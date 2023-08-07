@@ -1,0 +1,37 @@
+{
+  "name": "mergeui-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "cross ui lib react-native and web",
+  "scripts": {
+    "web": "cd apps/web && yarn dev",
+    "native": "cd apps/native && yarn start",
+    "docs": "turbo run dev --filter=crossed-docs",
+    "test": "bash ./scripts/test.sh",
+    "dev": "turbo run dev",
+    "watch": "turbo run watch --filter=@mergeui* --no-cache",
+    "build": "turbo run build --filter=@mergeui* --no-cache",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore",
+    "lint": "eslint packages/**/**/src --ext .ts,.tsx --config .eslintrc"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@changesets/cli": "^2.25.2",
+    "@commitlint/config-conventional": "^17.3.0",
+    "@react-native-community/eslint-config": "^3.2.0",
+    "commitlint": "^17.3.0",
+    "eslint": "^8.29.0",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.7.1",
+    "release-it": "^15.5.1",
+    "tsc-files": "^1.1.3",
+    "turbo": "latest",
+    "typescript": "^5.1.6"
+  }
+}

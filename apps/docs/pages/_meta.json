@@ -1,0 +1,12 @@
+{
+  "index": "Introduction",
+  "class-variance-authority": {
+    "title": "@mergeui/class-variance-authority"
+  },
+  "core": {
+    "title": "@mergeui/core"
+  },
+  "ui": {
+    "title": "@mergeui/ui"
+  }
+}
