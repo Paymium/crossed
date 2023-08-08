@@ -1,14 +1,9 @@
 import type { ComponentType } from 'react';
 import React from 'react';
-import { mergeui } from '@mergeui/class-variance-authority';
-import type {
-  Props,
-  ConfigSchema,
-  Config,
-} from '@mergeui/class-variance-authority';
-import type { ClassValue } from '@mergeui/class-variance-authority/dist/types';
+import { mergeui, cx } from '@mergeui/class-variance-authority';
+import type { Props, ConfigSchema } from '@mergeui/class-variance-authority';
 import tw from 'twrnc';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 type NewProps<P, T> = P & Props<T>;
 
@@ -17,7 +12,8 @@ type ThemeConfig<P> = {
     styles: string[];
     props?: P & { as?: string | ComponentType };
   };
-  variants: any
+  variants?: any;
+  defaultVariants?: any;
 };
 
 export const styled = <P extends {}, T extends ConfigSchema>(
@@ -26,9 +22,14 @@ export const styled = <P extends {}, T extends ConfigSchema>(
 ) => {
   const { base } = themeConfig || {};
   const { as: asTheme, ...propsTheme } = base?.props || {};
+
   const stylesClass = mergeui<T>(base?.styles || [], themeConfig as any);
 
-  const NewComponent = ({ as: asProps, ...props }: NewProps<P, T>) => {
+  const NewComponent = ({
+    as: asProps,
+    className,
+    ...props
+  }: NewProps<P, T>) => {
     const variants = themeConfig?.variants || {};
     const variantNames = Object.keys(variants);
     const { componentProps, variantProps } = Object.keys(props as any).reduce<{
@@ -45,11 +46,30 @@ export const styled = <P extends {}, T extends ConfigSchema>(
       },
       { componentProps: {} as P, variantProps: {} as Props<T> }
     );
-    const AsComp: any = (asProps as any) || (asTheme as any) || Component;
+
+    const asPropsOrTheme = (asProps as any) || (asTheme as any) || undefined;
+    const AsComp: any =
+      Platform.OS === 'web' ? asPropsOrTheme || Component : Component;
 
     const propsTmp =
       Platform.OS === 'web'
-        ? { className: stylesClass(variantProps) }
+        ? asPropsOrTheme
+          ? {
+              className: cx(stylesClass(variantProps), className),
+            }
+          : {
+              style: StyleSheet.create({
+                root: {
+                  $$css: true,
+                  ...cx(stylesClass(variantProps), className)
+                    .split(' ')
+                    .reduce<any>((acc, className) => {
+                      acc[`___${className}`] = className;
+                      return acc;
+                    }, {}),
+                },
+              }).root,
+            }
         : { style: tw.style(stylesClass(variantProps)) };
     return <AsComp {...propsTheme} {...propsTmp} {...componentProps} />;
   };

@@ -4,7 +4,8 @@
     "title": "@mergeui/class-variance-authority"
   },
   "core": {
-    "title": "@mergeui/core"
+    "title": "@mergeui/core",
+    "display": "hidden"
   },
   "ui": {
     "title": "@mergeui/ui"

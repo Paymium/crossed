@@ -1,0 +1,16 @@
+import { getStaticPaths as t } from '../components/getStaticPaths';
+import { CodeDemo } from '../components/CodeDemo';
+import { TextDemo } from '@mergeui/demo';
+
+export default function DocPage() {
+  return <CodeDemo Demo={TextDemo} />;
+}
+
+export const getStaticPaths = () => {
+  return {
+    paths: [{ params: { slug: ['typography', 'text'] } }],
+    fallback: false,
+  };
+};
+
+export const getStaticProps = t;

@@ -15,19 +15,12 @@
     "variants"
   ],
   "license": "Apache-2.0",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./types": {
-      "types": "./dist/types.d.ts"
-    }
-  },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "lib/commonjs/index",
+  "types": "lib/typescript/index.d.ts",
+  "module": "lib/module/index",
+  "react-native": "src/index",
+  "source": "src/index",
+  "typings": "lib/typescript/index.d.ts",
   "files": [
     "dist/*.mjs",
     "dist/*.mjs.map",
@@ -36,10 +29,8 @@
     "dist/*.d.ts"
   ],
   "scripts": {
-    "build": "npm run build:cjs && npm run build:esm && npm run build:tsc",
-    "build:cjs": "swc ./src/index.ts --config-file ./.config/.swcrc -o dist/index.js -C module.type=commonjs",
-    "build:esm": "swc ./src/index.ts --config-file ./.config/.swcrc -o dist/index.mjs -C module.type=es6 ",
-    "build:tsc": "tsc --project .config/tsconfig.build.json",
+    "watch": "mergeui-build --watch",
+    "build": "mergeui-build",
     "check": "tsc --project tsconfig.json --noEmit",
     "dev": "jest --config .config/jest.config.ts --watch",
     "prepublishOnly": "pnpm build",
@@ -50,6 +41,7 @@
     "clsx": "2.0.0"
   },
   "devDependencies": {
+    "@mergeui/build": "*",
     "@jest/types": "28.1.1",
     "@swc/cli": "0.1.57",
     "@swc/core": "1.2.198",

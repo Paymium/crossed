@@ -5,8 +5,8 @@ const ButtonFrame = styled(Pressable, {
   base: {
     styles: ["bg-blue-500", "rounded", 'hover:bg-blue-400'],
     props: {
-      as: 'button',
-      dataSet: { test: 'test' },
+      role: "button",
+      // dataSet: { test: 'test' },
     },
   },
   variants: {
@@ -24,7 +24,8 @@ const ButtonFrame = styled(Pressable, {
 });
 const ButtonText = styled(Text, {
   base: {
-    styles: ["text-white"]
+    styles: ["text-white"],
+    props: {as: 'span',}
   }
 });
 
