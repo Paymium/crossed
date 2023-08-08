@@ -3,14 +3,30 @@ import { styled, withStaticProperties } from '@mergeui/core';
 
 const ButtonFrame = styled(Pressable, {
   base: {
-    styles: [],
+    styles: ["bg-blue-500", "rounded", 'hover:bg-blue-400'],
     props: {
-      as: 'a',
+      as: 'button',
       dataSet: { test: 'test' },
     },
   },
+  variants: {
+    size: {
+      xs: ['px-1', "py-0.5"],
+      sm: ['p-2'],
+      md: ['px-3', 'p-2'],
+      lg: ['p-4'],
+      xl: ['p-5']
+    }
+  },
+  defaultVariants: {
+    size: "md",
+  }
 });
-const ButtonText = styled(Text, {});
+const ButtonText = styled(Text, {
+  base: {
+    styles: ["text-white"]
+  }
+});
 
 const Button = withStaticProperties(ButtonFrame, { Text: ButtonText });
 

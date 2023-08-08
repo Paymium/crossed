@@ -52,7 +52,7 @@ export type Props<T> = T extends ConfigSchema
   ? ConfigVariants<T> & ClassProp
   : ClassProp;
 
-export const cva =
+export const mergeui =
   <T>(base?: ClassValue, config?: Config<T>) =>
   (props?: Props<T>) => {
     if (config?.variants == null)

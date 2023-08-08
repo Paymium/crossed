@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 import React from 'react';
-import { cva } from '@mergeui/class-variance-authority';
+import { mergeui } from '@mergeui/class-variance-authority';
 import type {
   Props,
   ConfigSchema,
@@ -8,16 +8,27 @@ import type {
 } from '@mergeui/class-variance-authority';
 import type { ClassValue } from '@mergeui/class-variance-authority/dist/types';
 import tw from 'twrnc';
+import { Platform } from 'react-native';
 
 type NewProps<P, T> = P & Props<T>;
 
+type ThemeConfig<P> = {
+  base: {
+    styles: string[];
+    props?: P & { as?: string | ComponentType };
+  };
+  variants: any
+};
+
 export const styled = <P extends {}, T extends ConfigSchema>(
   Component: ComponentType<P>,
-  base: ClassValue,
-  themeConfig?: Config<T>
+  themeConfig: ThemeConfig<P>
 ) => {
-  const styles = cva<T>(base, themeConfig as any);
-  const NewComponent = (props: NewProps<P, T>) => {
+  const { base } = themeConfig || {};
+  const { as: asTheme, ...propsTheme } = base?.props || {};
+  const stylesClass = mergeui<T>(base?.styles || [], themeConfig as any);
+
+  const NewComponent = ({ as: asProps, ...props }: NewProps<P, T>) => {
     const variants = themeConfig?.variants || {};
     const variantNames = Object.keys(variants);
     const { componentProps, variantProps } = Object.keys(props as any).reduce<{
@@ -34,9 +45,13 @@ export const styled = <P extends {}, T extends ConfigSchema>(
       },
       { componentProps: {} as P, variantProps: {} as Props<T> }
     );
-    return (
-      <Component {...componentProps} style={tw.style(styles(variantProps))} />
-    );
+    const AsComp: any = (asProps as any) || (asTheme as any) || Component;
+
+    const propsTmp =
+      Platform.OS === 'web'
+        ? { className: stylesClass(variantProps) }
+        : { style: tw.style(stylesClass(variantProps)) };
+    return <AsComp {...propsTheme} {...propsTmp} {...componentProps} />;
   };
   // NewComponent.styles = styles;
   return NewComponent;
