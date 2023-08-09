@@ -38,11 +38,12 @@
     "test:jest": "jest --config .config/jest.config.ts --coverage"
   },
   "dependencies": {
-    "clsx": "2.0.0"
+    "clsx": "2.0.0",
+    "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
-    "@mergeui/build": "*",
     "@jest/types": "28.1.1",
+    "@mergeui/build": "*",
     "@swc/cli": "0.1.57",
     "@swc/core": "1.2.198",
     "@swc/jest": "0.2.21",

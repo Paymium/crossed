@@ -6,8 +6,8 @@
 
 ```ts
 // components/button.ts
-import type { VariantProps } from "@mergeui/class-variance-authority";
-import { mergeui, cx } from "@mergeui/class-variance-authority";
+import type { VariantProps } from '@mergeui/class-variance-authority';
+import { mergeui, cx } from '@mergeui/class-variance-authority';
 
 /**
  * Button
@@ -24,13 +24,13 @@ Instead, we recommend using TypeScript's [Utility Types](https://www.typescriptl
 
 ```ts
 // components/button.ts
-import { mergeui, type VariantProps } from "@mergeui/class-variance-authority";
+import { mergeui, type VariantProps } from '@mergeui/class-variance-authority';
 
 export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
-export const buttonVariants = mergeui("…", {
+export const buttonVariants = mergeui('…', {
   variants: {
-    optional: { a: "…", b: "…" },
-    required: { a: "…", b: "…" },
+    optional: { a: '…', b: '…' },
+    required: { a: '…', b: '…' },
   },
 });
 
@@ -38,8 +38,8 @@ export const buttonVariants = mergeui("…", {
  * Button
  */
 export interface ButtonProps
-  extends Omit<ButtonVariantProps, "required">,
-    Required<Pick<ButtonVariantProps, "required">> {}
+  extends Omit<ButtonVariantProps, 'required'>,
+    Required<Pick<ButtonVariantProps, 'required'>> {}
 
 export const button = (props: ButtonProps) => buttonVariants(props);
 
@@ -50,5 +50,5 @@ export const button = (props: ButtonProps) => buttonVariants(props);
 button({});
 
 // ✅
-button({ required: "a" });
+button({ required: 'a' });
 ```

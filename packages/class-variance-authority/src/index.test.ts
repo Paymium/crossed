@@ -1,5 +1,5 @@
 import type * as CVA from './';
-import { cva, cx } from './';
+import { mergeui, cx } from './';
 
 describe('cx', () => {
   describe.each<CVA.CxOptions>([
@@ -47,7 +47,7 @@ describe('cva', () => {
   describe('without base', () => {
     describe('without anything', () => {
       test('empty', () => {
-        const example = cva();
+        const example = mergeui();
         expect(example()).toBe('');
         expect(
           example({
@@ -69,7 +69,7 @@ describe('cva', () => {
       });
 
       test('undefined', () => {
-        const example = cva(undefined);
+        const example = mergeui(undefined);
         expect(example()).toBe('');
         expect(
           example({
@@ -91,7 +91,7 @@ describe('cva', () => {
       });
 
       test('null', () => {
-        const example = cva(null);
+        const example = mergeui(null);
         expect(example()).toBe('');
         expect(
           example({
@@ -114,7 +114,7 @@ describe('cva', () => {
     });
 
     describe('without defaults', () => {
-      const buttonWithoutBaseWithoutDefaultsString = cva(null, {
+      const buttonWithoutBaseWithoutDefaultsString = mergeui(null, {
         variants: {
           intent: {
             primary:
@@ -168,62 +168,65 @@ describe('cva', () => {
           },
         ],
       });
-      const buttonWithoutBaseWithoutDefaultsWithClassNameString = cva(null, {
-        variants: {
-          intent: {
-            primary:
-              'button--primary bg-blue-500 text-white border-transparent hover:bg-blue-600',
-            secondary:
-              'button--secondary bg-white text-gray-800 border-gray-400 hover:bg-gray-100',
-            warning:
-              'button--warning bg-yellow-500 border-transparent hover:bg-yellow-600',
-            danger: [
-              'button--danger',
-              [
-                1 && 'bg-red-500',
-                { baz: false, bat: null },
-                ['text-white', ['border-transparent']],
+      const buttonWithoutBaseWithoutDefaultsWithClassNameString = mergeui(
+        null,
+        {
+          variants: {
+            intent: {
+              primary:
+                'button--primary bg-blue-500 text-white border-transparent hover:bg-blue-600',
+              secondary:
+                'button--secondary bg-white text-gray-800 border-gray-400 hover:bg-gray-100',
+              warning:
+                'button--warning bg-yellow-500 border-transparent hover:bg-yellow-600',
+              danger: [
+                'button--danger',
+                [
+                  1 && 'bg-red-500',
+                  { baz: false, bat: null },
+                  ['text-white', ['border-transparent']],
+                ],
+                'hover:bg-red-600',
               ],
-              'hover:bg-red-600',
-            ],
+            },
+            disabled: {
+              true: 'button--disabled opacity-050 cursor-not-allowed',
+              false: 'button--enabled cursor-pointer',
+            },
+            size: {
+              small: 'button--small text-sm py-1 px-2',
+              medium: 'button--medium text-base py-2 px-4',
+              large: 'button--large text-lg py-2.5 px-4',
+            },
+            m: {
+              0: 'm-0',
+              1: 'm-1',
+            },
           },
-          disabled: {
-            true: 'button--disabled opacity-050 cursor-not-allowed',
-            false: 'button--enabled cursor-pointer',
-          },
-          size: {
-            small: 'button--small text-sm py-1 px-2',
-            medium: 'button--medium text-base py-2 px-4',
-            large: 'button--large text-lg py-2.5 px-4',
-          },
-          m: {
-            0: 'm-0',
-            1: 'm-1',
-          },
-        },
-        compoundVariants: [
-          {
-            intent: 'primary',
-            size: 'medium',
-            className: 'button--primary-medium uppercase',
-          },
-          {
-            intent: 'warning',
-            disabled: false,
-            className: 'button--warning-enabled text-gray-800',
-          },
-          {
-            intent: 'warning',
-            disabled: true,
-            className: [
-              'button--warning-disabled',
-              [1 && 'text-black', { baz: false, bat: null }],
-            ],
-          },
-        ],
-      });
+          compoundVariants: [
+            {
+              intent: 'primary',
+              size: 'medium',
+              className: 'button--primary-medium uppercase',
+            },
+            {
+              intent: 'warning',
+              disabled: false,
+              className: 'button--warning-enabled text-gray-800',
+            },
+            {
+              intent: 'warning',
+              disabled: true,
+              className: [
+                'button--warning-disabled',
+                [1 && 'text-black', { baz: false, bat: null }],
+              ],
+            },
+          ],
+        }
+      );
 
-      const buttonWithoutBaseWithoutDefaultsArray = cva(null, {
+      const buttonWithoutBaseWithoutDefaultsArray = mergeui(null, {
         variants: {
           intent: {
             primary: [
@@ -291,7 +294,7 @@ describe('cva', () => {
           },
         ],
       });
-      const buttonWithoutBaseWithoutDefaultsWithClassNameArray = cva(null, {
+      const buttonWithoutBaseWithoutDefaultsWithClassNameArray = mergeui(null, {
         variants: {
           intent: {
             primary: [
@@ -455,7 +458,7 @@ describe('cva', () => {
     });
 
     describe('with defaults', () => {
-      const buttonWithoutBaseWithDefaultsString = cva(
+      const buttonWithoutBaseWithDefaultsString = mergeui(
         'button font-semibold border rounded',
         {
           variants: {
@@ -527,7 +530,7 @@ describe('cva', () => {
           },
         }
       );
-      const buttonWithoutBaseWithDefaultsWithClassNameString = cva(
+      const buttonWithoutBaseWithDefaultsWithClassNameString = mergeui(
         'button font-semibold border rounded',
         {
           variants: {
@@ -600,7 +603,7 @@ describe('cva', () => {
         }
       );
 
-      const buttonWithoutBaseWithDefaultsArray = cva(
+      const buttonWithoutBaseWithDefaultsArray = mergeui(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -686,7 +689,7 @@ describe('cva', () => {
           },
         }
       );
-      const buttonWithoutBaseWithDefaultsWithClassNameArray = cva(
+      const buttonWithoutBaseWithDefaultsWithClassNameArray = mergeui(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -877,7 +880,7 @@ describe('cva', () => {
 
   describe('with base', () => {
     describe('without defaults', () => {
-      const buttonWithBaseWithoutDefaultsString = cva(
+      const buttonWithBaseWithoutDefaultsString = mergeui(
         'button font-semibold border rounded',
         {
           variants: {
@@ -939,7 +942,7 @@ describe('cva', () => {
           ],
         }
       );
-      const buttonWithBaseWithoutDefaultsWithClassNameString = cva(
+      const buttonWithBaseWithoutDefaultsWithClassNameString = mergeui(
         'button font-semibold border rounded',
         {
           variants: {
@@ -1002,7 +1005,7 @@ describe('cva', () => {
         }
       );
 
-      const buttonWithBaseWithoutDefaultsArray = cva(
+      const buttonWithBaseWithoutDefaultsArray = mergeui(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -1078,7 +1081,7 @@ describe('cva', () => {
           ],
         }
       );
-      const buttonWithBaseWithoutDefaultsWithClassNameArray = cva(
+      const buttonWithBaseWithoutDefaultsWithClassNameArray = mergeui(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -1253,7 +1256,7 @@ describe('cva', () => {
     });
 
     describe('with defaults', () => {
-      const buttonWithBaseWithDefaultsString = cva(
+      const buttonWithBaseWithDefaultsString = mergeui(
         'button font-semibold border rounded',
         {
           variants: {
@@ -1320,7 +1323,7 @@ describe('cva', () => {
           },
         }
       );
-      const buttonWithBaseWithDefaultsWithClassNameString = cva(
+      const buttonWithBaseWithDefaultsWithClassNameString = mergeui(
         'button font-semibold border rounded',
         {
           variants: {
@@ -1388,7 +1391,7 @@ describe('cva', () => {
         }
       );
 
-      const buttonWithBaseWithDefaultsArray = cva(
+      const buttonWithBaseWithDefaultsArray = mergeui(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -1469,7 +1472,7 @@ describe('cva', () => {
           },
         }
       );
-      const buttonWithBaseWithDefaultsWithClassNameArray = cva(
+      const buttonWithBaseWithDefaultsWithClassNameArray = mergeui(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -1658,7 +1661,7 @@ describe('cva', () => {
 
   describe('composing classes', () => {
     type BoxProps = CVA.VariantProps<typeof box>;
-    const box = cva(['box', 'box-border'], {
+    const box = mergeui(['box', 'box-border'], {
       variants: {
         margin: { 0: 'm-0', 2: 'm-2', 4: 'm-4', 8: 'm-8' },
         padding: { 0: 'p-0', 2: 'p-2', 4: 'p-4', 8: 'p-8' },
@@ -1670,7 +1673,7 @@ describe('cva', () => {
     });
 
     type CardBaseProps = CVA.VariantProps<typeof cardBase>;
-    const cardBase = cva(
+    const cardBase = mergeui(
       ['card', 'border-solid', 'border-slate-300', 'rounded'],
       {
         variants: {

@@ -1,54 +1,122 @@
-import { Box, Button, Select, YBox } from '@mergeui/ui';
+import { Props } from '@mergeui/demo/lib/typescript/props';
+import {
+  Box,
+  Button,
+  Label,
+  Select,
+  XBox,
+  YBox,
+  colorVariants,
+} from '@mergeui/ui';
 import { useData } from 'nextra/data';
-import { useState } from 'react';
+import { useState, ComponentType } from 'react';
 import { CopyBlock, dracula } from 'react-code-blocks';
 
-const DefaultDemo = (p: any) => {
+const DefaultDemo = () => {
   return 'No demo';
 };
-export const CodeDemo = ({ Demo = DefaultDemo }) => {
+export const CodeDemo = ({
+  Demo = DefaultDemo,
+  actions = {},
+}: {
+  Demo?: ComponentType<Props>;
+  actions?: {
+    size?: boolean;
+    space?: boolean;
+    color?: boolean;
+    variant?: string[];
+  };
+}) => {
   const { code } = useData() || { code: '' };
   const [show, setShow] = useState(false);
   const [color, setColor] = useState('zinc');
-  const [space, setSpace] = useState("md");
+  const [space, setSpace] = useState('md');
+  const [size, setSize] = useState('md');
+  const [variant, setVariant] = useState(actions.variant?.[0] || '');
+  const hasActions = Object.keys(actions || {}).length > 0;
+
   return (
     <Box className="border-zinc-800 border-2 rounded-md">
       <Box className="flex-row flex">
-        <Box className="flex-1 p-4 content-center items-center">
-          <Demo color={color} space={space} />
+        <Box className="flex-1 p-4 justify-center items-center">
+          <Demo color={color} space={space} size={size} variant={variant} />
         </Box>
-        <YBox className="border-l-2 border-zinc-800 p-4 relative" space="sm">
-          <Select onChange={(e)=> setSpace(e.target.value)} value={space}>
-            <Select.Option value={undefined}>undefined</Select.Option>
-            <Select.Option value="xs">xs</Select.Option>
-            <Select.Option value="sm">sm</Select.Option>
-            <Select.Option value="md">md</Select.Option>
-            <Select.Option value="lg">lg</Select.Option>
-            <Select.Option value="xl">xl</Select.Option>
-          </Select>
-          <Box className="flex-row gap-1">
-            <Button
-              className="w-5 h-5"
-              color="zinc"
-              onPress={() => setColor('zinc')}
-            />
-            <Button
-              className="w-5 h-5"
-              color="red"
-              onPress={() => setColor('red')}
-            />
-            <Button
-              className="w-5 h-5"
-              color="green"
-              onPress={() => setColor('green')}
-            />
-            <Button
-              className="w-5 h-5"
-              color="blue"
-              onPress={() => setColor('blue')}
-            />
-          </Box>
+        <YBox
+          className={`${
+            hasActions ? 'border-l-2 p-4' : ''
+          } border-zinc-800 relative pb-8 max-w-[26%]`}
+          space="sm"
+        >
+          {hasActions && (
+            <>
+              {actions.variant && (
+                <Select value={variant} onChangeValue={setVariant}>
+                  <Select.Label>Variant</Select.Label>
+                  <Select.Content>
+                    {actions.variant.map((v) => {
+                      return (
+                        <Select.Option value={v} key={v}>
+                          {v}
+                        </Select.Option>
+                      );
+                    })}
+                  </Select.Content>
+                </Select>
+              )}
+              {actions.space && (
+                <Select value={space} onChangeValue={setSpace}>
+                  <Select.Label>Space</Select.Label>
+                  <Select.Content>
+                    <Select.Option value={undefined}>undefined</Select.Option>
+                    <Select.Option value="xs">xs</Select.Option>
+                    <Select.Option value="sm">sm</Select.Option>
+                    <Select.Option value="md">md</Select.Option>
+                    <Select.Option value="lg">lg</Select.Option>
+                    <Select.Option value="xl">xl</Select.Option>
+                  </Select.Content>
+                </Select>
+              )}
+              {actions.size && (
+                <Select value={size} onChangeValue={setSize}>
+                  <Select.Label>Size</Select.Label>
+                  <Select.Content>
+                    <Select.Option value="xs">xs</Select.Option>
+                    <Select.Option value="sm">sm</Select.Option>
+                    <Select.Option value="md">md</Select.Option>
+                    <Select.Option value="lg">lg</Select.Option>
+                    <Select.Option value="xl">xl</Select.Option>
+                  </Select.Content>
+                </Select>
+              )}
+              {actions.color && (
+                <Label>
+                  <Label.Text>Color ({color})</Label.Text>
+                  <Label.Input>
+                    <XBox space="xs" className="flex-wrap">
+                      {(
+                        Object.keys(
+                          colorVariants
+                        ) as (keyof typeof colorVariants)[]
+                      ).map((c) => {
+                        return (
+                          <Button
+                            variant="filled"
+                            key={c}
+                            className="w-5 h-5"
+                            color={c}
+                            onPress={() => setColor(c)}
+                          />
+                        );
+                      })}
+                    </XBox>
+                  </Label.Input>
+                </Label>
+              )}
+            </>
+          )}
           <Button
+            color="violet"
+            variant="filled"
             onPress={() => setShow((e) => !e)}
             className="absolute bottom-0 right-0"
             size="xs"
@@ -60,6 +128,7 @@ export const CodeDemo = ({ Demo = DefaultDemo }) => {
       {show && (
         <Box className="text-md">
           <CopyBlock
+            // @ts-ignore
             text={code}
             language={'tsx'}
             theme={dracula}

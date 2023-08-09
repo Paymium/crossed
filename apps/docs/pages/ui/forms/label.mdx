@@ -1,0 +1,37 @@
+import { CodeDemo } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { Table } from 'components/Table';
+import { LabelDemo } from '@mergeui/demo';
+import { Tab, Tabs } from 'nextra-theme-docs';
+
+export const getStaticProps = getStaticDemo('ui/forms/Label');
+
+# Label
+
+<Tabs items={["Demo", "Anatomy", "Props"]}>
+  <Tab>
+    <CodeDemo Demo={LabelDemo} />
+  </Tab>
+  <Tab>
+    ```tsx
+    <Label>
+      <Label.Text />
+      <Label.Input />
+    </Label>
+    ```
+  </Tab>
+  <Tab>
+  
+    ## Label
+    <Table props={[
+      ["invalid", "boolean", "undefined", "Render invalid style"]
+    ]} />
+
+    ## Label.Text
+    <Table props={[]} />
+
+    ## Label.Input
+    <Table props={[]} />
+
+  </Tab>
+</Tabs>

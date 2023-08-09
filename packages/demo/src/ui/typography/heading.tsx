@@ -1,8 +1,6 @@
 import { Heading, YBox } from '@mergeui/ui';
-import React from 'react';
-import type { Props } from '../../props';
 
-export const HeadingDemo = ({ variant, weight }: Props) => {
+export const HeadingDemo = () => {
   return (
     <YBox space="md">
       <Heading order={1}>Heading 1</Heading>

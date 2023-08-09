@@ -102,10 +102,12 @@ importers:
       jest: 28.1.1
       react: 18.2.0
       react-dom: 18.2.0
+      tailwind-merge: ^1.14.0
       ts-node: 10.8.1
       typescript: 5.1.6
     dependencies:
       clsx: 2.0.0
+      tailwind-merge: 1.14.0
     devDependencies:
       '@jest/types': 28.1.1
       '@mergeui/build': link:../build
@@ -223,6 +225,7 @@ importers:
 
   packages/ui:
     specifiers:
+      '@iconscout/react-native-unicons': ^2.0.2
       '@mergeui/build': '*'
       '@mergeui/core': '*'
       '@types/react': ^18.2.18
@@ -235,14 +238,17 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-native: ^0.72.3
+      react-native-svg: ^13.10.0
       react-native-web: ^0.19.7
       tsconfig: '*'
       twrnc: ^3.6.3
     dependencies:
+      '@iconscout/react-native-unicons': 2.0.2_whnihh5yf4ab4theqd7ek6ulhq
       '@mergeui/core': link:../core
       class-variance-authority: 0.7.0
       inline-style-prefixer: 6.0.4
       normalize-css-color: 1.0.2
+      react-native-svg: 13.10.0_6syixf76bqx5r4tgwtwyqyssoi
       twrnc: 3.6.3_react-native@0.72.3
     devDependencies:
       '@mergeui/build': link:../build
@@ -2547,6 +2553,18 @@ packages:
   /@iarna/toml/2.2.5:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
     dev: true
+
+  /@iconscout/react-native-unicons/2.0.2_whnihh5yf4ab4theqd7ek6ulhq:
+    resolution: {integrity: sha512-Mkqacc1uSr1lkYsKSPUMwWj1M9pFP/XUkPlJk1P6hNg2UaNEMRaLQjayvMEl7fnNQEqF7PcKD+OXjEU/x17xFA==}
+    peerDependencies:
+      react: ^16.5.0
+      react-native: '>=0.57.0-rc.0 <1.0.x'
+      react-native-svg: ^9.5.3
+    dependencies:
+      react: 18.2.0
+      react-native: 0.72.3_react@18.2.0
+      react-native-svg: 13.10.0_6syixf76bqx5r4tgwtwyqyssoi
+    dev: false
 
   /@istanbuljs/load-nyc-config/1.1.0:
     resolution: {integrity: sha512-VjeHSlIzpv/NyD3N0YuHfXOPDIixcA1q2ZV98wsMqcYlPmv2n3Yb2lYP9XMElnaFVXg5A7YLTeLu6V84uQDjmQ==}
@@ -14291,6 +14309,18 @@ packages:
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
 
+  /react-native-svg/13.10.0_6syixf76bqx5r4tgwtwyqyssoi:
+    resolution: {integrity: sha512-D/oYTmUi5nsA/2Nw4WYlF1UUi3vZqhpESpiEhpYCIFB/EMd6vz4A/uq3tIzZFcfa5z2oAdGSxRU1TaYr8IcPlQ==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      css-select: 5.1.0
+      css-tree: 1.1.3
+      react: 18.2.0
+      react-native: 0.72.3_react@18.2.0
+    dev: false
+
   /react-native-svg/13.10.0_react@18.2.0:
     resolution: {integrity: sha512-D/oYTmUi5nsA/2Nw4WYlF1UUi3vZqhpESpiEhpYCIFB/EMd6vz4A/uq3tIzZFcfa5z2oAdGSxRU1TaYr8IcPlQ==}
     peerDependencies:
@@ -15955,6 +15985,10 @@ packages:
       slice-ansi: 2.1.0
       string-width: 3.1.0
     dev: true
+
+  /tailwind-merge/1.14.0:
+    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
+    dev: false
 
   /tailwindcss/3.3.3:
     resolution: {integrity: sha512-A0KgSkef7eE4Mf+nKJ83i75TMyq8HqY3qmFIJSWy8bNt0v1lG7jUcpGpoTFxAwYcWOphcTBLPPJg+bDfhDf52w==}

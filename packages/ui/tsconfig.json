@@ -1,5 +1,5 @@
 {
-  "include": ["./src"],
+  "include": ["./src", "src/unicons.ts"],
   "exclude": ["node_modules", "example"],
   "compilerOptions": {
     "baseUrl": ".",
@@ -29,7 +29,9 @@
     "target": "esnext",
     "paths": {
       "@mergeui/core": ["./node_modules/@mergeui/core/src"],
-      "@mergeui/class-variance-authority": ["./node_modules/@mergeui/class-variance-authority/src"]
-   },
+      "@mergeui/class-variance-authority": [
+        "./node_modules/@mergeui/class-variance-authority/src"
+      ]
+    }
   }
 }

@@ -6,7 +6,7 @@ module.exports = {
     './pages/**/*.{js,jsx,ts,tsx,md,mdx}',
     './components/**/*.{js,jsx,ts,tsx,md,mdx}',
     './node_modules/@mergeui/demo/lib/**/*.{js,jsx,ts,tsx,md,mdx}',
-    './node_modules/@mergeui/ui/lib/**/*.{js,jsx,ts,tsx,md,mdx}'
+    './node_modules/@mergeui/ui/lib/**/*.{js,jsx,ts,tsx,md,mdx}',
     // path.join(
     //   path.dirname(require.resolve('@mergeui/demo')),
     //   '**/*.{js,jsx,ts,tsx,md,mdx}'

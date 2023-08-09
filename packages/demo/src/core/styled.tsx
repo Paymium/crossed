@@ -1,40 +1,53 @@
 import { Pressable, Text } from 'react-native';
 import { styled, withStaticProperties } from '@mergeui/core';
+import type { Props } from '../props';
 
-const ButtonFrame = styled(Pressable, {
+const [ButtonFrame] = styled(Pressable, {
   base: {
-    styles: ["bg-blue-500", "rounded", 'hover:bg-blue-400'],
+    styles: ['bg-blue-500', 'rounded', 'hover:bg-blue-400'],
     props: {
-      role: "button",
+      role: 'button',
       // dataSet: { test: 'test' },
     },
   },
   variants: {
     size: {
-      xs: ['px-1', "py-0.5"],
-      sm: ['p-2'],
-      md: ['px-3', 'p-2'],
-      lg: ['p-4'],
-      xl: ['p-5']
-    }
+      xs: {
+        styles: ['px-1', 'py-0.5'],
+        props: { as: 'div' },
+      },
+      sm: { styles: ['p-2'] },
+      md: { styles: ['px-3', 'p-2'] },
+      lg: { styles: ['p-4'] },
+      xl: { styles: ['p-5'] },
+    },
   },
   defaultVariants: {
-    size: "md",
-  }
+    size: 'md',
+  },
 });
-const ButtonText = styled(Text, {
+const [ButtonText] = styled(Text, {
   base: {
-    styles: ["text-white"],
-    props: {as: 'span',}
-  }
+    styles: ['text-white'],
+    props: { as: 'span' },
+  },
+  variants: {
+    size: {
+      xs: { styles: ['text-xs'] },
+      sm: { styles: ['text-sm'] },
+      md: { styles: ['text-md'] },
+      lg: { styles: ['text-lg'] },
+      xl: { styles: ['text-xl'] },
+    },
+  },
 });
 
 const Button = withStaticProperties(ButtonFrame, { Text: ButtonText });
 
-export const StyledDemo = () => {
+export const StyledDemo = ({ space }: Props) => {
   return (
-    <Button>
-      <Button.Text>Hello</Button.Text>
+    <Button size={space}>
+      <Button.Text size={space}>Hello</Button.Text>
     </Button>
   );
-}
+};

@@ -12,6 +12,7 @@ const reactNativeDeps = [
   'react-native',
   'react-native-web',
   'react-native-svg',
+  '@iconscout/react-native-unicons',
 ];
 
 export default function withMergeui(nextConfig: any = {}) {
@@ -77,6 +78,7 @@ export default function withMergeui(nextConfig: any = {}) {
 
   let crossedUITranspileModules = Array.from(
     new Set([
+      '@iconscout/react-native-unicons',
       ...rootDependencyList,
       ...parentDependencyList,
       ...rootExactDependencyList,

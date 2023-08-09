@@ -1,6 +1,6 @@
 import { CodeDemo } from 'components/CodeDemo';
 import { Table } from 'components/Table';
-import { XBoxDemo } from "@mergeui/demo"
+import { XBoxDemo } from '@mergeui/demo';
 import { Tab, Tabs } from 'nextra-theme-docs';
 import { getStaticDemo } from 'components/getStaticDemo';
 
@@ -8,7 +8,7 @@ export const getStaticProps = getStaticDemo('ui/layout/XBox');
 
 # XBox
 
-<Tabs items={["Demo", "Anatomy", "Props"]}>
+<Tabs items={['Demo', 'Anatomy', 'Props']}>
   <Tab>
     <CodeDemo Demo={XBoxDemo} />
   </Tab>
@@ -19,8 +19,15 @@ export const getStaticProps = getStaticDemo('ui/layout/XBox');
   </Tab>
   <Tab>
     ## XBox
-   <Table props={[
-    ["space", "xs | sm | md | lg | xl", "undefined", "space between each children"]
-   ]}/>
+    <Table
+      props={[
+        [
+          'space',
+          'xs | sm | md | lg | xl',
+          'undefined',
+          'space between each children',
+        ],
+      ]}
+    />
   </Tab>
 </Tabs>

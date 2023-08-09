@@ -1,4 +1,4 @@
-import { Tab, Tabs } from "nextra-theme-docs";
+import { Tab, Tabs } from 'nextra-theme-docs';
 
 # Installation
 
@@ -104,17 +104,17 @@ For bulletproof components, wrap your `mergeui` component with `twMerge`.
 <summary>Example with tailwind-merge</summary>
 
 ```ts
-import { mergeui, type VariantProps } from "@mergeui/class-variance-authority";
-import { twMerge } from "tailwind-merge";
+import { mergeui, type VariantProps } from '@mergeui/class-variance-authority';
+import { twMerge } from 'tailwind-merge';
 
-const buttonVariants = mergeui(["your", "base", "classes"], {
+const buttonVariants = mergeui(['your', 'base', 'classes'], {
   variants: {
     intent: {
-      primary: ["your", "primary", "classes"],
+      primary: ['your', 'primary', 'classes'],
     },
   },
   defaultVariants: {
-    intent: "primary",
+    intent: 'primary',
   },
 });
 

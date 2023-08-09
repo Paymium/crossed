@@ -2,7 +2,7 @@ import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { ButtonDemo } from '@mergeui/demo';
 import { Tab, Tabs } from 'nextra-theme-docs';
-import { Table, Tr, Td, Th } from 'nextra/components';
+import { Table } from 'components/Table';
 
 export const getStaticProps = getStaticDemo('ui/Button');
 
@@ -10,7 +10,7 @@ export const getStaticProps = getStaticDemo('ui/Button');
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
   <Tab>
-    <CodeDemo Demo={ButtonDemo} />
+    <CodeDemo Demo={ButtonDemo} actions={{size:true,color:true, variant: ["filled", "outlined"]}} />
   </Tab>
   <Tab>
     ## Simple
@@ -30,41 +30,28 @@ export const getStaticProps = getStaticDemo('ui/Button');
   <Tab>
   
     ## Button
-   <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
-      <Tr>
-        <Td>disabled</Td>
-        <Th>false</Th>
-        <Th>Description</Th>
-      </Tr>
-      <Tr>
-        <Td>loading</Td>
-        <Th>false</Th>
-        <Th>dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd</Th>
-      </Tr>
-   </Table>
+    <Table props={[
+      ["disabled", "boolean", "false", "Disabled button"],
+      ["loading", "boolean", "false", "Loading state button"],
+      ["variant", "outline | filled", "outline", "Variant of button"],
+      ["size", "xs | sm | md | lg | xl", "md", "Size of button"],
+      ["color", "type Colors", "zinc", "Color of button"],
+      ["text", "string", "-", "Text of button in simple usage"],
+      ["icon", "ComponentType<{ size: number; color: string; }>", "-", "Icon on left in simple usage"],
+      ["iconAfter", "ComponentType<{ size: number; color: string; }>", "-", "Icon on right in simple usage"],
+    ]} />
 
 ## Button.Text
 
-   <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
-   </Table>
-   ## Button.Icon
-   <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
-   </Table>
-  
+    <Table props={[
+      ["variant", "outline | filled", "outline", "Specify variant of text without global context of button"],
+      ["size", "xs | sm | md | lg | xl", "md", "Specify size of text without global context of button"],
+      ["color", "type Colors", "zinc", "Specify color of text without global context of button"],
+    ]} />
+
+## Button.Icon
+
+    Extends [Box props](/ui/layout/box)
+
   </Tab>
 </Tabs>

@@ -1,4 +1,5 @@
 import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 import type {
   ClassProp,
@@ -22,6 +23,7 @@ export type CxOptions = Parameters<typeof clsx>;
 export type CxReturn = ReturnType<typeof clsx>;
 
 export const cx = clsx;
+export const merge = twMerge;
 
 /* cva
   ============================================ */

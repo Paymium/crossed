@@ -12,8 +12,8 @@
     "watch": "turbo run watch --filter=@mergeui* --no-cache",
     "build": "turbo run build --filter=@mergeui* --no-cache",
     "clean": "turbo run clean && rm -rf node_modules",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore",
-    "lint": "eslint packages/**/**/src --ext .ts,.tsx --config .eslintrc"
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mdx}\"",
+    "lint": "eslint packages/**/src --ext .ts,.tsx --config .eslintrc"
   },
   "main": "index.js",
   "license": "MIT",

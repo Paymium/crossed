@@ -1,9 +1,9 @@
 import { styled } from '@mergeui/core';
 import { Pressable } from 'react-native';
 
-export const SelectOption = styled(Pressable, {
+export const [SelectOption] = styled(Pressable, {
   base: {
-    styles: ["appearance-none"],
+    styles: ['appearance-none'],
     props: { as: 'option' },
   },
 });

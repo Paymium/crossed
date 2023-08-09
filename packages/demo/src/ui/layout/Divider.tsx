@@ -10,7 +10,7 @@ export const DividerDemo = ({ space }: Props) => {
         <Text>World</Text>
       </XBox>
       <Divider direction="horizontal" />
-      <Text className='self-center'>Hello</Text>
+      <Text className="self-center">Hello</Text>
     </YBox>
   );
 };

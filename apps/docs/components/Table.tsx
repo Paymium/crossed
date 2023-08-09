@@ -1,4 +1,3 @@
-
 import { Table as NTable, Tr, Td, Th } from 'nextra/components';
 
 export const Table = ({
@@ -18,8 +17,8 @@ export const Table = ({
         return (
           <Tr key={name}>
             <Td>{name}</Td>
-            <Td>{type}</Td>
-            <Td>{defaultValue}</Td>
+            <Td className="text-center">{type}</Td>
+            <Td className="text-center">{defaultValue}</Td>
             <Td>{description}</Td>
           </Tr>
         );

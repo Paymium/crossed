@@ -1,7 +1,7 @@
 export const spaceVariants = {
-  xs: ['gap-1'],
-  sm: ['gap-3'],
-  md: ['gap-5'],
-  lg: ['gap-7'],
-  xl: ['gap-9'],
+  xs: { styles: ['gap-1'] },
+  sm: { styles: ['gap-3'] },
+  md: { styles: ['gap-5'] },
+  lg: { styles: ['gap-7'] },
+  xl: { styles: ['gap-9'] },
 };

@@ -1,14 +1,14 @@
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { Tab, Tabs } from 'nextra-theme-docs';
-import { Table } from 'components/table';
-import { YBoxDemo } from "@mergeui/demo"
+import { Table } from 'components/Table';
+import { YBoxDemo } from '@mergeui/demo';
 
-export const getStaticProps = getStaticDemo("ui/layout/ybox")
+export const getStaticProps = getStaticDemo('ui/layout/YBox');
 
 # YBox
 
-<Tabs items={["Demo", "Anatomy", "Props"]}>
+<Tabs items={['Demo', 'Anatomy', 'Props']}>
   <Tab>
     <CodeDemo Demo={YBoxDemo} />
   </Tab>
@@ -19,8 +19,15 @@ export const getStaticProps = getStaticDemo("ui/layout/ybox")
   </Tab>
   <Tab>
     ## YBox
-   <Table props={[
-    ["space", "xs | sm | md | lg | xl", "undefined", "space between each children"]
-   ]}/>
+    <Table
+      props={[
+        [
+          'space',
+          'xs | sm | md | lg | xl',
+          'undefined',
+          'space between each children',
+        ],
+      ]}
+    />
   </Tab>
 </Tabs>

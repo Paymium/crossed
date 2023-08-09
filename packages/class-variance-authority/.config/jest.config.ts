@@ -1,9 +1,9 @@
-import type { Config } from "@jest/types";
+import type { Config } from '@jest/types';
 
 const config: Config.InitialOptions = {
-  rootDir: "../",
+  rootDir: '../',
   transform: {
-    "^.+\\.(t|j)sx?$": "@swc/jest",
+    '^.+\\.(t|j)sx?$': '@swc/jest',
   },
 };
 

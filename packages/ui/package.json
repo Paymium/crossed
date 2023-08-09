@@ -47,10 +47,12 @@
     "tsconfig": "*"
   },
   "dependencies": {
+    "@iconscout/react-native-unicons": "^2.0.2",
     "@mergeui/core": "*",
     "class-variance-authority": "^0.7.0",
     "inline-style-prefixer": "^6.0.1",
     "normalize-css-color": "^1.0.2",
+    "react-native-svg": "^13.10.0",
     "twrnc": "^3.6.3"
   },
   "react-native-builder-bob": {
