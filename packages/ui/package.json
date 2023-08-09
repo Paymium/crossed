@@ -49,6 +49,7 @@
   "dependencies": {
     "@iconscout/react-native-unicons": "^2.0.2",
     "@mergeui/core": "*",
+    "@mergeui/unicons": "*",
     "class-variance-authority": "^0.7.0",
     "inline-style-prefixer": "^6.0.1",
     "normalize-css-color": "^1.0.2",

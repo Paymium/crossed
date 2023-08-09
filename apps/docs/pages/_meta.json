@@ -9,5 +9,8 @@
   },
   "ui": {
     "title": "@mergeui/ui"
+  },
+  "unicons": {
+    "title": "@mergeui/unicons"
   }
 }

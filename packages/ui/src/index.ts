@@ -4,5 +4,5 @@ export * from './layout';
 export * from './variants';
 export * from './typography';
 export * from './forms';
-export * from './Icons';
+export * from '@mergeui/unicons';
 import './unicons';
