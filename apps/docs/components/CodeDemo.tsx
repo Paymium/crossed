@@ -1,9 +1,11 @@
+import { UilCheck } from '@iconscout/react-native-unicons';
 import { Props } from '@mergeui/demo/lib/typescript/props';
 import {
   Box,
   Button,
   Label,
   Select,
+  Text,
   XBox,
   YBox,
   colorVariants,
@@ -13,7 +15,7 @@ import { useState, ComponentType } from 'react';
 import { CopyBlock, dracula } from 'react-code-blocks';
 
 const DefaultDemo = () => {
-  return 'No demo';
+  return <Text>No demo</Text>;
 };
 export const CodeDemo = ({
   Demo = DefaultDemo,
@@ -101,11 +103,18 @@ export const CodeDemo = ({
                         return (
                           <Button
                             variant="filled"
+                            size="xs"
                             key={c}
                             className="w-5 h-5"
                             color={c}
                             onPress={() => setColor(c)}
-                          />
+                          >
+                            {c === color && (
+                              <Button.Icon className="absolute inset-0 justify-center items-center">
+                                <UilCheck />
+                              </Button.Icon>
+                            )}
+                          </Button>
                         );
                       })}
                     </XBox>
@@ -114,7 +123,7 @@ export const CodeDemo = ({
               )}
             </>
           )}
-          {code && (
+          {code.length > 0 && (
             <Button
               color="violet"
               variant="filled"

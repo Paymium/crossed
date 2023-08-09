@@ -1,12 +1,16 @@
 import { CodeDemo } from 'components/CodeDemo';
+import { Table } from 'components/Table';
+import { InputDemo } from '@mergeui/demo';
+import { getStaticDemo } from 'components/getStaticDemo';
 import { Tab, Tabs } from 'nextra-theme-docs';
-import { Table, Tr, Td, Th } from 'nextra/components';
+
+export const getStaticProps = getStaticDemo('ui/forms/Input');
 
 # Input
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
   <Tab>
-    <CodeDemo />
+    <CodeDemo Demo={InputDemo} actions={{ size: true, color: true, variant: ["outlined", "filled"] }} />
   </Tab>
   <Tab>
     ## Simple
@@ -18,50 +22,52 @@ import { Table, Tr, Td, Th } from 'nextra/components';
     ```tsx
     <Input>
       <Input.Label />
-      <Input.Input />
-      <Input.Icon />
+      <Input.Content>
+        <Input.Input />
+        <Input.Icon />
+      </Input.Content>
     </Input>
     ```
 
   </Tab>
   <Tab>
-  
-    ## Button
-   <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
-      <Tr>
-        <Td>disabled</Td>
-        <Th>false</Th>
-        <Th>Description</Th>
-      </Tr>
-      <Tr>
-        <Td>loading</Td>
-        <Th>false</Th>
-        <Th>dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd</Th>
-      </Tr>
-   </Table>
+    ## Input
+    <br />
+   <Table props={[
+    ["value", "string", "undefined", "Value of input"],
+    ["onChangeValue", "(params: string) => void", "undefined", "Event when on change value of input"],
+    ["variant", "outline | filled", "outline", "Variant of button"],
+    ["size", "xs | sm | md | lg | xl", "md", "Size of button"],
+    ["color", "type Colors", "zinc", "Color of button"],
+    ["className", "string", "undefined", "Classname pass to children"],
+   ]} />
 
-## Button.Text
+   ## Input.Label
+   Extends [Label](/ui/forms/label) props.
+   <br />
+   <Table props={[
+    ["className", "string", "undefined", "Classname pass to children"],
+   ]} />
 
-   <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
-   </Table>
-   ## Button.Icon
-   <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
-   </Table>
-  
+   ## Input.Content
+   Extends [View](https://reactnative.dev/docs/view) props.
+   <br />
+   <Table props={[
+    ["className", "string", "undefined", "Classname pass to children"],
+   ]} />
+
+   ## Input.Input
+   Extends [TextInput](https://reactnative.dev/docs/textinput) props.
+   <br />
+   <Table props={[
+    ["className", "string", "undefined", "Classname pass to children"],
+   ]} />
+
+   ## Input.Icon
+   Extends [Pressable](https://reactnative.dev/docs/pressable) props.
+   <br />
+   <Table props={[
+    ["className", "string", "undefined", "Classname pass to children"],
+   ]} />
   </Tab>
 </Tabs>

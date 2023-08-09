@@ -30,7 +30,7 @@ const [Provider, useContext] = createScope<{
 
 const [ButtonFrame] = styled(Pressable, {
   base: {
-    styles: ['rounded-md', 'flex', 'flex-row', 'items-center'],
+    styles: ['rounded-md', 'flex', 'flex-row', 'items-center', 'border-2'],
     props: {
       role: 'button',
     },
@@ -40,13 +40,9 @@ const [ButtonFrame] = styled(Pressable, {
     size: sizeVariants,
     space: spaceVariants,
     variant: {
-      filled: { styles: [''] },
+      filled: { styles: ['border-transparent'] },
       outlined: {
-        styles: [
-          'bg-zinc-950',
-          'border-2',
-          'hover:bg-zinc-900 active:bg-zinc-800',
-        ],
+        styles: ['bg-zinc-950', 'hover:bg-zinc-900 active:bg-zinc-800'],
       },
     },
   },
@@ -105,10 +101,7 @@ type ButtonRootProps = GetProps<typeof ButtonFrame> & {
 function ButtonRoot(
   props: Omit<ButtonRootProps, 'text' | 'iconAfter' | 'icon'>
 ): ReactElement;
-function ButtonRoot(
-  props: Omit<ButtonRootProps, 'children' | 'text'> &
-    Required<Pick<ButtonRootProps, 'text'>>
-): ReactElement;
+function ButtonRoot(props: Omit<ButtonRootProps, 'children'>): ReactElement;
 function ButtonRoot({
   text,
   iconAfter: IconAfter,
@@ -123,13 +116,13 @@ function ButtonRoot({
         {children ??
           [
             Icon && (
-              <ButtonIcon>
+              <ButtonIcon key="Icon">
                 <Icon />
               </ButtonIcon>
             ),
             text && <ButtonText key={`buttonText-${id}`}>{text}</ButtonText>,
             IconAfter && (
-              <ButtonIcon>
+              <ButtonIcon key={'IconAfter'}>
                 <IconAfter />
               </ButtonIcon>
             ),

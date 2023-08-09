@@ -27,11 +27,17 @@ export type LabelProps = {
 };
 
 export const Label = withStaticProperties(
-  ({ children, invalid }: PropsWithChildren<LabelProps>) => {
+  ({
+    children,
+    invalid,
+    ...props
+  }: PropsWithChildren<
+    LabelProps & Omit<GetProps<typeof Box>, 'children'>
+  >) => {
     const id = useId();
     return (
       <Provider id={id} invalid={invalid}>
-        <Box>{children}</Box>
+        <Box {...props}>{children}</Box>
       </Provider>
     );
   },
