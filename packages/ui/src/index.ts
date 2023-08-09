@@ -5,4 +5,3 @@ export * from './variants';
 export * from './typography';
 export * from './forms';
 export * from '@mergeui/unicons';
-import './unicons';
