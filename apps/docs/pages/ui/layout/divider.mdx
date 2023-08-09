@@ -1,0 +1,28 @@
+import { CodeDemo } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { DividerDemo } from '@mergeui/demo';
+import { Table } from 'components/Table';
+import { Tab, Tabs } from 'nextra-theme-docs';
+
+export const getStaticProps = getStaticDemo("ui/layout/divider");
+
+# Divider
+
+<Tabs items={['Demo', 'Anatomy', 'Props']}>
+  <Tab>
+    <CodeDemo Demo={DividerDemo} />
+  </Tab>
+  <Tab>
+    ```tsx
+    <Divider />
+    ```
+  </Tab>
+  <Tab>
+    ## Divider
+    <Table
+      props={[
+        ['direction', 'horizontal | vertical', 'horizontal', 'Set direction'],
+      ]}
+    />
+  </Tab>
+</Tabs>

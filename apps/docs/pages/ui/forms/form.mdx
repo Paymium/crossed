@@ -1,25 +1,37 @@
 import { CodeDemo } from 'components/CodeDemo';
-import { getStaticDemo } from 'components/getStaticDemo';
-import { HeadingDemo } from "@mergeui/demo"
 import { Tab, Tabs } from 'nextra-theme-docs';
 import { Table, Tr, Td, Th } from 'nextra/components';
 
-export const getStaticProps = getStaticDemo("ui/typography/heading")
-
-# Heading
+# Form
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
   <Tab>
-    <CodeDemo Demo={HeadingDemo} />
+    <CodeDemo />
   </Tab>
   <Tab>
     ```tsx
-    <Heading />
+    <Form>
+      <Form.Trigger />
+    </Form>
     ```
   </Tab>
   <Tab>
   
-    ## Heading
+    ## Form
+   <Table className="table-auto overflow-hidden w-full">
+      <Tr>
+        <Th>Props</Th>
+        <Th>default</Th>
+        <Th>Description</Th>
+      </Tr>
+      <Tr>
+        <Td>onSubmit</Td>
+        <Th>false</Th>
+        <Th>Description</Th>
+      </Tr>
+   </Table>
+
+    ## Form.Trigger
    <Table className="table-auto overflow-hidden w-full">
       <Tr>
         <Th>Props</Th>

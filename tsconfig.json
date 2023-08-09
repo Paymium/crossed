@@ -25,6 +25,9 @@
     "strict": true,
     "target": "esnext"
   },
+  "mdx": {
+    "plugins": [["remark-frontmatter", ["toml", "yaml"]], "remark-gfm"]
+  },
   "include": ["packages"],
   "exclude": ["node_modules", "example"]
 }

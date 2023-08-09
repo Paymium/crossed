@@ -5,6 +5,7 @@
   "typography": {
     "title": "Typography"
   },
-  "button": "Button",
-  "select": "Select"
+  "forms": {
+    "title": "Forms"
+  }
 }

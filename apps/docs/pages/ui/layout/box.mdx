@@ -1,9 +1,30 @@
-import { CodeDemo } from '../../../components/CodeDemo';
-import { getStaticDemo } from '../../../components/getStaticDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
 import { BoxDemo } from '@mergeui/demo';
+import { CodeDemo } from 'components/CodeDemo';
+import { Tab, Tabs } from 'nextra-theme-docs';
+import { Table, Tr, Td, Th } from 'nextra/components';
 
-export const getStaticProps = getStaticDemo('ui/Box');
+export const getStaticProps = getStaticDemo('ui/layout/Box');
 
 # Box
 
-<CodeDemo Demo={BoxDemo} />
+<Tabs items={["Demo", "Anatomy", "Props"]}>
+  <Tab>
+    <CodeDemo Demo={BoxDemo} />
+  </Tab>
+  <Tab>
+    ```tsx
+    <Box />
+    ```
+  </Tab>
+  <Tab>
+    ## Box
+   <Table className="table-auto overflow-hidden w-full">
+      <Tr>
+        <Th>Props</Th>
+        <Th>default</Th>
+        <Th>Description</Th>
+      </Tr>
+   </Table>
+  </Tab>
+</Tabs>

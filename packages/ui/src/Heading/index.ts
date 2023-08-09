@@ -1,7 +1,10 @@
 import { Text as TextNative } from 'react-native';
 import { styled } from '@mergeui/core';
 
-export const Text = styled(TextNative, '', {
+export const Heading = styled(TextNative, {
+  base: {
+    styles: [],
+  },
   variants: {
     variant: { link: ['text-blue-500'] },
     weight: {

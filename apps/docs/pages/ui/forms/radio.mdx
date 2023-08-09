@@ -1,0 +1,72 @@
+import { CodeDemo } from 'components/CodeDemo';
+import { Tab, Tabs } from 'nextra-theme-docs';
+import { Table, Tr, Td, Th } from 'nextra/components';
+
+# Radio
+
+<Tabs items={["Demo", "Anatomy", "Props"]}>
+  <Tab>
+    <CodeDemo />
+  </Tab>
+  <Tab>
+    ## Simple
+    ```tsx
+    <Radio.Group>
+      <Radio />
+    </Radio.Group>
+    ```
+
+    ## Advanced
+    ```tsx
+    <Radio.Group>
+      <Radio>
+        <Radio.Indicator>
+          <Radio.Icon />
+        </Radio.Indicator>
+        <Radio.Label />
+      </Radio>
+    </Radio.Group>
+    ```
+
+  </Tab>
+  <Tab>
+  
+    ## Button
+   <Table className="table-auto overflow-hidden w-full">
+      <Tr>
+        <Th>Props</Th>
+        <Th>default</Th>
+        <Th>Description</Th>
+      </Tr>
+      <Tr>
+        <Td>disabled</Td>
+        <Th>false</Th>
+        <Th>Description</Th>
+      </Tr>
+      <Tr>
+        <Td>loading</Td>
+        <Th>false</Th>
+        <Th>dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd</Th>
+      </Tr>
+   </Table>
+
+## Button.Text
+
+   <Table className="table-auto overflow-hidden w-full">
+      <Tr>
+        <Th>Props</Th>
+        <Th>default</Th>
+        <Th>Description</Th>
+      </Tr>
+   </Table>
+   ## Button.Icon
+   <Table className="table-auto overflow-hidden w-full">
+      <Tr>
+        <Th>Props</Th>
+        <Th>default</Th>
+        <Th>Description</Th>
+      </Tr>
+   </Table>
+  
+  </Tab>
+</Tabs>

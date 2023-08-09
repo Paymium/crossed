@@ -1,5 +1,5 @@
-import { CodeDemo } from '../../components/CodeDemo';
-import { getStaticDemo } from '../../components/getStaticDemo';
+import { CodeDemo } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
 import { ButtonDemo } from '@mergeui/demo';
 import { Tab, Tabs } from 'nextra-theme-docs';
 import { Table, Tr, Td, Th } from 'nextra/components';
@@ -10,12 +10,9 @@ export const getStaticProps = getStaticDemo('ui/Button');
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
   <Tab>
-
     <CodeDemo Demo={ButtonDemo} />
-
   </Tab>
   <Tab>
-
     ## Simple
     ```tsx
     <Button />
@@ -51,7 +48,8 @@ export const getStaticProps = getStaticDemo('ui/Button');
       </Tr>
    </Table>
 
-   ## Button.Text
+## Button.Text
+
    <Table className="table-auto overflow-hidden w-full">
       <Tr>
         <Th>Props</Th>
