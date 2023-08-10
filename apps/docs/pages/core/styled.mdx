@@ -1,9 +1,66 @@
 import { StyledDemo } from '@mergeui/demo';
 import { CodeDemo } from '../../components/CodeDemo';
 import { getStaticDemo } from '../../components/getStaticDemo';
+import { Tab, Tabs } from 'nextra-theme-docs';
 
 export const getStaticProps = getStaticDemo('core/styled');
 
 # styled()
 
-<CodeDemo Demo={StyledDemo} />
+
+<Tabs items={["Demo", "Anatomy", "Props"]}>
+  <Tab>
+    <CodeDemo Demo={StyledDemo} />
+  </Tab>
+  <Tab>
+  ```typescript
+  type ClassName = "..." | ["..."];
+
+  type Props = ComponentProps
+
+  type Base<P> = {
+    className: ClassName;
+    props: P,
+  }
+
+  type State<P> = {
+    ":focus": Base<P>;
+    ":hover": Base<P>;
+    ":disabled": Base<P>;
+    ":active": Base<P>;
+  }
+
+  type BaseWithState<P> = State<P> & {
+    className: ClassName;
+    props: P,
+    ":hover": Base<P>,
+  }
+
+  styled(Component, {
+    'className': ClassName,
+    'props': Props,
+    ":focus": Base<ComponentProps>;
+    ":hover": Base<ComponentProps>;
+    ":disabled": Base<ComponentProps>;
+    ":active": Base<ComponentProps>;
+    'variants': {
+      size: {
+        xs: {
+          'className': ClassName,
+          'props': Props,
+          ":focus": Base<ComponentProps>;
+          ":hover": Base<ComponentProps>;
+          ":disabled": Base<ComponentProps>;
+          ":active": Base<ComponentProps>;
+        },
+      },
+    },
+    'defaultVariants': {
+      size: 'md',
+    },
+  });
+  ```
+  </Tab>
+  <Tab>
+  </Tab>
+  </Tabs>

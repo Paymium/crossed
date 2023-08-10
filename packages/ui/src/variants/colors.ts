@@ -1,244 +1,231 @@
+import type { BaseWithState } from '@mergeui/core';
+
 export const colorVariants = {
   slate: {
-    styles: [
-      'text-slate-500',
-      'border-slate-500',
-      'bg-slate-800',
-      'hover:bg-slate-600',
+    'className': [
+      'text-slate-800 border-slate-800 bg-slate-700',
+      'dark:text-slate-500 dark:border-slate-800 dark:bg-slate-800',
     ],
-    _active: {
-      styles: ['bg-slate-700'],
+    ':active': {
+      className: ['bg-slate-600', 'dark:bg-slate-700'],
+    },
+    ':hover': {
+      className: ['bg-slate-500', 'dark:bg-slate-600'],
     },
   },
   gray: {
-    styles: [
-      'text-gray-500',
-      'border-gray-500',
-      'bg-gray-800',
-      'hover:bg-gray-600',
+    'className': [
+      'text-gray-800 border-gray-800 bg-gray-700',
+      'dark:text-gray-500 dark:border-gray-800 dark:bg-gray-800',
     ],
-    _active: {
-      styles: ['bg-gray-700'],
+    ':active': {
+      className: ['bg-gray-700'],
+    },
+    ':hover': {
+      className: ['bg-gray-600'],
     },
   },
   zinc: {
-    styles: [
-      'text-zinc-500',
-      'border-zinc-500',
+    'className': [
+      'text-zinc-800 dark:text-zinc-500',
+      'border-zinc-800',
       'bg-zinc-800',
-      'hover:bg-zinc-600',
     ],
-    _active: {
-      styles: ['bg-zinc-700'],
+    ':active': {
+      className: ['bg-zinc-700'],
+    },
+    ':hover': {
+      className: ['bg-zinc-600'],
     },
   },
   neutral: {
-    styles: [
-      'text-neutral-500',
-      'border-neutral-500',
+    'className': [
+      'text-neutral-800 dark:text-neutral-500',
+      'border-neutral-800',
       'bg-neutral-800',
-      'hover:bg-neutral-600',
     ],
-    _active: {
-      styles: ['bg-neutral-700'],
+    ':active': {
+      className: ['bg-neutral-700'],
+    },
+    ':hover': {
+      className: ['bg-neutral-600'],
     },
   },
   stone: {
-    styles: [
-      'text-stone-500',
-      'border-stone-500',
+    'className': [
+      'text-stone-800 dark:text-stone-500',
+      'border-stone-800',
       'bg-stone-800',
-      'hover:bg-stone-600',
     ],
-    _active: {
-      styles: ['bg-stone-700'],
+    ':active': {
+      className: ['bg-stone-700'],
+    },
+    ':hover': {
+      className: ['bg-stone-600'],
     },
   },
   red: {
-    styles: [
-      'text-red-500',
-      'border-red-500',
-      'bg-red-800',
-      'hover:bg-red-600',
+    'className': [
+      'text-red-700 border-red-700 bg-red-700',
+      'dark:text-red-500 dark:border-red-800 dark:bg-red-800',
     ],
-    _active: {
-      styles: ['bg-red-700'],
+    ':active': {
+      className: ['bg-red-600 dark:bg-red-700'],
+    },
+    ':hover': {
+      className: ['bg-red-500 dark:bg-red-600'],
     },
   },
   orange: {
-    styles: [
-      'text-orange-800',
-      'border-orange-800',
-      'bg-orange-800',
-      'hover:bg-orange-600',
-    ],
-    _active: {
-      styles: ['bg-orange-700'],
+    'className': ['text-orange-800', 'border-orange-800', 'bg-orange-800'],
+    ':active': {
+      className: ['bg-orange-700'],
+    },
+    ':hover': {
+      className: ['bg-orange-600'],
     },
   },
   amber: {
-    styles: [
-      'text-amber-800',
-      'border-amber-800',
-      'bg-amber-800',
-      'hover:bg-amber-600',
-    ],
-    _active: {
-      styles: ['bg-amber-700'],
+    'className': ['text-amber-800', 'border-amber-800', 'bg-amber-800'],
+    ':active': {
+      className: ['bg-amber-700'],
+    },
+    ':hover': {
+      className: ['bg-amber-600'],
     },
   },
   yellow: {
-    styles: [
-      'text-yellow-800',
-      'border-yellow-800',
-      'bg-yellow-800',
-      'hover:bg-yellow-600',
-    ],
-    _active: {
-      styles: ['bg-yellow-700'],
+    'className': ['text-yellow-800', 'border-yellow-800', 'bg-yellow-800'],
+    ':active': {
+      className: ['bg-yellow-700'],
+    },
+    ':hover': {
+      className: ['bg-yellow-600'],
     },
   },
   lime: {
-    styles: [
-      'text-lime-800',
-      'border-lime-800',
-      'bg-lime-800',
-      'hover:bg-lime-600',
-    ],
-    _active: {
-      styles: ['bg-lime-700'],
+    'className': ['text-lime-800', 'border-lime-800', 'bg-lime-800'],
+    ':active': {
+      className: ['bg-lime-700'],
+    },
+    ':hover': {
+      className: ['bg-lime-600'],
     },
   },
   green: {
-    styles: [
-      'text-green-800',
-      'border-green-800',
-      'bg-green-800',
-      'hover:bg-green-600',
-    ],
-    _active: {
-      styles: ['bg-green-700'],
+    'className': ['text-green-800', 'border-green-800', 'bg-green-800'],
+    ':active': {
+      className: ['bg-green-700'],
+    },
+    ':hover': {
+      className: ['bg-green-600'],
     },
   },
   emerald: {
-    styles: [
-      'text-emerald-800',
-      'border-emerald-800',
-      'bg-emerald-800',
-      'hover:bg-emerald-600',
-    ],
-    _active: {
-      styles: ['bg-emerald-700'],
+    'className': ['text-emerald-800', 'border-emerald-800', 'bg-emerald-800'],
+    ':active': {
+      className: ['bg-emerald-700'],
+    },
+    ':hover': {
+      className: ['bg-emerald-600'],
     },
   },
   teal: {
-    styles: [
-      'text-teal-800',
-      'border-teal-800',
-      'bg-teal-800',
-      'hover:bg-teal-600',
-    ],
-    _active: {
-      styles: ['bg-teal-700'],
+    'className': ['text-teal-800', 'border-teal-800', 'bg-teal-800'],
+    ':active': {
+      className: ['bg-teal-700'],
+    },
+    ':hover': {
+      className: ['bg-teal-600'],
     },
   },
   cyan: {
-    styles: [
-      'text-cyan-800',
-      'border-cyan-800',
-      'bg-cyan-800',
-      'hover:bg-cyan-600',
-    ],
-    _active: {
-      styles: ['bg-cyan-700'],
+    'className': ['text-cyan-800', 'border-cyan-800', 'bg-cyan-800'],
+    ':active': {
+      className: ['bg-cyan-700'],
+    },
+    ':hover': {
+      className: ['bg-cyan-600'],
     },
   },
   sky: {
-    styles: [
-      'text-sky-800',
-      'border-sky-800',
-      'bg-sky-800',
-      'hover:bg-sky-600',
-    ],
-    _active: {
-      styles: ['bg-sky-700'],
+    'className': ['text-sky-800', 'border-sky-800', 'bg-sky-800'],
+    ':active': {
+      className: ['bg-sky-700'],
+    },
+    ':hover': {
+      className: ['bg-sky-600'],
     },
   },
   blue: {
-    styles: [
-      'text-blue-500',
-      'border-blue-500',
-      'bg-blue-800',
-      'hover:bg-blue-600',
-    ],
-    _active: {
-      styles: ['bg-blue-700'],
+    'className': ['text-blue-500', 'border-blue-800', 'bg-blue-800'],
+    ':active': {
+      className: ['bg-blue-700'],
+    },
+    ':hover': {
+      className: ['bg-blue-600'],
     },
   },
   indigo: {
-    styles: [
-      'text-indigo-500',
-      'border-indigo-500',
-      'bg-indigo-800',
-      'hover:bg-indigo-600',
-    ],
-    _active: {
-      styles: ['bg-indigo-700'],
+    'className': ['text-indigo-500', 'border-indigo-800', 'bg-indigo-800'],
+    ':active': {
+      className: ['bg-indigo-700'],
+    },
+    ':hover': {
+      className: ['bg-indigo-600'],
     },
   },
   violet: {
-    styles: [
-      'text-violet-500',
-      'border-violet-500',
-      'bg-violet-800',
-      'hover:bg-violet-600',
-    ],
-    _active: {
-      styles: ['bg-violet-700'],
+    'className': ['text-violet-500', 'border-violet-800', 'bg-violet-800'],
+    ':active': {
+      className: ['bg-violet-700'],
+    },
+    ':hover': {
+      className: ['bg-violet-600'],
     },
   },
   purple: {
-    styles: [
-      'text-purple-500',
-      'border-purple-500',
-      'bg-purple-800',
-      'hover:bg-purple-600',
-    ],
-    _active: {
-      styles: ['bg-purple-700'],
+    'className': ['text-purple-500', 'border-purple-800', 'bg-purple-800'],
+    ':active': {
+      className: ['bg-purple-700'],
+    },
+    ':hover': {
+      className: ['bg-purple-600'],
     },
   },
   fuchsia: {
-    styles: [
-      'text-fuchsia-500',
-      'border-fuchsia-500',
-      'bg-fuchsia-800',
-      'hover:bg-fuchsia-600',
-    ],
-    _active: {
-      styles: ['bg-fuchsia-700'],
+    'className': ['text-fuchsia-500', 'border-fuchsia-800', 'bg-fuchsia-800'],
+    ':active': {
+      className: ['bg-fuchsia-700'],
+    },
+    ':hover': {
+      className: ['bg-fuchsia-600'],
     },
   },
   pink: {
-    styles: [
-      'text-pink-500',
-      'border-pink-500',
+    'className': [
+      'text-pink-800 dark:text-pink-500',
+      'border-pink-800',
       'bg-pink-800',
-      'hover:bg-pink-600',
     ],
-    _active: {
-      styles: ['bg-pink-700'],
+    ':active': {
+      className: ['bg-pink-700'],
+    },
+    ':hover': {
+      className: ['bg-pink-600'],
     },
   },
   rose: {
-    styles: [
-      'text-rose-500',
-      'border-rose-500',
+    'className': [
+      'text-rose-800 dark:text-rose-500',
+      'border-rose-800',
       'bg-rose-800',
-      'hover:bg-rose-600',
     ],
-    _active: {
-      styles: ['bg-rose-700'],
+    ':active': {
+      className: ['bg-rose-700'],
+    },
+    ':hover': {
+      className: ['bg-rose-600'],
     },
   },
-};
+} satisfies Record<string, BaseWithState<any>>;

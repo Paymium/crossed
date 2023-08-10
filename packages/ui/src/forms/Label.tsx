@@ -8,16 +8,16 @@ import {
 } from 'react';
 import { Platform, Text, View } from 'react-native';
 import type { GetProps } from '../types';
-import { Box } from '../Box';
+import { Box } from '../layout/Box';
 
 export const [LabelText] = styled(Text, {
-  styles: ['text-zinc-400'],
+  className: ['dark:text-zinc-400 text-zinc-700'],
   props: {
     as: 'label',
   },
   variants: {
     invalid: {
-      true: { styles: ['text-red-500'] },
+      true: { className: ['text-red-500'] },
     },
   },
 });

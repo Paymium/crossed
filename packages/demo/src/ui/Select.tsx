@@ -1,9 +1,9 @@
 import { Select } from '@mergeui/ui';
 import type { Props } from '../props';
 
-export const SelectDemo = ({ size }: Props) => {
+export const SelectDemo = ({ size, variant, color }: Props) => {
   return (
-    <Select size={size}>
+    <Select size={size} variant={variant as any} color={color}>
       <Select.Label>Size</Select.Label>
       <Select.Content>
         <Select.Option value={'xs'}>xs</Select.Option>

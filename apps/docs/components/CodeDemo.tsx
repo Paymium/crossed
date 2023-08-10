@@ -38,7 +38,7 @@ export const CodeDemo = ({
   const hasActions = Object.keys(actions || {}).length > 0;
 
   return (
-    <Box className="border-zinc-800 border-2 rounded-md">
+    <Box className="dark:border-zinc-800 border-zinc-200 border-2 rounded-md">
       <Box className="flex-row flex">
         <Box className="flex-1 p-4 justify-center items-center">
           <Demo color={color} space={space} size={size} variant={variant} />
@@ -46,7 +46,7 @@ export const CodeDemo = ({
         <YBox
           className={`${
             hasActions ? 'border-l-2 p-4' : ''
-          } border-zinc-800 relative pb-8 max-w-[26%]`}
+          } dark:border-zinc-800 border-zinc-200 relative pb-8 max-w-[26%]`}
           space="sm"
         >
           {hasActions && (

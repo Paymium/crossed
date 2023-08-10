@@ -1,7 +1,9 @@
+import type { BaseWithState } from '@mergeui/core';
+
 export const sizeVariants = {
-  xs: { styles: ['px-2', 'py-1'] },
-  sm: { styles: ['px-2', 'py-1.5'] },
-  md: { styles: ['px-3', 'py-2'] },
-  lg: { styles: ['px-4', 'py-3'] },
-  xl: { styles: ['px-5', 'py-4'] },
-};
+  xs: { className: ['px-2', 'py-1'] },
+  sm: { className: ['px-2', 'py-1.5'] },
+  md: { className: ['px-3', 'py-2'] },
+  lg: { className: ['px-4', 'py-3'] },
+  xl: { className: ['px-5', 'py-4'] },
+} satisfies Record<string, BaseWithState<any>>;

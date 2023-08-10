@@ -14,7 +14,8 @@
     "no-bitwise": 0,
     "prefer-const": "warn",
     "no-console": ["error", { "allow": ["warn", "error"] }],
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "react-hooks/exhaustive-deps": 1
   },
   "parserOptions": {
     "parser": "@babel/eslint-parser",

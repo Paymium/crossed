@@ -2,21 +2,19 @@ import { Text as TextNative } from 'react-native';
 import { styled } from '@mergeui/core';
 
 export const [Text] = styled(TextNative, {
-  base: {
-    styles: ['dark:text-white text-black'],
-  },
+  className: ['dark:text-white text-black'],
   variants: {
-    variant: { link: { styles: ['text-blue-500'] } },
+    variant: { link: { className: ['text-blue-500'] } },
     weight: {
-      thin: { styles: ['font-thin'] },
-      extralight: { styles: ['font-extralight'] },
-      light: { styles: ['font-light'] },
-      normal: { styles: ['font-normal'] },
-      medium: { styles: ['font-medium'] },
-      semibold: { styles: ['font-semibold'] },
-      bold: { styles: ['font-bold'] },
-      extrabold: { styles: ['font-extrabold'] },
-      black: { styles: ['font-black'] },
+      thin: { className: ['font-thin'] },
+      extralight: { className: ['font-extralight'] },
+      light: { className: ['font-light'] },
+      normal: { className: ['font-normal'] },
+      medium: { className: ['font-medium'] },
+      semibold: { className: ['font-semibold'] },
+      bold: { className: ['font-bold'] },
+      extrabold: { className: ['font-extrabold'] },
+      black: { className: ['font-black'] },
     },
-  } as const,
+  },
 });

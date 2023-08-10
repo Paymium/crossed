@@ -6,7 +6,7 @@
   "scripts": {
     "web": "cd apps/web && yarn dev",
     "native": "cd apps/native && yarn start",
-    "docs": "turbo run dev --filter=crossed-docs",
+    "docs": "turbo run dev --filter=mergeui-docs",
     "test": "bash ./scripts/test.sh",
     "dev": "turbo run dev",
     "watch": "turbo run watch --filter=@mergeui* --no-cache",
