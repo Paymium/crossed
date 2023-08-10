@@ -29,11 +29,9 @@ const [Provider, useContext] = createScope<{
 });
 
 const [ButtonFrame] = styled(Pressable, {
-  base: {
-    styles: ['rounded-md', 'flex', 'flex-row', 'items-center', 'border-2'],
-    props: {
-      role: 'button',
-    },
+  styles: ['rounded-md', 'flex', 'flex-row', 'items-center', 'border-2'],
+  props: {
+    role: 'button',
   },
   variants: {
     color: colorVariants,
@@ -42,7 +40,10 @@ const [ButtonFrame] = styled(Pressable, {
     variant: {
       filled: { styles: ['border-transparent'] },
       outlined: {
-        styles: ['bg-zinc-950', 'hover:bg-zinc-900 active:bg-zinc-800'],
+        styles: ['bg-zinc-950', 'hover:bg-zinc-900'],
+        _active: {
+          styles: ['bg-zinc-800'],
+        },
       },
     },
   },
@@ -88,6 +89,11 @@ const [ButtonTextFrame, ButtonTextFrameStyles] = styled(Text, {
       filled: { styles: [] },
       outlined: { styles: [] },
     },
+  },
+  defaultVariants: {
+    size: 'md',
+    color: 'zinc',
+    variant: 'outlined',
   },
   compoundVariants: [{ variant: 'filled', className: ['text-white'] }],
 });

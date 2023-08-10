@@ -5,8 +5,10 @@ export const colorVariants = {
       'border-slate-500',
       'bg-slate-800',
       'hover:bg-slate-600',
-      'active:bg-slate-700',
     ],
+    _active: {
+      styles: ['bg-slate-700'],
+    },
   },
   gray: {
     styles: [
@@ -14,8 +16,10 @@ export const colorVariants = {
       'border-gray-500',
       'bg-gray-800',
       'hover:bg-gray-600',
-      'active:bg-gray-700',
     ],
+    _active: {
+      styles: ['bg-gray-700'],
+    },
   },
   zinc: {
     styles: [
@@ -23,8 +27,10 @@ export const colorVariants = {
       'border-zinc-500',
       'bg-zinc-800',
       'hover:bg-zinc-600',
-      'active:bg-zinc-700',
     ],
+    _active: {
+      styles: ['bg-zinc-700'],
+    },
   },
   neutral: {
     styles: [
@@ -32,8 +38,10 @@ export const colorVariants = {
       'border-neutral-500',
       'bg-neutral-800',
       'hover:bg-neutral-600',
-      'active:bg-neutral-700',
     ],
+    _active: {
+      styles: ['bg-neutral-700'],
+    },
   },
   stone: {
     styles: [
@@ -41,8 +49,10 @@ export const colorVariants = {
       'border-stone-500',
       'bg-stone-800',
       'hover:bg-stone-600',
-      'active:bg-stone-700',
     ],
+    _active: {
+      styles: ['bg-stone-700'],
+    },
   },
   red: {
     styles: [
@@ -50,8 +60,10 @@ export const colorVariants = {
       'border-red-500',
       'bg-red-800',
       'hover:bg-red-600',
-      'active:bg-red-700',
     ],
+    _active: {
+      styles: ['bg-red-700'],
+    },
   },
   orange: {
     styles: [
@@ -59,8 +71,10 @@ export const colorVariants = {
       'border-orange-800',
       'bg-orange-800',
       'hover:bg-orange-600',
-      'active:bg-orange-700',
     ],
+    _active: {
+      styles: ['bg-orange-700'],
+    },
   },
   amber: {
     styles: [
@@ -68,8 +82,10 @@ export const colorVariants = {
       'border-amber-800',
       'bg-amber-800',
       'hover:bg-amber-600',
-      'active:bg-amber-700',
     ],
+    _active: {
+      styles: ['bg-amber-700'],
+    },
   },
   yellow: {
     styles: [
@@ -77,8 +93,10 @@ export const colorVariants = {
       'border-yellow-800',
       'bg-yellow-800',
       'hover:bg-yellow-600',
-      'active:bg-yellow-700',
     ],
+    _active: {
+      styles: ['bg-yellow-700'],
+    },
   },
   lime: {
     styles: [
@@ -86,8 +104,10 @@ export const colorVariants = {
       'border-lime-800',
       'bg-lime-800',
       'hover:bg-lime-600',
-      'active:bg-lime-700',
     ],
+    _active: {
+      styles: ['bg-lime-700'],
+    },
   },
   green: {
     styles: [
@@ -95,8 +115,10 @@ export const colorVariants = {
       'border-green-800',
       'bg-green-800',
       'hover:bg-green-600',
-      'active:bg-green-700',
     ],
+    _active: {
+      styles: ['bg-green-700'],
+    },
   },
   emerald: {
     styles: [
@@ -104,8 +126,10 @@ export const colorVariants = {
       'border-emerald-800',
       'bg-emerald-800',
       'hover:bg-emerald-600',
-      'active:bg-emerald-700',
     ],
+    _active: {
+      styles: ['bg-emerald-700'],
+    },
   },
   teal: {
     styles: [
@@ -113,8 +137,10 @@ export const colorVariants = {
       'border-teal-800',
       'bg-teal-800',
       'hover:bg-teal-600',
-      'active:bg-teal-700',
     ],
+    _active: {
+      styles: ['bg-teal-700'],
+    },
   },
   cyan: {
     styles: [
@@ -122,8 +148,10 @@ export const colorVariants = {
       'border-cyan-800',
       'bg-cyan-800',
       'hover:bg-cyan-600',
-      'active:bg-cyan-700',
     ],
+    _active: {
+      styles: ['bg-cyan-700'],
+    },
   },
   sky: {
     styles: [
@@ -131,8 +159,10 @@ export const colorVariants = {
       'border-sky-800',
       'bg-sky-800',
       'hover:bg-sky-600',
-      'active:bg-sky-700',
     ],
+    _active: {
+      styles: ['bg-sky-700'],
+    },
   },
   blue: {
     styles: [
@@ -140,8 +170,10 @@ export const colorVariants = {
       'border-blue-500',
       'bg-blue-800',
       'hover:bg-blue-600',
-      'active:bg-blue-700',
     ],
+    _active: {
+      styles: ['bg-blue-700'],
+    },
   },
   indigo: {
     styles: [
@@ -149,8 +181,10 @@ export const colorVariants = {
       'border-indigo-500',
       'bg-indigo-800',
       'hover:bg-indigo-600',
-      'active:bg-indigo-700',
     ],
+    _active: {
+      styles: ['bg-indigo-700'],
+    },
   },
   violet: {
     styles: [
@@ -158,8 +192,10 @@ export const colorVariants = {
       'border-violet-500',
       'bg-violet-800',
       'hover:bg-violet-600',
-      'active:bg-violet-700',
     ],
+    _active: {
+      styles: ['bg-violet-700'],
+    },
   },
   purple: {
     styles: [
@@ -167,8 +203,10 @@ export const colorVariants = {
       'border-purple-500',
       'bg-purple-800',
       'hover:bg-purple-600',
-      'active:bg-purple-700',
     ],
+    _active: {
+      styles: ['bg-purple-700'],
+    },
   },
   fuchsia: {
     styles: [
@@ -176,8 +214,10 @@ export const colorVariants = {
       'border-fuchsia-500',
       'bg-fuchsia-800',
       'hover:bg-fuchsia-600',
-      'active:bg-fuchsia-700',
     ],
+    _active: {
+      styles: ['bg-fuchsia-700'],
+    },
   },
   pink: {
     styles: [
@@ -185,8 +225,10 @@ export const colorVariants = {
       'border-pink-500',
       'bg-pink-800',
       'hover:bg-pink-600',
-      'active:bg-pink-700',
     ],
+    _active: {
+      styles: ['bg-pink-700'],
+    },
   },
   rose: {
     styles: [
@@ -194,7 +236,9 @@ export const colorVariants = {
       'border-rose-500',
       'bg-rose-800',
       'hover:bg-rose-600',
-      'active:bg-rose-700',
     ],
+    _active: {
+      styles: ['bg-rose-700'],
+    },
   },
 };

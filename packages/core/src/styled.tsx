@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
-import React from 'react';
-import { mergeui, merge } from '@mergeui/class-variance-authority';
+import React, { forwardRef, useState } from 'react';
+import { mergeui, merge, cx } from '@mergeui/class-variance-authority';
 import type {
   Props,
   ConfigSchema,
@@ -19,6 +19,7 @@ import type {
 type BaseStyle<P> = {
   styles?: ClassValue;
   props?: P & { as?: string | ComponentType };
+  _active?: BaseStyle<P>;
 };
 
 type Toto<T> = T extends undefined
@@ -29,8 +30,8 @@ type Toto<T> = T extends undefined
 
 export const styled = <P, T extends ConfigSchema = {}>(
   Component: ComponentType<P>,
-  themeConfigProps: {
-    base: BaseStyle<P>;
+  themeConfigProps: BaseStyle<P> & {
+    base?: BaseStyle<P>;
     variants?: T;
     defaultVariants?: ConfigVariants<T>;
     compoundVariants?: (T extends ConfigSchema
@@ -38,8 +39,9 @@ export const styled = <P, T extends ConfigSchema = {}>(
       : ClassProp)[];
   }
 ) => {
-  const { base, ...themeConfig } = themeConfigProps || {};
-  const { as: asTheme, ...propsTheme } = base?.props || {};
+  const { base, styles, props, _active, ...themeConfig } =
+    themeConfigProps || {};
+  const { as: asTheme, ...propsTheme } = props || base?.props || {};
   const variants = themeConfig?.variants || {};
 
   const finalVariant = Object.keys(variants).reduce<any>((acc, keyVariant) => {
@@ -52,16 +54,17 @@ export const styled = <P, T extends ConfigSchema = {}>(
     return acc;
   }, {});
 
-  const stylesClass = mergeui<T>(base?.styles || [], {
+  const stylesClass = mergeui<T>(styles || base?.styles || [], {
     ...themeConfig,
     variants: finalVariant,
   } as unknown as Config<T>);
 
-  const NewComponent = ({
-    as: asProps,
-    className,
-    ...props
-  }: Toto<T> & P & { className?: string; as?: string | ComponentType }) => {
+  const NewComponent = forwardRef<
+    any,
+    Toto<T> & P & { className?: string; as?: string | ComponentType }
+  >(({ as: asProps, className, ...props }, ref) => {
+    const [active, setActive] = useState(false);
+
     const variantNames = Object.keys(variants);
     const { componentProps, variantProps } = Object.keys(props as any).reduce<{
       componentProps: P;
@@ -94,40 +97,67 @@ export const styled = <P, T extends ConfigSchema = {}>(
       return acc;
     }, {});
 
+    const activeClassname = Object.keys(variantProps).reduce<string>(
+      (acc, keyVariant) => {
+        const valueVariant = (variantProps as any)[keyVariant];
+        if (active && valueVariant !== undefined) {
+          const variantList = (variants as any)[keyVariant];
+
+          const { _active } =
+            (variantList as any)[
+              valueVariant === true ? valueVariant.toString() : valueVariant
+            ] || {};
+          if (_active?.styles) {
+            return _active?.styles;
+          }
+        }
+        return acc;
+      },
+      ''
+    );
+
     const asPropsOrTheme = asProps || asVariant || asTheme || undefined;
     const AsComp = (
       Platform.OS === 'web' ? asPropsOrTheme || Component : Component
     ) as any;
 
+    const finalClassName = merge(
+      stylesClass(variantProps).split(' '),
+      className,
+      activeClassname
+    );
+
     const propsTmp =
       Platform.OS === 'web'
         ? asPropsOrTheme
           ? {
-              className: merge(stylesClass(variantProps).split(' '), className),
+              className: finalClassName,
             }
           : {
               style: StyleSheet.create({
                 root: {
                   $$css: true,
-                  ...merge(...stylesClass(variantProps).split(' '), className)
-                    .split(' ')
-                    .reduce<any>((acc, className) => {
-                      acc[`___${className}`] = className;
-                      return acc;
-                    }, {}),
+                  ...finalClassName.split(' ').reduce<any>((acc, className) => {
+                    acc[`___${className}`] = className;
+                    return acc;
+                  }, {}),
                 },
               }).root,
             }
-        : { style: tw.style(stylesClass(variantProps)) };
+        : { style: tw.style(finalClassName) };
+
     return (
       <AsComp
+        ref={ref}
+        onPressIn={() => setActive(true)}
+        onPressOut={() => setActive(false)}
         {...propsTheme}
         {...propsVariant}
         {...propsTmp}
         {...componentProps}
       />
     );
-  };
+  });
   // @ts-check
   // NewComponent.styles = stylesClass;
   return [NewComponent, stylesClass] as const;

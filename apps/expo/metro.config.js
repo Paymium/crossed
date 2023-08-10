@@ -7,6 +7,7 @@ const MetroSymlinksResolver = require("@rnx-kit/metro-resolver-symlinks");
 
 // eslint-disable-next-line no-undef
 module.exports = makeMetroConfig({
+  isCSSEnabled: true,
   // eslint-disable-next-line no-undef
   projectRoot: __dirname,
   transformer: {

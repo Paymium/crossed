@@ -6,6 +6,7 @@ import {
 } from '@mergeui/core';
 import {
   cloneElement,
+  forwardRef,
   type ComponentType,
   type PropsWithChildren,
   type ReactElement,
@@ -133,14 +134,22 @@ function InputRoot({
   );
 }
 const InputLabel = Label.Text;
-const InputInput = (props: Omit<GetProps<typeof InputInputFrame>, 'value'>) => {
+const InputInput = forwardRef<
+  any,
+  Omit<GetProps<typeof InputInputFrame>, 'value'>
+>((props, ref) => {
   const { value, onChangeValue } = useContext();
   return (
     <Label.Input>
-      <InputInputFrame {...props} value={value} onChangeText={onChangeValue} />
+      <InputInputFrame
+        {...props}
+        value={value}
+        onChangeText={onChangeValue}
+        ref={ref}
+      />
     </Label.Input>
   );
-};
+});
 const InputIcon = ({
   children,
   ...props

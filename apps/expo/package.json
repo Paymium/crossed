@@ -15,6 +15,7 @@
   "dependencies": {
     "@babel/runtime": "^7.22.10",
     "@expo/vector-icons": "^13.0.0",
+    "@mergeui/core": "workspace:*",
     "@mergeui/demo": "workspace:1.0.0",
     "@mergeui/ui": "workspace:^1.0.0",
     "@react-navigation/native": "^6.0.2",
