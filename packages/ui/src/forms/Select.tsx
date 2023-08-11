@@ -49,6 +49,7 @@ type ProviderContext = {
   variant: InputProps['variant'];
   color: InputProps['color'];
   value: string;
+  placeholder?: string;
 };
 
 const [Provider, useContext] = createScope<ProviderContext>(
@@ -91,15 +92,19 @@ const SelectTrigger = memo(
 const SelectLabel = Input.Label;
 const SelectIcon = Input.Icon;
 
-const SelectInput = memo((props: GetProps<typeof Input.Input>) => (
-  <Input.Input
-    editable={false}
-    selectTextOnFocus={false}
-    selection={{ start: 0, end: 0 }}
-    {...props}
-    className={cx('cursor-pointer', props.className)}
-  />
-));
+const SelectInput = memo((props: GetProps<typeof Input.Input>) => {
+  const { placeholder } = useContext();
+  return (
+    <Input.Input
+      editable={false}
+      selectTextOnFocus={false}
+      selection={{ start: 0, end: 0 }}
+      {...props}
+      placeholder={placeholder}
+      className={cx('cursor-pointer', props.className)}
+    />
+  );
+});
 
 const SelectContent = memo(({ children, ...props }: GetProps<typeof Box>) => {
   const context = useContext();
@@ -207,6 +212,7 @@ type SelectProps<V extends string = string> = {
   onChangeValue?: (value: V) => void;
   open?: boolean;
 
+  placeholder?: string;
   items?: { value: string; label: string }[];
   label?: string;
 };
@@ -228,6 +234,7 @@ function SelectRoot({
   value: valueProps,
   defaultValue,
   onChangeValue,
+  placeholder,
 }: PropsWithChildren<SelectProps>) {
   const [open, setOpen] = useState(openProps);
 
@@ -262,6 +269,7 @@ function SelectRoot({
       variant={variant}
       color={color}
       value={value}
+      placeholder={placeholder}
     >
       <FloatingProvider {...floating} {...interactions}>
         <Input size={size} variant={variant} color={color} value={value}>
