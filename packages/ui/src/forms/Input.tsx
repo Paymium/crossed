@@ -20,7 +20,7 @@ import {
 import { Label } from './Label';
 import { colorVariants, sizeVariants, spaceVariants } from '../variants';
 import type { GetProps } from '../types';
-import { Pressable, TextInput, View } from 'react-native';
+import { Pressable, TextInput } from 'react-native';
 
 const [Provider, useContext] = createScope<{
   size?: keyof typeof sizeVariants;
@@ -37,7 +37,7 @@ const [Provider, useContext] = createScope<{
   setFocus: () => {},
 });
 
-const [InputContentFrame] = styled(View, {
+const [InputContentFrame] = styled(Pressable, {
   'className': ['flex flex-row', 'rounded-md', 'appearance-none', 'border-2'],
   ':focus': {
     className: ['ring-2'],
@@ -150,27 +150,31 @@ function InputRoot({
 }
 const InputLabel = Label.Text;
 const InputInput = memo(
-  forwardRef<any, Omit<GetProps<typeof InputInputFrame>, 'value'>>(
-    (props, ref) => {
-      const { value, onChangeValue, setFocus } = useContext();
+  forwardRef<TextInput, GetProps<typeof InputInputFrame>>((props, ref) => {
+    const { value, onChangeValue, setFocus } = useContext();
 
-      return useMemo(
-        () => (
-          <Label.Input>
-            <InputInputFrame
-              {...props}
-              onFocus={() => setFocus(true)}
-              onBlur={() => setFocus(false)}
-              value={value}
-              onChangeText={onChangeValue}
-              ref={ref}
-            />
-          </Label.Input>
-        ),
-        [props, value]
-      );
-    }
-  )
+    return useMemo(
+      () => (
+        <Label.Input>
+          <InputInputFrame
+            value={value}
+            onChangeText={onChangeValue}
+            {...props}
+            onFocus={(e) => {
+              props?.onFocus?.(e);
+              setFocus(true);
+            }}
+            onBlur={(e) => {
+              props?.onBlur?.(e);
+              setFocus(false);
+            }}
+            ref={ref}
+          />
+        </Label.Input>
+      ),
+      [props, value]
+    );
+  })
 );
 const InputIcon = memo(
   ({

@@ -246,12 +246,12 @@ export const styled = <
 
   const NewComponent = forwardRef<
     any,
-    Props<T> &
-      P & {
-        className?: string;
-        as?: string | ComponentType;
-        states?: { isActive?: boolean; isFocus?: boolean; isHover?: boolean };
-      }
+    {
+      className?: string;
+      as?: string | ComponentType;
+      states?: { isActive?: boolean; isFocus?: boolean; isHover?: boolean };
+    } & P &
+      Props<T>
   >(({ as: asProps, className, disabled, states, ...props }, ref) => {
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
