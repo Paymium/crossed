@@ -1,14 +1,14 @@
 import { CodeDemo } from 'components/CodeDemo';
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
 import { Table, Tr, Td, Th } from 'nextra/components';
 
 # Slider
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
-  <Tab>
+  <Tabs.Tab>
     <CodeDemo />
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ## Simple
     ```tsx
     <Slider />
@@ -25,8 +25,8 @@ import { Table, Tr, Td, Th } from 'nextra/components';
     </Slider>
     ```
 
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
   
     ## Button
    <Table className="table-auto overflow-hidden w-full">
@@ -65,5 +65,5 @@ import { Table, Tr, Td, Th } from 'nextra/components';
       </Tr>
    </Table>
   
-  </Tab>
+  </Tabs.Tab>
 </Tabs>

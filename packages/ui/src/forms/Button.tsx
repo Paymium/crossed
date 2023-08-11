@@ -3,6 +3,7 @@ import {
   styled,
   withStaticProperties,
   merge,
+  tw,
 } from '@mergeui/core';
 import { Pressable, Text } from 'react-native';
 import {
@@ -12,41 +13,48 @@ import {
   type PropsWithChildren,
   useId,
 } from 'react';
-import { colorVariants } from './variants/colors';
-import { sizeVariants } from './variants/size';
-import type { GetProps } from './types';
-import tw from 'twrnc';
-import { Box } from './Box';
-import { spaceVariants } from './variants';
+import { colorVariants } from '../variants/colors';
+import { sizeVariants } from '../variants/size';
+import type { GetProps } from '../types';
+import { Box } from '../layout/Box';
+import { spaceVariants } from '../variants';
+import { useThemeContext } from '../Provider';
 
 const [Provider, useContext] = createScope<{
-  size?: keyof typeof sizeVariants | null;
-  color?: keyof typeof colorVariants | null;
-  variant?: 'filled' | 'outlined' | null;
+  size?: keyof typeof sizeVariants;
+  color?: keyof typeof colorVariants;
+  variant?: 'filled' | 'outlined';
 }>({
   size: 'md',
   color: 'zinc',
 });
 
-const [ButtonFrame] = styled(Pressable, {
-  base: {
-    styles: ['rounded-md', 'flex', 'flex-row', 'items-center', 'border-2'],
-    props: {
-      role: 'button',
-    },
+const ButtonFrame = styled(Pressable, {
+  'className': ['rounded-md', 'flex', 'flex-row', 'items-center', 'border-2'],
+  ':disabled': {
+    className: ['opacity-50', 'pointer-events-none'],
   },
-  variants: {
+  'props': {
+    role: 'button',
+  },
+  'variants': {
     color: colorVariants,
     size: sizeVariants,
     space: spaceVariants,
     variant: {
-      filled: { styles: ['border-transparent'] },
+      filled: { className: ['border-transparent dark:border-transparent'] },
       outlined: {
-        styles: ['bg-zinc-950', 'hover:bg-zinc-900 active:bg-zinc-800'],
+        'className': ['dark:bg-zinc-950 bg-zinc-100'],
+        ':hover': {
+          className: ['dark:bg-zinc-900 bg-zinc-300'],
+        },
+        ':active': {
+          className: ['dark:bg-zinc-800 bg-zinc-200'],
+        },
       },
     },
   },
-  defaultVariants: {
+  'defaultVariants': {
     size: 'md',
     color: 'zinc',
     variant: 'outlined',
@@ -54,21 +62,25 @@ const [ButtonFrame] = styled(Pressable, {
   },
 });
 
-const [ButtonTextFrame, ButtonTextFrameStyles] = styled(Text, {
-  base: {
-    styles: ['font-semibold'],
-  },
+const ButtonTextFrame = styled(Text, {
+  className: ['font-semibold'],
   variants: {
-    color: (
-      Object.keys(colorVariants) as (keyof typeof colorVariants)[]
-    ).reduce<{
+    color: Object.entries(colorVariants).reduce<{
       [key in keyof typeof colorVariants]: (typeof colorVariants)[key];
     }>(
-      (acc, keyColor) => {
-        const { styles, ...colorVariant } = colorVariants[keyColor];
+      (acc, [keyColor, { className, ...colorVariant }]) => {
+        const flatClassName = className.reduce<string[]>((d, c) => {
+          return [...d, ...c.split(' ')];
+        }, []);
+
         (acc as any)[keyColor] = {
           ...colorVariant,
-          styles: styles.filter((e) => e.startsWith('text-')),
+          'className': (flatClassName || []).filter(
+            (e) => e.startsWith('text-') || e.startsWith('dark:text-')
+          ),
+          ':active': undefined,
+          ':hover': undefined,
+          ':focus': undefined,
         };
 
         return acc;
@@ -78,18 +90,25 @@ const [ButtonTextFrame, ButtonTextFrameStyles] = styled(Text, {
       }
     ),
     size: {
-      xs: { styles: ['px-1', 'text-xs'] },
-      sm: { styles: ['px-2', 'text-sm'] },
-      md: { styles: ['px-3', 'text-base'] },
-      lg: { styles: ['px-4', 'text-lg'] },
-      xl: { styles: ['px-5', 'text-xl'] },
+      xs: { className: ['px-1', 'text-xs'] },
+      sm: { className: ['px-2', 'text-sm'] },
+      md: { className: ['px-3', 'text-base'] },
+      lg: { className: ['px-4', 'text-lg'] },
+      xl: { className: ['px-5', 'text-xl'] },
     },
     variant: {
-      filled: { styles: [] },
-      outlined: { styles: [] },
+      filled: { className: [] },
+      outlined: { className: [] },
     },
   },
-  compoundVariants: [{ variant: 'filled', className: ['text-white'] }],
+  defaultVariants: {
+    size: 'md',
+    color: 'zinc',
+    variant: 'outlined',
+  },
+  compoundVariants: [
+    { variant: 'filled', className: ['text-white dark:text-white'] },
+  ],
 });
 
 type ButtonRootProps = GetProps<typeof ButtonFrame> & {
@@ -144,10 +163,12 @@ const ButtonIcon = ({
   children,
   ...props
 }: PropsWithChildren<GetProps<typeof Box>>) => {
+  const { theme } = useThemeContext();
   const { color, variant, size } = useContext();
-  const className = merge(ButtonTextFrameStyles({ color, variant, size }));
-  const style = tw.style(className);
+  const className = merge(ButtonTextFrame.styles({ color, variant, size }));
 
+  tw.setColorScheme(theme);
+  const style = tw.style(className);
   return (
     <Box {...props}>
       {cloneElement(children as any, {

@@ -1,16 +1,16 @@
 import { CodeDemo } from 'components/CodeDemo';
+import { Table } from 'components/Table';
+import { Tabs } from 'components/Tabs';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { SelectDemo } from '@mergeui/demo';
-import { Tab, Tabs } from 'nextra-theme-docs';
-import { Table, Tr, Td, Th } from 'nextra/components';
 
-export const getStaticProps = getStaticDemo('ui/Select');
+export const getStaticProps = getStaticDemo('ui/forms/Select');
 
 # Select
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
-    <Tab><CodeDemo Demo={SelectDemo} /></Tab>
-    <Tab>
+    <Tabs.Tab><CodeDemo Demo={SelectDemo} actions={{ color: true, variant: ['outlined', "filled"], size: true} } /></Tabs.Tab>
+    <Tabs.Tab>
     ## Simple
     ```tsx
     <Select />
@@ -27,19 +27,47 @@ export const getStaticProps = getStaticDemo('ui/Select');
         </Select.Icon>
       </Select.Trigger>
       <Select.Content>
-          <Select.Item />
+          <Select.Option />
       </Select.Content>
     </Select>
     ```
-    </Tab>
-    <Tab>
-    <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
+    </Tabs.Tab>
+    <Tabs.Tab>
+    ## Select
+    <br />
+    <Table props={[
+      ["variant", "outline | filled", "outline", "Variant of button"],
+      ["size", "xs | sm | md | lg | xl", "md", "Size of button"],
+      ["color", "type Colors", "zinc", "Color of button"],
+      ["value", "any", "undefined", "Value of select"],
+      ["defaultValue", "any", "undefined", "Default value of select"],
+      ["placeholder", "string", "undefined", "Placeholder of Select"],
+      ["onChangeValue", "(value: any) => void", "undefined", "Fire when user select option"],
+      ["items", "SelectOptionProps[]", "", "List of options in simple mode"],
+      ["label", "string", "undefined", "Label of Select"],
+    ]} />
 
-   </Table>
-   </Tab>
+    ## Select.Label
+    Extends [Input.Label](/ui/forms/input?t=props#inputlabel) props.
+
+    ## Select.Trigger
+    Extends [Input.Content](/ui/forms/input?t=props#inputcontent) props.
+  
+    ## Select.Input
+    Extends [Input.Input](/ui/forms/input?t=props#inputinput) props.
+  
+    ## Select.Icon
+    Extends [Input.Icon](/ui/forms/input?t=props#inputicon) props.
+  
+    ## Select.Content
+    Extends [Box](/ui/layout/box?t=props) props.
+  
+    ## Select.Option
+    <br />
+    <Table props={[
+      ["value", "any", "undefined", "Value of option"],
+      ["label", "string", "undefined", "Label of option"],
+    ]} />
+
+   </Tabs.Tab>
 </Tabs>

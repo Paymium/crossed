@@ -1,7 +1,7 @@
 import { TextDemo } from '@mergeui/demo';
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
 import { Table, Tr, Td, Th } from 'nextra/components';
 
 export const getStaticProps = getStaticDemo("ui/typography/text")
@@ -9,15 +9,15 @@ export const getStaticProps = getStaticDemo("ui/typography/text")
 # Text
 
 <Tabs items={['Demo', 'Anatomy', 'Props']}>
-  <Tab>
+  <Tabs.Tab>
     <CodeDemo Demo={TextDemo} />
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```tsx
     <Text />
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ## Text
     <Table className="table-auto overflow-hidden w-full">
       <Tr>
@@ -26,5 +26,5 @@ export const getStaticProps = getStaticDemo("ui/typography/text")
         <Th>Description</Th>
       </Tr>
     </Table>
-  </Tab>
+  </Tabs.Tab>
 </Tabs>

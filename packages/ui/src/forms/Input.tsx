@@ -3,82 +3,95 @@ import {
   merge,
   styled,
   withStaticProperties,
+  tw,
 } from '@mergeui/core';
 import {
   cloneElement,
+  forwardRef,
   type ComponentType,
   type PropsWithChildren,
   type ReactElement,
+  useState,
+  useMemo,
+  memo,
+  Dispatch,
+  SetStateAction,
 } from 'react';
 import { Label } from './Label';
 import { colorVariants, sizeVariants, spaceVariants } from '../variants';
 import type { GetProps } from '../types';
-import { Pressable, TextInput, View } from 'react-native';
-import tw from 'twrnc';
+import { Pressable, TextInput } from 'react-native';
 
 const [Provider, useContext] = createScope<{
-  size?: keyof typeof sizeVariants | null;
-  color?: keyof typeof colorVariants | null;
-  variant?: 'filled' | 'outlined' | null;
+  size?: keyof typeof sizeVariants;
+  color?: keyof typeof colorVariants;
+  variant?: 'filled' | 'outlined';
   value?: string;
   onChangeValue?: (e: string) => void;
+  focus?: boolean;
+  setFocus: Dispatch<SetStateAction<boolean>>;
 }>({
   size: 'md',
   color: 'zinc',
   variant: 'outlined',
+  setFocus: () => {},
 });
 
-const [InputContentFrame] = styled(View, {
-  base: {
-    styles: [
-      'flex flex-row',
-      'rounded-md',
-      'appearance-none',
-      'border-2',
-      'focus:ring-2',
-      'focus-within:ring-2',
-      'focus-visible:ring-2',
-    ],
+export const InputContentFrame = styled(Pressable, {
+  'className': ['flex flex-row', 'rounded-md', 'appearance-none', 'border-2'],
+  ':focus': {
+    className: ['ring-2'],
   },
-  variants: {
+  'variants': {
     size: sizeVariants,
     color: colorVariants,
     variant: {
-      filled: { styles: ['border-transparent'] },
+      filled: { className: ['border-transparent'] },
       outlined: {
-        styles: ['bg-zinc-950', 'hover:bg-zinc-900', 'active:bg-zinc-900'],
+        className: ['bg-zinc-950'],
       },
     },
     space: spaceVariants,
   },
-  defaultVariants: {
+  'defaultVariants': {
     size: 'md',
     color: 'zinc',
     variant: 'outlined',
   },
+  'compoundVariants': [
+    {
+      'color': Object.keys(colorVariants) as (keyof typeof colorVariants)[],
+      'variant': 'outlined',
+      ':hover': {
+        className: ['bg-zinc-900'],
+      },
+      ':focus': {
+        className: ['bg-zinc-900'],
+      },
+    },
+  ],
 });
 
-const [InputInputFrame, InputInputFrameStyles] = styled(TextInput, {
-  base: {
-    styles: [
-      'appearance-none',
-      'focus-visible:!ring-offset-transparent focus-visible:!ring-transparent focus-visible:shadow-none',
-      'text-white',
-      'group-focus',
-      'flex-1',
-      'focus-visible:outline-0',
-    ],
-  },
+const InputInputFrame = styled(TextInput, {
+  className: [
+    'appearance-none',
+    'focus-visible:!ring-offset-transparent focus-visible:!ring-transparent focus-visible:shadow-none',
+    'text-white',
+    'group-focus',
+    'flex-1 min-w-0',
+    'focus-visible:outline-0',
+  ],
 });
 
-const [InputIconFrame] = styled(Pressable, {
-  base: {
-    styles: [],
-  },
+const InputIconFrame = styled(Pressable, {
+  className: [],
 });
 
 export type InputRootProps = PropsWithChildren<
-  Omit<GetProps<typeof Provider>, 'as' | 'className' | 'children'> & {
+  Omit<
+    GetProps<typeof Provider>,
+    'as' | 'className' | 'children' | 'focus' | 'setFocus'
+  > & {
     value?: string;
     onChangeValue?: (value: string) => void;
     label?: string;
@@ -102,6 +115,7 @@ function InputRoot({
   value,
   onChangeValue,
 }: InputRootProps) {
+  const [focus, setFocus] = useState(false);
   return (
     <Provider
       size={size}
@@ -109,8 +123,10 @@ function InputRoot({
       variant={variant}
       value={value}
       onChangeValue={onChangeValue}
+      focus={focus}
+      setFocus={setFocus}
     >
-      <Label className="group">
+      <Label className="group focus:ring ring-orange-400">
         {children ??
           [
             label && <InputLabel key="InputLabel">{label}</InputLabel>,
@@ -133,47 +149,78 @@ function InputRoot({
   );
 }
 const InputLabel = Label.Text;
-const InputInput = (props: Omit<GetProps<typeof InputInputFrame>, 'value'>) => {
-  const { value, onChangeValue } = useContext();
-  return (
-    <Label.Input>
-      <InputInputFrame {...props} value={value} onChangeText={onChangeValue} />
-    </Label.Input>
-  );
-};
-const InputIcon = ({
-  children,
-  ...props
-}: PropsWithChildren<GetProps<typeof InputIconFrame>>) => {
-  const className = merge(InputInputFrameStyles());
-  const style = tw.style(className);
-  return (
-    <InputIconFrame {...props}>
-      {cloneElement(children as any, {
-        size: Number(style.fontSize) * 1.2 || 16,
-        color: style.color,
-      })}
-    </InputIconFrame>
-  );
-  // return <InputIconFrame {...props}>{children}</InputIconFrame>;
-};
-const InputContent = ({
-  children,
-  ...props
-}: PropsWithChildren<GetProps<typeof InputContentFrame>>) => {
-  const { color, size, variant } = useContext();
-  return (
-    <InputContentFrame
-      color={color}
-      size={size}
-      variant={variant}
-      space={'xs'}
-      {...props}
-    >
-      {children}
-    </InputContentFrame>
-  );
-};
+const InputInput = memo(
+  forwardRef<TextInput, GetProps<typeof InputInputFrame>>((props, ref) => {
+    const { value, onChangeValue, setFocus } = useContext();
+
+    return useMemo(
+      () => (
+        <Label.Input>
+          <InputInputFrame
+            value={value}
+            onChangeText={onChangeValue}
+            className="focus:ring ring-violet-400"
+            {...props}
+            onFocus={(e) => {
+              props?.onFocus?.(e);
+              setFocus(true);
+            }}
+            onBlur={(e) => {
+              props?.onBlur?.(e);
+              setFocus(false);
+            }}
+            ref={ref}
+          />
+        </Label.Input>
+      ),
+      [props, value]
+    );
+  })
+);
+const InputIcon = memo(
+  ({
+    children,
+    ...props
+  }: PropsWithChildren<GetProps<typeof InputIconFrame>>) => {
+    const className = merge(InputInputFrame.styles());
+    const style = tw.style(className);
+    return useMemo(
+      () => (
+        <InputIconFrame {...props}>
+          {cloneElement(children as any, {
+            size: Number(style.fontSize) * 1.2 || 16,
+            color: style.color,
+          })}
+        </InputIconFrame>
+      ),
+      [style.fontSize, style.color]
+    );
+  }
+);
+const InputContent = forwardRef(
+  (
+    {
+      children,
+      ...props
+    }: PropsWithChildren<GetProps<typeof InputContentFrame>>,
+    ref
+  ) => {
+    const { color, size, variant, focus } = useContext();
+    return (
+      <InputContentFrame
+        color={color}
+        size={size}
+        variant={variant}
+        space={'xs'}
+        states={{ isFocus: focus }}
+        {...props}
+        ref={ref}
+      >
+        {children}
+      </InputContentFrame>
+    );
+  }
+);
 
 export const Input = withStaticProperties(InputRoot, {
   Label: InputLabel,

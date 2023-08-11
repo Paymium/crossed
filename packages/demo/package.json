@@ -50,7 +50,8 @@
   },
   "dependencies": {
     "@mergeui/ui": "*",
-    "fuse.js": "^6.6.2"
+    "fuse.js": "^6.6.2",
+    "react-aria": "^3.27.0"
   },
   "files": [
     "lib/",

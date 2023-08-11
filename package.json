@@ -6,7 +6,7 @@
   "scripts": {
     "web": "cd apps/web && yarn dev",
     "native": "cd apps/native && yarn start",
-    "docs": "turbo run dev --filter=crossed-docs",
+    "docs": "turbo run dev --filter=mergeui-docs",
     "test": "bash ./scripts/test.sh",
     "dev": "turbo run dev",
     "watch": "turbo run watch --filter=@mergeui* --no-cache",
@@ -22,6 +22,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@babel/runtime": "^7.22.10",
     "@changesets/cli": "^2.25.2",
     "@commitlint/config-conventional": "^17.3.0",
     "@react-native-community/eslint-config": "^3.2.0",

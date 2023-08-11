@@ -1,7 +1,9 @@
+import type { BaseWithState } from '@mergeui/core';
+
 export const spaceVariants = {
-  xs: { styles: ['gap-1'] },
-  sm: { styles: ['gap-3'] },
-  md: { styles: ['gap-5'] },
-  lg: { styles: ['gap-7'] },
-  xl: { styles: ['gap-9'] },
-};
+  xs: { className: ['gap-1'] },
+  sm: { className: ['gap-3'] },
+  md: { className: ['gap-5'] },
+  lg: { className: ['gap-7'] },
+  xl: { className: ['gap-9'] },
+} satisfies Record<string, BaseWithState<any>>;

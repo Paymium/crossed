@@ -1,6 +1,6 @@
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
 import { Table } from 'components/Table';
 import { YBoxDemo } from '@mergeui/demo';
 
@@ -9,15 +9,15 @@ export const getStaticProps = getStaticDemo('ui/layout/YBox');
 # YBox
 
 <Tabs items={['Demo', 'Anatomy', 'Props']}>
-  <Tab>
+  <Tabs.Tab>
     <CodeDemo Demo={YBoxDemo} />
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```tsx
     <YBox />
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ## YBox
     <Table
       props={[
@@ -29,5 +29,5 @@ export const getStaticProps = getStaticDemo('ui/layout/YBox');
         ],
       ]}
     />
-  </Tab>
+  </Tabs.Tab>
 </Tabs>

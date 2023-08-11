@@ -1,18 +1,17 @@
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { TextareaDemo } from '@mergeui/demo';
-import { Table } from 'components/Table';
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
 
 export const getStaticProps = getStaticDemo("ui/forms/Textarea")
 
 # Textarea
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
-  <Tab>
+  <Tabs.Tab>
     <CodeDemo Demo={TextareaDemo} actions={{ size: true, color: true, variant: ["outlined", "filled"] }} />
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ## Simple
     ```tsx
     <Textarea />
@@ -26,8 +25,8 @@ export const getStaticProps = getStaticDemo("ui/forms/Textarea")
     </Textarea>
     ```
 
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
   
     ## Textarea
    Extends [Input](/ui/forms/input) props.
@@ -38,5 +37,5 @@ export const getStaticProps = getStaticDemo("ui/forms/Textarea")
    ## Button.Input
    Extends [Input.Input](/ui/forms/input) props.
   
-  </Tab>
+  </Tabs.Tab>
 </Tabs>
