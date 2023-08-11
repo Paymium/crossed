@@ -1,5 +1,6 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
 import { tw, useAppColorScheme, useDeviceContext } from '@mergeui/core';
+import { PortalProvider } from '@gorhom/portal';
 
 type ThemeScheme = any;
 
@@ -21,7 +22,7 @@ export const MergeuiProvider = ({
 
   return (
     <themeContext.Provider value={{ theme, setTheme }}>
-      {children}
+      <PortalProvider>{children}</PortalProvider>
     </themeContext.Provider>
   );
 };

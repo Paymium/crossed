@@ -3,7 +3,7 @@ import { styled, withStaticProperties } from '@mergeui/core';
 import type { Props } from '../props';
 import { YBox } from '@mergeui/ui';
 
-const [ButtonFrame] = styled(Pressable, {
+const ButtonFrame = styled(Pressable, {
   'className': ['bg-blue-500', 'rounded'],
   ':hover': {
     className: ['bg-blue-400'],
@@ -33,7 +33,7 @@ const [ButtonFrame] = styled(Pressable, {
     size: 'md',
   },
 });
-const [ButtonText] = styled(Text, {
+const ButtonText = styled(Text, {
   className: ['text-white'],
   props: { as: 'span' },
   variants: {

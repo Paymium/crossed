@@ -52,43 +52,40 @@ export const CodeDemo = ({
           {hasActions && (
             <>
               {actions.variant && (
-                <Select value={variant} onChangeValue={setVariant}>
-                  <Select.Label>Variant</Select.Label>
-                  <Select.Content>
-                    {actions.variant.map((v) => {
-                      return (
-                        <Select.Option value={v} key={v}>
-                          {v}
-                        </Select.Option>
-                      );
-                    })}
-                  </Select.Content>
-                </Select>
+                <Select
+                  value={variant}
+                  onChangeValue={setVariant}
+                  label="Variant"
+                  items={actions.variant.map((v) => ({ value: v, label: v }))}
+                />
               )}
               {actions.space && (
-                <Select value={space} onChangeValue={setSpace}>
-                  <Select.Label>Space</Select.Label>
-                  <Select.Content>
-                    <Select.Option value={undefined}>undefined</Select.Option>
-                    <Select.Option value="xs">xs</Select.Option>
-                    <Select.Option value="sm">sm</Select.Option>
-                    <Select.Option value="md">md</Select.Option>
-                    <Select.Option value="lg">lg</Select.Option>
-                    <Select.Option value="xl">xl</Select.Option>
-                  </Select.Content>
-                </Select>
+                <Select
+                  value={space}
+                  onChangeValue={setSpace}
+                  label="Space"
+                  items={[
+                    { value: 'xs', label: 'xs' },
+                    { value: 'sm', label: 'sm' },
+                    { value: 'md', label: 'md' },
+                    { value: 'lg', label: 'lg' },
+                    { value: 'xl', label: 'xl' },
+                  ]}
+                />
               )}
               {actions.size && (
-                <Select value={size} onChangeValue={setSize}>
-                  <Select.Label>Size</Select.Label>
-                  <Select.Content>
-                    <Select.Option value="xs">xs</Select.Option>
-                    <Select.Option value="sm">sm</Select.Option>
-                    <Select.Option value="md">md</Select.Option>
-                    <Select.Option value="lg">lg</Select.Option>
-                    <Select.Option value="xl">xl</Select.Option>
-                  </Select.Content>
-                </Select>
+                <Select
+                  value={size}
+                  onChangeValue={setSize}
+                  label="Size"
+                  items={[
+                    { value: 'xs', label: 'xs' },
+                    { value: 'sm', label: 'sm' },
+                    { value: 'md', label: 'md' },
+                    { value: 'lg', label: 'lg' },
+                    { value: 'xl', label: 'xl' },
+                  ]}
+                />
               )}
               {actions.color && (
                 <Label>

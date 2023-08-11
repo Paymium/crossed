@@ -302,6 +302,8 @@ importers:
 
   packages/ui:
     specifiers:
+      '@floating-ui/react': ^0.25.1
+      '@gorhom/portal': ^1.0.14
       '@iconscout/react-native-unicons': ^2.0.2
       '@mergeui/build': '*'
       '@mergeui/core': '*'
@@ -314,18 +316,22 @@ importers:
       jest: ^29.5.0
       normalize-css-color: ^1.0.2
       react: ^18.2.0
+      react-aria: ^3.27.0
       react-dom: ^18.2.0
       react-native: ^0.72.3
       react-native-svg: ^13.10.0
       react-native-web: ^0.19.7
       tsconfig: '*'
     dependencies:
+      '@floating-ui/react': 0.25.1_biqbaboplfbrettd7655fr4n2y
+      '@gorhom/portal': 1.0.14_6syixf76bqx5r4tgwtwyqyssoi
       '@iconscout/react-native-unicons': 2.0.2_whnihh5yf4ab4theqd7ek6ulhq
       '@mergeui/core': link:../core
       '@mergeui/unicons': link:../unicons
       class-variance-authority: 0.7.0
       inline-style-prefixer: 6.0.4
       normalize-css-color: 1.0.2
+      react-aria: 3.27.0_biqbaboplfbrettd7655fr4n2y
       react-native-svg: 13.10.0_6syixf76bqx5r4tgwtwyqyssoi
     devDependencies:
       '@mergeui/build': link:../build
@@ -3043,6 +3049,47 @@ packages:
       js-yaml: 4.1.0
     dev: false
 
+  /@floating-ui/core/1.4.1:
+    resolution: {integrity: sha512-jk3WqquEJRlcyu7997NtR5PibI+y5bi+LS3hPmguVClypenMsCY3CBa3LAQnozRCtCrYWSEtAdiskpamuJRFOQ==}
+    dependencies:
+      '@floating-ui/utils': 0.1.1
+    dev: false
+
+  /@floating-ui/dom/1.5.1:
+    resolution: {integrity: sha512-KwvVcPSXg6mQygvA1TjbN/gh///36kKtllIF8SUm0qpFj8+rvYrpvlYdL1JoA71SHpDqgSSdGOSoQ0Mp3uY5aw==}
+    dependencies:
+      '@floating-ui/core': 1.4.1
+      '@floating-ui/utils': 0.1.1
+    dev: false
+
+  /@floating-ui/react-dom/2.0.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-rZtAmSht4Lry6gdhAJDrCp/6rKN7++JnL1/Anbr/DdeyYXQPxvg/ivrbYvJulbRf4vL8b212suwMM2lxbv+RQA==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@floating-ui/dom': 1.5.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@floating-ui/react/0.25.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-lxuWxfSgDJwOeZK07PIDjTSlH0CY6LRDKo6eI0H7TnctP+5IAn0n8+npNveM0L2wNIVdAr0S8RvvoHfhzPbBAQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@floating-ui/react-dom': 2.0.1_biqbaboplfbrettd7655fr4n2y
+      '@floating-ui/utils': 0.1.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tabbable: 6.2.0
+    dev: false
+
+  /@floating-ui/utils/0.1.1:
+    resolution: {integrity: sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==}
+    dev: false
+
   /@formatjs/ecma402-abstract/1.17.0:
     resolution: {integrity: sha512-6ueQTeJZtwKjmh23bdkq/DMqH4l4bmfvtQH98blOSbiXv/OUiyijSW6jU22IT8BNM1ujCaEvJfTtyCYVH38EMQ==}
     dependencies:
@@ -3079,6 +3126,17 @@ packages:
 
   /@gar/promisify/1.1.3:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
+    dev: false
+
+  /@gorhom/portal/1.0.14_6syixf76bqx5r4tgwtwyqyssoi:
+    resolution: {integrity: sha512-MXyL4xvCjmgaORr/rtryDNFy3kU4qUbKlwtQqqsygd0xX3mhKjOLn6mQK8wfu0RkoE0pBE0nAasRoHua+/QZ7A==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      nanoid: 3.3.6
+      react: 18.2.0
+      react-native: 0.72.3_react@18.2.0
     dev: false
 
   /@graphql-typed-document-node/core/3.2.0_graphql@15.8.0:
@@ -19796,6 +19854,10 @@ packages:
   /symbol-tree/3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
     dev: true
+
+  /tabbable/6.2.0:
+    resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
+    dev: false
 
   /table/5.4.6:
     resolution: {integrity: sha512-wmEc8m4fjnob4gt5riFRtTu/6+4rSe12TpAELNSqHMfF3IqnA+CH37USM6/YR3qRZv7e56kAEAtd6nKZaxe0Ug==}

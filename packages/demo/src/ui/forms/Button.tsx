@@ -6,7 +6,7 @@ import {
   YBox,
   useThemeContext,
 } from '@mergeui/ui';
-import type { Props } from '../props';
+import type { Props } from '../../props';
 
 export const ButtonDemo = ({ size, color, variant }: Props) => {
   const { theme, setTheme } = useThemeContext();

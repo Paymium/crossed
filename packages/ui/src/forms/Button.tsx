@@ -29,7 +29,7 @@ const [Provider, useContext] = createScope<{
   color: 'zinc',
 });
 
-const [ButtonFrame] = styled(Pressable, {
+const ButtonFrame = styled(Pressable, {
   'className': ['rounded-md', 'flex', 'flex-row', 'items-center', 'border-2'],
   ':disabled': {
     className: ['opacity-50', 'pointer-events-none'],
@@ -62,7 +62,7 @@ const [ButtonFrame] = styled(Pressable, {
   },
 });
 
-const [ButtonTextFrame, ButtonTextFrameStyles] = styled(Text, {
+const ButtonTextFrame = styled(Text, {
   className: ['font-semibold'],
   variants: {
     color: Object.entries(colorVariants).reduce<{
@@ -165,7 +165,7 @@ const ButtonIcon = ({
 }: PropsWithChildren<GetProps<typeof Box>>) => {
   const { theme } = useThemeContext();
   const { color, variant, size } = useContext();
-  const className = merge(ButtonTextFrameStyles({ color, variant, size }));
+  const className = merge(ButtonTextFrame.styles({ color, variant, size }));
 
   tw.setColorScheme(theme);
   const style = tw.style(className);

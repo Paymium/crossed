@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { styled } from '@mergeui/core';
 
-export const [Divider] = styled(View, {
+export const Divider = styled(View, {
   className: ['flex', 'border-zinc-600'],
   variants: {
     direction: {

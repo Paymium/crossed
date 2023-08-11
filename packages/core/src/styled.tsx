@@ -14,6 +14,7 @@ import type {
   State,
   StateName,
 } from './types';
+import { withStaticProperties } from './withStaticProperties';
 
 const cleanForMergeui = <P, T extends ConfigSchema<P>>(
   variantsDeclaration?: ConfigSchemaTheme<P, T>
@@ -242,7 +243,7 @@ export const styled = <
   const variants = themeConfig?.variants || {};
 
   const { base, config } = cleanForMergeui<P, T>(themeConfigProps);
-  const stylesClass = mergeui<T>(base, config);
+  const stylesClass = mergeui<T>(base, config) as (props?: Props<T>) => string;
 
   const NewComponent = forwardRef<
     any,
@@ -372,7 +373,5 @@ export const styled = <
       />
     );
   });
-  // @ts-check
-  // NewComponent.styles = stylesClass;
-  return [NewComponent, stylesClass] as const;
+  return withStaticProperties(NewComponent, { styles: stylesClass });
 };

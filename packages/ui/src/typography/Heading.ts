@@ -1,7 +1,7 @@
 import { Text as TextNative } from 'react-native';
 import { styled } from '@mergeui/core';
 
-export const [Heading] = styled(TextNative, {
+export const Heading = styled(TextNative, {
   className: ['text-black', 'dark:text-white'],
   variants: {
     variant: { link: { className: ['text-blue-500'], props: { as: 'a' } } },

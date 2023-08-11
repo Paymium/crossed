@@ -1,4 +1,4 @@
-import { createScope, styled, withStaticProperties } from '@mergeui/core';
+import { createScope, cx, styled, withStaticProperties } from '@mergeui/core';
 import {
   useId,
   type PropsWithChildren,
@@ -10,7 +10,7 @@ import { Platform, Text, View } from 'react-native';
 import type { GetProps } from '../types';
 import { Box } from '../layout/Box';
 
-export const [LabelText] = styled(Text, {
+export const LabelText = styled(Text, {
   className: ['dark:text-zinc-400 text-zinc-700'],
   props: {
     as: 'label',
@@ -45,7 +45,9 @@ export const Label = withStaticProperties(
     const ref = useRef();
     return (
       <Provider id={id} invalid={invalid} inputRef={ref}>
-        <Box {...props}>{children}</Box>
+        <Box {...props} className={cx('flex-col', props?.className)}>
+          {children}
+        </Box>
       </Provider>
     );
   },
