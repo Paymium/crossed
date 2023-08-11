@@ -2,25 +2,25 @@ import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { Table } from 'components/Table';
 import { LabelDemo } from '@mergeui/demo';
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
 
 export const getStaticProps = getStaticDemo('ui/forms/Label');
 
 # Label
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
-  <Tab>
+  <Tabs.Tab>
     <CodeDemo Demo={LabelDemo} />
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```tsx
     <Label>
       <Label.Text />
       <Label.Input />
     </Label>
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
   
     ## Label
     <Table props={[
@@ -33,5 +33,5 @@ export const getStaticProps = getStaticDemo('ui/forms/Label');
     ## Label.Input
     <Table props={[]} />
 
-  </Tab>
+  </Tabs.Tab>
 </Tabs>

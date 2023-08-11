@@ -1,18 +1,19 @@
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { ButtonDemo } from '@mergeui/demo';
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
+
 import { Table } from 'components/Table';
 
-export const getStaticProps = getStaticDemo('ui/Button');
+export const getStaticProps = getStaticDemo('ui/forms/Button');
 
 # Button
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
-  <Tab>
+  <Tabs.Tab>
     <CodeDemo Demo={ButtonDemo} actions={{size:true,color:true, variant: ["filled", "outlined"]}} />
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ## Simple
     ```tsx
     <Button />
@@ -26,8 +27,8 @@ export const getStaticProps = getStaticDemo('ui/Button');
     </Button>
     ```
 
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
   
     ## Button
     <Table props={[
@@ -53,5 +54,5 @@ export const getStaticProps = getStaticDemo('ui/Button');
 
     Extends [Box props](/ui/layout/box)
 
-  </Tab>
+  </Tabs.Tab>
 </Tabs>

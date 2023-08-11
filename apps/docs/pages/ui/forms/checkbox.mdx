@@ -1,15 +1,12 @@
 import { CodeDemo } from 'components/CodeDemo';
-// import { getStaticDemo } from 'components/getStaticDemo';
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
 import { Table, Tr, Td, Th } from 'nextra/components';
-
-{/* // export const getStaticProps = getStaticDemo('ui/Select'); */}
 
 # Select
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
-    <Tab><CodeDemo /></Tab>
-    <Tab>
+    <Tabs.Tab><CodeDemo /></Tabs.Tab>
+    <Tabs.Tab>
     ## Simple
     ```tsx
     <Checkbox />
@@ -26,8 +23,8 @@ import { Table, Tr, Td, Th } from 'nextra/components';
       </Checkbox>
     </Checkbox.Group>
     ```
-    </Tab>
-    <Tab>
+    </Tabs.Tab>
+    <Tabs.Tab>
     <Table className="table-auto overflow-hidden w-full">
       <Tr>
         <Th>Props</Th>
@@ -36,5 +33,5 @@ import { Table, Tr, Td, Th } from 'nextra/components';
       </Tr>
 
    </Table>
-   </Tab>
+   </Tabs.Tab>
 </Tabs>

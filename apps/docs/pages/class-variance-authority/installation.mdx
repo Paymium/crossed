@@ -1,29 +1,29 @@
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
 
 # Installation
 
 <Tabs items={["pnpm", "npm", "yarn"]}>
-  <Tab>
+  <Tabs.Tab>
 
     ```sh
     pnpm i @mergeui/class-variance-authority
     ```
 
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
 
     ```sh
     npm i @mergeui/class-variance-authority
     ```
 
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
   
     ```sh
     yarn add @mergeui/class-variance-authority
     ```
   
-  </Tab>
+  </Tabs.Tab>
 </Tabs>
 
 ## Tailwind CSS
@@ -35,7 +35,7 @@ If you're a Tailwind user, here are some additional (optional) steps to get the 
 You can enable autocompletion inside `mergeui` using the steps below:
 
 <Tabs items={["Visual Studio Code", "Neovim", "WebStorm"]}>
-  <Tab>
+  <Tabs.Tab>
 
     1. [Install the "Tailwind CSS IntelliSense" Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 
@@ -49,8 +49,8 @@ You can enable autocompletion inside `mergeui` using the steps below:
     }
     ```
 
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
 
     1. [Install the extension](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss)
 
@@ -71,8 +71,8 @@ You can enable autocompletion inside `mergeui` using the steps below:
     })
     ```
 
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
 
     1. Check the version. Available for [WebStorm 2023.1](https://www.jetbrains.com/webstorm/whatsnew/#version-2023-1-tailwind-css-configuration) and later
 
@@ -88,7 +88,7 @@ You can enable autocompletion inside `mergeui` using the steps below:
     }
     ```
 
-  </Tab>
+  </Tabs.Tab>
 </Tabs>
 
 ### Handling Style Conflicts

@@ -1,18 +1,18 @@
 import { CodeDemo } from 'components/CodeDemo';
 import { Table } from 'components/Table';
+import { Tabs } from 'components/Tabs';
 import { InputDemo } from '@mergeui/demo';
 import { getStaticDemo } from 'components/getStaticDemo';
-import { Tab, Tabs } from 'nextra-theme-docs';
 
 export const getStaticProps = getStaticDemo('ui/forms/Input');
 
 # Input
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
-  <Tab>
+  <Tabs.Tab>
     <CodeDemo Demo={InputDemo} actions={{ size: true, color: true, variant: ["outlined", "filled"] }} />
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ## Simple
     ```tsx
     <Input />
@@ -29,8 +29,8 @@ export const getStaticProps = getStaticDemo('ui/forms/Input');
     </Input>
     ```
 
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ## Input
     <br />
    <Table props={[
@@ -43,7 +43,7 @@ export const getStaticProps = getStaticDemo('ui/forms/Input');
    ]} />
 
    ## Input.Label
-   Extends [Label](/ui/forms/label) props.
+   Extends [Label](/ui/forms/label?t=props#label) props.
    <br />
    <Table props={[
     ["className", "string", "undefined", "Classname pass to children"],
@@ -69,5 +69,5 @@ export const getStaticProps = getStaticDemo('ui/forms/Input');
    <Table props={[
     ["className", "string", "undefined", "Classname pass to children"],
    ]} />
-  </Tab>
+  </Tabs.Tab>
 </Tabs>

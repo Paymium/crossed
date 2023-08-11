@@ -1,7 +1,7 @@
 import { getStaticDemo } from 'components/getStaticDemo';
 import { BoxDemo } from '@mergeui/demo';
 import { CodeDemo } from 'components/CodeDemo';
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
 import { Table, Tr, Td, Th } from 'nextra/components';
 
 export const getStaticProps = getStaticDemo('ui/layout/Box');
@@ -9,15 +9,15 @@ export const getStaticProps = getStaticDemo('ui/layout/Box');
 # Box
 
 <Tabs items={['Demo', 'Anatomy', 'Props']}>
-  <Tab>
+  <Tabs.Tab>
     <CodeDemo Demo={BoxDemo} />
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```tsx
     <Box />
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ## Box
     <Table className="table-auto overflow-hidden w-full">
       <Tr>
@@ -26,5 +26,5 @@ export const getStaticProps = getStaticDemo('ui/layout/Box');
         <Th>Description</Th>
       </Tr>
     </Table>
-  </Tab>
+  </Tabs.Tab>
 </Tabs>

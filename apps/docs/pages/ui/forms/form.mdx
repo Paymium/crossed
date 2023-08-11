@@ -1,21 +1,21 @@
 import { CodeDemo } from 'components/CodeDemo';
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
 import { Table, Tr, Td, Th } from 'nextra/components';
 
 # Form
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
-  <Tab>
+  <Tabs.Tab>
     <CodeDemo />
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```tsx
     <Form>
       <Form.Trigger />
     </Form>
     ```
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
   
     ## Form
    <Table className="table-auto overflow-hidden w-full">
@@ -40,5 +40,5 @@ import { Table, Tr, Td, Th } from 'nextra/components';
         <Th>Description</Th>
       </Tr>
    </Table>
-  </Tab>
+  </Tabs.Tab>
 </Tabs>

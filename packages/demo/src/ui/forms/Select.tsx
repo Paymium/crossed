@@ -3,7 +3,7 @@ import type { Props } from '../../props';
 
 export const SelectDemo = ({ size, variant, color }: Props) => {
   return (
-    <Select size={size} variant={variant as any} color={color} open>
+    <Select size={size} variant={variant as any} color={color}>
       <Select.Label>Size</Select.Label>
       <Select.Trigger>
         <Select.Input />

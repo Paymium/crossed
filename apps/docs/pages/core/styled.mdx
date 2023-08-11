@@ -1,7 +1,7 @@
 import { StyledDemo } from '@mergeui/demo';
 import { CodeDemo } from '../../components/CodeDemo';
 import { getStaticDemo } from '../../components/getStaticDemo';
-import { Tab, Tabs } from 'nextra-theme-docs';
+import { Tabs } from 'components/Tabs';
 
 export const getStaticProps = getStaticDemo('core/styled');
 
@@ -9,10 +9,10 @@ export const getStaticProps = getStaticDemo('core/styled');
 
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
-  <Tab>
+  <Tabs.Tab>
     <CodeDemo Demo={StyledDemo} />
-  </Tab>
-  <Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
   ```typescript
   type ClassName = "..." | ["..."];
 
@@ -60,7 +60,7 @@ export const getStaticProps = getStaticDemo('core/styled');
     },
   });
   ```
-  </Tab>
-  <Tab>
-  </Tab>
+  </Tabs.Tab>
+  <Tabs.Tab>
+  </Tabs.Tab>
   </Tabs>
