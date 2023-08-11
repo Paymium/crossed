@@ -1,12 +1,16 @@
 import { CodeDemo } from 'components/CodeDemo';
+import { CheckboxDemo } from '@mergeui/demo';
+import { getStaticDemo } from 'components/getStaticDemo';
 import { Tabs } from 'components/Tabs';
-import { Table, Tr, Td, Th } from 'nextra/components';
+import { Table } from 'components/Table';
 
-# Select
+export const getStaticProps = getStaticDemo('ui/forms/Checkbox');
+
+# Checkbox
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
-    <Tabs.Tab><CodeDemo /></Tabs.Tab>
-    <Tabs.Tab>
+  <Tabs.Tab><CodeDemo Demo={CheckboxDemo} actions={{ color: true, size: true, variant: ["outlined", "filled"]}} /></Tabs.Tab>
+  <Tabs.Tab>
     ## Simple
     ```tsx
     <Checkbox />
@@ -14,24 +18,43 @@ import { Table, Tr, Td, Th } from 'nextra/components';
 
     ## Advanced
     ```tsx
-    <Checkbox.Group>
       <Checkbox>
         <Checkbox.Indicator>
           <Checkbox.Icon />
         </Checkbox.Indicator>
         <Checkbox.Label />
       </Checkbox>
-    </Checkbox.Group>
     ```
     </Tabs.Tab>
     <Tabs.Tab>
-    <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
+      ## Checkbox
+      <Table
+        props={[
+          ["checked", "boolean", "undefined", "State of checkbox"],
+          ["onChangeValue", "(value: boolean) => void", "undefined", "Fire when user toggle checkbox"],
+          ["variant", "outline | filled", "outline", "Variant of button"],
+          ["size", "xs | sm | md | lg | xl", "md", "Size of button"],
+          ["color", "type Colors", "zinc", "Color of button"],
+        ]}
+      />
 
-   </Table>
+      ## Checkbox.Indicator
+      Extends [Pressable](https://reactnative.dev/docs/pressable) props.
+      <Table
+        props={[
+          ["checked", "boolean", "undefined", "State of checkbox"],
+          ["onChangeValue", "(value: boolean) => void", "undefined", "Fire when user toggle checkbox"],
+          ["variant", "outline | filled", "outline", "Variant of button"],
+          ["size", "xs | sm | md | lg | xl", "md", "Size of button"],
+          ["color", "type Colors", "zinc", "Color of button"],
+        ]}
+      />
+  
+      ## Checkbox.Icon
+      Extends [Box](/ui/layout/box?t=props) props.
+
+      ## Checkbox.Label
+      Extends [Label.Text](/ui/forms/label?t=props#labeltext) props.
+
    </Tabs.Tab>
 </Tabs>
