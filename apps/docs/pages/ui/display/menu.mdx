@@ -1,0 +1,35 @@
+import { MenuDemo } from '@mergeui/demo';
+import { CodeDemo } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { Tabs } from 'components/Tabs';
+import { Table, Tr, Td, Th } from 'nextra/components';
+
+export const getStaticProps = getStaticDemo('ui/display/Menu');
+
+# Menu
+
+<Tabs items={['Demo', 'Anatomy', 'Props']}>
+  <Tabs.Tab>
+    <CodeDemo Demo={MenuDemo} actions={{ color: true }} />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```tsx
+    <Menu>
+      <Menu.Item>
+        <Menu.Item.Title />
+        <Menu.Item.Subtitle />
+      </Menu.Item>
+    </Menu>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ## Menu
+    <Table className="table-auto overflow-hidden w-full">
+      <Tr>
+        <Th>Props</Th>
+        <Th>default</Th>
+        <Th>Description</Th>
+      </Tr>
+    </Table>
+  </Tabs.Tab>
+</Tabs>

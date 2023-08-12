@@ -13,7 +13,7 @@ import { UilCheck } from '@iconscout/react-native-unicons';
 import type { GetProps } from '../types';
 import { Box } from '../layout/Box';
 import { VisuallyHidden, useCheckbox } from 'react-aria';
-import { Pressable } from 'react-native';
+import { Pressable, TextInput } from 'react-native';
 import { colorVariants } from '../variants';
 
 type Context = {
@@ -138,7 +138,7 @@ const CheckboxIndicator = (props: CheckboxIndicatorFrameProps) => {
     <>
       <VisuallyHidden>
         <Label.Input>
-          <input {...inputProps} />
+          <TextInput {...inputProps} />
         </Label.Input>
       </VisuallyHidden>
       <CheckboxIndicatorFrame
