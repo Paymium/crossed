@@ -271,7 +271,10 @@ export const styled = <
         }
         return acc;
       },
-      { componentProps: {}, variantProps: {} } as any
+      {
+        componentProps: {},
+        variantProps: themeConfig?.defaultVariants || {},
+      } as any
     );
 
     const { as: asVariant, ...propsVariant } = Object.entries(
@@ -307,6 +310,11 @@ export const styled = <
     ) as any;
 
     const finalClassName = merge(
+      AsComp.styles?.({
+        ...propsTheme,
+        ...propsVariant,
+        ...componentProps,
+      }),
       stylesClass(variantProps as any).split(' '),
       className,
       ...(states?.isFocus || focus ? focusClassname : []),
@@ -333,12 +341,7 @@ export const styled = <
               }).root,
             }
         : { style: tw.style(finalClassName) };
-    // console.log(
-    //   { ...propsTheme },
-    //   { ...propsVariant },
-    //   { ...propsTmp },
-    //   { ...componentProps }
-    // );
+
     return (
       <AsComp
         ref={ref}
@@ -373,5 +376,8 @@ export const styled = <
       />
     );
   });
-  return withStaticProperties(NewComponent, { styles: stylesClass });
+  return withStaticProperties(NewComponent, {
+    styles: (p?: Props<T>) =>
+      merge((Component as any).styles?.(p), stylesClass(p)),
+  });
 };
