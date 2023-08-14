@@ -6,7 +6,7 @@
 
 ## Introduction
 Crossed is UI lib component which worked on react-native and web based on [tailwindcss](https://tailwindcss.com/).  
-Crossed transform className in style for native, and use power of css for web.
+Crossed transform className in style for native, and use power of css for web.  
 [Moti](https://moti.fyi/) used for animation
 
 ## Documentation
@@ -26,5 +26,5 @@ pnpm version 7
 node 18.16
 
 ### Command
-First run packages build `pnpm watch`
+First run packages build `pnpm watch`  
 Second run doc build `pnpm run docs`
