@@ -13,6 +13,7 @@ import {
   // type ComponentType,
   type PropsWithChildren,
   useId,
+  ComponentType,
 } from 'react';
 import { colorVariants } from '../variants/colors';
 import { sizeVariants } from '../variants/size';
@@ -63,7 +64,7 @@ const ButtonFrame = styled(MotiPressable, {
     variant: 'outlined',
     space: 'xs',
   },
-}) as any;
+});
 
 const ButtonTextFrame = styled(Text, {
   className: ['font-semibold'],
@@ -114,12 +115,11 @@ const ButtonTextFrame = styled(Text, {
   ],
 });
 
-type ButtonRootProps = any;
-// GetProps<typeof ButtonFrame> & {
-//   text?: string;
-//   iconAfter?: ComponentType;
-//   icon?: ComponentType;
-// };
+type ButtonRootProps = GetProps<typeof ButtonFrame> & {
+  text?: string;
+  iconAfter?: ComponentType;
+  icon?: ComponentType;
+};
 
 function ButtonRoot(
   props: Omit<ButtonRootProps, 'text' | 'iconAfter' | 'icon'>
