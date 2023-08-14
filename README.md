@@ -19,3 +19,12 @@ See documentation [site](https://lobor.github.io/crossed)
  - [gluestack-style](https://style.gluestack.io/)
  - [tailwindcss](https://tailwindcss.com/)
  - [cva](https://cva.style/docs)
+
+## Contribution
+### Environment 
+pnpm version 7
+node 18.16
+
+### Command
+First run packages build `pnpm watch`
+Second run doc build `pnpm run docs`
