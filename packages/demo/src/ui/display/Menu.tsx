@@ -1,5 +1,5 @@
 import { UilAngleRight, UilSetting } from '@iconscout/react-native-unicons';
-import { Menu } from '@mergeui/ui';
+import { Menu } from '@crossed/ui';
 import type { Props } from '../../props';
 
 export const MenuDemo = ({ color }: Props) => {

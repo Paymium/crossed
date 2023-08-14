@@ -1,4 +1,4 @@
-import { Text } from '@mergeui/ui';
+import { Text } from '@crossed/ui';
 import React from 'react';
 import type { Props } from '../../props';
 

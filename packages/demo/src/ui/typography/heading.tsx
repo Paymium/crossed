@@ -1,4 +1,4 @@
-import { Heading, YBox } from '@mergeui/ui';
+import { Heading, YBox } from '@crossed/ui';
 
 export const HeadingDemo = () => {
   return (

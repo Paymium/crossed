@@ -5,7 +5,7 @@ import {
   XBox,
   YBox,
   useThemeContext,
-} from '@mergeui/ui';
+} from '@crossed/ui';
 import type { Props } from '../../props';
 
 export const ButtonDemo = ({ size, color, variant }: Props) => {

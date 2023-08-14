@@ -4,17 +4,17 @@ const withNextra = require('nextra')({
 });
 const path = require('path');
 
-const { withMergeui } = require('@mergeui/next-adapter');
+const { withCrossed } = require('@crossed/next-adapter');
 /** @type {import('next').NextConfig} */
 module.exports = withNextra(
-  withMergeui({
+  withCrossed({
     images: {
       unoptimized: true,
     },
-    basePath: process.env.NODE_ENV === 'development' ? undefined : '/mergeui',
-    assetPrefix: process.env.NODE_ENV === 'development' ? '/' : '/mergeui/',
+    basePath: process.env.NODE_ENV === 'development' ? undefined : '/crossed',
+    assetPrefix: process.env.NODE_ENV === 'development' ? '/' : '/crossed/',
     output: 'export',
-    transpilePackages: ['@mergeui/core'],
+    transpilePackages: ['@crossed/core'],
     webpack: (config, { isServer, dev, webpack } = {}) => {
       if (!config.plugins) {
         config.plugins = [];

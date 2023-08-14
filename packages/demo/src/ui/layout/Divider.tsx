@@ -1,4 +1,4 @@
-import { YBox, Divider, XBox, Text } from '@mergeui/ui';
+import { YBox, Divider, XBox, Text } from '@crossed/ui';
 import type { Props } from '../../props';
 
 export const DividerDemo = ({ space }: Props) => {

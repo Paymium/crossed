@@ -1,10 +1,10 @@
 import '../styles/global.css';
-import { MergeuiProvider } from '@mergeui/ui';
+import { CrossedProvider } from '@crossed/ui';
 
 export default function App({ Component, pageProps }) {
   return (
-    <MergeuiProvider defaultTheme={'dark'}>
+    <CrossedProvider defaultTheme={'dark'}>
       <Component {...pageProps} />
-    </MergeuiProvider>
+    </CrossedProvider>
   );
 }

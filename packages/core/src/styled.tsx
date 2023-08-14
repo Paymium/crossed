@@ -1,11 +1,11 @@
 import 'raf/polyfill';
 import type { ComponentType } from 'react';
 import { forwardRef, useMemo, useState } from 'react';
-import { mergeui, merge } from '@mergeui/class-variance-authority';
-import type { ConfigSchema as ConfigSchemaCVA } from '@mergeui/class-variance-authority';
+import { crossed, merge } from '@crossed/class-variance-authority';
+import type { ConfigSchema as ConfigSchemaCVA } from '@crossed/class-variance-authority';
 import tw from 'twrnc';
 import { Platform, StyleSheet } from 'react-native';
-import type { ClassValue } from '@mergeui/class-variance-authority/src/types';
+import type { ClassValue } from '@crossed/class-variance-authority/src/types';
 import type { Base, ConfigSchema, ConfigSchemaTheme, Props } from './types';
 import { withStaticProperties } from './withStaticProperties';
 import type { MotiPressableProp } from 'moti/interactions';
@@ -15,7 +15,7 @@ import { composeEventHandlers } from './composeEventHandlers';
 const camelToSnakeCase = (str: string) =>
   str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 
-const cleanForMergeui = <P, T extends ConfigSchema<P>>(
+const cleanForCrossed = <P, T extends ConfigSchema<P>>(
   variantsDeclaration?: ConfigSchemaTheme<P, T>
 ) => {
   if (!variantsDeclaration) {
@@ -129,8 +129,8 @@ export const styled = <
   const variants = themeConfig?.variants || {};
   const isMotiComponent = (Component as any).render?.name.startsWith('Moti');
 
-  const { base, config } = cleanForMergeui<P, T>(themeConfigProps);
-  const stylesClass = mergeui<T>(base, config) as (props?: Props<T>) => string;
+  const { base, config } = cleanForCrossed<P, T>(themeConfigProps);
+  const stylesClass = crossed<T>(base, config) as (props?: Props<T>) => string;
 
   const NewComponent = forwardRef<
     any,

@@ -1,9 +1,9 @@
 import type {
   ConfigVariants,
   ConfigVariantsMulti,
-} from '@mergeui/class-variance-authority';
+} from '@crossed/class-variance-authority';
 
-import type { StringToBoolean } from '@mergeui/class-variance-authority/src/types';
+import type { StringToBoolean } from '@crossed/class-variance-authority/src/types';
 import type {
   ComponentType,
   ForwardRefExoticComponent,

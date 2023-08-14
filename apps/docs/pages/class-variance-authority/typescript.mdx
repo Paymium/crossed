@@ -2,32 +2,32 @@
 
 ## Extracting Variant Types
 
-`mergeui` offers the `VariantProps` helper to extract variant types
+`crossed` offers the `VariantProps` helper to extract variant types
 
 ```ts
 // components/button.ts
-import type { VariantProps } from '@mergeui/class-variance-authority';
-import { mergeui, cx } from '@mergeui/class-variance-authority';
+import type { VariantProps } from '@crossed/class-variance-authority';
+import { crossed, cx } from '@crossed/class-variance-authority';
 
 /**
  * Button
  */
 export type ButtonProps = VariantProps<typeof button>;
-export const button = mergeui(/* … */);
+export const button = crossed(/* … */);
 ```
 
 ## Required Variants
 
-To keep the API small and unopinionated, `mergeui` **doesn't** offer a built-in solution for setting required variants.
+To keep the API small and unopinionated, `crossed` **doesn't** offer a built-in solution for setting required variants.
 
 Instead, we recommend using TypeScript's [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html):
 
 ```ts
 // components/button.ts
-import { mergeui, type VariantProps } from '@mergeui/class-variance-authority';
+import { crossed, type VariantProps } from '@crossed/class-variance-authority';
 
 export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
-export const buttonVariants = mergeui('…', {
+export const buttonVariants = crossed('…', {
   variants: {
     optional: { a: '…', b: '…' },
     required: { a: '…', b: '…' },

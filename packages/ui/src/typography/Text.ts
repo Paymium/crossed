@@ -1,5 +1,5 @@
 import { Text as TextNative } from 'react-native';
-import { styled } from '@mergeui/core';
+import { styled } from '@crossed/core';
 
 export const Text = styled(TextNative, {
   className: ['dark:text-white text-black'],

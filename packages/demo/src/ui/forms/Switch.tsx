@@ -1,4 +1,4 @@
-import { Box, Switch } from '@mergeui/ui';
+import { Box, Switch } from '@crossed/ui';
 
 export const SwitchDemo = () => {
   return (

@@ -1,8 +1,8 @@
 {
-  "name": "@mergeui/build",
+  "name": "@crossed/build",
   "version": "1.0.0",
   "bin": {
-    "mergeui-build": "mergeui-build.js"
+    "crossed-build": "crossed-build.js"
   },
   "publishConfig": {
     "access": "public"

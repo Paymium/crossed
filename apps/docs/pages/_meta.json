@@ -1,16 +1,16 @@
 {
   "index": "Introduction",
   "class-variance-authority": {
-    "title": "@mergeui/class-variance-authority"
+    "title": "@crossed/class-variance-authority"
   },
   "core": {
-    "title": "@mergeui/core",
+    "title": "@crossed/core",
     "display": "hidden"
   },
   "ui": {
-    "title": "@mergeui/ui"
+    "title": "@crossed/ui"
   },
   "unicons": {
-    "title": "@mergeui/unicons"
+    "title": "@crossed/unicons"
   }
 }

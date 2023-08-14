@@ -1,5 +1,5 @@
-import { Input, Text, XBox, YBox } from '@mergeui/ui';
-import * as Icons from '@mergeui/unicons';
+import { Input, Text, XBox, YBox } from '@crossed/ui';
+import * as Icons from '@crossed/unicons';
 import Fuse from 'fuse.js';
 import { useMemo, useState } from 'react';
 

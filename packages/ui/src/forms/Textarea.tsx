@@ -1,4 +1,4 @@
-import { withStaticProperties, type GetProps } from '@mergeui/core';
+import { withStaticProperties, type GetProps } from '@crossed/core';
 import { Input, InputRootProps } from './Input';
 import type { ReactElement } from 'react';
 

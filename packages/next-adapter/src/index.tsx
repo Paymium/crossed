@@ -1,1 +1,1 @@
-export { default as withMergeui } from './withMergeui';
+export { default as withCrossed } from './withCrossed';

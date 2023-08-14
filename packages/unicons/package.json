@@ -1,5 +1,5 @@
 {
-  "name": "@mergeui/unicons",
+  "name": "@crossed/unicons",
   "description": "unicons",
   "version": "1.0.0",
   "main": "lib/commonjs/index",
@@ -11,12 +11,12 @@
   "scripts": {
     "release": "release-it",
     "clean": "rm -rf lib",
-    "watch": "mergeui-build --watch",
-    "build": "mergeui-build",
+    "watch": "crossed-build --watch",
+    "build": "crossed-build",
     "dev:web": "cd example/native && yarn web --clear"
   },
   "devDependencies": {
-    "@mergeui/build": "*",
+    "@crossed/build": "*",
     "@types/react": "^18.2.18",
     "@types/react-native": "^0.72.2",
     "babel-plugin-transform-remove-console": "^6.9.4",

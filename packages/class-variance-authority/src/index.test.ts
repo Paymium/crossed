@@ -1,5 +1,5 @@
 import type * as CVA from './';
-import { mergeui, cx } from './';
+import { crossed, cx } from './';
 
 describe('cx', () => {
   describe.each<CVA.CxOptions>([
@@ -47,7 +47,7 @@ describe('cva', () => {
   describe('without base', () => {
     describe('without anything', () => {
       test('empty', () => {
-        const example = mergeui();
+        const example = crossed();
         expect(example()).toBe('');
         expect(
           example({
@@ -69,7 +69,7 @@ describe('cva', () => {
       });
 
       test('undefined', () => {
-        const example = mergeui(undefined);
+        const example = crossed(undefined);
         expect(example()).toBe('');
         expect(
           example({
@@ -91,7 +91,7 @@ describe('cva', () => {
       });
 
       test('null', () => {
-        const example = mergeui(null);
+        const example = crossed(null);
         expect(example()).toBe('');
         expect(
           example({
@@ -114,7 +114,7 @@ describe('cva', () => {
     });
 
     describe('without defaults', () => {
-      const buttonWithoutBaseWithoutDefaultsString = mergeui(null, {
+      const buttonWithoutBaseWithoutDefaultsString = crossed(null, {
         variants: {
           intent: {
             primary:
@@ -168,7 +168,7 @@ describe('cva', () => {
           },
         ],
       });
-      const buttonWithoutBaseWithoutDefaultsWithClassNameString = mergeui(
+      const buttonWithoutBaseWithoutDefaultsWithClassNameString = crossed(
         null,
         {
           variants: {
@@ -226,7 +226,7 @@ describe('cva', () => {
         }
       );
 
-      const buttonWithoutBaseWithoutDefaultsArray = mergeui(null, {
+      const buttonWithoutBaseWithoutDefaultsArray = crossed(null, {
         variants: {
           intent: {
             primary: [
@@ -294,7 +294,7 @@ describe('cva', () => {
           },
         ],
       });
-      const buttonWithoutBaseWithoutDefaultsWithClassNameArray = mergeui(null, {
+      const buttonWithoutBaseWithoutDefaultsWithClassNameArray = crossed(null, {
         variants: {
           intent: {
             primary: [
@@ -458,7 +458,7 @@ describe('cva', () => {
     });
 
     describe('with defaults', () => {
-      const buttonWithoutBaseWithDefaultsString = mergeui(
+      const buttonWithoutBaseWithDefaultsString = crossed(
         'button font-semibold border rounded',
         {
           variants: {
@@ -530,7 +530,7 @@ describe('cva', () => {
           },
         }
       );
-      const buttonWithoutBaseWithDefaultsWithClassNameString = mergeui(
+      const buttonWithoutBaseWithDefaultsWithClassNameString = crossed(
         'button font-semibold border rounded',
         {
           variants: {
@@ -603,7 +603,7 @@ describe('cva', () => {
         }
       );
 
-      const buttonWithoutBaseWithDefaultsArray = mergeui(
+      const buttonWithoutBaseWithDefaultsArray = crossed(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -689,7 +689,7 @@ describe('cva', () => {
           },
         }
       );
-      const buttonWithoutBaseWithDefaultsWithClassNameArray = mergeui(
+      const buttonWithoutBaseWithDefaultsWithClassNameArray = crossed(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -880,7 +880,7 @@ describe('cva', () => {
 
   describe('with base', () => {
     describe('without defaults', () => {
-      const buttonWithBaseWithoutDefaultsString = mergeui(
+      const buttonWithBaseWithoutDefaultsString = crossed(
         'button font-semibold border rounded',
         {
           variants: {
@@ -942,7 +942,7 @@ describe('cva', () => {
           ],
         }
       );
-      const buttonWithBaseWithoutDefaultsWithClassNameString = mergeui(
+      const buttonWithBaseWithoutDefaultsWithClassNameString = crossed(
         'button font-semibold border rounded',
         {
           variants: {
@@ -1005,7 +1005,7 @@ describe('cva', () => {
         }
       );
 
-      const buttonWithBaseWithoutDefaultsArray = mergeui(
+      const buttonWithBaseWithoutDefaultsArray = crossed(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -1081,7 +1081,7 @@ describe('cva', () => {
           ],
         }
       );
-      const buttonWithBaseWithoutDefaultsWithClassNameArray = mergeui(
+      const buttonWithBaseWithoutDefaultsWithClassNameArray = crossed(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -1256,7 +1256,7 @@ describe('cva', () => {
     });
 
     describe('with defaults', () => {
-      const buttonWithBaseWithDefaultsString = mergeui(
+      const buttonWithBaseWithDefaultsString = crossed(
         'button font-semibold border rounded',
         {
           variants: {
@@ -1323,7 +1323,7 @@ describe('cva', () => {
           },
         }
       );
-      const buttonWithBaseWithDefaultsWithClassNameString = mergeui(
+      const buttonWithBaseWithDefaultsWithClassNameString = crossed(
         'button font-semibold border rounded',
         {
           variants: {
@@ -1391,7 +1391,7 @@ describe('cva', () => {
         }
       );
 
-      const buttonWithBaseWithDefaultsArray = mergeui(
+      const buttonWithBaseWithDefaultsArray = crossed(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -1472,7 +1472,7 @@ describe('cva', () => {
           },
         }
       );
-      const buttonWithBaseWithDefaultsWithClassNameArray = mergeui(
+      const buttonWithBaseWithDefaultsWithClassNameArray = crossed(
         ['button', 'font-semibold', 'border', 'rounded'],
         {
           variants: {
@@ -1661,7 +1661,7 @@ describe('cva', () => {
 
   describe('composing classes', () => {
     type BoxProps = CVA.VariantProps<typeof box>;
-    const box = mergeui(['box', 'box-border'], {
+    const box = crossed(['box', 'box-border'], {
       variants: {
         margin: { 0: 'm-0', 2: 'm-2', 4: 'm-4', 8: 'm-8' },
         padding: { 0: 'p-0', 2: 'p-2', 4: 'p-4', 8: 'p-8' },
@@ -1673,7 +1673,7 @@ describe('cva', () => {
     });
 
     type CardBaseProps = CVA.VariantProps<typeof cardBase>;
-    const cardBase = mergeui(
+    const cardBase = crossed(
       ['card', 'border-solid', 'border-slate-300', 'rounded'],
       {
         variants: {

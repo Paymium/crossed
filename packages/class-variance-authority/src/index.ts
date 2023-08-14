@@ -54,7 +54,7 @@ export type Props<T> = T extends ConfigSchema
   ? ConfigVariants<T> & ClassProp
   : ClassProp;
 
-export const mergeui =
+export const crossed =
   <T>(base?: ClassValue, config?: Config<T>) =>
   (props?: Props<T>) => {
     if (config?.variants == null)

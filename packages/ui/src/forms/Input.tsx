@@ -5,7 +5,7 @@ import {
   withStaticProperties,
   tw,
   GetProps,
-} from '@mergeui/core';
+} from '@crossed/core';
 import {
   cloneElement,
   forwardRef,

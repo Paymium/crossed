@@ -1,5 +1,5 @@
 import { UilCheck } from '@iconscout/react-native-unicons';
-import { Props } from '@mergeui/demo/lib/typescript/props';
+import { Props } from '@crossed/demo/lib/typescript/props';
 import {
   Box,
   Button,
@@ -9,7 +9,7 @@ import {
   XBox,
   YBox,
   colorVariants,
-} from '@mergeui/ui';
+} from '@crossed/ui';
 import { useData } from 'nextra/data';
 import { useState, ComponentType } from 'react';
 import { CopyBlock, dracula } from 'react-code-blocks';

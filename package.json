@@ -1,16 +1,16 @@
 {
-  "name": "mergeui-monorepo",
+  "name": "crossed-monorepo",
   "private": true,
   "version": "1.0.0",
   "description": "cross ui lib react-native and web",
   "scripts": {
     "web": "cd apps/web && yarn dev",
     "native": "cd apps/native && yarn start",
-    "docs": "turbo run dev --filter=mergeui-docs",
+    "docs": "turbo run dev --filter=crossed-docs",
     "test": "bash ./scripts/test.sh",
     "dev": "turbo run dev",
-    "watch": "turbo run watch --filter=@mergeui* --no-cache",
-    "build": "turbo run build --filter=@mergeui* --no-cache",
+    "watch": "turbo run watch --filter=@crossed* --no-cache",
+    "build": "turbo run build --filter=@crossed* --no-cache",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mdx}\"",
     "lint": "eslint packages/**/src --ext .ts,.tsx --config .eslintrc"

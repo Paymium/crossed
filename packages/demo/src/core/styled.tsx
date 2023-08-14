@@ -1,7 +1,7 @@
 import { Pressable, Text } from 'react-native';
-import { styled, withStaticProperties } from '@mergeui/core';
+import { styled, withStaticProperties } from '@crossed/core';
 import type { Props } from '../props';
-import { YBox } from '@mergeui/ui';
+import { YBox } from '@crossed/ui';
 
 const ButtonFrame = styled(Pressable, {
   'className': ['bg-blue-500', 'rounded', 'transition-[bg]'],

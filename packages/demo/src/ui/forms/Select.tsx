@@ -1,4 +1,4 @@
-import { Select, UilAngleDown } from '@mergeui/ui';
+import { Select, UilAngleDown } from '@crossed/ui';
 import type { Props } from '../../props';
 
 export const SelectDemo = ({ size, variant, color }: Props) => {

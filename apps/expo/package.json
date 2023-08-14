@@ -1,5 +1,5 @@
 {
-  "name": "mergeui-expo",
+  "name": "crossed-expo",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -15,9 +15,9 @@
   "dependencies": {
     "@babel/runtime": "^7.22.10",
     "@expo/vector-icons": "^13.0.0",
-    "@mergeui/core": "workspace:*",
-    "@mergeui/demo": "workspace:1.0.0",
-    "@mergeui/ui": "workspace:^1.0.0",
+    "@crossed/core": "workspace:*",
+    "@crossed/demo": "workspace:1.0.0",
+    "@crossed/ui": "workspace:^1.0.0",
     "@react-navigation/native": "^6.0.2",
     "@rnx-kit/metro-config": "^1.3.8",
     "@rnx-kit/metro-resolver-symlinks": "^0.1.30",

@@ -1,4 +1,4 @@
-import { Animate, Box, Button } from '@mergeui/ui';
+import { Animate, Box, Button } from '@crossed/ui';
 import { useState } from 'react';
 
 export const AnimateDemo = () => {

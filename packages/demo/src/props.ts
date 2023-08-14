@@ -1,4 +1,4 @@
-import type { colorVariants, sizeVariants, spaceVariants } from '@mergeui/ui';
+import type { colorVariants, sizeVariants, spaceVariants } from '@crossed/ui';
 
 export type Props = {
   size: keyof typeof sizeVariants;

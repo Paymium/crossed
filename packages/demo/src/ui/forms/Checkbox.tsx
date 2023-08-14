@@ -1,4 +1,4 @@
-import { Box, Checkbox } from '@mergeui/ui';
+import { Box, Checkbox } from '@crossed/ui';
 import type { Props } from '../../props';
 
 export const CheckboxDemo = ({ size, variant, color }: Props) => {

@@ -25,4 +25,4 @@ jobs:
       - name: Build
         run: pnpm build
       - name: Build
-        run: pnpm -F mergeui-docs build
+        run: pnpm -F crossed-docs build

@@ -6,11 +6,11 @@ import { Callout } from 'nextra-theme-docs';
 
 <Callout type="info">
 
-Although `mergeui` is a [**tiny**](https://bundlephobia.com/package/class-variance-authority) library, it's best to use in a SSR/SSG environment – your user probably doesn't need this JavaScript, especially for static components.
+Although `crossed` is a [**tiny**](https://bundlephobia.com/package/class-variance-authority) library, it's best to use in a SSR/SSG environment – your user probably doesn't need this JavaScript, especially for static components.
 
 </Callout>
 
-To kick things off, let's build a "basic" `button` component, using `mergeui` to handle our variant's classes
+To kick things off, let's build a "basic" `button` component, using `crossed` to handle our variant's classes
 
 <Callout type="info">
 
@@ -20,9 +20,9 @@ Use of Tailwind CSS is optional
 
 ```ts
 // components/button.ts
-import { mergeui } from '@mergeui/class-variance-authority';
+import { crossed } from '@crossed/class-variance-authority';
 
-const button = mergeui(['font-semibold', 'border', 'rounded'], {
+const button = crossed(['font-semibold', 'border', 'rounded'], {
   variants: {
     intent: {
       primary: [
@@ -73,9 +73,9 @@ Variants that apply when multiple other variant conditions are met.
 
 ```ts
 // components/button.ts
-import { mergeui } from '@mergeui/class-variance-authority';
+import { crossed } from '@crossed/class-variance-authority';
 
-const button = mergeui('…', {
+const button = crossed('…', {
   variants: {
     intent: { primary: '…', secondary: '…' },
     size: { small: '…', medium: '…' },
@@ -96,9 +96,9 @@ const button = mergeui('…', {
 
 ```ts
 // components/button.ts
-import { mergeui } from '@mergeui/class-variance-authority';
+import { crossed } from '@crossed/class-variance-authority';
 
-const button = mergeui('…', {
+const button = crossed('…', {
   variants: {
     intent: { primary: '…', secondary: '…' },
     size: { small: '…', medium: '…' },

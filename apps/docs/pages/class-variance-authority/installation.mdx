@@ -6,21 +6,21 @@ import { Tabs } from 'components/Tabs';
   <Tabs.Tab>
 
     ```sh
-    pnpm i @mergeui/class-variance-authority
+    pnpm i @crossed/class-variance-authority
     ```
 
   </Tabs.Tab>
   <Tabs.Tab>
 
     ```sh
-    npm i @mergeui/class-variance-authority
+    npm i @crossed/class-variance-authority
     ```
 
   </Tabs.Tab>
   <Tabs.Tab>
   
     ```sh
-    yarn add @mergeui/class-variance-authority
+    yarn add @crossed/class-variance-authority
     ```
   
   </Tabs.Tab>
@@ -28,11 +28,11 @@ import { Tabs } from 'components/Tabs';
 
 ## Tailwind CSS
 
-If you're a Tailwind user, here are some additional (optional) steps to get the most out of `mergeui`:
+If you're a Tailwind user, here are some additional (optional) steps to get the most out of `crossed`:
 
 ### IntelliSense
 
-You can enable autocompletion inside `mergeui` using the steps below:
+You can enable autocompletion inside `crossed` using the steps below:
 
 <Tabs items={["Visual Studio Code", "Neovim", "WebStorm"]}>
   <Tabs.Tab>
@@ -44,7 +44,7 @@ You can enable autocompletion inside `mergeui` using the steps below:
     ```json
     {
       "tailwindCSS.experimental.classRegex": [
-        ["mergeui\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+        ["crossed\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
       ]
     }
     ```
@@ -62,7 +62,7 @@ You can enable autocompletion inside `mergeui` using the steps below:
         tailwindCSS = {
           experimental = {
             classRegex = {
-              { "mergeui\\(([^)]*)\\)",
+              { "crossed\\(([^)]*)\\)",
                "[\"'`]([^\"'`]*).*?[\"'`]" },
             },
           },
@@ -83,7 +83,7 @@ You can enable autocompletion inside `mergeui` using the steps below:
     ```json
     {
       "experimental": {
-        "classRegex": ["mergeui\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+        "classRegex": ["crossed\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
       }
     }
     ```
@@ -93,21 +93,21 @@ You can enable autocompletion inside `mergeui` using the steps below:
 
 ### Handling Style Conflicts
 
-Although `mergeui`'s API is designed to help you avoid styling conflicts, there's still a small margin of error.
+Although `crossed`'s API is designed to help you avoid styling conflicts, there's still a small margin of error.
 
 If you're keen to lift that burden altogether, check out the wonderful [`tailwind-merge`](https://github.com/dcastil/tailwind-merge) package.
 
-For bulletproof components, wrap your `mergeui` component with `twMerge`.
+For bulletproof components, wrap your `crossed` component with `twMerge`.
 
 <details>
 
 <summary>Example with tailwind-merge</summary>
 
 ```ts
-import { mergeui, type VariantProps } from '@mergeui/class-variance-authority';
+import { crossed, type VariantProps } from '@crossed/class-variance-authority';
 import { twMerge } from 'tailwind-merge';
 
-const buttonVariants = mergeui(['your', 'base', 'classes'], {
+const buttonVariants = crossed(['your', 'base', 'classes'], {
   variants: {
     intent: {
       primary: ['your', 'primary', 'classes'],

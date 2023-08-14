@@ -1,5 +1,5 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { tw, useDeviceContext } from '@mergeui/core';
+import { tw, useDeviceContext } from '@crossed/core';
 import {
   DarkTheme,
   DefaultTheme,

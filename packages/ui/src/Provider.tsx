@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
-import { tw, useAppColorScheme, useDeviceContext } from '@mergeui/core';
+import { tw, useAppColorScheme, useDeviceContext } from '@crossed/core';
 import { PortalProvider } from '@gorhom/portal';
 
 type ThemeScheme = any;
@@ -13,7 +13,7 @@ const themeContext = createContext<ThemeContext>({} as ThemeContext);
 
 export const useThemeContext = () => useContext(themeContext);
 
-export const MergeuiProvider = ({
+export const CrossedProvider = ({
   defaultTheme,
   children,
 }: PropsWithChildren<{ defaultTheme: ThemeScheme }>) => {

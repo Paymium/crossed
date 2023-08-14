@@ -17,7 +17,7 @@ const reactNativeDeps = [
   'moti',
 ];
 
-export default function withMergeui(nextConfig: any = {}) {
+export default function withCrossed(nextConfig: any = {}) {
   const currDir = process.cwd();
   let rootDependencyList = [];
   try {

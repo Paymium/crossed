@@ -1,5 +1,5 @@
 {
-  "name": "@mergeui/class-variance-authority",
+  "name": "@crossed/class-variance-authority",
   "version": "0.7.0",
   "description": "Class Variance Authority 🧬",
   "keywords": [
@@ -29,8 +29,8 @@
     "dist/*.d.ts"
   ],
   "scripts": {
-    "watch": "mergeui-build --watch",
-    "build": "mergeui-build",
+    "watch": "crossed-build --watch",
+    "build": "crossed-build",
     "check": "tsc --project tsconfig.json --noEmit",
     "dev": "jest --config .config/jest.config.ts --watch",
     "prepublishOnly": "pnpm build",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@jest/types": "28.1.1",
-    "@mergeui/build": "*",
+    "@crossed/build": "*",
     "@swc/cli": "0.1.57",
     "@swc/core": "1.2.198",
     "@swc/jest": "0.2.21",

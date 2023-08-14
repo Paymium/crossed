@@ -1,4 +1,4 @@
-import { YBox, Heading, Text, Button, Input, Select } from '@mergeui/ui';
+import { YBox, Heading, Text, Button, Input, Select } from '@crossed/ui';
 
 export default function TabOneScreen() {
   return (

@@ -4,7 +4,7 @@ import {
   cx,
   styled,
   withStaticProperties,
-} from '@mergeui/core';
+} from '@crossed/core';
 import {
   useId,
   type PropsWithChildren,

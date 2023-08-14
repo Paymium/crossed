@@ -5,6 +5,6 @@ export * from './forms';
 export * from './Provider';
 export * from './animations';
 export * from './display';
-export * from '@mergeui/unicons';
-export * from '@mergeui/core';
+export * from '@crossed/unicons';
+export * from '@crossed/core';
 import 'raf/polyfill';

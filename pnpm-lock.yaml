@@ -32,10 +32,10 @@ importers:
 
   apps/docs:
     specifiers:
-      '@mergeui/core': workspace:^1.0.0
-      '@mergeui/demo': 1.0.0
-      '@mergeui/next-adapter': 1.0.0
-      '@mergeui/ui': 1.0.0
+      '@crossed/core': workspace:^1.0.0
+      '@crossed/demo': 1.0.0
+      '@crossed/next-adapter': 1.0.0
+      '@crossed/ui': 1.0.0
       '@types/node': 18.11.10
       autoprefixer: ^10.4.14
       babel-preset-react-native: ^4.0.1
@@ -53,10 +53,10 @@ importers:
       tailwindcss: ^3.3.3
       typescript: ^5.1.6
     dependencies:
-      '@mergeui/core': link:../../packages/core
-      '@mergeui/demo': link:../../packages/demo
-      '@mergeui/next-adapter': link:../../packages/next-adapter
-      '@mergeui/ui': link:../../packages/ui
+      '@crossed/core': link:../../packages/core
+      '@crossed/demo': link:../../packages/demo
+      '@crossed/next-adapter': link:../../packages/next-adapter
+      '@crossed/ui': link:../../packages/ui
       autoprefixer: 10.4.14_postcss@8.4.27
       next: 13.4.13_biqbaboplfbrettd7655fr4n2y
       next-themes: 0.2.1_7bxrc77cqw5efxjm7xsv6oi4pi
@@ -80,9 +80,9 @@ importers:
       '@babel/core': ^7.20.0
       '@babel/runtime': ^7.22.10
       '@expo/vector-icons': ^13.0.0
-      '@mergeui/core': workspace:*
-      '@mergeui/demo': workspace:1.0.0
-      '@mergeui/ui': workspace:^1.0.0
+      '@crossed/core': workspace:*
+      '@crossed/demo': workspace:1.0.0
+      '@crossed/ui': workspace:^1.0.0
       '@react-navigation/native': ^6.0.2
       '@rnx-kit/metro-config': ^1.3.8
       '@rnx-kit/metro-resolver-symlinks': ^0.1.30
@@ -110,9 +110,9 @@ importers:
     dependencies:
       '@babel/runtime': 7.22.10
       '@expo/vector-icons': 13.0.0
-      '@mergeui/core': link:../../packages/core
-      '@mergeui/demo': link:../../packages/demo
-      '@mergeui/ui': link:../../packages/ui
+      '@crossed/core': link:../../packages/core
+      '@crossed/demo': link:../../packages/demo
+      '@crossed/ui': link:../../packages/ui
       '@react-navigation/native': 6.1.7_6syixf76bqx5r4tgwtwyqyssoi
       '@rnx-kit/metro-config': 1.3.8_gwln3ggpma256bzzewbg4j7q5m
       '@rnx-kit/metro-resolver-symlinks': 0.1.30
@@ -165,7 +165,7 @@ importers:
   packages/class-variance-authority:
     specifiers:
       '@jest/types': 28.1.1
-      '@mergeui/build': '*'
+      '@crossed/build': '*'
       '@swc/cli': 0.1.57
       '@swc/core': 1.2.198
       '@swc/jest': 0.2.21
@@ -185,7 +185,7 @@ importers:
       tailwind-merge: 1.14.0
     devDependencies:
       '@jest/types': 28.1.1
-      '@mergeui/build': link:../build
+      '@crossed/build': link:../build
       '@swc/cli': 0.1.57_@swc+core@1.2.198
       '@swc/core': 1.2.198
       '@swc/jest': 0.2.21_@swc+core@1.2.198
@@ -201,8 +201,8 @@ importers:
 
   packages/core:
     specifiers:
-      '@mergeui/build': '*'
-      '@mergeui/class-variance-authority': '*'
+      '@crossed/build': '*'
+      '@crossed/class-variance-authority': '*'
       '@types/react': ^18.2.18
       '@types/react-native': ^0.72.2
       babel-plugin-transform-remove-console: ^6.9.4
@@ -216,10 +216,10 @@ importers:
       tsconfig: '*'
       twrnc: ^3.6.3
     dependencies:
-      '@mergeui/class-variance-authority': link:../class-variance-authority
+      '@crossed/class-variance-authority': link:../class-variance-authority
       twrnc: 3.6.3_react-native@0.72.3
     devDependencies:
-      '@mergeui/build': link:../build
+      '@crossed/build': link:../build
       '@types/react': 18.2.18
       '@types/react-native': 0.72.2_react-native@0.72.3
       babel-plugin-transform-remove-console: 6.9.4
@@ -234,10 +234,10 @@ importers:
 
   packages/demo:
     specifiers:
-      '@mergeui/build': '*'
-      '@mergeui/core': '*'
-      '@mergeui/ui': '*'
-      '@mergeui/unicons': '*'
+      '@crossed/build': '*'
+      '@crossed/core': '*'
+      '@crossed/ui': '*'
+      '@crossed/unicons': '*'
       '@types/react': ^18.2.18
       '@types/react-native': ^0.72.2
       babel-plugin-transform-remove-console: ^6.9.4
@@ -250,13 +250,13 @@ importers:
       react-native-web: ^0.19.7
       tsconfig: '*'
     dependencies:
-      '@mergeui/ui': link:../ui
+      '@crossed/ui': link:../ui
       fuse.js: 6.6.2
       react-aria: 3.27.0_biqbaboplfbrettd7655fr4n2y
     devDependencies:
-      '@mergeui/build': link:../build
-      '@mergeui/core': link:../core
-      '@mergeui/unicons': link:../unicons
+      '@crossed/build': link:../build
+      '@crossed/core': link:../core
+      '@crossed/unicons': link:../unicons
       '@types/react': 18.2.18
       '@types/react-native': 0.72.2_react-native@0.72.3
       babel-plugin-transform-remove-console: 6.9.4
@@ -309,9 +309,9 @@ importers:
       '@floating-ui/react': ^0.25.1
       '@gorhom/portal': ^1.0.14
       '@iconscout/react-native-unicons': ^2.0.2
-      '@mergeui/build': '*'
-      '@mergeui/core': '*'
-      '@mergeui/unicons': '*'
+      '@crossed/build': '*'
+      '@crossed/core': '*'
+      '@crossed/unicons': '*'
       '@types/react': ^18.2.18
       '@types/react-native': ^0.72.2
       babel-plugin-transform-remove-console: ^6.9.4
@@ -333,8 +333,8 @@ importers:
       '@floating-ui/react': 0.25.1_biqbaboplfbrettd7655fr4n2y
       '@gorhom/portal': 1.0.14_6syixf76bqx5r4tgwtwyqyssoi
       '@iconscout/react-native-unicons': 2.0.2_whnihh5yf4ab4theqd7ek6ulhq
-      '@mergeui/core': link:../core
-      '@mergeui/unicons': link:../unicons
+      '@crossed/core': link:../core
+      '@crossed/unicons': link:../unicons
       class-variance-authority: 0.7.0
       inline-style-prefixer: 6.0.4
       moti: 0.26.0_ed22hdxu4vjbqh5vi4pati4mzu
@@ -344,7 +344,7 @@ importers:
       react-native-reanimated: 3.4.2_6syixf76bqx5r4tgwtwyqyssoi
       react-native-svg: 13.10.0_6syixf76bqx5r4tgwtwyqyssoi
     devDependencies:
-      '@mergeui/build': link:../build
+      '@crossed/build': link:../build
       '@types/react': 18.2.18
       '@types/react-native': 0.72.2_react-native@0.72.3
       babel-plugin-transform-remove-console: 6.9.4
@@ -358,7 +358,7 @@ importers:
   packages/unicons:
     specifiers:
       '@iconscout/react-native-unicons': ^2.0.2
-      '@mergeui/build': '*'
+      '@crossed/build': '*'
       '@types/react': ^18.2.18
       '@types/react-native': ^0.72.2
       babel-plugin-transform-remove-console: ^6.9.4
@@ -372,7 +372,7 @@ importers:
     dependencies:
       '@iconscout/react-native-unicons': 2.0.2_whnihh5yf4ab4theqd7ek6ulhq
     devDependencies:
-      '@mergeui/build': link:../build
+      '@crossed/build': link:../build
       '@types/react': 18.2.18
       '@types/react-native': 0.72.2_react-native@0.72.3
       babel-plugin-transform-remove-console: 6.9.4

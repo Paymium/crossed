@@ -1,4 +1,4 @@
-import type { BaseWithState } from '@mergeui/core';
+import type { BaseWithState } from '@crossed/core';
 
 export const colorVariants = {
   slate: {

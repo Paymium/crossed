@@ -5,7 +5,7 @@ import {
   merge,
   tw,
   GetProps,
-} from '@mergeui/core';
+} from '@crossed/core';
 import { Text } from 'react-native';
 import {
   cloneElement,

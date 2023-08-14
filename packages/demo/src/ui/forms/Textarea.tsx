@@ -1,4 +1,4 @@
-import { Textarea, UilEye, YBox } from '@mergeui/ui';
+import { Textarea, UilEye, YBox } from '@crossed/ui';
 import type { Props } from '../../props';
 import { useState } from 'react';
 

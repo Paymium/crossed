@@ -5,7 +5,7 @@ import {
   styled,
   useUncontrolled,
   withStaticProperties,
-} from '@mergeui/core';
+} from '@crossed/core';
 import type { colorVariants, sizeVariants } from '../variants';
 import { Label } from './Label';
 import { Platform, Pressable, View } from 'react-native';

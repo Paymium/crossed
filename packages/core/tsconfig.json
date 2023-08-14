@@ -27,8 +27,8 @@
     "strict": true,
     "target": "esnext",
     "paths": {
-      "@mergeui/class-variance-authority": [
-        "./node_modules/@mergeui/class-variance-authority/src"
+      "@crossed/class-variance-authority": [
+        "./node_modules/@crossed/class-variance-authority/src"
       ]
     }
   }

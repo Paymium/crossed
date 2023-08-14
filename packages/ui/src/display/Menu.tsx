@@ -4,7 +4,7 @@ import {
   styled,
   tw,
   withStaticProperties,
-} from '@mergeui/core';
+} from '@crossed/core';
 import {
   useId,
   type ReactNode,

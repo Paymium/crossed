@@ -27,7 +27,7 @@
     "strict": true,
     "target": "esnext",
     "paths": {
-      "@mergeui/ui": ["./node_modules/@mergeui/ui/src"]
+      "@crossed/ui": ["./node_modules/@crossed/ui/src"]
     }
   }
 }

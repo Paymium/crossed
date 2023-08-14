@@ -6,7 +6,7 @@ import {
   cx,
   useUncontrolled,
   withStaticProperties,
-} from '@mergeui/core';
+} from '@crossed/core';
 import {
   Dispatch,
   PropsWithChildren,
@@ -24,7 +24,7 @@ import {
   useKeyboard,
 } from 'react-aria';
 import { Box } from '../layout/Box';
-import { UilAngleDown } from '@mergeui/unicons';
+import { UilAngleDown } from '@crossed/unicons';
 import { Portal } from '@gorhom/portal';
 import {
   FloatingFocusManager,

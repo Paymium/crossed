@@ -7,7 +7,7 @@ import {
   tw,
   useUncontrolled,
   withStaticProperties,
-} from '@mergeui/core';
+} from '@crossed/core';
 import { Label } from './Label';
 import { useRef, type PropsWithChildren, cloneElement } from 'react';
 import { UilCheck } from '@iconscout/react-native-unicons';

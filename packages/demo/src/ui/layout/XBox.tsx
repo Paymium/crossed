@@ -1,4 +1,4 @@
-import { Box, XBox } from '@mergeui/ui';
+import { Box, XBox } from '@crossed/ui';
 import type { Props } from '../../props';
 
 export const XBoxDemo = ({ space }: Props) => {

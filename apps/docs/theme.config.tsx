@@ -3,7 +3,7 @@ import { DocsThemeConfig } from 'nextra-theme-docs';
 import { useMounted } from 'nextra/hooks';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from 'nextra/icons';
-import { Button, useThemeContext, tw } from '@mergeui/ui';
+import { Button, useThemeContext, tw } from '@crossed/ui';
 
 const config: DocsThemeConfig = {
   logo: (
@@ -56,31 +56,31 @@ const config: DocsThemeConfig = {
           />
         </g>
       </svg>
-      mergeui
+      crossed
     </span>
   ),
   project: {
-    link: 'https://github.com/mergeui/mergeui',
+    link: 'https://github.com/crossed/crossed',
   },
   banner: {
-    text: 'Mergeui is not ready production',
+    text: 'Crossed is not ready production',
   },
-  docsRepositoryBase: 'https://github.com/mergeui/mergeui/tree/main/apps/docs',
+  docsRepositoryBase: 'https://github.com/crossed/crossed/tree/main/apps/docs',
   footer: {
-    text: 'mergeui documentation',
+    text: 'crossed documentation',
   },
   useNextSeoProps() {
     return {
-      titleTemplate: '%s – Mergeui',
+      titleTemplate: '%s – Crossed',
     };
   },
   head: (
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta property="og:title" content="Mergeui" />
+      <meta property="og:title" content="Crossed" />
       <meta
         property="og:description"
-        content="Mergeui is cross platform library for react-native and react web"
+        content="Crossed is cross platform library for react-native and react web"
       />
       <link rel="icon" href="/favicon.ico" />
     </>

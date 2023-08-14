@@ -1,4 +1,4 @@
-import { Box, Label } from '@mergeui/ui';
+import { Box, Label } from '@crossed/ui';
 
 export const LabelDemo = () => {
   return (

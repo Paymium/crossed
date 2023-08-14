@@ -27,7 +27,7 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "name": "@mergeui/next-adapter",
+  "name": "@crossed/next-adapter",
   "module": "dist/next-adapter.esm.js",
   "size-limit": [
     {

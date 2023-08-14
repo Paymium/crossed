@@ -1,5 +1,5 @@
 {
-  "name": "@mergeui/demo",
+  "name": "@crossed/demo",
   "description": "A universal & performant styling library for React Native, Next.js & React",
   "version": "1.0.0",
   "keywords": [
@@ -30,14 +30,14 @@
   "scripts": {
     "release": "release-it",
     "clean": "rm -rf lib",
-    "watch": "mergeui-build --watch",
-    "build": "mergeui-build",
+    "watch": "crossed-build --watch",
+    "build": "crossed-build",
     "dev:web": "cd example/native && yarn web --clear"
   },
   "devDependencies": {
-    "@mergeui/build": "*",
-    "@mergeui/core": "*",
-    "@mergeui/unicons": "*",
+    "@crossed/build": "*",
+    "@crossed/core": "*",
+    "@crossed/unicons": "*",
     "@types/react": "^18.2.18",
     "@types/react-native": "^0.72.2",
     "babel-plugin-transform-remove-console": "^6.9.4",
@@ -49,7 +49,7 @@
     "tsconfig": "*"
   },
   "dependencies": {
-    "@mergeui/ui": "*",
+    "@crossed/ui": "*",
     "fuse.js": "^6.6.2",
     "react-aria": "^3.27.0"
   },

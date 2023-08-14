@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { styled } from '@mergeui/core';
+import { styled } from '@crossed/core';
 import { spaceVariants } from '../variants/space';
 
 export const XBox = styled(View, {
