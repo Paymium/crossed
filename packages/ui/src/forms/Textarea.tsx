@@ -1,5 +1,4 @@
-import { withStaticProperties } from '@mergeui/core';
-import type { GetProps } from '../types';
+import { withStaticProperties, type GetProps } from '@mergeui/core';
 import { Input, InputRootProps } from './Input';
 import type { ReactElement } from 'react';
 

@@ -1,12 +1,16 @@
 import { CodeDemo } from 'components/CodeDemo';
 import { Tabs } from 'components/Tabs';
-import { Table, Tr, Td, Th } from 'nextra/components';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { SwitchDemo } from '@mergeui/demo';
+import { Table } from 'components/Table';
+
+export const getStaticProps = getStaticDemo("ui/forms/Switch")
 
 # Switch
 
 <Tabs items={["Demo", "Anatomy", "Props"]}>
   <Tabs.Tab>
-    <CodeDemo />
+    <CodeDemo Demo={SwitchDemo} />
   </Tabs.Tab>
   <Tabs.Tab>
     ## Simple
@@ -26,41 +30,7 @@ import { Table, Tr, Td, Th } from 'nextra/components';
   <Tabs.Tab>
   
     ## Button
-   <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
-      <Tr>
-        <Td>disabled</Td>
-        <Th>false</Th>
-        <Th>Description</Th>
-      </Tr>
-      <Tr>
-        <Td>loading</Td>
-        <Th>false</Th>
-        <Th>dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd dsfsd dsfds dsfdsd</Th>
-      </Tr>
-   </Table>
+   <Table props={[]} />
 
-## Button.Text
-
-   <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
-   </Table>
-   ## Button.Icon
-   <Table className="table-auto overflow-hidden w-full">
-      <Tr>
-        <Th>Props</Th>
-        <Th>default</Th>
-        <Th>Description</Th>
-      </Tr>
-   </Table>
-  
   </Tabs.Tab>
 </Tabs>

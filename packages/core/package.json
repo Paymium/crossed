@@ -40,31 +40,24 @@
     "@types/react-native": "^0.72.2",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "jest": "^29.5.0",
+    "moti": "^0.26.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "^0.72.3",
     "react-native-web": "^0.19.7",
+    "react-native-reanimated": "^3.4.2",
     "tsconfig": "*"
   },
   "dependencies": {
     "@mergeui/class-variance-authority": "*",
-    "inline-style-prefixer": "^6.0.1",
-    "normalize-css-color": "^1.0.2",
     "twrnc": "^3.6.3"
-  },
-  "react-native-builder-bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "commonjs",
-      [
-        "module"
-      ],
-      "typescript"
-    ]
   },
   "files": [
     "lib/",
     "src/"
-  ]
+  ],
+  "peerDependencies": {
+    "moti": "^0.26.0",
+    "react-native-reanimated": "^3.4.2"
+  }
 }

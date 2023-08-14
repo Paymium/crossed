@@ -4,21 +4,22 @@ import {
   withStaticProperties,
   merge,
   tw,
+  GetProps,
 } from '@mergeui/core';
-import { Pressable, Text } from 'react-native';
+import { Text } from 'react-native';
 import {
   cloneElement,
   ReactElement,
-  type ComponentType,
+  // type ComponentType,
   type PropsWithChildren,
   useId,
 } from 'react';
 import { colorVariants } from '../variants/colors';
 import { sizeVariants } from '../variants/size';
-import type { GetProps } from '../types';
 import { Box } from '../layout/Box';
 import { spaceVariants } from '../variants';
 import { useThemeContext } from '../Provider';
+import { MotiPressable } from 'moti/interactions';
 
 const [Provider, useContext] = createScope<{
   size?: keyof typeof sizeVariants;
@@ -29,27 +30,29 @@ const [Provider, useContext] = createScope<{
   color: 'zinc',
 });
 
-const ButtonFrame = styled(Pressable, {
+const ButtonFrame = styled(MotiPressable, {
   'className': ['rounded-md', 'flex', 'flex-row', 'items-center', 'border-2'],
   ':disabled': {
-    className: ['opacity-50', 'pointer-events-none'],
+    className: ['opacity-50', 'pointer-events-none', 'cursor-not-allowed'],
   },
   'props': {
-    role: 'button',
+    accessibilityRole: 'button',
   },
   'variants': {
     color: colorVariants,
     size: sizeVariants,
     space: spaceVariants,
     variant: {
-      filled: { className: ['border-transparent dark:border-transparent'] },
+      filled: {
+        animate: ['border-transparent dark:border-transparent'],
+      },
       outlined: {
-        'className': ['dark:bg-zinc-950 bg-zinc-100'],
+        'animate': ['dark:bg-zinc-950 bg-zinc-100'],
         ':hover': {
-          className: ['dark:bg-zinc-900 bg-zinc-300'],
+          animate: ['dark:bg-zinc-900 bg-zinc-300'],
         },
         ':active': {
-          className: ['dark:bg-zinc-800 bg-zinc-200'],
+          animate: ['dark:bg-zinc-800 bg-zinc-200'],
         },
       },
     },
@@ -60,7 +63,7 @@ const ButtonFrame = styled(Pressable, {
     variant: 'outlined',
     space: 'xs',
   },
-});
+}) as any;
 
 const ButtonTextFrame = styled(Text, {
   className: ['font-semibold'],
@@ -111,11 +114,12 @@ const ButtonTextFrame = styled(Text, {
   ],
 });
 
-type ButtonRootProps = GetProps<typeof ButtonFrame> & {
-  text?: string;
-  iconAfter?: ComponentType;
-  icon?: ComponentType;
-};
+type ButtonRootProps = any;
+// GetProps<typeof ButtonFrame> & {
+//   text?: string;
+//   iconAfter?: ComponentType;
+//   icon?: ComponentType;
+// };
 
 function ButtonRoot(
   props: Omit<ButtonRootProps, 'text' | 'iconAfter' | 'icon'>
@@ -126,12 +130,15 @@ function ButtonRoot({
   iconAfter: IconAfter,
   icon: Icon,
   children,
+  size = 'md',
+  color = 'zinc',
+  variant = 'outlined',
   ...props
 }: ButtonRootProps) {
   const id = useId();
   return (
-    <Provider size={props.size} color={props.color} variant={props.variant}>
-      <ButtonFrame {...props}>
+    <Provider size={size} color={color} variant={variant}>
+      <ButtonFrame size={size} color={color} variant={variant} {...props}>
         {children ??
           [
             Icon && (

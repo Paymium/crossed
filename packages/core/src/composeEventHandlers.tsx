@@ -3,8 +3,8 @@ type Events = Object;
 export type EventHandler<E extends Events> = (event: E) => void;
 
 export function composeEventHandlers<E extends Events>(
-  og?: EventHandler<E> | null,
-  next?: EventHandler<E> | null,
+  og?: EventHandler<E> | null | false,
+  next?: EventHandler<E> | null | false,
   { checkDefaultPrevented = true } = {}
 ) {
   if (!og || !next) {

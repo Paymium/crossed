@@ -4,9 +4,9 @@ import type { Props } from '../props';
 import { YBox } from '@mergeui/ui';
 
 const ButtonFrame = styled(Pressable, {
-  'className': ['bg-blue-500', 'rounded'],
+  'className': ['bg-blue-500', 'rounded', 'transition-[bg]'],
   ':hover': {
-    className: ['bg-blue-400'],
+    animate: ['bg-blue-400'],
   },
   ':active': {
     className: ['bg-blue-600'],

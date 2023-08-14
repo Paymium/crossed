@@ -1,5 +1,5 @@
 {
-  "include": ["./src", "src/unicons.ts"],
+  "include": ["./src", "node_modules/react-native-reanimated"],
   "exclude": ["node_modules", "example"],
   "compilerOptions": {
     "baseUrl": ".",

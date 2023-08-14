@@ -1,13 +1,19 @@
-import { createScope, cx, styled, withStaticProperties } from '@mergeui/core';
+import {
+  GetProps,
+  createScope,
+  cx,
+  styled,
+  withStaticProperties,
+} from '@mergeui/core';
 import {
   useId,
   type PropsWithChildren,
   cloneElement,
   useRef,
   type MutableRefObject,
+  forwardRef,
 } from 'react';
 import { Platform, Text, View } from 'react-native';
-import type { GetProps } from '../types';
 import { Box } from '../layout/Box';
 
 export const LabelText = styled(Text, {
@@ -34,23 +40,30 @@ export type LabelProps = {
 };
 
 export const Label = withStaticProperties(
-  ({
-    children,
-    invalid,
-    ...props
-  }: PropsWithChildren<
-    LabelProps & Omit<GetProps<typeof Box>, 'children'>
-  >) => {
-    const id = useId();
-    const ref = useRef();
-    return (
-      <Provider id={id} invalid={invalid} inputRef={ref}>
-        <Box {...props} className={cx('flex-col', props?.className)}>
-          {children}
-        </Box>
-      </Provider>
-    );
-  },
+  forwardRef(
+    (
+      {
+        children,
+        invalid,
+        ...props
+      }: PropsWithChildren<LabelProps & Omit<GetProps<typeof Box>, 'children'>>,
+      ref: any
+    ) => {
+      const id = useId();
+      const inputRef = useRef();
+      return (
+        <Provider id={id} invalid={invalid} inputRef={inputRef}>
+          <Box
+            {...props}
+            className={cx('flex-col', props?.className)}
+            ref={ref}
+          >
+            {children}
+          </Box>
+        </Provider>
+      );
+    }
+  ),
   {
     Text: (props: GetProps<typeof LabelText>) => {
       const { id, invalid, inputRef } = useContext();

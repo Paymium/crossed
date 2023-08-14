@@ -1,4 +1,5 @@
 import {
+  GetProps,
   composeEventHandlers,
   composeRefs,
   createScope,
@@ -16,7 +17,6 @@ import {
   useState,
 } from 'react';
 import { Input, InputContentFrame } from './Input';
-import type { GetProps } from '../types';
 import {
   FocusScope,
   useFocusManager,

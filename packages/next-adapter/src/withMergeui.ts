@@ -13,6 +13,8 @@ const reactNativeDeps = [
   'react-native-web',
   'react-native-svg',
   '@iconscout/react-native-unicons',
+  'react-native-reanimated',
+  'moti',
 ];
 
 export default function withMergeui(nextConfig: any = {}) {
@@ -79,6 +81,8 @@ export default function withMergeui(nextConfig: any = {}) {
   let crossedUITranspileModules = Array.from(
     new Set([
       '@iconscout/react-native-unicons',
+      'react-native-reanimated',
+      'moti',
       ...rootDependencyList,
       ...parentDependencyList,
       ...rootExactDependencyList,
@@ -90,8 +94,10 @@ export default function withMergeui(nextConfig: any = {}) {
   const updatedNextConfig = {
     ...nextConfig,
     transpilePackages: crossedUITranspileModules,
-    webpack: (config: any) => {
-      config = nextConfig.webpack ? nextConfig.webpack(config) : config;
+    webpack: (config: any, context: any) => {
+      config = nextConfig.webpack
+        ? nextConfig.webpack(config, context)
+        : config;
 
       config.resolve.alias = {
         ...(config.resolve.alias || {}),

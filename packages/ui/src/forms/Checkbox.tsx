@@ -1,4 +1,5 @@
 import {
+  GetProps,
   createScope,
   cx,
   merge,
@@ -10,7 +11,6 @@ import {
 import { Label } from './Label';
 import { useRef, type PropsWithChildren, cloneElement } from 'react';
 import { UilCheck } from '@iconscout/react-native-unicons';
-import type { GetProps } from '../types';
 import { Box } from '../layout/Box';
 import { VisuallyHidden, useCheckbox } from 'react-aria';
 import { Pressable, TextInput } from 'react-native';

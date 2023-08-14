@@ -1,0 +1,26 @@
+import { AnimateDemo } from '@mergeui/demo';
+import { CodeDemo } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { Tabs } from 'components/Tabs';
+import { Table } from 'components/Table';
+
+export const getStaticProps = getStaticDemo('ui/animations/Animate');
+
+# Animate
+
+Use moti js
+
+<Tabs items={['Demo', 'Anatomy', 'Props']}>
+  <Tabs.Tab>
+    <CodeDemo Demo={AnimateDemo} />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```tsx
+    <Animate />
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ## Animate
+    <Table props={[]} />
+  </Tabs.Tab>
+</Tabs>

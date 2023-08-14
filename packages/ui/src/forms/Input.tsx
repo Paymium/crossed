@@ -4,13 +4,13 @@ import {
   styled,
   withStaticProperties,
   tw,
+  GetProps,
 } from '@mergeui/core';
 import {
   cloneElement,
   forwardRef,
   type ComponentType,
   type PropsWithChildren,
-  type ReactElement,
   useState,
   useMemo,
   memo,
@@ -19,7 +19,6 @@ import {
 } from 'react';
 import { Label } from './Label';
 import { colorVariants, sizeVariants, spaceVariants } from '../variants';
-import type { GetProps } from '../types';
 import { Pressable, TextInput } from 'react-native';
 
 const [Provider, useContext] = createScope<{
@@ -30,6 +29,7 @@ const [Provider, useContext] = createScope<{
   onChangeValue?: (e: string) => void;
   focus?: boolean;
   setFocus: Dispatch<SetStateAction<boolean>>;
+  refInput?: any;
 }>({
   size: 'md',
   color: 'zinc',
@@ -90,7 +90,7 @@ const InputIconFrame = styled(Pressable, {
 export type InputRootProps = PropsWithChildren<
   Omit<
     GetProps<typeof Provider>,
-    'as' | 'className' | 'children' | 'focus' | 'setFocus'
+    'as' | 'className' | 'children' | 'focus' | 'setFocus' | 'refInput'
   > & {
     value?: string;
     onChangeValue?: (value: string) => void;
@@ -100,54 +100,73 @@ export type InputRootProps = PropsWithChildren<
   }
 >;
 
-function InputRoot(props: Omit<InputRootProps, 'children'>): ReactElement;
-function InputRoot(
-  props: Omit<InputRootProps, 'label' | 'iconAfter' | 'icon'>
-): ReactElement;
-function InputRoot({
-  children,
-  label,
-  iconAfter: IconAfter,
-  icon: Icon,
-  size,
-  color,
-  variant,
-  value,
-  onChangeValue,
-}: InputRootProps) {
-  const [focus, setFocus] = useState(false);
-  return (
-    <Provider
-      size={size}
-      color={color}
-      variant={variant}
-      value={value}
-      onChangeValue={onChangeValue}
-      focus={focus}
-      setFocus={setFocus}
-    >
-      <Label className="group focus:ring ring-orange-400">
-        {children ??
-          [
-            label && <InputLabel key="InputLabel">{label}</InputLabel>,
-            <InputContent key="InputContent">
-              {Icon && (
-                <InputIcon key="InputIconLeft">
-                  <Icon />
-                </InputIcon>
-              )}
-              <InputInput key="InputInput" />
-              {IconAfter && (
-                <InputIcon key="InputIconRight">
-                  <IconAfter />
-                </InputIcon>
-              )}
-            </InputContent>,
-          ].filter(Boolean)}
-      </Label>
-    </Provider>
-  );
-}
+type InputRootPropsSimple = Omit<InputRootProps, 'children'> & {
+  children?: never;
+};
+type InputRootPropsAdvanced = Omit<
+  InputRootProps,
+  'label' | 'iconAfter' | 'icon' | 'children'
+> &
+  Pick<Required<InputRootProps>, 'children'> & {
+    label?: never;
+    iconAfter?: never;
+    icon?: never;
+  };
+
+const InputRoot = forwardRef<
+  any,
+  InputRootPropsSimple | InputRootPropsAdvanced
+>(
+  (
+    {
+      children,
+      label,
+      iconAfter: IconAfter,
+      icon: Icon,
+      size,
+      color,
+      variant,
+      value,
+      onChangeValue,
+    },
+    ref
+  ) => {
+    const [focus, setFocus] = useState(false);
+    return (
+      <Provider
+        size={size}
+        color={color}
+        variant={variant}
+        value={value}
+        onChangeValue={onChangeValue}
+        focus={focus}
+        setFocus={setFocus}
+        refInput={ref}
+      >
+        <Label className="group focus:ring ring-orange-400">
+          {children ??
+            [
+              label && <InputLabel key="InputLabel">{label}</InputLabel>,
+              <InputContent key="InputContent">
+                {Icon && (
+                  <InputIcon key="InputIconLeft">
+                    <Icon />
+                  </InputIcon>
+                )}
+                <InputInput key="InputInput" ref={ref} />
+                {IconAfter && (
+                  <InputIcon key="InputIconRight">
+                    <IconAfter />
+                  </InputIcon>
+                )}
+              </InputContent>,
+            ].filter(Boolean)}
+        </Label>
+      </Provider>
+    );
+  }
+);
+
 const InputLabel = Label.Text;
 const InputInput = memo(
   forwardRef<TextInput, GetProps<typeof InputInputFrame>>((props, ref) => {

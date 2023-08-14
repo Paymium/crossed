@@ -1,4 +1,10 @@
-import { createScope, styled, tw, withStaticProperties } from '@mergeui/core';
+import {
+  GetProps,
+  createScope,
+  styled,
+  tw,
+  withStaticProperties,
+} from '@mergeui/core';
 import {
   useId,
   type ReactNode,
@@ -9,7 +15,6 @@ import {
 import { Pressable, View } from 'react-native';
 import { Text } from '../typography/Text';
 import { Divider } from '../layout/Divider';
-import type { GetProps } from '../types';
 import { colorVariants, spaceVariants } from '../variants';
 import { YBox } from '../layout/YBox';
 

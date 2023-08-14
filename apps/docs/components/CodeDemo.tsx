@@ -121,15 +121,16 @@ export const CodeDemo = ({
             </>
           )}
           {code.length > 0 && (
-            <Button
-              color="violet"
-              variant="filled"
-              onPress={() => setShow((e) => !e)}
-              className="absolute bottom-0 right-0"
-              size="xs"
-            >
-              <Button.Text>{show ? 'Hide' : 'Show'}</Button.Text>
-            </Button>
+            <Box className="absolute bottom-0 right-0">
+              <Button
+                color="violet"
+                variant="filled"
+                onPress={() => setShow((e) => !e)}
+                size="xs"
+              >
+                <Button.Text>{show ? 'Hide' : 'Show'}</Button.Text>
+              </Button>
+            </Box>
           )}
         </YBox>
       </Box>

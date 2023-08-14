@@ -17,7 +17,7 @@ export const Tabs = withStaticProperties(
         const time = setTimeout(() => {
           const [anchor] = asPath.match(/#(.*)$/g) || [];
           if (anchor) {
-            let target = document.querySelector(`${anchor}`);
+            const target = document.querySelector(`${anchor}`);
 
             if (!target) return;
 
@@ -32,7 +32,7 @@ export const Tabs = withStaticProperties(
         }, 200);
         return () => clearTimeout(time);
       }
-    }, [isReady]);
+    }, [isReady, asPath]);
 
     return (
       <TabsNext

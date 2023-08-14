@@ -1,20 +1,19 @@
+import 'raf/polyfill';
 import type { ComponentType } from 'react';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 import { mergeui, merge } from '@mergeui/class-variance-authority';
 import type { ConfigSchema as ConfigSchemaCVA } from '@mergeui/class-variance-authority';
 import tw from 'twrnc';
 import { Platform, StyleSheet } from 'react-native';
 import type { ClassValue } from '@mergeui/class-variance-authority/src/types';
-import type {
-  Base,
-  BaseWithState,
-  ConfigSchema,
-  ConfigSchemaTheme,
-  Props,
-  State,
-  StateName,
-} from './types';
+import type { Base, ConfigSchema, ConfigSchemaTheme, Props } from './types';
 import { withStaticProperties } from './withStaticProperties';
+import type { MotiPressableProp } from 'moti/interactions';
+import { extractState } from './extractPropertyState';
+import { composeEventHandlers } from './composeEventHandlers';
+
+const camelToSnakeCase = (str: string) =>
+  str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 
 const cleanForMergeui = <P, T extends ConfigSchema<P>>(
   variantsDeclaration?: ConfigSchemaTheme<P, T>
@@ -40,7 +39,7 @@ const cleanForMergeui = <P, T extends ConfigSchema<P>>(
         const variantListT = Object.entries(variantValues).reduce<
           Record<string, ClassValue>
         >((acc2, [keyInVar, value]) => {
-          acc2[keyInVar] = value.className;
+          acc2[keyInVar] = value.animate || value.className;
           return acc2;
         }, {});
         acc[variantKey] = variantListT;
@@ -76,7 +75,7 @@ const cleanForMergeui = <P, T extends ConfigSchema<P>>(
   return { base, config };
 };
 
-const extractStateClassName = <P, T extends ConfigSchema<P>>(
+const useExtractStateClassName = <P, T extends ConfigSchema<P>>(
   themeConfigProps: ConfigSchemaTheme<P, T>,
   variantProps: Props<T>,
   {
@@ -91,156 +90,44 @@ const extractStateClassName = <P, T extends ConfigSchema<P>>(
     disabledTheme?: Base<P>;
   } = {}
 ) => {
-  const { variants, compoundVariants = [], defaultVariants } = themeConfigProps;
+  const {
+    active: activeClassname,
+    hover: hoverClassname,
+    focus: focusClassname,
+    disabled: disabledClassname,
+  } = extractState(themeConfigProps, variantProps, 'className', {
+    activeTheme,
+    hoverTheme,
+    focusTheme,
+    disabledTheme,
+  });
 
-  const compounedVariant = compoundVariants?.reduce<{
-    [key in keyof Required<State<P>>]: string[];
-  }>(
-    (
-      acc,
-      {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        'className': cvClassName,
-        ':active': _activeCompoundVariant,
-        ':hover': _hoverCompoundVariant,
-        ':focus': _focusCompoundVariant,
-        ':disabled': _disabledCompoundVariant,
-        ...compoundVariantOptions
-      }
-    ) => {
-      return Object.entries(compoundVariantOptions).every(([key, value]) =>
-        Array.isArray(value)
-          ? value.includes(
-              {
-                ...defaultVariants,
-                ...variantProps,
-              }[key]
-            )
-          : {
-              ...defaultVariants,
-              ...variantProps,
-            }[key] === value
-      )
-        ? {
-            ':active': [
-              ...acc[':active'],
-              ...(_activeCompoundVariant?.className || []),
-            ],
-            ':hover': [
-              ...acc[':hover'],
-              ...(_hoverCompoundVariant?.className || []),
-            ],
-            ':focus': [
-              ...acc[':focus'],
-              ...(_focusCompoundVariant?.className || []),
-            ],
-            ':disabled': [
-              ...acc[':disabled'],
-              ...(_disabledCompoundVariant?.className || []),
-            ],
-          }
-        : acc;
-    },
-    {
-      ':active': [],
-      ':hover': [],
-      ':focus': [],
-      ':disabled': [],
-    }
-  );
-
-  const result = Object.entries(variantProps).reduce<{
-    [key in StateName as `${key}Classname`]: string[];
-  }>(
-    (acc, [keyVariant, valueVariant]) => {
-      if (valueVariant !== undefined && valueVariant !== null) {
-        const variantList = (variants as T)[keyVariant];
-
-        const {
-          ':active': _activeCompoundVariant,
-          ':hover': _hoverCompoundVariant,
-          ':focus': _focusCompoundVariant,
-          ':disabled': _disabledCompoundVariant,
-        } = compounedVariant;
-
-        const {
-          ':active': _active,
-          ':hover': _hover,
-          ':focus': _focus,
-          ':disabled': _disabled,
-        } = (variantList[valueVariant.toString()] ||
-          {}) satisfies BaseWithState<P>;
-
-        acc.activeClassname = [
-          ...acc.activeClassname,
-          ...(_active?.className || []),
-          ...(_activeCompoundVariant || []),
-        ];
-
-        acc.hoverClassname = [
-          ...acc.hoverClassname,
-          ...(_hover?.className || []),
-          ...(_hoverCompoundVariant || []),
-        ];
-
-        acc.focusClassname = [
-          ...acc.focusClassname,
-          ...(_focus?.className || []),
-          ...(_focusCompoundVariant || []),
-        ];
-
-        acc.disabledClassname = [
-          ...acc.disabledClassname,
-          ...(_disabled?.className || []),
-          ...(_disabledCompoundVariant || []),
-        ];
-      }
-      return acc;
-    },
-    {
-      activeClassname: !activeTheme?.className
-        ? []
-        : Array.isArray(activeTheme.className)
-        ? activeTheme.className
-        : [activeTheme.className],
-      hoverClassname: !hoverTheme?.className
-        ? []
-        : Array.isArray(hoverTheme.className)
-        ? hoverTheme.className
-        : [hoverTheme.className],
-      focusClassname: !focusTheme?.className
-        ? []
-        : Array.isArray(focusTheme.className)
-        ? focusTheme.className
-        : [focusTheme.className],
-      disabledClassname: !disabledTheme?.className
-        ? []
-        : Array.isArray(disabledTheme.className)
-        ? disabledTheme.className
-        : [disabledTheme.className],
-    }
-  );
-
-  return result;
+  return {
+    activeClassname,
+    hoverClassname,
+    focusClassname,
+    disabledClassname,
+  };
 };
 
 export const styled = <
   P extends Record<string, any> = {},
   T extends ConfigSchema<P> = {}
 >(
-  Component: ComponentType<P>,
+  Component: ComponentType<P> & { styles?: any },
   themeConfigProps: ConfigSchemaTheme<P, T>
 ) => {
   const {
-    props,
+    'props': propsTheme,
     ':active': activeTheme,
     ':focus': focusTheme,
     ':hover': hoverTheme,
     ':disabled': disabledTheme,
     ...themeConfig
   } = themeConfigProps || {};
-  const { as: asTheme, ...propsTheme } = props || {};
+  // const { as: asTheme, ...propsTheme } = props || {};
   const variants = themeConfig?.variants || {};
+  const isMotiComponent = (Component as any).render?.name.startsWith('Moti');
 
   const { base, config } = cleanForMergeui<P, T>(themeConfigProps);
   const stylesClass = mergeui<T>(base, config) as (props?: Props<T>) => string;
@@ -249,11 +136,12 @@ export const styled = <
     any,
     {
       className?: string;
-      as?: string | ComponentType;
+      animations?: boolean;
       states?: { isActive?: boolean; isFocus?: boolean; isHover?: boolean };
     } & P &
       Props<T>
-  >(({ as: asProps, className, disabled, states, ...props }, ref) => {
+  >((props, ref) => {
+    const { className, disabled, states } = props;
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
     const [focus, setFocus] = useState(false);
@@ -265,7 +153,8 @@ export const styled = <
     }>(
       (acc, [propsName, valueProps]) => {
         if (variantNames.includes(propsName)) {
-          acc.variantProps[propsName as keyof Props<T>] = valueProps;
+          acc.variantProps[propsName as keyof Props<T>] =
+            valueProps?.toString() || undefined;
         } else {
           (acc.componentProps as any)[propsName] = valueProps;
         }
@@ -277,105 +166,173 @@ export const styled = <
       } as any
     );
 
-    const { as: asVariant, ...propsVariant } = Object.entries(
-      variantProps
-    ).reduce<any>((acc, [keyVariant, valueVariant]) => {
-      if (valueVariant !== undefined && valueVariant !== null) {
-        const variantList = (variants as any)[keyVariant];
-        const classNameTmp =
-          variantList[valueVariant.toString()]?.className || [];
-        return {
-          ...acc,
-          className: classNameTmp,
-        };
-      }
-      return acc;
-    }, {});
-
     const {
       activeClassname = [],
       hoverClassname = [],
       focusClassname = [],
       disabledClassname = [],
-    } = extractStateClassName(themeConfigProps, variantProps, {
+    } = useExtractStateClassName(themeConfigProps, variantProps, {
       activeTheme,
       focusTheme,
       hoverTheme,
       disabledTheme,
     });
 
-    const asPropsOrTheme = asProps || asVariant || asTheme || undefined;
-    const AsComp = (
-      Platform.OS === 'web' ? asPropsOrTheme || Component : Component
-    ) as any;
+    const {
+      active: activeAnimate = [],
+      hover: hoverAnimate = [],
+      focus: focusAnimate = [],
+      disabled: disabledAnimate = [],
+    } = extractState(themeConfigProps, variantProps, 'animate', {
+      activeTheme,
+      hoverTheme,
+      focusTheme,
+      disabledTheme,
+    });
 
-    const finalClassName = merge(
-      AsComp.styles?.({
-        ...propsTheme,
-        ...propsVariant,
-        ...componentProps,
-      }),
-      stylesClass(variantProps as any).split(' '),
-      className,
-      ...(states?.isFocus || focus ? focusClassname : []),
-      ...(states?.isHover || hover ? hoverClassname : []),
-      ...(states?.isActive || active ? activeClassname : []),
-      ...(disabled ? disabledClassname : [])
+    const hasAnimate =
+      [...hoverAnimate, ...activeAnimate, ...disabledAnimate, ...focusAnimate]
+        .length > 0;
+
+    const extendClassName = useMemo(() => {
+      return Component.styles?.(props);
+    }, [props]);
+
+    const baseClassName = useMemo(() => {
+      return merge(extendClassName, stylesClass(props).split(' '), className);
+    }, [extendClassName, props, className]);
+
+    const finalClassName = useMemo(() => {
+      return merge(
+        baseClassName,
+        ...(states?.isFocus || focus ? focusClassname : []),
+        ...(states?.isHover || hover ? hoverClassname : []),
+        ...(states?.isActive || active ? activeClassname : []),
+        ...(disabled ? disabledClassname : []),
+        ...(isMotiComponent
+          ? []
+          : [
+              ...focusAnimate,
+              ...hoverAnimate,
+              ...activeAnimate,
+              ...disabledAnimate,
+            ].map((key) => {
+              const property = tw.style(key);
+              const [p] = Object.keys(property);
+              const propertyT = camelToSnakeCase(p);
+              return `transition-[${propertyT}]`;
+            })),
+        ...(!isMotiComponent && (states?.isFocus || focus) ? focusAnimate : []),
+        ...(!isMotiComponent && (states?.isHover || hover) ? hoverAnimate : []),
+        ...(!isMotiComponent && (states?.isActive || active)
+          ? activeAnimate
+          : []),
+        ...(!isMotiComponent && disabled ? disabledAnimate : [])
+      );
+    }, [
+      baseClassName,
+      states?.isFocus,
+      states?.isHover,
+      states?.isActive,
+      focus,
+      focusClassname,
+      hover,
+      hoverClassname,
+      active,
+      activeClassname,
+      disabled,
+      disabledClassname,
+      focusAnimate,
+      hoverAnimate,
+      activeAnimate,
+      disabledAnimate,
+    ]);
+
+    const animate = useMemo<MotiPressableProp>(
+      () =>
+        !hasAnimate
+          ? undefined
+          : ({ hovered, pressed }) => {
+              'worklet';
+              const classNameAnimate = merge(
+                baseClassName,
+                ...(focus ? focusAnimate : []),
+                ...(hovered ? hoverAnimate : []),
+                ...(pressed ? activeAnimate : []),
+                ...(disabled ? disabledAnimate : [])
+              );
+              const resultStyle = tw.style(classNameAnimate);
+
+              const resultString = Object.entries(resultStyle).reduce(
+                (acc, [key, value]) => {
+                  return {
+                    ...acc,
+                    [key]: value.toString(),
+                  };
+                },
+                {}
+              );
+              return resultString;
+            },
+      [
+        baseClassName,
+        hasAnimate,
+        hoverAnimate,
+        activeAnimate,
+        disabled,
+        disabledAnimate,
+        focus,
+        focusAnimate,
+      ]
     );
 
-    const propsTmp =
-      Platform.OS === 'web'
-        ? asPropsOrTheme
-          ? {
-              className: finalClassName,
-            }
-          : {
-              style: StyleSheet.create({
-                root: {
-                  $$css: true,
-                  ...finalClassName.split(' ').reduce<any>((acc, className) => {
-                    acc[`___${className}`] = className;
-                    return acc;
-                  }, {}),
-                },
-              }).root,
-            }
+    const propsTmp = useMemo(() => {
+      return Platform.OS === 'web'
+        ? {
+            style: StyleSheet.create({
+              root: {
+                $$css: true,
+                ...finalClassName.split(' ').reduce<any>((acc, className) => {
+                  acc[`___${className}`] = className;
+                  return acc;
+                }, {}),
+              },
+            }).root,
+          }
         : { style: tw.style(finalClassName) };
+    }, [finalClassName]);
+
+    const motiCompatibleProps = isMotiComponent ? { animate } : {};
 
     return (
-      <AsComp
+      <Component
         ref={ref}
-        onPressIn={(e: any) => {
-          componentProps?.onPressIn?.(e);
-          setActive(true);
-        }}
-        onPressOut={(e: any) => {
-          componentProps?.onPressOut?.(e);
-          setActive(false);
-        }}
-        onBlur={(e: any) => {
-          componentProps?.onBlur?.(e);
-          setFocus(false);
-        }}
-        onFocus={(e: any) => {
-          componentProps?.onFocus?.(e);
-          setFocus(true);
-        }}
-        onPointerOver={(e: any) => {
-          componentProps?.onPointerOver?.(e);
-          setHover(true);
-        }}
-        onPointerOut={(e: any) => {
-          componentProps?.onPointerOut?.(e);
-          setHover(false);
-        }}
-        {...propsTheme}
-        {...propsVariant}
         {...propsTmp}
         {...componentProps}
+        {...motiCompatibleProps}
+        {...propsTheme}
+        onPressIn={composeEventHandlers(componentProps?.onPressIn, () => {
+          setActive(true);
+        })}
+        onPressOut={composeEventHandlers(componentProps?.onPressIn, () => {
+          setActive(false);
+        })}
+        onHoverIn={composeEventHandlers(() => {
+          setHover(true);
+        }, componentProps?.onHoverIn)}
+        onHoverOut={composeEventHandlers(() => {
+          setHover(false);
+        }, componentProps?.onHoverOut)}
+        onBlur={composeEventHandlers(componentProps?.onBlur, () => {
+          setFocus(false);
+        })}
+        onFocus={composeEventHandlers(componentProps?.onFocus, () => {
+          setFocus(true);
+        })}
       />
     );
   });
+
   return withStaticProperties(NewComponent, {
     styles: (p?: Props<T>) =>
       merge((Component as any).styles?.(p), stylesClass(p)),
