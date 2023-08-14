@@ -47,11 +47,12 @@
     "tsconfig": "*"
   },
   "dependencies": {
+    "@crossed/core": "*",
+    "@crossed/unicons": "*",
+    "@expo/html-elements": "^0.5.1",
     "@floating-ui/react": "^0.25.1",
     "@gorhom/portal": "^1.0.14",
     "@iconscout/react-native-unicons": "^2.0.2",
-    "@crossed/core": "*",
-    "@crossed/unicons": "*",
     "class-variance-authority": "^0.7.0",
     "inline-style-prefixer": "^6.0.1",
     "moti": "^0.26.0",

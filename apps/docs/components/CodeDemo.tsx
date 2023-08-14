@@ -1,6 +1,7 @@
 import { UilCheck } from '@iconscout/react-native-unicons';
 import { Props } from '@crossed/demo/lib/typescript/props';
 import {
+  Animate,
   Box,
   Button,
   Label,
@@ -11,7 +12,7 @@ import {
   colorVariants,
 } from '@crossed/ui';
 import { useData } from 'nextra/data';
-import { useState, ComponentType } from 'react';
+import { useState, ComponentType, useRef } from 'react';
 import { CopyBlock, dracula } from 'react-code-blocks';
 
 const DefaultDemo = () => {
@@ -134,18 +135,36 @@ export const CodeDemo = ({
           )}
         </YBox>
       </Box>
-      {show && (
-        <Box className="text-md">
-          <CopyBlock
-            // @ts-ignore
-            text={code}
-            language={'tsx'}
-            theme={dracula}
-            showLineNumbers
-            wrapLines
-          />
-        </Box>
-      )}
+      <Code show={show} code={code} />
     </Box>
+  );
+};
+
+const Code = ({ show, code }: { show: boolean; code: string }) => {
+  const heightRef = useRef<number>(500);
+  return (
+    <Animate
+      from={{
+        height: 0,
+      }}
+      animate={{ height: show ? heightRef.current : 0 }}
+      className="overflow-hidden"
+    >
+      <Box
+        className="text-md"
+        onLayout={({ nativeEvent: { layout } }) => {
+          heightRef.current = layout.height;
+        }}
+      >
+        <CopyBlock
+          // @ts-ignore
+          text={code}
+          language={'tsx'}
+          theme={dracula}
+          showLineNumbers
+          wrapLines
+        />
+      </Box>
+    </Animate>
   );
 };

@@ -5,5 +5,6 @@ export * from './types';
 export * from './composeEventHandlers';
 export * from './composeRefs';
 export * from './useUncontrolled';
-export { merge, cx } from '@crossed/class-variance-authority';
+export * from './cva';
+export { twMerge as merge } from 'tailwind-merge';
 export { useDeviceContext, useAppColorScheme, default as tw } from 'twrnc';

@@ -1,6 +1,5 @@
 import {
   createScope,
-  merge,
   styled,
   withStaticProperties,
   tw,
@@ -77,8 +76,7 @@ const InputInputFrame = styled(TextInput, {
     'appearance-none',
     'focus-visible:!ring-offset-transparent focus-visible:!ring-transparent focus-visible:shadow-none',
     'text-white',
-    'group-focus',
-    'flex-1 min-w-0',
+    'flex-1 w-full',
     'focus-visible:outline-0',
   ],
 });
@@ -201,8 +199,7 @@ const InputIcon = memo(
     children,
     ...props
   }: PropsWithChildren<GetProps<typeof InputIconFrame>>) => {
-    const className = merge(InputInputFrame.styles());
-    const style = tw.style(className);
+    const style = tw.style(InputInputFrame.styles().className);
     return useMemo(
       () => (
         <InputIconFrame {...props}>
@@ -216,30 +213,25 @@ const InputIcon = memo(
     );
   }
 );
-const InputContent = forwardRef(
-  (
-    {
-      children,
-      ...props
-    }: PropsWithChildren<GetProps<typeof InputContentFrame>>,
-    ref
-  ) => {
-    const { color, size, variant, focus } = useContext();
-    return (
-      <InputContentFrame
-        color={color}
-        size={size}
-        variant={variant}
-        space={'xs'}
-        states={{ isFocus: focus }}
-        {...props}
-        ref={ref}
-      >
-        {children}
-      </InputContentFrame>
-    );
-  }
-);
+const InputContent = forwardRef<
+  any,
+  PropsWithChildren<GetProps<typeof InputContentFrame>>
+>(({ children, ...props }, ref) => {
+  const { color, size, variant, focus } = useContext();
+  return (
+    <InputContentFrame
+      color={color}
+      size={size}
+      variant={variant}
+      space={'xs'}
+      states={{ isFocus: focus }}
+      {...props}
+      ref={ref}
+    >
+      {children}
+    </InputContentFrame>
+  );
+});
 
 export const Input = withStaticProperties(InputRoot, {
   Label: InputLabel,

@@ -4,9 +4,9 @@ import type { Props } from '../props';
 import { YBox } from '@crossed/ui';
 
 const ButtonFrame = styled(Pressable, {
-  'className': ['bg-blue-500', 'rounded', 'transition-[bg]'],
+  'className': ['bg-blue-500', 'rounded'],
   ':hover': {
-    animate: ['bg-blue-400'],
+    className: ['bg-blue-400'],
   },
   ':active': {
     className: ['bg-blue-600'],
