@@ -1,78 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
-   width="6.5615616mm"
-   height="12.396698mm"
-   viewBox="0 0 6.5615616 12.396698"
-   version="1.1"
-   id="svg1495"
-   inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
-   sodipodi:docname="logo"
-   inkscape:export-filename="../36a7200b/logo-big.png"
-   inkscape:export-xdpi="387.10315"
-   inkscape:export-ydpi="387.10315"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview1497"
-     pagecolor="#000000"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm"
-     showgrid="false"
-     inkscape:zoom="2.2047486"
-     inkscape:cx="439.2791"
-     inkscape:cy="608.91295"
-     inkscape:window-width="1850"
-     inkscape:window-height="1016"
-     inkscape:window-x="1990"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <defs
-     id="defs1492" />
-  <g
-     inkscape:label="Calque 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-111.7855,-153.67251)">
-    <rect
-       style="fill:#FFF;fill-opacity:1;stroke-width:0.162002"
-       id="rect493"
-       width="10.078526"
-       height="1.5204298"
-       x="155.99068"
-       y="-113.30594"
-       transform="rotate(90)" />
-    <rect
-       style="fill:#FFF;fill-opacity:1;stroke-width:0.0609394"
-       id="rect493-56"
-       width="1.4261072"
-       height="1.5204298"
-       x="153.67252"
-       y="-113.30762"
-       transform="rotate(90)" />
-    <rect
-       style="fill:#FFF;fill-opacity:1;stroke-width:0.136255"
-       id="rect493-5"
-       width="7.129498"
-       height="1.5204298"
-       x="-197.55099"
-       y="-31.703402"
-       transform="rotate(-135)" />
-    <rect
-       style="fill:#FFF;fill-opacity:1;stroke-width:0.130668"
-       id="rect493-7"
-       width="6.5568142"
-       height="1.5204298"
-       x="111.78551"
-       y="164.54877" />
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.1"
+  xlink="http://www.w3.org/1999/xlink"
+  xmlns:svgjs="http://svgjs.com/svgjs"
+  width="100%"
+  height="100%"
+  viewBox="5 5 90 90"
+>
+  <g fill="#0f79d7">
+    <path
+      d="M5 70.48l19.108-19.108a2.029 2.029 0 0 0 0-2.87L5.058 29.45l7.545-7.546 21.89 21.89a8.685 8.685 0 0 1 0 12.283L12.659 77.912 5 70.48zm90-41.03L75.892 48.559a2.029 2.029 0 0 0 0 2.87l19.05 19.051-7.545 7.546-21.89-21.89a8.685 8.685 0 0 1 0-12.283l21.834-21.834L95 29.45zM29.428 5l19.108 19.108a2.029 2.029 0 0 0 2.87 0l19.052-19.05 7.546 7.545-21.89 21.89a8.685 8.685 0 0 1-12.283 0L21.997 12.659 29.428 5zm41.144 90L51.463 75.892a2.029 2.029 0 0 0-2.87 0l-19.051 19.05-7.546-7.545 21.89-21.89a8.685 8.685 0 0 1 12.283 0l21.834 21.834L70.572 95z"
+    ></path>
   </g>
 </svg>

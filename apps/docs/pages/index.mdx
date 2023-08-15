@@ -1,11 +1,54 @@
-# Introduction
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Button, XBox } from '@crossed/ui';
+import { UilArrowRight, UilGithub } from '@crossed/unicons';
+import { useConfig } from 'nextra-theme-docs'
 
-Welcome to Nextra! This is a basic docs template. You can use it as a starting point for your own project :)
-
-## What is Nextra?
-
-A **simple**, **powerful** and **flexible** site generation framework with everything you love from Next.js.
-
-## Documentation
-
-The documentation is available at [https://nextra.site](https://nextra.site).
+export default function LandingPage() {
+  const router = useRouter();
+  const config = useConfig();
+  return (
+    <>
+      <div className="min-h-screen">
+        <div className="flex flex-col items-center gap-2 bg-brand-800 py-20 px-5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            width="100"
+            height="100"
+            viewBox="5 5 90 90"
+          >
+            <g fill="#0f79d7">
+              <path d="M5 70.48l19.108-19.108a2.029 2.029 0 0 0 0-2.87L5.058 29.45l7.545-7.546 21.89 21.89a8.685 8.685 0 0 1 0 12.283L12.659 77.912 5 70.48zm90-41.03L75.892 48.559a2.029 2.029 0 0 0 0 2.87l19.05 19.051-7.545 7.546-21.89-21.89a8.685 8.685 0 0 1 0-12.283l21.834-21.834L95 29.45zM29.428 5l19.108 19.108a2.029 2.029 0 0 0 2.87 0l19.052-19.05 7.546 7.545-21.89 21.89a8.685 8.685 0 0 1-12.283 0L21.997 12.659 29.428 5zm41.144 90L51.463 75.892a2.029 2.029 0 0 0-2.87 0l-19.051 19.05-7.546-7.545 21.89-21.89a8.685 8.685 0 0 1 12.283 0l21.834 21.834L70.572 95z"></path>
+            </g>
+          </svg>
+          <h1 className="text-6xl mb-5">crossed UI</h1>
+          <h2 className="border-0 text-2xl text-center mb-10">
+            Universal Headless Components built with tailwindcss for{" "}
+            <b>react-native</b> + <b>web</b>
+          </h2>
+          <XBox space="md">
+            <Button
+              text="Get started"
+              variant="filled"
+              color="blue"
+              iconAfter={UilArrowRight}
+              href="/doc"
+              onPress={(e) => {
+                e.preventDefault();
+                router.push(e.currentTarget.href);
+              }}
+            />
+            <Button
+              text="Star us"
+              variant="filled"
+              iconAfter={UilGithub}
+              href={config.project.link}
+              target="_blank"
+            />
+          </XBox>
+        </div>
+      </div>
+    </>
+  );
+}

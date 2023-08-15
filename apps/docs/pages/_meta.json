@@ -1,16 +1,18 @@
 {
-  "index": "Introduction",
-  "class-variance-authority": {
-    "title": "@crossed/class-variance-authority"
+  "index": {
+    "title": "Crossed ui",
+    "display": "hidden",
+    "theme": {
+      "breadcrumb": false,
+      "footer": true,
+      "sidebar": false,
+      "toc": false,
+      "pagination": false,
+      "layout": "raw"
+    }
   },
-  "core": {
-    "title": "@crossed/core",
-    "display": "hidden"
-  },
-  "ui": {
-    "title": "@crossed/ui"
-  },
-  "unicons": {
-    "title": "@crossed/unicons"
+  "doc": {
+    "title": "Documentation",
+    "type": "page"
   }
 }

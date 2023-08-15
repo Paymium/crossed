@@ -36,6 +36,7 @@ importers:
       '@crossed/demo': 1.0.0
       '@crossed/next-adapter': 1.0.0
       '@crossed/ui': 1.0.0
+      '@crossed/unicons': workspace:*
       '@types/node': 18.11.10
       '@types/react': ^18.2.20
       autoprefixer: ^10.4.14
@@ -58,6 +59,7 @@ importers:
       '@crossed/demo': link:../../packages/demo
       '@crossed/next-adapter': link:../../packages/next-adapter
       '@crossed/ui': link:../../packages/ui
+      '@crossed/unicons': link:../../packages/unicons
       autoprefixer: 10.4.14_postcss@8.4.27
       next: 13.4.13_biqbaboplfbrettd7655fr4n2y
       next-themes: 0.2.1_7bxrc77cqw5efxjm7xsv6oi4pi
