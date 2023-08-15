@@ -22,7 +22,6 @@ export const ButtonDemo = ({ size, color, variant }: Props) => {
           size={size}
           variant={variant as any}
           onPress={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-          toto
         />
         <Button
           text="Disabled"

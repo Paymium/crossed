@@ -141,7 +141,7 @@ export const CodeDemo = ({
 };
 
 const Code = ({ show, code }: { show: boolean; code: string }) => {
-  const heightRef = useRef<number>(500);
+  const heightRef = useRef(500);
   return (
     <Animate
       from={{

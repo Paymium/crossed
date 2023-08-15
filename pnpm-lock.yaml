@@ -37,6 +37,7 @@ importers:
       '@crossed/next-adapter': 1.0.0
       '@crossed/ui': 1.0.0
       '@types/node': 18.11.10
+      '@types/react': ^18.2.20
       autoprefixer: ^10.4.14
       babel-preset-react-native: ^4.0.1
       next: ^13.0.6
@@ -72,6 +73,7 @@ importers:
       tailwindcss: 3.3.3
     devDependencies:
       '@types/node': 18.11.10
+      '@types/react': 18.2.20
       babel-preset-react-native: 4.0.1
       typescript: 5.1.6
 
@@ -3930,7 +3932,7 @@ packages:
       react: '>=16'
     dependencies:
       '@types/mdx': 2.0.5
-      '@types/react': 18.2.18
+      '@types/react': 18.2.20
       react: 18.2.0
     dev: false
 
@@ -6673,11 +6675,19 @@ packages:
   /@types/react-syntax-highlighter/15.5.7:
     resolution: {integrity: sha512-bo5fEO5toQeyCp0zVHBeggclqf5SQ/Z5blfFmjwO5dkMVGPgmiwZsJh9nu/Bo5L7IHTuGWrja6LxJVE2uB5ZrQ==}
     dependencies:
-      '@types/react': 18.2.18
+      '@types/react': 18.2.20
     dev: false
 
   /@types/react/18.2.18:
     resolution: {integrity: sha512-da4NTSeBv/P34xoZPhtcLkmZuJ+oYaCxHmyHzwaDQo9RQPBeXV+06gEk2FpqEcsX9XrnNLvRpVh6bdavDSjtiQ==}
+    dependencies:
+      '@types/prop-types': 15.7.5
+      '@types/scheduler': 0.16.3
+      csstype: 3.1.2
+    dev: true
+
+  /@types/react/18.2.20:
+    resolution: {integrity: sha512-WKNtmsLWJM/3D5mG4U84cysVY31ivmyw85dE84fOCk5Hx78wezB/XEjVPWl2JTZ5FkEeaTJf+VgUAUn3PE7Isw==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3

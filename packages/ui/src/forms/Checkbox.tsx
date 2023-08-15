@@ -2,7 +2,6 @@ import {
   GetProps,
   createScope,
   cx,
-  merge,
   styled,
   tw,
   useUncontrolled,
@@ -10,7 +9,7 @@ import {
 } from '@crossed/core';
 import { Label } from './Label';
 import { useRef, type PropsWithChildren, cloneElement } from 'react';
-import { UilCheck } from '@iconscout/react-native-unicons';
+import { UilCheck } from '@crossed/unicons';
 import { Box } from '../layout/Box';
 import { VisuallyHidden, useCheckbox } from 'react-aria';
 import { Pressable, TextInput } from 'react-native';
@@ -155,9 +154,11 @@ const CheckboxIndicator = (props: CheckboxIndicatorFrameProps) => {
 const CheckboxIcon = ({ children, ...props }: GetProps<typeof Box>) => {
   const { isChecked } = useContext();
   const { color, variant, size } = useContext();
-  const className = merge(
-    CheckboxIndicatorFrame.styles({ color, variant, size })
-  );
+  const className = CheckboxIndicatorFrame.styles({
+    color,
+    variant,
+    size,
+  }).className;
 
   const style = tw.style(className);
   return isChecked ? (

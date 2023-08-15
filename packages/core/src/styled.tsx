@@ -35,7 +35,6 @@ export const styled = <
   PropsWithoutRef<
     {
       className?: string;
-      animations?: boolean;
       states?: { isActive?: boolean; isFocus?: boolean; isHover?: boolean };
     } & Omit<Props<T, P>, 'className'> &
       GetProps<typeof Component>

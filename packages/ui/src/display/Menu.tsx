@@ -69,7 +69,7 @@ const MenuRoot = ({
 }: MenuRootProps) => {
   const id = useId();
   return (
-    <Provider color={color}>
+    <Provider color={color as any}>
       <MenuRootFrame {...props}>
         {Array.isArray(children)
           ? children.map((c, i) => {
@@ -96,14 +96,14 @@ type MenuItemProps = PropsWithChildren<
   } & Omit<GetProps<typeof MenuItemFrame>, 'children'>
 >;
 
-function MenuItem(
-  props: Omit<MenuItemProps, 'children'> &
-    Required<Pick<MenuItemProps, 'title'>>
-): ReactNode;
-function MenuItem(
-  props: Omit<MenuItemProps, 'subtitle' | 'title'> &
-    Required<Pick<MenuItemProps, 'children'>>
-): ReactNode;
+type MenuItempPropsSimple = Omit<MenuItemProps, 'children'> &
+  Required<Pick<MenuItemProps, 'title'>> & { children?: never };
+type MenuItempPropsAdvanced = Omit<MenuItemProps, 'subtitle' | 'title'> &
+  Required<Pick<MenuItemProps, 'children'>> & {
+    subtitle?: never;
+    title?: never;
+  };
+
 function MenuItem({
   children,
   title,
@@ -111,9 +111,9 @@ function MenuItem({
   icon,
   iconAfter,
   ...props
-}: MenuItemProps) {
+}: MenuItempPropsSimple | MenuItempPropsAdvanced) {
   const { color } = useContext();
-  const classNames = MenuItemTitle.styles();
+  const classNames = MenuItemTitle.styles().className;
   const style = tw.style(classNames);
 
   return (
@@ -132,10 +132,14 @@ function MenuItem({
   );
 }
 
+const Item = withStaticProperties(MenuItem, {
+  Title: MenuItemTitle,
+  Subtitle: MenuItemSubtitle as (
+    props: GetProps<typeof MenuItemSubtitle>
+  ) => ReactNode,
+});
+
 export const Menu = withStaticProperties(MenuRoot, {
   displayName: 'Menu',
-  Item: withStaticProperties(MenuItem, {
-    Title: MenuItemTitle,
-    Subtitle: MenuItemSubtitle,
-  }),
+  Item: Item,
 });

@@ -28,7 +28,6 @@ type PropsExtends<P> = P & { as?: any };
 
 export type Base<P> = {
   className?: string[];
-  animate?: string[];
   props?: PropsExtends<P>;
 };
 
@@ -116,7 +115,6 @@ export const crossed =
           [':focus']: focusCompoundVariant,
           [':hover']: hoverCompoundVariant,
           [':disabled']: disabledCompoundVariant,
-          ['animate']: animateCompoundVariant,
           ...compoundVariantOptions
         } = v;
         const check = Object.entries(compoundVariantOptions).every(
@@ -143,7 +141,6 @@ export const crossed =
             [':focus']: focusCompoundVariant,
             [':hover']: hoverCompoundVariant,
             [':disabled']: disabledCompoundVariant,
-            ['animate']: animateCompoundVariant,
           });
         }
         return acc;
