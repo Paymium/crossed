@@ -1,0 +1,13 @@
+{
+  "index": "Introduction",
+  "core": {
+    "title": "@crossed/core",
+    "display": "hidden"
+  },
+  "ui": {
+    "title": "@crossed/ui"
+  },
+  "unicons": {
+    "title": "@crossed/unicons"
+  }
+}

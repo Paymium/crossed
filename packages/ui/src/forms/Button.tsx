@@ -2,24 +2,23 @@ import {
   createScope,
   styled,
   withStaticProperties,
-  merge,
   tw,
   GetProps,
 } from '@crossed/core';
-import { Text } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import {
   cloneElement,
   ReactElement,
   // type ComponentType,
   type PropsWithChildren,
   useId,
+  ComponentType,
 } from 'react';
 import { colorVariants } from '../variants/colors';
 import { sizeVariants } from '../variants/size';
 import { Box } from '../layout/Box';
 import { spaceVariants } from '../variants';
 import { useThemeContext } from '../Provider';
-import { MotiPressable } from 'moti/interactions';
 
 const [Provider, useContext] = createScope<{
   size?: keyof typeof sizeVariants;
@@ -30,7 +29,7 @@ const [Provider, useContext] = createScope<{
   color: 'zinc',
 });
 
-const ButtonFrame = styled(MotiPressable, {
+const ButtonFrame = styled(Pressable, {
   'className': ['rounded-md', 'flex', 'flex-row', 'items-center', 'border-2'],
   ':disabled': {
     className: ['opacity-50', 'pointer-events-none', 'cursor-not-allowed'],
@@ -44,15 +43,15 @@ const ButtonFrame = styled(MotiPressable, {
     space: spaceVariants,
     variant: {
       filled: {
-        animate: ['border-transparent dark:border-transparent'],
+        className: ['border-transparent dark:border-transparent'],
       },
       outlined: {
-        'animate': ['dark:bg-zinc-950 bg-zinc-100'],
+        'className': ['dark:bg-zinc-950 bg-zinc-100'],
         ':hover': {
-          animate: ['dark:bg-zinc-900 bg-zinc-300'],
+          className: ['dark:bg-zinc-900 bg-zinc-300'],
         },
         ':active': {
-          animate: ['dark:bg-zinc-800 bg-zinc-200'],
+          className: ['dark:bg-zinc-800 bg-zinc-200'],
         },
       },
     },
@@ -63,7 +62,7 @@ const ButtonFrame = styled(MotiPressable, {
     variant: 'outlined',
     space: 'xs',
   },
-}) as any;
+});
 
 const ButtonTextFrame = styled(Text, {
   className: ['font-semibold'],
@@ -114,12 +113,11 @@ const ButtonTextFrame = styled(Text, {
   ],
 });
 
-type ButtonRootProps = any;
-// GetProps<typeof ButtonFrame> & {
-//   text?: string;
-//   iconAfter?: ComponentType;
-//   icon?: ComponentType;
-// };
+type ButtonRootProps = GetProps<typeof ButtonFrame> & {
+  text?: string;
+  iconAfter?: ComponentType;
+  icon?: ComponentType;
+};
 
 function ButtonRoot(
   props: Omit<ButtonRootProps, 'text' | 'iconAfter' | 'icon'>
@@ -137,7 +135,7 @@ function ButtonRoot({
 }: ButtonRootProps) {
   const id = useId();
   return (
-    <Provider size={size} color={color} variant={variant}>
+    <Provider size={size as any} color={color as any} variant={variant as any}>
       <ButtonFrame size={size} color={color} variant={variant} {...props}>
         {children ??
           [
@@ -172,10 +170,10 @@ const ButtonIcon = ({
 }: PropsWithChildren<GetProps<typeof Box>>) => {
   const { theme } = useThemeContext();
   const { color, variant, size } = useContext();
-  const className = merge(ButtonTextFrame.styles({ color, variant, size }));
+  const className = ButtonTextFrame.styles({ color, variant, size });
 
   tw.setColorScheme(theme);
-  const style = tw.style(className);
+  const style = tw.style(className.className);
   return (
     <Box {...props}>
       {cloneElement(children as any, {

@@ -7,65 +7,28 @@ import { Button, useThemeContext, tw } from '@crossed/ui';
 
 const config: DocsThemeConfig = {
   logo: (
-    <span className="flex flex-row items-center gap-md">
+    <span className="flex flex-row items-center gap-2">
       <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
         width="24"
         height="24"
-        viewBox="0 0 6.5615616 12.396698"
-        version="1.1"
+        viewBox="5 5 90 90"
       >
-        <g transform="translate(-111.7855,-153.67251)">
-          <rect
-            fill="currentColor"
-            strokeWidth="0.162002"
-            fillOpacity="1"
-            width="10.078526"
-            height="1.5204298"
-            x="155.99068"
-            y="-113.30594"
-            transform="rotate(90)"
-          />
-          <rect
-            fill="currentColor"
-            strokeWidth="0.0609394"
-            fillOpacity="1"
-            width="1.4261072"
-            height="1.5204298"
-            x="153.67252"
-            y="-113.30762"
-            transform="rotate(90)"
-          />
-          <rect
-            fill="currentColor"
-            strokeWidth="0.136255"
-            fillOpacity="1"
-            width="7.129498"
-            height="1.5204298"
-            x="-197.55099"
-            y="-31.703402"
-            transform="rotate(-135)"
-          />
-          <rect
-            fill="currentColor"
-            strokeWidth="0.130668"
-            fillOpacity="1"
-            width="6.5568142"
-            height="1.5204298"
-            x="111.78551"
-            y="164.54877"
-          />
+        <g fill="#0f79d7">
+          <path d="M5 70.48l19.108-19.108a2.029 2.029 0 0 0 0-2.87L5.058 29.45l7.545-7.546 21.89 21.89a8.685 8.685 0 0 1 0 12.283L12.659 77.912 5 70.48zm90-41.03L75.892 48.559a2.029 2.029 0 0 0 0 2.87l19.05 19.051-7.545 7.546-21.89-21.89a8.685 8.685 0 0 1 0-12.283l21.834-21.834L95 29.45zM29.428 5l19.108 19.108a2.029 2.029 0 0 0 2.87 0l19.052-19.05 7.546 7.545-21.89 21.89a8.685 8.685 0 0 1-12.283 0L21.997 12.659 29.428 5zm41.144 90L51.463 75.892a2.029 2.029 0 0 0-2.87 0l-19.051 19.05-7.546-7.545 21.89-21.89a8.685 8.685 0 0 1 12.283 0l21.834 21.834L70.572 95z"></path>
         </g>
       </svg>
-      crossed
+      crossed UI
     </span>
   ),
   project: {
-    link: 'https://github.com/crossed/crossed',
+    link: 'https://github.com/lobor/crossed',
   },
   banner: {
     text: 'Crossed is not ready production',
   },
-  docsRepositoryBase: 'https://github.com/crossed/crossed/tree/main/apps/docs',
+  docsRepositoryBase: 'https://github.com/lobor/crossed/tree/main/apps/docs',
   footer: {
     text: 'crossed documentation',
   },
@@ -82,7 +45,7 @@ const config: DocsThemeConfig = {
         property="og:description"
         content="Crossed is cross platform library for react-native and react web"
       />
-      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" href="/favicon.png" />
     </>
   ),
   themeSwitch: {

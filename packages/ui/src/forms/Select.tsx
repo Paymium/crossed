@@ -16,9 +16,11 @@ import {
   memo,
   useState,
 } from 'react';
+import { View } from 'react-native';
 import { Input, InputContentFrame } from './Input';
 import {
   FocusScope,
+  VisuallyHidden,
   useFocusManager,
   useFocusWithin,
   useKeyboard,
@@ -73,6 +75,7 @@ const SelectTrigger = memo(
         (e.code === 'ArrowUp' || e.code === 'ArrowDown') && setOpen(true);
       },
     });
+
     return (
       <Input.Content
         {...(keyboardProps as any)}
@@ -123,7 +126,7 @@ const SelectContent = memo(({ children, ...props }: GetProps<typeof Box>) => {
     <FloatingFocusManager context={contextFloating} modal={false}>
       <Portal>
         <Provider {...context}>
-          <Box
+          <View
             ref={refs.setFloating}
             style={{ ...floatingStyles, zIndex: 30 }}
             {...getFloatingProps()}
@@ -132,7 +135,7 @@ const SelectContent = memo(({ children, ...props }: GetProps<typeof Box>) => {
               {...(focusWithinProps as any)}
               {...props}
               className={cx(
-                InputContentFrame.styles({ variant, size, color }),
+                InputContentFrame.styles({ variant, size, color }).className,
                 'flex-col z-30',
                 props.className
               )}
@@ -141,7 +144,7 @@ const SelectContent = memo(({ children, ...props }: GetProps<typeof Box>) => {
                 {children}
               </FocusScope>
             </Box>
-          </Box>
+          </View>
         </Provider>
       </Portal>
     </FloatingFocusManager>
@@ -181,7 +184,9 @@ const SelectOption = memo(
         variant={valueProps === value ? 'filled' : variant}
         color={valueProps === value ? 'blue' : color}
       >
-        <Input.Label className="hidden">{label}</Input.Label>
+        <VisuallyHidden>
+          <Input.Label className="hidden">{label}</Input.Label>
+        </VisuallyHidden>
         <Input.Content
           {...(keyboardProps as any)}
           className="border-0 ring-0 focus:dark:bg-zinc-600 focus-visible:!ring-offset-transparent focus-visible:!ring-transparent focus-visible:shadow-none"
@@ -193,7 +198,6 @@ const SelectOption = memo(
           <Input.Input
             className="cursor-pointer"
             editable={false}
-            focusable={false}
             // tabIndex={-1}
             aria-disabled
           />

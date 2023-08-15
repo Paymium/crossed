@@ -6,5 +6,16 @@ export * from './Provider';
 export * from './animations';
 export * from './display';
 export * from '@crossed/unicons';
-export * from '@crossed/core';
+export {
+  styled,
+  useAnimationState,
+  useDeviceContext,
+  useAppColorScheme,
+  useUncontrolled,
+  useDynamicAnimation,
+  useMotify,
+  type GetProps,
+  withStaticProperties,
+  tw,
+} from '@crossed/core';
 import 'raf/polyfill';
