@@ -213,6 +213,7 @@ const convertValueToString = (json: Style) => {
     if (typeof value === 'number') {
       if (
         key.startsWith('padding') ||
+        key.startsWith('margin') ||
         ['fontSize', 'lineHeight'].includes(key)
       ) {
         valueTmp = `${value}px`;
@@ -224,7 +225,13 @@ const convertValueToString = (json: Style) => {
           'gap',
           'flexShrink',
           'borderWidth',
+          'borderLeftWidth',
+          'borderRightWidth',
+          'borderBottomWidth',
+          'borderTopWidth',
           'flexGrow',
+          'height',
+          'width',
         ].includes(key)
       ) {
         valueTmp = value.toString();

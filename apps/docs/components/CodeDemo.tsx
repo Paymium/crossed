@@ -42,7 +42,13 @@ export const CodeDemo = ({
     <Box className="dark:border-zinc-800 border-zinc-200 border-2 rounded-md">
       <Box className="flex-row flex">
         <Box className="flex-1 p-4 justify-center items-center">
-          <Demo color={color} space={space} size={size} variant={variant} />
+          <Demo
+            color={color as any}
+            space={space as any}
+            size={size as any}
+            variant={variant}
+            weight=""
+          />
         </Box>
         <YBox
           className={`${

@@ -32,11 +32,9 @@ export const colorVariants = {
       'bg-zinc-800',
     ],
     ':active': {
-      animate: ['bg-zinc-700'],
       className: ['bg-zinc-700'],
     },
     ':hover': {
-      animate: ['bg-zinc-600'],
       className: ['bg-zinc-600'],
     },
   },

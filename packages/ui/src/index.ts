@@ -14,5 +14,8 @@ export {
   useUncontrolled,
   useDynamicAnimation,
   useMotify,
+  type GetProps,
+  withStaticProperties,
+  tw,
 } from '@crossed/core';
 import 'raf/polyfill';
