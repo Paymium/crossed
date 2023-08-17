@@ -4,6 +4,7 @@ import {
   withStaticProperties,
   tw,
   GetProps,
+  CustomColor,
 } from '@crossed/core';
 import { Pressable, Text } from 'react-native';
 import {
@@ -22,7 +23,7 @@ import { useThemeContext } from '../Provider';
 
 const [Provider, useContext] = createScope<{
   size?: keyof typeof sizeVariants;
-  color?: keyof typeof colorVariants;
+  color?: CustomColor;
   variant?: 'filled' | 'outlined';
 }>({
   size: 'md',

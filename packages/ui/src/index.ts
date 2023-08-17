@@ -6,16 +6,18 @@ export * from './Provider';
 export * from './animations';
 export * from './display';
 export * from '@crossed/unicons';
+export * from './createTheme';
 export {
   styled,
-  useAnimationState,
+  // useAnimationState,
   useDeviceContext,
   useAppColorScheme,
   useUncontrolled,
-  useDynamicAnimation,
-  useMotify,
+  // useDynamicAnimation,
+  // useMotify,
   type GetProps,
   withStaticProperties,
   tw,
+  CrossedConfig,
 } from '@crossed/core';
 import 'raf/polyfill';

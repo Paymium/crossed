@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import {
   checkIfWorkspace,
   getDependenciesFromNodeModules,
@@ -102,6 +103,7 @@ export default function withCrossed(nextConfig: any = {}) {
       config.resolve.alias = {
         ...(config.resolve.alias || {}),
         'react-native$': 'react-native-web',
+        '@colorVariant': './.crossed/colors.js',
       };
 
       config.resolve.extensions = [
@@ -115,6 +117,15 @@ export default function withCrossed(nextConfig: any = {}) {
         test: /\.ttf$/,
         loader: 'url-loader',
       });
+
+      config.plugins.push(
+        new context.webpack.DefinePlugin({
+          'process.env.CROSSED_THEME': readFileSync(
+            './.crossed/tailwind.theme.json',
+            'utf8'
+          ),
+        })
+      );
 
       return config;
     },

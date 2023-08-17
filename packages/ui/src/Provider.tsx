@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
-import { tw, useAppColorScheme, useDeviceContext } from '@crossed/core';
+import { useAppColorScheme, useDeviceContext, tw } from '@crossed/core';
 import { PortalProvider } from '@gorhom/portal';
 
 type ThemeScheme = any;

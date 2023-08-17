@@ -4,6 +4,7 @@ import {
   Animate,
   Box,
   Button,
+  type CrossedConfig,
   Label,
   Select,
   Text,
@@ -14,6 +15,10 @@ import {
 import { useData } from 'nextra/data';
 import { useState, ComponentType, useRef } from 'react';
 import { CopyBlock, dracula } from 'react-code-blocks';
+import { AppConfig } from 'crossed.config';
+
+type toto = CrossedConfig;
+
 
 const DefaultDemo = () => {
   return <Text>No demo</Text>;
@@ -32,7 +37,8 @@ export const CodeDemo = ({
 }) => {
   const { code } = useData() || { code: '' };
   const [show, setShow] = useState(false);
-  const [color, setColor] = useState('zinc');
+  const [color, setColor] =
+    useState<keyof CrossedConfig['variants']['color']>('zinc');
   const [space, setSpace] = useState('md');
   const [size, setSize] = useState('md');
   const [variant, setVariant] = useState(actions.variant?.[0] || '');
@@ -99,11 +105,7 @@ export const CodeDemo = ({
                   <Label.Text>Color ({color})</Label.Text>
                   <Label.Input>
                     <XBox space="xs" className="flex-wrap">
-                      {(
-                        Object.keys(
-                          colorVariants
-                        ) as (keyof typeof colorVariants)[]
-                      ).map((c) => {
+                      {Object.entries(colorVariants).map(([c]) => {
                         return (
                           <Button
                             variant="filled"

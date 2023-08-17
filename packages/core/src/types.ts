@@ -3,6 +3,7 @@ import type {
   ForwardRefExoticComponent,
   RefAttributes,
 } from 'react';
+import type { BaseWithState } from './cva';
 
 export type GetProps<A extends StylableComponent> = A extends ComponentType<
   infer Props
@@ -25,3 +26,32 @@ export type StylableComponent =
   | ForwardRefExoticComponent<any>
   | ReactComponentWithRef<any, any>
   | (new (props: any) => any);
+
+export interface CustomColor {}
+
+export interface CrossedConfig
+  extends Omit<GenericTamaguiConfig, keyof CrossedCustomConfig>,
+    CrossedCustomConfig {}
+
+export interface CrossedCustomConfig {}
+
+export type GenericTamaguiConfig = {
+  variants?: {
+    color?: Record<string, BaseWithState<any>>;
+  };
+};
+
+export type CreateCrossedConfig<C extends Record<string, BaseWithState<any>>> =
+  {
+    variants: {
+      color: C;
+    };
+  };
+
+export type CreateCrossedConfigOptions<
+  C extends Record<string, BaseWithState<any>>
+> = {
+  variants?: {
+    color?: C;
+  };
+};

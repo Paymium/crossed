@@ -4,6 +4,7 @@ import { useMounted } from 'nextra/hooks';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from 'nextra/icons';
 import { Button, useThemeContext, tw } from '@crossed/ui';
+import colors from '@colorVariant';
 
 const config: DocsThemeConfig = {
   logo: (
@@ -74,3 +75,5 @@ const config: DocsThemeConfig = {
 };
 
 export default config;
+
+export type ColorConfig = typeof colors;

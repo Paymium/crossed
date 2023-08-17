@@ -1,14 +1,17 @@
 import { withStaticProperties, type GetProps } from '@crossed/core';
 import { Input, InputRootProps } from './Input';
-import type { ReactElement } from 'react';
+import type { ReactNode } from 'react';
 
 type TextareaRootProps = InputRootProps;
+type TextAreaPropsSimple = Omit<TextareaRootProps, 'children'> & {
+  children?: never;
+};
+type TextAreaPropsAdvance = Omit<
+  TextareaRootProps,
+  'label' | 'iconAfter' | 'icon'
+> & { label?: never; iconAfter?: never; icon?: never };
 
-function TextareaRoot(props: Omit<TextareaRootProps, 'children'>): ReactElement;
-function TextareaRoot(
-  props: Omit<TextareaRootProps, 'label' | 'iconAfter' | 'icon'>
-): ReactElement;
-function TextareaRoot({
+const TextareaRoot = ({
   children,
   label,
   size,
@@ -16,7 +19,7 @@ function TextareaRoot({
   variant,
   value,
   onChangeValue,
-}: TextareaRootProps) {
+}: TextAreaPropsSimple | TextAreaPropsAdvance) => {
   return (
     <Input
       size={size}
@@ -32,8 +35,9 @@ function TextareaRoot({
         ].filter(Boolean)}
     </Input>
   );
-}
-const TextareaLabel = Input.Label;
+};
+const TextareaLabel: (props: GetProps<typeof Input.Label>) => ReactNode =
+  Input.Label;
 const TextareaInput = (props: Omit<GetProps<typeof Input.Input>, 'value'>) => {
   return (
     <Input.Content>
