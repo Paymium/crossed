@@ -21,6 +21,7 @@ const DefaultDemo = () => {
 export const CodeDemo = ({
   Demo = DefaultDemo,
   actions = {},
+  name,
 }: {
   Demo?: ComponentType<Props>;
   actions?: {
@@ -29,8 +30,9 @@ export const CodeDemo = ({
     color?: boolean;
     variant?: string[];
   };
+  name?: string;
 }) => {
-  const { code } = useData() || { code: '' };
+  const code = (useData() || { [name]: '' })[name];
   const [show, setShow] = useState(false);
   const [color, setColor] = useState('zinc');
   const [space, setSpace] = useState('md');
