@@ -5,7 +5,7 @@ importers:
   .:
     specifiers:
       '@babel/runtime': ^7.22.10
-      '@changesets/cli': ^2.25.2
+      '@changesets/cli': ^2.26.2
       '@commitlint/config-conventional': ^17.3.0
       '@react-native-community/eslint-config': ^3.2.0
       commitlint: ^17.3.0
