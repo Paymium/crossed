@@ -1,5 +1,14 @@
 # @crossed/ui
 
+## 0.2.2
+
+### Patch Changes
+
+- fix build
+- Updated dependencies
+  - @crossed/core@0.2.2
+  - @crossed/unicons@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes

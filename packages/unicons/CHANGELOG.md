@@ -1,5 +1,11 @@
 # @crossed/unicons
 
+## 0.2.2
+
+### Patch Changes
+
+- fix build
+
 ## 0.2.1
 
 ### Patch Changes

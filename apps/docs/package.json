@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
-    "@crossed/core": "0.2.1",
+    "@crossed/core": "0.2.2",
     "@crossed/demo": "0.1.0",
-    "@crossed/next-adapter": "0.2.1",
-    "@crossed/ui": "0.2.1",
+    "@crossed/next-adapter": "0.2.2",
+    "@crossed/ui": "0.2.2",
     "@crossed/unicons": "workspace:*",
     "autoprefixer": "^10.4.14",
     "next": "^13.0.6",
