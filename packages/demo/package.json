@@ -1,7 +1,7 @@
 {
   "name": "@crossed/demo",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "keywords": [
     "React Native",
     "Next.js",

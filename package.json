@@ -1,7 +1,7 @@
 {
   "name": "crossed-monorepo",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "cross ui lib react-native and web",
   "scripts": {
     "web": "cd apps/web && yarn dev",
