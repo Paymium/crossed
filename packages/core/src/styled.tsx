@@ -151,7 +151,7 @@ export const styled = <
             componentProps.className
           ),
         }}
-        style={[styleProps.style || {}, componentProps.style || {}]}
+        style={[styleProps.style, componentProps.style]}
         onPressIn={composeEventHandlers(componentProps?.onPressIn, () => {
           setActive(true);
         })}

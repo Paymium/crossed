@@ -52,7 +52,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "^0.72.3",
-    "react-native-reanimated": "^3.4.2",
     "react-native-web": "^0.19.7",
     "ts-node": "10.8.1",
     "ts-node-dev": "^2.0.0",
@@ -67,8 +66,5 @@
   "files": [
     "lib/",
     "src/"
-  ],
-  "peerDependencies": {
-    "react-native-reanimated": "^3.4.2"
-  }
+  ]
 }

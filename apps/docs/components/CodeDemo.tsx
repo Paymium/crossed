@@ -31,7 +31,7 @@ export const CodeDemo = ({
   };
   name?: string;
 }) => {
-  const code = (useData() || { [name]: '' })[name];
+  const code = (useData() || { [name]: '' })[name] || '';
   const [show, setShow] = useState(false);
   const [color, setColor] = useState('zinc');
   const [space, setSpace] = useState('md');

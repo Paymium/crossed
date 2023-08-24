@@ -13,7 +13,6 @@ const reactNativeDeps = [
   'react-native-web',
   'react-native-svg',
   '@iconscout/react-native-unicons',
-  'react-native-reanimated',
 ];
 
 export default function withCrossed(nextConfig: any = {}) {
@@ -80,7 +79,6 @@ export default function withCrossed(nextConfig: any = {}) {
   let crossedUITranspileModules = Array.from(
     new Set([
       '@iconscout/react-native-unicons',
-      'react-native-reanimated',
       ...rootDependencyList,
       ...parentDependencyList,
       ...rootExactDependencyList,

@@ -1,5 +1,5 @@
 {
-  "include": ["./src", "node_modules/react-native-reanimated"],
+  "include": ["./src"],
   "exclude": ["node_modules", "example"],
   "compilerOptions": {
     "baseUrl": ".",
