@@ -69,7 +69,6 @@
     "src/"
   ],
   "peerDependencies": {
-    "moti": "^0.26.0",
     "react-native-reanimated": "^3.4.2"
   }
 }

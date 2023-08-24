@@ -81,7 +81,6 @@ export default function withCrossed(nextConfig: any = {}) {
     new Set([
       '@iconscout/react-native-unicons',
       'react-native-reanimated',
-      'moti',
       ...rootDependencyList,
       ...parentDependencyList,
       ...rootExactDependencyList,

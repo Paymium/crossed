@@ -8,5 +8,4 @@ export * from './useUncontrolled';
 export * from './cva';
 export { twMerge as merge } from 'tailwind-merge';
 export { useDeviceContext, useAppColorScheme, default as tw } from 'twrnc';
-export type * from 'moti/build/index';
 export type * from 'react-native-reanimated';

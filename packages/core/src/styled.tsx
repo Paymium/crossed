@@ -1,4 +1,3 @@
-import 'raf/polyfill';
 import type {
   ComponentType,
   ForwardRefExoticComponent,
@@ -7,7 +6,7 @@ import type {
 } from 'react';
 import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 import tw from 'twrnc';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform } from 'react-native';
 import type { GetProps } from './types';
 import { withStaticProperties } from './withStaticProperties';
 import { composeEventHandlers } from './composeEventHandlers';
@@ -17,10 +16,11 @@ import {
   ConfigSchema,
   Props,
   crossed,
+  cx,
   merge,
 } from './cva';
 import { twMerge } from 'tailwind-merge';
-import type { Style } from 'twrnc/dist/esm/types';
+import { StyleSheet } from './styleSheet';
 
 export const styled = <
   P extends Record<string, any>,
@@ -60,6 +60,20 @@ export const styled = <
     const [hover, setHover] = useState(false);
     const [focus, setFocus] = useState(false);
 
+    const stateRef = useRef({
+      active,
+      focus,
+      hover,
+    });
+
+    useEffect(() => {
+      stateRef.current = {
+        active,
+        focus,
+        hover,
+      };
+    }, [hover, focus, active]);
+
     const { componentProps, variantProps } = Object.entries(props).reduce<{
       componentProps: P;
       variantProps: Props<T, P>;
@@ -95,33 +109,32 @@ export const styled = <
       );
     }, [extendClassName?.className, props.className, styles.className]);
 
+    const variantClassName = useMemo(() => {
+      const {
+        active: activeRef,
+        focus: focusRef,
+        hover: hoverRef,
+      } = stateRef.current;
+      let from =
+        (focusRef
+          ? styles[':focus']?.className
+          : hoverRef
+          ? styles[':hover']?.className
+          : activeRef
+          ? styles[':active']?.className
+          : styles.className) || styles.className;
+      return from;
+    }, [hover, active, props.disabled, focus, styles]);
+
     const styleProps = useMemo(() => {
       return Platform.OS === 'web'
-        ? StyleSheet.create({
-            root: {
-              $$css: true,
-              ...baseClassName.split(' ').reduce<any>((acc, className) => {
-                acc[`___${className}`] = className;
-                return acc;
-              }, {}),
-            },
-          }).root
-        : tw.style(baseClassName);
-    }, [baseClassName]);
-
-    const stateRef = useRef({
-      active,
-      focus,
-      hover,
-    });
-
-    useEffect(() => {
-      stateRef.current = {
-        active,
-        focus,
-        hover,
-      };
-    }, [hover, focus, active]);
+        ? {
+            className: StyleSheet.create(
+              `${baseClassName} ${variantClassName}`
+            ),
+          }
+        : { style: tw.style(baseClassName, variantClassName) };
+    }, [baseClassName, variantClassName]);
 
     const NewComp = useMemo(() => {
       return styles.props?.as ? styles.props?.as : Component;
@@ -131,7 +144,14 @@ export const styled = <
       <NewComp
         ref={ref}
         {...(componentProps as any)}
-        style={[styleProps, convertValueToString(componentProps.style || {})]}
+        dataSet={{
+          className: cx(
+            styleProps.className,
+            variantClassName,
+            componentProps.className
+          ),
+        }}
+        style={[styleProps.style || {}, componentProps.style || {}]}
         onPressIn={composeEventHandlers(componentProps?.onPressIn, () => {
           setActive(true);
         })}
@@ -161,42 +181,4 @@ export const styled = <
       return parentStyle ? merge(parentStyle, style) : style;
     },
   });
-};
-
-const convertValueToString = (json: Style) => {
-  return Object.entries(json).reduce((acc, [key, value]) => {
-    let valueTmp = value;
-
-    if (typeof value === 'number') {
-      if (
-        key.startsWith('padding') ||
-        key.startsWith('margin') ||
-        ['fontSize', 'lineHeight'].includes(key)
-      ) {
-        valueTmp = `${value}px`;
-      }
-      if (
-        [
-          'zIndex',
-          'borderRadius',
-          'gap',
-          'flexShrink',
-          'borderWidth',
-          'borderLeftWidth',
-          'borderRightWidth',
-          'borderBottomWidth',
-          'borderTopWidth',
-          'flexGrow',
-          'height',
-          'width',
-        ].includes(key)
-      ) {
-        valueTmp = value.toString();
-      }
-    }
-    return {
-      ...acc,
-      [key]: valueTmp,
-    };
-  }, {});
 };

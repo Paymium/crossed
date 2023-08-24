@@ -1,4 +1,5 @@
-const path = require('path');
+// const path = require('path');
+// const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,17 +10,7 @@ module.exports = {
     './node_modules/@crossed/demo/lib/**/*.{js,jsx,ts,tsx,md,mdx}',
     './node_modules/@crossed/ui/lib/**/*.{js,jsx,ts,tsx,md,mdx}',
     './theme.config.tsx',
-    // path.join(
-    //   path.dirname(require.resolve('@crossed/demo')),
-    //   '**/*.{js,jsx,ts,tsx,md,mdx}'
-    // ),
-    // path.join(path.dirname(require.resolve('@crossed/ui')), '**/*.{js,jsx,ts,tsx,md,mdx}')
   ],
-  // safelist: [
-  //   {
-  //     pattern: /./,
-  //   },
-  // ],
   theme: {
     extend: {
       colors: {
@@ -37,5 +28,4 @@ module.exports = {
       },
     },
   },
-  plugins: [],
 };

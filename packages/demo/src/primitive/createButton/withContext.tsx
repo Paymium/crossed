@@ -1,4 +1,4 @@
-import { createButton, useButtonContext } from '@crossed/primitive';
+import { createButton } from '@crossed/primitive';
 import { Box } from '@crossed/ui';
 
 const Button = createButton(
@@ -8,7 +8,7 @@ const Button = createButton(
     },
     Text: () => {
       // const { title } = useButtonContext();
-      return <span className="text-white">{"title"}</span>;
+      return <span className="text-white">{'title'}</span>;
     },
     Icon: () => {
       return <span>€</span>;
