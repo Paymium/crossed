@@ -17,4 +17,3 @@ export {
   withStaticProperties,
   tw,
 } from '@crossed/core';
-import 'raf/polyfill';

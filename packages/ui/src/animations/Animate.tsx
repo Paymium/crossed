@@ -1,4 +1,3 @@
-import 'raf/polyfill';
 import { styled } from '@crossed/core';
 import { View } from 'react-native';
 
