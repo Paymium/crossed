@@ -1,5 +1,18 @@
 # @crossed/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- remove animation
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/core@0.3.0
+  - @crossed/primitive@1.1.0
+  - @crossed/unicons@0.3.0
+
 ## 0.2.2
 
 ### Patch Changes

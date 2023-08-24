@@ -1,5 +1,11 @@
 # @crossed/core
 
+## 0.3.0
+
+### Minor Changes
+
+- remove animation
+
 ## 0.2.2
 
 ### Patch Changes
