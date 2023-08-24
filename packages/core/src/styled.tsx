@@ -20,14 +20,13 @@ import {
   merge,
 } from './cva';
 import { twMerge } from 'tailwind-merge';
-import { motify } from 'moti';
 import type { Style } from 'twrnc/dist/esm/types';
 
 export const styled = <
   P extends Record<string, any>,
   T extends ConfigSchema<P> = {}
 >(
-  ComponentProps: ComponentType<P> & {
+  Component: ComponentType<P> & {
     styles?: (p?: Props<T, P>) => BaseWithState<P>;
   },
   themeConfigProps: Config<T, P>
@@ -44,8 +43,6 @@ export const styled = <
   styles: (p?: Props<T, P>) => BaseWithState<P>;
 } => {
   const stylesClass = crossed<P, T>(themeConfigProps);
-
-  const Component = motify<P, any>(ComponentProps)();
 
   type NewComponentProps = {
     className?: string;
@@ -87,7 +84,7 @@ export const styled = <
     }, [JSON.stringify(variantProps)]);
 
     const extendClassName = useMemo(() => {
-      return ComponentProps.styles?.(props as unknown as Props<T, P>);
+      return Component.styles?.(props as unknown as Props<T, P>);
     }, [props]);
 
     const baseClassName = useMemo(() => {
@@ -126,53 +123,13 @@ export const styled = <
       };
     }, [hover, focus, active]);
 
-    const { from, animate } = useMemo(() => {
-      const {
-        active: activeRef,
-        focus: focusRef,
-        hover: hoverRef,
-      } = stateRef.current;
-      let from =
-        (focusRef
-          ? styles[':focus']?.className
-          : hoverRef
-          ? styles[':hover']?.className
-          : activeRef
-          ? styles[':active']?.className
-          : styles.className) || styles.className;
-      let animate = styles.className;
-
-      if (hover && styles[':hover']) {
-        animate = styles[':hover'].className;
-      }
-      if (active && styles[':active']) {
-        animate = styles[':active'].className;
-      }
-      if (focus && styles[':focus']) {
-        animate = styles[':focus'].className;
-      }
-      if (props.disabled && styles[':disabled']) {
-        animate = styles[':disabled'].className;
-      }
-      return {
-        from: convertValueToString(tw.style(from)),
-        animate: convertValueToString(tw.style(animate)),
-      };
-    }, [hover, active, props.disabled, focus, styles]);
-
     const NewComp = useMemo(() => {
-      return styles.props?.as ? motify(styles.props?.as)() : Component;
+      return styles.props?.as ? styles.props?.as : Component;
     }, [styles.props?.as]);
 
     return (
       <NewComp
         ref={ref}
-        from={from}
-        animate={animate}
-        transition={{
-          type: 'timing',
-          duration: 200,
-        }}
         {...(componentProps as any)}
         style={[styleProps, convertValueToString(componentProps.style || {})]}
         onPressIn={composeEventHandlers(componentProps?.onPressIn, () => {
@@ -199,7 +156,7 @@ export const styled = <
 
   return withStaticProperties(NewComponent, {
     styles: (p?: Props<T, P>) => {
-      const parentStyle = ComponentProps.styles?.(p);
+      const parentStyle = Component.styles?.(p);
       const style = stylesClass(p);
       return parentStyle ? merge(parentStyle, style) : style;
     },

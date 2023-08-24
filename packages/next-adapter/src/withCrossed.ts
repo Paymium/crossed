@@ -14,7 +14,6 @@ const reactNativeDeps = [
   'react-native-svg',
   '@iconscout/react-native-unicons',
   'react-native-reanimated',
-  'moti',
 ];
 
 export default function withCrossed(nextConfig: any = {}) {
