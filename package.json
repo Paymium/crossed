@@ -5,7 +5,7 @@
   "description": "cross ui lib react-native and web",
   "scripts": {
     "web": "cd apps/web && yarn dev",
-    "native": "cd apps/native && yarn start",
+    "expo": "turbo run start --filter=crossed-expo",
     "docs": "turbo run dev --filter=crossed-docs",
     "test": "bash ./scripts/test.sh",
     "dev": "turbo run dev",

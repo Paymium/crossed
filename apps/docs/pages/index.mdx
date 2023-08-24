@@ -9,7 +9,6 @@ export default function LandingPage() {
   const config = useConfig();
   return (
     <>
-      <div className="min-h-screen">
         <div className="flex flex-col items-center gap-2 bg-brand-800 py-20 px-5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,13 +41,31 @@ export default function LandingPage() {
             <Button
               text="Star us"
               variant="filled"
+              color="zinc"
               iconAfter={UilGithub}
               href={config.project.link}
               target="_blank"
             />
           </XBox>
         </div>
-      </div>
+        <div className="w-1/2 mx-auto">
+          <h3>Introduction</h3>
+
+          <p>
+            Crossed is UI lib component which worked on react-native and web based on <a href="https://tailwindcss.com/" title="tailwindcss" target="_blank">tailwindcss</a>.
+            </p><p>
+            Crossed transform className in style for native, and use power of css for web.
+            </p>
+
+          <h3>Packages</h3>
+
+          <ul>
+            <li>@crossed/core</li>
+            <li>- @crossed/ui</li>
+            <li>- @crossed/unicons ([unicons](https://iconscout.com/unicons))</li>
+          </ul>
+        </div>
     </>
-  );
+
+);
 }

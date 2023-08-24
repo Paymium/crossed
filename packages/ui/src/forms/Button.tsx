@@ -1,17 +1,10 @@
-import {
-  createScope,
-  styled,
-  withStaticProperties,
-  tw,
-  GetProps,
-} from '@crossed/core';
+import { styled, tw, GetProps } from '@crossed/core';
+import { createButton } from '@crossed/primitive';
 import { Pressable, Text } from 'react-native';
 import {
   cloneElement,
-  ReactElement,
   // type ComponentType,
   type PropsWithChildren,
-  useId,
   ComponentType,
 } from 'react';
 import { colorVariants } from '../variants/colors';
@@ -19,15 +12,7 @@ import { sizeVariants } from '../variants/size';
 import { Box } from '../layout/Box';
 import { spaceVariants } from '../variants';
 import { useThemeContext } from '../Provider';
-
-const [Provider, useContext] = createScope<{
-  size?: keyof typeof sizeVariants;
-  color?: keyof typeof colorVariants;
-  variant?: 'filled' | 'outlined';
-}>({
-  size: 'md',
-  color: 'zinc',
-});
+import { useButtonContext } from '@crossed/primitive';
 
 const ButtonFrame = styled(Pressable, {
   'className': ['rounded-md', 'flex', 'flex-row', 'items-center', 'border-2'],
@@ -35,7 +20,7 @@ const ButtonFrame = styled(Pressable, {
     className: ['opacity-50', 'pointer-events-none', 'cursor-not-allowed'],
   },
   'props': {
-    accessibilityRole: 'button',
+    role: 'button',
   },
   'variants': {
     color: colorVariants,
@@ -109,7 +94,10 @@ const ButtonTextFrame = styled(Text, {
     variant: 'outlined',
   },
   compoundVariants: [
-    { variant: 'filled', className: ['text-white dark:text-white'] },
+    {
+      variant: 'filled',
+      className: ['text-white dark:text-white'],
+    },
   ],
 });
 
@@ -119,57 +107,29 @@ type ButtonRootProps = GetProps<typeof ButtonFrame> & {
   icon?: ComponentType;
 };
 
-function ButtonRoot(
-  props: Omit<ButtonRootProps, 'text' | 'iconAfter' | 'icon'>
-): ReactElement;
-function ButtonRoot(props: Omit<ButtonRootProps, 'children'>): ReactElement;
-function ButtonRoot({
-  text,
-  iconAfter: IconAfter,
-  icon: Icon,
-  children,
-  size = 'md',
-  color = 'zinc',
-  variant = 'outlined',
-  ...props
-}: ButtonRootProps) {
-  const id = useId();
-  return (
-    <Provider size={size as any} color={color as any} variant={variant as any}>
-      <ButtonFrame size={size} color={color} variant={variant} {...props}>
-        {children ??
-          [
-            Icon && (
-              <ButtonIcon key="Icon">
-                <Icon />
-              </ButtonIcon>
-            ),
-            text && <ButtonText key={`buttonText-${id}`}>{text}</ButtonText>,
-            IconAfter && (
-              <ButtonIcon key={'IconAfter'}>
-                <IconAfter />
-              </ButtonIcon>
-            ),
-          ].filter(Boolean)}
-      </ButtonFrame>
-    </Provider>
-  );
-}
-
-const ButtonText = (props: GetProps<typeof ButtonTextFrame>) => {
-  const { size, variant, color } = useContext();
-
-  return (
-    <ButtonTextFrame size={size} variant={variant} color={color} {...props} />
-  );
+type ButtonRootPropsSimple = Omit<ButtonRootProps, 'children'> & {
+  children?: never;
 };
+
+type ButtonRootPropsAdvanced = Omit<
+  ButtonRootProps,
+  'text' | 'iconAfter' | 'icon'
+> & {
+  text?: never;
+  iconAfter?: never;
+  icon?: never;
+};
+
+function ButtonRoot(props: ButtonRootPropsSimple | ButtonRootPropsAdvanced) {
+  return <ButtonFrame {...props} />;
+}
 
 const ButtonIcon = ({
   children,
   ...props
 }: PropsWithChildren<GetProps<typeof Box>>) => {
   const { theme } = useThemeContext();
-  const { color, variant, size } = useContext();
+  const { color, variant, size } = useButtonContext();
   const className = ButtonTextFrame.styles({ color, variant, size });
 
   tw.setColorScheme(theme);
@@ -177,14 +137,24 @@ const ButtonIcon = ({
   return (
     <Box {...props}>
       {cloneElement(children as any, {
-        size: Number(style.fontSize) * 1.2,
+        size: style.fontSize ? Number(style.fontSize) * 1.2 : 24,
         color: style.color,
       })}
     </Box>
   );
 };
 
-export const Button = withStaticProperties(ButtonRoot, {
-  Text: ButtonText,
-  Icon: ButtonIcon,
-});
+export const Button = createButton(
+  {
+    Root: ButtonRoot,
+    Text: ButtonTextFrame,
+    Icon: ButtonIcon,
+  },
+  {
+    context: {
+      color: 'blue',
+      size: 'md',
+      variant: 'oulined',
+    },
+  }
+);

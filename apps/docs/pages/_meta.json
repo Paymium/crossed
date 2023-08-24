@@ -11,8 +11,20 @@
       "layout": "raw"
     }
   },
-  "doc": {
-    "title": "Documentation",
+  "styled": {
+    "title": "styled()",
+    "type": "page"
+  },
+  "primitive": {
+    "title": "Primitive",
+    "type": "page"
+  },
+  "components": {
+    "title": "Components",
+    "type": "page"
+  },
+  "unicons": {
+    "title": "Unicons",
     "type": "page"
   }
 }

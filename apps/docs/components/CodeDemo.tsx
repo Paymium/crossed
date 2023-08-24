@@ -1,7 +1,6 @@
 import { UilCheck } from '@iconscout/react-native-unicons';
 import { Props } from '@crossed/demo/lib/typescript/props';
 import {
-  Animate,
   Box,
   Button,
   Label,
@@ -21,6 +20,7 @@ const DefaultDemo = () => {
 export const CodeDemo = ({
   Demo = DefaultDemo,
   actions = {},
+  name,
 }: {
   Demo?: ComponentType<Props>;
   actions?: {
@@ -29,8 +29,9 @@ export const CodeDemo = ({
     color?: boolean;
     variant?: string[];
   };
+  name?: string;
 }) => {
-  const { code } = useData() || { code: '' };
+  const code = (useData() || { [name]: '' })[name] || '';
   const [show, setShow] = useState(false);
   const [color, setColor] = useState('zinc');
   const [space, setSpace] = useState('md');
@@ -148,29 +149,21 @@ export const CodeDemo = ({
 
 const Code = ({ show, code }: { show: boolean; code: string }) => {
   const heightRef = useRef(500);
-  return (
-    <Animate
-      from={{
-        height: 0,
+  return show ? (
+    <Box
+      className="text-md"
+      onLayout={({ nativeEvent: { layout } }) => {
+        heightRef.current = layout.height;
       }}
-      animate={{ height: show ? heightRef.current : 0 }}
-      className="overflow-hidden"
     >
-      <Box
-        className="text-md"
-        onLayout={({ nativeEvent: { layout } }) => {
-          heightRef.current = layout.height;
-        }}
-      >
-        <CopyBlock
-          // @ts-ignore
-          text={code}
-          language={'tsx'}
-          theme={dracula}
-          showLineNumbers
-          wrapLines
-        />
-      </Box>
-    </Animate>
-  );
+      <CopyBlock
+        // @ts-ignore
+        text={code}
+        language={'tsx'}
+        theme={dracula}
+        showLineNumbers
+        wrapLines
+      />
+    </Box>
+  ) : null;
 };

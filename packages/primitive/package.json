@@ -1,26 +1,7 @@
 {
-  "name": "@crossed/ui",
+  "name": "@crossed/primitive",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "0.2.2",
-  "keywords": [
-    "React Native",
-    "Next.js",
-    "Expo",
-    "React",
-    "packager",
-    "styling",
-    "css-in-js",
-    "typescript",
-    "javascript",
-    "components",
-    "android",
-    "ios",
-    "theme",
-    "token",
-    "responsive-styling",
-    "design-system",
-    "universal"
-  ],
+  "version": "1.0.0",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
@@ -48,28 +29,11 @@
   },
   "dependencies": {
     "@crossed/core": "*",
-    "@crossed/primitive": "*",
-    "@crossed/unicons": "*",
-    "@expo/html-elements": "^0.5.1",
     "@floating-ui/react": "^0.25.1",
     "@gorhom/portal": "^1.0.14",
-    "@iconscout/react-native-unicons": "^2.0.2",
-    "class-variance-authority": "^0.7.0",
-    "inline-style-prefixer": "^6.0.1",
-    "normalize-css-color": "^1.0.2",
-    "react-aria": "^3.27.0",
-    "react-native-svg": "^13.10.0"
-  },
-  "react-native-builder-bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "commonjs",
-      [
-        "module"
-      ],
-      "typescript"
-    ]
+    "@react-native-aria/focus": "^0.2.8",
+    "@react-native-aria/interactions": "^0.2.10",
+    "react-aria": "^3.27.0"
   },
   "files": [
     "lib/",

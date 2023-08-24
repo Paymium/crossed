@@ -1,4 +1,3 @@
-import 'raf/polyfill';
 import type {
   ComponentType,
   ForwardRefExoticComponent,
@@ -7,7 +6,7 @@ import type {
 } from 'react';
 import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 import tw from 'twrnc';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform } from 'react-native';
 import type { GetProps } from './types';
 import { withStaticProperties } from './withStaticProperties';
 import { composeEventHandlers } from './composeEventHandlers';
@@ -17,17 +16,17 @@ import {
   ConfigSchema,
   Props,
   crossed,
+  cx,
   merge,
 } from './cva';
 import { twMerge } from 'tailwind-merge';
-import { motify } from 'moti';
-import type { Style } from 'twrnc/dist/esm/types';
+import { StyleSheet } from './styleSheet';
 
 export const styled = <
   P extends Record<string, any>,
   T extends ConfigSchema<P> = {}
 >(
-  ComponentProps: ComponentType<P> & {
+  Component: ComponentType<P> & {
     styles?: (p?: Props<T, P>) => BaseWithState<P>;
   },
   themeConfigProps: Config<T, P>
@@ -45,8 +44,6 @@ export const styled = <
 } => {
   const stylesClass = crossed<P, T>(themeConfigProps);
 
-  const Component = motify<P, any>(ComponentProps)();
-
   type NewComponentProps = {
     className?: string;
     animations?: boolean;
@@ -62,6 +59,20 @@ export const styled = <
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
     const [focus, setFocus] = useState(false);
+
+    const stateRef = useRef({
+      active,
+      focus,
+      hover,
+    });
+
+    useEffect(() => {
+      stateRef.current = {
+        active,
+        focus,
+        hover,
+      };
+    }, [hover, focus, active]);
 
     const { componentProps, variantProps } = Object.entries(props).reduce<{
       componentProps: P;
@@ -87,7 +98,7 @@ export const styled = <
     }, [JSON.stringify(variantProps)]);
 
     const extendClassName = useMemo(() => {
-      return ComponentProps.styles?.(props as unknown as Props<T, P>);
+      return Component.styles?.(props as unknown as Props<T, P>);
     }, [props]);
 
     const baseClassName = useMemo(() => {
@@ -98,35 +109,7 @@ export const styled = <
       );
     }, [extendClassName?.className, props.className, styles.className]);
 
-    const styleProps = useMemo(() => {
-      return Platform.OS === 'web'
-        ? StyleSheet.create({
-            root: {
-              $$css: true,
-              ...baseClassName.split(' ').reduce<any>((acc, className) => {
-                acc[`___${className}`] = className;
-                return acc;
-              }, {}),
-            },
-          }).root
-        : tw.style(baseClassName);
-    }, [baseClassName]);
-
-    const stateRef = useRef({
-      active,
-      focus,
-      hover,
-    });
-
-    useEffect(() => {
-      stateRef.current = {
-        active,
-        focus,
-        hover,
-      };
-    }, [hover, focus, active]);
-
-    const { from, animate } = useMemo(() => {
+    const variantClassName = useMemo(() => {
       const {
         active: activeRef,
         focus: focusRef,
@@ -140,41 +123,35 @@ export const styled = <
           : activeRef
           ? styles[':active']?.className
           : styles.className) || styles.className;
-      let animate = styles.className;
-
-      if (hover && styles[':hover']) {
-        animate = styles[':hover'].className;
-      }
-      if (active && styles[':active']) {
-        animate = styles[':active'].className;
-      }
-      if (focus && styles[':focus']) {
-        animate = styles[':focus'].className;
-      }
-      if (props.disabled && styles[':disabled']) {
-        animate = styles[':disabled'].className;
-      }
-      return {
-        from: convertValueToString(tw.style(from)),
-        animate: convertValueToString(tw.style(animate)),
-      };
+      return from;
     }, [hover, active, props.disabled, focus, styles]);
 
+    const styleProps = useMemo(() => {
+      return Platform.OS === 'web'
+        ? {
+            className: StyleSheet.create(
+              `${baseClassName} ${variantClassName}`
+            ),
+          }
+        : { style: tw.style(baseClassName, variantClassName) };
+    }, [baseClassName, variantClassName]);
+
     const NewComp = useMemo(() => {
-      return styles.props?.as ? motify(styles.props?.as)() : Component;
+      return styles.props?.as ? styles.props?.as : Component;
     }, [styles.props?.as]);
 
     return (
       <NewComp
         ref={ref}
-        from={from}
-        animate={animate}
-        transition={{
-          type: 'timing',
-          duration: 200,
-        }}
         {...(componentProps as any)}
-        style={[styleProps, convertValueToString(componentProps.style || {})]}
+        dataSet={{
+          className: cx(
+            styleProps.className,
+            variantClassName,
+            componentProps.className
+          ),
+        }}
+        style={[styleProps.style, componentProps.style]}
         onPressIn={composeEventHandlers(componentProps?.onPressIn, () => {
           setActive(true);
         })}
@@ -199,47 +176,9 @@ export const styled = <
 
   return withStaticProperties(NewComponent, {
     styles: (p?: Props<T, P>) => {
-      const parentStyle = ComponentProps.styles?.(p);
+      const parentStyle = Component.styles?.(p);
       const style = stylesClass(p);
       return parentStyle ? merge(parentStyle, style) : style;
     },
   });
-};
-
-const convertValueToString = (json: Style) => {
-  return Object.entries(json).reduce((acc, [key, value]) => {
-    let valueTmp = value;
-
-    if (typeof value === 'number') {
-      if (
-        key.startsWith('padding') ||
-        key.startsWith('margin') ||
-        ['fontSize', 'lineHeight'].includes(key)
-      ) {
-        valueTmp = `${value}px`;
-      }
-      if (
-        [
-          'zIndex',
-          'borderRadius',
-          'gap',
-          'flexShrink',
-          'borderWidth',
-          'borderLeftWidth',
-          'borderRightWidth',
-          'borderBottomWidth',
-          'borderTopWidth',
-          'flexGrow',
-          'height',
-          'width',
-        ].includes(key)
-      ) {
-        valueTmp = value.toString();
-      }
-    }
-    return {
-      ...acc,
-      [key]: valueTmp,
-    };
-  }, {});
 };
