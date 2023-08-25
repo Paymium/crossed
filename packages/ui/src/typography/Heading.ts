@@ -3,8 +3,8 @@ import { styled } from '@crossed/core';
 import { H1, H2, H3, H4, H5, H6 } from '@expo/html-elements';
 
 export const Heading = styled(TextNative, {
-  className: ['text-black', 'dark:text-white', 'my-0'],
-  variants: {
+  'className': ['text-white', 'my-0'],
+  'variants': {
     variant: { link: { className: ['text-blue-500'], props: { as: 'a' } } },
     order: {
       1: { className: ['text-9xl'], props: { as: H1 } },
@@ -15,7 +15,7 @@ export const Heading = styled(TextNative, {
       6: { className: ['text-4xl'], props: { as: H6 } },
     },
   },
-  defaultVariants: {
+  'defaultVariants': {
     order: 1,
   },
 });

@@ -2,7 +2,7 @@ import { Text as TextNative } from 'react-native';
 import { styled } from '@crossed/core';
 
 export const Text = styled(TextNative, {
-  className: ['dark:text-white text-black'],
+  className: ['text-white'],
   variants: {
     variant: { link: { className: ['text-blue-500'] } },
     weight: {
@@ -16,5 +16,15 @@ export const Text = styled(TextNative, {
       extrabold: { className: ['font-extrabold'] },
       black: { className: ['font-black'] },
     },
+    size: {
+      xs: { className: ['text-xs'] },
+      sm: { className: ['text-sm'] },
+      md: { className: ['text-md'] },
+      lg: { className: ['text-lg'] },
+      xl: { className: ['text-xl'] },
+    },
+  },
+  defaultVariants: {
+    size: 'md',
   },
 });

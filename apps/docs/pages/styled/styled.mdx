@@ -1,66 +1,60 @@
-import { StyledDemo } from '@crossed/demo';
+import { StyledDemo, StyledHtmlDemo } from '@crossed/demo';
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { Tabs } from 'components/Tabs';
 
-export const getStaticProps = getStaticDemo('core/styled');
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        native: (await getStaticDemo('core/styled-html'))(e).props.ssg.code,
+        html: (await getStaticDemo('core/styled'))(e).props.ssg.code,
+      },
+    },
+  };
+};
 
 # styled()
 
-
 <Tabs items={["Demo", "Anatomy", "Props"]}>
   <Tabs.Tab>
-    <CodeDemo Demo={StyledDemo} />
+    ## React web
+    <br />
+    <CodeDemo Demo={StyledHtmlDemo} name="html" />
+    ## React native
+    <br />
+    <CodeDemo Demo={StyledDemo} name="native" />
   </Tabs.Tab>
   <Tabs.Tab>
   ```typescript
-  type ClassName = "..." | ["..."];
-
-  type Props = ComponentProps
-
-  type Base<P> = {
-    className: ClassName;
-    props: P,
-  }
-
-  type State<P> = {
-    ":focus": Base<P>;
-    ":hover": Base<P>;
-    ":disabled": Base<P>;
-    ":active": Base<P>;
-  }
-
-  type BaseWithState<P> = State<P> & {
-    className: ClassName;
-    props: P,
-    ":hover": Base<P>,
-  }
-
-  styled(Component, {
-    'className': ClassName,
-    'props': Props,
-    ":focus": Base<ComponentProps>;
-    ":hover": Base<ComponentProps>;
-    ":disabled": Base<ComponentProps>;
-    ":active": Base<ComponentProps>;
-    'variants': {
-      size: {
-        xs: {
-          'className': ClassName,
-          'props': Props,
-          ":focus": Base<ComponentProps>;
-          ":hover": Base<ComponentProps>;
-          ":disabled": Base<ComponentProps>;
-          ":active": Base<ComponentProps>;
-        },
+styled(Component, {
+  'className': string[],
+  'props': Props,
+  ":focus": Base<ComponentProps>;
+  ":hover": Base<ComponentProps>;
+  ":disabled": Base<ComponentProps>;
+  ":active": Base<ComponentProps>;
+  'variants': {
+    size: {
+      xs: {
+        'className': ClassName,
+        'props': Props,
+        ":focus": Base<ComponentProps>;
+        ":hover": Base<ComponentProps>;
+        ":disabled": Base<ComponentProps>;
+        ":active": Base<ComponentProps>;
       },
     },
-    'defaultVariants': {
-      size: 'md',
-    },
-  });
-  ```
-  </Tabs.Tab>
-  <Tabs.Tab>
-  </Tabs.Tab>
-  </Tabs>
+  },
+  'defaultVariants': {
+    size: 'md',
+  },
+});
+
+```  
+
+
+</Tabs.Tab>
+<Tabs.Tab>
+</Tabs.Tab>
+</Tabs>

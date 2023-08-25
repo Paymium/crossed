@@ -1,9 +1,8 @@
-import { Pressable, Text } from 'react-native';
 import { styled, withStaticProperties } from '@crossed/core';
 import type { Props } from '../props';
 import { YBox } from '@crossed/ui';
 
-const ButtonFrame = styled(Pressable, {
+const ButtonFrame = styled('button', {
   'className': ['bg-blue-500', 'rounded'],
   ':hover': {
     className: ['bg-blue-400'],
@@ -13,18 +12,15 @@ const ButtonFrame = styled(Pressable, {
   },
   ':disabled': {
     className: ['opacity-50', 'pointer-events-none'],
-    props: {
-      'aria-disabled': true,
-    },
   },
   'props': {
     role: 'button',
+    'aria-disabled': true,
   },
   'variants': {
     size: {
       xs: {
         className: ['px-1', 'py-0.5'],
-        props: { as: 'div' },
       },
       sm: { className: ['p-2'] },
       md: { className: ['px-3', 'p-2'] },
@@ -36,7 +32,7 @@ const ButtonFrame = styled(Pressable, {
     size: 'md',
   },
 });
-const ButtonText = styled(Text, {
+const ButtonText = styled('span', {
   className: ['text-white'],
   variants: {
     size: {
@@ -49,9 +45,9 @@ const ButtonText = styled(Text, {
   },
 });
 
-const Button = withStaticProperties(ButtonFrame, { Text: ButtonText });
+const Button = withStaticProperties(ButtonFrame, { Text: ButtonText }) as any;
 
-export const StyledDemo = ({ space }: Props) => {
+export const StyledHtmlDemo = ({ space }: Props) => {
   return (
     <YBox space="md">
       <Button size={space}>

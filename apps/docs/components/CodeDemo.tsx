@@ -20,7 +20,7 @@ const DefaultDemo = () => {
 export const CodeDemo = ({
   Demo = DefaultDemo,
   actions = {},
-  name,
+  name = 'code',
 }: {
   Demo?: ComponentType<Props>;
   actions?: {
@@ -40,7 +40,7 @@ export const CodeDemo = ({
   const hasActions = Object.keys(actions || {}).length > 0;
 
   return (
-    <Box className="dark:border-zinc-800 border-zinc-200 border-2 rounded-md">
+    <Box className="dark:border-zinc-800 border-zinc-800 border rounded-md flex-col">
       <Box className="flex-row flex">
         <Box className="flex-1 p-4 justify-center items-center">
           <Demo
@@ -151,7 +151,7 @@ const Code = ({ show, code }: { show: boolean; code: string }) => {
   const heightRef = useRef(500);
   return show ? (
     <Box
-      className="text-md"
+      className="text-md block"
       onLayout={({ nativeEvent: { layout } }) => {
         heightRef.current = layout.height;
       }}
