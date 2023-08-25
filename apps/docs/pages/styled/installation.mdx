@@ -1,7 +1,26 @@
 import { Tabs } from 'components/Tabs';
+import { styled } from '@crossed/core';
+import { Box } from '@crossed/ui';
+
+export const Button = styled("button", {
+  className: ['border border-brand-900 bg-brand-500 rounded-md text-white'],
+  ':hover': { className: "bg-brand-400" },
+  ':active': { className: "bg-brand-600" },
+  variants: {
+    size: {
+      md: { className: ["px-3 py-2"] }
+    },
+  },
+  defaultVariants:{
+    size:"md"
+  }
+});
 
 # Installation
 
+Based you already have tailwind initilized. If not, see how [install tailwind](https://tailwindcss.com/docs/installation)
+
+## Install dependencies
 <Tabs items={["pnpm", "npm", "yarn"]}>
   <Tabs.Tab>
 
@@ -25,3 +44,42 @@ import { Tabs } from 'components/Tabs';
   
   </Tabs.Tab>
 </Tabs>
+
+## Add postcss plugin
+
+```javascript filename="postcss.config.js"
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: {
+    // ...,
+    '@crossed/core/postcss': {},
+    // ...,
+};
+
+module.exports = config;
+```
+
+## Usage
+<br />
+<Box className="items-center justify-center">
+  <Button>Hello</Button>
+</Box>
+
+```typescript
+import { styled } from '@crossed/core';
+
+export const Button = styled("button", {
+  className: ['border border-brand-900 bg-brand-500 rounded-md text-white'],
+  ':hover': { className: "bg-brand-400" },
+  ':active': { className: "bg-brand-600" },
+  variants: {
+    size: {
+      md: { className: ["px-3 py-2"] }
+    },
+  },
+  defaultVariants:{
+    size:"md"
+  }
+});
+
+```

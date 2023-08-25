@@ -22,7 +22,7 @@ export const cx = clsx;
 /* cva
   ============================================ */
 
-export type StateName = 'focus' | 'hover' | 'disabled' | 'active';
+export type StateName = 'focus' | 'hover' | 'disabled' | 'active' | 'dark';
 
 type PropsExtends<P> = P & { as?: any };
 
@@ -77,6 +77,7 @@ export const crossed =
       [':focus']: focusBase,
       [':hover']: hoverBase,
       [':disabled']: disabledBase,
+      [':dark']: darkBase,
       variants,
       defaultVariants,
     } = config;
@@ -115,6 +116,7 @@ export const crossed =
           [':focus']: focusCompoundVariant,
           [':hover']: hoverCompoundVariant,
           [':disabled']: disabledCompoundVariant,
+          [':dark']: darkCompoundVariant,
           ...compoundVariantOptions
         } = v;
         const check = Object.entries(compoundVariantOptions).every(
@@ -141,6 +143,7 @@ export const crossed =
             [':focus']: focusCompoundVariant,
             [':hover']: hoverCompoundVariant,
             [':disabled']: disabledCompoundVariant,
+            [':dark']: darkCompoundVariant,
           });
         }
         return acc;
@@ -156,6 +159,7 @@ export const crossed =
         ':focus': focusBase,
         ':hover': hoverBase,
         ':disabled': disabledBase,
+        ':dark': darkBase,
       },
       ...getVariantClassNames,
       getCompoundVariantClassNames,
@@ -197,6 +201,9 @@ export const merge = <P>(
   }
   if (two[':hover']) {
     acc[':hover'] = deepMerge(one[':hover'], two[':hover']);
+  }
+  if (two[':dark']) {
+    acc[':dark'] = deepMerge(one[':dark'], two[':dark']);
   }
   if (one.props || two.props) {
     one.props = { ...acc.props, ...two.props } as PropsExtends<P>;

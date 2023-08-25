@@ -1,15 +1,15 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Button, XBox } from '@crossed/ui';
+import { Button, XBox, Text, YBox, Box, Heading } from '@crossed/ui';
 import { UilArrowRight, UilGithub } from '@crossed/unicons';
 import { useConfig } from 'nextra-theme-docs'
+import { Link } from "next/link"
 
 export default function LandingPage() {
   const router = useRouter();
   const config = useConfig();
   return (
     <>
-        <div className="flex flex-col items-center gap-2 bg-brand-800 py-20 px-5">
+        <YBox className="items-center gap-2 bg-brand-800 py-20 px-5 border-b border-neutral-800">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
@@ -21,12 +21,12 @@ export default function LandingPage() {
               <path d="M5 70.48l19.108-19.108a2.029 2.029 0 0 0 0-2.87L5.058 29.45l7.545-7.546 21.89 21.89a8.685 8.685 0 0 1 0 12.283L12.659 77.912 5 70.48zm90-41.03L75.892 48.559a2.029 2.029 0 0 0 0 2.87l19.05 19.051-7.545 7.546-21.89-21.89a8.685 8.685 0 0 1 0-12.283l21.834-21.834L95 29.45zM29.428 5l19.108 19.108a2.029 2.029 0 0 0 2.87 0l19.052-19.05 7.546 7.545-21.89 21.89a8.685 8.685 0 0 1-12.283 0L21.997 12.659 29.428 5zm41.144 90L51.463 75.892a2.029 2.029 0 0 0-2.87 0l-19.051 19.05-7.546-7.545 21.89-21.89a8.685 8.685 0 0 1 12.283 0l21.834 21.834L70.572 95z"></path>
             </g>
           </svg>
-          <h1 className="text-6xl mb-5">crossed UI</h1>
+          <h1 className="text-6xl mb-5">crossed</h1>
           <h2 className="border-0 text-2xl text-center mb-10">
             Universal Headless Components built with tailwindcss for{" "}
             <b>react-native</b> + <b>web</b>
           </h2>
-          <XBox space="md">
+          <XBox space="md" className="justify-center">
             <Button
               text="Get started"
               variant="filled"
@@ -47,25 +47,31 @@ export default function LandingPage() {
               target="_blank"
             />
           </XBox>
-        </div>
-        <div className="w-1/2 mx-auto">
-          <h3>Introduction</h3>
-
-          <p>
-            Crossed is UI lib component which worked on react-native and web based on <a href="https://tailwindcss.com/" title="tailwindcss" target="_blank">tailwindcss</a>.
-            </p><p>
-            Crossed transform className in style for native, and use power of css for web.
-            </p>
-
-          <h3>Packages</h3>
-
-          <ul>
-            <li>@crossed/core</li>
-            <li>- @crossed/ui</li>
-            <li>- @crossed/unicons ([unicons](https://iconscout.com/unicons))</li>
-          </ul>
-        </div>
+        </YBox>
+        
+        <YBox className="w-1/2 mx-auto py-5" space="md">
+          <Heading order={3} className="text-lg self-center">Cross platform ecosystem</Heading>
+          <XBox className="justify-center" space="md">
+            <YBox space="sm" className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1" as={Link} href="/styled/installation">
+              <Heading order={4} className="text-lg self-center text-center">@crossed/styled</Heading>
+              <Text className="text-center">
+                Styled you component with tailwindcss
+              </Text>
+            </YBox>
+            <YBox space="sm" className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1" as={Link} href="/primitive/installation">
+              <Heading order={4} className="text-lg self-center text-center">@crossed/primitive</Heading>
+              <Text className="text-center">
+                Create your accessible component from anything
+              </Text>
+            </YBox>
+            <YBox space="sm" className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1" as={Link} href="/components/installation">
+              <Heading order={4} className="text-lg self-center text-center">@crossed/ui</Heading>
+              <Text className="text-center">
+                Component lib made with @crossed/primitive and @crossed/styled
+              </Text>
+            </YBox>
+          </XBox>
+        </YBox>
     </>
-
-);
+  );
 }

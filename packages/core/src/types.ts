@@ -1,5 +1,6 @@
 import type {
   ComponentType,
+  ElementType,
   ForwardRefExoticComponent,
   RefAttributes,
 } from 'react';
@@ -24,4 +25,5 @@ export type StylableComponent =
   | ComponentType<any>
   | ForwardRefExoticComponent<any>
   | ReactComponentWithRef<any, any>
+  | ElementType<any>
   | (new (props: any) => any);

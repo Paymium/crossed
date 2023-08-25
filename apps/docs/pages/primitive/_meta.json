@@ -2,6 +2,7 @@
   "introduction": {
     "title": "Intoduction"
   },
+  "installation": "Installation",
   "createButton": {
     "title": "createButton"
   }
