@@ -51,6 +51,7 @@
   "dependencies": {
     "@crossed/primitive": "workspace:*",
     "@crossed/ui": "*",
+    "@gorhom/portal": "^1.0.14",
     "fuse.js": "^6.6.2",
     "react-aria": "^3.27.0"
   },

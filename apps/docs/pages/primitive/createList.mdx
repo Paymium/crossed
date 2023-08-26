@@ -1,0 +1,45 @@
+import { CreateListSimpleDemo, CreateListWithSeparatorDemo } from '@crossed/demo';
+import { CodeDemo } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { Tabs } from 'components/Tabs';
+import { Table } from 'components/Table';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        simple: (await getStaticDemo('primitive/createList/simple')(e)).props.ssg.code,
+        separator: (await getStaticDemo('primitive/createList/separator')(e)).props.ssg.code
+      }
+    }
+  }
+};
+
+# createList
+
+<Tabs items={['Demo', 'Anatomy', 'Props']}>
+  <Tabs.Tab>
+    ## simple
+    <br />
+    <CodeDemo Demo={CreateListSimpleDemo} name="simple" />
+
+
+    ## With separator
+    <br />
+    <CodeDemo Demo={CreateListWithSeparatorDemo} name="separator" />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```tsx
+    <Menu>
+      <Menu.Item>
+        <Menu.Item.Title />
+        <Menu.Item.Subtitle />
+      </Menu.Item>
+    </Menu>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ## Menu
+    <Table props={[]} />
+  </Tabs.Tab>
+</Tabs>

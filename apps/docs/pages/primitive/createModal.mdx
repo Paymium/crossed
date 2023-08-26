@@ -1,0 +1,25 @@
+import { CreateModalSimpleDemo } from '@crossed/demo';
+import { CodeDemo } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { Tabs } from 'components/Tabs';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        simple: (await getStaticDemo('primitive/createModal/simple')(e)).props.ssg.code,
+      }
+    }
+  }
+};
+
+# createModal
+
+<Tabs items={['Demo']}>
+  <Tabs.Tab>
+    ## simple
+    <br />
+    <CodeDemo Demo={CreateModalSimpleDemo} name="simple" />
+
+  </Tabs.Tab>
+</Tabs>

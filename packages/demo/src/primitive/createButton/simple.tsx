@@ -1,9 +1,10 @@
 import { createButton } from '@crossed/primitive';
 import { Box } from '@crossed/ui';
+import type { HTMLAttributes } from 'react';
 
 const Button = createButton({
-  Root: (props) => {
-    return <button className="bg-blue-500" {...props} />;
+  Root: (props: HTMLAttributes<HTMLButtonElement>) => {
+    return <button className="bg-blue-500 px-3 py-2" {...props} />;
   },
   Text: ({ title }: { title: string }) => {
     return <span className="text-white">{title}</span>;
@@ -16,7 +17,7 @@ const Button = createButton({
 export const CreateButtonDemo = () => {
   return (
     <Box>
-      <Button>
+      <Button aria-label="Button text">
         <Button.Text title="text button" />
       </Button>
     </Box>
