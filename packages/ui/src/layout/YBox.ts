@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { styled } from '@crossed/core';
+import { styled } from '@crossed/styled';
 import { spaceVariants } from '../variants/space';
 
 export const YBox = styled(View, {

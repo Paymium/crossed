@@ -37,6 +37,7 @@
   "devDependencies": {
     "@crossed/build": "*",
     "@crossed/core": "*",
+    "@crossed/styled": "*",
     "@crossed/unicons": "*",
     "@types/react": "^18.2.20",
     "@types/react-native": "^0.72.2",

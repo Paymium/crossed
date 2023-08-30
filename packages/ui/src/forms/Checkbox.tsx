@@ -1,12 +1,10 @@
 import {
   GetProps,
   createScope,
-  cx,
-  styled,
-  tw,
   useUncontrolled,
   withStaticProperties,
 } from '@crossed/core';
+import { styled, cx, tw } from '@crossed/styled';
 import { Label } from './Label';
 import { useRef, type PropsWithChildren, cloneElement } from 'react';
 import { UilCheck } from '@crossed/unicons';

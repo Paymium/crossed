@@ -1,0 +1,24 @@
+import { ButtonDefaultVariantsDemo } from '@crossed/demo';
+import { CodeDemo, Code } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        defaultVariants: (
+          await getStaticDemo('styled/button/DefaultVariants')(e)
+        ).props.ssg.code,
+      },
+    },
+  };
+};
+
+# Default variants
+
+You can define default variants with `defaultVariants` param
+
+<br />
+<Code name="defaultVariants" show />
+<br />
+<CodeDemo Demo={ButtonDefaultVariantsDemo} />

@@ -5,10 +5,15 @@ import type { HTMLAttributes } from 'react';
 const Button = createButton(
   {
     Root: (props: HTMLAttributes<HTMLButtonElement>) => {
-      return <button className="bg-blue-500 px-3 py-2" {...props} />;
+      return (
+        <button
+          className="bg-blue-500 px-3 py-2 gap-2 flex flex-row justify-center"
+          {...props}
+        />
+      );
     },
-    Text: () => {
-      return <span className="text-white">{'title'}</span>;
+    Text: ({ title }: { title?: string }) => {
+      return <span className="text-white">{title}</span>;
     },
     Icon: () => {
       return <span>€</span>;
@@ -23,9 +28,18 @@ const Button = createButton(
 
 export const CreateButtonWithContextDemo = () => {
   return (
-    <Box>
-      <Button aria-label="Button example">
-        <Button.Text title="text button" />
+    <Box space="sm">
+      <Button aria-label="Button">
+        <Button.Icon />
+        <Button.Text />
+      </Button>
+      <Button aria-label="Button change title" title="Context title">
+        <Button.Icon />
+        <Button.Text />
+      </Button>
+      <Button aria-label="Button change title" title="Context title">
+        <Button.Text title="or here" />
+        <Button.Icon />
       </Button>
     </Box>
   );

@@ -1,4 +1,4 @@
-import { GetProps, merge } from '@crossed/core';
+import { GetProps, merge } from '@crossed/styled';
 import { createDropdown } from '@crossed/primitive';
 import { YBox, Text } from '@crossed/ui';
 import type { HTMLAttributes } from 'react';
@@ -46,7 +46,7 @@ export const CreateDropdownSimpleDemo = () => {
         <Dropdown.Portal>
           {/* <Dropdown.Overlay /> */}
           <Dropdown.Content aria-activedescendant="test">
-            <Text tabIndex={0} role="option" id="test">
+            <Text role="option" id="test">
               Hello 1
             </Text>
             <Text>Hello 1</Text>

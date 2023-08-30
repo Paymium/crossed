@@ -4,7 +4,9 @@ import type { HTMLAttributes } from 'react';
 
 const Button = createButton({
   Root: (props: HTMLAttributes<HTMLButtonElement>) => {
-    return <button className="bg-blue-500 px-3 py-2" {...props} />;
+    return (
+      <button className="bg-blue-500 px-3 py-2 hover:bg-blue-400" {...props} />
+    );
   },
   Text: ({ title }: { title: string }) => {
     return <span className="text-white">{title}</span>;

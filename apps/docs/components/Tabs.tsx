@@ -1,4 +1,5 @@
-import { withStaticProperties, type GetProps } from '@crossed/ui';
+import { type GetProps } from '@crossed/styled';
+import { withStaticProperties } from '@crossed/core';
 import { useRouter } from 'next/router';
 import { Tabs as TabsNext, Tab as TabNext } from 'nextra-theme-docs';
 import { memo, useEffect } from 'react';

@@ -2,10 +2,10 @@ import {
   GetProps,
   composeEventHandlers,
   createScope,
-  styled,
   useUncontrolled,
   withStaticProperties,
 } from '@crossed/core';
+import { styled } from '@crossed/styled';
 import type { colorVariants, sizeVariants } from '../variants';
 import { Label } from './Label';
 import { Platform, Pressable, View } from 'react-native';

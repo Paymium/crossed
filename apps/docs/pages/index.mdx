@@ -28,17 +28,6 @@ export default function LandingPage() {
           </h2>
           <XBox space="md" className="justify-center">
             <Button
-              text="Get started"
-              variant="filled"
-              color="blue"
-              iconAfter={UilArrowRight}
-              href="/doc"
-              onPress={(e) => {
-                e.preventDefault();
-                router.push(e.currentTarget.href);
-              }}
-            />
-            <Button
               text="Star us"
               variant="filled"
               color="zinc"
@@ -55,7 +44,7 @@ export default function LandingPage() {
             <YBox space="sm" className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1" as={Link} href="/styled/installation">
               <Heading order={4} className="text-lg self-center text-center">@crossed/styled</Heading>
               <Text className="text-center">
-                Styled you component with tailwindcss
+                Styled your component with tailwindcss
               </Text>
             </YBox>
             <YBox space="sm" className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1" as={Link} href="/primitive/installation">
@@ -67,7 +56,7 @@ export default function LandingPage() {
             <YBox space="sm" className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1" as={Link} href="/components/installation">
               <Heading order={4} className="text-lg self-center text-center">@crossed/ui</Heading>
               <Text className="text-center">
-                Component lib made with @crossed/primitive and @crossed/styled
+                UI Component made with @crossed/primitive and @crossed/styled
               </Text>
             </YBox>
           </XBox>

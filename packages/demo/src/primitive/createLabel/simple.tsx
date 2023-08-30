@@ -1,4 +1,4 @@
-import { merge } from '@crossed/core';
+import { merge } from '@crossed/styled';
 import { createLabel } from '@crossed/primitive';
 import { YBox } from '@crossed/ui';
 import type { HTMLAttributes } from 'react';
@@ -25,6 +25,7 @@ export const CreateLabelSimpleDemo = () => {
           <input type="text" className="border border-neutral-800" />
         </Label.Input>
       </Label>
+
       <Label>
         <Label.Text aria-label="Select">Select</Label.Text>
         <Label.Input>
@@ -36,18 +37,21 @@ export const CreateLabelSimpleDemo = () => {
           </select>
         </Label.Input>
       </Label>
+
       <Label className="flex-row gap-2">
         <Label.Input>
           <input type="checkbox" />
         </Label.Input>
         <Label.Text aria-label="Checkbox">Checkbox</Label.Text>
       </Label>
+
       <Label className="flex-row gap-2">
         <Label.Input>
           <input type="radio" />
         </Label.Input>
         <Label.Text aria-label="Radio">Radio</Label.Text>
       </Label>
+
       <Label className="flex-row gap-2">
         <Label.Input>
           <input type="radio" />

@@ -1,4 +1,4 @@
-import { merge } from '@crossed/core';
+import { merge } from '@crossed/styled';
 import { createList } from '@crossed/primitive';
 import { YBox } from '@crossed/ui';
 import type { HTMLAttributes } from 'react';

@@ -1,0 +1,24 @@
+import { ButtonCompoundVariantsDemo } from '@crossed/demo';
+import { CodeDemo, Code } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        compoundVariants: (
+          await getStaticDemo('styled/button/CompoundVariants')(e)
+        ).props.ssg.code,
+      },
+    },
+  };
+};
+
+# Compound Variants
+
+If you have conflict between variants
+
+<br />
+<Code name="compoundVariants" show />
+<br />
+<CodeDemo Demo={ButtonCompoundVariantsDemo} />

@@ -1,10 +1,5 @@
-import {
-  createScope,
-  styled,
-  withStaticProperties,
-  tw,
-  GetProps,
-} from '@crossed/core';
+import { createScope, withStaticProperties, GetProps } from '@crossed/core';
+import { styled, tw } from '@crossed/styled';
 import {
   cloneElement,
   forwardRef,

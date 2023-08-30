@@ -1,12 +1,7 @@
-import { styled, tw, GetProps } from '@crossed/core';
+import { styled, tw, type GetProps } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
 import { Pressable, Text } from 'react-native';
-import {
-  cloneElement,
-  // type ComponentType,
-  type PropsWithChildren,
-  ComponentType,
-} from 'react';
+import { cloneElement, type PropsWithChildren, ComponentType } from 'react';
 import { colorVariants } from '../variants/colors';
 import { sizeVariants } from '../variants/size';
 import { Box } from '../layout/Box';

@@ -1,0 +1,24 @@
+import { ButtonVariantsDemo } from '@crossed/demo';
+import { CodeDemo, Code } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        variants: (await getStaticDemo('styled/button/Variants')(e)).props.ssg
+          .code,
+      },
+    },
+  };
+};
+
+# Variants
+
+You can create variants with `variants` param, It use base `className`, `props` and `state`.  
+See [Base](/styled/base) for more explanation
+
+<br />
+<Code name="variants" show />
+<br />
+<CodeDemo Demo={ButtonVariantsDemo} />

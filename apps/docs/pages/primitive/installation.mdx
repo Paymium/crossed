@@ -1,7 +1,15 @@
 import { Tabs } from 'components/Tabs';
+import { Code, CodeDemo } from 'components/CodeDemo';
+import { Steps } from 'nextra/components';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { CreateButtonDemo } from "@crossed/demo"
+
+export const getStaticProps = getStaticDemo("primitive/createButton/simple")
 
 # Installation
 
+<Steps>
+### Install dependencies
 <Tabs items={["pnpm", "npm", "yarn"]}>
   <Tabs.Tab>
 
@@ -25,3 +33,9 @@ import { Tabs } from 'components/Tabs';
   
   </Tabs.Tab>
 </Tabs>
+
+### Create you button
+<Code name="code" show />
+<br />
+<CodeDemo Demo={CreateButtonDemo} />
+</Steps>
