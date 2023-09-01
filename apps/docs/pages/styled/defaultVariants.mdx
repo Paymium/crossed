@@ -1,6 +1,7 @@
-import { ButtonDefaultVariantsDemo } from '@crossed/demo';
+import { ButtonDefaultVariantsDemo, ButtonDefaultVariantsNativeDemo } from '@crossed/demo';
 import { CodeDemo, Code } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
+import { Tabs as TabsNext, Tab as TabNext } from 'nextra-theme-docs';
 
 export const getStaticProps = async (e) => {
   return {
@@ -8,6 +9,9 @@ export const getStaticProps = async (e) => {
       ssg: {
         defaultVariants: (
           await getStaticDemo('styled/button/DefaultVariants')(e)
+        ).props.ssg.code,
+        defaultVariantsNative: (
+          await getStaticDemo('styled/button/DefaultVariants.native')(e)
         ).props.ssg.code,
       },
     },
@@ -18,7 +22,15 @@ export const getStaticProps = async (e) => {
 
 You can define default variants with `defaultVariants` param
 
-<br />
-<Code name="defaultVariants" show />
-<br />
-<CodeDemo Demo={ButtonDefaultVariantsDemo} />
+<TabsNext items={['Web', 'Native']}>
+  <TabNext>
+    <Code name="defaultVariants" show />
+    <br />
+    <CodeDemo Demo={ButtonDefaultVariantsDemo} />
+  </TabNext>
+  <TabNext>
+    <Code name="defaultVariantsNative" show />
+    <br />
+    <CodeDemo Demo={ButtonDefaultVariantsNativeDemo} />
+  </TabNext>
+</TabsNext>

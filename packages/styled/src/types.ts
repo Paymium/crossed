@@ -5,6 +5,7 @@ import type {
   HTMLProps,
   RefAttributes,
 } from 'react';
+import type { ConfigVariants } from './crossed/types';
 
 export type GetProps<A extends StylableComponent> = A extends ComponentType<
   infer Props
@@ -30,3 +31,12 @@ export type StylableComponent<P = any> =
   | ReactComponentWithRef<P, any>
   | ElementType<P>
   | (new (props: P) => any);
+
+export type UnionToIntersection<U> = (
+  U extends ConfigVariants<any> ? (k: U) => string : never
+) extends (k: infer I) => string
+  ? I
+  : never;
+
+export type PropsFromExtends<E extends ((props: any) => any)[]> =
+  UnionToIntersection<Parameters<E[number]>[number]>;

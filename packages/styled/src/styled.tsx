@@ -5,7 +5,7 @@ import type {
 } from 'react';
 import { forwardRef, useCallback, useEffect } from 'react';
 import { Platform } from 'react-native';
-import type { GetProps, StylableComponent } from './types';
+import type { GetProps, PropsFromExtends, StylableComponent } from './types';
 import {
   withStaticProperties,
   composeEventHandlers,
@@ -29,13 +29,14 @@ import { StyleSheet } from './styleSheet';
 export const styled = <
   C extends StylableComponent,
   P extends GetProps<C>,
+  E extends ((e: any) => any)[],
   T extends ConfigSchema<GetProps<C>> = {}
 >(
   Component: C,
-  themeConfigProps: Config<GetProps<C>, T>
+  themeConfig: Config<GetProps<C>, T> & { extends?: E }
 ): ForwardRefExoticComponent<
   PropsWithoutRef<
-    {
+    PropsFromExtends<E> & {
       className?: string;
       states?: { isActive?: boolean; isFocus?: boolean; isHover?: boolean };
     } & Omit<ConfigVariants<T> & P, 'className'>
@@ -44,8 +45,9 @@ export const styled = <
 > & {
   styles: (p?: Props<T, P>) => BaseWithState<P>;
 } => {
+  const { extends: extendsStyle, ...themeConfigProps } = themeConfig;
   const stylesClass = crossed<P, T>(themeConfigProps as any);
-  type NewComponentProps = {
+  type NewComponentProps = PropsFromExtends<E> & {
     className?: string;
     animations?: boolean;
     states?: { isActive?: boolean; isFocus?: boolean; isHover?: boolean };
@@ -76,8 +78,8 @@ export const styled = <
         (acc, [propsName, valueProps]) => {
           if (variantNames.includes(propsName)) {
             (acc.variantProps as any)[propsName as any] =
-              (valueProps as any)?.toString() || undefined;
-          } else if (propsName !== 'className') {
+              valueProps || undefined;
+          } else if (!['className', 'states'].includes(propsName)) {
             (acc.componentProps as any)[propsName] = valueProps;
           }
           return acc;
@@ -87,14 +89,17 @@ export const styled = <
           variantProps: themeConfigProps?.defaultVariants || {},
         } as any
       );
-
       const styles = stylesClass(variantProps);
 
       const NewComp = styles.props?.as ? styles.props?.as : Component;
       const asIsString = typeof NewComp === 'string';
 
-      const extendClassName =
-        (Component as any).styles?.(props as unknown as Props<T, P>) || {};
+      const extendClassName = ((extendsStyle || []) as any[]).reduce<any>(
+        (acc, style) => {
+          return merge(acc, style(props as any) as any);
+        },
+        {}
+      );
 
       const variantExtendClassName =
         (props.disabled

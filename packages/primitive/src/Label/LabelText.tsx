@@ -1,7 +1,8 @@
-import { Platform } from 'react-native';
 import { useContext } from './context';
 import { ComponentType, forwardRef } from 'react';
 import type { RequiredAccessibilityProps } from 'src/types';
+import { composeEventHandlers } from '@crossed/core';
+import { Platform } from 'react-native';
 
 export const createLabelText = <P,>(StyledText: ComponentType<P>) =>
   // @ts-ignore
@@ -9,15 +10,17 @@ export const createLabelText = <P,>(StyledText: ComponentType<P>) =>
     const { id, inputRef } = useContext();
     return (
       <StyledText
-        {...(Platform.OS === 'web'
-          ? { for: id }
-          : {
-              onPress: () => {
-                inputRef?.current?.focus?.();
-              },
-            })}
         ref={ref}
+        id={`label-${id}`}
         {...(props as any)}
+        {...(Platform.OS === 'web'
+          ? {
+              for: id,
+            }
+          : {})}
+        onPress={composeEventHandlers((props as any).onPress, () => {
+          inputRef?.current?.focus?.();
+        })}
       />
     );
   });

@@ -51,13 +51,6 @@ export const CreateLabelSimpleDemo = () => {
         </Label.Input>
         <Label.Text aria-label="Radio">Radio</Label.Text>
       </Label>
-
-      <Label className="flex-row gap-2">
-        <Label.Input>
-          <input type="radio" />
-        </Label.Input>
-        <Label.Text aria-label="Radio">Radio</Label.Text>
-      </Label>
     </YBox>
   );
 };

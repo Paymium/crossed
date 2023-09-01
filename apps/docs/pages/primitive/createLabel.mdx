@@ -1,30 +1,50 @@
-import { CreateLabelSimpleDemo } from '@crossed/demo';
+import {
+  CreateLabelSimpleDemo,
+  CreateLabelSimpleNativeDemo,
+} from '@crossed/demo';
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { Tabs } from 'components/Tabs';
 import { Table } from 'components/Table';
 
-export const getStaticProps = getStaticDemo('primitive/createLabel/simple');
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        simple: (await getStaticDemo('primitive/createLabel/simple')(e)).props
+          .ssg.code,
+        simpleNative: (
+          await getStaticDemo('primitive/createLabel/simple.native')(e)
+        ).props.ssg.code,
+      },
+    },
+  };
+};
 
 # createLabel
 
 <Tabs items={['Demo', 'Anatomy', 'Props']}>
   <Tabs.Tab>
     ## simple
-    <CodeDemo Demo={CreateLabelSimpleDemo} />
+    <Tabs items={['Web', 'Native']}>
+      <Tabs.Tab>
+        <CodeDemo Demo={CreateLabelSimpleDemo} name="simple" />
+      </Tabs.Tab>
+      <Tabs.Tab>
+        <CodeDemo Demo={CreateLabelSimpleNativeDemo} name="simpleNative" />
+      </Tabs.Tab>
+    </Tabs>
   </Tabs.Tab>
   <Tabs.Tab>
     ```tsx
-    <Menu>
-      <Menu.Item>
-        <Menu.Item.Title />
-        <Menu.Item.Subtitle />
-      </Menu.Item>
-    </Menu>
+    <Label>
+      <Label.Text />
+      <Label.Input />
+    </Label>
     ```
   </Tabs.Tab>
   <Tabs.Tab>
-    ## Menu
+    ## Label
     <Table props={[]} />
   </Tabs.Tab>
 </Tabs>

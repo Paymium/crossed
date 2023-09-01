@@ -173,11 +173,11 @@ const InputInput = memo(
             onChangeText={onChangeValue}
             className="focus:ring ring-violet-400"
             {...props}
-            onFocus={(e) => {
+            onFocus={(e: any) => {
               props?.onFocus?.(e);
               setFocus(true);
             }}
-            onBlur={(e) => {
+            onBlur={(e: any) => {
               props?.onBlur?.(e);
               setFocus(false);
             }}
