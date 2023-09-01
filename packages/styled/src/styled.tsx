@@ -1,55 +1,57 @@
 import type {
-  ComponentType,
-  ElementType,
   ForwardRefExoticComponent,
   PropsWithoutRef,
   RefAttributes,
 } from 'react';
-import { forwardRef, useCallback, useEffect, useState } from 'react';
+import { forwardRef, useCallback, useEffect } from 'react';
 import { Platform } from 'react-native';
-import type { GetProps } from './types';
-import { withStaticProperties } from './withStaticProperties';
-import { composeEventHandlers } from './composeEventHandlers';
+import type { GetProps, PropsFromExtends, StylableComponent } from './types';
 import {
+  withStaticProperties,
+  composeEventHandlers,
+  useUncontrolled,
+} from '@crossed/core';
+import { crossed, merge } from './crossed';
+import type {
   BaseWithState,
   Config,
   ConfigSchema,
+  ConfigVariants,
   Props,
-  crossed,
-  merge,
-} from './cva';
+} from './crossed/types';
 import { twMerge } from 'tailwind-merge';
 import { StyleSheet } from './styleSheet';
 
+// type ComponentParam<P extends object> = ElementType<P> & {
+//   styles?: (p?: Props<any, P>) => BaseWithState<P>;
+// };
+
 export const styled = <
-  P extends Record<string, any>,
-  T extends ConfigSchema<P> = {}
+  C extends StylableComponent,
+  P extends GetProps<C>,
+  E extends ((e: any) => any)[],
+  T extends ConfigSchema<GetProps<C>> = {}
 >(
-  Component:
-    | (ComponentType<P> & {
-        styles?: (p?: Props<T, P>) => BaseWithState<P>;
-      })
-    | ElementType<P>,
-  themeConfigProps: Config<T, P>
+  Component: C,
+  themeConfig: Config<GetProps<C>, T> & { extends?: E }
 ): ForwardRefExoticComponent<
   PropsWithoutRef<
-    {
+    PropsFromExtends<E> & {
       className?: string;
       states?: { isActive?: boolean; isFocus?: boolean; isHover?: boolean };
-    } & Omit<Props<T, P>, 'className'> &
-      GetProps<typeof Component>
+    } & Omit<ConfigVariants<T> & P, 'className'>
   > &
     RefAttributes<any>
 > & {
   styles: (p?: Props<T, P>) => BaseWithState<P>;
 } => {
-  const stylesClass = crossed<P, T>(themeConfigProps);
-  type NewComponentProps = {
+  const { extends: extendsStyle, ...themeConfigProps } = themeConfig;
+  const stylesClass = crossed<P, T>(themeConfigProps as any);
+  type NewComponentProps = PropsFromExtends<E> & {
     className?: string;
     animations?: boolean;
     states?: { isActive?: boolean; isFocus?: boolean; isHover?: boolean };
-  } & Omit<Props<T, P>, 'className'> &
-    GetProps<typeof Component>;
+  } & Omit<ConfigVariants<T> & P, 'className'>;
 
   const variantNames = Object.keys(
     themeConfigProps.variants || {}
@@ -57,18 +59,27 @@ export const styled = <
 
   const NewComponent = forwardRef<any, NewComponentProps>(
     function CrossedStyledComponent(props, ref) {
-      const [active, setActive] = useState(false);
-      const [hover, setHover] = useState(false);
-      const [focus, setFocus] = useState(false);
+      const [active, setActive] = useUncontrolled({
+        defaultValue: false,
+        value: props.states?.isActive,
+      });
+      const [hover, setHover] = useUncontrolled({
+        defaultValue: false,
+        value: props.states?.isHover,
+      });
+      const [focus, setFocus] = useUncontrolled({
+        defaultValue: false,
+        value: props.states?.isFocus,
+      });
       const { componentProps, variantProps } = Object.entries(props).reduce<{
         componentProps: P;
         variantProps: Props<T, P>;
       }>(
         (acc, [propsName, valueProps]) => {
           if (variantNames.includes(propsName)) {
-            acc.variantProps[propsName as keyof Props<T, P>] =
-              valueProps?.toString() || undefined;
-          } else if (propsName !== 'className') {
+            (acc.variantProps as any)[propsName as any] =
+              valueProps || undefined;
+          } else if (!['className', 'states'].includes(propsName)) {
             (acc.componentProps as any)[propsName] = valueProps;
           }
           return acc;
@@ -78,15 +89,28 @@ export const styled = <
           variantProps: themeConfigProps?.defaultVariants || {},
         } as any
       );
-
       const styles = stylesClass(variantProps);
 
       const NewComp = styles.props?.as ? styles.props?.as : Component;
       const asIsString = typeof NewComp === 'string';
 
-      const extendClassName = (Component as any).styles?.(
-        props as unknown as Props<T, P>
+      const extendClassName = ((extendsStyle || []) as any[]).reduce<any>(
+        (acc, style) => {
+          return merge(acc, style(props as any) as any);
+        },
+        {}
       );
+
+      const variantExtendClassName =
+        (props.disabled
+          ? extendClassName[':disabled']?.className
+          : active
+          ? extendClassName[':active']?.className
+          : hover
+          ? extendClassName[':hover']?.className
+          : focus
+          ? extendClassName[':focus']?.className
+          : extendClassName.className) || extendClassName.className;
 
       const variantClassName =
         (props.disabled
@@ -114,6 +138,7 @@ export const styled = <
 
       const baseClassName = twMerge(
         extendClassName?.className,
+        variantExtendClassName,
         styles.className,
         variantClassName,
         props.className

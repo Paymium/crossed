@@ -3,7 +3,8 @@ import { DocsThemeConfig } from 'nextra-theme-docs';
 import { useMounted } from 'nextra/hooks';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from 'nextra/icons';
-import { Button, useThemeContext, tw } from '@crossed/ui';
+import { Button, useThemeContext } from '@crossed/ui';
+import { tw } from '@crossed/styled';
 
 const config: DocsThemeConfig = {
   logo: (
@@ -56,6 +57,7 @@ const config: DocsThemeConfig = {
       const IconToUse = mounted && theme === 'dark' ? MoonIcon : SunIcon;
       return (
         <Button
+          aria-label="Change color theme"
           className="self-center"
           onPress={() => {
             const newTheme = theme === 'dark' ? 'light' : 'dark';

@@ -1,6 +1,7 @@
 import { Tabs } from 'components/Tabs';
-import { styled } from '@crossed/core';
+import { styled } from '@crossed/styled';
 import { Box } from '@crossed/ui';
+import { Steps } from 'nextra/components'
 
 export const Button = styled("button", {
   className: ['border border-brand-900 bg-brand-500 rounded-md text-white'],
@@ -20,7 +21,8 @@ export const Button = styled("button", {
 
 Based you already have tailwind initilized. If not, see how [install tailwind](https://tailwindcss.com/docs/installation)
 
-## Install dependencies
+<Steps>
+### Install dependencies
 <Tabs items={["pnpm", "npm", "yarn"]}>
   <Tabs.Tab>
 
@@ -45,7 +47,7 @@ Based you already have tailwind initilized. If not, see how [install tailwind](h
   </Tabs.Tab>
 </Tabs>
 
-## Add postcss plugin
+### Add postcss plugin
 
 ```javascript filename="postcss.config.js"
 /** @type {import('postcss-load-config').Config} */
@@ -59,7 +61,7 @@ const config = {
 module.exports = config;
 ```
 
-## Usage
+### Usage
 <br />
 <Box className="items-center justify-center">
   <Button>Hello</Button>
@@ -83,3 +85,4 @@ export const Button = styled("button", {
 });
 
 ```
+</Steps>

@@ -1,4 +1,5 @@
-import { styled, withStaticProperties } from '@crossed/core';
+import { styled } from '@crossed/styled';
+import { withStaticProperties } from '@crossed/core';
 import type { Props } from '../props';
 import { YBox } from '@crossed/ui';
 

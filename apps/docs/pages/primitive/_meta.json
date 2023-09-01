@@ -3,7 +3,17 @@
     "title": "Intoduction"
   },
   "installation": "Installation",
+  "accessibility": "Accessibility",
+  "-- Primitives": {
+    "type": "separator",
+    "title": "Primitives"
+  },
   "createButton": {
     "title": "createButton"
-  }
+  },
+  "createLabel": "createLabel",
+  "createList": "createList",
+  "createDropdown": "createDropdown",
+  "createSheet": "createSheet",
+  "createModal": "createModal"
 }

@@ -1,0 +1,36 @@
+import { ButtonVariantsDemo, ButtonVariantsNativeDemo } from '@crossed/demo';
+import { CodeDemo, Code } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { Tabs as TabsNext, Tab as TabNext } from 'nextra-theme-docs';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        variants: (await getStaticDemo('styled/button/Variants')(e)).props.ssg
+          .code,
+        variantsNative: (
+          await getStaticDemo('styled/button/Variants.native')(e)
+        ).props.ssg.code,
+      },
+    },
+  };
+};
+
+# Variants
+
+You can create variants with `variants` param, It use base `className`, `props` and `state`.  
+See [Base](/styled/base) for more explanation
+
+<TabsNext items={['Web', 'Native']}>
+  <TabNext>
+    <Code name="variants" show />
+    <br />
+    <CodeDemo Demo={ButtonVariantsDemo} />
+  </TabNext>
+  <TabNext>
+    <Code name="variantsNative" show />
+    <br />
+    <CodeDemo Demo={ButtonVariantsNativeDemo} />
+  </TabNext>
+</TabsNext>

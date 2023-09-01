@@ -1,0 +1,69 @@
+import {
+  CreateListSimpleDemo,
+  CreateListSimpleNativeDemo,
+  CreateListWithSeparatorNativeDemo,
+  CreateListWithSeparatorDemo,
+} from '@crossed/demo';
+import { CodeDemo } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { Tabs } from 'components/Tabs';
+import { Table } from 'components/Table';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        simple: (await getStaticDemo('primitive/createList/simple')(e)).props
+          .ssg.code,
+        simpleNative: (
+          await getStaticDemo('primitive/createList/simple.native')(e)
+        ).props.ssg.code,
+        separator: (await getStaticDemo('primitive/createList/separator')(e))
+          .props.ssg.code,
+        separatorNative: (await getStaticDemo('primitive/createList/separator.native')(e))
+          .props.ssg.code,
+      },
+    },
+  };
+};
+
+# createList
+
+<Tabs items={['Demo', 'Anatomy', 'Props']}>
+  <Tabs.Tab>
+    ## simple
+    <Tabs items={['Web', 'Native']}>
+      <Tabs.Tab>
+        <CodeDemo Demo={CreateListSimpleDemo} name="simple" />
+      </Tabs.Tab>
+      <Tabs.Tab>
+        <CodeDemo Demo={CreateListSimpleNativeDemo} name="simpleNative" />
+      </Tabs.Tab>
+    </Tabs>
+
+    ## With separator
+    <Tabs items={['Web', 'Native']}>
+      <Tabs.Tab>
+        <CodeDemo Demo={CreateListWithSeparatorDemo} name="separator" />
+      </Tabs.Tab>
+      <Tabs.Tab>
+        <CodeDemo Demo={CreateListWithSeparatorNativeDemo} name="separatorNative" />
+      </Tabs.Tab>
+    </Tabs>
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```tsx
+    <List>
+      <List.Item>
+        <List.Item.Title />
+        <List.Item.Subtitle />
+      </List.Item>
+    </List>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ## List
+    <Table props={[]} />
+  </Tabs.Tab>
+</Tabs>

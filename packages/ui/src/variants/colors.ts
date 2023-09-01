@@ -1,4 +1,4 @@
-import type { BaseWithState } from '@crossed/core';
+import type { BaseWithState } from '@crossed/styled';
 
 export const colorVariants = {
   slate: {

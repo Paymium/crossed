@@ -1,4 +1,4 @@
-import { withStaticProperties } from '@crossed/core';
+import { GetProps, withStaticProperties } from '@crossed/core';
 import { useMemo, type ComponentType } from 'react';
 import { createButtonMain } from './Button';
 import { createButtonText } from './ButtonText';
@@ -33,7 +33,7 @@ export const createButton = <
   ButtonIcon.displayName = 'Button.Icon';
 
   return withStaticProperties(
-    (props: ButtonProps) => {
+    (props: GetProps<typeof Button>) => {
       const {
         text,
         iconAfter: IconAfter,
@@ -44,8 +44,8 @@ export const createButton = <
 
       const contextProps = useMemo(() => {
         return Object.entries(context || {}).reduce<C>((acc, [key]) => {
-          if (props[key]) {
-            (acc as any)[key] = props[key];
+          if ((props as any)[key]) {
+            (acc as any)[key] = (props as any)[key];
           }
           return acc;
         }, context || ({} as C));

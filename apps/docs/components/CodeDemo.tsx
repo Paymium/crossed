@@ -53,7 +53,7 @@ export const CodeDemo = ({
         </Box>
         <YBox
           className={`${
-            hasActions ? 'border-l-2 p-4' : ''
+            hasActions ? 'border-l-2 p-4' : 'w-0'
           } dark:border-zinc-800 border-zinc-200 relative pb-8 max-w-[26%]`}
           space="sm"
         >
@@ -107,6 +107,7 @@ export const CodeDemo = ({
                       ).map((c) => {
                         return (
                           <Button
+                            aria-label={`Color ${color}`}
                             variant="filled"
                             size="xs"
                             key={c}
@@ -131,6 +132,7 @@ export const CodeDemo = ({
           {code.length > 0 && (
             <Box className="absolute bottom-0 right-0">
               <Button
+                aria-label="Show code"
                 color="violet"
                 variant="filled"
                 onPress={() => setShow((e) => !e)}
@@ -142,16 +144,17 @@ export const CodeDemo = ({
           )}
         </YBox>
       </Box>
-      <Code show={show} code={code} />
+      <Code show={show} name={name} />
     </Box>
   );
 };
 
-const Code = ({ show, code }: { show: boolean; code: string }) => {
+export const Code = ({ show, name }: { show: boolean; name: string }) => {
   const heightRef = useRef(500);
-  return show ? (
+  const code = (useData() || { [name]: '' })[name] || '';
+  return show && code ? (
     <Box
-      className="text-md block"
+      className="text-[13px] block"
       onLayout={({ nativeEvent: { layout } }) => {
         heightRef.current = layout.height;
       }}

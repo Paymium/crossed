@@ -1,0 +1,36 @@
+import { ButtonCompoundVariantsDemo, ButtonCompoundVariantsNativeDemo } from '@crossed/demo';
+import { CodeDemo, Code } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { Tabs as TabsNext, Tab as TabNext } from 'nextra-theme-docs';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        compoundVariants: (
+          await getStaticDemo('styled/button/CompoundVariants')(e)
+        ).props.ssg.code,
+        compoundVariantsNative: (
+          await getStaticDemo('styled/button/CompoundVariants.native')(e)
+        ).props.ssg.code,
+      },
+    },
+  };
+};
+
+# Compound Variants
+
+If you have conflict between variants
+
+<TabsNext items={['Web', 'Native']}>
+  <TabNext>
+    <Code name="compoundVariants" show />
+    <br />
+    <CodeDemo Demo={ButtonCompoundVariantsDemo} />
+  </TabNext>
+  <TabNext>
+    <Code name="compoundVariantsNative" show />
+    <br />
+    <CodeDemo Demo={ButtonCompoundVariantsNativeDemo} />
+  </TabNext>
+</TabsNext>

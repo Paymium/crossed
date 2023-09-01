@@ -13,6 +13,7 @@ const reactNativeDeps = [
   'react-native-web',
   'react-native-svg',
   '@iconscout/react-native-unicons',
+  'twrnc',
 ];
 
 export default function withCrossed(nextConfig: any = {}) {

@@ -1,10 +1,5 @@
-import {
-  GetProps,
-  createScope,
-  styled,
-  tw,
-  withStaticProperties,
-} from '@crossed/core';
+import { createScope, withStaticProperties } from '@crossed/core';
+import { styled, tw, type GetProps } from '@crossed/styled';
 import {
   useId,
   type ReactNode,

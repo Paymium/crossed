@@ -1,29 +1,24 @@
-import { CreateButtonWithContextDemo, CreateButtonDemo } from '@crossed/demo';
+import {
+  CreateButtonWithContextDemo,
+  CreateButtonNativeDemo,
+  CreateButtonWithContextNativeDemo,
+  CreateButtonDemo,
+} from '@crossed/demo';
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { Tabs } from 'components/Tabs';
 import { Table } from 'components/Table';
 
 export const getStaticProps = async (e) => {
-  const [
-    {
-      props: {
-        ssg: { code: codeSimple },
-      },
-    },
-    {
-      props: {
-        ssg: { code: codeWithContext },
-      },
-    },
-  ] = await Promise.all([
-    getStaticDemo('primitive/createButton/simple')(e),
-    getStaticDemo('primitive/createButton/withContext')(e),
-  ]);
-
   return {
     props: {
-      ssg: { codeSimple, codeWithContext },
+      ssg: {
+        codeSimple: (await getStaticDemo('primitive/createButton/simple')(e))
+          .props.ssg.code,
+        codeSimpleNative: (
+          await getStaticDemo('primitive/createButton/simple.native')(e)
+        ).props.ssg.code,
+      },
     },
   };
 };
@@ -32,23 +27,26 @@ export const getStaticProps = async (e) => {
 
 <Tabs items={['Demo', 'Anatomy', 'Props']}>
   <Tabs.Tab>
-    ## simple
-    <CodeDemo Demo={CreateButtonDemo} name="codeSimple" />
-    ## With context
-    <CodeDemo Demo={CreateButtonWithContextDemo} name="codeWithContext" />
+    ## Simple
+    <Tabs items={['Web', 'Native']}>
+      <Tabs.Tab>
+        <CodeDemo Demo={CreateButtonDemo} name="codeSimple" />
+      </Tabs.Tab>
+      <Tabs.Tab>
+        <CodeDemo Demo={CreateButtonNativeDemo} name="codeSimpleNative" />
+      </Tabs.Tab>
+    </Tabs>
   </Tabs.Tab>
   <Tabs.Tab>
     ```tsx
-    <Menu>
-      <Menu.Item>
-        <Menu.Item.Title />
-        <Menu.Item.Subtitle />
-      </Menu.Item>
-    </Menu>
+    <Button>
+      <Button.Text />
+      <Button.Icon />
+    </Button>
     ```
   </Tabs.Tab>
   <Tabs.Tab>
-    ## Menu
+    ## Button
     <Table props={[]} />
   </Tabs.Tab>
 </Tabs>

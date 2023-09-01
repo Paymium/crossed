@@ -3,10 +3,10 @@ import {
   composeEventHandlers,
   composeRefs,
   createScope,
-  cx,
   useUncontrolled,
   withStaticProperties,
 } from '@crossed/core';
+import { cx } from '@crossed/styled';
 import {
   Dispatch,
   PropsWithChildren,

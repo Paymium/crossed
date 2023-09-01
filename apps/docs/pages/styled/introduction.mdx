@@ -1,6 +1,14 @@
 # Introduction
 
-Tailwindcss is powerfull system.  
-Based on [twrnc](https://github.com/jaredh159/tailwind-react-native-classnames)
+With react server component, CSS-in-JS is not suitable ([see](https://cord.com/blog/migrating-from-css-in-js-to-vanilla-extract) or other posts).  
+Browsers are faster to interpret a css file than to launch the execution of a script which will add the style in the header.  
 
-Why create an other lib which ask to learn new theme design ? just use tailwindcss
+## What is `@crossed/styled` ?
+`@crossed/styled` is like [cva](https://cva.style/docs) but center about Tailwindcss.  
+You can create variants/themes easly, without touch on jsx for react-native and web
+
+## Dependencies used
+Dependencies used in `@crossed/styled`
+- [twrnc](https://github.com/jaredh159/tailwind-react-native-classnames)
+- [clsx](https://github.com/lukeed/clsx)
+- [tailwind-merge](https://github.com/dcastil/tailwind-merge)

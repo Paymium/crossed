@@ -37,6 +37,7 @@
   "devDependencies": {
     "@crossed/build": "*",
     "@crossed/core": "*",
+    "@crossed/styled": "*",
     "@crossed/unicons": "*",
     "@types/react": "^18.2.20",
     "@types/react-native": "^0.72.2",
@@ -51,6 +52,7 @@
   "dependencies": {
     "@crossed/primitive": "workspace:*",
     "@crossed/ui": "*",
+    "@gorhom/portal": "^1.0.14",
     "fuse.js": "^6.6.2",
     "react-aria": "^3.27.0"
   },

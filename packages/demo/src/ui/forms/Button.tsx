@@ -1,29 +1,21 @@
-import {
-  Button,
-  Text,
-  UilMessage,
-  XBox,
-  YBox,
-  useThemeContext,
-} from '@crossed/ui';
+import { Button, Text, UilMessage, XBox, YBox } from '@crossed/ui';
 import type { Props } from '../../props';
 
 export const ButtonDemo = ({ size, color, variant }: Props) => {
-  const { theme, setTheme } = useThemeContext();
-
   return (
     <XBox space="md">
       <YBox space="sm">
         <Text>Simple</Text>
         <Button
+          aria-label="Button simple"
           text="Button"
           icon={UilMessage}
           color={color}
           size={size}
           variant={variant as any}
-          onPress={() => setTheme(theme === 'light' ? 'dark' : 'light')}
         />
         <Button
+          aria-label="disabled Button"
           text="Disabled"
           icon={UilMessage}
           color={color}
@@ -34,13 +26,24 @@ export const ButtonDemo = ({ size, color, variant }: Props) => {
       </YBox>
       <YBox space="sm">
         <Text>Advanced</Text>
-        <Button color={color} size={size} variant={variant as any}>
+        <Button
+          aria-label="advanced Button"
+          color={color}
+          size={size}
+          variant={variant as any}
+        >
           <Button.Icon>
             <UilMessage />
           </Button.Icon>
           <Button.Text>Button</Button.Text>
         </Button>
-        <Button color={color} size={size} variant={variant as any} disabled>
+        <Button
+          aria-label="disabled Button advanced"
+          color={color}
+          size={size}
+          variant={variant as any}
+          disabled
+        >
           <Button.Icon>
             <UilMessage />
           </Button.Icon>

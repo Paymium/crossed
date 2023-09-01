@@ -49,6 +49,7 @@
   "dependencies": {
     "@crossed/core": "*",
     "@crossed/primitive": "*",
+    "@crossed/styled": "*",
     "@crossed/unicons": "*",
     "@expo/html-elements": "^0.5.1",
     "@floating-ui/react": "^0.25.1",

@@ -1,10 +1,5 @@
-import {
-  GetProps,
-  createScope,
-  cx,
-  styled,
-  withStaticProperties,
-} from '@crossed/core';
+import { GetProps, createScope, withStaticProperties } from '@crossed/core';
+import { styled, cx } from '@crossed/styled';
 import {
   useId,
   type PropsWithChildren,

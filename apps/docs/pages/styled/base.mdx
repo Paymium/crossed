@@ -1,0 +1,91 @@
+import {
+  ButtonOnlyBaseDemo,
+  ButtonOnlyBaseNativeDemo,
+  ButtonStateDemo,
+  ButtonStateNativeDemo,
+} from '@crossed/demo';
+import { CodeDemo, Code } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { Tabs as TabsNext, Tab as TabNext } from 'nextra-theme-docs';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        onlyBase: (await getStaticDemo('styled/button/OnlyBase')(e)).props.ssg
+          .code,
+        onlyBaseNative: (
+          await getStaticDemo('styled/button/OnlyBase.native')(e)
+        ).props.ssg.code,
+        state: (await getStaticDemo('styled/button/State')(e)).props.ssg.code,
+        stateNative: (await getStaticDemo('styled/button/State.native')(e)).props.ssg.code,
+      },
+    },
+  };
+};
+
+# Base
+
+For explain the principe, we will creating button component.
+
+## `className` and `props`
+
+When you use `styled` you define base `className` and base `props` of your component.
+You have two parameters which are `Base` params, `className` (array of tailwind className) and `props` (props of you base component)
+
+`props` params can set default props of your component
+
+- `as` is polymorphic props (optional)
+
+`className` params can set tailwind class name
+
+<TabsNext items={['Web', 'Native']}>
+  <TabNext>
+    <Code name="onlyBase" show />
+    <br />
+    <CodeDemo Demo={ButtonOnlyBaseDemo} />
+  </TabNext>
+  <TabNext>
+    <Code name="onlyBaseNative" show />
+    <br />
+    <CodeDemo Demo={ButtonOnlyBaseNativeDemo} />
+  </TabNext>
+</TabsNext>
+
+## State
+
+State of component is manage by javascript event, onClick (web), onPress (Native), ...
+
+### State list
+
+- `:hover`
+- `:active`
+- `:disabled`
+- `:focus`
+
+### Order priority
+
+```
+focus: 1
+hover: 2
+active: 3
+disabled: 4
+```
+
+### Usage
+
+In state keys, you define `className` and `props`  
+You can manage state from parent with `states` props added to component styled
+
+<TabsNext items={['Web', 'Native']}>
+  <TabNext>
+    <Code name="state" show />
+    <br />
+    <CodeDemo Demo={ButtonStateDemo} />
+  </TabNext>
+  <TabNext>
+    <Code name="stateNative" show />
+    <br />
+    <CodeDemo Demo={ButtonStateNativeDemo} />
+  </TabNext>
+</TabsNext>

@@ -1,5 +1,5 @@
 import { Text as TextNative } from 'react-native';
-import { styled } from '@crossed/core';
+import { styled } from '@crossed/styled';
 
 export const Text = styled(TextNative, {
   className: ['text-white'],

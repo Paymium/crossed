@@ -1,5 +1,14 @@
 {
   "introduction": "Introduction",
   "installation": "Installation",
-  "styled": "styled()"
+  "-- Guide": {
+    "title": "Guide",
+    "type": "separator"
+  },
+  "base": "Base",
+  "variants": "Variants",
+  "defaultVariants": "Default variants",
+  "compoundVariants": "Compound variants",
+  "extends": "Extends",
+  "alias": "Alias"
 }

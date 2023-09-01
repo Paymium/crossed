@@ -1,10 +1,5 @@
-import {
-  createScope,
-  styled,
-  withStaticProperties,
-  tw,
-  GetProps,
-} from '@crossed/core';
+import { createScope, withStaticProperties, GetProps } from '@crossed/core';
+import { styled, tw } from '@crossed/styled';
 import {
   cloneElement,
   forwardRef,
@@ -178,11 +173,11 @@ const InputInput = memo(
             onChangeText={onChangeValue}
             className="focus:ring ring-violet-400"
             {...props}
-            onFocus={(e) => {
+            onFocus={(e: any) => {
               props?.onFocus?.(e);
               setFocus(true);
             }}
-            onBlur={(e) => {
+            onBlur={(e: any) => {
               props?.onBlur?.(e);
               setFocus(false);
             }}
