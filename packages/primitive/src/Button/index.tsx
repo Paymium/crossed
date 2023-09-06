@@ -29,58 +29,59 @@ export const createButton = <
   const ButtonIcon = createButtonIcon(Icon);
 
   Button.displayName = 'Button';
-  ButtonText.displayName = 'Button.Text';
-  ButtonIcon.displayName = 'Button.Icon';
+  ButtonText.displayName = 'ButtonText';
+  ButtonIcon.displayName = 'ButtonIcon';
 
-  return withStaticProperties(
-    (props: GetProps<typeof Button>) => {
-      const {
-        text,
-        iconAfter: IconAfter,
-        icon: Icon,
-        children,
-        ...otherProps
-      } = props as any;
+  const ButtonRoot = (props: GetProps<typeof Button>) => {
+    const {
+      text,
+      iconAfter: IconAfter,
+      icon: Icon,
+      children,
+      ...otherProps
+    } = props as any;
 
-      const contextProps = useMemo(() => {
-        return Object.entries(context || {}).reduce<C>((acc, [key]) => {
-          if ((props as any)[key]) {
-            (acc as any)[key] = (props as any)[key];
-          }
-          return acc;
-        }, context || ({} as C));
-      }, [props]);
+    const contextProps = useMemo(() => {
+      return Object.entries(context || {}).reduce<C>((acc, [key]) => {
+        if ((props as any)[key]) {
+          (acc as any)[key] = (props as any)[key];
+        }
+        return acc;
+      }, context || ({} as C));
+    }, [props]);
 
-      return (
-        <Provider {...contextProps}>
-          <Button {...otherProps}>
-            {children ?? (
-              <>
-                {Icon && (
-                  // @ts-ignore
-                  <ButtonIcon>
-                    <Icon />
-                  </ButtonIcon>
-                )}
-                {text && (
-                  // @ts-ignore
-                  <ButtonText>{text}</ButtonText>
-                )}
-                {IconAfter && (
-                  // @ts-ignore
-                  <ButtonIcon>
-                    <IconAfter />
-                  </ButtonIcon>
-                )}
-              </>
-            )}
-          </Button>
-        </Provider>
-      );
-    },
-    {
-      Text: ButtonText,
-      Icon: ButtonIcon,
-    }
-  );
+    return (
+      <Provider {...contextProps}>
+        <Button {...otherProps}>
+          {children ?? (
+            <>
+              {Icon && (
+                // @ts-ignore
+                <ButtonIcon>
+                  <Icon />
+                </ButtonIcon>
+              )}
+              {text && (
+                // @ts-ignore
+                <ButtonText>{text}</ButtonText>
+              )}
+              {IconAfter && (
+                // @ts-ignore
+                <ButtonIcon>
+                  <IconAfter />
+                </ButtonIcon>
+              )}
+            </>
+          )}
+        </Button>
+      </Provider>
+    );
+  };
+
+  ButtonRoot.displayName = 'ButtonRoot';
+
+  return withStaticProperties(ButtonRoot, {
+    Text: ButtonText,
+    Icon: ButtonIcon,
+  });
 };

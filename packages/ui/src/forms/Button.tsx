@@ -1,3 +1,4 @@
+'use client';
 import { styled, tw, type GetProps } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
 import { Pressable, Text } from 'react-native';
@@ -38,7 +39,7 @@ const ButtonFrame = styled(Pressable, {
   },
   'defaultVariants': {
     size: 'md',
-    color: 'zinc',
+    color: 'neutral',
     variant: 'outlined',
     space: 'xs',
   },
@@ -79,16 +80,20 @@ const ButtonTextFrame = styled(Text, {
       xl: { className: ['px-5', 'text-xl'] },
     },
     variant: {
-      filled: { className: [] },
-      outlined: { className: [] },
+      filled: { className: ['text-white dark:text-white'] },
+      outlined: { className: ['bg-transparent dark:bg-transparent'] },
     },
   },
   defaultVariants: {
     size: 'md',
-    color: 'zinc',
+    color: 'neutral',
     variant: 'outlined',
   },
   compoundVariants: [
+    {
+      variant: 'outlined',
+      className: ['bg-transparent dark:bg-transparent'],
+    },
     {
       variant: 'filled',
       className: ['text-white dark:text-white'],
@@ -119,7 +124,7 @@ function ButtonRoot(props: ButtonRootPropsSimple | ButtonRootPropsAdvanced) {
   return <ButtonFrame {...props} />;
 }
 
-const ButtonIcon = ({
+const ButtonIconFrame = ({
   children,
   ...props
 }: PropsWithChildren<GetProps<typeof Box>>) => {
@@ -139,17 +144,21 @@ const ButtonIcon = ({
   );
 };
 
-export const Button = createButton(
+const Button = createButton(
   {
     Root: ButtonRoot,
     Text: ButtonTextFrame,
-    Icon: ButtonIcon,
+    Icon: ButtonIconFrame,
   },
   {
     context: {
-      color: 'blue',
+      // color: 'blue',
       size: 'md',
-      variant: 'oulined',
+      variant: 'outlined',
     },
   }
 );
+
+const { Text: ButtonText, Icon: ButtonIcon } = Button;
+
+export { ButtonText, ButtonIcon, Button };

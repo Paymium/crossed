@@ -73,6 +73,7 @@ export const crossed =
           [':dark']: darkCompoundVariant,
           ...compoundVariantOptions
         } = v;
+
         const check = Object.entries(compoundVariantOptions).every(
           ([key, value]) => {
             return Array.isArray(value)

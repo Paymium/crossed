@@ -1,3 +1,5 @@
+'use client';
+
 import { Text as TextNative } from 'react-native';
 import { styled } from '@crossed/styled';
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { createScope, withStaticProperties } from '@crossed/core';
 import { styled, tw, type GetProps } from '@crossed/styled';
 import {

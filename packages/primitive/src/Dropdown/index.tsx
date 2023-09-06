@@ -5,7 +5,14 @@ import { createDropdownTrigger } from './DropdownTrigger';
 import { createDropdownContent } from './DropdownContent';
 import { createDropdownPortal } from './DropdownPortal';
 import { Provider } from './context';
-import { createDropdownOverlay } from './DropdownOverlay';
+import { createDropdownItem } from './DropdownItem';
+import { createDropdownDivider } from './DropdownDivider';
+import { createDropdownLabel } from './DropdownLabel';
+
+export {
+  Provider as ProviderDropdown,
+  useContext as useDropdownContext,
+} from './context';
 
 type Arg<Context extends Record<string, any>> = {
   context?: Context;
@@ -16,7 +23,9 @@ export const createDropdown = <
   TriggerProps extends Record<string, any>,
   ContentProps extends Record<string, any>,
   PortalProps extends Record<string, any>,
-  OverlayProps extends Record<string, any>,
+  ItemProps extends Record<string, any>,
+  DividerProps extends Record<string, any>,
+  LabelProps extends Record<string, any>,
   C extends Record<string, any>
 >(
   components: {
@@ -24,22 +33,28 @@ export const createDropdown = <
     Trigger: ComponentType<TriggerProps>;
     Content: ComponentType<ContentProps>;
     Portal: ComponentType<PortalProps>;
-    Overlay: ComponentType<OverlayProps>;
+    Item: ComponentType<ItemProps>;
+    Divider: ComponentType<DividerProps>;
+    Label: ComponentType<LabelProps>;
   },
   { context }: Arg<C> = {}
 ) => {
-  const { Root, Trigger, Content, Portal, Overlay } = components;
+  const { Root, Trigger, Content, Portal, Item, Divider, Label } = components;
   const Dropdown = createDropdownMain(Root);
   const DropdownTrigger = createDropdownTrigger(Trigger);
   const DropdownContent = createDropdownContent(Content);
   const DropdownPortal = createDropdownPortal(Portal);
-  const DropdownOverlay = createDropdownOverlay(Overlay);
+  const DropdownItem = createDropdownItem(Item);
+  const DropdownDivider = createDropdownDivider(Divider);
+  const DropdownLabel = createDropdownLabel(Label);
 
   Dropdown.displayName = 'Dropdown';
   DropdownTrigger.displayName = 'Dropdown.Trigger';
   DropdownContent.displayName = 'Dropdown.Content';
   DropdownPortal.displayName = 'Dropdown.Portal';
-  DropdownOverlay.displayName = 'Dropdown.Overlay';
+  DropdownItem.displayName = 'Dropdown.Item';
+  DropdownDivider.displayName = 'Dropdown.Divider';
+  DropdownLabel.displayName = 'Dropdown.Label';
 
   return withStaticProperties(
     (
@@ -81,7 +96,9 @@ export const createDropdown = <
       Trigger: DropdownTrigger,
       Content: DropdownContent,
       Portal: DropdownPortal,
-      Overlay: DropdownOverlay,
+      Item: DropdownItem,
+      Divider: DropdownDivider,
+      Label: DropdownLabel,
     }
   );
 };

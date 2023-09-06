@@ -1,3 +1,5 @@
+'use client';
+
 import { PropsWithChildren, createContext, useContext } from 'react';
 import { tw, useAppColorScheme, useDeviceContext } from '@crossed/styled';
 import { PortalProvider } from '@gorhom/portal';

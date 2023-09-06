@@ -1,3 +1,4 @@
+'use client';
 import {
   GetProps,
   composeEventHandlers,
@@ -146,7 +147,7 @@ const SwitchLabel = (props: GetProps<typeof Label.Text>) => {
       onPress={
         composeEventHandlers(
           props.onPress,
-          Platform.OS !== 'web' && (() => setIsChecked(!isChecked))
+          Platform.OS !== 'web' ? () => setIsChecked(!isChecked) : undefined
         ) as any
       }
     />

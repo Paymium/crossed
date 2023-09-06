@@ -1,3 +1,4 @@
+'use client';
 import React, { memo } from 'react';
 import { RemoveScroll as RS } from 'react-remove-scroll';
 

@@ -1,0 +1,19 @@
+import Image from 'next/image';
+import { Box } from '@crossed/ui';
+import { Collections, CollectionsItem } from '@crossed/primitive';
+
+export const Toto = () => {
+  return (
+    <Collections>
+      {[...Array(10).keys()].map((e) => (
+        <CollectionsItem key={e}>
+          <div className="w-5 h-5 bg-neutral-500 my-1" />
+        </CollectionsItem>
+      ))}
+    </Collections>
+  );
+};
+
+# Collections
+
+<Toto />
