@@ -1,6 +1,6 @@
-import { GetProps, merge } from '@crossed/styled';
+import { merge } from '@crossed/styled';
 import { createDropdown, useDropdownContext } from '@crossed/primitive';
-import { YBox, Text } from '@crossed/ui';
+import { YBox } from '@crossed/ui';
 import {
   type HTMLAttributes,
   forwardRef,
@@ -10,7 +10,6 @@ import {
 import { Portal } from '@gorhom/portal';
 import { composeRefs, createScope } from '@crossed/core';
 import {
-  FloatingFocusManager,
   autoUpdate,
   flip,
   offset,
