@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useContext as useContextReact, useMemo } from 'react';
 
 export const createScope = <C extends object | null>(defaultContext: C) => {

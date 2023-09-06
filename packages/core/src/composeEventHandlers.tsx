@@ -1,24 +1,18 @@
-type Events = Object;
-
-export type EventHandler<E extends Events> = (event: E) => void;
-
-export function composeEventHandlers<E extends Events>(
-  og?: EventHandler<E> | null | false,
-  next?: EventHandler<E> | null | false,
-  { checkDefaultPrevented = true } = {}
+function composeEventHandlers<E>(
+  originalEventHandler?: (event: E) => void,
+  ourEventHandler?: (event: E) => void,
+  { checkForDefaultPrevented = true } = {}
 ) {
-  if (!og || !next) {
-    return next || og;
-  }
-  return function composedEventHandler(event: E) {
-    og?.(event);
+  return function handleEvent(event: E) {
+    originalEventHandler?.(event);
+
     if (
-      !event ||
-      !(checkDefaultPrevented && 'defaultPrevented' in event) ||
-      // @ts-ignore
-      ('defaultPrevented' in event && !event.defaultPrevented)
+      checkForDefaultPrevented === false ||
+      !(event as unknown as Event).defaultPrevented
     ) {
-      return next?.(event);
+      return ourEventHandler?.(event);
     }
   };
 }
+
+export { composeEventHandlers };

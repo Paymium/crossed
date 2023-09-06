@@ -1,3 +1,4 @@
+'use client';
 import { withStaticProperties, type GetProps } from '@crossed/core';
 import { Input, InputRootProps } from './Input';
 import type { ReactElement } from 'react';

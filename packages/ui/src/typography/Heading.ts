@@ -1,3 +1,5 @@
+'use client';
+
 import { Text as TextNative } from 'react-native';
 import { styled } from '@crossed/styled';
 import { H1, H2, H3, H4, H5, H6 } from '@expo/html-elements';
