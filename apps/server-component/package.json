@@ -1,6 +1,6 @@
 {
   "name": "server-component",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@crossed/next-adapter": "0.4.0",
-    "@crossed/ui": "0.4.0",
+    "@crossed/next-adapter": "0.5.0",
+    "@crossed/ui": "0.5.0",
     "@types/node": "^20.5.9",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
