@@ -1,0 +1,82 @@
+import { ColorModeDemo } from '@crossed/demo';
+import { CodeDemo } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        onlyBase: (await getStaticDemo('styled/button/OnlyBase')(e)).props.ssg
+          .code,
+        onlyBaseNative: (
+          await getStaticDemo('styled/button/OnlyBase.native')(e)
+        ).props.ssg.code,
+        state: (await getStaticDemo('styled/button/State')(e)).props.ssg.code,
+        stateNative: (await getStaticDemo('styled/button/State.native')(e))
+          .props.ssg.code,
+        colorMode: (await getStaticDemo('styled/colorMode')(e)).props.ssg.code,
+      },
+    },
+  };
+};
+
+# Color mode
+
+You can specify color mode for each component styled
+
+```typescript
+import { styled } from '@crossed/styled';
+
+export const Button = styled('button', {
+  'className': ['px-2 py-1'],
+  ':dark': {
+    className: ['bg-neutral-800 text-white'],
+  },
+  ':light': {
+    className: ['bg-neutral-300 text-black'],
+  },
+  'variants': {
+    color: {
+      red: {
+        ':dark': {
+          className: ['bg-red-800 text-white'],
+        },
+        ':light': {
+          className: ['bg-red-300 text-black'],
+        },
+      },
+    },
+  }
+});
+```
+
+## Configuration
+
+First create component with dark and light config
+
+Second you should add `CrossedTheme`
+
+```typescript
+import { CrossedTheme } from '@crossed/styled';
+
+export const App = () => {
+  return <CrossedTheme defaultTheme="dark">{/* ... */}</CrossedTheme>;
+};
+```
+
+Then you can change theme with `useCrossedTheme`
+
+```typescript
+import { useCrossedTheme } from '@crossed/styled';
+
+export const ButtonTheme = () => {
+  const { theme, setTheme } = useCrossedTheme();
+  return (
+    <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} />
+  );
+};
+```
+
+## Demo
+
+<CodeDemo Demo={ColorModeDemo} name="colorMode" />

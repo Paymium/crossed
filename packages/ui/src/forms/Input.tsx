@@ -27,7 +27,7 @@ const [Provider, useContext] = createScope<{
   refInput?: any;
 }>({
   size: 'md',
-  color: 'zinc',
+  color: 'neutral',
   variant: 'outlined',
   setFocus: () => {},
 });
@@ -43,14 +43,14 @@ export const InputContentFrame = styled(Pressable, {
     variant: {
       filled: { className: ['border-transparent'] },
       outlined: {
-        className: ['bg-zinc-950'],
+        className: ['bg-neutral-950'],
       },
     },
     space: spaceVariants,
   },
   'defaultVariants': {
     size: 'md',
-    color: 'zinc',
+    color: 'neutral',
     variant: 'outlined',
   },
   'compoundVariants': [
@@ -58,10 +58,10 @@ export const InputContentFrame = styled(Pressable, {
       'color': Object.keys(colorVariants) as (keyof typeof colorVariants)[],
       'variant': 'outlined',
       ':hover': {
-        className: ['bg-zinc-900'],
+        className: ['bg-neutral-900'],
       },
       ':focus': {
-        className: ['bg-zinc-900'],
+        className: ['bg-neutral-900'],
       },
     },
   ],

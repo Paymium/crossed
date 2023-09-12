@@ -38,7 +38,7 @@ const MenuItemFrame = styled(Pressable, {
     space: spaceVariants,
   },
   'defaultVariants': {
-    color: 'zinc',
+    color: 'neutral',
     space: 'sm',
   },
 });
@@ -50,7 +50,7 @@ const MenuItemTitle = styled(Text, {
 });
 
 const MenuItemSubtitle = styled(Text, {
-  className: ['dark:text-zinc-500'],
+  className: ['dark:text-neutral-500'],
 });
 
 type MenuRootProps = { separator?: ReactNode } & GetProps<

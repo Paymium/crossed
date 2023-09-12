@@ -13,7 +13,7 @@ import { Platform, Text, View } from 'react-native';
 import { Box } from '../layout/Box';
 
 export const LabelText = styled(Text, {
-  className: ['dark:text-zinc-400 text-zinc-700'],
+  className: ['dark:text-neutral-400 text-neutral-700'],
   props: {
     as: 'label',
   },

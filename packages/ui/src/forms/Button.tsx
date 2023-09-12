@@ -1,13 +1,12 @@
 'use client';
-import { styled, tw, type GetProps } from '@crossed/styled';
+import { styled, tw, type GetProps, useCrossedTheme } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
-import { Pressable, Text } from 'react-native';
+import { Pressable, PressableProps, Text } from 'react-native';
 import { cloneElement, type PropsWithChildren, ComponentType } from 'react';
 import { colorVariants } from '../variants/colors';
 import { sizeVariants } from '../variants/size';
 import { Box } from '../layout/Box';
 import { spaceVariants } from '../variants';
-import { useThemeContext } from '../Provider';
 import { useButtonContext } from '@crossed/primitive';
 
 const ButtonFrame = styled(Pressable, {
@@ -22,19 +21,14 @@ const ButtonFrame = styled(Pressable, {
     color: colorVariants,
     size: sizeVariants,
     space: spaceVariants,
+    unstyled: {
+      true: {},
+    },
     variant: {
       filled: {
-        className: ['border-transparent dark:border-transparent'],
+        className: ['border-transparent'],
       },
-      outlined: {
-        'className': ['dark:bg-zinc-950 bg-zinc-100'],
-        ':hover': {
-          className: ['dark:bg-zinc-900 bg-zinc-300'],
-        },
-        ':active': {
-          className: ['dark:bg-zinc-800 bg-zinc-200'],
-        },
-      },
+      outlined: {},
     },
   },
   'defaultVariants': {
@@ -43,6 +37,14 @@ const ButtonFrame = styled(Pressable, {
     variant: 'outlined',
     space: 'xs',
   },
+  'compoundVariants': [
+    {
+      'unstyled': true,
+      'className': ['bg-transparent border-transparent'],
+      ':hover': { className: ['bg-transparent border-transparent'] },
+      ':active': { className: ['bg-transparent border-transparent'] },
+    },
+  ],
 });
 
 const ButtonTextFrame = styled(Text, {
@@ -51,15 +53,42 @@ const ButtonTextFrame = styled(Text, {
     color: Object.entries(colorVariants).reduce<{
       [key in keyof typeof colorVariants]: (typeof colorVariants)[key];
     }>(
-      (acc, [keyColor, { className, ...colorVariant }]) => {
-        const flatClassName = className.reduce<string[]>((d, c) => {
-          return [...d, ...c.split(' ')];
-        }, []);
+      (
+        acc,
+        [
+          keyColor,
+          { className, ':light': light, ':dark': dark, ...colorVariant },
+        ]
+      ) => {
+        const lightClassName = (light?.className || []).reduce<string[]>(
+          (d, c) => [...d, ...c.split(' ')],
+          []
+        );
+        const darkClassName = (dark?.className || []).reduce<string[]>(
+          (d, c) => [...d, ...c.split(' ')],
+          []
+        );
+        const flatClassName = (className || []).reduce<string[]>(
+          (d, c) => [...d, ...c.split(' ')],
+          []
+        );
 
         (acc as any)[keyColor] = {
           ...colorVariant,
-          'className': (flatClassName || []).filter(
-            (e) => e.startsWith('text-') || e.startsWith('dark:text-')
+          ':light': {
+            ...light,
+            className: (lightClassName || []).filter((e) =>
+              e.startsWith('text-')
+            ),
+          },
+          ':dark': {
+            ...dark,
+            className: (darkClassName || []).filter((e) =>
+              e.startsWith('text-')
+            ),
+          },
+          'className': (flatClassName || []).filter((e) =>
+            e.startsWith('text-')
           ),
           ':active': undefined,
           ':hover': undefined,
@@ -80,9 +109,10 @@ const ButtonTextFrame = styled(Text, {
       xl: { className: ['px-5', 'text-xl'] },
     },
     variant: {
-      filled: { className: ['text-white dark:text-white'] },
-      outlined: { className: ['bg-transparent dark:bg-transparent'] },
+      filled: { className: ['text-white'] },
+      outlined: { className: ['bg-transparent'] },
     },
+    unstyled: { true: {} },
   },
   defaultVariants: {
     size: 'md',
@@ -92,48 +122,48 @@ const ButtonTextFrame = styled(Text, {
   compoundVariants: [
     {
       variant: 'outlined',
-      className: ['bg-transparent dark:bg-transparent'],
+      className: ['bg-transparent'],
     },
     {
       variant: 'filled',
-      className: ['text-white dark:text-white'],
+      className: ['text-white'],
+      ':dark': {
+        className: ['text-white'],
+      },
+      ':light': {
+        className: ['text-white'],
+      },
+    },
+    {
+      'unstyled': true,
+      ':hover': {
+        className: ['bg-tranparent'],
+      },
+      ':dark': {
+        className: ['text-white'],
+      },
+      ':light': {
+        className: ['text-black'],
+      },
     },
   ],
 });
-
-type ButtonRootProps = GetProps<typeof ButtonFrame> & {
-  text?: string;
-  iconAfter?: ComponentType;
-  icon?: ComponentType;
-};
-
-type ButtonRootPropsSimple = Omit<ButtonRootProps, 'children'> & {
-  children?: never;
-};
-
-type ButtonRootPropsAdvanced = Omit<
-  ButtonRootProps,
-  'text' | 'iconAfter' | 'icon'
-> & {
-  text?: never;
-  iconAfter?: never;
-  icon?: never;
-};
-
-function ButtonRoot(props: ButtonRootPropsSimple | ButtonRootPropsAdvanced) {
-  return <ButtonFrame {...props} />;
-}
 
 const ButtonIconFrame = ({
   children,
   ...props
 }: PropsWithChildren<GetProps<typeof Box>>) => {
-  const { theme } = useThemeContext();
   const { color, variant, size } = useButtonContext();
-  const className = ButtonTextFrame.styles({ color, variant, size });
-
-  tw.setColorScheme(theme);
-  const style = tw.style(className.className);
+  const { theme } = useCrossedTheme();
+  const className = ButtonTextFrame.styles({
+    color,
+    variant,
+    size,
+  });
+  const style = tw.style(
+    className?.className,
+    className?.[`:${theme}`]?.className
+  );
   return (
     <Box {...props}>
       {cloneElement(children as any, {
@@ -146,13 +176,12 @@ const ButtonIconFrame = ({
 
 const Button = createButton(
   {
-    Root: ButtonRoot,
+    Root: ButtonFrame,
     Text: ButtonTextFrame,
     Icon: ButtonIconFrame,
   },
   {
     context: {
-      // color: 'blue',
       size: 'md',
       variant: 'outlined',
     },

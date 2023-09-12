@@ -46,7 +46,7 @@ const config: Config = {
   ],
   // ...
 };
-export default config;/@crossed/ui/lib/**/*.{js,jsx,ts,tsx,md,mdx}',
+export default config;,
 
 ```
 ### Postcss
@@ -80,15 +80,15 @@ module.exports = {
 
 ```
 
-### Add CrossedProvider
+### Add CrossedTheme
 ```typescript
-import { CrossedProvider } from "@crossed/ui"
+import { CrossedTheme } from "@crossed/ui"
 
 export default function App({ Component, pageProps }) {
   return (
-    <CrossedProvider defaultTheme={'dark'}>
+    <CrossedTheme defaultTheme={'dark'}>
       <Component {...pageProps} />
-    </CrossedProvider>
+    </CrossedTheme>
   );
 }
 ```

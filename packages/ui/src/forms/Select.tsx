@@ -190,7 +190,7 @@ const SelectOption = memo(
         </VisuallyHidden>
         <Input.Content
           {...(keyboardProps as any)}
-          className="border-0 ring-0 focus:dark:bg-zinc-600 focus-visible:!ring-offset-transparent focus-visible:!ring-transparent focus-visible:shadow-none"
+          className="border-0 ring-0 focus:dark:bg-neutral-600 focus-visible:!ring-offset-transparent focus-visible:!ring-transparent focus-visible:shadow-none"
           onPress={() => {
             setOpen(false);
             setValue(label);
@@ -231,7 +231,7 @@ function SelectRoot(
 function SelectRoot({
   size = 'md',
   variant = 'outlined',
-  color = 'zinc',
+  color = 'neutral',
   children,
   open: openProps = false,
   items,

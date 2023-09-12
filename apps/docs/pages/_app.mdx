@@ -1,10 +1,10 @@
 import '../styles/global.css';
-import { CrossedProvider } from '@crossed/ui';
+import { CrossedTheme } from '@crossed/ui';
 
 export default function App({ Component, pageProps }) {
   return (
-    <CrossedProvider defaultTheme={'dark'}>
+    <CrossedTheme defaultTheme={'dark'}>
       <Component {...pageProps} />
-    </CrossedProvider>
+    </CrossedTheme>
   );
 }

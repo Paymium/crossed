@@ -15,5 +15,6 @@
   "createList": "createList",
   "createDropdown": "createDropdown",
   "createSheet": "createSheet",
-  "createModal": "createModal"
+  "createModal": "createModal",
+  "createInput": "createInput"
 }

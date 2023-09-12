@@ -1,4 +1,4 @@
-import { UilCheck } from '@iconscout/react-native-unicons';
+import { UilCheck, UilEye, UilEyeSlash } from '@iconscout/react-native-unicons';
 import { Props } from '@crossed/demo/lib/typescript/props';
 import {
   Box,
@@ -33,14 +33,14 @@ export const CodeDemo = ({
 }) => {
   const code = (useData() || { [name]: '' })[name] || '';
   const [show, setShow] = useState(false);
-  const [color, setColor] = useState('zinc');
+  const [color, setColor] = useState('neutral');
   const [space, setSpace] = useState('md');
   const [size, setSize] = useState('md');
   const [variant, setVariant] = useState(actions.variant?.[0] || '');
   const hasActions = Object.keys(actions || {}).length > 0;
 
   return (
-    <Box className="dark:border-zinc-800 border-zinc-800 border rounded-md flex-col">
+    <Box className="dark:border-neutral-800 border-neutral-800 border rounded-md flex-col">
       <Box className="flex-row flex">
         <Box className="flex-1 p-4 justify-center items-center">
           <Demo
@@ -53,8 +53,10 @@ export const CodeDemo = ({
         </Box>
         <YBox
           className={`${
-            hasActions ? 'border-l-2 p-4' : 'w-0'
-          } dark:border-zinc-800 border-zinc-200 relative pb-8 max-w-[26%]`}
+            hasActions ? 'border-l p-4' : 'w-0'
+          } relative pb-8 max-w-[26%]`}
+          $dark={{className: ['border-neutral-800']}}
+          $light={{className: ['border-neutral-200']}}
           space="sm"
         >
           {hasActions && (
@@ -107,7 +109,7 @@ export const CodeDemo = ({
                       ).map((c) => {
                         return (
                           <Button
-                            aria-label={`Color ${color}`}
+                            aria-label={`Color ${c}`}
                             variant="filled"
                             size="xs"
                             key={c}
@@ -132,13 +134,15 @@ export const CodeDemo = ({
           {code.length > 0 && (
             <Box className="absolute bottom-0 right-0">
               <Button
+                className="relative"
                 aria-label="Show code"
-                color="violet"
-                variant="filled"
                 onPress={() => setShow((e) => !e)}
                 size="xs"
+                unstyled
               >
-                <Button.Text>{show ? 'Hide' : 'Show'}</Button.Text>
+                <Button.Icon>
+                  {!show ? <UilEye /> : <UilEyeSlash />}
+                </Button.Icon>
               </Button>
             </Box>
           )}

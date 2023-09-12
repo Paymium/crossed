@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { styled } from '@crossed/styled';
 
 export const Divider = styled(View, {
-  className: ['flex', 'border-zinc-600'],
+  className: ['flex', 'border-neutral-600'],
   variants: {
     direction: {
       vertical: { className: ['border-l', 'h-full'] },

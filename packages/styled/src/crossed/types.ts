@@ -16,7 +16,8 @@ export type ClassProp =
 export type OmitUndefined<T> = T extends undefined ? never : T;
 export type StringToBoolean<T> = T extends 'true' | 'false' ? boolean : T;
 
-export type StateName = 'focus' | 'hover' | 'disabled' | 'active' | 'dark';
+export type StateName = 'focus' | 'hover' | 'disabled' | 'active';
+export type ThemeName = 'dark' | 'light';
 
 export type PropsExtends<P> = P & { as?: any };
 
@@ -25,10 +26,14 @@ export type Base<P> = {
   props?: PropsExtends<P>;
 };
 
-export type BaseWithState<P> = State<P> & Base<P>;
+export type BaseWithState<P> = State<P> & Theme<P> & Base<P>;
 
 export type State<P> = {
-  [key in StateName as `:${key}`]?: Base<P>;
+  [key in StateName as `:${key}`]?: Base<P> & Theme<P>;
+};
+
+export type Theme<P> = {
+  [key in ThemeName as `:${key}`]?: Base<P>;
 };
 
 export type ConfigSchema<P> = Record<string, Record<string, BaseWithState<P>>>;

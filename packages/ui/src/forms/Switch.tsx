@@ -33,7 +33,7 @@ const SwitchThumbFrame = styled(Pressable, {
   variants: {
     size: {
       md: {
-        className: ['w-10 bg-zinc-500'],
+        className: ['w-10 bg-neutral-500'],
       },
     },
   },
@@ -77,7 +77,7 @@ type SwitchRootProps = {
 
 const SwitchRoot = ({
   size = 'md',
-  color = 'zinc',
+  color = 'neutral',
   children,
   checked,
   defaultChecked,

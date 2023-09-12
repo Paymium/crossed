@@ -3,7 +3,7 @@ import { DocsThemeConfig } from 'nextra-theme-docs';
 import { useMounted } from 'nextra/hooks';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from 'nextra/icons';
-import { Button, useThemeContext } from '@crossed/ui';
+import { Button, useCrossedTheme } from '@crossed/ui';
 import { tw } from '@crossed/styled';
 
 const config: DocsThemeConfig = {
@@ -51,7 +51,7 @@ const config: DocsThemeConfig = {
   ),
   themeSwitch: {
     component: function Component() {
-      const { setTheme, theme } = useThemeContext();
+      const { setTheme, theme } = useCrossedTheme();
       const { setTheme: setGlobalTheme } = useTheme();
       const mounted = useMounted();
       const IconToUse = mounted && theme === 'dark' ? MoonIcon : SunIcon;

@@ -44,19 +44,19 @@ const CheckboxIndicatorFrame = styled(Pressable, {
     variant: {
       filled: { className: ['border-transparent dark:border-transparent'] },
       outlined: {
-        'className': ['dark:bg-zinc-950 bg-zinc-100'],
+        'className': ['dark:bg-neutral-950 bg-neutral-100'],
         ':hover': {
-          className: ['dark:bg-zinc-900 bg-zinc-300'],
+          className: ['dark:bg-neutral-900 bg-neutral-300'],
         },
         ':active': {
-          className: ['dark:bg-zinc-800 bg-zinc-200'],
+          className: ['dark:bg-neutral-800 bg-neutral-200'],
         },
       },
     },
   },
   defaultVariants: {
     size: 'md',
-    color: 'zinc',
+    color: 'neutral',
     variant: 'outlined',
   },
   compoundVariants: [

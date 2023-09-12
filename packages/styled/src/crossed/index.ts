@@ -32,6 +32,7 @@ export const crossed =
       [':hover']: hoverBase,
       [':disabled']: disabledBase,
       [':dark']: darkBase,
+      [':light']: lightBase,
       variants,
       defaultVariants,
     } = config;
@@ -71,6 +72,7 @@ export const crossed =
           [':hover']: hoverCompoundVariant,
           [':disabled']: disabledCompoundVariant,
           [':dark']: darkCompoundVariant,
+          [':light']: lightCompoundVariant,
           ...compoundVariantOptions
         } = v;
 
@@ -99,6 +101,7 @@ export const crossed =
             [':hover']: hoverCompoundVariant,
             [':disabled']: disabledCompoundVariant,
             [':dark']: darkCompoundVariant,
+            [':light']: lightCompoundVariant,
           });
         }
         return acc;
@@ -115,6 +118,7 @@ export const crossed =
         ':hover': hoverBase,
         ':disabled': disabledBase,
         ':dark': darkBase,
+        ':light': lightBase,
       },
       ...getVariantClassNames,
       getCompoundVariantClassNames,
@@ -159,6 +163,9 @@ export const merge = <P>(
   }
   if (two[':dark']) {
     acc[':dark'] = deepMerge(one[':dark'], two[':dark']);
+  }
+  if (two[':light']) {
+    acc[':light'] = deepMerge(one[':light'], two[':light']);
   }
   if (one.props || two.props) {
     one.props = { ...acc.props, ...two.props } as PropsExtends<P>;
