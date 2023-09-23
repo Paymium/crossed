@@ -40,7 +40,11 @@ export const CodeDemo = ({
   const hasActions = Object.keys(actions || {}).length > 0;
 
   return (
-    <Box className="dark:border-neutral-800 border-neutral-800 border rounded-md flex-col">
+    <Box
+      $dark={{ className: ['border-neutral-800 bg-neutral-900'] }}
+      $light={{ className: ['border-neutral-200 bg-neutral-100'] }}
+      className="border rounded-md flex-col overflow-hidde"
+    >
       <Box className="flex-row flex">
         <Box className="flex-1 p-4 justify-center items-center">
           <Demo
@@ -55,8 +59,8 @@ export const CodeDemo = ({
           className={`${
             hasActions ? 'border-l p-4' : 'w-0'
           } relative pb-8 max-w-[26%]`}
-          $dark={{className: ['border-neutral-800']}}
-          $light={{className: ['border-neutral-200']}}
+          $dark={{ className: ['border-neutral-800'] }}
+          $light={{ className: ['border-neutral-200'] }}
           space="sm"
         >
           {hasActions && (
@@ -138,7 +142,7 @@ export const CodeDemo = ({
                 aria-label="Show code"
                 onPress={() => setShow((e) => !e)}
                 size="xs"
-                unstyled
+                variant="unstyled"
               >
                 <Button.Icon>
                   {!show ? <UilEye /> : <UilEyeSlash />}

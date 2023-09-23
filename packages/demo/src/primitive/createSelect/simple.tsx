@@ -1,5 +1,5 @@
 import { merge } from '@crossed/styled';
-import { createDropdown, useDropdownContext } from '@crossed/primitive';
+import { createSelect, useSelectContext } from '@crossed/primitive';
 import { UilAngleDown, YBox } from '@crossed/ui';
 import {
   type HTMLAttributes,
@@ -28,9 +28,9 @@ const [FloatingProvider, useFloatingProvider] = createScope<FloatingProvider>(
   {} as FloatingProvider
 );
 
-const Dropdown = createDropdown({
+const Select = createSelect({
   Root: (props: HTMLAttributes<HTMLDivElement>) => {
-    const { open, setOpen } = useDropdownContext();
+    const { open, setOpen } = useSelectContext();
     const floating = useFloating({
       open: open,
       onOpenChange: setOpen,
@@ -83,9 +83,9 @@ const Dropdown = createDropdown({
         ref={refs.setFloating}
         {...getFloatingProps()}
         {...props}
-        style={{ ...props.style, ...floatingStyles, zIndex: 30 }}
+        style={{ ...props.style, ...floatingStyles, zIndex: 30, minWidth: 200 }}
         className={merge(
-          'flex flex-col p-2 border bg-neutral-900 border-neutral-800 rounded-md w-auto',
+          'flex flex-col p-1 border bg-neutral-900 border-neutral-800 rounded-md w-auto',
           props.className
         )}
       />
@@ -96,12 +96,22 @@ const Dropdown = createDropdown({
       <button
         {...props}
         ref={ref}
-        className="text-left rounded px-2 py-1 hover:bg-neutral-800"
+        className={merge(
+          'text-left rounded px-2 py-1 hover:bg-neutral-800',
+          props.disabled && 'opacity-50',
+          props.className
+        )}
       />
     );
   }),
   Label: forwardRef((props: HtmlHTMLAttributes<HTMLDivElement>, ref: any) => {
-    return <div {...props} ref={ref} className="text-neutral-500 px-2 py-1" />;
+    return (
+      <div
+        {...props}
+        ref={ref}
+        className="text-neutral-500 px-2 py-1 font-semibold"
+      />
+    );
   }),
   Divider: forwardRef((props: HtmlHTMLAttributes<HTMLDivElement>, ref: any) => {
     return (
@@ -110,39 +120,39 @@ const Dropdown = createDropdown({
   }),
 });
 
-export const CreateDropdownSimpleDemo = () => {
+export const CreateSelectSimpleDemo = () => {
   return (
     <YBox space="md">
-      <Dropdown>
-        <Dropdown.Trigger
+      <Select>
+        <Select.Trigger
           aria-label="Click for toggle nav"
           className="flex flex-row gap-2 items-center"
         >
           Hello
           <UilAngleDown />
-        </Dropdown.Trigger>
-        <Dropdown.Portal>
-          <Dropdown.Content>
-            <Dropdown.Label>Application</Dropdown.Label>
-            <Dropdown.Item aria-label="Settings">Settings</Dropdown.Item>
-            <Dropdown.Item aria-label="Settings">Messages</Dropdown.Item>
-            <Dropdown.Item aria-label="Settings">Gallery</Dropdown.Item>
+        </Select.Trigger>
+        <Select.Portal>
+          <Select.Content>
+            <Select.Label>Application</Select.Label>
+            <Select.Item aria-label="Settings">Settings</Select.Item>
+            <Select.Item aria-label="Settings">Messages</Select.Item>
+            <Select.Item aria-label="Settings">Gallery</Select.Item>
 
-            <Dropdown.Divider />
+            <Select.Divider />
 
-            <Dropdown.Label>Danger zone</Dropdown.Label>
-            <Dropdown.Item aria-label="Transfer my data">
+            <Select.Label>Danger zone</Select.Label>
+            <Select.Item aria-label="Transfer my data">
               Transfer my data
-            </Dropdown.Item>
-            <Dropdown.Item aria-label="Delete my account">
+            </Select.Item>
+            <Select.Item aria-label="Delete my account">
               Delete my account
-            </Dropdown.Item>
-            <Dropdown.Item disabled aria-label="Settings">
+            </Select.Item>
+            <Select.Item disabled aria-label="Settings">
               Users (not right)
-            </Dropdown.Item>
-          </Dropdown.Content>
-        </Dropdown.Portal>
-      </Dropdown>
+            </Select.Item>
+          </Select.Content>
+        </Select.Portal>
+      </Select>
     </YBox>
   );
 };

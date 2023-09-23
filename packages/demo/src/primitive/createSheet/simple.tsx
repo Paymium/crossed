@@ -1,15 +1,18 @@
 import { createSheet } from '@crossed/primitive';
 import { Button, Text } from '@crossed/ui';
-import { Fragment, useState, type HTMLAttributes } from 'react';
+import { Fragment, type HTMLAttributes } from 'react';
 import { Portal } from '@gorhom/portal';
+import { useWindowDimensions } from 'react-native';
 
 const Sheet = createSheet({
-  Content: (props: HTMLAttributes<HTMLDivElement>) => {
+  Content: ({ children, ...props }: HTMLAttributes<HTMLDivElement>) => {
+    const { height } = useWindowDimensions();
     return (
-      <div
-        {...props}
-        className="bg-neutral-800 z-20 border border-neutral-700 rounded-md px-5 py-4 overflow-auto mt-[-64px]"
-      />
+      <div className="absolute top-0 w-full" style={{ height }} {...props}>
+        <div className="absolute bottom-0 bg-neutral-800 z-20 border border-neutral-700 rounded-md px-5 py-4 overflow-auto">
+          {children}
+        </div>
+      </div>
     );
   },
   Portal,
@@ -25,13 +28,12 @@ const Sheet = createSheet({
 });
 
 export const CreateSheetSimpleDemo = () => {
-  const [snap, setSnap] = useState(80);
   return (
     <Sheet>
       <Sheet.Trigger aria-label="Open sheet">Open</Sheet.Trigger>
       <Sheet.Portal>
         <Sheet.Overlay />
-        <Sheet.Content snapPoints={[snap]}>
+        <Sheet.Content>
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             laoreet dapibus metus, vel fringilla eros imperdiet id. Maecenas
@@ -48,10 +50,7 @@ export const CreateSheetSimpleDemo = () => {
             suscipit quis magna non, congue scelerisque nisl. Duis ligula lorem,
             ullamcorper et consectetur vitae, consequat ac sem.
           </Text>
-          <Button
-            aria-label="Click for random change snappoints props"
-            onPress={() => setSnap(Math.random() * 100)}
-          >
+          <Button aria-label="Click for random change snappoints props">
             <Button.Text>Change snapPoints</Button.Text>
           </Button>
         </Sheet.Content>

@@ -130,12 +130,5 @@ function mergeProps(slotProps: AnyProps, childProps: AnyProps) {
   return { ...slotProps, ...overrideProps };
 }
 
-const Root = Slot;
-
-export {
-  Slot,
-  Slottable,
-  //
-  Root,
-};
+export { Slot, Slottable };
 export type { SlotProps };

@@ -14,6 +14,7 @@
   "createLabel": "createLabel",
   "createList": "createList",
   "createDropdown": "createDropdown",
+  "createSelect": "createSelect",
   "createSheet": "createSheet",
   "createModal": "createModal",
   "createInput": "createInput"

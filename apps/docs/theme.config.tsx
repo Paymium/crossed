@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { DocsThemeConfig } from 'nextra-theme-docs';
 import { useMounted } from 'nextra/hooks';
 import { useTheme } from 'next-themes';
@@ -52,8 +52,13 @@ const config: DocsThemeConfig = {
   themeSwitch: {
     component: function Component() {
       const { setTheme, theme } = useCrossedTheme();
-      const { setTheme: setGlobalTheme } = useTheme();
+      const { setTheme: setGlobalTheme, theme: globalTheme } = useTheme();
       const mounted = useMounted();
+      useMemo(() => {
+        if (globalTheme !== theme) {
+          setTheme(globalTheme as any);
+        }
+      }, []);
       const IconToUse = mounted && theme === 'dark' ? MoonIcon : SunIcon;
       return (
         <Button

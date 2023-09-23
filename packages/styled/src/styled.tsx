@@ -21,7 +21,6 @@ import type {
   ConfigSchema,
   ConfigVariants,
   Props,
-  Theme,
 } from './crossed/types';
 import { twMerge } from 'tailwind-merge';
 import { StyleSheet } from './styleSheet';

@@ -1,10 +1,14 @@
+import 'raf/polyfill';
 import '../styles/global.css';
 import { CrossedTheme } from '@crossed/ui';
+import { PortalProvider } from '@gorhom/portal';
 
 export default function App({ Component, pageProps }) {
   return (
-    <CrossedTheme defaultTheme={'dark'}>
-      <Component {...pageProps} />
-    </CrossedTheme>
+    <PortalProvider>
+      <CrossedTheme defaultTheme={'dark'}>
+        <Component {...pageProps} />
+      </CrossedTheme>
+    </PortalProvider>
   );
 }

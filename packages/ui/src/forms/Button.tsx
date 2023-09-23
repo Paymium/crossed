@@ -1,16 +1,23 @@
 'use client';
 import { styled, tw, type GetProps, useCrossedTheme } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
-import { Pressable, PressableProps, Text } from 'react-native';
-import { cloneElement, type PropsWithChildren, ComponentType } from 'react';
+import { Pressable, Text } from 'react-native';
+import { cloneElement, type PropsWithChildren } from 'react';
 import { colorVariants } from '../variants/colors';
 import { sizeVariants } from '../variants/size';
 import { Box } from '../layout/Box';
 import { spaceVariants } from '../variants';
 import { useButtonContext } from '@crossed/primitive';
 
-const ButtonFrame = styled(Pressable, {
-  'className': ['rounded-md', 'flex', 'flex-row', 'items-center', 'border-2'],
+export const ButtonFrame = styled(Pressable, {
+  'className': [
+    'rounded-md',
+    'flex',
+    'flex-row',
+    'items-center',
+    'border-2',
+    'relative',
+  ],
   ':disabled': {
     className: ['opacity-50', 'pointer-events-none', 'cursor-not-allowed'],
   },
@@ -23,12 +30,18 @@ const ButtonFrame = styled(Pressable, {
     space: spaceVariants,
     unstyled: {
       true: {},
+      false: {},
     },
     variant: {
       filled: {
         className: ['border-transparent'],
       },
       outlined: {},
+      unstyled: {
+        'className': ['bg-transparent border-transparent'],
+        ':hover': { className: ['bg-transparent border-transparent'] },
+        ':active': { className: ['bg-transparent border-transparent'] },
+      },
     },
   },
   'defaultVariants': {
@@ -36,15 +49,8 @@ const ButtonFrame = styled(Pressable, {
     color: 'neutral',
     variant: 'outlined',
     space: 'xs',
+    unstyled: false,
   },
-  'compoundVariants': [
-    {
-      'unstyled': true,
-      'className': ['bg-transparent border-transparent'],
-      ':hover': { className: ['bg-transparent border-transparent'] },
-      ':active': { className: ['bg-transparent border-transparent'] },
-    },
-  ],
 });
 
 const ButtonTextFrame = styled(Text, {
@@ -125,8 +131,8 @@ const ButtonTextFrame = styled(Text, {
       className: ['bg-transparent'],
     },
     {
-      variant: 'filled',
-      className: ['text-white'],
+      'variant': 'filled',
+      'className': ['text-white'],
       ':dark': {
         className: ['text-white'],
       },
@@ -191,3 +197,4 @@ const Button = createButton(
 const { Text: ButtonText, Icon: ButtonIcon } = Button;
 
 export { ButtonText, ButtonIcon, Button };
+export type ButtonProps = GetProps<typeof Button>;
