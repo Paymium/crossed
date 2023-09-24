@@ -1,5 +1,26 @@
 # @crossed/ui
 
+## 0.6.1
+
+### Patch Changes
+
+- force rebuild
+- Updated dependencies
+  - @crossed/primitive@1.4.1
+  - @crossed/styled@0.6.1
+
+## 0.6.0
+
+### Minor Changes
+
+- 00a8f88: add theme dark light
+
+### Patch Changes
+
+- Updated dependencies [00a8f88]
+  - @crossed/primitive@1.4.0
+  - @crossed/styled@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes
