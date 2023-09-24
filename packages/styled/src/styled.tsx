@@ -13,7 +13,8 @@ import {
   composeEventHandlers,
   useUncontrolled,
 } from '@crossed/core';
-import { crossed, merge } from './crossed';
+import { crossed } from './crossed';
+import { merge } from './crossed/merge';
 import type {
   Base,
   BaseWithState,
@@ -25,6 +26,7 @@ import type {
 import { twMerge } from 'tailwind-merge';
 import { StyleSheet } from './styleSheet';
 import { useCrossedTheme } from './CrossedTheme';
+import { default as tw } from 'twrnc';
 
 type NewComponentProps<
   T extends ConfigSchema<P>,
@@ -61,6 +63,7 @@ export const styled = <
   const NewComponent = forwardRef<any, NewComponentProps<T, P, E>>(
     function CrossedStyledComponent(props, ref) {
       const { theme } = useCrossedTheme();
+
       const [active, setActive] = useUncontrolled({
         defaultValue: false,
         value: props.states?.isActive,
@@ -197,23 +200,28 @@ export const styled = <
         return () => {};
       }, [hover, active]);
 
+      const propsComponent = {
+        ...(componentProps as any),
+        ...propsVariant,
+      };
+
       return (
         <NewComp
           ref={ref}
-          {...(componentProps as any)}
-          {...propsVariant}
+          {...parsedPropsProperty(propsComponent)}
           {...(asIsString
             ? {
                 'data-class-name': styleProps.className,
               }
             : {
                 dataSet: {
+                  ...propsComponent.dataSet,
                   className: styleProps.className,
                 },
               })}
           style={
             asIsString
-              ? { ...styleProps.style, ...componentProps.style }
+              ? { ...(styleProps.style as any), ...componentProps.style }
               : [styleProps.style, componentProps.style]
           }
           onMouseDown={composeEventHandlers(componentProps?.onMouseDown, () => {
@@ -258,4 +266,18 @@ export const styled = <
       return parentStyle ? merge(parentStyle, style) : style;
     },
   });
+};
+
+const parsedPropsProperty = (props: Record<string, unknown>) => {
+  return Object.entries(props).reduce<Record<string, unknown>>(
+    (acc, [key, value]) => {
+      if (typeof value === 'string' && value.startsWith('$')) {
+        acc[key] = tw.color(value.replace('$', ''));
+      } else {
+        acc[key] = value;
+      }
+      return acc;
+    },
+    {}
+  );
 };

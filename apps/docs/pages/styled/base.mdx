@@ -4,6 +4,7 @@ import {
   ButtonStateDemo,
   ButtonStateNativeDemo,
   ColorModeDemo,
+  PropsPropertyDemo,
 } from '@crossed/demo';
 import { CodeDemo, Code } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
@@ -18,8 +19,12 @@ export const getStaticProps = async (e) => {
         onlyBaseNative: (
           await getStaticDemo('styled/button/OnlyBase.native')(e)
         ).props.ssg.code,
+        propsProperty: (
+          await getStaticDemo('styled/button/PropsProperty')(e)
+        ).props.ssg.code,
         state: (await getStaticDemo('styled/button/State')(e)).props.ssg.code,
-        stateNative: (await getStaticDemo('styled/button/State.native')(e)).props.ssg.code,
+        stateNative: (await getStaticDemo('styled/button/State.native')(e))
+          .props.ssg.code,
         colorMode: (await getStaticDemo('styled/colorMode')(e)).props.ssg.code,
       },
     },
@@ -53,6 +58,14 @@ You have two parameters which are `Base` params, `className` (array of tailwind 
     <CodeDemo Demo={ButtonOnlyBaseNativeDemo} />
   </TabNext>
 </TabsNext>
+
+### Props
+
+You can set one props with color property of tailwind `neutral-600`
+
+<Code name="propsProperty" show />
+<br />
+<CodeDemo Demo={PropsPropertyDemo} />
 
 ## State
 
