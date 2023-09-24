@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.6.0
+
+### Minor Changes
+
+- 00a8f88: add theme dark light
+
 ## 0.5.0
 
 ### Minor Changes

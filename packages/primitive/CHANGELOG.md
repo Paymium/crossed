@@ -1,5 +1,11 @@
 # @crossed/primitive
 
+## 1.4.0
+
+### Minor Changes
+
+- 00a8f88: add theme dark light
+
 ## 1.3.0
 
 ### Minor Changes
