@@ -10,6 +10,6 @@
   "defaultVariants": "Default variants",
   "compoundVariants": "Compound variants",
   "extends": "Extends",
-  "colorMode": "Color mode (theme)",
+  "colorMode": "Color mode (dark/light)",
   "alias": "Alias"
 }

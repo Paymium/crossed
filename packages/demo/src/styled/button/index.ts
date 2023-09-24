@@ -10,3 +10,4 @@ export * from './State';
 export * from './State.native';
 export * from './Extends';
 export * from './Extends.native';
+export * from './PropsProperty';

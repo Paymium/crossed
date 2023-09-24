@@ -40,5 +40,7 @@ jobs:
         run: pnpm lint
       - name: Build
         run: pnpm build
+      - name: unit-test
+        run: pnpm test
       - name: Build
         run: pnpm -F crossed-docs build

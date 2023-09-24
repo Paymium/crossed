@@ -1,13 +1,11 @@
+import { merge } from './merge';
 import type {
-  Base,
   BaseWithState,
   Config,
   ConfigSchema,
   OmitUndefined,
   Props,
-  PropsExtends,
 } from './types';
-import { twMerge } from 'tailwind-merge';
 
 export type VariantProps<Component extends (...args: any) => any> = Omit<
   OmitUndefined<Parameters<Component>[0]>,
@@ -131,51 +129,3 @@ export const crossed =
       return merge(acc, check);
     }, {} as BaseWithState<P>);
   };
-
-const deepMerge = <P>(one?: Base<P>, two?: Base<P>): Base<P> => {
-  const tmp = {
-    ...one,
-    ...two,
-    className: twMerge(one?.className, two?.className).split(' '),
-  };
-  if (one?.props || two?.props) {
-    tmp.props = { ...one?.props, ...two?.props } as PropsExtends<P>;
-  }
-  return tmp;
-};
-
-export const merge = <P>(
-  one: BaseWithState<P>,
-  two: BaseWithState<P>
-): BaseWithState<P> => {
-  const acc: BaseWithState<P> = one;
-  if (two[':active']) {
-    acc[':active'] = deepMerge(one[':active'], two[':active']);
-  }
-  if (two[':disabled']) {
-    acc[':disabled'] = deepMerge(one[':disabled'], two[':disabled']);
-  }
-  if (two[':focus']) {
-    acc[':focus'] = deepMerge(one[':focus'], two[':focus']);
-  }
-  if (two[':hover']) {
-    acc[':hover'] = deepMerge(one[':hover'], two[':hover']);
-  }
-  if (two[':dark']) {
-    acc[':dark'] = deepMerge(one[':dark'], two[':dark']);
-  }
-  if (two[':light']) {
-    acc[':light'] = deepMerge(one[':light'], two[':light']);
-  }
-  if (one.props || two.props) {
-    one.props = { ...acc.props, ...two.props } as PropsExtends<P>;
-  }
-
-  return {
-    ...one,
-    className: twMerge([
-      ...(acc.className || []),
-      ...(two.className || []),
-    ]).split(' '),
-  };
-};

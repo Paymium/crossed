@@ -12,7 +12,7 @@ type CrossedThemeProvider = {
   setTheme: (colorScheme: RnColorScheme) => void;
 };
 
-type CrossedThemeProps = {
+export type CrossedThemeProps = {
   defaultTheme?: RnColorScheme;
 };
 
