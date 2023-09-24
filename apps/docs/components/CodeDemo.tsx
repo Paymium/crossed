@@ -67,7 +67,7 @@ export const CodeDemo = ({
             <>
               {actions.variant && (
                 <Select
-                  value={variant}
+                  value={variant as any}
                   onChangeValue={setVariant}
                   label="Variant"
                   items={actions.variant.map((v) => ({ value: v, label: v }))}
