@@ -1,4 +1,4 @@
-import { deepMerge } from '../deepMerge';
+import { deepMerge } from '../../src/crossed/deepMerge';
 
 describe('deepMerge', () => {
   test('Merge empty one and empty two', () => {

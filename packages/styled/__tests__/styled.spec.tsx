@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { styled } from '../styled';
+import { styled } from '../src/styled';
 import { Text } from 'react-native';
 import userEvent from '@testing-library/user-event';
 

@@ -1,4 +1,4 @@
-import { StyleSheet } from '../styleSheet';
+import { StyleSheet } from '../src/styleSheet';
 
 describe('StyleSheet', () => {
   test('web', () => {

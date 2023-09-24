@@ -1,5 +1,5 @@
 {
-  "include": ["./src", "./jest-setup.ts"],
+  "include": ["./src", "./jest-setup.ts", "__tests__"],
   "exclude": ["node_modules", "example"],
   "compilerOptions": {
     "outDir": "./lib/typescript",

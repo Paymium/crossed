@@ -1,4 +1,4 @@
-import { crossed } from '../index';
+import { crossed } from '../../src/crossed';
 
 const result = (d: any) => {
   return {

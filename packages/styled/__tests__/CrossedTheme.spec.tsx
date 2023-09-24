@@ -6,9 +6,9 @@ import {
   CrossedTheme,
   CrossedThemeProps,
   useCrossedTheme,
-} from '../CrossedTheme';
+} from '../src/CrossedTheme';
 import { Text } from 'react-native';
-import { styled } from '../styled';
+import { styled } from '../src/styled';
 
 const Body = styled(Text, {
   className: ['text-white'],
