@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["crossed-docs", "crossed-expo", "@crossed/demo"]
+  "ignore": ["crossed-docs", "crossed-expo", "@crossed/demo", "server-component"]
 }
