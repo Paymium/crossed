@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
       - name: Install dependencies
         run: pnpm install
       - name: Linter
