@@ -3,6 +3,7 @@ import {
   ButtonOnlyBaseNativeDemo,
   ButtonStateDemo,
   ButtonStateNativeDemo,
+  ColorModeDemo,
 } from '@crossed/demo';
 import { CodeDemo, Code } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
@@ -19,6 +20,7 @@ export const getStaticProps = async (e) => {
         ).props.ssg.code,
         state: (await getStaticDemo('styled/button/State')(e)).props.ssg.code,
         stateNative: (await getStaticDemo('styled/button/State.native')(e)).props.ssg.code,
+        colorMode: (await getStaticDemo('styled/colorMode')(e)).props.ssg.code,
       },
     },
   };
@@ -89,3 +91,9 @@ You can manage state from parent with `states` props added to component styled
     <CodeDemo Demo={ButtonStateNativeDemo} />
   </TabNext>
 </TabsNext>
+
+## Color mode
+
+When you create styled component, you can specify `:dark` or `:light` keys
+
+<CodeDemo Demo={ColorModeDemo} name="colorMode" />

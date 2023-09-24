@@ -5,6 +5,7 @@ import { createSheetTrigger } from './SheetTrigger';
 import { createSheetContent } from './SheetContent';
 import { createSheetPortal } from './SheetPortal';
 import { createSheetOverlay } from './SheetOverlay';
+export { useContext as useSheetContext } from './context';
 
 export const createSheet = <
   RootProps extends Record<string, any>,

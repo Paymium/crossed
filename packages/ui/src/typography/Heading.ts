@@ -9,12 +9,12 @@ export const Heading = styled(TextNative, {
   'variants': {
     variant: { link: { className: ['text-blue-500'], props: { as: 'a' } } },
     order: {
-      1: { className: ['text-9xl'], props: { as: H1 } },
-      2: { className: ['text-8xl'], props: { as: H2 } },
-      3: { className: ['text-7xl'], props: { as: H3 } },
-      4: { className: ['text-6xl'], props: { as: H4 } },
-      5: { className: ['text-5xl'], props: { as: H5 } },
-      6: { className: ['text-4xl'], props: { as: H6 } },
+      1: { className: ['text-5xl font-bold'], props: { as: H1 } },
+      2: { className: ['text-4xl'], props: { as: H2 } },
+      3: { className: ['text-3xl'], props: { as: H3 } },
+      4: { className: ['text-2xl'], props: { as: H4 } },
+      5: { className: ['text-xl'], props: { as: H5 } },
+      6: { className: ['text-base'], props: { as: H6 } },
     },
   },
   'defaultVariants': {

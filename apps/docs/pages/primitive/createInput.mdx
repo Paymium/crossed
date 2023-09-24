@@ -1,0 +1,49 @@
+import {
+  CreateInputSimpleDemo,
+} from '@crossed/demo';
+import { CodeDemo } from 'components/CodeDemo';
+import { getStaticDemo } from 'components/getStaticDemo';
+import { Tabs } from 'components/Tabs';
+import { Table } from 'components/Table';
+
+export const getStaticProps = async (e) => {
+  return {
+    props: {
+      ssg: {
+        simple: (await getStaticDemo('primitive/createInput/simple')(e)).props
+          .ssg.code,
+        // simpleNative: (
+        //   await getStaticDemo('primitive/createInput/simple.native')(e)
+        // ).props.ssg.code,
+      },
+    },
+  };
+};
+
+# createInput
+
+<Tabs items={['Demo', 'Anatomy', 'Props']}>
+  <Tabs.Tab>
+    ## simple
+    <Tabs items={['Web', 'Native']}>
+      <Tabs.Tab>
+        <CodeDemo Demo={CreateInputSimpleDemo} name="simple" />
+      </Tabs.Tab>
+      <Tabs.Tab>
+        {/* <CodeDemo Demo={CreateInputSimpleNativeDemo} name="simpleNative" /> */}
+      </Tabs.Tab>
+    </Tabs>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```tsx
+    <Input>
+      <Input.Icon />
+      <Input.Input />
+    </Input>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ## Input
+    <Table props={[]} />
+  </Tabs.Tab>
+</Tabs>

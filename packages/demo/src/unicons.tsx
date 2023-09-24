@@ -33,7 +33,7 @@ export const UniconsDemo = () => {
                 className="basis-2/12 items-center rounded-md py-5"
               >
                 <Icon size={32} />
-                <Text className="dark:text-zinc-500">{name}</Text>
+                <Text className="dark:text-neutral-500">{name}</Text>
               </YBox>
             );
           }

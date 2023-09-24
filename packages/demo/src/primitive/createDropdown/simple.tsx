@@ -1,13 +1,13 @@
 import { merge } from '@crossed/styled';
 import { createDropdown, useDropdownContext } from '@crossed/primitive';
-import { YBox } from '@crossed/ui';
+import { UilAngleDown, YBox } from '@crossed/ui';
 import {
   type HTMLAttributes,
   forwardRef,
   PropsWithChildren,
   HtmlHTMLAttributes,
 } from 'react';
-import { Portal } from '@gorhom/portal';
+import { PortalProvider, Portal } from '@gorhom/portal';
 import { composeRefs, createScope } from '@crossed/core';
 import {
   autoUpdate,
@@ -47,7 +47,9 @@ const Dropdown = createDropdown({
     const interactions = useInteractions([click, dismiss, role]);
     return (
       <FloatingProvider {...floating} {...interactions}>
-        <div {...props} className={merge(props.className, 'flex flex-col')} />
+        <PortalProvider>
+          <div {...props} className={merge(props.className, 'flex flex-col')} />
+        </PortalProvider>
       </FloatingProvider>
     );
   },
@@ -112,8 +114,12 @@ export const CreateDropdownSimpleDemo = () => {
   return (
     <YBox space="md">
       <Dropdown>
-        <Dropdown.Trigger aria-label="Click for toggle nav">
+        <Dropdown.Trigger
+          aria-label="Click for toggle nav"
+          className="flex flex-row gap-2 items-center"
+        >
           Hello
+          <UilAngleDown />
         </Dropdown.Trigger>
         <Dropdown.Portal>
           <Dropdown.Content>

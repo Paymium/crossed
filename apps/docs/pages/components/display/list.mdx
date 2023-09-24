@@ -1,29 +1,29 @@
-import { MenuDemo } from '@crossed/demo';
+import { ListDemo } from '@crossed/demo';
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { Tabs } from 'components/Tabs';
 import { Table, Tr, Td, Th } from 'nextra/components';
 
-export const getStaticProps = getStaticDemo('ui/display/Menu');
+export const getStaticProps = getStaticDemo('ui/display/List');
 
-# Menu
+# List
 
 <Tabs items={['Demo', 'Anatomy', 'Props']}>
   <Tabs.Tab>
-    <CodeDemo Demo={MenuDemo} actions={{ color: true }} />
+    <CodeDemo Demo={ListDemo} actions={{ color: true, size: true }} />
   </Tabs.Tab>
   <Tabs.Tab>
     ```tsx
-    <Menu>
-      <Menu.Item>
-        <Menu.Item.Title />
-        <Menu.Item.Subtitle />
-      </Menu.Item>
-    </Menu>
+    <List>
+      <List.Item>
+        <List.Item.Title />
+        <List.Item.Subtitle />
+      </List.Item>
+    </List>
     ```
   </Tabs.Tab>
   <Tabs.Tab>
-    ## Menu
+    ## List
     <Table className="table-auto overflow-hidden w-full">
       <Tr>
         <Th>Props</Th>

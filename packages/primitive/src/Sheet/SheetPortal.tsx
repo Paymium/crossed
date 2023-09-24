@@ -1,6 +1,7 @@
 import { ComponentType, forwardRef, Fragment } from 'react';
 import { Provider, useContext } from './context';
 import { RemoveScroll as RS } from '../utils';
+import { VisibilityHidden } from '../utils/VisibilityHidden';
 
 export type SheetPortalProps = {
   /**
@@ -18,12 +19,14 @@ export const createSheetPortal = <P,>(Styled: ComponentType<P>) =>
       const { open } = context;
 
       const RemoveScroll = removeParentScroll ? RS : Fragment;
-      return open ? (
+      return (
         <Styled {...otherProps} ref={ref}>
           <Provider {...context}>
-            <RemoveScroll>{children}</RemoveScroll>
+            <RemoveScroll enabled={open}>
+              <VisibilityHidden hidden={!open}>{children}</VisibilityHidden>
+            </RemoveScroll>
           </Provider>
         </Styled>
-      ) : null;
+      );
     }
   );

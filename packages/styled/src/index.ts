@@ -5,3 +5,4 @@ export * from './types';
 export { clsx as cx } from 'clsx';
 export { twMerge as merge } from 'tailwind-merge';
 export { useDeviceContext, useAppColorScheme, default as tw } from 'twrnc';
+export * from './CrossedTheme';

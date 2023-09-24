@@ -1,4 +1,5 @@
 import { type GetProps, styled } from '@crossed/styled';
+import { memo, type PropsWithChildren } from 'react';
 
 const Button = styled('button', {
   'className': ['px-3 py-2', 'border border-neutral-700', 'bg-neutral-800'],
@@ -22,6 +23,12 @@ const Button = styled('button', {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type ButtonProps = GetProps<typeof Button>;
+
+const Other = memo((props: PropsWithChildren) => {
+  return <button {...props} />;
+});
+
+Other.displayName = 'Pressable';
 
 export const ButtonStateDemo = () => {
   return (
