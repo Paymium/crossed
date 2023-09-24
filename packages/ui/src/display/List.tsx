@@ -23,11 +23,11 @@ const ListRootFrame = styled(View, {
 });
 
 const ListTitleFrame = styled(Text, {
-  'className': ['font-semibold text-white'],
+  className: ['font-semibold text-white'],
 });
 
 const ListSubTitleFrame = styled(Text, {
-  'className': ['font-normal text-neutral-400'],
+  className: ['font-normal text-neutral-400'],
 });
 
 const ListItemFrame = styled(View, {

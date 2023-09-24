@@ -7,11 +7,11 @@ export const SelectDemo = ({ size, variant, color }: Props) => {
       <Select.Label>Size</Select.Label>
       <Select.Trigger aria-label="Size" />
       <Select.Content>
-        <Select.Item value={'xs'} label="xs" />
-        <Select.Item value={'sm'} label="sm" />
-        <Select.Item value={'md'} label="md" />
-        <Select.Item value={'lg'} label="lg" />
-        <Select.Item value={'xl'} label="xl" />
+        <Select.Item value={'xs'} label="xs" aria-label="xs" />
+        <Select.Item value={'sm'} label="sm" aria-label="sm" />
+        <Select.Item value={'md'} label="md" aria-label="md" />
+        <Select.Item value={'lg'} label="lg" aria-label="lg" />
+        <Select.Item value={'xl'} label="xl" aria-label="xl" />
       </Select.Content>
     </Select>
   );

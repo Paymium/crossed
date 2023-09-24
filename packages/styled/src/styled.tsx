@@ -26,10 +26,6 @@ import { twMerge } from 'tailwind-merge';
 import { StyleSheet } from './styleSheet';
 import { useCrossedTheme } from './CrossedTheme';
 
-// type ComponentParam<P extends object> = ElementType<P> & {
-//   styles?: (p?: Props<any, P>) => BaseWithState<P>;
-// };
-
 type NewComponentProps<
   T extends ConfigSchema<P>,
   P,

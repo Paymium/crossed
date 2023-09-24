@@ -91,19 +91,24 @@ const Select = createSelect({
       />
     );
   },
-  Item: forwardRef((props: HtmlHTMLAttributes<HTMLButtonElement>, ref: any) => {
-    return (
-      <button
-        {...props}
-        ref={ref}
-        className={merge(
-          'text-left rounded px-2 py-1 hover:bg-neutral-800',
-          props.disabled && 'opacity-50',
-          props.className
-        )}
-      />
-    );
-  }),
+  Item: forwardRef(
+    (
+      props: HtmlHTMLAttributes<HTMLButtonElement> & { disabled?: boolean },
+      ref: any
+    ) => {
+      return (
+        <button
+          {...props}
+          ref={ref}
+          className={merge(
+            'text-left rounded px-2 py-1 hover:bg-neutral-800',
+            props.disabled && 'opacity-50',
+            props.className
+          )}
+        />
+      );
+    }
+  ),
   Label: forwardRef((props: HtmlHTMLAttributes<HTMLDivElement>, ref: any) => {
     return (
       <div

@@ -1,38 +1,10 @@
 'use client';
-import {
-  GetProps,
-  composeEventHandlers,
-  composeRefs,
-  createScope,
-  useUncontrolled,
-  withStaticProperties,
-} from '@crossed/core';
-import { cx, merge, styled } from '@crossed/styled';
-import {
-  Dispatch,
-  HTMLAttributes,
-  HtmlHTMLAttributes,
-  PropsWithChildren,
-  ReactNode,
-  SetStateAction,
-  forwardRef,
-  memo,
-  useState,
-} from 'react';
-import { Pressable, TextInput, View } from 'react-native';
-import { Input, InputContentFrame } from '../Input';
-import {
-  FocusScope,
-  VisuallyHidden,
-  useFocusManager,
-  useFocusWithin,
-  useKeyboard,
-} from 'react-aria';
-import { Box } from '../../layout/Box';
-import { UilAngleDown } from '@crossed/unicons';
+import { GetProps, composeRefs, createScope } from '@crossed/core';
+import { merge, styled } from '@crossed/styled';
+import { HtmlHTMLAttributes, PropsWithChildren, forwardRef } from 'react';
+import { TextInput } from 'react-native';
 import { Portal, PortalProvider } from '@gorhom/portal';
 import {
-  FloatingFocusManager,
   autoUpdate,
   flip,
   offset,
@@ -43,8 +15,8 @@ import {
   useInteractions,
   useRole,
 } from '@floating-ui/react';
+import { ButtonFrame } from '../Button';
 import { createSelect, useSelectContext } from '@crossed/primitive';
-import { Button, ButtonFrame, ButtonProps } from '../Button';
 import { YBox, YBoxProps } from '../../layout/YBox';
 
 // type InputProps = GetProps<typeof Input>;
@@ -347,7 +319,13 @@ const SelectContent = (props: HtmlHTMLAttributes<HTMLDivElement>) => {
 };
 
 const SelectItem = forwardRef(
-  (props: HtmlHTMLAttributes<HTMLButtonElement>, ref: any) => {
+  (
+    props: HtmlHTMLAttributes<HTMLButtonElement> & {
+      value: string;
+      label: string;
+    },
+    ref: any
+  ) => {
     // const { value } = useSelectContext();
     return (
       <button
@@ -377,7 +355,12 @@ const SelectTrigger = forwardRef(
 );
 
 const Select = createSelect({
-  Root: ({ children, label, items, ...props }: YBoxProps) => {
+  Root: ({
+    children,
+    label,
+    items,
+    ...props
+  }: YBoxProps & { items?: { value: string; label: string }[] }) => {
     const { open, setOpen } = useSelectContext();
     const floating = useFloating({
       open: open,
