@@ -1,5 +1,5 @@
 import { tw } from '@crossed/styled';
-import { Box, Input, Label } from '@crossed/ui';
+import { Box, Label } from '@crossed/ui';
 import { TextInput } from 'react-native';
 
 export const LabelDemo = () => {

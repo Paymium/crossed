@@ -1,6 +1,5 @@
 import { withStaticProperties } from '@crossed/core';
 import type { ComponentType } from 'react';
-import { InputGroup as A } from './InputGroup';
 import { createIcon } from './InputIcon';
 import { createInput as createInputInput } from './InputInput';
 
