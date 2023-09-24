@@ -75,7 +75,7 @@ export const CodeDemo = ({
               )}
               {actions.space && (
                 <Select
-                  value={space}
+                  value={space as any}
                   onChangeValue={setSpace}
                   label="Space"
                   items={[
@@ -89,7 +89,7 @@ export const CodeDemo = ({
               )}
               {actions.size && (
                 <Select
-                  value={size}
+                  value={size as any}
                   onChangeValue={setSize}
                   label="Size"
                   items={[
