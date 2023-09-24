@@ -19,6 +19,9 @@
     "lint": {
       "outputs": []
     },
+    "test": {
+      "outputs": []
+    },
     "clean": {
       "cache": false
     }

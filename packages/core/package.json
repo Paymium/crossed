@@ -11,8 +11,7 @@
   "scripts": {
     "clean": "rm -rf lib",
     "watch": "crossed-build --watch",
-    "build": "crossed-build",
-    "test": "jest --config jest.config.ts --coverage"
+    "build": "crossed-build"
   },
   "devDependencies": {
     "@crossed/build": "*",
