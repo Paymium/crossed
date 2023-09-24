@@ -10,8 +10,8 @@
   "typings": "lib/typescript/index.d.ts",
   "scripts": {
     "clean": "rm -rf lib",
-    "watch": "crossed-build --watch",
-    "build": "crossed-build",
+    "watch": "crossed-build --watch --project-path ./tsconfig.build.json",
+    "build": "crossed-build --project-path ./tsconfig.build.json",
     "dev:web": "cd example/native && yarn web --clear",
     "test": "jest --config jest.config.ts --coverage",
     "dev": "ts-node-dev --respawn --transpile-only ./src/cva/index.ts"
