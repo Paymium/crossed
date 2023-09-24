@@ -1,5 +1,11 @@
 # @crossed/core
 
+## 0.5.1
+
+### Patch Changes
+
+- b4290e5: set test for good packages
+
 ## 0.5.0
 
 ### Minor Changes
