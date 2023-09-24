@@ -28,6 +28,7 @@ Based you already have tailwind initilized. If not, see how [install tailwind](h
 
     ```sh
     pnpm i @crossed/core
+    pnpm i -D modify-selectors
     ```
 
   </Tabs.Tab>
@@ -35,6 +36,7 @@ Based you already have tailwind initilized. If not, see how [install tailwind](h
 
     ```sh
     npm i @crossed/core
+    npm i -D modify-selectors
     ```
 
   </Tabs.Tab>
@@ -42,6 +44,7 @@ Based you already have tailwind initilized. If not, see how [install tailwind](h
   
     ```sh
     yarn add @crossed/core
+    yarn add -D modify-selectors
     ```
   
   </Tabs.Tab>
@@ -50,15 +53,19 @@ Based you already have tailwind initilized. If not, see how [install tailwind](h
 ### Add postcss plugin
 
 ```javascript filename="postcss.config.js"
+const {
+  default: crossedPlugin,
+} = require('@crossed/styled/lib/commonjs/postcss');
+
 /** @type {import('postcss-load-config').Config} */
 const config = {
   plugins: {
     // ...,
-    '@crossed/core/postcss': {},
+    ...crossedPlugin()
     // ...,
 };
 
-module.exports = config;
+export default config;
 ```
 
 ### Usage
