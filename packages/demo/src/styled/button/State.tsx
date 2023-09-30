@@ -1,11 +1,11 @@
-import { type GetProps, styled } from '@crossed/styled';
+import { styled } from '@crossed/styled';
 import { memo, type PropsWithChildren } from 'react';
+import { Pressable } from 'react-native';
 
-const Button = styled('button', {
+const Button = styled(Pressable, {
   'className': ['px-3 py-2', 'border border-neutral-700', 'bg-neutral-800'],
   'props': {
-    type: 'button',
-    tabIndex: 0,
+    role: 'button',
   },
   ':hover': {
     className: ['bg-neutral-700'],
@@ -20,9 +20,6 @@ const Button = styled('button', {
     className: ['opacity-50'],
   },
 });
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type ButtonProps = GetProps<typeof Button>;
 
 const Other = memo((props: PropsWithChildren) => {
   return <button {...props} />;

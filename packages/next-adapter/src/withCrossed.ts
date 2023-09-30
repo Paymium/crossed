@@ -3,8 +3,8 @@ import {
   getDependenciesFromNodeModules,
   getExactDependenciesFromNodeModules,
 } from './utils';
-const findWorkspaceRoot = require('find-yarn-workspace-root');
-const path = require('path');
+import findWorkspaceRoot from 'find-yarn-workspace-root';
+import path from 'path';
 
 const crossedDeps = ['@crossed', '@react-native-aria', '@expo', '@legendapp'];
 

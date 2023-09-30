@@ -346,13 +346,24 @@ const SelectTrigger = forwardRef(
     const { getReferenceProps, refs } = useFloatingProvider();
     return (
       <RootFrame
+        ref={composeRefs(refs.setReference, ref)}
         {...getReferenceProps()}
         {...props}
-        ref={composeRefs(refs.setReference, ref)}
       />
     );
   }
 );
+
+type SelectPropsBase = YBoxProps;
+type SelectPropsWithChildren = SelectPropsBase & {
+  items?: never;
+  label?: never;
+};
+type SelectPropsWithOutChildren = SelectPropsBase & {
+  items?: { value: string; label: string }[];
+  label?: string;
+  children?: never;
+};
 
 const Select = createSelect({
   Root: ({
@@ -360,7 +371,9 @@ const Select = createSelect({
     label,
     items,
     ...props
-  }: YBoxProps & { items?: { value: string; label: string }[] }) => {
+  }: PropsWithChildren<
+    SelectPropsWithChildren | SelectPropsWithOutChildren
+  >) => {
     const { open, setOpen } = useSelectContext();
     const floating = useFloating({
       open: open,

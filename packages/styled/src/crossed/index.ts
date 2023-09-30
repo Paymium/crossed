@@ -12,7 +12,7 @@ export type VariantProps<Component extends (...args: any) => any> = Omit<
   'class' | 'className'
 >;
 
-const falsyToString = <T extends unknown>(value: T) =>
+const falsyToString = <T>(value: T) =>
   typeof value === 'boolean' ? `${value}` : value === 0 ? '0' : value;
 
 export const crossed =

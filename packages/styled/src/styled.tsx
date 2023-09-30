@@ -1,13 +1,12 @@
 'use client';
 
-import type {
-  ForwardRefExoticComponent,
-  PropsWithoutRef,
-  RefAttributes,
-} from 'react';
 import { forwardRef, useCallback, useEffect } from 'react';
 import { Platform } from 'react-native';
-import type { GetProps, PropsFromExtends, StylableComponent } from './types';
+import type {
+  NewComponentProps,
+  StylableComponent,
+  StyledComponent,
+} from './types';
 import {
   withStaticProperties,
   composeEventHandlers,
@@ -15,44 +14,20 @@ import {
 } from '@crossed/core';
 import { crossed } from './crossed';
 import { merge } from './crossed/merge';
-import type {
-  Base,
-  BaseWithState,
-  Config,
-  ConfigSchema,
-  ConfigVariants,
-  Props,
-} from './crossed/types';
+import type { Config, ConfigSchema, Props } from './crossed/types';
 import { twMerge } from 'tailwind-merge';
 import { StyleSheet } from './styleSheet';
 import { useCrossedTheme } from './CrossedTheme';
 import { default as tw } from 'twrnc';
 
-type NewComponentProps<
-  T extends ConfigSchema<P>,
-  P,
-  E extends ((e: any) => any)[]
-> = PropsFromExtends<E> & {
-  className?: string;
-  animations?: boolean;
-  states?: { isActive?: boolean; isFocus?: boolean; isHover?: boolean };
-  $dark?: Base<P>;
-  $light?: Base<P>;
-} & Omit<ConfigVariants<T> & P, 'className'>;
-
-export const styled = <
-  P extends GetProps<C>,
-  C extends StylableComponent,
+export function styled<
+  P extends Record<string, any>,
   E extends ((e: any) => any)[],
-  T extends ConfigSchema<GetProps<C>> = {}
+  T extends ConfigSchema<any> = ConfigSchema<P>
 >(
-  Component: C,
-  themeConfig: Config<GetProps<C>, T> & { extends?: E }
-): ForwardRefExoticComponent<
-  PropsWithoutRef<NewComponentProps<T, P, E>> & RefAttributes<any>
-> & {
-  styles: (p?: Props<T, P>) => BaseWithState<P>;
-} => {
+  Component: StylableComponent<P>,
+  themeConfig: Config<P, T> & { extends?: E }
+) {
   const { extends: extendsStyle, ...themeConfigProps } = themeConfig;
   const stylesClass = crossed<P, T>(themeConfigProps as any);
 
@@ -60,7 +35,7 @@ export const styled = <
     themeConfigProps.variants || {}
   ) as (keyof T)[];
 
-  const NewComponent = forwardRef<any, NewComponentProps<T, P, E>>(
+  const NewComponent = forwardRef<any, NewComponentProps<P, E>>(
     function CrossedStyledComponent(props, ref) {
       const { theme } = useCrossedTheme();
 
@@ -265,8 +240,8 @@ export const styled = <
       const style = stylesClass(p);
       return parentStyle ? merge(parentStyle, style) : style;
     },
-  });
-};
+  }) as StyledComponent<T, P, E, NewComponentProps<P, E>>;
+}
 
 const parsedPropsProperty = (props: Record<string, unknown>) => {
   return Object.entries(props).reduce<Record<string, unknown>>(

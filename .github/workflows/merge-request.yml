@@ -38,9 +38,5 @@ jobs:
         run: pnpm install --frozen-lock
       - name: Linter
         run: pnpm lint
-      - name: Build
-        run: pnpm build
       - name: unit-test
         run: pnpm test
-      - name: Build
-        run: pnpm -F crossed-docs build

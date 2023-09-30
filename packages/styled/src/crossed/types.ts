@@ -41,7 +41,11 @@ export type ConfigSchema<P> = Record<string, Record<string, BaseWithState<P>>>;
 export type ConfigVariants<T extends ConfigSchema<any>> = {
   [Variant in keyof T]?: StringToBoolean<keyof T[Variant]> | null | undefined;
 };
-export type ConfigVariantsMulti<P extends object, T extends ConfigSchema<P>> = {
+
+export type ConfigVariantsMulti<
+  P extends Record<string, any>,
+  T extends ConfigSchema<P>
+> = {
   [Variant in keyof T]?:
     | StringToBoolean<keyof T[Variant]>
     | StringToBoolean<keyof T[Variant]>[]
@@ -49,16 +53,16 @@ export type ConfigVariantsMulti<P extends object, T extends ConfigSchema<P>> = {
 };
 
 export type Config<
-  P extends object,
-  T extends ConfigSchema<P>
+  P extends Record<string, any>,
+  T extends ConfigSchema<any>
 > = BaseWithState<P> & {
   variants?: T;
   defaultVariants?: ConfigVariants<T>;
-  compoundVariants?: (T extends ConfigSchema<P>
+  compoundVariants?: (T extends ConfigSchema<any>
     ? (ConfigVariants<T> | ConfigVariantsMulti<P, T>) & BaseWithState<P>
     : BaseWithState<P>)[];
 };
 
-export type Props<T, P extends object> = T extends ConfigSchema<P>
+export type Props<T, P extends Record<string, any>> = T extends ConfigSchema<P>
   ? ConfigVariants<T> & BaseWithState<P>
   : BaseWithState<P>;

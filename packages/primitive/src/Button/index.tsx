@@ -56,16 +56,19 @@ export const createButton = <
           {children ?? (
             <>
               {Icon && (
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 <ButtonIcon>
                   <Icon />
                 </ButtonIcon>
               )}
               {text && (
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 <ButtonText>{text}</ButtonText>
               )}
               {IconAfter && (
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 <ButtonIcon>
                   <IconAfter />

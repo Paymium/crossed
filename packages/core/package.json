@@ -10,8 +10,9 @@
   "typings": "lib/typescript/index.d.ts",
   "scripts": {
     "clean": "rm -rf lib",
-    "watch": "crossed-build --watch",
-    "build": "crossed-build"
+    "watch": "crossed-build --watch --project-path ./tsconfig.build.json",
+    "build": "crossed-build --project-path ./tsconfig.build.json",
+    "type-check": "tsc"
   },
   "devDependencies": {
     "@crossed/build": "*",

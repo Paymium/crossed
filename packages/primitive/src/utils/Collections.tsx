@@ -6,7 +6,7 @@ import { createScope, useComposedRefs } from '@crossed/core';
 
 type SlotProps = ComponentPropsWithoutRef<typeof Slot>;
 type CollectionElement = HTMLElement;
-interface CollectionProps extends SlotProps {}
+type CollectionProps = SlotProps;
 
 // We have resorted to returning slots directly rather than exposing primitives that can then
 // be slotted like `<CollectionItem as={Slot}>…</CollectionItem>`.

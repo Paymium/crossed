@@ -1,5 +1,5 @@
 import { UilCheck, UilEye, UilEyeSlash } from '@iconscout/react-native-unicons';
-import { Props } from '@crossed/demo/lib/typescript/props';
+import type { Props } from '@crossed/demo';
 import {
   Box,
   Button,
@@ -168,6 +168,7 @@ export const Code = ({ show, name }: { show: boolean; name: string }) => {
       }}
     >
       <CopyBlock
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         text={code}
         language={'tsx'}

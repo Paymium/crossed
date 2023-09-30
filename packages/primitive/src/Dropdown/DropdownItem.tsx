@@ -2,7 +2,7 @@ import { ComponentType, forwardRef } from 'react';
 import { useContext } from './context';
 import { composeEventHandlers } from '@crossed/core';
 import { RovingFocus } from '../utils/RovingFocus';
-import type { RequiredAccessibilityProps } from 'src/types';
+import type { RequiredAccessibilityProps } from '../types';
 
 export type DropdownItemProps = {
   disabled?: boolean;
@@ -10,6 +10,7 @@ export type DropdownItemProps = {
 export const createDropdownItem = <P extends Record<string, any>>(
   Styled: ComponentType<P>
 ) =>
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
   forwardRef<
     any,

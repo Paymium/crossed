@@ -1,5 +1,9 @@
 {
-  "extends": ["@react-native-community", "prettier"],
+  "extends": [
+    "@react-native-community",
+    "prettier",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "rules": {
     "prettier/prettier": [
       "error",
@@ -15,13 +19,14 @@
     "prefer-const": "warn",
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "react/react-in-jsx-scope": 0,
-    "react-hooks/exhaustive-deps": 1
+    "react-hooks/exhaustive-deps": 1,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/ban-types": 0,
+    "@typescript-eslint/no-empty-function": 0
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "parser": "@babel/eslint-parser",
-    "requireConfigFile": false,
-    "ecmaVersion": 2018, // Allows for the parsing of modern ECMAScript features
-    "sourceType": "module" // Allows for the use of imports
+    "project": ["./packages/*/tsconfig.json", "./apps/*/tsconfig.json"]
   },
-  "plugins": ["prettier"]
+  "plugins": ["@typescript-eslint", "prettier"]
 }
