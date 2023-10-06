@@ -27,7 +27,7 @@ Based you already have tailwind initilized. If not, see how [install tailwind](h
   <Tabs.Tab>
 
     ```sh
-    pnpm i @crossed/core
+    pnpm i @crossed/styled
     pnpm i -D modify-selectors
     ```
 
@@ -35,7 +35,7 @@ Based you already have tailwind initilized. If not, see how [install tailwind](h
   <Tabs.Tab>
 
     ```sh
-    npm i @crossed/core
+    npm i @crossed/styled
     npm i -D modify-selectors
     ```
 
@@ -43,7 +43,7 @@ Based you already have tailwind initilized. If not, see how [install tailwind](h
   <Tabs.Tab>
   
     ```sh
-    yarn add @crossed/core
+    yarn add @crossed/styled
     yarn add -D modify-selectors
     ```
   
@@ -75,7 +75,7 @@ export default config;
 </Box>
 
 ```typescript
-import { styled } from '@crossed/core';
+import { styled } from '@crossed/styled';
 
 export const Button = styled("button", {
   className: ['border border-brand-900 bg-brand-500 rounded-md text-white'],
@@ -90,6 +90,10 @@ export const Button = styled("button", {
     size:"md"
   }
 });
+
+function Demo() {
+  return <Button>Hello</Button>
+}
 
 ```
 </Steps>
