@@ -15,6 +15,7 @@ export const withStaticProperties = function <A extends Function, B>(
       // attach existing things again
       for (const key in component) {
         const v = component[key];
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         _[key] = v && typeof v === 'object' ? { ...v } : v;
       }

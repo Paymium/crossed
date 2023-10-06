@@ -1,9 +1,10 @@
 import { forwardRef, type ComponentType, useEffect, useRef } from 'react';
-import type { RequiredAccessibilityProps } from 'src/types';
+import type { RequiredAccessibilityProps } from '../types';
 import { useContext } from './context';
 import { composeEventHandlers, composeRefs } from '@crossed/core';
 
 export const createDropdownTrigger = <P,>(StyledRoot: ComponentType<P>) =>
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   forwardRef<any, RequiredAccessibilityProps<P, 'aria-label'>>((props, ref) => {
     const { id, open, setOpen } = useContext();

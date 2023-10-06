@@ -8,6 +8,7 @@ const Button = styled(Pressable, {
   },
   variants: {
     rounded: {
+      false: {},
       true: {
         className: ['rounded'],
       },

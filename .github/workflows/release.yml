@@ -71,7 +71,7 @@ jobs:
 
       - name: Build documentation site
         if: steps.changesets.outputs.hasChangesets == 'false'
-        run: pnpm -F crossed-docs build
+        run: pnpm turbo --filter crossed-docs build
 
       - name: Setup Pages
         if: steps.changesets.outputs.hasChangesets == 'false'

@@ -1,5 +1,5 @@
 import { UilCheck, UilEye, UilEyeSlash } from '@iconscout/react-native-unicons';
-import { Props } from '@crossed/demo/lib/typescript/props';
+import type { Props } from '@crossed/demo';
 import {
   Box,
   Button,
@@ -103,7 +103,7 @@ export const CodeDemo = ({
               )}
               {actions.color && (
                 <Label>
-                  <Label.Text>Color ({color})</Label.Text>
+                  <Label.Text aria-label={'Color'}>Color ({color})</Label.Text>
                   <Label.Input>
                     <XBox space="xs" className="flex-wrap">
                       {(
@@ -168,6 +168,7 @@ export const Code = ({ show, name }: { show: boolean; name: string }) => {
       }}
     >
       <CopyBlock
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         text={code}
         language={'tsx'}

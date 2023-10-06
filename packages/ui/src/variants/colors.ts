@@ -1,6 +1,6 @@
 import type { BaseWithState } from '@crossed/styled';
 
-export const colorVariants: Record<string, BaseWithState<any>> = {
+export const colorVariants = {
   slate: {
     ':light': { className: ['text-slate-800 border-slate-800 bg-slate-700'] },
     ':dark': { className: ['text-slate-500 border-slate-800 bg-slate-800'] },
@@ -138,4 +138,4 @@ export const colorVariants: Record<string, BaseWithState<any>> = {
     ':active': { className: ['bg-rose-700'] },
     ':hover': { className: ['bg-rose-600'] },
   },
-};
+} satisfies Record<string, BaseWithState<any>>;

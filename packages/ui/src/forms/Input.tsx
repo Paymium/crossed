@@ -140,7 +140,11 @@ const InputRoot = forwardRef<
         <Label className="group focus:ring ring-orange-400">
           {children ??
             [
-              label && <InputLabel key="InputLabel">{label}</InputLabel>,
+              label && (
+                <InputLabel key="InputLabel" aria-label={label}>
+                  {label}
+                </InputLabel>
+              ),
               <InputContent key="InputContent">
                 {Icon && (
                   <InputIcon key="InputIconLeft">

@@ -1,11 +1,12 @@
 {
   "include": ["./src"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "example"],
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./lib/typescript",
     "ignoreDeprecations": "5.0",
     "emitDeclarationOnly": true,
+    "noEmit": false,
     "declaration": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": true,
@@ -25,6 +26,12 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "paths": {
+      "@crossed/core": ["./node_modules/@crossed/core/src"],
+      "@crossed/styled": ["./node_modules/@crossed/styled/src"],
+      "@crossed/primitive": ["./node_modules/@crossed/primitive/src"],
+      "@crossed/unicons": ["./node_modules/@crossed/unicons/src"]
+    }
   }
 }

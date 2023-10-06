@@ -1,7 +1,12 @@
 'use client';
-import { GetProps, composeRefs, createScope } from '@crossed/core';
-import { merge, styled } from '@crossed/styled';
-import { HtmlHTMLAttributes, PropsWithChildren, forwardRef } from 'react';
+import { composeRefs, createScope } from '@crossed/core';
+import { GetProps, merge, styled } from '@crossed/styled';
+import {
+  HtmlHTMLAttributes,
+  PropsWithChildren,
+  ReactNode,
+  forwardRef,
+} from 'react';
 import { TextInput } from 'react-native';
 import { Portal, PortalProvider } from '@gorhom/portal';
 import {
@@ -18,6 +23,7 @@ import {
 import { ButtonFrame } from '../Button';
 import { createSelect, useSelectContext } from '@crossed/primitive';
 import { YBox, YBoxProps } from '../../layout/YBox';
+import { Box, BoxProps } from '../../layout/Box';
 
 // type InputProps = GetProps<typeof Input>;
 
@@ -277,7 +283,7 @@ import { YBox, YBoxProps } from '../../layout/YBox';
 // }
 
 const RootFrame = styled(TextInput, {
-  extends: [ButtonFrame.styles],
+  extends: ButtonFrame.styles,
   props: { editable: false },
   className: ['cursor-pointer'],
 });
@@ -289,17 +295,15 @@ const [FloatingProvider, useFloatingProvider] = createScope<FloatingProvider>(
   {} as FloatingProvider
 );
 
-const SelectLabel = forwardRef(
-  (props: HtmlHTMLAttributes<HTMLDivElement>, ref: any) => {
-    return (
-      <div
-        {...props}
-        ref={ref}
-        className="text-neutral-500 px-2 py-1 font-semibold"
-      />
-    );
-  }
-);
+const SelectLabel = forwardRef((props: BoxProps, ref: any) => {
+  return (
+    <Box
+      {...props}
+      ref={ref}
+      className="text-neutral-500 px-2 py-1 font-semibold"
+    />
+  );
+});
 
 const SelectContent = (props: HtmlHTMLAttributes<HTMLDivElement>) => {
   const { refs, floatingStyles, getFloatingProps } = useFloatingProvider();
@@ -341,18 +345,34 @@ const SelectItem = forwardRef(
   }
 );
 
-const SelectTrigger = forwardRef(
-  (props: GetProps<typeof RootFrame>, ref: any) => {
-    const { getReferenceProps, refs } = useFloatingProvider();
-    return (
-      <RootFrame
-        {...getReferenceProps()}
-        {...props}
-        ref={composeRefs(refs.setReference, ref)}
-      />
-    );
-  }
-);
+type SelectTriggerProps = GetProps<typeof RootFrame>;
+
+const SelectTrigger = forwardRef((props: SelectTriggerProps, ref: any) => {
+  const { getReferenceProps, refs } = useFloatingProvider();
+  return (
+    <RootFrame
+      ref={composeRefs(refs.setReference, ref)}
+      {...(getReferenceProps() as any)}
+      {...(props as any)}
+    />
+  );
+});
+
+type SelectPropsBase = YBoxProps & {
+  size?: any;
+  color?: any;
+  variant?: any;
+};
+type SelectPropsWithChildren = SelectPropsBase & {
+  items?: never;
+  label?: never;
+  children?: ReactNode;
+};
+type SelectPropsWithOutChildren = SelectPropsBase & {
+  items?: { value: string; label: string }[];
+  label?: string;
+  children?: never;
+};
 
 const Select = createSelect({
   Root: ({
@@ -360,7 +380,7 @@ const Select = createSelect({
     label,
     items,
     ...props
-  }: YBoxProps & { items?: { value: string; label: string }[] }) => {
+  }: SelectPropsWithChildren | SelectPropsWithOutChildren) => {
     const { open, setOpen } = useSelectContext();
     const floating = useFloating({
       open: open,

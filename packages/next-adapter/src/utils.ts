@@ -1,5 +1,5 @@
-const fs = require('fs-extra');
-const path = require('path');
+import fs from 'fs-extra';
+import path from 'path';
 
 const isIncludedInDependency = (arr: any[], inputString: string) => {
   return arr.includes(inputString);
@@ -65,6 +65,7 @@ const getDependenciesFromNodeModules = (
       if (stat.isDirectory()) {
         traverse(filePath);
       } else if (stat.isFile() && file === 'package.json') {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const packageJson = require(filePath);
 
         if (
@@ -107,6 +108,7 @@ const checkIfWorkspace = (currDir: any) => {
   const metadata: any = {};
 
   if (parentFiles.includes('package.json')) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const parentPackageJson = require(path.resolve(
       currDir,
       '..',

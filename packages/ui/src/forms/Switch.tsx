@@ -116,7 +116,7 @@ const SwitchRoot = ({
         {children ?? (
           <>
             <SwitchThumb />
-            {label && <SwitchLabel>{label}</SwitchLabel>}
+            {label && <SwitchLabel aria-label={label}>{label}</SwitchLabel>}
           </>
         )}
       </LabelFrame>

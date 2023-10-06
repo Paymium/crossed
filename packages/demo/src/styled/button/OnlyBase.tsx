@@ -1,6 +1,7 @@
 import { type GetProps, styled } from '@crossed/styled';
+import { Pressable } from 'react-native';
 
-const Button = styled('button', {
+const Button = styled(Pressable, {
   className: [
     'px-3 py-2',
     'border border-neutral-700',
@@ -8,7 +9,7 @@ const Button = styled('button', {
     'rounded-md',
   ],
   props: {
-    type: 'button',
+    role: 'button',
   },
 });
 

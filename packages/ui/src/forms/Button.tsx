@@ -1,8 +1,14 @@
 'use client';
-import { styled, tw, type GetProps, useCrossedTheme } from '@crossed/styled';
+import {
+  styled,
+  tw,
+  type GetProps,
+  useCrossedTheme,
+  BaseWithState,
+} from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
 import { Pressable, Text } from 'react-native';
-import { cloneElement, type PropsWithChildren } from 'react';
+import { cloneElement } from 'react';
 import { colorVariants } from '../variants/colors';
 import { sizeVariants } from '../variants/size';
 import { Box } from '../layout/Box';
@@ -56,7 +62,9 @@ export const ButtonFrame = styled(Pressable, {
 const ButtonTextFrame = styled(Text, {
   className: ['font-semibold'],
   variants: {
-    color: Object.entries(colorVariants).reduce<{
+    color: Object.entries(
+      colorVariants as Record<string, BaseWithState<any>>
+    ).reduce<{
       [key in keyof typeof colorVariants]: (typeof colorVariants)[key];
     }>(
       (
@@ -155,10 +163,8 @@ const ButtonTextFrame = styled(Text, {
   ],
 });
 
-const ButtonIconFrame = ({
-  children,
-  ...props
-}: PropsWithChildren<GetProps<typeof Box>>) => {
+type ButtonIconFrameProps = GetProps<typeof Box>;
+const ButtonIconFrame = ({ children, ...props }: ButtonIconFrameProps) => {
   const { color, variant, size } = useButtonContext();
   const { theme } = useCrossedTheme();
   const className = ButtonTextFrame.styles({

@@ -23,7 +23,7 @@ export const InputDemo = ({ size, variant, color }: Props) => {
         onChangeValue={setValue}
         value={value}
       >
-        <Input.Label>Label</Input.Label>
+        <Input.Label aria-label="Label">Label</Input.Label>
         <Input.Content>
           <Input.Icon>
             <UilEye />

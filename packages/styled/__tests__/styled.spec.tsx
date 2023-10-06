@@ -15,7 +15,7 @@ const Body = styled(Text, {
 
 describe('styled', () => {
   test('hover', async () => {
-    render(<Body dataSet={{ testid: 'toto' }} />);
+    render(<Body testID="toto" />);
     await screen.findAllByTestId('toto');
 
     expect(screen.getByTestId('toto')).toHaveAttribute(
@@ -35,7 +35,7 @@ describe('styled', () => {
     );
   });
   test('click', async () => {
-    render(<Body dataSet={{ testid: 'toto' }} />);
+    render(<Body testID="toto" />);
     await screen.findAllByTestId('toto');
 
     expect(screen.getByTestId('toto')).toHaveAttribute(

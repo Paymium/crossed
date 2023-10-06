@@ -5,7 +5,7 @@ export const SwitchDemo = () => {
     <Box>
       <Switch>
         <Switch.Thumb />
-        <Switch.Label>Hello</Switch.Label>
+        <Switch.Label aria-label="Hello">Hello</Switch.Label>
       </Switch>
     </Box>
   );

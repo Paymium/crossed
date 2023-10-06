@@ -75,7 +75,7 @@ const [RovingFocusProvider, useRovingFocusContext] =
   createScope<RovingContextValue>({} as RovingContextValue);
 
 type RovingFocusGroupElement = RovingFocusGroupImplElement;
-interface RovingFocusGroupProps extends RovingFocusGroupImplProps {}
+type RovingFocusGroupProps = RovingFocusGroupImplProps;
 
 const RovingFocusGroup = React.forwardRef<
   RovingFocusGroupElement,

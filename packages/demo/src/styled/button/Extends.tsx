@@ -1,9 +1,10 @@
 import { styled } from '@crossed/styled';
+import { Pressable } from 'react-native';
 
-const Button = styled('button', {
+const Button = styled(Pressable, {
   'className': ['px-3 py-2', 'border border-neutral-700', 'bg-neutral-800'],
   'props': {
-    type: 'button',
+    role: 'button',
   },
   ':hover': {
     className: ['bg-neutral-700'],
@@ -14,7 +15,7 @@ const Button = styled('button', {
 });
 
 const InputStyledFrom = styled('input', {
-  extends: [Button.styles],
+  extends: Button.styles,
 });
 
 export const ButtonExtendsDemo = () => {

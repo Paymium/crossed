@@ -30,9 +30,10 @@
   "scripts": {
     "release": "release-it",
     "clean": "rm -rf lib",
-    "watch": "crossed-build --watch",
-    "build": "crossed-build",
-    "dev:web": "cd example/native && yarn web --clear"
+    "watch": "crossed-build --watch --project-path ./tsconfig.build.json",
+    "build": "crossed-build --project-path ./tsconfig.build.json",
+    "dev:web": "cd example/native && yarn web --clear",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@crossed/build": "*",

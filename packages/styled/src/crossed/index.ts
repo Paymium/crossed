@@ -2,21 +2,26 @@ import { merge } from './merge';
 import type {
   BaseWithState,
   Config,
-  ConfigSchema,
+  ConfigSchemaUndefined,
   OmitUndefined,
   Props,
-} from './types';
+} from '@crossed/core';
 
 export type VariantProps<Component extends (...args: any) => any> = Omit<
   OmitUndefined<Parameters<Component>[0]>,
   'class' | 'className'
 >;
 
-const falsyToString = <T extends unknown>(value: T) =>
+const falsyToString = <T>(value: T) =>
   typeof value === 'boolean' ? `${value}` : value === 0 ? '0' : value;
 
 export const crossed =
-  <P extends object, T extends ConfigSchema<P>>(config?: Config<P, T>) =>
+  <
+    T extends ConfigSchemaUndefined<any> = ConfigSchemaUndefined<any>,
+    P extends Record<string, any> = any
+  >(
+    config?: Config<P, T, any>
+  ) =>
   (props?: Props<T, P>) => {
     if (config?.variants == null) {
       return config as BaseWithState<P>;
@@ -38,7 +43,7 @@ export const crossed =
     const getVariantClassNames = Object.entries(variants).map(
       ([variant, variantValue]) => {
         const variantProp = props?.[variant as keyof typeof props];
-        const defaultVariantProp = defaultVariants?.[variant];
+        const defaultVariantProp = (defaultVariants as any)?.[variant];
 
         if (variantProp === null) return null;
 

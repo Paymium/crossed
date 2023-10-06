@@ -2,10 +2,10 @@
   "include": ["./src"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "baseUrl": ".",
     "outDir": "./lib/typescript",
     "ignoreDeprecations": "5.0",
     "emitDeclarationOnly": true,
+    "noEmit": false,
     "declaration": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": true,
