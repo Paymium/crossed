@@ -28,7 +28,11 @@ function TextareaRoot({
     >
       {children ??
         [
-          label && <TextareaLabel key="TextareaLabel">{label}</TextareaLabel>,
+          label && (
+            <TextareaLabel key="TextareaLabel" aria-label={label}>
+              {label}
+            </TextareaLabel>
+          ),
           <TextareaInput key="TextareaInput" />,
         ].filter(Boolean)}
     </Input>

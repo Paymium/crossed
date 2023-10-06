@@ -7,6 +7,7 @@ const config: Config.InitialOptions = {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
   moduleNameMapper: {
+    '^@crossed/core$': '<rootDir>/node_modules/@crossed/core/src/index',
     '^react-native$': 'react-native-web',
   },
   moduleDirectories: ['./node_modules', 'src'],

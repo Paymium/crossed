@@ -20,7 +20,7 @@
       "outputs": []
     },
     "type-check": {
-      "outputs": []
+      "cache": false
     },
     "test": {
       "outputs": []

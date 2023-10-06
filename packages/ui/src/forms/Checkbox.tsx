@@ -120,7 +120,7 @@ const CheckboxRoot = ({
                 <UilCheck />
               </CheckboxIcon>
             </CheckboxIndicator>,
-            label && <CheckboxLabel>{label}</CheckboxLabel>,
+            label && <CheckboxLabel aria-label={label}>{label}</CheckboxLabel>,
           ].filter(Boolean)}
       </Label>
     </Provider>

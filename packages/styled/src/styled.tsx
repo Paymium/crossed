@@ -2,11 +2,6 @@
 
 import { forwardRef, useCallback, useEffect } from 'react';
 import { Platform } from 'react-native';
-import type {
-  NewComponentProps,
-  StylableComponent,
-  StyledComponent,
-} from './types';
 import {
   withStaticProperties,
   composeEventHandlers,
@@ -14,7 +9,16 @@ import {
 } from '@crossed/core';
 import { crossed } from './crossed';
 import { merge } from './crossed/merge';
-import type { Config, ConfigSchema, Props } from './crossed/types';
+import type {
+  NewComponentProps,
+  PropsFromExtends,
+  StylableComponent,
+  StyledComponent,
+  Config,
+  ConfigSchemaUndefined,
+  Props,
+  StylesFunctionUndefined,
+} from '@crossed/core';
 import { twMerge } from 'tailwind-merge';
 import { StyleSheet } from './styleSheet';
 import { useCrossedTheme } from './CrossedTheme';
@@ -22,20 +26,17 @@ import { default as tw } from 'twrnc';
 
 export function styled<
   P extends Record<string, any>,
-  E extends ((e: any) => any)[],
-  T extends ConfigSchema<any> = ConfigSchema<P>
->(
-  Component: StylableComponent<P>,
-  themeConfig: Config<P, T> & { extends?: E }
-) {
+  E extends StylesFunctionUndefined<any> = undefined,
+  T extends ConfigSchemaUndefined<P> = undefined
+>(Component: StylableComponent<P>, themeConfig: Config<P, T, E>) {
   const { extends: extendsStyle, ...themeConfigProps } = themeConfig;
-  const stylesClass = crossed<P, T>(themeConfigProps as any);
+  const stylesClass = crossed<T, P>(themeConfigProps);
 
   const variantNames = Object.keys(
     themeConfigProps.variants || {}
   ) as (keyof T)[];
 
-  const NewComponent = forwardRef<any, NewComponentProps<P, E>>(
+  const NewComponent = forwardRef<any, NewComponentProps<T, P, E>>(
     function CrossedStyledComponent(props, ref) {
       const { theme } = useCrossedTheme();
 
@@ -56,7 +57,7 @@ export function styled<
         variantProps: Props<T, P>;
       }>(
         (acc, [propsName, valueProps]) => {
-          if (variantNames.includes(propsName)) {
+          if (variantNames.includes(propsName as any)) {
             (acc.variantProps as any)[propsName as any] =
               valueProps || undefined;
           } else if (
@@ -76,12 +77,7 @@ export function styled<
       const NewComp = styles.props?.as ? styles.props?.as : Component;
       const asIsString = typeof NewComp === 'string';
 
-      const extendClassName = ((extendsStyle || []) as any[]).reduce<any>(
-        (acc, style) => {
-          return merge(acc, style(props as any) as any);
-        },
-        {}
-      );
+      const extendClassName = extendsStyle?.(props as any) || {};
 
       const variantExtendClassName =
         (props.disabled
@@ -235,12 +231,12 @@ export function styled<
   );
 
   return withStaticProperties(NewComponent, {
-    styles: (p?: Props<T, P>) => {
+    styles: (p?: Props<T, P> & PropsFromExtends<E>) => {
       const parentStyle = (Component as any).styles?.(p);
       const style = stylesClass(p);
       return parentStyle ? merge(parentStyle, style) : style;
     },
-  }) as StyledComponent<T, P, E, NewComponentProps<P, E>>;
+  }) as unknown as StyledComponent<T, P, E>;
 }
 
 const parsedPropsProperty = (props: Record<string, unknown>) => {

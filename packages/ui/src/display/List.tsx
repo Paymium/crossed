@@ -1,12 +1,6 @@
 import { createList } from '@crossed/primitive';
 import { GetProps, styled, tw, useCrossedTheme } from '@crossed/styled';
-import {
-  Fragment,
-  PropsWithChildren,
-  ReactElement,
-  cloneElement,
-  useId,
-} from 'react';
+import { Fragment, ReactElement, ReactNode, cloneElement, useId } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { Divider } from '../layout/Divider';
 import { YBox } from '../layout/YBox';
@@ -22,6 +16,8 @@ const ListRootFrame = styled(View, {
   ':light': { className: ['border-neutral-200'] },
 });
 
+type ListRootFrameProps = GetProps<typeof ListRootFrame>;
+
 const ListTitleFrame = styled(Text, {
   className: ['font-semibold text-white'],
 });
@@ -30,34 +26,35 @@ const ListSubTitleFrame = styled(Text, {
   className: ['font-normal text-neutral-400'],
 });
 
-const ListItemFrame = styled(View, {
-  'extends': [ButtonFrame.styles],
+const ListItemFrame = styled(Pressable, {
+  'props': { role: 'button', disabled: true },
+  'extends': ButtonFrame.styles,
   'className': ['flex flex-row items-center rounded-none border-0'],
   ':disabled': { className: ['opacity-50'] },
   'variants': {
     color: colorVariants,
     pressable: {
       true: {
-        props: { as: Pressable, role: 'button' },
-        // ':hover': { className: [""] },
+        props: { disabled: false },
       },
     },
-  } as const,
+  },
 });
 
-type ListItemProps = PropsWithChildren<
-  Omit<GetProps<typeof ListItemFrame>, 'children'> & {
-    title?: string;
-    subtitle?: string;
-    icon?: ReactElement;
-    iconAfter?: ReactElement;
-    disabled?: boolean;
-  }
->;
+type ListItemFrameProps = GetProps<typeof ListItemFrame>;
+
+type ListItemProps = Omit<ListItemFrameProps, 'children'> & {
+  children?: ReactNode;
+  title?: string;
+  subtitle?: string;
+  icon?: ReactElement;
+  iconAfter?: ReactElement;
+  disabled?: boolean;
+};
 
 type Context = {
-  color: GetProps<typeof ListItemFrame>['color'];
-  size: GetProps<typeof ListItemFrame>['size'];
+  color: ListItemFrameProps['color'];
+  size: ListItemFrameProps['size'];
 };
 const [Provider, useContext] = createScope<Context>({} as Context);
 
@@ -67,7 +64,7 @@ const List = createList({
     color = 'neutral',
     size = 'md',
     ...props
-  }: GetProps<typeof ListRootFrame>) => {
+  }: ListRootFrameProps & Partial<Context>) => {
     const id = useId();
     return (
       <Provider color={color} size={size}>
@@ -103,7 +100,7 @@ const List = createList({
     const style = tw.style(classNames);
 
     return (
-      <ListItemFrame color={color} size={size} {...props}>
+      <ListItemFrame color={color} size={size} {...(props as any)}>
         {icon &&
           cloneElement(icon as any, {
             color:

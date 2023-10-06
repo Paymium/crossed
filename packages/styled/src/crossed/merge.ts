@@ -1,5 +1,5 @@
 import { deepMerge } from './deepMerge';
-import type { BaseWithState } from './types';
+import type { BaseWithState } from '@crossed/core';
 
 export const merge = <P>(
   one: BaseWithState<P>,

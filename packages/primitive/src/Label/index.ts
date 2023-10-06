@@ -22,5 +22,5 @@ export const createLabel = <
   return withStaticProperties(Label, {
     Text: LabelText,
     Input: LabelInput,
-  });
+  } as const);
 };

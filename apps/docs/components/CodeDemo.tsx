@@ -103,7 +103,7 @@ export const CodeDemo = ({
               )}
               {actions.color && (
                 <Label>
-                  <Label.Text>Color ({color})</Label.Text>
+                  <Label.Text aria-label={'Color'}>Color ({color})</Label.Text>
                   <Label.Input>
                     <XBox space="xs" className="flex-wrap">
                       {(

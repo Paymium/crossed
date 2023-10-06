@@ -44,9 +44,11 @@
   "devDependencies": {
     "@types/node": "18.11.10",
     "@types/react": "^18.2.21",
+    "@types/react-native": "^0.72.2",
     "babel-preset-react-native": "^4.0.1",
     "modify-selectors": "^2.0.0",
     "postcss-load-config": "^4.0.1",
+    "react-native": "^0.72.5",
     "typescript": "^5.1.6"
   }
 }

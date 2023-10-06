@@ -18,7 +18,7 @@ const Button = styled(Pressable, {
 });
 
 const InputStyledFrom = styled(TextInput, {
-  extends: [Button.styles, ButtonText.styles],
+  extends: Button.styles,
   className: ['text-left'],
   props: {
     placeholderTextColor: tw.color('neutral-500'),

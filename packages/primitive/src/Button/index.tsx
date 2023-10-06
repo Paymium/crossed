@@ -1,5 +1,5 @@
 import { GetProps, withStaticProperties } from '@crossed/core';
-import { useMemo, type ComponentType } from 'react';
+import { useMemo, type ComponentType, ReactNode } from 'react';
 import { createButtonMain } from './Button';
 import { createButtonText } from './ButtonText';
 import { createButtonIcon } from './ButtonIcon';
@@ -32,14 +32,21 @@ export const createButton = <
   ButtonText.displayName = 'ButtonText';
   ButtonIcon.displayName = 'ButtonIcon';
 
-  const ButtonRoot = (props: GetProps<typeof Button>) => {
+  const ButtonRoot = (
+    props: Omit<GetProps<typeof Button>, 'children'> & {
+      text?: string;
+      iconAfter?: ComponentType;
+      icon?: ComponentType;
+      children?: ReactNode;
+    }
+  ) => {
     const {
       text,
       iconAfter: IconAfter,
       icon: Icon,
       children,
       ...otherProps
-    } = props as any;
+    } = props;
 
     const contextProps = useMemo(() => {
       return Object.entries(context || {}).reduce<C>((acc, [key]) => {
@@ -52,7 +59,7 @@ export const createButton = <
 
     return (
       <Provider {...contextProps}>
-        <Button {...otherProps}>
+        <Button {...(otherProps as any)}>
           {children ?? (
             <>
               {Icon && (

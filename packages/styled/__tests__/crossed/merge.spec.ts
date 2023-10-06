@@ -1,5 +1,5 @@
 import { merge } from '../../src/crossed/merge';
-import type { State } from '../../src/crossed/types';
+import type { State } from '@crossed/core';
 
 const baseOne: State<any>[':active'] = {
   ':dark': { className: ['bg-neutral-500'] },

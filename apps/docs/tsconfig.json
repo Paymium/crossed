@@ -14,15 +14,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "composite": true,
     "jsx": "preserve",
-    "paths": {
-      "@crossed/demo": ["./node_modules/@crossed/demo/src"],
-      "@crossed/ui": ["./node_modules/@crossed/ui/src"],
-      "@crossed/core": ["./node_modules/@crossed/core/src"],
-      "@crossed/styled": ["./node_modules/@crossed/styled/src"],
-      "@crossed/primitive": ["./node_modules/@crossed/primitive/src"],
-      "@crossed/unicons": ["./node_modules/@crossed/unicons/src"]
-    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

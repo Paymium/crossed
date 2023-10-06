@@ -15,7 +15,7 @@ const Button = styled(Pressable, {
 });
 
 const InputStyledFrom = styled('input', {
-  extends: [Button.styles],
+  extends: Button.styles,
 });
 
 export const ButtonExtendsDemo = () => {

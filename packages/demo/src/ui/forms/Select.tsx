@@ -1,10 +1,19 @@
 import { Select } from '@crossed/ui';
 import type { Props } from '../../props';
+import { styled } from '@crossed/styled/src';
+import { TextInput } from 'react-native';
+
+const RootFrame = styled(TextInput, {
+  // extends: ButtonFrame.styles,
+  props: { editable: false },
+  className: ['cursor-pointer'],
+});
 
 export const SelectDemo = ({ size, variant, color }: Props) => {
   return (
     <Select size={size} variant={variant as any} color={color}>
-      <Select.Label>Size</Select.Label>
+      <Select.Label />
+      <RootFrame />
       <Select.Trigger aria-label="Size" />
       <Select.Content>
         <Select.Item value={'xs'} label="xs" aria-label="xs" />

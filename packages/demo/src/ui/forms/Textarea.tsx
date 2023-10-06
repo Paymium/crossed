@@ -23,7 +23,7 @@ export const TextareaDemo = ({ size, variant, color }: Props) => {
         onChangeValue={setValue}
         value={value}
       >
-        <Textarea.Label>Label</Textarea.Label>
+        <Textarea.Label aria-label="Label">Label</Textarea.Label>
         <Textarea.Input />
       </Textarea>
     </YBox>

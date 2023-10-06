@@ -34,8 +34,8 @@ describe('crossed', () => {
         },
       },
     });
-    expect(variant({ toto: false })).toEqual(
-      result({ className: ['text-red-100'], toto: false })
+    expect(variant({ toto: null })).toEqual(
+      result({ className: ['text-red-100'], toto: null })
     );
     expect(variant({ toto: true })).toEqual(
       result({ className: ['text-red-200'], toto: true })
@@ -82,8 +82,8 @@ describe('crossed', () => {
         },
       ],
     });
-    expect(variant({ toto: false, foo: false })).toEqual(
-      result({ className: ['text-red-300'], foo: false, toto: false })
+    expect(variant({ toto: null, foo: null })).toEqual(
+      result({ className: ['text-red-100'], foo: null, toto: null })
     );
     expect(variant({ toto: false, foo: true })).toEqual(
       result({ className: ['text-red-700'], foo: true, toto: false })

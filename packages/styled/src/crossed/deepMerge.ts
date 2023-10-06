@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import type { Base, PropsExtends, Theme } from './types';
+import type { Base, PropsExtends, Theme } from '@crossed/core';
 
 export const deepMerge = <P>(
   one?: Base<P> & Theme<P>,
