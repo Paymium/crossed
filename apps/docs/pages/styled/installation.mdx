@@ -1,7 +1,7 @@
 import { Tabs } from 'components/Tabs';
 import { styled } from '@crossed/styled';
 import { Box } from '@crossed/ui';
-import { Steps } from 'nextra/components'
+import { Steps, Callout } from 'nextra/components'
 
 export const Button = styled("button", {
   className: ['border border-brand-900 bg-brand-500 rounded-md text-white'],
@@ -21,13 +21,17 @@ export const Button = styled("button", {
 
 Based you already have tailwind initilized. If not, see how [install tailwind](https://tailwindcss.com/docs/installation)
 
+<Callout type="warning" emoji="⚠️">
+  Only nextjs installation
+</Callout>
+
 <Steps>
 ### Install dependencies
 <Tabs items={["pnpm", "npm", "yarn"]}>
   <Tabs.Tab>
 
     ```sh
-    pnpm i @crossed/styled
+    pnpm i @crossed/styled @crossed/next-adapter react-native-web
     pnpm i -D modify-selectors
     ```
 
@@ -35,7 +39,7 @@ Based you already have tailwind initilized. If not, see how [install tailwind](h
   <Tabs.Tab>
 
     ```sh
-    npm i @crossed/styled
+    npm i @crossed/styled @crossed/next-adapter react-native-web
     npm i -D modify-selectors
     ```
 
@@ -43,7 +47,7 @@ Based you already have tailwind initilized. If not, see how [install tailwind](h
   <Tabs.Tab>
   
     ```sh
-    yarn add @crossed/styled
+    yarn add @crossed/styled @crossed/next-adapter react-native-web
     yarn add -D modify-selectors
     ```
   
@@ -68,6 +72,19 @@ const config = {
 export default config;
 ```
 
+### Add Nextjs plugin
+
+```javascript filename="next.config.js"
+const { withCrossed } = require('@crossed/next-adapter');
+
+/** @type {import('next').NextConfig} */
+const nextConfig = withCrossed({
+  /** your next config */
+})
+
+module.exports = nextConfig
+```
+
 ### Usage
 <br />
 <Box className="items-center justify-center">
@@ -78,9 +95,9 @@ export default config;
 import { styled } from '@crossed/styled';
 
 export const Button = styled("button", {
-  className: ['border border-brand-900 bg-brand-500 rounded-md text-white'],
-  ':hover': { className: "bg-brand-400" },
-  ':active': { className: "bg-brand-600" },
+  className: ['border border-neutral-900 bg-neutral-500 rounded-md text-white'],
+  ':hover': { className: "bg-neutral-400" },
+  ':active': { className: "bg-neutral-600" },
   variants: {
     size: {
       md: { className: ["px-3 py-2"] }
