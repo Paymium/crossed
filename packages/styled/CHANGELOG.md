@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.7.1
+
+### Patch Changes
+
+- acf36f8: fix return type typescript props when styled component
+
 ## 0.7.0
 
 ### Minor Changes
