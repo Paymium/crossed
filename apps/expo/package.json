@@ -14,7 +14,7 @@
   "dependencies": {
     "@babel/runtime": "^7.22.10",
     "@expo/vector-icons": "^13.0.0",
-    "@crossed/core": "0.5.1",
+    "@crossed/core": "0.6.0",
     "@crossed/demo": "0.1.0",
     "@crossed/ui": "0.6.1",
     "@react-navigation/native": "^6.0.2",
