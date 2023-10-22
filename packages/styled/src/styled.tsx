@@ -20,7 +20,7 @@ import type {
   StylesFunctionUndefined,
 } from '@crossed/core';
 import { twMerge } from 'tailwind-merge';
-import { StyleSheet } from './styleSheet';
+// import { StyleSheet } from './styleSheet';
 import { useCrossedTheme } from './CrossedTheme';
 import { default as tw } from 'twrnc';
 
@@ -124,6 +124,7 @@ export function styled<
           : styles?.[`:${theme}`]?.className) ||
         styles?.[`:${theme}`]?.className;
 
+      // TODO: remove as any
       const propsVariant = {
         ...styles.props,
         ...(theme === 'dark' ? props.$dark?.props : props.$light?.props),
@@ -136,6 +137,21 @@ export function styled<
           : focus
           ? styles[':focus']?.props
           : styles.props),
+        style: {
+          ...((styles.props || {}) as any).style,
+          ...(theme === 'dark'
+            ? (props.$dark?.props || {}).style
+            : (props.$light?.props || {}).style),
+          ...(props.disabled
+            ? ((styles[':disabled']?.props || {}) as any).style
+            : active
+            ? ((styles[':active']?.props || {}) as any).style
+            : hover
+            ? ((styles[':hover']?.props || {}) as any).style
+            : focus
+            ? ((styles[':focus']?.props || {}) as any).style
+            : ((styles.props || {}) as any).style),
+        },
       };
 
       const baseClassName = twMerge(
@@ -151,10 +167,10 @@ export function styled<
         theme === 'dark' ? props.$dark?.className : props.$light?.className
       );
 
-      const key = Platform.OS === 'web' ? 'className' : 'style';
+      // const key = Platform.OS === 'web' ? 'className' : 'style';
 
       const styleProps = {
-        [key]: StyleSheet.create(baseClassName),
+        className: baseClassName,
       };
 
       const toto = useCallback(() => {
@@ -192,8 +208,18 @@ export function styled<
               })}
           style={
             asIsString
-              ? { ...(styleProps.style as any), ...componentProps.style }
-              : [styleProps.style, componentProps.style]
+              ? {
+                  // ...(styleProps.style as any),
+                  ...propsComponent.style,
+                  ...componentProps.style,
+                }
+              : [
+                  // styleProps.style,
+                  ...(Array.isArray(propsComponent.style)
+                    ? propsComponent.style
+                    : [propsComponent.style]),
+                  componentProps.style,
+                ]
           }
           onMouseDown={composeEventHandlers(componentProps?.onMouseDown, () => {
             setActive(true);

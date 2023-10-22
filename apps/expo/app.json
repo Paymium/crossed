@@ -1,4 +1,5 @@
 {
+  "scheme": "your-app-scheme",
   "expo": {
     "name": "crossed-expo",
     "slug": "crossed-expo",

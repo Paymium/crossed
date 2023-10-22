@@ -11,7 +11,7 @@ export const createButtonMain = <T extends Record<string, any>>(
     const context = useContext();
     return (
       <StyledButton
-        aria-disabled={Boolean(props.disabled ?? false).toString()}
+        aria-disabled={Boolean(props.disabled ?? false)}
         role="button"
         {...context}
         {...props}

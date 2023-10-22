@@ -1,18 +1,9 @@
 'use client';
-import {
-  styled,
-  tw,
-  type GetProps,
-  useCrossedTheme,
-  BaseWithState,
-} from '@crossed/styled';
+import { styled, tw, type GetProps, useCrossedTheme } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
 import { Pressable, Text } from 'react-native';
 import { cloneElement } from 'react';
-import { colorVariants } from '../variants/colors';
-import { sizeVariants } from '../variants/size';
 import { Box } from '../layout/Box';
-import { spaceVariants } from '../variants';
 import { useButtonContext } from '@crossed/primitive';
 
 export const ButtonFrame = styled(Pressable, {
@@ -27,22 +18,159 @@ export const ButtonFrame = styled(Pressable, {
   ':disabled': {
     className: ['opacity-50', 'pointer-events-none', 'cursor-not-allowed'],
   },
-  'props': {
-    role: 'button',
-  },
+  'props': { role: 'button' },
   'variants': {
-    color: colorVariants,
-    size: sizeVariants,
-    space: spaceVariants,
+    color: {
+      slate: {
+        ':light': { className: ['border-slate-800 bg-slate-700'] },
+        ':dark': { className: ['border-slate-800 bg-slate-800'] },
+        ':active': {
+          ':light': { className: ['bg-slate-600'] },
+          ':dark': { className: ['bg-slate-700'] },
+        },
+        ':hover': {
+          ':light': { className: ['bg-slate-500'] },
+          ':dark': { className: ['bg-slate-600'] },
+        },
+      },
+      gray: {
+        ':light': { className: ['border-gray-800 bg-gray-700'] },
+        ':dark': { className: ['border-gray-800 bg-gray-800'] },
+        ':active': { className: ['bg-gray-700'] },
+        ':hover': { className: ['bg-gray-600'] },
+      },
+      zinc: {
+        'className': ['border-zinc-800 bg-zinc-800'],
+        ':active': { className: ['bg-zinc-700'] },
+        ':hover': { className: ['bg-zinc-600'] },
+      },
+      neutral: {
+        'className': ['border-neutral-800 bg-neutral-800'],
+        ':active': { className: ['bg-neutral-700'] },
+        ':hover': { className: ['bg-neutral-600'] },
+      },
+      stone: {
+        'className': ['border-stone-800 bg-stone-800'],
+        ':active': { className: ['bg-stone-700'] },
+        ':hover': { className: ['bg-stone-600'] },
+      },
+      red: {
+        ':light': { className: ['border-red-700 bg-red-700'] },
+        ':dark': { className: ['border-red-800 bg-red-800'] },
+        ':active': {
+          ':dark': { className: ['bg-red-700'] },
+          ':light': { className: ['bg-red-600'] },
+        },
+        ':hover': {
+          ':dark': { className: ['bg-red-600'] },
+          ':light': { className: ['bg-red-500'] },
+        },
+      },
+      orange: {
+        'className': ['border-orange-800', 'bg-orange-800'],
+        ':active': { className: ['bg-orange-700'] },
+        ':hover': { className: ['bg-orange-600'] },
+      },
+      amber: {
+        'className': ['border-amber-800', 'bg-amber-800'],
+        ':active': { className: ['bg-amber-700'] },
+        ':hover': { className: ['bg-amber-600'] },
+      },
+      yellow: {
+        'className': ['border-yellow-800', 'bg-yellow-800'],
+        ':active': { className: ['bg-yellow-700'] },
+        ':hover': { className: ['bg-yellow-600'] },
+      },
+      lime: {
+        'className': ['border-lime-800', 'bg-lime-800'],
+        ':active': { className: ['bg-lime-700'] },
+        ':hover': { className: ['bg-lime-600'] },
+      },
+      green: {
+        'className': ['border-green-800', 'bg-green-800'],
+        ':active': { className: ['bg-green-700'] },
+        ':hover': { className: ['bg-green-600'] },
+      },
+      emerald: {
+        'className': ['border-emerald-800', 'bg-emerald-800'],
+        ':active': { className: ['bg-emerald-700'] },
+        ':hover': { className: ['bg-emerald-600'] },
+      },
+      teal: {
+        'className': ['border-teal-800', 'bg-teal-800'],
+        ':active': { className: ['bg-teal-700'] },
+        ':hover': { className: ['bg-teal-600'] },
+      },
+      cyan: {
+        'className': ['border-cyan-800', 'bg-cyan-800'],
+        ':active': { className: ['bg-cyan-700'] },
+        ':hover': { className: ['bg-cyan-600'] },
+      },
+      sky: {
+        'className': ['border-sky-800', 'bg-sky-800'],
+        ':active': { className: ['bg-sky-700'] },
+        ':hover': { className: ['bg-sky-600'] },
+      },
+      blue: {
+        'className': ['border-blue-800', 'bg-blue-800'],
+        ':active': { className: ['bg-blue-700'] },
+        ':hover': { className: ['bg-blue-600'] },
+      },
+      indigo: {
+        'className': ['border-indigo-800', 'bg-indigo-800'],
+        ':active': { className: ['bg-indigo-700'] },
+        ':hover': { className: ['bg-indigo-600'] },
+      },
+      violet: {
+        'className': ['border-violet-800', 'bg-violet-800'],
+        ':active': { className: ['bg-violet-700'] },
+        ':hover': { className: ['bg-violet-600'] },
+      },
+      purple: {
+        'className': ['border-purple-800', 'bg-purple-800'],
+        ':active': { className: ['bg-purple-700'] },
+        ':hover': { className: ['bg-purple-600'] },
+      },
+      fuchsia: {
+        'className': ['border-fuchsia-800', 'bg-fuchsia-800'],
+        ':active': { className: ['bg-fuchsia-700'] },
+        ':hover': { className: ['bg-fuchsia-600'] },
+      },
+      pink: {
+        'className': ['border-pink-800 bg-pink-800'],
+        ':active': { className: ['bg-pink-700'] },
+        ':hover': { className: ['bg-pink-600'] },
+      },
+      rose: {
+        'className': ['border-rose-800', 'bg-rose-800'],
+        ':active': { className: ['bg-rose-700'] },
+        ':hover': { className: ['bg-rose-600'] },
+      },
+    },
+    size: {
+      xs: { className: ['px-2', 'py-1'] },
+      sm: { className: ['px-2', 'py-1.5'] },
+      md: { className: ['px-3', 'py-2'] },
+      lg: { className: ['px-4', 'py-3'] },
+      xl: { className: ['px-5', 'py-4'] },
+    },
+    space: {
+      xs: { className: ['gap-1'] },
+      sm: { className: ['gap-3'] },
+      md: { className: ['gap-5'] },
+      lg: { className: ['gap-7'] },
+      xl: { className: ['gap-9'] },
+    },
     unstyled: {
       true: {},
       false: {},
     },
     variant: {
-      filled: {
-        className: ['border-transparent'],
+      filled: { className: ['border-transparent'] },
+      outlined: {
+        'className': ['bg-transparent'],
+        ':active': { className: ['bg-neutral-300'] },
       },
-      outlined: {},
       unstyled: {
         'className': ['bg-transparent border-transparent'],
         ':hover': { className: ['bg-transparent border-transparent'] },
@@ -62,59 +190,54 @@ export const ButtonFrame = styled(Pressable, {
 const ButtonTextFrame = styled(Text, {
   className: ['font-semibold'],
   variants: {
-    color: Object.entries(
-      colorVariants as Record<string, BaseWithState<any>>
-    ).reduce<{
-      [key in keyof typeof colorVariants]: (typeof colorVariants)[key];
-    }>(
-      (
-        acc,
-        [
-          keyColor,
-          { className, ':light': light, ':dark': dark, ...colorVariant },
-        ]
-      ) => {
-        const lightClassName = (light?.className || []).reduce<string[]>(
-          (d, c) => [...d, ...c.split(' ')],
-          []
-        );
-        const darkClassName = (dark?.className || []).reduce<string[]>(
-          (d, c) => [...d, ...c.split(' ')],
-          []
-        );
-        const flatClassName = (className || []).reduce<string[]>(
-          (d, c) => [...d, ...c.split(' ')],
-          []
-        );
-
-        (acc as any)[keyColor] = {
-          ...colorVariant,
-          ':light': {
-            ...light,
-            className: (lightClassName || []).filter((e) =>
-              e.startsWith('text-')
-            ),
-          },
-          ':dark': {
-            ...dark,
-            className: (darkClassName || []).filter((e) =>
-              e.startsWith('text-')
-            ),
-          },
-          'className': (flatClassName || []).filter((e) =>
-            e.startsWith('text-')
-          ),
-          ':active': undefined,
-          ':hover': undefined,
-          ':focus': undefined,
-        };
-
-        return acc;
+    color: {
+      slate: {
+        ':light': { className: ['text-slate-800'] },
+        ':dark': { className: ['text-slate-500'] },
       },
-      {} as {
-        [key in keyof typeof colorVariants]: (typeof colorVariants)[key];
-      }
-    ),
+      gray: {
+        ':light': { className: ['text-gray-800'] },
+        ':dark': { className: ['text-gray-500'] },
+      },
+      zinc: {
+        ':light': { className: ['text-zinc-800'] },
+        ':dark': { className: ['text-zinc-500'] },
+      },
+      neutral: {
+        ':light': { className: ['text-neutral-800'] },
+        ':dark': { className: ['text-neutral-500'] },
+      },
+      stone: {
+        ':light': { className: ['text-stone-800'] },
+        ':dark': { className: ['text-stone-500'] },
+      },
+      red: {
+        ':light': { className: ['text-red-700 '] },
+        ':dark': { className: ['text-red-500'] },
+      },
+      orange: { className: ['text-orange-800'] },
+      amber: { className: ['text-amber-800'] },
+      yellow: { className: ['text-yellow-800'] },
+      lime: { className: ['text-lime-800'] },
+      green: { className: ['text-green-800'] },
+      emerald: { className: ['text-emerald-800'] },
+      teal: { className: ['text-teal-800'] },
+      cyan: { className: ['text-cyan-800'] },
+      sky: { className: ['text-sky-800'] },
+      blue: { className: ['text-blue-500'] },
+      indigo: { className: ['text-indigo-500'] },
+      violet: { className: ['text-violet-500'] },
+      purple: { className: ['text-purple-500'] },
+      fuchsia: { className: ['text-fuchsia-500'] },
+      pink: {
+        ':light': { className: ['text-pink-800'] },
+        ':dark': { className: ['text-pink-500'] },
+      },
+      rose: {
+        ':light': { className: ['text-rose-800 '] },
+        ':dark': { className: ['text-rose-500'] },
+      },
+    },
     size: {
       xs: { className: ['px-1', 'text-xs'] },
       sm: { className: ['px-2', 'text-sm'] },
@@ -141,24 +264,14 @@ const ButtonTextFrame = styled(Text, {
     {
       'variant': 'filled',
       'className': ['text-white'],
-      ':dark': {
-        className: ['text-white'],
-      },
-      ':light': {
-        className: ['text-white'],
-      },
+      ':dark': { className: ['text-white'] },
+      ':light': { className: ['text-white'] },
     },
     {
       'unstyled': true,
-      ':hover': {
-        className: ['bg-tranparent'],
-      },
-      ':dark': {
-        className: ['text-white'],
-      },
-      ':light': {
-        className: ['text-black'],
-      },
+      ':hover': { className: ['bg-tranparent'] },
+      ':dark': { className: ['text-white'] },
+      ':light': { className: ['text-black'] },
     },
   ],
 });
