@@ -18,11 +18,37 @@ import type {
   ConfigSchemaUndefined,
   Props,
   StylesFunctionUndefined,
+  BaseWithState,
 } from '@crossed/core';
 import { twMerge } from 'tailwind-merge';
-// import { StyleSheet } from './styleSheet';
 import { useCrossedTheme } from './CrossedTheme';
 import { default as tw } from 'twrnc';
+
+const getFromOrderState = (
+  obj: BaseWithState<any>,
+  {
+    active,
+    hover,
+    focus,
+    disabled,
+  }: { active: boolean; hover: boolean; focus: boolean; disabled: boolean },
+  path = ''
+) => {
+  function getPath(state?: keyof BaseWithState<any>) {
+    return path ? (state ? obj[state] : obj)?.[path] : state ? obj[state] : obj;
+  }
+  return (
+    (disabled
+      ? getPath(':disabled')?.className
+      : active
+      ? getPath(':active')?.className
+      : hover
+      ? getPath(':hover')?.className
+      : focus
+      ? getPath(':focus')?.className
+      : getPath().className) || getPath().className
+  );
+};
 
 export function styled<
   P extends Record<string, any>,
@@ -78,51 +104,29 @@ export function styled<
       const asIsString = typeof NewComp === 'string';
 
       const extendClassName = extendsStyle?.(props as any) || {};
+      const tmpState = {
+        disabled: props.disabled,
+        active,
+        hover,
+        focus,
+      };
+      const variantExtendClassName = getFromOrderState(
+        extendClassName,
+        tmpState
+      );
 
-      const variantExtendClassName =
-        (props.disabled
-          ? extendClassName[':disabled']?.className
-          : active
-          ? extendClassName[':active']?.className
-          : hover
-          ? extendClassName[':hover']?.className
-          : focus
-          ? extendClassName[':focus']?.className
-          : extendClassName.className) || extendClassName.className;
+      const variantExtendThemeClassName = getFromOrderState(
+        extendClassName,
+        tmpState,
+        `:${theme}`
+      );
 
-      const variantExtendThemeClassName =
-        (props.disabled
-          ? extendClassName[':disabled']?.[`:${theme}`]?.className
-          : active
-          ? extendClassName[':active']?.[`:${theme}`]?.className
-          : hover
-          ? extendClassName[':hover']?.[`:${theme}`]?.className
-          : focus
-          ? extendClassName[':focus']?.[`:${theme}`]?.className
-          : extendClassName?.[`:${theme}`]?.className) ||
-        extendClassName?.[`:${theme}`]?.className;
-
-      const variantClassName =
-        (props.disabled
-          ? styles[':disabled']?.className
-          : active
-          ? styles[':active']?.className
-          : hover
-          ? styles[':hover']?.className
-          : focus
-          ? styles[':focus']?.className
-          : styles.className) || styles.className;
-      const variantThemeClassName =
-        (props.disabled
-          ? styles[':disabled']?.[`:${theme}`]?.className
-          : active
-          ? styles[':active']?.[`:${theme}`]?.className
-          : hover
-          ? styles[':hover']?.[`:${theme}`]?.className
-          : focus
-          ? styles[':focus']?.[`:${theme}`]?.className
-          : styles?.[`:${theme}`]?.className) ||
-        styles?.[`:${theme}`]?.className;
+      const variantClassName = getFromOrderState(styles, tmpState);
+      const variantThemeClassName = getFromOrderState(
+        styles,
+        tmpState,
+        `:${theme}`
+      );
 
       // TODO: remove as any
       const propsVariant = {
@@ -167,21 +171,15 @@ export function styled<
         theme === 'dark' ? props.$dark?.className : props.$light?.className
       );
 
-      // const key = Platform.OS === 'web' ? 'className' : 'style';
-
-      const styleProps = {
-        className: baseClassName,
-      };
-
-      const toto = useCallback(() => {
+      const handleMouseUp = useCallback(() => {
         setActive(false);
       }, []);
 
       useEffect(() => {
         if (Platform.OS === 'web' && !hover && active) {
-          window.document.body.addEventListener('mouseup', toto);
+          window.document.body.addEventListener('mouseup', handleMouseUp);
           return () => {
-            window.document.body.removeEventListener('mouseup', toto);
+            window.document.body.removeEventListener('mouseup', handleMouseUp);
           };
         }
         return () => {};
@@ -198,23 +196,21 @@ export function styled<
           {...parsedPropsProperty(propsComponent)}
           {...(asIsString
             ? {
-                'data-class-name': styleProps.className,
+                'data-class-name': baseClassName,
               }
             : {
                 dataSet: {
                   ...propsComponent.dataSet,
-                  className: styleProps.className,
+                  className: baseClassName,
                 },
               })}
           style={
             asIsString
               ? {
-                  // ...(styleProps.style as any),
                   ...propsComponent.style,
                   ...componentProps.style,
                 }
               : [
-                  // styleProps.style,
                   ...(Array.isArray(propsComponent.style)
                     ? propsComponent.style
                     : [propsComponent.style]),

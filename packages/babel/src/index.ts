@@ -1,19 +1,24 @@
-import { create } from 'twrnc/create';
+import { create } from 'twrnc';
 import { declare } from '@babel/helper-plugin-utils';
 import type { Visitor } from '@babel/traverse';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import type { State, Theme } from '@crossed/core';
 import type { Style } from 'twrnc/dist/esm/types';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const tailwindConfig = require.resolve(__dirname, 'tailwind.config.js');
+import path from 'path';
 
-export default declare(function crosseBabel({ types: t }): {
+export default declare(function crosseBabel(
+  { types: t },
+  { tailwindPath }: { tailwindPath?: string },
+  dirname = __dirname
+): {
   name: string;
   visitor: Visitor;
 } {
+  const titi = path.resolve(dirname, tailwindPath || 'tailwind.config.js');
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const tailwindConfig = require(titi);
   const fullConfig = resolveConfig(tailwindConfig);
-  const tw = create(fullConfig, 'ios');
+  const tw = create(fullConfig as any);
 
   function returnValue(value: string | number) {
     return typeof value === 'string'
