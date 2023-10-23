@@ -46,7 +46,7 @@ const getFromOrderState = (
       ? getPath(':hover')?.className
       : focus
       ? getPath(':focus')?.className
-      : getPath().className) || getPath().className
+      : getPath()?.className) || getPath()?.className
   );
 };
 
