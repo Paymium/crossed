@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.8.0
+
+### Minor Changes
+
+- b802045: create babel plugin for react-native
+
 ## 0.7.1
 
 ### Patch Changes

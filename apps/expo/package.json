@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.22.10",
-    "@crossed/babel-plugin": "0.1.0",
+    "@crossed/babel-plugin": "0.2.0",
     "@crossed/core": "0.6.0",
     "@crossed/demo": "0.1.0",
     "@crossed/ui": "0.6.1",
