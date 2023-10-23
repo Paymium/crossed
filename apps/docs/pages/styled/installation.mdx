@@ -1,30 +1,30 @@
 import { Tabs } from 'components/Tabs';
 import { styled } from '@crossed/styled';
 import { Box } from '@crossed/ui';
-import { Steps, Callout } from 'nextra/components'
+import { Steps } from 'nextra/components';
 
-export const Button = styled("button", {
-  className: ['border border-brand-900 bg-brand-500 rounded-md text-white'],
-  ':hover': { className: "bg-brand-400" },
-  ':active': { className: "bg-brand-600" },
-  variants: {
+export const Button = styled('button', {
+  'className': [
+    'border border-neutral-900 bg-neutral-500 rounded-md text-white',
+  ],
+  ':hover': { className: 'bg-neutral-400' },
+  ':active': { className: 'bg-neutral-600' },
+  'variants': {
     size: {
-      md: { className: ["px-3 py-2"] }
+      md: { className: ['px-3 py-2'] },
     },
   },
-  defaultVariants:{
-    size:"md"
-  }
+  'defaultVariants': {
+    size: 'md',
+  },
 });
 
 # Installation
 
 Based you already have tailwind initilized. If not, see how [install tailwind](https://tailwindcss.com/docs/installation)
 
-<Callout type="warning" emoji="⚠️">
-  Only nextjs installation
-</Callout>
-
+<Tabs items={["nextjs", "react-native"]}>
+<Tabs.Tab>
 <Steps>
 ### Install dependencies
 <Tabs items={["pnpm", "npm", "yarn"]}>
@@ -72,6 +72,8 @@ const config = {
 export default config;
 ```
 
+See [documentation](/styled/babel)
+
 ### Add Nextjs plugin
 
 ```javascript filename="next.config.js"
@@ -80,12 +82,13 @@ const { withCrossed } = require('@crossed/next-adapter');
 /** @type {import('next').NextConfig} */
 const nextConfig = withCrossed({
   /** your next config */
-})
+});
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ### Usage
+
 <br />
 <Box className="items-center justify-center">
   <Button>Hello</Button>
@@ -94,23 +97,111 @@ module.exports = nextConfig
 ```typescript
 import { styled } from '@crossed/styled';
 
-export const Button = styled("button", {
-  className: ['border border-neutral-900 bg-neutral-500 rounded-md text-white'],
-  ':hover': { className: "bg-neutral-400" },
-  ':active': { className: "bg-neutral-600" },
-  variants: {
+export const Button = styled('button', {
+  'className': [
+    'border border-neutral-900 bg-neutral-500 rounded-md text-white',
+  ],
+  ':hover': { className: 'bg-neutral-400' },
+  ':active': { className: 'bg-neutral-600' },
+  'variants': {
     size: {
-      md: { className: ["px-3 py-2"] }
+      md: { className: ['px-3 py-2'] },
     },
   },
-  defaultVariants:{
-    size:"md"
-  }
+  'defaultVariants': {
+    size: 'md',
+  },
 });
 
 function Demo() {
-  return <Button>Hello</Button>
+  return <Button>Hello</Button>;
 }
+```
+
+</Steps>
+</Tabs.Tab>
+<Tabs.Tab>
+<Steps>
+### Install dependencies
+<Tabs items={["pnpm", "npm", "yarn"]}>
+  <Tabs.Tab>
+
+    ```sh
+    pnpm i @crossed/styled @crossed/babel-plugin react-native
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+
+    ```sh
+    npm i @crossed/styled @crossed/babel-plugin react-native
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+  
+    ```sh
+    yarn add @crossed/styled @crossed/babel-plugin react-native
+    ```
+  
+  </Tabs.Tab>
+</Tabs>
+
+### Add babel plugin
+
+```typescript
+module.exports = function (api) {
+  return {
+    // ...
+    plugins: [
+      // ...
+      ['@crossed/babel-plugin', { tailwindPath: './tailwind.config.js' }],
+    ],
+  };
+};
+```
+
+See [documentation](/styled/babel)
+
+### Usage
+
+<br />
+<Box className="items-center justify-center">
+  <Button>Hello</Button>
+</Box>
+
+```typescript
+import { styled } from '@crossed/styled';
+
+export const Button = styled('button', {
+  'className': [
+    'border border-neutral-900 bg-neutral-500 rounded-md text-white',
+  ],
+  ':hover': { className: 'bg-neutral-400' },
+  ':active': { className: 'bg-neutral-600' },
+  'variants': {
+    size: {
+      md: { className: ['px-3 py-2'] },
+    },
+  },
+  'defaultVariants': {
+    size: 'md',
+  },
+});
+
+function Demo() {
+  return <Button>Hello</Button>;
+}
+```
+
+</Steps>
+</Tabs.Tab>
+</Tabs>
+
+### Tailwind CSS IntelliSense plugin configuration
 
 ```
-</Steps>
+"tailwindCSS.experimental.classRegex": [
+  ["className: ?([^;]*)[;]", "[`'\"`]([^'\"`,;]*)[`'\"`]"]
+],
+```

@@ -23,6 +23,12 @@ export const deepMerge = <P>(
 
   if (one?.props || two?.props) {
     tmp.props = { ...one?.props, ...two?.props } as PropsExtends<P>;
+    if ((one?.props as any)?.style || (two?.props as any)?.style) {
+      (tmp.props as any).style = {
+        ...(one?.props as any)?.style,
+        ...(two?.props as any)?.style,
+      };
+    }
   }
   return tmp;
 };

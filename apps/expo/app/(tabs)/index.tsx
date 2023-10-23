@@ -2,13 +2,12 @@ import { YBox, Heading, Text, Button } from '@crossed/ui';
 
 export default function TabOneScreen() {
   return (
-    <YBox space="lg">
+    <YBox space="lg" className="px-4">
       <Heading order={3}>Heading</Heading>
       <Text className="text-white">Text</Text>
-      <Button variant={'filled'}>
+      <Button variant="outlined" aria-label="Press" color="blue">
         <Button.Text>Press</Button.Text>
       </Button>
-      {/* <Input label="Test" /> */}
     </YBox>
   );
 }
