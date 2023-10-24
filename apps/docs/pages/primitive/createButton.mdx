@@ -2,6 +2,7 @@ import {
   CreateButtonWithContextDemo,
   CreateButtonNativeDemo,
   CreateButtonWithContextNativeDemo,
+  CreateButtonGroupDemo,
   CreateButtonDemo,
 } from '@crossed/demo';
 import { CodeDemo } from 'components/CodeDemo';
@@ -17,6 +18,9 @@ export const getStaticProps = async (e) => {
           .props.ssg.code,
         codeSimpleNative: (
           await getStaticDemo('primitive/createButton/simple.native')(e)
+        ).props.ssg.code,
+        codeGroup: (
+          await getStaticDemo('primitive/createButton/group')(e)
         ).props.ssg.code,
       },
     },
@@ -36,6 +40,9 @@ export const getStaticProps = async (e) => {
         <CodeDemo Demo={CreateButtonNativeDemo} name="codeSimpleNative" />
       </Tabs.Tab>
     </Tabs>
+
+    ## Group
+    <CodeDemo Demo={CreateButtonGroupDemo} name="codeGroup" />
   </Tabs.Tab>
   <Tabs.Tab>
     ```tsx

@@ -1,4 +1,4 @@
-import { createScope } from '@crossed/core';
+import { States, createScope } from '@crossed/core';
 import type { MutableRefObject } from 'react';
 
 export type StyleRef = {
@@ -7,10 +7,11 @@ export type StyleRef = {
 };
 
 export type ContextInput = {
-  style: MutableRefObject<StyleRef>;
-  setStyle: (style: StyleRef) => void;
+  states: MutableRefObject<States>;
+  setStates: (style: Partial<States>) => void;
+  inputRef: MutableRefObject<any>;
 };
 
 export const [InputProvider, useInputContext] = createScope<ContextInput>(
-  {} as ContextInput
+  null as unknown as ContextInput
 );

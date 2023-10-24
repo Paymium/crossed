@@ -42,9 +42,9 @@ const getFromOrderState = (
       ? getPath(':disabled')?.className
       : active
       ? getPath(':active')?.className
-      : hover
-      ? getPath(':hover')?.className
       : focus
+      ? getPath(':hover')?.className
+      : hover
       ? getPath(':focus')?.className
       : getPath()?.className) || getPath()?.className
   );
@@ -136,10 +136,10 @@ export function styled<
           ? styles[':disabled']?.props
           : active
           ? styles[':active']?.props
-          : hover
-          ? styles[':hover']?.props
           : focus
           ? styles[':focus']?.props
+          : hover
+          ? styles[':hover']?.props
           : styles.props),
         style: {
           ...((styles.props || {}) as any).style,

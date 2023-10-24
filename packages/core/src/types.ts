@@ -25,6 +25,12 @@ export type State<P> = {
   [key in StateName as `:${key}`]?: Base<P> & Theme<P>;
 };
 
+export type States = {
+  isFocus: boolean;
+  isHover: boolean;
+  isActive: boolean;
+};
+
 export type Theme<P> = {
   [key in ThemeName as `:${key}`]?: Base<P>;
 };

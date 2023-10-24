@@ -299,19 +299,11 @@ const ButtonIconFrame = ({ children, ...props }: ButtonIconFrameProps) => {
   );
 };
 
-const Button = createButton(
-  {
-    Root: ButtonFrame,
-    Text: ButtonTextFrame,
-    Icon: ButtonIconFrame,
-  },
-  {
-    context: {
-      size: 'md',
-      variant: 'outlined',
-    },
-  }
-);
+const Button = createButton({
+  Root: ButtonFrame,
+  Text: ButtonTextFrame,
+  Icon: ButtonIconFrame,
+});
 
 const { Text: ButtonText, Icon: ButtonIcon } = Button;
 
