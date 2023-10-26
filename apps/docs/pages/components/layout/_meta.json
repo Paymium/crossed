@@ -1,5 +1,6 @@
 {
-  "box": "Box",
-  "xbox": "XBox",
-  "ybox": "YBox"
+  "box": "Box[beta]",
+  "xbox": "XBox[api-draft]",
+  "ybox": "YBox[api-draft]",
+  "divider": "YBox[beta]"
 }
