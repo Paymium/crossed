@@ -1,5 +1,15 @@
 # @crossed/core
 
+## 0.7.0
+
+### Minor Changes
+
+- ecce965: add variant center for XBox
+
+### Patch Changes
+
+- 151d9fd: defaultVariants props should extend props of extends param
+
 ## 0.6.0
 
 ### Minor Changes

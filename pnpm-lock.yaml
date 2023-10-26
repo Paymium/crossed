@@ -57,7 +57,7 @@ importers:
   apps/docs:
     dependencies:
       '@crossed/core':
-        specifier: 0.6.0
+        specifier: 0.7.0
         version: link:../../packages/core
       '@crossed/demo':
         specifier: 0.1.0
@@ -66,13 +66,13 @@ importers:
         specifier: 0.5.1
         version: link:../../packages/next-adapter
       '@crossed/primitive':
-        specifier: 1.4.1
+        specifier: 1.5.0
         version: link:../../packages/primitive
       '@crossed/styled':
-        specifier: 0.8.0
+        specifier: 0.9.0
         version: link:../../packages/styled
       '@crossed/ui':
-        specifier: 0.6.1
+        specifier: 0.7.0
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: 0.5.0
@@ -154,13 +154,13 @@ importers:
         specifier: 0.2.0
         version: link:../../packages/babel
       '@crossed/core':
-        specifier: 0.6.0
+        specifier: 0.7.0
         version: link:../../packages/core
       '@crossed/demo':
         specifier: 0.1.0
         version: link:../../packages/demo
       '@crossed/ui':
-        specifier: 0.6.1
+        specifier: 0.7.0
         version: link:../../packages/ui
       '@expo/vector-icons':
         specifier: ^13.0.0
@@ -254,7 +254,7 @@ importers:
         specifier: 0.5.1
         version: link:../../packages/next-adapter
       '@crossed/ui':
-        specifier: 0.6.1
+        specifier: 0.7.0
         version: link:../../packages/ui
       '@types/node':
         specifier: ^20.5.9
@@ -385,7 +385,7 @@ importers:
   packages/demo:
     dependencies:
       '@crossed/primitive':
-        specifier: 1.4.1
+        specifier: 1.5.0
         version: link:../primitive
       '@crossed/ui':
         specifier: '*'

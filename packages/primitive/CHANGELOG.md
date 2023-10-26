@@ -1,5 +1,19 @@
 # @crossed/primitive
 
+## 1.5.0
+
+### Minor Changes
+
+- bc25f3b: modify createInput with group element, addon, element
+- 34c0810: rewrite Button for add group component and use extends
+- 6f6f841: Add badge component
+
+### Patch Changes
+
+- Updated dependencies [151d9fd]
+- Updated dependencies [ecce965]
+  - @crossed/core@0.7.0
+
 ## 1.4.1
 
 ### Patch Changes

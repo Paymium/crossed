@@ -1,5 +1,25 @@
 # @crossed/ui
 
+## 0.7.0
+
+### Minor Changes
+
+- 34c0810: rewrite Button for add group component and use extends
+- 7888f24: refactor Heading components for use extends param
+- 6f6f841: Add badge component
+
+### Patch Changes
+
+- Updated dependencies [bc25f3b]
+- Updated dependencies [34c0810]
+- Updated dependencies [151d9fd]
+- Updated dependencies [ecce965]
+- Updated dependencies [dbce82f]
+- Updated dependencies [6f6f841]
+  - @crossed/primitive@1.5.0
+  - @crossed/core@0.7.0
+  - @crossed/styled@0.9.0
+
 ## 0.6.1
 
 ### Patch Changes

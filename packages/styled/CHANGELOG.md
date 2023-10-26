@@ -1,5 +1,17 @@
 # @crossed/styled
 
+## 0.9.0
+
+### Minor Changes
+
+- dbce82f: refactor styled, and fix bug with extend
+
+### Patch Changes
+
+- Updated dependencies [151d9fd]
+- Updated dependencies [ecce965]
+  - @crossed/core@0.7.0
+
 ## 0.8.0
 
 ### Minor Changes
