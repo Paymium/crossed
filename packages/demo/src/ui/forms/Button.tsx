@@ -9,7 +9,7 @@ export const ButtonDemo = ({ size, color, variant }: Props) => {
         <Button
           aria-label="Button simple"
           text="Button"
-          icon={UilMessage}
+          icon={<UilMessage />}
           color={color}
           size={size}
           variant={variant as any}
@@ -17,7 +17,7 @@ export const ButtonDemo = ({ size, color, variant }: Props) => {
         <Button
           aria-label="disabled Button"
           text="Disabled"
-          icon={UilMessage}
+          icon={<UilMessage />}
           color={color}
           size={size}
           variant={variant as any}

@@ -44,12 +44,10 @@ export const crossed =
       ([variant, variantValue]) => {
         const variantProp = props?.[variant as keyof typeof props];
         const defaultVariantProp = (defaultVariants as any)?.[variant];
-
         if (variantProp === null) return null;
 
         const variantKey = (falsyToString(variantProp) ||
           falsyToString(defaultVariantProp)) as keyof typeof variantValue;
-
         return variantValue[variantKey];
       }
     );
@@ -88,10 +86,12 @@ export const crossed =
                     ...(propsWithoutUndefined || {}),
                   }[key] as any
                 )
-              : {
-                  ...defaultVariants,
-                  ...propsWithoutUndefined,
-                }[key] === value;
+              : (
+                  {
+                    ...defaultVariants,
+                    ...propsWithoutUndefined,
+                  } as any
+                )[key] === value;
           }
         );
 

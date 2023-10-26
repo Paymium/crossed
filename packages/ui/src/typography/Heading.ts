@@ -3,11 +3,12 @@
 import { Text as TextNative } from 'react-native';
 import { styled } from '@crossed/styled';
 import { H1, H2, H3, H4, H5, H6 } from '@expo/html-elements';
+import { Text } from './Text';
 
 export const Heading = styled(TextNative, {
-  'className': ['text-white', 'my-0'],
-  'variants': {
-    variant: { link: { className: ['text-blue-500'], props: { as: 'a' } } },
+  extends: Text.styles,
+  className: ['my-0'],
+  variants: {
     order: {
       1: { className: ['text-5xl font-bold'], props: { as: H1 } },
       2: { className: ['text-4xl'], props: { as: H2 } },
@@ -17,7 +18,8 @@ export const Heading = styled(TextNative, {
       6: { className: ['text-base'], props: { as: H6 } },
     },
   },
-  'defaultVariants': {
+  defaultVariants: {
     order: 1,
+    color: 'inherit',
   },
 });

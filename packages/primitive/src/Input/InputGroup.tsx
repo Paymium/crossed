@@ -1,14 +1,55 @@
-import { useRef, type PropsWithChildren } from 'react';
-import { InputProvider, StyleRef } from './context';
+import {
+  useRef,
+  forwardRef,
+  ComponentType,
+  isValidElement,
+  PropsWithChildren,
+  Children,
+  cloneElement,
+  useState,
+} from 'react';
+import { InputProvider, useInputContext } from './context';
+import { composeEventHandlers, type States } from '@crossed/core';
 
-export const InputGroup = ({ children }: PropsWithChildren) => {
-  const styleRef = useRef<StyleRef>({});
-  const setStyleRef = (style: StyleRef) => {
-    styleRef.current = style;
-  };
-  return (
-    <InputProvider style={styleRef} setStyle={setStyleRef}>
-      {children}
-    </InputProvider>
-  );
+export const createInputGroup = <P,>(Styled: ComponentType<P>) =>
+  forwardRef<any, P>((props, ref) => {
+    const [states, setStates] = useState<States>({
+      isActive: false,
+      isFocus: false,
+      isHover: false,
+    });
+    const inputRef = useRef<any>(null);
+    return (
+      <InputProvider
+        states={states}
+        setStates={(style: Partial<States>) =>
+          setStates((old) => ({ ...old, ...style }))
+        }
+        inputRef={inputRef}
+      >
+        <Slot {...(props as any)}>
+          <Styled {...(props as any)} ref={ref} />
+        </Slot>
+      </InputProvider>
+    );
+  });
+
+const Slot = ({ children, ...props }: PropsWithChildren<any>) => {
+  const { setStates, states, inputRef } = useInputContext();
+
+  return isValidElement(children) && Children.count(children) === 1
+    ? cloneElement(children, {
+        ...props,
+        states,
+        onPointerEnter: composeEventHandlers(props.onPointerEnter, () => {
+          setStates({ isHover: true });
+        }),
+        onPointerLeave: composeEventHandlers(props.onPointerLeave, () => {
+          setStates({ isHover: false });
+        }),
+        onPress: composeEventHandlers(() => {
+          inputRef.current?.focus();
+        }, props.onPress),
+      } as any)
+    : children;
 };

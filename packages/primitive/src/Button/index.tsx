@@ -1,29 +1,25 @@
-import { GetProps, withStaticProperties } from '@crossed/core';
-import { useMemo, type ComponentType, ReactNode } from 'react';
+import { withStaticProperties } from '@crossed/core';
+import type { ComponentType } from 'react';
 import { createButtonMain } from './Button';
 import { createButtonText } from './ButtonText';
 import { createButtonIcon } from './ButtonIcon';
-import { Provider } from './context';
+import type { TextProps as NTextProps } from 'react-native';
+import { createButtonGroup } from './ButtonGroup';
 export { useContext as useButtonContext } from './context';
 
-type Arg<Context extends Record<string, any>> = {
-  context?: Context;
-};
-
 export const createButton = <
+  GroupProps extends Record<string, any>,
   ButtonProps extends Record<string, any>,
-  TextProps extends Record<string, any>,
-  IconProps extends Record<string, any>,
-  C extends Record<string, any>
->(
-  components: {
-    Root: ComponentType<ButtonProps>;
-    Text: ComponentType<TextProps>;
-    Icon: ComponentType<IconProps>;
-  },
-  { context }: Arg<C> = {}
-) => {
-  const { Root, Text, Icon } = components;
+  TextProps extends NTextProps,
+  IconProps extends Record<string, any>
+>(components: {
+  Root: ComponentType<ButtonProps>;
+  Group: ComponentType<GroupProps>;
+  Text: ComponentType<TextProps>;
+  Icon: ComponentType<IconProps>;
+}) => {
+  const { Root, Group, Text, Icon } = components;
+  const ButtonGroup = createButtonGroup(Group);
   const Button = createButtonMain(Root);
   const ButtonText = createButtonText(Text);
   const ButtonIcon = createButtonIcon(Icon);
@@ -31,66 +27,10 @@ export const createButton = <
   Button.displayName = 'Button';
   ButtonText.displayName = 'ButtonText';
   ButtonIcon.displayName = 'ButtonIcon';
+  ButtonGroup.displayName = 'ButtonGroup';
 
-  const ButtonRoot = (
-    props: Omit<GetProps<typeof Button>, 'children'> & {
-      text?: string;
-      iconAfter?: ComponentType;
-      icon?: ComponentType;
-      children?: ReactNode;
-    }
-  ) => {
-    const {
-      text,
-      iconAfter: IconAfter,
-      icon: Icon,
-      children,
-      ...otherProps
-    } = props;
-
-    const contextProps = useMemo(() => {
-      return Object.entries(context || {}).reduce<C>((acc, [key]) => {
-        if ((props as any)[key]) {
-          (acc as any)[key] = (props as any)[key];
-        }
-        return acc;
-      }, context || ({} as C));
-    }, [props]);
-
-    return (
-      <Provider {...contextProps}>
-        <Button {...(otherProps as any)}>
-          {children ?? (
-            <>
-              {Icon && (
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                <ButtonIcon>
-                  <Icon />
-                </ButtonIcon>
-              )}
-              {text && (
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                <ButtonText>{text}</ButtonText>
-              )}
-              {IconAfter && (
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                <ButtonIcon>
-                  <IconAfter />
-                </ButtonIcon>
-              )}
-            </>
-          )}
-        </Button>
-      </Provider>
-    );
-  };
-
-  ButtonRoot.displayName = 'ButtonRoot';
-
-  return withStaticProperties(ButtonRoot, {
+  return withStaticProperties(Button, {
+    Group: ButtonGroup,
     Text: ButtonText,
     Icon: ButtonIcon,
   });

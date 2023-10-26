@@ -8,5 +8,6 @@ export const XBox = styled(View, {
   className: ['flex', 'flex-row', 'w-full'],
   variants: {
     space: spaceVariants,
+    center: { true: { className: ['items-center'] } },
   },
 });

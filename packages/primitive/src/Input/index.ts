@@ -1,29 +1,35 @@
 import { withStaticProperties } from '@crossed/core';
 import type { ComponentType } from 'react';
-import { createIcon } from './InputIcon';
 import { createInput as createInputInput } from './InputInput';
+import { createInputGroup } from './InputGroup';
+import { createInputElement } from './InputElement';
 
 export const createInput = <
   GroupProps extends Record<string, any>,
   IconProps extends Record<string, any>,
+  ElementProps extends Record<string, any>,
   InputProps extends Record<string, any>
 >(components: {
   Group: ComponentType<GroupProps>;
-  Icon: ComponentType<IconProps>;
+  Addon: ComponentType<IconProps>;
+  Element: ComponentType<ElementProps>;
   Input: ComponentType<InputProps>;
 }) => {
-  const { Group, Icon, Input } = components;
+  const { Group, Element, Addon, Input } = components;
 
-  const InputGroup = Group;
-  const InputInput = createInputInput(Input);
-  const InputIcon = createIcon(Icon);
+  const InputGroup = createInputGroup(Group);
+  const InputInput = createInputInput(Input, Group);
+  const InputElement = createInputElement(Element);
+  const InputAddon = Addon;
 
   InputInput.displayName = 'Input';
   InputGroup.displayName = 'Input.Group';
-  InputIcon.displayName = 'Input.Icon';
+  InputElement.displayName = 'Input.Element';
+  InputAddon.displayName = 'Input.Addon';
 
   return withStaticProperties(InputInput, {
     Group: InputGroup,
-    Icon: InputIcon,
+    Addon: InputAddon,
+    Element: InputElement,
   });
 };

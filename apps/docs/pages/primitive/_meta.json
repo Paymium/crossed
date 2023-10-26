@@ -9,13 +9,14 @@
     "title": "Primitives"
   },
   "createButton": {
-    "title": "createButton"
+    "title": "createButton[beta]"
   },
-  "createLabel": "createLabel",
-  "createList": "createList",
-  "createDropdown": "createDropdown",
-  "createSelect": "createSelect",
-  "createSheet": "createSheet",
-  "createModal": "createModal",
-  "createInput": "createInput"
+  "createLabel": "createLabel[beta]",
+  "createBadge": "createBadge[beta]",
+  "createList": "createList[beta]",
+  "createDropdown": "createDropdown[api-draft]",
+  "createSelect": "createSelect[api-draft]",
+  "createSheet": "createSheet[api-draft]",
+  "createModal": "createModal[api-draft]",
+  "createInput": "createInput[api-draft]"
 }

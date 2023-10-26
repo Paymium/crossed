@@ -1,12 +1,16 @@
 import React, { useMemo } from 'react';
 import { DocsThemeConfig } from 'nextra-theme-docs';
-import { useMounted } from 'nextra/hooks';
+import { useFSRoute, useMounted } from 'nextra/hooks';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon } from 'nextra/icons';
-import { Button, useCrossedTheme } from '@crossed/ui';
+import { Button, useCrossedTheme, Badge, XBox, Text } from '@crossed/ui';
 import { tw } from '@crossed/styled';
+import { Navbar } from 'components/NavBar';
 
 const config: DocsThemeConfig = {
+  navbar: {
+    component: Navbar,
+  },
   logo: (
     <span className="flex flex-row items-center gap-2">
       <svg
@@ -20,9 +24,42 @@ const config: DocsThemeConfig = {
           <path d="M5 70.48l19.108-19.108a2.029 2.029 0 0 0 0-2.87L5.058 29.45l7.545-7.546 21.89 21.89a8.685 8.685 0 0 1 0 12.283L12.659 77.912 5 70.48zm90-41.03L75.892 48.559a2.029 2.029 0 0 0 0 2.87l19.05 19.051-7.545 7.546-21.89-21.89a8.685 8.685 0 0 1 0-12.283l21.834-21.834L95 29.45zM29.428 5l19.108 19.108a2.029 2.029 0 0 0 2.87 0l19.052-19.05 7.546 7.545-21.89 21.89a8.685 8.685 0 0 1-12.283 0L21.997 12.659 29.428 5zm41.144 90L51.463 75.892a2.029 2.029 0 0 0-2.87 0l-19.051 19.05-7.546-7.545 21.89-21.89a8.685 8.685 0 0 1 12.283 0l21.834 21.834L70.572 95z"></path>
         </g>
       </svg>
-      crossed
+      <Text size="lg">crossed</Text>
     </span>
   ),
+  sidebar: {
+    titleComponent: function TitleComponent({ title, route }) {
+      const FSRoute = useFSRoute();
+      const [routeOriginal] = FSRoute.split('#');
+      const active = [routeOriginal, routeOriginal + '/'].includes(route + '/');
+      let render = null;
+      if (title.endsWith('[beta]')) {
+        render = (
+          <Badge
+            color="blue"
+            text="BETA"
+            variant={active ? 'filled' : 'outlined'}
+          />
+        );
+      } else if (title.endsWith('[api-draft]')) {
+        render = (
+          <Badge
+            color="orange"
+            text="API-DRAFT"
+            variant={active ? 'filled' : 'outlined'}
+          />
+        );
+      }
+      return (
+        <XBox space="xs" center className="justify-between">
+          <Text color={'inherit'} size={false}>
+            {title.replace(/(\[beta\]|\[alpha\]|\[api-draft\])/g, '')}
+          </Text>
+          {render}
+        </XBox>
+      );
+    },
+  },
   project: {
     link: 'https://github.com/lobor/crossed',
   },
@@ -56,7 +93,7 @@ const config: DocsThemeConfig = {
       const mounted = useMounted();
       useMemo(() => {
         if (globalTheme !== theme) {
-          setTheme(globalTheme as any);
+          // setTheme(globalTheme as any);
         }
       }, []);
       const IconToUse = mounted && theme === 'dark' ? MoonIcon : SunIcon;

@@ -8,15 +8,12 @@ import {
   useUncontrolled,
 } from '@crossed/core';
 import { crossed } from './crossed';
-import { merge } from './crossed/merge';
 import type {
   NewComponentProps,
-  PropsFromExtends,
   StylableComponent,
   StyledComponent,
   Config,
   ConfigSchemaUndefined,
-  Props,
   StylesFunctionUndefined,
   BaseWithState,
 } from '@crossed/core';
@@ -31,7 +28,12 @@ const getFromOrderState = (
     hover,
     focus,
     disabled,
-  }: { active: boolean; hover: boolean; focus: boolean; disabled: boolean },
+  }: {
+    active?: boolean;
+    hover?: boolean;
+    focus?: boolean;
+    disabled?: boolean;
+  } = {},
   path = ''
 ) => {
   function getPath(state?: keyof BaseWithState<any>) {
@@ -58,9 +60,55 @@ export function styled<
   const { extends: extendsStyle, ...themeConfigProps } = themeConfig;
   const stylesClass = crossed<T, P>(themeConfigProps);
 
-  const variantNames = Object.keys(
-    themeConfigProps.variants || {}
-  ) as (keyof T)[];
+  const stylesFunction = (
+    props: any,
+    tmpState: {
+      disabled: boolean;
+      active: boolean;
+      hover: boolean;
+      focus: boolean;
+    },
+    theme: 'dark' | 'light'
+  ) => {
+    const styles = stylesClass(props);
+    const extendClassName =
+      // TODO: remove as any
+      (extendsStyle as any)?.(
+        { ...themeConfig?.defaultVariants, ...props } as any,
+        tmpState,
+        theme
+      ) || {};
+    const variantExtendClassName = getFromOrderState(extendClassName, tmpState);
+
+    const variantExtendThemeClassName = getFromOrderState(
+      extendClassName,
+      tmpState,
+      `:${theme}`
+    );
+
+    const variantClassName = getFromOrderState(styles, tmpState);
+    const variantThemeClassName = getFromOrderState(
+      styles,
+      tmpState,
+      `:${theme}`
+    );
+
+    return {
+      className: twMerge(
+        extendClassName?.className,
+        extendClassName?.[`:${theme}`]?.className,
+        variantExtendClassName,
+        variantExtendThemeClassName,
+        styles.className,
+        styles?.[`:${theme}`]?.className,
+        variantClassName,
+        variantThemeClassName,
+        props?.className,
+        theme === 'dark' ? props?.$dark?.className : props?.$light?.className
+      ),
+      as: styles.props?.as ? styles.props?.as : Component,
+    };
+  };
 
   const NewComponent = forwardRef<any, NewComponentProps<T, P, E>>(
     function CrossedStyledComponent(props, ref) {
@@ -78,98 +126,28 @@ export function styled<
         defaultValue: false,
         value: props.states?.isFocus,
       });
-      const { componentProps, variantProps } = Object.entries(props).reduce<{
-        componentProps: P;
-        variantProps: Props<T, P>;
-      }>(
+      const componentProps = Object.entries(props).reduce<P>(
         (acc, [propsName, valueProps]) => {
-          if (variantNames.includes(propsName as any)) {
-            (acc.variantProps as any)[propsName as any] =
-              valueProps || undefined;
-          } else if (
-            !['className', 'states', '$dark', '$light'].includes(propsName)
-          ) {
-            (acc.componentProps as any)[propsName] = valueProps;
+          if (!['className', 'states', '$dark', '$light'].includes(propsName)) {
+            (acc as any)[propsName] = valueProps;
           }
           return acc;
         },
+        {} as any
+      );
+      const { className: baseClassName, as } = stylesFunction(
+        props,
         {
-          componentProps: {},
-          variantProps: themeConfigProps?.defaultVariants || {},
-        } as any
-      );
-      const styles = stylesClass(variantProps);
-
-      const NewComp = styles.props?.as ? styles.props?.as : Component;
-      const asIsString = typeof NewComp === 'string';
-
-      const extendClassName = extendsStyle?.(props as any) || {};
-      const tmpState = {
-        disabled: props.disabled,
-        active,
-        hover,
-        focus,
-      };
-      const variantExtendClassName = getFromOrderState(
-        extendClassName,
-        tmpState
-      );
-
-      const variantExtendThemeClassName = getFromOrderState(
-        extendClassName,
-        tmpState,
-        `:${theme}`
-      );
-
-      const variantClassName = getFromOrderState(styles, tmpState);
-      const variantThemeClassName = getFromOrderState(
-        styles,
-        tmpState,
-        `:${theme}`
-      );
-
-      // TODO: remove as any
-      const propsVariant = {
-        ...styles.props,
-        ...(theme === 'dark' ? props.$dark?.props : props.$light?.props),
-        ...(props.disabled
-          ? styles[':disabled']?.props
-          : active
-          ? styles[':active']?.props
-          : hover
-          ? styles[':hover']?.props
-          : focus
-          ? styles[':focus']?.props
-          : styles.props),
-        style: {
-          ...((styles.props || {}) as any).style,
-          ...(theme === 'dark'
-            ? (props.$dark?.props || {}).style
-            : (props.$light?.props || {}).style),
-          ...(props.disabled
-            ? ((styles[':disabled']?.props || {}) as any).style
-            : active
-            ? ((styles[':active']?.props || {}) as any).style
-            : hover
-            ? ((styles[':hover']?.props || {}) as any).style
-            : focus
-            ? ((styles[':focus']?.props || {}) as any).style
-            : ((styles.props || {}) as any).style),
+          disabled: props.disabled,
+          active,
+          hover,
+          focus,
         },
-      };
-
-      const baseClassName = twMerge(
-        extendClassName?.className,
-        extendClassName?.[`:${theme}`]?.className,
-        variantExtendClassName,
-        variantExtendThemeClassName,
-        styles.className,
-        styles?.[`:${theme}`]?.className,
-        variantClassName,
-        variantThemeClassName,
-        props.className,
-        theme === 'dark' ? props.$dark?.className : props.$light?.className
+        theme
       );
+
+      const NewComp = as ?? Component;
+      const asIsString = typeof NewComp === 'string';
 
       const handleMouseUp = useCallback(() => {
         setActive(false);
@@ -185,35 +163,30 @@ export function styled<
         return () => {};
       }, [hover, active]);
 
-      const propsComponent = {
-        ...(componentProps as any),
-        ...propsVariant,
-      };
-
       return (
         <NewComp
           ref={ref}
-          {...parsedPropsProperty(propsComponent)}
+          {...parsedPropsProperty(componentProps)}
           {...(asIsString
             ? {
                 'data-class-name': baseClassName,
               }
             : {
                 dataSet: {
-                  ...propsComponent.dataSet,
+                  ...componentProps.dataSet,
                   className: baseClassName,
                 },
               })}
           style={
             asIsString
               ? {
-                  ...propsComponent.style,
+                  ...componentProps.style,
                   ...componentProps.style,
                 }
               : [
-                  ...(Array.isArray(propsComponent.style)
-                    ? propsComponent.style
-                    : [propsComponent.style]),
+                  ...(Array.isArray(componentProps.style)
+                    ? componentProps.style
+                    : [componentProps.style]),
                   componentProps.style,
                 ]
           }
@@ -253,11 +226,7 @@ export function styled<
   );
 
   return withStaticProperties(NewComponent, {
-    styles: (p?: Props<T, P> & PropsFromExtends<E>) => {
-      const parentStyle = (Component as any).styles?.(p);
-      const style = stylesClass(p);
-      return parentStyle ? merge(parentStyle, style) : style;
-    },
+    styles: stylesFunction,
   }) as unknown as StyledComponent<T, P, E>;
 }
 

@@ -1,3 +1,4 @@
+export * from './createBadge';
 export * from './createButton';
 export * from './createDropdown';
 export * from './createLabel';

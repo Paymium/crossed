@@ -12,16 +12,25 @@
     }
   },
   "styled": {
-    "title": "styled()",
-    "type": "page"
+    "title": "styled()[beta]",
+    "type": "page",
+    "theme": {
+      "breadcrumb": false
+    }
   },
   "primitive": {
-    "title": "Primitive",
-    "type": "page"
+    "title": "Primitive[api-draft]",
+    "type": "page",
+    "theme": {
+      "breadcrumb": false
+    }
   },
   "components": {
-    "title": "Components",
-    "type": "page"
+    "title": "Components[api-draft]",
+    "type": "page",
+    "theme": {
+      "breadcrumb": false
+    }
   },
   "unicons": {
     "title": "Unicons",
