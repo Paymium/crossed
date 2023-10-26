@@ -74,7 +74,7 @@ export type Config<
   E extends StylesFunctionUndefined<any> = undefined
 > = BaseWithState<P> & {
   variants?: T;
-  defaultVariants?: ConfigVariants<T>;
+  defaultVariants?: ConfigVariants<T> & PropsFromExtends<E>;
   extends?: E;
   compoundVariants?: (T extends ConfigSchemaUndefined<any>
     ? (ConfigVariants<T> | ConfigVariantsMulti<P, T>) & BaseWithState<P>
@@ -101,7 +101,7 @@ export type NewComponentProps<
   P extends Record<string, any>,
   E extends StylesFunctionUndefined<P>
 > = P &
-  PropsFromExtends<E> &
+  Omit<PropsFromExtends<E>, keyof ConfigVariants<T>> &
   ConfigVariants<T> & {
     className?: string;
     // animations?: boolean;
