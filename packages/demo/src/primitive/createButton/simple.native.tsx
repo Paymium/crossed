@@ -3,6 +3,7 @@ import { Box } from '@crossed/ui';
 import { Pressable, PressableProps, Text, TextProps } from 'react-native';
 
 const Button = createButton({
+  Group: Pressable,
   Root: (props: PressableProps) => {
     return (
       <Pressable

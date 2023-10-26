@@ -7,11 +7,8 @@ import { Pressable, Text, TextProps } from 'react-native';
 const Group = styled(Pressable, {
   className: ['overflow-hidden', 'rounded-md'],
   variants: {
-    horizontal: {
-      true: {
-        className: ['flex-row'],
-      },
-    },
+    horizontal: { true: { className: ['flex-row'] } },
+    vertical: { true: { className: ['flex-row'] } },
   },
   defaultVariants: {
     horizontal: true,
@@ -21,15 +18,13 @@ const Group = styled(Pressable, {
 type GroupProps = GetProps<typeof Group>;
 
 const Root = styled(Pressable, {
-  'className': ['flex-row', 'bg-blue-500', 'rounded-md', 'px-3 py-2'],
+  'className': ['flex-row', 'bg-blue-500', 'rounded', 'px-3 py-2'],
   ':hover': {
     className: ['bg-blue-400'],
   },
   'variants': {
     grouped: {
-      true: {
-        className: ['rounded-none'],
-      },
+      true: { className: ['rounded-none'] },
     },
   },
 });

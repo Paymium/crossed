@@ -1,14 +1,31 @@
 'use client';
 import { styled, tw, type GetProps, useCrossedTheme } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
-import { Pressable, Text } from 'react-native';
-import { cloneElement } from 'react';
+import { Pressable, Text, View } from 'react-native';
+import { Fragment, ReactNode, cloneElement } from 'react';
 import { Box } from '../layout/Box';
 import { useButtonContext } from '@crossed/primitive';
+import { createScope } from '@crossed/core';
+
+export const ButtonGroupFrame = styled(View, {
+  className: ['overflow-hidden', 'rounded-md'],
+  variants: {
+    horizontal: {
+      true: {
+        className: ['flex-row'],
+      },
+    },
+  },
+  defaultVariants: {
+    horizontal: true,
+  },
+});
+
+export type ButtonGroupFrameProps = GetProps<typeof ButtonGroupFrame>;
 
 export const ButtonFrame = styled(Pressable, {
   'className': [
-    'rounded-md',
+    'rounded',
     'flex',
     'flex-row',
     'items-center',
@@ -20,6 +37,11 @@ export const ButtonFrame = styled(Pressable, {
   },
   'props': { role: 'button' },
   'variants': {
+    grouped: {
+      true: {
+        className: ['rounded-none'],
+      },
+    },
     color: {
       slate: {
         ':light': { className: ['border-slate-800 bg-slate-700'] },
@@ -162,19 +184,17 @@ export const ButtonFrame = styled(Pressable, {
       xl: { className: ['gap-9'] },
     },
     unstyled: {
-      true: {},
-      false: {},
+      true: {
+        'className': ['bg-transparent border-transparent'],
+        ':hover': { className: ['bg-transparent border-transparent'] },
+        ':active': { className: ['bg-transparent border-transparent'] },
+      },
     },
     variant: {
       filled: { className: ['border-transparent'] },
       outlined: {
         'className': ['bg-transparent'],
         ':active': { className: ['bg-neutral-300'] },
-      },
-      unstyled: {
-        'className': ['bg-transparent border-transparent'],
-        ':hover': { className: ['bg-transparent border-transparent'] },
-        ':active': { className: ['bg-transparent border-transparent'] },
       },
     },
   },
@@ -187,7 +207,9 @@ export const ButtonFrame = styled(Pressable, {
   },
 });
 
-const ButtonTextFrame = styled(Text, {
+export type ButtonFrameProps = GetProps<typeof ButtonFrame>;
+
+export const ButtonTextFrame = styled(Text, {
   className: ['font-semibold'],
   variants: {
     color: {
@@ -276,6 +298,13 @@ const ButtonTextFrame = styled(Text, {
   ],
 });
 
+export type ButtonTextFrameProps = GetProps<typeof ButtonTextFrame>;
+
+const ButtonTextControlled = ({ ...props }: ButtonTextFrameProps) => {
+  const variantsContext = useVariantContext();
+  return <ButtonTextFrame {...variantsContext} {...props} />;
+};
+
 type ButtonIconFrameProps = GetProps<typeof Box>;
 const ButtonIconFrame = ({ children, ...props }: ButtonIconFrameProps) => {
   const { color, variant, size } = useButtonContext();
@@ -299,9 +328,64 @@ const ButtonIconFrame = ({ children, ...props }: ButtonIconFrameProps) => {
   );
 };
 
+const [ProviderGroup, useGroupContext] = createScope<{ grouped?: boolean }>({});
+
+type ContextVariant = Pick<
+  ButtonFrameProps,
+  'size' | 'color' | 'variant'
+> | null;
+const [ProviderVariant, useVariantContext] = createScope<ContextVariant>(null);
+
+type ButtonRootProps =
+  | (ButtonFrameProps & { text?: never; icon?: never; iconAfter?: never })
+  | (Omit<ButtonFrameProps, 'children'> & {
+      text: string;
+      icon?: ReactNode;
+      iconAfter?: ReactNode;
+      children: never;
+    });
+
 const Button = createButton({
-  Root: ButtonFrame,
-  Text: ButtonTextFrame,
+  Group: ({
+    color,
+    size,
+    variant,
+    ...props
+  }: ButtonGroupFrameProps & ContextVariant) => {
+    return (
+      <ProviderVariant color={color} size={size} variant={variant}>
+        <ProviderGroup grouped>
+          <ButtonGroupFrame {...props} />
+        </ProviderGroup>
+      </ProviderVariant>
+    );
+  },
+  Root: ({ children, text, icon, iconAfter, ...props }: ButtonRootProps) => {
+    const { grouped } = useGroupContext();
+    const variantsContext = useVariantContext();
+
+    const ParentComp = variantsContext ? Fragment : ProviderVariant;
+    const {
+      color = props.color || 'neutral',
+      size = props.size || 'md',
+      variant = props.variant || 'outlined',
+    } = variantsContext || {};
+
+    return (
+      <ParentComp {...{ color, size, variant }}>
+        <ButtonFrame grouped={grouped} {...props} {...{ color, size, variant }}>
+          {children ?? (
+            <>
+              {icon && <ButtonIconFrame>{icon}</ButtonIconFrame>}
+              <ButtonTextControlled>{text}</ButtonTextControlled>
+              {iconAfter && <ButtonIconFrame>{iconAfter}</ButtonIconFrame>}
+            </>
+          )}
+        </ButtonFrame>
+      </ParentComp>
+    );
+  },
+  Text: ButtonTextControlled,
   Icon: ButtonIconFrame,
 });
 
