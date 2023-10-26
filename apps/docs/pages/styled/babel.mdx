@@ -49,7 +49,7 @@ module.exports = function (api) {
 
 ### Principe
 
-`@crossed/babel-plugin` transform all `className` to `style` props if found in these patterns:
+`@crossed/babel-plugin` transforms all classes into style props when found in these patterns:
 
 - JSX attribute
 
@@ -81,7 +81,7 @@ styled(Pressable, {
 
 ### Usage
 
-Because of these specificities certain things are not possible to do
+Due to these specificities, certain things are not possible to achieve.
 
 ```typescript
 const config = { className: ['...'] }; // ==> Not transpiled by package
