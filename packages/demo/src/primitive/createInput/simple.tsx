@@ -1,9 +1,9 @@
 import { createInput } from '@crossed/primitive';
 import { styled } from '@crossed/styled/src';
 import { Button, YBox } from '@crossed/ui';
-import { Text, TextInput, View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 
-const GroupFrame = styled(View, {
+const GroupFrame = styled(Pressable, {
   'className': [
     'bg-neutral-800',
     'border border-neutral-600',
@@ -11,6 +11,8 @@ const GroupFrame = styled(View, {
     'rounded',
     'cursor-text',
     'w-full',
+    'items-center',
+    'overflow-hidden',
   ],
   ':hover': {
     className: ['border-blue-500'],
@@ -19,7 +21,7 @@ const GroupFrame = styled(View, {
     className: ['border-blue-500'],
   },
   ':focus': {
-    className: ['ring ring-blue-500'],
+    className: ['border-blue-500'],
   },
 });
 const InputFrame = styled(TextInput, {
@@ -38,7 +40,11 @@ const AddonFrame = styled(View, {
   className: ['bg-neutral-700', 'px-3 py-2'],
 });
 const ElementFrame = styled(View, {
-  className: ['px-3 py-2'],
+  className: ['px-3 py-2', 'cursor-default'],
+});
+
+const TextElementFrame = styled(Text, {
+  className: ['cursor-default'],
 });
 
 const Input = createInput({
@@ -54,20 +60,26 @@ export const CreateInputSimpleDemo = () => {
       {/* <Input /> */}
       <Input.Group>
         <Input.Element>
-          <Text>👌</Text>
+          <TextElementFrame>👌</TextElementFrame>
         </Input.Element>
         <Input />
       </Input.Group>
       <Input.Group>
         <Input.Addon>
-          <Text>👌</Text>
+          <TextElementFrame>👌</TextElementFrame>
         </Input.Addon>
         <Input />
       </Input.Group>
       <Input.Group>
         <Input />
-        <Input.Element>
-          <Button aria-label="more" onPress={() => console.log('dans la demo')}>
+        <Input.Element className="p-0 pr-1">
+          <Button
+            aria-label="more"
+            size="xs"
+            variant="filled"
+            // eslint-disable-next-line no-console
+            onPress={() => console.log('dans la demo')}
+          >
             <Button.Text>More</Button.Text>
           </Button>
         </Input.Element>

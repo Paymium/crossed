@@ -7,7 +7,7 @@ export type StyleRef = {
 };
 
 export type ContextInput = {
-  states: MutableRefObject<States>;
+  states: States;
   setStates: (style: Partial<States>) => void;
   inputRef: MutableRefObject<any>;
 };

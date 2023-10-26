@@ -33,12 +33,12 @@ const Slot = forwardRef(
     return isValidElement(children) && Children.count(children) === 1
       ? cloneElement(children, {
           ...props,
-          ref: composeRefs(ref, inputRef.current),
+          ref: composeRefs(ref, inputRef),
           onBlur: composeEventHandlers(props.onBlur, () => {
-            setStates({ isFocus: true });
-          }),
-          onFocus: composeEventHandlers(props.onBlur, () => {
             setStates({ isFocus: false });
+          }),
+          onFocus: composeEventHandlers(props.onFocus, () => {
+            setStates({ isFocus: true });
           }),
         } as any)
       : children;
