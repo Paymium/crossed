@@ -72,7 +72,7 @@ const config = {
 export default config;
 ```
 
-See [documentation](/styled/babel)
+See [documentation](/styled/postcss)
 
 ### Add Nextjs plugin
 
@@ -127,41 +127,25 @@ function Demo() {
   <Tabs.Tab>
 
     ```sh
-    pnpm i @crossed/styled @crossed/babel-plugin react-native
+    pnpm i @crossed/styled react-native
     ```
 
   </Tabs.Tab>
   <Tabs.Tab>
 
     ```sh
-    npm i @crossed/styled @crossed/babel-plugin react-native
+    npm i @crossed/styled react-native
     ```
 
   </Tabs.Tab>
   <Tabs.Tab>
   
     ```sh
-    yarn add @crossed/styled @crossed/babel-plugin react-native
+    yarn add @crossed/styled react-native
     ```
   
   </Tabs.Tab>
 </Tabs>
-
-### Add babel plugin
-
-```typescript
-module.exports = function (api) {
-  return {
-    // ...
-    plugins: [
-      // ...
-      ['@crossed/babel-plugin', { tailwindPath: './tailwind.config.js' }],
-    ],
-  };
-};
-```
-
-See [documentation](/styled/babel)
 
 ### Usage
 

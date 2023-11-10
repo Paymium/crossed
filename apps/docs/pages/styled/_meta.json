@@ -1,7 +1,6 @@
 {
   "introduction": "Introduction",
   "installation": { "title": "Installation", "theme": { "toc": false } },
-  "babel": "Babel",
   "postcss": "PostCSS",
   "-- Guide": {
     "title": "Guide",

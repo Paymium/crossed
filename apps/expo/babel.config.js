@@ -4,7 +4,6 @@ module.exports = function (api) {
     presets: ['babel-preset-expo'],
     plugins: [
       // Required for expo-router
-      '@crossed/babel-plugin',
       'expo-router/babel',
     ],
   };

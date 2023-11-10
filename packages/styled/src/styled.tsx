@@ -92,20 +92,21 @@ export function styled<
       tmpState,
       `:${theme}`
     );
+    const classNameMerged = twMerge(
+      extendClassName?.className,
+      extendClassName?.[`:${theme}`]?.className,
+      variantExtendClassName,
+      variantExtendThemeClassName,
+      styles.className,
+      styles?.[`:${theme}`]?.className,
+      variantClassName,
+      variantThemeClassName,
+      props?.className,
+      theme === 'dark' ? props?.$dark?.className : props?.$light?.className
+    );
 
     return {
-      className: twMerge(
-        extendClassName?.className,
-        extendClassName?.[`:${theme}`]?.className,
-        variantExtendClassName,
-        variantExtendThemeClassName,
-        styles.className,
-        styles?.[`:${theme}`]?.className,
-        variantClassName,
-        variantThemeClassName,
-        props?.className,
-        theme === 'dark' ? props?.$dark?.className : props?.$light?.className
-      ),
+      className: classNameMerged,
       as: styles.props?.as ? styles.props?.as : Component,
     };
   };
@@ -177,19 +178,13 @@ export function styled<
                   className: baseClassName,
                 },
               })}
-          style={
-            asIsString
-              ? {
-                  ...componentProps.style,
-                  ...componentProps.style,
-                }
-              : [
-                  ...(Array.isArray(componentProps.style)
-                    ? componentProps.style
-                    : [componentProps.style]),
-                  componentProps.style,
-                ]
-          }
+          style={[
+            ['ios', 'android'].includes(Platform.OS) && tw.style(baseClassName),
+            ...(Array.isArray(componentProps.style)
+              ? componentProps.style
+              : [componentProps.style]),
+            componentProps.style,
+          ].filter(Boolean)}
           onMouseDown={composeEventHandlers(componentProps?.onMouseDown, () => {
             setActive(true);
           })}
