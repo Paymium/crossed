@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.10.0
+
+### Minor Changes
+
+- ae5be59: remove babel
+
 ## 0.9.0
 
 ### Minor Changes
