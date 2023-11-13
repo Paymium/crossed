@@ -1,5 +1,11 @@
 # @crossed/babel-plugin
 
+## 0.3.0
+
+### Minor Changes
+
+- 3364ea8: babel plugin create config file
+
 ## 0.2.0
 
 ### Minor Changes

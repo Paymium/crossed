@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.10.1
+
+### Patch Changes
+
+- e64778c: fix theme if not define, not apply variant base
+
 ## 0.10.0
 
 ### Minor Changes
