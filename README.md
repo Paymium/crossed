@@ -24,7 +24,7 @@ Crossed is UI lib component which worked on react-native and web based on [tailw
 Crossed transform className in style for native, and use power of css for web.  
 
 ### Documentation
-See [documentation](https://lobor.github.io/crossed).
+See [documentation](https://paymium.github.io/crossed).
 
 ### Inspiration
  - [tamagui](https://tamagui.dev/)

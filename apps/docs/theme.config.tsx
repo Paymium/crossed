@@ -61,12 +61,12 @@ const config: DocsThemeConfig = {
     },
   },
   project: {
-    link: 'https://github.com/lobor/crossed',
+    link: 'https://github.com/Paymium/crossed',
   },
   banner: {
     text: 'Crossed is not ready production',
   },
-  docsRepositoryBase: 'https://github.com/lobor/crossed/tree/main/apps/docs',
+  docsRepositoryBase: 'https://github.com/Paymium/crossed/tree/main/apps/docs',
   footer: {
     text: 'crossed documentation',
   },

@@ -69,7 +69,7 @@ importers:
         specifier: 1.5.0
         version: link:../../packages/primitive
       '@crossed/styled':
-        specifier: 0.9.0
+        specifier: 0.10.0
         version: link:../../packages/styled
       '@crossed/ui':
         specifier: 0.7.0
