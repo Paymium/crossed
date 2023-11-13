@@ -111,7 +111,6 @@ export const crossed =
       },
       {} as BaseWithState<P>
     );
-
     return [
       {
         'props': propsBase,

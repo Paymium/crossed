@@ -18,12 +18,15 @@ export const merge = <P>(
   if (two[':hover']) {
     acc[':hover'] = deepMerge(one[':hover'], two[':hover']);
   }
-  if (two[':dark']) {
-    acc[':dark'] = deepMerge(one[':dark'], two[':dark']);
-  }
-  if (two[':light']) {
-    acc[':light'] = deepMerge(one[':light'], two[':light']);
-  }
+
+  acc[':dark'] = deepMerge(
+    one[':dark'],
+    two[':dark'] || (two.className ? { className: two.className } : undefined)
+  );
+  acc[':light'] = deepMerge(
+    one[':light'],
+    two[':light'] || (two.className ? { className: two.className } : undefined)
+  );
 
   return acc;
 };

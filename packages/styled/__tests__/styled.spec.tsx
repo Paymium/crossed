@@ -4,17 +4,16 @@ import { Text } from 'react-native';
 import userEvent from '@testing-library/user-event';
 import { CrossedTheme } from '../src';
 
-const Body = styled(Text, {
-  'className': ['bg-red-200'],
-  ':hover': {
-    className: ['bg-red-100'],
-  },
-  ':active': {
-    className: ['bg-red-100'],
-  },
-});
-
 describe('styled', () => {
+  const Body = styled(Text, {
+    'className': ['bg-red-200'],
+    ':hover': {
+      className: ['bg-red-100'],
+    },
+    ':active': {
+      className: ['bg-red-100'],
+    },
+  });
   test('hover', async () => {
     render(<Body testID="toto" />);
     await screen.findAllByTestId('toto');
@@ -134,6 +133,32 @@ describe('color theme', () => {
       expect(screen.getByTestId('toto')).toHaveAttribute(
         'data-class-name',
         'bg-blue-500 text-red-600'
+      );
+    });
+    test('With theme provider in dark with variant whithout dark for variant', async () => {
+      const TextTheme = styled(Text, {
+        'className': ['text-red-500'],
+        ':dark': {
+          className: ['text-white'],
+        },
+        'variants': {
+          color: {
+            green: {
+              className: ['text-green-500'],
+            },
+          },
+        },
+      });
+      render(
+        <CrossedTheme defaultTheme={'dark'}>
+          <TextTheme testID="toto" color="green" />
+        </CrossedTheme>
+      );
+      await screen.findAllByTestId('toto');
+
+      expect(screen.getByTestId('toto')).toHaveAttribute(
+        'data-class-name',
+        'text-green-500'
       );
     });
   });

@@ -16,6 +16,7 @@
     "@crossed/babel-plugin": "0.2.0",
     "@crossed/core": "0.7.0",
     "@crossed/demo": "0.1.0",
+    "@crossed/styled": "workspace:^",
     "@crossed/ui": "0.7.0",
     "@expo/vector-icons": "^13.0.0",
     "@react-navigation/native": "^6.0.2",

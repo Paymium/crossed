@@ -1,11 +1,7 @@
 import { createScope } from '@crossed/core';
 import type { PropsWithChildren } from 'react';
-import {
-  RnColorScheme,
-  default as tw,
-  useAppColorScheme,
-  useDeviceContext,
-} from 'twrnc';
+import { RnColorScheme, useAppColorScheme, useDeviceContext } from './twrnc';
+import tw from 'twrnc';
 
 type CrossedThemeProvider = {
   theme: 'light' | 'dark';

@@ -4,6 +4,11 @@ describe('deepMerge', () => {
   test('Merge empty one and empty two', () => {
     expect(deepMerge({}, {})).toStrictEqual({});
   });
+  test('Merge empty style', () => {
+    expect(deepMerge({ props: { style: {} } }, {})).toStrictEqual({
+      props: { style: {} },
+    });
+  });
   test('Merge one and empty two', () => {
     expect(deepMerge({ className: [] }, {})).toStrictEqual({ className: [] });
     expect(deepMerge({ className: ['test'] }, {})).toStrictEqual({
