@@ -69,7 +69,7 @@ importers:
         specifier: 1.5.0
         version: link:../../packages/primitive
       '@crossed/styled':
-        specifier: 0.10.1
+        specifier: 0.10.2
         version: link:../../packages/styled
       '@crossed/ui':
         specifier: 0.7.0
@@ -151,7 +151,7 @@ importers:
         specifier: ^7.22.10
         version: 7.22.10
       '@crossed/babel-plugin':
-        specifier: 0.3.0
+        specifier: 0.3.1
         version: link:../../packages/babel
       '@crossed/core':
         specifier: 0.7.0

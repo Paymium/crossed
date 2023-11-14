@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.10.2
+
+### Patch Changes
+
+- fix export tw
+
 ## 0.10.1
 
 ### Patch Changes

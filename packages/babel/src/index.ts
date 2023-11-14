@@ -61,7 +61,7 @@ export default declare(function crosseBabel(
   return {
     name: 'crossed',
     visitor: {
-      ImportDeclaration({ node, state }) {
+      ImportDeclaration({ node }, state: any) {
         if (
           t.isStringLiteral(node.source, { value: 'twrnc' }) &&
           !state.filename.endsWith('src/twrnc.ts')

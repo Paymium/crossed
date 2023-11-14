@@ -3,6 +3,8 @@
 # dependencies
 node_modules/
 
+.crossed
+
 # Expo
 .expo/
 dist/
