@@ -1,5 +1,5 @@
 import { YBox, Heading, Button } from '@crossed/ui';
-import { styled } from '@crossed/styled';
+import { styled } from '@crossed/styled/styled';
 import { Text as NText } from 'react-native';
 
 const TextTheme = styled(NText, {

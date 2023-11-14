@@ -1,5 +1,5 @@
 import { Tabs } from 'components/Tabs';
-import { styled } from '@crossed/styled';
+import { styled } from '@crossed/styled/styled';
 import { Box } from '@crossed/ui';
 import { Steps } from 'nextra/components';
 
@@ -95,7 +95,7 @@ module.exports = nextConfig;
 </Box>
 
 ```typescript
-import { styled } from '@crossed/styled';
+import { styled } from '@crossed/styled/styled';
 
 export const Button = styled('button', {
   'className': [
@@ -171,14 +171,14 @@ See [documentation](/styled/babel)
 </Box>
 
 ```typescript
-import { styled } from '@crossed/styled';
+import { styled } from '@crossed/styled/styled';
 
 export const Button = styled('button', {
   'className': [
     'border border-neutral-900 bg-neutral-500 rounded-md text-white',
   ],
-  ':hover': { className: 'bg-neutral-400' },
-  ':active': { className: 'bg-neutral-600' },
+  ':hover': { className: ['bg-neutral-400'] },
+  ':active': { className: ['bg-neutral-600'] },
   'variants': {
     size: {
       md: { className: ['px-3 py-2'] },

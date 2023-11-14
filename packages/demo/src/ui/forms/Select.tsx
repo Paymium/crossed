@@ -1,6 +1,6 @@
 import { Select } from '@crossed/ui';
 import type { Props } from '../../props';
-import { styled } from '@crossed/styled/src';
+import { styled } from '@crossed/styled/styled';
 import { TextInput } from 'react-native';
 
 const RootFrame = styled(TextInput, {

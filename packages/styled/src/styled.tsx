@@ -111,7 +111,13 @@ export function styled<
   };
 
   const NewComponent = forwardRef<any, NewComponentProps<T, P, E>>(
-    function CrossedStyledComponent(props, ref) {
+    function CrossedStyledComponent(originalProps, ref) {
+      const {
+        hoverTheme = true,
+        activeTheme = true,
+        focusTheme = true,
+        ...props
+      } = originalProps;
       const { theme } = useCrossedTheme();
 
       const [active, setActive] = useUncontrolled({
@@ -139,9 +145,9 @@ export function styled<
         props,
         {
           disabled: props.disabled,
-          active,
-          hover,
-          focus,
+          active: hoverTheme ? active : false,
+          hover: activeTheme ? hover : false,
+          focus: focusTheme ? focus : false,
         },
         theme
       );

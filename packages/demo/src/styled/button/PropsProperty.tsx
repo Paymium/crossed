@@ -1,4 +1,4 @@
-import { styled } from '@crossed/styled';
+import { styled } from '@crossed/styled/styled';
 import { TextInput } from 'react-native';
 
 const Input = styled(TextInput, {

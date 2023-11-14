@@ -1,4 +1,5 @@
-import { type GetProps, styled } from '@crossed/styled';
+import type { GetProps } from '@crossed/styled';
+import { styled } from '@crossed/styled/styled';
 import { Pressable } from 'react-native';
 
 const Button = styled(Pressable, {

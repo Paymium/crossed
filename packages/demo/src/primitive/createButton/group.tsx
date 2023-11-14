@@ -1,10 +1,11 @@
 import { createButton } from '@crossed/primitive';
-import { GetProps, styled } from '@crossed/styled';
+import type { GetProps } from '@crossed/styled';
+import { styled } from '@crossed/styled/styled';
 import { createScope } from '@crossed/core';
 import { YBox } from '@crossed/ui';
-import { Pressable, Text, TextProps } from 'react-native';
+import { Pressable, Text, TextProps, View } from 'react-native';
 
-const Group = styled(Pressable, {
+const Group = styled(View, {
   className: ['overflow-hidden', 'rounded-md'],
   variants: {
     horizontal: { true: { className: ['flex-row'] } },

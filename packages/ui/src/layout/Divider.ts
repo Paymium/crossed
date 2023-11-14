@@ -1,7 +1,7 @@
 'use client';
 
 import { View } from 'react-native';
-import { styled } from '@crossed/styled';
+import { styled } from '@crossed/styled/styled';
 
 export const Divider = styled(View, {
   'className': ['flex'],

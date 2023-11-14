@@ -1,5 +1,5 @@
-import { createBadge } from '@crossed/primitive';
-import { styled } from '@crossed/styled';
+import { createBadge } from '@crossed/primitive/createBadge';
+import { styled } from '@crossed/styled/styled';
 import { View } from 'react-native';
 import { Text } from '../typography/Text';
 import { Text as NText } from 'react-native';
@@ -40,10 +40,9 @@ const BadgeTextFrame = (props: BadgeTextStyledProps) => {
 };
 
 const BadgeFrame = styled(View, {
-  'className': ['border'],
-  ':hover': { className: ['bg-transparent'] },
-  'extends': ButtonFrame.styles,
-  'variants': {
+  className: ['border'],
+  extends: ButtonFrame.styles,
+  variants: {
     size: {
       xs: { className: ['px-1', 'py-px'] },
       sm: { className: ['px-1', 'py-px'] },
@@ -78,7 +77,12 @@ const Badge = createBadge({
         size={size}
         variant={props.variant ?? 'outlined'}
       >
-        <BadgeFrame {...props} size={size}>
+        <BadgeFrame
+          hoverTheme={false}
+          activeTheme={false}
+          {...props}
+          size={size}
+        >
           {children ?? <BadgeTextFrame>{text}</BadgeTextFrame>}
         </BadgeFrame>
       </Provider>

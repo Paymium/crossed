@@ -1,4 +1,4 @@
-import { styled } from '@crossed/styled';
+import { styled } from '@crossed/styled/styled';
 import { memo, type PropsWithChildren } from 'react';
 import { Pressable } from 'react-native';
 

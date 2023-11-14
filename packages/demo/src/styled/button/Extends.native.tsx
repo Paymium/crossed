@@ -1,4 +1,5 @@
-import { styled, tw } from '@crossed/styled';
+import { tw } from '@crossed/styled';
+import { styled } from '@crossed/styled/styled';
 import { Pressable, Text, TextInput } from 'react-native';
 
 const ButtonText = styled(Text, {

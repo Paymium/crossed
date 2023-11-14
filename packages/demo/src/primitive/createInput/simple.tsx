@@ -1,5 +1,5 @@
 import { createInput } from '@crossed/primitive';
-import { styled } from '@crossed/styled/src';
+import { styled } from '@crossed/styled/styled';
 import { Button, YBox } from '@crossed/ui';
 import { Pressable, Text, TextInput, View } from 'react-native';
 
