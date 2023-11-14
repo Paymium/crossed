@@ -14,14 +14,11 @@ export const getStaticProps = async (e) => {
   return {
     props: {
       ssg: {
-        codeSimple: (await getStaticDemo('primitive/createButton/simple')(e))
-          .props.ssg.code,
         codeSimpleNative: (
           await getStaticDemo('primitive/createButton/simple.native')(e)
         ).props.ssg.code,
-        codeGroup: (
-          await getStaticDemo('primitive/createButton/group')(e)
-        ).props.ssg.code,
+        codeGroup: (await getStaticDemo('primitive/createButton/group')(e))
+          .props.ssg.code,
       },
     },
   };
@@ -32,28 +29,32 @@ export const getStaticProps = async (e) => {
 <Tabs items={['Demo', 'Anatomy', 'Props']}>
   <Tabs.Tab>
     ## Simple
-    <Tabs items={['Web', 'Native']}>
-      <Tabs.Tab>
-        <CodeDemo Demo={CreateButtonDemo} name="codeSimple" />
-      </Tabs.Tab>
-      <Tabs.Tab>
-        <CodeDemo Demo={CreateButtonNativeDemo} name="codeSimpleNative" />
-      </Tabs.Tab>
-    </Tabs>
+    <CodeDemo Demo={CreateButtonNativeDemo} name="codeSimpleNative" />
 
     ## Group
     <CodeDemo Demo={CreateButtonGroupDemo} name="codeGroup" />
+
   </Tabs.Tab>
   <Tabs.Tab>
     ```tsx
-    <Button>
-      <Button.Text />
-      <Button.Icon />
-    </Button>
+    import { createButton } from "@crossed/primitive/createButton"
+    const Button = createButton(/* ... */);
+
+    <Button.Group>
+      <Button>
+        <Button.Text />
+        <Button.Icon />
+      </Button>
+    </Button.Group>
     ```
   </Tabs.Tab>
   <Tabs.Tab>
     ## Button
-    <Table props={[]} />
+    <Table props={[
+      ["Root", "ComponentType", "", "Root of button"],
+      ["Group", "ComponentType", "", "Element which wrap all button"],
+      ["Text", "ComponentType", "", "Text of button"],
+      ["Icon", "ComponentType", "", "Icon of button"],
+    ]} />
   </Tabs.Tab>
 </Tabs>

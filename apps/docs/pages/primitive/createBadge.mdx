@@ -2,24 +2,55 @@ import { CreateBadgeSimpleDemo } from '@crossed/demo';
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { Tabs } from 'components/Tabs';
+import { Table } from 'components/Table';
 
 export const getStaticProps = async (e) => {
   return {
     props: {
       ssg: {
-        simple: (await getStaticDemo('primitive/createBadge/simple')(e)).props.ssg.code,
-      }
-    }
-  }
+        simple: (await getStaticDemo('primitive/createBadge/simple')(e)).props
+          .ssg.code,
+      },
+    },
+  };
 };
 
 # createBadge
 
-<Tabs items={['Demo']}>
+<Tabs items={['Demo', "Doc"]}>
   <Tabs.Tab>
     ## simple
     <br />
     <CodeDemo Demo={CreateBadgeSimpleDemo} name="simple" />
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ## Usage
+    ```tsx
+      import type { ComponentProps } from "react";
+      import { createBadge } from "@crossed/primitive";
+
+      const Badge = createBadge({
+        Root: (props: ComponentProps<"div">) => <div {...props} />,
+        Text: (props: ComponentProps<"p">) => <p {...props} />,
+      })
+
+      const { Text } = Badge;
+
+      function App() {
+        return (
+          <Badge>
+            <Text>
+              Hello
+            </Text>
+          </Badge>
+        );
+      }
+    ```
+    <Table props={[
+      ["Root", "ComponentType", "", "Root of badge"],
+      ["Text", "ComponentType", "", "Text of badge"],
+    ]} />
 
   </Tabs.Tab>
 </Tabs>
