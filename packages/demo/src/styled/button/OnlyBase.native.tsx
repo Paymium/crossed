@@ -1,5 +1,5 @@
 import type { GetProps } from '@crossed/styled';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 import { Pressable, Text } from 'react-native';
 
 const Button = styled(Pressable, {

@@ -1,5 +1,5 @@
 import { Pressable, Text } from 'react-native';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 import { withStaticProperties } from '@crossed/core';
 import type { Props } from '../props';
 import { YBox } from '@crossed/ui';

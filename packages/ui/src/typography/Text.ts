@@ -2,7 +2,7 @@
 
 import { Text as TextNative } from 'react-native';
 import type { GetProps } from '@crossed/styled';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 
 export const Text = styled(TextNative, {
   variants: {

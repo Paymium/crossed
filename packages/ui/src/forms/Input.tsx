@@ -1,7 +1,7 @@
 'use client';
 import { createScope, withStaticProperties, GetProps } from '@crossed/core';
 import { tw } from '@crossed/styled';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 import {
   cloneElement,
   forwardRef,

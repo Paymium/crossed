@@ -2,7 +2,7 @@
 
 import { View } from 'react-native';
 import type { GetProps } from '@crossed/styled';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 import { spaceVariants } from '../variants/space';
 
 export const YBox = styled(View, {

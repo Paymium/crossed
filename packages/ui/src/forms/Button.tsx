@@ -1,6 +1,6 @@
 'use client';
 import { tw, type GetProps, useCrossedTheme } from '@crossed/styled';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
 import { Pressable, Text, View } from 'react-native';
 import { Fragment, ReactNode, cloneElement } from 'react';

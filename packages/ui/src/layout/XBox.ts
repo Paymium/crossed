@@ -1,7 +1,7 @@
 'use client';
 
 import { View } from 'react-native';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 import { spaceVariants } from '../variants/space';
 
 export const XBox = styled(View, {

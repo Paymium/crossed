@@ -1,6 +1,6 @@
 import { createButton } from '@crossed/primitive';
 import type { GetProps } from '@crossed/styled';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 import { createScope } from '@crossed/core';
 import { YBox } from '@crossed/ui';
 import { Pressable, Text, TextProps, View } from 'react-native';

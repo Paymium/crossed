@@ -2,7 +2,7 @@ import { createLabel } from '@crossed/primitive';
 import { Text } from 'react-native';
 import { Box } from '../layout/Box';
 import type { GetProps } from '@crossed/styled';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 
 const LabelTextFrame = styled(Text, {
   'className': ['font-medium'],

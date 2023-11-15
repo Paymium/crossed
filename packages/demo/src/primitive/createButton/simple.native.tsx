@@ -1,5 +1,5 @@
 import { createButton } from '@crossed/primitive';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 import { Box } from '@crossed/ui';
 import { Pressable, Text, TextProps } from 'react-native';
 

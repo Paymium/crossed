@@ -1,5 +1,5 @@
 import { createBadge } from '@crossed/primitive/createBadge';
-import { styled } from '@crossed/styled/styled';
+import { styled } from '@crossed/styled';
 import { View } from 'react-native';
 import { Text } from '../typography/Text';
 import { Text as NText } from 'react-native';
