@@ -1,6 +1,7 @@
 'use client';
 import { composeRefs, createScope } from '@crossed/core';
-import { GetProps, merge, styled } from '@crossed/styled';
+import { GetProps, merge } from '@crossed/styled';
+import { styled } from '@crossed/styled';
 import {
   HtmlHTMLAttributes,
   PropsWithChildren,

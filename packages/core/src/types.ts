@@ -77,8 +77,10 @@ export type Config<
   defaultVariants?: ConfigVariants<T> & PropsFromExtends<E>;
   extends?: E;
   compoundVariants?: (T extends ConfigSchemaUndefined<any>
-    ? (ConfigVariants<T> | ConfigVariantsMulti<P, T>) & BaseWithState<P>
-    : BaseWithState<P>)[];
+    ? (ConfigVariants<T> | ConfigVariantsMulti<P, T>) &
+        BaseWithState<P> &
+        PropsFromExtends<E>
+    : BaseWithState<P> & PropsFromExtends<E>)[];
 };
 
 export type Props<
@@ -94,7 +96,11 @@ export type StyledComponent<
   E extends StylesFunctionUndefined<P>
 > = ForwardRefExoticComponent<
   NewComponentProps<T, P, E> & RefAttributes<any>
-> & { styles: StylesFunction<Props<T, P> & PropsFromExtends<E>> };
+> & {
+  styles: StylesFunction<
+    Omit<PropsFromExtends<E>, keyof ConfigVariants<T>> & Props<T, P>
+  >;
+};
 
 export type NewComponentProps<
   T extends ConfigSchemaUndefined<P>,
@@ -106,6 +112,9 @@ export type NewComponentProps<
     className?: string;
     // animations?: boolean;
     states?: { isActive?: boolean; isFocus?: boolean; isHover?: boolean };
+    hoverTheme?: boolean;
+    activeTheme?: boolean;
+    focusTheme?: boolean;
     $dark?: Base<P>;
     $light?: Base<P>;
   };

@@ -1,7 +1,8 @@
 'use client';
 
 import { Text as TextNative } from 'react-native';
-import { GetProps, styled } from '@crossed/styled';
+import type { GetProps } from '@crossed/styled';
+import { styled } from '@crossed/styled';
 
 export const Text = styled(TextNative, {
   variants: {

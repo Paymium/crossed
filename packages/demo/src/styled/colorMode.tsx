@@ -1,4 +1,5 @@
-import { CrossedTheme, styled, useCrossedTheme } from '@crossed/styled';
+import { CrossedTheme, useCrossedTheme } from '@crossed/styled';
+import { styled } from '@crossed/styled';
 
 const ButtonWithoutVariant = styled('button', {
   'className': ['px-2 py-1'],

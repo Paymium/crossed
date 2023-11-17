@@ -1,6 +1,5 @@
 {
   "tailwindCSS.experimental.classRegex": [
-    ["className: ?([^;]*)[;]", "[`'\"`]([^'\"`,;]*)[`'\"`]"]
-  ],
-  "mdx.experimentalLanguageServer": true
+    ["className: ?([^;]*)[;]", "[`'\"`]([^'\"`,;]*)[`'\"`]"],
+  ]
 }

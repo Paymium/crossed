@@ -1,7 +1,8 @@
 'use client';
 
 import { View } from 'react-native';
-import { GetProps, styled } from '@crossed/styled';
+import type { GetProps } from '@crossed/styled';
+import { styled } from '@crossed/styled';
 import { spaceVariants } from '../variants/space';
 
 export const YBox = styled(View, {

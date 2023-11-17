@@ -1,5 +1,6 @@
 import { createList } from '@crossed/primitive';
-import { GetProps, styled, tw, useCrossedTheme } from '@crossed/styled';
+import { GetProps, tw, useCrossedTheme } from '@crossed/styled';
+import { styled } from '@crossed/styled';
 import { Fragment, ReactElement, ReactNode, cloneElement, useId } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { Divider } from '../layout/Divider';

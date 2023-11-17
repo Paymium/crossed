@@ -1,25 +1,16 @@
 import { createButton } from '@crossed/primitive';
+import { styled } from '@crossed/styled';
 import { Box } from '@crossed/ui';
-import { Pressable, PressableProps, Text, TextProps } from 'react-native';
+import { Pressable, Text, TextProps } from 'react-native';
 
 const Button = createButton({
   Group: Pressable,
-  Root: (props: PressableProps) => {
-    return (
-      <Pressable
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          backgroundColor: 'blue',
-          paddingHorizontal: 12,
-          paddingVertical: 8,
-          gap: 8,
-        }}
-        {...props}
-      />
-    );
-  },
+  Root: styled(Pressable, {
+    'className': ['flex-row', 'bg-blue-500', 'rounded', 'px-3 py-2', 'gap-2'],
+    ':hover': {
+      className: ['bg-blue-400'],
+    },
+  }),
   Text: (props: TextProps) => {
     return <Text {...props} style={[{ color: 'white' }, props.style]} />;
   },
