@@ -5,7 +5,6 @@ import { createButton } from '@crossed/primitive';
 import { Pressable, Text, View } from 'react-native';
 import { Fragment, ReactNode, cloneElement } from 'react';
 import { Box } from '../layout/Box';
-import { useButtonContext } from '@crossed/primitive';
 import { createScope } from '@crossed/core';
 
 export const ButtonGroupFrame = styled(View, {
@@ -308,7 +307,7 @@ const ButtonTextControlled = ({ ...props }: ButtonTextFrameProps) => {
 
 type ButtonIconFrameProps = GetProps<typeof Box>;
 const ButtonIconFrame = ({ children, ...props }: ButtonIconFrameProps) => {
-  const { color, variant, size } = useButtonContext();
+  const { color, variant, size } = useVariantContext() || {};
   const { theme } = useCrossedTheme();
   const className = ButtonTextFrame.styles({
     color,
@@ -343,7 +342,7 @@ type ButtonRootProps =
       text: string;
       icon?: ReactNode;
       iconAfter?: ReactNode;
-      children: never;
+      children?: never;
     });
 
 const Button = createButton({

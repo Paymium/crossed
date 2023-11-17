@@ -7,7 +7,6 @@ export const ButtonDemo = ({ size, color, variant }: Props) => {
       <YBox space="sm">
         <Text>Simple</Text>
         <Button
-          aria-label="Button simple"
           text="Button"
           icon={<UilMessage />}
           color={color}
@@ -15,7 +14,6 @@ export const ButtonDemo = ({ size, color, variant }: Props) => {
           variant={variant as any}
         />
         <Button
-          aria-label="disabled Button"
           text="Disabled"
           icon={<UilMessage />}
           color={color}
