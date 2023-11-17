@@ -8,30 +8,6 @@
   "react-native": "src/index",
   "source": "src/index",
   "typings": "lib/typescript/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/module/index.js",
-      "require": "./lib/commonjs/index.js"
-    },
-    "./createButton": {
-      "import": "./lib/module/Button/index.js",
-      "require": "./lib/commonjs/Button/index.js"
-    },
-    "./createBadge": {
-      "import": "./lib/module/Badge/index.js",
-      "require": "./lib/commonjs/Badge/index.js"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "createButton": [
-        "./lib/typescript/Button/index.d.js"
-      ],
-      "createBadge": [
-        "./lib/typescript/Badge/index.d.js"
-      ]
-    }
-  },
   "scripts": {
     "release": "release-it",
     "clean": "rm -rf lib",

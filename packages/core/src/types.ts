@@ -96,7 +96,11 @@ export type StyledComponent<
   E extends StylesFunctionUndefined<P>
 > = ForwardRefExoticComponent<
   NewComponentProps<T, P, E> & RefAttributes<any>
-> & { styles: StylesFunction<Props<T, P> & PropsFromExtends<E>> };
+> & {
+  styles: StylesFunction<
+    Omit<PropsFromExtends<E>, keyof ConfigVariants<T>> & Props<T, P>
+  >;
+};
 
 export type NewComponentProps<
   T extends ConfigSchemaUndefined<P>,

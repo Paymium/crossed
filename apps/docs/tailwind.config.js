@@ -7,8 +7,9 @@ module.exports = {
   content: [
     './pages/**/*.{js,jsx,ts,tsx,md,mdx}',
     './components/**/*.{js,jsx,ts,tsx,md,mdx}',
-    './node_modules/@crossed/demo/lib/**/*.{js,jsx,ts,tsx,md,mdx}',
-    './node_modules/@crossed/ui/lib/**/*.{js,jsx,ts,tsx,md,mdx}',
+    './node_modules/@crossed/demo/src/**/*.{js,jsx,ts,tsx,md,mdx}',
+    './node_modules/@crossed/ui/src/**/*.{js,jsx,ts,tsx,md,mdx}',
+    './node_modules/@crossed/primitive/src/**/*.{js,jsx,ts,tsx,md,mdx}',
     './theme.config.tsx',
   ],
   theme: {

@@ -1,10 +1,11 @@
-import { withStaticProperties } from '@crossed/core';
-import type { ComponentType } from 'react';
+import { GetProps, withStaticProperties } from '@crossed/core';
+import { useId, type ComponentType } from 'react';
 import { createButtonMain } from './Button';
 import { createButtonText } from './ButtonText';
 import { createButtonIcon } from './ButtonIcon';
 import type { TextProps as NTextProps } from 'react-native';
 import { createButtonGroup } from './ButtonGroup';
+import { Provider } from './context';
 export { useContext as useButtonContext } from './context';
 
 export const createButton = <
@@ -29,9 +30,19 @@ export const createButton = <
   ButtonIcon.displayName = 'ButtonIcon';
   ButtonGroup.displayName = 'ButtonGroup';
 
-  return withStaticProperties(Button, {
-    Group: ButtonGroup,
-    Text: ButtonText,
-    Icon: ButtonIcon,
-  });
+  return withStaticProperties(
+    function CreateButton(props: GetProps<typeof Button>) {
+      const id = useId();
+      return (
+        <Provider id={id}>
+          <Button {...props} />
+        </Provider>
+      );
+    },
+    {
+      Group: ButtonGroup,
+      Text: ButtonText,
+      Icon: ButtonIcon,
+    }
+  );
 };

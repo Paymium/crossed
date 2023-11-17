@@ -8,23 +8,6 @@
   "react-native": "src/index",
   "source": "src/index",
   "typings": "lib/typescript/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/module/index.js",
-      "require": "./lib/commonjs/index.js"
-    },
-    "./styled": {
-      "import": "./lib/module/styled.js",
-      "require": "./lib/commonjs/styled.js"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "styled": [
-        "./lib/typescript/styled.d.js"
-      ]
-    }
-  },
   "scripts": {
     "clean": "rm -rf lib",
     "watch": "crossed-build --watch --project-path ./tsconfig.build.json",

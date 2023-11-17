@@ -153,7 +153,6 @@ export function styled<
       );
 
       const NewComp = as ?? Component;
-      const asIsString = typeof NewComp === 'string';
 
       const handleMouseUp = useCallback(() => {
         setActive(false);
@@ -173,16 +172,11 @@ export function styled<
         <NewComp
           ref={ref}
           {...parsedPropsProperty(componentProps)}
-          {...(asIsString
-            ? {
-                'data-class-name': baseClassName,
-              }
-            : {
-                dataSet: {
-                  ...componentProps.dataSet,
-                  className: baseClassName,
-                },
-              })}
+          dataSet={{
+            ...componentProps.dataSet,
+            className: baseClassName,
+          }}
+          className={baseClassName}
           style={[
             ['ios', 'android'].includes(Platform.OS) && tw.style(baseClassName),
             ...(Array.isArray(componentProps.style)

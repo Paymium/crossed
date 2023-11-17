@@ -1,5 +1,4 @@
 import {
-  CreateLabelSimpleDemo,
   CreateLabelSimpleNativeDemo,
 } from '@crossed/demo';
 import { CodeDemo } from 'components/CodeDemo';
@@ -11,8 +10,6 @@ export const getStaticProps = async (e) => {
   return {
     props: {
       ssg: {
-        simple: (await getStaticDemo('primitive/createLabel/simple')(e)).props
-          .ssg.code,
         simpleNative: (
           await getStaticDemo('primitive/createLabel/simple.native')(e)
         ).props.ssg.code,
@@ -26,14 +23,7 @@ export const getStaticProps = async (e) => {
 <Tabs items={['Demo', 'Anatomy', 'Props']}>
   <Tabs.Tab>
     ## simple
-    <Tabs items={['Web', 'Native']}>
-      <Tabs.Tab>
-        <CodeDemo Demo={CreateLabelSimpleDemo} name="simple" />
-      </Tabs.Tab>
-      <Tabs.Tab>
-        <CodeDemo Demo={CreateLabelSimpleNativeDemo} name="simpleNative" />
-      </Tabs.Tab>
-    </Tabs>
+    <CodeDemo Demo={CreateLabelSimpleNativeDemo} name="simpleNative" />
   </Tabs.Tab>
   <Tabs.Tab>
     ```tsx
