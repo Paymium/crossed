@@ -3,7 +3,7 @@ import { tw, type GetProps, useCrossedTheme } from '@crossed/styled';
 import { styled } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
 import { Pressable, Text, View } from 'react-native';
-import { Fragment, ReactNode, cloneElement } from 'react';
+import { Fragment, ReactNode, cloneElement, forwardRef } from 'react';
 import { Box } from '../layout/Box';
 import { createScope } from '@crossed/core';
 
@@ -346,50 +346,65 @@ type ButtonRootProps =
     });
 
 const Button = createButton({
-  Group: ({
-    color,
-    size,
-    variant,
-    ...props
-  }: ButtonGroupFrameProps & ContextVariant) => {
-    return (
-      <ProviderVariant color={color} size={size} variant={variant}>
-        <ProviderGroup grouped>
-          <ButtonGroupFrame {...props} />
-        </ProviderGroup>
-      </ProviderVariant>
-    );
-  },
-  Root: ({ children, text, icon, iconAfter, ...props }: ButtonRootProps) => {
-    const { grouped } = useGroupContext();
-    const variantsContext = useVariantContext();
+  Group: forwardRef(
+    (
+      {
+        color,
+        size,
+        variant,
+        ...props
+      }: ButtonGroupFrameProps & ContextVariant,
+      ref: any
+    ) => {
+      return (
+        <ProviderVariant color={color} size={size} variant={variant}>
+          <ProviderGroup grouped>
+            <ButtonGroupFrame {...props} ref={ref} />
+          </ProviderGroup>
+        </ProviderVariant>
+      );
+    }
+  ),
+  Root: forwardRef(
+    (
+      { children, text, icon, iconAfter, ...props }: ButtonRootProps,
+      ref: any
+    ) => {
+      const { grouped } = useGroupContext();
+      const variantsContext = useVariantContext();
 
-    const ParentComp = variantsContext ? Fragment : ProviderVariant;
-    const {
-      color = props.color || 'neutral',
-      size = props.size || 'md',
-      variant = props.variant || 'outlined',
-    } = variantsContext || {};
+      const ParentComp = variantsContext ? Fragment : ProviderVariant;
+      const {
+        color = props.color || 'neutral',
+        size = props.size || 'md',
+        variant = props.variant || 'outlined',
+      } = variantsContext || {};
 
-    return (
-      <ParentComp {...{ color, size, variant }}>
-        <ButtonFrame grouped={grouped} {...props} {...{ color, size, variant }}>
-          {children ?? (
-            <>
-              {icon && <ButtonIconFrame>{icon}</ButtonIconFrame>}
-              <ButtonTextControlled>{text}</ButtonTextControlled>
-              {iconAfter && <ButtonIconFrame>{iconAfter}</ButtonIconFrame>}
-            </>
-          )}
-        </ButtonFrame>
-      </ParentComp>
-    );
-  },
+      return (
+        <ParentComp {...{ color, size, variant }}>
+          <ButtonFrame
+            grouped={grouped}
+            {...props}
+            {...{ color, size, variant }}
+            ref={ref}
+          >
+            {children ?? (
+              <>
+                {icon && <ButtonIconFrame>{icon}</ButtonIconFrame>}
+                <ButtonTextControlled>{text}</ButtonTextControlled>
+                {iconAfter && <ButtonIconFrame>{iconAfter}</ButtonIconFrame>}
+              </>
+            )}
+          </ButtonFrame>
+        </ParentComp>
+      );
+    }
+  ),
   Text: ButtonTextControlled,
-  Icon: ButtonIconFrame,
+  Element: ButtonIconFrame,
 });
 
-const { Text: ButtonText, Icon: ButtonIcon } = Button;
+const { Text: ButtonText, Element: ButtonElement } = Button;
 
-export { ButtonText, ButtonIcon, Button };
+export { ButtonText, ButtonElement, Button };
 export type ButtonProps = GetProps<typeof Button>;

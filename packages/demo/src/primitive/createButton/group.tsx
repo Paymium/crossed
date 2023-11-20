@@ -1,66 +1,93 @@
-import { createButton } from '@crossed/primitive';
+import {
+  createButton,
+  useButtonGroupCollection,
+  useButtonGroupContext,
+} from '@crossed/primitive';
 import type { GetProps } from '@crossed/styled';
 import { styled } from '@crossed/styled';
-import { createScope } from '@crossed/core';
-import { YBox } from '@crossed/ui';
-import { Pressable, Text, TextProps, View } from 'react-native';
+import { UilBitcoinCircle, YBox } from '@crossed/ui';
+import { Pressable, Text, View } from 'react-native';
+import { forwardRef } from 'react';
 
 const Group = styled(View, {
-  className: ['overflow-hidden', 'rounded-md'],
+  className: ['flex'],
   variants: {
-    horizontal: { true: { className: ['flex-row'] } },
-    vertical: { true: { className: ['flex-row'] } },
+    orientation: {
+      horizontal: { className: ['flex-row'] },
+      vertical: { className: ['flex-col'] },
+    },
   },
   defaultVariants: {
-    horizontal: true,
+    orientation: 'horizontal',
   },
 });
 
-type GroupProps = GetProps<typeof Group>;
-
 const Root = styled(Pressable, {
-  'className': ['flex-row', 'bg-blue-500', 'rounded', 'px-3 py-2'],
+  'className': [
+    'flex flex-row items-center gap-2',
+    'bg-blue-500',
+    'rounded',
+    'px-3 py-2',
+  ],
   ':hover': {
     className: ['bg-blue-400'],
   },
+  ':focus': { className: ['z-10'] },
   'variants': {
-    grouped: {
-      true: { className: ['rounded-none'] },
-    },
+    grouped: { true: { className: ['rounded-none'] } },
+    first: { true: { className: ['rounded-l'] } },
+    last: { true: { className: ['rounded-r'] } },
+    orientation: { horizontal: { className: [] }, vertical: { className: [] } },
   },
+  'compoundVariants': [
+    {
+      orientation: 'vertical',
+      first: true,
+      className: ['rounded-none rounded-t'],
+    },
+    {
+      orientation: 'vertical',
+      last: true,
+      className: ['rounded-none rounded-b'],
+    },
+  ],
 });
 
 type RootProps = GetProps<typeof Root>;
 
 const TextButton = styled(Text, {
-  className: ['text-white'],
+  className: ['text-white', 'text-base'],
 });
-const IconButton = (props: TextProps) => {
-  return <Text {...props} style={[{ color: 'white' }, props.style]} />;
-};
 
-const [ProviderGroup, useGroupContext] = createScope<{ grouped?: boolean }>({});
+const Element = styled(View, {
+  className: ['flex'],
+});
 
 const Button = createButton({
-  Group: (props: GroupProps) => {
+  Group,
+  Root: forwardRef((props: RootProps, ref: any) => {
+    const { grouped, orientation } = useButtonGroupContext();
+    const getItems = useButtonGroupCollection();
+    const index = getItems().findIndex(({ id }) => id === props.id);
     return (
-      <ProviderGroup grouped>
-        <Group {...props} />
-      </ProviderGroup>
+      <Root
+        grouped={grouped}
+        first={index === 0}
+        last={index === getItems().length - 1}
+        orientation={orientation}
+        {...props}
+        ref={ref}
+      />
     );
-  },
-  Root: (props: RootProps) => {
-    const { grouped } = useGroupContext();
-    return <Root grouped={grouped} {...props} />;
-  },
+  }),
   Text: TextButton,
-  Icon: IconButton,
+  Element: Element,
 });
 
 export const CreateButtonGroupDemo = () => {
   return (
     <YBox className="gap-4 items-center">
-      <Button.Group horizontal>
+      <Button.Group orientation="horizontal">
         <Button aria-label="Button text">
           <Button.Text>text button</Button.Text>
         </Button>
@@ -71,7 +98,7 @@ export const CreateButtonGroupDemo = () => {
           <Button.Text>text button</Button.Text>
         </Button>
       </Button.Group>
-      <Button.Group horizontal={false}>
+      <Button.Group orientation="vertical">
         <Button aria-label="Button text">
           <Button.Text>text button</Button.Text>
         </Button>
@@ -83,6 +110,13 @@ export const CreateButtonGroupDemo = () => {
         </Button>
       </Button.Group>
       <Button aria-label="Button text">
+        <Button.Text>text button</Button.Text>
+      </Button>
+
+      <Button aria-label="Button text">
+        <Button.Element>
+          <UilBitcoinCircle />
+        </Button.Element>
         <Button.Text>text button</Button.Text>
       </Button>
     </YBox>

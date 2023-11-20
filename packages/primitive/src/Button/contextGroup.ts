@@ -1,3 +1,10 @@
 import { createScope } from '@crossed/core';
+import type { Orientation } from '../utils/RovingFocus';
 
-export const [ProviderGroup, useContextGroup] = createScope<any>({});
+type ButtonGroupContext = {
+  orientation: Orientation;
+  grouped?: boolean;
+};
+export const [ProviderGroup, useContextGroup] = createScope<ButtonGroupContext>(
+  { orientation: 'horizontal' } as ButtonGroupContext
+);
