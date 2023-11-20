@@ -1,5 +1,5 @@
 import { useUncontrolled } from '@crossed/core';
-import { forwardRef, type ComponentType } from 'react';
+import { forwardRef, type ComponentType, useId } from 'react';
 import { Provider } from './context';
 
 export const createModalMain = <P,>(Styled: ComponentType<P>) =>
@@ -11,6 +11,7 @@ export const createModalMain = <P,>(Styled: ComponentType<P>) =>
       onChangeOpen?: (open: boolean) => void;
     }
   >((props, ref) => {
+    const id = useId();
     const {
       open: openProps,
       defaultOpen = false,
@@ -23,7 +24,7 @@ export const createModalMain = <P,>(Styled: ComponentType<P>) =>
       onChange: onChangeOpen,
     });
     return (
-      <Provider open={open} setOpen={setOpen}>
+      <Provider open={open} setOpen={setOpen} id={id}>
         <Styled {...(otherProps as any)} ref={ref} />
       </Provider>
     );

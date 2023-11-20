@@ -1,18 +1,20 @@
 import { ComponentType, forwardRef } from 'react';
+import { FocusScope } from '../utils/FocusScope';
+import { useContext } from './context';
 
 export const createModalContent = <P,>(Styled: ComponentType<P>) =>
   forwardRef<any, P>((props, ref) => {
+    const { id } = useContext();
     return (
-      <Styled
-        {...props}
-        ref={ref}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          margin: 'auto',
-          transform: 'translate(-50%, -50%',
-        }}
-      />
+      <FocusScope trapped loop>
+        <Styled
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={`${id}-title`}
+          aria-describedby={`${id}-description`}
+          {...props}
+          ref={ref}
+        />
+      </FocusScope>
     );
   });
