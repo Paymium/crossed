@@ -17,7 +17,7 @@ const Button = createButton({
   Text: (props: any) => {
     return <span className="text-white" {...props} />;
   },
-  Icon: (props: HTMLAttributes<HTMLSpanElement>) => {
+  Element: (props: HTMLAttributes<HTMLSpanElement>) => {
     return <span {...props} />;
   },
 });
@@ -26,7 +26,7 @@ export const CreateButtonDemo = () => {
   return (
     <Box>
       <Button aria-label="Button text">
-        <Button.Icon>€</Button.Icon>
+        <Button.Element>€</Button.Element>
         <Button.Text>text button</Button.Text>
       </Button>
     </Box>

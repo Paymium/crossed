@@ -1,5 +1,5 @@
 import { useUncontrolled } from '@crossed/core';
-import { forwardRef, type ComponentType } from 'react';
+import { forwardRef, type ComponentType, useId } from 'react';
 import { Provider } from './context';
 
 export const createSheetMain = <P,>(Styled: ComponentType<P>) =>
@@ -22,8 +22,9 @@ export const createSheetMain = <P,>(Styled: ComponentType<P>) =>
       defaultValue: defaultOpen,
       onChange: onChangeOpen,
     });
+    const id = useId();
     return (
-      <Provider open={open} setOpen={setOpen}>
+      <Provider open={open} setOpen={setOpen} id={id}>
         <Styled {...(otherProps as any)} ref={ref} />
       </Provider>
     );

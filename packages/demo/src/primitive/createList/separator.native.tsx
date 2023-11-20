@@ -1,4 +1,5 @@
 import { createList } from '@crossed/primitive';
+import { styled } from '@crossed/styled';
 import { YBox } from '@crossed/ui';
 import { Fragment, useId } from 'react';
 import { Text, TextProps, View, ViewProps } from 'react-native';
@@ -61,6 +62,11 @@ const List = createList({
       />
     );
   },
+  Divider: styled(View, { className: ['border-t border-neutral-800'] }),
+  Label: styled(Text, {
+    className: ['text-neutral-500 text-base font-bold', 'px-3 py-1.5'],
+    variants: { danger: { true: { className: ['text-red-800'] } } },
+  }),
 });
 
 export const CreateListWithSeparatorNativeDemo = () => {

@@ -1,3 +1,11 @@
 import { createScope } from '@crossed/core';
 
-export const [Provider, useContext] = createScope<any>({});
+export type ContextModal = {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+  id: string;
+};
+
+export const [Provider, useContext] = createScope<ContextModal>(
+  {} as ContextModal
+);

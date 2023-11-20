@@ -40,6 +40,10 @@ describe('crossed', () => {
         ':dark': { className: ['text-red-100'] },
         ':light': { className: ['text-red-100'] },
         'toto': null,
+        ':active': {},
+        ':focus': {},
+        ':hover': {},
+        ':disabled': {},
       })
     );
     expect(variant({ toto: true })).toEqual(
@@ -48,6 +52,10 @@ describe('crossed', () => {
         ':dark': { className: ['text-red-200'] },
         ':light': { className: ['text-red-200'] },
         'toto': true,
+        ':active': {},
+        ':focus': {},
+        ':hover': {},
+        ':disabled': {},
       })
     );
     expect(variant({ toto: undefined })).toEqual(
@@ -56,6 +64,10 @@ describe('crossed', () => {
         ':dark': { className: ['text-red-100'] },
         ':light': { className: ['text-red-100'] },
         'toto': undefined,
+        ':active': {},
+        ':focus': {},
+        ':hover': {},
+        ':disabled': {},
       })
     );
   });
@@ -104,6 +116,10 @@ describe('crossed', () => {
         ':light': { className: ['text-red-100'] },
         'foo': null,
         'toto': null,
+        ':active': {},
+        ':focus': {},
+        ':hover': {},
+        ':disabled': {},
       })
     );
     expect(variant({ toto: false, foo: true })).toEqual(
@@ -113,6 +129,10 @@ describe('crossed', () => {
         ':light': { className: ['text-red-700'] },
         'foo': true,
         'toto': false,
+        ':active': {},
+        ':focus': {},
+        ':hover': {},
+        ':disabled': {},
       })
     );
     expect(variant({ toto: true, foo: true })).toEqual(
@@ -122,6 +142,10 @@ describe('crossed', () => {
         ':light': { className: ['text-red-900'] },
         'foo': true,
         'toto': true,
+        ':active': {},
+        ':focus': {},
+        ':hover': {},
+        ':disabled': {},
       })
     );
   });
@@ -149,6 +173,10 @@ describe('crossed', () => {
         'className': ['text-red-200'],
         ':dark': { className: ['text-red-200'] },
         ':light': { className: ['text-red-200'] },
+        ':active': {},
+        ':focus': {},
+        ':hover': {},
+        ':disabled': {},
       })
     );
   });

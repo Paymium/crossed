@@ -1,48 +1,15 @@
 import { createList } from '@crossed/primitive';
+import { styled } from '@crossed/styled';
 import { YBox } from '@crossed/ui';
-import { Text, TextProps, View, ViewProps } from 'react-native';
+import { Text, View } from 'react-native';
 
 const List = createList({
-  Root: (props: ViewProps) => {
-    return (
-      <View
-        {...props}
-        style={[
-          {
-            borderWidth: 1,
-            borderColor: 'gray',
-            borderRadius: 5,
-          },
-          props.style,
-        ]}
-      />
-    );
-  },
-  Item: (props: ViewProps) => {
-    return (
-      <View
-        {...props}
-        style={[
-          {
-            paddingVertical: 8,
-            paddingHorizontal: 12,
-          },
-          props.style,
-        ]}
-      />
-    );
-  },
-  SubTitle: (props: TextProps) => {
-    return <Text {...props} style={[{ color: 'gray' }, props.style]} />;
-  },
-  Title: (props: TextProps) => {
-    return (
-      <Text
-        {...props}
-        style={[{ color: 'white', fontWeight: '700' }, props.style]}
-      />
-    );
-  },
+  Root: styled(View, { className: ['border border-neutral-800 rounded-lg'] }),
+  Item: styled(View, { className: ['py-2 px-3'] }),
+  SubTitle: styled(Text, { className: ['text-neutral-500 text-sm'] }),
+  Title: styled(Text, { className: ['text-white text-base font-semibold'] }),
+  Divider: styled(View, { className: ['border-t border-neutral-800'] }),
+  Label: styled(Text, { className: ['text-white text-base font-bold'] }),
 });
 
 export const CreateListSimpleNativeDemo = () => {

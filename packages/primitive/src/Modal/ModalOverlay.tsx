@@ -17,7 +17,7 @@ export const createModalOverlay = <P,>(Styled: ComponentType<P>) =>
       return (
         <Styled
           {...(props as any)}
-          onClick={composeEventHandlers((props as any).onClick, () => {
+          onPress={composeEventHandlers((props as any).onPress, () => {
             closeOnPress && setOpen(false);
           })}
           ref={ref}

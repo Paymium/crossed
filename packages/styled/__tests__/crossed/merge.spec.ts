@@ -26,7 +26,14 @@ const result = {
 
 describe('merge', () => {
   test('Merge empty one and empty two', () => {
-    expect(merge({}, {})).toStrictEqual({ ':dark': {}, ':light': {} });
+    expect(merge({}, {})).toStrictEqual({
+      ':dark': {},
+      ':light': {},
+      ':active': {},
+      ':focus': {},
+      ':hover': {},
+      ':disabled': {},
+    });
   });
 
   test(':base', () => {
@@ -49,6 +56,9 @@ describe('merge', () => {
       ':dark': { className: ['bg-neutral-600'] },
       ':light': { className: ['bg-neutral-600'] },
       'props': { p1: 'ici', myProps: 'la', p2: false },
+      ':focus': {},
+      ':hover': {},
+      ':disabled': {},
     });
   });
 
@@ -58,6 +68,9 @@ describe('merge', () => {
         ':active': result,
         ':dark': {},
         ':light': {},
+        ':focus': {},
+        ':hover': {},
+        ':disabled': {},
       }
     );
   });
@@ -69,6 +82,9 @@ describe('merge', () => {
       ':disabled': result,
       ':dark': {},
       ':light': {},
+      ':active': {},
+      ':focus': {},
+      ':hover': {},
     });
   });
   test(':focus', () => {
@@ -76,6 +92,9 @@ describe('merge', () => {
       ':focus': result,
       ':dark': {},
       ':light': {},
+      ':active': {},
+      ':hover': {},
+      ':disabled': {},
     });
   });
   test(':hover', () => {
@@ -83,18 +102,29 @@ describe('merge', () => {
       ':hover': result,
       ':dark': {},
       ':light': {},
+      ':active': {},
+      ':focus': {},
+      ':disabled': {},
     });
   });
   test(':dark', () => {
     expect(merge({ ':dark': baseOne }, { ':dark': baseTow })).toStrictEqual({
       ':dark': result,
       ':light': {},
+      ':active': {},
+      ':focus': {},
+      ':hover': {},
+      ':disabled': {},
     });
   });
   test(':light', () => {
     expect(merge({ ':light': baseOne }, { ':light': baseTow })).toStrictEqual({
       ':light': result,
       ':dark': {},
+      ':active': {},
+      ':focus': {},
+      ':hover': {},
+      ':disabled': {},
     });
   });
 });

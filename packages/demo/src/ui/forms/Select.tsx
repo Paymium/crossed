@@ -1,27 +1,43 @@
-import { Select } from '@crossed/ui';
+import { Select, SelectCompact, Text } from '@crossed/ui';
 import type { Props } from '../../props';
-import { styled } from '@crossed/styled';
-import { TextInput } from 'react-native';
-
-const RootFrame = styled(TextInput, {
-  // extends: ButtonFrame.styles,
-  props: { editable: false },
-  className: ['cursor-pointer'],
-});
 
 export const SelectDemo = ({ size, variant, color }: Props) => {
   return (
-    <Select size={size} variant={variant as any} color={color}>
-      <Select.Label />
-      <RootFrame />
-      <Select.Trigger aria-label="Size" />
-      <Select.Content>
-        <Select.Item value={'xs'} label="xs" aria-label="xs" />
-        <Select.Item value={'sm'} label="sm" aria-label="sm" />
-        <Select.Item value={'md'} label="md" aria-label="md" />
-        <Select.Item value={'lg'} label="lg" aria-label="lg" />
-        <Select.Item value={'xl'} label="xl" aria-label="xl" />
-      </Select.Content>
-    </Select>
+    <>
+      <Select size={size} variant={variant as any} color={color}>
+        <Select.Label>Size</Select.Label>
+        <Select.Trigger aria-label="Size" />
+        <Select.Content>
+          <Select.Item value={'xs'} aria-label="xs">
+            <Text>xs</Text>
+          </Select.Item>
+          <Select.Item value={'sm'} aria-label="sm">
+            <Text>sm</Text>
+          </Select.Item>
+          <Select.Item value={'md'} aria-label="md">
+            <Text>md</Text>
+          </Select.Item>
+          <Select.Item value={'lg'} aria-label="lg">
+            <Text>lg</Text>
+          </Select.Item>
+          <Select.Item value={'xl'} aria-label="xl">
+            <Text>xl</Text>
+          </Select.Item>
+        </Select.Content>
+      </Select>
+      <SelectCompact
+        size={size}
+        variant={variant as any}
+        color={color}
+        label={'Size'}
+        items={[
+          { value: 'xs', label: 'xs' },
+          { value: 'sm', label: 'sm' },
+          { value: 'md', label: 'md' },
+          { value: 'lg', label: 'lg' },
+          { value: 'xl', label: 'xl' },
+        ]}
+      />
+    </>
   );
 };

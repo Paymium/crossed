@@ -116,10 +116,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                   )}
                 >
                   <Text color={'inherit'} size={false}>
-                    {page.title.replace(
-                      /(\[beta\]|\[alpha\]|\[api-draft\])/g,
-                      ''
-                    )}
+                    {page.title.replace(/\[(doc|beta|alpha|api-draft)\]/g, '')}
                   </Text>
                   {render}
                 </XBox>

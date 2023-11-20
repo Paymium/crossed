@@ -26,9 +26,9 @@ export const createSelectTrigger = <P,>(StyledRoot: ComponentType<P>) =>
         aria-expanded={open.toString()}
         aria-activedescendant={open ? id : undefined}
         aria-controls={open ? id : undefined}
-        id={`label-${id}`}
+        id={`trigger-${id}`}
         {...(props as any)}
-        onClick={composeEventHandlers((props as any).onClick, () => {
+        onPress={composeEventHandlers((props as any).onPress, () => {
           setOpen(!open);
         })}
         onKeyDown={composeEventHandlers((props as any).onKeyDown, (e: any) => {

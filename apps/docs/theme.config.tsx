@@ -33,29 +33,50 @@ const config: DocsThemeConfig = {
       const [routeOriginal] = FSRoute.split('#');
       const active = [routeOriginal, routeOriginal + '/'].includes(route + '/');
       let render = null;
-      if (title.endsWith('[beta]')) {
+      if (title.includes('[beta]')) {
         render = (
-          <Badge
-            color="blue"
-            text="BETA"
-            variant={active ? 'filled' : 'outlined'}
-          />
+          <>
+            {render}
+            <Badge
+              color="blue"
+              text="BETA"
+              variant={active ? 'filled' : 'outlined'}
+            />
+          </>
         );
-      } else if (title.endsWith('[api-draft]')) {
+      }
+      if (title.includes('[api-draft]')) {
         render = (
-          <Badge
-            color="orange"
-            text="API-DRAFT"
-            variant={active ? 'filled' : 'outlined'}
-          />
+          <>
+            {render}
+            <Badge
+              color="orange"
+              text="API-DRAFT"
+              variant={active ? 'filled' : 'outlined'}
+            />
+          </>
+        );
+      }
+      if (title.includes('[doc]')) {
+        render = (
+          <>
+            {render}
+            <Badge
+              color="yellow"
+              text="DOC-DRAFT"
+              variant={active ? 'filled' : 'outlined'}
+            />
+          </>
         );
       }
       return (
-        <XBox space="xs" center className="justify-between">
+        <XBox center className="justify-between">
           <Text color={'inherit'} size={false}>
-            {title.replace(/(\[beta\]|\[alpha\]|\[api-draft\])/g, '')}
+            {title.replace(/\[(doc|beta|alpha|api-draft)\]/g, '')}
           </Text>
-          {render}
+          <XBox space="xs" className="w-auto">
+            {render}
+          </XBox>
         </XBox>
       );
     },
@@ -108,9 +129,9 @@ const config: DocsThemeConfig = {
             setTheme(newTheme);
           }}
         >
-          <Button.Icon>
+          <Button.Element>
             <IconToUse />
-          </Button.Icon>
+          </Button.Element>
         </Button>
       );
     },

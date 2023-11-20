@@ -6,6 +6,7 @@ import type { RequiredAccessibilityProps } from '../types';
 
 export type SelectItemProps = {
   disabled?: boolean;
+  value?: string;
 };
 export const createSelectItem = <P extends Record<string, any>>(
   Styled: ComponentType<P>
@@ -15,17 +16,18 @@ export const createSelectItem = <P extends Record<string, any>>(
   forwardRef<
     any,
     SelectItemProps & RequiredAccessibilityProps<P, 'aria-label'>
-  >((props, ref) => {
-    const { setOpen } = useContext();
+  >(({ value, ...props }, ref) => {
+    const { setOpen, setValue } = useContext();
     return (
       <RovingFocus.Item ref={ref} focusable={!props.disabled}>
         <Styled
           tabIndex={props.disabled ? -1 : 0}
-          aria-disabled={(props.disabled || false).toString()}
+          aria-disabled={((props as any).disabled || false).toString()}
           role="menuitem"
           {...(props as any)}
-          onPointerUp={composeEventHandlers((props as any).onPress, () => {
+          onPress={composeEventHandlers((props as any).onPress, () => {
             setOpen(false);
+            setValue(value);
           })}
         />
       </RovingFocus.Item>

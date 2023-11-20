@@ -12,7 +12,7 @@ export const createModalTrigger = <P,>(Styled: ComponentType<P>) =>
       <Styled
         {...(props as any)}
         ref={ref}
-        onClick={composeEventHandlers((props as any).onClick, () => {
+        onPress={composeEventHandlers((props as any).onPress, () => {
           setOpen(!open);
         })}
       />

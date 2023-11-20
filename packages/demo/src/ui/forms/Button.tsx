@@ -30,9 +30,9 @@ export const ButtonDemo = ({ size, color, variant }: Props) => {
           size={size}
           variant={variant as any}
         >
-          <Button.Icon>
+          <Button.Element>
             <UilMessage />
-          </Button.Icon>
+          </Button.Element>
           <Button.Text>Button</Button.Text>
         </Button>
         <Button
@@ -42,9 +42,9 @@ export const ButtonDemo = ({ size, color, variant }: Props) => {
           variant={variant as any}
           disabled
         >
-          <Button.Icon>
+          <Button.Element>
             <UilMessage />
-          </Button.Icon>
+          </Button.Element>
           <Button.Text>Disabled</Button.Text>
         </Button>
       </YBox>
