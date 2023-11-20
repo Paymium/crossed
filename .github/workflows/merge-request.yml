@@ -1,7 +1,7 @@
 on:
   pull_request:
-    tags:
-      - 'crossed-docs@[12].[0-9]+.[0-9]+'
+    branches:
+      - 'main'
 
 permissions:
   contents: read
