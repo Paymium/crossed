@@ -1,5 +1,20 @@
 # @crossed/primitive
 
+## 1.6.0
+
+### Minor Changes
+
+- 8240922: in list add Divider and Label
+- d4377ab: Button: add doc, change Icon to Element
+- 021e23a: add FocusScope component
+- e64abb3: Increase createSheet
+- 10ffc77: Increase createModal
+
+### Patch Changes
+
+- Updated dependencies [8e578aa]
+  - @crossed/core@0.7.1
+
 ## 1.5.0
 
 ### Minor Changes

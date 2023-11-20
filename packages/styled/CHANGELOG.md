@@ -1,5 +1,20 @@
 # @crossed/styled
 
+## 0.11.0
+
+### Minor Changes
+
+- 75be1bc: increase Select
+- 5c84ba7: add hoverTheme, focusTheme and activeTheme
+- 5c84ba7: split export for seperate styled
+
+### Patch Changes
+
+- 778bfce: fix merge state and className
+- 5f5a7e7: wrong check on hoverTheme and activeTheme
+- Updated dependencies [8e578aa]
+  - @crossed/core@0.7.1
+
 ## 0.10.2
 
 ### Patch Changes

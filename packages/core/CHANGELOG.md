@@ -1,5 +1,11 @@
 # @crossed/core
 
+## 0.7.1
+
+### Patch Changes
+
+- 8e578aa: add extends type in compounVariants
+
 ## 0.7.0
 
 ### Minor Changes
