@@ -8,7 +8,7 @@ export const createSheetOverlay = <P,>(Styled: ComponentType<P>) =>
     return (
       <Styled
         {...props}
-        onClick={composeEventHandlers((props as any).onClick, () => {
+        onPress={composeEventHandlers((props as any).onPress, () => {
           setOpen(false);
         })}
         ref={ref}
