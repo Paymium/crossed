@@ -129,6 +129,11 @@ const List = createList({
   },
   SubTitle: ListSubTitleFrame,
   Title: ListTitleFrame,
+  Divider: styled(View, { className: ['border-t border-neutral-800'] }),
+  Label: styled(Text, {
+    className: ['text-neutral-500 text-base font-bold', 'px-3 py-1.5'],
+    variants: { danger: { true: { className: ['text-red-800'] } } },
+  }),
 });
 
 const { Title: ListTitle, SubTitle: ListSubTitle, Item: ListItem } = List;

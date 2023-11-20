@@ -1,8 +1,7 @@
 import {
-  CreateListSimpleDemo,
   CreateListSimpleNativeDemo,
   CreateListWithSeparatorNativeDemo,
-  CreateListWithSeparatorDemo,
+  CreateListPressableDemo,
 } from '@crossed/demo';
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
@@ -13,15 +12,14 @@ export const getStaticProps = async (e) => {
   return {
     props: {
       ssg: {
-        simple: (await getStaticDemo('primitive/createList/simple')(e)).props
-          .ssg.code,
         simpleNative: (
           await getStaticDemo('primitive/createList/simple.native')(e)
         ).props.ssg.code,
-        separator: (await getStaticDemo('primitive/createList/separator')(e))
+        pressable: (await getStaticDemo('primitive/createList/pressable')(e))
           .props.ssg.code,
-        separatorNative: (await getStaticDemo('primitive/createList/separator.native')(e))
-          .props.ssg.code,
+        separatorNative: (
+          await getStaticDemo('primitive/createList/separator.native')(e)
+        ).props.ssg.code,
       },
     },
   };
@@ -29,41 +27,58 @@ export const getStaticProps = async (e) => {
 
 # createList
 
-<Tabs items={['Demo', 'Anatomy', 'Props']}>
+<Tabs items={['Demo', 'Anatomy', 'Components']}>
   <Tabs.Tab>
     ## simple
-    <Tabs items={['Web', 'Native']}>
-      <Tabs.Tab>
-        <CodeDemo Demo={CreateListSimpleDemo} name="simple" />
-      </Tabs.Tab>
-      <Tabs.Tab>
-        <CodeDemo Demo={CreateListSimpleNativeDemo} name="simpleNative" />
-      </Tabs.Tab>
-    </Tabs>
+    <CodeDemo Demo={CreateListSimpleNativeDemo} name="simpleNative" />
 
-    ## With separator
-    <Tabs items={['Web', 'Native']}>
-      <Tabs.Tab>
-        <CodeDemo Demo={CreateListWithSeparatorDemo} name="separator" />
-      </Tabs.Tab>
-      <Tabs.Tab>
-        <CodeDemo Demo={CreateListWithSeparatorNativeDemo} name="separatorNative" />
-      </Tabs.Tab>
-    </Tabs>
+    ## Pressable
+    <CodeDemo Demo={CreateListPressableDemo} name="pressable" />
 
   </Tabs.Tab>
   <Tabs.Tab>
     ```tsx
+    import { createList } from "@crossed/primitive";
+
+    const List = createList({
+      Root,
+      Item,
+      SubTitle,
+      Title,
+      Divider,
+      Label
+    });
+
     <List>
+      <List.Label />
+      <List.Divider />
       <List.Item>
-        <List.Item.Title />
-        <List.Item.Subtitle />
+        <List.Title />
+        <List.Subtitle />
       </List.Item>
     </List>
     ```
+
   </Tabs.Tab>
   <Tabs.Tab>
-    ## List
-    <Table props={[]} />
+    ### Root
+    Composant Root de la liste
+
+    ### Item
+    Un element de la liste
+
+    ### Title
+    Titre de l'élément de la list
+
+    ### SubTitle
+    Un element de la liste
+
+    ### Label
+    Label of section in list
+
+    ### Divider
+    Divider of List
+    {/* <Table props={[]} /> */}
+
   </Tabs.Tab>
 </Tabs>
