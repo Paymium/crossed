@@ -145,8 +145,8 @@ export function styled<
         props,
         {
           disabled: props.disabled,
-          active: hoverTheme ? active : false,
-          hover: activeTheme ? hover : false,
+          active: activeTheme ? active : false,
+          hover: hoverTheme ? hover : false,
           focus: focusTheme ? focus : false,
         },
         theme
