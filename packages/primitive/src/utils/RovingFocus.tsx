@@ -43,7 +43,7 @@ type ScopedProps<P> = P;
 // const [createRovingFocusGroupContext, createRovingFocusGroupScope] =
 //   createScope(GROUP_NAME, [createCollectionScope]);
 
-type Orientation = React.AriaAttributes['aria-orientation'];
+export type Orientation = React.AriaAttributes['aria-orientation'];
 type Direction = 'ltr' | 'rtl';
 
 interface RovingFocusGroupOptions {
@@ -71,7 +71,7 @@ type RovingContextValue = RovingFocusGroupOptions & {
   onFocusableItemRemove(): void;
 };
 
-const [RovingFocusProvider, useRovingFocusContext] =
+export const [RovingFocusProvider, useRovingFocusContext] =
   createScope<RovingContextValue>({} as RovingContextValue);
 
 type RovingFocusGroupElement = RovingFocusGroupImplElement;
@@ -241,8 +241,8 @@ const RovingFocusGroupItem = React.forwardRef<
 
   React.useEffect(() => {
     if (focusable) {
-      onFocusableItemAdd();
-      return () => onFocusableItemRemove();
+      onFocusableItemAdd?.();
+      return () => onFocusableItemRemove?.();
     }
     return () => {};
   }, [focusable, onFocusableItemAdd, onFocusableItemRemove]);
@@ -259,14 +259,14 @@ const RovingFocusGroupItem = React.forwardRef<
           // Even though the item has tabIndex={-1}, that only means take it out of the tab order.
           if (!focusable) event.preventDefault();
           // Safari doesn't focus a button when clicked so we run our logic on mousedown also
-          else context.onItemFocus(id);
+          else context.onItemFocus?.(id);
         })}
         onFocus={composeEventHandlers(props.onFocus, () =>
-          context.onItemFocus(id)
+          context.onItemFocus?.(id)
         )}
         onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
           if (event.key === 'Tab' && event.shiftKey) {
-            context.onItemShiftTab();
+            context.onItemShiftTab?.();
             return;
           }
 
@@ -345,7 +345,7 @@ function focusFirst(candidates: HTMLElement[]) {
   for (const candidate of candidates) {
     // if focus is already where we want to go, we don't want to keep going through the candidates
     if (candidate === PREVIOUSLY_FOCUSED_ELEMENT) return;
-    candidate.focus();
+    candidate.focus?.();
     if (document.activeElement !== PREVIOUSLY_FOCUSED_ELEMENT) return;
   }
 }
