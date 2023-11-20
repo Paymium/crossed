@@ -8,7 +8,7 @@ import {
   ReactNode,
   forwardRef,
 } from 'react';
-import { TextInput } from 'react-native';
+import { Pressable } from 'react-native';
 import { Portal, PortalProvider } from '@gorhom/portal';
 import {
   autoUpdate,
@@ -283,10 +283,10 @@ import { Box, BoxProps } from '../../layout/Box';
 //   );
 // }
 
-const RootFrame = styled(TextInput, {
+const SelectTriggerFrame = styled(Pressable, {
   extends: ButtonFrame.styles,
-  props: { editable: false },
   className: ['cursor-pointer'],
+  props: { role: 'button' },
 });
 
 type FloatingProvider = ReturnType<typeof useFloating> &
@@ -323,35 +323,18 @@ const SelectContent = (props: HtmlHTMLAttributes<HTMLDivElement>) => {
   );
 };
 
-const SelectItem = forwardRef(
-  (
-    props: HtmlHTMLAttributes<HTMLButtonElement> & {
-      value: string;
-      label: string;
-    },
-    ref: any
-  ) => {
-    // const { value } = useSelectContext();
-    return (
-      <button
-        {...props}
-        ref={ref}
-        className={merge(
-          'text-left rounded px-2 py-1 hover:bg-neutral-800',
-          // props.disabled && 'opacity-50',
-          props.className
-        )}
-      />
-    );
-  }
-);
+const SelectItem = styled(Pressable, {
+  extends: ButtonFrame.styles,
+  className: ['cursor-pointer border-0'],
+  props: { role: 'button' },
+});
 
-type SelectTriggerProps = GetProps<typeof RootFrame>;
+type SelectTriggerProps = GetProps<typeof SelectTriggerFrame>;
 
 const SelectTrigger = forwardRef((props: SelectTriggerProps, ref: any) => {
   const { getReferenceProps, refs } = useFloatingProvider();
   return (
-    <RootFrame
+    <SelectTriggerFrame
       ref={composeRefs(refs.setReference, ref)}
       {...(getReferenceProps() as any)}
       {...(props as any)}
@@ -364,24 +347,9 @@ type SelectPropsBase = YBoxProps & {
   color?: any;
   variant?: any;
 };
-type SelectPropsWithChildren = SelectPropsBase & {
-  items?: never;
-  label?: never;
-  children?: ReactNode;
-};
-type SelectPropsWithOutChildren = SelectPropsBase & {
-  items?: { value: string; label: string }[];
-  label?: string;
-  children?: never;
-};
 
 const Select = createSelect({
-  Root: ({
-    children,
-    label,
-    items,
-    ...props
-  }: SelectPropsWithChildren | SelectPropsWithOutChildren) => {
+  Root: forwardRef(({ children, ...props }: SelectPropsBase, ref: any) => {
     const { open, setOpen } = useSelectContext();
     const floating = useFloating({
       open: open,
@@ -400,24 +368,17 @@ const Select = createSelect({
     return (
       <FloatingProvider {...floating} {...interactions}>
         <PortalProvider>
-          <YBox {...props} className={merge(props.className, 'flex flex-col')}>
-            {children ??
-              [
-                label && (
-                  <SelectLabel key={'Select.Label'}>{label}</SelectLabel>
-                ),
-                <SelectTrigger key="Select.Trigger" />,
-                <SelectContent key="Select.Content">
-                  {items?.map(({ value: v, label: l }) => (
-                    <SelectItem key={v} value={v} label={l} />
-                  ))}
-                </SelectContent>,
-              ].filter(Boolean)}
+          <YBox
+            {...props}
+            className={merge(props.className, 'flex flex-col')}
+            ref={ref}
+          >
+            {children}
           </YBox>
         </PortalProvider>
       </FloatingProvider>
     );
-  },
+  }),
   Trigger: SelectTrigger,
   Portal: ({ children }: PropsWithChildren) => {
     const context = useFloatingProvider();
@@ -446,6 +407,49 @@ const Select = createSelect({
 //   Item: SelectItem,
 // } = Select;
 
+type SelectPropsWithChildren = GetProps<typeof Select> & {
+  items?: never;
+  label?: never;
+  children?: ReactNode;
+};
+type SelectPropsWithOutChildren = GetProps<typeof Select> & {
+  items?: { value: string; label: string }[];
+  label?: string;
+  children?: never;
+};
+
+const SelectCompact = forwardRef(
+  (
+    {
+      label,
+      items,
+      children,
+      ...props
+    }: SelectPropsWithChildren | SelectPropsWithOutChildren,
+    ref
+  ) => {
+    const { value } = props;
+    return (
+      <Select {...props} ref={ref}>
+        {children ??
+          [
+            label && <Select.Label key={'Select.Label'}>{label}</Select.Label>,
+            <Select.Trigger key="Select.Trigger" aria-label={label || 'Select'}>
+              {value}
+            </Select.Trigger>,
+            <Select.Content key="Select.Content">
+              {items?.map(({ value: v, label: l }) => (
+                <Select.Item key={v} value={v} aria-label={l}>
+                  {l}
+                </Select.Item>
+              ))}
+            </Select.Content>,
+          ].filter(Boolean)}
+      </Select>
+    );
+  }
+);
+
 export {
   // SelectDivider,
   // SelectLabel,
@@ -453,6 +457,7 @@ export {
   // SelectPortal,
   // SelectContent,
   // SelectItem,
+  SelectCompact,
   Select,
 };
 

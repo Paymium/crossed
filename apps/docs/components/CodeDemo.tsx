@@ -4,7 +4,7 @@ import {
   Box,
   Button,
   Label,
-  Select,
+  SelectCompact as Select,
   Text,
   XBox,
   YBox,
@@ -68,7 +68,7 @@ export const CodeDemo = ({
               {actions.variant && (
                 <Select
                   value={variant as any}
-                  onChangeValue={setVariant}
+                  onChange={setVariant}
                   label="Variant"
                   items={actions.variant.map((v) => ({ value: v, label: v }))}
                 />
@@ -76,7 +76,7 @@ export const CodeDemo = ({
               {actions.space && (
                 <Select
                   value={space as any}
-                  onChangeValue={setSpace}
+                  onChange={setSpace}
                   label="Space"
                   items={[
                     { value: 'xs', label: 'xs' },
@@ -90,7 +90,7 @@ export const CodeDemo = ({
               {actions.size && (
                 <Select
                   value={size as any}
-                  onChangeValue={setSize}
+                  onChange={setSize}
                   label="Size"
                   items={[
                     { value: 'xs', label: 'xs' },
@@ -122,9 +122,9 @@ export const CodeDemo = ({
                             onPress={() => setColor(c)}
                           >
                             {c === color && (
-                              <Button.Icon className="absolute inset-0 justify-center items-center">
+                              <Button.Element className="absolute inset-0 justify-center items-center">
                                 <UilCheck />
-                              </Button.Icon>
+                              </Button.Element>
                             )}
                           </Button>
                         );
@@ -144,9 +144,9 @@ export const CodeDemo = ({
                 size="xs"
                 variant="unstyled"
               >
-                <Button.Icon>
+                <Button.Element>
                   {!show ? <UilEye /> : <UilEyeSlash />}
-                </Button.Icon>
+                </Button.Element>
               </Button>
             </Box>
           )}

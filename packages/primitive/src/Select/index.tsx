@@ -1,5 +1,5 @@
 import { GetProps, useUncontrolled, withStaticProperties } from '@crossed/core';
-import { useMemo, type ComponentType, useId } from 'react';
+import { useMemo, type ComponentType, useId, useState } from 'react';
 import { createSelectMain } from './Select';
 import { createSelectTrigger } from './SelectTrigger';
 import { createSelectContent } from './SelectContent';
@@ -58,22 +58,23 @@ export const createSelect = <
   return withStaticProperties(
     (
       props: GetProps<typeof Select> & {
-        value?: boolean;
-        defaultValue?: boolean;
-        onChangeOpen?: (p: boolean) => void;
+        value?: string;
+        defaultValue?: string;
+        onChange?: (p: string) => void;
       }
     ) => {
       const id = useId();
       const {
-        value,
+        value: valueProps,
         defaultValue = false,
-        onChangeOpen,
+        onChange,
         ...otherProps
       } = props;
-      const [open, setOpen] = useUncontrolled({
-        value,
+      const [open, setOpen] = useState(false);
+      const [value, setVBalue] = useUncontrolled({
+        value: valueProps,
         defaultValue,
-        onChange: onChangeOpen,
+        onChange,
       });
 
       const contextProps = useMemo(() => {
@@ -86,7 +87,14 @@ export const createSelect = <
       }, [props]);
 
       return (
-        <Provider {...contextProps} id={id} open={open} setOpen={setOpen}>
+        <Provider
+          {...contextProps}
+          id={id}
+          open={open}
+          setOpen={setOpen}
+          value={value}
+          setValue={setVBalue}
+        >
           <Select {...(otherProps as any)} />
         </Provider>
       );
