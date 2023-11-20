@@ -6,18 +6,17 @@ export const merge = <P>(
   two: BaseWithState<P>
 ): BaseWithState<P> => {
   const acc: BaseWithState<P> = deepMerge(one, two);
-  if (two[':active']) {
-    acc[':active'] = deepMerge(one[':active'], two[':active']);
-  }
-  if (two[':disabled']) {
-    acc[':disabled'] = deepMerge(one[':disabled'], two[':disabled']);
-  }
-  if (two[':focus']) {
-    acc[':focus'] = deepMerge(one[':focus'], two[':focus']);
-  }
-  if (two[':hover']) {
-    acc[':hover'] = deepMerge(one[':hover'], two[':hover']);
-  }
+  // if (two[':active']) {
+  acc[':active'] = deepMerge(one[':active'], two[':active']);
+  // }
+  // if (two[':disabled']) {
+  acc[':disabled'] = deepMerge(one[':disabled'], two[':disabled']);
+  // }
+  // if (two[':focus']) {
+  acc[':focus'] = deepMerge(one[':focus'], two[':focus']);
+  // }
+
+  acc[':hover'] = deepMerge(one[':hover'], two[':hover']);
 
   acc[':dark'] = deepMerge(
     one[':dark'],
