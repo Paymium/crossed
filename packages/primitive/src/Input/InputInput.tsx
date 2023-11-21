@@ -29,16 +29,16 @@ export const createInput = <P, PGroup extends PropsWithChildren>(
 
 const Slot = forwardRef(
   ({ children, ...props }: PropsWithChildren<any>, ref: any) => {
-    const { setStates, inputRef } = useInputContext();
+    const { setStates, inputRef } = useInputContext() || {};
     return isValidElement(children) && Children.count(children) === 1
       ? cloneElement(children, {
           ...props,
           ref: composeRefs(ref, inputRef),
           onBlur: composeEventHandlers(props.onBlur, () => {
-            setStates({ isFocus: false });
+            setStates?.({ isFocus: false });
           }),
           onFocus: composeEventHandlers(props.onFocus, () => {
-            setStates({ isFocus: true });
+            setStates?.({ isFocus: true });
           }),
         } as any)
       : children;

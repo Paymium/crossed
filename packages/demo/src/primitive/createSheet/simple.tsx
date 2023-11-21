@@ -1,8 +1,8 @@
 import { createSheet } from '@crossed/primitive';
-import { Button, Text } from '@crossed/ui';
+import { Text } from '@crossed/ui';
 import { Fragment } from 'react';
 import { Portal } from '@gorhom/portal';
-import { Pressable, View } from 'react-native';
+import { Pressable, TextInput, View } from 'react-native';
 import { styled } from '@crossed/styled';
 
 const Sheet = createSheet({
@@ -20,8 +20,9 @@ const Sheet = createSheet({
   Overlay: styled(Pressable, {
     className: ['absolute inset-0 bg-neutral-800/50 z-20', 'cursor-default'],
   }),
-  Handle: styled(View, {
+  Handle: styled(Pressable, {
     className: ['bg-neutral-900/70 rounded-lg w-1/3 mx-auto', 'h-2'],
+    props: { role: 'button' },
   }),
 });
 
@@ -33,6 +34,7 @@ export const CreateSheetSimpleDemo = () => {
         <Sheet.Overlay />
         <Sheet.Content>
           <Sheet.Handle />
+          <TextInput />
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             laoreet dapibus metus, vel fringilla eros imperdiet id. Maecenas
@@ -49,9 +51,6 @@ export const CreateSheetSimpleDemo = () => {
             suscipit quis magna non, congue scelerisque nisl. Duis ligula lorem,
             ullamcorper et consectetur vitae, consequat ac sem.
           </Text>
-          <Button aria-label="Click for random change snappoints props">
-            <Button.Text>Change snapPoints</Button.Text>
-          </Button>
         </Sheet.Content>
       </Sheet.Portal>
     </Sheet>

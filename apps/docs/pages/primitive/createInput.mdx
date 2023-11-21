@@ -1,6 +1,4 @@
-import {
-  CreateInputSimpleDemo,
-} from '@crossed/demo';
+import { CreateInputSimpleDemo } from '@crossed/demo';
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { Tabs } from 'components/Tabs';
@@ -12,9 +10,6 @@ export const getStaticProps = async (e) => {
       ssg: {
         simple: (await getStaticDemo('primitive/createInput/simple')(e)).props
           .ssg.code,
-        // simpleNative: (
-        //   await getStaticDemo('primitive/createInput/simple.native')(e)
-        // ).props.ssg.code,
       },
     },
   };
@@ -22,28 +17,98 @@ export const getStaticProps = async (e) => {
 
 # createInput
 
-<Tabs items={['Demo', 'Anatomy', 'Props']}>
+<Tabs items={['Demo', 'Anatomy', 'Components', 'Hooks']}>
   <Tabs.Tab>
-    ## simple
-    <Tabs items={['Web', 'Native']}>
-      <Tabs.Tab>
-        <CodeDemo Demo={CreateInputSimpleDemo} name="simple" />
-      </Tabs.Tab>
-      <Tabs.Tab>
-        {/* <CodeDemo Demo={CreateInputSimpleNativeDemo} name="simpleNative" /> */}
-      </Tabs.Tab>
-    </Tabs>
+    <CodeDemo Demo={CreateInputSimpleDemo} name="simple" />
   </Tabs.Tab>
   <Tabs.Tab>
     ```tsx
-    <Input>
-      <Input.Icon />
-      <Input.Input />
-    </Input>
+      import {
+        createInput,
+        useInputContext,
+      } from "@crossed/primitive";
+
+      const Input = createInput({
+        Group,
+        Input,
+        Addon,
+        Element,
+      });
+
+      <Input.Group>
+        <Input.Addon />
+        <Input />
+        <Input.Element className="p-0 pr-1" />
+      </Input.Group>
     ```
+
   </Tabs.Tab>
   <Tabs.Tab>
-    ## Input
-    <Table props={[]} />
+     ```tsx
+    import { createModal } from "@crossed/primitive";
+
+    const Button = createModal({
+      Portal,
+      Root,
+      Trigger,
+      Title,
+      Overlay,
+      Content,
+      Description,
+    });
+    ```
+    ### Group
+    Group is use for style complete input, is used in Input if Input is not wrap by other Group
+
+    ### Input
+    The input render
+
+    ### Addon
+    Add addons to the left and right
+
+    ### Element
+    Add Element to the left and right
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ## useInputContext
+
+    Retrieve the input context.
+
+    ### Syntax
+
+    ```typescript
+    function useInputContext(): ContextInput {
+      // Function body
+    }
+    ```
+
+    ### Parameters
+
+    None.
+
+    ### Return Value
+
+    An object of type `ContextInput`
+
+    <Table props={[
+      ["states", "States", "", "State of input (hover, focus, ...)"],
+      ["setStates", "(state: States) => void", "", "Set state of input"],
+      ["inputRef", "MutableRef", "", "Ref of input"],
+    ]} />
+
+    ### Example
+
+    ```typescript
+    // Example of using the function
+    const result = useInputContext();
+    console.log(result);
+    ```
+
+    ### Remarks
+
+    None.
+
   </Tabs.Tab>
 </Tabs>

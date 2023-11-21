@@ -1,11 +1,10 @@
 {
-  "include": ["./src", "__tests__"],
-  "exclude": ["node_modules"],
+  "include": ["./src", "./jest-setup.ts", "__tests__"],
+  "exclude": ["node_modules", "example"],
   "compilerOptions": {
-    "baseUrl": ".",
     "outDir": "./lib/typescript",
     "ignoreDeprecations": "5.0",
-    "noEmit": true,
+    "noEmit": false,
     "declaration": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": true,
@@ -25,9 +24,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext",
-    "paths": {
-      "@crossed/core": ["./node_modules/@crossed/core/src"]
-    }
+    "target": "esnext"
   }
 }

@@ -8,6 +8,7 @@ export const createButtonMain = <T extends Record<string, any>>(
 ) =>
   forwardRef<any, T>((props, ref) => {
     const { id } = useContext();
+
     return (
       <Provider id={props.id ?? id}>
         <ButtonGroupCollection.ItemSlot id={id}>

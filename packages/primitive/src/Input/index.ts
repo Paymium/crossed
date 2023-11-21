@@ -3,6 +3,7 @@ import type { ComponentType } from 'react';
 import { createInput as createInputInput } from './InputInput';
 import { createInputGroup } from './InputGroup';
 import { createInputElement } from './InputElement';
+export { useInputContext } from './context';
 
 export const createInput = <
   GroupProps extends Record<string, any>,

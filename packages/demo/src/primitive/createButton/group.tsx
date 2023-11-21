@@ -88,32 +88,32 @@ export const CreateButtonGroupDemo = () => {
   return (
     <YBox className="gap-4 items-center">
       <Button.Group orientation="horizontal">
-        <Button aria-label="Button text">
+        <Button>
           <Button.Text>text button</Button.Text>
         </Button>
-        <Button aria-label="Button text">
+        <Button>
           <Button.Text>text button</Button.Text>
         </Button>
-        <Button aria-label="Button text">
+        <Button>
           <Button.Text>text button</Button.Text>
         </Button>
       </Button.Group>
       <Button.Group orientation="vertical">
-        <Button aria-label="Button text">
+        <Button>
           <Button.Text>text button</Button.Text>
         </Button>
-        <Button aria-label="Button text">
+        <Button>
           <Button.Text>text button</Button.Text>
         </Button>
-        <Button aria-label="Button text">
+        <Button>
           <Button.Text>text button</Button.Text>
         </Button>
       </Button.Group>
-      <Button aria-label="Button text">
+      <Button>
         <Button.Text>text button</Button.Text>
       </Button>
 
-      <Button aria-label="Button text">
+      <Button>
         <Button.Element>
           <UilBitcoinCircle />
         </Button.Element>

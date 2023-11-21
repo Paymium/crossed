@@ -57,7 +57,7 @@ const Input = createInput({
 export const CreateInputSimpleDemo = () => {
   return (
     <YBox space="md" className="w-1/2">
-      {/* <Input /> */}
+      <Input />
       <Input.Group>
         <Input.Element>
           <TextElementFrame>👌</TextElementFrame>
@@ -80,6 +80,17 @@ export const CreateInputSimpleDemo = () => {
             // eslint-disable-next-line no-console
             onPress={() => console.log('dans la demo')}
           >
+            <Button.Text>More</Button.Text>
+          </Button>
+        </Input.Element>
+      </Input.Group>
+      <Input.Group>
+        <Input.Addon>
+          <TextElementFrame>👌</TextElementFrame>
+        </Input.Addon>
+        <Input />
+        <Input.Element className="p-0 pr-1">
+          <Button aria-label="more" size="xs" variant="filled">
             <Button.Text>More</Button.Text>
           </Button>
         </Input.Element>
