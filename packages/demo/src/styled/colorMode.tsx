@@ -2,13 +2,11 @@ import { CrossedTheme, useCrossedTheme } from '@crossed/styled';
 import { styled } from '@crossed/styled';
 
 const ButtonWithoutVariant = styled('button', {
-  'className': ['px-2 py-1'],
-  ':dark': {
-    className: ['bg-neutral-800 text-white'],
-  },
-  ':light': {
-    className: ['bg-neutral-300 text-black'],
-  },
+  className: [
+    'px-2 py-1',
+    'bg-neutral-300 text-black',
+    'dark:bg-neutral-800 dark:text-white',
+  ],
 });
 
 const ButtonWithVariant = styled('button', {
@@ -16,12 +14,10 @@ const ButtonWithVariant = styled('button', {
   variants: {
     variant: {
       filled: {
-        ':dark': {
-          className: ['bg-neutral-800 text-white'],
-        },
-        ':light': {
-          className: ['bg-neutral-300 text-black'],
-        },
+        className: [
+          'bg-neutral-300 text-black',
+          'dark:bg-neutral-800 dark:text-white',
+        ],
       },
     },
   },

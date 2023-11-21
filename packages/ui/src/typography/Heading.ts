@@ -20,6 +20,5 @@ export const Heading = styled(TextNative, {
   },
   defaultVariants: {
     order: 1,
-    color: 'inherit',
   },
 });

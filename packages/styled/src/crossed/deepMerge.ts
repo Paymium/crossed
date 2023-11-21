@@ -1,10 +1,7 @@
 import { twMerge } from 'tailwind-merge';
-import type { Base, PropsExtends, Theme } from '@crossed/core';
+import type { Base, PropsExtends } from '@crossed/core';
 
-export const deepMerge = <P>(
-  one?: Base<P> & Theme<P>,
-  two?: Base<P> & Theme<P>
-): Base<P> & Theme<P> => {
+export const deepMerge = <P>(one?: Base<P>, two?: Base<P>): Base<P> => {
   const merge = twMerge(one?.className, two?.className);
   const tmp = {
     ...one,
@@ -12,13 +9,6 @@ export const deepMerge = <P>(
   };
   if (merge) {
     tmp.className = merge.split(' ');
-  }
-
-  if (one?.[':dark'] || two?.[':dark']) {
-    tmp[':dark'] = deepMerge(one?.[':dark'], two?.[':dark']);
-  }
-  if (one?.[':light'] || two?.[':light']) {
-    tmp[':light'] = deepMerge(one?.[':light'], two?.[':light']);
   }
 
   if (one?.props || two?.props) {

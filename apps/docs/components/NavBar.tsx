@@ -115,7 +115,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                       : classes.active
                   )}
                 >
-                  <Text color={'inherit'} size={false}>
+                  <Text size={false} color={isActive ? 'default' : 'neutral'}>
                     {page.title.replace(/\[(doc|beta|alpha|api-draft)\]/g, '')}
                   </Text>
                   {render}
@@ -134,11 +134,8 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
                       : classes.active
                   )}
                 >
-                  <Text color={'inherit'} size={false}>
-                    {page.title.replace(
-                      /(\[beta\]|\[alpha\]|\[api-draft\])/g,
-                      ''
-                    )}
+                  <Text color={isActive ? 'default' : 'neutral'} size={false}>
+                    {page.title.replace(/\[(doc|beta|alpha|api-draft)\]/g, '')}
                   </Text>
                   {render}
                 </XBox>
@@ -155,7 +152,7 @@ export function Navbar({ flatDirectories, items }: NavBarProps): ReactElement {
 
         {config.project.link ? (
           <Link href={config.project.link} target={'_blank'}>
-            <Text className="nx-p-2 nx-text-current" color={'inherit'}>
+            <Text className="nx-p-2 nx-text-current">
               {renderComponent(config.project.icon)}
             </Text>
           </Link>

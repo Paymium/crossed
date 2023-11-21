@@ -5,9 +5,7 @@ import type { GetProps } from '@crossed/styled';
 import { styled } from '@crossed/styled';
 
 const LabelTextFrame = styled(Text, {
-  'className': ['font-medium'],
-  ':dark': { className: ['text-neutral-500'] },
-  ':light': { className: ['text-neutral-800'] },
+  'className': ['font-medium dark:text-neutral-500', 'text-neutral-800'],
 });
 
 export type LabelTextFrameProps = GetProps<typeof LabelTextFrame>;

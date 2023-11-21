@@ -39,30 +39,15 @@ describe('deepMerge', () => {
         {
           'className': ['text-neutral-600'],
           'props': { myProps: 'ici', p1: false },
-          ':dark': { className: ['bg-neutral-500'] },
-          ':light': {
-            className: ['bg-neutral-500'],
-            props: { myProps: 'ici', p2: false },
-          },
         },
         {
           'className': ['text-neutral-700'],
           'props': { myProps: 'et non', p2: true },
-          ':dark': { className: [] },
-          ':light': {
-            className: ['bg-neutral-700'],
-            props: { p1: 'ici', myProps: 'la' },
-          },
         }
       )
     ).toStrictEqual({
       'className': ['text-neutral-700'],
       'props': { myProps: 'et non', p2: true, p1: false },
-      ':dark': { className: ['bg-neutral-500'] },
-      ':light': {
-        className: ['bg-neutral-700'],
-        props: { p1: 'ici', myProps: 'la', p2: false },
-      },
     });
   });
 });

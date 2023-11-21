@@ -1,5 +1,5 @@
 import { createList } from '@crossed/primitive';
-import { GetProps, tw, useCrossedTheme } from '@crossed/styled';
+import { GetProps, tw } from '@crossed/styled';
 import { styled } from '@crossed/styled';
 import { Fragment, ReactElement, ReactNode, cloneElement, useId } from 'react';
 import { Pressable, Text, View } from 'react-native';
@@ -10,11 +10,11 @@ import { createScope } from '@crossed/core';
 import { ButtonFrame } from '../forms/Button';
 
 const ListRootFrame = styled(View, {
-  'className': [
+  className: [
     'border rounded-md overflow-hidden flex-col p-0 gap-0 items-stretch',
+    'border-neutral-200',
+    'dark:border-neutral-800',
   ],
-  ':dark': { className: ['border-neutral-800'] },
-  ':light': { className: ['border-neutral-200'] },
 });
 
 type ListRootFrameProps = GetProps<typeof ListRootFrame>;
@@ -95,9 +95,8 @@ const List = createList({
     ...props
   }: ListItemProps) => {
     const { color, size } = useContext();
-    const { theme } = useCrossedTheme();
     const textStyle = ListTitleFrame.styles();
-    const classNames = textStyle[`:${theme}`]?.className || textStyle.className;
+    const classNames = textStyle.className;
     const style = tw.style(classNames);
 
     return (

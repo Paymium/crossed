@@ -18,58 +18,34 @@ describe('styled', () => {
     render(<Body testID="toto" />);
     await screen.findAllByTestId('toto');
 
-    expect(screen.getByTestId('toto')).toHaveAttribute(
-      'data-class-name',
-      'bg-red-200'
-    );
+    expect(screen.getByTestId('toto')).toHaveClass('bg-red-200');
     await userEvent.hover(screen.getByTestId('toto'));
-    expect(screen.getByTestId('toto')).toHaveAttribute(
-      'data-class-name',
-      'bg-red-100'
-    );
+    expect(screen.getByTestId('toto')).toHaveClass('bg-red-100');
 
     await userEvent.unhover(screen.getByTestId('toto'));
-    expect(screen.getByTestId('toto')).toHaveAttribute(
-      'data-class-name',
-      'bg-red-200'
-    );
+    expect(screen.getByTestId('toto')).toHaveClass('bg-red-200');
   });
   test('click', async () => {
     render(<Body testID="toto" />);
     await screen.findAllByTestId('toto');
 
-    expect(screen.getByTestId('toto')).toHaveAttribute(
-      'data-class-name',
-      'bg-red-200'
-    );
+    expect(screen.getByTestId('toto')).toHaveClass('bg-red-200');
     await fireEvent.mouseDown(screen.getByTestId('toto'));
-    expect(screen.getByTestId('toto')).toHaveAttribute(
-      'data-class-name',
-      'bg-red-100'
-    );
+    expect(screen.getByTestId('toto')).toHaveClass('bg-red-100');
 
     await fireEvent.mouseUp(screen.getByTestId('toto'));
-    expect(screen.getByTestId('toto')).toHaveAttribute(
-      'data-class-name',
-      'bg-red-200'
-    );
+    expect(screen.getByTestId('toto')).toHaveClass('bg-red-200');
   });
 });
 
 describe('color theme', () => {
   describe('render dark className', () => {
     const Test = styled(Text, {
-      'className': ['bg-red-200'],
-      ':dark': {
-        className: ['bg-blue-500'],
-      },
-      'variants': {
+      className: ['bg-red-200', 'dark:bg-blue-500'],
+      variants: {
         variant: {
           error: {
-            'className': ['text-red-500'],
-            ':dark': {
-              className: ['text-red-600'],
-            },
+            className: ['text-red-500', 'dark:text-red-600'],
           },
         },
       },
@@ -78,9 +54,8 @@ describe('color theme', () => {
       render(<Test testID="toto" />);
       await screen.findAllByTestId('toto');
 
-      expect(screen.getByTestId('toto')).toHaveAttribute(
-        'data-class-name',
-        'bg-red-200'
+      expect(screen.getByTestId('toto')).toHaveClass(
+        'bg-red-200 dark:bg-blue-500'
       );
     });
     test('with theme provider in dark', async () => {
@@ -91,9 +66,8 @@ describe('color theme', () => {
       );
       await screen.findAllByTestId('toto');
 
-      expect(screen.getByTestId('toto')).toHaveAttribute(
-        'data-class-name',
-        'bg-blue-500'
+      expect(screen.getByTestId('toto')).toHaveClass(
+        'bg-red-200 dark:bg-blue-500'
       );
     });
     test('With theme provider in light', async () => {
@@ -104,9 +78,8 @@ describe('color theme', () => {
       );
       await screen.findAllByTestId('toto');
 
-      expect(screen.getByTestId('toto')).toHaveAttribute(
-        'data-class-name',
-        'bg-red-200'
+      expect(screen.getByTestId('toto')).toHaveClass(
+        'bg-red-200 dark:bg-blue-500'
       );
     });
     test('With theme provider in light with variant', async () => {
@@ -117,9 +90,8 @@ describe('color theme', () => {
       );
       await screen.findAllByTestId('toto');
 
-      expect(screen.getByTestId('toto')).toHaveAttribute(
-        'data-class-name',
-        'bg-red-200 text-red-500'
+      expect(screen.getByTestId('toto')).toHaveClass(
+        'bg-red-200 dark:bg-blue-500 text-red-500 dark:text-red-600'
       );
     });
     test('With theme provider in dark with variant', async () => {
@@ -130,18 +102,14 @@ describe('color theme', () => {
       );
       await screen.findAllByTestId('toto');
 
-      expect(screen.getByTestId('toto')).toHaveAttribute(
-        'data-class-name',
-        'bg-blue-500 text-red-600'
+      expect(screen.getByTestId('toto')).toHaveClass(
+        'bg-red-200 dark:bg-blue-500 text-red-500 dark:text-red-600'
       );
     });
     test('With theme provider in dark with variant whithout dark for variant', async () => {
       const TextTheme = styled(Text, {
-        'className': ['text-red-500'],
-        ':dark': {
-          className: ['text-white'],
-        },
-        'variants': {
+        className: ['text-red-500', 'dark:text-white'],
+        variants: {
           color: {
             green: {
               className: ['text-green-500'],
@@ -156,9 +124,8 @@ describe('color theme', () => {
       );
       await screen.findAllByTestId('toto');
 
-      expect(screen.getByTestId('toto')).toHaveAttribute(
-        'data-class-name',
-        'text-green-500'
+      expect(screen.getByTestId('toto')).toHaveClass(
+        'dark:text-white text-green-500'
       );
     });
   });
