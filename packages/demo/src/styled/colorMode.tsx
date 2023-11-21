@@ -1,7 +1,8 @@
 import { CrossedTheme, useCrossedTheme } from '@crossed/styled';
 import { styled } from '@crossed/styled';
+import { Pressable, Text } from 'react-native';
 
-const ButtonWithoutVariant = styled('button', {
+const ButtonWithoutVariant = styled(Pressable, {
   className: [
     'px-2 py-1',
     'bg-neutral-300 text-black',
@@ -9,7 +10,7 @@ const ButtonWithoutVariant = styled('button', {
   ],
 });
 
-const ButtonWithVariant = styled('button', {
+const ButtonWithVariant = styled(Pressable, {
   className: ['px-2 py-1'],
   variants: {
     variant: {
@@ -43,8 +44,12 @@ export const ColorModeDemo = () => {
     <CrossedTheme>
       <div className="flex flex-col items-center gap-2">
         <div className="flex flex-row gap-2">
-          <ButtonWithoutVariant>Button without variant</ButtonWithoutVariant>
-          <ButtonWithVariant>Button with variant</ButtonWithVariant>
+          <ButtonWithoutVariant>
+            <Text>Button without variant</Text>
+          </ButtonWithoutVariant>
+          <ButtonWithVariant>
+            <Text>Button with variant</Text>
+          </ButtonWithVariant>
         </div>
         <ButtonTheme />
       </div>

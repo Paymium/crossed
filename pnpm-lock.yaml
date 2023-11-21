@@ -60,7 +60,7 @@ importers:
         specifier: 0.8.0
         version: link:../../packages/core
       '@crossed/demo':
-        specifier: 0.2.0
+        specifier: 0.2.1
         version: link:../../packages/demo
       '@crossed/next-adapter':
         specifier: 0.5.1
@@ -157,7 +157,7 @@ importers:
         specifier: 0.8.0
         version: link:../../packages/core
       '@crossed/demo':
-        specifier: 0.2.0
+        specifier: 0.2.1
         version: link:../../packages/demo
       '@crossed/styled':
         specifier: workspace:^

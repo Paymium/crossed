@@ -1,5 +1,13 @@
 # crossed-docs
 
+## 0.2.3
+
+### Patch Changes
+
+- fix error styled('button')
+- Updated dependencies
+  - @crossed/demo@0.2.1
+
 ## 0.2.2
 
 ### Patch Changes

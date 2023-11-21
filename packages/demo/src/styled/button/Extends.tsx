@@ -1,5 +1,5 @@
 import { styled } from '@crossed/styled';
-import { Pressable } from 'react-native';
+import { Pressable, TextInput } from 'react-native';
 
 const Button = styled(Pressable, {
   'className': ['px-3 py-2', 'border border-neutral-700', 'bg-neutral-800'],
@@ -14,7 +14,7 @@ const Button = styled(Pressable, {
   },
 });
 
-const InputStyledFrom = styled('input', {
+const InputStyledFrom = styled(TextInput, {
   extends: Button.styles,
 });
 

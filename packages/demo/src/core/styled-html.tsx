@@ -2,8 +2,9 @@ import { styled } from '@crossed/styled';
 import { withStaticProperties } from '@crossed/core';
 import type { Props } from '../props';
 import { YBox } from '@crossed/ui';
+import { Pressable, Text } from 'react-native';
 
-const ButtonFrame = styled('button', {
+const ButtonFrame = styled(Pressable, {
   'className': ['bg-blue-500', 'rounded'],
   ':hover': {
     className: ['bg-blue-400'],
@@ -33,7 +34,7 @@ const ButtonFrame = styled('button', {
     size: 'md',
   },
 });
-const ButtonText = styled('span', {
+const ButtonText = styled(Text, {
   className: ['text-white'],
   variants: {
     size: {
