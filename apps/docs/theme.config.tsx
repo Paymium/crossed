@@ -28,7 +28,7 @@ const config: DocsThemeConfig = {
     </span>
   ),
   sidebar: {
-    titleComponent: function TitleComponent({ title, route }) {
+    titleComponent: function TitleComponent({ title, route, type }) {
       const FSRoute = useFSRoute();
       const [routeOriginal] = FSRoute.split('#');
       const active = [routeOriginal, routeOriginal + '/'].includes(route + '/');
@@ -71,7 +71,10 @@ const config: DocsThemeConfig = {
       }
       return (
         <XBox center className="justify-between">
-          <Text color={'inherit'} size={false}>
+          <Text
+            size={false}
+            color={type === 'separator' || active ? 'default' : 'neutral'}
+          >
             {title.replace(/\[(doc|beta|alpha|api-draft)\]/g, '')}
           </Text>
           <XBox space="xs" className="w-auto">

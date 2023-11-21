@@ -39,14 +39,14 @@ export default function LandingPage() {
         </XBox>
       </YBox>
 
-      <YBox className="w-1/2 mx-auto py-5" space="md">
-        <Heading order={3} className="text-lg self-center">
+      <YBox className="md:w-2/3 lg:w-1/2 mx-auto py-5 items-center" space="md">
+        <Heading order={3} className="text-lg self-center text-center">
           Cross platform ecosystem
         </Heading>
-        <XBox className="justify-center" space="md">
+        <YBox className="justify-center md:flex-row items-stretch flex-wrap" space="md">
           <YBox
             space="sm"
-            className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1"
+            className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1 items-stretch"
             as={Link}
             href="styled/installation"
           >
@@ -63,7 +63,7 @@ export default function LandingPage() {
           </YBox>
           <YBox
             space="sm"
-            className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1"
+            className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1 items-stretch"
             as={Link}
             href="primitive/installation"
           >
@@ -80,7 +80,7 @@ export default function LandingPage() {
           </YBox>
           <YBox
             space="sm"
-            className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1"
+            className="bg-brand-900 p-5 rounded-md border border-neutral-800 flex-1 items-stretch"
             as={Link}
             href="components/installation"
           >
@@ -95,7 +95,7 @@ export default function LandingPage() {
               UI Component made with @crossed/primitive and @crossed/styled
             </Text>
           </YBox>
-        </XBox>
+        </YBox>
       </YBox>
     </>
   );

@@ -6,8 +6,6 @@ const result = (d: any) => {
     ':active': undefined,
     ':focus': undefined,
     ':hover': undefined,
-    ':light': {},
-    ':dark': {},
     ':disabled': undefined,
     ...d,
   };
@@ -37,8 +35,6 @@ describe('crossed', () => {
     expect(variant({ toto: null })).toEqual(
       result({
         'className': ['text-red-100'],
-        ':dark': { className: ['text-red-100'] },
-        ':light': { className: ['text-red-100'] },
         'toto': null,
         ':active': {},
         ':focus': {},
@@ -49,8 +45,6 @@ describe('crossed', () => {
     expect(variant({ toto: true })).toEqual(
       result({
         'className': ['text-red-200'],
-        ':dark': { className: ['text-red-200'] },
-        ':light': { className: ['text-red-200'] },
         'toto': true,
         ':active': {},
         ':focus': {},
@@ -61,8 +55,6 @@ describe('crossed', () => {
     expect(variant({ toto: undefined })).toEqual(
       result({
         'className': ['text-red-100'],
-        ':dark': { className: ['text-red-100'] },
-        ':light': { className: ['text-red-100'] },
         'toto': undefined,
         ':active': {},
         ':focus': {},
@@ -112,8 +104,6 @@ describe('crossed', () => {
     expect(variant({ toto: null, foo: null })).toEqual(
       result({
         'className': ['text-red-100'],
-        ':dark': { className: ['text-red-100'] },
-        ':light': { className: ['text-red-100'] },
         'foo': null,
         'toto': null,
         ':active': {},
@@ -125,8 +115,6 @@ describe('crossed', () => {
     expect(variant({ toto: false, foo: true })).toEqual(
       result({
         'className': ['text-red-700'],
-        ':dark': { className: ['text-red-700'] },
-        ':light': { className: ['text-red-700'] },
         'foo': true,
         'toto': false,
         ':active': {},
@@ -138,8 +126,6 @@ describe('crossed', () => {
     expect(variant({ toto: true, foo: true })).toEqual(
       result({
         'className': ['text-red-900'],
-        ':dark': { className: ['text-red-900'] },
-        ':light': { className: ['text-red-900'] },
         'foo': true,
         'toto': true,
         ':active': {},
@@ -171,8 +157,6 @@ describe('crossed', () => {
     expect(variant()).toEqual(
       result({
         'className': ['text-red-200'],
-        ':dark': { className: ['text-red-200'] },
-        ':light': { className: ['text-red-200'] },
         ':active': {},
         ':focus': {},
         ':hover': {},

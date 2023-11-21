@@ -1,5 +1,5 @@
 'use client';
-import { tw, type GetProps, useCrossedTheme } from '@crossed/styled';
+import { tw, type GetProps } from '@crossed/styled';
 import { styled } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
 import { Pressable, Text, View } from 'react-native';
@@ -44,20 +44,25 @@ export const ButtonFrame = styled(Pressable, {
     },
     color: {
       slate: {
-        ':light': { className: ['border-slate-800 bg-slate-700'] },
-        ':dark': { className: ['border-slate-800 bg-slate-800'] },
+        'className': [
+          'border-slate-800 bg-slate-700',
+          'dark:border-slate-800 dark:bg-slate-800',
+        ],
         ':active': {
-          ':light': { className: ['bg-slate-600'] },
-          ':dark': { className: ['bg-slate-700'] },
+          className: [
+            'bg-slate-600',
+            'dark:border-slate-800 dark:bg-slate-700',
+          ],
         },
         ':hover': {
-          ':light': { className: ['bg-slate-500'] },
-          ':dark': { className: ['bg-slate-600'] },
+          className: ['bg-slate-500', 'dark:bg-slate-600'],
         },
       },
       gray: {
-        ':light': { className: ['border-gray-800 bg-gray-700'] },
-        ':dark': { className: ['border-gray-800 bg-gray-800'] },
+        'className': [
+          'border-gray-800 bg-gray-700',
+          'dark:border-gray-800 dark:bg-gray-800',
+        ],
         ':active': { className: ['bg-gray-700'] },
         ':hover': { className: ['bg-gray-600'] },
       },
@@ -77,15 +82,15 @@ export const ButtonFrame = styled(Pressable, {
         ':hover': { className: ['bg-stone-600'] },
       },
       red: {
-        ':light': { className: ['border-red-700 bg-red-700'] },
-        ':dark': { className: ['border-red-800 bg-red-800'] },
+        'className': [
+          'border-red-700 bg-red-700',
+          'dark:border-red-800 dark:bg-red-800',
+        ],
         ':active': {
-          ':dark': { className: ['bg-red-700'] },
-          ':light': { className: ['bg-red-600'] },
+          className: ['bg-red-700', 'dark:bg-red-600'],
         },
         ':hover': {
-          ':dark': { className: ['bg-red-600'] },
-          ':light': { className: ['bg-red-500'] },
+          className: ['bg-red-600', 'dark:bg-red-500'],
         },
       },
       orange: {
@@ -214,28 +219,22 @@ export const ButtonTextFrame = styled(Text, {
   variants: {
     color: {
       slate: {
-        ':light': { className: ['text-slate-800'] },
-        ':dark': { className: ['text-slate-500'] },
+        className: ['text-slate-800', 'dark:text-slate-500'],
       },
       gray: {
-        ':light': { className: ['text-gray-800'] },
-        ':dark': { className: ['text-gray-500'] },
+        className: ['text-gray-800', 'dark:text-gray-500'],
       },
       zinc: {
-        ':light': { className: ['text-zinc-800'] },
-        ':dark': { className: ['text-zinc-500'] },
+        className: ['text-zinc-800', 'dark:text-zinc-500'],
       },
       neutral: {
-        ':light': { className: ['text-neutral-800'] },
-        ':dark': { className: ['text-neutral-500'] },
+        className: ['text-neutral-800', 'dark:text-neutral-500'],
       },
       stone: {
-        ':light': { className: ['text-stone-800'] },
-        ':dark': { className: ['text-stone-500'] },
+        className: ['text-stone-800', 'dark:text-stone-500'],
       },
       red: {
-        ':light': { className: ['text-red-700 '] },
-        ':dark': { className: ['text-red-500'] },
+        className: ['text-red-700', 'dark:text-red-500'],
       },
       orange: { className: ['text-orange-800'] },
       amber: { className: ['text-amber-800'] },
@@ -252,12 +251,10 @@ export const ButtonTextFrame = styled(Text, {
       purple: { className: ['text-purple-500'] },
       fuchsia: { className: ['text-fuchsia-500'] },
       pink: {
-        ':light': { className: ['text-pink-800'] },
-        ':dark': { className: ['text-pink-500'] },
+        className: ['text-pink-800', 'dark:text-red-500'],
       },
       rose: {
-        ':light': { className: ['text-rose-800 '] },
-        ':dark': { className: ['text-rose-500'] },
+        className: ['text-rose-800', 'dark:text-rose-500'],
       },
     },
     size: {
@@ -284,16 +281,13 @@ export const ButtonTextFrame = styled(Text, {
       className: ['bg-transparent'],
     },
     {
-      'variant': 'filled',
-      'className': ['text-white'],
-      ':dark': { className: ['text-white'] },
-      ':light': { className: ['text-white'] },
+      variant: 'filled',
+      className: ['text-white', 'dark:text-white'],
     },
     {
       'unstyled': true,
       ':hover': { className: ['bg-tranparent'] },
-      ':dark': { className: ['text-white'] },
-      ':light': { className: ['text-black'] },
+      'className': ['text-black', 'dark:text-white'],
     },
   ],
 });
@@ -308,16 +302,12 @@ const ButtonTextControlled = ({ ...props }: ButtonTextFrameProps) => {
 type ButtonIconFrameProps = GetProps<typeof Box>;
 const ButtonIconFrame = ({ children, ...props }: ButtonIconFrameProps) => {
   const { color, variant, size } = useVariantContext() || {};
-  const { theme } = useCrossedTheme();
   const className = ButtonTextFrame.styles({
     color,
     variant,
     size,
   });
-  const style = tw.style(
-    className?.className,
-    className?.[`:${theme}`]?.className
-  );
+  const style = tw.style(className?.className);
   return (
     <Box {...props}>
       {cloneElement(children as any, {

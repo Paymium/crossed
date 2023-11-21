@@ -34,8 +34,6 @@ export const crossed =
       [':focus']: focusBase,
       [':hover']: hoverBase,
       [':disabled']: disabledBase,
-      [':dark']: darkBase,
-      [':light']: lightBase,
       variants,
       defaultVariants,
     } = config;
@@ -72,8 +70,6 @@ export const crossed =
           [':focus']: focusCompoundVariant,
           [':hover']: hoverCompoundVariant,
           [':disabled']: disabledCompoundVariant,
-          [':dark']: darkCompoundVariant,
-          [':light']: lightCompoundVariant,
           ...compoundVariantOptions
         } = v;
 
@@ -103,8 +99,6 @@ export const crossed =
             [':focus']: focusCompoundVariant,
             [':hover']: hoverCompoundVariant,
             [':disabled']: disabledCompoundVariant,
-            [':dark']: darkCompoundVariant,
-            [':light']: lightCompoundVariant,
           });
         }
         return acc;
@@ -119,8 +113,6 @@ export const crossed =
         ':focus': focusBase,
         ':hover': hoverBase,
         ':disabled': disabledBase,
-        ':dark': darkBase,
-        ':light': lightBase,
       },
       ...getVariantClassNames,
       getCompoundVariantClassNames,

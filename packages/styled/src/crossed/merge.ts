@@ -18,14 +18,5 @@ export const merge = <P>(
 
   acc[':hover'] = deepMerge(one[':hover'], two[':hover']);
 
-  acc[':dark'] = deepMerge(
-    one[':dark'],
-    two[':dark'] || (two.className ? { className: two.className } : undefined)
-  );
-  acc[':light'] = deepMerge(
-    one[':light'],
-    two[':light'] || (two.className ? { className: two.className } : undefined)
-  );
-
   return acc;
 };

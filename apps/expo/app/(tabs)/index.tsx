@@ -1,12 +1,9 @@
-import { YBox, Heading, Button } from '@crossed/ui';
+import { YBox, Heading, Button, Box, Text } from '@crossed/ui';
 import { styled } from '@crossed/styled';
 import { Text as NText } from 'react-native';
 
 const TextTheme = styled(NText, {
-  'className': ['text-red-500'],
-  ':dark': {
-    className: ['text-white'],
-  },
+  'className': ['text-black dark:text-white'],
   'variants': {
     color: {
       green: {
@@ -24,6 +21,14 @@ export default function TabOneScreen() {
       <Button variant="outlined" aria-label="Press" color="blue">
         <Button.Text>Press</Button.Text>
       </Button>
+      <YBox className="md:flex-row">
+        <Box>
+          <Text className="text-red-500 dark:text-green-500">Hello</Text>
+        </Box>
+        <Box>
+          <Text>Hello</Text>
+        </Box>
+      </YBox>
     </YBox>
   );
 }

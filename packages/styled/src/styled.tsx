@@ -1,11 +1,12 @@
 'use client';
 
 import { forwardRef, useCallback, useEffect } from 'react';
-import { Platform } from 'react-native';
 import {
   withStaticProperties,
   composeEventHandlers,
   useUncontrolled,
+  isWeb,
+  isNative,
 } from '@crossed/core';
 import { crossed } from './crossed';
 import type {
@@ -78,30 +79,14 @@ export function styled<
       ) || {};
     const variantExtendClassName = getFromOrderState(extendClassName, tmpState);
 
-    const variantExtendThemeClassName = getFromOrderState(
-      extendClassName,
-      tmpState,
-      `:${theme}`
-    );
-
     const variantClassName = getFromOrderState(styles, tmpState);
-    const variantThemeClassName = getFromOrderState(
-      styles,
-      tmpState,
-      `:${theme}`
-    );
 
     const classNameMerged = twMerge(
       extendClassName?.className,
-      extendClassName?.[`:${theme}`]?.className,
       variantExtendClassName,
-      variantExtendThemeClassName,
       styles.className,
-      styles?.[`:${theme}`]?.className,
       variantClassName,
-      variantThemeClassName,
-      props?.className,
-      theme === 'dark' ? props?.$dark?.className : props?.$light?.className
+      props?.className
     );
 
     return {
@@ -134,7 +119,7 @@ export function styled<
       });
       const componentProps = Object.entries(props).reduce<P>(
         (acc, [propsName, valueProps]) => {
-          if (!['className', 'states', '$dark', '$light'].includes(propsName)) {
+          if (!['className', 'states'].includes(propsName)) {
             (acc as any)[propsName] = valueProps;
           }
           return acc;
@@ -159,7 +144,7 @@ export function styled<
       }, []);
 
       useEffect(() => {
-        if (Platform.OS === 'web' && !hover && active) {
+        if (isWeb && !hover && active) {
           window.document.body.addEventListener('mouseup', handleMouseUp);
           return () => {
             window.document.body.removeEventListener('mouseup', handleMouseUp);
@@ -172,13 +157,12 @@ export function styled<
         <NewComp
           ref={ref}
           {...parsedPropsProperty(componentProps)}
-          dataSet={{
-            ...componentProps.dataSet,
-            className: baseClassName,
-          }}
-          className={baseClassName}
           style={[
-            ['ios', 'android'].includes(Platform.OS) && tw.style(baseClassName),
+            isWeb && {
+              $$css: true,
+              [`${baseClassName}`]: baseClassName,
+            },
+            isNative && tw.style(baseClassName),
             ...(Array.isArray(componentProps.style)
               ? componentProps.style
               : [componentProps.style]),

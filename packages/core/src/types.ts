@@ -10,7 +10,6 @@ export type OmitUndefined<T> = T extends undefined ? never : T;
 export type StringToBoolean<T> = T extends 'true' | 'false' ? boolean : T;
 
 export type StateName = 'focus' | 'hover' | 'disabled' | 'active';
-export type ThemeName = 'dark' | 'light';
 
 export type PropsExtends<P> = P & { as?: any };
 
@@ -19,20 +18,16 @@ export type Base<P> = {
   props?: PropsExtends<P>;
 };
 
-export type BaseWithState<P> = State<P> & Theme<P> & Base<P>;
+export type BaseWithState<P> = State<P> & Base<P>;
 
 export type State<P> = {
-  [key in StateName as `:${key}`]?: Base<P> & Theme<P>;
+  [key in StateName as `:${key}`]?: Base<P>;
 };
 
 export type States = {
   isFocus: boolean;
   isHover: boolean;
   isActive: boolean;
-};
-
-export type Theme<P> = {
-  [key in ThemeName as `:${key}`]?: Base<P>;
 };
 
 export type ConfigSchema<P> = Record<string, Record<string, BaseWithState<P>>>;
@@ -115,8 +110,6 @@ export type NewComponentProps<
     hoverTheme?: boolean;
     activeTheme?: boolean;
     focusTheme?: boolean;
-    $dark?: Base<P>;
-    $light?: Base<P>;
   };
 
 export type GetProps<A extends StylableComponent<any>> =

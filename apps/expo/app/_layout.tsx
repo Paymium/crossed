@@ -1,4 +1,4 @@
-import { CrossedTheme } from '@crossed/styled';
+import { CrossedTheme, useCrossedTheme } from '@crossed/styled';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import {
   DarkTheme,
@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
-import { useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 
 export {
@@ -50,13 +50,22 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <CrossedTheme defaultTheme={colorScheme}>
+    <CrossedTheme defaultTheme={colorScheme}>
+      <Theme>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack>
-      </CrossedTheme>
-    </ThemeProvider>
+      </Theme>
+    </CrossedTheme>
   );
 }
+
+const Theme = ({ children }: PropsWithChildren) => {
+  const { theme } = useCrossedTheme();
+  return (
+    <ThemeProvider value={theme === 'dark' ? DarkTheme : DefaultTheme}>
+      {children}
+    </ThemeProvider>
+  );
+};

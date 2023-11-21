@@ -15,12 +15,7 @@ const Body = styled(Text, {
 });
 
 const BodyThemed = styled(Text, {
-  ':dark': {
-    className: ['text-white'],
-  },
-  ':light': {
-    className: ['text-black'],
-  },
+  className: ['text-black', 'dark:text-white'],
 });
 
 const customRender = (
@@ -41,13 +36,9 @@ describe('CrossedTheme', () => {
     );
     await screen.findAllByText('Crossed 1');
     await screen.findAllByText('Crossed 2');
-    expect(screen.getByText('Crossed 1')).toHaveAttribute(
-      'data-class-name',
-      'text-white'
-    );
-    expect(screen.getByText('Crossed 2')).toHaveAttribute(
-      'data-class-name',
-      'text-white'
+    expect(screen.getByText('Crossed 1')).toHaveClass('text-white');
+    expect(screen.getByText('Crossed 2')).toHaveClass(
+      'text-black dark:text-white'
     );
   });
   test('light', async () => {
@@ -60,13 +51,9 @@ describe('CrossedTheme', () => {
     );
     await screen.findAllByText('Crossed 1');
     await screen.findAllByText('Crossed 2');
-    expect(screen.getByText('Crossed 1')).toHaveAttribute(
-      'data-class-name',
-      'text-white'
-    );
-    expect(screen.getByText('Crossed 2')).toHaveAttribute(
-      'data-class-name',
-      'text-black'
+    expect(screen.getByText('Crossed 1')).toHaveClass('text-white');
+    expect(screen.getByText('Crossed 2')).toHaveClass(
+      'text-black dark:text-white'
     );
   });
   test('setTheme', async () => {
@@ -76,15 +63,13 @@ describe('CrossedTheme', () => {
     };
     customRender(<RenderChildren />, { defaultTheme: 'dark' });
 
-    expect(screen.getByText('Crossed')).toHaveAttribute(
-      'data-class-name',
-      'text-white'
+    expect(screen.getByText('Crossed')).toHaveClass(
+      'text-black dark:text-white'
     );
     await userEvent.click(screen.getByText('Crossed'));
 
-    expect(screen.getByText('Crossed')).toHaveAttribute(
-      'data-class-name',
-      'text-black'
+    expect(screen.getByText('Crossed')).toHaveClass(
+      'text-black dark:text-white'
     );
   });
 });

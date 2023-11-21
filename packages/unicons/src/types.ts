@@ -3,7 +3,7 @@ declare module '@iconscout/react-native-unicons' {
 
   type IconComponent = (props: {
     size?: number | string;
-    color?: 'string';
+    color?: string;
   }) => ReactNode;
 
   export const Uil0Plus: IconComponent;

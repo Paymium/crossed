@@ -2,8 +2,9 @@ import { Tabs } from 'components/Tabs';
 import { styled } from '@crossed/styled';
 import { Box } from '@crossed/ui';
 import { Steps } from 'nextra/components';
+import { Pressable } from 'react-native';
 
-export const Button = styled('button', {
+export const Button = styled(Pressable, {
   'className': [
     'border border-neutral-900 bg-neutral-500 rounded-md text-white',
   ],
@@ -54,26 +55,6 @@ Before using @crossed/style, it is essential to have Tailwind CSS already instal
   </Tabs.Tab>
 </Tabs>
 
-### Add postcss plugin
-
-```javascript filename="postcss.config.js"
-const {
-  default: crossedPlugin,
-} = require('@crossed/styled/lib/commonjs/postcss');
-
-/** @type {import('postcss-load-config').Config} */
-const config = {
-  plugins: {
-    // ...,
-    ...crossedPlugin()
-    // ...,
-};
-
-export default config;
-```
-
-See [documentation](/styled/postcss)
-
 ### Add Nextjs plugin
 
 ```javascript filename="next.config.js"
@@ -96,8 +77,9 @@ module.exports = nextConfig;
 
 ```typescript
 import { styled } from '@crossed/styled';
+import { Pressable } from 'react-native';
 
-export const Button = styled('button', {
+export const Button = styled(Pressable, {
   'className': [
     'border border-neutral-900 bg-neutral-500 rounded-md text-white',
   ],
@@ -172,6 +154,7 @@ See [documentation](/styled/babel)
 
 ```typescript
 import { styled } from '@crossed/styled';
+import { Pressable } from 'react-native';
 
 export const Button = styled('button', {
   'className': [

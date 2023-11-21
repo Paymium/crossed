@@ -7,35 +7,28 @@ import { styled } from '@crossed/styled';
 export const Text = styled(TextNative, {
   variants: {
     color: {
+      default: {
+        className: ['text-black dark:text-white'],
+      },
       white: { className: ['text-white'] },
       black: { className: ['text-black'] },
-      inherit: {
-        ':dark': { className: ['text-inherit'] },
-        ':light': { className: ['text-inherit'] },
-      },
       slate: {
-        ':light': { className: ['text-slate-800'] },
-        ':dark': { className: ['text-slate-500'] },
+        className: ['text-slate-800 dark:text-slate-500'],
       },
       gray: {
-        ':light': { className: ['text-gray-800'] },
-        ':dark': { className: ['text-gray-500'] },
+        className: ['text-gray-800 dark:text-gray-500'],
       },
       zinc: {
-        ':light': { className: ['text-zinc-800'] },
-        ':dark': { className: ['text-zinc-500'] },
+        className: ['text-zinc-800 dark:text-zinc-500'],
       },
       neutral: {
-        ':light': { className: ['text-neutral-800'] },
-        ':dark': { className: ['text-neutral-500'] },
+        className: ['text-neutral-500'],
       },
       stone: {
-        ':light': { className: ['text-stone-800'] },
-        ':dark': { className: ['text-stone-500'] },
+        className: ['text-stone-800 dark:text-stone-500'],
       },
       red: {
-        ':light': { className: ['text-red-700 '] },
-        ':dark': { className: ['text-red-500'] },
+        className: ['text-red-700 dark:text-red-500'],
       },
       orange: { className: ['text-orange-800'] },
       amber: { className: ['text-amber-800'] },
@@ -52,12 +45,10 @@ export const Text = styled(TextNative, {
       purple: { className: ['text-purple-500'] },
       fuchsia: { className: ['text-fuchsia-500'] },
       pink: {
-        ':light': { className: ['text-pink-800'] },
-        ':dark': { className: ['text-pink-500'] },
+        className: ['text-pink-800 dark:text-pink-500'],
       },
       rose: {
-        ':light': { className: ['text-rose-800 '] },
-        ':dark': { className: ['text-rose-500'] },
+        className: ['text-rose-800 dark:text-rose-500'],
       },
     },
     variant: { link: { className: ['text-blue-500'] } },
@@ -83,7 +74,7 @@ export const Text = styled(TextNative, {
   },
   defaultVariants: {
     size: 'md',
-    color: 'inherit',
+    color: 'default',
   },
 });
 
