@@ -1,4 +1,4 @@
-import { UilCheck, UilEye, UilEyeSlash } from '@crossed/unicons';
+import { UilCheck, UilEye, UilEyeSlash } from '@iconscout/react-native-unicons';
 import type { Props } from '@crossed/demo';
 import {
   Box,
@@ -19,12 +19,12 @@ const Eye = styled(UilEye, {
   props: {
     color: '$neutral-500',
   },
-});
+}) as any;
 const EyeSlash = styled(UilEyeSlash, {
   props: {
     color: '$neutral-500',
   },
-});
+}) as any;
 
 const DefaultDemo = () => {
   return <Text>No demo</Text>;
