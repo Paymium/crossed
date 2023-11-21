@@ -23,7 +23,7 @@
       "cache": false
     },
     "test": {
-      "outputs": []
+      "cache": false
     },
     "clean": {
       "cache": false
