@@ -2,24 +2,135 @@ import { CreateModalSimpleDemo } from '@crossed/demo';
 import { CodeDemo } from 'components/CodeDemo';
 import { getStaticDemo } from 'components/getStaticDemo';
 import { Tabs } from 'components/Tabs';
+import { Table } from 'components/Table';
 
 export const getStaticProps = async (e) => {
   return {
     props: {
       ssg: {
-        simple: (await getStaticDemo('primitive/createModal/simple')(e)).props.ssg.code,
-      }
-    }
-  }
+        simple: (await getStaticDemo('primitive/createModal/simple')(e)).props
+          .ssg.code,
+      },
+    },
+  };
 };
 
 # createModal
 
-<Tabs items={['Demo']}>
+<Tabs items={['Demo', 'Anatomy', 'Components', 'Hooks']}>
   <Tabs.Tab>
-    ## simple
     <br />
     <CodeDemo Demo={CreateModalSimpleDemo} name="simple" />
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```tsx
+    import {
+      createButton,
+      useModalContext,
+    } from "@crossed/primitive";
+
+    const Modal = createModal({
+      Portal,
+      Root,
+      Trigger,
+      Title,
+      Overlay,
+      Content,
+      Description,
+    });
+
+    <Modal>
+      <Modal.Trigger />
+      <Modal.Portal>
+        <Modal.Overlay />
+        <Modal.Content>
+          <Modal.Trigger />
+          <Modal.Title />
+          <Modal.Description />
+        </Modal.Content>
+      </Modal.Portal>
+    </Modal>
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```tsx
+    import { createModal } from "@crossed/primitive";
+
+    const Button = createModal({
+      Portal,
+      Root,
+      Trigger,
+      Title,
+      Overlay,
+      Content,
+      Description,
+    });
+    ```
+    ### Root
+    The `Root` component initializes the Modal provider
+
+    ### Portal
+    The `Portal` component is use if you want use react portal.
+
+
+    ### Trigger
+    The `Trigger` component trigger open modal.
+
+    ### Title
+    Title of modal
+
+    ### Overlay
+    Overvaly of modal
+
+    ### Content
+    Content of modal
+
+    ### Description
+    Description of modal
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ## useModalContext
+
+    Retrieve the modal context.
+
+    ### Syntax
+
+    ```typescript
+    function useModalContext(): ContextModal {
+      // Function body
+    }
+    ```
+
+    ### Parameters
+
+    None.
+
+    ### Return Value
+
+    An object of type `ContextModal`
+
+    <Table props={[
+      ["open", `boolean`, "false", "State of modal"],
+      ["setOpen", "(open: boolean) => void", "", "Set state of modal"],
+      ["id", "string", "", "Id use for accessibility"],
+    ]} />
+
+    ### Example
+
+    ```typescript
+    // Example of using the function
+    const result = useModalContext();
+    console.log(result);
+    ```
+
+    ### Remarks
+
+    None.
 
   </Tabs.Tab>
 </Tabs>

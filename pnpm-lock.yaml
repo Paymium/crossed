@@ -558,6 +558,15 @@ importers:
       '@crossed/build':
         specifier: '*'
         version: link:../build
+      '@crossed/test':
+        specifier: '*'
+        version: link:../test
+      '@testing-library/jest-dom':
+        specifier: ^6.1.3
+        version: 6.1.3(@types/jest@29.5.5)(jest@29.6.2)
+      '@types/jest':
+        specifier: ^29.5.0
+        version: 29.5.5
       '@types/react':
         specifier: ^18.2.21
         version: 18.2.21
@@ -607,6 +616,9 @@ importers:
       '@crossed/build':
         specifier: '*'
         version: link:../build
+      '@crossed/test':
+        specifier: '*'
+        version: link:../test
       '@jest/types':
         specifier: 28.1.1
         version: 28.1.1
@@ -652,6 +664,66 @@ importers:
       react-native:
         specifier: ^0.72.3
         version: 0.72.3(@babel/core@7.22.9)(@babel/preset-env@7.22.9)(react@18.2.0)
+      react-native-web:
+        specifier: ^0.19.7
+        version: 0.19.7(react-dom@18.2.0)(react@18.2.0)
+      ts-node:
+        specifier: 10.8.1
+        version: 10.8.1(@swc/core@1.3.88)(@types/node@18.11.18)(typescript@5.1.6)
+      ts-node-dev:
+        specifier: ^2.0.0
+        version: 2.0.0(@swc/core@1.3.88)(@types/node@18.11.18)(typescript@5.1.6)
+      tsconfig:
+        specifier: '*'
+        version: 7.0.0
+      typescript:
+        specifier: 5.1.6
+        version: 5.1.6
+
+  packages/test:
+    devDependencies:
+      '@jest/types':
+        specifier: 28.1.1
+        version: 28.1.1
+      '@swc/jest':
+        specifier: ^0.2.29
+        version: 0.2.29(@swc/core@1.3.88)
+      '@testing-library/jest-dom':
+        specifier: ^6.1.3
+        version: 6.1.3(@types/jest@29.5.5)(jest@29.6.2)
+      '@testing-library/react':
+        specifier: ^14.0.0
+        version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@testing-library/user-event':
+        specifier: ^14.5.1
+        version: 14.5.1(@testing-library/dom@9.3.3)
+      '@types/jest':
+        specifier: ^29.5.0
+        version: 29.5.5
+      '@types/node':
+        specifier: 18.11.18
+        version: 18.11.18
+      '@types/react':
+        specifier: ^18.2.21
+        version: 18.2.21
+      '@types/react-dom':
+        specifier: 18.2.7
+        version: 18.2.7
+      '@types/react-native':
+        specifier: ^0.72.2
+        version: 0.72.2(react-native@0.72.5)
+      jest:
+        specifier: ^29.5.0
+        version: 29.6.2(@types/node@18.11.18)(ts-node@10.8.1)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-native:
+        specifier: ^0.72.3
+        version: 0.72.5(@babel/core@7.22.9)(@babel/preset-env@7.22.9)(react@18.2.0)
       react-native-web:
         specifier: ^0.19.7
         version: 0.19.7(react-dom@18.2.0)(react@18.2.0)
@@ -6905,7 +6977,7 @@ packages:
       chalk: 3.0.0
       css.escape: 1.5.1
       dom-accessibility-api: 0.5.16
-      jest: 29.6.2(@types/node@18.11.18)(ts-node@10.8.1)
+      jest: 29.6.2(@types/node@20.8.7)(ts-node@10.8.1)
       lodash: 4.17.21
       redent: 3.0.0
     dev: true

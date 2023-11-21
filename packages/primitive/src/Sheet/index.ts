@@ -6,6 +6,7 @@ import { createSheetContent } from './SheetContent';
 import { createSheetPortal } from './SheetPortal';
 import { createSheetOverlay } from './SheetOverlay';
 import { createSheetHandle } from './SheetHandle';
+import type { PressableProps } from 'react-native';
 export { useContext as useSheetContext } from './context';
 
 export const createSheet = <
@@ -14,7 +15,7 @@ export const createSheet = <
   ContentProps extends Record<string, any>,
   PortalProps extends Record<string, any>,
   OverlayProps extends Record<string, any>,
-  HandleProps extends Record<string, any>
+  HandleProps extends PressableProps
 >(components: {
   Root: ComponentType<RootProps>;
   Trigger: ComponentType<TriggerProps>;

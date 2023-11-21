@@ -6,6 +6,7 @@ import { createModalContent } from './ModalContent';
 import { createModalPortal } from './ModalPortal';
 import { createModalOverlay } from './ModalOverlay';
 import { createModalTitle } from './ModalTitle';
+export { useContext as useModalContext } from './context';
 
 export const createModal = <
   RootProps extends Record<string, any>,
