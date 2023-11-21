@@ -1,5 +1,11 @@
 # @crossed/unicons
 
+## 0.6.0
+
+### Minor Changes
+
+- 70a832e: Breaking changes: remove :dark and :light key, remove postcss plugin
+
 ## 0.5.0
 
 ### Minor Changes

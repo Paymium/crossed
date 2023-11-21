@@ -1,5 +1,16 @@
 # @crossed/demo
 
+## 0.2.0
+
+### Minor Changes
+
+- 70a832e: Breaking changes: remove :dark and :light key, remove postcss plugin
+
+### Patch Changes
+
+- Updated dependencies [70a832e]
+  - @crossed/ui@0.9.0
+
 ## 0.1.1
 
 ### Patch Changes

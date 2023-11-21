@@ -1,5 +1,16 @@
 # @crossed/styled
 
+## 0.12.0
+
+### Minor Changes
+
+- 70a832e: Breaking changes: remove :dark and :light key, remove postcss plugin
+
+### Patch Changes
+
+- Updated dependencies [70a832e]
+  - @crossed/core@0.8.0
+
 ## 0.11.0
 
 ### Minor Changes
