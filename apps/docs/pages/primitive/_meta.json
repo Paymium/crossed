@@ -12,7 +12,7 @@
     "title": "createButton[beta]"
   },
   "createLabel": "createLabel[beta]",
-  "createBadge": "createBadge[beta][doc]",
+  "createBadge": "createBadge[beta]",
   "createList": "createList[beta][doc]",
   "createDropdown": "createDropdown[api-draft]",
   "createSelect": "createSelect[api-draft]",

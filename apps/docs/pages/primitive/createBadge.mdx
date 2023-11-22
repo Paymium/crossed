@@ -17,40 +17,41 @@ export const getStaticProps = async (e) => {
 
 # createBadge
 
-<Tabs items={['Demo', "Doc"]}>
+<Tabs items={['Demo', "Anatomy", "Components"]}>
   <Tabs.Tab>
-    ## simple
     <br />
     <CodeDemo Demo={CreateBadgeSimpleDemo} name="simple" />
   </Tabs.Tab>
 
   <Tabs.Tab>
-    ## Usage
     ```tsx
-      import type { ComponentProps } from "react";
       import { createBadge } from "@crossed/primitive";
 
       const Badge = createBadge({
-        Root: (props: ComponentProps<"div">) => <div {...props} />,
-        Text: (props: ComponentProps<"p">) => <p {...props} />,
+        Root,
+        Text,
       })
 
-      const { Text } = Badge;
-
-      function App() {
-        return (
-          <Badge>
-            <Text>
-              Hello
-            </Text>
-          </Badge>
-        );
-      }
+      <Badge>
+        <Badge.Text />
+      </Badge>
     ```
-    <Table props={[
-      ["Root", "ComponentType", "", "Root of badge"],
-      ["Text", "ComponentType", "", "Text of badge"],
-    ]} />
 
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```tsx
+      import { createBadge } from "@crossed/primitive";
+
+      const Badge = createBadge({
+        Root,
+        Text,
+      })
+    ```
+
+    ### Root
+    The `Root` component represents the badge itself
+
+    ### Text
+    Render text
   </Tabs.Tab>
 </Tabs>
