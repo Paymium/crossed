@@ -1,5 +1,5 @@
-import { ComponentType, forwardRef } from 'react';
-import { Provider, useContext } from './context';
+import { ComponentType, forwardRef, useId } from 'react';
+import { Provider } from './context';
 import { RovingFocusGroupItem } from '../utils';
 import { ButtonGroupCollection } from './contextCollection';
 
@@ -7,10 +7,11 @@ export const createButtonMain = <T extends Record<string, any>>(
   StyledButton: ComponentType<T>
 ) =>
   forwardRef<any, T>((props, ref) => {
-    const { id } = useContext();
+    const idDefault = useId();
+    const id = props.id ?? idDefault;
 
     return (
-      <Provider id={props.id ?? id}>
+      <Provider id={id}>
         <ButtonGroupCollection.ItemSlot id={id}>
           <RovingFocusGroupItem
             ref={ref}

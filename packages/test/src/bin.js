@@ -11,6 +11,8 @@ const path = require('node:path');
 process.argv.push(
   '--config',
   path.resolve(__dirname, 'jest.config.ts'),
+  '--collectCoverageFrom',
+  '**/*.[jt]s?(x)',
   '--coverage'
 );
 

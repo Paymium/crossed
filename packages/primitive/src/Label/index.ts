@@ -3,6 +3,7 @@ import { createLabelMain } from './Label';
 import { createLabelText } from './LabelText';
 import { LabelInput } from './LabelInput';
 import { withStaticProperties } from '@crossed/core';
+export { useContext as useLabelContext } from './context';
 
 export const createLabel = <
   LabelProps extends Record<string, any>,

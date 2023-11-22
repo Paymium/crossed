@@ -137,67 +137,89 @@ export function styled<
         theme
       );
 
-      const NewComp = as ?? Component;
+      const isAsString = typeof as === 'string';
+      const NewComp = isAsString && isNative ? Component : as ?? Component;
+      const isNewCompString = typeof NewComp === 'string';
 
-      const handleMouseUp = useCallback(() => {
-        setActive(false);
-      }, []);
+      const handlePointerUp = useCallback(() => setActive(false), []);
+      const handlePointerDown = useCallback(() => setActive(true), []);
+      const handlePointerEnter = useCallback(() => setHover(true), []);
+      const handlePointerLeave = useCallback(() => setHover(false), []);
 
       useEffect(() => {
         if (isWeb && !hover && active) {
-          window.document.body.addEventListener('mouseup', handleMouseUp);
+          window.document.body.addEventListener('mouseup', handlePointerUp);
           return () => {
-            window.document.body.removeEventListener('mouseup', handleMouseUp);
+            window.document.body.removeEventListener(
+              'mouseup',
+              handlePointerUp
+            );
           };
         }
         return () => {};
       }, [hover, active]);
 
+      if (isNative && isNewCompString) {
+        throw new Error(
+          "@crossed/styled try render string component (like 'a') in native environment"
+        );
+      }
+
       return (
         <NewComp
           ref={ref}
           {...parsedPropsProperty(componentProps)}
+          {...(isAsString ? { className: baseClassName } : {})}
           style={[
-            isWeb && {
-              $$css: true,
-              [`${baseClassName}`]: baseClassName,
-            },
+            isWeb &&
+              !isAsString && {
+                $$css: true,
+                [`${baseClassName}`]: baseClassName,
+              },
             isNative && tw.style(baseClassName),
             ...(Array.isArray(componentProps.style)
               ? componentProps.style
               : [componentProps.style]),
             componentProps.style,
           ].filter(Boolean)}
-          onMouseDown={composeEventHandlers(componentProps?.onMouseDown, () => {
-            setActive(true);
-          })}
-          onMouseUp={composeEventHandlers(componentProps?.onMouseUp, () => {
-            setActive(false);
-          })}
-          onMouseEnter={composeEventHandlers(() => {
-            setHover(true);
-          }, componentProps?.onMouseEnter)}
-          onMouseLeave={composeEventHandlers(() => {
-            setHover(false);
-          }, componentProps?.onMouseLeave)}
-          onPressIn={composeEventHandlers(componentProps?.onPressIn, () => {
-            setActive(true);
-          })}
-          onPressOut={composeEventHandlers(componentProps?.onPressOut, () => {
-            setActive(false);
-          })}
-          onHoverIn={composeEventHandlers(() => {
-            setHover(true);
-          }, componentProps?.onHoverIn)}
-          onHoverOut={composeEventHandlers(() => {
-            setHover(false);
-          }, componentProps?.onHoverOut)}
-          onBlur={composeEventHandlers(componentProps?.onBlur, () => {
-            setFocus(false);
-          })}
-          onFocus={composeEventHandlers(componentProps?.onFocus, () => {
-            setFocus(true);
-          })}
+          onMouseDown={composeEventHandlers(
+            componentProps?.onMouseDown,
+            handlePointerDown
+          )}
+          onMouseUp={composeEventHandlers(
+            componentProps?.onMouseUp,
+            handlePointerUp
+          )}
+          onMouseEnter={composeEventHandlers(
+            componentProps?.onMouseEnter,
+            handlePointerEnter
+          )}
+          onMouseLeave={composeEventHandlers(
+            componentProps?.onMouseLeave,
+            handlePointerLeave
+          )}
+          onHoverIn={composeEventHandlers(
+            componentProps?.onHoverIn,
+            handlePointerEnter
+          )}
+          onHoverOut={composeEventHandlers(
+            componentProps?.onHoverOut,
+            handlePointerLeave
+          )}
+          onPressIn={composeEventHandlers(
+            componentProps?.onPressIn,
+            handlePointerDown
+          )}
+          onPressOut={composeEventHandlers(
+            componentProps?.onPressOut,
+            handlePointerUp
+          )}
+          onBlur={composeEventHandlers(componentProps?.onBlur, () =>
+            setFocus(false)
+          )}
+          onFocus={composeEventHandlers(componentProps?.onFocus, () =>
+            setFocus(true)
+          )}
         />
       );
     }

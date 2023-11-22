@@ -12,6 +12,7 @@ const config: Config.InitialOptions = {
     '^@crossed/styled$': '<rootDir>/node_modules/@crossed/styled/src/index',
     '^react-native$': 'react-native-web',
   },
+  modulePathIgnorePatterns: ['lib', 'coverage'],
   moduleDirectories: ['./node_modules', 'src'],
   setupFilesAfterEnv: [path.resolve(__dirname, './jest-setup.js')],
   testEnvironment: 'jsdom',
