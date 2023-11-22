@@ -11,7 +11,7 @@
   "createButton": {
     "title": "createButton[beta]"
   },
-  "createLabel": "createLabel[beta][doc]",
+  "createLabel": "createLabel[beta]",
   "createBadge": "createBadge[beta][doc]",
   "createList": "createList[beta][doc]",
   "createDropdown": "createDropdown[api-draft]",
