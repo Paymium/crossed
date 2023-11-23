@@ -10,6 +10,7 @@ export const createLabelText = <P,>(StyledText: ComponentType<P>) =>
         ref={ref}
         id={`label-${id}`}
         role="label"
+        htmlFor={id}
         {...(props as any)}
         onPress={composeEventHandlers((props as any).onPress, () => {
           inputRef?.current?.focus?.();

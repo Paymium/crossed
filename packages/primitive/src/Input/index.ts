@@ -19,7 +19,7 @@ export const createInput = <
   const { Group, Element, Addon, Input } = components;
 
   const InputGroup = createInputGroup(Group);
-  const InputInput = createInputInput(Input, Group);
+  const InputInput = createInputInput(Input, InputGroup);
   const InputElement = createInputElement(Element);
   const InputAddon = Addon;
 
