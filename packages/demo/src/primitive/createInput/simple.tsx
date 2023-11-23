@@ -14,6 +14,9 @@ const GroupFrame = styled(Pressable, {
     'items-center',
     'overflow-hidden',
   ],
+  'props': {
+    focusable: false,
+  },
   ':hover': {
     className: ['border-blue-500'],
   },

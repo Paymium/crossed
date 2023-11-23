@@ -17,6 +17,6 @@
   "createDropdown": "createDropdown[api-draft]",
   "createSelect": "createSelect[api-draft]",
   "createSheet": "createSheet[api-draft]",
-  "createModal": "createModal[beta][doc]",
-  "createInput": "createInput[beta][doc]"
+  "createModal": "createModal[beta]",
+  "createInput": "createInput[beta]"
 }

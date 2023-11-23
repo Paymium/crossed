@@ -4,3 +4,4 @@ dist
 out
 coverage
 .turbo
+coverage.json

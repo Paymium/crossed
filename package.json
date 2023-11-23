@@ -14,7 +14,8 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mdx}\"",
     "lint": "eslint packages/**/src apps/** --ext .ts,.tsx --config .eslintrc && turbo run type-check",
-    "release": "pnpm build && pnpm publish -r"
+    "release": "pnpm build && pnpm publish -r",
+    "coverage-merge": "istanbul-merge --out coverage.raw.json **/coverage/coverage-final.json && istanbul report --include coverage.json --dir coverage html"
   },
   "main": "index.js",
   "license": "MIT",
@@ -31,6 +32,8 @@
     "@typescript-eslint/parser": "^6.7.3",
     "commitlint": "^17.3.0",
     "eslint": "^8.29.0",
+    "istanbul": "^0.4.5",
+    "istanbul-merge": "^2.0.0",
     "lint-staged": "^13.1.0",
     "prettier": "^2.7.1",
     "release-it": "^15.5.1",
