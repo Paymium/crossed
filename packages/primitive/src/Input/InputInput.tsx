@@ -10,7 +10,7 @@ import {
 import { useInputContext } from './context';
 import { composeEventHandlers, composeRefs } from '@crossed/core';
 
-export const createInput = <P, PGroup extends PropsWithChildren>(
+export const createInput = <P, PGroup>(
   Styled: ComponentType<P>,
   Group: ComponentType<PGroup>
 ) =>

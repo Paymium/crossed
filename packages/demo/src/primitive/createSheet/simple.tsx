@@ -29,7 +29,9 @@ const Sheet = createSheet({
 export const CreateSheetSimpleDemo = () => {
   return (
     <Sheet>
-      <Sheet.Trigger aria-label="Open sheet">Open</Sheet.Trigger>
+      <Sheet.Trigger aria-label="Open sheet">
+        <Text>Open</Text>
+      </Sheet.Trigger>
       <Sheet.Portal>
         <Sheet.Overlay />
         <Sheet.Content>

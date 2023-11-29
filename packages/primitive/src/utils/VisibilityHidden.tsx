@@ -8,9 +8,12 @@ import {
 
 export const VisibilityHidden = forwardRef(
   (
-    { children, hidden = false }: PropsWithChildren<{ hidden: boolean }>,
+    { children, hidden = false }: PropsWithChildren & { hidden?: boolean },
     ref: any
   ) => {
+    if (typeof children === 'string') {
+      throw new Error(`"VisibilityHidden" not accept string children`);
+    }
     return Children.map(children, (c) => {
       return isValidElement(c)
         ? cloneElement(c as any, {

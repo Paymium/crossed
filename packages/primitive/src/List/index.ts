@@ -4,6 +4,8 @@ import { createListMain } from './List';
 import { createListItem } from './ListItem';
 import { createListTitle } from './ListTitle';
 import { createListSubTitle } from './ListSubTitle';
+import { createListLabel } from './ListLabel';
+import { createListDivider } from './ListDivider';
 
 export const createList = <
   ListProps extends Record<string, any>,
@@ -25,8 +27,8 @@ export const createList = <
   const ListItem = createListItem(Item);
   const ListTitle = createListTitle(Title);
   const ListSubTitle = createListSubTitle(SubTitle);
-  const ListLabel = createListSubTitle(Label);
-  const ListDivider = createListSubTitle(Divider);
+  const ListLabel = createListLabel(Label);
+  const ListDivider = createListDivider(Divider);
 
   List.displayName = 'List';
   ListItem.displayName = 'List.Item';

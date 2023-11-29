@@ -41,13 +41,13 @@ const getFromOrderState = (
     return path ? (state ? obj[state] : obj)?.[path] : state ? obj[state] : obj;
   }
   return disabled
-    ? getPath(':disabled')?.className
+    ? getPath(':disabled')
     : active
-    ? getPath(':active')?.className
+    ? getPath(':active')
     : hover
-    ? getPath(':hover')?.className
+    ? getPath(':hover')
     : focus
-    ? getPath(':focus')?.className
+    ? getPath(':focus')
     : getPath()?.className;
 };
 
@@ -83,15 +83,19 @@ export function styled<
 
     const classNameMerged = twMerge(
       extendClassName?.className,
-      variantExtendClassName,
-      styles.className,
-      variantClassName,
+      variantExtendClassName?.className,
+      styles?.className,
+      variantClassName?.className,
       props?.className
     );
 
     return {
       className: classNameMerged,
       as: styles.props?.as ? styles.props?.as : Component,
+      props: {
+        ...styles?.props,
+        ...variantClassName?.props,
+      },
     };
   };
 
@@ -126,7 +130,11 @@ export function styled<
         },
         {} as any
       );
-      const { className: baseClassName, as } = stylesFunction(
+      const {
+        className: baseClassName,
+        as,
+        props: propsStyled,
+      } = stylesFunction(
         props,
         {
           disabled: props.disabled,
@@ -168,6 +176,7 @@ export function styled<
       return (
         <NewComp
           ref={ref}
+          {...propsStyled}
           {...parsedPropsProperty(componentProps)}
           {...(isAsString ? { className: baseClassName } : {})}
           style={[

@@ -130,3 +130,69 @@ describe('color theme', () => {
     });
   });
 });
+
+describe('check props', () => {
+  const Test = styled(Text, {
+    'props': { role: 'button' },
+    ':active': { props: { role: 'link' } },
+    ':focus': { props: { role: 'alert' } },
+    ':hover': { props: { role: 'form' } },
+    ':disabled': { props: { role: 'navigation' } },
+    'variants': {
+      v: {
+        true: {
+          'props': { role: 'menu' },
+          ':active': { props: { role: 'alert' } },
+        },
+      },
+      y: { true: { props: { role: 'list' } }, toto: {} },
+    },
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    'compoundVariants': [{ v: true, y: true, props: { role: 'listitem' } }],
+  });
+  describe('without variant', () => {
+    test('basic', async () => {
+      render(<Test />);
+      await screen.getByRole('button');
+    });
+    test('active', async () => {
+      render(<Test states={{ isActive: true }} />);
+      await screen.getByRole('link');
+    });
+    test('focus', async () => {
+      render(<Test states={{ isFocus: true }} />);
+      await screen.getByRole('alert');
+    });
+    test('hover', async () => {
+      render(<Test states={{ isHover: true }} />);
+      await screen.getByRole('form');
+    });
+    test('disabled', async () => {
+      render(<Test disabled />);
+      await screen.getByRole('navigation');
+    });
+  });
+
+  describe('with variant', () => {
+    test('simple', async () => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      render(<Test v />);
+      await screen.getByRole('menu');
+    });
+    test('compoundVariants', async () => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      render(<Test v y />);
+      await screen.getByRole('listitem');
+    });
+
+    test('variant active', async () => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      render(<Test v y states={{ isActive: true }} />);
+      await screen.getByRole('alert');
+    });
+  });
+});
