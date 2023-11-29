@@ -1,5 +1,17 @@
 # @crossed/primitive
 
+## 1.7.0
+
+### Minor Changes
+
+- 89eadd5: createLabel doc, test, accessibility behavior
+
+### Patch Changes
+
+- d9763fa: add doc and test for createBadge
+- 972791d: fix button context id
+- 9726758: fix input and labelText
+
 ## 1.6.0
 
 ### Minor Changes

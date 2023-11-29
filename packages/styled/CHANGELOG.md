@@ -1,5 +1,12 @@
 # @crossed/styled
 
+## 0.12.1
+
+### Patch Changes
+
+- 0687168: styled not pass props, add test
+- 0036714: refacto styled for clean code
+
 ## 0.12.0
 
 ### Minor Changes

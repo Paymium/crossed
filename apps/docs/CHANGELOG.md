@@ -1,5 +1,24 @@
 # crossed-docs
 
+## 0.3.0
+
+### Minor Changes
+
+- 89eadd5: createLabel doc, test, accessibility behavior
+
+### Patch Changes
+
+- d9763fa: add doc and test for createBadge
+- Updated dependencies [0687168]
+- Updated dependencies [89eadd5]
+- Updated dependencies [d9763fa]
+- Updated dependencies [0036714]
+- Updated dependencies [972791d]
+- Updated dependencies [9726758]
+  - @crossed/styled@0.12.1
+  - @crossed/primitive@1.7.0
+  - @crossed/demo@0.3.0
+
 ## 0.2.3
 
 ### Patch Changes

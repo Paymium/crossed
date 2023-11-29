@@ -1,7 +1,7 @@
 {
   "name": "@crossed/demo",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "keywords": [
     "React Native",
     "Next.js",
@@ -51,7 +51,7 @@
     "tsconfig": "*"
   },
   "dependencies": {
-    "@crossed/primitive": "1.6.0",
+    "@crossed/primitive": "1.7.0",
     "@crossed/ui": "*",
     "@floating-ui/react": "^0.25.1",
     "@gorhom/bottom-sheet": "^4.5.0",

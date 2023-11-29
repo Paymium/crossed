@@ -1,6 +1,6 @@
 {
   "name": "crossed-docs",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Nextra docs template",
   "private": true,
   "scripts": {
@@ -19,10 +19,10 @@
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
     "@crossed/core": "0.8.0",
-    "@crossed/demo": "0.2.1",
+    "@crossed/demo": "0.3.0",
     "@crossed/next-adapter": "0.5.1",
-    "@crossed/primitive": "1.6.0",
-    "@crossed/styled": "0.12.0",
+    "@crossed/primitive": "1.7.0",
+    "@crossed/styled": "0.12.1",
     "@crossed/ui": "0.9.0",
     "@crossed/unicons": "0.6.0",
     "autoprefixer": "^10.4.14",
