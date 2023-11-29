@@ -5,7 +5,6 @@ export * from './Label';
 export * from './List';
 export * from './Input';
 export * from './Modal';
-export * from './Portal';
 export * from './Select';
 export * from './Sheet';
 export * from './utils';
