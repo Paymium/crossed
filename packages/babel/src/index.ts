@@ -17,12 +17,17 @@ export default declare(function crosseBabel(
 
   const configString = readFileSync(titi);
 
-  const configTailwindAst = template.ast(configString.toString());
+  const configTailwind = template.ast(configString.toString()); // 7.23.3
 
-  if (
-    Array.isArray(configTailwindAst) ||
-    !t.isExpressionStatement(configTailwindAst)
-  ) {
+  const configTailwindAst = Array.isArray(configTailwind)
+    ? configTailwind.find((e) => t.isExpressionStatement(e))
+    : configTailwind;
+
+  if (!configTailwindAst) {
+    throw new Error(`tailwind.config.js export not found`);
+  }
+
+  if (!t.isExpressionStatement(configTailwindAst)) {
     throw new Error(`tailwind.config.js is not "ExpressionStatement"`);
   }
 
