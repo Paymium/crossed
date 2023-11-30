@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.13.0
+
+### Minor Changes
+
+- a4cbe96: add theme props on CrossedTheme for set theme
+
 ## 0.12.1
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # crossed-docs
 
+## 0.4.0
+
+### Minor Changes
+
+- 55556a3: change doc of babel
+
+### Patch Changes
+
+- Updated dependencies [a4cbe96]
+  - @crossed/styled@0.13.0
+
 ## 0.3.0
 
 ### Minor Changes

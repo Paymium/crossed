@@ -1,5 +1,11 @@
 # @crossed/babel-plugin
 
+## 0.3.2
+
+### Patch Changes
+
+- 2eb676e: fix parsing error when config ast is array
+
 ## 0.3.1
 
 ### Patch Changes
