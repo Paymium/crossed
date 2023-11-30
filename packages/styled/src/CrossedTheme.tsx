@@ -10,6 +10,7 @@ type CrossedThemeProvider = {
 
 export type CrossedThemeProps = {
   defaultTheme?: RnColorScheme;
+  theme?: CrossedThemeProvider['theme'];
 };
 
 const [Provider, useCrossedTheme] = createScope<CrossedThemeProvider>(
@@ -18,6 +19,7 @@ const [Provider, useCrossedTheme] = createScope<CrossedThemeProvider>(
 
 const CrossedTheme = ({
   defaultTheme = 'dark',
+  theme: themeProps,
   children,
 }: PropsWithChildren<CrossedThemeProps>) => {
   useDeviceContext(tw, { withDeviceColorScheme: false });
@@ -26,7 +28,7 @@ const CrossedTheme = ({
     setTheme(theme);
   };
   return (
-    <Provider theme={theme as any} setTheme={handleChangeTheme}>
+    <Provider theme={themeProps ?? (theme as any)} setTheme={handleChangeTheme}>
       {children}
     </Provider>
   );
