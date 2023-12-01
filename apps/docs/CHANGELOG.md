@@ -1,5 +1,13 @@
 # crossed-docs
 
+## 0.4.1
+
+### Patch Changes
+
+- fix docs build
+- Updated dependencies
+  - @crossed/demo@0.3.1
+
 ## 0.4.0
 
 ### Minor Changes

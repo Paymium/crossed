@@ -7,7 +7,8 @@ const path = require('path');
 const { withCrossed } = require('@crossed/next-adapter');
 /** @type {import('next').NextConfig} */
 module.exports = withNextra(
-  withCrossed({
+  withCrossed(
+    {
     images: {
       unoptimized: true,
     },

@@ -1,24 +1,5 @@
 import { Tabs } from 'components/Tabs';
-import { styled } from '@crossed/styled';
-import { Box } from '@crossed/ui';
 import { Steps } from 'nextra/components';
-import { Pressable } from 'react-native';
-
-export const Button = styled(Pressable, {
-  'className': [
-    'border border-neutral-900 bg-neutral-500 rounded-md text-white',
-  ],
-  ':hover': { className: 'bg-neutral-400' },
-  ':active': { className: 'bg-neutral-600' },
-  'variants': {
-    size: {
-      md: { className: ['px-3 py-2'] },
-    },
-  },
-  'defaultVariants': {
-    size: 'md',
-  },
-});
 
 # Installation
 
@@ -33,7 +14,6 @@ Before using @crossed/style, it is essential to have Tailwind CSS already instal
 
     ```sh
     pnpm i @crossed/styled @crossed/next-adapter react-native-web
-    pnpm i -D modify-selectors
     ```
 
   </Tabs.Tab>
@@ -41,7 +21,6 @@ Before using @crossed/style, it is essential to have Tailwind CSS already instal
 
     ```sh
     npm i @crossed/styled @crossed/next-adapter react-native-web
-    npm i -D modify-selectors
     ```
 
   </Tabs.Tab>
@@ -49,7 +28,6 @@ Before using @crossed/style, it is essential to have Tailwind CSS already instal
   
     ```sh
     yarn add @crossed/styled @crossed/next-adapter react-native-web
-    yarn add -D modify-selectors
     ```
   
   </Tabs.Tab>
@@ -68,37 +46,6 @@ const nextConfig = withCrossed({
 module.exports = nextConfig;
 ```
 
-### Usage
-
-<br />
-<Box className="items-center justify-center">
-  <Button>Hello</Button>
-</Box>
-
-```typescript
-import { styled } from '@crossed/styled';
-import { Pressable } from 'react-native';
-
-export const Button = styled(Pressable, {
-  'className': [
-    'border border-neutral-900 bg-neutral-500 rounded-md text-white',
-  ],
-  ':hover': { className: 'bg-neutral-400' },
-  ':active': { className: 'bg-neutral-600' },
-  'variants': {
-    size: {
-      md: { className: ['px-3 py-2'] },
-    },
-  },
-  'defaultVariants': {
-    size: 'md',
-  },
-});
-
-function Demo() {
-  return <Button>Hello</Button>;
-}
-```
 
 </Steps>
 </Tabs.Tab>
@@ -109,21 +56,21 @@ function Demo() {
   <Tabs.Tab>
 
     ```sh
-    pnpm i @crossed/styled @crossed/babel-plugin react-native
+    pnpm i @crossed/styled @crossed/babel-plugin
     ```
 
   </Tabs.Tab>
   <Tabs.Tab>
 
     ```sh
-    npm i @crossed/styled @crossed/babel-plugin react-native
+    npm i @crossed/styled @crossed/babel-plugin
     ```
 
   </Tabs.Tab>
   <Tabs.Tab>
   
     ```sh
-    yarn add @crossed/styled @crossed/babel-plugin react-native
+    yarn add @crossed/styled @crossed/babel-plugin
     ```
   
   </Tabs.Tab>
@@ -132,12 +79,17 @@ function Demo() {
 ### Add babel plugin
 
 ```typescript
+const path = require('path');
+
 module.exports = function (api) {
   return {
     // ...
     plugins: [
       // ...
-      ['@crossed/babel-plugin', { tailwindPath: './tailwind.config.js' }],
+      [
+        '@crossed/babel-plugin',
+        { tailwindPath: path.resolve(__dirname, './tailwind.config.js') },
+      ],
     ],
   };
 };
@@ -145,37 +97,6 @@ module.exports = function (api) {
 
 See [documentation](/styled/babel)
 
-### Usage
-
-<br />
-<Box className="items-center justify-center">
-  <Button>Hello</Button>
-</Box>
-
-```typescript
-import { styled } from '@crossed/styled';
-import { Pressable } from 'react-native';
-
-export const Button = styled(Pressable, {
-  'className': [
-    'border border-neutral-900 bg-neutral-500 rounded-md text-white',
-  ],
-  ':hover': { className: ['bg-neutral-400'] },
-  ':active': { className: ['bg-neutral-600'] },
-  'variants': {
-    size: {
-      md: { className: ['px-3 py-2'] },
-    },
-  },
-  'defaultVariants': {
-    size: 'md',
-  },
-});
-
-function Demo() {
-  return <Button>Hello</Button>;
-}
-```
 
 </Steps>
 </Tabs.Tab>
@@ -183,8 +104,13 @@ function Demo() {
 
 ### Tailwind CSS IntelliSense plugin configuration
 
-```
+```json filename=./.vscode/settings.json
 "tailwindCSS.experimental.classRegex": [
   ["[`'\"`]?className[`'\"`]?: ?([^;]*)[;]", "[`'\"`]([^'\"`,;]*)[`'\"`]"]
 ],
 ```
+If you have monorepo, you can define global tailwind config file
+```json filename=./.vscode/settings.json
+"tailwindCSS.experimental.configFile": "./packages/design_system/tailwind.config.js",
+```
+

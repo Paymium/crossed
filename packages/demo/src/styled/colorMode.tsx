@@ -31,7 +31,7 @@ const ButtonTheme = () => {
   const { theme, setTheme } = useCrossedTheme();
   return (
     <button
-      className="bg-neutral-800 px-2 py-1"
+      className="bg-neutral-500 dark:bg-neutral-800 px-2 py-1 text-black dark:text-white"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
       Change theme: {theme}

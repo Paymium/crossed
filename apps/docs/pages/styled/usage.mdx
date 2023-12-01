@@ -1,0 +1,61 @@
+import { styled } from '@crossed/styled';
+import { Pressable, Text } from 'react-native';
+import { Box } from '@crossed/ui';
+
+export const Button = styled(Pressable, {
+  'className': ['border border-neutral-900 bg-neutral-500 rounded-md'],
+  ':hover': { className: 'bg-neutral-400' },
+  ':active': { className: 'bg-neutral-600' },
+  'variants': {
+    size: {
+      md: { className: ['px-3 py-2'] },
+    },
+  },
+  'defaultVariants': {
+    size: 'md',
+  },
+});
+
+export const ButtonText = styled(Text, {
+  className: ['text-white'],
+});
+
+# Usage
+
+<br />
+<Box className="items-center justify-center">
+  <Button>
+    <ButtonText>Hello</ButtonText>
+  </Button>
+</Box>
+
+```tsx
+import { styled } from '@crossed/styled';
+import { Pressable, Text } from 'react-native';
+
+export const Button = styled(Pressable, {
+  'className': ['border border-neutral-900 bg-neutral-500 rounded-md'],
+  ':hover': { className: ['bg-neutral-400'] },
+  ':active': { className: ['bg-neutral-600'] },
+  'variants': {
+    size: {
+      md: { className: ['px-3 py-2'] },
+    },
+  },
+  'defaultVariants': {
+    size: 'md',
+  },
+});
+
+export const ButtonText = styled(Text, {
+  className: ['text-white'],
+});
+
+function Demo() {
+  return (
+    <Button>
+      <ButtonText>Hello</ButtonText>
+    </Button>
+  );
+}
+```
