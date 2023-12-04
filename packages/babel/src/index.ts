@@ -13,9 +13,12 @@ export default declare(function crosseBabel(
   name: string;
   visitor: Visitor;
 } {
-  const titi = path.resolve(dirname, tailwindPath || 'tailwind.config.js');
+  const pathTailwindConfig = path.resolve(
+    process.cwd(),
+    tailwindPath || 'tailwind.config.js'
+  );
 
-  const configString = readFileSync(titi);
+  const configString = readFileSync(pathTailwindConfig);
 
   const configTailwind = template.ast(configString.toString()); // 7.23.3
 
@@ -39,9 +42,7 @@ export default declare(function crosseBabel(
     throw new Error(`tailwind.config.js export is not object`);
   }
 
-  const pathConfig = t.stringLiteral(
-    path.resolve(dirname, tailwindPath || 'tailwind.config.js')
-  );
+  const pathConfig = t.stringLiteral(pathTailwindConfig);
 
   const build = template(`
     var { create } = require('@crossed/styled/lib/commonjs/twrnc');

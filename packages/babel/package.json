@@ -1,7 +1,7 @@
 {
   "name": "@crossed/babel-plugin",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",

@@ -157,7 +157,7 @@ importers:
         specifier: ^7.22.10
         version: 7.22.10
       '@crossed/babel-plugin':
-        specifier: 0.3.2
+        specifier: 0.3.3
         version: link:../../packages/babel
       '@crossed/core':
         specifier: 0.8.0

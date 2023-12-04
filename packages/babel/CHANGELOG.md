@@ -1,5 +1,11 @@
 # @crossed/babel-plugin
 
+## 0.3.3
+
+### Patch Changes
+
+- use process.cwd and not dirname for load tailwindconfig
+
 ## 0.3.2
 
 ### Patch Changes
