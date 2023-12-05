@@ -1,5 +1,11 @@
 # @crossed/babel-plugin
 
+## 0.4.0
+
+### Minor Changes
+
+- not require config, pre eval config and inject directly
+
 ## 0.3.3
 
 ### Patch Changes

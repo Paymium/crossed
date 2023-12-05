@@ -4,7 +4,7 @@ module.exports = function (api) {
     presets: ['babel-preset-expo'],
     plugins: [
       // Required for expo-router
-      '@crossed/babel-plugin',
+      ['@crossed/babel-plugin', { tailwindPath: "./node_modules/@crossed/tailwind/tailwind.config.js" }],
       'expo-router/babel',
     ],
   };

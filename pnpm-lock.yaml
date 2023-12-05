@@ -77,6 +77,9 @@ importers:
       '@crossed/styled':
         specifier: 0.13.0
         version: link:../../packages/styled
+      '@crossed/tailwind':
+        specifier: workspace:^
+        version: link:../../packages/tailwind
       '@crossed/ui':
         specifier: 0.9.0
         version: link:../../packages/ui
@@ -157,7 +160,7 @@ importers:
         specifier: ^7.22.10
         version: 7.22.10
       '@crossed/babel-plugin':
-        specifier: 0.3.3
+        specifier: 0.4.0
         version: link:../../packages/babel
       '@crossed/core':
         specifier: 0.8.0
@@ -168,6 +171,9 @@ importers:
       '@crossed/styled':
         specifier: workspace:^
         version: link:../../packages/styled
+      '@crossed/tailwind':
+        specifier: workspace:^
+        version: link:../../packages/tailwind
       '@crossed/ui':
         specifier: 0.9.0
         version: link:../../packages/ui
@@ -694,6 +700,8 @@ importers:
       typescript:
         specifier: 5.1.6
         version: 5.1.6
+
+  packages/tailwind: {}
 
   packages/test:
     devDependencies:

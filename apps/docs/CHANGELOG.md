@@ -1,5 +1,11 @@
 # crossed-docs
 
+## 0.5.0
+
+### Minor Changes
+
+- home page increase theme light
+
 ## 0.4.1
 
 ### Patch Changes

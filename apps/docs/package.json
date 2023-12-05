@@ -1,6 +1,6 @@
 {
   "name": "crossed-docs",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Nextra docs template",
   "private": true,
   "scripts": {
@@ -23,6 +23,7 @@
     "@crossed/next-adapter": "0.5.1",
     "@crossed/primitive": "1.7.0",
     "@crossed/styled": "0.13.0",
+    "@crossed/tailwind": "workspace:^",
     "@crossed/ui": "0.9.0",
     "@crossed/unicons": "0.6.0",
     "autoprefixer": "^10.4.14",

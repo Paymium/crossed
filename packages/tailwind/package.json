@@ -1,0 +1,11 @@
+{
+  "name": "@crossed/tailwind",
+  "private": true,
+  "version": "0.3.1",
+  "main": "tailwind.config.js",
+  "types": "tailwind.config.js",
+  "module": "tailwind.config.js",
+  "react-native": "tailwind.config.js",
+  "source": "tailwind.config.js",
+  "typings": "tailwind.config.js"
+}

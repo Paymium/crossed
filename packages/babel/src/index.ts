@@ -42,16 +42,12 @@ export default declare(function crosseBabel(
     throw new Error(`tailwind.config.js export is not object`);
   }
 
-  const pathConfig = t.stringLiteral(pathTailwindConfig);
-
   const build = template(`
     var { create } = require('@crossed/styled/lib/commonjs/twrnc');
-    var config = require(ROOT_DIR);
-
-    module.exports = create(config);
+    module.exports = create(CONFIG);
   `);
 
-  const astBuild = build({ ROOT_DIR: pathConfig });
+  const astBuild = build({ CONFIG: configTailwindAst.expression.right });
   const pathCrossed = path.resolve(dirname, '.crossed');
   const pathFile = path.resolve(pathCrossed, 'crossed.config.js');
 
