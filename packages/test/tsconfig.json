@@ -8,6 +8,7 @@
     "declaration": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": true,
+    "allowJs": true,
     "esModuleInterop": true,
     "importsNotUsedAsValues": "error",
     "forceConsistentCasingInFileNames": true,

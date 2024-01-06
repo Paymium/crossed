@@ -5,9 +5,11 @@ import { styled } from '@crossed/styled';
 import { spaceVariants } from '../variants/space';
 
 export const XBox = styled(View, {
-  className: ['flex', 'flex-row', 'w-full'],
+  display: 'flex',
+  flexDirection: 'row',
+  width: '100%',
   variants: {
     space: spaceVariants,
-    center: { true: { className: ['items-center'] } },
+    center: { true: { alignItems: 'center' } },
   },
 });

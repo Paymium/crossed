@@ -1,10 +1,8 @@
-import { UnistylesRegistry } from 'react-native-unistyles';
-import 'react-native-unistyles';
+// if you defined breakpoints
 
-export { styled } from './styled';
-export * from 'react-native-unistyles';
+import { UnistylesRegistry } from '@crossed/styled';
 
-const lightTheme = {
+export const lightTheme = {
   colors: {
     typography: '#000000',
     background: '#ffffff',
@@ -17,7 +15,7 @@ const lightTheme = {
   },
 } as const;
 
-const darkTheme = {
+export const darkTheme = {
   colors: {
     typography: '#ffffff',
     background: '#000000',
@@ -30,7 +28,7 @@ const darkTheme = {
   },
 } as const;
 
-const breakpoints = {
+export const breakpoints = {
   xs: 0,
   sm: 576,
   md: 768,
@@ -47,18 +45,19 @@ type AppThemes = {
   dark: typeof darkTheme;
 };
 
-export const test = () => {
-  UnistylesRegistry.addBreakpoints(breakpoints)
-    .addThemes({
-      light: lightTheme,
-      dark: darkTheme,
-    })
-    .addConfig({
-      initialTheme: 'dark',
-    });
-};
-
-declare module 'react-native-unistyles' {
+declare module '@crossed/styled' {
   export interface UnistylesBreakpoints extends AppBreakpoints {}
   export interface UnistylesThemes extends AppThemes {}
 }
+
+UnistylesRegistry.addBreakpoints(breakpoints)
+  .addThemes({
+    light: lightTheme,
+    dark: darkTheme,
+    // register other themes with unique names
+  })
+  .addConfig({
+    initialTheme: "dark"
+    // you can pass here optional config described below
+    // adaptiveThemes: true,
+  });
