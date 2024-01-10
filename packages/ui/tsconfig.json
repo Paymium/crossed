@@ -26,6 +26,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
+    "typeRoots": ["./src/theme/index.ts"],
     "paths": {
       "@crossed/core": ["./node_modules/@crossed/core/src"],
       "@crossed/styled": ["./node_modules/@crossed/styled/src"],

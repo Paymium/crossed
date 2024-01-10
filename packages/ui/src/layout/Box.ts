@@ -1,12 +1,12 @@
 'use client';
 
 import { View } from 'react-native';
-import type { GetProps } from '@crossed/styled';
 import { styled } from '@crossed/styled';
 import { spaceVariants } from '../variants';
+import type { GetProps } from '@crossed/core';
 
 export const Box = styled(View, {
-  className: ['flex'],
+  display: 'flex',
   variants: {
     space: spaceVariants,
   },

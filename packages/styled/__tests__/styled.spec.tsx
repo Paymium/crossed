@@ -33,16 +33,8 @@ describe('styled', () => {
       expect((createStyleSheet as jest.Mock).mock.results[0].value()).toEqual({
         active: { backgroundColor: 'green' },
         base: { backgroundColor: 'red' },
-        checked: {},
-        disabled: {},
         focus: {},
-        focusVisible: {},
         hover: { backgroundColor: 'gray' },
-        invalid: {},
-        loading: {},
-        pressed: {},
-        readOnly: {},
-        required: {},
       });
     });
 
@@ -59,16 +51,8 @@ describe('styled', () => {
       expect((createStyleSheet as jest.Mock).mock.results[0].value()).toEqual({
         active: { backgroundColor: 'green' },
         base: { backgroundColor: 'red' },
-        checked: {},
-        disabled: {},
         focus: {},
-        focusVisible: {},
         hover: { backgroundColor: 'gray' },
-        invalid: {},
-        loading: {},
-        pressed: {},
-        readOnly: {},
-        required: {},
       });
     });
   });
@@ -88,10 +72,8 @@ describe('styled', () => {
       expect(useLogic).toBeCalled();
 
       const [params] = useLogic.mock.lastCall;
-      expect(params).toHaveProperty('animationDuration', 100);
-      expect(params).toHaveProperty('animationKeys', []);
       expect(params).toHaveProperty('hovered', undefined);
-      expect(params).toHaveProperty('pressed', undefined);
+      expect(params).toHaveProperty('active', undefined);
       expect(params).toHaveProperty('props', {});
       expect(params).toHaveProperty('styleSheet');
       expect(typeof params.styleSheet).toEqual('function');
@@ -111,10 +93,8 @@ describe('styled', () => {
       expect(useLogic).toBeCalled();
 
       const [params] = useLogic.mock.lastCall;
-      expect(params).toHaveProperty('animationDuration', 100);
-      expect(params).toHaveProperty('animationKeys', []);
       expect(params).toHaveProperty('hovered', undefined);
-      expect(params).toHaveProperty('pressed', undefined);
+      expect(params).toHaveProperty('active', undefined);
       expect(params).toHaveProperty('props', {});
       expect(params).toHaveProperty('styleSheet');
       expect(typeof params.styleSheet).toEqual('function');

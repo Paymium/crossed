@@ -1,114 +1,61 @@
-import { composeEventHandlers } from '@crossed/core';
-import { useCallback, useMemo, useState } from 'react';
-import {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import { useMemo } from 'react';
 import { useStyles } from 'react-native-unistyles';
 import type { ReturnExtract } from './extract';
-
-const useHover = (props: any) => {
-  const [hovered, setHoveredState] = useState(false);
-  // hover
-  const onPointerEnter = useCallback(
-    composeEventHandlers(() => {
-      setHoveredState(true);
-    }, props.onPointerEnter) as any,
-    []
-  );
-  const onPointerLeave = useCallback(
-    composeEventHandlers(() => {
-      setHoveredState(false);
-    }, props.onPointerLeave) as any,
-    []
-  );
-
-  return {
-    hovered,
-    onPointerLeave,
-    onPointerEnter,
-  };
-};
-
-const usePress = (props: any) => {
-  const [pressed, setPressedState] = useState(false);
-  // active
-  const onPointerUp = useCallback(
-    composeEventHandlers(() => {
-      setPressedState(false);
-    }, props.onPointerUp) as any,
-    []
-  );
-  const onPointerDown = useCallback(
-    composeEventHandlers(() => {
-      setPressedState(true);
-    }, props.onPointerDown) as any,
-    []
-  );
-  return {
-    pressed,
-    onPointerUp,
-    onPointerDown,
-  };
-};
+import { useActive } from './hooks/useActive';
+import { useHover } from './hooks/useHover';
+import { useFocus } from './hooks/useFocus';
 
 export const useLogic = <P extends Record<string, any>>({
   props,
+  // debug,
   styleSheet,
   hovered: hoveredProps,
-  pressed: pressedProps,
-  animationDuration,
-  animationKeys,
+  active: activeProps,
+  focus: focusProps,
 }: {
   props: P;
   styleSheet: (e: never) => ReturnExtract;
   hovered?: boolean;
-  pressed?: boolean;
-  animationDuration?: number;
-  animationKeys?: string[];
+  active?: boolean;
+  focus?: boolean;
+  debug?: boolean;
 }) => {
   const { styles } = useStyles(styleSheet as any, props as any);
 
   const { hovered, ...actionsHover } = useHover(props);
-  const { pressed, ...actionsPressed } = usePress(props);
+  const { active, ...actionsPressed } = useActive(props);
+  const { focus, ...actionsFocus } = useFocus(props);
 
-  const styleAnimation = useAnimatedStyle(() => {
-    const toto = Object.entries({
-      ...styles.base,
-      ...(((hovered || hoveredProps) && styles.hover) || {}),
-      ...(((pressed || pressedProps) && styles.active) || {}),
-    } as any).reduce<any>((acc, [key, value]: any[]) => {
-      if ((animationKeys || []).includes(key)) {
-        acc[key] = withTiming(value, {
-          duration: animationDuration || 100,
-        });
-      } else {
-        acc[key] = value;
-      }
-      return acc;
-    }, {});
-    return toto;
+  const globalStyle = useMemo(() => {
+    return [
+      styles.base,
+      (focus || focusProps) && styles.focus,
+      (hovered || hoveredProps) && styles.hover,
+      (active || activeProps) && styles.active,
+      styles.base.extraStyle?.(props, {
+        focus: focus || focusProps,
+        active: active || activeProps,
+        hover: hovered || hoveredProps,
+      }),
+      props.style,
+    ];
   }, [
-    pressedProps,
-    hoveredProps,
-    pressed,
-    hovered,
+    props,
     styles,
-    animationKeys,
-    animationDuration,
+    hovered,
+    hoveredProps,
+    active,
+    activeProps,
+    focus,
+    focusProps,
   ]);
 
-  const globalStyle = useMemo(
-    () => [styles.base, styleAnimation, props.style],
-    [props.style, styleAnimation, styles]
-  );
-
   return {
-    styles: { base: globalStyle },
+    styles: globalStyle,
     actions: {
       ...actionsPressed,
       ...actionsHover,
+      ...actionsFocus,
     },
   };
 };

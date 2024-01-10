@@ -6,4 +6,4 @@ export * from './composeRefs';
 export * from './useUncontrolled';
 export * from './useCallbackRef';
 export * from './useDirection';
-export * from './helpers';
+export * from './withDefaultProps';

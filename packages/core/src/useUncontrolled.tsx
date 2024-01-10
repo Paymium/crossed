@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-interface UseUncontrolledInput<T> {
+export interface UseUncontrolledInput<T> {
   /** Value for controlled state */
   value?: T;
 

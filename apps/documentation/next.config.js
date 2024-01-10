@@ -2,24 +2,16 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
   transpilePackages: [
     'react-native',
     'react-native-reanimated',
-    'react-native-unistyles',
-    '@crossed/styled',
   ],
+  basePath: '/crossed',
   webpack: (config, { webpack }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       'react-native$': 'react-native-web',
-      'react-native-unistyles$': path.resolve(
-        __dirname,
-        '../../node_modules/.pnpm/react-native-unistyles@2.0.0_@react-native+normalize-colors@0.73.2_react-native-web@0.19.10_r_lpfmakqcc5anks54r56ubcsaim/node_modules/react-native-unistyles/lib/module/index.js'
-      ),
-      '@crossed/styled$': path.resolve(
-        __dirname,
-        './node_modules/@crossed/styled/src/index.ts'
-      ),
     };
 
     config.resolve.extensions = [

@@ -4,17 +4,17 @@ import type { ExtractUnistylesValues, UnistylesValuesExtends } from './types';
 export type ReturnExtract = ExtractUnistylesValues & { base: UnistylesValues };
 
 const stateToExtract = [
-  'checked:',
-  'readOnly:',
-  'required:',
-  'invalid:',
+  // 'checked:',
+  // 'readOnly:',
+  // 'required:',
+  // 'invalid:',
   'focus:',
-  'focusVisible:',
+  // 'focusVisible:',
   'hover:',
-  'pressed:',
+  // 'pressed:',
   'active:',
-  'loading:',
-  'disabled:',
+  // 'loading:',
+  // 'disabled:',
 ];
 
 export const extract = (p: Partial<UnistylesValuesExtends>): ReturnExtract => {
@@ -39,17 +39,17 @@ export const extract = (p: Partial<UnistylesValuesExtends>): ReturnExtract => {
     },
     {
       base: {},
-      checked: {},
-      readOnly: {},
-      required: {},
-      invalid: {},
+      // checked: {},
+      // readOnly: {},
+      // required: {},
+      // invalid: {},
       focus: {},
-      focusVisible: {},
+      // focusVisible: {},
       hover: {},
-      pressed: {},
+      // pressed: {},
       active: {},
-      loading: {},
-      disabled: {},
+      // loading: {},
+      // disabled: {},
     }
   );
 };
