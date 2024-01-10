@@ -1,5 +1,5 @@
 import './globals.css';
-// import '@/types/unistyles';
+import '@/types/unistyles';
 import type { Metadata } from 'next';
 import { Body } from '@/components/Body';
 import { NavBar } from '@/components/NavBar';
@@ -15,24 +15,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
+    <html lang={'en'}>
       <head></head>
       <Registry>
-        <Body>
-          <Suspense>
-            <ScrollView
-              stickyHeaderIndices={[0]}
-              style={{ height: '100%' }}
-              contentContainerStyle={{ minHeight: '100%' }}
-              // scrollEnabled={false}
-              // scrollToOverflowEnabled
-            >
-              <NavBar />
-              {children}
-              <Footer />
-            </ScrollView>
-          </Suspense>
-        </Body>
+          <Body>
+            <Suspense>
+              <ScrollView
+                stickyHeaderIndices={[0]}
+                style={{ height: '100%' }}
+                contentContainerStyle={{ minHeight: '100%' }}
+              >
+                <NavBar />
+                {children}
+                <Footer />
+              </ScrollView>
+            </Suspense>
+          </Body>
       </Registry>
     </html>
   );

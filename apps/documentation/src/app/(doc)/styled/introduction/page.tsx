@@ -1,16 +1,24 @@
-'use client';
-import { Link } from '@/components/Link';
+"use client";
+
 import '@/types/unistyles';
+import { Link } from '@/components/Link';
 import { H1, H2, P, Text, YBox, Ul, Li, B, Kbd } from '@crossed/ui';
+import { Trans, useTranslation } from 'react-i18next';
+
+
 
 export default function Home() {
+  const { t, ...other } = useTranslation();
+  console.log(other)
   return (
     <YBox role="main">
-      <H1 id="introduction">Introduction</H1>
+      <H1 id="introduction">{t('Introduction')}</H1>
       <P>
-        <Kbd>@crossed/styled</Kbd> is here to streamline your styling workflow,
+        <Trans><Kbd>@crossed/styled</Kbd> is here to streamline your styling workflow, offering the same ease of use as style-components but with a cross-platform twist.</Trans>
+        {/* {t('@crossed/styled is here to streamline your styling workflow, offering the same ease of use as style-components but with a cross-platform twist.')} */}
+        {/* <Kbd>@crossed/styled</Kbd> is here to streamline your styling workflow,
         offering the same ease of use as style-components but with a
-        cross-platform twist.
+        cross-platform twist. */}
       </P>
       <P>
         Additionally, CSS simplifies maintenance and scalability, allowing for

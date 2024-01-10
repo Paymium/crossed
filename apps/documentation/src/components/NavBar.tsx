@@ -1,5 +1,7 @@
 'use client';
 
+
+import '@/types/unistyles';
 import {
   UnistylesRuntime,
   createStyleSheet,
@@ -13,6 +15,7 @@ import { Logo } from './Logo';
 import { withDefaultProps } from '@crossed/core';
 import { forwardRef, memo } from 'react';
 import { usePathname } from 'next/navigation';
+import { ChangeLang } from './ChangeLang';
 
 const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
   {
@@ -58,6 +61,7 @@ export const NavBar = () => {
             {title}
           </LinkNav>
         ))}
+        <ChangeLang />
         <ChangeTheme />
       </XBox>
     </XBox>

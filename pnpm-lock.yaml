@@ -171,9 +171,15 @@ importers:
       babel-loader:
         specifier: ^9.1.3
         version: 9.1.3(@babel/core@7.22.9)(webpack@5.89.0)
+      i18next:
+        specifier: ^23.7.16
+        version: 23.7.16
       next:
         specifier: 14.0.4
         version: 14.0.4(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)
+      next-translate:
+        specifier: ^2.6.2
+        version: 2.6.2(next@14.0.4)(react@18.2.0)
       prism-react-renderer:
         specifier: ^2.3.1
         version: 2.3.1(react@18.2.0)
@@ -186,6 +192,9 @@ importers:
       react-dom:
         specifier: ^18
         version: 18.2.0(react@18.2.0)
+      react-i18next:
+        specifier: ^14.0.0
+        version: 14.0.0(i18next@23.7.16)(react-dom@18.2.0)(react-native@0.72.5)(react@18.2.0)
       react-live:
         specifier: ^4.1.5
         version: 4.1.5(react-dom@18.2.0)(react@18.2.0)
@@ -217,6 +226,9 @@ importers:
       eslint-config-next:
         specifier: 14.0.4
         version: 14.0.4(eslint@8.46.0)(typescript@5.2.2)
+      next-translate-plugin:
+        specifier: ^2.6.2
+        version: 2.6.2(next-translate@2.6.2)
       typescript:
         specifier: ^5
         version: 5.2.2
@@ -2493,6 +2505,12 @@ packages:
     dependencies:
       regenerator-runtime: 0.14.0
 
+  /@babel/runtime@7.23.8:
+    resolution: {integrity: sha512-Y7KbAP984rn1VGMbGqKmBLio9V7y5Je9GvU4rQPCPinCyNfUcToxIXl06d59URp/F3LwinvODxab5N/G6qggkw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.0
+
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
     engines: {node: '>=6.9.0'}
@@ -4539,7 +4557,7 @@ packages:
   /@manypkg/find-root@1.1.0:
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
     dependencies:
-      '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.23.8
       '@types/node': 12.20.55
       find-up: 4.1.0
       fs-extra: 8.1.0
@@ -5078,7 +5096,7 @@ packages:
     peerDependencies:
       react: ^16.8 || ^17.0 || ^18.0
     dependencies:
-      '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.23.8
       react: 18.2.0
     dev: false
 
@@ -7080,7 +7098,7 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       '@babel/code-frame': 7.22.13
-      '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.23.8
       '@types/aria-query': 5.0.2
       aria-query: 5.1.3
       chalk: 4.1.2
@@ -8982,7 +9000,7 @@ packages:
   /babel-plugin-macros@2.8.0:
     resolution: {integrity: sha512-SEP5kJpfGYqYKpBrj5XU3ahw5p5GOHJ0U5ssOSQ/WBVdwkD2Dzlce95exQTs3jOVWPPKLBN2rlEWkCK7dSmLvg==}
     dependencies:
-      '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.23.8
       cosmiconfig: 6.0.0
       resolve: 1.22.4
     dev: true
@@ -14229,6 +14247,12 @@ packages:
   /html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
 
+  /html-parse-stringify@3.0.1:
+    resolution: {integrity: sha512-KknJ50kTInJ7qIScF3jeaFRpMpE8/lfiTdzf/twXyPBLAGrLRTmkz3AdTnKeh40X8k9L2fdYwEp/42WGXIRGcg==}
+    dependencies:
+      void-elements: 3.1.0
+    dev: false
+
   /html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
     dev: false
@@ -14334,6 +14358,12 @@ packages:
 
   /hyphenate-style-name@1.0.4:
     resolution: {integrity: sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==}
+
+  /i18next@23.7.16:
+    resolution: {integrity: sha512-SrqFkMn9W6Wb43ZJ9qrO6U2U4S80RsFMA7VYFSqp7oc7RllQOYDCdRfsse6A7Cq/V8MnpxKvJCYgM8++27n4Fw==}
+    dependencies:
+      '@babel/runtime': 7.23.8
+    dev: false
 
   /iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
@@ -17125,7 +17155,7 @@ packages:
   /match-sorter@6.3.1:
     resolution: {integrity: sha512-mxybbo3pPNuA+ZuCUhm5bwNkXrJTbsk5VWbR5wiwz/GC6LIiegBGn2w3O08UG/jdbYLinw51fSQ5xNU1U3MgBw==}
     dependencies:
-      '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.23.8
       remove-accents: 0.4.2
     dev: false
 
@@ -17760,7 +17790,7 @@ packages:
     resolution: {integrity: sha512-16RKcwpxriNnPdE5eKWJu7/KLgxE+AaDAdYthoS6zbzjaOu7RiY2zPM1Elz175Rw//74kOwtKXgxTW8ADHB8SQ==}
     engines: {node: '>=18'}
     dependencies:
-      '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.23.8
     dev: false
 
   /metro-source-map@0.76.8:
@@ -18711,6 +18741,27 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
+
+  /next-translate-plugin@2.6.2(next-translate@2.6.2):
+    resolution: {integrity: sha512-qfvYG//QfP7b+A/xXGP9K+bdswkAFCabguemuEqjxu+j8pRNoF+jWKmepRXRaAcn1PqFLBj6PBvYkqD1r5k5Zw==}
+    engines: {node: '>=14.15.0'}
+    requiresBuild: true
+    peerDependencies:
+      next-translate: '>= 2.4.1'
+    dependencies:
+      next-translate: 2.6.2(next@14.0.4)(react@18.2.0)
+      typescript: 4.5.2
+    dev: true
+
+  /next-translate@2.6.2(next@14.0.4)(react@18.2.0):
+    resolution: {integrity: sha512-Dcfo2Vyw+Ds06+8BJM0RcV/lfN7R59kTY/NP+XJgSpcrFKZV6QJuKfS+K4+OHkKBdQnF3ZOT3wk1np9eZx/PEA==}
+    engines: {node: '>=16.10.0'}
+    peerDependencies:
+      next: '>= 13.2.5'
+      react: '>= 18.0.0'
+    dependencies:
+      next: 14.0.4(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
 
   /next-transpile-modules@10.0.1:
     resolution: {integrity: sha512-4VX/LCMofxIYAVV58UmD+kr8jQflpLWvas/BQ4Co0qWLWzVh06FoZkECkrX5eEZT6oJFqie6+kfbTA3EZCVtdQ==}
@@ -20258,6 +20309,27 @@ packages:
       shallowequal: 1.1.0
     dev: false
 
+  /react-i18next@14.0.0(i18next@23.7.16)(react-dom@18.2.0)(react-native@0.72.5)(react@18.2.0):
+    resolution: {integrity: sha512-OCrS8rHNAmnr8ggGRDxjakzihrMW7HCbsplduTm3EuuQ6fyvWGT41ksZpqbduYoqJurBmEsEVZ1pILSUWkHZng==}
+    peerDependencies:
+      i18next: '>= 23.2.3'
+      react: '>= 16.8.0'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.8
+      html-parse-stringify: 3.0.1
+      i18next: 23.7.16
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-native: 0.72.5(@babel/core@7.22.9)(@babel/preset-env@7.22.9)(react@18.2.0)
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -20737,7 +20809,7 @@ packages:
   /regenerator-transform@0.15.1:
     resolution: {integrity: sha512-knzmNAcuyxV+gQCufkYcvOqX/qIIfHLv0u5x79kRxuGojfYVky1f15TzZEu2Avte8QGepvUNTnLskf8E6X6Vyg==}
     dependencies:
-      '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.23.8
 
   /regex-not@1.0.2:
     resolution: {integrity: sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A==}
@@ -23244,6 +23316,12 @@ packages:
     hasBin: true
     dev: true
 
+  /typescript@4.5.2:
+    resolution: {integrity: sha512-5BlMof9H1yGt0P8/WF+wPNw6GfctgGjXp5hkblpyT+8rkASSmkUKMXrxR0Xg8ThVCi/JnHQiKXeBaEwCeQwMFw==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
   /typescript@5.1.6:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
@@ -23788,6 +23866,11 @@ packages:
       acorn: 8.10.0
       acorn-walk: 8.2.0
     dev: true
+
+  /void-elements@3.1.0:
+    resolution: {integrity: sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /vscode-oniguruma@1.7.0:
     resolution: {integrity: sha512-L9WMGRfrjOhgHSdOYgCt/yRMsXzLDJSL7BPrOZt73gU0iWO4mpqzqQzOz5srxqTvMBaR0XZTSrVWo4j55Rc6cA==}

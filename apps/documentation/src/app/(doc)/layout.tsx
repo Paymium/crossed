@@ -1,4 +1,5 @@
 'use client';
+
 import '@/types/unistyles';
 import { XBox } from '@crossed/ui';
 import { styled } from '@crossed/styled';

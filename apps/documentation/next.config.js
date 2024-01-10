@@ -2,11 +2,13 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  i18n: {
+    locales: ['en', 'fr'],
+    defaultLocale: 'en',
+    localeDetection: false
+  },
   reactStrictMode: false,
-  transpilePackages: [
-    'react-native',
-    'react-native-reanimated',
-  ],
+  transpilePackages: ['react-native', 'react-native-reanimated'],
   basePath: '/crossed',
   webpack: (config, { webpack }) => {
     config.resolve.alias = {
@@ -20,19 +22,6 @@ const nextConfig = {
       '.web.tsx',
       ...config.resolve.extensions,
     ];
-
-    // config.module.rules.push({
-    //   test: /react-native-reanimated/,
-    //   use: {
-    //     loader: 'babel-loader',
-    //     options: {
-    //       presets: [
-    //         '@babel/preset-react',
-    //         { plugins: ['react-native-reanimated/plugin'] },
-    //       ],
-    //     },
-    //   },
-    // });
 
     config.plugins.push(
       new webpack.DefinePlugin({
