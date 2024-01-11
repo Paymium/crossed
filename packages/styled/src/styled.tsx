@@ -1,7 +1,7 @@
 'use client';
 
 import { extract } from './extract';
-import { forwardRef, memo } from 'react';
+import { forwardRef, memo, useMemo } from 'react';
 import { createStyleSheet } from 'react-native-unistyles';
 import { withStaticProperties } from '@crossed/core/src/withStaticProperties';
 import type {
@@ -54,8 +54,11 @@ export const styled = <
             active: pressedProps,
             hovered: hoveredProps,
           });
-          return (
-            <Comp ref={ref} {...(props as any)} {...actions} style={styles} />
+          return useMemo(
+            () => (
+              <Comp ref={ref} {...(props as any)} {...actions} style={styles} />
+            ),
+            [actions, props, styles]
           );
         }
       )

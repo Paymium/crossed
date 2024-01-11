@@ -4,17 +4,18 @@ import { Text as TextNative } from 'react-native';
 import { styled } from '@crossed/styled';
 import type { GetProps } from '@crossed/core';
 
+export const textAlign = {
+  auto: { textAlign: 'auto' },
+  center: { textAlign: 'center' },
+  justify: { textAlign: 'justify' },
+  left: { textAlign: 'left' },
+  default: { textAlign: 'left' },
+  right: { textAlign: 'right' },
+} as const
+
 export const Text = styled(TextNative, (t) => ({
-  color: t.colors.textColor,
   variants: {
-    textAlign: {
-      auto: { textAlign: 'auto' },
-      center: { textAlign: 'center' },
-      justify: { textAlign: 'justify' },
-      left: { textAlign: 'left' },
-      default: { textAlign: 'left' },
-      right: { textAlign: 'right' },
-    },
+    textAlign,
     weight: {
       thin: { fontWeight: '100' },
       extralight: { fontWeight: '200' },
@@ -38,6 +39,13 @@ export const Text = styled(TextNative, (t) => ({
       '3xl': { fontSize: t.fontSize['3xl'], lineHeight: 36 },
       '4xl': { fontSize: t.fontSize['4xl'], lineHeight: 54 },
       '5xl': { fontSize: t.fontSize['5xl'], lineHeight: 78 },
+    },
+    color: {
+      default: { color: t.colors.textColor },
+      error: { color: t.colors.error},
+      info: { color: t.colors.info},
+      warning: { color: t.colors.warning},
+      success: { color: t.colors.success},
     },
   },
 }));

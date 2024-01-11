@@ -14,7 +14,7 @@ export const H1 = withDefaultProps<HeadingProps>(Text, {
 });
 
 export const H2 = withDefaultProps<HeadingProps>(
-  styled(Text, { marginTop: 30 }),
+  styled(Text, (t) => ({ marginTop: t.space.xl, marginBottom: t.space.md })),
   {
     'role': 'heading',
     'aria-level': 2,
@@ -27,11 +27,14 @@ export const H3 = withDefaultProps<HeadingProps>(Text, {
   'aria-level': 3,
   'size': '3xl',
 });
-export const H4 = withDefaultProps<HeadingProps>(styled(Text, { marginTop: 20 }), {
-  'role': 'heading',
-  'aria-level': 4,
-  'size': '2xl',
-});
+export const H4 = withDefaultProps<HeadingProps>(
+  styled(Text, { marginTop: 20 }),
+  {
+    'role': 'heading',
+    'aria-level': 4,
+    'size': '2xl',
+  }
+);
 export const H5 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 5,

@@ -14,6 +14,7 @@ i18n
         common: frCommon,
       },
     },
+    debug: true,
     
     lng: 'en', // if you're using a language detector, do not define the lng option
     fallbackLng: 'en',

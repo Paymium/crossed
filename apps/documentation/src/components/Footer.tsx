@@ -4,6 +4,7 @@ import { Text, XBox, YBox } from '@crossed/ui';
 import { Link } from './Link';
 import { styled } from '@crossed/styled';
 import { withDefaultProps } from '@crossed/core';
+import { Trans, useTranslation } from 'react-i18next';
 
 const Container = styled(YBox, (t) => ({
   backgroundColor: t.colors.backgroundStrong,
@@ -23,8 +24,9 @@ const Row = withDefaultProps(
 );
 
 export const Footer = () => {
+  const { t } = useTranslation();
   return (
-    <Container space="xs">
+    <Container space="xs" role="contentinfo">
       <Row>
         <Text size="xs">Copyright © {new Date().getFullYear()}</Text>
         <Link
@@ -36,7 +38,9 @@ export const Footer = () => {
           Paymium
         </Link>
       </Row>
-      <Text size="xxs">Made with crossed ecosystem</Text>
+      <Text size="xxs">
+        {t("Made with crossed ecosystem")}
+      </Text>
     </Container>
   );
 };

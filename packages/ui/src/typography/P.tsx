@@ -13,6 +13,6 @@ export const P = styled(
   )),
   (t) => ({
     alignSelf: 'stretch',
-    marginVertical: t.space.lg,
+    marginBottom: t.space.md,
   })
 );

@@ -1,5 +1,5 @@
 'use client';
-import { styled } from '@crossed/styled';
+import { styled, unifyStyle } from '@crossed/styled';
 import { HtmlHTMLAttributes, forwardRef } from 'react';
 
 export const Body = styled(
@@ -7,7 +7,7 @@ export const Body = styled(
     { children, style, ...props }: HtmlHTMLAttributes<HTMLBodyElement>,
     ref: HTMLBodyElement
   ) => (
-    <body {...props} style={style[0]}>
+    <body {...props} style={unifyStyle(style)}>
       {children}
     </body>
   ),

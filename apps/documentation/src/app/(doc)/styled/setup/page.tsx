@@ -4,18 +4,20 @@ import '@/types/unistyles';
 import { withDefaultProps } from '@crossed/core';
 import { styled } from '@crossed/styled';
 import { Alert, Anchor, H1, H2, P, Tabs, Text, YBox } from '@crossed/ui';
+import { Trans, useTranslation } from 'react-i18next';
 
 const Description = withDefaultProps(styled(Text, {}), {
   size: 'xl',
   weight: 'medium',
 });
 export default function Home() {
+  const { t } = useTranslation();
   return (
     <YBox role="main">
-      <H1>Setup</H1>
-      <Description>Get @crossed/styled set up, step by step</Description>
+      <H1>{t('Setup')}</H1>
+      <Description>{t('Get @crossed/styled set up, step by step')}</Description>
       <YBox space="md">
-        <H2 id="install">Install dependencies</H2>
+        <H2 id="install">{t('Install dependencies')}</H2>
         <Tabs defaultValue="pnpm">
           <Tabs.List>
             <Tabs.Tab value="pnpm">
@@ -48,25 +50,29 @@ export default function Home() {
         </Tabs>
       </YBox>
 
-      <H2 id="configure">Configure</H2>
+      <H2 id="configure">{t('Configure')}</H2>
       <P>
-        You should finish installation and configure react-native-unistyles,
-        click{' '}
-        <Anchor
-          href="https://reactnativeunistyles.vercel.app/start/setup/#3-configure-unistyles-with-unistylesregistry"
-          hrefAttrs={{ target: '_blank' }}
-        >
-          here
-        </Anchor>
+        <Trans>
+          You should finish installation and configure react-native-unistyles,
+          click{' '}
+          <Anchor
+            href="https://reactnativeunistyles.vercel.app/start/setup/#3-configure-unistyles-with-unistylesregistry"
+            hrefAttrs={{ target: '_blank' }}
+          >
+            here
+          </Anchor>
+        </Trans>
       </P>
 
       <Alert status="warning">
         <YBox space="md">
           <YBox>
-            <Alert.Title>Server side renderer</Alert.Title>
+            <Alert.Title>{t('Server side renderer')}</Alert.Title>
             <Alert.Description>
-              For add style on server side rendering, you should add registry on
-              server components (nextjs app router)
+              <Trans>
+                For add style on server side rendering, you should add registry
+                on server components (nextjs app router)
+              </Trans>
             </Alert.Description>
           </YBox>
           <CodeBlock language="tsx" fileName="app/layout.tsx">
@@ -93,7 +99,7 @@ export default function RootLayout({
       </Alert>
 
       <YBox space="md">
-        <H2 id="usage">Usage</H2>
+        <H2 id="usage">{t("Usage")}</H2>
         <CodeBlock language="tsx" fileName="foo.tsx">
           {`
 import { styled } from '@crossed/styled';

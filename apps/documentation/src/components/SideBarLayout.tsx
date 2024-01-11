@@ -5,6 +5,7 @@ import { PropsWithChildren } from 'react';
 import { createStyleSheet, mq, styled, useStyles } from '@crossed/styled';
 import { usePathname, useRouter } from 'next/navigation';
 import { withDefaultProps } from '@crossed/core';
+import { useTranslation } from 'react-i18next';
 
 const Menu = withDefaultProps(
   styled(MenuList, () => ({
@@ -52,10 +53,14 @@ const Li = withDefaultProps(
 
 type Nav = { href?: string; title: string };
 
-export function SideBarLayout({ children, menus }: PropsWithChildren<{menus: Nav[]}>) {
+export function SideBarLayout({
+  children,
+  menus,
+}: PropsWithChildren<{ menus: Nav[] }>) {
   const { styles } = useStyles(styleSheet);
   const pathname = usePathname();
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <Container>
@@ -78,10 +83,16 @@ export function SideBarLayout({ children, menus }: PropsWithChildren<{menus: Nav
                   }}
                   style={styles.leftItem}
                 >
-                  <MenuList.Title>{title}</MenuList.Title>
+                  <MenuList.Title
+                    weight={href === pathname ? 'semibold' : undefined}
+                  >
+                    {t(title)}
+                  </MenuList.Title>
                 </MenuList.Item>
               ) : (
-                <MenuList.Label textAlign="right">{title}</MenuList.Label>
+                <MenuList.Label textAlign="right" weight="semibold">
+                  {t(title)}
+                </MenuList.Label>
               )}
             </Li>
           );

@@ -1,6 +1,7 @@
 'use client';
 import { UnistylesRuntime, useStyles } from '@crossed/styled';
 import { Button } from '@crossed/ui';
+import { VisibilityHidden } from '@crossed/primitive';
 import { useCallback } from 'react';
 
 // const Button = styled(Pressable, (theme) => ({
@@ -26,7 +27,13 @@ export const ChangeTheme = () => {
     );
   }, []);
   return (
-    <Button onPress={onPress} variant='ghost'>
+    <Button onPress={onPress} variant="ghost">
+      <VisibilityHidden hidden>
+        <Button.Text>
+          Change to {UnistylesRuntime.themeName === 'light' ? 'dark' : 'light'}{' '}
+          mode
+        </Button.Text>
+      </VisibilityHidden>
       {UnistylesRuntime.themeName === 'light' ? (
         <svg
           fill="none"

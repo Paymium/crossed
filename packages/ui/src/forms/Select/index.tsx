@@ -26,6 +26,37 @@
 // import { YBox, YBoxProps } from '../../layout/YBox';
 // import { Box, BoxProps } from '../../layout/Box';
 
+import {
+  GetProps,
+  UseUncontrolledInput,
+  composeEventHandlers,
+  createScope,
+  useUncontrolled,
+  withDefaultProps,
+  withStaticProperties,
+} from '@crossed/core';
+import { styled, useStyles } from '@crossed/styled';
+import {
+  useState,
+  type forwardRef,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  memo,
+  ReactNode,
+  useRef,
+  Children,
+  isValidElement,
+  MutableRefObject,
+} from 'react';
+import { Pressable, View } from 'react-native';
+import { Button, ButtonProps } from '../Button';
+import { YBox, YBoxProps } from '../../layout/YBox';
+import { XBox, XBoxProps } from '../../layout/XBox';
+import { MenuItemProps, MenuList, MenuListProps } from '../../display/MenuList';
+import { Card } from '../../display/Card';
+import { Text } from '../../typography/Text';
+
 // // type InputProps = GetProps<typeof Input>;
 
 // // type ProviderContext = {
@@ -461,11 +492,162 @@
 //   Select,
 // };
 
-// // export const Select = withStaticProperties(SelectRoot, {
-// //   Label: SelectLabel,
-// //   Trigger: SelectTrigger,
-// //   Input: SelectInput,
-// //   Icon: SelectIcon,
-// //   Content: SelectContent,
-// //   Option: SelectOption,
-// // });
+// const Select = withStaticProperties(SelectRoot, {
+//   Label: SelectLabel,
+//   Trigger: SelectTrigger,
+//   Input: SelectInput,
+//   Icon: SelectIcon,
+//   Content: Content,
+//   Option: Option,
+// });
+
+const findChild = (
+  children: ReactNode | ReactNode[],
+  value: string | number
+): ReactNode | undefined => {
+  if (!children) {
+    return;
+  }
+  return Children.toArray(children).reduce<ReactNode | undefined>((acc, e) => {
+    if (acc || !isValidElement(e)) {
+      return acc;
+    }
+    if (e.type && (e.type as any)?.id === 'Select.Option') {
+      if (e.props?.value === value) {
+        acc = e.props.children;
+      }
+      return acc;
+    } else {
+      acc = findChild(e?.props?.children, value);
+    }
+    return acc;
+  }, undefined);
+};
+
+const SelectRoot = styled(
+  memo(
+    <V extends string | number>({
+      value: valueProps,
+      defaultValue,
+      finalValue,
+      onChange,
+      ...props
+    }: UseUncontrolledInput<V> & XBoxProps) => {
+      const renderValue = useRef<ReactNode>();
+      const [value, setValue] = useUncontrolled<string | number>({
+        value: valueProps,
+        defaultValue,
+        finalValue,
+        onChange,
+      });
+      const [open, setOpen] = useUncontrolled<boolean>({
+        defaultValue: false,
+      });
+      renderValue.current = findChild(props.children, value) || 'rien trouvé';
+      return (
+        <SelectProvider
+          value={value}
+          setValue={setValue}
+          open={open}
+          setOpen={setOpen}
+          renderValue={renderValue}
+        >
+          <XBox {...props} />
+        </SelectProvider>
+      );
+    }
+  ),
+  {
+    position: 'relative',
+    width: 'auto',
+  }
+);
+
+// @ts-expect-error
+SelectRoot.id = 'Select';
+SelectRoot.displayName = 'Select';
+
+const Trigger = withStaticProperties(
+  memo((props: ButtonProps) => {
+    const { setOpen, open } = useSelectProvider();
+    const onPress = useCallback(
+      composeEventHandlers(() => {
+        setOpen(!open);
+      }, props.onPress),
+      [props.onPress, open]
+    );
+    return <Button {...props} onPress={onPress} />;
+  }),
+  { Text: Button.Text }
+);
+const Content = styled(
+  (props: MenuListProps) => {
+    const { open } = useSelectProvider();
+    const { styles } = useStyles(Card.styleSheet as any, props);
+    return open ? (
+      <MenuList {...props} style={[styles.base, props.style]} />
+    ) : null;
+  },
+  (t) => ({
+    position: 'absolute',
+    top: '100%',
+    maxWidth: 'auto',
+    padding: t.space.xs,
+  })
+);
+
+// @ts-expect-error
+Content.id = 'Select.Content';
+Content.displayName = 'Select.Content';
+
+const Option = styled(
+  ({ value, ...props }: MenuItemProps & { value: string | number }) => {
+    const { setOpen, setValue } = useSelectProvider();
+    return (
+      <MenuList.Item
+        {...props}
+        onPress={composeEventHandlers(() => {
+          setOpen(false);
+          setValue(value);
+        }, props.onPress)}
+      />
+    );
+  },
+  {}
+);
+
+// @ts-expect-error
+Option.id = 'Select.Option';
+Option.displayName = 'Select.Option';
+
+const Value = () => {
+  const { renderValue } = useSelectProvider();
+  return renderValue.current || '';
+};
+
+Value.id = 'Select.Value';
+Value.displayName = 'Select.Value';
+
+type Context = {
+  open: boolean;
+  setOpen: (p: boolean) => void;
+  value: string | number;
+  setValue: (p: string | number) => void;
+  renderValue: MutableRefObject<ReactNode>;
+};
+const [SelectProvider, useSelectProvider] = createScope<Context>({} as Context);
+
+const Select = withStaticProperties(SelectRoot, {
+  Option,
+  Content,
+  Trigger,
+  Value,
+});
+
+const {
+  Option: SelectOption,
+  Content: SelectContent,
+  Value: SelectValue,
+} = Select;
+
+export { Select, SelectOption, SelectContent, SelectValue };

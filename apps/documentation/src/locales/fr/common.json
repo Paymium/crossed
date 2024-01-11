@@ -1,4 +1,35 @@
 {
   "Introduction": "Introduction",
-  "<0>@crossed/styled</0> is here to streamline your styling workflow, offering the same ease of use as style-components but with a cross-platform twist.": "<0>@crossed/styled</0> est là pour rationaliser votre flux de travail de style, offrant la même facilité d'utilisation que les composants de style mais avec une touche multiplateforme."
+  "<0>@crossed/styled</0> is here to streamline your styling workflow, offering the same ease of use as style-components but with a cross-platform twist.": "<0>@crossed/styled</0> est là pour rationaliser votre flux de travail de style, offrant la même facilité d'utilisation que les composants de style mais avec une touche multiplateforme.",
+  "Explore our ecosystem to develop cross-platform applications with<br/><2>react-native</2> and <4>react-native-web</4>": "Explorez notre écosystème pour développer des applications multiplateformes avec<br/><2>React Native</2> et <4>React Native Web</4>.",
+  "Cross platform ecosystem": "Un écosystème mutli-plateforme",
+  "Star us": "Likez",
+  "Styled your component with unistyles": "Stylisez votre composant avec Unistyles",
+  "Create your accessible component from anything": "Créez votre composant accessible à partir de n'importe quoi",
+  "UI Component made with @crossed/primitive and @crossed/styled": "Composant d'interface utilisateur créé avec @crossed/primitive et @crossed/styled",
+  "Comming soon": "Bientôt disponible",
+  "Additionally, CSS simplifies maintenance and scalability, allowing for consistent style changes and design expansion as the website evolves.": "De plus, le CSS simplifie la maintenance et la scalabilité, permettant des modifications de style cohérentes et une expansion du design au fur et à mesure de l'évolution du site web",
+  "Key Features": "Caractéristiques clés",
+  "<0>Unified Codebase:</0> Maintain a single codebase to generate styles seamlessly for both React and React Native platforms.": "<0>Base de code unifiée :</0> Maintenez une seule base de code pour générer des styles de manière transparente pour les plateformes React et React Native.",
+  "<0>Higher Order Component (HOC):</0> Unlock the power of hover, active, and focus states in your components effortlessly.": "<0>Composant d'ordre supérieur (HOC) :</0> Libérez la puissance des états hover, active et focus dans vos composants sans effort.",
+  "<0>React-Native-Unistyles Integration:</0> Familiar with react-native-unistyles? Harness its potential with our library for an enhanced styling experience.": "<0>Intégration React-Native-Unistyles :</0> Familiarisé avec react-native-unistyles ? Exploitez son potentiel avec notre bibliothèque pour une expérience de stylisation améliorée.",
+  "Dependencies used in @crossed/styled": "Dépendances utilisées dans @crossed/styled",
+  "Dependencies used": "Dépendances utilisées",
+  "Made with crossed ecosystem": "Réalisé avec l'écosystème crossed",
+  "On this page": "Sur cette page",
+  "Setup": "Configuration",
+  "Guide": "Guide",
+  "Concept": "Concept",
+  "Usage": "Utilisation",
+  "Reference": "Référence",
+  "styled": "stylisé",
+  "Registry": "Registre",
+  "Install dependencies": "Installation des dépendances",
+  "Configure": "Configuration",
+
+
+  "Get @crossed/styled set up, step by step": "Mettez en place @crossed/styled, étape par étape",
+  "You should finish installation and configure react-native-unistyles, click <2>here</2>": "Vous devriez terminer l'installation et configurer react-native-unistyles, cliquez <2>ici</2>",
+  "For add style on server side rendering, you should add registry on server components (nextjs app router)": "Pour ajouter du style au rendu côté serveur, vous devriez ajouter un registre sur les composants serveur (routeur de l'application nextjs)",
+  "Server side renderer": "Rendu côté serveur"
 }

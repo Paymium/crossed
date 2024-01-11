@@ -162,6 +162,9 @@ importers:
       '@crossed/core':
         specifier: workspace:^
         version: link:../../packages/core
+      '@crossed/primitive':
+        specifier: workspace:^
+        version: link:../../packages/primitive
       '@crossed/styled':
         specifier: workspace:^
         version: link:../../packages/styled

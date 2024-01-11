@@ -1,3 +1,5 @@
+"use client";
+
 import { useStyles } from '@crossed/styled';
 import { YBox } from '@crossed/ui';
 import { Highlight, HighlightProps, themes, Prism } from 'prism-react-renderer';

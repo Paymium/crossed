@@ -74,6 +74,7 @@ const {
   SubTitle: MenuSubTitle,
 } = MenuList;
 
+export type MenuListProps = GetProps<typeof MenuList>;
 export type MenuItemProps = GetProps<typeof MenuItem>;
 
 export {

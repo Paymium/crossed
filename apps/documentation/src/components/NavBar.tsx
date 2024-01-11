@@ -10,10 +10,9 @@ import {
 } from '@crossed/styled';
 import { ChangeTheme } from './ChangeTheme';
 import { XBox } from '@crossed/ui';
-import { Link, LinkProps } from './Link';
+import { Link } from './Link';
 import { Logo } from './Logo';
 import { withDefaultProps } from '@crossed/core';
-import { forwardRef, memo } from 'react';
 import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
 
@@ -70,7 +69,7 @@ export const NavBar = () => {
 
 const LinkNav = withDefaultProps(
   styled(
-    forwardRef((props: LinkProps, ref: any) => <Link {...props} ref={ref} />),
+    Link,
     (t) => ({
       'color': t.utils.shadeColor(
         t.colors.textColor,

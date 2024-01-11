@@ -27,17 +27,25 @@ export const useLogic = <P extends Record<string, any>>({
   const { focus, ...actionsFocus } = useFocus(props);
 
   const globalStyle = useMemo(() => {
-    return [
-      styles.base,
-      (focus || focusProps) && styles.focus,
-      (hovered || hoveredProps) && styles.hover,
-      (active || activeProps) && styles.active,
+    const hoverStyle = (hoveredProps || hovered) && styles.hover;
+    const focusStyle = (focusProps || focus) && styles.focus;
+    const activeStyle = (activeProps || active) && styles.active;
+    const extraStyle =
       styles.base.extraStyle?.(props, {
         focus: focus || focusProps,
         active: active || activeProps,
         hover: hovered || hoveredProps,
-      }),
-      props.style,
+      }) || {};
+
+    return [
+      Object.keys(styles.base).length > 0 ? styles.base : undefined,
+      focusStyle && Object.keys(focusStyle).length > 0 ? focusStyle : undefined,
+      hoverStyle && Object.keys(hoverStyle).length > 0 ? hoverStyle : undefined,
+      activeStyle && Object.keys(activeStyle).length > 0
+        ? activeStyle
+        : undefined,
+      extraStyle && Object.keys(extraStyle).length > 0 ? extraStyle : undefined,
+      ...(Array.isArray(props.style) ? props.style : [props.style]),
     ];
   }, [
     props,

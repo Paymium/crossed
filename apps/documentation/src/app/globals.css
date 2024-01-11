@@ -8,14 +8,15 @@ html, body { height: 100%; margin:0;padding:0; }
 a { text-decoration-line: none; }
 
 h2, h1 {
-  padding-top: 70px !important;
   display: inline-block !important;
   z-index: -1;
 }
 
 h1 {
+  padding-top: 70px !important;
   margin-top: -70px !important;
 }
 h2 {
-  margin-top: -25px !important;
+  padding-top: 70px !important;
+  margin-top: -50px !important;
 }

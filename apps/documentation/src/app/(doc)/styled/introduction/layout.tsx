@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 import '@/types/unistyles';
 import { TOCLayout } from '@/components/TOCLayout';

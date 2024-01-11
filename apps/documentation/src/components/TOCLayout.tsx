@@ -4,6 +4,7 @@ import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { createStyleSheet, mq, styled, useStyles } from '@crossed/styled';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { withDefaultProps } from '@crossed/core';
+import { Trans, useTranslation } from 'react-i18next';
 
 const Container = styled(XBox, { minHeight: '100%' });
 
@@ -60,6 +61,7 @@ export const TOCLayout = ({
   const { styles } = useStyles(styleSheet);
   const pathname = usePathname();
   const router = useRouter();
+  const { t } = useTranslation();
 
   useEffect(() => {
     window.location.hash !== hash && setHash(window.location.hash);
@@ -73,7 +75,7 @@ export const TOCLayout = ({
         </Center>
 
         <Menu style={{ position: 'sticky', top: '75px' } as any}>
-          {links.length > 0 && <Label weight="bold">On this page</Label>}
+          {links.length > 0 && <Label weight="bold">{t('On this page')}</Label>}
           {links.map(({ href, title }) => {
             return (
               <Li key={href || title}>
@@ -88,7 +90,11 @@ export const TOCLayout = ({
                   }}
                   style={styles.rightItem}
                 >
-                  <MenuList.Title weight={undefined}>{title}</MenuList.Title>
+                  <MenuList.Title
+                    weight={href === hash ? 'semibold' : undefined}
+                  >
+                    {t(title)}
+                  </MenuList.Title>
                 </MenuList.Item>
               </Li>
             );
@@ -96,7 +102,7 @@ export const TOCLayout = ({
         </Menu>
       </Container>
     );
-  }, [children, links, hash]);
+  }, [children, links, hash, t]);
 };
 
 const styleSheet = createStyleSheet((t) => ({

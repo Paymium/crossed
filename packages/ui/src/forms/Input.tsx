@@ -291,7 +291,7 @@ const Group = styled(
 const InputRoot = styled(
   forwardRef((props: TextInputProps, ref: any) => {
     const { theme } = useStyles();
-    const { toto } = useInputProvider();
+    // const { toto } = useInputProvider();
     // console.log(toto, props.style);
     return (
       <TextInput
@@ -301,8 +301,8 @@ const InputRoot = styled(
         )}
         {...props}
         style={[
-          ...props.style,
-          { paddingRight: toto },
+          // ...props.style,
+          // { paddingRight: toto },
         ]}
         ref={ref}
       />

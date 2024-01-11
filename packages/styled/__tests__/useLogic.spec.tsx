@@ -63,7 +63,7 @@ describe('useLogic', () => {
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
     expect(data.styles).toEqual([
-      {},
+      undefined,
       undefined,
       undefined,
       undefined,
@@ -105,7 +105,7 @@ describe('useLogic', () => {
 
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
-    expect(data.styles).toEqual([{}, undefined, {}, undefined, undefined]);
+    expect(data.styles).toEqual([undefined, undefined, undefined, undefined, undefined]);
     expect(Object.keys(data.actions)).toEqual([
       'actionActive',
       'actionHover',
@@ -141,7 +141,7 @@ describe('useLogic', () => {
 
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
-    expect(data.styles).toEqual([{}, undefined, undefined, {}, undefined]);
+    expect(data.styles).toEqual([undefined, undefined, undefined, undefined, undefined]);
     expect(Object.keys(data.actions)).toEqual([
       'actionActive',
       'actionHover',
@@ -178,8 +178,8 @@ describe('useLogic', () => {
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
     expect(data.styles).toEqual([
-      {},
-      {},
+      undefined,
+      undefined,
       undefined,
       undefined,
       undefined,
@@ -226,7 +226,14 @@ describe('useLogic', () => {
 
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
-    expect(data.styles).toEqual([{}, {}, {}, {}, undefined, undefined]);
+    expect(data.styles).toEqual([
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+    ]);
     expect(Object.keys(data.actions)).toEqual([
       'actionActive',
       'actionHover',
@@ -279,9 +286,9 @@ describe('useLogic', () => {
     expect(data).toHaveProperty('styles');
     expect(data.styles).toEqual([
       { extraStyle },
-      {},
-      {},
-      {},
+      undefined,
+      undefined,
+      undefined,
       undefined,
       undefined,
     ]);
