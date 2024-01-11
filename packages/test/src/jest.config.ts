@@ -1,5 +1,15 @@
 import type { Config } from '@jest/types';
 import path from 'path';
+import { readFileSync } from 'fs';
+
+let localSetup: boolean = false;
+
+try {
+  readFileSync(path.resolve(process.cwd(), './jest-setup.ts'));
+  localSetup = true;
+} catch (_e: any) {
+  localSetup = false;
+}
 
 const config: Config.InitialOptions = {
   // preset: 'react-native',
@@ -18,19 +28,12 @@ const config: Config.InitialOptions = {
   transformIgnorePatterns: [
     'node_modules/(?!((.pnpm/)?((jest-)?react-native|@react-native(-community)?))|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|tamagui|@tamagui/.*|@paymium/.*|react-native-reanimated|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)',
   ],
-  // moduleFileExtensions: [
-  //   'js',
-  //   'jsx',
-  //   'ts',
-  //   'tsx',
-  //   'json',
-  //   'node',
-  //   'android.js',
-  //   'ios.js',
-  // ],
   modulePathIgnorePatterns: ['lib', 'coverage'],
   moduleDirectories: ['./node_modules', 'src'],
-  setupFilesAfterEnv: [path.resolve(__dirname, './jest-setup.ts')],
+  setupFilesAfterEnv: [
+    path.resolve(__dirname, './jest-setup.ts'),
+    localSetup && path.resolve(process.cwd(), './jest-setup.ts'),
+  ].filter(Boolean) as any[],
   testEnvironment: 'jsdom',
   globals: {
     __DEV__: true,

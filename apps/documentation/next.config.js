@@ -1,12 +1,6 @@
-const path = require('path');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  i18n: {
-    locales: ['en', 'fr'],
-    defaultLocale: 'en',
-    localeDetection: false
-  },
+  output: 'export',
   reactStrictMode: false,
   transpilePackages: ['react-native', 'react-native-reanimated'],
   basePath: '/crossed',

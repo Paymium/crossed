@@ -6,7 +6,7 @@
   "scripts": {
     "web": "cd apps/web && yarn dev",
     "expo": "turbo run start --filter=crossed-expo",
-    "docs": "turbo run dev --filter=crossed-docs",
+    "documentation": "turbo run dev --filter=crossed-docs",
     "test": "turbo run test",
     "dev": "turbo run dev",
     "watch": "turbo run watch --filter=@crossed* --no-cache",

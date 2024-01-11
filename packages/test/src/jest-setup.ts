@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import * as React from 'react';
 import { jest } from '@jest/globals';
+
 // import { setUpTests } from 'react-native-reanimated';
 // require('react-native-reanimated').setUpTests();
 // setUpTests();
