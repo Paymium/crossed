@@ -1,7 +1,7 @@
 # crossed-docs
 
-## 0.1.1
+## 0.5.1
 
 ### Patch Changes
 
-- change for unset
+- use unistyles
