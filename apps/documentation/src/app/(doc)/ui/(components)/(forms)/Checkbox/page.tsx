@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Checkbox"
-      description={t("Checkbox component is used in forms when a user needs to select multiple values from several options.")}
+      description={t(
+        'Checkbox component is used in forms when a user needs to select multiple values from several options.'
+      )}
       params={[]}
       return={[]}
       types={[]}

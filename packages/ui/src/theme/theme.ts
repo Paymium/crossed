@@ -31,12 +31,6 @@ const fontSize: Theme['fontSize'] = {
   '5xl': 48,
 };
 
-// --chakra-sizes-xs: 20rem;
-// --chakra-sizes-sm: 24rem;
-// --chakra-sizes-md: 28rem;
-// --chakra-sizes-lg: 32rem;
-// --chakra-sizes-xl: 36rem;
-
 const utils: Theme['utils'] = {
   shadeColor: (col, amt) => {
     col = col.replace(/^#/, '');
@@ -66,7 +60,7 @@ const utils: Theme['utils'] = {
     return `#${rr}${gg}${bb}`;
   },
   hexToRgbA: (hex: string, alpha: number) => {
-    var r = parseInt(hex.slice(1, 3), 16),
+    const r = parseInt(hex.slice(1, 3), 16),
       g = parseInt(hex.slice(3, 5), 16),
       b = parseInt(hex.slice(5, 7), 16);
 
@@ -102,9 +96,9 @@ export const lightTheme = {
 
     neutral: '#DDDDDD',
     error: '#7d2424',
-    info: "#93c5fd",
-    warning: "#fdba74",
-    success: "#3abb7d",
+    info: '#93c5fd',
+    warning: '#fdba74',
+    success: '#3abb7d',
   },
   space,
   // padding,
@@ -126,9 +120,9 @@ export const darkTheme = {
 
     neutral: '#373737',
     error: '#C53030',
-    info: "#93c5fd",
-    warning: "#994912",
-    success: "#3abb7d",
+    info: '#93c5fd',
+    warning: '#994912',
+    success: '#3abb7d',
   },
   space,
   // padding,

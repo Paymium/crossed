@@ -1,7 +1,9 @@
-import { forwardRef } from 'react';
-import { Text, type TextProps } from './Text';
+import { Text } from './Text';
 import { styled } from '@crossed/styled';
+import type { GetProps } from '@crossed/core';
 
 export const I = styled(Text, {
-  fontStyle: "italic",
+  fontStyle: 'italic',
 });
+
+export type IProps = GetProps<typeof I>;

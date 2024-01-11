@@ -11,7 +11,7 @@ export const textAlign = {
   left: { textAlign: 'left' },
   default: { textAlign: 'left' },
   right: { textAlign: 'right' },
-} as const
+} as const;
 
 export const Text = styled(TextNative, (t) => ({
   variants: {
@@ -42,10 +42,10 @@ export const Text = styled(TextNative, (t) => ({
     },
     color: {
       default: { color: t.colors.textColor },
-      error: { color: t.colors.error},
-      info: { color: t.colors.info},
-      warning: { color: t.colors.warning},
-      success: { color: t.colors.success},
+      error: { color: t.colors.error },
+      info: { color: t.colors.info },
+      warning: { color: t.colors.warning },
+      success: { color: t.colors.success },
     },
   },
 }));

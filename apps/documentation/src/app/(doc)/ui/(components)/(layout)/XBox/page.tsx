@@ -8,7 +8,7 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="XBox"
-      description={t("Used to Box elements in the horizontal direction")}
+      description={t('Used to Box elements in the horizontal direction')}
       params={[]}
       return={[]}
       types={[]}

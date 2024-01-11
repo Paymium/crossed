@@ -2,16 +2,10 @@
 
 import { styled } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
-import {
-  Pressable,
-  PressableProps,
-  Text as TextNative,
-  View,
-} from 'react-native';
+import { Pressable, PressableProps, View } from 'react-native';
 import { TextProps, Text as TextUi } from '../typography/Text';
-import { type ComponentType, forwardRef, memo } from 'react';
-import type { ExtractVariant } from '@crossed/styled/src/types';
-import { GetProps, createScope, withStaticProperties } from '@crossed/core';
+import { forwardRef, memo } from 'react';
+import { GetProps, withStaticProperties } from '@crossed/core';
 
 const Group = styled(View, () => ({}));
 const Root = styled(
@@ -52,7 +46,7 @@ const Root = styled(
         outlined: {},
       },
     },
-    // @ts-expect-error
+    // @ts-expect-error missing type of extraStyle function
     extraStyle: ({ color, variant }, state) => {
       const select = (c: string) => {
         const color = t.utils.select(
@@ -98,7 +92,6 @@ const Root = styled(
 const Text = withStaticProperties(
   memo(
     forwardRef((props: TextProps, ref: any) => {
-      // const context = useVariantContext();
       return <TextUi weight="semibold" {...props} ref={ref} />;
     })
   ),
@@ -106,9 +99,6 @@ const Text = withStaticProperties(
 );
 
 const Element = styled(View, {});
-
-type ContextVariant = ExtractVariant<typeof Root.styleSheet>;
-const [ProviderVariant, useVariantContext] = createScope<ContextVariant>({});
 
 const Button = withStaticProperties(
   createButton({

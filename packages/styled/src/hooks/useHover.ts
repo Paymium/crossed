@@ -3,8 +3,8 @@ import { useCallback, useState } from 'react';
 
 export const useHover = <
   T extends {
-    onPointerEnter?: (...args: any[]) => void;
-    onPointerLeave?: (...args: any[]) => void;
+    onPointerEnter?: (..._args: any[]) => void;
+    onPointerLeave?: (..._args: any[]) => void;
   }
 >(
   props: T

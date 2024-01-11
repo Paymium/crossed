@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Skeleton"
-      description={t("Skeleton is used to display the loading state of some component.")}
+      description={t(
+        'Skeleton is used to display the loading state of some component.'
+      )}
       params={[]}
       return={[]}
       types={[]}

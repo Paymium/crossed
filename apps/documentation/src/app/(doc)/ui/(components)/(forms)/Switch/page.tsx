@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Switch"
-      description={t("The Switch component is used as an alternative for the checkbox component.")}
+      description={t(
+        'The Switch component is used as an alternative for the checkbox component.'
+      )}
       params={[]}
       return={[]}
       types={[]}

@@ -6,9 +6,12 @@ import { useTranslation } from 'react-i18next';
 export const ChangeLang = () => {
   const { i18n } = useTranslation();
   return (
-    <Select defaultValue="en" onChange={(v)=>{
-      i18n.changeLanguage(v.toString());
-    }}>
+    <Select
+      defaultValue="en"
+      onChange={(v) => {
+        i18n.changeLanguage(v.toString());
+      }}
+    >
       <Select.Trigger>
         <Select.Value />
       </Select.Trigger>

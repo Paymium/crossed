@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Badge"
-      description={t("Badges are used to highlight an item's status for quick recognition.")}
+      description={t(
+        "Badges are used to highlight an item's status for quick recognition."
+      )}
       params={[]}
       return={[]}
       types={[]}

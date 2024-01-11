@@ -20,7 +20,7 @@ const Table = styled(
   (props: HTMLProps<HTMLTableElement>) => (
     <table {...props} style={props.style[0]} />
   ),
-  (t) => ({
+  () => ({
     width: '100%',
     borderCollapse: 'collapse',
     borderWidth: 0,
@@ -68,13 +68,15 @@ const TBody = styled(
       ) : (
         <Tr>
           <Td>
-            <Text color="warning" >-</Text>
+            <Text color="warning">-</Text>
           </Td>
           <Td>
-            <Text color="warning" >-</Text>
+            <Text color="warning">-</Text>
           </Td>
           <Td>
-            <Text textAlign="center" color="warning" >-</Text>
+            <Text textAlign="center" color="warning">
+              -
+            </Text>
           </Td>
         </Tr>
       );
@@ -107,7 +109,7 @@ const Td = styled(
   (t) => ({
     padding: t.space.sm,
     variants: {
-      textAlign: {...textAlign},
+      textAlign: { ...textAlign },
     },
   })
 );

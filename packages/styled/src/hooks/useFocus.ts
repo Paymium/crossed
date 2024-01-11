@@ -3,8 +3,8 @@ import { useCallback, useState } from 'react';
 
 export const useFocus = <
   T extends {
-    onFocus?: (...args: any[]) => void;
-    onBlur?: (...args: any[]) => void;
+    onFocus?: (..._args: any[]) => void;
+    onBlur?: (..._args: any[]) => void;
   }
 >(
   props: T

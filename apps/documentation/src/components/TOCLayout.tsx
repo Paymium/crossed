@@ -4,7 +4,7 @@ import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { createStyleSheet, mq, styled, useStyles } from '@crossed/styled';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { withDefaultProps } from '@crossed/core';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const Container = styled(XBox, { minHeight: '100%' });
 
@@ -30,7 +30,7 @@ const Center = styled(YBox, (t) => ({
 }));
 
 const Menu = withDefaultProps(
-  styled(MenuList, (t) => ({
+  styled(MenuList, () => ({
     paddingHorizontal: 20,
     alignSelf: 'baseline',
     display: {
@@ -105,6 +105,6 @@ export const TOCLayout = ({
   }, [children, links, hash, t]);
 };
 
-const styleSheet = createStyleSheet((t) => ({
+const styleSheet = createStyleSheet(() => ({
   rightItem: { justifyContent: 'flex-start' },
 }));

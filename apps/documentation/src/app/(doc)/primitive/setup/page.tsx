@@ -1,7 +1,7 @@
 'use client';
 import '@/types/unistyles';
 import { CodeBlock } from '@/components/CodeBlock';
-import { H1, H2, P, Text, YBox, Ul, Li, B, Kbd, Tabs } from '@crossed/ui';
+import { H1, H2, YBox, Tabs } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 
 export default function Home() {

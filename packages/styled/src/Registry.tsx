@@ -1,7 +1,13 @@
 'use client';
 
 import { useServerInsertedHTML } from 'next/navigation';
-import { useRef, type PropsWithChildren, useState, useEffect, useMemo } from 'react';
+import {
+  useRef,
+  type PropsWithChildren,
+  useState,
+  useEffect,
+  useMemo,
+} from 'react';
 import { AppRegistry } from 'react-native';
 
 export const Registry = ({ children }: PropsWithChildren) => {
@@ -18,5 +24,5 @@ export const Registry = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     setState(true);
   }, []);
-  return useMemo(()=>children, [state]);
+  return useMemo(() => children, [state]);
 };

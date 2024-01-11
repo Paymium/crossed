@@ -99,7 +99,7 @@ export default function RootLayout({
       </Alert>
 
       <YBox space="md">
-        <H2 id="usage">{t("Usage")}</H2>
+        <H2 id="usage">{t('Usage')}</H2>
         <CodeBlock language="tsx" fileName="foo.tsx">
           {`
 import { styled } from '@crossed/styled';

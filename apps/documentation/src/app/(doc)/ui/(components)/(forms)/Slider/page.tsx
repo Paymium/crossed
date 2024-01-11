@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Slider"
-      description={t("The Slider is used to allow users to make selections from a range of values.")}
+      description={t(
+        'The Slider is used to allow users to make selections from a range of values.'
+      )}
       params={[]}
       return={[]}
       types={[]}

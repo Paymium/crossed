@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Card"
-      description={t("Card is a flexible component used to group and display content in a clear and concise format.")}
+      description={t(
+        'Card is a flexible component used to group and display content in a clear and concise format.'
+      )}
       params={[]}
       return={[]}
       types={[]}

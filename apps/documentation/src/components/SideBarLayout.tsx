@@ -104,6 +104,6 @@ export function SideBarLayout({
   );
 }
 
-const styleSheet = createStyleSheet((t) => ({
+const styleSheet = createStyleSheet(() => ({
   leftItem: { justifyContent: 'flex-end' },
 }));

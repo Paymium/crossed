@@ -2,7 +2,7 @@
 
 import { CodeBlock } from '@/components/CodeBlock';
 import '@/types/unistyles';
-import { B, H1, H2, Li, P, Text, Ul, YBox } from '@crossed/ui';
+import { H1, H2, P, YBox } from '@crossed/ui';
 
 export default function UsagePage() {
   return (

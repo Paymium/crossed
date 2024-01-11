@@ -1,10 +1,5 @@
 'use client';
-import {
-  GetProps,
-  createScope,
-  withDefaultProps,
-  withStaticProperties,
-} from '@crossed/core';
+import { withDefaultProps, withStaticProperties } from '@crossed/core';
 import { styled } from '@crossed/styled';
 import { Text } from '../typography/Text';
 import { XBox } from '../layout/XBox';
@@ -25,30 +20,12 @@ const Container = withDefaultProps(
   { space: undefined }
 );
 
-type ContainerProps = GetProps<typeof Container>;
-
-type AlertContext = {
-  status: ContainerProps['status'];
-};
-
-const [AlertProvider, useAlertContext] = createScope<AlertContext>({
-  status: 'info',
-});
-
-const AlertRoot = ({ status = 'info', ...props }: ContainerProps) => {
-  return (
-    <AlertProvider status={status}>
-      <Container status={status} {...props} />
-    </AlertProvider>
-  );
-};
-
 const Icon = () => {};
 
 const Title = withDefaultProps(Text, { weight: 'bold', size: 'lg' });
 const Description = Text;
 
-const Alert = withStaticProperties(AlertRoot, {
+const Alert = withStaticProperties(Container, {
   Icon,
   Title,
   Description,

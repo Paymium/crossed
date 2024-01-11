@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Accordion"
-      description={t("Accordions display a list of high-level options that can expand/collapse to reveal more information.")}
+      description={t(
+        'Accordions display a list of high-level options that can expand/collapse to reveal more information.'
+      )}
       params={[]}
       return={[]}
       types={[]}

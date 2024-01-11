@@ -6,7 +6,6 @@ import { createStyleSheet } from 'react-native-unistyles';
 import { withStaticProperties } from '@crossed/core/src/withStaticProperties';
 import type {
   ComponentLocal,
-  ExtraStyle,
   ExtractVariant,
   UnistylesTheme,
   UnistylesValues,
@@ -18,7 +17,7 @@ export const styled = <
   P extends Record<string, any>,
   S extends
     | Partial<UnistylesValuesExtends>
-    | ((theme: UnistylesTheme) => Partial<UnistylesValuesExtends>)
+    | ((_theme: UnistylesTheme) => Partial<UnistylesValuesExtends>)
 >(
   Comp: ComponentLocal<P>,
   style: S

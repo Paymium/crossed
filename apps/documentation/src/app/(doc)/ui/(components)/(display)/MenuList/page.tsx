@@ -8,7 +8,7 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="MenuList"
-      description={t("A simple, sizable list item.")}
+      description={t('A simple, sizable list item.')}
       params={[]}
       return={[]}
       types={[]}

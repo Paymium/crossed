@@ -8,7 +8,7 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Code"
-      description={t("Code is a component used to display inline code.")}
+      description={t('Code is a component used to display inline code.')}
       params={[]}
       return={[]}
       types={[]}

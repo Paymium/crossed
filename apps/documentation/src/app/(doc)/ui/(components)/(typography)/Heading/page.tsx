@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Heading"
-      description={t("The H1 to H6 elements represent six levels of section headings.")}
+      description={t(
+        'The H1 to H6 elements represent six levels of section headings.'
+      )}
       params={[]}
       return={[]}
       types={[]}

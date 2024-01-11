@@ -9,7 +9,7 @@ export const XBox = styled(Box, () => ({
   flexDirection: 'row',
   justifyContent: 'flex-start',
   width: '100%',
-  flexBasis: "auto",
+  flexBasis: 'auto',
   variants: {
     center: { true: { alignItems: 'center' } },
   },

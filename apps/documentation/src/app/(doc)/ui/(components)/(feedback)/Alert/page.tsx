@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Alert"
-      description={t("Alerts are used to communicate a state that affects a system, feature or page.")}
+      description={t(
+        'Alerts are used to communicate a state that affects a system, feature or page.'
+      )}
       params={[]}
       return={[]}
       types={[]}

@@ -18,19 +18,19 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang={'en'}>
       <head></head>
       <Registry>
-          <Body>
-            <Suspense>
-              <ScrollView
-                stickyHeaderIndices={[0]}
-                style={{ height: '100%' }}
-                contentContainerStyle={{ minHeight: '100%' }}
-              >
-                <NavBar />
-                {children}
-                <Footer />
-              </ScrollView>
-            </Suspense>
-          </Body>
+        <Body>
+          <Suspense>
+            <ScrollView
+              stickyHeaderIndices={[0]}
+              style={{ height: '100%' }}
+              contentContainerStyle={{ minHeight: '100%' }}
+            >
+              <NavBar />
+              {children}
+              <Footer />
+            </ScrollView>
+          </Suspense>
+        </Body>
       </Registry>
     </html>
   );

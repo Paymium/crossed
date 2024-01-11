@@ -16,9 +16,6 @@ declare module '@crossed/styled' {
   export interface UnistylesThemes extends AppThemes {}
 }
 
-let pass = false;
-
-
 export const setup = ({
   themes,
   extends: extendsProps,
@@ -26,15 +23,13 @@ export const setup = ({
   UnistylesRegistry.addBreakpoints(breakpoints)
     .addThemes(
       themes ??
-        deepmerge(extendsProps?.themes as any || {}, {
+        deepmerge((extendsProps?.themes as any) || {}, {
           light: lightTheme,
           dark: darkTheme,
         })
     )
     .addConfig({
-      initialTheme: "dark",
+      initialTheme: 'dark',
       // experimentalCSSMediaQueries: true
     });
-
-  pass = true;
 };

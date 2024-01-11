@@ -14,7 +14,7 @@ export const useLogic = <P extends Record<string, any>>({
   focus: focusProps,
 }: {
   props: P;
-  styleSheet: (e: never) => ReturnExtract;
+  styleSheet: (_e: never) => ReturnExtract;
   hovered?: boolean;
   active?: boolean;
   focus?: boolean;

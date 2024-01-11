@@ -10,10 +10,10 @@ export const Link = (props: LinkProps) => {
     replace,
     scroll,
     shallow,
-    passHref,
+    passHref: _passHref,
     prefetch,
     locale,
-    legacyBehavior,
+    legacyBehavior: _legacyBehavior,
     onMouseEnter,
     onTouchStart,
     onClick,
@@ -41,4 +41,4 @@ export const Link = (props: LinkProps) => {
   );
 };
 
-export type LinkProps = AnchorProps & LinkNextProps
+export type LinkProps = AnchorProps & LinkNextProps;

@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="List"
-      description={t("List is used to display list items. It renders a <ul> element by default.")}
+      description={t(
+        'List is used to display list items. It renders a <ul> element by default.'
+      )}
       params={[]}
       return={[]}
       types={[]}

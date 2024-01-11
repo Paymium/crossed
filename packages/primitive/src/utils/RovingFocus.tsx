@@ -65,7 +65,7 @@ interface RovingFocusGroupOptions {
 
 type RovingContextValue = RovingFocusGroupOptions & {
   currentTabStopId: string | null;
-  onItemFocus(tabStopId: string): void;
+  onItemFocus(_tabStopId: string): void;
   onItemShiftTab(): void;
   onFocusableItemAdd(): void;
   onFocusableItemRemove(): void;
@@ -101,8 +101,8 @@ interface RovingFocusGroupImplProps
     RovingFocusGroupOptions {
   currentTabStopId?: string | null;
   defaultCurrentTabStopId?: string;
-  onCurrentTabStopIdChange?: (tabStopId: string | null) => void;
-  onEntryFocus?: (event: Event) => void;
+  onCurrentTabStopIdChange?: (_tabStopId: string | null) => void;
+  onEntryFocus?: (_event: Event) => void;
 }
 
 const RovingFocusGroupImpl = React.forwardRef<

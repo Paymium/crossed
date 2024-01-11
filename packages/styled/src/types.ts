@@ -12,8 +12,8 @@ export type UnistylesValuesExtends = Omit<UnistylesValues, 'variants'> &
 
 export type ExtraStyle<P> = {
   extraStyle: (
-    props: P,
-    state: { hover: boolean; active: boolean; focus: boolean }
+    _props: P,
+    _state: { hover: boolean; active: boolean; focus: boolean }
   ) => Omit<UnistylesValues, 'variants'>;
 };
 type Variants = {
@@ -27,7 +27,7 @@ type Variants = {
 // export type ExtractVariantNames<T> = T extends (...args: any) => infer R
 //   ? ExtractVariantKeys<R>
 //   : ExtractVariantKeys<T>;
-export type ExtractVariant<T> = T extends (...args: any) => infer R
+export type ExtractVariant<T> = T extends (..._args: any) => infer R
   ? R extends { variants: infer V }
     ? { [key in keyof V]?: ExtractSubVariantKeys<V[key]> }
     : {}
@@ -56,6 +56,7 @@ type StateUnistylesValues = {
 };
 
 export type ExtractUnistylesValues = {
+  // eslint-disable-next-line no-unused-vars
   [key in State]: UnistylesValues;
 };
 
@@ -63,4 +64,4 @@ export type ComponentLocal<P extends Record<string, any>> =
   | ComponentType<P>
   | ForwardRefExoticComponent<P>
   | ReactComponentWithRef<P, any>
-  | (new (props: P) => any);
+  | (new (_props: P) => any);

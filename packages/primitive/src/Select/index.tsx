@@ -60,7 +60,7 @@ export const createSelect = <
       props: GetProps<typeof Select> & {
         value?: string;
         defaultValue?: string;
-        onChange?: (p: string) => void;
+        onChange?: (_p: string) => void;
       }
     ) => {
       const id = useId();

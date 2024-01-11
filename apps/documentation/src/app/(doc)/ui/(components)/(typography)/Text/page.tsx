@@ -8,7 +8,7 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Text"
-      description={t("Text primitives with themes custom to each font.")}
+      description={t('Text primitives with themes custom to each font.')}
       params={[]}
       return={[]}
       types={[]}

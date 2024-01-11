@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { Text } from '@crossed/ui';
 import '@/types/unistyles';
 

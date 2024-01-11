@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useStyles } from '@crossed/styled';
 import { YBox } from '@crossed/ui';

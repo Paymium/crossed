@@ -15,7 +15,7 @@ export type Theme = {
     error: string;
     success: string;
     warning: string;
-    info: string,
+    info: string;
   };
   space: {
     xs: number;
@@ -45,11 +45,11 @@ export type Theme = {
     '5xl': number;
   };
   utils: {
-    shadeColor: (col: string, amt: number) => string;
-    hexToRgbA: (hex: string, alpha: number) => string;
+    shadeColor: (_col: string, _amt: number) => string;
+    hexToRgbA: (_hex: string, _alpha: number) => string;
     select: (
-      p: { hover?: any; active?: any; focus?: any; base?: any },
-      state: { hover?: boolean; active?: boolean; focus?: boolean }
+      _p: { hover?: any; active?: any; focus?: any; base?: any },
+      _state: { hover?: boolean; active?: boolean; focus?: boolean }
     ) => string;
   };
 };

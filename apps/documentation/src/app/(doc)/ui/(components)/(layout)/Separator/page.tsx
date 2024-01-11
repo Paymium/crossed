@@ -8,7 +8,7 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Separator"
-      description={t("Visually or semantically separates content.")}
+      description={t('Visually or semantically separates content.')}
       params={[]}
       return={[]}
       types={[]}

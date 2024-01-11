@@ -3,8 +3,8 @@ import { useCallback, useState } from 'react';
 
 export const useActive = <
   T extends {
-    onPointerUp?: (...args: any[]) => void;
-    onPointerDown?: (...args: any[]) => void;
+    onPointerUp?: (..._args: any[]) => void;
+    onPointerDown?: (..._args: any[]) => void;
   }
 >(
   props: T

@@ -27,20 +27,14 @@
 // import { Box, BoxProps } from '../../layout/Box';
 
 import {
-  GetProps,
   UseUncontrolledInput,
   composeEventHandlers,
   createScope,
   useUncontrolled,
-  withDefaultProps,
   withStaticProperties,
 } from '@crossed/core';
 import { styled, useStyles } from '@crossed/styled';
 import {
-  useState,
-  type forwardRef,
-  Dispatch,
-  SetStateAction,
   useCallback,
   memo,
   ReactNode,
@@ -49,13 +43,10 @@ import {
   isValidElement,
   MutableRefObject,
 } from 'react';
-import { Pressable, View } from 'react-native';
 import { Button, ButtonProps } from '../Button';
-import { YBox, YBoxProps } from '../../layout/YBox';
 import { XBox, XBoxProps } from '../../layout/XBox';
 import { MenuItemProps, MenuList, MenuListProps } from '../../display/MenuList';
 import { Card } from '../../display/Card';
-import { Text } from '../../typography/Text';
 
 // // type InputProps = GetProps<typeof Input>;
 
@@ -563,7 +554,7 @@ const SelectRoot = styled(
   }
 );
 
-// @ts-expect-error
+// @ts-expect-error because id not exists in type
 SelectRoot.id = 'Select';
 SelectRoot.displayName = 'Select';
 
@@ -596,7 +587,7 @@ const Content = styled(
   })
 );
 
-// @ts-expect-error
+// @ts-expect-error because id not exist in type
 Content.id = 'Select.Content';
 Content.displayName = 'Select.Content';
 
@@ -616,7 +607,7 @@ const Option = styled(
   {}
 );
 
-// @ts-expect-error
+// @ts-expect-error because id not exist in type
 Option.id = 'Select.Option';
 Option.displayName = 'Select.Option';
 
@@ -630,9 +621,9 @@ Value.displayName = 'Select.Value';
 
 type Context = {
   open: boolean;
-  setOpen: (p: boolean) => void;
+  setOpen: (_p: boolean) => void;
   value: string | number;
-  setValue: (p: string | number) => void;
+  setValue: (_p: string | number) => void;
   renderValue: MutableRefObject<ReactNode>;
 };
 const [SelectProvider, useSelectProvider] = createScope<Context>({} as Context);

@@ -24,13 +24,13 @@ export interface FocusScopeProps {
    * Event handler called when auto-focusing on mount.
    * Can be prevented.
    */
-  onMountAutoFocus?: (event: Event) => void;
+  onMountAutoFocus?: (_event: Event) => void;
 
   /**
    * Event handler called when auto-focusing on unmount.
    * Can be prevented.
    */
-  onUnmountAutoFocus?: (event: Event) => void;
+  onUnmountAutoFocus?: (_event: Event) => void;
 
   /**
    * If unmount is animated, you want to force re-focus at start of animation not after
@@ -39,8 +39,8 @@ export interface FocusScopeProps {
 
   children?:
     | ReactNode
-    | ((props: {
-        onKeyDown: (event: KeyboardEvent) => void;
+    | ((_props: {
+        onKeyDown: (_event: KeyboardEvent) => void;
         tabIndex: number;
         ref: ForwardedRef<any>;
       }) => ReactNode);

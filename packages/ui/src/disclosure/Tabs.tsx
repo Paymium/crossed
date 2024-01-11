@@ -16,7 +16,7 @@ import { YBox, YBoxProps } from '../layout/YBox';
 
 type TabsContext = Pick<ButtonProps, 'variant' | 'size'> & {
   value: string | number;
-  setValue: (value: string | number) => void;
+  setValue: (_value: string | number) => void;
 };
 
 const [TabsProvider, useTabsContext] = createScope<TabsContext>(
@@ -51,7 +51,9 @@ const TabsRoot = ({
       variant={variant}
       setValue={setValue}
     >
-      <YBox space="md" {...props}>{children}</YBox>
+      <YBox space="md" {...props}>
+        {children}
+      </YBox>
     </TabsProvider>
   );
 };

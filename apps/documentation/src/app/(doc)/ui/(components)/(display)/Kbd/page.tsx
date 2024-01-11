@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Kdb"
-      description={t("The keyboard key component exists to show which key or combination of keys performs a given action.")}
+      description={t(
+        'The keyboard key component exists to show which key or combination of keys performs a given action.'
+      )}
       params={[]}
       return={[]}
       types={[]}

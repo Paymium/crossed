@@ -9,6 +9,6 @@ export function withDefaultProps<P extends Record<string, any>>(
       Partial<Pick<P, keyof typeof defaultProps>>,
     ref: any
   ) {
-    return <Comp {...defaultProps} {...props as any} ref={ref} />;
+    return <Comp {...defaultProps} {...(props as any)} ref={ref} />;
   });
 }

@@ -12,7 +12,7 @@ declare module 'react-native' {
   interface TextProps {
     accessibilityComponentType?: never;
     accessibilityTraits?: never;
-    
+
     href?: string;
     hrefAttrs?: {
       rel?: 'noreferrer';
@@ -26,6 +26,6 @@ declare module 'react-native' {
       rel?: 'noreferrer';
       target?: '_blank';
     };
-    onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+    onClick?: (_e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   }
 }

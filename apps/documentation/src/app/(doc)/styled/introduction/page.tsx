@@ -53,7 +53,9 @@ export default function Home() {
           </Text>
         </Li>
       </Ul>
-      <H2 id="dependencies"><Trans>Dependencies used</Trans></H2>
+      <H2 id="dependencies">
+        <Trans>Dependencies used</Trans>
+      </H2>
       <Ul>
         <P>
           <Trans>Dependencies used in @crossed/styled</Trans>

@@ -8,7 +8,7 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="P"
-      description={"The P represents a paragraph."}
+      description={t('The P represents a paragraph.')}
       params={[]}
       return={[]}
       types={[]}

@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Select"
-      description={t("Select component is a component that allows users pick a value from predefined options.")}
+      description={t(
+        'Select component is a component that allows users pick a value from predefined options.'
+      )}
       params={[]}
       return={[]}
       types={[]}

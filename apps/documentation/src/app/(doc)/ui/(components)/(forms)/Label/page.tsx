@@ -8,7 +8,7 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Label"
-      description={t("Label form elements with accessibility.")}
+      description={t('Label form elements with accessibility.')}
       params={[]}
       return={[]}
       types={[]}

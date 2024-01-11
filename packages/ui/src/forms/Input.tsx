@@ -1,5 +1,4 @@
 // 'use client';
-import { createScope } from '@crossed/core';
 // import { tw } from '@crossed/styled';
 // import { styled } from '@crossed/styled';
 // import {
@@ -248,8 +247,6 @@ import { forwardRef } from 'react';
 //   Content: InputContent,
 // });
 
-const [InputProvider, useInputProvider] = createScope({});
-
 const Addon = styled(YBox, {});
 const Element = styled(YBox, {
   position: 'absolute',
@@ -269,13 +266,9 @@ const Group = styled(
     //   }
     //   return acc;
     // }, undefined);
-    return (
-      <InputProvider>
-        <XBox {...props} />
-      </InputProvider>
-    );
+    return <XBox {...props} />;
   },
-  (t) => ({
+  () => ({
     // backgroundColor: t.utils.shadeColor(t.colors.background, 50),
     // borderWidth: 1,
     // borderColor: t.utils.shadeColor(
@@ -300,10 +293,12 @@ const InputRoot = styled(
           UnistylesRuntime.themeName === 'dark' ? 100 : -100
         )}
         {...props}
-        style={[
-          // ...props.style,
-          // { paddingRight: toto },
-        ]}
+        style={
+          [
+            // ...props.style,
+            // { paddingRight: toto },
+          ]
+        }
         ref={ref}
       />
     );

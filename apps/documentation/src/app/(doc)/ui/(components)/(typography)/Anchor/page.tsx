@@ -8,7 +8,7 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Anchor"
-      description={t("Link is an accessible element for navigation.")}
+      description={t('Link is an accessible element for navigation.')}
       params={[]}
       return={[]}
       types={[]}

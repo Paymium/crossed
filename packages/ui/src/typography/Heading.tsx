@@ -1,6 +1,6 @@
 'use client';
 
-import { createStyleSheet, styled, useStyles } from '@crossed/styled';
+import { styled } from '@crossed/styled';
 import { Text, TextProps } from './Text';
 import { withDefaultProps } from '@crossed/core';
 

@@ -5,7 +5,7 @@ import { Text, TextProps } from '../typography/Text';
 import { YBox } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
 import { Button, ButtonProps } from '../forms/Button';
-import { GetProps, createScope, withDefaultProps } from '@crossed/core';
+import { GetProps, createScope } from '@crossed/core';
 import type { ExtractVariant } from '@crossed/styled/src/types';
 import { forwardRef, memo } from 'react';
 
@@ -77,11 +77,4 @@ const {
 export type MenuListProps = GetProps<typeof MenuList>;
 export type MenuItemProps = GetProps<typeof MenuItem>;
 
-export {
-  MenuList,
-  MenuDivider,
-  MenuItem,
-  MenuLabel,
-  MenuTitle,
-  MenuSubTitle,
-};
+export { MenuList, MenuDivider, MenuItem, MenuLabel, MenuTitle, MenuSubTitle };

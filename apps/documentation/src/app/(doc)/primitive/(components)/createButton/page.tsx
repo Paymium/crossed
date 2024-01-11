@@ -8,7 +8,7 @@ export default function CreateButton() {
   return (
     <TemplatePrimitive
       title="createButton"
-      description={t("Creation primitive button")}
+      description={t('Creation primitive button')}
       params={[]}
       return={[]}
       types={[]}

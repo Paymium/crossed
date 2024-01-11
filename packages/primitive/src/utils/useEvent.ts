@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
-type AnyFunction = (...args: any[]) => any;
+type AnyFunction = (..._args: any[]) => any;
 
 export function useEvent<T extends AnyFunction>(callback?: T): T {
   return useGet(callback, defaultValue, true) as T;

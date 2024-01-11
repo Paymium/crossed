@@ -1,6 +1,5 @@
 'use client';
 
-
 import '@/types/unistyles';
 import {
   UnistylesRuntime,
@@ -68,19 +67,16 @@ export const NavBar = () => {
 };
 
 const LinkNav = withDefaultProps(
-  styled(
-    Link,
-    (t) => ({
-      'color': t.utils.shadeColor(
-        t.colors.textColor,
-        UnistylesRuntime.themeName === 'dark' ? -90 : 90
-      ),
-      'hover:': {
-        textDecorationLine: 'none',
-        color: t.colors.textColor,
-      },
-    })
-  ),
+  styled(Link, (t) => ({
+    'color': t.utils.shadeColor(
+      t.colors.textColor,
+      UnistylesRuntime.themeName === 'dark' ? -90 : 90
+    ),
+    'hover:': {
+      textDecorationLine: 'none',
+      color: t.colors.textColor,
+    },
+  })),
   { size: 'md' }
 );
 

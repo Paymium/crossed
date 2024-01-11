@@ -8,7 +8,7 @@ export const createSheetMain = <P,>(Styled: ComponentType<P>) =>
     P & {
       open?: boolean;
       defaultOpen?: boolean;
-      onChangeOpen?: (open: boolean) => void;
+      onChangeOpen?: (_open: boolean) => void;
     }
   >((props, ref) => {
     const {

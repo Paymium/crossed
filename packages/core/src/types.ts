@@ -44,12 +44,12 @@ export type ConfigVariants<T extends ConfigSchemaUndefined<any>> =
     : {};
 
 export type StylesFunction<P extends Record<string, any>> = (
-  p?: P
+  _p?: P
 ) => BaseWithState<P>;
 
 export type StylesFunctionUndefined<P extends Record<string, any>> =
   | undefined
-  | ((p?: P) => BaseWithState<P>);
+  | ((_p?: P) => BaseWithState<P>);
 
 export type ConfigVariantsMulti<
   P extends Record<string, any>,
@@ -119,7 +119,7 @@ export type GetProps<A extends StylableComponent<any>> =
     ? P
     : A extends ElementType
     ? HTMLProps<A>
-    : A extends new (props: infer P) => any
+    : A extends new (_props: infer P) => any
     ? P
     : {};
 
@@ -141,11 +141,11 @@ export type StylableComponent<
   | ForwardRefExoticComponent<P>
   | ReactComponentWithRef<P, any>
   | ElementType<P>
-  | (new (props: P) => any);
+  | (new (_props: P) => any);
 
 export type UnionToIntersection<U> = (
-  U extends ConfigVariants<any> ? (k: U) => string : never
-) extends (k: infer I) => string
+  U extends ConfigVariants<any> ? (_k: U) => string : never
+) extends (_k: infer I) => string
   ? I
   : never;
 

@@ -8,7 +8,9 @@ export default function CreateBadge() {
   return (
     <TemplatePrimitive
       title="Input"
-      description={t("Input component is a component that is used to get user input in a text field.")}
+      description={t(
+        'Input component is a component that is used to get user input in a text field.'
+      )}
       params={[]}
       return={[]}
       types={[]}
