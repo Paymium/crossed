@@ -1,9 +1,7 @@
-export * from './crossed/types';
-export * from './styleSheet';
-export * from './types';
-export { clsx as cx } from 'clsx';
-export { twMerge as merge } from 'tailwind-merge';
-export * from './twrnc';
-export * from './CrossedTheme';
-export { default as tw } from 'twrnc';
-export * from './styled';
+import 'react-native-unistyles';
+
+export { styled } from './styled';
+export * from './unistyles';
+export { Registry } from './Registry';
+export type * from '@crossed/core';
+export { unifyStyle } from './unifyStyle';

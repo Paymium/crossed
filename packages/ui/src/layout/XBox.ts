@@ -1,13 +1,18 @@
 'use client';
 
-import { View } from 'react-native';
 import { styled } from '@crossed/styled';
-import { spaceVariants } from '../variants/space';
+import type { GetProps } from '@crossed/core';
+import { Box } from './Box';
 
-export const XBox = styled(View, {
-  className: ['flex', 'flex-row', 'w-full'],
+export const XBox = styled(Box, () => ({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'flex-start',
+  width: '100%',
+  flexBasis: 'auto',
   variants: {
-    space: spaceVariants,
-    center: { true: { className: ['items-center'] } },
+    center: { true: { alignItems: 'center' } },
   },
-});
+}));
+
+export type XBoxProps = GetProps<typeof XBox>;

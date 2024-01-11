@@ -2,7 +2,7 @@ import { createScope } from '@crossed/core';
 
 export type ContextModal = {
   open: boolean;
-  setOpen: (value: boolean) => void;
+  setOpen: (_value: boolean) => void;
   id: string;
 };
 

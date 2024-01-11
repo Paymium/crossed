@@ -1,9 +1,7 @@
-import type { BaseWithState } from '@crossed/styled';
-
 export const spaceVariants = {
-  xs: { className: ['gap-1'] },
-  sm: { className: ['gap-3'] },
-  md: { className: ['gap-5'] },
-  lg: { className: ['gap-7'] },
-  xl: { className: ['gap-9'] },
-} satisfies Record<string, BaseWithState<any>>;
+  xs: { gap: 0.25 },
+  sm: { gap: 0.75 },
+  md: { gap: 1.25 },
+  lg: { gap: 1.75 },
+  xl: { gap: 2.25 },
+};

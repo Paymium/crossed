@@ -23,14 +23,14 @@
     "@jest/types": "28.1.1",
     "@types/react": "^18.2.21",
     "@types/react-dom": "18.2.7",
-    "@types/react-native": "^0.72.2",
-    "react-native": "^0.72.3",
+    "@types/react-native": "^0.72.5",
+    "react-native": "^0.72.5",
     "react": "^18.2.0",
     "typescript": "5.1.6"
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-native": "^0.72.3"
+    "react-native": "^0.72.5"
   },
   "files": [
     "lib/",

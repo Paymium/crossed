@@ -1,3 +1,3 @@
-export * from './colors';
-export * from './size';
+// export * from './colors';
+// export * from './size';
 export * from './space';

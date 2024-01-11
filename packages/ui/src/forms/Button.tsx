@@ -1,398 +1,114 @@
 'use client';
-import { tw, type GetProps } from '@crossed/styled';
+
 import { styled } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
-import { Pressable, Text, View } from 'react-native';
-import { Fragment, ReactNode, cloneElement, forwardRef } from 'react';
-import { Box } from '../layout/Box';
-import { createScope } from '@crossed/core';
+import { Pressable, PressableProps, View } from 'react-native';
+import { TextProps, Text as TextUi } from '../typography/Text';
+import { forwardRef, memo } from 'react';
+import { GetProps, withStaticProperties } from '@crossed/core';
 
-export const ButtonGroupFrame = styled(View, {
-  className: ['overflow-hidden', 'rounded-md'],
-  variants: {
-    horizontal: {
-      true: {
-        className: ['flex-row'],
-      },
-    },
-  },
-  defaultVariants: {
-    horizontal: true,
-  },
-});
-
-export type ButtonGroupFrameProps = GetProps<typeof ButtonGroupFrame>;
-
-export const ButtonFrame = styled(Pressable, {
-  'className': [
-    'rounded',
-    'flex',
-    'flex-row',
-    'items-center',
-    'border-2',
-    'relative',
-  ],
-  ':disabled': {
-    className: ['opacity-50', 'pointer-events-none', 'cursor-not-allowed'],
-  },
-  'props': { role: 'button' },
-  'variants': {
-    grouped: {
-      true: {
-        className: ['rounded-none'],
-      },
-    },
-    color: {
-      slate: {
-        'className': [
-          'border-slate-800 bg-slate-700',
-          'dark:border-slate-800 dark:bg-slate-800',
-        ],
-        ':active': {
-          className: [
-            'bg-slate-600',
-            'dark:border-slate-800 dark:bg-slate-700',
-          ],
+const Group = styled(View, () => ({}));
+const Root = styled(
+  forwardRef((props: PressableProps, ref: any) => (
+    // <ProviderVariant
+    //   variant={props.variant}
+    //   color={props.color}
+    //   size={props.size}
+    // >
+    <Pressable {...props} ref={ref} />
+    // </ProviderVariant>
+  )),
+  (t) => ({
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    gap: t.space.sm,
+    borderRadius: t.space.xs,
+    borderWidth: 1,
+    variants: {
+      size: {
+        xs: { paddingHorizontal: t.space.xs, height: t.size.xs },
+        sm: { paddingHorizontal: t.space.sm, height: t.size.sm },
+        default: { paddingHorizontal: t.space.md, height: t.size.md },
+        lg: { paddingHorizontal: t.space.lg, height: t.size.lg },
+        xl: { paddingHorizontal: t.space.xl, height: t.size.xl },
+      } as const,
+      color: {
+        default: {
+          borderWidth: 1,
         },
-        ':hover': {
-          className: ['bg-slate-500', 'dark:bg-slate-600'],
-        },
+        red: {},
+        // gray: {},
       },
-      gray: {
-        'className': [
-          'border-gray-800 bg-gray-700',
-          'dark:border-gray-800 dark:bg-gray-800',
-        ],
-        ':active': { className: ['bg-gray-700'] },
-        ':hover': { className: ['bg-gray-600'] },
-      },
-      zinc: {
-        'className': ['border-zinc-800 bg-zinc-800'],
-        ':active': { className: ['bg-zinc-700'] },
-        ':hover': { className: ['bg-zinc-600'] },
-      },
-      neutral: {
-        'className': ['border-neutral-800 bg-neutral-800'],
-        ':active': { className: ['bg-neutral-700'] },
-        ':hover': { className: ['bg-neutral-600'] },
-      },
-      stone: {
-        'className': ['border-stone-800 bg-stone-800'],
-        ':active': { className: ['bg-stone-700'] },
-        ':hover': { className: ['bg-stone-600'] },
-      },
-      red: {
-        'className': [
-          'border-red-700 bg-red-700',
-          'dark:border-red-800 dark:bg-red-800',
-        ],
-        ':active': {
-          className: ['bg-red-700', 'dark:bg-red-600'],
-        },
-        ':hover': {
-          className: ['bg-red-600', 'dark:bg-red-500'],
-        },
-      },
-      orange: {
-        'className': ['border-orange-800', 'bg-orange-800'],
-        ':active': { className: ['bg-orange-700'] },
-        ':hover': { className: ['bg-orange-600'] },
-      },
-      amber: {
-        'className': ['border-amber-800', 'bg-amber-800'],
-        ':active': { className: ['bg-amber-700'] },
-        ':hover': { className: ['bg-amber-600'] },
-      },
-      yellow: {
-        'className': ['border-yellow-800', 'bg-yellow-800'],
-        ':active': { className: ['bg-yellow-700'] },
-        ':hover': { className: ['bg-yellow-600'] },
-      },
-      lime: {
-        'className': ['border-lime-800', 'bg-lime-800'],
-        ':active': { className: ['bg-lime-700'] },
-        ':hover': { className: ['bg-lime-600'] },
-      },
-      green: {
-        'className': ['border-green-800', 'bg-green-800'],
-        ':active': { className: ['bg-green-700'] },
-        ':hover': { className: ['bg-green-600'] },
-      },
-      emerald: {
-        'className': ['border-emerald-800', 'bg-emerald-800'],
-        ':active': { className: ['bg-emerald-700'] },
-        ':hover': { className: ['bg-emerald-600'] },
-      },
-      teal: {
-        'className': ['border-teal-800', 'bg-teal-800'],
-        ':active': { className: ['bg-teal-700'] },
-        ':hover': { className: ['bg-teal-600'] },
-      },
-      cyan: {
-        'className': ['border-cyan-800', 'bg-cyan-800'],
-        ':active': { className: ['bg-cyan-700'] },
-        ':hover': { className: ['bg-cyan-600'] },
-      },
-      sky: {
-        'className': ['border-sky-800', 'bg-sky-800'],
-        ':active': { className: ['bg-sky-700'] },
-        ':hover': { className: ['bg-sky-600'] },
-      },
-      blue: {
-        'className': ['border-blue-800', 'bg-blue-800'],
-        ':active': { className: ['bg-blue-700'] },
-        ':hover': { className: ['bg-blue-600'] },
-      },
-      indigo: {
-        'className': ['border-indigo-800', 'bg-indigo-800'],
-        ':active': { className: ['bg-indigo-700'] },
-        ':hover': { className: ['bg-indigo-600'] },
-      },
-      violet: {
-        'className': ['border-violet-800', 'bg-violet-800'],
-        ':active': { className: ['bg-violet-700'] },
-        ':hover': { className: ['bg-violet-600'] },
-      },
-      purple: {
-        'className': ['border-purple-800', 'bg-purple-800'],
-        ':active': { className: ['bg-purple-700'] },
-        ':hover': { className: ['bg-purple-600'] },
-      },
-      fuchsia: {
-        'className': ['border-fuchsia-800', 'bg-fuchsia-800'],
-        ':active': { className: ['bg-fuchsia-700'] },
-        ':hover': { className: ['bg-fuchsia-600'] },
-      },
-      pink: {
-        'className': ['border-pink-800 bg-pink-800'],
-        ':active': { className: ['bg-pink-700'] },
-        ':hover': { className: ['bg-pink-600'] },
-      },
-      rose: {
-        'className': ['border-rose-800', 'bg-rose-800'],
-        ':active': { className: ['bg-rose-700'] },
-        ':hover': { className: ['bg-rose-600'] },
+      variant: {
+        default: {},
+        ghost: {},
+        outlined: {},
       },
     },
-    size: {
-      xs: { className: ['px-2', 'py-1'] },
-      sm: { className: ['px-2', 'py-1.5'] },
-      md: { className: ['px-3', 'py-2'] },
-      lg: { className: ['px-4', 'py-3'] },
-      xl: { className: ['px-5', 'py-4'] },
-    },
-    space: {
-      xs: { className: ['gap-1'] },
-      sm: { className: ['gap-3'] },
-      md: { className: ['gap-5'] },
-      lg: { className: ['gap-7'] },
-      xl: { className: ['gap-9'] },
-    },
-    unstyled: {
-      true: {
-        'className': ['bg-transparent border-transparent'],
-        ':hover': { className: ['bg-transparent border-transparent'] },
-        ':active': { className: ['bg-transparent border-transparent'] },
-      },
-    },
-    variant: {
-      filled: { className: ['border-transparent'] },
-      outlined: {
-        'className': ['bg-transparent'],
-        ':active': { className: ['bg-neutral-300'] },
-      },
-    },
-  },
-  'defaultVariants': {
-    size: 'md',
-    color: 'neutral',
-    variant: 'outlined',
-    space: 'xs',
-    unstyled: false,
-  },
-});
+    // @ts-expect-error missing type of extraStyle function
+    extraStyle: ({ color, variant }, state) => {
+      const select = (c: string) => {
+        const color = t.utils.select(
+          {
+            active: t.utils.hexToRgbA(t.utils.shadeColor(c, 25), 0.5),
+            hover: t.utils.hexToRgbA(t.utils.shadeColor(c, 5), 0.5),
+            base: 'transparent',
+          },
+          state
+        );
+        if (variant === 'outlined') {
+          return {
+            borderColor: c,
+            backgroundColor: color,
+          };
+        } else if (variant === 'ghost') {
+          return {
+            borderColor: 'transparent',
+            backgroundColor: color,
+          };
+        }
+        const colorDefault = t.utils.select(
+          {
+            active: t.utils.shadeColor(c, -15),
+            hover: t.utils.shadeColor(c, 15),
+            base: c,
+          },
+          state
+        );
+        return {
+          borderColor: colorDefault,
+          backgroundColor: colorDefault,
+        };
+      };
 
-export type ButtonFrameProps = GetProps<typeof ButtonFrame>;
-
-export const ButtonTextFrame = styled(Text, {
-  className: ['font-semibold'],
-  variants: {
-    color: {
-      slate: {
-        className: ['text-slate-800', 'dark:text-slate-500'],
-      },
-      gray: {
-        className: ['text-gray-800', 'dark:text-gray-500'],
-      },
-      zinc: {
-        className: ['text-zinc-800', 'dark:text-zinc-500'],
-      },
-      neutral: {
-        className: ['text-neutral-800', 'dark:text-neutral-500'],
-      },
-      stone: {
-        className: ['text-stone-800', 'dark:text-stone-500'],
-      },
-      red: {
-        className: ['text-red-700', 'dark:text-red-500'],
-      },
-      orange: { className: ['text-orange-800'] },
-      amber: { className: ['text-amber-800'] },
-      yellow: { className: ['text-yellow-800'] },
-      lime: { className: ['text-lime-800'] },
-      green: { className: ['text-green-800'] },
-      emerald: { className: ['text-emerald-800'] },
-      teal: { className: ['text-teal-800'] },
-      cyan: { className: ['text-cyan-800'] },
-      sky: { className: ['text-sky-800'] },
-      blue: { className: ['text-blue-500'] },
-      indigo: { className: ['text-indigo-500'] },
-      violet: { className: ['text-violet-500'] },
-      purple: { className: ['text-purple-500'] },
-      fuchsia: { className: ['text-fuchsia-500'] },
-      pink: {
-        className: ['text-pink-800', 'dark:text-red-500'],
-      },
-      rose: {
-        className: ['text-rose-800', 'dark:text-rose-500'],
-      },
+      if (color === 'red') {
+        return select(t.colors.error);
+      }
+      return select(t.colors.neutral);
     },
-    size: {
-      xs: { className: ['px-1', 'text-xs'] },
-      sm: { className: ['px-2', 'text-sm'] },
-      md: { className: ['px-3', 'text-base'] },
-      lg: { className: ['px-4', 'text-lg'] },
-      xl: { className: ['px-5', 'text-xl'] },
-    },
-    variant: {
-      filled: { className: ['text-white'] },
-      outlined: { className: ['bg-transparent'] },
-    },
-    unstyled: { true: {} },
-  },
-  defaultVariants: {
-    size: 'md',
-    color: 'neutral',
-    variant: 'outlined',
-  },
-  compoundVariants: [
-    {
-      variant: 'outlined',
-      className: ['bg-transparent'],
-    },
-    {
-      variant: 'filled',
-      className: ['text-white', 'dark:text-white'],
-    },
-    {
-      'unstyled': true,
-      ':hover': { className: ['bg-tranparent'] },
-      'className': ['text-black', 'dark:text-white'],
-    },
-  ],
-});
-
-export type ButtonTextFrameProps = GetProps<typeof ButtonTextFrame>;
-
-const ButtonTextControlled = ({ ...props }: ButtonTextFrameProps) => {
-  const variantsContext = useVariantContext();
-  return <ButtonTextFrame {...variantsContext} {...props} />;
-};
-
-type ButtonIconFrameProps = GetProps<typeof Box>;
-const ButtonIconFrame = ({ children, ...props }: ButtonIconFrameProps) => {
-  const { color, variant, size } = useVariantContext() || {};
-  const className = ButtonTextFrame.styles({
-    color,
-    variant,
-    size,
-  });
-  const style = tw.style(className?.className);
-  return (
-    <Box {...props}>
-      {cloneElement(children as any, {
-        size: style.fontSize ? Number(style.fontSize) * 1.2 : 24,
-        color: style.color,
-      })}
-    </Box>
-  );
-};
-
-const [ProviderGroup, useGroupContext] = createScope<{ grouped?: boolean }>({});
-
-type ContextVariant = Pick<
-  ButtonFrameProps,
-  'size' | 'color' | 'variant'
-> | null;
-const [ProviderVariant, useVariantContext] = createScope<ContextVariant>(null);
-
-type ButtonRootProps =
-  | (ButtonFrameProps & { text?: never; icon?: never; iconAfter?: never })
-  | (Omit<ButtonFrameProps, 'children'> & {
-      text: string;
-      icon?: ReactNode;
-      iconAfter?: ReactNode;
-      children?: never;
-    });
-
-const Button = createButton({
-  Group: forwardRef(
-    (
-      {
-        color,
-        size,
-        variant,
-        ...props
-      }: ButtonGroupFrameProps & ContextVariant,
-      ref: any
-    ) => {
-      return (
-        <ProviderVariant color={color} size={size} variant={variant}>
-          <ProviderGroup grouped>
-            <ButtonGroupFrame {...props} ref={ref} />
-          </ProviderGroup>
-        </ProviderVariant>
-      );
-    }
+  })
+);
+const Text = withStaticProperties(
+  memo(
+    forwardRef((props: TextProps, ref: any) => {
+      return <TextUi weight="semibold" {...props} ref={ref} />;
+    })
   ),
-  Root: forwardRef(
-    (
-      { children, text, icon, iconAfter, ...props }: ButtonRootProps,
-      ref: any
-    ) => {
-      const { grouped } = useGroupContext();
-      const variantsContext = useVariantContext();
+  { styleSheet: TextUi.styleSheet }
+);
 
-      const ParentComp = variantsContext ? Fragment : ProviderVariant;
-      const {
-        color = props.color || 'neutral',
-        size = props.size || 'md',
-        variant = props.variant || 'outlined',
-      } = variantsContext || {};
+const Element = styled(View, {});
 
-      return (
-        <ParentComp {...{ color, size, variant }}>
-          <ButtonFrame
-            grouped={grouped}
-            {...props}
-            {...{ color, size, variant }}
-            ref={ref}
-          >
-            {children ?? (
-              <>
-                {icon && <ButtonIconFrame>{icon}</ButtonIconFrame>}
-                <ButtonTextControlled>{text}</ButtonTextControlled>
-                {iconAfter && <ButtonIconFrame>{iconAfter}</ButtonIconFrame>}
-              </>
-            )}
-          </ButtonFrame>
-        </ParentComp>
-      );
-    }
-  ),
-  Text: ButtonTextControlled,
-  Element: ButtonIconFrame,
-});
+const Button = withStaticProperties(
+  createButton({
+    Group,
+    Root,
+    Text,
+    Element,
+  }),
+  { styleSheet: Root.styleSheet }
+);
 
 const { Text: ButtonText, Element: ButtonElement } = Button;
 

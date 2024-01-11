@@ -1,15 +1,15 @@
 'use client';
 
-import { View } from 'react-native';
-import type { GetProps } from '@crossed/styled';
 import { styled } from '@crossed/styled';
-import { spaceVariants } from '../variants/space';
+import type { GetProps } from '@crossed/core';
+import { Box } from './Box';
 
-export const YBox = styled(View, {
-  className: ['flex', 'flex-col', 'items-start'],
-  variants: {
-    space: spaceVariants,
-  },
-});
+export const YBox = styled(Box, () => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  alignSelf: 'stretch',
+  maxWidth: '100%',
+}));
 
 export type YBoxProps = GetProps<typeof YBox>;

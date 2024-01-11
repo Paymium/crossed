@@ -1,0 +1,22 @@
+/* These styles make the body full-height */
+html, body { height: 100%; margin:0;padding:0; }
+/* These styles disable body scrolling if you are using <ScrollView> */
+/* body { overflow: hidden; } */
+/* These styles make the root element full-height */
+#root { display:flex; height:100%; }
+
+a { text-decoration-line: none; }
+
+h2, h1 {
+  display: inline-block !important;
+  z-index: -1;
+}
+
+h1 {
+  padding-top: 70px !important;
+  margin-top: -70px !important;
+}
+h2 {
+  padding-top: 70px !important;
+  margin-top: -50px !important;
+}

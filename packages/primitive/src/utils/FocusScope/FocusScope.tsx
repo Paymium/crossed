@@ -47,8 +47,7 @@ export function useFocusScope(
     onMountAutoFocus: onMountAutoFocusProp,
     onUnmountAutoFocus: onUnmountAutoFocusProp,
     forceUnmount,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    children,
+    children: _children,
     ...scopeProps
   } = props;
   const [container, setContainer] = React.useState<HTMLElement | null>(null);

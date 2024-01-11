@@ -61,7 +61,7 @@ export const createDropdown = <
       props: GetProps<typeof Dropdown> & {
         value?: boolean;
         defaultValue?: boolean;
-        onChangeOpen?: (p: boolean) => void;
+        onChangeOpen?: (_p: boolean) => void;
       }
     ) => {
       const id = useId();
