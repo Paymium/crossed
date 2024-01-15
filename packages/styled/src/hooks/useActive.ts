@@ -1,8 +1,9 @@
 import { composeEventHandlers } from '@crossed/core';
-import { useSignal } from '@preact/signals-react';
+import { useComputed, useSignal } from '@preact/signals-react';
 
 export const useActive = <
   T extends {
+    active?: boolean;
     onPointerUp?: (..._args: any[]) => void;
     onPointerDown?: (..._args: any[]) => void;
   }
@@ -17,8 +18,12 @@ export const useActive = <
     active.value = true;
   }, props.onPointerDown);
 
+  const isActive = useComputed(() => {
+    return props.active ?? active.value;
+  });
+
   return {
-    active,
+    active: isActive,
     actions: {
       onPointerUp,
       onPointerDown,

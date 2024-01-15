@@ -1,8 +1,9 @@
 import { composeEventHandlers } from '@crossed/core';
-import { useSignal } from '@preact/signals-react';
+import { useComputed, useSignal } from '@preact/signals-react';
 
 export const useFocus = <
   T extends {
+    focus?: boolean;
     onFocus?: (..._args: any[]) => void;
     onBlur?: (..._args: any[]) => void;
   }
@@ -17,5 +18,9 @@ export const useFocus = <
     focus.value = false;
   }, props.onBlur) as any;
 
-  return { focus, actions: { onFocus, onBlur } };
+  const isFocus = useComputed(() => {
+    return props.focus || focus.value;
+  });
+
+  return { focus: isFocus, actions: { onFocus, onBlur } };
 };

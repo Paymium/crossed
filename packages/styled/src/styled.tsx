@@ -1,16 +1,21 @@
-import { extract } from './extract';
+import { ReturnExtract, extract } from './extract';
 import { forwardRef, memo } from 'react';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { withStaticProperties } from '@crossed/core/src/withStaticProperties';
 import type {
-  Children,
   ComponentLocal,
+  ExtractStyle,
   ExtractVariant,
   UnistylesTheme,
   UnistylesValuesExtends,
 } from './types';
 import { useLogic } from './useLogic';
 import { useSignals } from '@preact/signals-react/runtime';
+import { Slot } from './Slot';
+import { parseStyle } from './parseStyle';
+import { Platform } from 'react-native';
+
+export type StyledOptions = { debug?: boolean; name?: string };
 
 export const styled = <
   P extends Record<string, any>,
@@ -20,7 +25,7 @@ export const styled = <
 >(
   Comp: ComponentLocal<P>,
   style: S,
-  { debug: debugStyled, name }: { debug?: boolean; name?: string } = {}
+  { debug: debugStyled, name }: StyledOptions = {}
 ) => {
   // eslint-disable-next-line no-console
   const log = (...args: any[]) => console.log(`styled - "${name}" -`, ...args);
@@ -29,8 +34,9 @@ export const styled = <
 
   const styleSheet = (debug?: boolean) =>
     createStyleSheet((e) => {
-      const styleParam =
-        typeof style === 'function' ? style(e) : (style as any);
+      const styleParam = (
+        typeof style === 'function' ? style(e) : style
+      ) as ExtractStyle<typeof style>;
       const resultExtract = extract(styleParam);
       debug && log('after extrac ', resultExtract);
       return resultExtract;
@@ -39,54 +45,42 @@ export const styled = <
     memo(
       forwardRef(
         (
-          params: Children<P> &
+          params: P &
             ExtractVariant<S> & {
-              pressed?: boolean;
               hovered?: boolean;
+              active?: boolean;
               focus?: boolean;
               debug?: boolean;
               asChild?: any;
             },
           ref: any
         ) => {
-          const {
-            pressed: pressedProps,
-            hovered: hoveredProps,
-            focus: focusProps,
-            debug,
-            asChild,
-            ...props
-          } = params as any;
+          const { debug, asChild, ...props } = params;
 
           const isDebug = debugStyled || debug;
 
           useSignals();
 
-          const { styles } = useStyles(styleSheet(debug) as any, props as any);
+          const { styles } = useStyles(
+            styleSheet(isDebug) as any,
+            props as any
+          );
 
           const { styles: old } = useStyles(
             ((Comp as any).styleSheet || {}) as any,
             props as any
           );
-          isDebug && log('Comp.styleSheet', Comp, old);
-
           const l = useLogic({
             name,
             props,
             debug: isDebug,
             styles: styles as any,
-            active: pressedProps,
-            hovered: hoveredProps,
-            focus: focusProps,
           });
           const t = useLogic({
             name: (Comp as any).displayName,
             props,
             debug: isDebug,
             styles: old as any,
-            active: pressedProps,
-            hovered: hoveredProps,
-            focus: focusProps,
           });
 
           isDebug && log(`render`);
@@ -94,28 +88,39 @@ export const styled = <
             ...(props as any),
             ref: ref,
             ...l.actions,
-            style: {
-              ...t.styles.value,
-              ...l.styles.value,
-            },
+            style:
+              Platform.OS === 'web'
+                ? parseStyle({
+                    ...t.styles.value,
+                    ...l.styles.value,
+                  })
+                : {
+                    ...t.styles.value,
+                    ...l.styles.value,
+                  },
           };
-          return typeof props.children === 'function' ? (
-            props.children({
-              ...propsTmp,
-              children: propsTmp.children.props?.children || propsTmp.children,
-            })
-          ) : (
-            <Comp {...propsTmp} />
-          );
+          return asChild ? <Slot {...propsTmp} /> : <Comp {...propsTmp} />;
         }
       )
     ),
     {
       styleSheet: (e: UnistylesTheme) => {
-        const st = styleSheet(debugStyled);
+        let st = styleSheet(debugStyled);
+        const styleSheetExtends =
+          'styleSheet' in Comp ? Comp.styleSheet(e) : undefined;
+        let stTmp: ReturnExtract;
+        if (typeof st === 'function') {
+          stTmp = st(e) as ReturnExtract;
+        } else {
+          stTmp = st as ReturnExtract;
+        }
         return {
-          ...(Comp as any).styleSheet?.(e),
-          ...(typeof st === 'function' ? st(e) : st),
+          ...styleSheetExtends,
+          ...stTmp,
+          base: { ...(styleSheetExtends || {}).base, ...stTmp.base },
+          active: { ...(styleSheetExtends || {}).base, ...stTmp.active },
+          focus: { ...(styleSheetExtends || {}).focus, ...stTmp.focus },
+          hover: { ...(styleSheetExtends || {}).hover, ...stTmp.hover },
         };
       },
       name,

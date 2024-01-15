@@ -26,7 +26,7 @@ const config: Config.InitialOptions = {
       '<rootDir>/node_modules/react-native-reanimated/mock',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!((.pnpm/)?((jest-)?react-native|@react-native(-community)?))|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|tamagui|@tamagui/.*|@paymium/.*|react-native-reanimated|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)',
+    'node_modules/(?!((.pnpm/)?((jest-)?react-native|@react-native(-community)?))|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|tamagui|@tamagui/.*|@paymium/.*|react-native-reanimated|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@preact/.*)',
   ],
   modulePathIgnorePatterns: ['lib', 'coverage'],
   moduleDirectories: ['./node_modules', 'src'],

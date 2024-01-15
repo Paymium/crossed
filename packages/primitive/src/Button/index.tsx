@@ -35,5 +35,6 @@ export const createButton = <
     Group: ButtonGroup,
     Text: ButtonText,
     Element: ButtonElement,
+    displayName: 'Button',
   });
 };

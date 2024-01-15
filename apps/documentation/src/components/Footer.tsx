@@ -29,12 +29,7 @@ export const Footer = () => {
     <Container space="xs" role="contentinfo">
       <Row>
         <Text size="xs">Copyright © {new Date().getFullYear()}</Text>
-        <Link
-          href="https://paymium.com"
-          hrefAttrs={{
-            target: '_blank',
-          }}
-        >
+        <Link href="https://paymium.com" target="_blank">
           Paymium
         </Link>
       </Row>

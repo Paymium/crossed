@@ -1,8 +1,9 @@
 import { composeEventHandlers } from '@crossed/core';
-import { useSignal } from '@preact/signals-react';
+import { useComputed, useSignal } from '@preact/signals-react';
 
 export const useHover = <
   T extends {
+    hovered?: boolean;
     onPointerEnter?: (..._args: any[]) => void;
     onPointerLeave?: (..._args: any[]) => void;
   }
@@ -17,8 +18,12 @@ export const useHover = <
     hovered.value = false;
   }, props.onPointerLeave);
 
+  const isHover = useComputed(() => {
+    return props.hovered || hovered.value;
+  });
+
   return {
-    hovered,
+    hovered: isHover,
     actions: {
       onPointerEnter: onPointerEnter,
       onPointerLeave: onPointerLeave,

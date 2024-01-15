@@ -8,13 +8,13 @@ import {
   useStyles,
 } from '@crossed/styled';
 import { ChangeTheme } from './ChangeTheme';
-import { Anchor, XBox } from '@crossed/ui';
-import LinkNext from 'next/link';
+import { XBox } from '@crossed/ui';
 import { Logo } from './Logo';
 import { withDefaultProps } from '@crossed/core';
 import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
 import { memo } from 'react';
+import { Link } from './Link';
 
 const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
   {
@@ -55,7 +55,9 @@ export const NavBar = memo(() => {
           <LinkNav
             href={href}
             key={href}
-            hovered={Boolean(pathname.match(activeFor))}
+            active={
+              Boolean(pathname.match(activeFor)).toString() as 'true' | 'false'
+            }
           >
             {title}
           </LinkNav>
@@ -69,7 +71,7 @@ export const NavBar = memo(() => {
 
 const LinkNav = withDefaultProps(
   styled(
-    Anchor,
+    Link,
     (t) => ({
       'color': t.utils.shadeColor(
         t.colors.textColor,
@@ -85,10 +87,13 @@ const LinkNav = withDefaultProps(
           UnistylesRuntime.themeName === 'dark' ? -90 : 90
         ),
       },
+      'variants': {
+        active: { true: { color: t.colors.textColor }, false: {} },
+      },
     }),
     { name: 'LinkNav' }
   ),
-  { size: 'md', as: LinkNext }
+  { size: 'md' }
 );
 
 const Nav = styled(XBox, (t) => ({

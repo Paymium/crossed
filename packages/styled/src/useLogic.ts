@@ -3,23 +3,16 @@ import { useActive } from './hooks/useActive';
 import { useHover } from './hooks/useHover';
 import { effect, signal } from '@preact/signals-react';
 import { useFocus } from './hooks/useFocus';
-import { useMemo } from 'react';
 
 export const useLogic = <P extends Record<string, any>>({
   name,
   props,
   debug,
   styles,
-  hovered: hoveredProps,
-  active: activeProps,
-  focus: focusProps,
 }: {
   name?: string;
   props: P;
   styles: Partial<ReturnExtract>;
-  hovered?: boolean;
-  active?: boolean;
-  focus?: boolean;
   debug?: boolean;
 }) => {
   const log = (...args: any[]) =>
@@ -36,18 +29,17 @@ export const useLogic = <P extends Record<string, any>>({
     const hoverStyle = hovered.value && stylesComputed.value.hover;
     const focusStyle = focus.value && stylesComputed.value.focus;
     const activeStyle = active.value && stylesComputed.value.active;
+    const { extraStyle: extraStyleBase, ...base } =
+      (stylesComputed.value.base as any) || {};
     const extraStyle =
-      (stylesComputed.value.base as any)?.extraStyle?.(props, {
-        focus: focus.value || focusProps,
-        active: active.value || activeProps,
-        hover: hovered.value || hoveredProps,
+      extraStyleBase?.(props, {
+        focus: focus.value,
+        active: active.value,
+        hover: hovered.value,
       }) || {};
 
     const toto = {
-      ...(stylesComputed.value.base &&
-      Object.keys(stylesComputed.value.base).length > 0
-        ? stylesComputed.value.base
-        : undefined),
+      ...(base && Object.keys(base).length > 0 ? base : undefined),
       ...(focusStyle && Object.keys(focusStyle).length > 0
         ? focusStyle
         : undefined),
@@ -61,7 +53,7 @@ export const useLogic = <P extends Record<string, any>>({
         ? extraStyle
         : undefined),
       ...(Array.isArray(props.style)
-        ? props.style.reduce((acc, t) => ({ ...acc, t }), {})
+        ? props.style.reduce((acc, t) => ({ ...acc, ...t }), {})
         : props.style),
     };
     if (JSON.stringify(styleToRender) !== JSON.stringify(toto)) {
