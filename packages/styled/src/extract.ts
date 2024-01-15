@@ -25,7 +25,9 @@ export const extract = (p: Partial<UnistylesValuesExtends>): ReturnExtract => {
         typeof value === 'object'
       ) {
         Object.entries(extract(value as any)).forEach(([k, v]) => {
-          (acc as any)[k][key] = v;
+          if (Object.keys(v).length > 0) {
+            (acc as any)[k][key] = v;
+          }
         });
       }
       if (stateToExtract.includes(key) && typeof value === 'object') {

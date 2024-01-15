@@ -1,5 +1,5 @@
 import { composeEventHandlers } from '@crossed/core';
-import { useCallback, useState } from 'react';
+import { useSignal } from '@preact/signals-react';
 
 export const useHover = <
   T extends {
@@ -9,23 +9,19 @@ export const useHover = <
 >(
   props: T
 ) => {
-  const [hovered, setHoveredState] = useState(false);
-  const onPointerEnter = useCallback(
-    composeEventHandlers(() => {
-      setHoveredState(true);
-    }, props.onPointerEnter) as any,
-    [props.onPointerEnter, setHoveredState]
-  );
-  const onPointerLeave = useCallback(
-    composeEventHandlers(() => {
-      setHoveredState(false);
-    }, props.onPointerLeave) as any,
-    [props.onPointerLeave, setHoveredState]
-  );
+  const hovered = useSignal(false);
+  const onPointerEnter = composeEventHandlers(() => {
+    hovered.value = true;
+  }, props.onPointerEnter);
+  const onPointerLeave = composeEventHandlers(() => {
+    hovered.value = false;
+  }, props.onPointerLeave);
 
   return {
     hovered,
-    onPointerLeave,
-    onPointerEnter,
+    actions: {
+      onPointerEnter: onPointerEnter,
+      onPointerLeave: onPointerLeave,
+    },
   };
 };

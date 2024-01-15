@@ -8,12 +8,13 @@ import {
   useStyles,
 } from '@crossed/styled';
 import { ChangeTheme } from './ChangeTheme';
-import { XBox } from '@crossed/ui';
-import { Link } from './Link';
+import { Anchor, XBox } from '@crossed/ui';
+import LinkNext from 'next/link';
 import { Logo } from './Logo';
 import { withDefaultProps } from '@crossed/core';
 import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
+import { memo } from 'react';
 
 const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
   {
@@ -38,11 +39,11 @@ const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
   },
 ];
 
-export const NavBar = () => {
+export const NavBar = memo(() => {
   const { styles } = useStyles(styleSheet);
   const pathname = usePathname();
   return (
-    <XBox style={styles.nav} role="navigation">
+    <Nav role="navigation">
       <XBox style={styles.element}>
         <LinkNav href="/" style={styles.logo} size="lg">
           <Logo />
@@ -62,38 +63,44 @@ export const NavBar = () => {
         <ChangeLang />
         <ChangeTheme />
       </XBox>
-    </XBox>
+    </Nav>
   );
-};
+});
 
 const LinkNav = withDefaultProps(
-  styled(Link, (t) => ({
-    'color': t.utils.shadeColor(
-      t.colors.textColor,
-      UnistylesRuntime.themeName === 'dark' ? -90 : 90
-    ),
-    'hover:': {
-      textDecorationLine: 'none',
-      color: t.colors.textColor,
-    },
-  })),
-  { size: 'md' }
+  styled(
+    Anchor,
+    (t) => ({
+      'color': t.utils.shadeColor(
+        t.colors.textColor,
+        UnistylesRuntime.themeName === 'dark' ? -90 : 90
+      ),
+      'hover:': {
+        textDecorationLine: 'none',
+        color: t.colors.textColor,
+      },
+      'active:': {
+        color: t.utils.shadeColor(
+          t.colors.textColor,
+          UnistylesRuntime.themeName === 'dark' ? -90 : 90
+        ),
+      },
+    }),
+    { name: 'LinkNav' }
+  ),
+  { size: 'md', as: LinkNext }
 );
 
+const Nav = styled(XBox, (t) => ({
+  backgroundColor: t.colors.backgroundStrong,
+  padding: 15,
+  justifyContent: 'space-between',
+  borderBottomWidth: 1,
+  borderColor: t.colors.borderColor,
+  alignItems: 'center',
+}));
+
 const styleSheet = createStyleSheet((theme) => ({
-  nav: {
-    backgroundColor: theme.colors.backgroundStrong,
-    padding: 15,
-    justifyContent: 'space-between',
-    borderBottomWidth: 1,
-    borderColor: theme.colors.borderColor,
-    alignItems: 'center',
-    variants: {
-      brand: {
-        0: {},
-      } as unknown as { 0: {} },
-    },
-  },
   element: {
     width: 'auto',
     alignItems: 'center',

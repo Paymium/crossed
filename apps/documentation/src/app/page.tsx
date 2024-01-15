@@ -2,7 +2,7 @@
 import '@/types/unistyles';
 import { Logo } from '@/components/Logo';
 import { createStyleSheet, mq, styled, useStyles } from '@crossed/styled';
-import { B, Button, Card, H1, H2, H3, XBox, YBox } from '@crossed/ui';
+import { B, Button, Card, H1, H2, H3, YBox } from '@crossed/ui';
 import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -10,19 +10,36 @@ const Description = styled(H2, {
   textAlign: 'center',
   marginTop: 0,
   maxWidth: {
-    xs: '90%',
-    md: '60%',
+    [mq.only.width(undefined, 'xs')]: '90%',
+    [mq.only.width('xs')]: '60%',
   },
 });
-const SectionCTA = styled(YBox, {
-  marginTop: 30,
-  alignItems: 'center',
-  alignSelf: 'center',
-  width: {
-    [mq.only.width(undefined, 'xl')]: '90%',
-    [mq.only.width('xl')]: '70%',
+const SectionCTA = styled(
+  YBox,
+  {
+    marginTop: 30,
+    alignItems: 'center',
+    alignSelf: 'center',
+    width: {
+      [mq.only.width(undefined, 'xl')]: '90%',
+      [mq.only.width('xl')]: '70%',
+    },
   },
-});
+  { name: 'SectionCTA' }
+);
+
+const ContainerButtonCta = styled(
+  YBox,
+  {
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    flexDirection: {
+      [mq.only.width(undefined, 'sm')]: 'column',
+      [mq.only.width('sm')]: 'row',
+    },
+  },
+  { name: 'ContainerButtonCta' }
+);
 
 export default function Home() {
   const { styles } = useStyles(styleSheet);
@@ -57,7 +74,7 @@ export default function Home() {
         <H3 textAlign="center">
           <Trans>Cross platform ecosystem</Trans>
         </H3>
-        <XBox space="lg" style={styles.cardsContainer}>
+        <ContainerButtonCta space="lg">
           <Link href="/styled/introduction" passHref legacyBehavior>
             <Card style={styles.card} role="link">
               <Card.Title
@@ -110,7 +127,7 @@ export default function Home() {
               <Trans>Comming soon</Trans>
             </Card.Description>
           </Card>
-        </XBox>
+        </ContainerButtonCta>
       </SectionCTA>
     </YBox>
   );
@@ -118,15 +135,6 @@ export default function Home() {
 
 const styleSheet = createStyleSheet((t) => ({
   container: { alignItems: 'center', paddingVertical: 50, minHeight: '90%' },
-  cardsContainer: {
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    flexDirection: {
-      xs: 'column',
-      sm: 'column',
-      md: 'row',
-    },
-  },
   card: { flex: 1 },
   cardTitle: { textAlign: 'center', marginBottom: t.space.md },
   cardDescription: { textAlign: 'center' },

@@ -1,14 +1,23 @@
 import type { ReactComponentWithRef } from '@crossed/core';
-import type { ComponentType, ForwardRefExoticComponent } from 'react';
+import type {
+  ComponentType,
+  ForwardRefExoticComponent,
+  PropsWithChildren,
+  ReactNode,
+} from 'react';
 // import type { UnistylesTheme } from 'react-native-unistyles/lib/typescript/src/types';
 import type { UnistylesValues } from 'react-native-unistyles/lib/typescript/src/types/stylesheet';
 
 import type { UnistylesTheme } from 'react-native-unistyles/lib/typescript/src/types';
 
+export type Children<P extends PropsWithChildren> = Omit<P, 'children'> & {
+  children: ReactNode | ReactNode[] | ((_p: P) => ReactNode | ReactNode[]);
+};
+
 export { UnistylesValues, UnistylesTheme };
 export type UnistylesValuesExtends = Omit<UnistylesValues, 'variants'> &
   StateUnistylesValues &
-  Variants;
+  Variants & { name?: string };
 
 export type ExtraStyle<P> = {
   extraStyle: (

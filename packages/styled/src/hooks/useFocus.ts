@@ -1,5 +1,5 @@
 import { composeEventHandlers } from '@crossed/core';
-import { useCallback, useState } from 'react';
+import { useSignal } from '@preact/signals-react';
 
 export const useFocus = <
   T extends {
@@ -9,22 +9,13 @@ export const useFocus = <
 >(
   props: T
 ) => {
-  const [focus, setFocus] = useState(false);
-  const onFocus = useCallback(
-    composeEventHandlers(() => {
-      setFocus(true);
-    }, props.onFocus) as any,
-    []
-  );
-  const onBlur = useCallback(
-    composeEventHandlers(() => {
-      setFocus(false);
-    }, props.onBlur) as any,
-    []
-  );
-  return {
-    focus,
-    onFocus,
-    onBlur,
-  };
+  const focus = useSignal(false);
+  const onFocus = composeEventHandlers(() => {
+    focus.value = true;
+  }, props.onFocus) as any;
+  const onBlur = composeEventHandlers(() => {
+    focus.value = false;
+  }, props.onBlur) as any;
+
+  return { focus, actions: { onFocus, onBlur } };
 };

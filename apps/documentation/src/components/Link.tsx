@@ -1,43 +1,21 @@
 'use client';
 
+import { parseStyle } from '@crossed/styled';
 import { Anchor, AnchorProps } from '@crossed/ui';
 import LinkNext, { LinkProps as LinkNextProps } from 'next/link';
 
-export const Link = (props: LinkProps) => {
-  const {
-    href,
-    as,
-    replace,
-    scroll,
-    shallow,
-    passHref: _passHref,
-    prefetch,
-    locale,
-    legacyBehavior: _legacyBehavior,
-    onMouseEnter,
-    onTouchStart,
-    onClick,
-    ...other
-  } = props;
+export const Link = function Link({
+  children,
+  ...props
+}: LinkProps & { target?: '_blank' }) {
   return (
-    <LinkNext
-      {...{
-        href,
-        as,
-        replace,
-        scroll,
-        shallow,
-        passHref: true,
-        prefetch,
-        locale,
-        legacyBehavior: true,
-        onMouseEnter,
-        onTouchStart,
-        onClick,
-      }}
-    >
-      <Anchor {...(other as any)} href={href} />
-    </LinkNext>
+    <Anchor {...(props as any)}>
+      {(p) => (
+        <LinkNext {...(p as any)} style={parseStyle(p.style)}>
+          {children}
+        </LinkNext>
+      )}
+    </Anchor>
   );
 };
 
