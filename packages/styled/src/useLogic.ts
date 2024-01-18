@@ -38,7 +38,7 @@ export const useLogic = <P extends Record<string, any>>({
         hover: hovered.value,
       }) || {};
 
-    const toto = {
+    const stylesUnify = {
       ...(base && Object.keys(base).length > 0 ? base : undefined),
       ...(focusStyle && Object.keys(focusStyle).length > 0
         ? focusStyle
@@ -56,7 +56,7 @@ export const useLogic = <P extends Record<string, any>>({
         ? props.style.reduce((acc, t) => ({ ...acc, ...t }), {})
         : props.style),
     };
-    if (JSON.stringify(styleToRender) !== JSON.stringify(toto)) {
+    if (JSON.stringify(styleToRender) !== JSON.stringify(stylesUnify)) {
       debug &&
         log(
           'reconciliate styles whith state',
@@ -65,10 +65,10 @@ export const useLogic = <P extends Record<string, any>>({
             isActive: active.value,
             isFocus: focus.value,
           },
-          toto,
+          stylesUnify,
           stylesComputed.value
         );
-      styleToRender.value = toto;
+      styleToRender.value = stylesUnify;
     }
   });
 

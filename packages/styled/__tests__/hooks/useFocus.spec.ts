@@ -1,24 +1,11 @@
-import { renderHook } from '@crossed/test';
+import { Signal, renderHook } from '@crossed/test';
 import { useFocus } from '../../src/hooks/useFocus';
 import { act } from 'react-dom/test-utils';
 
 jest.mock('@preact/signals-react', () => {
-  class Toto {
-    private _value: boolean;
-    constructor(e: boolean) {
-      this._value = e;
-    }
-    get value() {
-      return this._value;
-    }
-    set value(e) {
-      this._value = e;
-    }
-  }
-
-  const t = new Toto(false);
+  const t = new Signal(false);
   return {
-    useComputed: jest.fn((cb) => new Toto(cb())),
+    useComputed: jest.fn((cb) => new Signal(cb())),
     useSignal: jest.fn(() => {
       return t;
     }),
