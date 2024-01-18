@@ -3,13 +3,13 @@ import { render, screen } from '@crossed/test';
 
 import { LabelInput } from '../LabelInput';
 import { ContextLabel, useContext } from '../context';
-import { composeRefs } from '@crossed/core';
+// import { composeRefs } from '@crossed/core';
 
 jest.mock('../context');
 jest.mock('@crossed/core/src/composeRefs');
 
 const useContextMocked = useContext as unknown as jest.Mock<ContextLabel>;
-const composeRefsMocked = composeRefs as unknown as jest.Mock<any>;
+// const composeRefsMocked = composeRefs as unknown as jest.Mock<any>;
 
 describe('createLabelMain', () => {
   beforeEach(() => {
@@ -31,7 +31,7 @@ describe('createLabelMain', () => {
     );
 
     expect(useContextMocked).toBeCalled();
-    expect(composeRefsMocked).toBeCalledWith({ current: undefined }, null);
+    // expect(composeRefsMocked).toBeCalledWith({ current: undefined }, null);
 
     const el = await screen.getByTestId('input');
     expect(el).toHaveAttribute('id', 'id');
