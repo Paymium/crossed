@@ -9,18 +9,61 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { Divider, Button, XBox, YBox } from '@crossed/ui';
+import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
   return (
     <TemplatePrimitive
       title="Separator"
-      description={t('Visually or semantically separates content.')}
-      params={[]}
+      description={t('separator description')}
+      params={[
+        {
+          title: 'Props',
+          description: (
+            <TemplateDescriptionProps
+              composantName="Separator"
+              composantExtended="View"
+              link="https://reactnative.dev/docs/view"
+              blank={true}
+            />
+          ),
+          props: [
+            {
+              name: 'Direction',
+              description: t('direction props description'),
+              type: 'horizontal, vertical',
+            },
+          ],
+        },
+      ]}
       return={[]}
       types={[]}
-      anatomy={`// coming soon`}
-      example={`// coming soon`}
+      anatomy={`
+import { Divider } from "@crossed/ui"
+      
+const MyComponent = () => {
+  return (<Divider>Insert element here</Divider>)
+}`}
+      example={`
+<XBox space="md">
+  <YBox>
+    <Button size='md'/>
+    <Divider direction="horizontal"/>
+    <Button size='md'/>
+    <Divider direction="horizontal"/>
+    <Button size='md'/>
+  </Ybox>
+  <XBox center='true'>
+    <Button size='md'/>
+    <Divider direction="vertical"/>
+    <Button size='md'/>
+    <Divider direction="vertical"/>
+    <Button size='md'/>
+  </XBox>
+</XBox>`}
+      scope={{ Divider, Button, XBox, YBox }}
     />
   );
 }

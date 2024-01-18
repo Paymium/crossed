@@ -9,18 +9,43 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { YBox, Button } from '@crossed/ui';
+import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
   return (
     <TemplatePrimitive
       title="YBox"
-      description={t('Used to Box elements in the vertical direction')}
-      params={[]}
+      description={t('ybox description')}
+      params={[
+        {
+          title: 'Props',
+          description: (
+            <TemplateDescriptionProps
+              composantName="XBox"
+              composantExtended="Box"
+              link="/Box"
+            />
+          ),
+          props: [],
+        },
+      ]}
       return={[]}
       types={[]}
-      anatomy={`// coming soon`}
-      example={`// coming soon`}
+      anatomy={`
+import { YBox } from "@crossed/ui"
+      
+const MyComponent = () => {
+  return (<YBox>Insert element here</YBox>)
+}`}
+      example={`
+<YBox space="md">
+  <Button size='md'/>
+  <Button size='md'/>
+  <Button size='md'/>
+</YBox>`}
+      scope={{ YBox, Button }}
     />
   );
 }

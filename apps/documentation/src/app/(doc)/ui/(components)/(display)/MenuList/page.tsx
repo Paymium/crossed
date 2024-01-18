@@ -9,18 +9,47 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import {
+  MenuList,
+  MenuDivider,
+  MenuItem,
+  MenuLabel,
+  MenuTitle,
+  MenuSubTitle,
+} from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
   return (
     <TemplatePrimitive
       title="MenuList"
-      description={t('A simple, sizable list item.')}
+      description={t('menuList description')}
       params={[]}
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`// coming soon`}
+      example={`
+<MenuList>
+  <MenuItem>
+    <MenuTitle>Home</MenuTitle>
+  </MenuItem>
+  <MenuDivider/>
+  <MenuItem>
+    <MenuTitle>Account</MenuTitle>
+  </MenuItem>
+  <MenuDivider/>
+  <MenuItem>
+    <MenuTitle>Disconnect</MenuTitle>
+  </MenuItem>
+</MenuList>`}
+      scope={{
+        MenuList,
+        MenuDivider,
+        MenuItem,
+        MenuLabel,
+        MenuTitle,
+        MenuSubTitle,
+      }}
     />
   );
 }

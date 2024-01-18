@@ -9,20 +9,55 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { Box, Button } from '@crossed/ui';
+import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
   return (
     <TemplatePrimitive
       title="Box"
-      description={t(
-        'Box is a layout component used to group elements together and apply a space between them'
-      )}
-      params={[]}
+      description={t('box description')}
+      params={[
+        {
+          title: 'Props',
+          description: (
+            <TemplateDescriptionProps
+              composantName="Box"
+              composantExtended="View"
+              link="https://reactnative.dev/docs/view"
+              blank={true}
+            />
+          ),
+          props: [
+            {
+              name: 'space',
+              description: t('space props description'),
+              type: 'xs, sm, md, lg, xl',
+            },
+            {
+              name: 'center',
+              description: t('center props description'),
+              type: 'true',
+            },
+          ],
+        },
+      ]}
       return={[]}
       types={[]}
-      anatomy={`// coming soon`}
-      example={`// coming soon`}
+      anatomy={`
+import { Box } from "@crossed/ui"
+      
+const MyComponent = () => {
+  return (<Box>Insert element here</Box>)
+}`}
+      example={`
+<Box space='md'>
+  <Button size='md'/>
+  <Button size='md'/>
+  <Button size='md'/>
+</Box>`}
+      scope={{ Box, Button }}
     />
   );
 }

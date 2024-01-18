@@ -9,20 +9,55 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { H1, H2, H3, H4, H5, H6 } from '@crossed/ui';
+import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
   return (
     <TemplatePrimitive
       title="Heading"
-      description={t(
-        'The H1 to H6 elements represent six levels of section headings.'
-      )}
-      params={[]}
+      description={t('heading description')}
+      params={[
+        {
+          title: 'Props',
+          description: (
+            <TemplateDescriptionProps
+              composantName="H1, H2, H3, H4, H5, H6"
+              composantExtended="Text"
+              link="/Text"
+            />
+          ),
+          props: [],
+        },
+      ]}
       return={[]}
       types={[]}
-      anatomy={`// coming soon`}
-      example={`// coming soon`}
+      anatomy={`
+import { H1, H2, H3, H4, H5, H6 } from "@crossed/ui"
+      
+const MyComponent = () => {
+  return (
+    <H1>This is Heading 1</H1>
+    <H2>This is Heading 2</H2>
+    <H3>This is Heading 3</H3>
+    <H4>This is Heading 4</H4>
+    <H5>This is Heading 5</H5>
+    <H6>This is Heading 6</H6>
+  )
+}`}
+      example={`
+<>
+  <H1>This is Heading 1</H1>
+  <H2>This is Heading 2</H2>
+  <H3>This is Heading 3</H3>
+  <H4>This is Heading 4</H4>
+  <H5>This is Heading 5</H5>
+  <H6>This is Heading 6</H6>
+</>
+
+`}
+      scope={{ H1, H2, H3, H4, H5, H6 }}
     />
   );
 }
