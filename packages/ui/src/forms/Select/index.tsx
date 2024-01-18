@@ -493,26 +493,28 @@ import { Card } from '../../display/Card';
 // });
 
 const findChild = (
-  children: ReactNode | ReactNode[],
+  children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
   value: string | number
 ): ReactNode | undefined => {
   if (!children) {
     return;
   }
-  return Children.toArray(children).reduce<ReactNode | undefined>((acc, e) => {
-    if (acc || !isValidElement(e)) {
-      return acc;
-    }
-    if (e.type && (e.type as any)?.id === 'Select.Option') {
-      if (e.props?.value === value) {
-        acc = e.props.children;
-      }
-      return acc;
-    } else {
-      acc = findChild(e?.props?.children, value);
-    }
-    return acc;
-  }, undefined);
+  return typeof children === 'function'
+    ? undefined
+    : Children.toArray(children).reduce<ReactNode | undefined>((acc, e) => {
+        if (acc || !isValidElement(e)) {
+          return acc;
+        }
+        if (e.type && (e.type as any)?.id === 'Select.Option') {
+          if (e.props?.value === value) {
+            acc = e.props.children;
+          }
+          return acc;
+        } else {
+          acc = findChild(e?.props?.children, value);
+        }
+        return acc;
+      }, undefined);
 };
 
 const SelectRoot = styled(

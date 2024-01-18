@@ -1,24 +1,19 @@
-import { styled } from '@crossed/styled';
+import { styled, withDefaultProps } from '@crossed/styled';
 import { Text, TextProps } from './Text';
 import { forwardRef, memo } from 'react';
 import { XBox, XBoxProps } from '../layout/XBox';
 import { YBox } from '../layout/YBox';
 
-export const Ul = styled(
-  memo(
-    forwardRef((props: Omit<TextProps, 'role'>, ref: any) => (
-      <YBox {...props} ref={ref} role="list" />
-    ))
-  ),
-  (t) => ({ marginTop: t.space.xl })
-);
+export const Ul = styled(withDefaultProps(YBox, { role: 'list' }), (t) => ({
+  marginTop: t.space.xl,
+}));
 
 export const Li = styled(
   memo(
     forwardRef(({ children, ...props }: Omit<XBoxProps, 'role'>, ref: any) => (
       <XBox {...props} ref={ref} role="listitem">
         <Disc />
-        {children}
+        {children as any}
       </XBox>
     ))
   ),

@@ -1,31 +1,32 @@
 import { composeEventHandlers } from '@crossed/core';
-import { useCallback, useState } from 'react';
+import { useComputed, useSignal } from '@preact/signals-react';
 
 export const useHover = <
   T extends {
+    hovered?: boolean;
     onPointerEnter?: (..._args: any[]) => void;
     onPointerLeave?: (..._args: any[]) => void;
   }
 >(
   props: T
 ) => {
-  const [hovered, setHoveredState] = useState(false);
-  const onPointerEnter = useCallback(
-    composeEventHandlers(() => {
-      setHoveredState(true);
-    }, props.onPointerEnter) as any,
-    [props.onPointerEnter, setHoveredState]
-  );
-  const onPointerLeave = useCallback(
-    composeEventHandlers(() => {
-      setHoveredState(false);
-    }, props.onPointerLeave) as any,
-    [props.onPointerLeave, setHoveredState]
-  );
+  const hovered = useSignal(false);
+  const onPointerEnter = composeEventHandlers(() => {
+    hovered.value = true;
+  }, props.onPointerEnter);
+  const onPointerLeave = composeEventHandlers(() => {
+    hovered.value = false;
+  }, props.onPointerLeave);
+
+  const isHover = useComputed(() => {
+    return props.hovered || hovered.value;
+  });
 
   return {
-    hovered,
-    onPointerLeave,
-    onPointerEnter,
+    hovered: isHover,
+    actions: {
+      onPointerEnter: onPointerEnter,
+      onPointerLeave: onPointerLeave,
+    },
   };
 };

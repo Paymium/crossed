@@ -25,27 +25,27 @@ describe('useEvent', () => {
 
   test('with callback', () => {
     const callback = jest.fn();
-    const toto = useEvent(callback);
+    const event = useEvent(callback);
 
     expect(useRefMocked).toBeCalled();
     expect(useLayoutEffectMocked).toBeCalled();
     expect(useCallbackMocked).toBeCalled();
 
-    expect(typeof toto).toBe('function');
-    toto();
+    expect(typeof event).toBe('function');
+    event();
 
     expect(callback).toBeCalled();
   });
 
   test('without callback', () => {
-    const toto = useEvent();
+    const event = useEvent();
 
     expect(useRefMocked).toBeCalled();
     expect(useLayoutEffectMocked).toBeCalled();
     expect(useCallbackMocked).toBeCalled();
 
-    expect(typeof toto).toBe('function');
-    toto();
+    expect(typeof event).toBe('function');
+    event();
   });
 });
 
@@ -66,16 +66,16 @@ describe('useGet', () => {
 
   test('simple', () => {
     const callback = jest.fn();
-    const toto = useGet(callback);
+    const event = useGet(callback);
 
     expect(useRefMocked).toBeCalled();
     expect(useLayoutEffectMocked).toBeCalled();
     expect(useCallbackMocked).toBeCalled();
 
-    expect(typeof toto).toBe('function');
-    const titi = toto();
-    expect(typeof titi).toBe('function');
-    titi();
+    expect(typeof event).toBe('function');
+    const eventReturn = event();
+    expect(typeof eventReturn).toBe('function');
+    eventReturn();
     expect(callback).toBeCalled();
   });
 });

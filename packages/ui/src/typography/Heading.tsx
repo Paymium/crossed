@@ -13,27 +13,27 @@ export const H1 = withDefaultProps<HeadingProps>(Text, {
   'weight': 'bold',
 });
 
-export const H2 = withDefaultProps<HeadingProps>(
-  styled(Text, (t) => ({ marginTop: t.space.xl, marginBottom: t.space.md })),
-  {
+export const H2 = styled(
+  withDefaultProps<HeadingProps>(Text, {
     'role': 'heading',
     'aria-level': 2,
     'size': '4xl',
     'weight': 'semibold',
-  }
+  }),
+  (t) => ({ marginTop: t.space.xl, marginBottom: t.space.md })
 );
 export const H3 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 3,
   'size': '3xl',
 });
-export const H4 = withDefaultProps<HeadingProps>(
-  styled(Text, { marginTop: 20 }),
-  {
+export const H4 = styled(
+  withDefaultProps<HeadingProps>(Text, {
     'role': 'heading',
     'aria-level': 4,
     'size': '2xl',
-  }
+  }),
+  { marginTop: 20 }
 );
 export const H5 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',

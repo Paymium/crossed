@@ -1,3 +1,4 @@
+import type { ReturnExtract } from '../src/extract';
 import { useLogic } from '../src/useLogic';
 
 jest.mock('react', () => {
@@ -7,308 +8,290 @@ jest.mock('react', () => {
   };
 });
 
-jest.mock('react-native-unistyles', () => {
+jest.mock('@preact/signals-react', () => {
   return {
-    useStyles: jest.fn().mockImplementation((cb) => cb()),
+    effect: jest.fn((c) => c()),
+    signal: jest.fn((e: any) => ({ value: e })),
   };
 });
 jest.mock('../src/hooks/useHover', () => {
   return {
-    useHover: jest
-      .fn()
-      .mockImplementation(() => ({ hovered: false, actionHover: {} })),
+    useHover: jest.fn().mockImplementation(() => ({
+      hovered: { value: false },
+      actions: { onHover: () => {} },
+    })),
   };
 });
 jest.mock('../src/hooks/useActive', () => {
   return {
-    useActive: jest
-      .fn()
-      .mockImplementation(() => ({ active: false, actionActive: {} })),
+    useActive: jest.fn().mockImplementation(() => ({
+      active: { value: false },
+      actions: { onActive: () => {} },
+    })),
   };
 });
 jest.mock('../src/hooks/useFocus', () => {
   return {
-    useFocus: jest
-      .fn()
-      .mockImplementation(() => ({ focus: false, actionFocus: {} })),
+    useFocus: jest.fn().mockImplementation(() => ({
+      focus: { value: false },
+      actions: { onFocus: () => {} },
+    })),
   };
 });
 
-const styleSheet = jest.fn().mockImplementation(() => ({
-  styles: { base: {}, hover: {}, active: {}, focus: {} },
-}));
+const styles: Partial<ReturnExtract> = {
+  base: {},
+  hover: {},
+  active: {},
+  focus: {},
+};
 
 describe('useLogic', () => {
+  // eslint-disable-next-line no-console
+  const log = console.log;
   beforeEach(() => {
     jest.requireMock('react-native-unistyles').useStyles.mockClear();
     jest.requireMock('react').useMemo.mockClear();
     jest.requireMock('../src/hooks/useHover').useHover.mockClear();
     jest.requireMock('../src/hooks/useActive').useActive.mockClear();
     jest.requireMock('../src/hooks/useFocus').useFocus.mockClear();
+    // eslint-disable-next-line no-console
+    console.log = jest.fn();
+  });
+  afterEach(() => {
+    // eslint-disable-next-line no-console
+    console.log = log;
   });
   test('basic', () => {
     const props = { style: {} };
-    const data = useLogic({ props, styleSheet });
-    const { useMemo } = jest.requireMock('react');
-    const { useStyles } = jest.requireMock('react-native-unistyles');
+    const data = useLogic({ props, styles });
     const { useHover } = jest.requireMock('../src/hooks/useHover');
     const { useActive } = jest.requireMock('../src/hooks/useActive');
     const { useFocus } = jest.requireMock('../src/hooks/useFocus');
+    const { effect, signal } = jest.requireMock('@preact/signals-react');
 
-    expect(useStyles).toBeCalledWith(styleSheet, props);
     expect(useHover).toBeCalledWith(props);
     expect(useActive).toBeCalledWith(props);
     expect(useFocus).toBeCalledWith(props);
 
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
-    expect(data.styles).toEqual([
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      {},
-    ]);
+    expect(data.styles).toEqual({ value: {} });
     expect(Object.keys(data.actions)).toEqual([
-      'actionActive',
-      'actionHover',
-      'actionFocus',
+      'onActive',
+      'onHover',
+      'onFocus',
     ]);
 
-    expect(useMemo).toBeCalledTimes(1);
-    expect(useMemo.mock.calls[0][1]).toEqual([
-      { style: {} },
-      { base: {}, hover: {}, active: {}, focus: {} },
-      false,
-      undefined,
-      false,
-      undefined,
-      false,
-      undefined,
-    ]);
+    expect(effect).toBeCalled();
+    expect(signal).toBeCalledTimes(2);
   });
 
   test('hover', () => {
     const props = {};
-    const data = useLogic({ props, styleSheet, hovered: true });
-    const { useMemo } = jest.requireMock('react');
-    const { useStyles } = jest.requireMock('react-native-unistyles');
+    const data = useLogic({ props, styles });
     const { useHover } = jest.requireMock('../src/hooks/useHover');
     const { useActive } = jest.requireMock('../src/hooks/useActive');
     const { useFocus } = jest.requireMock('../src/hooks/useFocus');
 
-    expect(useStyles).toBeCalledWith(styleSheet, props);
     expect(useHover).toBeCalledWith(props);
     expect(useActive).toBeCalledWith(props);
     expect(useFocus).toBeCalledWith(props);
 
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
-    expect(data.styles).toEqual([undefined, undefined, undefined, undefined, undefined]);
+    expect(data.styles).toEqual({ value: {} });
     expect(Object.keys(data.actions)).toEqual([
-      'actionActive',
-      'actionHover',
-      'actionFocus',
-    ]);
-
-    expect(useMemo).toBeCalledTimes(1);
-    expect(useMemo.mock.calls[0][1]).toEqual([
-      {},
-      { base: {}, hover: {}, active: {}, focus: {} },
-      false,
-      true,
-      false,
-      undefined,
-      false,
-      undefined,
+      'onActive',
+      'onHover',
+      'onFocus',
     ]);
   });
 
   test('active', () => {
     const props = {};
-    const data = useLogic({ props, styleSheet, active: true });
-    const { useMemo } = jest.requireMock('react');
-    const { useStyles } = jest.requireMock('react-native-unistyles');
+    const data = useLogic({ props, styles });
     const { useHover } = jest.requireMock('../src/hooks/useHover');
     const { useActive } = jest.requireMock('../src/hooks/useActive');
     const { useFocus } = jest.requireMock('../src/hooks/useFocus');
 
-    expect(useStyles).toBeCalledWith(styleSheet, props);
     expect(useHover).toBeCalledWith(props);
     expect(useActive).toBeCalledWith(props);
     expect(useFocus).toBeCalledWith(props);
 
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
-    expect(data.styles).toEqual([undefined, undefined, undefined, undefined, undefined]);
+    expect(data.styles).toEqual({ value: {} });
     expect(Object.keys(data.actions)).toEqual([
-      'actionActive',
-      'actionHover',
-      'actionFocus',
-    ]);
-
-    expect(useMemo).toBeCalledTimes(1);
-    expect(useMemo.mock.calls[0][1]).toEqual([
-      {},
-      { base: {}, hover: {}, active: {}, focus: {} },
-      false,
-      undefined,
-      false,
-      true,
-      false,
-      undefined,
+      'onActive',
+      'onHover',
+      'onFocus',
     ]);
   });
 
   test('focus', () => {
     const props = {};
-    const data = useLogic({ props, styleSheet, focus: true });
-    const { useMemo } = jest.requireMock('react');
-    const { useStyles } = jest.requireMock('react-native-unistyles');
+    const data = useLogic({ props, styles });
     const { useHover } = jest.requireMock('../src/hooks/useHover');
     const { useActive } = jest.requireMock('../src/hooks/useActive');
     const { useFocus } = jest.requireMock('../src/hooks/useFocus');
 
-    expect(useStyles).toBeCalledWith(styleSheet, props);
     expect(useHover).toBeCalledWith(props);
     expect(useActive).toBeCalledWith(props);
     expect(useFocus).toBeCalledWith(props);
 
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
-    expect(data.styles).toEqual([
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-    ]);
+    expect(data.styles).toEqual({ value: {} });
     expect(Object.keys(data.actions)).toEqual([
-      'actionActive',
-      'actionHover',
-      'actionFocus',
-    ]);
-
-    expect(useMemo).toBeCalledTimes(1);
-    expect(useMemo.mock.calls[0][1]).toEqual([
-      {},
-      { base: {}, hover: {}, active: {}, focus: {} },
-      false,
-      undefined,
-      false,
-      undefined,
-      false,
-      true,
+      'onActive',
+      'onHover',
+      'onFocus',
     ]);
   });
 
   test('all', () => {
     const props = {};
-    const data = useLogic({
-      props,
-      styleSheet,
-      focus: true,
-      active: true,
-      hovered: true,
-    });
-    const { useMemo } = jest.requireMock('react');
-    const { useStyles } = jest.requireMock('react-native-unistyles');
     const { useHover } = jest.requireMock('../src/hooks/useHover');
     const { useActive } = jest.requireMock('../src/hooks/useActive');
     const { useFocus } = jest.requireMock('../src/hooks/useFocus');
 
-    expect(useStyles).toBeCalledWith(styleSheet, props);
+    useHover.mockImplementation(() => ({
+      hovered: { value: true },
+      actions: { onHover: () => {} },
+    }));
+    useActive.mockImplementation(() => ({
+      active: { value: true },
+      actions: { onActive: () => {} },
+    }));
+    useFocus.mockImplementation(() => ({
+      focus: { value: true },
+      actions: { onFocus: () => {} },
+    }));
+
+    const data = useLogic({
+      props,
+      styles,
+    });
+
     expect(useHover).toBeCalledWith(props);
     expect(useActive).toBeCalledWith(props);
     expect(useFocus).toBeCalledWith(props);
 
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
-    expect(data.styles).toEqual([
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-    ]);
+    expect(data.styles).toEqual({ value: {} });
     expect(Object.keys(data.actions)).toEqual([
-      'actionActive',
-      'actionHover',
-      'actionFocus',
-    ]);
-
-    expect(useMemo).toBeCalledTimes(1);
-    expect(useMemo.mock.calls[0][1]).toEqual([
-      {},
-      { base: {}, hover: {}, active: {}, focus: {} },
-      false,
-      true,
-      false,
-      true,
-      false,
-      true,
+      'onActive',
+      'onHover',
+      'onFocus',
     ]);
   });
 
   test('with extraStyle', () => {
     const props = {};
     const extraStyle = jest.fn();
-    const styleSheet = jest.fn().mockImplementation(() => ({
+    const data = useLogic({
+      props,
       styles: {
-        base: { extraStyle },
+        base: { extraStyle } as any,
         hover: {},
         active: {},
         focus: {},
       },
-    }));
-    const data = useLogic({
-      props,
-      styleSheet,
-      focus: true,
-      active: true,
-      hovered: true,
     });
-    const { useMemo } = jest.requireMock('react');
-    const { useStyles } = jest.requireMock('react-native-unistyles');
     const { useHover } = jest.requireMock('../src/hooks/useHover');
     const { useActive } = jest.requireMock('../src/hooks/useActive');
     const { useFocus } = jest.requireMock('../src/hooks/useFocus');
 
-    expect(useStyles).toBeCalledWith(styleSheet, props);
     expect(useHover).toBeCalledWith(props);
     expect(useActive).toBeCalledWith(props);
     expect(useFocus).toBeCalledWith(props);
 
     expect(data).toHaveProperty('actions');
     expect(data).toHaveProperty('styles');
-    expect(data.styles).toEqual([
-      { extraStyle },
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-    ]);
     expect(Object.keys(data.actions)).toEqual([
-      'actionActive',
-      'actionHover',
-      'actionFocus',
+      'onActive',
+      'onHover',
+      'onFocus',
     ]);
 
-    expect(useMemo).toBeCalledTimes(1);
-    expect(useMemo.mock.calls[0][1]).toEqual([
-      {},
-      { base: { extraStyle }, hover: {}, active: {}, focus: {} },
-      false,
-      true,
-      false,
-      true,
-      false,
-      true,
+    expect(extraStyle).toBeCalledWith(props, {
+      focus: true,
+      active: true,
+      hover: true,
+    });
+  });
+
+  test('with style', () => {
+    const props = { style: [{ color: 'white' }] };
+    const extraStyle = jest.fn(() => ({ color: 'violet' }));
+    const data = useLogic({
+      props,
+      styles: {
+        base: { color: 'red', extraStyle } as any,
+        hover: { color: 'orange' },
+        active: { color: 'green' },
+        focus: { color: 'blue' },
+      },
+    });
+    const { useHover } = jest.requireMock('../src/hooks/useHover');
+    const { useActive } = jest.requireMock('../src/hooks/useActive');
+    const { useFocus } = jest.requireMock('../src/hooks/useFocus');
+
+    expect(useHover).toBeCalledWith(props);
+    expect(useActive).toBeCalledWith(props);
+    expect(useFocus).toBeCalledWith(props);
+
+    expect(data).toHaveProperty('actions');
+    expect(data).toHaveProperty('styles');
+    expect(data.styles).toEqual({
+      value: { color: 'white' },
+    });
+    expect(Object.keys(data.actions)).toEqual([
+      'onActive',
+      'onHover',
+      'onFocus',
     ]);
+
+    expect(extraStyle).toBeCalledWith(props, {
+      focus: true,
+      active: true,
+      hover: true,
+    });
+  });
+
+  test('debug', () => {
+    const props = {};
+    const extraStyle = jest.fn();
+    const data = useLogic({
+      props,
+      debug: true,
+      styles: {
+        base: { extraStyle } as any,
+        hover: {},
+        active: {},
+        focus: {},
+      },
+    });
+    const { useHover } = jest.requireMock('../src/hooks/useHover');
+    const { useActive } = jest.requireMock('../src/hooks/useActive');
+    const { useFocus } = jest.requireMock('../src/hooks/useFocus');
+
+    expect(useHover).toBeCalledWith(props);
+    expect(useActive).toBeCalledWith(props);
+    expect(useFocus).toBeCalledWith(props);
+
+    expect(data).toHaveProperty('actions');
+    expect(data).toHaveProperty('styles');
+    expect(Object.keys(data.actions)).toEqual([
+      'onActive',
+      'onHover',
+      'onFocus',
+    ]);
+
+    // eslint-disable-next-line no-console
+    expect(console.log).toBeCalledTimes(2);
 
     expect(extraStyle).toBeCalledWith(props, {
       focus: true,

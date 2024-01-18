@@ -1,67 +1,82 @@
-import { useMemo } from 'react';
-import { useStyles } from 'react-native-unistyles';
 import type { ReturnExtract } from './extract';
 import { useActive } from './hooks/useActive';
 import { useHover } from './hooks/useHover';
+import { effect, signal } from '@preact/signals-react';
 import { useFocus } from './hooks/useFocus';
 
 export const useLogic = <P extends Record<string, any>>({
+  name,
   props,
-  // debug,
-  styleSheet,
-  hovered: hoveredProps,
-  active: activeProps,
-  focus: focusProps,
+  debug,
+  styles,
 }: {
+  name?: string;
   props: P;
-  styleSheet: (_e: never) => ReturnExtract;
-  hovered?: boolean;
-  active?: boolean;
-  focus?: boolean;
+  styles: Partial<ReturnExtract>;
   debug?: boolean;
 }) => {
-  const { styles } = useStyles(styleSheet as any, props as any);
+  const log = (...args: any[]) =>
+    // eslint-disable-next-line no-console
+    console.log(`useLogic - "${name}" -`, ...args);
+  const stylesComputed = signal(styles);
+  const styleToRender = signal({});
 
-  const { hovered, ...actionsHover } = useHover(props);
-  const { active, ...actionsPressed } = useActive(props);
-  const { focus, ...actionsFocus } = useFocus(props);
+  const { hovered, actions: actionsHover } = useHover(props);
+  const { active, actions: actionsActive } = useActive(props);
+  const { focus, actions: actionsFocus } = useFocus(props);
 
-  const globalStyle = useMemo(() => {
-    const hoverStyle = (hoveredProps || hovered) && styles.hover;
-    const focusStyle = (focusProps || focus) && styles.focus;
-    const activeStyle = (activeProps || active) && styles.active;
+  effect(() => {
+    const hoverStyle = hovered.value && stylesComputed.value.hover;
+    const focusStyle = focus.value && stylesComputed.value.focus;
+    const activeStyle = active.value && stylesComputed.value.active;
+    const { extraStyle: extraStyleBase, ...base } =
+      (stylesComputed.value.base as any) || {};
     const extraStyle =
-      styles.base.extraStyle?.(props, {
-        focus: focus || focusProps,
-        active: active || activeProps,
-        hover: hovered || hoveredProps,
+      extraStyleBase?.(props, {
+        focus: focus.value,
+        active: active.value,
+        hover: hovered.value,
       }) || {};
 
-    return [
-      Object.keys(styles.base).length > 0 ? styles.base : undefined,
-      focusStyle && Object.keys(focusStyle).length > 0 ? focusStyle : undefined,
-      hoverStyle && Object.keys(hoverStyle).length > 0 ? hoverStyle : undefined,
-      activeStyle && Object.keys(activeStyle).length > 0
+    const stylesUnify = {
+      ...(base && Object.keys(base).length > 0 ? base : undefined),
+      ...(focusStyle && Object.keys(focusStyle).length > 0
+        ? focusStyle
+        : undefined),
+      ...(hoverStyle && Object.keys(hoverStyle).length > 0
+        ? hoverStyle
+        : undefined),
+      ...(activeStyle && Object.keys(activeStyle).length > 0
         ? activeStyle
-        : undefined,
-      extraStyle && Object.keys(extraStyle).length > 0 ? extraStyle : undefined,
-      ...(Array.isArray(props.style) ? props.style : [props.style]),
-    ];
-  }, [
-    props,
-    styles,
-    hovered,
-    hoveredProps,
-    active,
-    activeProps,
-    focus,
-    focusProps,
-  ]);
+        : undefined),
+      ...(extraStyle && Object.keys(extraStyle).length > 0
+        ? extraStyle
+        : undefined),
+      ...(Array.isArray(props.style)
+        ? props.style.reduce((acc, t) => ({ ...acc, ...t }), {})
+        : props.style),
+    };
+    if (JSON.stringify(styleToRender) !== JSON.stringify(stylesUnify)) {
+      debug &&
+        log(
+          'reconciliate styles whith state',
+          {
+            isHover: hovered.value,
+            isActive: active.value,
+            isFocus: focus.value,
+          },
+          stylesUnify,
+          stylesComputed.value
+        );
+      styleToRender.value = stylesUnify;
+    }
+  });
 
+  debug && log('return value');
   return {
-    styles: globalStyle,
+    styles: styleToRender,
     actions: {
-      ...actionsPressed,
+      ...actionsActive,
       ...actionsHover,
       ...actionsFocus,
     },

@@ -6,11 +6,9 @@ import { YBox } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
 import { Button, ButtonProps } from '../forms/Button';
 import { GetProps, createScope } from '@crossed/core';
-import type { ExtractVariant } from '@crossed/styled/src/types';
 import { forwardRef, memo } from 'react';
 
-type ButtonVariantProps = ExtractVariant<typeof Button.styleSheet>;
-
+type ButtonVariantProps = Pick<ButtonProps, 'size' | 'color' | 'variant'>;
 const MenuRoot = styled(YBox, () => ({
   alignItems: 'stretch',
 }));
@@ -51,7 +49,7 @@ const MenuList = createList({
   Root: memo(
     forwardRef((props: MenuRootProps & ButtonVariantProps, ref) => (
       <ProviderVariant
-        color={props.color}
+        // color={props.color}
         size={props.size}
         variant={props.variant || 'ghost'}
       >

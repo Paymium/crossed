@@ -56,15 +56,12 @@ export default function Home() {
       <H2 id="dependencies">
         <Trans>Dependencies used</Trans>
       </H2>
+      <P>
+        <Trans>Dependencies used in @crossed/styled</Trans>
+      </P>
       <Ul>
-        <P>
-          <Trans>Dependencies used in @crossed/styled</Trans>
-        </P>
         <Li>
-          <Link
-            href="https://reactnativeunistyles.vercel.app/"
-            hrefAttrs={{ target: '_blank' }}
-          >
+          <Link href="https://reactnativeunistyles.vercel.app/" target="_blank">
             react-native-unistyles
           </Link>
         </Li>

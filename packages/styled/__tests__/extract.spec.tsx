@@ -73,12 +73,12 @@ describe('extract', () => {
           backgroundColor: 'gray',
           variants: { color: { red: { backgroundColor: 'red' } } },
         },
-        focus: { variants: { color: { red: {} } } },
+        focus: {},
         hover: {
           backgroundColor: 'white',
           variants: { color: { red: { backgroundColor: 'orange' } } },
         },
-        active: { variants: { color: { red: {} } } },
+        active: {},
       });
     });
 

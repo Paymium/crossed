@@ -100,6 +100,8 @@ export const lightTheme = {
     warning: '#fdba74',
     success: '#3abb7d',
   },
+  fontFamily:
+    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
   space,
   // padding,
   size,
@@ -124,6 +126,8 @@ export const darkTheme = {
     warning: '#994912',
     success: '#3abb7d',
   },
+  fontFamily:
+    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
   space,
   // padding,
   size,

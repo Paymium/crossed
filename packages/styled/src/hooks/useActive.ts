@@ -1,31 +1,32 @@
 import { composeEventHandlers } from '@crossed/core';
-import { useCallback, useState } from 'react';
+import { useComputed, useSignal } from '@preact/signals-react';
 
 export const useActive = <
   T extends {
+    active?: boolean;
     onPointerUp?: (..._args: any[]) => void;
     onPointerDown?: (..._args: any[]) => void;
   }
 >(
   props: T
 ) => {
-  const [active, setActive] = useState(false);
-  // active
-  const onPointerUp = useCallback(
-    composeEventHandlers(() => {
-      setActive(false);
-    }, props.onPointerUp) as any,
-    []
-  );
-  const onPointerDown = useCallback(
-    composeEventHandlers(() => {
-      setActive(true);
-    }, props.onPointerDown) as any,
-    []
-  );
+  const active = useSignal(false);
+  const onPointerUp = composeEventHandlers(() => {
+    active.value = false;
+  }, props.onPointerUp);
+  const onPointerDown = composeEventHandlers(() => {
+    active.value = true;
+  }, props.onPointerDown);
+
+  const isActive = useComputed(() => {
+    return props.active ?? active.value;
+  });
+
   return {
-    active,
-    onPointerUp,
-    onPointerDown,
+    active: isActive,
+    actions: {
+      onPointerUp,
+      onPointerDown,
+    },
   };
 };

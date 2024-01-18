@@ -47,6 +47,8 @@
   },
   "dependencies": {
     "@crossed/core": "*",
+    "@preact/signals": "^1.2.2",
+    "@preact/signals-react": "^2.0.0",
     "react-native-unistyles": "^2.0.0"
   },
   "files": [

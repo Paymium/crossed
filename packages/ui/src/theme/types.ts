@@ -17,6 +17,7 @@ export type Theme = {
     warning: string;
     info: string;
   };
+  fontFamily: string;
   space: {
     xs: number;
     sm: number;

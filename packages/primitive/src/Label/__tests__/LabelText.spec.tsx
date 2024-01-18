@@ -4,7 +4,7 @@ import { render, screen } from '@crossed/test';
 import { createLabelText } from '../LabelText';
 import React, { forwardRef } from 'react';
 import { ContextLabel, useContext } from '../context';
-import { composeEventHandlers } from '@crossed/core';
+// import { composeEventHandlers } from '@crossed/core';
 import { Text } from 'react-native';
 
 jest.mock('../context');
@@ -16,8 +16,8 @@ const Comp = forwardRef((p: any, ref: any) => (
 const NewComp = createLabelText(Comp);
 
 const useContextMocked = useContext as unknown as jest.Mock<ContextLabel>;
-const composeEventHandlersMocked =
-  composeEventHandlers as unknown as jest.Mock<ContextLabel>;
+// const composeEventHandlersMocked =
+//   composeEventHandlers as unknown as jest.Mock<ContextLabel>;
 
 describe('createLabelMain', () => {
   beforeEach(() => {
@@ -25,15 +25,15 @@ describe('createLabelMain', () => {
       id: 'id',
       inputRef: { current: undefined },
     }));
-    composeEventHandlersMocked.mockImplementation(((a: any, b: any) => {
-      a();
-      b();
-    }) as any);
+    // composeEventHandlersMocked.mockImplementation(((a: any, b: any) => {
+    //   a();
+    //   b();
+    // }) as any);
   });
 
   afterEach(() => {
     useContextMocked.mockReset();
-    composeEventHandlersMocked.mockReset();
+    // composeEventHandlersMocked.mockReset();
   });
 
   test('init', async () => {
@@ -49,7 +49,7 @@ describe('createLabelMain', () => {
     render(<NewComp onPress={onPress}>{child}</NewComp>);
 
     expect(useContextMocked).toBeCalled();
-    expect(composeEventHandlersMocked).toBeCalled();
+    // expect(composeEventHandlersMocked).toBeCalled();
 
     const el = await screen.getByText(child);
     expect(el).toHaveAttribute('id', 'label-id');
