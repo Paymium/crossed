@@ -33,7 +33,6 @@
     "watch": "crossed-build --watch --project-path ./tsconfig.build.json",
     "build": "crossed-build --project-path ./tsconfig.build.json",
     "dev:web": "cd example/native && yarn web --clear",
-    "test": "crossed-test",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
