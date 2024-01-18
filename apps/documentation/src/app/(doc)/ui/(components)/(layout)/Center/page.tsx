@@ -9,20 +9,43 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { Center, Button } from '@crossed/ui';
+import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
   return (
     <TemplatePrimitive
       title="Center"
-      description={t(
-        'Center is a layout component that centers its child within itself.'
-      )}
-      params={[]}
+      description={t('center description')}
+      params={[
+        {
+          title: 'Props',
+          description: (
+            <TemplateDescriptionProps
+              composantName="Center"
+              composantExtended="YBox"
+              link="/YBox"
+            />
+          ),
+          props: [],
+        },
+      ]}
       return={[]}
       types={[]}
-      anatomy={`// coming soon`}
-      example={`// coming soon`}
+      anatomy={`
+import { Center } from "@crossed/ui"
+      
+const MyComponent = () => {
+  return (<Center>Insert element here</Center>)
+}`}
+      example={`
+<Center space='md'>
+  <Button size='md'/>
+  <Button size='md'/>
+  <Button size='md'/>
+</Center>`}
+      scope={{ Center, Button }}
     />
   );
 }

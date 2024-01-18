@@ -15,7 +15,7 @@ export default withDefaultProps(TOCLayout, {
   links: [
     { title: 'Example', href: '#example' },
     { title: 'Anatomy', href: '#anatomy' },
-    { title: 'Params', href: '#params' },
+    { title: 'Props', href: '#props' },
     { title: 'Return', href: '#return' },
     { title: 'Types', href: '#types' },
   ],
