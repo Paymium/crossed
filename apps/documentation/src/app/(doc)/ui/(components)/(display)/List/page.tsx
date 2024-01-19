@@ -9,7 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Ul, Li, Text, Disc } from '@crossed/ui';
+import { Ul, Li, Text } from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();

@@ -11,7 +11,6 @@ import { styled } from '@crossed/styled';
 import type { GetProps } from '@crossed/core';
 import { Box } from '@crossed/ui';
 import { HighlightProps } from 'prism-react-renderer';
-import { ReactNode } from 'react';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
 type LiveEditorProps = GetProps<typeof LiveEditor>;
@@ -28,17 +27,10 @@ const StyledLiveEditor = styled(
 
 export const CodeBlock = ({
   children,
-  fileName,
-  showLine,
   scope,
-  code,
-  ...props
 }: Omit<HighlightProps, 'children' | 'code'> & {
   children?: string | string[];
-  fileName?: string;
-  showLine?: boolean;
-  scope?: object;
-  code?: ReactNode;
+  scope?: any;
 }) => {
   return (
     <>
@@ -49,7 +41,7 @@ export const CodeBlock = ({
           width: '100%',
         }}
       >
-        <Box style={{ width: '100%' }}>
+        <Box style={{ width: '100%' }} space="md">
           <LiveProvider
             code={(Array.isArray(children)
               ? children.join('')
@@ -63,7 +55,6 @@ export const CodeBlock = ({
                 display: 'flex',
                 flexDirection: 'column',
                 width: '100%',
-                marginBottom: '12px',
               }}
               space="md"
             >

@@ -23,9 +23,9 @@ export default function CreateBadge() {
           title: 'Props Alert',
           description: (
             <TemplateDescriptionProps
-              composantName="Alert"
-              composantExtended="XBox"
-              link="/XBox"
+              componentName="Alert"
+              componentExtended="XBox"
+              href="/XBox"
             />
           ),
           props: [
@@ -40,9 +40,9 @@ export default function CreateBadge() {
           title: 'Props AlertTitle',
           description: (
             <TemplateDescriptionProps
-              composantName="AlertTitle"
-              composantExtended="Text"
-              link="/Text"
+              componentName="AlertTitle"
+              componentExtended="Text"
+              href="/Text"
             />
           ),
           props: [],
@@ -51,9 +51,9 @@ export default function CreateBadge() {
           title: 'Props AlertDescription',
           description: (
             <TemplateDescriptionProps
-              composantName="AlertDescription"
-              composantExtended="Text"
-              link="/Text"
+              componentName="AlertDescription"
+              componentExtended="Text"
+              href="/Text"
             />
           ),
           props: [],
@@ -64,8 +64,8 @@ export default function CreateBadge() {
       anatomy={`// coming soon`}
       example={`
 <Alert status="error"> 
-  <AlertTitle>Error</AlertTitle>
-  <AlertDescription>Status code 404</AlertDescription>
+  <Alert.Title>Error</Alert.Title>
+  <Alert.Description>Status code 404</Alert.Description>
 </Alert>`}
       scope={{ Alert, AlertDescription, AlertTitle }}
     />

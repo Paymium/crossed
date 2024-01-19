@@ -23,9 +23,9 @@ export default function CreateBadge() {
           title: 'Props',
           description: (
             <TemplateDescriptionProps
-              composantName="Box"
-              composantExtended="View"
-              link="https://reactnative.dev/docs/view"
+              componentName="Box"
+              componentExtended="View"
+              href="https://reactnative.dev/docs/view"
               blank={true}
             />
           ),

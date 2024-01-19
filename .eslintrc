@@ -15,9 +15,15 @@
         "useTabs": false
       }
     ],
-    "license-header/header": [ "error", "./license-header.js" ],
-    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }],
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }],
+    "license-header/header": ["error", "./license-header.js"],
+    "no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
+    ],
     "no-bitwise": 0,
     "prefer-const": "warn",
     "no-console": ["error", { "allow": ["warn", "error"] }],
@@ -31,5 +37,6 @@
   "parserOptions": {
     "project": ["./packages/*/tsconfig.json", "./apps/*/tsconfig.json"]
   },
-  "plugins": ["@typescript-eslint", "prettier", "license-header"]
+  "plugins": ["@typescript-eslint", "prettier", "license-header"],
+  "ignorePatterns": ["next-env.d.ts"]
 }

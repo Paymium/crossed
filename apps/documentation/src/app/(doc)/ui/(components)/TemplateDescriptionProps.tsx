@@ -1,24 +1,32 @@
-import { Anchor, P } from '@crossed/ui';
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
+import { Link } from '@/components/Link';
+import { P } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 
 export const TemplateDescriptionProps = ({
-  composantName,
-  link,
-  composantExtended,
+  componentName,
+  href,
+  componentExtended,
   blank = false,
 }: {
-  composantName: string;
-  link: string;
-  composantExtended: string;
+  componentName: string;
+  href: string;
+  componentExtended: string;
   blank?: boolean;
 }) => {
   const { t } = useTranslation();
   return (
     <P>
-      {composantName + ' ' + t('extended from') + ' '}
-      <Anchor href={link} hrefAttrs={blank ? { target: '_blank' } : null}>
-        {composantExtended}
-      </Anchor>
+      {componentName + ' ' + t('extended from') + ' '}
+      <Link href={href} hrefAttrs={blank ? { target: '_blank' } : null}>
+        {componentExtended}
+      </Link>
     </P>
   );
 };

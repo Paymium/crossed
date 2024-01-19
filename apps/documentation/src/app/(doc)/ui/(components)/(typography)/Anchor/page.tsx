@@ -23,9 +23,9 @@ export default function CreateBadge() {
           title: 'Props',
           description: (
             <TemplateDescriptionProps
-              composantName="Anchor"
-              composantExtended="Text"
-              link="/Text"
+              componentName="Anchor"
+              componentExtended="Text"
+              href="/Text"
             />
           ),
           props: [],
