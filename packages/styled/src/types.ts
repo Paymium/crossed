@@ -81,11 +81,10 @@ export type ExtractUnistylesValues = {
   [key in State]: UnistylesValues;
 };
 
-export type StyledComponent<P extends { children?: ReactNode }> = ComponentType<
-  Children<P>
-> & {
-  styleSheet: (_p: UnistylesTheme) => ReturnExtract;
-};
+export type StyledComponent<P extends { children?: ReactNode }> =
+  ComponentType<P> & {
+    styleSheet: (_p: UnistylesTheme) => ReturnExtract;
+  };
 
 export type ComponentLocal<P extends Record<string, any>> =
   | StyledComponent<P>
