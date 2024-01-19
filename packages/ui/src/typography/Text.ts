@@ -50,13 +50,7 @@ export const Text = styled(
         '4xl': { fontSize: t.fontSize['4xl'], lineHeight: 54 },
         '5xl': { fontSize: t.fontSize['5xl'], lineHeight: 78 },
       },
-      color: {
-        default: { color: t.colors.textColor },
-        error: { color: t.colors.error },
-        info: { color: t.colors.info },
-        warning: { color: t.colors.warning },
-        success: { color: t.colors.success },
-      },
+      color: t.utils.createVariants('color', t),
     },
   }),
   { name: 'Text' }

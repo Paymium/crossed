@@ -18,7 +18,7 @@ const Container = styled(YBox, (t) => ({
   padding: 15,
   justifyContent: 'center',
   borderTopWidth: 1,
-  borderColor: t.colors.borderColor,
+  borderColor: t.colors.neutral,
   alignItems: 'center',
 }));
 

@@ -18,7 +18,7 @@ const Container = styled(XBox, { minHeight: '100%' });
 const Center = styled(YBox, (t) => ({
   flex: 1,
   width: '100%',
-  borderColor: t.colors.borderColor,
+  borderColor: t.colors.neutral,
   paddingHorizontal: {
     [mq.only.width('xs', 'lg')]: t.space.md,
     [mq.only.width('lg')]: t.space[100],
