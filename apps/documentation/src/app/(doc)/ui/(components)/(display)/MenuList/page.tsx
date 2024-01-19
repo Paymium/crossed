@@ -9,14 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import {
-  MenuList,
-  MenuDivider,
-  MenuItem,
-  MenuLabel,
-  MenuTitle,
-  MenuSubTitle,
-} from '@crossed/ui';
+import { MenuList } from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
@@ -30,25 +23,21 @@ export default function CreateBadge() {
       anatomy={`// coming soon`}
       example={`
 <MenuList>
-  <MenuItem>
-    <MenuTitle>Home</MenuTitle>
-  </MenuItem>
-  <MenuDivider/>
-  <MenuItem>
-    <MenuTitle>Account</MenuTitle>
-  </MenuItem>
-  <MenuDivider/>
-  <MenuItem>
-    <MenuTitle>Disconnect</MenuTitle>
-  </MenuItem>
+  <MenuList.Label>Label</MenuList.Label>
+  <MenuList.Item>
+    <MenuList.Title>Home</MenuList.Title>
+  </MenuList.Item>
+  <MenuList.Divider/>
+  <MenuList.Item>
+    <MenuList.Title>Account</MenuList.Title>
+  </MenuList.Item>
+  <MenuList.Divider/>
+  <MenuList.Item>
+    <MenuList.Title>Disconnect</MenuList.Title>
+  </MenuList.Item>
 </MenuList>`}
       scope={{
         MenuList,
-        MenuDivider,
-        MenuItem,
-        MenuLabel,
-        MenuTitle,
-        MenuSubTitle,
       }}
     />
   );

@@ -23,9 +23,9 @@ export default function CreateBadge() {
           title: 'Card Props',
           description: (
             <TemplateDescriptionProps
-              composantName="Card"
-              composantExtended="YBox"
-              link="/YBox"
+              componentName="Card"
+              componentExtended="YBox"
+              href="/YBox"
             />
           ),
           props: [],
@@ -34,9 +34,9 @@ export default function CreateBadge() {
           title: 'Card.Title Props',
           description: (
             <TemplateDescriptionProps
-              composantName="Card.Title"
-              composantExtended="Text"
-              link="/Text"
+              componentName="Card.Title"
+              componentExtended="Text"
+              href="/Text"
             />
           ),
           props: [],
@@ -45,9 +45,9 @@ export default function CreateBadge() {
           title: 'Card.Description Props',
           description: (
             <TemplateDescriptionProps
-              composantName="Card.Description"
-              composantExtended="Text"
-              link="/Text"
+              componentName="Card.Description"
+              componentExtended="Text"
+              href="/Text"
             />
           ),
           props: [],

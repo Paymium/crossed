@@ -23,9 +23,9 @@ export default function CreateBadge() {
           title: 'Props',
           description: (
             <TemplateDescriptionProps
-              composantName="Separator"
-              composantExtended="View"
-              link="https://reactnative.dev/docs/view"
+              componentName="Separator"
+              componentExtended="View"
+              href="https://reactnative.dev/docs/view"
               blank={true}
             />
           ),

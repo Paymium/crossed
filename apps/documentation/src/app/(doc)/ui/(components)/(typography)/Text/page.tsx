@@ -23,27 +23,25 @@ export default function CreateBadge() {
           title: 'Props',
           description: (
             <TemplateDescriptionProps
-              composantName="Text"
-              composantExtended="Text"
-              link="/Text"
+              componentName="Text"
+              componentExtended="Text"
+              href="/Text"
             />
           ),
           props: [
             {
               name: 'weight',
-              description:
-                "Apply choosen font's weight. Default value is a weight of 400.",
+              description: t('weight props description'),
               type: 'thin, extralight, light, medium, semibold, bold, extrabold, black',
             },
             {
               name: 'size',
-              description: "Apply choosen font's size. Default value is 20.",
+              description: t('font size props description'),
               type: 'xxs, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl',
             },
             {
               name: 'color',
-              description:
-                "Apply choosen font's color. Default color depend on the theme : black for light theme and white for dark theme.",
+              description: t('color props description'),
               type: 'error, info, warning, success',
             },
           ],

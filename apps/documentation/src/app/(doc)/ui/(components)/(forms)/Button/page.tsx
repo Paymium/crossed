@@ -23,9 +23,9 @@ export default function CreateBadge() {
           title: 'Props Button',
           description: (
             <TemplateDescriptionProps
-              composantName="Button"
-              composantExtended="View"
-              link="https://reactnative.dev/docs/view"
+              componentName="Button"
+              componentExtended="View"
+              href="https://reactnative.dev/docs/view"
               blank={true}
             />
           ),
@@ -46,9 +46,9 @@ export default function CreateBadge() {
           title: 'Props Button',
           description: (
             <TemplateDescriptionProps
-              composantName="Button.Text"
-              composantExtended="Text"
-              link="/Text"
+              componentName="Button.Text"
+              componentExtended="Text"
+              href="/Text"
             />
           ),
           props: [],
@@ -57,9 +57,9 @@ export default function CreateBadge() {
           title: 'Props Button',
           description: (
             <TemplateDescriptionProps
-              composantName="Button.Element"
-              composantExtended="View"
-              link="https://reactnative.dev/docs/view"
+              componentName="Button.Element"
+              componentExtended="View"
+              href="https://reactnative.dev/docs/view"
               blank={true}
             />
           ),
