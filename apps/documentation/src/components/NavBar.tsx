@@ -62,9 +62,7 @@ export const NavBar = memo(() => {
           <LinkNav
             href={href}
             key={href}
-            active={
-              Boolean(pathname.match(activeFor)).toString() as 'true' | 'false'
-            }
+            active={Boolean(pathname.match(activeFor))}
           >
             {title}
           </LinkNav>
@@ -81,22 +79,19 @@ const LinkNav = withDefaultProps(
     Link,
     (t) => ({
       'color': t.utils.shadeColor(
-        t.colors.textColor,
+        t.colors.default,
         UnistylesRuntime.themeName === 'dark' ? -90 : 90
       ),
       'hover:': {
         textDecorationLine: 'none',
-        color: t.colors.textColor,
+        color: t.colors.default,
       },
       'active:': {
-        color: t.utils.shadeColor(
-          t.colors.textColor,
-          UnistylesRuntime.themeName === 'dark' ? -90 : 90
-        ),
+        color: t.colors.default,
       },
-      'variants': {
-        active: { true: { color: t.colors.textColor }, false: {} },
-      },
+      // 'variants': {
+      //   active: { true: { color: t.colors.default }, false: {} },
+      // },
     }),
     { name: 'LinkNav' }
   ),
@@ -108,7 +103,7 @@ const Nav = styled(XBox, (t) => ({
   padding: 15,
   justifyContent: 'space-between',
   borderBottomWidth: 1,
-  borderColor: t.colors.borderColor,
+  borderColor: t.colors.neutral,
   alignItems: 'center',
 }));
 

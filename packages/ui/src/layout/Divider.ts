@@ -14,7 +14,7 @@ import { withDefaultProps } from '@crossed/core';
 export const Divider = withDefaultProps(
   styled(View, (t) => ({
     borderWidth: 0,
-    borderColor: t.colors.borderColor,
+    borderColor: t.colors.neutral,
     variants: {
       direction: {
         vertical: {

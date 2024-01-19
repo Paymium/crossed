@@ -46,7 +46,7 @@ export const THead = styled(
     borderWidth: 0,
     borderBottomWidth: 1,
     borderStyle: 'solid',
-    borderColor: t.colors.borderColor,
+    borderColor: t.colors.neutral,
     backgroundColor: t.utils.hexToRgbA(
       t.utils.shadeColor(t.colors.neutral, 5),
       0.5
@@ -83,7 +83,7 @@ export const Tr = styled(
     borderWidth: 0,
     borderTopWidth: 1,
     borderStyle: 'solid',
-    borderColor: t.colors.borderColor,
+    borderColor: t.colors.neutral,
   })
 );
 

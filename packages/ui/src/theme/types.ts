@@ -7,23 +7,41 @@
 
 import type { UnistylesThemes } from '@crossed/styled';
 
-export type Theme = {
-  colors: {
-    textColor: string;
-    headingColor: string;
-    background: string;
-    backgroundStrong: string;
-    backgroundPress: string;
-    backgroundHover: string;
-    borderColor: string;
-    linkColor: string;
+export type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
 
-    neutral: string;
-    error: string;
-    success: string;
-    warning: string;
-    info: string;
-  };
+export type Colors = {
+  // brand colors
+  primary: string;
+  secondary: string;
+
+  // common colors
+  neutral: string;
+  success: string;
+  info: string;
+  error: string;
+  warning: string;
+  link: string;
+  white: string;
+  black: string;
+  default: string;
+
+  // background colors
+  background: string;
+  backgroundStrong: string;
+  backgroundSoft: string;
+};
+
+export type VariantColor = {
+  [key in keyof Omit<
+    Colors,
+    'background' | 'backgroundStrong' | 'backgroundSoft'
+  >]: { color: Colors[key] };
+};
+
+export type Theme = {
+  colors: Colors;
   fontFamily: string;
   space: {
     xs: number;
@@ -59,6 +77,7 @@ export type Theme = {
       _p: { hover?: any; active?: any; focus?: any; base?: any },
       _state: { hover?: boolean; active?: boolean; focus?: boolean }
     ) => string;
+    createVariants: (_type: 'color', _theme: Theme) => VariantColor;
   };
 };
 export type Themes = UnistylesThemes & {
