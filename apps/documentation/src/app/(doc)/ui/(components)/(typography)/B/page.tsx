@@ -9,20 +9,38 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { B } from '@crossed/ui';
+import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
   return (
     <TemplatePrimitive
       title="B"
-      description={t(
-        "The B element is used to draw the reader's attention to the element's contents."
-      )}
-      params={[]}
+      description={t('B description')}
+      params={[
+        {
+          title: 'Props',
+          description: (
+            <TemplateDescriptionProps
+              componentName="B"
+              componentExtended="Text"
+              href="/Text"
+            />
+          ),
+          props: [],
+        },
+      ]}
       return={[]}
       types={[]}
-      anatomy={`// coming soon`}
-      example={`// coming soon`}
+      anatomy={`
+import { B } from "@crossed/ui"
+      
+const MyComponent = () => {
+  return (<B>Write your text here</B>)
+}`}
+      example={`<B>This is a way to put emphasis on a text </B>`}
+      scope={{ B }}
     />
   );
 }

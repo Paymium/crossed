@@ -9,20 +9,65 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
+import { Alert, AlertDescription, AlertTitle } from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
   return (
     <TemplatePrimitive
       title="Alert"
-      description={t(
-        'Alerts are used to communicate a state that affects a system, feature or page.'
-      )}
-      params={[]}
+      description={t('alert description')}
+      params={[
+        {
+          title: 'Props Alert',
+          description: (
+            <TemplateDescriptionProps
+              componentName="Alert"
+              componentExtended="XBox"
+              href="/XBox"
+            />
+          ),
+          props: [
+            {
+              name: 'status',
+              description: t('status props description'),
+              type: 'error, success, warning, info',
+            },
+          ],
+        },
+        {
+          title: 'Props AlertTitle',
+          description: (
+            <TemplateDescriptionProps
+              componentName="AlertTitle"
+              componentExtended="Text"
+              href="/Text"
+            />
+          ),
+          props: [],
+        },
+        {
+          title: 'Props AlertDescription',
+          description: (
+            <TemplateDescriptionProps
+              componentName="AlertDescription"
+              componentExtended="Text"
+              href="/Text"
+            />
+          ),
+          props: [],
+        },
+      ]}
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`// coming soon`}
+      example={`
+<Alert status="error"> 
+  <Alert.Title>Error</Alert.Title>
+  <Alert.Description>Status code 404</Alert.Description>
+</Alert>`}
+      scope={{ Alert, AlertDescription, AlertTitle }}
     />
   );
 }

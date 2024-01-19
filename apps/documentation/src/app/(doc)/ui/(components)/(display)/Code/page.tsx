@@ -9,18 +9,39 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { Code } from '@crossed/ui';
+import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
   return (
     <TemplatePrimitive
       title="Code"
-      description={t('Code is a component used to display inline code.')}
-      params={[]}
+      description={t('code description')}
+      params={[
+        {
+          title: 'Props',
+          description: (
+            <TemplateDescriptionProps
+              componentName="Code"
+              componentExtended="Text"
+              href="/Text"
+            />
+          ),
+          props: [],
+        },
+      ]}
       return={[]}
       types={[]}
-      anatomy={`// coming soon`}
-      example={`// coming soon`}
+      anatomy={`
+import { Code } from '@crossed/ui'
+
+const MyComponent = () => {
+  return (<Code>Type any code here</Code>)
+}`}
+      example={`
+      <Code>const toto = () => console.log("tata") </Code>`}
+      scope={{ Code }}
     />
   );
 }

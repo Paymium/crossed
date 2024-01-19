@@ -7,98 +7,71 @@
 
 'use client';
 
-import { useStyles } from '@crossed/styled';
-import { YBox } from '@crossed/ui';
-import { Highlight, HighlightProps, themes, Prism } from 'prism-react-renderer';
+import { styled } from '@crossed/styled';
+import type { GetProps } from '@crossed/core';
+import { Box } from '@crossed/ui';
+import { HighlightProps } from 'prism-react-renderer';
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+
+type LiveEditorProps = GetProps<typeof LiveEditor>;
+
+const StyledLiveEditor = styled(
+  (props: LiveEditorProps) => {
+    return <LiveEditor {...props} style={props.style[0]} />;
+  },
+  {
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+  }
+);
 
 export const CodeBlock = ({
   children,
-  fileName,
-  showLine,
-  ...props
+  scope,
 }: Omit<HighlightProps, 'children' | 'code'> & {
-  children: string | string[];
-  fileName?: string;
-  showLine?: boolean;
+  children?: string | string[];
+  scope?: any;
 }) => {
-  const { theme } = useStyles();
   return (
-    <Highlight
-      theme={themes.dracula}
-      prism={Prism}
-      code={(Array.isArray(children) ? children.join('') : children).trim()}
-      language="tsx"
-      {...(props as any)}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <YBox>
-          {fileName && (
-            <pre
-              style={{
-                ...style,
-                width: '100%',
-                padding: theme.space.md,
-                boxSizing: 'border-box',
-                margin: 0,
-                borderTopLeftRadius: 4,
-                borderTopRightRadius: 4,
-                borderTopWidth: 0,
-                borderLeftWidth: 0,
-                borderRightWidth: 0,
-                borderBottomWidth: '1px',
-                borderColor: theme.colors.backgroundStrong,
-                borderStyle: 'solid',
-              }}
-            >
-              {fileName}
-            </pre>
-          )}
-          <pre
-            style={{
-              ...style,
-              textAlign: 'left',
-              margin: `0`,
-              padding: theme.space.md,
-              borderTopLeftRadius: fileName ? 0 : 4,
-              borderTopRightRadius: fileName ? 0 : 4,
-              borderBottomLeftRadius: 4,
-              borderBottomRightRadius: 4,
-              width: '100%',
-              overflow: 'auto',
-              boxSizing: 'border-box',
-              gap: theme.space.xs,
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-            className={className}
+    <>
+      <Box
+        style={{
+          flexDirection: 'row',
+          alignItems: 'flex-start',
+          width: '100%',
+        }}
+      >
+        <Box style={{ width: '100%' }} space="md">
+          <LiveProvider
+            code={(Array.isArray(children)
+              ? children.join('')
+              : children
+            ).trim()}
+            scope={scope}
+            disabled={true}
           >
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line })}>
-                {showLine && (
-                  <span
-                    style={{
-                      paddingRight: theme.space.sm,
-                      marginRight: theme.space.sm,
-                      borderTopWidth: 0,
-                      borderLeftWidth: 0,
-                      borderBottomWidth: 0,
-                      borderRightWidth: '1px',
-                      borderStyle: 'solid',
-                      borderColor: theme.colors.neutral,
-                      display: 'inline-block',
-                    }}
-                  >
-                    {i + 1}
-                  </span>
-                )}
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        </YBox>
-      )}
-    </Highlight>
+            <Box
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+              }}
+              space="md"
+            >
+              <LivePreview
+                style={{
+                  alignSelf: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              />
+            </Box>
+            <StyledLiveEditor />
+            <LiveError />
+          </LiveProvider>
+        </Box>
+      </Box>
+    </>
   );
 };
