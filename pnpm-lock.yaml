@@ -35,6 +35,9 @@ importers:
       eslint:
         specifier: ^8.29.0
         version: 8.46.0
+      eslint-plugin-license-header:
+        specifier: ^0.6.0
+        version: 0.6.0
       istanbul:
         specifier: ^0.4.5
         version: 0.4.5
@@ -10789,6 +10792,12 @@ packages:
       semver: 6.3.1
     dev: true
 
+  /eslint-plugin-license-header@0.6.0:
+    resolution: {integrity: sha512-IEywStBWaDBDMkogYoKUAdaOuomZ+YaQmdoSD2vHmXobekM+XuP6SWLlvwUUhIbdocn3MTlb5CUJ8E4VHz1c/w==}
+    dependencies:
+      requireindex: 1.2.0
+    dev: true
+
   /eslint-plugin-prettier@3.4.1(eslint-config-prettier@6.15.0)(eslint@6.8.0)(prettier@1.19.1):
     resolution: {integrity: sha512-htg25EUYUeIhKHXjOinK4BgCcDwtLHjqaxCDsMy5nbnUMkKFvIhMVCp+5GFUXQ4Nr8lBsPqtGAqBenbpFqAA2g==}
     engines: {node: '>=6.0.0'}
@@ -13639,7 +13648,7 @@ packages:
       pretty-format: 29.6.2
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.8.1(@swc/core@1.3.88)(@types/node@18.11.18)(typescript@5.1.6)
+      ts-node: 10.8.1(@types/node@20.8.7)(typescript@5.1.6)
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -18249,6 +18258,11 @@ packages:
       rc: 1.2.8
       resolve: 1.7.1
     dev: false
+
+  /requireindex@1.2.0:
+    resolution: {integrity: sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==}
+    engines: {node: '>=0.10.5'}
+    dev: true
 
   /requires-port@1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}

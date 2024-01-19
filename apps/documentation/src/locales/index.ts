@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 import frCommon from './fr/common.json';

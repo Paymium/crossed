@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import fs from 'fs-extra';
 import path from 'path';
 
@@ -117,8 +124,8 @@ const checkIfWorkspace = (currDir: any) => {
 
     const workspaces = parentPackageJson.workspaces;
     if (workspaces) {
-      metadata['isWorkspace'] = true;
-      metadata['workspaces'] = workspaces;
+      metadata.isWorkspace = true;
+      metadata.workspaces = workspaces;
     }
   }
   return metadata;

@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 // import type { BaseWithState } from '@crossed/styled';
 
 // export const colorVariants = {
@@ -145,3 +152,5 @@
 //     ':hover': { className: ['bg-rose-600'] },
 //   },
 // } satisfies Record<string, BaseWithState<any>>;
+
+export {};

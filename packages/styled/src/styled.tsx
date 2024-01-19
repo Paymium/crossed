@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import { ReturnExtract, extract } from './extract';
 import { forwardRef, memo } from 'react';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
@@ -105,7 +112,7 @@ export const styled = <
     ),
     {
       styleSheet: (e: UnistylesTheme) => {
-        let st = styleSheet(debugStyled);
+        const st = styleSheet(debugStyled);
         const styleSheetExtends =
           'styleSheet' in Comp ? Comp.styleSheet(e) : undefined;
         let stTmp: ReturnExtract;

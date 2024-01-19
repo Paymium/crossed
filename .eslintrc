@@ -15,6 +15,7 @@
         "useTabs": false
       }
     ],
+    "license-header/header": [ "error", "./license-header.js" ],
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }],
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }],
     "no-bitwise": 0,
@@ -30,5 +31,5 @@
   "parserOptions": {
     "project": ["./packages/*/tsconfig.json", "./apps/*/tsconfig.json"]
   },
-  "plugins": ["@typescript-eslint", "prettier"]
+  "plugins": ["@typescript-eslint", "prettier", "license-header"]
 }
