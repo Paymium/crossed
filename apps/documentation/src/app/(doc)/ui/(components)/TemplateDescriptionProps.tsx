@@ -13,18 +13,18 @@ export const TemplateDescriptionProps = ({
   componentName,
   href,
   componentExtended,
-  blank = false,
+  target,
 }: {
   componentName: string;
   href: string;
   componentExtended: string;
-  blank?: boolean;
+  target?: '_blank';
 }) => {
   const { t } = useTranslation();
   return (
     <P>
-      {componentName + ' ' + t('extended from') + ' '}
-      <Link href={href} hrefAttrs={blank ? { target: '_blank' } : null}>
+      {t('extended from', { componentName: componentName })}
+      <Link href={href} target={target}>
         {componentExtended}
       </Link>
     </P>

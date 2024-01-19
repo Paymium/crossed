@@ -26,7 +26,7 @@ export default function CreateBadge() {
               componentName="Box"
               componentExtended="View"
               href="https://reactnative.dev/docs/view"
-              blank={true}
+              target="_blank"
             />
           ),
           props: [
