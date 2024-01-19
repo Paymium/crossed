@@ -26,7 +26,7 @@ export default function CreateBadge() {
               componentName="Button"
               componentExtended="View"
               href="https://reactnative.dev/docs/view"
-              blank={true}
+              target="_blank"
             />
           ),
           props: [
@@ -60,7 +60,7 @@ export default function CreateBadge() {
               componentName="Button.Element"
               componentExtended="View"
               href="https://reactnative.dev/docs/view"
-              blank={true}
+              target="_blank"
             />
           ),
           props: [],
