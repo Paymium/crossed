@@ -5,8 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+'use client';
+
 import { composeEventHandlers } from '@crossed/core';
-import { useComputed, useSignal } from '@preact/signals-react';
+import { useSignal } from '@preact/signals-react';
+import { useEffect } from 'react';
 
 export const useFocus = <
   T extends {
@@ -25,9 +28,11 @@ export const useFocus = <
     focus.value = false;
   }, props.onBlur) as any;
 
-  const isFocus = useComputed(() => {
-    return props.focus || focus.value;
-  });
+  useEffect(() => {
+    if (props.focus !== undefined && focus.value !== props.focus) {
+      focus.value = props.focus;
+    }
+  }, [props.focus]);
 
-  return { focus: isFocus, actions: { onFocus, onBlur } };
+  return { focus: focus, actions: { onFocus, onBlur } };
 };

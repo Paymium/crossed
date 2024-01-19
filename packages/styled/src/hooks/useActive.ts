@@ -5,8 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+'use client';
+
 import { composeEventHandlers } from '@crossed/core';
-import { useComputed, useSignal } from '@preact/signals-react';
+import { useSignal } from '@preact/signals-react';
+import { useEffect } from 'react';
 
 export const useActive = <
   T extends {
@@ -25,12 +28,14 @@ export const useActive = <
     active.value = true;
   }, props.onPointerDown);
 
-  const isActive = useComputed(() => {
-    return props.active ?? active.value;
-  });
+  useEffect(() => {
+    if (props.active !== undefined && active.value !== props.active) {
+      active.value = props.active;
+    }
+  }, [props.active]);
 
   return {
-    active: isActive,
+    active,
     actions: {
       onPointerUp,
       onPointerDown,
