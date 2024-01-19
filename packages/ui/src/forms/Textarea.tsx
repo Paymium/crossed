@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 // 'use client';
 // import { withStaticProperties, type GetProps } from '@crossed/core';
 // import { Input, InputRootProps } from './Input';
@@ -51,3 +58,5 @@
 //   Label: TextareaLabel,
 //   Input: TextareaInput,
 // });
+
+export {};

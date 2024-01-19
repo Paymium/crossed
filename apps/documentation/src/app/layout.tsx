@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import './globals.css';
 import '@/types/unistyles';
 import type { Metadata } from 'next';
@@ -16,7 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang={'en'}>
-      <head></head>
+      <head />
       <Registry>
         <Body>
           <Suspense>

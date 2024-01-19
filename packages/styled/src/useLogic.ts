@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import type { ReturnExtract } from './extract';
 import { useActive } from './hooks/useActive';
 import { useHover } from './hooks/useHover';

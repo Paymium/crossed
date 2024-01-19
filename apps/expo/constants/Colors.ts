@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 const tintColorLight = '#2f95dc';
 const tintColorDark = '#fff';
 

@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import {
   checkIfWorkspace,
   getDependenciesFromNodeModules,
@@ -77,7 +84,7 @@ export default function withCrossed(nextConfig: any = {}) {
     } catch (e) {}
   }
 
-  let crossedUITranspileModules = Array.from(
+  const crossedUITranspileModules = Array.from(
     new Set([
       '@iconscout/react-native-unicons',
       ...rootDependencyList,
