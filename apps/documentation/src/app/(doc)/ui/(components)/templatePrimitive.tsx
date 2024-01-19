@@ -24,7 +24,7 @@ import {
   YBox,
 } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
-import { ReactNode } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { withDefaultProps } from '@crossed/core';
 import { TOCLayout } from '@/components/TOCLayout';
 
