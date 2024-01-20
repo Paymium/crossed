@@ -18,7 +18,7 @@ export default function UsagePage() {
 
       <H2 id="create">Create component</H2>
       <P>Create a new component by extending a react-native component</P>
-      <CodeBlock language="tsx" fileName="components/Body.tsx">{`
+      <CodeBlock fileName="components/Body.tsx">{`
 import { styled, type GetProps } from '@crossed/styled';
 import { Text } from "react-native";
 
@@ -30,7 +30,7 @@ export type BodyProps = GetProps<typeof Body>;
       `}</CodeBlock>
 
       <P>Import and use it</P>
-      <CodeBlock language="tsx" fileName="app/page.tsx">{`
+      <CodeBlock fileName="app/page.tsx">{`
 import { Body } from "../components/Body";
 
 function App () {
@@ -40,7 +40,7 @@ function App () {
 
       <H2 id="extend">Extend component</H2>
       <P>You can extending from existing one </P>
-      <CodeBlock language="tsx" fileName="components/Heading.tsx">{`
+      <CodeBlock fileName="components/Heading.tsx">{`
 import { type GetProps, styled } from '@crossed/styled';
 import { Body } from "../components/Body";
 
@@ -52,7 +52,7 @@ export type HeadingProps = GetProps<typeof Heading>;
       `}</CodeBlock>
 
       <P>Import and use it</P>
-      <CodeBlock language="tsx" fileName="app/page.tsx">{`
+      <CodeBlock fileName="app/page.tsx">{`
 import { Heading } from "../components/Heading";
 
 function App () {

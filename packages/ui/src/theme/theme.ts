@@ -5,7 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { Theme } from './types';
+import { colorsDark, colorsLight } from './colors';
+import type { Colors, Entries, Theme, VariantColor } from './types';
 
 const space = {
   xs: 4,
@@ -28,7 +29,7 @@ const fontSize: Theme['fontSize'] = {
   'xxs': 10,
   'xs': 12,
   'sm': 14,
-  'default': 14,
+  'default': 16,
   'md': 16,
   'lg': 18,
   'xl': 20,
@@ -88,25 +89,28 @@ const utils: Theme['utils'] = {
         : base) || base
     );
   },
+  createVariants: (type, t) => {
+    if (type === 'color') {
+      return (Object.entries(t.colors) as Entries<Colors>).reduce<VariantColor>(
+        (acc, [key, value]) => {
+          if (
+            key !== 'background' &&
+            key !== 'backgroundSoft' &&
+            key !== 'backgroundStrong'
+          ) {
+            acc[key] = { color: value };
+          }
+          return acc;
+        },
+        {} as VariantColor
+      );
+    }
+    throw new Error(`createVariants not allowed type "${type}"`);
+  },
 };
 
 export const lightTheme = {
-  colors: {
-    textColor: '#000000',
-    headingColor: '#000000',
-    background: '#ffffff',
-    backgroundPress: '#DDD',
-    backgroundStrong: '#ffffff',
-    backgroundHover: '#EEE',
-    borderColor: '#EEE',
-    linkColor: '#0f79d7',
-
-    neutral: '#DDDDDD',
-    error: '#7d2424',
-    info: '#93c5fd',
-    warning: '#fdba74',
-    success: '#3abb7d',
-  },
+  colors: colorsLight,
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
   space,
@@ -117,22 +121,7 @@ export const lightTheme = {
 } satisfies Theme;
 
 export const darkTheme = {
-  colors: {
-    textColor: '#ffffff',
-    headingColor: '#ffffff',
-    background: '#000020',
-    backgroundPress: '#373737',
-    backgroundStrong: '#000000',
-    backgroundHover: '#262626',
-    borderColor: '#262626',
-    linkColor: '#0f79d7',
-
-    neutral: '#373737',
-    error: '#C53030',
-    info: '#93c5fd',
-    warning: '#994912',
-    success: '#3abb7d',
-  },
+  colors: colorsDark,
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
   space,

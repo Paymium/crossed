@@ -20,3 +20,15 @@ h2 {
   padding-top: 70px !important;
   margin-top: -50px !important;
 }
+
+.prism-code{
+  gap: 4px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+}
+
+.filename .prism-code{
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}

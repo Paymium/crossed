@@ -311,7 +311,7 @@ const InputRoot = styled(
     );
   }),
   (t) => ({
-    color: t.colors.textColor,
+    color: t.colors.default,
     backgroundColor: t.utils.shadeColor(t.colors.background, 50),
     borderWidth: 1,
     borderColor: t.utils.shadeColor(

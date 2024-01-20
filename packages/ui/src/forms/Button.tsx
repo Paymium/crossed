@@ -46,7 +46,8 @@ const Root = styled(Pressable, (t) => ({
       outlined: {},
     },
   },
-  // @ts-expect-error missing type of extraStyle function
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore: missing type of extraStyle function
   extraStyle: ({ color, variant }, state) => {
     const select = (c: string) => {
       const color = t.utils.select(

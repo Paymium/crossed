@@ -91,8 +91,9 @@ export const styled = <
           });
 
           isDebug && log(`render`);
+          const { active, hovered, focus, ...otherProps } = props;
           const propsTmp = {
-            ...(props as any),
+            ...(otherProps as any),
             ref: ref,
             ...l.actions,
             style:

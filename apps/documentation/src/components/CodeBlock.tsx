@@ -8,70 +8,71 @@
 'use client';
 
 import { styled } from '@crossed/styled';
-import type { GetProps } from '@crossed/core';
-import { Box } from '@crossed/ui';
-import { HighlightProps } from 'prism-react-renderer';
+import { Alert, Text, YBox } from '@crossed/ui';
+import { themes } from 'prism-react-renderer';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
-type LiveEditorProps = GetProps<typeof LiveEditor>;
+const StyledLiveEditor = styled(LiveEditor, {
+  width: '100%',
+  borderRadius: 4,
+  fontFamily:
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+});
 
-const StyledLiveEditor = styled(
-  (props: LiveEditorProps) => {
-    return <LiveEditor {...props} style={props.style[0]} />;
-  },
-  {
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-  }
-);
+const LivePreviewStyled = styled(LivePreview, {
+  alignSelf: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+});
+const Pre = styled(Text, (t) => ({
+  backgroundColor: themes.dracula.plain.backgroundColor,
+  width: '100%',
+  padding: t.space.md,
+  boxSizing: 'border-box',
+  margin: 0,
+  borderTopLeftRadius: 4,
+  borderTopRightRadius: 4,
+  borderTopWidth: 0,
+  borderLeftWidth: 0,
+  borderRightWidth: 0,
+  borderBottomWidth: 1,
+  borderColor: t.colors.neutral,
+  borderStyle: 'solid',
+}));
 
 export const CodeBlock = ({
   children,
   scope,
-}: Omit<HighlightProps, 'children' | 'code'> & {
+  fileName,
+  preview,
+}: {
   children?: string | string[];
   scope?: any;
+  fileName?: string;
+  preview?: boolean;
 }) => {
   return (
-    <>
-      <Box
-        style={{
-          flexDirection: 'row',
-          alignItems: 'flex-start',
-          width: '100%',
-        }}
+    <YBox space="md">
+      <LiveProvider
+        code={(Array.isArray(children) ? children.join('') : children).trim()}
+        scope={scope}
+        disabled={true}
       >
-        <Box style={{ width: '100%' }} space="md">
-          <LiveProvider
-            code={(Array.isArray(children)
-              ? children.join('')
-              : children
-            ).trim()}
-            scope={scope}
-            disabled={true}
-          >
-            <Box
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                width: '100%',
-              }}
-              space="md"
-            >
-              <LivePreview
-                style={{
-                  alignSelf: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-              />
-            </Box>
-            <StyledLiveEditor />
-            <LiveError />
-          </LiveProvider>
-        </Box>
-      </Box>
-    </>
+        {preview && <LivePreviewStyled />}
+        <YBox>
+          {fileName && <Pre>{fileName}</Pre>}
+          <StyledLiveEditor
+            theme={themes.dracula}
+            className={fileName ? 'filename' : ''}
+          />
+          {preview && (
+            <Alert>
+              <LiveError />
+            </Alert>
+          )}
+        </YBox>
+      </LiveProvider>
+    </YBox>
   );
 };

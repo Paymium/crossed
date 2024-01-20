@@ -37,7 +37,7 @@ const Container = styled(XBox, {
 const Center = styled(YBox, (t) => ({
   flex: 1,
   borderLeftWidth: 1,
-  borderColor: t.colors.borderColor,
+  borderColor: t.colors.neutral,
   minHeight: '100%',
 }));
 
@@ -49,7 +49,7 @@ const Li = withDefaultProps(
         true: {
           marginTop: t.space.xl,
           borderBottomWidth: 1,
-          borderColor: t.colors.borderColor,
+          borderColor: t.colors.neutral,
         },
         false: {},
       },

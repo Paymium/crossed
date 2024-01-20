@@ -15,17 +15,16 @@ export const Anchor = withDefaultProps(
     Text,
     (t) => ({
       'fontFamily': t.fontFamily,
-      'color': t.colors.linkColor,
       'textDecorationLine': 'none',
       'cursor': 'pointer',
       'hover:': {
         textDecorationLine: 'underline',
-        color: t.utils.shadeColor(t.colors.linkColor, 45),
+        color: t.utils.shadeColor(t.colors.link, 45),
       },
     }),
     { name: 'Anchor' }
   ),
-  { weight: 'medium', role: 'link' }
+  { weight: 'medium', role: 'link', color: 'link' }
 );
 
 export type AnchorProps = GetProps<typeof Anchor>;

@@ -39,17 +39,17 @@ export default function Home() {
           </Tabs.List>
           <Tabs.Panels>
             <Tabs.Panel value="pnpm">
-              <CodeBlock language="sh">
+              <CodeBlock>
                 pnpm i @crossed/styled react-native-unistyles
               </CodeBlock>
             </Tabs.Panel>
             <Tabs.Panel value="npm">
-              <CodeBlock language="sh">
+              <CodeBlock>
                 npm i @crossed/styled react-native-unistyles
               </CodeBlock>
             </Tabs.Panel>
             <Tabs.Panel value="yarn">
-              <CodeBlock language="sh">
+              <CodeBlock>
                 yarn add @crossed/styled react-native-unistyles
               </CodeBlock>
             </Tabs.Panel>
@@ -72,7 +72,7 @@ export default function Home() {
       </P>
 
       <Alert status="warning">
-        <YBox space="md">
+        <YBox space="md" style={{ width: '100%' }}>
           <YBox>
             <Alert.Title>{t('Server side renderer')}</Alert.Title>
             <Alert.Description>
@@ -82,7 +82,7 @@ export default function Home() {
               </Trans>
             </Alert.Description>
           </YBox>
-          <CodeBlock language="tsx" fileName="app/layout.tsx">
+          <CodeBlock fileName="app/layout.tsx">
             {`
 import type { PropsWithChildren } from 'react';
 import { Registry } from '@crossed/styled';
@@ -107,7 +107,7 @@ export default function RootLayout({
 
       <YBox space="md">
         <H2 id="usage">{t('Usage')}</H2>
-        <CodeBlock language="tsx" fileName="foo.tsx">
+        <CodeBlock fileName="foo.tsx">
           {`
 import { styled } from '@crossed/styled';
 import { Text } from "react-native";

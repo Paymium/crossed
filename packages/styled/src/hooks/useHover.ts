@@ -5,8 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+'use client';
 import { composeEventHandlers } from '@crossed/core';
-import { useComputed, useSignal } from '@preact/signals-react';
+import { useSignal } from '@preact/signals-react';
+import { useEffect } from 'react';
 
 export const useHover = <
   T extends {
@@ -19,18 +21,24 @@ export const useHover = <
 ) => {
   const hovered = useSignal(false);
   const onPointerEnter = composeEventHandlers(() => {
-    hovered.value = true;
+    if (props.hovered === undefined || props.hovered === false) {
+      hovered.value = true;
+    }
   }, props.onPointerEnter);
   const onPointerLeave = composeEventHandlers(() => {
-    hovered.value = false;
+    if (props.hovered === undefined || props.hovered === false) {
+      hovered.value = false;
+    }
   }, props.onPointerLeave);
 
-  const isHover = useComputed(() => {
-    return props.hovered || hovered.value;
-  });
+  useEffect(() => {
+    if (props.hovered !== undefined && hovered.value !== props.hovered) {
+      hovered.value = props.hovered;
+    }
+  }, [props.hovered]);
 
   return {
-    hovered: isHover,
+    hovered,
     actions: {
       onPointerEnter: onPointerEnter,
       onPointerLeave: onPointerLeave,
