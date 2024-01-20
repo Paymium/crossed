@@ -21,6 +21,7 @@ export default function CreateBadge() {
       types={[]}
       anatomy={`// coming soon`}
       example={`// coming soon`}
+      scope={{}}
     />
   );
 }

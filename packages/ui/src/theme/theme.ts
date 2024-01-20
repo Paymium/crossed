@@ -29,7 +29,7 @@ const fontSize: Theme['fontSize'] = {
   'xxs': 10,
   'xs': 12,
   'sm': 14,
-  'default': 14,
+  'default': 16,
   'md': 16,
   'lg': 18,
   'xl': 20,

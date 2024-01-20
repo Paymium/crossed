@@ -43,7 +43,7 @@ export default function UsagePage() {
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel value="StyleSheet.create">
-            <CodeBlock language="tsx" showLine>
+            <CodeBlock>
               {`import { StyleSheet } from "react-native";
 
 const styleSheet = StyleSheet.create({
@@ -56,7 +56,7 @@ function App() {
             </CodeBlock>
           </Tabs.Panel>
           <Tabs.Panel value="react-native-unistyles">
-            <CodeBlock language="tsx" showLine>
+            <CodeBlock>
               {`import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 const styleSheet = createStyleSheet({
@@ -76,7 +76,7 @@ function App() {
         With <Kbd size="lg">@crossed/styled</Kbd>
       </H6>
       <P>You can write it with less code</P>
-      <CodeBlock language="tsx" showLine>{`
+      <CodeBlock>{`
 import { styled } from "@crossed/styled";
 
 const styleSheet = styled({ color: "red" });
@@ -87,7 +87,7 @@ const styleSheet = styled({ color: "red" });
         The styled function allows for interactive styling based on the state
         associated with pointer events, such as finger or mouse interactions.
       </P>
-      <CodeBlock language="tsx">{`
+      <CodeBlock>{`
 import { styled } from "@crossed/styled";
 
 const styleSheet = styled({

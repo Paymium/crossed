@@ -32,13 +32,13 @@ export default function Home() {
           </Tabs.List>
           <Tabs.Panels>
             <Tabs.Panel value="pnpm">
-              <CodeBlock language="sh">pnpm i @crossed/primitive</CodeBlock>
+              <CodeBlock>pnpm i @crossed/primitive</CodeBlock>
             </Tabs.Panel>
             <Tabs.Panel value="npm">
-              <CodeBlock language="sh">npm i @crossed/primitive</CodeBlock>
+              <CodeBlock>npm i @crossed/primitive</CodeBlock>
             </Tabs.Panel>
             <Tabs.Panel value="yarn">
-              <CodeBlock language="sh">yarn add @crossed/primitive</CodeBlock>
+              <CodeBlock>yarn add @crossed/primitive</CodeBlock>
             </Tabs.Panel>
           </Tabs.Panels>
         </Tabs>

@@ -57,13 +57,13 @@ export const TemplatePrimitive = ({
       {example && (
         <>
           <H2 id="example">{t('Example')}</H2>
-          <CodeBlock language="tsx">{example}</CodeBlock>
+          <CodeBlock>{example}</CodeBlock>
         </>
       )}
       {anatomy && (
         <>
           <H2 id="anatomy">{t('Anatomy')}</H2>
-          <CodeBlock language="tsx">{anatomy}</CodeBlock>
+          <CodeBlock>{anatomy}</CodeBlock>
         </>
       )}
       <H2 id="params">Params</H2>
