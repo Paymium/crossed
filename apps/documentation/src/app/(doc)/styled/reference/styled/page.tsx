@@ -29,7 +29,7 @@ export default function ReferenceStyled() {
     <YBox>
       <H1>styled</H1>
       <H2 id="example">{t('Example')}</H2>
-      <CodeBlock language="tsx">{`
+      <CodeBlock>{`
 import { styled, type GetProps } from '@crossed/styled';
 import { Text } from "react-native";
 
@@ -100,7 +100,7 @@ export type BodyProps = GetProps<typeof Body>;
         </TBody>
       </Table>
       <H2 id="return">Return</H2>
-      <CodeBlock language="tsx">{`
+      <CodeBlock>{`
 const Button = styled(Comp, styles)
 const { styleSheet } = Button;
       `}</CodeBlock>
