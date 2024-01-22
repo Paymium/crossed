@@ -15,7 +15,7 @@ export * from './theme';
 export * from './forms';
 export * from './disclosure';
 export * from './feedback';
-// export * from './Provider';
+export * from './Provider';
 // export * from './animations';
 export * from './display';
 // export * from '@crossed/unicons';

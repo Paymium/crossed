@@ -6,4 +6,8 @@
  */
 
 import './types';
-export * from './unicons';
+export * from './ChevronDown';
+export * from './Github';
+export * from './Moon';
+export * from './MousePointerClick';
+export * from './Sun';

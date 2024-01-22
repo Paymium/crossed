@@ -25,7 +25,7 @@ export default function CreateBadge() {
             <TemplateDescriptionProps
               componentName="XBox"
               componentExtended="Box"
-              href="/Box"
+              href="/ui/Box"
             />
           ),
           props: [],

@@ -8,8 +8,9 @@
 'use client';
 
 import { styled } from '@crossed/styled';
-import { Alert, Text, YBox } from '@crossed/ui';
+import { Alert, Center, Text, XBox, YBox } from '@crossed/ui';
 import { themes } from 'prism-react-renderer';
+import { PropsWithChildren, ReactNode, useCallback } from 'react';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
 const StyledLiveEditor = styled(LiveEditor, {
@@ -19,12 +20,24 @@ const StyledLiveEditor = styled(LiveEditor, {
     '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
 });
 
-const LivePreviewStyled = styled(LivePreview, {
-  alignSelf: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-});
+const RenderPreview = styled(Center, (t) => ({
+  padding: t.space.md,
+  alignItems: 'stretch',
+}));
+
+const ContainerPreview = styled(XBox, (t) => ({
+  borderWidth: 1,
+  borderColor: t.colors.neutral,
+  borderStyle: 'solid',
+  borderRadius: 4,
+}));
+const ContainerVariants = styled(YBox, (t) => ({
+  borderLeftWidth: 1,
+  borderColor: t.colors.neutral,
+  borderStyle: 'solid',
+  padding: t.space.md,
+}));
+
 const Pre = styled(Text, (t) => ({
   backgroundColor: themes.dracula.plain.backgroundColor,
   width: '100%',
@@ -39,6 +52,7 @@ const Pre = styled(Text, (t) => ({
   borderBottomWidth: 1,
   borderColor: t.colors.neutral,
   borderStyle: 'solid',
+  color: t.colors.white,
 }));
 
 export const CodeBlock = ({
@@ -46,12 +60,25 @@ export const CodeBlock = ({
   scope,
   fileName,
   preview,
+  variants,
 }: {
   children?: string | string[];
   scope?: any;
   fileName?: string;
   preview?: boolean;
+  variants?: ReactNode;
 }) => {
+  const Component = useCallback(
+    ({ children }: PropsWithChildren) => (
+      <ContainerPreview>
+        <RenderPreview style={{ flex: 1 }}>{children}</RenderPreview>
+        {variants && (
+          <ContainerVariants space="md">{variants}</ContainerVariants>
+        )}
+      </ContainerPreview>
+    ),
+    [variants, children]
+  );
   return (
     <YBox space="md">
       <LiveProvider
@@ -59,7 +86,7 @@ export const CodeBlock = ({
         scope={scope}
         disabled={true}
       >
-        {preview && <LivePreviewStyled />}
+        {preview && <LivePreview Component={Component} />}
         <YBox>
           {fileName && <Pre>{fileName}</Pre>}
           <StyledLiveEditor

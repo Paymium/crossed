@@ -40,6 +40,18 @@ export type VariantColor = {
   >]: { color: Colors[key] };
 };
 
+export type VariantBackgroundColor = {
+  [key in keyof Omit<
+    Colors,
+    | 'background'
+    | 'backgroundStrong'
+    | 'backgroundSoft'
+    | 'black'
+    | 'default'
+    | 'white'
+  >]: { backgroundColor: Colors[key] };
+};
+
 export type Theme = {
   colors: Colors;
   fontFamily: string;
@@ -77,7 +89,10 @@ export type Theme = {
       _p: { hover?: any; active?: any; focus?: any; base?: any },
       _state: { hover?: boolean; active?: boolean; focus?: boolean }
     ) => string;
-    createVariants: (_type: 'color', _theme: Theme) => VariantColor;
+    createVariants: {
+      (_type: 'color', _theme: Theme): VariantColor;
+      (_type: 'backgroundColor', _theme: Theme): VariantBackgroundColor;
+    };
   };
 };
 export type Themes = UnistylesThemes & {
