@@ -18,6 +18,7 @@ export * from './feedback';
 export * from './Provider';
 // export * from './animations';
 export * from './display';
+export * from './theme/types';
 // export * from '@crossed/unicons';
 // export {
 //   styled,

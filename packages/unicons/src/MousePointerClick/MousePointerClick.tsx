@@ -6,7 +6,7 @@
  */
 
 import { useStyles } from '@crossed/styled/unistyles';
-import type { IconProps } from 'src/types';
+import type { IconProps } from '../types';
 
 export const MousePointerClick = ({
   Svg,

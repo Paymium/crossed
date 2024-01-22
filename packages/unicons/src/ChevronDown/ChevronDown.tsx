@@ -6,7 +6,7 @@
  */
 
 import { useStyles } from '@crossed/styled/unistyles';
-import type { IconProps } from 'src/types';
+import type { IconProps } from '../types';
 
 export const ChevronDown = ({ Svg, Path, color, size = 24 }: IconProps) => {
   const { theme } = useStyles();
