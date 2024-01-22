@@ -15,7 +15,7 @@ const Container = withDefaultProps(
   styled(XBox, (t) => ({
     padding: t.space.md,
     borderRadius: 4,
-    alignItems: 'stretch',
+    alignItems: 'flex-start',
     variants: {
       status: {
         error: { backgroundColor: t.colors.error },

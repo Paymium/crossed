@@ -33,13 +33,7 @@ const Root = styled(Pressable, (t) => ({
       lg: { paddingHorizontal: t.space.lg, height: t.size.lg },
       xl: { paddingHorizontal: t.space.xl, height: t.size.xl },
     } as const,
-    color: {
-      default: {
-        borderWidth: 1,
-      },
-      red: {},
-      // gray: {},
-    },
+    color: t.utils.createVariants('backgroundColor', t),
     variant: {
       default: {},
       ghost: {},
@@ -83,8 +77,8 @@ const Root = styled(Pressable, (t) => ({
       };
     };
 
-    if (color === 'red') {
-      return select(t.colors.error);
+    if (color && color !== 'neutral') {
+      return select((t.colors as any)[color]);
     }
     return select(t.colors.neutral);
   },

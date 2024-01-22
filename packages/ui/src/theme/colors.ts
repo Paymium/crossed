@@ -36,7 +36,7 @@ export const colorsDark: Colors = {
   // common colors
   neutral: '#373737',
   success: '#3abb7d',
-  info: '#93c5fd',
+  info: '#5795db',
   error: '#C53030',
   warning: '#994912',
   link: '#0f79d7',

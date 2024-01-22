@@ -89,6 +89,7 @@ type TemplatePrimitiveProps = {
   types: TableRow[];
   example: string;
   scope: object;
+  variants?: ReactNode;
 };
 
 export const TemplatePrimitive = ({
@@ -100,6 +101,7 @@ export const TemplatePrimitive = ({
   example,
   types,
   scope,
+  variants,
 }: TemplatePrimitiveProps) => {
   const { t } = useTranslation();
   return (
@@ -109,7 +111,9 @@ export const TemplatePrimitive = ({
       {example && (
         <>
           <H2 id="example">{t('Example')}</H2>
-          <CodeBlock scope={scope}>{example}</CodeBlock>
+          <CodeBlock preview scope={scope} variants={variants}>
+            {example}
+          </CodeBlock>
         </>
       )}
       {anatomy && (

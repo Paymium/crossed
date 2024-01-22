@@ -25,7 +25,7 @@ export default function CreateBadge() {
             <TemplateDescriptionProps
               componentName="P"
               componentExtended="Text"
-              href="/Text"
+              href="/ui/Text"
             />
           ),
           props: [],

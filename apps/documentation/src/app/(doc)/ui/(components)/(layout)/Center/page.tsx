@@ -25,7 +25,7 @@ export default function CreateBadge() {
             <TemplateDescriptionProps
               componentName="Center"
               componentExtended="YBox"
-              href="/YBox"
+              href="/ui/YBox"
             />
           ),
           props: [],

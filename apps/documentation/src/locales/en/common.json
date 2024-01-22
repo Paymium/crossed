@@ -30,7 +30,7 @@
   "You should finish installation and configure react-native-unistyles, click <2>here</2>": "You should finish installation and configure react-native-unistyles, click <2>here</2>",
   "For add style on server side rendering, you should add registry on server components (nextjs app router)": "For add style on server side rendering, you should add registry on server components (nextjs app router)",
   "Server side renderer": "Server side renderer",
-  "extended from": "{{componentName}} is extended from component ",
+  "extended from": "{{componentName}} is extended from ",
   "font size props description": "Apply choosen font's size. Default value is 20.",
   "weight props description": "Apply choosen font's weight. Default value is a weight of 400.",
   "color props description": "Apply choosen font's color. Default color depend on the theme : black for light theme and white for dark theme.",
