@@ -14,7 +14,7 @@ import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 import { useSignals } from '@preact/signals-react/runtime';
 import { useSignal } from '@preact/signals-react';
 import { colorsLight } from '@crossed/ui/src/theme/colors';
-import { Entries } from '@crossed/ui/lib/typescript/theme/types';
+import type { Entries } from '@crossed/ui';
 import { fontSize } from '@crossed/ui/src/theme/theme';
 
 export default function CreateBadge() {

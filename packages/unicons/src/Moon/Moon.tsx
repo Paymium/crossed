@@ -6,7 +6,7 @@
  */
 
 import { useStyles } from '@crossed/styled/unistyles';
-import type { IconProps } from 'src/types';
+import type { IconProps } from '../types';
 
 export const Moon = ({ Svg, Path, color, size = 25 }: IconProps) => {
   const { theme } = useStyles();
