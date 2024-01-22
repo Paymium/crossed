@@ -27,10 +27,8 @@
     "strict": true,
     "target": "esnext",
     "paths": {
-      "@crossed/core": ["./node_modules/@crossed/core/src"],
-      "@crossed/class-variance-authority": [
-        "./node_modules/@crossed/class-variance-authority/src"
-      ]
+      "@crossed/styled": ["./node_modules/@crossed/styled/src"],
+      "@crossed/core": ["./node_modules/@crossed/core/src"]
     }
   }
 }
