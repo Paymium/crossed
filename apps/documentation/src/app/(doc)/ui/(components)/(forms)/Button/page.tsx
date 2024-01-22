@@ -9,11 +9,19 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { XBox, Button } from '@crossed/ui';
+import { Button, Select, Text, Center } from '@crossed/ui';
+import { MousePointerClick } from '@crossed/unicons/MousePointerClick';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
+import { useSignal } from '@preact/signals-react';
+import { useSignals } from '@preact/signals-react/runtime';
+import { useStyles } from 'react-native-unistyles';
 
 export default function CreateBadge() {
+  useSignals();
   const { t } = useTranslation();
+  const variants = useSignal('default');
+  const colors = useSignal('neutral');
+  const { theme } = useStyles();
   return (
     <TemplatePrimitive
       title="Button"
@@ -48,7 +56,7 @@ export default function CreateBadge() {
             <TemplateDescriptionProps
               componentName="Button.Text"
               componentExtended="Text"
-              href="/Text"
+              href="/ui/Text"
             />
           ),
           props: [],
@@ -80,15 +88,57 @@ import { Button } from '@crossed/ui'
   <Button.Element>Insert your icon/SVG</Button.Element>
 </Button>`}
       example={`
-<Button>
-  <Button.Text color="info" weight="bold">Try Me</Button.Text>
-  <Button.Element>
-    <svg width="19.2" height="19.2" viewBox="0 0 400 400" fill="red">
-      <path d="M 100 100 L 300 100 L 200 300 z" fill="#93C5FD"></path>
-    </svg>
-  </Button.Element>
-</Button>`}
-      scope={{ XBox, Button }}
+<Center>
+  <Button variant="${variants}" color="${colors.value}">
+    <Button.Element>
+      <MousePointerClick />
+    </Button.Element>
+    <Button.Text>Try Me</Button.Text>
+  </Button>
+</Center>`}
+      scope={{ Center, Button, MousePointerClick }}
+      variants={
+        <>
+          <Select
+            value={colors.value}
+            onChange={(e: string) => {
+              colors.value = e;
+            }}
+          >
+            <Select.Trigger>
+              <Select.Value />
+            </Select.Trigger>
+            <Select.Content>
+              {Object.keys(
+                theme.utils.createVariants('backgroundColor', theme)
+              ).map((key) => (
+                <Select.Option value={key} key={key}>
+                  <Text>{key}</Text>
+                </Select.Option>
+              ))}
+            </Select.Content>
+          </Select>
+          <Select
+            value={variants.value}
+            onChange={(e: string) => {
+              variants.value = e;
+            }}
+          >
+            <Select.Trigger>
+              <Select.Value />
+            </Select.Trigger>
+            <Select.Content>
+              {['default', 'ghost', 'outlined'].map((key) => {
+                return (
+                  <Select.Option value={key} key={key}>
+                    <Text>{key}</Text>
+                  </Select.Option>
+                );
+              })}
+            </Select.Content>
+          </Select>
+        </>
+      }
     />
   );
 }

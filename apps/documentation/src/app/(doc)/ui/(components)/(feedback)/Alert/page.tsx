@@ -10,10 +10,14 @@
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
-import { Alert, AlertDescription, AlertTitle } from '@crossed/ui';
+import { Alert, AlertDescription, AlertTitle, Select, Text } from '@crossed/ui';
+import { useSignal } from '@preact/signals-react';
+import { useSignals } from '@preact/signals-react/runtime';
 
 export default function CreateBadge() {
+  useSignals();
   const { t } = useTranslation();
+  const status = useSignal('default');
   return (
     <TemplatePrimitive
       title="Alert"
@@ -25,7 +29,7 @@ export default function CreateBadge() {
             <TemplateDescriptionProps
               componentName="Alert"
               componentExtended="XBox"
-              href="/XBox"
+              href="/ui/XBox"
             />
           ),
           props: [
@@ -42,7 +46,7 @@ export default function CreateBadge() {
             <TemplateDescriptionProps
               componentName="AlertTitle"
               componentExtended="Text"
-              href="/Text"
+              href="/ui/Text"
             />
           ),
           props: [],
@@ -53,7 +57,7 @@ export default function CreateBadge() {
             <TemplateDescriptionProps
               componentName="AlertDescription"
               componentExtended="Text"
-              href="/Text"
+              href="/ui/Text"
             />
           ),
           props: [],
@@ -63,11 +67,32 @@ export default function CreateBadge() {
       types={[]}
       anatomy={`// coming soon`}
       example={`
-<Alert status="error"> 
+<Alert status="${status.value}"> 
   <Alert.Title>Error</Alert.Title>
   <Alert.Description>Status code 404</Alert.Description>
 </Alert>`}
       scope={{ Alert, AlertDescription, AlertTitle }}
+      variants={
+        <Select
+          value={status.value}
+          onChange={(e: string) => {
+            status.value = e;
+          }}
+        >
+          <Select.Trigger>
+            <Select.Value />
+          </Select.Trigger>
+          <Select.Content>
+            {['error', 'success', 'warning', 'info'].map((key) => {
+              return (
+                <Select.Option value={key} key={key}>
+                  <Text>{key}</Text>
+                </Select.Option>
+              );
+            })}
+          </Select.Content>
+        </Select>
+      }
     />
   );
 }

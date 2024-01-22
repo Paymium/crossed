@@ -6,7 +6,13 @@
  */
 
 import { colorsDark, colorsLight } from './colors';
-import type { Colors, Entries, Theme, VariantColor } from './types';
+import type {
+  Colors,
+  Entries,
+  Theme,
+  VariantBackgroundColor,
+  VariantColor,
+} from './types';
 
 const space = {
   xs: 4,
@@ -25,11 +31,11 @@ const size: Theme['size'] = {
   xl: 56,
 };
 
-const fontSize: Theme['fontSize'] = {
+export const fontSize: Theme['fontSize'] = {
   'xxs': 10,
   'xs': 12,
   'sm': 14,
-  'default': 16,
+  'default': 14,
   'md': 16,
   'lg': 18,
   'xl': 20,
@@ -103,7 +109,24 @@ const utils: Theme['utils'] = {
           return acc;
         },
         {} as VariantColor
-      );
+      ) as any;
+    }
+    if (type === 'backgroundColor') {
+      return (
+        Object.entries(t.colors) as Entries<Colors>
+      ).reduce<VariantBackgroundColor>((acc, [key, value]) => {
+        if (
+          key !== 'background' &&
+          key !== 'backgroundSoft' &&
+          key !== 'backgroundStrong' &&
+          key !== 'black' &&
+          key !== 'default' &&
+          key !== 'white'
+        ) {
+          acc[key] = { backgroundColor: value };
+        }
+        return acc;
+      }, {} as any);
     }
     throw new Error(`createVariants not allowed type "${type}"`);
   },

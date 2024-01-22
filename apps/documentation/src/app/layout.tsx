@@ -14,6 +14,7 @@ import { PropsWithChildren, Suspense } from 'react';
 import { ScrollView } from '@/components/ScrollView';
 import { Footer } from '@/components/Footer';
 import { Registry } from '@crossed/styled';
+import { CrossedUIProvider } from '@crossed/ui/src';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -25,19 +26,21 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang={'en'}>
       <head />
       <Registry>
-        <Body>
-          <Suspense>
-            <ScrollView
-              stickyHeaderIndices={[0]}
-              style={{ height: '100%' }}
-              contentContainerStyle={{ minHeight: '100%' }}
-            >
-              <NavBar />
-              {children}
-              <Footer />
-            </ScrollView>
-          </Suspense>
-        </Body>
+        <CrossedUIProvider>
+          <Body>
+            <Suspense>
+              <ScrollView
+                stickyHeaderIndices={[0]}
+                style={{ height: '100%' }}
+                contentContainerStyle={{ minHeight: '100%' }}
+              >
+                <NavBar />
+                {children}
+                <Footer />
+              </ScrollView>
+            </Suspense>
+          </Body>
+        </CrossedUIProvider>
       </Registry>
     </html>
   );

@@ -5,8 +5,12 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-// 'use client';
+'use client';
 
 // export { CrossedTheme, useCrossedTheme } from '@crossed/styled';
+import { PortalProvider } from '@gorhom/portal';
+import type { PropsWithChildren } from 'react';
 
-export {};
+export const CrossedUIProvider = ({ children }: PropsWithChildren) => {
+  return <PortalProvider>{children}</PortalProvider>;
+};

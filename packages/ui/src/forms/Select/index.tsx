@@ -40,7 +40,7 @@ import {
   useUncontrolled,
   withStaticProperties,
 } from '@crossed/core';
-import { styled, useStyles } from '@crossed/styled';
+import { styled } from '@crossed/styled';
 import {
   useCallback,
   memo,
@@ -53,7 +53,8 @@ import {
 import { Button, ButtonProps } from '../Button';
 import { XBox, XBoxProps } from '../../layout/XBox';
 import { MenuItemProps, MenuList, MenuListProps } from '../../display/MenuList';
-import { Card } from '../../display/Card';
+import { Portal } from '@gorhom/portal';
+import type { LayoutRectangle } from 'react-native';
 
 // // type InputProps = GetProps<typeof Input>;
 
@@ -531,9 +532,11 @@ const SelectRoot = styled(
       defaultValue,
       finalValue,
       onChange,
+      variant,
       ...props
-    }: UseUncontrolledInput<V> & XBoxProps) => {
+    }: UseUncontrolledInput<V> & XBoxProps & Pick<ButtonProps, 'variant'>) => {
       const renderValue = useRef<ReactNode>();
+      const triggerLayout = useRef<LayoutRectangle | undefined>();
       const [value, setValue] = useUncontrolled<string | number>({
         value: valueProps,
         defaultValue,
@@ -551,6 +554,8 @@ const SelectRoot = styled(
           open={open}
           setOpen={setOpen}
           renderValue={renderValue}
+          variant={variant}
+          triggerLayout={triggerLayout}
         >
           <XBox {...props} />
         </SelectProvider>
@@ -569,30 +574,64 @@ SelectRoot.displayName = 'Select';
 
 const Trigger = withStaticProperties(
   memo((props: ButtonProps) => {
-    const { setOpen, open } = useSelectProvider();
+    const { setOpen, open, variant, triggerLayout } = useSelectProvider();
     const onPress = useCallback(
       composeEventHandlers(() => {
         setOpen(!open);
       }, props.onPress),
       [props.onPress, open]
     );
-    return <Button {...props} onPress={onPress} />;
+    return (
+      <Button
+        variant={variant}
+        active={open}
+        onLayout={({ nativeEvent: { layout } }) => {
+          triggerLayout.current = layout;
+        }}
+        {...props}
+        onPress={onPress}
+      />
+    );
   }),
   { Text: Button.Text }
 );
+
 const Content = styled(
   (props: MenuListProps) => {
-    const { open } = useSelectProvider();
-    const { styles } = useStyles(Card.styleSheet as any, props);
-    return open ? (
-      <MenuList {...props} style={[styles.base, props.style]} />
-    ) : null;
+    const all = useSelectProvider();
+    const { top, height, left } = (all.triggerLayout.current as any) || {
+      top: 0,
+      height: 0,
+      left: 0,
+    };
+    return (
+      <Portal>
+        <SelectProvider {...all}>
+          {all.open ? (
+            <>
+              <MenuList
+                {...props}
+                style={{
+                  ...(typeof props.style === 'object' ? props.style : {}),
+                  top: top + height,
+                  left,
+                }}
+              />
+            </>
+          ) : null}
+        </SelectProvider>
+      </Portal>
+    );
   },
   (t) => ({
     position: 'absolute',
-    top: '100%',
+    top: 15 + 40,
+    left: 1253,
     maxWidth: 'auto',
     padding: t.space.xs,
+    zIndex: 100,
+    backgroundColor: t.utils.shadeColor(t.colors.neutral, -25),
+    borderRadius: 4,
   })
 );
 
@@ -602,9 +641,10 @@ Content.displayName = 'Select.Content';
 
 const Option = styled(
   ({ value, ...props }: MenuItemProps & { value: string | number }) => {
-    const { setOpen, setValue } = useSelectProvider();
+    const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
     return (
       <MenuList.Item
+        active={value === valueGlobal}
         {...props}
         onPress={composeEventHandlers(() => {
           setOpen(false);
@@ -613,7 +653,7 @@ const Option = styled(
       />
     );
   },
-  {}
+  { justifyContent: 'flex-start' }
 );
 
 // @ts-expect-error because id not exist in type
@@ -634,6 +674,8 @@ type Context = {
   value: string | number;
   setValue: (_p: string | number) => void;
   renderValue: MutableRefObject<ReactNode>;
+  variant?: ButtonProps['variant'];
+  triggerLayout: MutableRefObject<LayoutRectangle | undefined>;
 };
 const [SelectProvider, useSelectProvider] = createScope<Context>({} as Context);
 
