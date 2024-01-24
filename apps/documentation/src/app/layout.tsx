@@ -6,7 +6,6 @@
  */
 
 import './globals.css';
-import '@/types/unistyles';
 import type { Metadata } from 'next';
 import { Body } from '@/components/Body';
 import { NavBar } from '@/components/NavBar';

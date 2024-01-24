@@ -7,7 +7,6 @@
 
 'use client';
 import { CodeBlock } from '@/components/CodeBlock';
-import '@/types/unistyles';
 import { withDefaultProps } from '@crossed/core';
 import { styled } from '@crossed/styled';
 import { Alert, Anchor, H1, H2, P, Tabs, Text, YBox } from '@crossed/ui';

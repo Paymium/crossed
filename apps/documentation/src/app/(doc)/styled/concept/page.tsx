@@ -5,10 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-'use client';
-
 import { CodeBlock } from '@/components/CodeBlock';
-import '@/types/unistyles';
 import { H1, H2, H6, Kbd, P, Tabs, YBox } from '@crossed/ui';
 
 export default function UsagePage() {

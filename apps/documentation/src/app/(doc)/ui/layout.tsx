@@ -5,8 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-'use client';
-import '@/types/unistyles';
 import { SideBarLayout } from '@/components/SideBarLayout';
 import { withDefaultProps } from '@crossed/core';
 

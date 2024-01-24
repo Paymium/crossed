@@ -7,7 +7,6 @@
 
 'use client';
 import { SideBarLayout } from '@/components/SideBarLayout';
-import '@/types/unistyles';
 import { withDefaultProps } from '@crossed/core';
 
 export default withDefaultProps(SideBarLayout, {

@@ -5,9 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-// if you defined breakpoints
-
 import 'react-native-unistyles';
-import { setup } from '@crossed/ui/src/theme/index';
+// import { setup } from '@crossed/ui/src/theme/index';
 import '@/locales';
-setup();
+// setup();
