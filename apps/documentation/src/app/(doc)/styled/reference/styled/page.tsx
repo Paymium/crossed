@@ -7,7 +7,6 @@
 
 'use client';
 import { CodeBlock } from '@/components/CodeBlock';
-import '@/types/unistyles';
 import {
   Code,
   H1,

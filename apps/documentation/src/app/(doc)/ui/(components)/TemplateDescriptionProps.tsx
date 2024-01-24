@@ -5,6 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+'use client';
+
 import { Link } from '@/components/Link';
 import { P } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';

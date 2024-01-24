@@ -6,7 +6,6 @@
  */
 
 'use client';
-import '@/types/unistyles';
 import { H1, P, YBox, Kbd } from '@crossed/ui';
 
 export default function Home() {

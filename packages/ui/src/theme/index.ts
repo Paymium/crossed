@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { UnistylesRegistry } from '@crossed/styled';
+import { UnistylesRegistry } from '@crossed/styled/unistyles';
 import { darkTheme, lightTheme } from './theme';
 import { breakpoints } from './breakpoints';
 import deepmerge from 'deepmerge';

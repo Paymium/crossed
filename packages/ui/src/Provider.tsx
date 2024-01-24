@@ -6,11 +6,18 @@
  */
 
 'use client';
+import { setup } from './theme';
+setup();
 
+import { Registry } from '@crossed/styled';
 // export { CrossedTheme, useCrossedTheme } from '@crossed/styled';
 import { PortalProvider } from '@gorhom/portal';
 import type { PropsWithChildren } from 'react';
 
 export const CrossedUIProvider = ({ children }: PropsWithChildren) => {
-  return <PortalProvider>{children}</PortalProvider>;
+  return (
+    <PortalProvider>
+      <Registry>{children}</Registry>
+    </PortalProvider>
+  );
 };

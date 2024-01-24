@@ -6,7 +6,6 @@
  */
 
 'use client';
-import '@/types/unistyles';
 import { CodeBlock } from '@/components/CodeBlock';
 import { H1, H2, YBox, Tabs } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';

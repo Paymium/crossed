@@ -6,7 +6,6 @@
  */
 
 'use client';
-import '@/types/unistyles';
 import { Logo } from '@/components/Logo';
 import { createStyleSheet, mq, styled, useStyles } from '@crossed/styled';
 import { B, Button, Card, H1, H2, H3, YBox } from '@crossed/ui';

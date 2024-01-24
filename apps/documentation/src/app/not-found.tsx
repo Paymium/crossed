@@ -8,7 +8,6 @@
 'use client';
 
 import { Link } from '@/components/Link';
-import '@/types/unistyles';
 import { styled } from '@crossed/styled';
 import { Center, H2, P } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
