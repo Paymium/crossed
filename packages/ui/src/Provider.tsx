@@ -9,7 +9,7 @@
 import { setup } from './theme';
 setup();
 
-import { Registry } from '@crossed/styled/registry';
+import { Registry } from '@crossed/styled';
 // export { CrossedTheme, useCrossedTheme } from '@crossed/styled';
 import { PortalProvider } from '@gorhom/portal';
 import type { PropsWithChildren } from 'react';
