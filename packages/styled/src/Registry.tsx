@@ -8,17 +8,15 @@
 'use client';
 
 import { useServerInsertedHTML } from 'next/navigation';
-import { useRef, type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { AppRegistry } from 'react-native';
+import { Main } from 'next/document';
 
 export const Registry = ({ children }: PropsWithChildren) => {
-  const ref = useRef(false);
   useServerInsertedHTML(() => {
-    if (ref.current) return;
-    ref.current = true;
-    AppRegistry.registerComponent('Registry', () => Registry);
+    AppRegistry.registerComponent('Main', () => Main);
 
-    const { getStyleElement } = (AppRegistry as any).getApplication('Registry');
+    const { getStyleElement } = (AppRegistry as any).getApplication('Main');
     return <>{getStyleElement()}</>;
   });
   return children;
