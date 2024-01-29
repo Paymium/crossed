@@ -1,5 +1,9 @@
 {
-  "include": ["./src", "__tests__"],
+  "include": [
+    "./src",
+    "__tests__",
+    "../../apps/documentation/src/components/MyLabel.tsx"
+  ],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": ".",

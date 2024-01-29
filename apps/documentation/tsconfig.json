@@ -30,7 +30,7 @@
       "@crossed/primitive": ["./node_modules/@crossed/primitive/src"],
       "@crossed/primitive/*": ["./node_modules/@crossed/primitive/src/*"],
       "@crossed/unicons": ["./node_modules/@crossed/unicons/src"],
-      "@crossed/unicons/*": ["./node_modules/@crossed/unicons/src/*"],
+      "@crossed/unicons/*": ["./node_modules/@crossed/unicons/src/*"]
     },
     "typeRoots": ["./src/types/**/*.ts"]
   },

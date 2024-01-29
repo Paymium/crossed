@@ -15,30 +15,60 @@ export default function CreateLabel() {
     <TemplatePrimitive
       title="createLabel"
       description={t('Creation primitive Label')}
-      params={[]}
-      return={[]}
+      params={[
+        {
+          name: 'Root',
+          description: 'Container of Label component',
+          type: '(p: any) => ReactNode',
+        },
+        {
+          name: 'Label',
+          description: 'Text to show as Label',
+          type: '(p: any) => ReactNode',
+        },
+        {
+          name: 'Input',
+          description: 'Input used for this Label component',
+          type: '(p: any) => ReactNode',
+        },
+      ]}
+      return={[
+        { name: 'Label', description: 'Container of Label component' },
+        { name: 'Label.Label', description: 'Text to show as Label' },
+        {
+          name: 'Label.input',
+          description: 'Input used for this Label component',
+        },
+      ]}
       types={[]}
       anatomy={`
-import { createLabel } from "@crossed/primitive";
+    import { createLabel } from "@crossed/primitive";
 
-const Label = createLabel({
-  Root,
-  Text,
-})
+    const Label = createLabel({
+      Root,
+      Input,
+      Label,
+    })
 
-<Label>
-  <Label.Text />
-  <Label.Input />
-</Label>`}
+    // Either use it in a composed way 
+    <Label>
+      <Label.Label>Votre Label</Label.Label>
+      <Label.Input />
+    </Label>
+    
+    // or in one line 
+    <Label props={props}/>
+    `}
       example={`
-import { createLabel } from "@crossed/primitive";
+    import { createLabel } from "@crossed/primitive";
 
-const Input = createLabel({
-  Root,
-  Text,
-});
+    const Input = createLabel({
+      Root,
+      Input,
+      Label,
+    });
 
-`}
+    `}
     />
   );
 }
