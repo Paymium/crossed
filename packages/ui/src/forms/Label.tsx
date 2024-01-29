@@ -5,29 +5,43 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-// import { createLabel } from '@crossed/primitive';
-// import { Text } from 'react-native';
-// import { Box } from '../layout/Box';
-// import type { GetProps } from '@crossed/styled';
-// import { styled } from '@crossed/styled';
+import { createInput } from '@crossed/primitive/src/LabelV2';
+import { Box } from '../layout';
+import { Text } from '../typography';
 
-// const LabelTextFrame = styled(Text, {
-//   'className': ['font-medium dark:text-neutral-500', 'text-neutral-800'],
-// });
+const Label = ({ children, id }: { children?: any; id?: string }) => {
+  return <Text id={id}>{children}</Text>;
+};
 
-// export type LabelTextFrameProps = GetProps<typeof LabelTextFrame>;
+const Input = ({ ariaLabelledby, ...props }: { ariaLabelledby?: string }) => {
+  return <input type="text" aria-labelledby={ariaLabelledby} {...props} />;
+};
 
-// const Label = createLabel({
-//   Root: Box,
-//   Text: LabelTextFrame,
-// });
+const Root = ({
+  children,
+  role,
+  id,
+  label,
+}: {
+  children?: any;
+  role?: string;
+  id?: string;
+  label?: string;
+}) => {
+  return (
+    <Box accessibilityRole={role}>
+      {children ?? (
+        <>
+          <Label id={id}>{label}</Label>
+          <Input ariaLabelledby={id} />
+        </>
+      )}
+    </Box>
+  );
+};
 
-// const { Text: LabelText, Input: LabelInput } = Label;
-
-// export type LabelProps = GetProps<typeof Label>;
-// export type LabelTextProps = GetProps<typeof LabelText>;
-// export type LabelInputProps = GetProps<typeof LabelInput>;
-
-// export { Label, LabelText, LabelInput };
-
-export {};
+export const LabelV3 = createInput({
+  Root,
+  Input,
+  Label,
+});
