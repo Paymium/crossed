@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import { withStaticProperties } from '@crossed/core';
 import { createLabel } from './createLabel';
 import { createRoot } from './createRoot';
@@ -24,7 +31,7 @@ export const createInput = <
   const newLabel = createLabel(Label);
   const newInput = createInputInput(Input);
   newLabel.id = 'label.label';
-  newInput.id = 'label.input';
+  // newInput.id = 'label.input';
 
   return withStaticProperties(newRoot, { Input: newInput, Label: newLabel });
 };

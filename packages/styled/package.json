@@ -16,6 +16,7 @@
       "types": "./lib/typescript/index.d.ts"
     },
     "./styled": {
+      "react-native": "./src/styled.ts",
       "require": "./lib/commonjs/styled.js",
       "import": "./lib/module/styled.js",
       "default": "./lib/module/styled.js",
@@ -36,10 +37,18 @@
   },
   "typesVersions": {
     "*": {
-      "index": ["lib/typescript/index.d.ts"],
-      "styled": ["lib/typescript/styled.d.ts"],
-      "unistyles": ["lib/typescript/unistyles.d.ts"],
-      "registry": ["lib/typescript/Registry.d.ts"]
+      "index": [
+        "lib/typescript/index.d.ts"
+      ],
+      "styled": [
+        "lib/typescript/styled.d.ts"
+      ],
+      "unistyles": [
+        "lib/typescript/unistyles.d.ts"
+      ],
+      "registry": [
+        "lib/typescript/Registry.d.ts"
+      ]
     }
   },
   "scripts": {

@@ -5,27 +5,27 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { YBox, Heading, Button, Box, Text } from '@crossed/ui';
-import { styled } from '@crossed/styled';
-import { Text as NText } from 'react-native';
+import { YBox, Button, Box, Text } from '@crossed/ui';
+// import { styled } from '@crossed/styled';
+// import { Text as NText } from 'react-native';
 
-const TextTheme = styled(NText, {
-  'className': ['text-black dark:text-white'],
-  'variants': {
-    color: {
-      green: {
-        className: ['text-green-500'],
-      },
-    },
-  },
-});
+// const TextTheme = styled(NText, {
+//   'className': ['text-black dark:text-white'],
+//   'variants': {
+//     color: {
+//       green: {
+//         className: ['text-green-500'],
+//       },
+//     },
+//   },
+// });
 
 export default function TabOneScreen() {
   return (
     <YBox space="lg" className="px-4">
-      <Heading order={3}>Heading</Heading>
-      <TextTheme color="green">Text</TextTheme>
-      <Button variant="outlined" aria-label="Press" color="blue">
+      {/* <Heading order={3}>Heading</Heading> */}
+      {/* <TextTheme color="green">Text</TextTheme> */}
+      <Button variant="outlined" aria-label="Press" color="red">
         <Button.Text>Press</Button.Text>
       </Button>
       <YBox className="md:flex-row">

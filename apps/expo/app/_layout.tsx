@@ -5,17 +5,18 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { CrossedTheme, useCrossedTheme } from '@crossed/styled';
+import { Registry } from '@crossed/styled/Registry';
+import { CrossedUIProvider } from '@crossed/ui';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from '@react-navigation/native';
+// import {
+//   DarkTheme,
+//   DefaultTheme,
+//   ThemeProvider,
+// } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
-import { PropsWithChildren, useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { useEffect } from 'react';
+// import { useColorScheme } from 'react-native';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -55,24 +56,23 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+  // const colorScheme = useColorScheme();
+  // console.log(CrossedUIProvider);
   return (
-    <CrossedTheme defaultTheme={colorScheme}>
-      <Theme>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-        </Stack>
-      </Theme>
-    </CrossedTheme>
+    <CrossedUIProvider>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+      </Stack>
+    </CrossedUIProvider>
   );
 }
 
-const Theme = ({ children }: PropsWithChildren) => {
-  const { theme } = useCrossedTheme();
-  return (
-    <ThemeProvider value={theme === 'dark' ? DarkTheme : DefaultTheme}>
-      {children}
-    </ThemeProvider>
-  );
-};
+// const Theme = ({ children }: PropsWithChildren) => {
+//   // const { theme } = useCrossedTheme();
+//   return (
+//     <ThemeProvider value={theme === 'dark' ? DarkTheme : DefaultTheme}>
+//       {children}
+//     </ThemeProvider>
+//   );
+// };

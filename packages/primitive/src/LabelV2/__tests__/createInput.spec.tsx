@@ -1,18 +1,25 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import '@testing-library/jest-dom';
 import { createInput } from '../index';
 import { createRoot } from '../createRoot';
 import { createLabel } from '../createLabel';
 import { createInputInput } from '../createInput';
 
-const createRootMocked = createRoot as unknown as jest.Mock<any>;
-const createLabelMocked = createLabel as unknown as jest.Mock<any>;
-const createInputInputMocked = createInputInput as unknown as jest.Mock<any>;
-
 jest.mock('../createRoot');
 jest.mock('../createLabel');
 jest.mock('../createInput');
 
-describe('createButton', () => {
+const createRootMocked = createRoot as unknown as jest.Mock<any>;
+const createLabelMocked = createLabel as unknown as jest.Mock<any>;
+const createInputInputMocked = createInputInput as unknown as jest.Mock<any>;
+
+describe('createLabel', () => {
   beforeEach(() => {
     createRootMocked.mockImplementation((e: any) => e);
     createLabelMocked.mockImplementation((e: any) => e);
@@ -26,9 +33,9 @@ describe('createButton', () => {
   });
 
   test('init', async () => {
-    const Root = (p: any) => <p {...p} />;
+    const Root = (p: any) => <div {...p} />;
     const Input = (p: any) => <p {...p} />;
-    const Label = (p: any) => (<p {...p} />) as any;
+    const Label = (p: any) => (<input {...p} />) as any;
 
     const MyLabel = createInput({
       Root,

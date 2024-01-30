@@ -10,7 +10,7 @@ import { Link, Tabs } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
 
 import Colors from '@/constants/Colors';
-import { Button, UilMoon, XBox, useCrossedTheme } from '@crossed/ui';
+import { XBox } from '@crossed/ui';
 // import { useTheme } from '@react-navigation/native';
 
 /**
@@ -25,7 +25,7 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { theme, setTheme } = useCrossedTheme();
+  // const { theme, setTheme } = useCrossedTheme();
 
   return (
     <Tabs
@@ -52,14 +52,14 @@ export default function TabLayout() {
                   )}
                 </Pressable>
               </Link>
-              <Button
+              {/* <Button
                 onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               >
                 <Button.Element>
                   <UilMoon color="#000" />
                 </Button.Element>
                 <Button.Text>{theme}</Button.Text>
-              </Button>
+              </Button> */}
             </XBox>
           ),
         }}
