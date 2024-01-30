@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import {
   useId,
   type ComponentType,
@@ -62,7 +69,7 @@ export const createRoot = <P extends Record<string, any>>(
     const inputRef = useRef(null);
     return (
       <Provider id={id}>
-        {/* <Comp role="label" id={id} {...(props as any)}/> */}
+        {/* <Comp role="label" id={id} {...(props as any)} /> */}
         <Comp role="label" id={id} {...(props as any)}>
           <>
             <LabelElement onPress={() => inputRef.current?.focus()} />

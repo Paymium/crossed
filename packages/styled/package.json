@@ -46,6 +46,19 @@
       "react-native": "./src/index.ts",
       "types": "./lib/typescript/index.d.ts"
     },
+    "./styled": {
+      "react-native": "./src/styled.ts",
+      "require": "./lib/commonjs/styled.js",
+      "import": "./lib/module/styled.js",
+      "default": "./lib/module/styled.js",
+      "types": "./lib/typescript/styled.d.ts"
+    },
+    "./unistyles": {
+      "require": "./lib/commonjs/unistyles.js",
+      "import": "./lib/module/unistyles.js",
+      "default": "./lib/module/unistyles.js",
+      "types": "./lib/typescript/unistyles.d.ts"
+    },
     "./registry": {
       "require": "./lib/commonjs/Registry.js",
       "import": "./lib/module/Registry.js",
@@ -63,16 +76,28 @@
   },
   "typesVersions": {
     "*": {
-      ".": [
-        "./lib/typescript/index.d.ts"
+      "index": [
+        "lib/typescript/index.d.ts"
+      ],
+      "styled": [
+        "lib/typescript/styled.d.ts"
+      ],
+      "unistyles": [
+        "lib/typescript/unistyles.d.ts"
       ],
       "registry": [
-        "./lib/typescript/Registry.d.ts"
-      ],
-      "plugins": [
-        "./lib/typescript/plugins/index.d.ts"
+        "lib/typescript/Registry.d.ts"
       ]
     }
+  },
+  "scripts": {
+    "clean": "rm -rf lib",
+    "watch": "crossed-build --watch --project-path ./tsconfig.build.json",
+    "build": "crossed-build --project-path ./tsconfig.build.json",
+    "dev:web": "cd example/native && yarn web --clear",
+    "test": "crossed-test",
+    "dev": "ts-node-dev --respawn --transpile-only ./src/cva/index.ts",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@crossed/build": "^0.5.0",
