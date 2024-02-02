@@ -6,7 +6,7 @@
  */
 
 import { Registry } from '@crossed/styled/Registry';
-import { CrossedUIProvider } from '@crossed/ui';
+import { CrossedUIProvider } from '../node_modules/@crossed/ui/src/Provider';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 // import {
 //   DarkTheme,

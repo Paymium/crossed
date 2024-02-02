@@ -63,8 +63,6 @@
   "Example": "Example",
   "Anatomy": "Anatomy",
   "Return": "Return",
-  "Type any code here": "Type any code here"
-  "For add style on server side rendering, you should add registry on server components (nextjs app router)": "For add style on server side rendering, you should add registry on server components (nextjs app router)",
-  "Server side renderer": "Server side renderer",
+  "Type any code here": "Type any code here",
   "Creation primitive Label": "createLabel is a primitive allowing to easily create Label component with accessibility. This primitive use 3 arguments Root component, Label component and Input component. It will add role='label' to root, retrive id of Label component (if set) or give it a new one (if not set) and add aria-labelledby='id' (of Label component)."
 }

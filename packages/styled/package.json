@@ -54,10 +54,10 @@
       "types": "./lib/typescript/styled.d.ts"
     },
     "./unistyles": {
-      "require": "./lib/commonjs/unistyles.js",
-      "import": "./lib/module/unistyles.js",
-      "default": "./lib/module/unistyles.js",
-      "types": "./lib/typescript/unistyles.d.ts"
+      "require": "./lib/commonjs/src/unistyles.js",
+      "import": "./lib/module/src/unistyles.js",
+      "default": "./lib/module/src/unistyles.js",
+      "types": "./lib/typescript/src/unistyles.d.ts"
     },
     "./registry": {
       "require": "./lib/commonjs/Registry.js",
