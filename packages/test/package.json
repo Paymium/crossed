@@ -7,6 +7,12 @@
   "source": "src/index.ts",
   "typings": "src/index.ts",
   "private": true,
+  "keywords": [
+    "test",
+    "testing",
+    "unit test",
+    "Jest"
+  ],
   "bin": {
     "crossed-test": "./src/bin.js"
   },

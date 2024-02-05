@@ -8,6 +8,26 @@
   "react-native": "src/index",
   "source": "src/index",
   "typings": "lib/typescript/index.d.ts",
+  "keywords": [
+    "React Native",
+    "Next.js",
+    "Expo",
+    "React",
+    "packager",
+    "styling",
+    "css-in-js",
+    "typescript",
+    "javascript",
+    "components",
+    "android",
+    "ios",
+    "theme",
+    "responsive-styling",
+    "universal",
+    "ui",
+    "theming",
+    "generator"
+  ],
   "exports": {
     ".": {
       "require": "./lib/commonjs/index.js",
@@ -36,10 +56,18 @@
   },
   "typesVersions": {
     "*": {
-      "index": ["lib/typescript/index.d.ts"],
-      "styled": ["lib/typescript/styled.d.ts"],
-      "unistyles": ["lib/typescript/unistyles.d.ts"],
-      "registry": ["lib/typescript/Registry.d.ts"]
+      "index": [
+        "lib/typescript/index.d.ts"
+      ],
+      "styled": [
+        "lib/typescript/styled.d.ts"
+      ],
+      "unistyles": [
+        "lib/typescript/unistyles.d.ts"
+      ],
+      "registry": [
+        "lib/typescript/Registry.d.ts"
+      ]
     }
   },
   "scripts": {

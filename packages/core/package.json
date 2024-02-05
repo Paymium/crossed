@@ -8,6 +8,19 @@
   "react-native": "src/index",
   "source": "src/index",
   "typings": "lib/typescript/index.d.ts",
+  "keywords": [
+    "React Native",
+    "React",
+    "Next.js",
+    "Expo",
+    "packager",
+    "typescript",
+    "javascript",
+    "android",
+    "ios",
+    "function",
+    "tools"
+  ],
   "scripts": {
     "clean": "rm -rf lib",
     "watch": "crossed-build --watch --project-path ./tsconfig.build.json",

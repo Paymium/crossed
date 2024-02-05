@@ -1,6 +1,20 @@
 {
   "name": "@crossed/build",
   "version": "0.5.0",
+  "keywords": [
+    "React Native",
+    "React",
+    "Next.js",
+    "Expo",
+    "packager",
+    "typescript",
+    "javascript",
+    "android",
+    "ios",
+    "commonjs",
+    "module",
+    "build"
+  ],
   "bin": {
     "crossed-build": "crossed-build.js"
   },

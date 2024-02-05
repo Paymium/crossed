@@ -8,6 +8,20 @@
   "react-native": "src/index",
   "source": "src/index",
   "typings": "lib/typescript/index.d.ts",
+  "keywords": [
+    "React Native",
+    "React",
+    "Next.js",
+    "Expo",
+    "packager",
+    "typescript",
+    "javascript",
+    "android",
+    "ios",
+    "function",
+    "HOC",
+    "accessibility"
+  ],
   "scripts": {
     "release": "release-it",
     "clean": "rm -rf lib",
