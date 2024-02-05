@@ -13,7 +13,7 @@ pnpm i @crossed/styled react-native-unistyles
 
 ## Configuration
 
-finish installation and configure react-native-unistyles, need elp to configure react-native-unistyles ? look [here](https://reactnativeunistyles.vercel.app/start/setup/#3-configure-unistyles-with-unistylesregistry)
+finish installation and configure react-native-unistyles, need help to configure react-native-unistyles ? look [here](https://reactnativeunistyles.vercel.app/start/setup/#3-configure-unistyles-with-unistylesregistry)
 
 ## Getting Strated
 
