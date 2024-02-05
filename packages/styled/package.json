@@ -42,6 +42,26 @@
       "registry": ["lib/typescript/Registry.d.ts"]
     }
   },
+  "keywords": [
+    "React Native",
+    "Next.js",
+    "Expo",
+    "React",
+    "packager",
+    "styling",
+    "css-in-js",
+    "typescript",
+    "javascript",
+    "components",
+    "android",
+    "ios",
+    "theme",
+    "responsive-styling",
+    "universal",
+    "ui",
+    "theming",
+    "generator"
+  ],
   "scripts": {
     "clean": "rm -rf lib",
     "watch": "crossed-build --watch --project-path ./tsconfig.build.json",

@@ -10,6 +10,12 @@
   "bin": {
     "crossed-test": "./src/bin.js"
   },
+  "keywords": [
+    "test",
+    "testing",
+    "unit test",
+    "Jest"
+  ],
   "scripts": {},
   "devDependencies": {
     "@jest/types": "28.1.1",
