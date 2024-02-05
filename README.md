@@ -29,17 +29,13 @@ See [documentation](https://paymium.github.io/crossed).
 ### Inspiration
 
 - [tamagui](https://tamagui.dev/)
-- [gluestack-ui](https://ui.gluestack.io/)
-- [gluestack-style](https://style.gluestack.io/)
-- [tailwindcss](https://tailwindcss.com/)
-- [cva](https://cva.style/docs)
 
 ## Contribution
 
 ### Environment
 
 pnpm version 7
-node 18.16
+node 20
 
 ### Command
 

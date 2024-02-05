@@ -14,4 +14,4 @@ pnpm i @crossed/core
 
 ## Contribution
 
-Want to Contribute to our project ? Check our [contribution guide line](link)
+Want to Contribute to our project ? Check our [contribution guide line](../../CONTRIBUTING.MD)

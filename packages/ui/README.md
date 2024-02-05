@@ -34,4 +34,4 @@ Go check our [documentation](https://paymium.github.io/crossed/ui/Card) to find 
 
 ## Contribution
 
-Want to Contribute to our project ? Check our [contribution guide line](link)
+Want to Contribute to our project ? Check our [contribution guide line](../../CONTRIBUTING.MD)
