@@ -6,9 +6,9 @@
  */
 
 'use client';
-import { UnistylesRuntime, useStyles } from '@crossed/styled';
-import { Sun } from '@crossed/unicons/Sun';
-import { Moon } from '@crossed/unicons/Moon';
+// import { UnistylesRuntime } from '@crossed/styled';
+// import { Sun } from '@crossed/unicons/Sun';
+// import { Moon } from '@crossed/unicons/Moon';
 import { Button } from '@crossed/ui';
 import { VisibilityHidden } from '@crossed/primitive';
 import { useCallback } from 'react';
@@ -29,21 +29,21 @@ import { useCallback } from 'react';
 // });
 
 export const ChangeTheme = () => {
-  useStyles();
   const onPress = useCallback(() => {
-    UnistylesRuntime.setTheme(
-      UnistylesRuntime.themeName === 'dark' ? 'light' : 'dark'
-    );
+    // UnistylesRuntime.setTheme(
+    //   UnistylesRuntime.themeName === 'dark' ? 'light' : 'dark'
+    // );
   }, []);
   return (
     <Button onPress={onPress} variant="ghost">
       <VisibilityHidden hidden>
         <Button.Text>
-          Change to {UnistylesRuntime.themeName === 'light' ? 'dark' : 'light'}{' '}
+          Change to
+          {/* {UnistylesRuntime.themeName === 'light' ? 'dark' : 'light'}{' '} */}
           mode
         </Button.Text>
       </VisibilityHidden>
-      {UnistylesRuntime.themeName === 'light' ? <Moon /> : <Sun />}
+      {/* {UnistylesRuntime.themeName === 'light' ? <Moon /> : <Sun />} */}
     </Button>
   );
 };

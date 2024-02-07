@@ -5,17 +5,20 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { styled, withDefaultProps } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { Text, TextProps } from './Text';
 import { forwardRef, memo } from 'react';
 import { XBox, XBoxProps } from '../layout/XBox';
 import { YBox } from '../layout/YBox';
+import { withDefaultProps } from '@crossed/core';
 
-export const Ul = styled(withDefaultProps(YBox, { role: 'list' }), (t) => ({
-  marginTop: t.space.xl,
+export const Ul = withStyle(withDefaultProps(YBox, { role: 'list' }), (t) => ({
+  base: {
+    marginTop: t.space.xl,
+  },
 }));
 
-export const Li = styled(
+export const Li = withStyle(
   memo(
     forwardRef(({ children, ...props }: Omit<XBoxProps, 'role'>, ref: any) => (
       <XBox {...props} ref={ref} role="listitem">
@@ -24,10 +27,10 @@ export const Li = styled(
       </XBox>
     ))
   ),
-  (t) => ({ gap: t.space.md, marginBottom: t.space.md })
+  (t) => ({ base: { gap: t.space.md, marginBottom: t.space.md } })
 );
 
-export const Disc = styled(
+export const Disc = withStyle(
   memo(
     forwardRef((props: Omit<TextProps, 'children'>, ref: any) => (
       <Text {...props} ref={ref}>
@@ -35,5 +38,5 @@ export const Disc = styled(
       </Text>
     ))
   ),
-  { fontSize: 9 }
+  { base: { fontSize: 9 } }
 );

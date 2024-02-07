@@ -152,4 +152,4 @@ export const darkTheme = {
   size,
   utils,
   fontSize,
-} satisfies Theme;
+} as const;

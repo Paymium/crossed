@@ -8,7 +8,7 @@
 'use client';
 
 import { Text as TextNative } from 'react-native';
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import type { GetProps } from '@crossed/core';
 
 export const textAlign = {
@@ -20,9 +20,8 @@ export const textAlign = {
   right: { textAlign: 'right' },
 } as const;
 
-export const Text = styled(
-  TextNative,
-  (t) => ({
+export const Text = withStyle(TextNative, (t) => ({
+  base: {
     fontFamily: t.fontFamily,
     variants: {
       textAlign,
@@ -52,8 +51,7 @@ export const Text = styled(
       },
       color: t.utils.createVariants('color', t),
     },
-  }),
-  { name: 'Text' }
-);
+  },
+}));
 
 export type TextProps = GetProps<typeof Text>;

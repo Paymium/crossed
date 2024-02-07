@@ -18,7 +18,7 @@ import {
 import { useCallback, type PropsWithChildren } from 'react';
 import { Button, type ButtonProps } from '../forms/Button';
 import { XBox } from '../layout/XBox';
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { YBox, YBoxProps } from '../layout/YBox';
 
 type TabsContext = Pick<ButtonProps, 'variant' | 'size'> & {
@@ -66,10 +66,12 @@ const TabsRoot = ({
 };
 
 const List = withDefaultProps(
-  styled(XBox, (t) => ({
-    borderBottomWidth: 1,
-    borderColor: t.colors.neutral,
-    paddingBottom: t.space.xs,
+  withStyle(XBox, (t) => ({
+    base: {
+      borderBottomWidth: 1,
+      borderColor: t.colors.neutral,
+      paddingBottom: t.space.xs,
+    },
   })),
   { space: 'xs' }
 );

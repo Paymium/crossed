@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import {
   useMemo,
   type HTMLProps,
@@ -15,17 +15,19 @@ import {
 } from 'react';
 import { Text, textAlign } from '../typography/Text';
 
-export const Table = styled(
+export const Table = withStyle(
   (props: HTMLProps<HTMLTableElement>) => <table {...props} />,
   () => ({
-    width: '100%',
-    borderCollapse: 'collapse',
-    borderWidth: 0,
-    tableLayout: 'fixed',
+    base: {
+      width: '100%',
+      borderCollapse: 'collapse',
+      borderWidth: 0,
+      tableLayout: 'fixed',
+    },
   })
 );
 
-export const THead = styled(
+export const THead = withStyle(
   ({ children, ...props }: HTMLProps<HTMLTableSectionElement>) => {
     const newChildren = useMemo(
       () =>
@@ -43,17 +45,19 @@ export const THead = styled(
     return <thead {...props}>{newChildren}</thead>;
   },
   (t) => ({
-    borderWidth: 0,
-    borderBottomWidth: 1,
-    borderStyle: 'solid',
-    borderColor: t.colors.neutral,
-    backgroundColor: t.utils.hexToRgbA(
-      t.utils.shadeColor(t.colors.neutral, 5),
-      0.5
-    ),
+    base: {
+      borderWidth: 0,
+      borderBottomWidth: 1,
+      borderStyle: 'solid',
+      borderColor: t.colors.neutral,
+      backgroundColor: t.utils.hexToRgbA(
+        t.utils.shadeColor(t.colors.neutral, 5),
+        0.5
+      ),
+    },
   })
 );
-export const TBody = styled(
+export const TBody = withStyle(
   ({ children, ...props }: HTMLProps<HTMLTableSectionElement>) => {
     const newChild =
       Array.isArray(children) && children.length > 0 ? (
@@ -75,30 +79,34 @@ export const TBody = styled(
       );
     return <tbody {...props}>{newChild}</tbody>;
   },
-  {}
+  { base: {} }
 );
-export const Tr = styled(
+export const Tr = withStyle(
   (props: HTMLProps<HTMLTableRowElement>) => <tr {...props} />,
   (t) => ({
-    borderWidth: 0,
-    borderTopWidth: 1,
-    borderStyle: 'solid',
-    borderColor: t.colors.neutral,
+    base: {
+      borderWidth: 0,
+      borderTopWidth: 1,
+      borderStyle: 'solid',
+      borderColor: t.colors.neutral,
+    },
   })
 );
 
 (Tr as any).id = 'Table.Tr';
 
-export const Td = styled(
+export const Td = withStyle(
   (props: HTMLProps<HTMLTableCellElement>) => <td {...props} />,
   (t) => ({
-    padding: t.space.sm,
-    variants: {
-      textAlign,
+    base: {
+      padding: t.space.sm,
+      variants: {
+        textAlign,
+      },
     },
   })
 );
-export const Th = styled(
+export const Th = withStyle(
   (props: HTMLProps<HTMLTableCellElement>) => <th {...props} />,
-  (t) => ({ textAlign: 'left', padding: t.space.sm })
+  (t) => ({ base: { textAlign: 'left', padding: t.space.sm } })
 );

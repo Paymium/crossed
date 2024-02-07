@@ -24,7 +24,7 @@
 // import { Pressable, TextInput } from 'react-native';
 
 import { createInput } from '@crossed/primitive';
-import { UnistylesRuntime, styled, useStyles } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { TextInput, TextInputProps } from 'react-native';
 import { YBox } from '../layout/YBox';
 import { XBox, XBoxProps } from '../layout/XBox';
@@ -254,17 +254,19 @@ import { forwardRef } from 'react';
 //   Content: InputContent,
 // });
 
-const Addon = styled(YBox, {});
-const Element = styled(YBox, {
-  position: 'absolute',
-  right: 0,
-  top: 0,
-  bottom: 0,
-  color: 'white',
-  alignItems: 'center',
-  justifyContent: 'center',
+const Addon = withStyle(YBox, { base: {} });
+const Element = withStyle(YBox, {
+  base: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    color: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
-const Group = styled(
+const Group = withStyle(
   (props: XBoxProps) => {
     // const toto = props.children.reduce((acc, e) => {
     //   if (e.type.displayName === 'Input.Element') {
@@ -276,29 +278,31 @@ const Group = styled(
     return <XBox {...props} />;
   },
   () => ({
-    // backgroundColor: t.utils.shadeColor(t.colors.background, 50),
-    // borderWidth: 1,
-    // borderColor: t.utils.shadeColor(
-    //   t.colors.neutral,
-    //   UnistylesRuntime.themeName === 'dark' ? 100 : -100
-    // ),
-    // borderRadius: 4,
-    // paddingVertical: t.space.xs,
-    // paddingHorizontal: t.space.sm,
+    base: {
+      // backgroundColor: t.utils.shadeColor(t.colors.background, 50),
+      // borderWidth: 1,
+      // borderColor: t.utils.shadeColor(
+      //   t.colors.neutral,
+      //   UnistylesRuntime.themeName === 'dark' ? 100 : -100
+      // ),
+      // borderRadius: 4,
+      // paddingVertical: t.space.xs,
+      // paddingHorizontal: t.space.sm,
+    },
   })
 );
 
-const InputRoot = styled(
+const InputRoot = withStyle(
   forwardRef((props: TextInputProps, ref: any) => {
-    const { theme } = useStyles();
+    // const { theme } = useStyle();
     // const { toto } = useInputProvider();
     // console.log(toto, props.style);
     return (
       <TextInput
-        placeholderTextColor={theme.utils.shadeColor(
-          theme.colors.neutral,
-          UnistylesRuntime.themeName === 'dark' ? 100 : -100
-        )}
+        // placeholderTextColor={theme.utils.shadeColor(
+        //   theme.colors.neutral,
+        //   UnistylesRuntime.themeName === 'dark' ? 100 : -100
+        // )}
         {...props}
         style={
           [
@@ -311,17 +315,19 @@ const InputRoot = styled(
     );
   }),
   (t) => ({
-    color: t.colors.default,
-    backgroundColor: t.utils.shadeColor(t.colors.background, 50),
-    borderWidth: 1,
-    borderColor: t.utils.shadeColor(
-      t.colors.neutral,
-      UnistylesRuntime.themeName === 'dark' ? 100 : -100
-    ),
-    borderRadius: 4,
-    paddingVertical: t.space.xs,
-    paddingHorizontal: t.space.sm,
-    textAlign: 'right',
+    base: {
+      color: t.colors.default,
+      backgroundColor: t.utils.shadeColor(t.colors.background, 50),
+      borderWidth: 1,
+      // borderColor: t.utils.shadeColor(
+      //   t.colors.neutral,
+      //   UnistylesRuntime.themeName === 'dark' ? 100 : -100
+      // ),
+      borderRadius: 4,
+      paddingVertical: t.space.xs,
+      paddingHorizontal: t.space.sm,
+      textAlign: 'right',
+    },
   })
 );
 

@@ -40,7 +40,7 @@ import {
   useUncontrolled,
   withStaticProperties,
 } from '@crossed/core';
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import {
   useCallback,
   memo,
@@ -525,7 +525,7 @@ const findChild = (
       }, undefined);
 };
 
-const SelectRoot = styled(
+const SelectRoot = withStyle(
   memo(
     <V extends string | number>({
       value: valueProps,
@@ -563,8 +563,10 @@ const SelectRoot = styled(
     }
   ),
   {
-    position: 'relative',
-    width: 'auto',
+    base: {
+      position: 'relative',
+      width: 'auto',
+    },
   }
 );
 
@@ -596,7 +598,7 @@ const Trigger = withStaticProperties(
   { Text: Button.Text }
 );
 
-const Content = styled(
+const Content = withStyle(
   (props: MenuListProps) => {
     const all = useSelectProvider();
     const { top, height, left } = (all.triggerLayout.current as any) || {
@@ -624,14 +626,16 @@ const Content = styled(
     );
   },
   (t) => ({
-    position: 'absolute',
-    top: 15 + 40,
-    left: 1253,
-    maxWidth: 'auto',
-    padding: t.space.xs,
-    zIndex: 100,
-    backgroundColor: t.utils.shadeColor(t.colors.neutral, -25),
-    borderRadius: 4,
+    base: {
+      position: 'absolute',
+      top: 15 + 40,
+      left: 1253,
+      maxWidth: 'auto',
+      padding: t.space.xs,
+      zIndex: 100,
+      backgroundColor: t.utils.shadeColor(t.colors.neutral, -25),
+      borderRadius: 4,
+    },
   })
 );
 
@@ -639,7 +643,7 @@ const Content = styled(
 Content.id = 'Select.Content';
 Content.displayName = 'Select.Content';
 
-const Option = styled(
+const Option = withStyle(
   ({ value, ...props }: MenuItemProps & { value: string | number }) => {
     const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
     return (
@@ -653,7 +657,7 @@ const Option = styled(
       />
     );
   },
-  { justifyContent: 'flex-start' }
+  { base: { justifyContent: 'flex-start' } }
 );
 
 // @ts-expect-error because id not exist in type

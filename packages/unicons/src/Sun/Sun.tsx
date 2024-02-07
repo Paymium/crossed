@@ -5,11 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useStyles } from '@crossed/styled/unistyles';
+import { useStyle } from '@crossed/styled';
 import type { IconProps } from '../types';
 
 export const Sun = ({ Svg, Path, Circle, color, size = 25 }: IconProps) => {
-  const { theme } = useStyles();
+  const { theme } = useStyle();
   return (
     <Svg
       width={size}

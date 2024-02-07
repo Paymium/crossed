@@ -6,11 +6,11 @@
  */
 
 'use client';
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { HtmlHTMLAttributes, memo } from 'react';
 
-export const Body = styled(
+export const Body = withStyle(
   memo((props: HtmlHTMLAttributes<HTMLBodyElement>) => <body {...props} />),
-  (t) => ({ backgroundColor: t?.colors?.background }),
-  { name: 'Body', debug: true }
+  (t) => ({ base: { backgroundColor: t?.colors?.background } })
+  // { name: 'Body', debug: true }
 );

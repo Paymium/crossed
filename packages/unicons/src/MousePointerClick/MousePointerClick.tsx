@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useStyles } from '@crossed/styled/unistyles';
+import { useStyle } from '@crossed/styled';
 import type { IconProps } from '../types';
 
 export const MousePointerClick = ({
@@ -14,7 +14,7 @@ export const MousePointerClick = ({
   color,
   size = 24,
 }: IconProps) => {
-  const { theme } = useStyles();
+  const { theme } = useStyle();
   return (
     <Svg
       width={size}

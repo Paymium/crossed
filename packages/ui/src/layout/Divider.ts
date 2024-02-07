@@ -8,22 +8,24 @@
 'use client';
 
 import { View } from 'react-native';
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { withDefaultProps } from '@crossed/core';
 
 export const Divider = withDefaultProps(
-  styled(View, (t) => ({
-    borderWidth: 0,
-    borderColor: t.colors.neutral,
-    variants: {
-      direction: {
-        vertical: {
-          borderLeftWidth: 1,
-          height: '100%',
-        },
-        horizontal: {
-          borderTopWidth: 1,
-          width: '100%',
+  withStyle(View, (t) => ({
+    base: {
+      borderWidth: 0,
+      borderColor: t.colors.neutral,
+      variants: {
+        direction: {
+          vertical: {
+            borderLeftWidth: 1,
+            height: '100%',
+          },
+          horizontal: {
+            borderTopWidth: 1,
+            width: '100%',
+          },
         },
       },
     },

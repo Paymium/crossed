@@ -8,12 +8,7 @@
 'use client';
 
 import '@/types/unistyles';
-import {
-  UnistylesRuntime,
-  createStyleSheet,
-  styled,
-  useStyles,
-} from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { ChangeTheme } from './ChangeTheme';
 import { XBox } from '@crossed/ui';
 import { Logo } from './Logo';
@@ -47,17 +42,16 @@ const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
 ];
 
 export const NavBar = memo(() => {
-  const { styles } = useStyles(styleSheet);
   const pathname = usePathname();
   return (
     <Nav role="navigation">
-      <XBox style={styles.element}>
-        <LinkNav href="/" style={styles.logo} size="lg">
+      <El>
+        <LinkLogo href="/" size="lg">
           <Logo />
           Crossed
-        </LinkNav>
-      </XBox>
-      <XBox style={styles.element}>
+        </LinkLogo>
+      </El>
+      <El>
         {navLinks.map(({ href, title, activeFor }) => (
           <LinkNav
             href={href}
@@ -69,53 +63,56 @@ export const NavBar = memo(() => {
         ))}
         <ChangeLang />
         <ChangeTheme />
-      </XBox>
+      </El>
     </Nav>
   );
 });
 
 const LinkNav = withDefaultProps(
-  styled(
+  withStyle(
     Link,
     (t) => ({
-      'color': t.utils.shadeColor(
-        t.colors.default,
-        UnistylesRuntime.themeName === 'dark' ? -90 : 90
-      ),
-      'hover:': {
+      'base': {
+        // 'color': t.utils.shadeColor(
+        //   t.colors.default,
+        //   UnistylesRuntime.themeName === 'dark' ? -90 : 90
+        // ),
+        // 'variants': {
+        //   active: { true: { color: t.colors.default }, false: {} },
+        // },
+      },
+      ':hover': {
         textDecorationLine: 'none',
         color: t.colors.default,
       },
-      'active:': {
+      ':active': {
         color: t.colors.default,
       },
-      // 'variants': {
-      //   active: { true: { color: t.colors.default }, false: {} },
-      // },
-    }),
-    { name: 'LinkNav' }
+    })
+    // { name: 'LinkNav' }
   ),
   { size: 'md' }
 );
 
-const Nav = styled(XBox, (t) => ({
-  backgroundColor: t.colors.backgroundStrong,
-  padding: 15,
-  justifyContent: 'space-between',
-  borderBottomWidth: 1,
-  borderColor: t.colors.neutral,
-  alignItems: 'center',
+const LinkLogo = withStyle(LinkNav, (theme) => ({
+  base: { alignItems: 'center', gap: theme.space.sm, display: 'flex' },
 }));
 
-const styleSheet = createStyleSheet((theme) => ({
-  element: {
-    width: 'auto',
+const Nav = withStyle(XBox, (t) => ({
+  base: {
+    backgroundColor: t.colors.backgroundStrong,
+    padding: 15,
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: t.colors.neutral,
     alignItems: 'center',
-    gap: theme.space.md,
   },
-  logo: {
+}));
+
+const El = withStyle(XBox, (t) => ({
+  base: {
     alignItems: 'center',
-    gap: theme.space.sm,
+    gap: t.space.sm,
     display: 'flex',
   },
 }));

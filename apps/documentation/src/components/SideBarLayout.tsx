@@ -9,49 +9,56 @@
 import '@/types/unistyles';
 import { MenuList, XBox, YBox } from '@crossed/ui';
 import { PropsWithChildren } from 'react';
-import { createStyleSheet, mq, styled, useStyles } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
+import mq from '@crossed/styled/mq';
 import { usePathname, useRouter } from 'next/navigation';
 import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
 
 const Menu = withDefaultProps(
-  styled(MenuList, () => ({
-    paddingHorizontal: 20,
-    alignSelf: 'baseline',
-    display: { xs: 'none', sm: 'none', md: 'flex' },
+  withStyle(MenuList, () => ({
+    base: {
+      paddingHorizontal: 20,
+      alignSelf: 'baseline',
+      display: { xs: 'none', sm: 'none', md: 'flex' },
+    },
   })),
   { space: 'xs', size: 'xs' }
 );
-const Container = styled(XBox, {
-  width: '100%',
-  justifyContent: 'center',
-  paddingVertical: 15,
-  minHeight: '95%',
-  maxWidth: {
-    [mq.only.width(undefined, 'md')]: '100%',
-    [mq.only.width('md', 'lg')]: 768,
-    [mq.only.width('lg', 'xl')]: 900,
-    [mq.only.width('xl')]: 1200,
+const Container = withStyle(XBox, {
+  base: {
+    width: '100%',
+    justifyContent: 'center',
+    paddingVertical: 15,
+    minHeight: '95%',
+    [mq.width(undefined, 'md')]: { maxWidth: '100%' },
+    [mq.width('md', 'lg')]: { maxWidth: 768 },
+    [mq.width('lg', 'xl')]: { maxWidth: 900 },
+    [mq.width('xl')]: { maxWidth: 1200 },
   },
 });
-const Center = styled(YBox, (t) => ({
-  flex: 1,
-  borderLeftWidth: 1,
-  borderColor: t.colors.neutral,
-  minHeight: '100%',
+const Center = withStyle(YBox, (t) => ({
+  base: {
+    flex: 1,
+    borderLeftWidth: 1,
+    borderColor: t.colors.neutral,
+    minHeight: '100%',
+  },
 }));
 
 const Li = withDefaultProps(
-  styled(YBox, (t) => ({
-    alignItems: 'stretch',
-    variants: {
-      label: {
-        true: {
-          marginTop: t.space.xl,
-          borderBottomWidth: 1,
-          borderColor: t.colors.neutral,
+  withStyle(YBox, (t) => ({
+    base: {
+      alignItems: 'stretch',
+      variants: {
+        label: {
+          true: {
+            marginTop: t.space.xl,
+            borderBottomWidth: 1,
+            borderColor: t.colors.neutral,
+          },
+          false: {},
         },
-        false: {},
       },
     },
   })),
@@ -64,7 +71,6 @@ export function SideBarLayout({
   children,
   menus,
 }: PropsWithChildren<{ menus: Nav[] }>) {
-  const { styles } = useStyles(styleSheet);
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
@@ -88,7 +94,7 @@ export function SideBarLayout({
                     e.preventDefault();
                     router.push(href);
                   }}
-                  style={styles.leftItem}
+                  style={{ justifyContent: 'flex-end' }}
                 >
                   <MenuList.Title
                     weight={href === pathname ? 'semibold' : undefined}
@@ -110,7 +116,3 @@ export function SideBarLayout({
     </Container>
   );
 }
-
-const styleSheet = createStyleSheet(() => ({
-  leftItem: { justifyContent: 'flex-end' },
-}));

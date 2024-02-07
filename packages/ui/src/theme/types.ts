@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { UnistylesThemes } from '@crossed/styled';
+import type { CrossedstyleTheme } from '@crossed/styled';
 
 export type Entries<T> = {
   [K in keyof T]: [K, T[K]];
@@ -95,7 +95,7 @@ export type Theme = {
     };
   };
 };
-export type Themes = UnistylesThemes & {
+export type Themes = CrossedstyleTheme & {
   light: Theme;
   dark: Theme;
   [key: string]: Theme;

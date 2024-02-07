@@ -7,7 +7,7 @@
 
 'use client';
 
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { Text, TextProps } from './Text';
 import { withDefaultProps } from '@crossed/core';
 
@@ -21,7 +21,9 @@ export const H1 = withDefaultProps<HeadingProps>(Text, {
 });
 
 export const H2 = withDefaultProps<HeadingProps>(
-  styled(Text, (t) => ({ marginTop: t.space.xl, marginBottom: t.space.md })),
+  withStyle(Text, (t) => ({
+    base: { marginTop: t.space.xl, marginBottom: t.space.md },
+  })),
   {
     'role': 'heading',
     'aria-level': 2,
@@ -36,7 +38,7 @@ export const H3 = withDefaultProps<HeadingProps>(Text, {
   'size': '3xl',
 });
 export const H4 = withDefaultProps<HeadingProps>(
-  styled(Text, { marginTop: 20 }),
+  withStyle(Text, { base: { marginTop: 20 } }),
   {
     'role': 'heading',
     'aria-level': 4,

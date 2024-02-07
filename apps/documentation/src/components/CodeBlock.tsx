@@ -7,52 +7,62 @@
 
 'use client';
 
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { Alert, Center, Text, XBox, YBox } from '@crossed/ui';
 import { themes } from 'prism-react-renderer';
 import { PropsWithChildren, ReactNode, useCallback } from 'react';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
-const StyledLiveEditor = styled(LiveEditor, {
-  width: '100%',
-  borderRadius: 4,
-  fontFamily:
-    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+const StyledLiveEditor = withStyle(LiveEditor, {
+  base: {
+    width: '100%',
+    borderRadius: 4,
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+  },
 });
 
-const RenderPreview = styled(Center, (t) => ({
-  padding: t.space.md,
-  alignItems: 'stretch',
+const RenderPreview = withStyle(Center, (t) => ({
+  base: {
+    padding: t.space.md,
+    alignItems: 'stretch',
+  },
 }));
 
-const ContainerPreview = styled(XBox, (t) => ({
-  borderWidth: 1,
-  borderColor: t.colors.neutral,
-  borderStyle: 'solid',
-  borderRadius: 4,
+const ContainerPreview = withStyle(XBox, (t) => ({
+  base: {
+    borderWidth: 1,
+    borderColor: t.colors.neutral,
+    borderStyle: 'solid',
+    borderRadius: 4,
+  },
 }));
-const ContainerVariants = styled(YBox, (t) => ({
-  borderLeftWidth: 1,
-  borderColor: t.colors.neutral,
-  borderStyle: 'solid',
-  padding: t.space.md,
+const ContainerVariants = withStyle(YBox, (t) => ({
+  base: {
+    borderLeftWidth: 1,
+    borderColor: t.colors.neutral,
+    borderStyle: 'solid',
+    padding: t.space.md,
+  },
 }));
 
-const Pre = styled(Text, (t) => ({
-  backgroundColor: themes.dracula.plain.backgroundColor,
-  width: '100%',
-  padding: t.space.md,
-  boxSizing: 'border-box',
-  margin: 0,
-  borderTopLeftRadius: 4,
-  borderTopRightRadius: 4,
-  borderTopWidth: 0,
-  borderLeftWidth: 0,
-  borderRightWidth: 0,
-  borderBottomWidth: 1,
-  borderColor: t.colors.neutral,
-  borderStyle: 'solid',
-  color: t.colors.white,
+const Pre = withStyle(Text, (t) => ({
+  base: {
+    backgroundColor: themes.dracula.plain.backgroundColor,
+    width: '100%',
+    padding: t.space.md,
+    boxSizing: 'border-box',
+    margin: 0,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderBottomWidth: 1,
+    borderColor: t.colors.neutral,
+    borderStyle: 'solid',
+    color: t.colors.white,
+  },
 }));
 
 export const CodeBlock = ({

@@ -5,10 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import 'react-native-unistyles';
-
-export { styled } from './styled';
-export { parseStyle } from './parseStyle';
-export * from './unistyles';
-export { Registry } from './Registry';
-export * from '@crossed/core';
+export { useStyle } from './useStyle';
+export { createStyle } from './creatStyle';
+export { withStyle } from './withStyle';
+export { default as Registry } from './Registry';
+export type * from './types';

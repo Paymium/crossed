@@ -7,19 +7,16 @@
 
 import { forwardRef } from 'react';
 import { Text, type TextProps } from './Text';
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 
-export const P = styled(
+export const P = withStyle(
   forwardRef((props: Omit<TextProps, 'role'>, ref) => (
-    <Text
-      // @ts-expect-error paragraph is not in role type
-      role="paragraph"
-      {...props}
-      ref={ref}
-    />
+    <Text role="paragraph" {...props} ref={ref} />
   )),
   (t) => ({
-    alignSelf: 'stretch',
-    marginVertical: t.space.md,
+    base: {
+      alignSelf: 'stretch',
+      marginVertical: t.space.md,
+    },
   })
 );

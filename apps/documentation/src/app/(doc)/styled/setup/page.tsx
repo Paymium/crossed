@@ -8,11 +8,11 @@
 'use client';
 import { CodeBlock } from '@/components/CodeBlock';
 import { withDefaultProps } from '@crossed/core';
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { Alert, Anchor, H1, H2, P, Tabs, Text, YBox } from '@crossed/ui';
 import { Trans, useTranslation } from 'react-i18next';
 
-const Description = withDefaultProps(styled(Text, {}), {
+const Description = withDefaultProps(withStyle(Text, { base: {} }), {
   size: 'xl',
   weight: 'medium',
 });
