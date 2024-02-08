@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import Registry from '@crossed/styled/registry';
+import { Registry } from '@crossed/styled/registry';
 import { darkTheme } from /*lightTheme*/ './theme';
 // import { breakpoints } from './breakpoints';
 // import deepmerge from 'deepmerge';

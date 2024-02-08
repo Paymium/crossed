@@ -12,6 +12,7 @@
   "dependencies": {
     "@babel/preset-react": "^7.23.3",
     "@crossed/core": "workspace:^",
+    "@crossed/next-adapter": "workspace:^",
     "@crossed/primitive": "workspace:^",
     "@crossed/styled": "workspace:^",
     "@crossed/ui": "workspace:^",

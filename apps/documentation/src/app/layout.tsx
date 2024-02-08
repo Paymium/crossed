@@ -6,6 +6,12 @@
  */
 
 import './globals.css';
+
+import { Registry } from '@crossed/styled/registry';
+import theme from '../../style.config';
+
+Registry.setTheme(theme);
+
 import type { Metadata } from 'next';
 import { Body } from '@/components/Body';
 import { NavBar } from '@/components/NavBar';
@@ -22,7 +28,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang={'en'}>
-      <head />
+      <head>
+        <link rel="stylesheet" href="/crossed/output.css" />
+      </head>
       <CrossedUIProvider>
         <Body>
           <Suspense>

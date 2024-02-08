@@ -30,8 +30,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "crossed-build --watch",
-    "build": "crossed-build --project-path"
+    "watch": "crossed-build --watch --project-path ./tsconfig.build.json",
+    "build": "crossed-build  --project-path ./tsconfig.build.json"
   },
   "files": [
     "lib/",

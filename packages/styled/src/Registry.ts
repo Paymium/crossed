@@ -7,19 +7,16 @@
 
 import type { CrossedstyleTheme } from './types';
 
-class Registry {
+class RegistryBridge {
   private theme?: CrossedstyleTheme;
 
   setTheme(t: CrossedstyleTheme) {
-    // console.log("setTheme")
     this.theme = t;
     return this;
-    // ...
   }
   getTheme() {
     return this.theme as CrossedstyleTheme;
-    // ...
   }
 }
 
-export default new Registry();
+export const Registry = new RegistryBridge();

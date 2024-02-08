@@ -1,8 +1,10 @@
 {
   "version": "0.5.1",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/modules/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "typings": "lib/typescript/index.d.ts",
   "files": [
     "dist",
     "src"
@@ -11,10 +13,10 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
+    "start": "crossed-build --watch",
+    "build": "crossed-build",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "prepare": "crossed-build",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "type-check": "tsc --noEmit"
@@ -28,7 +30,6 @@
     }
   },
   "name": "@crossed/next-adapter",
-  "module": "dist/next-adapter.esm.js",
   "size-limit": [
     {
       "path": "dist/next-adapter.cjs.production.min.js",
@@ -40,6 +41,7 @@
     }
   ],
   "devDependencies": {
+    "@crossed/build": "workspace:^",
     "@size-limit/preset-small-lib": "^8.1.2",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "18.11.10",
@@ -54,6 +56,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "@crossed/webpack": "workspace:^",
     "find-yarn-workspace-root": "^2.0.0",
     "fs-extra": "^11.1.0",
     "next": "^13.4.19",

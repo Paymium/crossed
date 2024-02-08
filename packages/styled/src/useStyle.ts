@@ -7,14 +7,15 @@
 
 import * as React from 'react';
 import { parse } from './parsse';
-import Registry from './Registry';
+import { Registry } from './Registry';
 import type { CrossedstyleTheme } from './types';
 
 export function useStyle<
   T extends { className?: string; style?: Record<string, any> }
 >(
   params?: () => Record<string, any>,
-  props: T = { className: '', style: {} } as T
+  props: T = { className: '', style: {} } as T,
+  options?: { native?: boolean; debug?: boolean }
 ): { className: string; style: Record<string, any>; theme: CrossedstyleTheme } {
   const [active, setActive] = React.useState(false);
   const [hover, setHover] = React.useState(false);
@@ -45,7 +46,12 @@ export function useStyle<
       const { style } = parse(params?.() || {});
       return {
         className: ``,
-        style: [style.base, active && style.hover, active && style.active],
+        style: [
+          style.base,
+          active && style.hover,
+          active && style.active,
+          props.style,
+        ],
         onPressIn,
         onPressOut,
         onHoverIn,

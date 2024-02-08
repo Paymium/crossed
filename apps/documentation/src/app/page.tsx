@@ -9,10 +9,11 @@
 import { Logo } from '@/components/Logo';
 import mq from '@crossed/styled/mq';
 import { withStyle } from '@crossed/styled';
-import { B, Button, Card, H1, H2, H3, YBox } from '@crossed/ui';
+import { B, Button, Card, H1, H2, H3, Text, YBox } from '@crossed/ui';
 import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
 import { Github } from '@crossed/unicons/Github';
+import { useStyle } from '@crossed/styled';
 
 const Description = withStyle(H2, {
   base: {
@@ -47,14 +48,16 @@ const ContainerButtonCta = withStyle(YBox, {
 
 export default function Home() {
   const { t } = useTranslation();
+  const {theme} = useStyle()
 
   return (
     <YBox
       role="main"
-      style={{ alignItems: 'center', paddingVertical: 50, minHeight: '90%' }}
+      style={{ alignItems: 'center', paddingVertical: "50px", minHeight: '90%' }}
       space="lg"
     >
-      <Logo size={100} />
+      <Text>hello</Text>
+      {/* <Logo size={100} />
       <H1 size={'4xl'}>Crossed</H1>
       <Description size="2xl" weight="medium">
         <Trans>
@@ -85,7 +88,7 @@ export default function Home() {
               <Card.Title
                 role="heading"
                 aria-level={4}
-                style={{ textAlign: 'center', marginBottom: t.space.md }}
+                style={{ textAlign: 'center', marginBottom: theme.space.md }}
               >
                 @crossed/styled
               </Card.Title>
@@ -99,7 +102,7 @@ export default function Home() {
               <Card.Title
                 role="heading"
                 aria-level={4}
-                style={{ textAlign: 'center', marginBottom: t.space.md }}
+                style={{ textAlign: 'center', marginBottom: theme.space.md }}
               >
                 @crossed/primitive
               </Card.Title>
@@ -113,7 +116,7 @@ export default function Home() {
               <Card.Title
                 role="heading"
                 aria-level={4}
-                style={{ textAlign: 'center', marginBottom: t.space.md }}
+                style={{ textAlign: 'center', marginBottom: theme.space.md }}
               >
                 @crossed/ui
               </Card.Title>
@@ -128,7 +131,7 @@ export default function Home() {
             <Card.Title
               role="heading"
               aria-level={4}
-              style={{ textAlign: 'center', marginBottom: t.space.md }}
+              style={{ textAlign: 'center', marginBottom: theme.space.md }}
             >
               @crossed/router
             </Card.Title>
@@ -137,7 +140,7 @@ export default function Home() {
             </Card.Description>
           </Card>
         </ContainerButtonCta>
-      </SectionCTA>
+      </SectionCTA> */}
     </YBox>
   );
 }

@@ -20,38 +20,42 @@ export const textAlign = {
   right: { textAlign: 'right' },
 } as const;
 
-export const Text = withStyle(TextNative, (t) => ({
-  base: {
-    fontFamily: t.fontFamily,
-    variants: {
-      textAlign,
-      weight: {
-        thin: { fontWeight: '100' },
-        extralight: { fontWeight: '200' },
-        light: { fontWeight: '300' },
-        default: { fontWeight: '400' },
-        medium: { fontWeight: '500' },
-        semibold: { fontWeight: '600' },
-        bold: { fontWeight: '700' },
-        extrabold: { fontWeight: '800' },
-        black: { fontWeight: '900' },
+export const Text = withStyle(
+  TextNative,
+  (t) => ({
+    base: {
+      fontFamily: t.fontFamily,
+      variants: {
+        textAlign,
+        weight: {
+          thin: { fontWeight: '100' },
+          extralight: { fontWeight: '200' },
+          light: { fontWeight: '300' },
+          default: { fontWeight: '400' },
+          medium: { fontWeight: '500' },
+          semibold: { fontWeight: '600' },
+          bold: { fontWeight: '700' },
+          extrabold: { fontWeight: '800' },
+          black: { fontWeight: '900' },
+        },
+        size: {
+          'xxs': { fontSize: t.fontSize.xxs, lineHeight: 12 },
+          'xs': { fontSize: t.fontSize.xs, lineHeight: 16 },
+          'sm': { fontSize: t.fontSize.sm, lineHeight: 20 },
+          'default': { fontSize: t.fontSize.default, lineHeight: 20 },
+          'md': { fontSize: t.fontSize.md, lineHeight: 24 },
+          'lg': { fontSize: t.fontSize.lg, lineHeight: 28 },
+          'xl': { fontSize: t.fontSize.xl, lineHeight: 28 },
+          '2xl': { fontSize: t.fontSize['2xl'], lineHeight: 32 },
+          '3xl': { fontSize: t.fontSize['3xl'], lineHeight: 36 },
+          '4xl': { fontSize: t.fontSize['4xl'], lineHeight: 54 },
+          '5xl': { fontSize: t.fontSize['5xl'], lineHeight: 78 },
+        },
+        color: t.utils.createVariants('color', t),
       },
-      size: {
-        'xxs': { fontSize: t.fontSize.xxs, lineHeight: 12 },
-        'xs': { fontSize: t.fontSize.xs, lineHeight: 16 },
-        'sm': { fontSize: t.fontSize.sm, lineHeight: 20 },
-        'default': { fontSize: t.fontSize.default, lineHeight: 20 },
-        'md': { fontSize: t.fontSize.md, lineHeight: 24 },
-        'lg': { fontSize: t.fontSize.lg, lineHeight: 28 },
-        'xl': { fontSize: t.fontSize.xl, lineHeight: 28 },
-        '2xl': { fontSize: t.fontSize['2xl'], lineHeight: 32 },
-        '3xl': { fontSize: t.fontSize['3xl'], lineHeight: 36 },
-        '4xl': { fontSize: t.fontSize['4xl'], lineHeight: 54 },
-        '5xl': { fontSize: t.fontSize['5xl'], lineHeight: 78 },
-      },
-      color: t.utils.createVariants('color', t),
     },
-  },
-}));
+  }),
+  { native: true, debug: true }
+);
 
 export type TextProps = GetProps<typeof Text>;

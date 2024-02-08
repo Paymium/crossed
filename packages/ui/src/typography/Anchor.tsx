@@ -18,10 +18,10 @@ export const Anchor = withDefaultProps(
         'fontFamily': t.fontFamily,
         'textDecorationLine': 'none',
         'cursor': 'pointer',
-        'hover:': {
-          textDecorationLine: 'underline',
-          color: t.utils.shadeColor(t.colors.link, 45),
-        },
+      },
+      ':hover': {
+        textDecorationLine: 'underline',
+        color: t.utils.shadeColor(t.colors.link, 45),
       },
     })
     // { name: 'Anchor' }

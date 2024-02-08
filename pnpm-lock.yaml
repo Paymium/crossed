@@ -71,6 +71,9 @@ importers:
       '@crossed/core':
         specifier: workspace:^
         version: link:../../packages/core
+      '@crossed/next-adapter':
+        specifier: workspace:^
+        version: link:../../packages/next-adapter
       '@crossed/primitive':
         specifier: workspace:^
         version: link:../../packages/primitive
@@ -328,6 +331,9 @@ importers:
 
   packages/next-adapter:
     dependencies:
+      '@crossed/webpack':
+        specifier: workspace:^
+        version: link:../webpack
       find-yarn-workspace-root:
         specifier: ^2.0.0
         version: 2.0.0
@@ -344,6 +350,9 @@ importers:
         specifier: ^10.0.0
         version: 10.0.1
     devDependencies:
+      '@crossed/build':
+        specifier: workspace:^
+        version: link:../build
       '@size-limit/preset-small-lib':
         specifier: ^8.1.2
         version: 8.2.6(size-limit@8.2.6)

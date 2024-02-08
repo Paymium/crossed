@@ -7,6 +7,11 @@
 
 'use client';
 
+import { Registry } from '@crossed/styled/registry';
+import theme from '../../../style.config';
+
+Registry.setTheme(theme);
+
 import { XBox } from '@crossed/ui';
 import { withStyle } from '@crossed/styled';
 

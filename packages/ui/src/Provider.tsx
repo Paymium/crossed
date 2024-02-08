@@ -6,8 +6,6 @@
  */
 
 'use client';
-import { setup } from './theme';
-setup();
 
 // export { CrossedTheme, useCrossedTheme } from '@crossed/styled';
 import { PortalProvider } from '@gorhom/portal';

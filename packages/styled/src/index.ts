@@ -8,5 +8,5 @@
 export { useStyle } from './useStyle';
 export { createStyle } from './creatStyle';
 export { withStyle } from './withStyle';
-export { default as Registry } from './Registry';
+export { Registry } from './Registry';
 export type * from './types';
