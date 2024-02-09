@@ -13,7 +13,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "crossed-build --watch",
+    "watch": "crossed-build --watch",
     "build": "crossed-build",
     "lint": "tsdx lint",
     "prepare": "crossed-build",

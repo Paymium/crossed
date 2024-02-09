@@ -65,10 +65,18 @@
   },
   "typesVersions": {
     "*": {
-      "index": ["lib/typescript/index.d.ts"],
-      "hashCode": ["lib/typescript/hashCode.d.ts"],
-      "mq": ["lib/typescript/mq.d.ts"],
-      "registry": ["lib/typescript/Registry.d.ts"]
+      "index": [
+        "lib/typescript/index.d.ts"
+      ],
+      "hashCode": [
+        "lib/typescript/hashCode.d.ts"
+      ],
+      "mq": [
+        "lib/typescript/mq.d.ts"
+      ],
+      "registry": [
+        "lib/typescript/Registry.d.ts"
+      ]
     }
   },
   "devDependencies": {
@@ -87,5 +95,7 @@
     "react-dom": "^18.2.0",
     "react-native": "^0.73.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "deepmerge": "^4.3.1"
+  }
 }

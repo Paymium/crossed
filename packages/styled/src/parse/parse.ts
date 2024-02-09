@@ -5,11 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export const parse = (
-  params: Record<string, any>
-  // media?: string,
-  // pseudo?: string
-): { className: string; style: Record<string, any> } => {
+import type { Parse } from './types';
+
+export const parse: Parse = (params) => {
   const style = Object.entries(params).reduce<{
     base: Record<string, any>;
     active?: Record<string, any>;

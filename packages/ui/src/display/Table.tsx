@@ -13,7 +13,7 @@ import {
   isValidElement,
   cloneElement,
 } from 'react';
-import { Text, textAlign } from '../typography/Text';
+import { Text } from '../typography/Text';
 
 export const Table = withStyle(
   (props: HTMLProps<HTMLTableElement>) => <table {...props} />,
@@ -100,9 +100,9 @@ export const Td = withStyle(
   (t) => ({
     base: {
       padding: t.space.sm,
-      variants: {
-        textAlign,
-      },
+      // variants: {
+      //   textAlign,
+      // },
     },
   })
 );

@@ -15,7 +15,7 @@ import { YBox } from '../layout/YBox';
 import { Text } from '../typography/Text';
 
 const CardRoot = withStyle(
-  (props) => <YBox {...props} />,
+  YBox,
   (t) => ({
     base: {
       padding: t.space.md,
@@ -39,12 +39,18 @@ const CardRoot = withStyle(
 );
 
 const Title = withDefaultProps(
-  withStyle(Text, { base: { alignSelf: 'stretch' } }),
+  withStyle(
+    Text,
+    {
+      base: { alignSelf: 'stretch' },
+    },
+    { native: true }
+  ),
   { size: 'lg' }
 );
 
 const Description = withDefaultProps(
-  withStyle(Text, { base: { alignSelf: 'stretch' } }),
+  withStyle(Text, { base: { alignSelf: 'stretch' } }, { native: true }),
   {}
 );
 

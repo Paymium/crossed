@@ -1,0 +1,34 @@
+{
+  "name": "@crossed/loader",
+  "description": "",
+  "version": "0.1.0",
+  "main": "lib/commonjs/index",
+  "types": "lib/typescript/index.d.ts",
+  "module": "lib/module/index",
+  "source": "src/index",
+  "typings": "lib/typescript/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf lib",
+    "watch": "crossed-build --watch",
+    "build": "crossed-build",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@crossed/build": "*",
+    "@types/escodegen": "^0.0.10",
+    "@types/esprima": "^4.0.6",
+    "@types/estree": "^1.0.5",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@crossed/log": "workspace:^",
+    "@crossed/styled": "workspace:^",
+    "escodegen": "^2.1.0",
+    "esprima": "^4.0.1",
+    "eval-estree-expression": "^1.1.0"
+  },
+  "files": [
+    "lib/",
+    "src/"
+  ]
+}

@@ -18,9 +18,9 @@ export const XBox = withStyle(Box, () => ({
     justifyContent: 'flex-start',
     width: '100%',
     flexBasis: 'auto',
-    variants: {
-      center: { true: { alignItems: 'center' } },
-    },
+  },
+  variants: {
+    center: { true: { alignItems: 'center' } },
   },
 }));
 

@@ -18,18 +18,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "escodegen": "^2.1.0",
-    "esprima": "^4.0.1",
-    "eval-estree-expression": "^1.1.0",
+    "@crossed/loader": "workspace:^",
+    "@crossed/log": "workspace:^",
     "static-eval": "^2.1.1",
-    "ts-pattern": "^5.0.6"
+    "ts-pattern": "^5.0.6",
+    "webpack-virtual-modules": "^0.6.1"
   },
   "devDependencies": {
     "@crossed/build": "^0.5.0",
     "@crossed/styled": "workspace:*",
-    "@types/escodegen": "^0.0.10",
-    "@types/esprima": "^4.0.6",
-    "@types/estree": "^1.0.5",
     "@types/node": "^20.11.16",
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",

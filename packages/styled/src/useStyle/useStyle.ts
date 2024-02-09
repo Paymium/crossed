@@ -6,17 +6,11 @@
  */
 
 import * as React from 'react';
-import { parse } from './parsse';
-import { Registry } from './Registry';
-import type { CrossedstyleTheme } from './types';
+import { parse } from '../parse';
+import { Registry } from '../Registry';
+import type { UseStyle } from './types';
 
-export function useStyle<
-  T extends { className?: string; style?: Record<string, any> }
->(
-  params?: () => Record<string, any>,
-  props: T = { className: '', style: {} } as T,
-  options?: { native?: boolean; debug?: boolean }
-): { className: string; style: Record<string, any>; theme: CrossedstyleTheme } {
+export const useStyle: UseStyle = (params, props) => {
   const [active, setActive] = React.useState(false);
   const [hover, setHover] = React.useState(false);
   const [, setTransition] = React.useTransition();
@@ -61,4 +55,4 @@ export function useStyle<
     },
     [params, props.style, active, hover]
   );
-}
+};

@@ -1,12 +1,14 @@
-const withCrossed = require("@crossed/next-adapter")
+const withCrossed = require('@crossed/next-adapter');
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withCrossed.default()({
+const nextConfig = withCrossed.default({
+  cssOutput: './public/crossed.css',
+})({
   output: 'export',
   reactStrictMode: false,
   transpilePackages: ['react-native', 'react-native-reanimated'],
   basePath: '/crossed',
-  webpack: (config, { webpack }) => {
+  webpack: (config, { webpack, isServer }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       'react-native$': 'react-native-web',

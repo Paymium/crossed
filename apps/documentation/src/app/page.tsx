@@ -6,58 +6,75 @@
  */
 
 'use client';
+import { Registry } from '@crossed/styled/registry';
+import theme from '../../style.config';
+
+Registry.setTheme(theme);
 import { Logo } from '@/components/Logo';
 import mq from '@crossed/styled/mq';
 import { withStyle } from '@crossed/styled';
-import { B, Button, Card, H1, H2, H3, Text, YBox } from '@crossed/ui';
+import { B, Button, Card, H1, H2, H3, Text } from '@crossed/ui';
 import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
 import { Github } from '@crossed/unicons/Github';
-import { useStyle } from '@crossed/styled';
+import { YBox } from '@crossed/ui/src';
 
-const Description = withStyle(H2, {
-  base: {
-    textAlign: 'center',
-    marginTop: 0,
-    [mq.width(undefined, 'xs')]: { maxWidth: '90%' },
-    [mq.width('xs')]: { maxWidth: '60%' },
-  },
-});
-const SectionCTA = withStyle(YBox, {
-  base: {
-    marginTop: 30,
-    alignItems: 'center',
-    alignSelf: 'center',
-    [mq.width(undefined, 'xl')]: {
-      width: '90%',
-    },
-    [mq.width('xl')]: {
-      width: '70%',
+const Description = withStyle(
+  H2,
+  {
+    base: {
+      textAlign: 'center',
+      marginTop: 0,
+      [mq.width(undefined, 'xs')]: { maxWidth: '90%' },
+      [mq.width('xs')]: { maxWidth: '60%' },
     },
   },
-});
-
-const ContainerButtonCta = withStyle(YBox, {
-  base: {
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    [mq.width(undefined, 'sm')]: { flexDirection: 'column' },
-    [mq.width('sm')]: { flexDirection: 'row' },
+  { native: true }
+);
+const SectionCTA = withStyle(
+  YBox,
+  {
+    base: {
+      marginTop: 30,
+      alignItems: 'center',
+      alignSelf: 'center',
+      [mq.width(undefined, 'xl')]: {
+        width: '90%',
+      },
+      [mq.width('xl')]: {
+        width: '70%',
+      },
+    },
   },
-});
+  { native: true }
+);
+
+const ContainerButtonCta = withStyle(
+  YBox,
+  {
+    base: {
+      justifyContent: 'space-between',
+      flexWrap: 'wrap',
+      [mq.width(undefined, 'sm')]: { flexDirection: 'column' },
+      [mq.width('sm')]: { flexDirection: 'row' },
+    },
+  },
+  { native: true }
+);
 
 export default function Home() {
   const { t } = useTranslation();
-  const {theme} = useStyle()
-
   return (
     <YBox
       role="main"
-      style={{ alignItems: 'center', paddingVertical: "50px", minHeight: '90%' }}
+      style={{
+        alignItems: 'center',
+        paddingVertical: '50px',
+        minHeight: '90%',
+      }}
       space="lg"
     >
-      <Text>hello</Text>
-      {/* <Logo size={100} />
+      <Logo size={100} />
       <H1 size={'4xl'}>Crossed</H1>
       <Description size="2xl" weight="medium">
         <Trans>
@@ -140,7 +157,7 @@ export default function Home() {
             </Card.Description>
           </Card>
         </ContainerButtonCta>
-      </SectionCTA> */}
+      </SectionCTA>
     </YBox>
   );
 }

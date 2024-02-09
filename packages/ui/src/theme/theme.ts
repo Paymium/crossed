@@ -104,7 +104,7 @@ const utils: Theme['utils'] = {
             key !== 'backgroundSoft' &&
             key !== 'backgroundStrong'
           ) {
-            acc[key] = { color: value };
+            acc[key] = { base: { color: value } };
           }
           return acc;
         },
@@ -123,7 +123,7 @@ const utils: Theme['utils'] = {
           key !== 'default' &&
           key !== 'white'
         ) {
-          acc[key] = { backgroundColor: value };
+          acc[key] = { base: { backgroundColor: value } };
         }
         return acc;
       }, {} as any);

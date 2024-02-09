@@ -37,7 +37,7 @@ export type VariantColor = {
   [key in keyof Omit<
     Colors,
     'background' | 'backgroundStrong' | 'backgroundSoft'
-  >]: { color: Colors[key] };
+  >]: { base: { color: Colors[key] } };
 };
 
 export type VariantBackgroundColor = {
@@ -49,7 +49,7 @@ export type VariantBackgroundColor = {
     | 'black'
     | 'default'
     | 'white'
-  >]: { backgroundColor: Colors[key] };
+  >]: { base: { backgroundColor: Colors[key] } };
 };
 
 export type Theme = {

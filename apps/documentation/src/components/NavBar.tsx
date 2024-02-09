@@ -15,13 +15,14 @@ Registry.setTheme(theme);
 import '@/types/unistyles';
 import { withStyle } from '@crossed/styled';
 import { ChangeTheme } from './ChangeTheme';
-import { XBox } from '@crossed/ui';
+import { Box, XBox } from '@crossed/ui';
 import { Logo } from './Logo';
 import { withDefaultProps } from '@crossed/core';
 import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
 import { memo } from 'react';
 import { Link } from './Link';
+import LinkNext, { LinkProps as LinkNextProps } from 'next/link';
 
 const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
   {
@@ -75,15 +76,15 @@ export const NavBar = memo(() => {
 
 const LinkNav = withDefaultProps(
   withStyle(
-    Link,
+    LinkNext,
     (t) => ({
       'base': {
-        'color': t.colors.default,
+        color: t.colors.default,
         // 'color': t.utils.shadeColor(
         //   t.colors.default,
         //   UnistylesRuntime.themeName === 'dark' ? -90 : 90
         // ),
-        'variants': {
+        variants: {
           active: { true: { color: t.colors.default }, false: {} },
         },
       },
@@ -94,7 +95,8 @@ const LinkNav = withDefaultProps(
       ':active': {
         color: t.colors.default,
       },
-    })
+    }),
+    { native: false }
     // { name: 'LinkNav' }
   ),
   { size: 'md' }
@@ -104,21 +106,23 @@ const LinkLogo = withStyle(LinkNav, (theme) => ({
   base: { alignItems: 'center', gap: theme.space.sm, display: 'flex' },
 }));
 
-const Nav = withStyle(XBox, (t) => ({
+const Nav = withStyle(Box, (t) => ({
   base: {
     backgroundColor: t.colors.backgroundStrong,
     padding: 15,
     justifyContent: 'space-between',
+    flexDirection: 'row',
     borderBottomWidth: 1,
     borderColor: t.colors.neutral,
     alignItems: 'center',
   },
 }));
 
-const El = withStyle(XBox, (t) => ({
+const El = withStyle(Box, (t) => ({
   base: {
     alignItems: 'center',
     gap: t.space.sm,
     display: 'flex',
+    flexDirection: 'row',
   },
 }));
