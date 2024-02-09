@@ -15,12 +15,13 @@ export const withStyle = <
   S extends CreateStyleParams
 >(
   Comp: React.ComponentType<P>,
-  styleParams: S
+  styleParams: S,
+  options?: { native?: boolean; debug?: boolean }
 ) => {
   const styleThemed = createStyle(styleParams);
   return React.memo(
     React.forwardRef(function WithStyled(props: P, ref: any) {
-      const styleProps = useStyle(styleThemed, props);
+      const { theme, ...styleProps } = useStyle(styleThemed, props, options);
       return <Comp ref={ref} {...props} {...styleProps} />;
     })
   );

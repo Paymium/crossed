@@ -24,7 +24,7 @@ import { parseScript as parse } from 'esprima';
 import { Compiler } from 'webpack';
 import hashChode from '@crossed/styled/hashCode';
 import mq from '@crossed/styled/mq';
-import Registry from '@crossed/styled/registry';
+import { Registry } from '@crossed/styled/registry';
 
 type Style = Record<string, any>;
 
@@ -277,33 +277,35 @@ export default class StylePlugin {
           if (this.isFirst) {
             this.fileCache.set(resource, new Set());
           }
-          (c as any).parser.hooks.evaluate
-            .for('CallExpression')
-            .tap(pluginName, (e: CallExpression) => {
-              let arg;
-              if (e.callee.type === 'Identifier') {
-                if (e.callee?.name === 'createStyle') {
-                  arg = e.arguments[0];
+          if (c.parser.hooks) {
+            (c as any).parser.hooks.evaluate
+              .for('CallExpression')
+              .tap(pluginName, (e: CallExpression) => {
+                let arg;
+                if (e.callee.type === 'Identifier') {
+                  if (e.callee?.name === 'createStyle') {
+                    arg = e.arguments[0];
+                  }
+                  if (e.callee?.name === 'withStyle') {
+                    arg = e.arguments[1];
+                  }
+                  if (arg) {
+                    const file = (c as any).parser.state.current.resource;
+                    parserAst(arg, (cssRule) => {
+                      // console.log("detect in");
+                      // console.log(file);
+                      // console.log(this.fileCache);
+                      // console.log("____________________");
+                      if (!this.fileCache.has(file)) {
+                        this.fileCache.set(file, new Set());
+                      }
+                      // console.log(resource, c.parser.state.current.request)
+                      this.fileCache.get(file)?.add(cssRule);
+                    });
+                  }
                 }
-                if (e.callee?.name === 'withStyle') {
-                  arg = e.arguments[1];
-                }
-                if (arg) {
-                  const file = (c as any).parser.state.current.resource;
-                  parserAst(arg, (cssRule) => {
-                    // console.log("detect in");
-                    // console.log(file);
-                    // console.log(this.fileCache);
-                    // console.log("____________________");
-                    if (!this.fileCache.has(file)) {
-                      this.fileCache.set(file, new Set());
-                    }
-                    // console.log(resource, c.parser.state.current.request)
-                    this.fileCache.get(file)?.add(cssRule);
-                  });
-                }
-              }
-            });
+              });
+          }
         }
         return c;
       });

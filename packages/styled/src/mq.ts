@@ -6,7 +6,11 @@
  */
 
 const breakpoints = {
-  md: 900,
+  xs: 0,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
 };
 
 export const mq = {
@@ -16,23 +20,33 @@ export const mq = {
   ) => {
     let minTmp;
     let maxTmp;
-    if (typeof min === 'string' && breakpoints[min]) {
+    if (
+      typeof min === 'string' &&
+      (breakpoints[min] || breakpoints[min] === 0)
+    ) {
       minTmp = breakpoints[min];
     } else if (typeof min === 'number') {
       minTmp = min;
     }
-    if (typeof max === 'string' && breakpoints[max]) {
+    if (
+      typeof max === 'string' &&
+      (breakpoints[max] || breakpoints[max] === 0)
+    ) {
       maxTmp = breakpoints[max];
     } else if (typeof max === 'number') {
       maxTmp = max;
     }
-    if (!minTmp && minTmp !== 0) {
-      throw new Error('min not number and not correspond to breakpoints');
+    if (!minTmp && minTmp !== undefined && minTmp !== 0) {
+      throw new Error(
+        `min not number and not correspond to breakpoints "${minTmp}"`
+      );
     }
-    if (max && !maxTmp) {
-      throw new Error('max not number and not correspond to breakpoints');
+    if (max && !maxTmp && maxTmp !== 0) {
+      throw new Error(
+        `max not number and not correspond to breakpoints "${maxTmp}"`
+      );
     }
-    return `@media (min-width: ${minTmp}px) ${
+    return `@media (min-width: ${minTmp || 0}px) ${
       !max ? '' : `and (max-width: ${maxTmp}px)`
     }`;
   },

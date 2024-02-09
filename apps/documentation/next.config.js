@@ -1,5 +1,7 @@
+const withCrossed = require("@crossed/next-adapter")
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withCrossed.default()({
   output: 'export',
   reactStrictMode: false,
   transpilePackages: ['react-native', 'react-native-reanimated'],
@@ -14,6 +16,9 @@ const nextConfig = {
       '.web.js',
       '.web.ts',
       '.web.tsx',
+      '.server.tsx',
+      '.server.jsx',
+      '.server.js',
       ...config.resolve.extensions,
     ];
 
@@ -25,6 +30,6 @@ const nextConfig = {
 
     return config;
   },
-};
+});
 
 module.exports = nextConfig;

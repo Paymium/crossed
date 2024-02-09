@@ -7,6 +7,11 @@
 
 'use client';
 
+import { Registry } from '@crossed/styled/registry';
+import theme from '../../style.config';
+
+Registry.setTheme(theme);
+
 import '@/types/unistyles';
 import { withStyle } from '@crossed/styled';
 import { ChangeTheme } from './ChangeTheme';
@@ -73,13 +78,14 @@ const LinkNav = withDefaultProps(
     Link,
     (t) => ({
       'base': {
+        'color': t.colors.default,
         // 'color': t.utils.shadeColor(
         //   t.colors.default,
         //   UnistylesRuntime.themeName === 'dark' ? -90 : 90
         // ),
-        // 'variants': {
-        //   active: { true: { color: t.colors.default }, false: {} },
-        // },
+        'variants': {
+          active: { true: { color: t.colors.default }, false: {} },
+        },
       },
       ':hover': {
         textDecorationLine: 'none',

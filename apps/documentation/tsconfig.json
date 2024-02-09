@@ -11,6 +11,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
@@ -25,8 +26,6 @@
       "@crossed/core/*": ["./node_modules/@crossed/core/src/*"],
       "@crossed/ui": ["./node_modules/@crossed/ui/src"],
       "@crossed/ui/*": ["./node_modules/@crossed/ui/src/*"],
-      "@crossed/styled": ["./node_modules/@crossed/styled/src"],
-      "@crossed/styled/*": ["./node_modules/@crossed/styled/src/*"],
       "@crossed/primitive": ["./node_modules/@crossed/primitive/src"],
       "@crossed/primitive/*": ["./node_modules/@crossed/primitive/src/*"],
       "@crossed/unicons": ["./node_modules/@crossed/unicons/src"],
@@ -40,7 +39,8 @@
     "**/*.tsx",
     "**/*.json",
     ".next/types/**/*.ts",
-    "i18n.js"
+    "i18n.js",
+    "./style.config.js"
   ],
   "exclude": ["node_modules"]
 }

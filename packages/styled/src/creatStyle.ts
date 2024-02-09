@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import Registry from './Registry';
+import { Registry } from './Registry';
 import type { CreateStyleParams } from './types';
 
 export const createStyle = (data: CreateStyleParams) => {
