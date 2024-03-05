@@ -16,7 +16,6 @@
     "watch": "crossed-build --watch",
     "build": "crossed-build",
     "lint": "tsdx lint",
-    "prepare": "crossed-build",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "type-check": "tsc --noEmit"

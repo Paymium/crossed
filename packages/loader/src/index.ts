@@ -20,7 +20,6 @@ import {
 } from 'estree';
 import { parseScript as parse } from 'esprima';
 import escodegen from 'escodegen';
-import hashChode from '@crossed/styled/hashCode';
 import mq from '@crossed/styled/mq';
 import { createLogger, apiLog } from '@crossed/log';
 import { Registry } from '@crossed/styled/registry';
@@ -28,7 +27,13 @@ import { Registry } from '@crossed/styled/registry';
 type Style = Record<string, any>;
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const t = require(path.resolve(process.cwd(), './style.config'));
+let t = {};
+
+try {
+  t = require(path.resolve(process.cwd(), './style.config'));
+} catch (e) {
+  console.log('not found config theme');
+}
 
 const theme = Registry.setTheme(t).getTheme();
 
@@ -54,13 +59,20 @@ const convertToPx = [
   'gap',
 ];
 
+const convertKeyToCss = (key: string) =>
+  key
+    .split(/(?=[A-Z])/)
+    .join('-')
+    .toLowerCase();
+
+const normalizeUnitPixel = (value: any) => `${value}px`;
+
 const styleToString = (style: Style) => {
   return Object.keys(style).reduce((acc, key) => {
     const value = style[key];
-    return `${acc}${key
-      .split(/(?=[A-Z])/)
-      .join('-')
-      .toLowerCase()}:${value}${convertToPx.includes(key) ? 'px' : ''};`;
+    return `${acc}${convertKeyToCss(key)}:${
+      convertToPx.includes(key) ? normalizeUnitPixel(value) : value
+    };`;
   }, '');
 };
 
@@ -69,7 +81,7 @@ export class Loader {
 
   private fileCache: Set<string> = new Set();
 
-  constructor({ level }: { level?: string }) {
+  constructor({ level }: { level?: string } = {}) {
     this.logger = createLogger({ label: 'CrossedLoader', level });
     this.logger.debug(
       apiLog({
@@ -102,10 +114,10 @@ export class Loader {
         const key = (a.key as Identifier).name || (a.key as Literal).value;
         if (typeof key === 'string') {
           const value = a.value.value;
-          console.log(`${media} ${pseudo} ${key} ${value}`);
-          const className = `.c-${hashChode(
-            `${media}${pseudo}${key}${value}`
-          )}`;
+          // console.log(media)
+          const className = `.${media ? 'md:' : ''}${convertKeyToCss(key)}-[${
+            convertToPx.includes(key) ? normalizeUnitPixel(value) : value
+          }]`;
           this.fileCache.add(
             _cssContent(className, { [key]: value }, media, pseudo)
           );
@@ -120,36 +132,58 @@ export class Loader {
     ) => {
       if (arg?.type === 'ObjectExpression') {
         arg.properties.forEach((e) => {
-          if (
-            e.type === 'Property' &&
-            (e.key.type === 'Identifier' || e.key.type === 'Literal')
-          ) {
-            const name =
-              e.key.type === 'Identifier'
-                ? e.key.name
-                : e.key.type === 'Literal'
-                ? e.key.value
-                : undefined;
-            if (
-              name &&
-              typeof name === 'string' &&
-              (name === 'base' || name.startsWith(':') || name === 'variants')
-            ) {
-              const nameTmp =
-                name === 'base' || name === 'variants' ? undefined : name;
-              if (e.value.type === 'ObjectExpression') {
-                if (name === 'variants') {
-                  console.log(e.value.properties, media, nameTmp);
+          if (e.type === 'Property') {
+            if (e.key.type === 'Identifier' || e.key.type === 'Literal') {
+              const name =
+                e.key.type === 'Identifier'
+                  ? e.key.name
+                  : e.key.type === 'Literal'
+                  ? e.key.value
+                  : undefined;
+              if (
+                name &&
+                typeof name === 'string' &&
+                (name === 'base' ||
+                  name.startsWith(':') ||
+                  name.startsWith('@media') ||
+                  name === 'variants')
+              ) {
+                const nameTmp =
+                  name === 'base' || name === 'variants' ? undefined : name;
+                if (e.value.type === 'ObjectExpression') {
+                  _parseObjectExpression(e.value, media, nameTmp);
+                } else if (e.value.type === 'SequenceExpression') {
+                  _parseSequenceExpression(e.value, media, nameTmp);
                 }
-                _parseObjectExpression(e.value, media, nameTmp);
-              } else if (e.value.type === 'SequenceExpression') {
-                _parseSequenceExpression(e.value, media, nameTmp);
+              } else {
+                if (e.value.type === 'ObjectExpression') {
+                  _parseObjectExpression(e.value, media, undefined);
+                }
+                _parseProperty(e, media, pseudo);
               }
-            } else {
-              if (e.value.type === 'ObjectExpression') {
-                _parseObjectExpression(e.value, media, undefined);
+            } else if (
+              e.key.type === 'CallExpression' &&
+              e.key.callee.type === 'MemberExpression' &&
+              e.key.callee.object.type === 'Identifier' &&
+              e.key.callee.object.name === 'mq' &&
+              e.key.callee.property.type === 'Identifier' &&
+              e.key.callee.property.name === 'width' &&
+              e.value.type === 'ObjectExpression'
+            ) {
+              const [min, max] = e.key.arguments;
+              if (
+                min &&
+                min.type === 'Literal' &&
+                ((max && max.type === 'Literal') || !max)
+              ) {
+                const media = mq.width(min.value, max?.value || undefined);
+                // console.log(media, min)
+                e.value.properties.forEach((e) => {
+                  if (e.type === 'Property') {
+                    _parseProperty(e, media, pseudo);
+                  }
+                });
               }
-              _parseProperty(e, media, pseudo);
             }
           }
         });
@@ -185,15 +219,8 @@ export class Loader {
                     min.type === 'Literal' &&
                     ((max && max.type === 'Literal') || !max)
                   ) {
-                    const media = mq.width(
-                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                      // @ts-expect-error
-                      min.value,
-
-                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                      // @ts-expect-error
-                      max?.value || undefined
-                    );
+                    const media = mq.width(min.value, max?.value || undefined);
+                    console.log(media)
                     expression.right.properties.forEach((e) => {
                       if (e.type === 'Property') {
                         _parseProperty(e, media, pseudo);
@@ -210,6 +237,8 @@ export class Loader {
       }
     };
 
+    // const _parse
+
     const _parseFunctionExpression = (arg: FunctionExpression) => {
       if (arg.type === 'FunctionExpression') {
         const ast = {
@@ -223,7 +252,7 @@ export class Loader {
         };
         const toto = escodegen.generate(ast);
         // eslint-disable-next-line no-eval
-        const returnEl = JSON.stringify(eval(toto)(theme));
+        const returnEl = JSON.stringify(eval(toto)({ theme, mq }));
         const [body] = parse(`const toto = ${returnEl}`).body;
         if (
           body.type === 'VariableDeclaration' &&
@@ -249,7 +278,7 @@ export class Loader {
         let returnEl;
         try {
           // eslint-disable-next-line no-eval
-          returnEl = JSON.stringify(eval(toto)(theme));
+          returnEl = JSON.stringify(eval(toto)({ theme, mq }));
         } catch (e) {
           this.logger.error(
             apiLog({

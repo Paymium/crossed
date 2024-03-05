@@ -11,13 +11,17 @@
     "clean": "rm -rf lib",
     "watch": "crossed-build --watch",
     "build": "crossed-build",
+    "test": "crossed-test",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@crossed/build": "*",
+    "@crossed/test": "0.11.0",
     "@types/escodegen": "^0.0.10",
     "@types/esprima": "^4.0.6",
     "@types/estree": "^1.0.5",
+    "@types/jest": "^29.5.0",
+    "jest": "^29.5.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {

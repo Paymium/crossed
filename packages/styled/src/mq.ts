@@ -46,8 +46,8 @@ export const mq = {
         `max not number and not correspond to breakpoints "${maxTmp}"`
       );
     }
-    return `@media (min-width: ${minTmp || 0}px) ${
-      !max ? '' : `and (max-width: ${maxTmp}px)`
+    return `@media (min-width: ${minTmp || 0}px)${
+      !max ? '' : ` and (max-width: ${maxTmp}px)`
     }`;
   },
 } as const;
