@@ -5,6 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+'use client';
+
 import { CodeBlock } from '@/components/CodeBlock';
 import { H1, H2, H6, Kbd, P, Tabs, YBox } from '@crossed/ui';
 
@@ -89,13 +91,13 @@ import { styled } from "@crossed/styled";
 
 const styleSheet = styled({
   color: "red",
-  "hover:":{
+  ":hover":{
     color: "green"
   },
-  "active:":{
+  ":active":{
     color: "blue"
   },
-  "focus:":{
+  ":focus":{
     color: "violet"
   },
 });

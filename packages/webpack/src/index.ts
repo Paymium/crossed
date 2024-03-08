@@ -5,8 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import fs from 'fs';
-import path from 'path';
 import { Compiler } from 'webpack';
 import { createLogger, apiLog } from '@crossed/log';
 import { Loader } from '@crossed/loader';
@@ -15,7 +13,7 @@ import VirtualModulesPlugin from 'webpack-virtual-modules';
 const pluginName = 'CrossedPlugin';
 
 export type StylePluginOptions = {
-  cssOutput?: string;
+  configPath: string;
   level?: string;
   isServer?: boolean;
 };
@@ -25,11 +23,8 @@ let parseAst: Loader;
 export default class StylePlugin {
   logger: ReturnType<typeof createLogger>;
 
-  constructor(
-    public options: StylePluginOptions = { cssOutput: './public/output.css' }
-  ) {
+  constructor(public options: StylePluginOptions) {
     this.options = options;
-    fs.writeFileSync(path.resolve(process.cwd(), options.cssOutput), ``);
 
     this.logger = createLogger({
       label: 'CrossedWebpackPlugin',
@@ -39,30 +34,46 @@ export default class StylePlugin {
 
   apply = (compiler: Compiler) => {
     this.logger.debug('apply StylePlugin');
-    const virtualModules = new VirtualModulesPlugin();
 
-    compiler.options.plugins.push(virtualModules);
-
+    /**
+     * Load loader if not already in cache
+     */
     if (!parseAst) {
       parseAst = new Loader({
+        configPath: this.options.configPath,
         level: this.options.level,
       });
     }
 
+    /**
+     * Add virtual module crossed.css
+     */
+    const virtualModules = new VirtualModulesPlugin();
+    compiler.options.plugins.push(virtualModules);
+
+    /**
+     * Wait end parsing and write css
+     */
     compiler.hooks.afterCompile.tap(pluginName, () => {
+      // get css from loader and apply on css with virtual module crossed.css
       const newContent = parseAst.getCSS();
-      if (newContent) {
-        virtualModules.writeModule('node_modules/crossed.css', newContent);
-        this.logger.info(
-          apiLog({
-            events: ['css_output_success'],
-          })
-        );
-      }
+      virtualModules.writeModule('node_modules/crossed.css', newContent || '');
+
+      this.logger.info(
+        apiLog({
+          events: ['css_output_success'],
+        })
+      );
     });
 
+    /**
+     * Parse files
+     */
     compiler.hooks.normalModuleFactory.tap(pluginName, (factory) => {
       factory.hooks.parser.for('javascript/auto').tap(pluginName, (c) => {
+        /**
+         * Get all call expression and filter by name (createStyle, withStyle)
+         */
         c.hooks.evaluate.for('CallExpression').tap(pluginName, (e: any) => {
           const resource = c.state.current.resource;
           let arg;
@@ -74,11 +85,19 @@ export default class StylePlugin {
               arg = e.arguments[1];
             }
             if (arg) {
+              /**
+               * call name expression is createStyle or withStyle
+               * we can parsed argument
+               */
               this.logger.debug(
                 apiLog({
                   events: ['detect_style_function'],
                 }).message,
-                { file: resource.replace(process.cwd(), '') }
+                {
+                  file: `${resource.replace(process.cwd(), '')}:${
+                    e.loc.start.line
+                  }`,
+                }
               );
               parseAst.parse(arg);
             }

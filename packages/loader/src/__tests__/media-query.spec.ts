@@ -5,84 +5,68 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import { Registry } from '@crossed/styled/registry';
 import { Loader } from '../index';
 import { getAst } from './getAst';
+import { MediaQueriesPlugin, BasePlugin } from '@crossed/styled/plugins';
 
-jest.mock('@crossed/styled/hashCode', () => {
-  return jest.fn();
-});
+Registry.addPlugin(BasePlugin).addPlugin(
+  MediaQueriesPlugin({
+    sm: 500,
+    md: 700,
+  })
+);
 
 describe('media-query', () => {
-  describe.only('media-query define by theme', () => {
-    test('only min', () => {
-      const loader = new Loader();
+  test('only min', () => {
+    const loader = new Loader();
 
-      loader.parse(
-        getAst(
-          `({mq})=>({
+    loader.parse(
+      getAst(
+        `()=>({
             base: {
               marginTop: 4,
               width: 50,
-              [mq.width("md")]: {
-                  backgroundColor: "red"
+            },
+            media: {
+              md: {
+                backgroundColor: "red"
               }
             }
           })`
-        )
-      );
-      expect(loader.getCSS()).toEqual(
-        `.margin-top-[4px] { margin-top:4px; }
-.width-[50] { width:50; }
-@media (min-width: 768px)  { .md:background-color-[red] { background-color:red; } }\n`
-      );
-    });
+      )
+    );
+    expect(loader.getCSS()).toEqual(
+      `.margin-top-\\[4px\\] { margin-top:4px; }
+.width-\\[50px\\] { width:50px; }
+@media (min-width: 700px) { .md\\:background-color-\\[red\\] { background-color:red; } }`
+    );
   });
-  describe('media-query define by number', () => {
-    test('only min', () => {
-      const loader = new Loader();
 
-      loader.parse(
-        getAst(
-          `({mq})=>({
+  test('sm/md', () => {
+    const loader = new Loader();
+
+    loader.parse(
+      getAst(
+        `()=>({
             base: {
               marginTop: 4,
               width: 50,
-              [mq.width(300)]: {
-                  backgroundColor: "red"
-              }
+              backgroundColor: "black"
+            },
+            media: {
+              sm : { backgroundColor: "green" },
+              md: { backgroundColor: "red" }
             }
           })`
-        )
-      );
-      expect(loader.getCSS()).toEqual(
-        `.margin-top-[4px] { margin-top:4px; }
-.width-[50] { width:50; }
-@media (min-width: 300px)  { .min-[300]:background-color-[red] { background-color:red; } }\n`
-      );
-    });
-    test('min and max', () => {
-      const loader = new Loader();
-
-      loader.parse(
-        getAst(
-          `({mq})=>({
-          base: {
-              marginTop: 4,
-              width: 50,
-              backgroundColor: "red",
-              [mq.width(300, 400)]: {
-                  backgroundColor: "red"
-              }
-              }
-          })`
-        )
-      );
-      expect(loader.getCSS()).toEqual(
-        `.margin-top-[4px] { margin-top:4px; }
-  .width-[50] { width:50; }
-  .background-color-[red] { background-color:red; }
-  @media (min-width: 300px) and (max-width: 400px) { .min-[300]:max-[400]:background-color-[red] { background-color:red; } }\n`
-      );
-    });
+      )
+    );
+    expect(loader.getCSS()).toEqual(
+      `.margin-top-\\[4px\\] { margin-top:4px; }
+.width-\\[50px\\] { width:50px; }
+.background-color-\\[black\\] { background-color:black; }
+@media (min-width: 500px) { .sm\\:background-color-\\[green\\] { background-color:green; } }
+@media (min-width: 700px) { .md\\:background-color-\\[red\\] { background-color:red; } }`
+    );
   });
 });

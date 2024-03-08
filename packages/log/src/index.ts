@@ -13,6 +13,7 @@ export const apiLog = createHumanLogs({
     eval_style_function_error: 'Cannot eval style with theme',
     detect_style_function: 'Style creation detection',
     parser_hook_undefined: 'Parser hook not exist',
+    ast_type_not_implemented: 'Ast type is not implemented',
     css_output_success: 'css output was written successfully',
     css_output_error: 'css output error',
     create_instance_success: 'Plugin bridge created successfully',
@@ -68,7 +69,7 @@ export const createLogger = ({
       winston.format.label({ label }),
       winston.format.colorize(),
       winston.format.printf(({ level, message, label, file }) => {
-        return `${level}: [${label}] ${message}     ${file || ""}`;
+        return `${level}: [${label}] ${message}     ${file || ''}`;
       })
     ),
     transports: [new winston.transports.Console()],

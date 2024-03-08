@@ -9,4 +9,5 @@ export { useStyle } from './useStyle';
 export { createStyle } from './creatStyle';
 export { withStyle } from './withStyle';
 export { Registry } from './Registry';
+export * from './plugins/utils';
 export type * from './types';

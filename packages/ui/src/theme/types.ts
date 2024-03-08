@@ -85,6 +85,7 @@ export type Theme = {
   utils: {
     shadeColor: (_col: string, _amt: number) => string;
     hexToRgbA: (_hex: string, _alpha: number) => string;
+    rgbaToHex: (_rgba: string) => string;
     select: (
       _p: { hover?: any; active?: any; focus?: any; base?: any },
       _state: { hover?: boolean; active?: boolean; focus?: boolean }

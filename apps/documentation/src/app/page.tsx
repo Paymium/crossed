@@ -6,74 +6,56 @@
  */
 
 'use client';
-import { Registry } from '@crossed/styled/registry';
-import theme from '../../style.config';
-
-Registry.setTheme(theme);
 import { Logo } from '@/components/Logo';
-import mq from '@crossed/styled/mq';
-import { withStyle } from '@crossed/styled';
-import { B, Button, Card, H1, H2, H3, Text } from '@crossed/ui';
+import { createStyle, useStyle, withStyle } from '@crossed/styled';
+import { B, Box, Button, Card, H1, H2, H3 } from '@crossed/ui';
 import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
 import { Github } from '@crossed/unicons/Github';
-import { YBox } from '@crossed/ui/src';
 
-const Description = withStyle(
-  H2,
-  {
-    base: {
-      textAlign: 'center',
-      marginTop: 0,
-      [mq.width(undefined, 'xs')]: { maxWidth: '90%' },
-      [mq.width('xs')]: { maxWidth: '60%' },
-    },
-  },
-  { native: true }
-);
-const SectionCTA = withStyle(
-  YBox,
-  {
-    base: {
-      marginTop: 30,
-      alignItems: 'center',
-      alignSelf: 'center',
-      [mq.width(undefined, 'xl')]: {
-        width: '90%',
-      },
-      [mq.width('xl')]: {
-        width: '70%',
-      },
-    },
-  },
-  { native: true }
-);
+const Description = withStyle(H2, {
+  base: { textAlign: 'center', marginTop: 0 },
+  media: { xs: { width: '90%' }, md: { width: '60%' } },
+});
 
-const ContainerButtonCta = withStyle(
-  YBox,
-  {
-    base: {
-      justifyContent: 'space-between',
-      flexWrap: 'wrap',
-      [mq.width(undefined, 'sm')]: { flexDirection: 'column' },
-      [mq.width('sm')]: { flexDirection: 'row' },
-    },
+const SectionCTA = withStyle(Box, {
+  base: {
+    marginTop: 30,
+    marginHorizontal: 'auto',
+    alignItems: 'center',
+    alignSelf: 'center',
   },
-  { native: true }
-);
+  media: { xs: { width: '90%' }, xl: { width: '70%' } },
+});
+
+const ContainerButtonCta = withStyle(Box, {
+  base: { justifyContent: 'space-between', flexWrap: 'wrap' },
+  media: { xs: { flexDirection: 'column' }, md: { flexDirection: 'row' } },
+});
+
+const CardStyled = withStyle(Card, { base: { flex: 1 } });
+
+const containerStyle = createStyle({
+  base: {
+    alignItems: 'center',
+    paddingVertical: 50,
+    minHeight: '90%',
+  },
+});
+
+const titleActionStyle = createStyle({
+  base: {
+    textAlign: 'center',
+  },
+});
 
 export default function Home() {
   const { t } = useTranslation();
+  const { theme, style } = useStyle(containerStyle);
+  const { style: titleStyle } = useStyle(titleActionStyle);
+
   return (
-    <YBox
-      role="main"
-      style={{
-        alignItems: 'center',
-        paddingVertical: '50px',
-        minHeight: '90%',
-      }}
-      space="lg"
-    >
+    <Box role="main" style={style} space="lg">
       <Logo size={100} />
       <H1 size={'4xl'}>Crossed</H1>
       <Description size="2xl" weight="medium">
@@ -96,12 +78,12 @@ export default function Home() {
         </Button.Element>
       </Button>
       <SectionCTA space="lg">
-        <H3 textAlign="center">
+        <H3 style={titleStyle}>
           <Trans>Cross platform ecosystem</Trans>
         </H3>
         <ContainerButtonCta space="lg">
           <Link href="/styled/introduction" passHref legacyBehavior>
-            <Card style={{ flex: 1 }} role="link">
+            <CardStyled role="link">
               <Card.Title
                 role="heading"
                 aria-level={4}
@@ -112,10 +94,10 @@ export default function Home() {
               <Card.Description style={{ textAlign: 'center' }}>
                 <Trans>Styled your component with unistyles</Trans>
               </Card.Description>
-            </Card>
+            </CardStyled>
           </Link>
           <Link href="/primitive/introduction" passHref legacyBehavior>
-            <Card style={{ flex: 1 }} role="link">
+            <CardStyled role="link">
               <Card.Title
                 role="heading"
                 aria-level={4}
@@ -126,10 +108,10 @@ export default function Home() {
               <Card.Description style={{ textAlign: 'center' }}>
                 <Trans>Create your accessible component from anything</Trans>
               </Card.Description>
-            </Card>
+            </CardStyled>
           </Link>
           <Link href="/ui/introduction" passHref legacyBehavior>
-            <Card style={{ flex: 1 }} role="link">
+            <CardStyled role="link">
               <Card.Title
                 role="heading"
                 aria-level={4}
@@ -142,9 +124,9 @@ export default function Home() {
                   UI Component made with @crossed/primitive and @crossed/styled
                 </Trans>
               </Card.Description>
-            </Card>
+            </CardStyled>
           </Link>
-          <Card style={{ flex: 1 }}>
+          <CardStyled>
             <Card.Title
               role="heading"
               aria-level={4}
@@ -155,9 +137,9 @@ export default function Home() {
             <Card.Description style={{ textAlign: 'center' }}>
               <Trans>Comming soon</Trans>
             </Card.Description>
-          </Card>
+          </CardStyled>
         </ContainerButtonCta>
       </SectionCTA>
-    </YBox>
+    </Box>
   );
 }

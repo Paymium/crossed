@@ -44,7 +44,7 @@ export const THead = withStyle(
     );
     return <thead {...props}>{newChildren}</thead>;
   },
-  (t) => ({
+  ({ theme: t }) => ({
     base: {
       borderWidth: 0,
       borderBottomWidth: 1,
@@ -71,9 +71,7 @@ export const TBody = withStyle(
             <Text color="warning">-</Text>
           </Td>
           <Td>
-            <Text textAlign="center" color="warning">
-              -
-            </Text>
+            <Text color="warning">-</Text>
           </Td>
         </Tr>
       );
@@ -83,7 +81,7 @@ export const TBody = withStyle(
 );
 export const Tr = withStyle(
   (props: HTMLProps<HTMLTableRowElement>) => <tr {...props} />,
-  (t) => ({
+  ({ theme: t }) => ({
     base: {
       borderWidth: 0,
       borderTopWidth: 1,
@@ -97,7 +95,7 @@ export const Tr = withStyle(
 
 export const Td = withStyle(
   (props: HTMLProps<HTMLTableCellElement>) => <td {...props} />,
-  (t) => ({
+  ({ theme: t }) => ({
     base: {
       padding: t.space.sm,
       // variants: {
@@ -108,5 +106,5 @@ export const Td = withStyle(
 );
 export const Th = withStyle(
   (props: HTMLProps<HTMLTableCellElement>) => <th {...props} />,
-  (t) => ({ base: { textAlign: 'left', padding: t.space.sm } })
+  ({ theme: t }) => ({ base: { textAlign: 'left', padding: t.space.sm } })
 );

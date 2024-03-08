@@ -533,6 +533,7 @@ const SelectRoot = withStyle(
       finalValue,
       onChange,
       variant,
+      children,
       ...props
     }: UseUncontrolledInput<V> & XBoxProps & Pick<ButtonProps, 'variant'>) => {
       const renderValue = useRef<ReactNode>();
@@ -546,7 +547,8 @@ const SelectRoot = withStyle(
       const [open, setOpen] = useUncontrolled<boolean>({
         defaultValue: false,
       });
-      renderValue.current = findChild(props.children, value) || 'rien trouvé';
+      renderValue.current =
+        findChild((props as any).children, value) || 'rien trouvé';
       return (
         <SelectProvider
           value={value}
@@ -557,7 +559,7 @@ const SelectRoot = withStyle(
           variant={variant}
           triggerLayout={triggerLayout}
         >
-          <XBox {...props} />
+          <XBox {...props}>{children}</XBox>
         </SelectProvider>
       );
     }
@@ -586,8 +588,7 @@ const Trigger = withStaticProperties(
     return (
       <Button
         variant={variant}
-        active={open}
-        onLayout={({ nativeEvent: { layout } }) => {
+        onLayout={({ nativeEvent: { layout } }: any) => {
           triggerLayout.current = layout;
         }}
         {...props}
@@ -614,7 +615,7 @@ const Content = withStyle(
               <MenuList
                 {...props}
                 style={{
-                  ...(typeof props.style === 'object' ? props.style : {}),
+                  // ...(typeof props.style === 'object' ? props.style : {}),
                   top: top + height,
                   left,
                 }}
@@ -625,7 +626,7 @@ const Content = withStyle(
       </Portal>
     );
   },
-  (t) => ({
+  ({ theme: t }) => ({
     base: {
       position: 'absolute',
       top: 15 + 40,
@@ -644,12 +645,12 @@ Content.id = 'Select.Content';
 Content.displayName = 'Select.Content';
 
 const Option = withStyle(
-  ({ value, ...props }: MenuItemProps & { value: string | number }) => {
-    const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
+  ({ value, style, ...props }: MenuItemProps & { value: string | number }) => {
+    const { setOpen, setValue } = useSelectProvider();
     return (
       <MenuList.Item
-        active={value === valueGlobal}
-        {...props}
+        // active={value === valueGlobal}
+        // {...props}
         onPress={composeEventHandlers(() => {
           setOpen(false);
           setValue(value);

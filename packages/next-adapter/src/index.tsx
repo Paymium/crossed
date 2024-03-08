@@ -6,9 +6,7 @@
  */
 
 import StylePlugin, { type StylePluginOptions } from '@crossed/webpack';
-export default (
-  options: StylePluginOptions = { cssOutput: './public/crossed.css' }
-) => {
+export default (options: StylePluginOptions) => {
   return function withCrossed(nextConfig: any = {}) {
     const updatedNextConfig = {
       ...nextConfig,
@@ -36,7 +34,7 @@ export default (
           'react-native$': 'react-native-web',
         };
 
-        // if (isServer) {
+        // if (!isServer) {
         config.plugins = [
           ...config.plugins,
           new StylePlugin({ ...options, isServer }),

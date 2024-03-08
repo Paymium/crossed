@@ -7,10 +7,10 @@
 
 import { Loader } from '../index';
 import { getAst } from './getAst';
+import { Registry } from '@crossed/styled/registry';
+import { BasePlugin } from '@crossed/styled/plugins';
 
-jest.mock('@crossed/styled/hashCode', () => {
-  return jest.fn();
-});
+Registry.addPlugin(BasePlugin);
 
 describe('@crossed/loader', () => {
   test('simple', () => {
@@ -26,9 +26,9 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.margin-top-[4px] { margin-top:4px; }
-.width-[50] { width:50; }
-.background-color-[white] { background-color:white; }\n`
+      `.margin-top-\\[4px\\] { margin-top:4px; }
+.width-\\[50px\\] { width:50px; }
+.background-color-\\[white\\] { background-color:white; }`
     );
   });
 
@@ -45,9 +45,9 @@ describe('@crossed/loader', () => {
     })`)
     );
     expect(loader.getCSS()).toEqual(
-      `.margin-top-[4px] { margin-top:4px; }
-.width-[50] { width:50; }
-.background-color-[white] { background-color:white; }\n`
+      `.margin-top-\\[4px\\] { margin-top:4px; }
+.width-\\[50px\\] { width:50px; }
+.background-color-\\[white\\] { background-color:white; }`
     );
   });
   test('arrow function explicit return', () => {
@@ -65,9 +65,9 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.margin-top-[4px] { margin-top:4px; }
-.width-[50] { width:50; }
-.background-color-[white] { background-color:white; }\n`
+      `.margin-top-\\[4px\\] { margin-top:4px; }
+.width-\\[50px\\] { width:50px; }
+.background-color-\\[white\\] { background-color:white; }`
     );
   });
 
@@ -86,9 +86,9 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.margin-top-[4px] { margin-top:4px; }
-.width-[50] { width:50; }
-.background-color-[white] { background-color:white; }\n`
+      `.margin-top-\\[4px\\] { margin-top:4px; }
+.width-\\[50px\\] { width:50px; }
+.background-color-\\[white\\] { background-color:white; }`
     );
   });
 });

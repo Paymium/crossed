@@ -14,9 +14,11 @@ import { forwardRef } from 'react';
 export const Link = forwardRef<any, LinkProps & { target?: '_blank' }>(
   function Link({ children, ...props }, ref) {
     return (
-      <Anchor ref={ref} {...(props as any)} asChild>
-        <LinkNext {...(props as any)}>{children}</LinkNext>
-      </Anchor>
+      <LinkNext {...(props as any)} legacyBehavior>
+        <Anchor ref={ref} {...(props as any)}>
+          {children}
+        </Anchor>
+      </LinkNext>
     );
   }
 );

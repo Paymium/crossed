@@ -6,7 +6,6 @@
  */
 
 import * as React from 'react';
-import { parse } from '../parse';
 import { Registry } from '../Registry';
 import type { UseStyle } from './types';
 
@@ -37,14 +36,15 @@ export const useStyle: UseStyle = (params, props) => {
   }, [setHover]);
   return React.useMemo(
     function MemoUseStyle() {
-      const { style } = parse(params?.() || {});
+      // const { style } = parse(params?.() || {});
+      // const style = {};
       return {
         className: ``,
         style: [
-          style.base,
-          active && style.hover,
-          active && style.active,
-          props.style,
+          // style.base,
+          // active && style.hover,
+          // active && style.active,
+          props?.style,
         ],
         onPressIn,
         onPressOut,
@@ -53,6 +53,6 @@ export const useStyle: UseStyle = (params, props) => {
         theme: Registry.getTheme(),
       };
     },
-    [params, props.style, active, hover]
+    [params, props?.style, active, hover]
   );
 };

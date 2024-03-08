@@ -6,19 +6,14 @@
  */
 
 import './globals.css';
-
-import { Registry } from '@crossed/styled/registry';
-import theme from '../../style.config';
-
-Registry.setTheme(theme);
-
+import '@/style.config';
 import type { Metadata } from 'next';
 import { Body } from '@/components/Body';
 import { NavBar } from '@/components/NavBar';
 import { PropsWithChildren, Suspense } from 'react';
 import { ScrollView } from '@/components/ScrollView';
 import { Footer } from '@/components/Footer';
-import { CrossedUIProvider } from '@crossed/ui/src';
+import { CrossedUIProvider } from '@crossed/ui';
 
 export const metadata: Metadata = {
   title: 'Create Next App',

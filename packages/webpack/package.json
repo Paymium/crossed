@@ -26,15 +26,15 @@
   },
   "devDependencies": {
     "@crossed/build": "^0.5.0",
-    "@crossed/styled": "workspace:*",
+    "@crossed/styled": "workspace:^",
     "@types/node": "^20.11.16",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.2",
     "webpack": "^5.90.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
   "peerDependencies": {
-    "@crossed/styled": "workspace:*"
+    "@crossed/styled": "workspace:^"
   }
 }

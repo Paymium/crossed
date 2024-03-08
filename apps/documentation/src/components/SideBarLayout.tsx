@@ -10,34 +10,38 @@ import '@/types/unistyles';
 import { MenuList, XBox, YBox } from '@crossed/ui';
 import { PropsWithChildren } from 'react';
 import { withStyle } from '@crossed/styled';
-import mq from '@crossed/styled/mq';
 import { usePathname, useRouter } from 'next/navigation';
 import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
 
-const Menu = withDefaultProps(
-  withStyle(MenuList, () => ({
+const Menu = withStyle(
+  withDefaultProps(MenuList, { space: 'xs', size: 'xs' }),
+  () => ({
     base: {
       paddingHorizontal: 20,
       alignSelf: 'baseline',
-      display: { xs: 'none', sm: 'none', md: 'flex' },
+      display: 'flex',
     },
-  })),
-  { space: 'xs', size: 'xs' }
+    media: {
+      md: { display: 'none' },
+    },
+  })
 );
-const Container = withStyle(XBox, {
+const Container = withStyle(XBox, () => ({
   base: {
     width: '100%',
     justifyContent: 'center',
     paddingVertical: 15,
     minHeight: '95%',
-    [mq.width(undefined, 'md')]: { maxWidth: '100%' },
-    [mq.width('md', 'lg')]: { maxWidth: 768 },
-    [mq.width('lg', 'xl')]: { maxWidth: 900 },
-    [mq.width('xl')]: { maxWidth: 1200 },
   },
-});
-const Center = withStyle(YBox, (t) => ({
+  media: {
+    xs: { maxWidth: '100%' },
+    md: { maxWidth: 768 },
+    lg: { maxWidth: 900 },
+    xl: { maxWidth: 1200 },
+  },
+}));
+const Center = withStyle(YBox, ({ theme: t }) => ({
   base: {
     flex: 1,
     borderLeftWidth: 1,
@@ -46,23 +50,25 @@ const Center = withStyle(YBox, (t) => ({
   },
 }));
 
-const Li = withDefaultProps(
-  withStyle(YBox, (t) => ({
+const Li = withStyle(
+  withDefaultProps(YBox, { role: 'listitem' }),
+  ({ theme: t }) => ({
     base: {
       alignItems: 'stretch',
-      variants: {
-        label: {
-          true: {
+    },
+    variants: {
+      label: {
+        true: {
+          base: {
             marginTop: t.space.xl,
             borderBottomWidth: 1,
             borderColor: t.colors.neutral,
           },
-          false: {},
         },
+        false: {},
       },
     },
-  })),
-  { role: 'listitem' }
+  })
 );
 
 type Nav = { href?: string; title: string };
@@ -88,7 +94,7 @@ export function SideBarLayout({
                 <MenuList.Item
                   role="link"
                   href={`/crossed${href}`}
-                  hovered={href === pathname}
+                  // hovered={href === pathname}
                   onPress={(e) => {
                     e.stopPropagation();
                     e.preventDefault();

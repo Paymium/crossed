@@ -16,20 +16,20 @@ import { Text } from '../typography/Text';
 
 const CardRoot = withStyle(
   YBox,
-  (t) => ({
+  ({ theme: t }) => ({
     base: {
       padding: t.space.md,
       borderRadius: t.space.xs,
       backgroundColor: t.utils.shadeColor(t.colors.background, 25),
-      variants: {
-        role: {
-          link: {
-            'hover:': {
-              backgroundColor: t.utils.shadeColor(t.colors.background, 30),
-            },
-            'active:': {
-              backgroundColor: t.utils.shadeColor(t.colors.background, 20),
-            },
+    },
+    variants: {
+      role: {
+        link: {
+          ':hover': {
+            backgroundColor: t.utils.shadeColor(t.colors.background, 30),
+          },
+          ':active': {
+            backgroundColor: t.utils.shadeColor(t.colors.background, 20),
           },
         },
       },
@@ -38,20 +38,16 @@ const CardRoot = withStyle(
   { native: true }
 );
 
-const Title = withDefaultProps(
-  withStyle(
-    Text,
-    {
-      base: { alignSelf: 'stretch' },
-    },
-    { native: true }
-  ),
-  { size: 'lg' }
+const Title = withStyle(
+  withDefaultProps(Text, { size: 'lg' }),
+  { base: { alignSelf: 'stretch' } },
+  { native: true }
 );
 
-const Description = withDefaultProps(
-  withStyle(Text, { base: { alignSelf: 'stretch' } }, { native: true }),
-  {}
+const Description = withStyle(
+  Text,
+  { base: { alignSelf: 'stretch' } },
+  { native: true }
 );
 
 const Card = withStaticProperties(CardRoot, {

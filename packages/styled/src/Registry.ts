@@ -5,10 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { CrossedstyleTheme } from './types';
+import type { CrossedstyleTheme, Plugin } from './types';
 
 class RegistryBridge {
   private theme?: CrossedstyleTheme;
+  private plugins: Plugin[] = [];
 
   setTheme(t: CrossedstyleTheme) {
     this.theme = t;
@@ -16,6 +17,15 @@ class RegistryBridge {
   }
   getTheme() {
     return this.theme as CrossedstyleTheme;
+  }
+
+  addPlugin<S = any>(plugin: Plugin<S>) {
+    this.plugins.push(plugin as any);
+    return this;
+  }
+
+  getPlugins() {
+    return this.plugins;
   }
 }
 

@@ -38,5 +38,5 @@
     "project": ["./packages/*/tsconfig.json", "./apps/*/tsconfig.json"]
   },
   "plugins": ["@typescript-eslint", "prettier", "license-header"],
-  "ignorePatterns": ["next-env.d.ts", "expo-env.d.ts"]
+  "ignorePatterns": ["next-env.d.ts", "expo-env.d.ts", "lib"]
 }

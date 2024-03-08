@@ -6,9 +6,15 @@
  */
 
 import { useStyle } from '@crossed/styled';
-import type { IconProps } from '../types';
+import type { RequireOnly } from '../types';
 
-export const Sun = ({ Svg, Path, Circle, color, size = 25 }: IconProps) => {
+export const Sun = ({
+  Svg,
+  Path,
+  Circle,
+  color,
+  size = 25,
+}: RequireOnly<'Svg' | 'Path' | 'Circle'>) => {
   const { theme } = useStyle();
   return (
     <Svg

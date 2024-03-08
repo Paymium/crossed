@@ -10,23 +10,20 @@ import { Text } from './Text';
 import type { GetProps } from '@crossed/core';
 import { withDefaultProps } from '@crossed/core';
 
-export const Anchor = withDefaultProps(
-  withStyle(
-    Text,
-    (t) => ({
-      base: {
-        'fontFamily': t.fontFamily,
-        'textDecorationLine': 'none',
-        'cursor': 'pointer',
-      },
-      ':hover': {
-        textDecorationLine: 'underline',
-        color: t.utils.shadeColor(t.colors.link, 45),
-      },
-    })
-    // { name: 'Anchor' }
-  ),
-  { weight: 'medium', role: 'link', color: 'link' }
+export const Anchor = withStyle(
+  withDefaultProps(Text, { weight: 'medium', role: 'link', color: 'link' }),
+  ({ theme: t }) => ({
+    'base': {
+      fontFamily: t.fontFamily,
+      textDecorationLine: 'none',
+      cursor: 'pointer',
+    },
+    ':hover': {
+      textDecorationLine: 'underline',
+      color: t.utils.shadeColor(t.colors.link, 45),
+    },
+  })
+  // { name: 'Anchor' }
 );
 
 export type AnchorProps = GetProps<typeof Anchor>;

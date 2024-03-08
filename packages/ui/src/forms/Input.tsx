@@ -314,7 +314,7 @@ const InputRoot = withStyle(
       />
     );
   }),
-  (t) => ({
+  ({ theme: t }) => ({
     base: {
       color: t.colors.default,
       backgroundColor: t.utils.shadeColor(t.colors.background, 50),

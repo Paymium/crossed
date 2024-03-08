@@ -13,9 +13,9 @@ import { Select, Text } from '@crossed/ui';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 import { useSignals } from '@preact/signals-react/runtime';
 import { useSignal } from '@preact/signals-react';
-import { colorsLight } from '@crossed/ui/src/theme/colors';
-import type { Entries } from '@crossed/ui';
-import { fontSize } from '@crossed/ui/src/theme/theme';
+// import { colorsLight } from '@crossed/ui/src/theme/colors';
+// import type { Entries } from '@crossed/ui';
+// import { fontSize } from '@crossed/ui/src/theme/theme';
 
 export default function CreateBadge() {
   useSignals();
@@ -88,7 +88,7 @@ const MyComponent = () => {
               <Select.Value />
             </Select.Trigger>
             <Select.Content>
-              {(Object.entries(colorsLight) as Entries<typeof colorsLight>).map(
+              {/* {(Object.entries(colorsLight) as Entries<typeof colorsLight>).map(
                 ([key]) => {
                   if (
                     key !== 'background' &&
@@ -103,7 +103,7 @@ const MyComponent = () => {
                   }
                   return null;
                 }
-              )}
+              )} */}
             </Select.Content>
           </Select>
           <Select
@@ -116,13 +116,13 @@ const MyComponent = () => {
               <Select.Value />
             </Select.Trigger>
             <Select.Content>
-              {(Object.entries(fontSize) as Entries<typeof fontSize>).map(
+              {/* {(Object.entries(fontSize) as Entries<typeof fontSize>).map(
                 ([key]) => (
                   <Select.Option value={key} key={key}>
                     <Text>{key}</Text>
                   </Select.Option>
                 )
-              )}
+              )} */}
             </Select.Content>
           </Select>
           <Select

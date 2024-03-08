@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { withStaticProperties } from '@crossed/core';
+import { withStaticProperties, ReactComponentWithRef } from '@crossed/core';
 import type { ComponentType } from 'react';
 import { createButtonMain } from './Button';
 import { createButtonText } from './ButtonText';
@@ -24,7 +24,7 @@ export const createButton = <
 >(components: {
   Root: ComponentType<ButtonProps>;
   Group: ComponentType<GroupProps>;
-  Text: ComponentType<TextProps>;
+  Text: ReactComponentWithRef<TextProps, any>;
   Element: ComponentType<ElementProps>;
 }) => {
   const { Root, Group, Text, Element } = components;

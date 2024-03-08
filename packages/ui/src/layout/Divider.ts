@@ -11,24 +11,28 @@ import { View } from 'react-native';
 import { withStyle } from '@crossed/styled';
 import { withDefaultProps } from '@crossed/core';
 
-export const Divider = withDefaultProps(
-  withStyle(View, (t) => ({
+export const Divider = withStyle(
+  withDefaultProps(View, { role: 'separator' }),
+  ({ theme: t }) => ({
     base: {
       borderWidth: 0,
       borderColor: t.colors.neutral,
-      variants: {
-        direction: {
-          vertical: {
+    },
+    variants: {
+      direction: {
+        vertical: {
+          base: {
             borderLeftWidth: 1,
             height: '100%',
           },
-          horizontal: {
+        },
+        horizontal: {
+          base: {
             borderTopWidth: 1,
             width: '100%',
           },
         },
       },
     },
-  })),
-  { role: 'separator' }
+  })
 );

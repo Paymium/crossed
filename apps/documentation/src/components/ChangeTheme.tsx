@@ -8,7 +8,7 @@
 'use client';
 // import { UnistylesRuntime } from '@crossed/styled';
 // import { Sun } from '@crossed/unicons/Sun';
-// import { Moon } from '@crossed/unicons/Moon';
+import { Moon } from '@crossed/unicons/Moon';
 import { Button } from '@crossed/ui';
 import { VisibilityHidden } from '@crossed/primitive';
 import { useCallback } from 'react';
@@ -43,6 +43,7 @@ export const ChangeTheme = () => {
           mode
         </Button.Text>
       </VisibilityHidden>
+      <Moon />
       {/* {UnistylesRuntime.themeName === 'light' ? <Moon /> : <Sun />} */}
     </Button>
   );

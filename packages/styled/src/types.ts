@@ -25,13 +25,63 @@ export type CrossedstyleValues = {
   [propName in AllAvailableKeys]?: AllAvailableStyles[propName];
 };
 
-export type StyleSheet = {
-  'base': CrossedstyleValues;
-  ':hover'?: CrossedstyleValues;
-  ':focus'?: CrossedstyleValues;
-  ':active'?: CrossedstyleValues;
-};
+export interface StyleSheet {}
 
 export type CreateStyleParams =
-  | ((_theme: CrossedstyleTheme) => StyleSheet)
+  | ((_params: { theme: CrossedstyleTheme }) => StyleSheet)
   | StyleSheet;
+
+export type PluginContext<S> = {
+  /**
+   * Key detected
+   */
+  key: keyof S;
+  /**
+   * style correspond of test key
+   */
+  styles: S[keyof S];
+
+  /**
+   * props of component, only on runtime
+   */
+  props?: any;
+  /**
+   * Callback function for add className and style object
+   * @returns {void}
+   */
+  addClassname: (_params: {
+    /**
+     * Add suffix on className
+     * @returns {string} string to add as suffix
+     */
+    suffix?: string;
+    /**
+     * Add prefix on className
+     * @returns {string} string to add as prefix
+     */
+    prefix?: string;
+    wrapper?: (_str: string) => string;
+    body: Record<string, CrossedstyleValues>;
+  }) => void;
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore S should exists
+export interface CrossedPropsExtended<S extends StyleSheet> {} // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
+
+export type Plugin<S = any> = {
+  /**
+   * Test of key, if true, apply plugin
+   */
+  test: string;
+  /**
+   * apply transform on detected object
+   * @returns
+   */
+  apply: (_context: PluginContext<Required<S>>) => void;
+  /**
+   * driver to use
+   * @returns
+   */
+  useDriver?: () => any;
+};

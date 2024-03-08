@@ -9,7 +9,7 @@ import type { CrossedstyleTheme } from '../types';
 
 export type UseStyle = (
   _params?: () => Record<string, any>,
-  _props?: Record<string, any> & { className: string; style: {} },
+  _props?: Record<string, any> & { className?: string; style?: any },
   _options?: { native?: boolean; debug?: boolean }
 ) => {
   className: string;

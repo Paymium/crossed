@@ -9,56 +9,55 @@
 import { MenuList, XBox, YBox } from '@crossed/ui';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { withStyle } from '@crossed/styled';
-import mq from '@crossed/styled/mq';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
 
 const Container = withStyle(XBox, { base: { minHeight: '100%' } });
 
-const Center = withStyle(YBox, (t) => ({
+const Center = withStyle(YBox, ({ theme: t }) => ({
   base: {
     flex: 1,
     width: '100%',
     borderColor: t.colors.neutral,
-    [mq.width('xs', 'lg')]: { paddingHorizontal: t.space.md },
-    [mq.width('lg')]: { paddingHorizontal: t.space[100] },
-    variants: {
-      bordered: {
-        true: {
-          borderRightWidth: {
-            [mq.width(undefined, 'xl')]: 0,
-            [mq.width('xl')]: 1,
-          },
+  },
+  variants: {
+    bordered: {
+      true: {
+        media: {
+          xl: { borderRightWidth: 1 },
         },
-        false: { borderRightWidth: 0 },
       },
+      false: { base: { borderRightWidth: 0 } },
     },
+  },
+  media: {
+    xs: { paddingHorizontal: t.space.md },
+    lg: { paddingHorizontal: t.space[100] },
   },
 }));
 
-const Menu = withDefaultProps(
-  withStyle(MenuList, () => ({
+const Menu = withStyle(
+  withDefaultProps(MenuList, { space: 'xs', size: 'xs' }),
+  () => ({
     base: {
       paddingHorizontal: 20,
       alignSelf: 'baseline',
-      [mq.width(undefined, 'xl')]: { display: 'none' },
-      [mq.width('xl')]: { display: 'flex' },
+      display: 'none',
     },
-  })),
-  { space: 'xs', size: 'xs' }
+    media: {
+      xl: { display: 'flex' },
+    },
+  })
 );
 
-const Label = withStyle(MenuList.Label, (t) => ({
+const Label = withStyle(MenuList.Label, ({ theme: t }) => ({
   base: { fontSize: t.fontSize.lg },
 }));
 
-const Li = withDefaultProps(
-  withStyle(YBox, { base: { alignItems: 'stretch' } }),
-  {
-    role: 'listitem',
-  }
-);
+const Li = withStyle(withDefaultProps(YBox, { role: 'listitem' }), {
+  base: { alignItems: 'stretch' },
+});
 
 type Nav = {
   href: string;
@@ -94,7 +93,7 @@ export const TOCLayout = ({
                 <MenuList.Item
                   role="link"
                   href={`${pathname}${href}`}
-                  hovered={href === hash}
+                  // hovered={href === hash}
                   onPress={(e) => {
                     e.stopPropagation();
                     e.preventDefault();

@@ -11,23 +11,23 @@ import { withStyle } from '@crossed/styled';
 import { Text } from '../typography/Text';
 import { XBox } from '../layout/XBox';
 
-const Container = withDefaultProps(
-  withStyle(XBox, (t) => ({
+const Container = withStyle(
+  withDefaultProps(XBox, { space: undefined }),
+  ({ theme: t }) => ({
     base: {
       padding: t.space.md,
       borderRadius: 4,
       alignItems: 'flex-start',
-      variants: {
-        status: {
-          error: { backgroundColor: t.colors.error },
-          success: { backgroundColor: t.colors.success },
-          warning: { backgroundColor: t.colors.warning },
-          info: { backgroundColor: t.colors.info },
-        },
+    },
+    variants: {
+      status: {
+        error: { base: { backgroundColor: t.colors.error } },
+        success: { base: { backgroundColor: t.colors.success } },
+        warning: { base: { backgroundColor: t.colors.warning } },
+        info: { base: { backgroundColor: t.colors.info } },
       },
     },
-  })),
-  { space: undefined }
+  })
 );
 
 const Icon = () => {};

@@ -6,14 +6,14 @@
  */
 
 import { useStyle } from '@crossed/styled';
-import type { IconProps } from '../types';
+import type { RequireOnly } from '../types';
 
 export const MousePointerClick = ({
   Svg,
   Path,
   color,
   size = 24,
-}: IconProps) => {
+}: RequireOnly<'Svg' | 'Path'>) => {
   const { theme } = useStyle();
   return (
     <Svg

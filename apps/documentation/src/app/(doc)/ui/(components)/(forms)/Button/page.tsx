@@ -14,14 +14,14 @@ import { MousePointerClick } from '@crossed/unicons/MousePointerClick';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 import { useSignal } from '@preact/signals-react';
 import { useSignals } from '@preact/signals-react/runtime';
-import { useStyles } from 'react-native-unistyles';
+import { useStyle } from '@crossed/styled';
 
 export default function CreateBadge() {
   useSignals();
   const { t } = useTranslation();
   const variants = useSignal('default');
   const colors = useSignal('neutral');
-  const { theme } = useStyles();
+  const { theme } = useStyle();
   return (
     <TemplatePrimitive
       title="Button"
