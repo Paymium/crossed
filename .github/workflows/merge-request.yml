@@ -36,6 +36,8 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install --frozen-lock
+      - name: Build
+        run: pnpm build
       - name: Linter
         run: pnpm lint
       - name: unit-test
