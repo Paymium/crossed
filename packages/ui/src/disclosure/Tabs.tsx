@@ -65,15 +65,15 @@ const TabsRoot = ({
   );
 };
 
-const List = withDefaultProps(
-  withStyle(XBox, (t) => ({
+const List = withStyle(
+  withDefaultProps(XBox, { space: 'xs' }),
+  ({ theme: t }) => ({
     base: {
       borderBottomWidth: 1,
       borderColor: t.colors.neutral,
       paddingBottom: t.space.xs,
     },
-  })),
-  { space: 'xs' }
+  })
 );
 
 const Panels = ({ children }: PropsWithChildren) => {
@@ -84,7 +84,7 @@ const TabImpl = withStaticProperties(
     value: valueProps,
     ...props
   }: ButtonProps & Pick<TabsContext, 'value'>) => {
-    const { variant, setValue, size, value } = useTabsContext();
+    const { variant, setValue, size } = useTabsContext();
 
     const onPress = useCallback(
       composeEventHandlers(() => {
@@ -97,7 +97,7 @@ const TabImpl = withStaticProperties(
       <Button
         variant={variant}
         size={size}
-        active={valueProps === value}
+        // active={valueProps === value}
         {...props}
         onPress={onPress}
       />

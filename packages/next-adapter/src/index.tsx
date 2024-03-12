@@ -6,34 +6,40 @@
  */
 
 import StylePlugin, { type StylePluginOptions } from '@crossed/webpack';
-
-export default (options?: StylePluginOptions) =>
-  function withCrossed(nextConfig: any = {}) {
+export default (options: StylePluginOptions) => {
+  return function withCrossed(nextConfig: any = {}) {
     const updatedNextConfig = {
       ...nextConfig,
       // transpilePackages: [...nextConfig.transpilePackages, '@crossed/styled'],
       webpack: (config: any, context: any) => {
+        const { isServer } = context;
         config = nextConfig.webpack
           ? nextConfig.webpack(config, context)
           : config;
 
-        (config.plugins = [...config.plugins, new StylePlugin(options)]),
-          // config.resolve.alias = {
-          //   ...(config.resolve.alias || {}),
-          //   'react-native$': 'react-native-web',
-          // };
-
-          (config.resolve.extensions = [
-            '.web.js',
-            '.web.ts',
-            '.web.tsx',
-            ...config.resolve.extensions,
-          ]);
+        config.resolve.extensions = [
+          '.web.js',
+          '.web.ts',
+          '.web.tsx',
+          ...config.resolve.extensions,
+        ];
 
         config.module.rules.push({
           test: /\.ttf$/,
           loader: 'url-loader',
         });
+
+        config.resolve.alias = {
+          ...(config.resolve.alias || {}),
+          'react-native$': 'react-native-web',
+        };
+
+        // if (!isServer) {
+        config.plugins = [
+          ...config.plugins,
+          new StylePlugin({ ...options, isServer }),
+        ];
+        // }
 
         return config;
       },
@@ -41,3 +47,4 @@ export default (options?: StylePluginOptions) =>
 
     return updatedNextConfig;
   };
+};

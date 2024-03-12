@@ -6,9 +6,14 @@
  */
 
 import { useStyle } from '@crossed/styled';
-import type { IconProps } from '../types';
+import type { RequireOnly } from '../types';
 
-export const Github = ({ Svg, Path, color, size = 24 }: IconProps) => {
+export const Github = ({
+  Svg,
+  Path,
+  color,
+  size = 24,
+}: RequireOnly<'Svg' | 'Path'>) => {
   const { theme } = useStyle();
   return (
     <Svg

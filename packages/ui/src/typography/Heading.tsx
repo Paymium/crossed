@@ -21,7 +21,7 @@ export const H1 = withDefaultProps<HeadingProps>(Text, {
 });
 
 export const H2 = withDefaultProps<HeadingProps>(
-  withStyle(Text, (t) => ({
+  withStyle(Text, ({ theme: t }) => ({
     base: { marginTop: t.space.xl, marginBottom: t.space.md },
   })),
   {

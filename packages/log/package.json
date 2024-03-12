@@ -1,0 +1,29 @@
+{
+  "name": "@crossed/log",
+  "description": "",
+  "version": "0.1.0",
+  "main": "lib/commonjs/index",
+  "types": "lib/typescript/index.d.ts",
+  "module": "lib/module/index",
+  "react-native": "src/index",
+  "source": "src/index",
+  "typings": "lib/typescript/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf lib",
+    "watch": "crossed-build --watch",
+    "build": "crossed-build",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@crossed/build": "*",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "human-logs": "^0.4.1",
+    "winston": "^3.11.0"
+  },
+  "files": [
+    "lib/",
+    "src/"
+  ]
+}

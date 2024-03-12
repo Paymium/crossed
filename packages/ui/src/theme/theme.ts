@@ -46,6 +46,18 @@ export const fontSize: Theme['fontSize'] = {
 };
 
 const utils: Theme['utils'] = {
+  rgbaToHex: (color) => {
+    const rgba = color.replace(/^rgba?\(|\s+|\)$/g, '').split(',');
+
+    return `#${(
+      (1 << 24) +
+      (parseInt(rgba[0]) << 16) +
+      (parseInt(rgba[1]) << 8) +
+      parseInt(rgba[2])
+    )
+      .toString(16)
+      .slice(1)}`;
+  },
   shadeColor: (col, amt) => {
     col = col.replace(/^#/, '');
     if (col.length === 3)
@@ -104,7 +116,7 @@ const utils: Theme['utils'] = {
             key !== 'backgroundSoft' &&
             key !== 'backgroundStrong'
           ) {
-            acc[key] = { color: value };
+            acc[key] = { base: { color: value } };
           }
           return acc;
         },
@@ -123,7 +135,7 @@ const utils: Theme['utils'] = {
           key !== 'default' &&
           key !== 'white'
         ) {
-          acc[key] = { backgroundColor: value };
+          acc[key] = { base: { backgroundColor: value } };
         }
         return acc;
       }, {} as any);
@@ -146,7 +158,7 @@ export const lightTheme = {
 export const darkTheme = {
   colors: colorsDark,
   fontFamily:
-    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
+    '-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif',
   space,
   // padding,
   size,

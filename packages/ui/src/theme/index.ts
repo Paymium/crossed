@@ -5,31 +5,33 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Registry } from '@crossed/styled/registry';
-import { darkTheme } from /*lightTheme*/ './theme';
+// import { Registry } from '@crossed/styled/registry';
+// import { darkTheme } from './theme';
 // import { breakpoints } from './breakpoints';
 // import deepmerge from 'deepmerge';
 import type { Extends, Themes } from './types';
+// import type { CrossedBasePlugin } from '@crossed/styled/src/plugins/Base';
+// import type {
+//   CrossedVariantsPlugin,
+//   CrossedVariantsPluginProps,
+// } from '@crossed/styled/src/plugins/Variants';
+// import type { CrossedMediaQueriesPlugin } from '@crossed/styled/src/plugins/MediaQueries';
+// import type { CrossedPseudoClassPlugin } from '@crossed/styled/src/plugins/PseudoClass';
 
 // type AppBreakpoints = typeof breakpoints;
 
-type AppThemes = typeof darkTheme;
+// type AppThemes = typeof darkTheme;
 
 // type AppThemes = {
 //   light: typeof lightTheme;
 //   dark: typeof darkTheme;
 // };
 
-declare module '@crossed/styled' {
-  // export interface UnistylesBreakpoints extends AppBreakpoints {}
-  export interface CrossedstyleTheme extends AppThemes {}
-}
-
 export const setup = ({
   themes: _themes,
   extends: _extendsProps,
 }: { themes?: Themes; extends?: Extends } = {}) => {
-  Registry.setTheme(darkTheme);
+  // Registry.setTheme(darkTheme);
   // Registry.addBreakpoints(breakpoints)
   //   .addThemes(
   //     themes ??

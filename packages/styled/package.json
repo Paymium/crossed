@@ -2,12 +2,12 @@
   "name": "@crossed/styled",
   "description": "A universal & performant styling library for React Native, Next.js & React",
   "version": "0.13.0",
-  "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
-  "module": "lib/module/index",
-  "react-native": "src/index",
-  "source": "src/index",
   "typings": "lib/typescript/index.d.ts",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "react-native": "./src/index.ts",
+  "source": "src/index",
   "keywords": [
     "React Native",
     "Next.js",
@@ -30,62 +30,70 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "crossed-build --watch --project-path ./tsconfig.build.json",
-    "build": "crossed-build  --project-path ./tsconfig.build.json"
+    "watch": "crossed-build --watch",
+    "build": "crossed-build"
   },
   "files": [
     "lib/",
     "src/"
   ],
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "require": "./lib/commonjs/index.js",
       "import": "./lib/module/index.js",
       "default": "./lib/module/index.js",
+      "react-native": "./src/index.ts",
       "types": "./lib/typescript/index.d.ts"
-    },
-    "./hashCode": {
-      "require": "./lib/commonjs/hashCode.js",
-      "import": "./lib/module/hashCode.js",
-      "default": "./lib/module/hashCode.js",
-      "types": "./lib/typescript/hashCode.d.ts"
-    },
-    "./mq": {
-      "require": "./lib/commonjs/mq.js",
-      "import": "./lib/module/mq.js",
-      "default": "./lib/module/mq.js",
-      "types": "./lib/typescript/mq.d.ts"
     },
     "./registry": {
       "require": "./lib/commonjs/Registry.js",
       "import": "./lib/module/Registry.js",
       "default": "./lib/module/Registry.js",
+      "react-native": "./src/Registry.ts",
       "types": "./lib/typescript/Registry.d.ts"
+    },
+    "./plugins": {
+      "require": "./lib/commonjs/plugins/index.js",
+      "import": "./lib/module/plugins/index.js",
+      "default": "./lib/module/plugins/index.js",
+      "react-native": "./src/plugins/index.ts",
+      "types": "./lib/typescript/plugins/index.d.ts"
     }
   },
   "typesVersions": {
     "*": {
-      "index": ["lib/typescript/index.d.ts"],
-      "hashCode": ["lib/typescript/hashCode.d.ts"],
-      "mq": ["lib/typescript/mq.d.ts"],
-      "registry": ["lib/typescript/Registry.d.ts"]
+      ".": [
+        "./lib/typescript/index.d.ts"
+      ],
+      "registry": [
+        "./lib/typescript/Registry.d.ts"
+      ],
+      "plugins": [
+        "./lib/typescript/plugins/index.d.ts"
+      ]
     }
   },
   "devDependencies": {
     "@crossed/build": "^0.5.0",
-    "@types/react": "^18.2.48",
+    "@crossed/test": "0.11.0",
+    "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.18",
-    "@types/react-native": "^0.73.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.73.2",
+    "react-native": "^0.73.5",
+    "react-native-web": "^0.19.10",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.73.2"
+    "react-native": "^0.73.5",
+    "react-native-web": "^0.19.10"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@crossed/core": "workspace:^",
+    "deepmerge": "^4.3.1"
+  }
 }

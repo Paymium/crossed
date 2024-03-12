@@ -147,7 +147,7 @@ export type StylableComponent<
   | ComponentType<P>
   | ForwardRefExoticComponent<P>
   | ReactComponentWithRef<P, any>
-  | ElementType<P>
+  // | ElementType<P>
   | (new (_props: P) => any);
 
 export type UnionToIntersection<U> = (

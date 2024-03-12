@@ -9,7 +9,7 @@ import { withStyle } from '@crossed/styled';
 import { Text } from '../typography/Text';
 import type { GetProps } from '@crossed/core';
 
-const Code = withStyle(Text, (t) => ({
+const Code = withStyle(Text, ({ theme: t }) => ({
   base: {
     backgroundColor: t.colors.neutral,
     paddingVertical: 1,

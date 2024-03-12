@@ -41,7 +41,7 @@ const Label = forwardRef((props: TextProps & ButtonVariantProps, ref) => {
       {...props}
       style={[
         style.base,
-        style.base.extraStyle({ ...context, ...props }, {}),
+        // style.base.extraStyle({ ...context, ...props }, {}),
         props.style,
       ]}
       ref={ref}

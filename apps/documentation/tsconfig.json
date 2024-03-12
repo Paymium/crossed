@@ -6,7 +6,6 @@
     "skipLibCheck": true,
     "strict": false,
     "noEmit": true,
-    "composite": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -22,14 +21,6 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@crossed/core": ["./node_modules/@crossed/core/src"],
-      "@crossed/core/*": ["./node_modules/@crossed/core/src/*"],
-      "@crossed/ui": ["./node_modules/@crossed/ui/src"],
-      "@crossed/ui/*": ["./node_modules/@crossed/ui/src/*"],
-      "@crossed/primitive": ["./node_modules/@crossed/primitive/src"],
-      "@crossed/primitive/*": ["./node_modules/@crossed/primitive/src/*"],
-      "@crossed/unicons": ["./node_modules/@crossed/unicons/src"],
-      "@crossed/unicons/*": ["./node_modules/@crossed/unicons/src/*"],
     },
     "typeRoots": ["./src/types/**/*.ts"]
   },

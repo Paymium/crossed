@@ -13,7 +13,7 @@ import { withStyle } from '@crossed/styled';
 import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
 
-const Container = withStyle(YBox, (t) => ({
+const Container = withStyle(YBox, ({ theme: t }) => ({
   base: {
     backgroundColor: t.colors.backgroundStrong,
     padding: 15,
@@ -24,15 +24,12 @@ const Container = withStyle(YBox, (t) => ({
   },
 }));
 
-const Row = withDefaultProps(
-  withStyle(XBox, {
-    base: {
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  }),
-  { space: 'sm' }
-);
+const Row = withStyle(withDefaultProps(XBox, { space: 'sm' }), {
+  base: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export const Footer = () => {
   const { t } = useTranslation();

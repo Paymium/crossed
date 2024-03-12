@@ -37,7 +37,7 @@ export type VariantColor = {
   [key in keyof Omit<
     Colors,
     'background' | 'backgroundStrong' | 'backgroundSoft'
-  >]: { color: Colors[key] };
+  >]: { base: { color: Colors[key] } };
 };
 
 export type VariantBackgroundColor = {
@@ -49,7 +49,7 @@ export type VariantBackgroundColor = {
     | 'black'
     | 'default'
     | 'white'
-  >]: { backgroundColor: Colors[key] };
+  >]: { base: { backgroundColor: Colors[key] } };
 };
 
 export type Theme = {
@@ -85,6 +85,7 @@ export type Theme = {
   utils: {
     shadeColor: (_col: string, _amt: number) => string;
     hexToRgbA: (_hex: string, _alpha: number) => string;
+    rgbaToHex: (_rgba: string) => string;
     select: (
       _p: { hover?: any; active?: any; focus?: any; base?: any },
       _state: { hover?: boolean; active?: boolean; focus?: boolean }

@@ -11,17 +11,17 @@ import { withStyle } from '@crossed/styled';
 import type { GetProps } from '@crossed/core';
 import { Box } from './Box';
 
-export const XBox = withStyle(Box, () => ({
+export const XBox = withStyle(Box, {
   base: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     width: '100%',
     flexBasis: 'auto',
-    variants: {
-      center: { true: { alignItems: 'center' } },
-    },
   },
-}));
+  variants: {
+    center: { true: { base: { alignItems: 'center' } } },
+  },
+});
 
 export type XBoxProps = GetProps<typeof XBox>;

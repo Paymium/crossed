@@ -6,17 +6,20 @@
  */
 
 import { withStyle } from '@crossed/styled';
-import { Text, TextProps } from './Text';
+import { Text } from './Text';
 import { forwardRef, memo } from 'react';
 import { XBox, XBoxProps } from '../layout/XBox';
 import { YBox } from '../layout/YBox';
 import { withDefaultProps } from '@crossed/core';
 
-export const Ul = withStyle(withDefaultProps(YBox, { role: 'list' }), (t) => ({
-  base: {
-    marginTop: t.space.xl,
-  },
-}));
+export const Ul = withStyle(
+  withDefaultProps(YBox, { role: 'list' }),
+  ({ theme: t }) => ({
+    base: {
+      marginTop: t.space.xl,
+    },
+  })
+);
 
 export const Li = withStyle(
   memo(
@@ -27,16 +30,10 @@ export const Li = withStyle(
       </XBox>
     ))
   ),
-  (t) => ({ base: { gap: t.space.md, marginBottom: t.space.md } })
+  ({ theme: t }) => ({ base: { gap: t.space.md, marginBottom: t.space.md } })
 );
 
 export const Disc = withStyle(
-  memo(
-    forwardRef((props: Omit<TextProps, 'children'>, ref: any) => (
-      <Text {...props} ref={ref}>
-        {'\u2B24' + ' '}
-      </Text>
-    ))
-  ),
+  withDefaultProps(Text, { children: '\u2B24' + ' ' }),
   { base: { fontSize: 9 } }
 );

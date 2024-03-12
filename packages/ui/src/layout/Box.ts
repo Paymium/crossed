@@ -11,19 +11,17 @@ import { View } from 'react-native';
 import { withStyle } from '@crossed/styled';
 import type { GetProps } from '@crossed/core';
 
-export const Box = withStyle(View, (t) => ({
-  base: {
-    display: 'flex',
-    variants: {
-      space: {
-        xs: { gap: t.space.xs },
-        sm: { gap: t.space.sm },
-        md: { gap: t.space.md },
-        lg: { gap: t.space.lg },
-        xl: { gap: t.space.xl },
-      },
-      center: { true: { alignItems: 'center' } },
+export const Box = withStyle(View, ({ theme: t }) => ({
+  base: { display: 'flex' },
+  variants: {
+    space: {
+      xs: { base: { gap: t.space.xs } },
+      sm: { base: { gap: t.space.sm } },
+      md: { base: { gap: t.space.md } },
+      lg: { base: { gap: t.space.lg } },
+      xl: { base: { gap: t.space.xl } },
     },
+    center: { true: { base: { alignItems: 'center' } } },
   },
 }));
 

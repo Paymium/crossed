@@ -7,29 +7,35 @@
 
 'use client';
 
-import { withStyle } from '@crossed/styled';
+import { GetProps } from '@crossed/core';
+import { useStyle, withStyle } from '@crossed/styled';
 import { Alert, Center, Text, XBox, YBox } from '@crossed/ui';
 import { themes } from 'prism-react-renderer';
 import { PropsWithChildren, ReactNode, useCallback } from 'react';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
-const StyledLiveEditor = withStyle(LiveEditor, {
-  base: {
-    width: '100%',
-    borderRadius: 4,
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-  },
-});
+const StyledLiveEditor = (props: GetProps<typeof LiveEditor>) => {
+  const { theme } = useStyle();
+  return (
+    <LiveEditor
+      {...props}
+      style={{
+        width: '100%',
+        borderRadius: 4,
+        fontFamily: theme.fontFamily,
+      }}
+    />
+  );
+};
 
-const RenderPreview = withStyle(Center, (t) => ({
+const RenderPreview = withStyle(Center, ({ theme: t }) => ({
   base: {
     padding: t.space.md,
     alignItems: 'stretch',
   },
 }));
 
-const ContainerPreview = withStyle(XBox, (t) => ({
+const ContainerPreview = withStyle(XBox, ({ theme: t }) => ({
   base: {
     borderWidth: 1,
     borderColor: t.colors.neutral,
@@ -37,7 +43,7 @@ const ContainerPreview = withStyle(XBox, (t) => ({
     borderRadius: 4,
   },
 }));
-const ContainerVariants = withStyle(YBox, (t) => ({
+const ContainerVariants = withStyle(YBox, ({ theme: t }) => ({
   base: {
     borderLeftWidth: 1,
     borderColor: t.colors.neutral,
@@ -46,9 +52,9 @@ const ContainerVariants = withStyle(YBox, (t) => ({
   },
 }));
 
-const Pre = withStyle(Text, (t) => ({
+const Pre = withStyle(Text, ({ theme: t }) => ({
   base: {
-    backgroundColor: themes.dracula.plain.backgroundColor,
+    // backgroundColor: themes.dracula.plain.backgroundColor,
     width: '100%',
     padding: t.space.md,
     boxSizing: 'border-box',

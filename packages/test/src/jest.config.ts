@@ -6,7 +6,7 @@
  */
 
 import type { Config } from '@jest/types';
-import path from 'path';
+import * as path from 'path';
 import { readFileSync } from 'fs';
 
 let localSetup: boolean = false;
@@ -43,6 +43,8 @@ const config: Config.InitialOptions = {
     '^react-native-reanimated$':
       '<rootDir>/node_modules/react-native-reanimated/mock',
   },
+  coveragePathIgnorePatterns: ['/node_modules/', '__tests__'],
+  testRegex: '\\.spec\\.[jt]sx?$',
   transformIgnorePatterns: [
     // 'node_modules/(?!((.pnpm/)?((jest-)?react-native|@react-native(-community)?))|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|tamagui|@tamagui/.*|@crossed/.*|react-native-reanimated|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)',
     'node_modules/(?!((.pnpm/)?(@preact)))',

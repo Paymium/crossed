@@ -6,7 +6,10 @@
  */
 
 export { useStyle } from './useStyle';
-export { createStyle } from './creatStyle';
+export { useStyles } from './useStyles';
+export { createStyle } from './createStyle';
+export { createStyles } from './createStyles';
 export { withStyle } from './withStyle';
 export { Registry } from './Registry';
+export * from './plugins/utils';
 export type * from './types';

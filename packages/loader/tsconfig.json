@@ -5,14 +5,13 @@
     "outDir": "./lib/typescript",
     "noImplicitAny": true,
     "module": "es6",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2017"],
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node",
-    "emitDeclarationOnly": true,
     "declaration": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
   }
 }

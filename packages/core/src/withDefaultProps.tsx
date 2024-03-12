@@ -10,7 +10,7 @@ import { withStaticProperties } from './withStaticProperties';
 
 export function withDefaultProps<P extends Record<string, any>>(
   Comp: ComponentType<P>,
-  defaultProps: Partial<P>
+  defaultProps: P
 ) {
   const { id, styleSheet, displayName } = Comp as any;
   return withStaticProperties(

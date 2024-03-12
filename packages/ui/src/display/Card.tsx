@@ -15,21 +15,21 @@ import { YBox } from '../layout/YBox';
 import { Text } from '../typography/Text';
 
 const CardRoot = withStyle(
-  (props) => <YBox {...props} />,
-  (t) => ({
+  YBox,
+  ({ theme: t }) => ({
     base: {
       padding: t.space.md,
       borderRadius: t.space.xs,
       backgroundColor: t.utils.shadeColor(t.colors.background, 25),
-      variants: {
-        role: {
-          link: {
-            'hover:': {
-              backgroundColor: t.utils.shadeColor(t.colors.background, 30),
-            },
-            'active:': {
-              backgroundColor: t.utils.shadeColor(t.colors.background, 20),
-            },
+    },
+    variants: {
+      role: {
+        link: {
+          ':hover': {
+            backgroundColor: t.utils.shadeColor(t.colors.background, 30),
+          },
+          ':active': {
+            backgroundColor: t.utils.shadeColor(t.colors.background, 20),
           },
         },
       },
@@ -38,14 +38,16 @@ const CardRoot = withStyle(
   { native: true }
 );
 
-const Title = withDefaultProps(
-  withStyle(Text, { base: { alignSelf: 'stretch' } }),
-  { size: 'lg' }
+const Title = withStyle(
+  withDefaultProps(Text, { size: 'lg' }),
+  { base: { alignSelf: 'stretch' } },
+  { native: true }
 );
 
-const Description = withDefaultProps(
-  withStyle(Text, { base: { alignSelf: 'stretch' } }),
-  {}
+const Description = withStyle(
+  Text,
+  { base: { alignSelf: 'stretch' } },
+  { native: true }
 );
 
 const Card = withStaticProperties(CardRoot, {
