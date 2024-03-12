@@ -14,6 +14,7 @@ import type {
 import type { darkTheme } from './theme/theme';
 import type { breakpoints } from './theme/breakpoints';
 import type { CrossedVariantsPluginProps } from '@crossed/styled/src/plugins/Variants';
+import type { CrossedPseudoClassProps } from '@crossed/styled/src/plugins/PseudoClass';
 
 type Theme = typeof darkTheme;
 type Breakpoints = keyof typeof breakpoints;
@@ -28,5 +29,6 @@ declare module '@crossed/styled' {
       CrossedPseudoClassPlugin {}
 
   export interface CrossedPropsExtended<S extends StyleSheet>
-    extends CrossedVariantsPluginProps<S['variants']> {}
+    extends CrossedVariantsPluginProps<S['variants']>,
+      CrossedPseudoClassProps {}
 }

@@ -7,7 +7,7 @@
 
 import * as React from 'react';
 import { StylableComponent, withStaticProperties } from '@crossed/core';
-import { createStyle } from './creatStyle';
+import { createStyle } from './createStyle';
 import { useStyle } from './useStyle';
 import type { CreateStyleParams, CrossedPropsExtended } from './types';
 

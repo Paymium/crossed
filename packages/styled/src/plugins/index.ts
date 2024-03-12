@@ -13,6 +13,7 @@ export {
 export {
   PseudoClassPlugin,
   type CrossedPseudoClassPlugin,
+  type CrossedPseudoClassProps,
 } from './PseudoClass';
 export {
   VariantsPlugin,

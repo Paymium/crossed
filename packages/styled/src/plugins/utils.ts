@@ -33,8 +33,10 @@ export const convertToPx = [
   'height',
 ];
 
-export const normalizeUnitPixel = (key: string, value: any) =>
-  convertToPx.includes(key) && typeof value === 'number' ? `${value}px` : value;
+export const normalizeUnitPixel = (key: string, value: any, isWeb?: boolean) =>
+  isWeb && convertToPx.includes(key) && typeof value === 'number'
+    ? `${value}px`
+    : value;
 
 export const convertKeyToCss = (key: string) =>
   key

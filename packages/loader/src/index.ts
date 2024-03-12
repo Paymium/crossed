@@ -197,6 +197,7 @@ export class Loader {
             const keyFind = key.match(new RegExp(test, 'g'));
             if (keyFind && keyFind.length > 0 && typeof apply === 'function') {
               apply?.({
+                isWeb: true,
                 key,
                 styles,
                 addClassname: this.addClassname,

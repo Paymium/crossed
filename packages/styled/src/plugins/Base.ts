@@ -22,7 +22,7 @@ export const BasePlugin: Plugin<CrossedBasePlugin> = {
       body: Object.entries(context.styles).reduce<
         Record<string, CrossedstyleValues>
       >((acc, [key, value]) => {
-        const valueNormalized = normalizeUnitPixel(key, value);
+        const valueNormalized = normalizeUnitPixel(key, value, context.isWeb);
         acc[`.${convertKeyToCss(key)}-[${valueNormalized}]`] = {
           [key]: valueNormalized,
         };

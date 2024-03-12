@@ -9,21 +9,6 @@ const nextConfig = withCrossed.default({
   transpilePackages: ['react-native', 'react-native-reanimated'],
   basePath: '/crossed',
   webpack: (config, { webpack, isServer }) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      'react-native$': 'react-native-web',
-    };
-
-    config.resolve.extensions = [
-      '.web.js',
-      '.web.ts',
-      '.web.tsx',
-      '.server.tsx',
-      '.server.jsx',
-      '.server.js',
-      ...config.resolve.extensions,
-    ];
-
     config.plugins.push(
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),

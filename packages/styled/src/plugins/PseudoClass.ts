@@ -8,6 +8,15 @@
 import type { CrossedstyleValues, Plugin } from '../types';
 import { convertKeyToCss, normalizeUnitPixel } from './utils';
 
+type CrossedPseudoClassList = 'focus' | 'hover' | 'active';
+
+export interface CrossedPseudoClassProps {
+  props: {
+    // eslint-disable-next-line no-unused-vars
+    [key in CrossedPseudoClassList]?: true | false;
+  };
+}
+
 export interface CrossedPseudoClassPlugin {
   ':focus'?: CrossedstyleValues;
   ':hover'?: CrossedstyleValues;
@@ -16,18 +25,20 @@ export interface CrossedPseudoClassPlugin {
 
 export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
   test: '^:(hover|active|focus)$',
-  apply: ({ styles, key: ctxKey, addClassname }) => {
+  apply: ({ styles, key: ctxKey, addClassname, props, isWeb }) => {
     const pseudoClass = ctxKey.replace(/:/i, '');
     Object.entries(styles).forEach(([key, value]) => {
-      const valueNormalized = normalizeUnitPixel(key, value);
-      addClassname({
-        suffix: `:${pseudoClass}`,
-        body: {
-          [`.${pseudoClass}:${convertKeyToCss(key)}-[${valueNormalized}]`]: {
-            [key]: valueNormalized,
+      const valueNormalized = normalizeUnitPixel(key, value, isWeb);
+      if ((props && props[pseudoClass]) || !props) {
+        addClassname({
+          suffix: `:${pseudoClass}`,
+          body: {
+            [`.${pseudoClass}:${convertKeyToCss(key)}-[${valueNormalized}]`]: {
+              [key]: valueNormalized,
+            },
           },
-        },
-      });
+        });
+      }
     }, {});
   },
 };

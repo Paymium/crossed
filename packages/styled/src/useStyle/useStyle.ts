@@ -8,8 +8,11 @@
 import * as React from 'react';
 import { Registry } from '../Registry';
 import type { UseStyle } from './types';
+import type { CrossedstyleValues } from '../types';
+// import { useWindowDimensions } from 'react-native';
+import { composeEventHandlers } from '@crossed/core';
 
-export const useStyle: UseStyle = (params, props) => {
+export const useStyle: UseStyle = (params, props = {}) => {
   const [active, setActive] = React.useState(false);
   const [hover, setHover] = React.useState(false);
   const [, setTransition] = React.useTransition();
@@ -18,41 +21,78 @@ export const useStyle: UseStyle = (params, props) => {
       setActive(true);
     });
   }, [setActive]);
-  const onPressOut = React.useCallback(() => {
-    setTransition(() => {
-      setActive(false);
-    });
-  }, [setActive]);
+  const onPressOut = React.useCallback(
+    composeEventHandlers(props.onPressOut, () => {
+      setTransition(() => {
+        setActive(false);
+      });
+    }),
+    [setActive, props.onPressOut]
+  );
 
-  const onHoverIn = React.useCallback(() => {
-    setTransition(() => {
-      setHover(true);
-    });
-  }, [setHover]);
-  const onHoverOut = React.useCallback(() => {
-    setTransition(() => {
-      setHover(false);
-    });
-  }, [setHover]);
-  return React.useMemo(
+  const onHoverIn = React.useCallback(
+    composeEventHandlers(props.onHoverIn, () => {
+      setTransition(() => {
+        setHover(true);
+      });
+    }),
+    [setHover, props.onHoverIn]
+  );
+  const onHoverOut = React.useCallback(
+    composeEventHandlers(props.onHoverOut, () => {
+      setTransition(() => {
+        setHover(false);
+      });
+    }),
+    [setHover, props.onHoverOut]
+  );
+  // const { width } = useWindowDimensions();
+  const { style, className } = React.useMemo(
     function MemoUseStyle() {
-      // const { style } = parse(params?.() || {});
-      // const style = {};
+      const style: CrossedstyleValues[] = [];
+      if (params) {
+        Object.entries(params()).forEach(
+          ([key, styles]: [string, CrossedstyleValues]) => {
+            Registry.getPlugins().forEach(({ test, apply }) => {
+              const keyFind = key.match(new RegExp(test, 'g'));
+              if (test && keyFind && keyFind.length > 0) {
+                apply({
+                  props: {
+                    ...props,
+                    active: props.active ?? active,
+                    hover: props.hover ?? hover,
+                  },
+                  key,
+                  styles,
+                  addClassname: ({ body }) => {
+                    style.push(...Object.values(body));
+                  },
+                });
+              }
+            });
+          }
+        );
+      }
       return {
         className: ``,
         style: [
+          ...style,
           // style.base,
           // active && style.hover,
           // active && style.active,
           props?.style,
         ],
-        onPressIn,
-        onPressOut,
-        onHoverIn,
-        onHoverOut,
-        theme: Registry.getTheme(),
       };
     },
-    [params, props?.style, active, hover]
+    [params, props, active, hover]
   );
+  return {
+    style,
+    className,
+    onPressIn,
+    onPressOut,
+    onHoverIn,
+    onHoverOut,
+    theme: Registry.getTheme(),
+  };
 };

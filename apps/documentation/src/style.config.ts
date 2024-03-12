@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Registry } from '@crossed/styled';
+import { Registry } from '@crossed/styled/registry';
 import {
   BasePlugin,
   PseudoClassPlugin,

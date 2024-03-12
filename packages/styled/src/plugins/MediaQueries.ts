@@ -17,27 +17,51 @@ export const MediaQueriesPlugin = <B extends Record<string, number>>(
 ): Plugin<CrossedMediaQueriesPlugin<keyof B>> => {
   return {
     test: '^media$',
-    apply: ({ styles, addClassname }) => {
+    apply: ({ styles, addClassname, props, isWeb }) => {
+      let Dimensions: any;
+      let Platform: any;
+      if (props) {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        Dimensions = require('react-native').Dimensions;
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        Platform = require('react-native').Platform;
+      }
       Object.entries(styles).forEach(([key, values]) => {
-        const breakpointsValue = normalizeUnitPixel('width', breakpoints[key]);
+        const breakpointsValue = normalizeUnitPixel(
+          'width',
+          breakpoints[key],
+          isWeb
+        );
         if (values) {
           Object.entries(values).forEach(([keyProperty, valueProperty]) => {
-            const valueNormalized = normalizeUnitPixel(
-              keyProperty,
-              valueProperty
-            );
-
-            addClassname({
-              wrapper: (str) =>
-                `@media (min-width: ${breakpointsValue}) { ${str} }`,
-              body: {
-                [`.${key}:${convertKeyToCss(
-                  keyProperty
-                )}-[${valueNormalized}]`]: {
-                  [keyProperty]: valueNormalized,
+            if (Platform && Platform.OS !== 'web' && Dimensions) {
+              if (breakpoints[key] < Dimensions.get('screen').width) {
+                addClassname({
+                  body: {
+                    [``]: {
+                      [keyProperty]: valueProperty,
+                    },
+                  },
+                });
+              }
+            } else {
+              const valueNormalized = normalizeUnitPixel(
+                keyProperty,
+                valueProperty,
+                isWeb
+              );
+              addClassname({
+                wrapper: (str) =>
+                  `@media (min-width: ${breakpointsValue}) { ${str} }`,
+                body: {
+                  [`.${key}:${convertKeyToCss(
+                    keyProperty
+                  )}-[${valueNormalized}]`]: {
+                    [keyProperty]: valueNormalized,
+                  },
                 },
-              },
-            });
+              });
+            }
           });
         }
       });

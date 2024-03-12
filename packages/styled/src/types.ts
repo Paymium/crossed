@@ -31,6 +31,10 @@ export type CreateStyleParams =
   | ((_params: { theme: CrossedstyleTheme }) => StyleSheet)
   | StyleSheet;
 
+export type CreateStylesParams<K extends string> =
+  | ((_params: { theme: CrossedstyleTheme }) => Record<K, StyleSheet>)
+  | Record<K, StyleSheet>;
+
 export type PluginContext<S> = {
   /**
    * Key detected
@@ -40,6 +44,11 @@ export type PluginContext<S> = {
    * style correspond of test key
    */
   styles: S[keyof S];
+
+  /**
+   * isWeb is true when plugin loaded by @crossed/loader
+   */
+  isWeb?: boolean;
 
   /**
    * props of component, only on runtime
