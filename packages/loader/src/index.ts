@@ -23,7 +23,8 @@ import {
 import escodegen from 'escodegen';
 import { createLogger, apiLog } from '@crossed/log';
 import { Registry } from '@crossed/styled/registry';
-import { convertKeyToCss, type CrossedstyleValues } from '@crossed/styled';
+import { convertKeyToCss } from '@crossed/styled/plugins';
+import type { CrossedstyleValues } from '@crossed/styled';
 
 type Style = Record<string, any>;
 
@@ -172,7 +173,7 @@ export class Loader {
       }
     };
 
-    let parsing;
+    let parsing: Record<string, any>;
 
     if (ast.type === 'ObjectExpression') {
       parsing = _parseObjectExpression(ast);
@@ -191,21 +192,10 @@ export class Loader {
     }
 
     if (parsing) {
-      Object.entries(parsing).forEach(
-        ([key, styles]: [string, CrossedstyleValues]) => {
-          Registry.getPlugins().forEach(({ test, apply }) => {
-            const keyFind = key.match(new RegExp(test, 'g'));
-            if (keyFind && keyFind.length > 0 && typeof apply === 'function') {
-              apply?.({
-                isWeb: true,
-                key,
-                styles,
-                addClassname: this.addClassname,
-              });
-            }
-          });
-        }
-      );
+      Registry.apply(() => parsing, {
+        addClassname: this.addClassname,
+        isWeb: true,
+      });
     }
   }
 }

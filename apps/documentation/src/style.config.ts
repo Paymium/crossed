@@ -15,9 +15,9 @@ import {
   type CrossedVariantsPlugin,
   type CrossedMediaQueriesPlugin,
   type CrossedPseudoClassPlugin,
+  type CrossedVariantsPluginProps,
 } from '@crossed/styled/plugins';
 import { darkTheme } from '@crossed/ui/theme';
-import type { CrossedVariantsPluginProps } from '@crossed/styled/plugins';
 
 const breakpoints = { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200 };
 

@@ -8,6 +8,7 @@
 import * as React from 'react';
 import { Registry } from '../Registry';
 import type { CrossedstyleValues, StyleSheet } from '../types';
+import { Platform } from 'react-native';
 // import { useWindowDimensions } from 'react-native';
 
 export const useStyles = <C extends string>(
@@ -21,6 +22,12 @@ export const useStyles = <C extends string>(
         { className: string; style: CrossedstyleValues }
       > = {} as any;
       if (params) {
+        // Registry.apply(params, {
+        //   // props,
+        //   isWeb: Platform.OS === 'web',
+        //   addClassname: ({ body }) =>
+        //     className.push(...Object.keys(body).map((e) => e.slice(1))),
+        // });
         (Object.entries(params()) as [C, StyleSheet][]).forEach(
           ([keyStyle, styleOfKey]: [C, StyleSheet]) => {
             Object.entries(styleOfKey).forEach(

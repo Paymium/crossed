@@ -20,6 +20,8 @@ export const MediaQueriesPlugin = <B extends Record<string, number>>(
     apply: ({ styles, addClassname, props, isWeb }) => {
       let Dimensions: any;
       let Platform: any;
+      // props only exists at runtime
+      // Hack for load react-native only at runtime, not buildtime
       if (props) {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         Dimensions = require('react-native').Dimensions;
@@ -34,7 +36,8 @@ export const MediaQueriesPlugin = <B extends Record<string, number>>(
         );
         if (values) {
           Object.entries(values).forEach(([keyProperty, valueProperty]) => {
-            if (Platform && Platform.OS !== 'web' && Dimensions) {
+            if (Platform && Dimensions && Platform.OS !== 'web') {
+              // apply style for native
               if (breakpoints[key] < Dimensions.get('screen').width) {
                 addClassname({
                   body: {
@@ -45,6 +48,7 @@ export const MediaQueriesPlugin = <B extends Record<string, number>>(
                 });
               }
             } else {
+              // apply style for web
               const valueNormalized = normalizeUnitPixel(
                 keyProperty,
                 valueProperty,

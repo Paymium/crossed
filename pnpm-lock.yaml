@@ -534,6 +534,9 @@ importers:
       '@crossed/test':
         specifier: 0.11.0
         version: link:../test
+      '@types/jest':
+        specifier: ^29.5.0
+        version: 29.5.5
       '@types/react':
         specifier: ^18.2.64
         version: 18.2.64
@@ -4189,12 +4192,6 @@ packages:
       '@jest/types': 29.6.3
       '@types/node': 20.11.16
       jest-mock: 29.7.0
-
-  /@jest/expect-utils@29.6.2:
-    resolution: {integrity: sha512-6zIhM8go3RV2IG4aIZaZbxwpOzz3ZiM23oxAlkquOIole+G6TrbeXnykxWYlqF7kz2HlBjdKtca20x9atkEQYg==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      jest-get-type: 29.6.3
 
   /@jest/expect-utils@29.7.0:
     resolution: {integrity: sha512-GlsNBWiFQFCVi9QVSx7f5AgMeLxe9YCCs5PuP2O2LdjDAA8Jh9eX7lA1Jq/xdXw3Wb3hyvlFNfZIfcRetSzYcA==}
@@ -14413,7 +14410,7 @@ packages:
       dedent: 1.5.1
       is-generator-fn: 2.1.0
       jest-each: 29.6.2
-      jest-matcher-utils: 29.6.2
+      jest-matcher-utils: 29.7.0
       jest-message-util: 29.7.0
       jest-runtime: 29.6.2
       jest-snapshot: 29.7.0
@@ -14932,10 +14929,6 @@ packages:
     engines: {node: '>= 8.3'}
     dev: true
 
-  /jest-get-type@29.4.3:
-    resolution: {integrity: sha512-J5Xez4nRRMjk8emnTpWrlkyb9pfRQQanDrvWHhsR1+VUfbwxi30eVcZFlcdGInRibU4G5LwHXpI7IRHU0CY+gg==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-
   /jest-get-type@29.6.3:
     resolution: {integrity: sha512-zrteXnqYxfQh7l5FHyL38jL39di8H8rHoecLH3JNxH3BwOrBsNeabdap5e0I23lD4HHI8W5VFBZqG4Eaq5LNcw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -15020,7 +15013,7 @@ packages:
     resolution: {integrity: sha512-aNqYhfp5uYEO3tdWMb2bfWv6f0b4I0LOxVRpnRLAeque2uqOVVMLh6khnTcE2qJ5wAKop0HcreM1btoysD6bPQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
-      jest-get-type: 29.4.3
+      jest-get-type: 29.6.3
       pretty-format: 29.7.0
 
   /jest-leak-detector@29.7.0:
@@ -15040,15 +15033,6 @@ packages:
       jest-get-type: 25.2.6
       pretty-format: 25.5.0
     dev: true
-
-  /jest-matcher-utils@29.6.2:
-    resolution: {integrity: sha512-4LiAk3hSSobtomeIAzFTe+N8kL6z0JtF3n6I4fg29iIW7tt99R7ZcIFW34QkX+DuVrf+CUe6wuVOpm7ZKFJzZQ==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      chalk: 4.1.2
-      jest-diff: 29.6.2
-      jest-get-type: 29.6.3
-      pretty-format: 29.7.0
 
   /jest-matcher-utils@29.7.0:
     resolution: {integrity: sha512-sBkD+Xi9DtcChsI3L3u0+N0opgPYnCRPtGcQYrgXmR+hmt/fYfWAL0xRXYU8eWOdfuLgBe0YCW3AFtnRLagq/g==}
@@ -15072,20 +15056,6 @@ packages:
       slash: 3.0.0
       stack-utils: 1.0.5
     dev: true
-
-  /jest-message-util@29.6.2:
-    resolution: {integrity: sha512-vnIGYEjoPSuRqV8W9t+Wow95SDp6KPX2Uf7EoeG9G99J2OVh7OSwpS4B6J0NfpEIpfkBNHlBZpA2rblEuEFhZQ==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@babel/code-frame': 7.23.5
-      '@jest/types': 29.6.3
-      '@types/stack-utils': 2.0.1
-      chalk: 4.1.2
-      graceful-fs: 4.2.11
-      micromatch: 4.0.5
-      pretty-format: 29.7.0
-      slash: 3.0.0
-      stack-utils: 2.0.6
 
   /jest-message-util@29.7.0:
     resolution: {integrity: sha512-GBEV4GRADeP+qtB2+6u61stea8mGcOT4mCtrYISZwfu9/ISHFJ/5zOMXYbpBE9RsS5+Gb63DW4FgmnKJ79Kf6w==}
@@ -15457,7 +15427,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.22.5(@babel/core@7.24.0)
       '@babel/plugin-syntax-typescript': 7.22.5(@babel/core@7.24.0)
       '@babel/types': 7.24.0
-      '@jest/expect-utils': 29.6.2
+      '@jest/expect-utils': 29.7.0
       '@jest/transform': 29.6.2
       '@jest/types': 29.6.3
       babel-preset-current-node-syntax: 1.0.1(@babel/core@7.24.0)
@@ -15465,10 +15435,10 @@ packages:
       expect: 29.7.0
       graceful-fs: 4.2.11
       jest-diff: 29.6.2
-      jest-get-type: 29.4.3
-      jest-matcher-utils: 29.6.2
-      jest-message-util: 29.6.2
-      jest-util: 29.6.2
+      jest-get-type: 29.6.3
+      jest-matcher-utils: 29.7.0
+      jest-message-util: 29.7.0
+      jest-util: 29.7.0
       natural-compare: 1.4.0
       pretty-format: 29.7.0
       semver: 7.5.4
@@ -15523,6 +15493,7 @@ packages:
       ci-info: 3.8.0
       graceful-fs: 4.2.11
       picomatch: 2.3.1
+    dev: false
 
   /jest-util@29.7.0:
     resolution: {integrity: sha512-z6EbKajIpqGKU56y5KBUgy1dt1ihhQJgWzUlZHArA/+X2ad7Cb5iF+AK1EWVL/Bo7Rz9uurpqw6SiBCefUbCGA==}

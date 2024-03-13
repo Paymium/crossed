@@ -26,48 +26,6 @@ const Root = withStyle(Pressable, ({ theme: t }) => ({
     gap: t.space.sm,
     borderRadius: t.space.xs,
     borderWidth: 1,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore: missing type of extraStyle function
-    // extraStyle: ({ color, variant }, state) => {
-    //   const select = (c: string) => {
-    //     const color = t.utils.select(
-    //       {
-    //         active: t.utils.hexToRgbA(t.utils.shadeColor(c, 25), 0.5),
-    //         hover: t.utils.hexToRgbA(t.utils.shadeColor(c, 5), 0.5),
-    //         base: 'transparent',
-    //       },
-    //       state
-    //     );
-    //     if (variant === 'outlined') {
-    //       return {
-    //         borderColor: c,
-    //         backgroundColor: color,
-    //       };
-    //     } else if (variant === 'ghost') {
-    //       return {
-    //         borderColor: 'transparent',
-    //         backgroundColor: color,
-    //       };
-    //     }
-    //     const colorDefault = t.utils.select(
-    //       {
-    //         active: t.utils.shadeColor(c, -15),
-    //         hover: t.utils.shadeColor(c, 15),
-    //         base: c,
-    //       },
-    //       state
-    //     );
-    //     return {
-    //       borderColor: colorDefault,
-    //       backgroundColor: colorDefault,
-    //     };
-    //   };
-
-    //   if (color && color !== 'neutral') {
-    //     return select((t.colors as any)[color]);
-    //   }
-    //   return select(t.colors.neutral);
-    // },
   },
   variants: {
     size: {

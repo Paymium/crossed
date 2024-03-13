@@ -5,23 +5,27 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import * as React from 'react';
 import { Registry } from '../Registry';
 import type { UseStyle } from './types';
 import type { CrossedstyleValues } from '../types';
-// import { useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import { composeEventHandlers } from '@crossed/core';
+import { useCallback, useMemo, useState, useTransition } from 'react';
+import { Platform } from 'react-native';
 
 export const useStyle: UseStyle = (params, props = {}) => {
-  const [active, setActive] = React.useState(false);
-  const [hover, setHover] = React.useState(false);
-  const [, setTransition] = React.useTransition();
-  const onPressIn = React.useCallback(() => {
-    setTransition(() => {
-      setActive(true);
-    });
-  }, [setActive]);
-  const onPressOut = React.useCallback(
+  const [active, setActive] = useState(false);
+  const [hover, setHover] = useState(false);
+  const [, setTransition] = useTransition();
+  const onPressIn = useCallback(
+    composeEventHandlers(props.onPressIn, () => {
+      setTransition(() => {
+        setActive(true);
+      });
+    }),
+    [setActive, props.onPressIn]
+  );
+  const onPressOut = useCallback(
     composeEventHandlers(props.onPressOut, () => {
       setTransition(() => {
         setActive(false);
@@ -30,7 +34,7 @@ export const useStyle: UseStyle = (params, props = {}) => {
     [setActive, props.onPressOut]
   );
 
-  const onHoverIn = React.useCallback(
+  const onHoverIn = useCallback(
     composeEventHandlers(props.onHoverIn, () => {
       setTransition(() => {
         setHover(true);
@@ -38,7 +42,7 @@ export const useStyle: UseStyle = (params, props = {}) => {
     }),
     [setHover, props.onHoverIn]
   );
-  const onHoverOut = React.useCallback(
+  const onHoverOut = useCallback(
     composeEventHandlers(props.onHoverOut, () => {
       setTransition(() => {
         setHover(false);
@@ -46,46 +50,28 @@ export const useStyle: UseStyle = (params, props = {}) => {
     }),
     [setHover, props.onHoverOut]
   );
-  // const { width } = useWindowDimensions();
-  const { style, className } = React.useMemo(
-    function MemoUseStyle() {
-      const style: CrossedstyleValues[] = [];
-      if (params) {
-        Object.entries(params()).forEach(
-          ([key, styles]: [string, CrossedstyleValues]) => {
-            Registry.getPlugins().forEach(({ test, apply }) => {
-              const keyFind = key.match(new RegExp(test, 'g'));
-              if (test && keyFind && keyFind.length > 0) {
-                apply({
-                  props: {
-                    ...props,
-                    active: props.active ?? active,
-                    hover: props.hover ?? hover,
-                  },
-                  key,
-                  styles,
-                  addClassname: ({ body }) => {
-                    style.push(...Object.values(body));
-                  },
-                });
-              }
-            });
-          }
-        );
-      }
-      return {
-        className: ``,
-        style: [
-          ...style,
-          // style.base,
-          // active && style.hover,
-          // active && style.active,
-          props?.style,
-        ],
-      };
-    },
-    [params, props, active, hover]
-  );
+  const { width } = useWindowDimensions();
+  const { style, className } = useMemo(() => {
+    const style: CrossedstyleValues[] = [];
+    if (params) {
+      Registry.apply(params, {
+        isWeb: Platform.OS === 'web',
+        addClassname: ({ body }) => style.push(...Object.values(body)),
+        props: {
+          ...props,
+          active: props.active ?? active,
+          hover: props.hover ?? hover,
+        },
+      });
+    }
+    return {
+      className: ``,
+      style: [
+        ...style,
+        ...(Array.isArray(props?.style) ? props?.style : [props?.style]),
+      ],
+    };
+  }, [params, props, active, hover, width]);
   return {
     style,
     className,

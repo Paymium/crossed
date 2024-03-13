@@ -20,10 +20,10 @@ const Menu = withStyle(
     base: {
       paddingHorizontal: 20,
       alignSelf: 'baseline',
-      display: 'flex',
+      display: 'none',
     },
     media: {
-      md: { display: 'none' },
+      md: { display: 'flex' },
     },
   })
 );
@@ -44,9 +44,12 @@ const Container = withStyle(XBox, () => ({
 const Center = withStyle(YBox, ({ theme: t }) => ({
   base: {
     flex: 1,
-    borderLeftWidth: 1,
+    borderLeftWidth: 0,
     borderColor: t.colors.neutral,
     minHeight: '100%',
+  },
+  media: {
+    md: { borderLeftWidth: 1 },
   },
 }));
 
@@ -92,9 +95,10 @@ export function SideBarLayout({
             >
               {href ? (
                 <MenuList.Item
+                  variant="ghost"
+                  size="xs"
                   role="link"
                   href={`/crossed${href}`}
-                  // hovered={href === pathname}
                   onPress={(e) => {
                     e.stopPropagation();
                     e.preventDefault();

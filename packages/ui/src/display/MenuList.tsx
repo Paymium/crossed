@@ -24,10 +24,7 @@ const MenuRoot = withStyle(YBox, {
 type MenuRootProps = GetProps<typeof MenuRoot>;
 
 const Divider = withStyle(D, { base: {} });
-const Item = forwardRef((props: ButtonProps, ref) => {
-  const context = useVariantContext();
-  return <Button {...context} {...props} ref={ref} />;
-});
+const Item = Button;
 
 const Label = forwardRef((props: TextProps & ButtonVariantProps, ref) => {
   const context = useVariantContext();

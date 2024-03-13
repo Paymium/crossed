@@ -91,9 +91,11 @@ export const TOCLayout = ({
             return (
               <Li key={href || title}>
                 <MenuList.Item
+                  variant="ghost"
+                  size="xs"
                   role="link"
                   href={`${pathname}${href}`}
-                  // hovered={href === hash}
+                  // hover={href === hash}
                   onPress={(e) => {
                     e.stopPropagation();
                     e.preventDefault();

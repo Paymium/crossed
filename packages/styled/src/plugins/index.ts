@@ -20,3 +20,4 @@ export {
   type CrossedVariantsPlugin,
   type CrossedVariantsPluginProps,
 } from './Variants';
+export * from './utils';

@@ -10,7 +10,10 @@ export default (options: StylePluginOptions) => {
   return function withCrossed(nextConfig: any = {}) {
     const updatedNextConfig = {
       ...nextConfig,
-      // transpilePackages: [...nextConfig.transpilePackages, '@crossed/styled'],
+      transpilePackages: [
+        ...(nextConfig.transpilePackages || []),
+        'react-native',
+      ],
       webpack: (config: any, context: any) => {
         const { isServer } = context;
         config = nextConfig.webpack

@@ -547,8 +547,7 @@ const SelectRoot = withStyle(
       const [open, setOpen] = useUncontrolled<boolean>({
         defaultValue: false,
       });
-      renderValue.current =
-        findChild((props as any).children, value) || 'rien trouvé';
+      renderValue.current = findChild(children, value) || 'rien trouvé';
       return (
         <SelectProvider
           value={value}
@@ -600,7 +599,7 @@ const Trigger = withStaticProperties(
 );
 
 const Content = withStyle(
-  (props: MenuListProps) => {
+  (props: Partial<MenuListProps>) => {
     const all = useSelectProvider();
     const { top, height, left } = (all.triggerLayout.current as any) || {
       top: 0,
@@ -614,11 +613,14 @@ const Content = withStyle(
             <>
               <MenuList
                 {...props}
-                style={{
-                  // ...(typeof props.style === 'object' ? props.style : {}),
-                  top: top + height,
-                  left,
-                }}
+                style={[
+                  ...(Array.isArray(props.style) ? props.style : [props.style]),
+                  {
+                    top: top + height,
+                    left,
+                    position: 'absolute',
+                  },
+                ]}
               />
             </>
           ) : null}
@@ -629,8 +631,8 @@ const Content = withStyle(
   ({ theme: t }) => ({
     base: {
       position: 'absolute',
-      top: 15 + 40,
-      left: 1253,
+      // top: 15 + 40,
+      // left: 1253,
       maxWidth: 'auto',
       padding: t.space.xs,
       zIndex: 100,
@@ -644,24 +646,23 @@ const Content = withStyle(
 Content.id = 'Select.Content';
 Content.displayName = 'Select.Content';
 
-const Option = withStyle(
-  ({ value, style, ...props }: MenuItemProps & { value: string | number }) => {
-    const { setOpen, setValue } = useSelectProvider();
-    return (
-      <MenuList.Item
-        // active={value === valueGlobal}
-        // {...props}
-        onPress={composeEventHandlers(() => {
-          setOpen(false);
-          setValue(value);
-        }, props.onPress)}
-      />
-    );
-  },
-  { base: { justifyContent: 'flex-start' } }
-);
+const Option = ({
+  value,
+  ...props
+}: MenuItemProps & { value: string | number }) => {
+  const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
+  return (
+    <MenuList.Item
+      active={value === valueGlobal}
+      {...props}
+      onPress={composeEventHandlers(() => {
+        setOpen(false);
+        setValue(value);
+      }, props.onPress)}
+    />
+  );
+};
 
-// @ts-expect-error because id not exist in type
 Option.id = 'Select.Option';
 Option.displayName = 'Select.Option';
 
