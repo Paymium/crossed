@@ -58,7 +58,7 @@ export const MediaQueriesPlugin = <B extends Record<string, number>>(
                 wrapper: (str) =>
                   `@media (min-width: ${breakpointsValue}) { ${str} }`,
                 body: {
-                  [`.${key}:${convertKeyToCss(
+                  [`${key}:${convertKeyToCss(
                     keyProperty
                   )}-[${valueNormalized}]`]: {
                     [keyProperty]: valueNormalized,

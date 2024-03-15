@@ -8,13 +8,12 @@
 import * as React from 'react';
 import { Registry } from '../Registry';
 import type { CrossedstyleValues, StyleSheet } from '../types';
-import { Platform } from 'react-native';
-// import { useWindowDimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 
 export const useStyles = <C extends string>(
   params: () => Record<C, StyleSheet>
 ) => {
-  // const { width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const stylesToReturn = React.useMemo(
     function MemoUseStyles() {
       const stylesMemo: Record<
@@ -22,57 +21,32 @@ export const useStyles = <C extends string>(
         { className: string; style: CrossedstyleValues }
       > = {} as any;
       if (params) {
-        // Registry.apply(params, {
-        //   // props,
-        //   isWeb: Platform.OS === 'web',
-        //   addClassname: ({ body }) =>
-        //     className.push(...Object.keys(body).map((e) => e.slice(1))),
-        // });
         (Object.entries(params()) as [C, StyleSheet][]).forEach(
           ([keyStyle, styleOfKey]: [C, StyleSheet]) => {
-            Object.entries(styleOfKey).forEach(
-              ([key, styles]: [string, CrossedstyleValues]) => {
-                Registry.getPlugins().forEach(({ test, apply }) => {
-                  const keyFind = key.match(new RegExp(test, 'g'));
-                  if (test && keyFind && keyFind.length > 0) {
-                    apply({
-                      // props: {
-                      //   ...props,
-                      //   active: props.active ?? active,
-                      //   hover: props.hover ?? hover,
-                      // },
-                      key,
-                      styles,
-                      addClassname: ({ body }) => {
-                        if (!stylesMemo[keyStyle]) {
-                          stylesMemo[keyStyle] = { className: '', style: {} };
-                        }
-                        Object.values(body).reduce(
-                          (acc, e) => ({ ...acc, ...e }),
-                          {}
-                        );
-                        stylesMemo[keyStyle] = {
-                          className: '',
-                          style: {
-                            ...stylesMemo[keyStyle].style,
-                            ...Object.values(body).reduce(
-                              (acc, e) => ({ ...acc, ...e }),
-                              {}
-                            ),
-                          },
-                        };
-                      },
-                    });
-                  }
-                });
-              }
-            );
+            Registry.apply(() => styleOfKey, {
+              addClassname: ({ body }) => {
+                if (!stylesMemo[keyStyle]) {
+                  stylesMemo[keyStyle] = { className: '', style: {} };
+                }
+                Object.values(body).reduce((acc, e) => ({ ...acc, ...e }), {});
+                stylesMemo[keyStyle] = {
+                  className: '',
+                  style: {
+                    ...stylesMemo[keyStyle].style,
+                    ...Object.values(body).reduce(
+                      (acc, e) => ({ ...acc, ...e }),
+                      {}
+                    ),
+                  },
+                };
+              },
+            });
           }
         );
       }
       return stylesMemo;
     },
-    [params]
+    [params, width]
   );
   return {
     styles: stylesToReturn,

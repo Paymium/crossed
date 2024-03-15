@@ -15,10 +15,15 @@ export const useStyle: UseStyle = (params, props, options) => {
     const className: string[] = [...(props?.className?.split(' ') || [])];
     if (params) {
       Registry.apply(params, {
-        props,
+        props: props
+          ? {
+              ...props,
+              active: props?.active,
+              hover: props?.hover,
+            }
+          : undefined,
         isWeb: Platform.OS === 'web',
-        addClassname: ({ body }) =>
-          className.push(...Object.keys(body).map((e) => e.slice(1))),
+        addClassname: ({ body }) => className.push(...Object.keys(body)),
       });
     }
     const style = className.reduce<Record<string, any>>(

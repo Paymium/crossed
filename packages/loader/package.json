@@ -29,7 +29,7 @@
     "@crossed/styled": "*"
   },
   "dependencies": {
-    "@crossed/log": "workspace:^",
+    "@crossed/log": "*",
     "escodegen": "^2.1.0",
     "esprima": "^4.0.1",
     "eval-estree-expression": "^1.1.0"

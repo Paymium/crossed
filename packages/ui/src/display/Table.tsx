@@ -6,17 +6,11 @@
  */
 
 import { withStyle } from '@crossed/styled';
-import {
-  useMemo,
-  type HTMLProps,
-  Children,
-  isValidElement,
-  cloneElement,
-} from 'react';
+import type { HTMLProps } from 'react';
 import { Text } from '../typography/Text';
 
 export const Table = withStyle(
-  (props: HTMLProps<HTMLTableElement>) => <table {...props} />,
+  ({ style, ...props }: HTMLProps<HTMLTableElement>) => <table {...props} />,
   () => ({
     base: {
       width: '100%',
@@ -28,39 +22,25 @@ export const Table = withStyle(
 );
 
 export const THead = withStyle(
-  ({ children, ...props }: HTMLProps<HTMLTableSectionElement>) => {
-    const newChildren = useMemo(
-      () =>
-        Children.map(children, (c) => {
-          if (isValidElement(c) && (c.type as any).id === 'Table.Tr') {
-            return cloneElement(c, {
-              ...c.props,
-              style: { borderTopWidth: 0 },
-            });
-          }
-          return c;
-        }),
-      [children]
-    );
-    return <thead {...props}>{newChildren}</thead>;
+  ({ style, ...props }: HTMLProps<HTMLTableSectionElement>) => {
+    return <thead {...props} />;
   },
   ({ theme: t }) => ({
     base: {
-      borderWidth: 0,
+      borderTopWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
       borderBottomWidth: 1,
       borderStyle: 'solid',
       borderColor: t.colors.neutral,
-      backgroundColor: t.utils.hexToRgbA(
-        t.utils.shadeColor(t.colors.neutral, 5),
-        0.5
-      ),
+      backgroundColor: t.colors.backgroundSoft,
     },
   })
 );
 export const TBody = withStyle(
-  ({ children, ...props }: HTMLProps<HTMLTableSectionElement>) => {
+  ({ children, style, ...props }: HTMLProps<HTMLTableSectionElement>) => {
     const newChild =
-      Array.isArray(children) && children.length > 0 ? (
+      (Array.isArray(children) && children.length > 0) || children ? (
         children
       ) : (
         <Tr>
@@ -80,11 +60,13 @@ export const TBody = withStyle(
   { base: {} }
 );
 export const Tr = withStyle(
-  (props: HTMLProps<HTMLTableRowElement>) => <tr {...props} />,
+  ({ style, ...props }: HTMLProps<HTMLTableRowElement>) => <tr {...props} />,
   ({ theme: t }) => ({
     base: {
-      borderWidth: 0,
       borderTopWidth: 1,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      borderBottomWidth: 0,
       borderStyle: 'solid',
       borderColor: t.colors.neutral,
     },
@@ -94,7 +76,7 @@ export const Tr = withStyle(
 (Tr as any).id = 'Table.Tr';
 
 export const Td = withStyle(
-  (props: HTMLProps<HTMLTableCellElement>) => <td {...props} />,
+  ({ style, ...props }: HTMLProps<HTMLTableCellElement>) => <td {...props} />,
   ({ theme: t }) => ({
     base: {
       padding: t.space.sm,
@@ -105,6 +87,6 @@ export const Td = withStyle(
   })
 );
 export const Th = withStyle(
-  (props: HTMLProps<HTMLTableCellElement>) => <th {...props} />,
+  ({ style, ...props }: HTMLProps<HTMLTableCellElement>) => <th {...props} />,
   ({ theme: t }) => ({ base: { textAlign: 'left', padding: t.space.sm } })
 );

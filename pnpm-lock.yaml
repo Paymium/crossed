@@ -338,7 +338,7 @@ importers:
   packages/loader:
     dependencies:
       '@crossed/log':
-        specifier: workspace:^
+        specifier: '*'
         version: link:../log
       escodegen:
         specifier: ^2.1.0
@@ -397,7 +397,7 @@ importers:
   packages/next-adapter:
     dependencies:
       '@crossed/webpack':
-        specifier: workspace:^
+        specifier: '*'
         version: link:../webpack
       find-yarn-workspace-root:
         specifier: ^2.0.0
@@ -416,7 +416,7 @@ importers:
         version: 10.0.1
     devDependencies:
       '@crossed/build':
-        specifier: workspace:^
+        specifier: '*'
         version: link:../build
       '@size-limit/preset-small-lib':
         specifier: ^8.1.2
@@ -522,11 +522,8 @@ importers:
   packages/styled:
     dependencies:
       '@crossed/core':
-        specifier: workspace:^
+        specifier: ^0.8.0
         version: link:../core
-      deepmerge:
-        specifier: ^4.3.1
-        version: 4.3.1
     devDependencies:
       '@crossed/build':
         specifier: ^0.5.0
@@ -760,10 +757,10 @@ importers:
   packages/webpack:
     dependencies:
       '@crossed/loader':
-        specifier: workspace:^
+        specifier: '*'
         version: link:../loader
       '@crossed/log':
-        specifier: workspace:^
+        specifier: '*'
         version: link:../log
       static-eval:
         specifier: ^2.1.1
@@ -779,7 +776,7 @@ importers:
         specifier: ^0.5.0
         version: link:../build
       '@crossed/styled':
-        specifier: workspace:^
+        specifier: '*'
         version: link:../styled
       '@types/node':
         specifier: ^20.11.16

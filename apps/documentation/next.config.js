@@ -1,7 +1,7 @@
-const withCrossed = require('@crossed/next-adapter');
+const { withCrossed } = require('@crossed/next-adapter');
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withCrossed.default({
+const nextConfig = withCrossed({
   configPath: './src/style.config.ts',
 })({
   output: 'export',

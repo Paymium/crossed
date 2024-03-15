@@ -10,7 +10,7 @@ import { withDefaultProps } from '@crossed/core';
 
 export default withDefaultProps(TOCLayout, {
   links: [
-    { href: '#migrate', title: 'Migrate to @crossed/styled' },
-    { href: '#interaction', title: 'User interaction' },
+    // { title: 'Introduction', href: '#introduction' },
+    // { title: 'Key Features', href: '#features' },
   ],
 });

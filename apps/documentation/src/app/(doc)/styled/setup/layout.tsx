@@ -11,7 +11,7 @@ import { withDefaultProps } from '@crossed/core';
 export default withDefaultProps(TOCLayout, {
   links: [
     { href: '#install', title: 'Install dependencies' },
-    { href: '#configure', title: 'Configure' },
+    { href: '#configure', title: 'Configure builder' },
     { href: '#usage', title: 'Usage' },
   ],
 });

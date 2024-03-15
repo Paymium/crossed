@@ -18,16 +18,20 @@ import {
   type CrossedVariantsPluginProps,
 } from '@crossed/styled/plugins';
 import { darkTheme } from '@crossed/ui/theme';
+import { themes } from 'prism-react-renderer';
 
 const breakpoints = { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200 };
-
-Registry.setTheme(darkTheme)
+const theme = {
+  ...darkTheme,
+  draculaTheme: themes.dracula,
+};
+Registry.setTheme(theme)
   .addPlugin(BasePlugin)
   .addPlugin(PseudoClassPlugin)
   .addPlugin(VariantsPlugin)
   .addPlugin(MediaQueriesPlugin(breakpoints));
 
-type Theme = typeof darkTheme;
+type Theme = typeof theme;
 
 declare module '@crossed/styled' {
   // export interface UnistylesBreakpoints extends AppBreakpoints {}

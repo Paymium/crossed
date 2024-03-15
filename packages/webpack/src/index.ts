@@ -78,7 +78,8 @@ export default class StylePlugin {
           const resource = c.state.current.resource;
           let arg;
           if (e.callee.type === 'Identifier') {
-            if (e.callee?.name === 'createStyle') {
+            const isMulti = e.callee?.name === 'createStyles';
+            if (e.callee?.name === 'createStyle' || isMulti) {
               arg = e.arguments[0];
             }
             if (e.callee?.name === 'withStyle') {
@@ -99,7 +100,7 @@ export default class StylePlugin {
                   }`,
                 }
               );
-              parseAst.parse(arg);
+              parseAst.parse(arg, isMulti);
             }
           }
         });

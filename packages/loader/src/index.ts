@@ -48,16 +48,25 @@ export class Loader {
     );
 
     if (configPath) {
-      execSync(
-        `npx tsc --outDir ${path.resolve(
-          process.cwd(),
-          './lib'
-        )} ${path.resolve(
-          process.cwd(),
-          configPath
-        )} --skipLibCheck --module NodeNext --moduleResolution nodenext --esModuleInterop`
-      );
-      require(path.resolve(process.cwd(), './lib/style.config'));
+      try {
+        execSync(
+          `npx tsc --outDir ${path.resolve(
+            process.cwd(),
+            './lib'
+          )} ${path.resolve(
+            process.cwd(),
+            configPath
+          )} --skipLibCheck --module NodeNext --moduleResolution nodenext --esModuleInterop`
+        );
+      } catch (e) {
+        this.logger.error(e.toString());
+      }
+
+      try {
+        require(path.resolve(process.cwd(), './lib/style.config'));
+      } catch (e) {
+        this.logger.error(e.toString());
+      }
     }
   }
 
@@ -101,7 +110,7 @@ export class Loader {
       const styleParsed = this.styleToString(value);
 
       // escape some character in css
-      const css = `${obj.prefix || ''}${key.replace(/[#:\[\]%,]/g, '\\$&')}${
+      const css = `.${obj.prefix || ''}${key.replace(/[#:\[\]%,]/g, '\\$&')}${
         obj.suffix || ''
       } { ${styleParsed} }`;
 
@@ -110,7 +119,7 @@ export class Loader {
     });
   };
 
-  parse(ast: Expression | SpreadElement) {
+  parse(ast: Expression | SpreadElement, isMulti?: boolean) {
     const theme = Registry.getTheme();
     const _parseObjectExpression = (arg: ObjectExpression) => {
       if (arg.type === 'ObjectExpression') {
@@ -192,10 +201,19 @@ export class Loader {
     }
 
     if (parsing) {
-      Registry.apply(() => parsing, {
-        addClassname: this.addClassname,
-        isWeb: true,
-      });
+      if (isMulti) {
+        Object.entries(parsing).forEach(([, p]) => {
+          Registry.apply(() => p, {
+            addClassname: this.addClassname,
+            isWeb: true,
+          });
+        });
+      } else {
+        Registry.apply(() => parsing, {
+          addClassname: this.addClassname,
+          isWeb: true,
+        });
+      }
     }
   }
 }

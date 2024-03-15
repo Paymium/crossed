@@ -53,7 +53,7 @@ export const VariantsPlugin: Plugin<CrossedVariantsPlugin> = {
                 suffix,
                 prefix,
                 body: {
-                  [`.${variantName}-${variantValue}:${e.slice(1)}`]: obj,
+                  [`${variantName}-${variantValue}:${e}`]: obj,
                 },
               });
             });

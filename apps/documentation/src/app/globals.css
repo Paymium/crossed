@@ -7,19 +7,10 @@ html, body { height: 100%; margin:0;padding:0; }
 
 a { text-decoration-line: none; }
 
-h2, h1 {
+/* h2, h1 {
   display: inline-block !important;
   z-index: -1;
-}
-
-h1 {
-  padding-top: 70px !important;
-  margin-top: -70px !important;
-}
-h2 {
-  padding-top: 70px !important;
-  margin-top: -50px !important;
-}
+} */
 
 .prism-code{
   gap: 4px;

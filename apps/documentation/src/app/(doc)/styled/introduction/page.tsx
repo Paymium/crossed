@@ -59,19 +59,6 @@ export default function Home() {
           </Text>
         </Li>
       </Ul>
-      <H2 id="dependencies">
-        <Trans>Dependencies used</Trans>
-      </H2>
-      <P>
-        <Trans>Dependencies used in @crossed/styled</Trans>
-      </P>
-      <Ul>
-        <Li>
-          <Link href="https://reactnativeunistyles.vercel.app/" target="_blank">
-            react-native-unistyles
-          </Link>
-        </Li>
-      </Ul>
     </YBox>
   );
 }

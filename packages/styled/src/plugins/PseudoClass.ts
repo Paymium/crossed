@@ -29,11 +29,18 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
     const pseudoClass = ctxKey.replace(/:/i, '');
     Object.entries(styles).forEach(([key, value]) => {
       const valueNormalized = normalizeUnitPixel(key, value, isWeb);
+      addClassname({
+        suffix: `:${pseudoClass}`,
+        body: {
+          [`${pseudoClass}:${convertKeyToCss(key)}-[${valueNormalized}]`]: {
+            [key]: valueNormalized,
+          },
+        },
+      });
       if ((props && props[pseudoClass]) || !props) {
         addClassname({
-          suffix: `:${pseudoClass}`,
           body: {
-            [`.${pseudoClass}:${convertKeyToCss(key)}-[${valueNormalized}]`]: {
+            [`${convertKeyToCss(key)}-[${valueNormalized}]`]: {
               [key]: valueNormalized,
             },
           },

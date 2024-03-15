@@ -37,14 +37,11 @@ export const H3 = withDefaultProps<HeadingProps>(Text, {
   'aria-level': 3,
   'size': '3xl',
 });
-export const H4 = withDefaultProps<HeadingProps>(
-  withStyle(Text, { base: { marginTop: 20 } }),
-  {
-    'role': 'heading',
-    'aria-level': 4,
-    'size': '2xl',
-  }
-);
+export const H4 = withDefaultProps<HeadingProps>(Text, {
+  'role': 'heading',
+  'aria-level': 4,
+  'size': '2xl',
+});
 export const H5 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 5,

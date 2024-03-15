@@ -92,5 +92,5 @@ export type Plugin<S = any> = {
    * driver to use
    * @returns
    */
-  useDriver?: () => any;
+  // useDriver?: () => any;
 };

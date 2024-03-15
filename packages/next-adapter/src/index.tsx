@@ -6,8 +6,8 @@
  */
 
 import StylePlugin, { type StylePluginOptions } from '@crossed/webpack';
-export default (options: StylePluginOptions) => {
-  return function withCrossed(nextConfig: any = {}) {
+export const withCrossed = (options: StylePluginOptions) => {
+  return (nextConfig: any = {}) => {
     const updatedNextConfig = {
       ...nextConfig,
       transpilePackages: [
