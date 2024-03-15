@@ -7,7 +7,6 @@
 
 'use client';
 
-import { Link } from '@/components/Link';
 import { H1, H2, P, Text, YBox, Ul, Li, B, Kbd } from '@crossed/ui';
 import { Trans, useTranslation } from 'react-i18next';
 
