@@ -1,5 +1,21 @@
 # @crossed/ui
 
+## 1.0.0-beta.0
+
+### Minor Changes
+
+- 7b48a2b: feat(theme): add theme colors and utils for apply variants based on colors
+
+### Patch Changes
+
+- b7f88a7: fix(Tabs): missing active state when tab is selected
+- Updated dependencies [d9f9372]
+- Updated dependencies [31e0003]
+- Updated dependencies [c7e44dc]
+- Updated dependencies [8917db4]
+  - @crossed/styled@0.14.0-beta.0
+  - @crossed/unicons@1.0.0-beta.0
+
 ## 0.9.0
 
 ### Minor Changes

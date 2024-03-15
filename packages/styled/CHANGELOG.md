@@ -1,5 +1,17 @@
 # @crossed/styled
 
+## 0.14.0-beta.0
+
+### Minor Changes
+
+- 31e0003: feat(styled): add exports in package.json
+
+### Patch Changes
+
+- d9f9372: not pass state props on component styled
+- c7e44dc: wrong export type of unistyles
+- 8917db4: state not apply (hovered, active, focus)
+
 ## 0.13.0
 
 ### Minor Changes
