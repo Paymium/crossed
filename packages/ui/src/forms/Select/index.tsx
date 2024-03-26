@@ -628,18 +628,20 @@ const Content = withStyle(
       </Portal>
     );
   },
-  ({ theme: t }) => ({
-    base: {
-      position: 'absolute',
-      // top: 15 + 40,
-      // left: 1253,
-      maxWidth: 'auto',
-      padding: t.space.xs,
-      zIndex: 100,
-      backgroundColor: t.utils.shadeColor(t.colors.neutral, -25),
-      borderRadius: 4,
-    },
-  })
+  {
+    theme: (t) => ({
+      base: {
+        position: 'absolute',
+        // top: 15 + 40,
+        // left: 1253,
+        maxWidth: 'auto',
+        padding: t.space.xs,
+        zIndex: 100,
+        backgroundColor: t.colors.neutral,
+        borderRadius: 4,
+      },
+    }),
+  }
 );
 
 // @ts-expect-error because id not exist in type

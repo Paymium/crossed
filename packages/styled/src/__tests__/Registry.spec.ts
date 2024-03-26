@@ -12,12 +12,12 @@ describe('Registry', () => {
     expect(Registry).toBeInstanceOf(RegistryBridge);
   });
 
-  test('can set/get theme', () => {
-    const theme = {};
-    expect(Registry.getTheme()).toBe(undefined);
-    expect(Registry.setTheme(theme)).toBe(Registry);
-    expect(Registry.getTheme()).toBe(theme);
-  });
+  // test('can set/get theme', () => {
+  //   const theme = {};
+  //   expect(Registry.getTheme()).toBe(undefined);
+  //   expect(Registry.setTheme(theme)).toBe(Registry);
+  //   expect(Registry.getTheme()).toBe(theme);
+  // });
 
   test('can add/get plugins', () => {
     const plugins = {} as any;

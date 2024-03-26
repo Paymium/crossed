@@ -5,8 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { CrossedstyleValues, Plugin } from '../types';
-import { convertKeyToCss, normalizeUnitPixel } from './utils';
+import type { CrossedstyleValues, Plugin } from '../../types';
+import { convertKeyToCss, normalizeUnitPixel } from './../utils';
 
 type CrossedPseudoClassList = 'focus' | 'hover' | 'active';
 
@@ -29,15 +29,17 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
     const pseudoClass = ctxKey.replace(/:/i, '');
     Object.entries(styles).forEach(([key, value]) => {
       const valueNormalized = normalizeUnitPixel(key, value, isWeb);
-      addClassname({
-        suffix: `:${pseudoClass}`,
-        body: {
-          [`${pseudoClass}:${convertKeyToCss(key)}-[${valueNormalized}]`]: {
-            [key]: valueNormalized,
+      if (isWeb) {
+        addClassname({
+          suffix: `:${pseudoClass}`,
+          body: {
+            [`${pseudoClass}:${convertKeyToCss(key)}-[${valueNormalized}]`]: {
+              [key]: valueNormalized,
+            },
           },
-        },
-      });
-      if ((props && props[pseudoClass]) || !props) {
+        });
+      }
+      if (props?.[pseudoClass] || !props) {
         addClassname({
           body: {
             [`${convertKeyToCss(key)}-[${valueNormalized}]`]: {

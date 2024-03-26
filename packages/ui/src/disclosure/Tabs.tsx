@@ -65,16 +65,16 @@ export const createTabs = () => {
     );
   };
 
-  const List = withStyle(
-    withDefaultProps(XBox, { space: 'xs' }),
-    ({ theme: t }) => ({
+  const List = withStyle(withDefaultProps(XBox, { space: 'xs' }), {
+    theme: (t) => ({
       base: {
         borderBottomWidth: 1,
+        borderStyle: 'solid',
         borderColor: t.colors.neutral,
         paddingBottom: t.space.xs,
       },
-    })
-  );
+    }),
+  });
 
   const Panels = ({ children }: PropsWithChildren) => {
     return children;

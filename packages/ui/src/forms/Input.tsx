@@ -277,7 +277,7 @@ const Group = withStyle(
     // }, undefined);
     return <XBox {...props} />;
   },
-  () => ({
+  {
     base: {
       // backgroundColor: t.utils.shadeColor(t.colors.background, 50),
       // borderWidth: 1,
@@ -289,7 +289,7 @@ const Group = withStyle(
       // paddingVertical: t.space.xs,
       // paddingHorizontal: t.space.sm,
     },
-  })
+  }
 );
 
 const InputRoot = withStyle(
@@ -314,21 +314,24 @@ const InputRoot = withStyle(
       />
     );
   }),
-  ({ theme: t }) => ({
-    base: {
-      color: t.colors.default,
-      backgroundColor: t.utils.shadeColor(t.colors.background, 50),
-      borderWidth: 1,
-      // borderColor: t.utils.shadeColor(
-      //   t.colors.neutral,
-      //   UnistylesRuntime.themeName === 'dark' ? 100 : -100
-      // ),
-      borderRadius: 4,
-      paddingVertical: t.space.xs,
-      paddingHorizontal: t.space.sm,
-      textAlign: 'right',
-    },
-  })
+  {
+    theme: (t) => ({
+      base: {
+        color: t.colors.default,
+        backgroundColor: t.colors.background,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        // borderColor: t.utils.shadeColor(
+        //   t.colors.neutral,
+        //   UnistylesRuntime.themeName === 'dark' ? 100 : -100
+        // ),
+        borderRadius: 4,
+        paddingVertical: t.space.xs,
+        paddingHorizontal: t.space.sm,
+        textAlign: 'right',
+      },
+    }),
+  }
 );
 
 const Input = createInput({

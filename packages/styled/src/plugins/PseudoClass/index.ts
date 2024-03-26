@@ -5,4 +5,5 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export * from './useStyle';
+export * from './PseudoClass';
+export { useInteraction } from './useInteraction';

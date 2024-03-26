@@ -3,6 +3,7 @@ const { withCrossed } = require('@crossed/next-adapter');
 /** @type {import('next').NextConfig} */
 const nextConfig = withCrossed({
   configPath: './src/style.config.ts',
+  level: "debug"
 })({
   output: 'export',
   reactStrictMode: false,

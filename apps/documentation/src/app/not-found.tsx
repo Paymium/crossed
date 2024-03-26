@@ -12,12 +12,14 @@ import { withStyle } from '@crossed/styled';
 import { Center, H2, P } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 
-const Container = withStyle(Center, ({ theme: t }) => ({
-  base: {
-    minHeight: '85%',
-    backgroundColor: t.colors.background,
-  },
-}));
+const Container = withStyle(Center, {
+  theme: (t) => ({
+    base: {
+      minHeight: '85%',
+      backgroundColor: t.colors.background,
+    },
+  }),
+});
 
 export default function NotFound() {
   const { t } = useTranslation();

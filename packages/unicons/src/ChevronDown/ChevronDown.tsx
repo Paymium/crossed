@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useStyle } from '@crossed/styled';
+import { useTheme } from '@crossed/styled/plugins';
 import type { RequireOnly } from '../types';
 
 export const ChevronDown = ({
@@ -14,7 +14,7 @@ export const ChevronDown = ({
   color,
   size = 24,
 }: RequireOnly<'Path' | 'Svg'>) => {
-  const { theme } = useStyle();
+  const theme = useTheme();
   return (
     <Svg
       width={size}

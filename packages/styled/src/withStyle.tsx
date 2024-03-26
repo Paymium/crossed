@@ -7,8 +7,8 @@
 
 import * as React from 'react';
 import { StylableComponent, withStaticProperties } from '@crossed/core';
-import { createStyle } from './createStyle';
-import { useStyle } from './useStyle';
+import { createStyles } from './createStyles';
+import { useStyles } from './useStyles';
 import type { CreateStyleParams, CrossedPropsExtended } from './types';
 
 export const withStyle = <
@@ -16,10 +16,9 @@ export const withStyle = <
   S extends CreateStyleParams = CreateStyleParams
 >(
   Comp: StylableComponent<P>,
-  styleParams: S,
-  options?: { native?: boolean; debug?: boolean }
+  styleParams: S
 ) => {
-  const styleThemed = createStyle(styleParams);
+  const styleThemed = createStyles({ root: styleParams });
   return withStaticProperties(
     React.forwardRef<
       any,
@@ -30,12 +29,8 @@ export const withStyle = <
       >['props'] &
         P
     >(function WithStyled(props, ref) {
-      const { theme, ...styleProps } = useStyle(
-        styleThemed,
-        props as any,
-        options
-      );
-      return <Comp ref={ref} {...props} {...styleProps} />;
+      const { root } = useStyles(styleThemed, props as any);
+      return <Comp ref={ref} {...props} {...root} />;
     }),
     { styleSheet: styleThemed }
   );

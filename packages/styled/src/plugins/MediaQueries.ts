@@ -17,7 +17,7 @@ export const MediaQueriesPlugin = <B extends Record<string, number>>(
 ): Plugin<CrossedMediaQueriesPlugin<keyof B>> => {
   return {
     test: '^media$',
-    apply: ({ styles, addClassname, props, isWeb }) => {
+    apply: function MediaQueriesApply({ styles, addClassname, props, isWeb }) {
       let Dimensions: any;
       let Platform: any;
       // props only exists at runtime

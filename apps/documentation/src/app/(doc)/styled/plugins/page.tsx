@@ -28,7 +28,7 @@ const stylesSheet = createStyles({
 });
 
 export default function PluginsPage() {
-  const { styles } = useStyles(stylesSheet);
+  const styles = useStyles(stylesSheet);
   return (
     <YBox space="md">
       <H1>Plugins</H1>

@@ -82,19 +82,6 @@ export type Theme = {
     '4xl': number;
     '5xl': number;
   };
-  utils: {
-    shadeColor: (_col: string, _amt: number) => string;
-    hexToRgbA: (_hex: string, _alpha: number) => string;
-    rgbaToHex: (_rgba: string) => string;
-    select: (
-      _p: { hover?: any; active?: any; focus?: any; base?: any },
-      _state: { hover?: boolean; active?: boolean; focus?: boolean }
-    ) => string;
-    createVariants: {
-      (_type: 'color', _theme: Theme): VariantColor;
-      (_type: 'backgroundColor', _theme: Theme): VariantBackgroundColor;
-    };
-  };
 };
 export type Themes = CrossedstyleTheme & {
   light: Theme;

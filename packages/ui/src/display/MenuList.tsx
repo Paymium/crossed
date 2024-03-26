@@ -7,7 +7,7 @@
 
 'use client';
 import { createList } from '@crossed/primitive';
-import { withStyle, useStyle } from '@crossed/styled';
+import { withStyle, useStyles } from '@crossed/styled';
 import { Text, TextProps } from '../typography/Text';
 import { YBox } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
@@ -28,22 +28,12 @@ const Item = Button;
 
 const Label = forwardRef((props: TextProps & ButtonVariantProps, ref) => {
   const context = useVariantContext();
-  const { style } = useStyle(Button.styleSheet as any, {
+  const { root } = useStyles(Button.styleSheet, {
     ...context,
     ...props,
   });
 
-  return (
-    <Text
-      {...props}
-      style={[
-        style.base,
-        // style.base.extraStyle({ ...context, ...props }, {}),
-        props.style,
-      ]}
-      ref={ref}
-    />
-  );
+  return <Text {...props} style={[root.style, props.style]} ref={ref} />;
 });
 const Title = withStyle(Button.Text, { base: {} });
 const SubTitle = withStyle(Button.Text, { base: {} });

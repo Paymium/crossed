@@ -102,17 +102,19 @@ export class Loader {
     suffix?: string;
     prefix?: string;
     wrapper?: (_str: string) => string;
-    body: Record<string, CrossedstyleValues>;
-    file: string;
+    body: Record<string, CrossedstyleValues | string>;
   }) => {
     Object.entries(obj.body).forEach(([key, value]) => {
       // transform { backgroundColor: "blue" } => background-color: blue;
-      const styleParsed = this.styleToString(value);
+
+      const styleParsed =
+        typeof value === 'string' ? value : this.styleToString(value);
 
       // escape some character in css
-      const css = `.${obj.prefix || ''}${key.replace(/[#:\[\]%,]/g, '\\$&')}${
-        obj.suffix || ''
-      } { ${styleParsed} }`;
+      const css = `${obj.prefix ?? '.'}${key.replace(
+        /[#:\[\]\(\)%,]/g,
+        '\\$&'
+      )}${obj.suffix || ''} { ${styleParsed} }`;
 
       // add css in cahce file
       this.fileCache.add(obj.wrapper ? obj.wrapper(css) : css);
@@ -120,7 +122,13 @@ export class Loader {
   };
 
   parse(ast: Expression | SpreadElement, isMulti?: boolean) {
-    const theme = Registry.getTheme();
+    const plugins = Registry.getPlugins();
+    const ctx = plugins.reduce((acc, { utils }) => {
+      return { ...acc, ...(utils?.() || undefined) };
+    }, {});
+    plugins.forEach(({ init }) =>
+      init?.({ addClassname: this.addClassname, isWeb: true, ...ctx })
+    );
     const _parseObjectExpression = (arg: ObjectExpression) => {
       if (arg.type === 'ObjectExpression') {
         const ast = {
@@ -142,7 +150,7 @@ export class Loader {
             apiLog({
               events: ['eval_style_function_error'],
             }).message,
-            { message: e.message, theme }
+            { message: e.message }
           );
         }
         return returnEl;
@@ -169,13 +177,13 @@ export class Loader {
         let returnEl;
         try {
           // eslint-disable-next-line no-eval
-          returnEl = eval(toto)({ theme });
+          returnEl = eval(toto)(ctx);
         } catch (e) {
           this.logger.error(
             apiLog({
               events: ['eval_style_function_error'],
             }).message,
-            { message: e.message, theme }
+            { message: e.message }
           );
         }
         return returnEl;

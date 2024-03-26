@@ -16,25 +16,27 @@ import { Text } from '../typography/Text';
 
 const CardRoot = withStyle(
   YBox,
-  ({ theme: t }) => ({
-    base: {
-      padding: t.space.md,
-      borderRadius: t.space.xs,
-      backgroundColor: t.utils.shadeColor(t.colors.background, 25),
-    },
-    variants: {
-      role: {
-        link: {
-          ':hover': {
-            backgroundColor: t.utils.shadeColor(t.colors.background, 30),
-          },
-          ':active': {
-            backgroundColor: t.utils.shadeColor(t.colors.background, 20),
+  {
+    theme: (t) => ({
+      base: {
+        padding: t.space.md,
+        borderRadius: t.space.xs,
+        backgroundColor: t.colors.neutral,
+      },
+      variants: {
+        role: {
+          link: {
+            ':hover': {
+              backgroundColor: t.colors.background,
+            },
+            ':active': {
+              backgroundColor: t.colors.background,
+            },
           },
         },
       },
-    },
-  }),
+    }),
+  },
   { native: true }
 );
 

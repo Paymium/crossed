@@ -12,17 +12,19 @@ import { withDefaultProps } from '@crossed/core';
 
 export const Anchor = withStyle(
   withDefaultProps(Text, { weight: 'medium', role: 'link', color: 'link' }),
-  ({ theme: t }) => ({
-    'base': {
-      fontFamily: t.fontFamily,
-      textDecorationLine: 'none',
-      cursor: 'pointer',
-    },
-    ':hover': {
-      textDecorationLine: 'underline',
-      color: t.utils.shadeColor(t.colors.link, 45),
-    },
-  })
+  {
+    theme: (t) => ({
+      'base': {
+        fontFamily: t.fontFamily,
+        textDecorationLine: 'none',
+        cursor: 'pointer',
+      },
+      ':hover': {
+        textDecorationLine: 'underline',
+        color: t.colors.link,
+      },
+    }),
+  }
   // { name: 'Anchor' }
 );
 

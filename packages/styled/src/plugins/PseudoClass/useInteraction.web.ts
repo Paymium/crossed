@@ -5,8 +5,4 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { CreateStyleParams } from './types';
-
-export const createStyle = (data: CreateStyleParams) => {
-  return () => data;
-};
+export const useInteraction = () => ({});

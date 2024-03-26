@@ -13,10 +13,12 @@ export const P = withStyle(
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore error un react-native, work for web
   withDefaultProps(Text, { role: 'paragraph' }),
-  ({ theme: t }) => ({
-    base: {
-      alignSelf: 'stretch',
-      marginVertical: t.space.md,
-    },
-  })
+  {
+    theme: (t) => ({
+      base: {
+        alignSelf: 'stretch',
+        marginVertical: t.space.md,
+      },
+    }),
+  }
 );

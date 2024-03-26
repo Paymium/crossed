@@ -18,58 +18,68 @@ const StyledLiveEditor = withStyle(
   ({ style, ...props }: GetProps<typeof LiveEditor>) => {
     return <LiveEditor {...props} />;
   },
-  ({ theme: t }) => ({
-    base: {
-      width: '100%',
-      borderRadius: 4,
-      fontFamily: t.fontFamily,
-      fontSize: t.fontSize.sm,
-    },
-  })
+  {
+    theme: (t) => ({
+      base: {
+        width: '100%',
+        borderRadius: 4,
+        fontFamily: t.fontFamily,
+        fontSize: t.fontSize.sm,
+      },
+    }),
+  }
 );
 
-const RenderPreview = withStyle(Center, ({ theme: t }) => ({
-  base: {
-    padding: t.space.md,
-    alignItems: 'stretch',
-  },
-}));
+const RenderPreview = withStyle(Center, {
+  theme: (t) => ({
+    base: {
+      padding: t.space.md,
+      alignItems: 'stretch',
+    },
+  }),
+});
 
-const ContainerPreview = withStyle(XBox, ({ theme: t }) => ({
-  base: {
-    borderWidth: 1,
-    borderColor: t.colors.neutral,
-    borderStyle: 'solid',
-    borderRadius: 4,
-  },
-}));
-const ContainerVariants = withStyle(YBox, ({ theme: t }) => ({
-  base: {
-    borderLeftWidth: 1,
-    borderColor: t.colors.neutral,
-    borderStyle: 'solid',
-    padding: t.space.md,
-  },
-}));
+const ContainerPreview = withStyle(XBox, {
+  theme: (t) => ({
+    base: {
+      borderWidth: 1,
+      borderColor: t.colors.neutral,
+      borderStyle: 'solid',
+      borderRadius: 4,
+    },
+  }),
+});
+const ContainerVariants = withStyle(YBox, {
+  theme: (t) => ({
+    base: {
+      borderLeftWidth: 1,
+      borderColor: t.colors.neutral,
+      borderStyle: 'solid',
+      padding: t.space.md,
+    },
+  }),
+});
 
-const Pre = withStyle(Text, ({ theme: t }) => ({
-  base: {
-    backgroundColor: t.draculaTheme.plain.backgroundColor,
-    width: '100%',
-    padding: t.space.md,
-    boxSizing: 'border-box',
-    margin: 0,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 1,
-    borderColor: t.colors.neutral,
-    borderStyle: 'solid',
-    color: t.colors.white,
-  },
-}));
+const Pre = withStyle(Text, {
+  theme: (t) => ({
+    base: {
+      backgroundColor: t.draculaTheme.plain.backgroundColor,
+      width: '100%',
+      padding: t.space.md,
+      boxSizing: 'border-box',
+      margin: 0,
+      borderTopLeftRadius: 4,
+      borderTopRightRadius: 4,
+      borderTopWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      borderBottomWidth: 1,
+      borderColor: t.colors.neutral,
+      borderStyle: 'solid',
+      color: t.colors.white,
+    },
+  }),
+});
 
 export const CodeBlock = ({
   children,
