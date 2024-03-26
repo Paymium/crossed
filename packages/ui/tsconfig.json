@@ -10,6 +10,7 @@
     "allowUnusedLabels": true,
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
+    "composite": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "lib": ["esnext", "dom"],

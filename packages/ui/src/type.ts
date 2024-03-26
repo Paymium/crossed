@@ -41,6 +41,5 @@ declare module '@crossed/styled' {
 }
 
 declare module '@crossed/styled/plugins' {
-  // export interface UnistylesBreakpoints extends AppBreakpoints {}
   export interface Themes extends ThemesCustom {}
 }

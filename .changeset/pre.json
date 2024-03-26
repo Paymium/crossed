@@ -17,6 +17,7 @@
     "@crossed/webpack": "1.0.0"
   },
   "changesets": [
+    "chatty-experts-collect",
     "lucky-bulldogs-rest",
     "perfect-points-laugh",
     "pink-starfishes-swim",

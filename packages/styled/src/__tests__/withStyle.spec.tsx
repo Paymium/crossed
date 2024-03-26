@@ -14,7 +14,7 @@ import { BasePlugin } from '../plugins';
 describe('withStyle', () => {
   test('no theme or plugin', () => {
     const Comp = jest.fn().mockReturnValue(null);
-    const NewComp = withStyle(Comp, {});
+    const NewComp = withStyle(Comp, {} as any);
 
     render(<NewComp />);
 
@@ -28,7 +28,7 @@ describe('withStyle', () => {
 
     const style = { base: { color: 'white' } };
     const Comp = jest.fn().mockReturnValue(null);
-    const NewComp = withStyle(Comp, style);
+    const NewComp = withStyle(Comp, style as any);
 
     render(<NewComp />);
 

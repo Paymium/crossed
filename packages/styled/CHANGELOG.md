@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.1
+
+### Minor Changes
+
+- add plugin
+
 ## 0.14.0-beta.0
 
 ### Minor Changes
