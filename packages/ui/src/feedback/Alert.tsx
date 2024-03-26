@@ -11,9 +11,8 @@ import { withStyle } from '@crossed/styled';
 import { Text } from '../typography/Text';
 import { XBox } from '../layout/XBox';
 
-const Container = withStyle(
-  withDefaultProps(XBox, { space: undefined }),
-  ({ theme: t }) => ({
+const Container = withStyle(withDefaultProps(XBox, { space: undefined }), {
+  theme: (t) => ({
     base: {
       padding: t.space.md,
       borderRadius: 4,
@@ -27,8 +26,8 @@ const Container = withStyle(
         info: { base: { backgroundColor: t.colors.info } },
       },
     },
-  })
-);
+  }),
+});
 
 const Icon = () => {};
 

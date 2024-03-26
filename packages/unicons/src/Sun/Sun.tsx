@@ -5,8 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useStyle } from '@crossed/styled';
 import type { RequireOnly } from '../types';
+import { useTheme } from '@crossed/styled/plugins';
 
 export const Sun = ({
   Svg,
@@ -15,7 +15,7 @@ export const Sun = ({
   color,
   size = 25,
 }: RequireOnly<'Svg' | 'Path' | 'Circle'>) => {
-  const { theme } = useStyle();
+  const { theme } = useTheme();
   return (
     <Svg
       width={size}

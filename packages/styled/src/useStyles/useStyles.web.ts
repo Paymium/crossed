@@ -5,49 +5,49 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import * as React from 'react';
+import { useMemo } from 'react';
 import { Registry } from '../Registry';
-import type { CrossedstyleValues } from '../types';
 
-export const useStyles = (params: any, props: any, options: any) => {
-  return React.useMemo(
-    function MemoUseStyle() {
-      const className: string[] = [...(props?.className?.split(' ') || [])];
-      if (params) {
-        Object.entries(params()).forEach(
-          ([key, styles]: [string, CrossedstyleValues]) => {
-            Registry.getPlugins().forEach(({ test, apply }) => {
-              const keyFind = key.match(new RegExp(test, 'g'));
-              if (test && keyFind && keyFind.length > 0) {
-                apply({
-                  props,
-                  key,
-                  styles,
-                  addClassname: ({ body }) => {
-                    className.push(...Object.keys(body).map((e) => e.slice(1)));
-                  },
-                });
+export const useStyles = <C extends string>(
+  params: () => Record<C, StyleSheet>,
+  props: Record<string, any> = {}
+) => {
+  return useMemo(() => {
+    const classNames: Record<C, string[]> = {} as any;
+    if (params) {
+      (Object.entries(params()) as [C, StyleSheet][]).forEach(
+        ([keyStyle, styleOfKey]: [C, StyleSheet]) => {
+          Registry.apply(() => styleOfKey, {
+            props,
+            isWeb: true,
+            addClassname: ({ body }) => {
+              if (!classNames[keyStyle]) {
+                classNames[keyStyle] = [];
               }
-            });
-          }
-        );
-      }
-      const style = className.reduce<Record<string, any>>(
-        (acc, cl) => {
-          acc[cl] = cl;
-          return acc;
-        },
-        { $$css: true }
+              classNames[keyStyle].push(...Object.keys(body));
+            },
+          });
+        }
       );
-      let styleTmp = Array.isArray(props?.style)
-        ? [style, ...props?.style]
-        : [style, props?.style];
-      return {
-        className: className.join(' '),
-        style: styleTmp,
-        theme: Registry.getTheme(),
-      };
-    },
-    [params, props, options]
-  );
+    }
+    const styles = (
+      Object.entries(classNames) as unknown as [C, string[]][]
+    ).reduce<Record<string, { className: string; style: Record<string, any> }>>(
+      (acc, [key, className]) => {
+        acc[key] = {
+          className: className.join(' '),
+          style: className.reduce<Record<string, any>>(
+            (acc, cl) => {
+              acc[cl] = cl;
+              return acc;
+            },
+            props?.style?.$$css ? props.style : { $$css: true }
+          ),
+        };
+        return acc;
+      },
+      {}
+    );
+    return styles;
+  }, [params, props]);
 };

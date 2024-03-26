@@ -16,18 +16,18 @@ import { useTranslation } from 'react-i18next';
 
 const Menu = withStyle(
   withDefaultProps(MenuList, { space: 'xs', size: 'xs' }),
-  () => ({
+  {
     base: {
       paddingHorizontal: 20,
       alignSelf: 'baseline',
-      display: 'flex',
+      display: 'none',
     },
     media: {
-      md: { display: 'none' },
+      md: { display: 'flex' },
     },
-  })
+  }
 );
-const Container = withStyle(XBox, () => ({
+const Container = withStyle(XBox, {
   base: {
     width: '100%',
     justifyContent: 'center',
@@ -40,19 +40,23 @@ const Container = withStyle(XBox, () => ({
     lg: { maxWidth: 900 },
     xl: { maxWidth: 1200 },
   },
-}));
-const Center = withStyle(YBox, ({ theme: t }) => ({
-  base: {
-    flex: 1,
-    borderLeftWidth: 1,
-    borderColor: t.colors.neutral,
-    minHeight: '100%',
-  },
-}));
+});
+const Center = withStyle(YBox, {
+  theme: (t) => ({
+    base: {
+      flex: 1,
+      borderLeftWidth: 0,
+      borderColor: t.colors.neutral,
+      minHeight: '100%',
+    },
+    media: {
+      md: { borderLeftWidth: 1 },
+    },
+  }),
+});
 
-const Li = withStyle(
-  withDefaultProps(YBox, { role: 'listitem' }),
-  ({ theme: t }) => ({
+const Li = withStyle(withDefaultProps(YBox, { role: 'listitem' }), {
+  theme: (t) => ({
     base: {
       alignItems: 'stretch',
     },
@@ -62,14 +66,15 @@ const Li = withStyle(
           base: {
             marginTop: t.space.xl,
             borderBottomWidth: 1,
+            borderStyle: 'solid',
             borderColor: t.colors.neutral,
           },
         },
         false: {},
       },
     },
-  })
-);
+  }),
+});
 
 type Nav = { href?: string; title: string };
 
@@ -92,9 +97,10 @@ export function SideBarLayout({
             >
               {href ? (
                 <MenuList.Item
+                  variant="ghost"
+                  size="xs"
                   role="link"
                   href={`/crossed${href}`}
-                  // hovered={href === pathname}
                   onPress={(e) => {
                     e.stopPropagation();
                     e.preventDefault();

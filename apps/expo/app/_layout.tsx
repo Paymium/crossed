@@ -10,6 +10,11 @@ import { CrossedUIProvider } from '@crossed/ui';
 import { Slot, SplashScreen } from 'expo-router';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useEffect } from 'react';
+import {
+  ThemeProvider,
+  DarkTheme,
+  DefaultTheme,
+} from '@react-navigation/native';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -24,33 +29,46 @@ import {
   type CrossedMediaQueriesPlugin,
   type CrossedPseudoClassPlugin,
   type CrossedPseudoClassProps,
+  ThemePlugin,
 } from '@crossed/styled/plugins';
-import { darkTheme } from '@crossed/ui/theme';
-import type { CrossedVariantsPluginProps } from '@crossed/styled/plugins';
+import { darkTheme, lightTheme } from '@crossed/ui/theme';
+import type {
+  CrossedThemePlugin,
+  CrossedVariantsPluginProps,
+} from '@crossed/styled/plugins';
+import { useColorScheme } from 'react-native';
 
 const breakpoints = { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200 };
 
-Registry.setTheme(darkTheme)
-  .addPlugin(BasePlugin)
+const themes = { dark: darkTheme, light: lightTheme };
+
+type ThemesCustom = typeof themes;
+
+Registry.addPlugin(BasePlugin)
+  .addPlugin(ThemePlugin(themes, 'dark'))
   .addPlugin(PseudoClassPlugin)
   .addPlugin(VariantsPlugin)
   .addPlugin(MediaQueriesPlugin(breakpoints));
 
-type Theme = typeof darkTheme;
-
 declare module '@crossed/styled' {
-  // export interface UnistylesBreakpoints extends AppBreakpoints {}
-  export interface CrossedstyleTheme extends Theme {}
-
   export interface StyleSheet
     extends CrossedBasePlugin,
       CrossedVariantsPlugin,
+      CrossedThemePlugin,
       CrossedMediaQueriesPlugin<keyof typeof breakpoints>,
       CrossedPseudoClassPlugin {}
 
   export interface CrossedPropsExtended<S extends StyleSheet>
-    extends CrossedVariantsPluginProps<S['variants']>,
+    extends CrossedVariantsPluginProps<
+        S['theme'] extends (..._args: any) => any
+          ? ReturnType<S['theme']>['variants'] & S['variants']
+          : S['variants']
+      >,
       CrossedPseudoClassProps {}
+}
+
+declare module '@crossed/styled/plugins' {
+  export interface Themes extends ThemesCustom {}
 }
 
 export const unstable_settings = {
@@ -86,11 +104,14 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const toto = useColorScheme();
   return (
     <CrossedUIProvider>
-      <SafeAreaProvider>
-        <Slot />
-      </SafeAreaProvider>
+      <ThemeProvider value={toto === 'dark' ? DarkTheme : DefaultTheme}>
+        <SafeAreaProvider>
+          <Slot />
+        </SafeAreaProvider>
+      </ThemeProvider>
     </CrossedUIProvider>
   );
 }

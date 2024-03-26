@@ -31,8 +31,7 @@ export interface CrossedVariantsPluginProps<V extends Variants | undefined> {
 
 export const VariantsPlugin: Plugin<CrossedVariantsPlugin> = {
   test: '^variants$',
-  apply: ({ styles, addClassname, props }) => {
-    const plugins = Registry.getPlugins();
+  apply: ({ styles, addClassname, props, isWeb }) => {
     Object.entries(styles).forEach(([variantName, variantValues]) => {
       if (props && !props[variantName]) {
         return;
@@ -45,28 +44,20 @@ export const VariantsPlugin: Plugin<CrossedVariantsPlugin> = {
         ) {
           return;
         }
-        Object.entries(style).forEach(([key, value]) => {
-          plugins.forEach(({ test, apply }) => {
-            const keyFind = key.match(new RegExp(test, 'g'));
-            if (keyFind && keyFind.length > 0) {
-              apply({
-                props,
-                key,
-                styles: value,
-                addClassname: ({ suffix, prefix, body }) => {
-                  Object.entries(body).forEach(([e, obj]) => {
-                    addClassname({
-                      suffix,
-                      prefix,
-                      body: {
-                        [`.${variantName}-${variantValue}:${e.slice(1)}`]: obj,
-                      },
-                    });
-                  });
+        Registry.apply(() => style, {
+          isWeb,
+          props,
+          addClassname: ({ suffix, prefix, body }) => {
+            Object.entries(body).forEach(([e, obj]) => {
+              addClassname({
+                suffix,
+                prefix,
+                body: {
+                  [`${variantName}-${variantValue}:${e}`]: obj,
                 },
               });
-            }
-          });
+            });
+          },
         });
       });
     });

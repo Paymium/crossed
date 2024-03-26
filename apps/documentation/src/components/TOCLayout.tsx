@@ -15,31 +15,33 @@ import { useTranslation } from 'react-i18next';
 
 const Container = withStyle(XBox, { base: { minHeight: '100%' } });
 
-const Center = withStyle(YBox, ({ theme: t }) => ({
-  base: {
-    flex: 1,
-    width: '100%',
-    borderColor: t.colors.neutral,
-  },
-  variants: {
-    bordered: {
-      true: {
-        media: {
-          xl: { borderRightWidth: 1 },
-        },
-      },
-      false: { base: { borderRightWidth: 0 } },
+const Center = withStyle(YBox, {
+  theme: (t) => ({
+    base: {
+      flex: 1,
+      width: '100%',
+      borderColor: t.colors.neutral,
     },
-  },
-  media: {
-    xs: { paddingHorizontal: t.space.md },
-    lg: { paddingHorizontal: t.space[100] },
-  },
-}));
+    variants: {
+      bordered: {
+        true: {
+          media: {
+            xl: { borderRightWidth: 1 },
+          },
+        },
+        false: { base: { borderRightWidth: 0 } },
+      },
+    },
+    media: {
+      xs: { paddingHorizontal: t.space.md },
+      lg: { paddingHorizontal: t.space[100] },
+    },
+  }),
+});
 
 const Menu = withStyle(
   withDefaultProps(MenuList, { space: 'xs', size: 'xs' }),
-  () => ({
+  {
     base: {
       paddingHorizontal: 20,
       alignSelf: 'baseline',
@@ -48,12 +50,14 @@ const Menu = withStyle(
     media: {
       xl: { display: 'flex' },
     },
-  })
+  }
 );
 
-const Label = withStyle(MenuList.Label, ({ theme: t }) => ({
-  base: { fontSize: t.fontSize.lg },
-}));
+const Label = withStyle(MenuList.Label, {
+  theme: (t) => ({
+    base: { fontSize: t.fontSize.lg },
+  }),
+});
 
 const Li = withStyle(withDefaultProps(YBox, { role: 'listitem' }), {
   base: { alignItems: 'stretch' },
@@ -91,9 +95,11 @@ export const TOCLayout = ({
             return (
               <Li key={href || title}>
                 <MenuList.Item
+                  variant="ghost"
+                  size="xs"
                   role="link"
                   href={`${pathname}${href}`}
-                  // hovered={href === hash}
+                  // hover={href === hash}
                   onPress={(e) => {
                     e.stopPropagation();
                     e.preventDefault();

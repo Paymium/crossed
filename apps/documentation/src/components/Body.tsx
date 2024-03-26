@@ -12,5 +12,13 @@ export const Body = withStyle(
   memo(({ style, ...props }: HtmlHTMLAttributes<HTMLBodyElement>) => (
     <body {...props} />
   )),
-  ({ theme: t }) => ({ base: { backgroundColor: t.colors.background } })
+  {
+    theme: (t) => ({
+      base: {
+        backgroundColor: t.colors.background,
+        minHeight: '100%',
+        display: 'flex',
+      },
+    }),
+  }
 );

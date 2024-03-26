@@ -18,6 +18,7 @@ export type AllAvailableStyles = CrossedstyleView &
   CrossedstyleImage;
 
 export interface CrossedstyleTheme {}
+export interface CrossedstyleThemes extends Record<string, CrossedstyleTheme> {}
 
 export type AllAvailableKeys = keyof AllAvailableStyles;
 
@@ -27,13 +28,9 @@ export type CrossedstyleValues = {
 
 export interface StyleSheet {}
 
-export type CreateStyleParams =
-  | ((_params: { theme: CrossedstyleTheme }) => StyleSheet)
-  | StyleSheet;
+export type CreateStyleParams = StyleSheet;
 
-export type CreateStylesParams<K extends string> =
-  | ((_params: { theme: CrossedstyleTheme }) => Record<K, StyleSheet>)
-  | Record<K, StyleSheet>;
+export type CreateStylesParams<K extends string> = Record<K, StyleSheet>;
 
 export type PluginContext<S> = {
   /**
@@ -83,14 +80,27 @@ export type Plugin<S = any> = {
    * Test of key, if true, apply plugin
    */
   test: string;
+
+  /**
+   * init plugin
+   * @returns
+   */
+  init?: (_context: Omit<PluginContext<Required<S>>, 'key' | 'styles'>) => void;
+
   /**
    * apply transform on detected object
    * @returns
    */
-  apply: (_context: PluginContext<Required<S>>) => void;
+  apply?: (_context: PluginContext<Required<S>>) => void;
+
+  /**
+   * add utils added in parsing
+   * @returns
+   */
+  utils?: () => Record<string, any>;
   /**
    * driver to use
    * @returns
    */
-  useDriver?: () => any;
+  // useDriver?: () => any;
 };

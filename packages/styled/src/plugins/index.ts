@@ -6,17 +6,21 @@
  */
 
 export { BasePlugin, type CrossedBasePlugin } from './Base';
+export * from './Theme';
 export {
   MediaQueriesPlugin,
   type CrossedMediaQueriesPlugin,
 } from './MediaQueries';
 export {
   PseudoClassPlugin,
+  useInteraction,
   type CrossedPseudoClassPlugin,
   type CrossedPseudoClassProps,
 } from './PseudoClass';
+export { WebPlugin, type CrossedWebPlugin } from './Web';
 export {
   VariantsPlugin,
   type CrossedVariantsPlugin,
   type CrossedVariantsPluginProps,
 } from './Variants';
+export * from './utils';

@@ -72,55 +72,59 @@ const LinkNav = withStyle<GetProps<typeof LinkNext>>(
   forwardRef(({ style, active: _a, ...props }: any, ref) => (
     <LinkNext {...props} ref={ref} />
   )),
-  ({ theme: t }) => ({
-    'base': {
-      fontFamily: t.fontFamily,
-      color: t.utils.shadeColor(t.colors.default, -90),
-      transitionProperty: 'all',
-      transitionDuration: '170ms',
-    },
-    'variants': {
-      active: {
-        true: { base: { color: t.colors.default } },
-        false: {},
+  {
+    theme: (t) => ({
+      'base': {
+        fontFamily: t.fontFamily,
+        color: t.colors.default,
+        transitionProperty: 'all',
+        transitionDuration: '170ms',
       },
-    },
-    ':active': {
-      color: t.colors.default,
-    },
-    ':hover': {
-      textDecorationLine: 'none',
-      color: t.colors.default,
-    },
-  }),
-  { native: false }
-  // { name: 'LinkNav' }
+      'variants': {
+        active: {
+          true: { base: { color: t.colors.default } },
+          false: {},
+        },
+      },
+      ':active': {
+        color: t.colors.default,
+      },
+      ':hover': {
+        textDecorationLine: 'none',
+        color: t.colors.default,
+      },
+    }),
+  }
 );
 
-const LinkLogo = withStyle(LinkNav, ({ theme }) => ({
-  base: { alignItems: 'center', gap: theme.space.sm, display: 'flex' },
-}));
+const LinkLogo = withStyle(LinkNav, {
+  theme: (theme) => ({
+    base: { alignItems: 'center', gap: theme.space.sm, display: 'flex' },
+  }),
+});
 
-const Nav = withStyle(
-  (props) => <Box {...props} />,
-  ({ theme: t }) => ({
+const Nav = withStyle(Box, {
+  theme: (t) => ({
     base: {
       backgroundColor: t.colors.backgroundStrong,
-      padding: 15,
+      padding: t.space.lg,
       justifyContent: 'space-between',
       flexDirection: 'row',
       borderBottomWidth: 1,
+      borderStyle: 'solid',
       borderColor: t.colors.neutral,
       alignItems: 'center',
     },
-  })
-);
+  }),
+});
 
-const El = withStyle(Box, ({ theme: t }) => ({
-  base: {
-    alignItems: 'center',
-    gap: t.space.sm,
-    display: 'flex',
-    flexDirection: 'row',
-  },
-}));
+const El = withStyle(Box, {
+  theme: (t) => ({
+    base: {
+      alignItems: 'center',
+      gap: t.space.sm,
+      display: 'flex',
+      flexDirection: 'row',
+    },
+  }),
+});

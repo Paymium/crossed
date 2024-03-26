@@ -5,19 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { CrossedstyleTheme, Plugin } from './types';
+import type { CrossedstyleValues, Plugin, PluginContext } from './types';
 
-class RegistryBridge {
-  private theme?: CrossedstyleTheme;
+export class RegistryBridge {
   private plugins: Plugin[] = [];
-
-  setTheme(t: CrossedstyleTheme) {
-    this.theme = t;
-    return this;
-  }
-  getTheme() {
-    return this.theme as CrossedstyleTheme;
-  }
 
   addPlugin<S = any>(plugin: Plugin<S>) {
     this.plugins.push(plugin as any);
@@ -26,6 +17,22 @@ class RegistryBridge {
 
   getPlugins() {
     return this.plugins;
+  }
+
+  apply(
+    params: () => Record<string, any>,
+    options: Omit<PluginContext<Required<any>>, 'styles' | 'key'>
+  ) {
+    Object.entries(params()).forEach(
+      ([key, styles]: [string, CrossedstyleValues]) => {
+        this.plugins.forEach(({ test, apply }) => {
+          const keyFind = key.match(new RegExp(test, 'g'));
+          if (test && keyFind && keyFind.length > 0) {
+            apply?.({ ...options, key, styles });
+          }
+        });
+      }
+    );
   }
 }
 

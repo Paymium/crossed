@@ -1,5 +1,5 @@
 {
-  "version": "0.5.1",
+  "version": "0.5.2-beta.0",
   "license": "MIT",
   "main": "lib/commonjs/index.js",
   "module": "lib/modules/index.js",
@@ -40,7 +40,7 @@
     }
   ],
   "devDependencies": {
-    "@crossed/build": "workspace:^",
+    "@crossed/build": "*",
     "@size-limit/preset-small-lib": "^8.1.2",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "18.11.10",
@@ -55,7 +55,7 @@
     "typescript": "^5.4.2"
   },
   "dependencies": {
-    "@crossed/webpack": "workspace:^",
+    "@crossed/webpack": "2.0.0-beta.0",
     "find-yarn-workspace-root": "^2.0.0",
     "fs-extra": "^11.1.0",
     "next": "^13.4.19",

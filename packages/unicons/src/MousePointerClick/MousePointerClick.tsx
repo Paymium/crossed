@@ -5,8 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useStyle } from '@crossed/styled';
 import type { RequireOnly } from '../types';
+import { useTheme } from '@crossed/styled/plugins';
 
 export const MousePointerClick = ({
   Svg,
@@ -14,7 +14,7 @@ export const MousePointerClick = ({
   color,
   size = 24,
 }: RequireOnly<'Svg' | 'Path'>) => {
-  const { theme } = useStyle();
+  const { theme } = useTheme();
   return (
     <Svg
       width={size}

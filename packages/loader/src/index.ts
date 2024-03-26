@@ -23,7 +23,8 @@ import {
 import escodegen from 'escodegen';
 import { createLogger, apiLog } from '@crossed/log';
 import { Registry } from '@crossed/styled/registry';
-import { convertKeyToCss, type CrossedstyleValues } from '@crossed/styled';
+import { convertKeyToCss } from '@crossed/styled/plugins';
+import type { CrossedstyleValues } from '@crossed/styled';
 
 type Style = Record<string, any>;
 
@@ -47,16 +48,25 @@ export class Loader {
     );
 
     if (configPath) {
-      execSync(
-        `npx tsc --outDir ${path.resolve(
-          process.cwd(),
-          './lib'
-        )} ${path.resolve(
-          process.cwd(),
-          configPath
-        )} --skipLibCheck --module NodeNext --moduleResolution nodenext --esModuleInterop`
-      );
-      require(path.resolve(process.cwd(), './lib/style.config'));
+      try {
+        execSync(
+          `npx tsc --outDir ${path.resolve(
+            process.cwd(),
+            './lib'
+          )} ${path.resolve(
+            process.cwd(),
+            configPath
+          )} --skipLibCheck --module NodeNext --moduleResolution nodenext --esModuleInterop`
+        );
+      } catch (e) {
+        this.logger.error(e.toString());
+      }
+
+      try {
+        require(path.resolve(process.cwd(), './lib/style.config'));
+      } catch (e) {
+        this.logger.error(e.toString());
+      }
     }
   }
 
@@ -92,25 +102,33 @@ export class Loader {
     suffix?: string;
     prefix?: string;
     wrapper?: (_str: string) => string;
-    body: Record<string, CrossedstyleValues>;
-    file: string;
+    body: Record<string, CrossedstyleValues | string>;
   }) => {
     Object.entries(obj.body).forEach(([key, value]) => {
       // transform { backgroundColor: "blue" } => background-color: blue;
-      const styleParsed = this.styleToString(value);
+
+      const styleParsed =
+        typeof value === 'string' ? value : this.styleToString(value);
 
       // escape some character in css
-      const css = `${obj.prefix || ''}${key.replace(/[#:\[\]%,]/g, '\\$&')}${
-        obj.suffix || ''
-      } { ${styleParsed} }`;
+      const css = `${obj.prefix ?? '.'}${key.replace(
+        /[#:\[\]\(\)%,]/g,
+        '\\$&'
+      )}${obj.suffix || ''} { ${styleParsed} }`;
 
       // add css in cahce file
       this.fileCache.add(obj.wrapper ? obj.wrapper(css) : css);
     });
   };
 
-  parse(ast: Expression | SpreadElement) {
-    const theme = Registry.getTheme();
+  parse(ast: Expression | SpreadElement, isMulti?: boolean) {
+    const plugins = Registry.getPlugins();
+    const ctx = plugins.reduce((acc, { utils }) => {
+      return { ...acc, ...(utils?.() || undefined) };
+    }, {});
+    plugins.forEach(({ init }) =>
+      init?.({ addClassname: this.addClassname, isWeb: true, ...ctx })
+    );
     const _parseObjectExpression = (arg: ObjectExpression) => {
       if (arg.type === 'ObjectExpression') {
         const ast = {
@@ -132,7 +150,7 @@ export class Loader {
             apiLog({
               events: ['eval_style_function_error'],
             }).message,
-            { message: e.message, theme }
+            { message: e.message }
           );
         }
         return returnEl;
@@ -159,20 +177,20 @@ export class Loader {
         let returnEl;
         try {
           // eslint-disable-next-line no-eval
-          returnEl = eval(toto)({ theme });
+          returnEl = eval(toto)(ctx);
         } catch (e) {
           this.logger.error(
             apiLog({
               events: ['eval_style_function_error'],
             }).message,
-            { message: e.message, theme }
+            { message: e.message }
           );
         }
         return returnEl;
       }
     };
 
-    let parsing;
+    let parsing: Record<string, any>;
 
     if (ast.type === 'ObjectExpression') {
       parsing = _parseObjectExpression(ast);
@@ -191,21 +209,19 @@ export class Loader {
     }
 
     if (parsing) {
-      Object.entries(parsing).forEach(
-        ([key, styles]: [string, CrossedstyleValues]) => {
-          Registry.getPlugins().forEach(({ test, apply }) => {
-            const keyFind = key.match(new RegExp(test, 'g'));
-            if (keyFind && keyFind.length > 0 && typeof apply === 'function') {
-              apply?.({
-                isWeb: true,
-                key,
-                styles,
-                addClassname: this.addClassname,
-              });
-            }
+      if (isMulti) {
+        Object.entries(parsing).forEach(([, p]) => {
+          Registry.apply(() => p, {
+            addClassname: this.addClassname,
+            isWeb: true,
           });
-        }
-      );
+        });
+      } else {
+        Registry.apply(() => parsing, {
+          addClassname: this.addClassname,
+          isWeb: true,
+        });
+      }
     }
   }
 }

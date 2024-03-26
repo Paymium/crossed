@@ -5,4 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export * from './useStyle';
+import type { SetTheme } from './types';
+
+export const setTheme: SetTheme = () => {};

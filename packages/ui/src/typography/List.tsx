@@ -8,18 +8,17 @@
 import { withStyle } from '@crossed/styled';
 import { Text } from './Text';
 import { forwardRef, memo } from 'react';
-import { XBox, XBoxProps } from '../layout/XBox';
+import { XBox, type XBoxProps } from '../layout/XBox';
 import { YBox } from '../layout/YBox';
 import { withDefaultProps } from '@crossed/core';
 
-export const Ul = withStyle(
-  withDefaultProps(YBox, { role: 'list' }),
-  ({ theme: t }) => ({
+export const Ul = withStyle(withDefaultProps(YBox, { role: 'list' }), {
+  theme: (t) => ({
     base: {
       marginTop: t.space.xl,
     },
-  })
-);
+  }),
+});
 
 export const Li = withStyle(
   memo(
@@ -30,7 +29,7 @@ export const Li = withStyle(
       </XBox>
     ))
   ),
-  ({ theme: t }) => ({ base: { gap: t.space.md, marginBottom: t.space.md } })
+  { theme: (t) => ({ base: { gap: t.space.md, marginBottom: t.space.md } }) }
 );
 
 export const Disc = withStyle(

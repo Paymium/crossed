@@ -8,13 +8,15 @@
 import * as React from 'react';
 import { Registry } from '../Registry';
 import type { CrossedstyleValues, StyleSheet } from '../types';
-// import { useWindowDimensions } from 'react-native';
+import { useColorScheme, useWindowDimensions } from 'react-native';
 
 export const useStyles = <C extends string>(
-  params: () => Record<C, StyleSheet>
+  params: () => Record<C, StyleSheet>,
+  props: Record<string, any> = {}
 ) => {
-  // const { width } = useWindowDimensions();
-  const stylesToReturn = React.useMemo(
+  const { width } = useWindowDimensions();
+  const colorSheme = useColorScheme();
+  return React.useMemo(
     function MemoUseStyles() {
       const stylesMemo: Record<
         C,
@@ -23,52 +25,26 @@ export const useStyles = <C extends string>(
       if (params) {
         (Object.entries(params()) as [C, StyleSheet][]).forEach(
           ([keyStyle, styleOfKey]: [C, StyleSheet]) => {
-            Object.entries(styleOfKey).forEach(
-              ([key, styles]: [string, CrossedstyleValues]) => {
-                Registry.getPlugins().forEach(({ test, apply }) => {
-                  const keyFind = key.match(new RegExp(test, 'g'));
-                  if (test && keyFind && keyFind.length > 0) {
-                    apply({
-                      // props: {
-                      //   ...props,
-                      //   active: props.active ?? active,
-                      //   hover: props.hover ?? hover,
-                      // },
-                      key,
-                      styles,
-                      addClassname: ({ body }) => {
-                        if (!stylesMemo[keyStyle]) {
-                          stylesMemo[keyStyle] = { className: '', style: {} };
-                        }
-                        Object.values(body).reduce(
-                          (acc, e) => ({ ...acc, ...e }),
-                          {}
-                        );
-                        stylesMemo[keyStyle] = {
-                          className: '',
-                          style: {
-                            ...stylesMemo[keyStyle].style,
-                            ...Object.values(body).reduce(
-                              (acc, e) => ({ ...acc, ...e }),
-                              {}
-                            ),
-                          },
-                        };
-                      },
-                    });
-                  }
-                });
-              }
-            );
+            Registry.apply(() => styleOfKey, {
+              props,
+              addClassname: ({ body }) => {
+                if (!stylesMemo[keyStyle]) {
+                  stylesMemo[keyStyle] = { className: '', style: {} };
+                }
+                stylesMemo[keyStyle].style = {
+                  ...stylesMemo[keyStyle].style,
+                  ...Object.values(body).reduce(
+                    (acc, e) => ({ ...acc, ...e }),
+                    {}
+                  ),
+                };
+              },
+            });
           }
         );
       }
       return stylesMemo;
     },
-    [params]
+    [width, props, colorSheme]
   );
-  return {
-    styles: stylesToReturn,
-    theme: Registry.getTheme(),
-  };
 };
