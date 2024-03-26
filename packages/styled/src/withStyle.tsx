@@ -11,10 +11,7 @@ import { createStyles } from './createStyles';
 import { useStyles } from './useStyles';
 import type { CreateStyleParams, CrossedPropsExtended } from './types';
 
-export const withStyle = <
-  P extends Record<string, any>,
-  S extends CreateStyleParams = CreateStyleParams
->(
+export const withStyle = <P extends Record<string, any>, S extends StyleSheet>(
   Comp: StylableComponent<P>,
   styleParams: S
 ) => {

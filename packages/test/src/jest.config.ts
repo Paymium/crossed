@@ -21,6 +21,7 @@ try {
 const config: Config.InitialOptions = {
   // preset: 'react-native',
   rootDir: process.cwd(),
+  extensionsToTreatAsEsm: ['.ts', '.tsx', '.mts'],
   transform: {
     '^.+\\.(j)sx?$': [
       'babel-jest',
