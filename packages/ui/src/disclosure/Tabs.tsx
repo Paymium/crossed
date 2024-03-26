@@ -8,7 +8,7 @@
 'use client';
 
 import {
-  UseUncontrolledInput,
+  type UseUncontrolledInput,
   composeEventHandlers,
   createScope,
   useUncontrolled,
@@ -19,7 +19,7 @@ import { useCallback, type PropsWithChildren } from 'react';
 import { Button, type ButtonProps } from '../forms/Button';
 import { XBox } from '../layout/XBox';
 import { withStyle } from '@crossed/styled';
-import { YBox, YBoxProps } from '../layout/YBox';
+import { YBox, type YBoxProps } from '../layout/YBox';
 
 type TabsContext = Pick<ButtonProps, 'variant' | 'size'> & {
   value: string | number;
@@ -40,7 +40,7 @@ export const createTabs = () => {
     size = 'sm',
     ...props
   }: PropsWithChildren<
-    Pick<TabsContext, 'variant' | 'size'> &
+    Partial<Pick<TabsContext, 'variant' | 'size'>> &
       UseUncontrolledInput<TabsContext['value']> &
       YBoxProps
   >) => {

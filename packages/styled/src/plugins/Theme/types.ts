@@ -6,3 +6,5 @@
  */
 
 export interface Themes {}
+
+export type SetTheme = (_old: string, _theme: string) => void;

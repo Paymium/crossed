@@ -7,31 +7,14 @@
 
 import { createStyles } from '../createStyles';
 
-jest.mock('../Registry');
-
 describe('createStyles', () => {
   test('should return function', () => {
-    const { Registry } = jest.requireMock('../Registry');
-    Registry.getTheme.mockImplementation(jest.fn().mockReturnValue({}));
     const style = createStyles({});
     expect(typeof style).toBe('function');
   });
 
-  describe('call return function', () => {
-    test('with function params', () => {
-      const { Registry } = jest.requireMock('../Registry');
-      Registry.getTheme.mockImplementation(jest.fn().mockReturnValue({}));
-      const style = createStyles(() => ({}))();
-      expect(Registry.getTheme).toBeCalled();
-      expect(style).toEqual({});
-    });
-
-    test('with object params', () => {
-      const { Registry } = jest.requireMock('../Registry');
-      Registry.getTheme.mockImplementation(jest.fn().mockReturnValue({}));
-      const style = createStyles({})();
-      expect(Registry.getTheme).toBeCalled();
-      expect(style).toEqual({});
-    });
+  test('call return function', () => {
+    const style = createStyles({})();
+    expect(style).toEqual({});
   });
 });

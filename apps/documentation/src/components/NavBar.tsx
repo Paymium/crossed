@@ -94,9 +94,7 @@ const LinkNav = withStyle<GetProps<typeof LinkNext>>(
         color: t.colors.default,
       },
     }),
-  },
-  { native: false }
-  // { name: 'LinkNav' }
+  }
 );
 
 const LinkLogo = withStyle(LinkNav, {
@@ -109,7 +107,7 @@ const Nav = withStyle(Box, {
   theme: (t) => ({
     base: {
       backgroundColor: t.colors.backgroundStrong,
-      padding: 15,
+      padding: t.space.lg,
       justifyContent: 'space-between',
       flexDirection: 'row',
       borderBottomWidth: 1,

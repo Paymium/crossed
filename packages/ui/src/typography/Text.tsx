@@ -10,6 +10,7 @@
 import { Text as TextNative } from 'react-native';
 import { withStyle } from '@crossed/styled';
 import { withDefaultProps, type GetProps } from '@crossed/core';
+// import type { Entries } from 'src/theme/types';
 
 export const textAlign = {
   auto: { textAlign: 'auto' },
@@ -53,7 +54,11 @@ export const Text = withDefaultProps(
           '4xl': { base: { fontSize: t.fontSize['4xl'], lineHeight: 54 } },
           '5xl': { base: { fontSize: t.fontSize['5xl'], lineHeight: 78 } },
         },
-        // color: t.utils.createVariants('color', t),
+        color: {
+          warning: { base: { color: t.colors.warning } },
+          info: { base: { color: t.colors.info } },
+          link: { base: { color: t.colors.link } },
+        },
         textAlign: {
           center: { base: { textAlign: 'center' } },
           left: { base: { textAlign: 'left' } },

@@ -10,7 +10,7 @@ import { Registry } from '../../Registry';
 import type { Plugin, StyleSheet } from '../../types';
 import { convertKeyToCss, normalizeUnitPixel } from '../utils';
 import { ThemeRegistry } from './Registry';
-import { Themes } from './types';
+import type { Themes } from './types';
 
 type Theme = <T extends Themes[keyof Themes]>(
   _t: T
@@ -86,13 +86,13 @@ export const ThemePlugin = (
       }
 
       const theme = ThemeRegistry.getTheme();
-      const { theme: themeParsed } = parse(theme, undefined, isWeb);
+      const { theme: themeParsed } = parse(theme as any, undefined, isWeb);
 
       const styles = getStyles(themeParsed as Themes[keyof Themes]);
       Registry.apply(() => styles, {
         isWeb,
         props,
-        addClassname: (...e) => addClassname(...e),
+        addClassname,
       });
     },
   };

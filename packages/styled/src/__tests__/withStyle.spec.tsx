@@ -15,8 +15,7 @@ describe('withStyle', () => {
   test('no theme or plugin', () => {
     const style = { color: 'white' };
     const Comp = jest.fn().mockReturnValue(null);
-    const styleFunction = jest.fn().mockReturnValue(style);
-    const NewComp = withStyle(Comp, styleFunction);
+    const NewComp = withStyle(Comp, style);
 
     render(<NewComp />);
 

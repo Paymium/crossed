@@ -7,7 +7,7 @@
 
 function composeEventHandlers<E>(
   originalEventHandler?: (_event: E) => void,
-  ourEventHandler?: null | ((_event: E) => void),
+  ourEventHandler?: (_event: E) => void,
   { checkForDefaultPrevented = true } = {}
 ) {
   return function handleEvent(event: E) {

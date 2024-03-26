@@ -12,7 +12,6 @@ import { B, Box, Button, Card, H1, H2, H3, YBox } from '@crossed/ui';
 import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
 import { Github } from '@crossed/unicons/Github';
-import { useTheme } from '@crossed/styled/plugins';
 
 const Description = withStyle(H2, {
   base: { textAlign: 'center', marginTop: 0 },
@@ -60,7 +59,6 @@ const styleSheet = createStyles({
 
 export default function Home() {
   const { t } = useTranslation();
-  // const theme = useTheme();
   const { container, title, cardTitle, cardDescription } =
     useStyles(styleSheet);
 

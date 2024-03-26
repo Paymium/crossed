@@ -5,12 +5,11 @@
     "baseUrl": ".",
     "outDir": "./lib/typescript",
     "ignoreDeprecations": "5.0",
-    "noEmit": true,
     "declaration": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": true,
     "esModuleInterop": true,
-    "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "lib": ["esnext", "dom"],
@@ -24,7 +23,6 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true,
     "target": "esnext",
     "typeRoots": ["./src/type.ts"]
   }

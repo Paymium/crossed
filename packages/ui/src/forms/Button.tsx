@@ -12,7 +12,7 @@ import { createButton } from '@crossed/primitive';
 import { Pressable } from 'react-native';
 import { Text as TextUi } from '../typography/Text';
 import {
-  GetProps,
+  type GetProps,
   withDefaultProps,
   withStaticProperties,
 } from '@crossed/core';

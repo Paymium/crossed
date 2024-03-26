@@ -17,6 +17,7 @@ export {
   type CrossedPseudoClassPlugin,
   type CrossedPseudoClassProps,
 } from './PseudoClass';
+export { WebPlugin, type CrossedWebPlugin } from './Web';
 export {
   VariantsPlugin,
   type CrossedVariantsPlugin,

@@ -10,7 +10,6 @@
     "./lib"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "crossed-build --watch",
     "build": "crossed-build"
   },

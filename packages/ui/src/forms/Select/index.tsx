@@ -34,7 +34,7 @@
 // import { Box, BoxProps } from '../../layout/Box';
 
 import {
-  UseUncontrolledInput,
+  type UseUncontrolledInput,
   composeEventHandlers,
   createScope,
   useUncontrolled,
@@ -44,15 +44,19 @@ import { withStyle } from '@crossed/styled';
 import {
   useCallback,
   memo,
-  ReactNode,
+  type ReactNode,
   useRef,
   Children,
   isValidElement,
-  MutableRefObject,
+  type MutableRefObject,
 } from 'react';
-import { Button, ButtonProps } from '../Button';
-import { XBox, XBoxProps } from '../../layout/XBox';
-import { MenuItemProps, MenuList, MenuListProps } from '../../display/MenuList';
+import { Button, type ButtonProps } from '../Button';
+import { XBox, type XBoxProps } from '../../layout/XBox';
+import {
+  type MenuItemProps,
+  MenuList,
+  type MenuListProps,
+} from '../../display/MenuList';
 import { Portal } from '@gorhom/portal';
 import type { LayoutRectangle } from 'react-native';
 
@@ -505,7 +509,7 @@ const findChild = (
   value: string | number
 ): ReactNode | undefined => {
   if (!children) {
-    return;
+    return undefined;
   }
   return typeof children === 'function'
     ? undefined

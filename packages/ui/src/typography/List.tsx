@@ -8,7 +8,7 @@
 import { withStyle } from '@crossed/styled';
 import { Text } from './Text';
 import { forwardRef, memo } from 'react';
-import { XBox, XBoxProps } from '../layout/XBox';
+import { XBox, type XBoxProps } from '../layout/XBox';
 import { YBox } from '../layout/YBox';
 import { withDefaultProps } from '@crossed/core';
 

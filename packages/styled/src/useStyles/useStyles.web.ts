@@ -41,7 +41,7 @@ export const useStyles = <C extends string>(
               acc[cl] = cl;
               return acc;
             },
-            { $$css: true }
+            props?.style?.$$css ? props.style : { $$css: true }
           ),
         };
         return acc;

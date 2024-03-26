@@ -8,14 +8,16 @@
 'use client';
 import { createList } from '@crossed/primitive';
 import { withStyle, useStyles } from '@crossed/styled';
-import { Text, TextProps } from '../typography/Text';
+import { Text, type TextProps } from '../typography/Text';
 import { YBox } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
-import { Button, ButtonProps } from '../forms/Button';
-import { GetProps, createScope } from '@crossed/core';
+import { Button, type ButtonProps } from '../forms/Button';
+import { type GetProps, createScope } from '@crossed/core';
 import { forwardRef, memo } from 'react';
 
-type ButtonVariantProps = Pick<ButtonProps, 'size' | 'color' | 'variant'>;
+type ButtonVariantProps = Partial<
+  Pick<ButtonProps, 'size' | 'color' | 'variant'>
+>;
 const MenuRoot = withStyle(YBox, {
   base: {
     alignItems: 'stretch',

@@ -14,43 +14,33 @@ import { withStyle } from '@crossed/styled';
 import { YBox } from '../layout/YBox';
 import { Text } from '../typography/Text';
 
-const CardRoot = withStyle(
-  YBox,
-  {
-    theme: (t) => ({
-      base: {
-        padding: t.space.md,
-        borderRadius: t.space.xs,
-        backgroundColor: t.colors.neutral,
-      },
-      variants: {
-        role: {
-          link: {
-            ':hover': {
-              backgroundColor: t.colors.background,
-            },
-            ':active': {
-              backgroundColor: t.colors.background,
-            },
+const CardRoot = withStyle(YBox, {
+  theme: (t) => ({
+    base: {
+      padding: t.space.md,
+      borderRadius: t.space.xs,
+      backgroundColor: t.colors.neutral,
+    },
+    variants: {
+      role: {
+        link: {
+          ':hover': {
+            backgroundColor: t.colors.background,
+          },
+          ':active': {
+            backgroundColor: t.colors.background,
           },
         },
       },
-    }),
-  },
-  { native: true }
-);
+    },
+  }),
+});
 
-const Title = withStyle(
-  withDefaultProps(Text, { size: 'lg' }),
-  { base: { alignSelf: 'stretch' } },
-  { native: true }
-);
+const Title = withStyle(withDefaultProps(Text, { size: 'lg' }), {
+  base: { alignSelf: 'stretch' },
+});
 
-const Description = withStyle(
-  Text,
-  { base: { alignSelf: 'stretch' } },
-  { native: true }
-);
+const Description = withStyle(Text, { base: { alignSelf: 'stretch' } });
 
 const Card = withStaticProperties(CardRoot, {
   Title,

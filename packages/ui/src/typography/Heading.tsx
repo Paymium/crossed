@@ -8,7 +8,7 @@
 'use client';
 
 import { withStyle } from '@crossed/styled';
-import { Text, TextProps } from './Text';
+import { Text, type TextProps } from './Text';
 import { withDefaultProps } from '@crossed/core';
 
 type HeadingProps = TextProps & { 'aria-level'?: number };

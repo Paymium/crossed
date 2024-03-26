@@ -7,7 +7,7 @@
 
 import { composeEventHandlers, useUncontrolled } from '@crossed/core';
 import { useCallback, useMemo, useTransition } from 'react';
-import { PressableProps } from 'react-native';
+import type { PressableProps } from 'react-native';
 
 type PropsOverWrite = 'onPressIn' | 'onPressOut' | 'onHoverIn' | 'onHoverOut';
 export const useInteraction = (
@@ -26,7 +26,7 @@ export const useInteraction = (
   });
   const [, setTransition] = useTransition();
   const onPressIn = useCallback(
-    composeEventHandlers(props?.onPressIn, () => {
+    composeEventHandlers(props?.onPressIn || undefined, () => {
       setTransition(() => {
         if (!active) {
           setActive(true);
@@ -36,7 +36,7 @@ export const useInteraction = (
     [active, setActive, props?.onPressIn]
   );
   const onPressOut = useCallback(
-    composeEventHandlers(props?.onPressOut, () => {
+    composeEventHandlers(props?.onPressOut || undefined, () => {
       setTransition(() => {
         if (active) {
           setActive(false);
@@ -47,7 +47,7 @@ export const useInteraction = (
   );
 
   const onHoverIn = useCallback(
-    composeEventHandlers(props?.onHoverIn, () => {
+    composeEventHandlers(props?.onHoverIn || undefined, () => {
       setTransition(() => {
         if (!hover) {
           setHover(true);
@@ -57,7 +57,7 @@ export const useInteraction = (
     [hover, setHover, props?.onHoverIn]
   );
   const onHoverOut = useCallback(
-    composeEventHandlers(props?.onHoverOut, () => {
+    composeEventHandlers(props?.onHoverOut || undefined, () => {
       setTransition(() => {
         if (!hover) {
           setHover(false);

@@ -25,9 +25,9 @@
 
 import { createInput } from '@crossed/primitive';
 import { withStyle } from '@crossed/styled';
-import { TextInput, TextInputProps } from 'react-native';
+import { TextInput, type TextInputProps } from 'react-native';
 import { YBox } from '../layout/YBox';
-import { XBox, XBoxProps } from '../layout/XBox';
+import { XBox, type XBoxProps } from '../layout/XBox';
 import { forwardRef } from 'react';
 
 // const [Provider, useContext] = createScope<{

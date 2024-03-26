@@ -5,7 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export const setTheme = (old: string, theme: string) => {
+import type { SetTheme } from './types';
+
+export const setTheme: SetTheme = (old, theme) => {
   if (typeof window !== 'undefined') {
     window.document.documentElement.classList.remove(old);
     window.document.documentElement.classList.add(theme);

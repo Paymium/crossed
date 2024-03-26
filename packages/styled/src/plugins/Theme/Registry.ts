@@ -6,14 +6,14 @@
  */
 
 import { setTheme } from './setTheme';
-import { Themes } from './types';
+import type { Themes } from './types';
 
 export class ThemeBridge {
   private _listen = new Set<
     (_themeName: keyof Themes) => Promise<void> | void
   >();
-  private themes: Themes;
-  private _themeName: keyof Themes;
+  private themes?: Themes;
+  private _themeName?: keyof Themes;
 
   setThemes(themes: Partial<Themes>) {
     this.themes = { ...this.themes, ...themes };
@@ -32,6 +32,9 @@ export class ThemeBridge {
   }
 
   getTheme() {
+    if (!this.themes) {
+      throw new Error('themes are not set');
+    }
     return this.themes[this._themeName];
   }
 
