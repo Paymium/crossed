@@ -5,10 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { UnistylesRegistry } from '@crossed/styled/src/unistyles';
-import { darkTheme, lightTheme } from './theme';
-import { breakpoints } from './breakpoints';
-import deepmerge from 'deepmerge';
+// import { Registry } from '@crossed/styled/registry';
+// import { darkTheme } from './theme';
+// import { breakpoints } from './breakpoints';
+// import deepmerge from 'deepmerge';
 import type { Extends, Themes } from './types';
 // import type { CrossedBasePlugin } from '@crossed/styled/src/plugins/Base';
 // import type {

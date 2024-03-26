@@ -64,6 +64,5 @@
   "Example": "Exemple",
   "Anatomy": "Anatomie",
   "Return": "Retour",
-  "Type any code here": "Entrer votre code ici",
-  "Creation primitive Label": "createLabel est une primitive permettant de créer facilement un composant de type étiquette avec accessibilité. Cette primitive utilise 3 arguments : le composant racine, le composant étiquette et le composant entrée. Elle ajoute role='label' à la racine, récupère l'identifiant du composant Label (s'il est défini) ou lui en donne un nouveau (s'il n'est pas défini) et ajoute aria-labelledby='id' (du composant Label)."
+  "Type any code here": "Entrer votre code ici"
 }

@@ -24,11 +24,11 @@
     "accessible",
     "ui"
   ],
-  "main": "lib/commonjs/index.ts",
+  "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
-  "module": "lib/module/index.ts",
-  "react-native": "src/index.ts",
-  "source": "src/index.ts",
+  "module": "lib/module/index",
+  "react-native": "src/index",
+  "source": "src/index",
   "typings": "lib/typescript/index.d.ts",
   "exports": {
     ".": {

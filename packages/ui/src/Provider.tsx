@@ -5,9 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-// 'use client';
-import { setup } from './theme';
-setup();
+'use client';
 
 // export { CrossedTheme, useCrossedTheme } from '@crossed/styled';
 import { PortalProvider } from '@gorhom/portal';

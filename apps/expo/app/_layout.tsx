@@ -5,18 +5,38 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Registry } from '@crossed/styled/Registry';
-import { CrossedUIProvider } from '../node_modules/@crossed/ui/src/Provider';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-// import {
-//   DarkTheme,
-//   DefaultTheme,
-//   ThemeProvider,
-// } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { SplashScreen, Stack } from 'expo-router';
+// import { CrossedTheme, useCrossedTheme } from '@crossed/styled';
+import { CrossedUIProvider } from '@crossed/ui';
+import { Slot, SplashScreen } from 'expo-router';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useEffect } from 'react';
-// import { useColorScheme } from 'react-native';
+import {
+  ThemeProvider,
+  DarkTheme,
+  DefaultTheme,
+} from '@react-navigation/native';
+
+export { ErrorBoundary } from 'expo-router';
+
+import { Registry } from '@crossed/styled';
+import {
+  BasePlugin,
+  PseudoClassPlugin,
+  VariantsPlugin,
+  MediaQueriesPlugin,
+  type CrossedBasePlugin,
+  type CrossedVariantsPlugin,
+  type CrossedMediaQueriesPlugin,
+  type CrossedPseudoClassPlugin,
+  type CrossedPseudoClassProps,
+  ThemePlugin,
+} from '@crossed/styled/plugins';
+import { darkTheme, lightTheme } from '@crossed/ui/theme';
+import type {
+  CrossedThemePlugin,
+  CrossedVariantsPluginProps,
+} from '@crossed/styled/plugins';
+import { useColorScheme } from 'react-native';
 
 const breakpoints = { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200 };
 
@@ -84,23 +104,14 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  // const colorScheme = useColorScheme();
-  // console.log(CrossedUIProvider);
+  const toto = useColorScheme();
   return (
     <CrossedUIProvider>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
+      <ThemeProvider value={toto === 'dark' ? DarkTheme : DefaultTheme}>
+        <SafeAreaProvider>
+          <Slot />
+        </SafeAreaProvider>
+      </ThemeProvider>
     </CrossedUIProvider>
   );
 }
-
-// const Theme = ({ children }: PropsWithChildren) => {
-//   // const { theme } = useCrossedTheme();
-//   return (
-//     <ThemeProvider value={theme === 'dark' ? DarkTheme : DefaultTheme}>
-//       {children}
-//     </ThemeProvider>
-//   );
-// };

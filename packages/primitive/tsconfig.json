@@ -1,9 +1,5 @@
 {
-  "include": [
-    "./src",
-    "__tests__",
-    "../../apps/documentation/src/components/MyLabel.tsx"
-  ],
+  "include": ["./src", "__tests__"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": ".",
@@ -29,6 +25,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext",
+    "target": "esnext"
   }
 }
