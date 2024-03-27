@@ -1,0 +1,17 @@
+{
+  "include": ["./src"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "outDir": "./lib/typescript",
+    "noImplicitAny": true,
+    "module": "es6",
+    "lib": ["es2017"],
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
+  }
+}

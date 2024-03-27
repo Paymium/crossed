@@ -10,36 +10,37 @@ import {
   withDefaultProps,
   withStaticProperties,
 } from '@crossed/core';
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { YBox } from '../layout/YBox';
 import { Text } from '../typography/Text';
 
-const CardRoot = styled(YBox, (t) => ({
-  padding: t.space.md,
-  borderRadius: t.space.xs,
-  backgroundColor: t.utils.shadeColor(t.colors.background, 25),
-  variants: {
-    role: {
-      link: {
-        'hover:': {
-          backgroundColor: t.utils.shadeColor(t.colors.background, 30),
-        },
-        'active:': {
-          backgroundColor: t.utils.shadeColor(t.colors.background, 20),
+const CardRoot = withStyle(YBox, {
+  theme: (t) => ({
+    base: {
+      padding: t.space.md,
+      borderRadius: t.space.xs,
+      backgroundColor: t.colors.neutral,
+    },
+    variants: {
+      role: {
+        link: {
+          ':hover': {
+            backgroundColor: t.colors.background,
+          },
+          ':active': {
+            backgroundColor: t.colors.background,
+          },
         },
       },
     },
-  },
-}));
-
-const Title = withDefaultProps(styled(Text, { alignSelf: 'stretch' }), {
-  size: 'lg',
+  }),
 });
 
-const Description = withDefaultProps(
-  styled(Text, { alignSelf: 'stretch' }),
-  {}
-);
+const Title = withStyle(withDefaultProps(Text, { size: 'lg' }), {
+  base: { alignSelf: 'stretch' },
+});
+
+const Description = withStyle(Text, { base: { alignSelf: 'stretch' } });
 
 const Card = withStaticProperties(CardRoot, {
   Title,

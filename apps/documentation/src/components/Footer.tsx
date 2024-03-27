@@ -9,26 +9,30 @@
 
 import { Text, XBox, YBox } from '@crossed/ui';
 import { Link } from './Link';
-import { styled } from '@crossed/styled';
+import { withStyle } from '@crossed/styled';
 import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
 
-const Container = styled(YBox, (t) => ({
-  backgroundColor: t.colors.backgroundStrong,
-  padding: 15,
-  justifyContent: 'center',
-  borderTopWidth: 1,
-  borderColor: t.colors.neutral,
-  alignItems: 'center',
-}));
+const Container = withStyle(YBox, {
+  theme: (t) => ({
+    base: {
+      backgroundColor: t.colors.backgroundStrong,
+      padding: 15,
+      justifyContent: 'center',
+      borderTopWidth: 1,
+      borderStyle: 'solid',
+      borderColor: t.colors.neutral,
+      alignItems: 'center',
+    },
+  }),
+});
 
-const Row = withDefaultProps(
-  styled(XBox, {
+const Row = withStyle(withDefaultProps(XBox, { space: 'sm' }), {
+  base: {
     justifyContent: 'center',
     alignItems: 'center',
-  }),
-  { space: 'sm' }
-);
+  },
+});
 
 export const Footer = () => {
   const { t } = useTranslation();

@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createCollection } from '../utils';
+import { createCollection } from '../utils/Collections';
 
 const GROUP_NAME = 'ButtonGroup';
 

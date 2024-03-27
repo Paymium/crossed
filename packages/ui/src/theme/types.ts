@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { UnistylesThemes } from '@crossed/styled';
+import type { CrossedstyleTheme } from '@crossed/styled';
 
 export type Entries<T> = {
   [K in keyof T]: [K, T[K]];
@@ -37,7 +37,7 @@ export type VariantColor = {
   [key in keyof Omit<
     Colors,
     'background' | 'backgroundStrong' | 'backgroundSoft'
-  >]: { color: Colors[key] };
+  >]: { base: { color: Colors[key] } };
 };
 
 export type VariantBackgroundColor = {
@@ -49,7 +49,7 @@ export type VariantBackgroundColor = {
     | 'black'
     | 'default'
     | 'white'
-  >]: { backgroundColor: Colors[key] };
+  >]: { base: { backgroundColor: Colors[key] } };
 };
 
 export type Theme = {
@@ -82,20 +82,8 @@ export type Theme = {
     '4xl': number;
     '5xl': number;
   };
-  utils: {
-    shadeColor: (_col: string, _amt: number) => string;
-    hexToRgbA: (_hex: string, _alpha: number) => string;
-    select: (
-      _p: { hover?: any; active?: any; focus?: any; base?: any },
-      _state: { hover?: boolean; active?: boolean; focus?: boolean }
-    ) => string;
-    createVariants: {
-      (_type: 'color', _theme: Theme): VariantColor;
-      (_type: 'backgroundColor', _theme: Theme): VariantBackgroundColor;
-    };
-  };
 };
-export type Themes = UnistylesThemes & {
+export type Themes = CrossedstyleTheme & {
   light: Theme;
   dark: Theme;
   [key: string]: Theme;

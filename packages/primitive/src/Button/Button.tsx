@@ -7,7 +7,7 @@
 
 import { ComponentType, forwardRef, useId } from 'react';
 import { Provider } from './context';
-import { RovingFocusGroupItem } from '../utils';
+import { RovingFocusGroupItem } from '../utils/RovingFocus';
 import { ButtonGroupCollection } from './contextCollection';
 
 export const createButtonMain = <T extends Record<string, any>>(

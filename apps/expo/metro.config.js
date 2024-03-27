@@ -1,24 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+const { getDefaultConfig } = require('expo/metro-config');
 
-// eslint-disable-next-line no-undef
-const { makeMetroConfig } = require("@rnx-kit/metro-config");
-// eslint-disable-next-line no-undef
-const MetroSymlinksResolver = require("@rnx-kit/metro-resolver-symlinks");
-
-// eslint-disable-next-line no-undef
-module.exports = makeMetroConfig({
-  isCSSEnabled: true,
-  // eslint-disable-next-line no-undef
-  projectRoot: __dirname,
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
-  },
-  resolver: {
-    resolveRequest: MetroSymlinksResolver(),
-  },
-});
+const config = getDefaultConfig(__dirname);
+config.resolver.unstable_enableSymlinks = true;
+config.resolver.unstable_enablePackageExports = true;
+module.exports = config;

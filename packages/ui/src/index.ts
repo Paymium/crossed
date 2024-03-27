@@ -7,7 +7,6 @@
 
 'use client';
 // react-native-unistyles/lib/typescript/src/types/core
-import 'react-native-unistyles';
 export * from './layout';
 // export * from './variants';
 export * from './typography';

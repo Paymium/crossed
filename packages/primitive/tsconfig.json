@@ -26,8 +26,5 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "paths": {
-      "@crossed/core": ["./node_modules/@crossed/core/src"]
-    }
   }
 }

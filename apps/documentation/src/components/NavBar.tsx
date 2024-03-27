@@ -7,21 +7,16 @@
 
 'use client';
 
-import '@/types/unistyles';
-import {
-  UnistylesRuntime,
-  createStyleSheet,
-  styled,
-  useStyles,
-} from '@crossed/styled';
+import '@/style.config';
+import { withStyle } from '@crossed/styled';
 import { ChangeTheme } from './ChangeTheme';
-import { XBox } from '@crossed/ui';
+import { Box } from '@crossed/ui';
 import { Logo } from './Logo';
-import { withDefaultProps } from '@crossed/core';
+import { GetProps } from '@crossed/core';
 import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
-import { memo } from 'react';
-import { Link } from './Link';
+import { forwardRef, memo } from 'react';
+import LinkNext from 'next/link';
 
 const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
   {
@@ -47,17 +42,16 @@ const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
 ];
 
 export const NavBar = memo(() => {
-  const { styles } = useStyles(styleSheet);
   const pathname = usePathname();
   return (
     <Nav role="navigation">
-      <XBox style={styles.element}>
-        <LinkNav href="/" style={styles.logo} size="lg">
+      <El>
+        <LinkLogo href="/" size="lg">
           <Logo />
           Crossed
-        </LinkNav>
-      </XBox>
-      <XBox style={styles.element}>
+        </LinkLogo>
+      </El>
+      <El>
         {navLinks.map(({ href, title, activeFor }) => (
           <LinkNav
             href={href}
@@ -69,53 +63,68 @@ export const NavBar = memo(() => {
         ))}
         <ChangeLang />
         <ChangeTheme />
-      </XBox>
+      </El>
     </Nav>
   );
 });
 
-const LinkNav = withDefaultProps(
-  styled(
-    Link,
-    (t) => ({
-      'color': t.utils.shadeColor(
-        t.colors.default,
-        UnistylesRuntime.themeName === 'dark' ? -90 : 90
-      ),
-      'hover:': {
+const LinkNav = withStyle<GetProps<typeof LinkNext>>(
+  forwardRef(({ style, active: _a, ...props }: any, ref) => (
+    <LinkNext {...props} ref={ref} />
+  )),
+  {
+    theme: (t) => ({
+      'base': {
+        fontFamily: t.fontFamily,
+        color: t.colors.default,
+        transitionProperty: 'all',
+        transitionDuration: '170ms',
+      },
+      'variants': {
+        active: {
+          true: { base: { color: t.colors.default } },
+          false: {},
+        },
+      },
+      ':active': {
+        color: t.colors.default,
+      },
+      ':hover': {
         textDecorationLine: 'none',
         color: t.colors.default,
       },
-      'active:': {
-        color: t.colors.default,
-      },
-      // 'variants': {
-      //   active: { true: { color: t.colors.default }, false: {} },
-      // },
     }),
-    { name: 'LinkNav' }
-  ),
-  { size: 'md' }
+  }
 );
 
-const Nav = styled(XBox, (t) => ({
-  backgroundColor: t.colors.backgroundStrong,
-  padding: 15,
-  justifyContent: 'space-between',
-  borderBottomWidth: 1,
-  borderColor: t.colors.neutral,
-  alignItems: 'center',
-}));
+const LinkLogo = withStyle(LinkNav, {
+  theme: (theme) => ({
+    base: { alignItems: 'center', gap: theme.space.sm, display: 'flex' },
+  }),
+});
 
-const styleSheet = createStyleSheet((theme) => ({
-  element: {
-    width: 'auto',
-    alignItems: 'center',
-    gap: theme.space.md,
-  },
-  logo: {
-    alignItems: 'center',
-    gap: theme.space.sm,
-    display: 'flex',
-  },
-}));
+const Nav = withStyle(Box, {
+  theme: (t) => ({
+    base: {
+      backgroundColor: t.colors.backgroundStrong,
+      padding: t.space.lg,
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      borderBottomWidth: 1,
+      borderStyle: 'solid',
+      borderColor: t.colors.neutral,
+      alignItems: 'center',
+    },
+  }),
+});
+
+const El = withStyle(Box, {
+  theme: (t) => ({
+    base: {
+      alignItems: 'center',
+      gap: t.space.sm,
+      display: 'flex',
+      flexDirection: 'row',
+    },
+  }),
+});

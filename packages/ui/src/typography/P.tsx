@@ -5,21 +5,20 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef } from 'react';
-import { Text, type TextProps } from './Text';
-import { styled } from '@crossed/styled';
+import { Text } from './Text';
+import { withStyle } from '@crossed/styled';
+import { withDefaultProps } from '@crossed/core';
 
-export const P = styled(
-  forwardRef((props: Omit<TextProps, 'role'>, ref) => (
-    <Text
-      // @ts-expect-error paragraph is not in role type
-      role="paragraph"
-      {...props}
-      ref={ref}
-    />
-  )),
-  (t) => ({
-    alignSelf: 'stretch',
-    marginVertical: t.space.md,
-  })
+export const P = withStyle(
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore error un react-native, work for web
+  withDefaultProps(Text, { role: 'paragraph' }),
+  {
+    theme: (t) => ({
+      base: {
+        alignSelf: 'stretch',
+        marginVertical: t.space.md,
+      },
+    }),
+  }
 );

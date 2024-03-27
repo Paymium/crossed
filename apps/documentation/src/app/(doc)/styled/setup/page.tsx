@@ -6,121 +6,155 @@
  */
 
 'use client';
-import { CodeBlock } from '@/components/CodeBlock';
 import { withDefaultProps } from '@crossed/core';
-import { styled } from '@crossed/styled';
-import { Alert, Anchor, H1, H2, P, Tabs, Text, YBox } from '@crossed/ui';
-import { Trans, useTranslation } from 'react-i18next';
+import { H1, Text } from '@crossed/ui';
+import { CodeBlock } from '@/components/CodeBlock';
+import { Alert, H2, P, createTabs, YBox } from '@crossed/ui';
+import { useTranslation } from 'react-i18next';
 
-const Description = withDefaultProps(styled(Text, {}), {
+const Description = withDefaultProps(Text, {
   size: 'xl',
   weight: 'medium',
 });
+
+const PlatformTabs = createTabs();
+const BuilderTabs = createTabs();
+
 export default function Home() {
   const { t } = useTranslation();
   return (
-    <YBox role="main">
-      <H1>{t('Setup')}</H1>
-      <Description>{t('Get @crossed/styled set up, step by step')}</Description>
-      <YBox space="md">
+    <PlatformTabs defaultValue="web">
+      <BuilderTabs defaultValue="webpack">
+        <H1>{t('Setup')}</H1>
+        <Description>
+          {t('Get @crossed/styled set up, step by step')}
+        </Description>
+
+        <PlatformTabs.List>
+          <PlatformTabs.Tab value="web">
+            <PlatformTabs.Tab.Text>web</PlatformTabs.Tab.Text>
+          </PlatformTabs.Tab>
+          <PlatformTabs.Tab value="native">
+            <PlatformTabs.Tab.Text>react-native</PlatformTabs.Tab.Text>
+          </PlatformTabs.Tab>
+        </PlatformTabs.List>
+
+        <PlatformTabs.Panels>
+          <PlatformTabs.Panel value="web">
+            <YBox space="md">
+              <BuilderTabs.List>
+                <BuilderTabs.Tab value="webpack">
+                  <BuilderTabs.Tab.Text>webpack</BuilderTabs.Tab.Text>
+                </BuilderTabs.Tab>
+                <BuilderTabs.Tab value="next">
+                  <BuilderTabs.Tab.Text>next</BuilderTabs.Tab.Text>
+                </BuilderTabs.Tab>
+              </BuilderTabs.List>
+            </YBox>
+          </PlatformTabs.Panel>
+        </PlatformTabs.Panels>
+
         <H2 id="install">{t('Install dependencies')}</H2>
-        <Tabs defaultValue="pnpm">
-          <Tabs.List>
-            <Tabs.Tab value="pnpm">
-              <Tabs.Tab.Text>pnpm</Tabs.Tab.Text>
-            </Tabs.Tab>
-            <Tabs.Tab value="npm">
-              <Tabs.Tab.Text>npm</Tabs.Tab.Text>
-            </Tabs.Tab>
-            <Tabs.Tab value="yarn">
-              <Tabs.Tab.Text>yarn</Tabs.Tab.Text>
-            </Tabs.Tab>
-          </Tabs.List>
-          <Tabs.Panels>
-            <Tabs.Panel value="pnpm">
+        <PlatformTabs.Panels>
+          <PlatformTabs.Panel value="web">
+            <BuilderTabs.Panel value="webpack">
+              <CodeBlock>pnpm i @crossed/styled @crossed/webpack</CodeBlock>
+            </BuilderTabs.Panel>
+            <BuilderTabs.Panel value="next">
               <CodeBlock>
-                pnpm i @crossed/styled react-native-unistyles
+                pnpm i @crossed/styled @crossed/next-adapter
               </CodeBlock>
-            </Tabs.Panel>
-            <Tabs.Panel value="npm">
-              <CodeBlock>
-                npm i @crossed/styled react-native-unistyles
-              </CodeBlock>
-            </Tabs.Panel>
-            <Tabs.Panel value="yarn">
-              <CodeBlock>
-                yarn add @crossed/styled react-native-unistyles
-              </CodeBlock>
-            </Tabs.Panel>
-          </Tabs.Panels>
-        </Tabs>
-      </YBox>
+            </BuilderTabs.Panel>
+          </PlatformTabs.Panel>
+          <PlatformTabs.Panel value="native">
+            <CodeBlock>pnpm i @crossed/styled</CodeBlock>
+          </PlatformTabs.Panel>
+        </PlatformTabs.Panels>
 
-      <H2 id="configure">{t('Configure')}</H2>
-      <P>
-        <Trans>
-          You should finish installation and configure react-native-unistyles,
-          click{' '}
-          <Anchor
-            href="https://reactnativeunistyles.vercel.app/start/setup/#3-configure-unistyles-with-unistylesregistry"
-            hrefAttrs={{ target: '_blank' }}
-          >
-            here
-          </Anchor>
-        </Trans>
-      </P>
+        <BuilderTabs.Panels>
+          <PlatformTabs.Panel value="web">
+            <H2 id="configure">{t('Configure builder')}</H2>
+            <BuilderTabs.Panel value="webpack">
+              <CodeBlock fileName="next.config.js">{`
+const StylePlugin = require('@crossed/webpack');
 
-      <Alert status="warning">
-        <YBox space="md" style={{ width: '100%' }}>
-          <YBox>
-            <Alert.Title>{t('Server side renderer')}</Alert.Title>
-            <Alert.Description>
-              <Trans>
-                For add style on server side rendering, you should add registry
-                on server components (nextjs app router)
-              </Trans>
-            </Alert.Description>
-          </YBox>
-          <CodeBlock fileName="app/layout.tsx">
-            {`
-import type { PropsWithChildren } from 'react';
-import { Registry } from '@crossed/styled';
+module.exports = {
+  /** your webpack config **/
+  plugins: [new StylePlugin({ configPath: './src/style.config.ts' })]
+};
+              `}</CodeBlock>
+            </BuilderTabs.Panel>
+            <BuilderTabs.Panel value="next">
+              <CodeBlock fileName="next.config.js">{`
+const withCrossed = require('@crossed/next-adapter');
 
-export default function RootLayout({
-  children
-}: PropsWithChildren) {
-  return (
-    <html lang="en">
-      <Registry>
-        <body>
-          {children}
-        </body>
-      </Registry>
-    </html>
-  );
+
+const nextConfig = withCrossed({
+  configPath: './src/style.config.ts',
+})({ /** your next config here */ });
+
+module.exports = nextConfig;
+              `}</CodeBlock>
+            </BuilderTabs.Panel>
+          </PlatformTabs.Panel>
+        </BuilderTabs.Panels>
+
+        <H2 id="install">{t('Init registry')}</H2>
+        <P>{t('Create style.config.ts file')}</P>
+        <CodeBlock fileName="./src/style.config.ts">{`
+import { Registry } from '@crossed/styled/registry';
+import { BasePlugin, type CrossedBasePlugin } from '@crossed/styled/plugins';
+
+// add base plugin or add yours
+Registry.addPlugin(BasePlugin);
+
+declare module '@crossed/styled' {
+  export interface StyleSheet extends CrossedBasePlugin {}
 }
-`}
-          </CodeBlock>
-        </YBox>
-      </Alert>
 
-      <YBox space="md">
-        <H2 id="usage">{t('Usage')}</H2>
-        <CodeBlock fileName="foo.tsx">
-          {`
+              `}</CodeBlock>
+
+        <PlatformTabs.Panel value="web">
+          <BuilderTabs.Panel value="webpack">
+            <Text>
+              {t('And import this file only once in your entry file')}
+            </Text>
+            <CodeBlock fileName="./App.ts">import "./style.config";</CodeBlock>
+          </BuilderTabs.Panel>
+          <BuilderTabs.Panel value="next">
+            <Text>{t('And import this file in your _app.tsx')}</Text>
+            <CodeBlock fileName="./App.ts">import "./style.config";</CodeBlock>
+            <Alert status="warning">
+              <YBox>
+                <Alert.Title>{t('Only for app Router')}</Alert.Title>
+                <Alert.Description>
+                  {t(
+                    'You should import style.config on your _layout root file (for server component) and in your global client component (generaly theme context provider)'
+                  )}
+                </Alert.Description>
+              </YBox>
+            </Alert>
+          </BuilderTabs.Panel>
+        </PlatformTabs.Panel>
+
+        <YBox space="md">
+          <H2 id="usage">{t('Usage')}</H2>
+          <CodeBlock fileName="foo.tsx">
+            {`
 import { styled } from '@crossed/styled';
 import { Text } from "react-native";
 
 const TextStyled = styled(Text, {
-  color: "red"
+  base: { color: "red" }
 });
 
 function App () {
   return <TextStyled>Hello World!</TextStyled>;
 }
 `}
-        </CodeBlock>
-      </YBox>
-    </YBox>
+          </CodeBlock>
+        </YBox>
+      </BuilderTabs>
+    </PlatformTabs>
   );
 }

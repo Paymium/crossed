@@ -15,7 +15,7 @@ export const ChangeLang = () => {
   const { i18n } = useTranslation();
   return (
     <Select
-      variant="ghost"
+      variant="default"
       defaultValue="en"
       value={i18n.language}
       onChange={(v) => {
