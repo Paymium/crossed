@@ -29,6 +29,7 @@
     "generator"
   ],
   "scripts": {
+    "clean": "rm -rf lib",
     "test": "crossed-test",
     "watch": "crossed-build --watch",
     "build": "crossed-build"

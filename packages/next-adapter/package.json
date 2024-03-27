@@ -13,6 +13,7 @@
     "node": ">=10"
   },
   "scripts": {
+    "clean": "rm -rf lib",
     "watch": "crossed-build --watch",
     "build": "crossed-build",
     "lint": "tsdx lint",
