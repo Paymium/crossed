@@ -10,6 +10,13 @@ import type { CrossedstyleValues, Plugin, PluginContext } from './types';
 export class RegistryBridge {
   private plugins: Plugin[] = [];
 
+  private _debug = false;
+
+  setDebug(d: boolean) {
+    this._debug = d;
+    return this;
+  }
+
   addPlugin<S = any>(plugin: Plugin<S>) {
     this.plugins.push(plugin as any);
     return this;
@@ -19,15 +26,24 @@ export class RegistryBridge {
     return this.plugins;
   }
 
+  log(e: string) {
+    if (this._debug) {
+      // eslint-disable-next-line no-console
+      console.log(`[@crossed/styled] ${e}`);
+    }
+  }
+
   apply(
     params: () => Record<string, any>,
     options: Omit<PluginContext<Required<any>>, 'styles' | 'key'>
   ) {
+    this.log(`Registry apply`);
     Object.entries(params()).forEach(
       ([key, styles]: [string, CrossedstyleValues]) => {
-        this.plugins.forEach(({ test, apply }) => {
+        this.plugins.forEach(({ test, apply, name }) => {
           const keyFind = key.match(new RegExp(test, 'g'));
           if (test && keyFind && keyFind.length > 0) {
+            this.log(`[${name}] Find "${key}" for "${name}" plugin`);
             apply?.({ ...options, key, styles });
           }
         });

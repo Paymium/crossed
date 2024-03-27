@@ -343,6 +343,9 @@ importers:
       '@crossed/log':
         specifier: '*'
         version: link:../log
+      esbuild:
+        specifier: ^0.17.17
+        version: 0.17.19
       escodegen:
         specifier: ^2.1.0
         version: 2.1.0

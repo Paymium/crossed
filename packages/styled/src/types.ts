@@ -81,6 +81,8 @@ export type Plugin<S = any> = {
    */
   test: string;
 
+  name: string;
+
   /**
    * init plugin
    * @returns

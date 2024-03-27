@@ -16,6 +16,7 @@ export const MediaQueriesPlugin = <B extends Record<string, number>>(
   breakpoints: B
 ): Plugin<CrossedMediaQueriesPlugin<keyof B>> => {
   return {
+    name: 'MediaQueriesPlugin',
     test: '^media$',
     apply: function MediaQueriesApply({ styles, addClassname, props, isWeb }) {
       let Dimensions: any;
