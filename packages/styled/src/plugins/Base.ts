@@ -14,7 +14,8 @@ export interface CrossedBasePlugin {
 
 export const BasePlugin: Plugin<CrossedBasePlugin> = {
   name: 'BasePlugin',
-  test: '^base$',
+  test: "base",
+  // test: '^base$',
   apply: (context) => {
     /**
      * {".bg-color": { backgroundColor: "black" } }

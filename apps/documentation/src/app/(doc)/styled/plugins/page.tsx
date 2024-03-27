@@ -36,8 +36,8 @@ export default function PluginsPage() {
       <P>
         @crossed/styled se base sur un systeme de plugin afin de generer au
         runtime et au buildtime le css et les className pour le web, et juste
-        retourner le style pour react-native web. Cela permet une grands
-        flexibilité sur la manière d'ecrire sont design systeme
+        retourner le style pour react-native web. Cela permet une grande
+        flexibilité sur la manière d'ecrire sont design system
       </P>
       <H2 id="migrate">Structure d'un plugin</H2>
       <CodeBlock>{`

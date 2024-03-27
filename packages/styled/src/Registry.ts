@@ -7,6 +7,7 @@
 
 import type { CrossedstyleValues, Plugin, PluginContext } from './types';
 
+const cache = new Map();
 export class RegistryBridge {
   private plugins: Plugin[] = [];
 
@@ -38,17 +39,72 @@ export class RegistryBridge {
     options: Omit<PluginContext<Required<any>>, 'styles' | 'key'>
   ) {
     this.log(`Registry apply`);
+
+    // //method 2
+    // const toto = params();
+    // // {base: {color: ""}}
+    // this.plugins.forEach(({ test, apply, name }) => {
+    //   // test === "base"
+    //   const styles = toto[test];
+    //   if (!styles) return;
+    // if (cache.has(styles)) {
+    //   options.addClassname(cache.get(styles));
+    // } else {
+    //     apply?.({
+    //       ...options,
+    //       addClassname: (e) => {
+    //         options.addClassname(e);
+    //         cache.set(styles, e)
+    //       },
+    //       key: test,
+    //       styles,
+    //     });
+    //   }
+    // });
+
     Object.entries(params()).forEach(
       ([key, styles]: [string, CrossedstyleValues]) => {
         this.plugins.forEach(({ test, apply, name }) => {
           const keyFind = key.match(new RegExp(test, 'g'));
           if (test && keyFind && keyFind.length > 0) {
             this.log(`[${name}] Find "${key}" for "${name}" plugin`);
-            apply?.({ ...options, key, styles });
+            if (cache.has(styles)) {
+              options.addClassname(cache.get(styles));
+            } else {
+              apply?.({
+                ...options,
+                addClassname: (e) => {
+                  options.addClassname(e);
+                  cache.set(styles, e)
+                },
+                key,
+                styles,
+              });
+            }
           }
         });
       }
     );
+
+    // // method1
+    // Object.entries(params()).forEach(
+    //   ([key, styles]: [string, CrossedstyleValues]) => {
+    //     this.plugins.forEach(({ test, apply, name }) => {
+    //       const keyFind = key.match(new RegExp(test, 'g'));
+    //       if (test && keyFind && keyFind.length > 0) {
+    //         this.log(`[${name}] Find "${key}" for "${name}" plugin`);
+    //         apply?.({
+    //           ...options,
+    //           addClassname: (e) => {
+    //             options.addClassname(e);
+    //           },
+    //           key,
+    //           styles,
+    //         });
+    //       }
+    //     });
+    //   }
+    // );
   }
 }
 

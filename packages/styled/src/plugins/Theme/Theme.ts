@@ -72,7 +72,7 @@ export const ThemePlugin = (
   ThemeRegistry.setThemes(themes).setThemeName(initialTheme);
   return {
     name: 'ThemePlugin',
-    test: '^theme$',
+    test: 'theme',
     apply({ styles: getStyles, isWeb, props, addClassname }) {
       if (!props) {
         Object.entries(themes).forEach(([themeName, theme]) => {

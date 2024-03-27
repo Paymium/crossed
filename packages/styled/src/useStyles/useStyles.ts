@@ -10,6 +10,8 @@ import { Registry } from '../Registry';
 import type { CrossedstyleValues, StyleSheet } from '../types';
 import { useColorScheme, useWindowDimensions } from 'react-native';
 
+const cache = new Map();
+
 export const useStyles = <C extends string>(
   params: () => Record<C, StyleSheet>,
   props: Record<string, any> = {}
@@ -22,27 +24,28 @@ export const useStyles = <C extends string>(
         C,
         { className: string; style: CrossedstyleValues }
       > = {} as any;
-      if (params) {
-        (Object.entries(params()) as [C, StyleSheet][]).forEach(
-          ([keyStyle, styleOfKey]: [C, StyleSheet]) => {
-            Registry.apply(() => styleOfKey, {
-              props,
-              addClassname: ({ body }) => {
-                if (!stylesMemo[keyStyle]) {
-                  stylesMemo[keyStyle] = { className: '', style: {} };
-                }
-                stylesMemo[keyStyle].style = {
-                  ...stylesMemo[keyStyle].style,
-                  ...Object.values(body).reduce(
-                    (acc, e) => ({ ...acc, ...e }),
-                    {}
-                  ),
-                };
-              },
-            });
+      const toto = params();
+      (Object.keys(toto)).forEach(
+        // keystyle ==== root, styleOfKey === { base: {}, theme: () =>{}}
+        (keyStyle: C) => {
+          const styleOfKey = toto[keyStyle]
+          if (!stylesMemo[keyStyle]) {
+            stylesMemo[keyStyle] = { className: '', style: {} };
           }
-        );
-      }
+          Registry.apply(() => styleOfKey, {
+            props,
+            addClassname: ({ body }) => {
+              stylesMemo[keyStyle].style = {
+                ...stylesMemo[keyStyle].style,
+                ...Object.values(body).reduce(
+                  (acc, e) => ({ ...acc, ...e }),
+                  {}
+                ),
+              };
+            },
+          });
+        }
+      );
       return stylesMemo;
     },
     [width, props, colorSheme]
