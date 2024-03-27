@@ -71,6 +71,7 @@ export const ThemePlugin = (
 ): Plugin<CrossedThemePlugin> => {
   ThemeRegistry.setThemes(themes).setThemeName(initialTheme);
   return {
+    name: 'ThemePlugin',
     test: '^theme$',
     apply({ styles: getStyles, isWeb, props, addClassname }) {
       if (!props) {

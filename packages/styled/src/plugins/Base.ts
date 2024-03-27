@@ -13,6 +13,7 @@ export interface CrossedBasePlugin {
 }
 
 export const BasePlugin: Plugin<CrossedBasePlugin> = {
+  name: 'BasePlugin',
   test: '^base$',
   apply: (context) => {
     /**

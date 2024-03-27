@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.3
+
+### Patch Changes
+
+- 7a7a589: some fix after first usage in external project
+
 ## 0.14.0-beta.2
 
 ### Patch Changes

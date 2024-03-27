@@ -28,7 +28,7 @@ export const withStyle = <
         // @ts-ignore props is define by user
       >['props'] &
         P
-    >(function WithStyled(props, ref) {
+    >((props, ref) => {
       const { root } = useStyles(styleThemed, props as any);
       return <Comp ref={ref} {...props} {...root} />;
     }),

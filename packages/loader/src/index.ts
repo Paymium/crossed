@@ -6,7 +6,6 @@
  */
 
 import path from 'path';
-import { execSync } from 'child_process';
 import {
   ArrowFunctionExpression,
   // CallExpression,
@@ -25,6 +24,7 @@ import { createLogger, apiLog } from '@crossed/log';
 import { Registry } from '@crossed/styled/registry';
 import { convertKeyToCss } from '@crossed/styled/plugins';
 import type { CrossedstyleValues } from '@crossed/styled';
+import * as esbuild from 'esbuild';
 
 type Style = Record<string, any>;
 
@@ -49,15 +49,13 @@ export class Loader {
 
     if (configPath) {
       try {
-        execSync(
-          `npx tsc --outDir ${path.resolve(
-            process.cwd(),
-            './lib'
-          )} ${path.resolve(
-            process.cwd(),
-            configPath
-          )} --skipLibCheck --module NodeNext --moduleResolution nodenext --esModuleInterop`
-        );
+        esbuild.buildSync({
+          bundle: true,
+          entryPoints: [path.resolve(process.cwd(), configPath)],
+          packages: 'external',
+          outfile: path.resolve(process.cwd(), './lib/style.config.js'),
+          target: 'node20',
+        });
       } catch (e) {
         this.logger.error(e.toString());
       }

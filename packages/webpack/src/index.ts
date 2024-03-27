@@ -49,15 +49,14 @@ export default class StylePlugin {
      * Add virtual module crossed.css
      */
     const virtualModules = new VirtualModulesPlugin();
-    compiler.options.plugins.push(virtualModules);
+    virtualModules.apply(compiler);
 
     /**
      * Wait end parsing and write css
      */
     compiler.hooks.afterCompile.tap(pluginName, () => {
-      // get css from loader and apply on css with virtual module crossed.css
-      const newContent = parseAst.getCSS();
-      virtualModules.writeModule('node_modules/crossed.css', newContent || '');
+      const newContent = parseAst.getCSS() || '';
+      virtualModules.writeModule('node_modules/crossed.css', newContent);
 
       this.logger.info(
         apiLog({

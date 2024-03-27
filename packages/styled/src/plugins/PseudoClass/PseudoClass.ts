@@ -24,6 +24,7 @@ export interface CrossedPseudoClassPlugin {
 }
 
 export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
+  name: 'PseudoClassPlugin',
   test: '^:(hover|active|focus)$',
   apply: ({ styles, key: ctxKey, addClassname, props, isWeb }) => {
     const pseudoClass = ctxKey.replace(/:/i, '');

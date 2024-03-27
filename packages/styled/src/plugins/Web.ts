@@ -13,6 +13,7 @@ export interface CrossedWebPlugin {
 }
 
 export const WebPlugin: Plugin<CrossedWebPlugin> = {
+  name: 'WebPlugin',
   test: '^web$',
   apply: ({ addClassname, styles, isWeb }) => {
     if (isWeb) {
