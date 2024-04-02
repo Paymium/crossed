@@ -1,5 +1,12 @@
 # @crossed/loader
 
+## 1.0.0-beta.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/styled@0.14.0-beta.4
+
 ## 1.0.0-beta.3
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @crossed/styled
 
+## 0.14.0-beta.4
+
+### Patch Changes
+
+- fix typescript error not pass props
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.1
+
 ## 0.14.0-beta.3
 
 ### Patch Changes

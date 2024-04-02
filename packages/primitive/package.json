@@ -1,7 +1,7 @@
 {
   "name": "@crossed/primitive",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "1.7.1-beta.0",
+  "version": "1.7.1-beta.1",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
@@ -46,7 +46,7 @@
     "tsconfig": "*"
   },
   "dependencies": {
-    "@crossed/core": "0.8.1-beta.0",
+    "@crossed/core": "0.8.1-beta.1",
     "@floating-ui/react": "^0.25.1",
     "@gorhom/portal": "^1.0.14",
     "@react-native-aria/focus": "^0.2.8",
