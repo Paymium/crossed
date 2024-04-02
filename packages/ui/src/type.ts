@@ -31,13 +31,13 @@ declare module '@crossed/styled' {
       CrossedPseudoClassPlugin {}
 
   export interface CrossedPropsExtended<S extends StyleSheet>
+    // extends CrossedVariantsPluginProps<S['variants']> {}
     extends CrossedVariantsPluginProps<
-      S['theme'] extends (..._args: any) => any
-        ? ReturnType<S['theme']>['variants'] &
-            S['variants'] &
-            CrossedPseudoClassProps
-        : S['variants'] & CrossedPseudoClassProps
-    > {}
+        S['theme'] extends (..._args: any) => any
+          ? ReturnType<S['theme']>['variants'] & S['variants']
+          : S['variants']
+      >,
+      CrossedPseudoClassProps {}
 }
 
 declare module '@crossed/styled/plugins' {

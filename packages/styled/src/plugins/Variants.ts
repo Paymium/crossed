@@ -22,7 +22,7 @@ type HasBooleanVariants<T> = T extends Record<'true', any>
   : false;
 
 export interface CrossedVariantsPluginProps<V extends Variants | undefined> {
-  props: {
+  variants?: {
     [key in keyof V]?: HasBooleanVariants<keyof V[key]> extends true
       ? keyof V[key] | boolean
       : keyof V[key];

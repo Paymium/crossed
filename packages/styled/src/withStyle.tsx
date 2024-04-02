@@ -20,15 +20,7 @@ export const withStyle = <
 ) => {
   const styleThemed = createStyles({ root: styleParams });
   return withStaticProperties(
-    React.forwardRef<
-      any,
-      CrossedPropsExtended<
-        S extends (_params: any) => infer SF ? SF : S
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore props is define by user
-      >['props'] &
-        P
-    >((props, ref) => {
+    React.forwardRef<any, CrossedPropsExtended<S> & P>((props, ref) => {
       const { root } = useStyles(styleThemed, props as any);
       return <Comp ref={ref} {...props} {...root} />;
     }),

@@ -16,7 +16,7 @@ import { type GetProps, createScope } from '@crossed/core';
 import { forwardRef, memo } from 'react';
 
 type ButtonVariantProps = Partial<
-  Pick<ButtonProps, 'size' | 'color' | 'variant'>
+  Pick<ButtonProps['variants'], 'size' | 'color' | 'variant'>
 >;
 const MenuRoot = withStyle(YBox, {
   base: {

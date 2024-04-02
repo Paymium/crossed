@@ -8,13 +8,10 @@
 import type { CrossedstyleValues, Plugin } from '../../types';
 import { convertKeyToCss, normalizeUnitPixel } from './../utils';
 
-type CrossedPseudoClassList = 'focus' | 'hover' | 'active';
-
 export interface CrossedPseudoClassProps {
-  props: {
-    // eslint-disable-next-line no-unused-vars
-    [key in CrossedPseudoClassList]?: true | false;
-  };
+  focus?: true | false;
+  hover?: true | false;
+  active?: true | false;
 }
 
 export interface CrossedPseudoClassPlugin {

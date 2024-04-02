@@ -85,14 +85,16 @@ const Root = withStyle(Pressable, {
     },
   }),
 });
-const Text = withDefaultProps(TextUi, { weight: 'semibold' });
+const Text = withDefaultProps(TextUi, { variants: { weight: 'semibold' } });
 
 const Element = withStyle(Box, { base: {} });
 
 const Button = withStaticProperties(
   createButton({
     Group,
-    Root: withDefaultProps(Root, { size: 'md', variant: 'default' }),
+    Root: withDefaultProps(Root, {
+      variants: { size: 'md', variant: 'default' },
+    }),
     Text,
     Element,
   }),

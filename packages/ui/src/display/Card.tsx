@@ -36,7 +36,7 @@ const CardRoot = withStyle(YBox, {
   }),
 });
 
-const Title = withStyle(withDefaultProps(Text, { size: 'lg' }), {
+const Title = withStyle(withDefaultProps(Text, { variants: { size: 'lg' } }), {
   base: { alignSelf: 'stretch' },
 });
 

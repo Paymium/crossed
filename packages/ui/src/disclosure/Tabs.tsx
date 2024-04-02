@@ -21,7 +21,7 @@ import { XBox } from '../layout/XBox';
 import { withStyle } from '@crossed/styled';
 import { YBox, type YBoxProps } from '../layout/YBox';
 
-type TabsContext = Pick<ButtonProps, 'variant' | 'size'> & {
+type TabsContext = Pick<ButtonProps['variants'], 'variant' | 'size'> & {
   value: string | number;
   setValue: (_value: string | number) => void;
 };
@@ -58,23 +58,26 @@ export const createTabs = () => {
         variant={variant}
         setValue={setValue}
       >
-        <YBox space="md" {...props}>
+        <YBox variants={{ space: 'md' }} {...props}>
           {children}
         </YBox>
       </TabsProvider>
     );
   };
 
-  const List = withStyle(withDefaultProps(XBox, { space: 'xs' }), {
-    theme: (t) => ({
-      base: {
-        borderBottomWidth: 1,
-        borderStyle: 'solid',
-        borderColor: t.colors.neutral,
-        paddingBottom: t.space.xs,
-      },
-    }),
-  });
+  const List = withStyle(
+    withDefaultProps(XBox, { variants: { space: 'xs' } }),
+    {
+      theme: (t) => ({
+        base: {
+          borderBottomWidth: 1,
+          borderStyle: 'solid',
+          borderColor: t.colors.neutral,
+          paddingBottom: t.space.xs,
+        },
+      }),
+    }
+  );
 
   const Panels = ({ children }: PropsWithChildren) => {
     return children;
@@ -95,8 +98,7 @@ export const createTabs = () => {
 
       return (
         <Button
-          variant={variant}
-          size={size}
+          variants={{ variant, size }}
           active={valueProps === value}
           {...props}
           onPress={onPress}

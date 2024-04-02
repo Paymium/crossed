@@ -11,7 +11,13 @@ import type { GetProps } from '@crossed/core';
 import { withDefaultProps } from '@crossed/core';
 
 export const Anchor = withStyle(
-  withDefaultProps(Text, { weight: 'medium', role: 'link', color: 'link' }),
+  withDefaultProps(Text, {
+    variants: {
+      color: 'link',
+      weight: 'medium',
+    },
+    role: 'link',
+  }),
   {
     theme: (t) => ({
       'base': {
