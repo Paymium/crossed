@@ -6,7 +6,6 @@
  */
 
 export { BasePlugin, type CrossedBasePlugin } from './Base';
-export * from './Theme';
 export {
   MediaQueriesPlugin,
   type CrossedMediaQueriesPlugin,

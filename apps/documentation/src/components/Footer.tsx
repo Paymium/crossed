@@ -13,26 +13,24 @@ import { withStyle } from '@crossed/styled';
 import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
 
-const Container = withStyle(YBox, {
-  theme: (t) => ({
-    base: {
-      backgroundColor: t.colors.backgroundStrong,
-      padding: 15,
-      justifyContent: 'center',
-      borderTopWidth: 1,
-      borderStyle: 'solid',
-      borderColor: t.colors.neutral,
-      alignItems: 'center',
-    },
-  }),
-});
+const Container = withStyle(YBox, (t) => ({
+  base: {
+    backgroundColor: t.colors.backgroundStrong,
+    padding: 15,
+    justifyContent: 'center',
+    borderTopWidth: 1,
+    borderStyle: 'solid',
+    borderColor: t.colors.neutral,
+    alignItems: 'center',
+  },
+}));
 
-const Row = withStyle(withDefaultProps(XBox, { space: 'sm' }), {
+const Row = withStyle(withDefaultProps(XBox, { space: 'sm' }), () => ({
   base: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-});
+}));
 
 export const Footer = () => {
   const { t } = useTranslation();

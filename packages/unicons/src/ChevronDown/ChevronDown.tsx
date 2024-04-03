@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useTheme } from '@crossed/styled/plugins';
+import { useTheme } from '@crossed/styled';
 import type { RequireOnly } from '../types';
 
 export const ChevronDown = ({

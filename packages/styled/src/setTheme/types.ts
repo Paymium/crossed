@@ -5,6 +5,4 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export interface Themes {}
-
 export type SetTheme = (_old: string, _theme: string) => void;

@@ -46,6 +46,7 @@
     "@babel/plugin-transform-flow-strip-types": "^7.23.3",
     "@jest/globals": "^29.7.0",
     "@preact/signals-react-transform": "^0.3.0",
+    "@testing-library/react-hooks": "^8.0.1",
     "babel-preset-flow": "^6.23.0",
     "ts-jest": "^29.1.1"
   }

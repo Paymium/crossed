@@ -7,16 +7,17 @@
 
 // import { useMemo } from 'react';
 import { Registry } from '../Registry';
+import { CreateStylesParams, CrossedPropsExtended } from '../types';
 
-export const useStyles = <C extends string>(
-  params: () => Record<C, StyleSheet>,
-  props: Record<string, any> = {}
+export const useStyles = <C extends string, S>(
+  params: CreateStylesParams<C, S>,
+  props: CrossedPropsExtended<S>
 ) => {
   // TODO: Error in nextjs pages router TypeError: Cannot read properties of null (reading 'useMemo')
   // return useMemo(() => {
   const classNames: Record<C, string[]> = {} as any;
-  if (params) {
-    (Object.entries(params()) as [C, StyleSheet][]).forEach(
+  if (params && typeof params === 'function') {
+    (Object.entries(params(Registry.getTheme())) as [C, StyleSheet][]).forEach(
       ([keyStyle, styleOfKey]: [C, StyleSheet]) => {
         Registry.apply(() => styleOfKey, {
           props,
@@ -31,6 +32,7 @@ export const useStyles = <C extends string>(
       }
     );
   }
+
   const styles = (
     Object.entries(classNames) as unknown as [C, string[]][]
   ).reduce<Record<string, { className: string; style: Record<string, any> }>>(
@@ -42,13 +44,14 @@ export const useStyles = <C extends string>(
             acc[cl] = cl;
             return acc;
           },
-          props?.style?.$$css ? props.style : { $$css: true }
+          { $$css: true }
         ),
       };
       return acc;
     },
     {}
   );
+
   return styles;
   // }, [params, props]);
 };

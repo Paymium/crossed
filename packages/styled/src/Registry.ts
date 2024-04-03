@@ -5,12 +5,54 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { CrossedstyleValues, Plugin, PluginContext } from './types';
+import type {
+  CrossedstyleValues,
+  Plugin,
+  PluginContext,
+  Themes,
+} from './types';
+import { setTheme } from './setTheme';
 
 export class RegistryBridge {
-  private plugins: Plugin[] = [];
+  private plugins: Plugin<any>[] = [];
 
   private _debug = false;
+
+  private _listen = new Set<
+    (_themeName: keyof Themes) => Promise<void> | void
+  >();
+  private themes?: Themes;
+  private _themeName?: keyof Themes;
+
+  setThemes(themes: Partial<Themes>) {
+    this.themes = { ...this.themes, ...themes };
+    return this;
+  }
+
+  get themeName() {
+    return this._themeName;
+  }
+
+  setThemeName(themeName: keyof Themes) {
+    setTheme(this._themeName, themeName);
+    this._themeName = themeName;
+    this._listen.forEach((cb) => cb(themeName));
+    return this;
+  }
+
+  getTheme() {
+    if (!this.themes) {
+      throw new Error('themes are not set');
+    }
+    return this.themes[this._themeName];
+  }
+
+  subscribe(cb: (_themeName: keyof Themes) => Promise<void> | void) {
+    this._listen.add(cb);
+    return () => {
+      this._listen.delete(cb);
+    };
+  }
 
   setDebug(d: boolean) {
     this._debug = d;
@@ -23,7 +65,7 @@ export class RegistryBridge {
   }
 
   getPlugins() {
-    return this.plugins;
+    return this.plugins as typeof this.plugins;
   }
 
   log(e: string) {

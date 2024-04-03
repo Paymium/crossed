@@ -13,35 +13,33 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
 
-const Container = withStyle(XBox, { base: { minHeight: '100%' } });
+const Container = withStyle(XBox, () => ({ base: { minHeight: '100%' } }));
 
-const Center = withStyle(YBox, {
-  theme: (t) => ({
-    base: {
-      flex: 1,
-      width: '100%',
-      borderColor: t.colors.neutral,
-    },
-    variants: {
-      bordered: {
-        true: {
-          media: {
-            xl: { borderRightWidth: 1 },
-          },
+const Center = withStyle(YBox, (t) => ({
+  base: {
+    flex: 1,
+    width: '100%',
+    borderColor: t.colors.neutral,
+  },
+  variants: {
+    bordered: {
+      true: {
+        media: {
+          xl: { borderRightWidth: 1 },
         },
-        false: { base: { borderRightWidth: 0 } },
       },
+      false: { base: { borderRightWidth: 0 } },
     },
-    media: {
-      xs: { paddingHorizontal: t.space.md },
-      lg: { paddingHorizontal: t.space[100] },
-    },
-  }),
-});
+  },
+  media: {
+    xs: { paddingHorizontal: t.space.md },
+    lg: { paddingHorizontal: t.space[100] },
+  },
+}));
 
 const Menu = withStyle(
   withDefaultProps(MenuList, { space: 'xs', size: 'xs' }),
-  {
+  () => ({
     base: {
       paddingHorizontal: 20,
       alignSelf: 'baseline',
@@ -50,18 +48,16 @@ const Menu = withStyle(
     media: {
       xl: { display: 'flex' },
     },
-  }
+  })
 );
 
-const Label = withStyle(MenuList.Label, {
-  theme: (t) => ({
-    base: { fontSize: t.fontSize.lg },
-  }),
-});
+const Label = withStyle(MenuList.Label, (t) => ({
+  base: { fontSize: t.fontSize.lg },
+}));
 
-const Li = withStyle(withDefaultProps(YBox, { role: 'listitem' }), {
+const Li = withStyle(withDefaultProps(YBox, { role: 'listitem' }), () => ({
   base: { alignItems: 'stretch' },
-});
+}));
 
 type Nav = {
   href: string;

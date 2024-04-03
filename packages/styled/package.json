@@ -30,6 +30,7 @@
   ],
   "scripts": {
     "clean": "rm -rf lib",
+    "type-check": "tsc --noEmit",
     "test": "crossed-test",
     "watch": "crossed-build --watch",
     "build": "crossed-build"

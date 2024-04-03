@@ -9,10 +9,10 @@ import { Text } from './Text';
 import { withStyle } from '@crossed/styled';
 import type { GetProps } from '@crossed/core';
 
-export const I = withStyle(Text, {
+export const I = withStyle(Text, () => ({
   base: {
     fontStyle: 'italic',
   },
-});
+}));
 
 export type IProps = GetProps<typeof I>;

@@ -15,17 +15,29 @@ export interface CrossedVariantsPlugin {
   variants?: Variants;
 }
 
-type HasBooleanVariants<T> = T extends Record<'true', any>
+type HasBooleanVariants<T> = T extends 'true'
   ? true
-  : T extends Record<'false', any>
+  : T extends 'false'
   ? true
   : false;
 
-export interface CrossedVariantsPluginProps<V extends Variants | undefined> {
+type AllKeys<T> = T extends any ? keyof T : never;
+// eslint-disable-next-line no-unused-vars
+type PickType<T, K extends AllKeys<T>> = T extends { [k in K]?: any }
+  ? T[K]
+  : undefined;
+type Merge<T extends object> = {
+  [k in AllKeys<T>]: PickType<T, k>;
+};
+
+export interface CrossedVariantsPluginProps<
+  V extends Variants | undefined,
+  MV = Merge<V>
+> {
   variants?: {
-    [key in keyof V]?: HasBooleanVariants<keyof V[key]> extends true
-      ? keyof V[key] | boolean
-      : keyof V[key];
+    [key in keyof MV]?: HasBooleanVariants<keyof MV[key]> extends false
+      ? keyof MV[key]
+      : keyof MV[key] | boolean;
   };
 }
 

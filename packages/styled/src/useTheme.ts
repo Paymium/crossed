@@ -7,14 +7,14 @@
 
 'use client';
 import { useEffect, useState, useTransition } from 'react';
-import { ThemeRegistry } from './Registry';
+import { Registry } from './Registry';
 
 export const useTheme = () => {
-  const [theme, setTheme] = useState(ThemeRegistry.getTheme());
+  const [theme, setTheme] = useState(Registry.getTheme());
   const [, setTransition] = useTransition();
   useEffect(() => {
-    const unsubscribe = ThemeRegistry.subscribe(() =>
-      setTransition(() => setTheme(ThemeRegistry.getTheme()))
+    const unsubscribe = Registry.subscribe(() =>
+      setTransition(() => setTheme(Registry.getTheme()))
     );
     return unsubscribe;
   }, [setTheme]);

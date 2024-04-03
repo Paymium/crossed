@@ -22,10 +22,10 @@ import {
   Th,
 } from '@crossed/ui';
 
-const stylesSheet = createStyles({
+const stylesSheet = createStyles(() => ({
   colRequired: { base: { width: 100 } },
   colName: { base: { width: 100 } },
-});
+}));
 
 export default function PluginsPage() {
   const styles = useStyles(stylesSheet);

@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { RegistryBridge, Registry } from '../Registry';
+import { RegistryBridge, Registry } from '../src/Registry';
 
 describe('Registry', () => {
   test('be instance of RegitryBridge', () => {

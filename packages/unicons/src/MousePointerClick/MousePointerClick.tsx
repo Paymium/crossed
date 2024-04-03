@@ -6,7 +6,7 @@
  */
 
 import type { RequireOnly } from '../types';
-import { useTheme } from '@crossed/styled/plugins';
+import { useTheme } from '@crossed/styled';
 
 export const MousePointerClick = ({
   Svg,

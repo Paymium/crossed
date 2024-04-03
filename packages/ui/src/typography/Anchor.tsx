@@ -18,19 +18,17 @@ export const Anchor = withStyle(
     },
     role: 'link',
   }),
-  {
-    theme: (t) => ({
-      'base': {
-        fontFamily: t.fontFamily,
-        textDecorationLine: 'none',
-        cursor: 'pointer',
-      },
-      ':hover': {
-        textDecorationLine: 'underline',
-        color: t.colors.link,
-      },
-    }),
-  }
+  (t) => ({
+    'base': {
+      fontFamily: t.fontFamily,
+      textDecorationLine: 'none',
+      cursor: 'pointer',
+    },
+    ':hover': {
+      textDecorationLine: 'underline',
+      color: t.colors.link,
+    },
+  })
   // { name: 'Anchor' }
 );
 

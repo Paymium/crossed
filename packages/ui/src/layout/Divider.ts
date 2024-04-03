@@ -13,29 +13,27 @@ import { withDefaultProps } from '@crossed/core';
 
 export const Divider = withStyle(
   withDefaultProps(View, { role: 'separator' }),
-  {
-    theme: (t) => ({
-      base: {
-        borderWidth: 0,
-        borderStyle: 'solid',
-        borderColor: t.colors.neutral,
-      },
-      variants: {
-        direction: {
-          vertical: {
-            base: {
-              borderLeftWidth: 1,
-              height: '100%',
-            },
+  (t) => ({
+    base: {
+      borderWidth: 0,
+      borderStyle: 'solid',
+      borderColor: t.colors.neutral,
+    },
+    variants: {
+      direction: {
+        vertical: {
+          base: {
+            borderLeftWidth: 1,
+            height: '100%',
           },
-          horizontal: {
-            base: {
-              borderTopWidth: 1,
-              width: '100%',
-            },
+        },
+        horizontal: {
+          base: {
+            borderTopWidth: 1,
+            width: '100%',
           },
         },
       },
-    }),
-  }
+    },
+  })
 );

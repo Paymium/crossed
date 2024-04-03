@@ -8,9 +8,9 @@
 import { withStyle } from '@crossed/styled';
 import { YBox } from './YBox';
 
-export const Center = withStyle(YBox, {
+export const Center = withStyle(YBox, () => ({
   base: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-});
+}));

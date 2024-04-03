@@ -7,6 +7,6 @@
 
 export { useStyles } from './useStyles';
 export { createStyles } from './createStyles';
-export { withStyle } from './withStyle';
 export { Registry } from './Registry';
 export type * from './types';
+export { useTheme } from './useTheme';

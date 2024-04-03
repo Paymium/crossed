@@ -16,10 +16,9 @@ import {
   type CrossedMediaQueriesPlugin,
   type CrossedPseudoClassPlugin,
   type CrossedVariantsPluginProps,
-  ThemePlugin,
-  CrossedThemePlugin,
   CrossedWebPlugin,
   WebPlugin,
+  CrossedPseudoClassProps,
 } from '@crossed/styled/plugins';
 import { darkTheme, lightTheme } from '@crossed/ui/theme';
 import { themes as primsThemes } from 'prism-react-renderer';
@@ -39,24 +38,23 @@ const themes = {
 type ThemesCustom = typeof themes;
 
 declare module '@crossed/styled' {
+  export interface Themes extends ThemesCustom {}
+
   export interface StyleSheet
     extends CrossedBasePlugin,
       CrossedVariantsPlugin,
-      CrossedThemePlugin,
       CrossedWebPlugin,
       CrossedMediaQueriesPlugin<keyof typeof breakpoints>,
       CrossedPseudoClassPlugin {}
 
   export interface CrossedPropsExtended<S extends StyleSheet>
-    extends CrossedVariantsPluginProps<ReturnType<S['theme']>['variants']> {}
+    extends CrossedVariantsPluginProps<S['variants']>,
+      CrossedPseudoClassProps {}
 }
 
-declare module '@crossed/styled/plugins' {
-  export interface Themes extends ThemesCustom {}
-}
-
-Registry.addPlugin(BasePlugin)
-  .addPlugin(ThemePlugin(themes, 'dark'))
+Registry.setThemes(themes)
+  .setThemeName('dark')
+  .addPlugin(BasePlugin)
   .addPlugin(PseudoClassPlugin)
   .addPlugin(VariantsPlugin)
   .addPlugin(WebPlugin)

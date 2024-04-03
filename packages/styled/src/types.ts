@@ -18,7 +18,6 @@ export type AllAvailableStyles = CrossedstyleView &
   CrossedstyleImage;
 
 export interface CrossedstyleTheme {}
-export interface CrossedstyleThemes extends Record<string, CrossedstyleTheme> {}
 
 export type AllAvailableKeys = keyof AllAvailableStyles;
 
@@ -28,9 +27,13 @@ export type CrossedstyleValues = {
 
 export interface StyleSheet {}
 
-export type CreateStyleParams = StyleSheet;
+export type CreateStylesParams<
+  K extends string,
+  S extends StyleSheet = StyleSheet
+> = <T extends Themes[keyof Themes]>(_theme: T) => Record<K, S>;
 
-export type CreateStylesParams<K extends string> = Record<K, StyleSheet>;
+export type ExtractForProps<S extends (_p: CrossedPropsExtended<any>) => any> =
+  S extends (_p: infer D) => any ? D : never;
 
 export type PluginContext<S> = {
   /**
@@ -71,9 +74,10 @@ export type PluginContext<S> = {
   }) => void;
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore S should exists
-export interface CrossedPropsExtended<S extends StyleSheet> {} // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
+export interface Themes {}
+
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+export interface CrossedPropsExtended<S = StyleSheet> {}
 
 export type Plugin<S = any> = {
   /**

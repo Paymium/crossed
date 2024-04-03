@@ -12,7 +12,7 @@ import { Moon } from '@crossed/unicons/Moon';
 import { Button } from '@crossed/ui';
 import { VisibilityHidden } from '@crossed/primitive';
 import { useCallback } from 'react';
-import { ThemeRegistry } from '@crossed/styled/plugins';
+import { Registry } from '@crossed/styled';
 
 // const Button = styled(Pressable, (theme) => ({
 //   'borderRadius': theme.space.lg,
@@ -31,9 +31,7 @@ import { ThemeRegistry } from '@crossed/styled/plugins';
 
 export const ChangeTheme = () => {
   const onPress = useCallback(() => {
-    ThemeRegistry.setThemeName(
-      ThemeRegistry.themeName === 'dark' ? 'light' : 'dark'
-    );
+    Registry.setThemeName(Registry.themeName === 'dark' ? 'light' : 'dark');
     // Registry.setTheme(Registry.themeName === 'dark' ? 'light' : 'dark');
     // UnistylesRuntime.setTheme(
     //   UnistylesRuntime.themeName === 'dark' ? 'light' : 'dark'

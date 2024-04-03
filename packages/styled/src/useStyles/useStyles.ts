@@ -7,41 +7,46 @@
 
 import * as React from 'react';
 import { Registry } from '../Registry';
-import type { CrossedstyleValues, StyleSheet } from '../types';
+import type {
+  CreateStylesParams,
+  CrossedPropsExtended,
+  CrossedstyleValues,
+  StyleSheet,
+} from '../types';
 import { useColorScheme, useWindowDimensions } from 'react-native';
 
-export const useStyles = <C extends string>(
-  params: () => Record<C, StyleSheet>,
-  props: Record<string, any> = {}
+export const useStyles = <K extends string, S>(
+  params: CreateStylesParams<K, S>,
+  props: CrossedPropsExtended<S>
 ) => {
   const { width } = useWindowDimensions();
   const colorSheme = useColorScheme();
   return React.useMemo(
     function MemoUseStyles() {
       const stylesMemo: Record<
-        C,
+        K,
         { className: string; style: CrossedstyleValues }
       > = {} as any;
       if (params) {
-        (Object.entries(params()) as [C, StyleSheet][]).forEach(
-          ([keyStyle, styleOfKey]: [C, StyleSheet]) => {
-            Registry.apply(() => styleOfKey, {
-              props,
-              addClassname: ({ body }) => {
-                if (!stylesMemo[keyStyle]) {
-                  stylesMemo[keyStyle] = { className: '', style: {} };
-                }
-                stylesMemo[keyStyle].style = {
-                  ...stylesMemo[keyStyle].style,
-                  ...Object.values(body).reduce(
-                    (acc, e) => ({ ...acc, ...e }),
-                    {}
-                  ),
-                };
-              },
-            });
-          }
-        );
+        (
+          Object.entries(params(Registry.getTheme())) as [K, StyleSheet][]
+        ).forEach(([keyStyle, styleOfKey]: [K, StyleSheet]) => {
+          Registry.apply(() => styleOfKey, {
+            props,
+            addClassname: ({ body }) => {
+              if (!stylesMemo[keyStyle]) {
+                stylesMemo[keyStyle] = { className: '', style: {} };
+              }
+              stylesMemo[keyStyle].style = {
+                ...stylesMemo[keyStyle].style,
+                ...Object.values(body).reduce(
+                  (acc, e) => ({ ...acc, ...e }),
+                  {}
+                ),
+              };
+            },
+          });
+        });
       }
       return stylesMemo;
     },

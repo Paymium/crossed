@@ -5,8 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { CreateStylesParams } from './types';
+import type { CrossedPropsExtended, Themes } from './types';
+import { useStyles } from './useStyles';
 
-export const createStyles = <C extends string>(data: CreateStylesParams<C>) => {
-  return () => data;
+export const createStyles = <C extends string, S>(
+  styles: (_theme: Themes[keyof Themes]) => Record<C, S>
+) => {
+  return (p?: CrossedPropsExtended<S>) => useStyles(styles, p);
 };

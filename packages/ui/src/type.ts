@@ -9,7 +9,6 @@ import type {
   CrossedBasePlugin,
   CrossedMediaQueriesPlugin,
   CrossedPseudoClassPlugin,
-  CrossedThemePlugin,
   CrossedVariantsPlugin,
 } from '@crossed/styled/plugins';
 import { darkTheme, lightTheme } from './theme/theme';
@@ -22,24 +21,15 @@ type ThemesCustom = typeof themes;
 type Breakpoints = keyof typeof breakpoints;
 
 declare module '@crossed/styled' {
-  // export interface UnistylesBreakpoints extends AppBreakpoints {}
+  export interface Themes extends ThemesCustom {}
+
   export interface StyleSheet
     extends CrossedBasePlugin,
       CrossedVariantsPlugin,
-      CrossedThemePlugin,
       CrossedMediaQueriesPlugin<Breakpoints>,
       CrossedPseudoClassPlugin {}
 
   export interface CrossedPropsExtended<S extends StyleSheet>
-    // extends CrossedVariantsPluginProps<S['variants']> {}
-    extends CrossedVariantsPluginProps<
-        S['theme'] extends (..._args: any) => any
-          ? ReturnType<S['theme']>['variants'] & S['variants']
-          : S['variants']
-      >,
-      CrossedPseudoClassProps {}
-}
-
-declare module '@crossed/styled/plugins' {
-  export interface Themes extends ThemesCustom {}
+    extends CrossedPseudoClassProps,
+      CrossedVariantsPluginProps<S['variants']> {}
 }

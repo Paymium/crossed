@@ -13,29 +13,32 @@ import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
 import { Github } from '@crossed/unicons/Github';
 
-const Description = withStyle(H2, {
+const Description = withStyle(H2, () => ({
   base: { textAlign: 'center', marginTop: 0 },
   media: { xs: { width: '90%' }, md: { width: '60%' } },
-});
+}));
 
-const SectionCTA = withStyle((props) => <YBox {...props} />, {
-  base: {
-    marginTop: 30,
-    marginHorizontal: 'auto',
-    alignItems: 'center',
-    alignSelf: 'center',
-  },
-  media: { xs: { width: '90%' }, xl: { width: '70%' } },
-});
+const SectionCTA = withStyle(
+  (props) => <YBox {...props} />,
+  () => ({
+    base: {
+      marginTop: 30,
+      marginHorizontal: 'auto',
+      alignItems: 'center',
+      alignSelf: 'center',
+    },
+    media: { xs: { width: '90%' }, xl: { width: '70%' } },
+  })
+);
 
-const ContainerButtonCta = withStyle(Box, {
+const ContainerButtonCta = withStyle(Box, () => ({
   base: { justifyContent: 'space-between', flexWrap: 'wrap' },
   media: { xs: { flexDirection: 'column' }, md: { flexDirection: 'row' } },
-});
+}));
 
-const CardStyled = withStyle(Card, { base: { flex: 1 } });
+const CardStyled = withStyle(Card, () => ({ base: { flex: 1 } }));
 
-const styleSheet = createStyles({
+const styleSheet = createStyles((t) => ({
   title: {
     base: {
       textAlign: 'center',
@@ -50,12 +53,10 @@ const styleSheet = createStyles({
     },
   },
   cardTitle: {
-    theme: (t) => ({
-      base: { textAlign: 'center', marginBottom: t.space.md },
-    }),
+    base: { textAlign: 'center', marginBottom: t.space.md },
   },
   cardDescription: { base: { textAlign: 'center' } },
-});
+}));
 
 export default function Home() {
   const { t } = useTranslation();

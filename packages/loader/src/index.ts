@@ -175,7 +175,7 @@ export class Loader {
         let returnEl;
         try {
           // eslint-disable-next-line no-eval
-          returnEl = eval(toto)(ctx);
+          returnEl = eval(toto)(Registry.getTheme());
         } catch (e) {
           this.logger.error(
             apiLog({

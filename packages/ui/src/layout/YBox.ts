@@ -11,7 +11,7 @@ import { withStyle } from '@crossed/styled';
 import type { GetProps } from '@crossed/core';
 import { Box } from './Box';
 
-export const YBox = withStyle(Box, {
+export const YBox = withStyle(Box, () => ({
   base: {
     display: 'flex',
     flexDirection: 'column',
@@ -19,6 +19,6 @@ export const YBox = withStyle(Box, {
     alignSelf: 'stretch',
     maxWidth: '100%',
   },
-});
+}));
 
 export type YBoxProps = GetProps<typeof YBox>;
