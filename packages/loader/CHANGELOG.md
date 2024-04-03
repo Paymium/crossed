@@ -1,5 +1,13 @@
 # @crossed/loader
 
+## 1.0.0-beta.5
+
+### Patch Changes
+
+- 63171a9: remove Theme plugin for add theme in core, delete withStyle, and createStyles return directly hooks
+- Updated dependencies [63171a9]
+  - @crossed/styled@0.14.0-beta.5
+
 ## 1.0.0-beta.4
 
 ### Patch Changes
