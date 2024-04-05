@@ -7,12 +7,12 @@
 
 'use client';
 import { withDefaultProps, withStaticProperties } from '@crossed/core';
-import { withStyle } from '@crossed/styled';
 import { Text } from '../typography/Text';
-import { XBox } from '../layout/XBox';
+import { XBox, type XBoxProps } from '../layout/XBox';
+import { createStyles, type ExtractForProps } from '@crossed/styled';
 
-const Container = withStyle(withDefaultProps(XBox, { space: undefined }), {
-  theme: (t) => ({
+const useAlert = createStyles((t) => ({
+  container: {
     base: {
       padding: t.space.md,
       borderRadius: 4,
@@ -26,8 +26,17 @@ const Container = withStyle(withDefaultProps(XBox, { space: undefined }), {
         info: { base: { backgroundColor: t.colors.info } },
       },
     },
-  }),
-});
+  },
+}));
+
+type Variant = ExtractForProps<typeof useAlert>;
+
+type ContainerProps = XBoxProps & Variant['variants'];
+
+const Container = ({ status, ...props }: ContainerProps) => {
+  const { container } = useAlert({ variants: { status } });
+  return <XBox space={undefined} {...props} {...container} />;
+};
 
 const Icon = () => {};
 

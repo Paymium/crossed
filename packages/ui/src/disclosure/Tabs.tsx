@@ -17,9 +17,20 @@ import {
 } from '@crossed/core';
 import { useCallback, type PropsWithChildren } from 'react';
 import { Button, type ButtonProps } from '../forms/Button';
-import { XBox } from '../layout/XBox';
-import { withStyle } from '@crossed/styled';
+import { XBox, type XBoxProps } from '../layout/XBox';
 import { YBox, type YBoxProps } from '../layout/YBox';
+import { createStyles } from '@crossed/styled';
+
+const useStyles = createStyles((t) => ({
+  list: {
+    base: {
+      borderBottomWidth: 1,
+      borderStyle: 'solid',
+      borderColor: t.colors.neutral,
+      paddingBottom: t.space.xs,
+    },
+  },
+}));
 
 type TabsContext = Pick<ButtonProps['variants'], 'variant' | 'size'> & {
   value: string | number;
@@ -58,26 +69,17 @@ export const createTabs = () => {
         variant={variant}
         setValue={setValue}
       >
-        <YBox variants={{ space: 'md' }} {...props}>
+        <YBox space="md" {...props}>
           {children}
         </YBox>
       </TabsProvider>
     );
   };
 
-  const List = withStyle(
-    withDefaultProps(XBox, { variants: { space: 'xs' } }),
-    {
-      theme: (t) => ({
-        base: {
-          borderBottomWidth: 1,
-          borderStyle: 'solid',
-          borderColor: t.colors.neutral,
-          paddingBottom: t.space.xs,
-        },
-      }),
-    }
-  );
+  const List = (props: XBoxProps) => {
+    const { list } = useStyles();
+    return <XBox space="xs" {...props} {...list} />;
+  };
 
   const Panels = ({ children }: PropsWithChildren) => {
     return children;
@@ -98,7 +100,8 @@ export const createTabs = () => {
 
       return (
         <Button
-          variants={{ variant, size }}
+          variant={variant}
+          size={size}
           active={valueProps === value}
           {...props}
           onPress={onPress}

@@ -5,20 +5,12 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { withStyle } from '@crossed/styled';
-import { Text } from './Text';
-import type { GetProps } from '@crossed/core';
-import { withDefaultProps } from '@crossed/core';
+import { createStyles } from '@crossed/styled';
+import { Text, type TextProps } from './Text';
+import { forwardRef } from 'react';
 
-export const Anchor = withStyle(
-  withDefaultProps(Text, {
-    variants: {
-      color: 'link',
-      weight: 'medium',
-    },
-    role: 'link',
-  }),
-  (t) => ({
+export const useAnchor = createStyles((t) => ({
+  anchor: {
     'base': {
       fontFamily: t.fontFamily,
       textDecorationLine: 'none',
@@ -28,8 +20,19 @@ export const Anchor = withStyle(
       textDecorationLine: 'underline',
       color: t.colors.link,
     },
-  })
-  // { name: 'Anchor' }
-);
+  },
+}));
 
-export type AnchorProps = GetProps<typeof Anchor>;
+export type AnchorProps = TextProps;
+export const Anchor = forwardRef((props: AnchorProps, ref: any) => {
+  return (
+    <Text
+      ref={ref}
+      color="link"
+      weight="medium"
+      role="link"
+      {...props}
+      {...useAnchor.anchor.style()}
+    />
+  );
+});

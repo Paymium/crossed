@@ -46,14 +46,14 @@ export const VariantsPlugin: Plugin<CrossedVariantsPlugin> = {
   test: '^variants$',
   apply: ({ styles, addClassname, props, isWeb }) => {
     Object.entries(styles).forEach(([variantName, variantValues]) => {
-      if (props && !props[variantName]) {
+      if (props && !props.variants?.[variantName]) {
         return;
       }
       Object.entries(variantValues).forEach(([variantValue, style]) => {
         if (
           props &&
-          props[variantName] &&
-          props[variantName].toString() !== variantValue
+          props.variants?.[variantName] &&
+          props.variants?.[variantName].toString() !== variantValue
         ) {
           return;
         }

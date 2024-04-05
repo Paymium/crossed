@@ -13,7 +13,7 @@ export const useStyles = <C extends string, S>(
   params: CreateStylesParams<C, S>,
   props: CrossedPropsExtended<S>
 ) => {
-  // TODO: Error in nextjs pages router TypeError: Cannot read properties of null (reading 'useMemo')
+  // TODO: Error in nextjs app router TypeError: Cannot read properties of null (reading 'useMemo')
   // return useMemo(() => {
   const classNames: Record<C, string[]> = {} as any;
   if (params && typeof params === 'function') {

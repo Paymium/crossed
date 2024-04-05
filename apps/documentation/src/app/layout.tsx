@@ -16,7 +16,6 @@ import { Footer } from '@/components/Footer';
 import { CrossedUIProvider } from '@crossed/ui';
 import { Registry } from '@crossed/styled';
 import { createStyles } from '@crossed/styled';
-import { useStyles } from '@crossed/styled';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -30,7 +29,6 @@ const styleSheet = createStyles(() => ({
 }));
 
 export default function RootLayout({ children }: PropsWithChildren) {
-  const styles = useStyles(styleSheet);
   return (
     <html lang={'en'} className={Registry.themeName}>
       <head />
@@ -39,7 +37,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <Suspense>
             <ScrollView
               stickyHeaderIndices={[0]}
-              style={styles.root.style}
+              {...styleSheet.root.rnw()}
               contentContainerStyle={{ minHeight: '100%' }}
             >
               <NavBar />

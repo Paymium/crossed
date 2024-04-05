@@ -7,13 +7,11 @@
 
 'use client';
 
-import { View } from 'react-native';
-import { withStyle } from '@crossed/styled';
-import { withDefaultProps } from '@crossed/core';
+import { View, type ViewProps } from 'react-native';
+import { createStyles, type ExtractForProps } from '@crossed/styled';
 
-export const Divider = withStyle(
-  withDefaultProps(View, { role: 'separator' }),
-  (t) => ({
+export const useDivider = createStyles((t) => ({
+  divider: {
     base: {
       borderWidth: 0,
       borderStyle: 'solid',
@@ -35,5 +33,14 @@ export const Divider = withStyle(
         },
       },
     },
-  })
-);
+  },
+}));
+
+type Variant = ExtractForProps<typeof useDivider>;
+
+export type DividerProps = ViewProps & Variant['variants'];
+
+export const Divider = ({ direction, ...props }: DividerProps) => {
+  const { divider } = useDivider({ variants: { direction } });
+  return <View role="separator" {...props} {...divider} />;
+};

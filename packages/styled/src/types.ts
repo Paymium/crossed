@@ -32,8 +32,10 @@ export type CreateStylesParams<
   S extends StyleSheet = StyleSheet
 > = <T extends Themes[keyof Themes]>(_theme: T) => Record<K, S>;
 
-export type ExtractForProps<S extends (_p: CrossedPropsExtended<any>) => any> =
-  S extends (_p: infer D) => any ? D : never;
+export type ExtractForProps<S extends CrossedMethods<any>> =
+  S extends CrossedMethods<CrossedPropsExtended<infer D>>
+    ? CrossedPropsExtended<D>
+    : never;
 
 export type PluginContext<S> = {
   /**
@@ -77,7 +79,16 @@ export type PluginContext<S> = {
 export interface Themes {}
 
 // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-export interface CrossedPropsExtended<S = StyleSheet> {}
+export interface CrossedPropsExtended<S = StyleSheet> {
+  className?: string;
+  style?: Record<string, any>;
+}
+
+export type CrossedMethods<P extends CrossedPropsExtended<StyleSheet>> = {
+  style: (_p?: P) => { style: Record<string, string> };
+  className: (_p?: P) => { className: string };
+  rnw: (_p?: P) => { style: Record<string, any> };
+};
 
 export type Plugin<S = any> = {
   /**

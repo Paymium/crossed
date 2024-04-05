@@ -5,18 +5,22 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { withStyle } from '@crossed/styled';
-import { HtmlHTMLAttributes, memo } from 'react';
+import { createStyles } from '@crossed/styled';
+import { type HtmlHTMLAttributes } from 'react';
 
-export const Body = withStyle(
-  memo(({ style, ...props }: HtmlHTMLAttributes<HTMLBodyElement>) => (
-    <body {...props} />
-  )),
-  (t) => ({
+const useBody = createStyles((t) => ({
+  body: {
     base: {
       backgroundColor: t.colors.background,
       minHeight: '100%',
       display: 'flex',
     },
-  })
-);
+  },
+}));
+
+export const Body = ({
+  style,
+  ...props
+}: HtmlHTMLAttributes<HTMLBodyElement>) => {
+  return <body {...props} {...useBody.body.className({ style })} />;
+};

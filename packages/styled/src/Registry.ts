@@ -42,7 +42,9 @@ export class RegistryBridge {
 
   getTheme() {
     if (!this.themes) {
-      throw new Error('themes are not set');
+      // throw new Error('themes are not set');
+      console.warn('Themes are not set');
+      return {} as Themes[keyof Themes];
     }
     return this.themes[this._themeName];
   }

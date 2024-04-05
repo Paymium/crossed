@@ -5,26 +5,27 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { withStyle } from '@crossed/styled';
-import { Text } from '../typography/Text';
-import type { GetProps } from '@crossed/core';
+import { createStyles } from '@crossed/styled';
+import { Text, type TextProps } from '../typography/Text';
 
-const Kbd = withStyle(Text, {
-  theme: (t) => ({
+const useKbd = createStyles((t) => ({
+  root: {
     base: {
       backgroundColor: t.colors.neutral,
       paddingVertical: 1,
       paddingHorizontal: t.space.xs,
       borderWidth: 1,
       borderStyle: 'solid',
-      // borderColor: t.utils.shadeColor(
-      //   t.colors.neutral,
-      //   (UnistylesRuntime.themeName === 'dark' ? 1 : -1) * 50
-      // ),
       borderRadius: 4,
     },
-  }),
-});
-type KbdProps = GetProps<typeof Kbd>;
+  },
+}));
+
+type KbdProps = TextProps;
+
+const Kbd = (props: KbdProps) => {
+  const { root } = useKbd();
+  return <Text {...props} {...root} />;
+};
 
 export { Kbd, type KbdProps };

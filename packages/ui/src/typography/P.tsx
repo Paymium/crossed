@@ -18,6 +18,5 @@ const useP = createStyles((t) => ({
 }));
 
 export const P = (props: TextProps) => {
-  const { root } = useP(props);
-  return <Text role="paragraph" {...props} {...root} />;
+  return <Text role="paragraph" {...props} {...useP.root.style(props)} />;
 };

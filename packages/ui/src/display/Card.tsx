@@ -5,17 +5,14 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import {
-  type GetProps,
-  withDefaultProps,
-  withStaticProperties,
-} from '@crossed/core';
-import { withStyle } from '@crossed/styled';
-import { YBox } from '../layout/YBox';
-import { Text } from '../typography/Text';
+import { type GetProps, withStaticProperties } from '@crossed/core';
+import { YBox, type YBoxProps } from '../layout/YBox';
+import { Text, type TextProps } from '../typography/Text';
+import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { forwardRef } from 'react';
 
-const CardRoot = withStyle(YBox, {
-  theme: (t) => ({
+const useCard = createStyles((t) => ({
+  root: {
     base: {
       padding: t.space.md,
       borderRadius: t.space.xs,
@@ -33,22 +30,39 @@ const CardRoot = withStyle(YBox, {
         },
       },
     },
-  }),
+  },
+  title: { base: { alignSelf: 'stretch' } },
+  description: { base: { alignSelf: 'stretch' } },
+}));
+
+type Variants = ExtractForProps<typeof useCard.root>;
+
+type CardProps = YBoxProps & Variants['variants'];
+
+const CardRoot = forwardRef(({ role, ...props }: CardProps, ref: any) => {
+  return (
+    <YBox
+      ref={ref}
+      role={role}
+      {...props}
+      {...useCard.root.style({ ...props, variants: { role } })}
+    />
+  );
 });
 
-const Title = withStyle(withDefaultProps(Text, { variants: { size: 'lg' } }), {
-  base: { alignSelf: 'stretch' },
-});
+const Title = (props: TextProps) => {
+  return <Text size="lg" {...props} {...useCard.title.style(props)} />;
+};
 
-const Description = withStyle(Text, { base: { alignSelf: 'stretch' } });
-
+const Description = (props: TextProps) => {
+  return <Text {...props} {...useCard.description.style(props)} />;
+};
 const Card = withStaticProperties(CardRoot, {
   Title,
   Description,
 });
 const { Title: CardTitle, Description: CardDescription } = Card;
 
-type CardProps = GetProps<typeof Card>;
 type CardTitleProps = GetProps<typeof CardTitle>;
 type CardDescriptionProps = GetProps<typeof CardDescription>;
 
