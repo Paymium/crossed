@@ -24,8 +24,7 @@ const useKbd = createStyles((t) => ({
 type KbdProps = TextProps;
 
 const Kbd = (props: KbdProps) => {
-  const { root } = useKbd();
-  return <Text {...props} {...root} />;
+  return <Text {...props} {...useKbd.root.rnw()} />;
 };
 
 export { Kbd, type KbdProps };

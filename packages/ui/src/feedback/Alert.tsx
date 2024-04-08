@@ -11,31 +11,39 @@ import { Text } from '../typography/Text';
 import { XBox, type XBoxProps } from '../layout/XBox';
 import { createStyles, type ExtractForProps } from '@crossed/styled';
 
-const useAlert = createStyles((t) => ({
-  container: {
-    base: {
-      padding: t.space.md,
-      borderRadius: 4,
-      alignItems: 'flex-start',
-    },
-    variants: {
-      status: {
-        error: { base: { backgroundColor: t.colors.error } },
-        success: { base: { backgroundColor: t.colors.success } },
-        warning: { base: { backgroundColor: t.colors.warning } },
-        info: { base: { backgroundColor: t.colors.info } },
+const useAlert = createStyles(
+  (t) =>
+    ({
+      container: {
+        base: {
+          padding: t.space.md,
+          borderRadius: 4,
+          alignItems: 'flex-start',
+        },
+        variants: {
+          status: {
+            error: { base: { backgroundColor: t.colors.error } },
+            success: { base: { backgroundColor: t.colors.success } },
+            warning: { base: { backgroundColor: t.colors.warning } },
+            info: { base: { backgroundColor: t.colors.info } },
+          },
+        },
       },
-    },
-  },
-}));
+    } as const)
+);
 
-type Variant = ExtractForProps<typeof useAlert>;
+type Variant = ExtractForProps<typeof useAlert.container>;
 
 type ContainerProps = XBoxProps & Variant['variants'];
 
 const Container = ({ status, ...props }: ContainerProps) => {
-  const { container } = useAlert({ variants: { status } });
-  return <XBox space={undefined} {...props} {...container} />;
+  return (
+    <XBox
+      space={undefined}
+      {...props}
+      {...useAlert.container.rnw({ variants: { status } })}
+    />
+  );
 };
 
 const Icon = () => {};

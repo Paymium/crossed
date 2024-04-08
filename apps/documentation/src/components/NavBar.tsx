@@ -125,13 +125,13 @@ const LinkNav = forwardRef(({ style, active: _a, ...props }: any, ref) => {
 });
 
 const LinkLogo = forwardRef((props: any, ref) => {
-  return <LinkNav {...props} ref={ref} {...useStyles.linkLogo.style(props)} />;
+  return <LinkNav {...props} ref={ref} {...useStyles.linkLogo.rnw(props)} />;
 });
 
 const Nav = forwardRef((props: any, ref) => {
-  return <XBox {...props} ref={ref} {...useStyles.nav.style(props)} />;
+  return <XBox {...props} ref={ref} {...useStyles.nav.rnw(props)} />;
 });
 
 const El = forwardRef((props: any, ref) => {
-  return <Box {...props} ref={ref} {...useStyles.el.style(props)} />;
+  return <Box {...props} ref={ref} {...useStyles.el.rnw(props)} />;
 });

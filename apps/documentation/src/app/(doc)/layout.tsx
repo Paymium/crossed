@@ -9,15 +9,19 @@
 
 import '@/style.config';
 import { XBox } from '@crossed/ui';
-import { withStyle } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 
-const Container = withStyle(XBox, {
-  base: {
-    flex: 1,
-    width: '100%',
-    justifyContent: 'center',
-    paddingVertical: 15,
+const styles = createStyles(() => ({
+  root: {
+    base: {
+      flex: 1,
+      width: '100%',
+      justifyContent: 'center',
+      paddingVertical: 15,
+    },
   },
-});
+}));
 
-export default Container;
+export default () => {
+  return <XBox {...styles.root.rnw()} />;
+};

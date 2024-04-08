@@ -6,7 +6,7 @@
  */
 
 'use client';
-
+import '@/style.config';
 import { Link } from '@/components/Link';
 import { createStyles } from '@crossed/styled';
 import { Center, H2, P } from '@crossed/ui';
@@ -24,7 +24,7 @@ const styles = createStyles((t) => ({
 export default function NotFound() {
   const { t } = useTranslation();
   return (
-    <Center {...styles.root.style()}>
+    <Center {...styles.root.rnw()}>
       <H2>{t('Not Found')}</H2>
       <P textAlign="center">{t('Could not find requested resource')}</P>
       <Link href="/">{t('Return Home')}</Link>

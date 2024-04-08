@@ -12,6 +12,8 @@
     "moduleResolution": "node",
     "declaration": true,
     "skipLibCheck": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "allowSyntheticDefaultImports": true,
     "verbatimModuleSyntax": false,
   }

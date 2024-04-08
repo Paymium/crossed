@@ -29,7 +29,10 @@ const useStyles = createStyles((t) => ({
     media: { xs: { width: '90%' }, xl: { width: '70%' } },
   },
   containerButtonCta: {
-    base: { justifyContent: 'space-between', flexWrap: 'wrap' },
+    base: {
+      justifyContent: 'space-between',
+      flexWrap: 'wrap',
+    },
     media: { xs: { flexDirection: 'column' }, md: { flexDirection: 'row' } },
   },
   card: { base: { flex: 1 } },
@@ -54,12 +57,11 @@ const useStyles = createStyles((t) => ({
 
 export default function Home() {
   const { t } = useTranslation();
-
   return (
-    <Box role="main" {...useStyles.container.style()} space="lg">
+    <Box role="main" {...useStyles.container.rnw()} space="lg">
       <Logo size={100} />
       <H1 size={'4xl'}>Crossed</H1>
-      <H2 size="2xl" weight="medium" {...useStyles.description.style()}>
+      <H2 size="2xl" weight="medium" {...useStyles.description.rnw()}>
         <Trans>
           Explore our ecosystem to develop cross-platform applications with
           <br />
@@ -78,64 +80,64 @@ export default function Home() {
           <Github />
         </Button.Element>
       </Button>
-      <YBox space="lg" {...useStyles.sectionCta.style()}>
-        <H3 {...useStyles.title.style()}>
+      <YBox space="lg" {...useStyles.sectionCta.rnw()}>
+        <H3 {...useStyles.title.rnw()}>
           <Trans>Cross platform ecosystem</Trans>
         </H3>
-        <Box space="lg" {...useStyles.containerButtonCta.style()}>
+        <Box space="lg" {...useStyles.containerButtonCta.rnw()}>
           <Link href="/styled/introduction" passHref legacyBehavior>
-            <Card {...useStyles.card.className()} role="link">
+            <Card {...useStyles.card.rnw()} role="link">
               <Card.Title
                 role="heading"
                 aria-level={4}
-                {...useStyles.cardTitle.style()}
+                {...useStyles.cardTitle.rnw()}
               >
                 @crossed/styled
               </Card.Title>
-              <Card.Description {...useStyles.cardDescription.style()}>
+              <Card.Description {...useStyles.cardDescription.rnw()}>
                 <Trans>Styled your component with unistyles</Trans>
               </Card.Description>
             </Card>
           </Link>
           <Link href="/primitive/introduction" passHref legacyBehavior>
-            <Card {...useStyles.card.style()} role="link">
+            <Card {...useStyles.card.rnw()} role="link">
               <Card.Title
                 role="heading"
                 aria-level={4}
-                {...useStyles.cardTitle.style()}
+                {...useStyles.cardTitle.rnw()}
               >
                 @crossed/primitive
               </Card.Title>
-              <Card.Description {...useStyles.cardDescription.style()}>
+              <Card.Description {...useStyles.cardDescription.rnw()}>
                 <Trans>Create your accessible component from anything</Trans>
               </Card.Description>
             </Card>
           </Link>
           <Link href="/ui/introduction" passHref legacyBehavior>
-            <Card {...useStyles.card.style()} role="link">
+            <Card {...useStyles.card.rnw()} role="link">
               <Card.Title
                 role="heading"
                 aria-level={4}
-                {...useStyles.card.style()}
+                {...useStyles.cardTitle.rnw()}
               >
                 @crossed/ui
               </Card.Title>
-              <Card.Description {...useStyles.cardDescription.style()}>
+              <Card.Description {...useStyles.cardDescription.rnw()}>
                 <Trans>
                   UI Component made with @crossed/primitive and @crossed/styled
                 </Trans>
               </Card.Description>
             </Card>
           </Link>
-          <Card>
+          <Card {...useStyles.card.rnw()}>
             <Card.Title
               role="heading"
               aria-level={4}
-              {...useStyles.card.style()}
+              {...useStyles.cardTitle.rnw()}
             >
               @crossed/router
             </Card.Title>
-            <Card.Description {...useStyles.cardDescription.style()}>
+            <Card.Description {...useStyles.cardDescription.rnw()}>
               <Trans>Comming soon</Trans>
             </Card.Description>
           </Card>

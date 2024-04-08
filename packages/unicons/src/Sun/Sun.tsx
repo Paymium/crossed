@@ -15,7 +15,7 @@ export const Sun = ({
   color,
   size = 25,
 }: RequireOnly<'Svg' | 'Path' | 'Circle'>) => {
-  const { theme } = useTheme();
+  const theme = useTheme();
   return (
     <Svg
       width={size}

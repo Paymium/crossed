@@ -11,19 +11,37 @@ import type {
   PluginContext,
   Themes,
 } from './types';
-import { Registry } from './Registry';
+import { Registry, parse } from './Registry';
+import { isWeb } from './isWeb';
+
+const cleanClassName = (classNames: string[]) => {
+  return classNames.reduce((acc, className) => {
+    const [property] = className.match(/^([a-z\-]+)/g) || [];
+    if (property) {
+      acc.forEach((accKey) => {
+        const [same] = accKey.match(new RegExp(`^${property}`, 'g')) || [];
+        if (same) {
+          acc.delete(accKey);
+        }
+      });
+    }
+    acc.add(className);
+    return acc;
+  }, new Set<string>());
+};
 
 export const createStyles = <C extends string, S>(
   stylesParam: (_theme: Themes[keyof Themes]) => Record<C, S>
 ) => {
-  const results = stylesParam(Registry.getTheme());
+  const { theme: themeParsed } = parse(Registry.getTheme(), undefined, isWeb);
+  const results = stylesParam(themeParsed);
   const apply = (
     style: Record<string, any>,
     props: CrossedPropsExtended<S>,
     addClassname: PluginContext<S>['addClassname']
   ) => {
     Registry.apply(() => style, {
-      isWeb: true,
+      isWeb,
       props,
       addClassname,
     });
@@ -35,29 +53,50 @@ export const createStyles = <C extends string, S>(
     acc[keyStyle] = {
       style: (props: CrossedPropsExtended<S> = {}) => {
         let style = {} as any;
-        apply(
-          {
-            ...styleOfKey,
-            base: { ...(styleOfKey as any).base, ...props.style },
-          },
-          props,
-          ({ body }) => {
+        const parentStyle = (
+          Array.isArray(props.style) ? props.style : [props.style]
+        ).reduce((acc, st) => {
+          if (!st || st.$$css) return acc;
+          if (!st.$$css) {
+            acc = { ...acc, ...st };
+          }
+          return acc;
+        }, {});
+        apply(styleOfKey, props, ({ body, suffix, wrapper, prefix }) => {
+          if (!suffix && !wrapper && !prefix) {
             style = {
               ...style,
               ...Object.values(body).reduce((acc, e) => ({ ...acc, ...e }), {}),
             };
           }
-        );
-        return { style };
+        });
+        return {
+          style: {
+            ...style,
+            ...parentStyle,
+          },
+        };
       },
       className: (props: CrossedPropsExtended<S> = {}) => {
         const classNames: string[] = props.className
           ? props.className.split(' ')
           : [];
+        const parentStyle = (
+          Array.isArray(props.style) ? props.style : [props.style]
+        ).reduce((acc, st) => {
+          if (!st) return acc;
+          if (!st.$$css) {
+            acc = { ...acc, ...st };
+          } else if (st.$$css) {
+            const { $$css, ...otherClassName } = st;
+            classNames.push(...Object.keys(otherClassName));
+          }
+          return acc;
+        }, {});
         apply(
           {
             ...styleOfKey,
-            base: { ...(styleOfKey as any).base, ...props.style },
+            base: { ...(styleOfKey as any).base, ...parentStyle },
           },
           props,
           ({ body }) => {
@@ -65,31 +104,57 @@ export const createStyles = <C extends string, S>(
           }
         );
         return {
-          className: classNames.join(' '),
+          className: Array.from(cleanClassName(classNames).values()).join(' '),
         };
       },
       rnw: (props: CrossedPropsExtended<S> = {}) => {
         const classNames: string[] = props.className
           ? props.className.split(' ')
           : [];
+        const parentStyle = (
+          Array.isArray(props.style) ? props.style : [props.style]
+        ).reduce((acc, st) => {
+          if (!st) return acc;
+          if (!st.$$css) {
+            acc = { ...acc, ...st };
+          } else if (st.$$css) {
+            const { $$css, ...otherClassName } = st;
+            classNames.push(...Object.keys(otherClassName));
+          }
+          return acc;
+        }, {});
         apply(
           {
             ...styleOfKey,
-            base: { ...(styleOfKey as any).base, ...props.style },
+            base: { ...(styleOfKey as any).base, ...parentStyle },
           },
           props,
           ({ body }) => {
             classNames.push(...Object.keys(body));
           }
         );
+
+        (Array.isArray(props.style) ? props.style : [props.style]).forEach(
+          (st) => {
+            if (st && st.$$css) {
+              const { $$css, ...otherClassName } = st;
+              classNames.push(...Object.keys(otherClassName));
+            }
+          }
+        );
+
         return {
-          style: classNames.reduce<Record<string, any>>(
-            (acc2, cl) => {
-              acc2[cl] = cl;
-              return acc2;
-            },
-            { $$css: true }
-          ),
+          style: [
+            Array.from(cleanClassName(classNames).values()).reduce<
+              Record<string, any>
+            >(
+              (acc2, cl) => {
+                acc2[cl] = cl;
+                return acc2;
+              },
+              { $$css: true }
+            ),
+          ],
         };
       },
     };

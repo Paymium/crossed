@@ -52,20 +52,17 @@ const useTable = createStyles((t) => ({
 }));
 
 export const Table = (props: HTMLProps<HTMLTableElement>) => {
-  const { table } = useTable();
-  return <table {...props} className={table.className} />;
+  return <table {...props} {...useTable.table.className()} />;
 };
 
 export const THead = (props: HTMLProps<HTMLTableSectionElement>) => {
-  const { thead } = useTable();
-  return <thead {...props} className={thead.className} />;
+  return <thead {...props} {...useTable.thead.className()} />;
 };
 
 export const TBody = ({
   children,
   ...props
 }: HTMLProps<HTMLTableSectionElement>) => {
-  const { tbody } = useTable();
   const newChild =
     (Array.isArray(children) && children.length > 0) || children ? (
       children
@@ -83,23 +80,20 @@ export const TBody = ({
       </Tr>
     );
   return (
-    <tbody {...props} className={tbody.className}>
+    <tbody {...props} {...useTable.tbody.className()}>
       {newChild}
     </tbody>
   );
 };
 export const Tr = (props: HTMLProps<HTMLTableRowElement>) => {
-  const { tr } = useTable();
-  return <tr {...props} className={tr.className} />;
+  return <tr {...props} {...useTable.tr.className()} />;
 };
 
 (Tr as any).id = 'Table.Tr';
 
 export const Td = (props: HTMLProps<HTMLTableCellElement>) => {
-  const { td } = useTable();
-  return <td {...props} className={td.className} />;
+  return <td {...props} {...useTable.td.className()} />;
 };
 export const Th = (props: HTMLProps<HTMLTableCellElement>) => {
-  const { th } = useTable();
-  return <th {...props} className={th.className} />;
+  return <th {...props} {...useTable.th.className()} />;
 };

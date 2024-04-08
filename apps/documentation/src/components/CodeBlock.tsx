@@ -7,67 +7,61 @@
 
 'use client';
 
-import { GetProps } from '@crossed/core';
-import { withStyle } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 import { Alert, Center, Text, XBox, YBox } from '@crossed/ui';
 import { themes } from 'prism-react-renderer';
 import { PropsWithChildren, ReactNode, useCallback } from 'react';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
-const StyledLiveEditor = withStyle(
-  ({ style, ...props }: GetProps<typeof LiveEditor>) => {
-    return <LiveEditor {...props} />;
-  },
-  (t) => ({
+const styles = createStyles((t) => ({
+  liveEditor: {
     base: {
       width: '100%',
       borderRadius: 4,
       fontFamily: t.fontFamily,
       fontSize: t.fontSize.sm,
     },
-  })
-);
-
-const RenderPreview = withStyle(Center, (t) => ({
-  base: {
-    padding: t.space.md,
-    alignItems: 'stretch',
   },
-}));
-
-const ContainerPreview = withStyle(XBox, (t) => ({
-  base: {
-    borderWidth: 1,
-    borderColor: t.colors.neutral,
-    borderStyle: 'solid',
-    borderRadius: 4,
+  preview: {
+    base: {
+      padding: t.space.md,
+      alignItems: 'stretch',
+      flex: 1,
+    },
   },
-}));
-const ContainerVariants = withStyle(YBox, (t) => ({
-  base: {
-    borderLeftWidth: 1,
-    borderColor: t.colors.neutral,
-    borderStyle: 'solid',
-    padding: t.space.md,
+  containerPreview: {
+    base: {
+      borderWidth: 1,
+      borderColor: t.colors.neutral,
+      borderStyle: 'solid',
+      borderRadius: 4,
+    },
   },
-}));
-
-const Pre = withStyle(Text, (t) => ({
-  base: {
-    backgroundColor: t.draculaTheme.plain.backgroundColor,
-    width: '100%',
-    padding: t.space.md,
-    boxSizing: 'border-box',
-    margin: 0,
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 1,
-    borderColor: t.colors.neutral,
-    borderStyle: 'solid',
-    color: t.colors.white,
+  containerVariants: {
+    base: {
+      borderLeftWidth: 1,
+      borderColor: t.colors.neutral,
+      borderStyle: 'solid',
+      padding: t.space.md,
+    },
+  },
+  pre: {
+    base: {
+      backgroundColor: t.draculaTheme.plain.backgroundColor,
+      width: '100%',
+      padding: t.space.md,
+      boxSizing: 'border-box',
+      margin: 0,
+      borderTopLeftRadius: 4,
+      borderTopRightRadius: 4,
+      borderTopWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      borderBottomWidth: 1,
+      borderColor: t.colors.neutral,
+      borderStyle: 'solid',
+      color: t.colors.white,
+    },
   },
 }));
 
@@ -86,12 +80,14 @@ export const CodeBlock = ({
 }) => {
   const Component = useCallback(
     ({ children }: PropsWithChildren) => (
-      <ContainerPreview>
-        <RenderPreview style={{ flex: 1 }}>{children}</RenderPreview>
+      <XBox {...styles.containerPreview.rnw()}>
+        <Center {...styles.preview.rnw()}>{children}</Center>
         {variants && (
-          <ContainerVariants space="md">{variants}</ContainerVariants>
+          <YBox space="md" {...styles.containerVariants.rnw()}>
+            {variants}
+          </YBox>
         )}
-      </ContainerPreview>
+      </XBox>
     ),
     [variants, children]
   );
@@ -104,10 +100,12 @@ export const CodeBlock = ({
       >
         {preview && <LivePreview Component={Component} />}
         <YBox>
-          {fileName && <Pre>{fileName}</Pre>}
-          <StyledLiveEditor
+          {fileName && <Text {...styles.pre.rnw()}>{fileName}</Text>}
+          <LiveEditor
             theme={themes.dracula}
-            className={fileName ? 'filename' : ''}
+            {...styles.liveEditor.className({
+              className: fileName ? 'filename' : '',
+            })}
           />
           {preview && (
             <Alert>

@@ -7,11 +7,11 @@
 
 'use client';
 import { createList } from '@crossed/primitive';
-import { createStyles, useStyles } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 import { Text, type TextProps } from '../typography/Text';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
-import { Button, type ButtonProps } from '../forms/Button';
+import { Button, useButton, type ButtonProps } from '../forms/Button';
 import { type GetProps, createScope } from '@crossed/core';
 import { forwardRef, memo } from 'react';
 
@@ -24,23 +24,24 @@ const useMenuList = createStyles(() => ({
 }));
 type ButtonVariantProps = Partial<Pick<ButtonProps, 'size' | 'variant'>>;
 
-const MenuRoot = (props: MenuRootProps) => {
-  const { root } = useMenuList();
-  return <YBox {...props} {...root} />;
-};
+const MenuRoot = forwardRef((props: MenuRootProps, ref: any) => {
+  return <YBox {...props} {...useMenuList.root.rnw()} ref={ref} />;
+});
 type MenuRootProps = YBoxProps;
 
 const Divider = D;
 const Item = Button;
 
 const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
-  const context = useVariantContext();
-  const { root } = useStyles(Button.styleSheet, {
-    ...context,
-    ...props,
-  });
+  const variants = useVariantContext();
 
-  return <Text {...props} style={[root.style, props.style]} ref={ref} />;
+  return (
+    <Text
+      {...props}
+      {...useButton.button.rnw({ ...props, variants })}
+      ref={ref}
+    />
+  );
 });
 const Title = Button.Text;
 const SubTitle = Button.Text;
@@ -52,7 +53,7 @@ const [ProviderVariant, useVariantContext] = createScope<ContextVariant>(
 
 const MenuList = createList({
   Root: memo(
-    forwardRef((props: MenuRootProps & ButtonVariantProps, ref) => (
+    forwardRef((props: MenuRootProps & ButtonVariantProps, ref: any) => (
       <ProviderVariant
         // color={props.color}
         size={props.size}

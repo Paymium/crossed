@@ -18,6 +18,5 @@ const useItalic = createStyles(() => ({
 
 export type IProps = TextProps;
 export const I = (props: IProps) => {
-  const { root } = useItalic();
-  return <Text {...props} {...root} />;
+  return <Text {...props} {...useItalic.root.rnw()} />;
 };

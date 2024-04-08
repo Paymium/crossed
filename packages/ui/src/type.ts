@@ -10,11 +10,11 @@ import type {
   CrossedMediaQueriesPlugin,
   CrossedPseudoClassPlugin,
   CrossedVariantsPlugin,
+  CrossedVariantsPluginProps,
+  CrossedPseudoClassProps,
 } from '@crossed/styled/plugins';
 import { darkTheme, lightTheme } from './theme/theme';
 import type { breakpoints } from './theme/breakpoints';
-import type { CrossedVariantsPluginProps } from '@crossed/styled/src/plugins/Variants';
-import type { CrossedPseudoClassProps } from '@crossed/styled/src/plugins/PseudoClass';
 
 const themes = { dark: darkTheme, light: lightTheme };
 type ThemesCustom = typeof themes;

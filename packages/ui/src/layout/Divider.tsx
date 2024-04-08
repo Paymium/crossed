@@ -10,37 +10,45 @@
 import { View, type ViewProps } from 'react-native';
 import { createStyles, type ExtractForProps } from '@crossed/styled';
 
-export const useDivider = createStyles((t) => ({
-  divider: {
-    base: {
-      borderWidth: 0,
-      borderStyle: 'solid',
-      borderColor: t.colors.neutral,
-    },
-    variants: {
-      direction: {
-        vertical: {
-          base: {
-            borderLeftWidth: 1,
-            height: '100%',
-          },
+export const useDivider = createStyles(
+  (t) =>
+    ({
+      divider: {
+        base: {
+          borderWidth: 0,
+          borderStyle: 'solid',
+          borderColor: t.colors.neutral,
         },
-        horizontal: {
-          base: {
-            borderTopWidth: 1,
-            width: '100%',
+        variants: {
+          direction: {
+            vertical: {
+              base: {
+                borderLeftWidth: 1,
+                height: '100%',
+              },
+            },
+            horizontal: {
+              base: {
+                borderTopWidth: 1,
+                width: '100%',
+              },
+            },
           },
         },
       },
-    },
-  },
-}));
+    } as const)
+);
 
-type Variant = ExtractForProps<typeof useDivider>;
+type Variant = ExtractForProps<typeof useDivider.divider>;
 
 export type DividerProps = ViewProps & Variant['variants'];
 
 export const Divider = ({ direction, ...props }: DividerProps) => {
-  const { divider } = useDivider({ variants: { direction } });
-  return <View role="separator" {...props} {...divider} />;
+  return (
+    <View
+      role="separator"
+      {...props}
+      {...useDivider.divider.rnw({ variants: { direction } })}
+    />
+  );
 };

@@ -11,20 +11,23 @@ import { createStyles } from '@crossed/styled';
 import { Box, type BoxProps } from './Box';
 import { forwardRef } from 'react';
 
-const useYBox = createStyles(() => ({
-  root: {
-    base: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      alignSelf: 'stretch',
-      maxWidth: '100%',
-    },
-  },
-}));
+const useYBox = createStyles(
+  () =>
+    ({
+      root: {
+        base: {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          alignSelf: 'stretch',
+          maxWidth: '100%',
+        },
+      },
+    } as const)
+);
 
 export type YBoxProps = BoxProps;
 
 export const YBox = forwardRef((props: YBoxProps, ref: any) => {
-  return <Box ref={ref} {...props} {...useYBox.root.style(props)} />;
+  return <Box ref={ref} {...props} {...useYBox.root.rnw(props)} />;
 });

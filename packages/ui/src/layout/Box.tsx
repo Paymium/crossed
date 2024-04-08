@@ -5,34 +5,36 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-'use client';
-
 import { View, type ViewProps } from 'react-native';
 import { createStyles, type ExtractForProps } from '@crossed/styled';
 import { forwardRef } from 'react';
+import type { GetProps } from '@crossed/core';
 
-const styleBox = createStyles((t) => ({
-  root: {
-    base: { display: 'flex' },
-    web: { boxSizing: 'border-box' },
-    variants: {
-      space: {
-        xs: { base: { gap: t.space.xs } },
-        sm: { base: { gap: t.space.sm } },
-        md: { base: { gap: t.space.md } },
-        lg: { base: { gap: t.space.lg } },
-        xl: { base: { gap: t.space.xl } },
+const styleBox = createStyles(
+  (t) =>
+    ({
+      root: {
+        base: { display: 'flex' },
+        web: { boxSizing: 'border-box' },
+        variants: {
+          space: {
+            xs: { base: { gap: t.space.xs } },
+            sm: { base: { gap: t.space.sm } },
+            md: { base: { gap: t.space.md } },
+            lg: { base: { gap: t.space.lg } },
+            xl: { base: { gap: t.space.xl } },
+          },
+          center: { true: { base: { alignItems: 'center' } } },
+        },
       },
-      center: { true: { base: { alignItems: 'center' } } },
-    },
-  } as const,
-}));
+    } as const)
+);
 
 type Variant = ExtractForProps<typeof styleBox.root>;
 
-export type BoxProps = ViewProps &
-  Variant['variants'] &
-  Omit<Variant, 'variants'> & { className?: string };
+type BoxPropsTmp = Pick<Variant['variants'], 'center' | 'space'> &
+  Omit<Variant, 'variants'> &
+  ViewProps;
 
 export const Box = forwardRef(
   (
@@ -45,7 +47,7 @@ export const Box = forwardRef(
       hover,
       focus,
       ...props
-    }: BoxProps,
+    }: BoxPropsTmp,
     ref: any
   ) => (
     <View
@@ -62,3 +64,5 @@ export const Box = forwardRef(
     />
   )
 );
+
+export type BoxProps = GetProps<typeof Box>;

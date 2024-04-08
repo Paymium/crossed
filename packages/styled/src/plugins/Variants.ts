@@ -60,17 +60,7 @@ export const VariantsPlugin: Plugin<CrossedVariantsPlugin> = {
         Registry.apply(() => style, {
           isWeb,
           props,
-          addClassname: ({ suffix, prefix, body }) => {
-            Object.entries(body).forEach(([e, obj]) => {
-              addClassname({
-                suffix,
-                prefix,
-                body: {
-                  [`${variantName}-${variantValue}:${e}`]: obj,
-                },
-              });
-            });
-          },
+          addClassname,
         });
       });
     });

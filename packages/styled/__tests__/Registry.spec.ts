@@ -5,6 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+/// <reference types="jest" />
+
 import { RegistryBridge, Registry } from '../src/Registry';
 
 describe('Registry', () => {

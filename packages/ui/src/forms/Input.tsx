@@ -286,14 +286,12 @@ const useInput = createStyles((t) => ({
 
 const Addon = YBox;
 const Element = (props: YBoxProps) => {
-  const { element } = useInput();
-  return <YBox {...props} {...element} />;
+  return <YBox {...props} {...useInput.element.rnw()} />;
 };
 const Group = XBox;
 
 const InputRoot = forwardRef((props: TextInputProps, ref: any) => {
-  const { root } = useInput();
-  return <TextInput ref={ref} {...props} {...root} />;
+  return <TextInput ref={ref} {...props} {...useInput.root.rnw()} />;
 });
 
 const Input = createInput({

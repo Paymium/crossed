@@ -6,7 +6,7 @@
  */
 
 'use client';
-
+import '@/style.config';
 import { Text, XBox, YBox } from '@crossed/ui';
 import { Link } from './Link';
 import { useTranslation } from 'react-i18next';
@@ -35,8 +35,8 @@ const useStyles = createStyles((t) => ({
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <YBox space="xs" role="contentinfo" {...useStyles.container.style()}>
-      <XBox {...useStyles.row.style()}>
+    <YBox space="xs" role="contentinfo" {...useStyles.container.rnw()}>
+      <XBox {...useStyles.row.rnw()}>
         <Text size="xs">Copyright © {new Date().getFullYear()}</Text>
         <Link href="https://paymium.com" target="_blank">
           Paymium

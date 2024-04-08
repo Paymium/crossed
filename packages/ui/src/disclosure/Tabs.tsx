@@ -12,7 +12,6 @@ import {
   composeEventHandlers,
   createScope,
   useUncontrolled,
-  withDefaultProps,
   withStaticProperties,
 } from '@crossed/core';
 import { useCallback, type PropsWithChildren } from 'react';
@@ -32,7 +31,7 @@ const useStyles = createStyles((t) => ({
   },
 }));
 
-type TabsContext = Pick<ButtonProps['variants'], 'variant' | 'size'> & {
+type TabsContext = Pick<ButtonProps, 'variant' | 'size'> & {
   value: string | number;
   setValue: (_value: string | number) => void;
 };
@@ -77,8 +76,7 @@ export const createTabs = () => {
   };
 
   const List = (props: XBoxProps) => {
-    const { list } = useStyles();
-    return <XBox space="xs" {...props} {...list} />;
+    return <XBox space="xs" {...props} {...useStyles.list.rnw()} />;
   };
 
   const Panels = ({ children }: PropsWithChildren) => {

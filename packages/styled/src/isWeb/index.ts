@@ -5,7 +5,4 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Text } from './Text';
-import { withDefaultProps } from '@crossed/core';
-
-export const B = withDefaultProps(Text, { weight: 'bold' });
+export { isWeb } from './isWeb';

@@ -11,11 +11,7 @@ import { createStyles, type ExtractForProps } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
 import { Pressable, type PressableProps } from 'react-native';
 import { Text as TextUi } from '../typography/Text';
-import {
-  type GetProps,
-  withDefaultProps,
-  withStaticProperties,
-} from '@crossed/core';
+import { type GetProps, withDefaultProps } from '@crossed/core';
 import { XBox } from '../layout/XBox';
 import { Box } from '../layout/Box';
 import { forwardRef } from 'react';
@@ -89,7 +85,9 @@ export const useButton = createStyles((t) => ({
 const Group = XBox;
 
 type VariantButton = ExtractForProps<typeof useButton.button>;
-type RootProps = PressableProps & VariantButton['variants'];
+type RootProps = PressableProps &
+  VariantButton['variants'] &
+  Omit<VariantButton, 'variants'>;
 const Root = forwardRef(({ size, variant, ...props }: RootProps, ref: any) => {
   return (
     <Pressable
@@ -104,15 +102,12 @@ const Text = withDefaultProps(TextUi, { weight: 'semibold' });
 
 const Element = Box;
 
-const Button = withStaticProperties(
-  createButton({
-    Group,
-    Root: withDefaultProps(Root, { size: 'md', variant: 'default' }),
-    Text,
-    Element,
-  }),
-  { styleSheet: Root.styleSheet }
-);
+const Button = createButton({
+  Group,
+  Root: withDefaultProps(Root, { size: 'md', variant: 'default' }),
+  Text,
+  Element,
+});
 
 const { Text: ButtonText, Element: ButtonElement } = Button;
 

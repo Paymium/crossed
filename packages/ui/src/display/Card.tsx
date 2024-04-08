@@ -11,29 +11,32 @@ import { Text, type TextProps } from '../typography/Text';
 import { createStyles, type ExtractForProps } from '@crossed/styled';
 import { forwardRef } from 'react';
 
-const useCard = createStyles((t) => ({
-  root: {
-    base: {
-      padding: t.space.md,
-      borderRadius: t.space.xs,
-      backgroundColor: t.colors.neutral,
-    },
-    variants: {
-      role: {
-        link: {
-          ':hover': {
-            backgroundColor: t.colors.background,
-          },
-          ':active': {
-            backgroundColor: t.colors.background,
+const useCard = createStyles(
+  (t) =>
+    ({
+      root: {
+        base: {
+          padding: t.space.md,
+          borderRadius: t.space.xs,
+          backgroundColor: t.colors.neutral,
+        },
+        variants: {
+          role: {
+            link: {
+              ':hover': {
+                backgroundColor: t.colors.backgroundStrong,
+              },
+              ':active': {
+                backgroundColor: t.colors.backgroundStrong,
+              },
+            },
           },
         },
       },
-    },
-  },
-  title: { base: { alignSelf: 'stretch' } },
-  description: { base: { alignSelf: 'stretch' } },
-}));
+      title: { base: { alignSelf: 'stretch' } },
+      description: { base: { alignSelf: 'stretch' } },
+    } as const)
+);
 
 type Variants = ExtractForProps<typeof useCard.root>;
 
@@ -45,17 +48,17 @@ const CardRoot = forwardRef(({ role, ...props }: CardProps, ref: any) => {
       ref={ref}
       role={role}
       {...props}
-      {...useCard.root.style({ ...props, variants: { role } })}
+      {...useCard.root.rnw({ ...props, variants: { role } })}
     />
   );
 });
 
 const Title = (props: TextProps) => {
-  return <Text size="lg" {...props} {...useCard.title.style(props)} />;
+  return <Text size="lg" {...props} {...useCard.title.rnw(props)} />;
 };
 
 const Description = (props: TextProps) => {
-  return <Text {...props} {...useCard.description.style(props)} />;
+  return <Text {...props} {...useCard.description.rnw(props)} />;
 };
 const Card = withStaticProperties(CardRoot, {
   Title,

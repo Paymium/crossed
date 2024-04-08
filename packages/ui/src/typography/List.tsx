@@ -34,7 +34,7 @@ export const Li = ({
   return (
     <XBox
       {...props}
-      {...useList.li.style({ active, hover, focus, style, className })}
+      {...useList.li.rnw({ active, hover, focus, style, className })}
       role="listitem"
     >
       <Text {...useList.disc.style()}>{'\u2B24'} </Text>
