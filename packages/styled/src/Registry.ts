@@ -92,7 +92,7 @@ export class RegistryBridge {
       console.warn('Themes are not set');
       return {} as Themes[keyof Themes];
     }
-    return parse(this.themes[this.themeName], undefined, true)
+    return parse(this.themes[this.themeName] || {}, undefined, true)
       .theme as Themes[keyof Themes];
   }
   getThemes() {

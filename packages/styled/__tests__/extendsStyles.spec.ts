@@ -11,8 +11,6 @@ import { createStyles } from '../src/createStyles';
 import { BasePlugin } from '../src/plugins/Base';
 import { Registry } from '../src/Registry';
 
-jest.mock('../src/useStyles');
-
 describe('extends with createStyles', () => {
   beforeAll(() => {
     Registry.addPlugin(BasePlugin);
@@ -68,7 +66,7 @@ describe('extends with createStyles', () => {
         style: { $$css: true, color: 'color' },
       })
     ).toStrictEqual({
-      className: 'color-[color]',
+      className: 'color color-[white]',
     });
   });
 

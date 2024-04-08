@@ -11,9 +11,9 @@ import { renderHook, act } from '@crossed/test';
 
 describe('useTheme', () => {
   test('no theme', () => {
-    Registry.setThemes({});
+    Registry.setThemes({ dark: {}, light: {} });
     const { result } = renderHook(() => useTheme());
-    expect(result.current).toEqual(undefined);
+    expect(result.current).toEqual({});
   });
   test('with theme', () => {
     Registry.setThemes({
@@ -21,17 +21,17 @@ describe('useTheme', () => {
       light: { light: 'light' },
     });
     const { result, rerender } = renderHook(() => useTheme());
-    expect(result.current).toEqual(undefined);
+    expect(result.current).toEqual({});
 
     act(() => {
       Registry.setThemeName('dark');
     });
     rerender();
-    expect(result.current).toEqual({ dark: 'dark' });
+    expect(result.current).toEqual({ dark: 'var(--dark)' });
     act(() => {
       Registry.setThemeName('light');
     });
     rerender();
-    expect(result.current).toEqual({ light: 'light' });
+    expect(result.current).toEqual({ light: 'var(--light)' });
   });
 });

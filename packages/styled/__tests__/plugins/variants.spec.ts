@@ -94,29 +94,33 @@ describe('VariantsPlugin', () => {
       },
     }));
     expect(style.container.rnw({})).toStrictEqual({
-      style: { '$$css': true, 'color-[black]': 'color-[black]' },
+      style: [{ '$$css': true, 'color-[black]': 'color-[black]' }],
     });
     expect(style.container.rnw({ variants: {} })).toStrictEqual({
-      style: { '$$css': true, 'color-[black]': 'color-[black]' },
+      style: [{ '$$css': true, 'color-[black]': 'color-[black]' }],
     });
     expect(style.container.rnw({ variants: { role: 'toto' } })).toStrictEqual({
-      style: { '$$css': true, 'color-[black]': 'color-[black]' },
+      style: [{ '$$css': true, 'color-[black]': 'color-[black]' }],
     });
     expect(style.container.rnw({ variants: { role: 'link' } })).toStrictEqual({
-      style: {
-        '$$css': true,
-        'color-[white]': 'color-[white]',
-        'hover:color-[red]': 'hover:color-[red]',
-      },
+      style: [
+        {
+          '$$css': true,
+          'color-[white]': 'color-[white]',
+          'hover:color-[red]': 'hover:color-[red]',
+        },
+      ],
     });
     expect(
       style.container.rnw({ variants: { role: 'link' }, hover: true })
     ).toStrictEqual({
-      style: {
-        '$$css': true,
-        'color-[red]': 'color-[red]',
-        'hover:color-[red]': 'hover:color-[red]',
-      },
+      style: [
+        {
+          '$$css': true,
+          'color-[red]': 'color-[red]',
+          'hover:color-[red]': 'hover:color-[red]',
+        },
+      ],
     });
   });
 });

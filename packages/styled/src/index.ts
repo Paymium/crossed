@@ -5,7 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export { useStyles } from './useStyles';
 export { createStyles } from './createStyles';
 export { Registry } from './Registry';
 export type * from './types';
