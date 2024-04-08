@@ -1,5 +1,7 @@
 # crossed-docs
 
+## 0.6.0-beta.9
+
 ## 0.6.0-beta.8
 
 ## 0.6.0-beta.7
