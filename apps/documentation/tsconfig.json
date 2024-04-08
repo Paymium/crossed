@@ -6,11 +6,11 @@
     "skipLibCheck": true,
     "strict": false,
     "noEmit": true,
-    "composite": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
@@ -20,19 +20,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@crossed/core": ["./node_modules/@crossed/core/src"],
-      "@crossed/core/*": ["./node_modules/@crossed/core/src/*"],
-      "@crossed/ui": ["./node_modules/@crossed/ui/src"],
-      "@crossed/ui/*": ["./node_modules/@crossed/ui/src/*"],
-      "@crossed/styled": ["./node_modules/@crossed/styled/src"],
-      "@crossed/styled/*": ["./node_modules/@crossed/styled/src/*"],
-      "@crossed/primitive": ["./node_modules/@crossed/primitive/src"],
-      "@crossed/primitive/*": ["./node_modules/@crossed/primitive/src/*"],
-      "@crossed/unicons": ["./node_modules/@crossed/unicons/src"],
-      "@crossed/unicons/*": ["./node_modules/@crossed/unicons/src/*"],
+      "@/*": ["./src/*"]
     },
-    "typeRoots": ["./src/types/**/*.ts"]
+    "typeRoots": ["./src/types/**/*.ts", "./src/style.config.js"]
   },
   "include": [
     "next-env.d.ts",

@@ -8,51 +8,51 @@
 'use client';
 import { MenuList, XBox, YBox } from '@crossed/ui';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
-import { createStyleSheet, mq, styled, useStyles } from '@crossed/styled';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
+import { createStyles } from '@crossed/styled';
 
-const Container = styled(XBox, { minHeight: '100%' });
-
-const Center = styled(YBox, (t) => ({
-  flex: 1,
-  width: '100%',
-  borderColor: t.colors.neutral,
-  paddingHorizontal: {
-    [mq.only.width('xs', 'lg')]: t.space.md,
-    [mq.only.width('lg')]: t.space[100],
-  },
-  variants: {
-    bordered: {
-      true: {
-        borderRightWidth: {
-          [mq.only.width(undefined, 'xl')]: 0,
-          [mq.only.width('xl')]: 1,
+const styles = createStyles(
+  (t) =>
+    ({
+      container: { base: { minHeight: '100%' } },
+      center: {
+        base: {
+          flex: 1,
+          width: '100%',
+          borderColor: t.colors.neutral,
+        },
+        variants: {
+          bordered: {
+            true: {
+              media: {
+                xl: { borderRightWidth: 1 },
+              },
+            },
+            false: { base: { borderRightWidth: 0 } },
+          },
+        },
+        media: {
+          xs: { paddingHorizontal: t.space.md },
+          lg: { paddingHorizontal: t.space[100] },
         },
       },
-      false: { borderRightWidth: 0 },
-    },
-  },
-}));
-
-const Menu = withDefaultProps(
-  styled(MenuList, () => ({
-    paddingHorizontal: 20,
-    alignSelf: 'baseline',
-    display: {
-      [mq.only.width(undefined, 'xl')]: 'none',
-      [mq.only.width('xl')]: 'flex',
-    },
-  })),
-  { space: 'xs', size: 'xs' }
+      menuList: {
+        base: {
+          paddingHorizontal: 20,
+          alignSelf: 'baseline',
+          display: 'none',
+        },
+        media: {
+          xl: { display: 'flex' },
+        },
+      },
+      menuLabel: {
+        base: { fontSize: t.fontSize.lg },
+      },
+      li: { base: { alignItems: 'stretch' } },
+    } as const)
 );
-
-const Label = styled(MenuList.Label, (t) => ({ fontSize: t.fontSize.lg }));
-
-const Li = withDefaultProps(styled(YBox, { alignItems: 'stretch' }), {
-  role: 'listitem',
-});
 
 type Nav = {
   href: string;
@@ -65,7 +65,6 @@ export const TOCLayout = ({
 }: PropsWithChildren<{ links?: Nav[] }>) => {
   const searchParams = useSearchParams();
   const [hash, setHash] = useState(undefined);
-  const { styles } = useStyles(styleSheet);
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
@@ -76,26 +75,44 @@ export const TOCLayout = ({
 
   return useMemo(() => {
     return (
-      <Container>
-        <Center bordered={(links.length !== 0).toString() as 'true' | 'false'}>
+      <XBox {...styles.container.rnw()}>
+        <YBox
+          {...styles.center.rnw({
+            variants: {
+              bordered: (links.length !== 0).toString() as 'true' | 'false',
+            },
+          })}
+        >
           {children}
-        </Center>
+        </YBox>
 
-        <Menu style={{ position: 'sticky', top: '75px' } as any}>
-          {links.length > 0 && <Label weight="bold">{t('On this page')}</Label>}
+        <MenuList
+          {...styles.menuList.rnw({
+            style: { position: 'sticky', top: '75px' },
+          })}
+          space="xs"
+          size="xs"
+        >
+          {links.length > 0 && (
+            <MenuList.Label {...styles.menuLabel.rnw()} weight="bold">
+              {t('On this page')}
+            </MenuList.Label>
+          )}
           {links.map(({ href, title }) => {
             return (
-              <Li key={href || title}>
+              <YBox role="listitem" key={href || title} {...styles.li.rnw()}>
                 <MenuList.Item
+                  variant="ghost"
+                  size="xs"
                   role="link"
                   href={`${pathname}${href}`}
-                  hovered={href === hash}
+                  // hover={href === hash}
                   onPress={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
                     router.push(href);
                   }}
-                  style={styles.rightItem}
+                  style={{ justifyContent: 'flex-start' }}
                 >
                   <MenuList.Title
                     weight={href === hash ? 'semibold' : undefined}
@@ -103,15 +120,11 @@ export const TOCLayout = ({
                     {t(title)}
                   </MenuList.Title>
                 </MenuList.Item>
-              </Li>
+              </YBox>
             );
           })}
-        </Menu>
-      </Container>
+        </MenuList>
+      </XBox>
     );
   }, [children, links, hash, t]);
 };
-
-const styleSheet = createStyleSheet(() => ({
-  rightItem: { justifyContent: 'flex-start' },
-}));

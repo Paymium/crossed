@@ -1,5 +1,17 @@
 # @crossed/core
 
+## 0.8.1-beta.1
+
+### Patch Changes
+
+- fix typescript error not pass props
+
+## 0.8.1-beta.0
+
+### Patch Changes
+
+- remove helper
+
 ## 0.8.0
 
 ### Minor Changes

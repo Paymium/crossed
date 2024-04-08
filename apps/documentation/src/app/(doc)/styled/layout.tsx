@@ -13,7 +13,7 @@ export default withDefaultProps(SideBarLayout, {
     { href: '/styled/introduction', title: 'Introduction' },
     { href: '/styled/setup', title: 'Setup' },
     { title: 'Guide' },
-    { href: '/styled/concept', title: 'Concept' },
+    { href: '/styled/plugins', title: 'Plugins' },
     { href: '/styled/usage', title: 'Usage' },
     { title: 'Reference' },
     { href: '/styled/reference/styled', title: 'styled' },

@@ -9,16 +9,18 @@
 
 import { Anchor, AnchorProps } from '@crossed/ui';
 import LinkNext, { LinkProps as LinkNextProps } from 'next/link';
+import { forwardRef } from 'react';
 
-export const Link = function Link({
-  children,
-  ...props
-}: LinkProps & { target?: '_blank' }) {
-  return (
-    <Anchor {...(props as any)} asChild>
-      <LinkNext {...(props as any)}>{children}</LinkNext>
-    </Anchor>
-  );
-};
+export const Link = forwardRef<any, LinkProps & { target?: '_blank' }>(
+  function Link({ children, ...props }, ref) {
+    return (
+      <LinkNext {...(props as any)} legacyBehavior>
+        <Anchor ref={ref} {...(props as any)}>
+          {children}
+        </Anchor>
+      </LinkNext>
+    );
+  }
+);
 
 export type LinkProps = AnchorProps & LinkNextProps;

@@ -24,11 +24,11 @@
 // import { Pressable, TextInput } from 'react-native';
 
 import { createInput } from '@crossed/primitive';
-import { UnistylesRuntime, styled, useStyles } from '@crossed/styled';
-import { TextInput, TextInputProps } from 'react-native';
-import { YBox } from '../layout/YBox';
-import { XBox, XBoxProps } from '../layout/XBox';
+import { TextInput, type TextInputProps } from 'react-native';
+import { YBox, type YBoxProps } from '../layout/YBox';
+import { XBox } from '../layout/XBox';
 import { forwardRef } from 'react';
+import { createStyles } from '@crossed/styled';
 
 // const [Provider, useContext] = createScope<{
 //   size?: keyof typeof sizeVariants;
@@ -254,76 +254,45 @@ import { forwardRef } from 'react';
 //   Content: InputContent,
 // });
 
-const Addon = styled(YBox, {});
-const Element = styled(YBox, {
-  position: 'absolute',
-  right: 0,
-  top: 0,
-  bottom: 0,
-  color: 'white',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
-const Group = styled(
-  (props: XBoxProps) => {
-    // const toto = props.children.reduce((acc, e) => {
-    //   if (e.type.displayName === 'Input.Element') {
-    //     console.log(e)
-    //     acc = e.props.style.width;
-    //   }
-    //   return acc;
-    // }, undefined);
-    return <XBox {...props} />;
+const useInput = createStyles((t) => ({
+  element: {
+    base: {
+      position: 'absolute',
+      right: 0,
+      top: 0,
+      bottom: 0,
+      color: 'white',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
   },
-  () => ({
-    // backgroundColor: t.utils.shadeColor(t.colors.background, 50),
-    // borderWidth: 1,
-    // borderColor: t.utils.shadeColor(
-    //   t.colors.neutral,
-    //   UnistylesRuntime.themeName === 'dark' ? 100 : -100
-    // ),
-    // borderRadius: 4,
-    // paddingVertical: t.space.xs,
-    // paddingHorizontal: t.space.sm,
-  })
-);
+  root: {
+    base: {
+      color: t.colors.default,
+      backgroundColor: t.colors.background,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      // borderColor: t.utils.shadeColor(
+      //   t.colors.neutral,
+      //   UnistylesRuntime.themeName === 'dark' ? 100 : -100
+      // ),
+      borderRadius: 4,
+      paddingVertical: t.space.xs,
+      paddingHorizontal: t.space.sm,
+      textAlign: 'right',
+    },
+  },
+}));
 
-const InputRoot = styled(
-  forwardRef((props: TextInputProps, ref: any) => {
-    const { theme } = useStyles();
-    // const { toto } = useInputProvider();
-    // console.log(toto, props.style);
-    return (
-      <TextInput
-        placeholderTextColor={theme.utils.shadeColor(
-          theme.colors.neutral,
-          UnistylesRuntime.themeName === 'dark' ? 100 : -100
-        )}
-        {...props}
-        style={
-          [
-            // ...props.style,
-            // { paddingRight: toto },
-          ]
-        }
-        ref={ref}
-      />
-    );
-  }),
-  (t) => ({
-    color: t.colors.default,
-    backgroundColor: t.utils.shadeColor(t.colors.background, 50),
-    borderWidth: 1,
-    borderColor: t.utils.shadeColor(
-      t.colors.neutral,
-      UnistylesRuntime.themeName === 'dark' ? 100 : -100
-    ),
-    borderRadius: 4,
-    paddingVertical: t.space.xs,
-    paddingHorizontal: t.space.sm,
-    textAlign: 'right',
-  })
-);
+const Addon = YBox;
+const Element = (props: YBoxProps) => {
+  return <YBox {...props} {...useInput.element.rnw()} />;
+};
+const Group = XBox;
+
+const InputRoot = forwardRef((props: TextInputProps, ref: any) => {
+  return <TextInput ref={ref} {...props} {...useInput.root.rnw()} />;
+});
 
 const Input = createInput({
   Addon,

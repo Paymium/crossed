@@ -15,8 +15,8 @@ import {
   cloneElement,
   useState,
 } from 'react';
-import { InputProvider, useInputContext } from './context';
-import { composeEventHandlers, type States } from '@crossed/core';
+import { InputProvider, States, useInputContext } from './context';
+import { composeEventHandlers } from '@crossed/core';
 
 export const createInputGroup = <P,>(Styled: ComponentType<P>) =>
   forwardRef<any, P>((props, ref) => {

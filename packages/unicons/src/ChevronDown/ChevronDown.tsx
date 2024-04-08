@@ -5,11 +5,16 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useStyles } from '@crossed/styled/unistyles';
-import type { IconProps } from '../types';
+import { useTheme } from '@crossed/styled';
+import type { RequireOnly } from '../types';
 
-export const ChevronDown = ({ Svg, Path, color, size = 24 }: IconProps) => {
-  const { theme } = useStyles();
+export const ChevronDown = ({
+  Svg,
+  Path,
+  color,
+  size = 24,
+}: RequireOnly<'Path' | 'Svg'>) => {
+  const theme = useTheme();
   return (
     <Svg
       width={size}

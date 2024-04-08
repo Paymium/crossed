@@ -6,41 +6,43 @@
  */
 
 'use client';
-
+import '@/style.config';
 import { Text, XBox, YBox } from '@crossed/ui';
 import { Link } from './Link';
-import { styled } from '@crossed/styled';
-import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
+import { createStyles } from '@crossed/styled';
 
-const Container = styled(YBox, (t) => ({
-  backgroundColor: t.colors.backgroundStrong,
-  padding: 15,
-  justifyContent: 'center',
-  borderTopWidth: 1,
-  borderColor: t.colors.neutral,
-  alignItems: 'center',
+const useStyles = createStyles((t) => ({
+  container: {
+    base: {
+      backgroundColor: t.colors.backgroundStrong,
+      padding: 15,
+      justifyContent: 'center',
+      borderTopWidth: 1,
+      borderStyle: 'solid',
+      borderColor: t.colors.neutral,
+      alignItems: 'center',
+    },
+  },
+  row: {
+    base: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  },
 }));
-
-const Row = withDefaultProps(
-  styled(XBox, {
-    justifyContent: 'center',
-    alignItems: 'center',
-  }),
-  { space: 'sm' }
-);
 
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <Container space="xs" role="contentinfo">
-      <Row>
+    <YBox space="xs" role="contentinfo" {...useStyles.container.rnw()}>
+      <XBox {...useStyles.row.rnw()}>
         <Text size="xs">Copyright © {new Date().getFullYear()}</Text>
         <Link href="https://paymium.com" target="_blank">
           Paymium
         </Link>
-      </Row>
+      </XBox>
       <Text size="xxs">{t('Made with crossed ecosystem')}</Text>
-    </Container>
+    </YBox>
   );
 };

@@ -5,6 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import '@/style.config';
+
 import { TOCLayout } from '@/components/TOCLayout';
 import { withDefaultProps } from '@crossed/core';
 
@@ -12,6 +14,5 @@ export default withDefaultProps(TOCLayout, {
   links: [
     { title: 'Introduction', href: '#introduction' },
     { title: 'Key Features', href: '#features' },
-    { title: 'Dependencies used', href: '#dependencies' },
   ],
 });

@@ -5,100 +5,95 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { styled } from '@crossed/styled';
-import {
-  useMemo,
-  type HTMLProps,
-  Children,
-  isValidElement,
-  cloneElement,
-} from 'react';
-import { Text, textAlign } from '../typography/Text';
+import type { HTMLProps } from 'react';
+import { Text } from '../typography/Text';
+import { createStyles } from '@crossed/styled';
 
-export const Table = styled(
-  (props: HTMLProps<HTMLTableElement>) => <table {...props} />,
-  () => ({
-    width: '100%',
-    borderCollapse: 'collapse',
-    borderWidth: 0,
-    tableLayout: 'fixed',
-  })
-);
+const useTable = createStyles((t) => ({
+  table: {
+    base: {
+      width: '100%',
+      borderCollapse: 'collapse',
+      borderWidth: 0,
+      tableLayout: 'fixed',
+    },
+  },
+  thead: {
+    base: {
+      borderTopWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      borderBottomWidth: 1,
+      borderStyle: 'solid',
+      borderColor: t.colors.neutral,
+      backgroundColor: t.colors.backgroundSoft,
+    },
+  },
+  tbody: { base: {} },
+  tr: {
+    base: {
+      borderTopWidth: 1,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+      borderBottomWidth: 0,
+      borderStyle: 'solid',
+      borderColor: t.colors.neutral,
+    },
+  },
+  td: {
+    base: {
+      padding: t.space.sm,
+      // variants: {
+      //   textAlign,
+      // },
+    },
+  },
+  th: { base: { textAlign: 'left', padding: t.space.sm } },
+}));
 
-export const THead = styled(
-  ({ children, ...props }: HTMLProps<HTMLTableSectionElement>) => {
-    const newChildren = useMemo(
-      () =>
-        Children.map(children, (c) => {
-          if (isValidElement(c) && (c.type as any).id === 'Table.Tr') {
-            return cloneElement(c, {
-              ...c.props,
-              style: { borderTopWidth: 0 },
-            });
-          }
-          return c;
-        }),
-      [children]
+export const Table = (props: HTMLProps<HTMLTableElement>) => {
+  return <table {...props} {...useTable.table.className()} />;
+};
+
+export const THead = (props: HTMLProps<HTMLTableSectionElement>) => {
+  return <thead {...props} {...useTable.thead.className()} />;
+};
+
+export const TBody = ({
+  children,
+  ...props
+}: HTMLProps<HTMLTableSectionElement>) => {
+  const newChild =
+    (Array.isArray(children) && children.length > 0) || children ? (
+      children
+    ) : (
+      <Tr>
+        <Td>
+          <Text color="warning">-</Text>
+        </Td>
+        <Td>
+          <Text color="warning">-</Text>
+        </Td>
+        <Td>
+          <Text color="warning">-</Text>
+        </Td>
+      </Tr>
     );
-    return <thead {...props}>{newChildren}</thead>;
-  },
-  (t) => ({
-    borderWidth: 0,
-    borderBottomWidth: 1,
-    borderStyle: 'solid',
-    borderColor: t.colors.neutral,
-    backgroundColor: t.utils.hexToRgbA(
-      t.utils.shadeColor(t.colors.neutral, 5),
-      0.5
-    ),
-  })
-);
-export const TBody = styled(
-  ({ children, ...props }: HTMLProps<HTMLTableSectionElement>) => {
-    const newChild =
-      Array.isArray(children) && children.length > 0 ? (
-        children
-      ) : (
-        <Tr>
-          <Td>
-            <Text color="warning">-</Text>
-          </Td>
-          <Td>
-            <Text color="warning">-</Text>
-          </Td>
-          <Td>
-            <Text textAlign="center" color="warning">
-              -
-            </Text>
-          </Td>
-        </Tr>
-      );
-    return <tbody {...props}>{newChild}</tbody>;
-  },
-  {}
-);
-export const Tr = styled(
-  (props: HTMLProps<HTMLTableRowElement>) => <tr {...props} />,
-  (t) => ({
-    borderWidth: 0,
-    borderTopWidth: 1,
-    borderStyle: 'solid',
-    borderColor: t.colors.neutral,
-  })
-);
+  return (
+    <tbody {...props} {...useTable.tbody.className()}>
+      {newChild}
+    </tbody>
+  );
+};
+export const Tr = (props: HTMLProps<HTMLTableRowElement>) => {
+  return <tr {...props} {...useTable.tr.className()} />;
+};
 
 (Tr as any).id = 'Table.Tr';
 
-export const Td = styled(
-  (props: HTMLProps<HTMLTableCellElement>) => <td {...props} />,
-  (t) => ({
-    padding: t.space.sm,
-    variants: {
-      textAlign,
-    },
-  })
-);
-export const Th = styled(
-  (props: HTMLProps<HTMLTableCellElement>) => <th {...props} />,
-  (t) => ({ textAlign: 'left', padding: t.space.sm })
-);
+export const Td = (props: HTMLProps<HTMLTableCellElement>) => {
+  return <td {...props} {...useTable.td.className()} />;
+};
+export const Th = (props: HTMLProps<HTMLTableCellElement>) => {
+  return <th {...props} {...useTable.th.className()} />;
+};

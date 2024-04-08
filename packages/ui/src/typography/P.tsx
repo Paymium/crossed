@@ -5,21 +5,19 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef } from 'react';
 import { Text, type TextProps } from './Text';
-import { styled } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 
-export const P = styled(
-  forwardRef((props: Omit<TextProps, 'role'>, ref) => (
-    <Text
-      // @ts-expect-error paragraph is not in role type
-      role="paragraph"
-      {...props}
-      ref={ref}
-    />
-  )),
-  (t) => ({
-    alignSelf: 'stretch',
-    marginVertical: t.space.md,
-  })
-);
+const useP = createStyles((t) => ({
+  root: {
+    base: {
+      alignSelf: 'stretch',
+      marginVertical: t.space.md,
+    },
+  },
+}));
+
+export const P = (props: TextProps) => {
+  // @ts-expect-error role not defined in typed
+  return <Text role="paragraph" {...props} {...useP.root.style(props)} />;
+};

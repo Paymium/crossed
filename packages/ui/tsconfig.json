@@ -5,12 +5,13 @@
     "baseUrl": ".",
     "outDir": "./lib/typescript",
     "ignoreDeprecations": "5.0",
-    "noEmit": true,
     "declaration": true,
+    "isolatedModules": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": true,
     "esModuleInterop": true,
-    "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
+    "composite": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "lib": ["esnext", "dom"],
@@ -24,18 +25,7 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true,
     "target": "esnext",
-    "typeRoots": ["./src/theme/index.ts"],
-    "paths": {
-      "@crossed/core": ["./node_modules/@crossed/core/src"],
-      "@crossed/core/*": ["./node_modules/@crossed/core/src/*"],
-      "@crossed/styled": ["./node_modules/@crossed/styled/src"],
-      "@crossed/styled/*": ["./node_modules/@crossed/styled/src/*"],
-      "@crossed/primitive": ["./node_modules/@crossed/primitive/src"],
-      "@crossed/primitive/*": ["./node_modules/@crossed/primitive/src/*"],
-      "@crossed/unicons": ["./node_modules/@crossed/unicons/src"],
-      "@crossed/unicons/*": ["./node_modules/@crossed/unicons/src/*"]
-    }
+    "typeRoots": ["./src/type.ts"]
   }
 }

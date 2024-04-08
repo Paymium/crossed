@@ -5,6 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import '@/style.config';
 import { SideBarLayout } from '@/components/SideBarLayout';
 import { withDefaultProps } from '@crossed/core';
 

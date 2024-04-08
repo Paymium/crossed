@@ -1,0 +1,40 @@
+{
+  "name": "@crossed/webpack",
+  "version": "2.0.0-beta.5",
+  "description": "",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "typings": "lib/typescript/index.d.ts",
+  "files": [
+    "./lib"
+  ],
+  "scripts": {
+    "clean": "rm -rf lib",
+    "watch": "crossed-build --watch",
+    "build": "crossed-build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@crossed/loader": "1.0.0-beta.5",
+    "@crossed/log": "*",
+    "static-eval": "^2.1.1",
+    "ts-pattern": "^5.0.6",
+    "webpack-virtual-modules": "^0.6.1"
+  },
+  "devDependencies": {
+    "@crossed/build": "^0.5.0",
+    "@crossed/styled": "0.14.0-beta.5",
+    "@types/node": "^20.11.16",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.2",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "peerDependencies": {
+    "@crossed/styled": "0.14.0-beta.5"
+  }
+}

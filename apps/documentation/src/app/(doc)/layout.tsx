@@ -7,14 +7,21 @@
 
 'use client';
 
+import '@/style.config';
 import { XBox } from '@crossed/ui';
-import { styled } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 
-const Container = styled(XBox, {
-  flex: 1,
-  width: '100%',
-  justifyContent: 'center',
-  paddingVertical: 15,
-});
+const styles = createStyles(() => ({
+  root: {
+    base: {
+      flex: 1,
+      width: '100%',
+      justifyContent: 'center',
+      paddingVertical: 15,
+    },
+  },
+}));
 
-export default Container;
+export default (props) => {
+  return <XBox {...props} {...styles.root.rnw(props)} />;
+};

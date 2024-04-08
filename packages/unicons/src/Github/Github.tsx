@@ -5,11 +5,16 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useStyles } from '@crossed/styled/unistyles';
-import type { IconProps } from '../types';
+import type { RequireOnly } from '../types';
+import { useTheme } from '@crossed/styled';
 
-export const Github = ({ Svg, Path, color, size = 24 }: IconProps) => {
-  const { theme } = useStyles();
+export const Github = ({
+  Svg,
+  Path,
+  color,
+  size = 24,
+}: RequireOnly<'Svg' | 'Path'>) => {
+  const theme = useTheme();
   return (
     <Svg
       width={size}

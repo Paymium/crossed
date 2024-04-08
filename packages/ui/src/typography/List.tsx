@@ -5,35 +5,40 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { styled, withDefaultProps } from '@crossed/styled';
-import { Text, TextProps } from './Text';
-import { forwardRef, memo } from 'react';
-import { XBox, XBoxProps } from '../layout/XBox';
-import { YBox } from '../layout/YBox';
+import { Text } from './Text';
+import { XBox, type XBoxProps } from '../layout/XBox';
+import { YBox, type YBoxProps } from '../layout/YBox';
+import { createStyles } from '@crossed/styled';
 
-export const Ul = styled(withDefaultProps(YBox, { role: 'list' }), (t) => ({
-  marginTop: t.space.xl,
+const useList = createStyles((t) => ({
+  ul: { base: { marginTop: t.space.xl } },
+  li: { base: { gap: t.space.md, marginBottom: t.space.md } },
+  disc: { base: { fontSize: 9 } },
 }));
 
-export const Li = styled(
-  memo(
-    forwardRef(({ children, ...props }: Omit<XBoxProps, 'role'>, ref: any) => (
-      <XBox {...props} ref={ref} role="listitem">
-        <Disc />
-        {children as any}
-      </XBox>
-    ))
-  ),
-  (t) => ({ gap: t.space.md, marginBottom: t.space.md })
-);
+export type UlProps = YBoxProps;
+export const Ul = (props: UlProps) => {
+  return <YBox role="list" {...props} {...useList.ul.style()} />;
+};
 
-export const Disc = styled(
-  memo(
-    forwardRef((props: Omit<TextProps, 'children'>, ref: any) => (
-      <Text {...props} ref={ref}>
-        {'\u2B24' + ' '}
-      </Text>
-    ))
-  ),
-  { fontSize: 9 }
-);
+export type LiProps = XBoxProps;
+export const Li = ({
+  children,
+  active,
+  hover,
+  focus,
+  style,
+  className,
+  ...props
+}: LiProps) => {
+  return (
+    <XBox
+      {...props}
+      {...useList.li.rnw({ active, hover, focus, style, className })}
+      role="listitem"
+    >
+      <Text {...useList.disc.style()}>{'\u2B24'} </Text>
+      {children as any}
+    </XBox>
+  );
+};

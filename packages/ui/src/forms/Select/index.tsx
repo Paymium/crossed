@@ -34,27 +34,31 @@
 // import { Box, BoxProps } from '../../layout/Box';
 
 import {
-  UseUncontrolledInput,
+  type UseUncontrolledInput,
   composeEventHandlers,
   createScope,
   useUncontrolled,
   withStaticProperties,
 } from '@crossed/core';
-import { styled } from '@crossed/styled';
 import {
   useCallback,
   memo,
-  ReactNode,
+  type ReactNode,
   useRef,
   Children,
   isValidElement,
-  MutableRefObject,
+  type MutableRefObject,
 } from 'react';
-import { Button, ButtonProps } from '../Button';
-import { XBox, XBoxProps } from '../../layout/XBox';
-import { MenuItemProps, MenuList, MenuListProps } from '../../display/MenuList';
+import { Button, type ButtonProps } from '../Button';
+import { XBox, type XBoxProps } from '../../layout/XBox';
+import {
+  type MenuItemProps,
+  MenuList,
+  type MenuListProps,
+} from '../../display/MenuList';
 import { Portal } from '@gorhom/portal';
 import type { LayoutRectangle } from 'react-native';
+import { createStyles } from '@crossed/styled';
 
 // // type InputProps = GetProps<typeof Input>;
 
@@ -505,7 +509,7 @@ const findChild = (
   value: string | number
 ): ReactNode | undefined => {
   if (!children) {
-    return;
+    return undefined;
   }
   return typeof children === 'function'
     ? undefined
@@ -525,46 +529,64 @@ const findChild = (
       }, undefined);
 };
 
-const SelectRoot = styled(
-  memo(
-    <V extends string | number>({
+const useSelect = createStyles((t) => ({
+  select: {
+    base: {
+      position: 'relative',
+      width: 'auto',
+    },
+  },
+  content: {
+    base: {
+      position: 'absolute',
+      // top: 15 + 40,
+      // left: 1253,
+      maxWidth: 'auto',
+      padding: t.space.xs,
+      zIndex: 100,
+      backgroundColor: t.colors.neutral,
+      borderRadius: 4,
+    },
+  },
+}));
+
+const SelectRoot = memo(
+  <V extends string | number>({
+    value: valueProps,
+    defaultValue,
+    finalValue,
+    onChange,
+    variant,
+    children,
+    ...props
+  }: UseUncontrolledInput<V> & XBoxProps & Pick<ButtonProps, 'variant'>) => {
+    const renderValue = useRef<ReactNode>();
+    const triggerLayout = useRef<LayoutRectangle | undefined>();
+    const [value, setValue] = useUncontrolled<string | number>({
       value: valueProps,
       defaultValue,
       finalValue,
       onChange,
-      variant,
-      ...props
-    }: UseUncontrolledInput<V> & XBoxProps & Pick<ButtonProps, 'variant'>) => {
-      const renderValue = useRef<ReactNode>();
-      const triggerLayout = useRef<LayoutRectangle | undefined>();
-      const [value, setValue] = useUncontrolled<string | number>({
-        value: valueProps,
-        defaultValue,
-        finalValue,
-        onChange,
-      });
-      const [open, setOpen] = useUncontrolled<boolean>({
-        defaultValue: false,
-      });
-      renderValue.current = findChild(props.children, value) || 'rien trouvé';
-      return (
-        <SelectProvider
-          value={value}
-          setValue={setValue}
-          open={open}
-          setOpen={setOpen}
-          renderValue={renderValue}
-          variant={variant}
-          triggerLayout={triggerLayout}
-        >
-          <XBox {...props} />
-        </SelectProvider>
-      );
-    }
-  ),
-  {
-    position: 'relative',
-    width: 'auto',
+    });
+    const [open, setOpen] = useUncontrolled<boolean>({
+      defaultValue: false,
+    });
+    renderValue.current = findChild(children, value) || 'rien trouvé';
+    return (
+      <SelectProvider
+        value={value}
+        setValue={setValue}
+        open={open}
+        setOpen={setOpen}
+        renderValue={renderValue}
+        variant={variant}
+        triggerLayout={triggerLayout}
+      >
+        <XBox {...props} {...useSelect.select.style()}>
+          {children}
+        </XBox>
+      </SelectProvider>
+    );
   }
 );
 
@@ -584,8 +606,7 @@ const Trigger = withStaticProperties(
     return (
       <Button
         variant={variant}
-        active={open}
-        onLayout={({ nativeEvent: { layout } }) => {
+        onLayout={({ nativeEvent: { layout } }: any) => {
           triggerLayout.current = layout;
         }}
         {...props}
@@ -596,67 +617,55 @@ const Trigger = withStaticProperties(
   { Text: Button.Text }
 );
 
-const Content = styled(
-  (props: MenuListProps) => {
-    const all = useSelectProvider();
-    const { top, height, left } = (all.triggerLayout.current as any) || {
-      top: 0,
-      height: 0,
-      left: 0,
-    };
-    return (
-      <Portal>
-        <SelectProvider {...all}>
-          {all.open ? (
-            <>
-              <MenuList
-                {...props}
-                style={{
-                  ...(typeof props.style === 'object' ? props.style : {}),
+const Content = (props: Partial<MenuListProps>) => {
+  const all = useSelectProvider();
+  const { top, height, left } = (all.triggerLayout.current as any) || {
+    top: 0,
+    height: 0,
+    left: 0,
+  };
+  return (
+    <Portal>
+      <SelectProvider {...all}>
+        {all.open ? (
+          <>
+            <MenuList
+              {...props}
+              {...useSelect.content.style({
+                style: {
                   top: top + height,
                   left,
-                }}
-              />
-            </>
-          ) : null}
-        </SelectProvider>
-      </Portal>
-    );
-  },
-  (t) => ({
-    position: 'absolute',
-    top: 15 + 40,
-    left: 1253,
-    maxWidth: 'auto',
-    padding: t.space.xs,
-    zIndex: 100,
-    backgroundColor: t.utils.shadeColor(t.colors.neutral, -25),
-    borderRadius: 4,
-  })
-);
+                  position: 'absolute',
+                },
+              })}
+            />
+          </>
+        ) : null}
+      </SelectProvider>
+    </Portal>
+  );
+};
 
-// @ts-expect-error because id not exist in type
 Content.id = 'Select.Content';
 Content.displayName = 'Select.Content';
 
-const Option = styled(
-  ({ value, ...props }: MenuItemProps & { value: string | number }) => {
-    const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
-    return (
-      <MenuList.Item
-        active={value === valueGlobal}
-        {...props}
-        onPress={composeEventHandlers(() => {
-          setOpen(false);
-          setValue(value);
-        }, props.onPress)}
-      />
-    );
-  },
-  { justifyContent: 'flex-start' }
-);
+const Option = ({
+  value,
+  ...props
+}: MenuItemProps & { value: string | number }) => {
+  const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
+  return (
+    <MenuList.Item
+      active={value === valueGlobal}
+      {...props}
+      onPress={composeEventHandlers(() => {
+        setOpen(false);
+        setValue(value);
+      }, props.onPress)}
+    />
+  );
+};
 
-// @ts-expect-error because id not exist in type
 Option.id = 'Select.Option';
 Option.displayName = 'Select.Option';
 

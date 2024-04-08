@@ -7,54 +7,54 @@
 
 'use client';
 import { createList } from '@crossed/primitive';
-import { styled, useStyles } from '@crossed/styled';
-import { Text, TextProps } from '../typography/Text';
-import { YBox } from '../layout/YBox';
+import { createStyles } from '@crossed/styled';
+import { Text, type TextProps } from '../typography/Text';
+import { YBox, type YBoxProps } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
-import { Button, ButtonProps } from '../forms/Button';
-import { GetProps, createScope } from '@crossed/core';
+import { Button, useButton, type ButtonProps } from '../forms/Button';
+import { type GetProps, createScope } from '@crossed/core';
 import { forwardRef, memo } from 'react';
 
-type ButtonVariantProps = Pick<ButtonProps, 'size' | 'color' | 'variant'>;
-const MenuRoot = styled(YBox, () => ({
-  alignItems: 'stretch',
+const useMenuList = createStyles(() => ({
+  root: {
+    base: {
+      alignItems: 'stretch',
+    },
+  },
 }));
-type MenuRootProps = GetProps<typeof MenuRoot>;
+type ButtonVariantProps = Partial<Pick<ButtonProps, 'size' | 'variant'>>;
 
-const Divider = styled(D, {});
-const Item = forwardRef((props: ButtonProps, ref) => {
-  const context = useVariantContext();
-  return <Button {...context} {...props} ref={ref} />;
+const MenuRoot = forwardRef((props: MenuRootProps, ref: any) => {
+  return <YBox {...props} {...useMenuList.root.rnw(props)} ref={ref} />;
 });
 
-const Label = forwardRef((props: TextProps & ButtonVariantProps, ref) => {
-  const context = useVariantContext();
-  const { styles } = useStyles(Button.styleSheet as any, {
-    ...context,
-    ...props,
-  });
+type MenuRootProps = YBoxProps;
+
+const Divider = D;
+const Item = Button;
+
+const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
+  const variants = useVariantContext();
 
   return (
     <Text
       {...props}
-      style={[
-        styles.base,
-        styles.base.extraStyle({ ...context, ...props }, {}),
-        props.style,
-      ]}
+      {...useButton.button.rnw({ ...props, variants })}
       ref={ref}
     />
   );
 });
-const Title = styled(Button.Text, {});
-const SubTitle = styled(Button.Text, {});
+const Title = Button.Text;
+const SubTitle = Button.Text;
 
 type ContextVariant = ButtonVariantProps;
-const [ProviderVariant, useVariantContext] = createScope<ContextVariant>({});
+const [ProviderVariant, useVariantContext] = createScope<ContextVariant>(
+  {} as ContextVariant
+);
 
 const MenuList = createList({
   Root: memo(
-    forwardRef((props: MenuRootProps & ButtonVariantProps, ref) => (
+    forwardRef((props: MenuRootProps & ButtonVariantProps, ref: any) => (
       <ProviderVariant
         // color={props.color}
         size={props.size}

@@ -1,5 +1,19 @@
 # @crossed/primitive
 
+## 1.7.1-beta.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.1
+
+## 1.7.1-beta.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.0
+
 ## 1.7.0
 
 ### Minor Changes

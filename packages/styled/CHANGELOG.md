@@ -1,5 +1,50 @@
 # @crossed/styled
 
+## 0.14.0-beta.5
+
+### Patch Changes
+
+- 63171a9: remove Theme plugin for add theme in core, delete withStyle, and createStyles return directly hooks
+
+## 0.14.0-beta.4
+
+### Patch Changes
+
+- fix typescript error not pass props
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.1
+
+## 0.14.0-beta.3
+
+### Patch Changes
+
+- 7a7a589: some fix after first usage in external project
+
+## 0.14.0-beta.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.0
+
+## 0.14.0-beta.1
+
+### Minor Changes
+
+- add plugin
+
+## 0.14.0-beta.0
+
+### Minor Changes
+
+- 31e0003: feat(styled): add exports in package.json
+
+### Patch Changes
+
+- d9f9372: not pass state props on component styled
+- c7e44dc: wrong export type of unistyles
+- 8917db4: state not apply (hovered, active, focus)
+
 ## 0.13.0
 
 ### Minor Changes

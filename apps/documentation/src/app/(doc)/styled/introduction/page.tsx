@@ -7,7 +7,7 @@
 
 'use client';
 
-import { Link } from '@/components/Link';
+import '@/style.config';
 import { H1, H2, P, Text, YBox, Ul, Li, B, Kbd } from '@crossed/ui';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -57,19 +57,6 @@ export default function Home() {
               an enhanced styling experience.
             </Trans>
           </Text>
-        </Li>
-      </Ul>
-      <H2 id="dependencies">
-        <Trans>Dependencies used</Trans>
-      </H2>
-      <P>
-        <Trans>Dependencies used in @crossed/styled</Trans>
-      </P>
-      <Ul>
-        <Li>
-          <Link href="https://reactnativeunistyles.vercel.app/" target="_blank">
-            react-native-unistyles
-          </Link>
         </Li>
       </Ul>
     </YBox>

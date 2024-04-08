@@ -1,30 +1,23 @@
+const { withCrossed } = require('@crossed/next-adapter');
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withCrossed({
+  configPath: './src/style.config.ts',
+  level: "debug"
+})({
   output: 'export',
   reactStrictMode: false,
-  transpilePackages: ['react-native', 'react-native-reanimated'],
+  // transpilePackages: ['react-native', 'react-native-reanimated'],
   basePath: '/crossed',
-  webpack: (config, { webpack }) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      'react-native$': 'react-native-web',
-    };
+  // webpack: (config, { webpack, isServer }) => {
+  //   config.plugins.push(
+  //     new webpack.DefinePlugin({
+  //       __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
+  //     })
+  //   );
 
-    config.resolve.extensions = [
-      '.web.js',
-      '.web.ts',
-      '.web.tsx',
-      ...config.resolve.extensions,
-    ];
-
-    config.plugins.push(
-      new webpack.DefinePlugin({
-        __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
-      })
-    );
-
-    return config;
-  },
-};
+  //   return config;
+  // },
+});
 
 module.exports = nextConfig;

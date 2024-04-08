@@ -5,49 +5,67 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import {
-  type GetProps,
-  withDefaultProps,
-  withStaticProperties,
-} from '@crossed/core';
-import { styled } from '@crossed/styled';
-import { YBox } from '../layout/YBox';
-import { Text } from '../typography/Text';
+import { type GetProps, withStaticProperties } from '@crossed/core';
+import { YBox, type YBoxProps } from '../layout/YBox';
+import { Text, type TextProps } from '../typography/Text';
+import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { forwardRef } from 'react';
 
-const CardRoot = styled(YBox, (t) => ({
-  padding: t.space.md,
-  borderRadius: t.space.xs,
-  backgroundColor: t.utils.shadeColor(t.colors.background, 25),
-  variants: {
-    role: {
-      link: {
-        'hover:': {
-          backgroundColor: t.utils.shadeColor(t.colors.background, 30),
+const useCard = createStyles(
+  (t) =>
+    ({
+      root: {
+        base: {
+          padding: t.space.md,
+          borderRadius: t.space.xs,
+          backgroundColor: t.colors.neutral,
         },
-        'active:': {
-          backgroundColor: t.utils.shadeColor(t.colors.background, 20),
+        variants: {
+          role: {
+            link: {
+              ':hover': {
+                backgroundColor: t.colors.backgroundStrong,
+              },
+              ':active': {
+                backgroundColor: t.colors.backgroundStrong,
+              },
+            },
+          },
         },
       },
-    },
-  },
-}));
-
-const Title = withDefaultProps(styled(Text, { alignSelf: 'stretch' }), {
-  size: 'lg',
-});
-
-const Description = withDefaultProps(
-  styled(Text, { alignSelf: 'stretch' }),
-  {}
+      title: { base: { alignSelf: 'stretch' } },
+      description: { base: { alignSelf: 'stretch' } },
+    } as const)
 );
 
+type Variants = ExtractForProps<typeof useCard.root>;
+
+type CardProps = YBoxProps & Variants['variants'];
+
+const CardRoot = forwardRef(({ role, ...props }: CardProps, ref: any) => {
+  return (
+    <YBox
+      ref={ref}
+      role={role}
+      {...props}
+      {...useCard.root.rnw({ ...props, variants: { role } })}
+    />
+  );
+});
+
+const Title = (props: TextProps) => {
+  return <Text size="lg" {...props} {...useCard.title.rnw(props)} />;
+};
+
+const Description = (props: TextProps) => {
+  return <Text {...props} {...useCard.description.rnw(props)} />;
+};
 const Card = withStaticProperties(CardRoot, {
   Title,
   Description,
 });
 const { Title: CardTitle, Description: CardDescription } = Card;
 
-type CardProps = GetProps<typeof Card>;
 type CardTitleProps = GetProps<typeof CardTitle>;
 type CardDescriptionProps = GetProps<typeof CardDescription>;
 

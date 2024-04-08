@@ -5,38 +5,43 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { UnistylesRegistry } from '@crossed/styled/unistyles';
-import { darkTheme, lightTheme } from './theme';
-import { breakpoints } from './breakpoints';
-import deepmerge from 'deepmerge';
+// import { Registry } from '@crossed/styled/registry';
+// import { darkTheme } from './theme';
+// import { breakpoints } from './breakpoints';
+// import deepmerge from 'deepmerge';
 import type { Extends, Themes } from './types';
+// import type { CrossedBasePlugin } from '@crossed/styled/src/plugins/Base';
+// import type {
+//   CrossedVariantsPlugin,
+//   CrossedVariantsPluginProps,
+// } from '@crossed/styled/src/plugins/Variants';
+// import type { CrossedMediaQueriesPlugin } from '@crossed/styled/src/plugins/MediaQueries';
+// import type { CrossedPseudoClassPlugin } from '@crossed/styled/src/plugins/PseudoClass';
 
-type AppBreakpoints = typeof breakpoints;
+// type AppBreakpoints = typeof breakpoints;
 
-type AppThemes = {
-  light: typeof lightTheme;
-  dark: typeof darkTheme;
-};
+// type AppThemes = typeof darkTheme;
 
-declare module '@crossed/styled' {
-  export interface UnistylesBreakpoints extends AppBreakpoints {}
-  export interface UnistylesThemes extends AppThemes {}
-}
+// type AppThemes = {
+//   light: typeof lightTheme;
+//   dark: typeof darkTheme;
+// };
 
 export const setup = ({
-  themes,
-  extends: extendsProps,
+  themes: _themes,
+  extends: _extendsProps,
 }: { themes?: Themes; extends?: Extends } = {}) => {
-  UnistylesRegistry.addBreakpoints(breakpoints)
-    .addThemes(
-      themes ??
-        deepmerge((extendsProps?.themes as any) || {}, {
-          light: lightTheme,
-          dark: darkTheme,
-        })
-    )
-    .addConfig({
-      initialTheme: 'dark',
-      // experimentalCSSMediaQueries: true
-    });
+  // Registry.setTheme(darkTheme);
+  // Registry.addBreakpoints(breakpoints)
+  //   .addThemes(
+  //     themes ??
+  //       deepmerge((extendsProps?.themes as any) || {}, {
+  //         light: lightTheme,
+  //         dark: darkTheme,
+  //       })
+  //   )
+  //   .addConfig({
+  //     initialTheme: 'dark',
+  //     // experimentalCSSMediaQueries: true
+  //   });
 };

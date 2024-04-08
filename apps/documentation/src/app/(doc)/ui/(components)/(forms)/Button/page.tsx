@@ -6,7 +6,7 @@
  */
 
 'use client';
-
+import '@/style.config';
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
 import { Button, Select, Text, Center } from '@crossed/ui';
@@ -14,14 +14,12 @@ import { MousePointerClick } from '@crossed/unicons/MousePointerClick';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 import { useSignal } from '@preact/signals-react';
 import { useSignals } from '@preact/signals-react/runtime';
-import { useStyles } from 'react-native-unistyles';
 
 export default function CreateBadge() {
   useSignals();
   const { t } = useTranslation();
   const variants = useSignal('default');
   const colors = useSignal('neutral');
-  const { theme } = useStyles();
   return (
     <TemplatePrimitive
       title="Button"
@@ -109,13 +107,13 @@ import { Button } from '@crossed/ui'
               <Select.Value />
             </Select.Trigger>
             <Select.Content>
-              {Object.keys(
+              {/* {Object.keys(
                 theme.utils.createVariants('backgroundColor', theme)
               ).map((key) => (
                 <Select.Option value={key} key={key}>
                   <Text>{key}</Text>
                 </Select.Option>
-              ))}
+              ))} */}
             </Select.Content>
           </Select>
           <Select

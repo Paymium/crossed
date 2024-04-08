@@ -6,7 +6,7 @@
  */
 
 'use client';
-
+import '@/style.config';
 import { CodeBlock } from '@/components/CodeBlock';
 import {
   H1,

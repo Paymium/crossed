@@ -1,0 +1,8 @@
+{
+  "include": ["./src", "**/__tests__"],
+  "exclude": ["node_modules"],
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "verbatimModuleSyntax": false
+  }
+}

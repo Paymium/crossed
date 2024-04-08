@@ -1,38 +1,20 @@
 {
-  "include": ["./src", "./jest-setup.ts", "__tests__"],
-  "exclude": ["node_modules", "example"],
+  "include": ["./src"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "outDir": "./lib/typescript",
-    "ignoreDeprecations": "5.0",
-    "noEmit": false,
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": true,
-    "esModuleInterop": true,
-    "isolatedModules": false,
-    "composite": true,
-    "importsNotUsedAsValues": "error",
-    "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
-    "lib": ["esnext", "dom"],
-    "module": "esnext",
+    "noImplicitAny": true,
+    "module": "es6",
+    "lib": ["es2017", "dom"],
+    "target": "es5",
+    "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node",
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noImplicitUseStrict": false,
-    "noStrictGenericChecks": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": true,
-    "resolveJsonModule": true,
+    "declaration": true,
     "skipLibCheck": true,
-    "strict": true,
-    "target": "esnext",
-    "paths": {
-      "@crossed/core": [
-        "./node_modules/@crossed/core/src"
-      ]
-    }
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "allowSyntheticDefaultImports": true,
+    "verbatimModuleSyntax": false,
   }
 }

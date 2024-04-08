@@ -7,55 +7,74 @@
 
 'use client';
 import '@/types/unistyles';
-import { MenuList, XBox, YBox } from '@crossed/ui';
+import { MenuList, XBox, YBox, YBoxProps } from '@crossed/ui';
 import { PropsWithChildren } from 'react';
-import { createStyleSheet, mq, styled, useStyles } from '@crossed/styled';
 import { usePathname, useRouter } from 'next/navigation';
-import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
+import { createStyles } from '@crossed/styled';
 
-const Menu = withDefaultProps(
-  styled(MenuList, () => ({
-    paddingHorizontal: 20,
-    alignSelf: 'baseline',
-    display: { xs: 'none', sm: 'none', md: 'flex' },
-  })),
-  { space: 'xs', size: 'xs' }
-);
-const Container = styled(XBox, {
-  width: '100%',
-  justifyContent: 'center',
-  paddingVertical: 15,
-  minHeight: '95%',
-  maxWidth: {
-    [mq.only.width(undefined, 'md')]: '100%',
-    [mq.only.width('md', 'lg')]: 768,
-    [mq.only.width('lg', 'xl')]: 900,
-    [mq.only.width('xl')]: 1200,
+const menuStyle = createStyles((t) => ({
+  root: {
+    base: {
+      paddingHorizontal: 20,
+      alignSelf: 'baseline',
+      display: 'none',
+    },
+    media: {
+      md: { display: 'flex' },
+    },
   },
-});
-const Center = styled(YBox, (t) => ({
-  flex: 1,
-  borderLeftWidth: 1,
-  borderColor: t.colors.neutral,
-  minHeight: '100%',
-}));
-
-const Li = withDefaultProps(
-  styled(YBox, (t) => ({
-    alignItems: 'stretch',
+  container: {
+    base: {
+      width: '100%',
+      justifyContent: 'center',
+      paddingVertical: 15,
+      minHeight: '95%',
+    },
+    media: {
+      xs: { maxWidth: '100%' },
+      md: { maxWidth: 768 },
+      lg: { maxWidth: 900 },
+      xl: { maxWidth: 1200 },
+    },
+  },
+  center: {
+    base: {
+      flex: 1,
+      borderLeftWidth: 0,
+      borderColor: t.colors.neutral,
+      minHeight: '100%',
+    },
+    media: {
+      md: { borderLeftWidth: 1 },
+    },
+  },
+  li: {
+    base: {
+      alignItems: 'stretch',
+    },
     variants: {
       label: {
         true: {
-          marginTop: t.space.xl,
-          borderBottomWidth: 1,
-          borderColor: t.colors.neutral,
+          base: {
+            marginTop: t.space.xl,
+            borderBottomWidth: 1,
+            borderStyle: 'solid',
+            borderColor: t.colors.neutral,
+          },
         },
         false: {},
       },
     },
-  })),
-  { role: 'listitem' }
+  },
+}));
+
+const Li = ({ label, ...props }: YBoxProps & { label?: boolean }) => (
+  <YBox
+    role="listitem"
+    {...props}
+    {...menuStyle.li.rnw({ variants: { label } })}
+  />
 );
 
 type Nav = { href?: string; title: string };
@@ -64,31 +83,32 @@ export function SideBarLayout({
   children,
   menus,
 }: PropsWithChildren<{ menus: Nav[] }>) {
-  const { styles } = useStyles(styleSheet);
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
 
   return (
-    <Container>
-      <Menu style={{ position: 'sticky', top: '75px' } as any}>
+    <XBox {...menuStyle.container.rnw()}>
+      <MenuList
+        space="xs"
+        size="xs"
+        {...menuStyle.root.rnw({ style: { position: 'sticky', top: '75px' } })}
+      >
         {menus.map(({ href, title }) => {
           return (
-            <Li
-              key={href || title}
-              label={Boolean(!href).toString() as 'true' | 'false'}
-            >
+            <Li key={href || title} label={!href}>
               {href ? (
                 <MenuList.Item
+                  variant="ghost"
+                  size="xs"
                   role="link"
                   href={`/crossed${href}`}
-                  hovered={href === pathname}
                   onPress={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
                     router.push(href);
                   }}
-                  style={styles.leftItem}
+                  style={{ justifyContent: 'flex-end' }}
                 >
                   <MenuList.Title
                     weight={href === pathname ? 'semibold' : undefined}
@@ -97,20 +117,20 @@ export function SideBarLayout({
                   </MenuList.Title>
                 </MenuList.Item>
               ) : (
-                <MenuList.Label textAlign="right" weight="semibold">
+                <MenuList.Label
+                  hover={false}
+                  textAlign="right"
+                  weight="semibold"
+                >
                   {t(title)}
                 </MenuList.Label>
               )}
             </Li>
           );
         })}
-      </Menu>
+      </MenuList>
 
-      <Center>{children}</Center>
-    </Container>
+      <YBox {...menuStyle.center.rnw()}>{children}</YBox>
+    </XBox>
   );
 }
-
-const styleSheet = createStyleSheet(() => ({
-  leftItem: { justifyContent: 'flex-end' },
-}));

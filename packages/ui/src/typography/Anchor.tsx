@@ -5,26 +5,34 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { styled } from '@crossed/styled';
-import { Text } from './Text';
-import type { GetProps } from '@crossed/core';
-import { withDefaultProps } from '@crossed/core';
+import { createStyles } from '@crossed/styled';
+import { Text, type TextProps } from './Text';
+import { forwardRef } from 'react';
 
-export const Anchor = withDefaultProps(
-  styled(
-    Text,
-    (t) => ({
-      'fontFamily': t.fontFamily,
-      'textDecorationLine': 'none',
-      'cursor': 'pointer',
-      'hover:': {
-        textDecorationLine: 'underline',
-        color: t.utils.shadeColor(t.colors.link, 45),
-      },
-    }),
-    { name: 'Anchor' }
-  ),
-  { weight: 'medium', role: 'link', color: 'link' }
-);
+export const useAnchor = createStyles((t) => ({
+  anchor: {
+    'base': {
+      fontFamily: t.fontFamily,
+      textDecorationLine: 'none',
+      cursor: 'pointer',
+    },
+    ':hover': {
+      textDecorationLine: 'underline',
+      color: t.colors.link,
+    },
+  },
+}));
 
-export type AnchorProps = GetProps<typeof Anchor>;
+export type AnchorProps = TextProps;
+export const Anchor = forwardRef((props: AnchorProps, ref: any) => {
+  return (
+    <Text
+      ref={ref}
+      color="link"
+      weight="medium"
+      role="link"
+      {...props}
+      {...useAnchor.anchor.style(props)}
+    />
+  );
+});
