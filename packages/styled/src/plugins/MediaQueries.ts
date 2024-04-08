@@ -39,7 +39,7 @@ export const MediaQueriesPlugin = <B extends Record<string, number>>(
           Object.entries(values).forEach(([keyProperty, valueProperty]) => {
             if (Platform && Dimensions && Platform.OS !== 'web') {
               // apply style for native
-              if (breakpoints[key] < Dimensions.get('screen').width) {
+              if (breakpoints[key] < Dimensions.get('window').width) {
                 addClassname({
                   body: {
                     [``]: {
@@ -55,17 +55,23 @@ export const MediaQueriesPlugin = <B extends Record<string, number>>(
                 valueProperty,
                 isWeb
               );
+              const body = {
+                [`${key}:${convertKeyToCss(keyProperty)}-[${valueNormalized}]`]:
+                  {
+                    [keyProperty]: valueNormalized,
+                  },
+              };
               addClassname({
                 wrapper: (str) =>
                   `@media (min-width: ${breakpointsValue}) { ${str} }`,
-                body: {
-                  [`${key}:${convertKeyToCss(
-                    keyProperty
-                  )}-[${valueNormalized}]`]: {
-                    [keyProperty]: valueNormalized,
-                  },
-                },
+                body,
               });
+
+              if (props && typeof window !== 'undefined') {
+                if (breakpoints[key] < Dimensions.get('window').width) {
+                  addClassname({ body });
+                }
+              }
             }
           });
         }

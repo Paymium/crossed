@@ -5,4 +5,4 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export * from './useStyles';
+export const isWeb = false;

@@ -7,16 +7,14 @@
 
 'use client';
 import '@/types/unistyles';
-import { MenuList, XBox, YBox } from '@crossed/ui';
+import { MenuList, XBox, YBox, YBoxProps } from '@crossed/ui';
 import { PropsWithChildren } from 'react';
-import { withStyle } from '@crossed/styled';
 import { usePathname, useRouter } from 'next/navigation';
-import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
+import { createStyles } from '@crossed/styled';
 
-const Menu = withStyle(
-  withDefaultProps(MenuList, { space: 'xs', size: 'xs' }),
-  () => ({
+const menuStyle = createStyles((t) => ({
+  root: {
     base: {
       paddingHorizontal: 20,
       alignSelf: 'baseline',
@@ -25,52 +23,59 @@ const Menu = withStyle(
     media: {
       md: { display: 'flex' },
     },
-  })
-);
-const Container = withStyle(XBox, () => ({
-  base: {
-    width: '100%',
-    justifyContent: 'center',
-    paddingVertical: 15,
-    minHeight: '95%',
   },
-  media: {
-    xs: { maxWidth: '100%' },
-    md: { maxWidth: 768 },
-    lg: { maxWidth: 900 },
-    xl: { maxWidth: 1200 },
+  container: {
+    base: {
+      width: '100%',
+      justifyContent: 'center',
+      paddingVertical: 15,
+      minHeight: '95%',
+    },
+    media: {
+      xs: { maxWidth: '100%' },
+      md: { maxWidth: 768 },
+      lg: { maxWidth: 900 },
+      xl: { maxWidth: 1200 },
+    },
   },
-}));
-const Center = withStyle(YBox,(t) => ({
-  base: {
-    flex: 1,
-    borderLeftWidth: 0,
-    borderColor: t.colors.neutral,
-    minHeight: '100%',
+  center: {
+    base: {
+      flex: 1,
+      borderLeftWidth: 0,
+      borderColor: t.colors.neutral,
+      minHeight: '100%',
+    },
+    media: {
+      md: { borderLeftWidth: 1 },
+    },
   },
-  media: {
-    md: { borderLeftWidth: 1 },
-  },
-}));
-
-const Li = withStyle(withDefaultProps(YBox, { role: 'listitem' }), (t) => ({
-  base: {
-    alignItems: 'stretch',
-  },
-  variants: {
-    label: {
-      true: {
-        base: {
-          marginTop: t.space.xl,
-          borderBottomWidth: 1,
-          borderStyle: 'solid',
-          borderColor: t.colors.neutral,
+  li: {
+    base: {
+      alignItems: 'stretch',
+    },
+    variants: {
+      label: {
+        true: {
+          base: {
+            marginTop: t.space.xl,
+            borderBottomWidth: 1,
+            borderStyle: 'solid',
+            borderColor: t.colors.neutral,
+          },
         },
+        false: {},
       },
-      false: {},
     },
   },
 }));
+
+const Li = ({ label, ...props }: YBoxProps & { label?: boolean }) => (
+  <YBox
+    role="listitem"
+    {...props}
+    {...menuStyle.li.rnw({ variants: { label } })}
+  />
+);
 
 type Nav = { href?: string; title: string };
 
@@ -83,14 +88,15 @@ export function SideBarLayout({
   const { t } = useTranslation();
 
   return (
-    <Container>
-      <Menu style={{ position: 'sticky', top: '75px' } as any}>
+    <XBox {...menuStyle.container.rnw()}>
+      <MenuList
+        space="xs"
+        size="xs"
+        {...menuStyle.root.rnw({ style: { position: 'sticky', top: '75px' } })}
+      >
         {menus.map(({ href, title }) => {
           return (
-            <Li
-              key={href || title}
-              label={Boolean(!href).toString() as 'true' | 'false'}
-            >
+            <Li key={href || title} label={!href}>
               {href ? (
                 <MenuList.Item
                   variant="ghost"
@@ -111,16 +117,20 @@ export function SideBarLayout({
                   </MenuList.Title>
                 </MenuList.Item>
               ) : (
-                <MenuList.Label textAlign="right" weight="semibold">
+                <MenuList.Label
+                  hover={false}
+                  textAlign="right"
+                  weight="semibold"
+                >
                   {t(title)}
                 </MenuList.Label>
               )}
             </Li>
           );
         })}
-      </Menu>
+      </MenuList>
 
-      <Center>{children}</Center>
-    </Container>
+      <YBox {...menuStyle.center.rnw()}>{children}</YBox>
+    </XBox>
   );
 }

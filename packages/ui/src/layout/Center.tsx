@@ -5,12 +5,17 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { withStyle } from '@crossed/styled';
-import { YBox } from './YBox';
+import { createStyles } from '@crossed/styled';
+import { YBox, type YBoxProps } from './YBox';
 
-export const Center = withStyle(YBox, () => ({
-  base: {
-    justifyContent: 'center',
-    alignItems: 'center',
+export const useCenter = createStyles(() => ({
+  root: {
+    base: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   },
 }));
+export const Center = (props: YBoxProps) => {
+  return <YBox {...props} {...useCenter.root.rnw()} />;
+};

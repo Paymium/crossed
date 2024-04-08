@@ -8,56 +8,51 @@
 'use client';
 import { MenuList, XBox, YBox } from '@crossed/ui';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
-import { withStyle } from '@crossed/styled';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
+import { createStyles } from '@crossed/styled';
 
-const Container = withStyle(XBox, () => ({ base: { minHeight: '100%' } }));
-
-const Center = withStyle(YBox, (t) => ({
-  base: {
-    flex: 1,
-    width: '100%',
-    borderColor: t.colors.neutral,
-  },
-  variants: {
-    bordered: {
-      true: {
+const styles = createStyles(
+  (t) =>
+    ({
+      container: { base: { minHeight: '100%' } },
+      center: {
+        base: {
+          flex: 1,
+          width: '100%',
+          borderColor: t.colors.neutral,
+        },
+        variants: {
+          bordered: {
+            true: {
+              media: {
+                xl: { borderRightWidth: 1 },
+              },
+            },
+            false: { base: { borderRightWidth: 0 } },
+          },
+        },
         media: {
-          xl: { borderRightWidth: 1 },
+          xs: { paddingHorizontal: t.space.md },
+          lg: { paddingHorizontal: t.space[100] },
         },
       },
-      false: { base: { borderRightWidth: 0 } },
-    },
-  },
-  media: {
-    xs: { paddingHorizontal: t.space.md },
-    lg: { paddingHorizontal: t.space[100] },
-  },
-}));
-
-const Menu = withStyle(
-  withDefaultProps(MenuList, { space: 'xs', size: 'xs' }),
-  () => ({
-    base: {
-      paddingHorizontal: 20,
-      alignSelf: 'baseline',
-      display: 'none',
-    },
-    media: {
-      xl: { display: 'flex' },
-    },
-  })
+      menuList: {
+        base: {
+          paddingHorizontal: 20,
+          alignSelf: 'baseline',
+          display: 'none',
+        },
+        media: {
+          xl: { display: 'flex' },
+        },
+      },
+      menuLabel: {
+        base: { fontSize: t.fontSize.lg },
+      },
+      li: { base: { alignItems: 'stretch' } },
+    } as const)
 );
-
-const Label = withStyle(MenuList.Label, (t) => ({
-  base: { fontSize: t.fontSize.lg },
-}));
-
-const Li = withStyle(withDefaultProps(YBox, { role: 'listitem' }), () => ({
-  base: { alignItems: 'stretch' },
-}));
 
 type Nav = {
   href: string;
@@ -80,16 +75,32 @@ export const TOCLayout = ({
 
   return useMemo(() => {
     return (
-      <Container>
-        <Center bordered={(links.length !== 0).toString() as 'true' | 'false'}>
+      <XBox {...styles.container.rnw()}>
+        <YBox
+          {...styles.center.rnw({
+            variants: {
+              bordered: (links.length !== 0).toString() as 'true' | 'false',
+            },
+          })}
+        >
           {children}
-        </Center>
+        </YBox>
 
-        <Menu style={{ position: 'sticky', top: '75px' } as any}>
-          {links.length > 0 && <Label weight="bold">{t('On this page')}</Label>}
+        <MenuList
+          {...styles.menuList.rnw({
+            style: { position: 'sticky', top: '75px' },
+          })}
+          space="xs"
+          size="xs"
+        >
+          {links.length > 0 && (
+            <MenuList.Label {...styles.menuLabel.rnw()} weight="bold">
+              {t('On this page')}
+            </MenuList.Label>
+          )}
           {links.map(({ href, title }) => {
             return (
-              <Li key={href || title}>
+              <YBox role="listitem" key={href || title} {...styles.li.rnw()}>
                 <MenuList.Item
                   variant="ghost"
                   size="xs"
@@ -109,11 +120,11 @@ export const TOCLayout = ({
                     {t(title)}
                   </MenuList.Title>
                 </MenuList.Item>
-              </Li>
+              </YBox>
             );
           })}
-        </Menu>
-      </Container>
+        </MenuList>
+      </XBox>
     );
   }, [children, links, hash, t]);
 };

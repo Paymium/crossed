@@ -12,6 +12,52 @@ import type {
   Themes,
 } from './types';
 import { setTheme } from './setTheme';
+import { convertKeyToCss, normalizeUnitPixel } from './plugins';
+
+export const parse = <T extends Record<string, any>>(
+  t: T,
+  parentName?: string,
+  isWeb?: boolean
+): {
+  theme: T;
+  values: Record<string, any>;
+} => {
+  return !isWeb
+    ? { theme: t, values: t }
+    : Object.entries(t).reduce<{
+        theme: T;
+        values: Record<string, any>;
+      }>(
+        (acc, [key, value]) => {
+          if (Array.isArray(value)) {
+          } else if (['number', 'string'].includes(typeof value)) {
+            const name = convertKeyToCss(
+              `--${parentName ? `${parentName}-` : ''}${key}`
+            );
+            (acc.theme as any)[key] = `var(${name})`;
+            acc.values[name] = normalizeUnitPixel('marginTop', value, isWeb);
+          } else if (typeof value === 'object') {
+            const toto = parse(value, key, isWeb);
+            acc.theme = {
+              ...acc.theme,
+              ...Object.entries(toto.theme).reduce<T>(
+                (acc2, [key2, value2]) => {
+                  (acc2 as any)[key] = { ...acc2[key], [key2]: value2 };
+                  return acc2;
+                },
+                {} as T
+              ),
+            };
+            acc.values = {
+              ...acc.values,
+              ...toto.values,
+            };
+          }
+          return acc;
+        },
+        { theme: {} as T, values: {} }
+      );
+};
 
 export class RegistryBridge {
   private plugins: Plugin<any>[] = [];
@@ -42,9 +88,15 @@ export class RegistryBridge {
 
   getTheme() {
     if (!this.themes) {
-      throw new Error('themes are not set');
+      // throw new Error('themes are not set');
+      console.warn('Themes are not set');
+      return {} as Themes[keyof Themes];
     }
-    return this.themes[this._themeName];
+    return parse(this.themes[this.themeName] || {}, undefined, true)
+      .theme as Themes[keyof Themes];
+  }
+  getThemes() {
+    return this.themes;
   }
 
   subscribe(cb: (_themeName: keyof Themes) => Promise<void> | void) {

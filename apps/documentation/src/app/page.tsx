@@ -6,21 +6,20 @@
  */
 
 'use client';
+import '@/style.config';
 import { Logo } from '@/components/Logo';
-import { createStyles, useStyles, withStyle } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 import { B, Box, Button, Card, H1, H2, H3, YBox } from '@crossed/ui';
 import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
 import { Github } from '@crossed/unicons/Github';
 
-const Description = withStyle(H2, () => ({
-  base: { textAlign: 'center', marginTop: 0 },
-  media: { xs: { width: '90%' }, md: { width: '60%' } },
-}));
-
-const SectionCTA = withStyle(
-  (props) => <YBox {...props} />,
-  () => ({
+const useStyles = createStyles((t) => ({
+  description: {
+    base: { textAlign: 'center', marginTop: 0 },
+    media: { xs: { width: '90%' }, md: { width: '60%' } },
+  },
+  sectionCta: {
     base: {
       marginTop: 30,
       marginHorizontal: 'auto',
@@ -28,17 +27,15 @@ const SectionCTA = withStyle(
       alignSelf: 'center',
     },
     media: { xs: { width: '90%' }, xl: { width: '70%' } },
-  })
-);
-
-const ContainerButtonCta = withStyle(Box, () => ({
-  base: { justifyContent: 'space-between', flexWrap: 'wrap' },
-  media: { xs: { flexDirection: 'column' }, md: { flexDirection: 'row' } },
-}));
-
-const CardStyled = withStyle(Card, () => ({ base: { flex: 1 } }));
-
-const styleSheet = createStyles((t) => ({
+  },
+  containerButtonCta: {
+    base: {
+      justifyContent: 'space-between',
+      flexWrap: 'wrap',
+    },
+    media: { xs: { flexDirection: 'column' }, md: { flexDirection: 'row' } },
+  },
+  card: { base: { flex: 1 } },
   title: {
     base: {
       textAlign: 'center',
@@ -60,20 +57,17 @@ const styleSheet = createStyles((t) => ({
 
 export default function Home() {
   const { t } = useTranslation();
-  const { container, title, cardTitle, cardDescription } =
-    useStyles(styleSheet);
-
   return (
-    <Box role="main" style={container.style} space="lg">
+    <Box role="main" {...useStyles.container.rnw()} space="lg">
       <Logo size={100} />
       <H1 size={'4xl'}>Crossed</H1>
-      <Description size="2xl" weight="medium">
+      <H2 size="2xl" weight="medium" {...useStyles.description.rnw()}>
         <Trans>
           Explore our ecosystem to develop cross-platform applications with
           <br />
           <B size="2xl">react-native</B> and <B size="2xl">react-native-web</B>
         </Trans>
-      </Description>
+      </H2>
       <Button
         role="link"
         href="https://github.com/Paymium/crossed"
@@ -86,53 +80,69 @@ export default function Home() {
           <Github />
         </Button.Element>
       </Button>
-      <SectionCTA space="lg">
-        <H3 style={title.style}>
+      <YBox space="lg" {...useStyles.sectionCta.rnw()}>
+        <H3 {...useStyles.title.rnw()}>
           <Trans>Cross platform ecosystem</Trans>
         </H3>
-        <ContainerButtonCta space="lg">
+        <Box space="lg" {...useStyles.containerButtonCta.rnw()}>
           <Link href="/styled/introduction" passHref legacyBehavior>
-            <CardStyled role="link">
-              <Card.Title role="heading" aria-level={4} style={cardTitle.style}>
+            <Card {...useStyles.card.rnw()} role="link">
+              <Card.Title
+                role="heading"
+                aria-level={4}
+                {...useStyles.cardTitle.rnw()}
+              >
                 @crossed/styled
               </Card.Title>
-              <Card.Description style={cardDescription.style}>
+              <Card.Description {...useStyles.cardDescription.rnw()}>
                 <Trans>Styled your component with unistyles</Trans>
               </Card.Description>
-            </CardStyled>
+            </Card>
           </Link>
           <Link href="/primitive/introduction" passHref legacyBehavior>
-            <CardStyled role="link">
-              <Card.Title role="heading" aria-level={4} style={cardTitle.style}>
+            <Card {...useStyles.card.rnw()} role="link">
+              <Card.Title
+                role="heading"
+                aria-level={4}
+                {...useStyles.cardTitle.rnw()}
+              >
                 @crossed/primitive
               </Card.Title>
-              <Card.Description style={cardDescription.style}>
+              <Card.Description {...useStyles.cardDescription.rnw()}>
                 <Trans>Create your accessible component from anything</Trans>
               </Card.Description>
-            </CardStyled>
+            </Card>
           </Link>
           <Link href="/ui/introduction" passHref legacyBehavior>
-            <CardStyled role="link">
-              <Card.Title role="heading" aria-level={4} style={cardTitle.style}>
+            <Card {...useStyles.card.rnw()} role="link">
+              <Card.Title
+                role="heading"
+                aria-level={4}
+                {...useStyles.cardTitle.rnw()}
+              >
                 @crossed/ui
               </Card.Title>
-              <Card.Description style={cardDescription.style}>
+              <Card.Description {...useStyles.cardDescription.rnw()}>
                 <Trans>
                   UI Component made with @crossed/primitive and @crossed/styled
                 </Trans>
               </Card.Description>
-            </CardStyled>
+            </Card>
           </Link>
-          <CardStyled>
-            <Card.Title role="heading" aria-level={4} style={cardTitle.style}>
+          <Card {...useStyles.card.rnw()}>
+            <Card.Title
+              role="heading"
+              aria-level={4}
+              {...useStyles.cardTitle.rnw()}
+            >
               @crossed/router
             </Card.Title>
-            <Card.Description style={cardDescription.style}>
+            <Card.Description {...useStyles.cardDescription.rnw()}>
               <Trans>Comming soon</Trans>
             </Card.Description>
-          </CardStyled>
-        </ContainerButtonCta>
-      </SectionCTA>
+          </Card>
+        </Box>
+      </YBox>
     </Box>
   );
 }

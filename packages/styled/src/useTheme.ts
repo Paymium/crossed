@@ -13,10 +13,10 @@ export const useTheme = () => {
   const [theme, setTheme] = useState(Registry.getTheme());
   const [, setTransition] = useTransition();
   useEffect(() => {
-    const unsubscribe = Registry.subscribe(() =>
-      setTransition(() => setTheme(Registry.getTheme()))
-    );
+    const unsubscribe = Registry.subscribe(() => {
+      setTransition(() => setTheme(Registry.getTheme()));
+    });
     return unsubscribe;
-  }, [setTheme]);
+  }, [setTheme, setTransition]);
   return theme;
 };

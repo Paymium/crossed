@@ -8,15 +8,14 @@
 'use client';
 
 import '@/style.config';
-import { withStyle } from '@crossed/styled';
 import { ChangeTheme } from './ChangeTheme';
-import { Box } from '@crossed/ui';
+import { Box, XBox } from '@crossed/ui';
 import { Logo } from './Logo';
-import { GetProps } from '@crossed/core';
 import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
 import { forwardRef, memo } from 'react';
 import LinkNext from 'next/link';
+import { createStyles } from '@crossed/styled';
 
 const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
   {
@@ -68,11 +67,8 @@ export const NavBar = memo(() => {
   );
 });
 
-const LinkNav = withStyle<GetProps<typeof LinkNext>>(
-  forwardRef(({ style, active: _a, ...props }: any, ref) => (
-    <LinkNext {...props} ref={ref} />
-  )),
-  (t) => ({
+const useStyles = createStyles((t) => ({
+  linkNav: {
     'base': {
       fontFamily: t.fontFamily,
       color: t.colors.default,
@@ -92,31 +88,50 @@ const LinkNav = withStyle<GetProps<typeof LinkNext>>(
       textDecorationLine: 'none',
       color: t.colors.default,
     },
-  })
-);
-
-const LinkLogo = withStyle(LinkNav, (theme) => ({
-  base: { alignItems: 'center', gap: theme.space.sm, display: 'flex' },
-}));
-
-const Nav = withStyle(Box, (t) => ({
-  base: {
-    backgroundColor: t.colors.backgroundStrong,
-    padding: t.space.lg,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderStyle: 'solid',
-    borderColor: t.colors.neutral,
-    alignItems: 'center',
+  },
+  linkLogo: {
+    base: { alignItems: 'center', gap: t.space.sm, display: 'flex' },
+  },
+  nav: {
+    base: {
+      backgroundColor: t.colors.backgroundStrong,
+      padding: t.space.lg,
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      borderBottomWidth: 1,
+      borderStyle: 'solid',
+      borderColor: t.colors.neutral,
+      alignItems: 'center',
+    },
+  },
+  el: {
+    base: {
+      alignItems: 'center',
+      gap: t.space.sm,
+      display: 'flex',
+      flexDirection: 'row',
+    },
   },
 }));
 
-const El = withStyle(Box, (t) => ({
-  base: {
-    alignItems: 'center',
-    gap: t.space.sm,
-    display: 'flex',
-    flexDirection: 'row',
-  },
-}));
+const LinkNav = forwardRef(({ style, active: _a, ...props }: any, ref) => {
+  return (
+    <LinkNext
+      {...props}
+      ref={ref}
+      {...useStyles.linkNav.className({ style, active: _a })}
+    />
+  );
+});
+
+const LinkLogo = forwardRef((props: any, ref) => {
+  return <LinkNav {...props} ref={ref} {...useStyles.linkLogo.rnw(props)} />;
+});
+
+const Nav = forwardRef((props: any, ref) => {
+  return <XBox {...props} ref={ref} {...useStyles.nav.rnw(props)} />;
+});
+
+const El = forwardRef((props: any, ref) => {
+  return <Box {...props} ref={ref} {...useStyles.el.rnw(props)} />;
+});

@@ -7,21 +7,17 @@
 
 'use client';
 
-import { withStyle } from '@crossed/styled';
+import { createStyles, type ExtractForProps } from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
-import { Pressable } from 'react-native';
+import { Pressable, type PressableProps } from 'react-native';
 import { Text as TextUi } from '../typography/Text';
-import {
-  type GetProps,
-  withDefaultProps,
-  withStaticProperties,
-} from '@crossed/core';
+import { type GetProps, withDefaultProps } from '@crossed/core';
 import { XBox } from '../layout/XBox';
 import { Box } from '../layout/Box';
+import { forwardRef } from 'react';
 
-const Group = withStyle(XBox, { base: {} });
-const Root = withStyle(Pressable, {
-  theme: (t) => ({
+export const useButton = createStyles((t) => ({
+  button: {
     base: {
       display: 'flex',
       alignItems: 'center',
@@ -40,7 +36,7 @@ const Root = withStyle(Pressable, {
         md: { base: { paddingHorizontal: t.space.md, height: t.size.md } },
         lg: { base: { paddingHorizontal: t.space.lg, height: t.size.lg } },
         xl: { base: { paddingHorizontal: t.space.xl, height: t.size.xl } },
-      } as const,
+      },
       // color: t.utils.createVariants('backgroundColor', t),
       variant: {
         default: {
@@ -83,23 +79,35 @@ const Root = withStyle(Pressable, {
         },
       },
     },
-  }),
+  } as const,
+}));
+
+const Group = XBox;
+
+type VariantButton = ExtractForProps<typeof useButton.button>;
+type RootProps = PressableProps &
+  VariantButton['variants'] &
+  Omit<VariantButton, 'variants'>;
+const Root = forwardRef(({ size, variant, ...props }: RootProps, ref: any) => {
+  return (
+    <Pressable
+      ref={ref}
+      {...props}
+      {...useButton.button.rnw({ ...props, variants: { size, variant } })}
+    />
+  );
 });
-const Text = withDefaultProps(TextUi, { variants: { weight: 'semibold' } });
 
-const Element = withStyle(Box, { base: {} });
+const Text = withDefaultProps(TextUi, { weight: 'semibold' });
 
-const Button = withStaticProperties(
-  createButton({
-    Group,
-    Root: withDefaultProps(Root, {
-      variants: { size: 'md', variant: 'default' },
-    }),
-    Text,
-    Element,
-  }),
-  { styleSheet: Root.styleSheet }
-);
+const Element = Box;
+
+const Button = createButton({
+  Group,
+  Root: withDefaultProps(Root, { size: 'md', variant: 'default' }),
+  Text,
+  Element,
+});
 
 const { Text: ButtonText, Element: ButtonElement } = Button;
 

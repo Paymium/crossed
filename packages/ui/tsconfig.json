@@ -6,6 +6,7 @@
     "outDir": "./lib/typescript",
     "ignoreDeprecations": "5.0",
     "declaration": true,
+    "isolatedModules": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": true,
     "esModuleInterop": true,

@@ -5,14 +5,18 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Text } from './Text';
-import { withStyle } from '@crossed/styled';
-import type { GetProps } from '@crossed/core';
+import { Text, type TextProps } from './Text';
+import { createStyles } from '@crossed/styled';
 
-export const I = withStyle(Text, () => ({
-  base: {
-    fontStyle: 'italic',
+const useItalic = createStyles(() => ({
+  root: {
+    base: {
+      fontStyle: 'italic',
+    },
   },
 }));
 
-export type IProps = GetProps<typeof I>;
+export type IProps = TextProps;
+export const I = (props: IProps) => {
+  return <Text {...props} {...useItalic.root.rnw()} />;
+};

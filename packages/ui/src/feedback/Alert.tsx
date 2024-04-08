@@ -7,27 +7,44 @@
 
 'use client';
 import { withDefaultProps, withStaticProperties } from '@crossed/core';
-import { withStyle } from '@crossed/styled';
 import { Text } from '../typography/Text';
-import { XBox } from '../layout/XBox';
+import { XBox, type XBoxProps } from '../layout/XBox';
+import { createStyles, type ExtractForProps } from '@crossed/styled';
 
-const Container = withStyle(withDefaultProps(XBox, { space: undefined }), {
-  theme: (t) => ({
-    base: {
-      padding: t.space.md,
-      borderRadius: 4,
-      alignItems: 'flex-start',
-    },
-    variants: {
-      status: {
-        error: { base: { backgroundColor: t.colors.error } },
-        success: { base: { backgroundColor: t.colors.success } },
-        warning: { base: { backgroundColor: t.colors.warning } },
-        info: { base: { backgroundColor: t.colors.info } },
+const useAlert = createStyles(
+  (t) =>
+    ({
+      container: {
+        base: {
+          padding: t.space.md,
+          borderRadius: 4,
+          alignItems: 'center',
+        },
+        variants: {
+          status: {
+            error: { base: { backgroundColor: t.colors.error } },
+            success: { base: { backgroundColor: t.colors.success } },
+            warning: { base: { backgroundColor: t.colors.warning } },
+            info: { base: { backgroundColor: t.colors.info } },
+          },
+        },
       },
-    },
-  }),
-});
+    } as const)
+);
+
+type Variant = ExtractForProps<typeof useAlert.container>;
+
+type ContainerProps = XBoxProps & Variant['variants'];
+
+const Container = ({ status, ...props }: ContainerProps) => {
+  return (
+    <XBox
+      space={undefined}
+      {...props}
+      {...useAlert.container.rnw({ variants: { status } })}
+    />
+  );
+};
 
 const Icon = () => {};
 

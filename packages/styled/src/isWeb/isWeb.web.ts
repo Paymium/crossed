@@ -5,7 +5,4 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export { createStyles } from './createStyles';
-export { Registry } from './Registry';
-export type * from './types';
-export { useTheme } from './useTheme';
+export const isWeb = true;

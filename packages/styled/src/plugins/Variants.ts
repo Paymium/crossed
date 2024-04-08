@@ -46,31 +46,21 @@ export const VariantsPlugin: Plugin<CrossedVariantsPlugin> = {
   test: '^variants$',
   apply: ({ styles, addClassname, props, isWeb }) => {
     Object.entries(styles).forEach(([variantName, variantValues]) => {
-      if (props && !props[variantName]) {
+      if (props && !props.variants?.[variantName]) {
         return;
       }
       Object.entries(variantValues).forEach(([variantValue, style]) => {
         if (
           props &&
-          props[variantName] &&
-          props[variantName].toString() !== variantValue
+          props.variants?.[variantName] &&
+          props.variants?.[variantName].toString() !== variantValue
         ) {
           return;
         }
         Registry.apply(() => style, {
           isWeb,
           props,
-          addClassname: ({ suffix, prefix, body }) => {
-            Object.entries(body).forEach(([e, obj]) => {
-              addClassname({
-                suffix,
-                prefix,
-                body: {
-                  [`${variantName}-${variantValue}:${e}`]: obj,
-                },
-              });
-            });
-          },
+          addClassname,
         });
       });
     });

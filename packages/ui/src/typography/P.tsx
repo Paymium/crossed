@@ -18,6 +18,6 @@ const useP = createStyles((t) => ({
 }));
 
 export const P = (props: TextProps) => {
-  const { root } = useP(props);
-  return <Text role="paragraph" {...props} {...root} />;
+  // @ts-expect-error role not defined in typed
+  return <Text role="paragraph" {...props} {...useP.root.style(props)} />;
 };

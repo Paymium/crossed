@@ -6,7 +6,7 @@
  */
 
 import { CodeBlock } from '@/components/CodeBlock';
-import { createStyles, useStyles } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 import {
   H1,
   H2,
@@ -28,7 +28,6 @@ const stylesSheet = createStyles(() => ({
 }));
 
 export default function PluginsPage() {
-  const styles = useStyles(stylesSheet);
   return (
     <YBox space="md">
       <H1>Plugins</H1>
@@ -71,10 +70,10 @@ Registry.addPlugin(myPlugin)
       <Table>
         <THead>
           <Tr>
-            <Th className={styles.colName.className}>
+            <Th {...stylesSheet.colName.className()}>
               <Text>Name</Text>
             </Th>
-            <Th className={styles.colName.className}>
+            <Th {...stylesSheet.colName.className()}>
               <Text>type</Text>
             </Th>
             <Th>
@@ -153,10 +152,10 @@ addClassname(params: {
       <Table>
         <THead>
           <Tr>
-            <Th className={styles.colName.className}>
+            <Th {...stylesSheet.colName.className()}>
               <Text>Name</Text>
             </Th>
-            <Th className={styles.colRequired.className}>
+            <Th {...stylesSheet.colRequired.className()}>
               <Text>Required</Text>
             </Th>
             <Th>

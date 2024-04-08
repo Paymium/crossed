@@ -21,7 +21,7 @@ import {
 // import { parseScript as parse } from 'esprima';
 import escodegen from 'escodegen';
 import { createLogger, apiLog } from '@crossed/log';
-import { Registry } from '@crossed/styled/registry';
+import { Registry, parse } from '@crossed/styled/registry';
 import { convertKeyToCss } from '@crossed/styled/plugins';
 import type { CrossedstyleValues } from '@crossed/styled';
 import * as esbuild from 'esbuild';
@@ -124,6 +124,16 @@ export class Loader {
     const ctx = plugins.reduce((acc, { utils }) => {
       return { ...acc, ...(utils?.() || undefined) };
     }, {});
+
+    Object.entries(Registry.getThemes()).forEach(([themeName, theme]) => {
+      this.addClassname({
+        prefix: '.',
+        body: {
+          [`${themeName}`]: parse(theme, undefined, true).values,
+        },
+      });
+    });
+
     plugins.forEach(({ init }) =>
       init?.({ addClassname: this.addClassname, isWeb: true, ...ctx })
     );
