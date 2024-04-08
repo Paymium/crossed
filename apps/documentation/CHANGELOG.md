@@ -1,5 +1,7 @@
 # crossed-docs
 
+## 0.6.0-beta.7
+
 ## 0.6.0-beta.6
 
 ### Patch Changes
