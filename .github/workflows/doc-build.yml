@@ -24,10 +24,10 @@ jobs:
           version: 8
       - name: Install dependencies
         run: pnpm install
-      - name: Linter
-        run: pnpm lint
       - name: Build
         run: pnpm build
+      - name: Linter
+        run: pnpm lint
       - name: Build
         run: pnpm -F crossed-docs build
       # 👆 Build steps
