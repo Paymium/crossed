@@ -1,5 +1,13 @@
 # @crossed/styled
 
+## 0.14.0-beta.6
+
+### Patch Changes
+
+- some fix
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.2
+
 ## 0.14.0-beta.5
 
 ### Patch Changes

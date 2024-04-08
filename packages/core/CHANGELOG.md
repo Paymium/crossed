@@ -1,5 +1,11 @@
 # @crossed/core
 
+## 0.8.1-beta.2
+
+### Patch Changes
+
+- some fix
+
 ## 0.8.1-beta.1
 
 ### Patch Changes

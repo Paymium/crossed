@@ -1,5 +1,13 @@
 # @crossed/unicons
 
+## 1.0.0-beta.6
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.2
+  - @crossed/styled@0.14.0-beta.6
+
 ## 1.0.0-beta.5
 
 ### Patch Changes

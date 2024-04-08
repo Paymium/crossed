@@ -1,7 +1,7 @@
 {
   "name": "@crossed/ui",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "keywords": [
     "React Native",
     "React",
@@ -63,19 +63,19 @@
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@crossed/core": "0.8.1-beta.1",
+    "@crossed/core": "0.8.1-beta.2",
     "@crossed/build": "*",
-    "@crossed/primitive": "1.7.1-beta.1",
+    "@crossed/primitive": "1.7.1-beta.2",
     "@crossed/styled": "workspace:^",
-    "@crossed/unicons": "1.0.0-beta.5"
+    "@crossed/unicons": "1.0.0-beta.6"
   },
   "devDependencies": {
-    "@crossed/core": "0.8.1-beta.1",
+    "@crossed/core": "0.8.1-beta.2",
     "@crossed/build": "*",
-    "@crossed/primitive": "1.7.1-beta.1",
+    "@crossed/primitive": "1.7.1-beta.2",
     "@crossed/styled": "workspace:^",
     "@crossed/test": "*",
-    "@crossed/unicons": "1.0.0-beta.5",
+    "@crossed/unicons": "1.0.0-beta.6",
     "@jest/globals": "^29.7.0",
     "@jest/types": "28.1.1",
     "@testing-library/jest-dom": "^6.1.3",
