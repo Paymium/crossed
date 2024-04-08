@@ -18,7 +18,7 @@ const useAlert = createStyles(
         base: {
           padding: t.space.md,
           borderRadius: 4,
-          alignItems: 'flex-start',
+          alignItems: 'center',
         },
         variants: {
           status: {

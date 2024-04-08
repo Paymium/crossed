@@ -25,8 +25,9 @@ const useMenuList = createStyles(() => ({
 type ButtonVariantProps = Partial<Pick<ButtonProps, 'size' | 'variant'>>;
 
 const MenuRoot = forwardRef((props: MenuRootProps, ref: any) => {
-  return <YBox {...props} {...useMenuList.root.rnw()} ref={ref} />;
+  return <YBox {...props} {...useMenuList.root.rnw(props)} ref={ref} />;
 });
+
 type MenuRootProps = YBoxProps;
 
 const Divider = D;

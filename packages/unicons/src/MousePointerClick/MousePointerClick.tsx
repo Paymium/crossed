@@ -14,7 +14,7 @@ export const MousePointerClick = ({
   color,
   size = 24,
 }: RequireOnly<'Svg' | 'Path'>) => {
-  const { theme } = useTheme();
+  const theme = useTheme();
   return (
     <Svg
       width={size}

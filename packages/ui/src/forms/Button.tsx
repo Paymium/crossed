@@ -93,7 +93,7 @@ const Root = forwardRef(({ size, variant, ...props }: RootProps, ref: any) => {
     <Pressable
       ref={ref}
       {...props}
-      {...useButton.button.rnw({ variants: { size, variant } })}
+      {...useButton.button.rnw({ ...props, variants: { size, variant } })}
     />
   );
 });

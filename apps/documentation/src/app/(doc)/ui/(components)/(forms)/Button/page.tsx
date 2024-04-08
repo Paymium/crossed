@@ -6,7 +6,7 @@
  */
 
 'use client';
-
+import '@/style.config';
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
 import { Button, Select, Text, Center } from '@crossed/ui';

@@ -22,6 +22,6 @@ const styles = createStyles(() => ({
   },
 }));
 
-export default () => {
-  return <XBox {...styles.root.rnw()} />;
+export default (props) => {
+  return <XBox {...props} {...styles.root.rnw(props)} />;
 };

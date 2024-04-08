@@ -7,14 +7,7 @@
 
 'use client';
 import '@/types/unistyles';
-import {
-  MenuList,
-  MenuListProps,
-  XBox,
-  XBoxProps,
-  YBox,
-  YBoxProps,
-} from '@crossed/ui';
+import { MenuList, XBox, YBox, YBoxProps } from '@crossed/ui';
 import { PropsWithChildren } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
@@ -76,16 +69,6 @@ const menuStyle = createStyles((t) => ({
   },
 }));
 
-const Menu = (props: MenuListProps) => (
-  <MenuList space="xs" size="xs" {...props} {...menuStyle.root.rnw()} />
-);
-const Container = (props: XBoxProps) => (
-  <XBox {...props} {...menuStyle.container.rnw()} />
-);
-const Center = (props: YBoxProps) => (
-  <YBox {...props} {...menuStyle.center.rnw()} />
-);
-
 const Li = ({ label, ...props }: YBoxProps & { label?: boolean }) => (
   <YBox
     role="listitem"
@@ -105,11 +88,15 @@ export function SideBarLayout({
   const { t } = useTranslation();
 
   return (
-    <Container>
-      <Menu style={{ position: 'sticky', top: '75px' } as any}>
+    <XBox {...menuStyle.container.rnw()}>
+      <MenuList
+        space="xs"
+        size="xs"
+        {...menuStyle.root.rnw({ style: { position: 'sticky', top: '75px' } })}
+      >
         {menus.map(({ href, title }) => {
           return (
-            <Li key={href || title} label={Boolean(!href)}>
+            <Li key={href || title} label={!href}>
               {href ? (
                 <MenuList.Item
                   variant="ghost"
@@ -130,16 +117,20 @@ export function SideBarLayout({
                   </MenuList.Title>
                 </MenuList.Item>
               ) : (
-                <MenuList.Label textAlign="right" weight="semibold">
+                <MenuList.Label
+                  hover={false}
+                  textAlign="right"
+                  weight="semibold"
+                >
                   {t(title)}
                 </MenuList.Label>
               )}
             </Li>
           );
         })}
-      </Menu>
+      </MenuList>
 
-      <Center>{children}</Center>
-    </Container>
+      <YBox {...menuStyle.center.rnw()}>{children}</YBox>
+    </XBox>
   );
 }

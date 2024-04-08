@@ -6,7 +6,7 @@
  */
 
 'use client';
-
+import '@/style.config';
 import { createStyles } from '@crossed/styled';
 import { Alert, Center, Text, XBox, YBox } from '@crossed/ui';
 import { themes } from 'prism-react-renderer';
@@ -31,10 +31,12 @@ const styles = createStyles((t) => ({
   },
   containerPreview: {
     base: {
+      padding: t.space.md,
       borderWidth: 1,
       borderColor: t.colors.neutral,
       borderStyle: 'solid',
       borderRadius: 4,
+      justifyContent: 'center',
     },
   },
   containerVariants: {
@@ -82,11 +84,11 @@ export const CodeBlock = ({
     ({ children }: PropsWithChildren) => (
       <XBox {...styles.containerPreview.rnw()}>
         <Center {...styles.preview.rnw()}>{children}</Center>
-        {variants && (
+        {/* {variants && (
           <YBox space="md" {...styles.containerVariants.rnw()}>
             {variants}
           </YBox>
-        )}
+        )} */}
       </XBox>
     ),
     [variants, children]
