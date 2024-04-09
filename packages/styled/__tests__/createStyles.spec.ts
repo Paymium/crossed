@@ -11,6 +11,10 @@ import { createStyles } from '../src/createStyles';
 import { BasePlugin } from '../src/plugins/Base';
 import { Registry } from '../src/Registry';
 
+jest.mock('../src/isWeb/isWeb', () => {
+  return { isWeb: true };
+});
+
 describe('createStyles', () => {
   beforeAll(() => {
     Registry.addPlugin(BasePlugin);

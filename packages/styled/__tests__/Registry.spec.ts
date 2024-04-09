@@ -9,6 +9,10 @@
 
 import { RegistryBridge, Registry } from '../src/Registry';
 
+jest.mock('../src/isWeb/isWeb', () => {
+  return { isWeb: true };
+});
+
 describe('Registry', () => {
   test('be instance of RegitryBridge', () => {
     expect(Registry).toBeInstanceOf(RegistryBridge);

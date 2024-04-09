@@ -8,7 +8,8 @@
       "@/*": [
         "./*"
       ]
-    }
+    },
+    "typeRoots": ["./style.config.ts"]
   },
   "include": [
     "**/*.ts",

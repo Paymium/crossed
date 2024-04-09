@@ -9,6 +9,10 @@ import { Registry } from '../src/Registry';
 import { useTheme } from '../src/useTheme';
 import { renderHook, act } from '@crossed/test';
 
+jest.mock('../src/isWeb/isWeb', () => {
+  return { isWeb: true };
+});
+
 describe('useTheme', () => {
   test('no theme', () => {
     Registry.setThemes({ dark: {}, light: {} });

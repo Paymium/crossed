@@ -6,31 +6,17 @@
  */
 
 import { YBox, H1, Button, Box, Text } from '@crossed/ui';
-import { createStyles, useStyles, withStyle } from '@crossed/styled';
-import { ThemeRegistry, useInteraction } from '@crossed/styled/plugins';
+import { createStyles } from '@crossed/styled';
+import { Registry } from '@crossed/styled';
 import { Appearance, Text as NText, Pressable } from 'react-native';
 import { useTransition } from 'react';
 
-const TextTheme = withStyle(NText, {
-  media: {
-    xs: { color: 'red' },
-    sm: { color: 'green' },
-    md: { color: 'violet' },
-    lg: { color: 'blue' },
-  },
-});
-
-const globalStyles = createStyles({
+const styles = createStyles((t) => ({
   container: { base: { paddingHorizontal: 15 } },
   text: {
-    theme: (t) => ({
-      base: { color: t.colors.default },
-    }),
+    base: { color: t.colors.default },
   },
-});
-
-const ButtonC = withStyle(Pressable, {
-  theme: (t) => ({
+  button: {
     'base': {
       paddingHorizontal: 15,
       paddingVertical: 10,
@@ -39,49 +25,45 @@ const ButtonC = withStyle(Pressable, {
     ':active': {
       backgroundColor: t.colors.backgroundStrong,
     },
-  }),
-});
+  },
+}));
 
 const ChangeTheme = () => {
   const [, setTransition] = useTransition();
-  const { props, state } = useInteraction();
-  const { text } = useStyles(globalStyles);
   return (
-    <ButtonC
-      {...props}
-      {...state}
+    <Pressable
+      style={({ pressed }) => styles.button.rnw({ active: pressed }).style}
       onPress={() => {
         setTransition(() => {
-          const theme = ThemeRegistry.themeName === 'dark' ? 'light' : 'dark';
+          const theme = Registry.themeName === 'dark' ? 'light' : 'dark';
+          Registry.setThemeName(theme);
           Appearance.setColorScheme(theme);
-          ThemeRegistry.setThemeName(theme);
         });
       }}
     >
-      <NText style={text.style}>toto</NText>
-    </ButtonC>
+      <NText {...styles.text.rnw()}>toto</NText>
+    </Pressable>
   );
 };
 
 export default function TabOneScreen() {
-  const styles = useStyles(globalStyles);
   return (
-    <YBox space="lg" style={styles.container.style}>
+    <YBox space="lg" {...styles.container.rnw()}>
       <ChangeTheme />
-      <H1 style={styles.text.style}>Heading</H1>
-      <TextTheme>Text</TextTheme>
+      <H1 {...styles.text.rnw()}>Heading</H1>
+      <NText {...styles.text.rnw()}>Text</NText>
       <Button>
-        <TextTheme>Hello</TextTheme>
+        <NText {...styles.text.rnw()}>Hello</NText>
       </Button>
       <Button variant="outlined" aria-label="Press">
-        <Button.Text style={styles.text.style}>Press</Button.Text>
+        <Button.Text {...styles.text.rnw()}>Press</Button.Text>
       </Button>
       <YBox>
         <Box>
-          <Text style={styles.text.style}>Hello</Text>
+          <Text {...styles.text.rnw()}>Hello</Text>
         </Box>
         <Box>
-          <Text style={styles.text.style}>Hello</Text>
+          <Text {...styles.text.rnw()}>Hello</Text>
         </Box>
       </YBox>
     </YBox>

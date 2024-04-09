@@ -8,6 +8,10 @@
 import { setTheme } from '../src/setTheme/setTheme';
 import { setTheme as setThemeWeb } from '../src/setTheme/setTheme.web';
 
+jest.mock('../src/isWeb/isWeb', () => {
+  return { isWeb: true };
+});
+
 describe('setTheme', () => {
   const removeOld = window.document.documentElement.classList.remove;
   const addOld = window.document.documentElement.classList.add;
