@@ -9,6 +9,8 @@
 
 import { createStyles } from '../src/createStyles';
 import { BasePlugin } from '../src/plugins/Base';
+import { PseudoClassPlugin } from '../src/plugins/PseudoClass';
+import { VariantsPlugin } from '../src/plugins/Variants';
 import { Registry } from '../src/Registry';
 
 jest.mock('../src/isWeb/isWeb', () => {
@@ -17,7 +19,9 @@ jest.mock('../src/isWeb/isWeb', () => {
 
 describe('createStyles', () => {
   beforeAll(() => {
-    Registry.addPlugin(BasePlugin);
+    Registry.addPlugin(BasePlugin)
+      .addPlugin(PseudoClassPlugin)
+      .addPlugin(VariantsPlugin);
   });
   test('should return function', () => {
     const style = createStyles(() => ({ container: {} }));
@@ -117,14 +121,4 @@ describe('createStyles', () => {
       ],
     });
   });
-
-  // test('call return function', () => {
-  //   const { useStyles } = jest.requireMock('../src/useStyles');
-  //   const useStylesImpl = jest.fn(() => ({ titi: 'titi' }));
-  //   useStyles.mockImplementation(useStylesImpl);
-  //   const styleF = () => ({ bar: 'foo' });
-  //   const style = createStyles(styleF)({ toto: 'toto' });
-  //   expect(useStylesImpl).toBeCalledWith(styleF, { toto: 'toto' });
-  //   expect(style).toEqual({ titi: 'titi' });
-  // });
 });

@@ -5,17 +5,17 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+'use client';
+
 import React, {
-  cloneElement,
-  isValidElement,
   useEffect,
+  useMemo,
   useRef,
   useState,
   useTransition,
 } from 'react';
 import { Animated, ViewProps } from 'react-native';
 import { useTheme } from './useTheme';
-import { Registry } from './Registry';
 
 export const NativeImplementation = ({ children, ...props }: ViewProps) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -46,16 +46,14 @@ export const NativeImplementation = ({ children, ...props }: ViewProps) => {
     Animated.sequence([handleHide(), handleShow()]).start();
   }, [theme]);
 
+  const child = useMemo(() => children, [theme]);
   return (
     <Animated.View
       {...props}
+      // key={Registry.themeName}
       style={[{ flex: 1, zIndex: 10000 }, { opacity: fadeAnim }, props.style]}
     >
-      {show
-        ? isValidElement(children)
-          ? cloneElement(children, { key: Registry.themeName })
-          : children
-        : null}
+      {show ? child : null}
     </Animated.View>
   );
 };

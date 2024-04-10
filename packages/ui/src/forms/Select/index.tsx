@@ -48,17 +48,18 @@ import {
   Children,
   isValidElement,
   type MutableRefObject,
+  type PropsWithChildren,
 } from 'react';
 import { Button, type ButtonProps } from '../Button';
-import { XBox, type XBoxProps } from '../../layout/XBox';
 import {
   type MenuItemProps,
   MenuList,
   type MenuListProps,
 } from '../../display/MenuList';
 import { Portal } from '@gorhom/portal';
-import type { LayoutRectangle } from 'react-native';
+import { Pressable, View, type LayoutRectangle } from 'react-native';
 import { createStyles } from '@crossed/styled';
+import { form } from '../../styles/form';
 
 // // type InputProps = GetProps<typeof Input>;
 
@@ -539,13 +540,18 @@ const useSelect = createStyles((t) => ({
   content: {
     base: {
       position: 'absolute',
-      // top: 15 + 40,
-      // left: 1253,
       maxWidth: 'auto',
-      padding: t.space.xs,
+      backgroundColor: t.colors.background,
+      // padding: t.space.xs,
       zIndex: 100,
-      backgroundColor: t.colors.neutral,
-      borderRadius: 4,
+      // backgroundColor: t.colors.neutral,
+      // borderRadius: 4,
+      display: 'flex',
+      flexDirection: 'column',
+      height: 'auto',
+      alignItems: 'stretch',
+      paddingVertical: t.space.xs,
+      paddingHorizontal: t.space.xs,
     },
   },
 }));
@@ -558,8 +564,9 @@ const SelectRoot = memo(
     onChange,
     variant,
     children,
-    ...props
-  }: UseUncontrolledInput<V> & XBoxProps & Pick<ButtonProps, 'variant'>) => {
+  }: PropsWithChildren<
+    UseUncontrolledInput<V> & Pick<ButtonProps, 'variant'>
+  >) => {
     const renderValue = useRef<ReactNode>();
     const triggerLayout = useRef<LayoutRectangle | undefined>();
     const [value, setValue] = useUncontrolled<string | number>({
@@ -582,9 +589,7 @@ const SelectRoot = memo(
         variant={variant}
         triggerLayout={triggerLayout}
       >
-        <XBox {...props} {...useSelect.select.style()}>
-          {children}
-        </XBox>
+        {children}
       </SelectProvider>
     );
   }
@@ -596,20 +601,33 @@ SelectRoot.displayName = 'Select';
 
 const Trigger = withStaticProperties(
   memo((props: ButtonProps) => {
+    const pressableRef = useRef<View>(null);
     const { setOpen, open, variant, triggerLayout } = useSelectProvider();
     const onPress = useCallback(
       composeEventHandlers(() => {
-        setOpen(!open);
+        pressableRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+          triggerLayout.current = {
+            left: pageX,
+            top: pageY,
+            width,
+            height,
+            pageX,
+            pageY,
+          } as any;
+          setOpen(!open);
+        });
       }, props.onPress),
       [props.onPress, open]
     );
     return (
-      <Button
+      <Pressable
+        ref={pressableRef}
         variant={variant}
         onLayout={({ nativeEvent: { layout } }: any) => {
           triggerLayout.current = layout;
         }}
         {...props}
+        {...form.input.rnw(props)}
         onPress={onPress}
       />
     );
@@ -619,7 +637,7 @@ const Trigger = withStaticProperties(
 
 const Content = (props: Partial<MenuListProps>) => {
   const all = useSelectProvider();
-  const { top, height, left } = (all.triggerLayout.current as any) || {
+  const { top, height, left, width } = (all.triggerLayout.current as any) || {
     top: 0,
     height: 0,
     left: 0,
@@ -631,13 +649,16 @@ const Content = (props: Partial<MenuListProps>) => {
           <>
             <MenuList
               {...props}
-              {...useSelect.content.style({
-                style: {
-                  top: top + height,
+              style={[
+                form.input.rnw({ style: useSelect.content.rnw().style }).style,
+                {
+                  top: top + height + 5,
                   left,
+                  minWidth: width,
                   position: 'absolute',
                 },
-              })}
+                // props.style,
+              ]}
             />
           </>
         ) : null}

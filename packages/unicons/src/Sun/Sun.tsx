@@ -27,15 +27,32 @@ export const Sun = ({
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <Circle cx="12" cy="12" r="4" stroke="var(--color)" />
-      <Path d="M12 2v2" stroke="var(--color)" />
-      <Path d="M12 20v2" stroke="var(--color)" />
-      <Path d="m4.93 4.93 1.41 1.41" stroke="var(--color)" />
-      <Path d="m17.66 17.66 1.41 1.41" stroke="var(--color)" />
-      <Path d="M2 12h2" stroke="var(--color)" />
-      <Path d="M20 12h2" stroke="var(--color)" />
-      <Path d="m6.34 17.66-1.41 1.41" stroke="var(--color)" />
-      <Path d="m19.07 4.93-1.41 1.41" stroke="var(--color)" />
+      <Circle
+        cx="12"
+        cy="12"
+        r="4"
+        stroke={color ?? (theme as any).colors.default}
+      />
+      <Path d="M12 2v2" stroke={color ?? (theme as any).colors.default} />
+      <Path d="M12 20v2" stroke={color ?? (theme as any).colors.default} />
+      <Path
+        d="m4.93 4.93 1.41 1.41"
+        stroke={color ?? (theme as any).colors.default}
+      />
+      <Path
+        d="m17.66 17.66 1.41 1.41"
+        stroke={color ?? (theme as any).colors.default}
+      />
+      <Path d="M2 12h2" stroke={color ?? (theme as any).colors.default} />
+      <Path d="M20 12h2" stroke={color ?? (theme as any).colors.default} />
+      <Path
+        d="m6.34 17.66-1.41 1.41"
+        stroke={color ?? (theme as any).colors.default}
+      />
+      <Path
+        d="m19.07 4.93-1.41 1.41"
+        stroke={color ?? (theme as any).colors.default}
+      />
     </Svg>
   );
 };

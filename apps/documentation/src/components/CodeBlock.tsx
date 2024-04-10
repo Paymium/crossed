@@ -8,7 +8,7 @@
 'use client';
 import '@/style.config';
 import { createStyles } from '@crossed/styled';
-import { Alert, Center, Text, XBox, YBox } from '@crossed/ui';
+import { Center, Text, XBox, YBox } from '@crossed/ui';
 import { themes } from 'prism-react-renderer';
 import { PropsWithChildren, ReactNode, useCallback } from 'react';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
@@ -36,7 +36,7 @@ const styles = createStyles((t) => ({
       borderColor: t.colors.neutral,
       borderStyle: 'solid',
       borderRadius: 4,
-      justifyContent: 'center',
+      // justifyContent: 'center',
     },
   },
   containerVariants: {
@@ -65,6 +65,7 @@ const styles = createStyles((t) => ({
       color: t.colors.white,
     },
   },
+  liveError: { base: { color: t.colors.error } },
 }));
 
 export const CodeBlock = ({
@@ -84,11 +85,11 @@ export const CodeBlock = ({
     ({ children }: PropsWithChildren) => (
       <XBox {...styles.containerPreview.rnw()}>
         <Center {...styles.preview.rnw()}>{children}</Center>
-        {/* {variants && (
+        {variants && (
           <YBox space="md" {...styles.containerVariants.rnw()}>
             {variants}
           </YBox>
-        )} */}
+        )}
       </XBox>
     ),
     [variants, children]
@@ -109,11 +110,7 @@ export const CodeBlock = ({
               className: fileName ? 'filename' : '',
             })}
           />
-          {preview && (
-            <Alert>
-              <LiveError />
-            </Alert>
-          )}
+          {preview && <LiveError {...styles.pre.className()} />}
         </YBox>
       </LiveProvider>
     </YBox>

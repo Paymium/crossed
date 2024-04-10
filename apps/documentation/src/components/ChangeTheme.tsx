@@ -19,7 +19,7 @@ export const ChangeTheme = () => {
   return (
     <Button
       onPress={onPress}
-      variant="ghost"
+      variant={undefined}
       accessibilityLabel={`Change to ${
         Registry.themeName === 'light' ? 'dark' : 'light'
       } theme`}

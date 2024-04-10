@@ -93,11 +93,8 @@ export class RegistryBridge {
       console.warn('Themes are not set');
       return {} as Themes[keyof Themes];
     }
-    return (
-      isWeb
-        ? parse(this.themes[this.themeName] || {}, undefined, isWeb).theme
-        : this.themes[this.themeName]
-    ) as Themes[keyof Themes];
+    return parse(this.themes[this.themeName] || {}, undefined, true)
+      .theme as Themes[keyof Themes];
   }
   getThemes() {
     return this.themes;

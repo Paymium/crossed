@@ -11,6 +11,7 @@ import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { createStyles } from '@crossed/styled';
+import { menuStyle } from './menuSide.style';
 
 const styles = createStyles(
   (t) =>
@@ -21,6 +22,7 @@ const styles = createStyles(
           flex: 1,
           width: '100%',
           borderColor: t.colors.neutral,
+          flexDirection: 'column',
         },
         variants: {
           bordered: {
@@ -42,6 +44,7 @@ const styles = createStyles(
           paddingHorizontal: 20,
           alignSelf: 'baseline',
           display: 'none',
+          height: 'auto',
         },
         media: {
           xl: { display: 'flex' },
@@ -91,7 +94,6 @@ export const TOCLayout = ({
             style: { position: 'sticky', top: '75px' },
           })}
           space="xs"
-          size="xs"
         >
           {links.length > 0 && (
             <MenuList.Label {...styles.menuLabel.rnw()} weight="bold">
@@ -102,19 +104,17 @@ export const TOCLayout = ({
             return (
               <YBox role="listitem" key={href || title} {...styles.li.rnw()}>
                 <MenuList.Item
-                  variant="ghost"
-                  size="xs"
+                  {...menuStyle.item.rnw({ hover: href === hash })}
                   role="link"
                   href={`${pathname}${href}`}
-                  // hover={href === hash}
                   onPress={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
                     router.push(href);
                   }}
-                  style={{ justifyContent: 'flex-start' }}
                 >
                   <MenuList.Title
+                    {...menuStyle.itemText.rnw()}
                     weight={href === hash ? 'semibold' : undefined}
                   >
                     {t(title)}

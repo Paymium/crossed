@@ -9,4 +9,4 @@ export { createStyles } from './createStyles';
 export { Registry } from './Registry';
 export type * from './types';
 export { useTheme } from './useTheme';
-export { NativeImplementation } from './NativeImplementation';
+// export { NativeImplementation } from './NativeImplementation';

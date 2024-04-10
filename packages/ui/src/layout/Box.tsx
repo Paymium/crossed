@@ -53,14 +53,17 @@ export const Box = forwardRef(
     <View
       ref={ref}
       {...props}
-      {...styleBox.root.rnw({
+      style={[
+        styleBox.root.rnw({
+          // style,
+          className,
+          active,
+          hover,
+          focus,
+          variants: { space, center },
+        }).style,
         style,
-        className,
-        active,
-        hover,
-        focus,
-        variants: { space, center },
-      })}
+      ]}
     />
   )
 );

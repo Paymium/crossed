@@ -9,58 +9,54 @@
 import '@/style.config';
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Button, Select, Text, Center } from '@crossed/ui';
+import { Button, Select, Text, Center, XBox } from '@crossed/ui';
 import { MousePointerClick } from '@crossed/unicons/MousePointerClick';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
-import { useSignal } from '@preact/signals-react';
 import { useSignals } from '@preact/signals-react/runtime';
+import { useState } from 'react';
+import { ChevronDown } from '@crossed/unicons';
 
 export default function CreateBadge() {
   useSignals();
   const { t } = useTranslation();
-  const variants = useSignal('default');
-  const colors = useSignal('neutral');
+  const [variants, setVariants] = useState('primary');
+  const [error, setError] = useState(false);
   return (
     <TemplatePrimitive
       title="Button"
       description={t('button description')}
       params={[
         {
-          title: 'Props Button',
+          title: 'Button',
           description: (
             <TemplateDescriptionProps
               componentName="Button"
-              componentExtended="View"
-              href="https://reactnative.dev/docs/view"
+              componentExtended="Pressable"
+              href="https://reactnative.dev/docs/pressable"
               target="_blank"
             />
           ),
           props: [
             {
-              name: 'size',
-              description: t('size props description'),
-              type: 'xs, sm, default, lg, xl',
-            },
-            {
               name: 'variant',
               description: t('variant props description'),
-              type: 'default, ghost, outlined ',
+              type: 'primary, secondary, tertiary ',
             },
           ],
         },
         {
-          title: 'Props Button',
+          title: 'Button.Text',
           description: (
             <TemplateDescriptionProps
               componentName="Button.Text"
               componentExtended="Text"
-              href="/ui/Text"
+              href="/crossed/ui/Text"
             />
           ),
           props: [],
         },
         {
-          title: 'Props Button',
+          title: 'Button.Element',
           description: (
             <TemplateDescriptionProps
               componentName="Button.Element"
@@ -86,47 +82,31 @@ import { Button } from '@crossed/ui'
   <Button.Element>Insert your icon/SVG</Button.Element>
 </Button>`}
       example={`
-<Center>
-  <Button variant="${variants}" color="${colors.value}">
-    <Button.Element>
-      <MousePointerClick />
-    </Button.Element>
-    <Button.Text>Try Me</Button.Text>
-  </Button>
-</Center>`}
+  <Center>
+    <Button variant="${variants}"${error ? ' error' : ''}>
+      <Button.Element>
+        <MousePointerClick />
+      </Button.Element>
+      <Button.Text>Try Me</Button.Text>
+    </Button>
+  </Center>
+`}
       scope={{ Center, Button, MousePointerClick }}
       variants={
         <>
+          <Text>variant</Text>
           <Select
-            value={colors.value}
+            value={variants}
             onChange={(e: string) => {
-              colors.value = e;
+              setVariants(e);
             }}
           >
             <Select.Trigger>
               <Select.Value />
+              <ChevronDown />
             </Select.Trigger>
             <Select.Content>
-              {/* {Object.keys(
-                theme.utils.createVariants('backgroundColor', theme)
-              ).map((key) => (
-                <Select.Option value={key} key={key}>
-                  <Text>{key}</Text>
-                </Select.Option>
-              ))} */}
-            </Select.Content>
-          </Select>
-          <Select
-            value={variants.value}
-            onChange={(e: string) => {
-              variants.value = e;
-            }}
-          >
-            <Select.Trigger>
-              <Select.Value />
-            </Select.Trigger>
-            <Select.Content>
-              {['default', 'ghost', 'outlined'].map((key) => {
+              {['primary', 'secondary', 'tertiary'].map((key) => {
                 return (
                   <Select.Option value={key} key={key}>
                     <Text>{key}</Text>
@@ -135,6 +115,14 @@ import { Button } from '@crossed/ui'
               })}
             </Select.Content>
           </Select>
+          <XBox>
+            <input
+              type="checkbox"
+              checked={error}
+              onChange={(e) => setError(e.target.checked)}
+            />
+            <Text>error</Text>
+          </XBox>
         </>
       }
     />

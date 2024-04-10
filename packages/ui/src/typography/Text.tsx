@@ -77,14 +77,17 @@ export const Text = forwardRef(
       <TextNative
         ref={ref}
         {...props}
-        {...useText.root.rnw({
-          style: props.style,
-          className: props.className,
-          active,
-          hover,
-          focus,
-          variants: { color, size },
-        })}
+        style={[
+          useText.root.rnw({
+            style: props.style,
+            className: props.className,
+            active,
+            hover,
+            focus,
+            variants: { color, size },
+          }).style,
+          props.style,
+        ]}
       />
     );
   }

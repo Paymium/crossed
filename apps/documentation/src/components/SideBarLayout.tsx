@@ -12,8 +12,9 @@ import { PropsWithChildren } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { createStyles } from '@crossed/styled';
+import { menuStyle } from './menuSide.style';
 
-const menuStyle = createStyles((t) => ({
+const styles = createStyles((t) => ({
   root: {
     base: {
       paddingHorizontal: 20,
@@ -67,13 +68,14 @@ const menuStyle = createStyles((t) => ({
       },
     },
   },
+  item: { base: { justifyContent: 'flex-end' } },
 }));
 
 const Li = ({ label, ...props }: YBoxProps & { label?: boolean }) => (
   <YBox
     role="listitem"
     {...props}
-    {...menuStyle.li.rnw({ variants: { label } })}
+    {...styles.li.rnw({ variants: { label } })}
   />
 );
 
@@ -88,19 +90,16 @@ export function SideBarLayout({
   const { t } = useTranslation();
 
   return (
-    <XBox {...menuStyle.container.rnw()}>
+    <XBox {...styles.container.rnw()}>
       <MenuList
         space="xs"
-        size="xs"
-        {...menuStyle.root.rnw({ style: { position: 'sticky', top: '75px' } })}
+        {...styles.root.rnw({ style: { position: 'sticky', top: '75px' } })}
       >
         {menus.map(({ href, title }) => {
           return (
             <Li key={href || title} label={!href}>
               {href ? (
                 <MenuList.Item
-                  variant="ghost"
-                  size="xs"
                   role="link"
                   href={`/crossed${href}`}
                   onPress={(e) => {
@@ -108,9 +107,13 @@ export function SideBarLayout({
                     e.preventDefault();
                     router.push(href);
                   }}
-                  style={{ justifyContent: 'flex-end' }}
+                  {...menuStyle.item.rnw({
+                    hover: href === pathname,
+                    style: styles.item.rnw().style,
+                  })}
                 >
                   <MenuList.Title
+                    {...menuStyle.itemText.rnw({ hover: href === pathname })}
                     weight={href === pathname ? 'semibold' : undefined}
                   >
                     {t(title)}
@@ -130,7 +133,7 @@ export function SideBarLayout({
         })}
       </MenuList>
 
-      <YBox {...menuStyle.center.rnw()}>{children}</YBox>
+      <YBox {...styles.center.rnw()}>{children}</YBox>
     </XBox>
   );
 }

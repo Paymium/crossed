@@ -11,12 +11,13 @@ import type {
   PluginContext,
   Themes,
 } from './types';
-import { Registry, parse } from './Registry';
+import { Registry } from './Registry';
 import { isWeb } from './isWeb';
 
 const cleanClassName = (classNames: string[]) => {
   return classNames.reduce((acc, className) => {
-    const [property] = className.match(/^([a-z\-]+)/g) || [];
+    const [property] = className.match(/^([a-z\-:]+)/g) || [];
+
     if (property) {
       acc.forEach((accKey) => {
         const [same] = accKey.match(new RegExp(`^${property}`, 'g')) || [];
@@ -111,9 +112,6 @@ const createMethods = <S>(styleOfKey: Record<string, any>) => {
         if (!st) return acc;
         if (!st.$$css) {
           acc = { ...acc, ...st };
-        } else if (st.$$css) {
-          const { $$css, ...otherClassName } = st;
-          classNames.push(...Object.keys(otherClassName));
         }
         return acc;
       }, {});
@@ -140,21 +138,18 @@ const createMethods = <S>(styleOfKey: Record<string, any>) => {
           }
         }
       );
-
       return {
-        style: [
-          isWeb
-            ? Array.from(cleanClassName(classNames).values()).reduce<
-                Record<string, any>
-              >(
-                (acc2, cl) => {
-                  acc2[cl] = cl;
-                  return acc2;
-                },
-                { $$css: true }
-              )
-            : style,
-        ],
+        style: isWeb
+          ? Array.from(cleanClassName(classNames).values()).reduce<
+              Record<string, any>
+            >(
+              (acc2, cl) => {
+                acc2[cl] = cl;
+                return acc2;
+              },
+              { $$css: true }
+            )
+          : style,
       };
     },
   };
@@ -163,8 +158,7 @@ const createMethods = <S>(styleOfKey: Record<string, any>) => {
 export const createStyles = <C extends string, S>(
   stylesParam: (_theme: Themes[keyof Themes]) => Record<C, S>
 ) => {
-  let { theme: themeParsed } = parse(Registry.getTheme(), undefined, isWeb);
-  let results = stylesParam(themeParsed);
+  let results = stylesParam(Registry.getTheme());
 
   const foo = new Proxy(
     Object.entries(results).reduce<
@@ -181,8 +175,7 @@ export const createStyles = <C extends string, S>(
   );
 
   Registry.subscribe(() => {
-    themeParsed = parse(Registry.getTheme(), undefined, isWeb).theme;
-    results = stylesParam(themeParsed);
+    results = stylesParam(Registry.getTheme());
   });
 
   return foo;

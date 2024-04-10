@@ -5,9 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createStyles } from '@crossed/styled';
+import { createStyles, type ExtractForProps } from '@crossed/styled';
 import { Box, type BoxProps } from './Box';
 import { forwardRef } from 'react';
+import type { GetProps } from '@crossed/core';
 
 export const useXBox = createStyles(
   () =>
@@ -20,18 +21,33 @@ export const useXBox = createStyles(
           width: '100%',
           flexBasis: 'auto',
         },
+        variants: {
+          justifyContent: {
+            start: { base: { justifyContent: 'flex-start' } },
+            end: { base: { justifyContent: 'flex-end' } },
+            between: { base: { justifyContent: 'space-between' } },
+            around: { base: { justifyContent: 'space-around' } },
+            evenly: { base: { justifyContent: 'space-evenly' } },
+          },
+        },
       },
     } as const)
 );
 
-export type XBoxProps = BoxProps;
+type Variant = ExtractForProps<typeof useXBox.root>;
 
-export const XBox = forwardRef(({ center, ...props }: XBoxProps, ref: any) => {
-  return (
-    <Box
-      ref={ref}
-      {...props}
-      {...useXBox.root.rnw({ ...props, variants: { center } })}
-    />
-  );
-});
+type XBoxPropsTmp = BoxProps & Variant['variants'];
+
+export const XBox = forwardRef(
+  ({ justifyContent, ...props }: XBoxPropsTmp, ref: any) => {
+    return (
+      <Box
+        ref={ref}
+        {...props}
+        {...useXBox.root.rnw({ ...props, variants: { justifyContent } })}
+      />
+    );
+  }
+);
+
+export type XBoxProps = GetProps<typeof XBox>;
