@@ -24,11 +24,11 @@
 // import { Pressable, TextInput } from 'react-native';
 
 import { createInput } from '@crossed/primitive';
-import { TextInput, View, type TextInputProps } from 'react-native';
+import { TextInput, type TextInputProps } from 'react-native';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { XBox } from '../layout/XBox';
 import { forwardRef } from 'react';
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 import { form, type FormInput } from '../styles/form';
 import { useInteraction } from '@crossed/styled/plugins';
 

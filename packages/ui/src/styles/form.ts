@@ -41,7 +41,7 @@ export const form = createStyles((t) => ({
       fontWeight: '600',
       fontSize: 16,
       lineHeight: 24,
-     },
+    },
     ':focus': { color: t.colors.primary.hover },
     ':disabled': { color: '#AEB6CE' },
   },
