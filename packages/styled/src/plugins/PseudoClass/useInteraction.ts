@@ -9,11 +9,18 @@ import { composeEventHandlers, useUncontrolled } from '@crossed/core';
 import { useCallback, useMemo, useTransition } from 'react';
 import type { PressableProps } from 'react-native';
 
-type PropsOverWrite = 'onPressIn' | 'onPressOut' | 'onHoverIn' | 'onHoverOut';
+type PropsOverWrite =
+  | 'onPressIn'
+  | 'onPressOut'
+  | 'onHoverIn'
+  | 'onHoverOut'
+  | 'onFocus'
+  | 'onBlur';
 export const useInteraction = (
   props?: Pick<PressableProps, PropsOverWrite> & {
     active?: boolean;
     hover?: boolean;
+    focus?: boolean;
   }
 ) => {
   const [active, setActive] = useUncontrolled({
@@ -22,6 +29,10 @@ export const useInteraction = (
   });
   const [hover, setHover] = useUncontrolled({
     value: props?.hover,
+    defaultValue: false,
+  });
+  const [focus, setFocus] = useUncontrolled({
+    value: props?.focus,
     defaultValue: false,
   });
   const [, setTransition] = useTransition();
@@ -66,12 +77,51 @@ export const useInteraction = (
     }),
     [hover, setHover, props?.onHoverOut]
   );
+  const onFocus = useCallback(
+    composeEventHandlers(props?.onFocus || undefined, () => {
+      setTransition(() => {
+        if (!focus) {
+          setFocus(true);
+        }
+      });
+    }),
+    [focus, setFocus, props?.onFocus]
+  );
+  const onBlur = useCallback(
+    composeEventHandlers(props?.onBlur || undefined, () => {
+      setTransition(() => {
+        if (focus) {
+          setFocus(false);
+        }
+      });
+    }),
+    [focus, setFocus, props?.onBlur]
+  );
 
   return useMemo(
     () => ({
-      state: { active, hover },
-      props: { ...props, onPressIn, onPressOut, onHoverIn, onHoverOut },
+      state: { active, hover, focus },
+      props: {
+        ...props,
+        onPressIn,
+        onPressOut,
+        onHoverIn,
+        onHoverOut,
+        onBlur,
+        onFocus,
+      },
     }),
-    [props, active, hover, onPressIn, onPressOut, onHoverIn, onHoverOut]
+    [
+      props,
+      active,
+      hover,
+      focus,
+      onPressIn,
+      onPressOut,
+      onHoverIn,
+      onHoverOut,
+      onBlur,
+      onFocus,
+    ]
   );
 };

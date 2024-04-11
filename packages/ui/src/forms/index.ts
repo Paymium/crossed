@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-// export * from './Label';
+export * from './Label';
 export * from './Input';
 // export * from './Textarea';
 export * from './Button';

@@ -9,12 +9,22 @@ import type { Colors } from './types';
 
 export const colorsLight: Colors = {
   // brand color
-  primary: { default: '#0f79d7', hover: '#0d66b5', active: '#0b5597' },
+  primary: {
+    default: '#4737FF',
+    hover: '#2606c0',
+    active: '#1e078f',
+    disabled: '#9088F7',
+  },
   // secondary: { default: '#0f79d7', hover: '', active: '' },
   // tertiary: { default: '#0f79d7', hover: '', active: '' },
 
   // common colors
-  neutral: { default: '#DDDDDD', hover: '#ebeaff', active: '#dad9ea' },
+  neutral: {
+    default: '#DDDDDD',
+    hover: '#ebeaff',
+    active: '#dad9ea',
+    disabled: '#dad9ea',
+  },
   success: '#3abb7d',
   info: '#93c5fd',
   error: '#7d2424',
@@ -31,12 +41,22 @@ export const colorsLight: Colors = {
 };
 export const colorsDark: Colors = {
   // brand color
-  primary: { default: '#0f79d7', hover: '#0d66b5', active: '#0b5597' },
+  primary: {
+    default: '#0f79d7',
+    hover: '#0d66b5',
+    active: '#0b5597',
+    disabled: '#0b5597',
+  },
   // secondary: { default: '#0f79d7', hover: '', active: '' },
   // tertiary: { default: '#0f79d7', hover: '', active: '' },
 
   // common colors
-  neutral: { default: '#757474', hover: '#5d5c5c', active: '#414040' },
+  neutral: {
+    default: '#757474',
+    hover: '#5d5c5c',
+    active: '#414040',
+    disabled: '#414040',
+  },
   success: '#3abb7d',
   info: '#5795db',
   error: '#C53030',

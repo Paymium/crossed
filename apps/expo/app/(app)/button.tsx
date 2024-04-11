@@ -35,7 +35,10 @@ const states = [
   { title: 'Default', props: {} },
   { title: 'Hover', props: { hover: true } },
   { title: 'Active', props: { active: true } },
+  { title: 'Disabled', props: { disabled: true } },
+  { title: 'Loading', props: { loading: true } },
   { title: 'Error', props: { error: true } },
+  { title: 'Error loading', props: { error: true, loading: true } },
 ];
 
 const variantList = [
@@ -61,9 +64,7 @@ export default function TabOneScreen() {
         section: { title: titleVariant, props: propsVariant },
       }) => (
         <XBox {...styles.between.rnw()} key={`${titleVariant}${title}`}>
-          <Text weight="semibold" size="lg">
-            {title}
-          </Text>
+          <Text weight="semibold">{title}</Text>
           <Box {...styles.end.rnw()} space="sm">
             <Button {...props} {...propsVariant}>
               <ButtonText>Button</ButtonText>

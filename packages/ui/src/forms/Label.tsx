@@ -5,6 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import { form } from '../styles/form';
+import { Text, type TextProps } from '../typography';
+
 // import { createLabel } from '@crossed/primitive';
 // import { Text } from 'react-native';
 // import { Box } from '../layout/Box';
@@ -29,5 +32,12 @@
 // export type LabelInputProps = GetProps<typeof LabelInput>;
 
 // export { Label, LabelText, LabelInput };
+
+export const Label = ({
+  disabled,
+  ...props
+}: TextProps & { disabled?: boolean }) => {
+  return <Text {...props} {...form.label.rnw({ ...props, disabled })} />;
+};
 
 export {};

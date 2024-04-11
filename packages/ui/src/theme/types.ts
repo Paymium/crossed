@@ -15,6 +15,7 @@ type Color = {
   hover: string;
   active: string;
   default: string;
+  disabled: string;
 };
 
 export type Colors = {

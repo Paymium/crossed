@@ -24,12 +24,13 @@
 // import { Pressable, TextInput } from 'react-native';
 
 import { createInput } from '@crossed/primitive';
-import { TextInput, type TextInputProps } from 'react-native';
+import { TextInput, View, type TextInputProps } from 'react-native';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { XBox } from '../layout/XBox';
 import { forwardRef } from 'react';
-import { createStyles } from '@crossed/styled';
-import { form } from '../styles/form';
+import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { form, type FormInput } from '../styles/form';
+import { useInteraction } from '@crossed/styled/plugins';
 
 // const [Provider, useContext] = createScope<{
 //   size?: keyof typeof sizeVariants;
@@ -275,9 +276,36 @@ const Element = (props: YBoxProps) => {
 };
 const Group = XBox;
 
-const InputRoot = forwardRef((props: TextInputProps, ref: any) => {
-  return <TextInput ref={ref} {...props} {...form.input.rnw()} />;
-});
+const InputRoot = forwardRef(
+  (
+    {
+      error,
+      disabled,
+      ...props
+    }: Omit<TextInputProps, 'editable'> &
+      Omit<FormInput, 'variants'> &
+      Pick<FormInput['variants'], 'error'>,
+    ref: any
+  ) => {
+    const { state, props: propsInteraction } = useInteraction(props);
+    const { color } = form.placeholder.style().style;
+    return (
+      <TextInput
+        ref={ref}
+        placeholderTextColor={color}
+        cursorColor={color}
+        editable={!disabled}
+        {...props}
+        {...propsInteraction}
+        {...form.input.rnw({
+          ...state,
+          disabled,
+          variants: { error },
+        })}
+      />
+    );
+  }
+);
 
 const Input = createInput({
   Addon,
