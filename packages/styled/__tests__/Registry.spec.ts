@@ -7,7 +7,8 @@
 
 /// <reference types="jest" />
 
-import { RegistryBridge, Registry } from '../src/Registry';
+import { Registry } from '../src/Registry';
+import { RegistryBridge } from '../src/Registry/RegistryBridge';
 
 jest.mock('../src/isWeb/isWeb', () => {
   return { isWeb: true };
