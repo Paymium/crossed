@@ -11,7 +11,11 @@ import {
   Text as TextNative,
   type TextProps as TextNativeProps,
 } from 'react-native';
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import {
+  createStyles,
+  withReactive,
+  type ExtractForProps,
+} from '@crossed/styled';
 import { forwardRef } from 'react';
 
 const useText = createStyles(
@@ -71,21 +75,26 @@ export type TextProps = TextNativeProps &
   VariantLocal['variants'] &
   Omit<VariantLocal, 'variants'>;
 
-export const Text = forwardRef(
-  ({ active, hover, focus, color, size, ...props }: TextProps, ref: any) => {
-    return (
-      <TextNative
-        ref={ref}
-        {...props}
-        {...useText.root.rnw({
-          style: props.style,
-          className: props.className,
-          active,
-          hover,
-          focus,
-          variants: { color, size },
-        })}
-      />
-    );
-  }
+export const Text = withReactive(
+  forwardRef(
+    ({ active, hover, focus, color, size, ...props }: TextProps, ref: any) => {
+      return (
+        <TextNative
+          ref={ref}
+          {...props}
+          style={[
+            useText.root.rnw({
+              style: props.style,
+              className: props.className,
+              active,
+              hover,
+              focus,
+              variants: { color, size },
+            }).style,
+            props.style,
+          ]}
+        />
+      );
+    }
+  )
 );

@@ -8,14 +8,13 @@
 import { View, type ViewProps } from 'react-native';
 import { createStyles, type ExtractForProps } from '@crossed/styled';
 import { forwardRef } from 'react';
-import type { GetProps } from '@crossed/core';
 
 const styleBox = createStyles(
   (t) =>
     ({
       root: {
         base: { display: 'flex' },
-        web: { boxSizing: 'border-box' },
+        // web: { boxSizing: 'border-box' },
         variants: {
           space: {
             xs: { base: { gap: t.space.xs } },
@@ -32,7 +31,7 @@ const styleBox = createStyles(
 
 type Variant = ExtractForProps<typeof styleBox.root>;
 
-type BoxPropsTmp = Pick<Variant['variants'], 'center' | 'space'> &
+export type BoxProps = Pick<Variant['variants'], 'center' | 'space'> &
   Omit<Variant, 'variants'> &
   ViewProps;
 
@@ -47,22 +46,23 @@ export const Box = forwardRef(
       hover,
       focus,
       ...props
-    }: BoxPropsTmp,
+    }: BoxProps,
     ref: any
   ) => (
     <View
       ref={ref}
       {...props}
-      {...styleBox.root.rnw({
+      style={[
+        styleBox.root.rnw({
+          // style,
+          className,
+          active,
+          hover,
+          focus,
+          variants: { space, center },
+        }).style,
         style,
-        className,
-        active,
-        hover,
-        focus,
-        variants: { space, center },
-      })}
+      ]}
     />
   )
 );
-
-export type BoxProps = GetProps<typeof Box>;

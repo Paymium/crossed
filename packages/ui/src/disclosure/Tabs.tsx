@@ -25,13 +25,13 @@ const useStyles = createStyles((t) => ({
     base: {
       borderBottomWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       paddingBottom: t.space.xs,
     },
   },
 }));
 
-type TabsContext = Pick<ButtonProps, 'variant' | 'size'> & {
+type TabsContext = Pick<ButtonProps, 'variant'> & {
   value: string | number;
   setValue: (_value: string | number) => void;
 };
@@ -46,11 +46,10 @@ export const createTabs = () => {
     defaultValue,
     finalValue,
     onChange,
-    variant = 'ghost',
-    size = 'sm',
+    variant = undefined,
     ...props
   }: PropsWithChildren<
-    Partial<Pick<TabsContext, 'variant' | 'size'>> &
+    Partial<Pick<TabsContext, 'variant'>> &
       UseUncontrolledInput<TabsContext['value']> &
       YBoxProps
   >) => {
@@ -62,12 +61,7 @@ export const createTabs = () => {
     });
 
     return (
-      <TabsProvider
-        size={size}
-        value={value}
-        variant={variant}
-        setValue={setValue}
-      >
+      <TabsProvider value={value} variant={variant} setValue={setValue}>
         <YBox space="md" {...props}>
           {children}
         </YBox>
@@ -87,7 +81,7 @@ export const createTabs = () => {
       value: valueProps,
       ...props
     }: ButtonProps & Pick<TabsContext, 'value'>) => {
-      const { variant, setValue, size, value } = useTabsContext();
+      const { variant, setValue, value } = useTabsContext();
 
       const onPress = useCallback(
         composeEventHandlers(() => {
@@ -99,7 +93,7 @@ export const createTabs = () => {
       return (
         <Button
           variant={variant}
-          size={size}
+          // size={size}
           active={valueProps === value}
           {...props}
           onPress={onPress}

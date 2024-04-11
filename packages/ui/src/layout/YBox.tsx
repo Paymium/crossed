@@ -18,7 +18,6 @@ const useYBox = createStyles(
         base: {
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'flex-start',
           alignSelf: 'stretch',
           maxWidth: '100%',
         },
@@ -29,5 +28,7 @@ const useYBox = createStyles(
 export type YBoxProps = BoxProps;
 
 export const YBox = forwardRef((props: YBoxProps, ref: any) => {
-  return <Box ref={ref} {...props} {...useYBox.root.rnw(props)} />;
+  return (
+    <Box ref={ref} {...props} style={[useYBox.root.rnw().style, props.style]} />
+  );
 });

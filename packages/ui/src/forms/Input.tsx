@@ -29,6 +29,7 @@ import { YBox, type YBoxProps } from '../layout/YBox';
 import { XBox } from '../layout/XBox';
 import { forwardRef } from 'react';
 import { createStyles } from '@crossed/styled';
+import { form } from '../styles/form';
 
 // const [Provider, useContext] = createScope<{
 //   size?: keyof typeof sizeVariants;
@@ -254,7 +255,7 @@ import { createStyles } from '@crossed/styled';
 //   Content: InputContent,
 // });
 
-const useInput = createStyles((t) => ({
+const useInput = createStyles(() => ({
   element: {
     base: {
       position: 'absolute',
@@ -266,22 +267,6 @@ const useInput = createStyles((t) => ({
       justifyContent: 'center',
     },
   },
-  root: {
-    base: {
-      color: t.colors.default,
-      backgroundColor: t.colors.background,
-      borderWidth: 1,
-      borderStyle: 'solid',
-      // borderColor: t.utils.shadeColor(
-      //   t.colors.neutral,
-      //   UnistylesRuntime.themeName === 'dark' ? 100 : -100
-      // ),
-      borderRadius: 4,
-      paddingVertical: t.space.xs,
-      paddingHorizontal: t.space.sm,
-      textAlign: 'right',
-    },
-  },
 }));
 
 const Addon = YBox;
@@ -291,7 +276,7 @@ const Element = (props: YBoxProps) => {
 const Group = XBox;
 
 const InputRoot = forwardRef((props: TextInputProps, ref: any) => {
-  return <TextInput ref={ref} {...props} {...useInput.root.rnw()} />;
+  return <TextInput ref={ref} {...props} {...form.input.rnw()} />;
 });
 
 const Input = createInput({

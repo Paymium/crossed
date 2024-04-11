@@ -17,5 +17,5 @@ export const useCenter = createStyles(() => ({
   },
 }));
 export const Center = (props: YBoxProps) => {
-  return <YBox {...props} {...useCenter.root.rnw()} />;
+  return <YBox {...props} {...useCenter.root.rnw(props)} />;
 };

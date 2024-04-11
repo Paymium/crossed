@@ -6,6 +6,7 @@
  */
 
 import './types';
+export * from './ChevronRight';
 export * from './ChevronDown';
 export * from './Github';
 export * from './Moon';

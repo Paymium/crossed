@@ -5,6 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import '@/style.config';
 import { TOCLayout } from '@/components/TOCLayout';
 import { withDefaultProps } from '@crossed/core';
 

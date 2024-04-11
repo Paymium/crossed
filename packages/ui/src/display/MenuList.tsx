@@ -7,31 +7,83 @@
 
 'use client';
 import { createList } from '@crossed/primitive';
-import { createStyles } from '@crossed/styled';
+import {
+  createStyles,
+  withReactive,
+  type ExtractForProps,
+} from '@crossed/styled';
 import { Text, type TextProps } from '../typography/Text';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
 import { Button, useButton, type ButtonProps } from '../forms/Button';
 import { type GetProps, createScope } from '@crossed/core';
 import { forwardRef, memo } from 'react';
+import { Pressable, View, type PressableProps } from 'react-native';
 
-const useMenuList = createStyles(() => ({
+const useMenuList = createStyles((t) => ({
   root: {
     base: {
       alignItems: 'stretch',
+      paddingVertical: t.space.xs,
+      paddingHorizontal: t.space.xs,
     },
   },
+  item: {
+    'base': {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: t.space.md,
+      justifyContent: 'flex-start',
+      height: 42,
+      backgroundColor: 'transparent',
+      borderWidth: 0,
+      borderRadius: 5,
+    },
+    ':hover': { backgroundColor: t.colors.neutral.default },
+  },
 }));
-type ButtonVariantProps = Partial<Pick<ButtonProps, 'size' | 'variant'>>;
+type ButtonVariantProps = Partial<Pick<ButtonProps, 'variant'>>;
 
 const MenuRoot = forwardRef((props: MenuRootProps, ref: any) => {
-  return <YBox {...props} {...useMenuList.root.rnw(props)} ref={ref} />;
+  return (
+    <YBox
+      {...props}
+      style={[useMenuList.root.rnw().style, props.style]}
+      ref={ref}
+    />
+  );
 });
 
 type MenuRootProps = YBoxProps;
 
 const Divider = D;
-const Item = Button;
+const Item = withReactive(
+  forwardRef<
+    View,
+    PressableProps & Omit<ExtractForProps<typeof useMenuList.item>, 'variants'>
+  >(({ active, focus, hover, ...props }, ref) => {
+    return (
+      <Pressable
+        {...props}
+        style={({ pressed }) => [
+          {
+            ...useMenuList.item.rnw({
+              active: active ?? pressed,
+              focus,
+              hover,
+              style:
+                typeof props.style === 'function'
+                  ? props.style({ pressed })
+                  : (props.style as any),
+            }),
+          }.style,
+        ]}
+        ref={ref}
+      />
+    );
+  })
+);
 
 const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
   const variants = useVariantContext();
@@ -39,7 +91,7 @@ const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
   return (
     <Text
       {...props}
-      {...useButton.button.rnw({ ...props, variants })}
+      {...useButton.root.rnw({ ...props, variants })}
       ref={ref}
     />
   );
@@ -47,7 +99,7 @@ const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
 const Title = Button.Text;
 const SubTitle = Button.Text;
 
-type ContextVariant = ButtonVariantProps;
+type ContextVariant = ButtonVariantProps & { active?: boolean };
 const [ProviderVariant, useVariantContext] = createScope<ContextVariant>(
   {} as ContextVariant
 );
@@ -57,8 +109,9 @@ const MenuList = createList({
     forwardRef((props: MenuRootProps & ButtonVariantProps, ref: any) => (
       <ProviderVariant
         // color={props.color}
-        size={props.size}
-        variant={props.variant || 'ghost'}
+        // size={props.size}
+        variant={props.variant || undefined}
+        active={props.active || undefined}
       >
         <MenuRoot {...props} ref={ref} />
       </ProviderVariant>

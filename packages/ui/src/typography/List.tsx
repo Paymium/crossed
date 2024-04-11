@@ -18,7 +18,7 @@ const useList = createStyles((t) => ({
 
 export type UlProps = YBoxProps;
 export const Ul = (props: UlProps) => {
-  return <YBox role="list" {...props} {...useList.ul.style()} />;
+  return <YBox role="list" {...props} {...useList.ul.rnw()} />;
 };
 
 export type LiProps = XBoxProps;
@@ -37,7 +37,7 @@ export const Li = ({
       {...useList.li.rnw({ active, hover, focus, style, className })}
       role="listitem"
     >
-      <Text {...useList.disc.style()}>{'\u2B24'} </Text>
+      <Text {...useList.disc.rnw()}>{'\u2B24'} </Text>
       {children as any}
     </XBox>
   );

@@ -32,7 +32,7 @@ export const Anchor = forwardRef((props: AnchorProps, ref: any) => {
       weight="medium"
       role="link"
       {...props}
-      {...useAnchor.anchor.style(props)}
+      {...useAnchor.anchor.rnw(props)}
     />
   );
 });

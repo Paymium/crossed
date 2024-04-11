@@ -7,7 +7,7 @@
 
 import { Loader } from '../index';
 import { getAst } from './getAst';
-import { Registry } from '@crossed/styled/registry';
+import { Registry } from '@crossed/styled';
 import { BasePlugin } from '@crossed/styled/plugins';
 
 Registry.setThemes({ dark: {} })

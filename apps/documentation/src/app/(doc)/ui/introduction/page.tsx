@@ -6,6 +6,7 @@
  */
 
 'use client';
+import '@/style.config';
 import { H1, YBox } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 

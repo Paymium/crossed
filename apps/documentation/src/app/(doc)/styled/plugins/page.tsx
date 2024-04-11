@@ -5,6 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import '@/style.config';
 import { CodeBlock } from '@/components/CodeBlock';
 import { createStyles } from '@crossed/styled';
 import {
@@ -33,17 +34,17 @@ export default function PluginsPage() {
       <H1>Plugins</H1>
 
       <P>
-        @crossed/styled se base sur un systeme de plugin afin de generer au
-        runtime et au buildtime le css et les className pour le web, et juste
-        retourner le style pour react-native web. Cela permet une grands
-        flexibilité sur la manière d'ecrire sont design systeme
+        @crossed/styled se base sur un systeme de plugin afin de generer le
+        style ou les className pour le web. Cela permet une grande flexibilité
+        sur la manière d'écrire sont design system
       </P>
       <H2 id="migrate">Structure d'un plugin</H2>
       <CodeBlock>{`
-import { Registry } from "@crossed/styled/registry";
+import { Registry, createStyles } from "@crossed/styled";
+import { normalizeUnitPixel } from "@crossed/styled/plugins";
 import type { Plugins } from "@crossed/styled";
 
-export interface MyPlugin {
+interface MyPlugin {
   font?: {
     size?: number;
     color?: string;
@@ -52,19 +53,32 @@ export interface MyPlugin {
 
 const myPlugin: Plugins<MyPlugin> = {
   test: '^font$',
-  apply: ({ styles, addClassname }) => {
+  apply: ({ styles, addClassname, isWeb }) => {
     const { size, color } = styles;
     addClassname({
       body: {
         [\`.font\`]: {
-          fontSize: \`\${size}px\`,
+          fontSize: normalizeUnitPixel('fontSize', size, isWeb),
+          lineHeight: normalizeUnitPixel('lineHeight', size * 1.3, isWeb),
           color
         }
       }
     })
   }
 }
+
+declare module '@crossed/styled' {
+  export interface StyleSheet extends MyPlugin {}
+}
+
 Registry.addPlugin(myPlugin)
+
+createStyles(() => ({
+  font: { // <= you have autocompletion
+    size: 12,
+    color: "black",
+  },
+}));
       `}</CodeBlock>
       <H3>apply</H3>
       <Table>
@@ -207,82 +221,6 @@ addClassname(params: {
           </Tr>
         </TBody>
       </Table>
-      {/* <P></P>
-      <H6>
-        Without <Kbd size="lg">@crossed/styled</Kbd>
-      </H6>
-      <br />
-      <Tabs defaultValue="StyleSheet.create" space="md">
-        <TabList>
-          <Tab value="StyleSheet.create">
-            <TabText>StyleSheet.create</TabText>
-          </Tab>
-          <Tab value="react-native-unistyles">
-            <TabText>react-native-unistyles</TabText>
-          </Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel value="StyleSheet.create">
-            <CodeBlock>
-              {`import { StyleSheet } from "react-native";
-
-const styleSheet = StyleSheet.create({
-  base: { color: "red" }
-});
-
-function App() {
-  return <Text style={styleSheet.base}>Hello</Text>;
-}`}
-            </CodeBlock>
-          </TabPanel>
-          <TabPanel value="react-native-unistyles">
-            <CodeBlock>
-              {`import { createStyleSheet, useStyles } from "react-native-unistyles";
-
-const styleSheet = createStyleSheet({
-  base: { color: "red" }
-});
-
-function App() {
-  const { styles } = useStyles(styleSheet);
-  return <Text style={styles.base}>Hello</Text>;
-}`}
-            </CodeBlock>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-      <br />
-      <H6>
-        With <Kbd size="lg">@crossed/styled</Kbd>
-      </H6>
-      <P>You can write it with less code</P>
-      <CodeBlock>{`
-import { styled } from "@crossed/styled";
-
-const styleSheet = styled({ color: "red" });
-      `}</CodeBlock>
-
-      <H2 id="interaction">User interaction</H2>
-      <P>
-        The styled function allows for interactive styling based on the state
-        associated with pointer events, such as finger or mouse interactions.
-      </P>
-      <CodeBlock>{`
-import { styled } from "@crossed/styled";
-
-const styleSheet = styled({
-  color: "red",
-  ":hover":{
-    color: "green"
-  },
-  ":active":{
-    color: "blue"
-  },
-  ":focus":{
-    color: "violet"
-  },
-});
-      `}</CodeBlock> */}
     </YBox>
   );
 }

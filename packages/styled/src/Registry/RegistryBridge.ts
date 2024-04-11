@@ -10,9 +10,10 @@ import type {
   Plugin,
   PluginContext,
   Themes,
-} from './types';
-import { setTheme } from './setTheme';
-import { convertKeyToCss, normalizeUnitPixel } from './plugins';
+} from '../types';
+import { setTheme } from '../setTheme';
+import { convertKeyToCss, normalizeUnitPixel } from '../plugins/utils';
+import { isWeb } from '../isWeb';
 
 export const parse = <T extends Record<string, any>>(
   t: T,
@@ -86,13 +87,13 @@ export class RegistryBridge {
     return this;
   }
 
-  getTheme() {
+  getTheme(web?: boolean) {
     if (!this.themes) {
       // throw new Error('themes are not set');
       console.warn('Themes are not set');
       return {} as Themes[keyof Themes];
     }
-    return parse(this.themes[this.themeName] || {}, undefined, true)
+    return parse(this.themes[this.themeName] || {}, undefined, web ?? isWeb)
       .theme as Themes[keyof Themes];
   }
   getThemes() {
@@ -145,5 +146,3 @@ export class RegistryBridge {
     );
   }
 }
-
-export const Registry = new RegistryBridge();

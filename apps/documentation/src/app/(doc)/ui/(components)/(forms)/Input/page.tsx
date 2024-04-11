@@ -9,6 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { Input } from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
@@ -22,8 +23,8 @@ export default function CreateBadge() {
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`// coming soon`}
-      scope={{}}
+      example={`<Input />`}
+      scope={{ Input }}
     />
   );
 }

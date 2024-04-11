@@ -100,7 +100,7 @@ const useStyles = createStyles((t) => ({
       flexDirection: 'row',
       borderBottomWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       alignItems: 'center',
     },
   },

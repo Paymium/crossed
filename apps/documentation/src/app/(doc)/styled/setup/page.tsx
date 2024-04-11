@@ -6,6 +6,7 @@
  */
 
 'use client';
+import '@/style.config';
 import { withDefaultProps } from '@crossed/core';
 import { H1, Text } from '@crossed/ui';
 import { CodeBlock } from '@/components/CodeBlock';
@@ -102,14 +103,19 @@ module.exports = nextConfig;
         <H2 id="install">{t('Init registry')}</H2>
         <P>{t('Create style.config.ts file')}</P>
         <CodeBlock fileName="./src/style.config.ts">{`
-import { Registry } from '@crossed/styled/registry';
-import { BasePlugin, type CrossedBasePlugin } from '@crossed/styled/plugins';
+import { Registry } from '@crossed/styled';
 
 // add base plugin or add yours
-Registry.addPlugin(BasePlugin);
+const themes = {
+  dark: { colorText: "white" },
+  light: { colorText: "black" },
+};
+type CustomThemes = typeof themes;
+
+Registry.setThemes(themes).setThemeName("dark");
 
 declare module '@crossed/styled' {
-  export interface StyleSheet extends CrossedBasePlugin {}
+  export interface Themes extends CustomThemes {}
 }
 
               `}</CodeBlock>
@@ -135,21 +141,41 @@ declare module '@crossed/styled' {
               </YBox>
             </Alert>
           </BuilderTabs.Panel>
+
+          <H2 id="usage">{t('importCss')}</H2>
+          <CodeBlock fileName="style.css">
+            {`
+@import "node_modules/crossed.css";
+`}
+          </CodeBlock>
         </PlatformTabs.Panel>
 
         <YBox space="md">
           <H2 id="usage">{t('Usage')}</H2>
           <CodeBlock fileName="foo.tsx">
             {`
-import { styled } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 import { Text } from "react-native";
 
-const TextStyled = styled(Text, {
-  base: { color: "red" }
-});
+const styles = createStyles((t) => ({
+  root: {
+    base: { color: t.colorText }
+  }
+}));
 
 function App () {
-  return <TextStyled>Hello World!</TextStyled>;
+  return (
+    <>
+      {/* react-native + web */}
+      <Text {...styles.root.style()}>Hello World!</Text>
+
+      {/* react-native + web */}
+      <Text {...styles.root.rnw()}>Hello World!</Text>
+
+      {/* web */}
+      <p {...styles.root.className()}>Hello World!</p>
+    </>
+  );
 }
 `}
           </CodeBlock>

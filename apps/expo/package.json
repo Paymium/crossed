@@ -18,6 +18,7 @@
     "@crossed/demo": "0.3.1",
     "@crossed/styled": "workspace:^",
     "@crossed/ui": "1.0.0-beta.6",
+    "@crossed/unicons": "workspace:*",
     "@expo/vector-icons": "^13.0.0",
     "@react-native/assets-registry": "^0.74.0",
     "@react-native/metro-config": "^0.73.5",

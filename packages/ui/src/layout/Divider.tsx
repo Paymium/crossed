@@ -17,7 +17,7 @@ export const useDivider = createStyles(
         base: {
           borderWidth: 0,
           borderStyle: 'solid',
-          borderColor: t.colors.neutral,
+          borderColor: t.colors.neutral.default,
         },
         variants: {
           direction: {
@@ -48,7 +48,9 @@ export const Divider = ({ direction, ...props }: DividerProps) => {
     <View
       role="separator"
       {...props}
-      {...useDivider.divider.rnw({ variants: { direction } })}
+      {...useDivider.divider.rnw({
+        variants: { direction: direction ?? 'horizontal' },
+      })}
     />
   );
 };

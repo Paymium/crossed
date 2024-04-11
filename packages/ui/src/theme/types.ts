@@ -11,13 +11,20 @@ export type Entries<T> = {
   [K in keyof T]: [K, T[K]];
 }[keyof T][];
 
+type Color = {
+  hover: string;
+  active: string;
+  default: string;
+};
+
 export type Colors = {
   // brand colors
-  primary: string;
-  secondary: string;
+  primary: Color;
+  // secondary: Color;
+  // tertiary: Color;
 
   // common colors
-  neutral: string;
+  neutral: Color;
   success: string;
   info: string;
   error: string;

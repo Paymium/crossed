@@ -7,6 +7,7 @@
 
 import './globals.css';
 import '@/style.config';
+import '@/locales';
 import type { Metadata } from 'next';
 import { NavBar } from '@/components/NavBar';
 import { PropsWithChildren, Suspense } from 'react';
@@ -46,8 +47,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang={'en'} className={`${Registry.themeName} ${roboto.className}`}>
       <head />
-      <CrossedUIProvider>
-        <body {...styleSheet.body.className()}>
+      <body {...styleSheet.body.className()}>
+        <CrossedUIProvider>
           <Suspense>
             <ScrollView
               stickyHeaderIndices={[0]}
@@ -59,8 +60,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
               <Footer />
             </ScrollView>
           </Suspense>
-        </body>
-      </CrossedUIProvider>
+        </CrossedUIProvider>
+      </body>
     </html>
   );
 }

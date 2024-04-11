@@ -6,74 +6,79 @@
  */
 
 'use client';
-import '@/types/unistyles';
+import '@/style.config';
 import { MenuList, XBox, YBox, YBoxProps } from '@crossed/ui';
 import { PropsWithChildren } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { createStyles } from '@crossed/styled';
+import { menuStyle } from './menuSide.style';
 
-const menuStyle = createStyles((t) => ({
-  root: {
-    base: {
-      paddingHorizontal: 20,
-      alignSelf: 'baseline',
-      display: 'none',
-    },
-    media: {
-      md: { display: 'flex' },
-    },
-  },
-  container: {
-    base: {
-      width: '100%',
-      justifyContent: 'center',
-      paddingVertical: 15,
-      minHeight: '95%',
-    },
-    media: {
-      xs: { maxWidth: '100%' },
-      md: { maxWidth: 768 },
-      lg: { maxWidth: 900 },
-      xl: { maxWidth: 1200 },
-    },
-  },
-  center: {
-    base: {
-      flex: 1,
-      borderLeftWidth: 0,
-      borderColor: t.colors.neutral,
-      minHeight: '100%',
-    },
-    media: {
-      md: { borderLeftWidth: 1 },
-    },
-  },
-  li: {
-    base: {
-      alignItems: 'stretch',
-    },
-    variants: {
-      label: {
-        true: {
-          base: {
-            marginTop: t.space.xl,
-            borderBottomWidth: 1,
-            borderStyle: 'solid',
-            borderColor: t.colors.neutral,
+const styles = createStyles(
+  (t) =>
+    ({
+      root: {
+        base: {
+          paddingHorizontal: 20,
+          alignSelf: 'baseline',
+          display: 'none',
+        },
+        media: {
+          md: { display: 'flex' },
+        },
+      },
+      container: {
+        base: {
+          width: '100%',
+          justifyContent: 'center',
+          paddingVertical: 15,
+          minHeight: '95%',
+        },
+        media: {
+          xs: { maxWidth: '100%' },
+          md: { maxWidth: 768 },
+          lg: { maxWidth: 900 },
+          xl: { maxWidth: 1200 },
+        },
+      },
+      center: {
+        base: {
+          flex: 1,
+          borderLeftWidth: 0,
+          borderColor: t.colors.neutral.default,
+          minHeight: '100%',
+        },
+        media: {
+          md: { borderLeftWidth: 1 },
+        },
+      },
+      li: {
+        base: {
+          alignItems: 'stretch',
+        },
+        variants: {
+          label: {
+            true: {
+              base: {
+                marginTop: t.space.xl,
+                borderBottomWidth: 1,
+                borderStyle: 'solid',
+                borderColor: t.colors.neutral.default,
+              },
+            },
+            false: {},
           },
         },
-        false: {},
       },
-    },
-  },
-}));
+      item: { base: { justifyContent: 'flex-end' } },
+    } as const)
+);
 
 const Li = ({ label, ...props }: YBoxProps & { label?: boolean }) => (
   <YBox
     role="listitem"
     {...props}
-    {...menuStyle.li.rnw({ variants: { label } })}
+    {...styles.li.rnw({ variants: { label } })}
   />
 );
 
@@ -88,19 +93,16 @@ export function SideBarLayout({
   const { t } = useTranslation();
 
   return (
-    <XBox {...menuStyle.container.rnw()}>
+    <XBox {...styles.container.rnw()}>
       <MenuList
         space="xs"
-        size="xs"
-        {...menuStyle.root.rnw({ style: { position: 'sticky', top: '75px' } })}
+        style={[styles.root.rnw().style, { position: 'sticky', top: '75px' }]}
       >
         {menus.map(({ href, title }) => {
           return (
             <Li key={href || title} label={!href}>
               {href ? (
                 <MenuList.Item
-                  variant="ghost"
-                  size="xs"
                   role="link"
                   href={`/crossed${href}`}
                   onPress={(e) => {
@@ -108,9 +110,15 @@ export function SideBarLayout({
                     e.preventDefault();
                     router.push(href);
                   }}
-                  style={{ justifyContent: 'flex-end' }}
+                  style={[
+                    menuStyle.item.rnw({
+                      hover: href === pathname,
+                    }).style,
+                    styles.item.rnw().style,
+                  ]}
                 >
                   <MenuList.Title
+                    {...menuStyle.itemText.rnw({ hover: href === pathname })}
                     weight={href === pathname ? 'semibold' : undefined}
                   >
                     {t(title)}
@@ -130,7 +138,7 @@ export function SideBarLayout({
         })}
       </MenuList>
 
-      <YBox {...menuStyle.center.rnw()}>{children}</YBox>
+      <YBox {...styles.center.rnw()}>{children}</YBox>
     </XBox>
   );
 }

@@ -7,25 +7,23 @@
 
 /// <reference types="jest" />
 
-import { RegistryBridge, Registry } from '../src/Registry';
+import { Registry } from '../src/Registry';
+import { RegistryBridge } from '../src/Registry/RegistryBridge';
+
+jest.mock('../src/isWeb/isWeb', () => {
+  return { isWeb: true };
+});
 
 describe('Registry', () => {
   test('be instance of RegitryBridge', () => {
     expect(Registry).toBeInstanceOf(RegistryBridge);
   });
 
-  // test('can set/get theme', () => {
-  //   const theme = {};
-  //   expect(Registry.getTheme()).toBe(undefined);
-  //   expect(Registry.setTheme(theme)).toBe(Registry);
-  //   expect(Registry.getTheme()).toBe(theme);
-  // });
-
   test('can add/get plugins', () => {
     const plugins = {} as any;
-    expect(Registry.getPlugins()).toEqual([]);
+    expect(Registry.getPlugins().length).toEqual(5);
     expect(Registry.addPlugin(plugins)).toBe(Registry);
     expect(Registry.addPlugin(plugins)).toBe(Registry);
-    expect(Registry.getPlugins()).toEqual([plugins, plugins]);
+    expect(Registry.getPlugins().length).toEqual(7);
   });
 });

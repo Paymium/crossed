@@ -9,11 +9,19 @@
 
 import { createStyles } from '../src/createStyles';
 import { BasePlugin } from '../src/plugins/Base';
+import { PseudoClassPlugin } from '../src/plugins/PseudoClass';
+import { VariantsPlugin } from '../src/plugins/Variants';
 import { Registry } from '../src/Registry';
+
+jest.mock('../src/isWeb/isWeb', () => {
+  return { isWeb: true };
+});
 
 describe('createStyles', () => {
   beforeAll(() => {
-    Registry.addPlugin(BasePlugin);
+    Registry.addPlugin(BasePlugin)
+      .addPlugin(PseudoClassPlugin)
+      .addPlugin(VariantsPlugin);
   });
   test('should return function', () => {
     const style = createStyles(() => ({ container: {} }));
@@ -74,27 +82,23 @@ describe('createStyles', () => {
       container: { base },
     }));
     expect(style.container.rnw()).toStrictEqual({
-      style: [
-        {
-          '$$css': true,
-          'color-[white]': 'color-[white]',
-          'border-color-[red]': 'border-color-[red]',
-        },
-      ],
+      style: {
+        '$$css': true,
+        'color-[white]': 'color-[white]',
+        'border-color-[red]': 'border-color-[red]',
+      },
     });
     expect(
       style.container.rnw({
         style: { color: 'black', backgroundColor: 'white' },
       })
     ).toStrictEqual({
-      style: [
-        {
-          '$$css': true,
-          'color-[black]': 'color-[black]',
-          'border-color-[red]': 'border-color-[red]',
-          'background-color-[white]': 'background-color-[white]',
-        },
-      ],
+      style: {
+        '$$css': true,
+        'color-[black]': 'color-[black]',
+        'border-color-[red]': 'border-color-[red]',
+        'background-color-[white]': 'background-color-[white]',
+      },
     });
     expect(
       style.container.rnw({
@@ -102,25 +106,13 @@ describe('createStyles', () => {
         className: 'toto',
       })
     ).toStrictEqual({
-      style: [
-        {
-          '$$css': true,
-          'color-[black]': 'color-[black]',
-          'border-color-[red]': 'border-color-[red]',
-          'background-color-[white]': 'background-color-[white]',
-          'toto': 'toto',
-        },
-      ],
+      style: {
+        '$$css': true,
+        'color-[black]': 'color-[black]',
+        'border-color-[red]': 'border-color-[red]',
+        'background-color-[white]': 'background-color-[white]',
+        'toto': 'toto',
+      },
     });
   });
-
-  // test('call return function', () => {
-  //   const { useStyles } = jest.requireMock('../src/useStyles');
-  //   const useStylesImpl = jest.fn(() => ({ titi: 'titi' }));
-  //   useStyles.mockImplementation(useStylesImpl);
-  //   const styleF = () => ({ bar: 'foo' });
-  //   const style = createStyles(styleF)({ toto: 'toto' });
-  //   expect(useStylesImpl).toBeCalledWith(styleF, { toto: 'toto' });
-  //   expect(style).toEqual({ titi: 'titi' });
-  // });
 });

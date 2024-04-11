@@ -8,7 +8,7 @@
 'use client';
 import '@/style.config';
 import { createStyles } from '@crossed/styled';
-import { Alert, Center, Text, XBox, YBox } from '@crossed/ui';
+import { Center, Text, XBox, YBox } from '@crossed/ui';
 import { themes } from 'prism-react-renderer';
 import { PropsWithChildren, ReactNode, useCallback } from 'react';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
@@ -33,16 +33,16 @@ const styles = createStyles((t) => ({
     base: {
       padding: t.space.md,
       borderWidth: 1,
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       borderStyle: 'solid',
       borderRadius: 4,
-      justifyContent: 'center',
+      // justifyContent: 'center',
     },
   },
   containerVariants: {
     base: {
       borderLeftWidth: 1,
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       borderStyle: 'solid',
       padding: t.space.md,
     },
@@ -60,11 +60,12 @@ const styles = createStyles((t) => ({
       borderLeftWidth: 0,
       borderRightWidth: 0,
       borderBottomWidth: 1,
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       borderStyle: 'solid',
       color: t.colors.white,
     },
   },
+  liveError: { base: { color: t.colors.error } },
 }));
 
 export const CodeBlock = ({
@@ -84,11 +85,11 @@ export const CodeBlock = ({
     ({ children }: PropsWithChildren) => (
       <XBox {...styles.containerPreview.rnw()}>
         <Center {...styles.preview.rnw()}>{children}</Center>
-        {/* {variants && (
+        {variants && (
           <YBox space="md" {...styles.containerVariants.rnw()}>
             {variants}
           </YBox>
-        )} */}
+        )}
       </XBox>
     ),
     [variants, children]
@@ -109,11 +110,7 @@ export const CodeBlock = ({
               className: fileName ? 'filename' : '',
             })}
           />
-          {preview && (
-            <Alert>
-              <LiveError />
-            </Alert>
-          )}
+          {preview && <LiveError {...styles.pre.className()} />}
         </YBox>
       </LiveProvider>
     </YBox>

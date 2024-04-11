@@ -8,7 +8,7 @@
 'use client';
 import { Sun } from '@crossed/unicons/Sun';
 import { Moon } from '@crossed/unicons/Moon';
-import { Button } from '@crossed/ui';
+import { Button, ButtonIcon } from '@crossed/ui';
 import { useCallback } from 'react';
 import { Registry } from '@crossed/styled';
 
@@ -19,12 +19,14 @@ export const ChangeTheme = () => {
   return (
     <Button
       onPress={onPress}
-      variant="ghost"
+      variant={false}
       accessibilityLabel={`Change to ${
         Registry.themeName === 'light' ? 'dark' : 'light'
       } theme`}
     >
-      {Registry.themeName === 'light' ? <Moon /> : <Sun />}
+      <ButtonIcon>
+        {Registry.themeName === 'light' ? <Moon /> : <Sun />}
+      </ButtonIcon>
     </Button>
   );
 };
