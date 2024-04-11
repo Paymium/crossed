@@ -9,11 +9,12 @@ import type { Colors } from './types';
 
 export const colorsLight: Colors = {
   // brand color
-  primary: '#0f79d7',
-  secondary: '#0f79d7',
+  primary: { default: '#0f79d7', hover: '#0d66b5', active: '#0b5597' },
+  // secondary: { default: '#0f79d7', hover: '', active: '' },
+  // tertiary: { default: '#0f79d7', hover: '', active: '' },
 
   // common colors
-  neutral: '#DDDDDD',
+  neutral: { default: '#DDDDDD', hover: '#ebeaff', active: '#dad9ea' },
   success: '#3abb7d',
   info: '#93c5fd',
   error: '#7d2424',
@@ -30,11 +31,12 @@ export const colorsLight: Colors = {
 };
 export const colorsDark: Colors = {
   // brand color
-  primary: '#0f79d7',
-  secondary: '#0f79d7',
+  primary: { default: '#0f79d7', hover: '#0d66b5', active: '#0b5597' },
+  // secondary: { default: '#0f79d7', hover: '', active: '' },
+  // tertiary: { default: '#0f79d7', hover: '', active: '' },
 
   // common colors
-  neutral: '#373737',
+  neutral: { default: '#757474', hover: '#5d5c5c', active: '#414040' },
   success: '#3abb7d',
   info: '#5795db',
   error: '#C53030',

@@ -25,7 +25,7 @@ const useTable = createStyles((t) => ({
       borderRightWidth: 0,
       borderBottomWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       backgroundColor: t.colors.backgroundSoft,
     },
   },
@@ -37,7 +37,7 @@ const useTable = createStyles((t) => ({
       borderRightWidth: 0,
       borderBottomWidth: 0,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
     },
   },
   td: {

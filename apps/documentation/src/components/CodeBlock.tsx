@@ -33,7 +33,7 @@ const styles = createStyles((t) => ({
     base: {
       padding: t.space.md,
       borderWidth: 1,
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       borderStyle: 'solid',
       borderRadius: 4,
       // justifyContent: 'center',
@@ -42,7 +42,7 @@ const styles = createStyles((t) => ({
   containerVariants: {
     base: {
       borderLeftWidth: 1,
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       borderStyle: 'solid',
       padding: t.space.md,
     },
@@ -60,7 +60,7 @@ const styles = createStyles((t) => ({
       borderLeftWidth: 0,
       borderRightWidth: 0,
       borderBottomWidth: 1,
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       borderStyle: 'solid',
       color: t.colors.white,
     },

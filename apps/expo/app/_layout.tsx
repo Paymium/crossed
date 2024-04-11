@@ -14,7 +14,6 @@ import {
   DarkTheme,
   DefaultTheme,
 } from '@react-navigation/native';
-import { NativeImplementation } from '@crossed/styled';
 import { useColorScheme } from 'react-native';
 
 export { ErrorBoundary } from 'expo-router';
@@ -32,11 +31,7 @@ export default function RootLayout() {
     SplashScreen.hideAsync();
   }, []);
 
-  return (
-    <NativeImplementation>
-      <RootLayoutNav />
-    </NativeImplementation>
-  );
+  return <RootLayoutNav />;
 }
 
 function RootLayoutNav() {

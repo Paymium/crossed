@@ -25,7 +25,7 @@ const useStyles = createStyles((t) => ({
     base: {
       borderBottomWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       paddingBottom: t.space.xs,
     },
   },

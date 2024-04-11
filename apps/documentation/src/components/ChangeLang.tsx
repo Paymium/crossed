@@ -7,6 +7,7 @@
 
 'use client';
 
+import '@/locales';
 import { Select, Text } from '@crossed/ui';
 import { ChevronDown } from '@crossed/unicons/ChevronDown';
 import { useTranslation } from 'react-i18next';

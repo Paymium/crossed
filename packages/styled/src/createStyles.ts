@@ -9,6 +9,7 @@ import type {
   CrossedMethods,
   CrossedPropsExtended,
   PluginContext,
+  StyleSheet,
   Themes,
 } from './types';
 import { Registry } from './Registry';
@@ -49,7 +50,7 @@ const createMethods = <S>(styleOfKey: Record<string, any>) => {
       let style = {} as any;
       const parentStyle = (
         Array.isArray(props.style) ? props.style : [props.style]
-      ).reduce((acc, st) => {
+      ).reduce((acc, st: any) => {
         if (!st || st.$$css) return acc;
         if (!st.$$css) {
           acc = { ...acc, ...st };
@@ -77,7 +78,7 @@ const createMethods = <S>(styleOfKey: Record<string, any>) => {
         : [];
       const parentStyle = (
         Array.isArray(props.style) ? props.style : [props.style]
-      ).reduce((acc, st) => {
+      ).reduce((acc, st: any) => {
         if (!st) return acc;
         if (!st.$$css) {
           acc = { ...acc, ...st };
@@ -108,7 +109,7 @@ const createMethods = <S>(styleOfKey: Record<string, any>) => {
         : [];
       const parentStyle = (
         Array.isArray(props.style) ? props.style : [props.style]
-      ).reduce((acc, st) => {
+      ).reduce((acc, st: any) => {
         if (!st) return acc;
         if (!st.$$css) {
           acc = { ...acc, ...st };
@@ -132,9 +133,12 @@ const createMethods = <S>(styleOfKey: Record<string, any>) => {
 
       (Array.isArray(props.style) ? props.style : [props.style]).forEach(
         (st) => {
-          if (st && st.$$css) {
+          if (!st) return;
+          if (st.$$css) {
             const { $$css, ...otherClassName } = st;
             classNames.push(...Object.keys(otherClassName));
+          } else if (!st.$$css) {
+            style = { ...style, ...st };
           }
         }
       );
@@ -155,18 +159,19 @@ const createMethods = <S>(styleOfKey: Record<string, any>) => {
   };
 };
 
-export const createStyles = <C extends string, S>(
-  stylesParam: (_theme: Themes[keyof Themes]) => Record<C, S>
+export const createStyles = <O extends Record<C, StyleSheet>, C extends string>(
+  stylesParam: (_theme: Themes[keyof Themes]) => {
+    [key in keyof O]: O[key];
+  }
 ) => {
   let results = stylesParam(Registry.getTheme());
-
   const foo = new Proxy(
-    Object.entries(results).reduce<
-      Record<C, CrossedMethods<CrossedPropsExtended<S>>>
-    >((acc, [keyStyle, styleOfKey]: [C, S]) => {
-      acc[keyStyle] = createMethods(styleOfKey);
+    Object.entries(results).reduce<{
+      [key in keyof O]: CrossedMethods<O[key]>;
+    }>((acc, [keyStyle, styleOfKey]) => {
+      (acc as any)[keyStyle] = createMethods(styleOfKey);
       return acc;
-    }, {} as any) as Record<C, CrossedMethods<CrossedPropsExtended<S>>>,
+    }, {} as any),
     {
       get(cible, prop) {
         return createMethods((results as any)[prop]);

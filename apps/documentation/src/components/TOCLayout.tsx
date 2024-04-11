@@ -6,6 +6,7 @@
  */
 
 'use client';
+import '@/style.config';
 import { MenuList, XBox, YBox } from '@crossed/ui';
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -21,7 +22,7 @@ const styles = createStyles(
         base: {
           flex: 1,
           width: '100%',
-          borderColor: t.colors.neutral,
+          borderColor: t.colors.neutral.default,
           flexDirection: 'column',
         },
         variants: {
@@ -45,6 +46,9 @@ const styles = createStyles(
           alignSelf: 'baseline',
           display: 'none',
           height: 'auto',
+          borderLeftWidth: 1,
+          borderColor: t.colors.neutral.default,
+          borderStyle: 'solid',
         },
         media: {
           xl: { display: 'flex' },
@@ -79,20 +83,13 @@ export const TOCLayout = ({
   return useMemo(() => {
     return (
       <XBox {...styles.container.rnw()}>
-        <YBox
-          {...styles.center.rnw({
-            variants: {
-              bordered: (links.length !== 0).toString() as 'true' | 'false',
-            },
-          })}
-        >
-          {children}
-        </YBox>
+        <YBox {...styles.center.rnw()}>{children}</YBox>
 
         <MenuList
-          {...styles.menuList.rnw({
-            style: { position: 'sticky', top: '75px' },
-          })}
+          style={[
+            styles.menuList.rnw().style,
+            { position: 'sticky', top: '75px' },
+          ]}
           space="xs"
         >
           {links.length > 0 && (

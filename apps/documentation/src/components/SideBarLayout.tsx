@@ -6,7 +6,7 @@
  */
 
 'use client';
-import '@/types/unistyles';
+import '@/style.config';
 import { MenuList, XBox, YBox, YBoxProps } from '@crossed/ui';
 import { PropsWithChildren } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -14,62 +14,65 @@ import { useTranslation } from 'react-i18next';
 import { createStyles } from '@crossed/styled';
 import { menuStyle } from './menuSide.style';
 
-const styles = createStyles((t) => ({
-  root: {
-    base: {
-      paddingHorizontal: 20,
-      alignSelf: 'baseline',
-      display: 'none',
-    },
-    media: {
-      md: { display: 'flex' },
-    },
-  },
-  container: {
-    base: {
-      width: '100%',
-      justifyContent: 'center',
-      paddingVertical: 15,
-      minHeight: '95%',
-    },
-    media: {
-      xs: { maxWidth: '100%' },
-      md: { maxWidth: 768 },
-      lg: { maxWidth: 900 },
-      xl: { maxWidth: 1200 },
-    },
-  },
-  center: {
-    base: {
-      flex: 1,
-      borderLeftWidth: 0,
-      borderColor: t.colors.neutral,
-      minHeight: '100%',
-    },
-    media: {
-      md: { borderLeftWidth: 1 },
-    },
-  },
-  li: {
-    base: {
-      alignItems: 'stretch',
-    },
-    variants: {
-      label: {
-        true: {
-          base: {
-            marginTop: t.space.xl,
-            borderBottomWidth: 1,
-            borderStyle: 'solid',
-            borderColor: t.colors.neutral,
+const styles = createStyles(
+  (t) =>
+    ({
+      root: {
+        base: {
+          paddingHorizontal: 20,
+          alignSelf: 'baseline',
+          display: 'none',
+        },
+        media: {
+          md: { display: 'flex' },
+        },
+      },
+      container: {
+        base: {
+          width: '100%',
+          justifyContent: 'center',
+          paddingVertical: 15,
+          minHeight: '95%',
+        },
+        media: {
+          xs: { maxWidth: '100%' },
+          md: { maxWidth: 768 },
+          lg: { maxWidth: 900 },
+          xl: { maxWidth: 1200 },
+        },
+      },
+      center: {
+        base: {
+          flex: 1,
+          borderLeftWidth: 0,
+          borderColor: t.colors.neutral.default,
+          minHeight: '100%',
+        },
+        media: {
+          md: { borderLeftWidth: 1 },
+        },
+      },
+      li: {
+        base: {
+          alignItems: 'stretch',
+        },
+        variants: {
+          label: {
+            true: {
+              base: {
+                marginTop: t.space.xl,
+                borderBottomWidth: 1,
+                borderStyle: 'solid',
+                borderColor: t.colors.neutral.default,
+              },
+            },
+            false: {},
           },
         },
-        false: {},
       },
-    },
-  },
-  item: { base: { justifyContent: 'flex-end' } },
-}));
+      item: { base: { justifyContent: 'flex-end' } },
+    } as const)
+);
 
 const Li = ({ label, ...props }: YBoxProps & { label?: boolean }) => (
   <YBox
@@ -93,7 +96,7 @@ export function SideBarLayout({
     <XBox {...styles.container.rnw()}>
       <MenuList
         space="xs"
-        {...styles.root.rnw({ style: { position: 'sticky', top: '75px' } })}
+        style={[styles.root.rnw().style, { position: 'sticky', top: '75px' }]}
       >
         {menus.map(({ href, title }) => {
           return (
@@ -107,10 +110,12 @@ export function SideBarLayout({
                     e.preventDefault();
                     router.push(href);
                   }}
-                  {...menuStyle.item.rnw({
-                    hover: href === pathname,
-                    style: styles.item.rnw().style,
-                  })}
+                  style={[
+                    menuStyle.item.rnw({
+                      hover: href === pathname,
+                    }).style,
+                    styles.item.rnw().style,
+                  ]}
                 >
                   <MenuList.Title
                     {...menuStyle.itemText.rnw({ hover: href === pathname })}

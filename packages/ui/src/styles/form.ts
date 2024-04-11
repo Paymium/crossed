@@ -14,7 +14,7 @@ export const form = createStyles((t) => ({
       // backgroundColor: t.colors.background,
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.neutral.default,
       // borderColor: t.utils.shadeColor(
       //   t.colors.neutral,
       //   UnistylesRuntime.themeName === 'dark' ? 100 : -100
@@ -27,8 +27,11 @@ export const form = createStyles((t) => ({
       flexDirection: 'row',
       alignItems: 'center',
     },
-    ':hover': { borderColor: t.colors.primary },
-    ':focus': { outlineColor: t.colors.primary },
-    ':focus-visible': { outlineColor: t.colors.primary, borderRadius: 7 },
+    ':hover': { borderColor: t.colors.primary.default },
+    ':focus': { outlineColor: t.colors.primary.default } as any,
+    ':focus-visible': {
+      outlineColor: t.colors.primary.default,
+      borderRadius: 7,
+    },
   },
 }));

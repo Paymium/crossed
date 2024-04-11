@@ -565,7 +565,7 @@ const SelectRoot = memo(
     variant,
     children,
   }: PropsWithChildren<
-    UseUncontrolledInput<V> & Pick<ButtonProps, 'variant'>
+    UseUncontrolledInput<V> & Partial<Pick<ButtonProps, 'variant'>>
   >) => {
     const renderValue = useRef<ReactNode>();
     const triggerLayout = useRef<LayoutRectangle | undefined>();

@@ -6,7 +6,7 @@
  */
 
 export { createStyles } from './createStyles';
-export { Registry } from './Registry';
+export { Registry, parse } from './Registry';
 export type * from './types';
 export { useTheme } from './useTheme';
-// export { NativeImplementation } from './NativeImplementation';
+export { withReactive } from './withReactive';

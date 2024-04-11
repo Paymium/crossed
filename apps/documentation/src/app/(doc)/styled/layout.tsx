@@ -5,6 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import '@/style.config';
 import { SideBarLayout } from '@/components/SideBarLayout';
 import { withDefaultProps } from '@crossed/core';
 
@@ -12,11 +13,16 @@ export default withDefaultProps(SideBarLayout, {
   menus: [
     { href: '/styled/introduction', title: 'Introduction' },
     { href: '/styled/setup', title: 'Setup' },
-    { title: 'Guide' },
-    { href: '/styled/plugins', title: 'Plugins' },
     { href: '/styled/usage', title: 'Usage' },
+    { title: 'Plugin' },
+    { href: '/styled/plugins', title: 'Introduction' },
+    { href: '/styled/plugins/base', title: 'Base' },
+    { href: '/styled/plugins/variants', title: 'Variants' },
+    { href: '/styled/plugins/pseudoclass', title: 'PseudoClass' },
+    { href: '/styled/plugins/mediaqueries', title: 'MediaQueries' },
+    { href: '/styled/plugins/web', title: 'Web' },
     { title: 'Reference' },
-    { href: '/styled/reference/styled', title: 'styled' },
+    { href: '/styled/reference/createStyles', title: 'createStyles' },
     { href: '/styled/reference/Registry', title: 'Registry' },
   ],
 });

@@ -11,7 +11,7 @@ import { Text, type TextProps } from '../typography/Text';
 const useCode = createStyles((t) => ({
   root: {
     base: {
-      backgroundColor: t.colors.neutral,
+      backgroundColor: t.colors.neutral.default,
       paddingVertical: 1,
       paddingHorizontal: t.space.xs,
       borderWidth: 1,

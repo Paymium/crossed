@@ -11,32 +11,29 @@ import { Text, type TextProps } from '../typography/Text';
 import { createStyles, type ExtractForProps } from '@crossed/styled';
 import { forwardRef } from 'react';
 
-const useCard = createStyles(
-  (t) =>
-    ({
-      root: {
-        base: {
-          padding: t.space.md,
-          borderRadius: t.space.xs,
-          backgroundColor: t.colors.neutral,
-        },
-        variants: {
-          role: {
-            link: {
-              ':hover': {
-                backgroundColor: t.colors.backgroundStrong,
-              },
-              ':active': {
-                backgroundColor: t.colors.backgroundStrong,
-              },
-            },
+const useCard = createStyles((t) => ({
+  root: {
+    base: {
+      padding: t.space.md,
+      borderRadius: t.space.xs,
+      backgroundColor: t.colors.neutral.default,
+    },
+    variants: {
+      role: {
+        link: {
+          ':hover': {
+            backgroundColor: t.colors.backgroundStrong,
+          },
+          ':active': {
+            backgroundColor: t.colors.backgroundStrong,
           },
         },
       },
-      title: { base: { alignSelf: 'stretch' } },
-      description: { base: { alignSelf: 'stretch' } },
-    } as const)
-);
+    },
+  },
+  title: { base: { alignSelf: 'stretch' } },
+  description: { base: { alignSelf: 'stretch' } },
+}));
 
 type Variants = ExtractForProps<typeof useCard.root>;
 

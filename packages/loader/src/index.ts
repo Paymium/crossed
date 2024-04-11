@@ -21,7 +21,7 @@ import {
 // import { parseScript as parse } from 'esprima';
 import escodegen from 'escodegen';
 import { createLogger, apiLog } from '@crossed/log';
-import { Registry, parse } from '@crossed/styled/registry';
+import { Registry, parse } from '@crossed/styled';
 import { convertKeyToCss } from '@crossed/styled/plugins';
 import type { CrossedstyleValues } from '@crossed/styled';
 import * as esbuild from 'esbuild';
@@ -185,7 +185,7 @@ export class Loader {
         let returnEl;
         try {
           // eslint-disable-next-line no-eval
-          returnEl = eval(toto)(Registry.getTheme());
+          returnEl = eval(toto)(Registry.getTheme(true));
         } catch (e) {
           this.logger.error(
             apiLog({

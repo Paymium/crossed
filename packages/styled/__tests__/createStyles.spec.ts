@@ -82,27 +82,23 @@ describe('createStyles', () => {
       container: { base },
     }));
     expect(style.container.rnw()).toStrictEqual({
-      style: [
-        {
-          '$$css': true,
-          'color-[white]': 'color-[white]',
-          'border-color-[red]': 'border-color-[red]',
-        },
-      ],
+      style: {
+        '$$css': true,
+        'color-[white]': 'color-[white]',
+        'border-color-[red]': 'border-color-[red]',
+      },
     });
     expect(
       style.container.rnw({
         style: { color: 'black', backgroundColor: 'white' },
       })
     ).toStrictEqual({
-      style: [
-        {
-          '$$css': true,
-          'color-[black]': 'color-[black]',
-          'border-color-[red]': 'border-color-[red]',
-          'background-color-[white]': 'background-color-[white]',
-        },
-      ],
+      style: {
+        '$$css': true,
+        'color-[black]': 'color-[black]',
+        'border-color-[red]': 'border-color-[red]',
+        'background-color-[white]': 'background-color-[white]',
+      },
     });
     expect(
       style.container.rnw({
@@ -110,15 +106,13 @@ describe('createStyles', () => {
         className: 'toto',
       })
     ).toStrictEqual({
-      style: [
-        {
-          '$$css': true,
-          'color-[black]': 'color-[black]',
-          'border-color-[red]': 'border-color-[red]',
-          'background-color-[white]': 'background-color-[white]',
-          'toto': 'toto',
-        },
-      ],
+      style: {
+        '$$css': true,
+        'color-[black]': 'color-[black]',
+        'border-color-[red]': 'border-color-[red]',
+        'background-color-[white]': 'background-color-[white]',
+        'toto': 'toto',
+      },
     });
   });
 });

@@ -9,7 +9,17 @@
 import '@/style.config';
 import { Logo } from '@/components/Logo';
 import { createStyles } from '@crossed/styled';
-import { B, Box, Button, Card, H1, H2, H3, YBox } from '@crossed/ui';
+import {
+  B,
+  Box,
+  Button,
+  ButtonIcon,
+  Card,
+  H1,
+  H2,
+  H3,
+  YBox,
+} from '@crossed/ui';
 import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
 import { Github } from '@crossed/unicons/Github';
@@ -76,9 +86,9 @@ export default function Home() {
         }}
       >
         <Button.Text>{t('Star us')}</Button.Text>
-        <Button.Element>
+        <ButtonIcon>
           <Github />
-        </Button.Element>
+        </ButtonIcon>
       </Button>
       <YBox space="lg" {...useStyles.sectionCta.rnw()}>
         <H3 {...useStyles.title.rnw()}>

@@ -8,21 +8,16 @@
 import { YBox, MenuList, MenuItem, MenuTitle } from '@crossed/ui';
 import { createStyles } from '@crossed/styled';
 import { Link } from 'expo-router';
+import { ChevronRight } from '@crossed/unicons';
 
 const styles = createStyles((t) => ({
   container: { base: { paddingHorizontal: 15 } },
-  text: {
-    base: { color: t.colors.default },
-  },
-  button: {
+  item: {
     'base': {
-      paddingHorizontal: 15,
-      paddingVertical: 10,
-      backgroundColor: t.colors.neutral,
+      justifyContent: 'space-between',
+      backgroundColor: t.colors.neutral.default,
     },
-    ':active': {
-      backgroundColor: t.colors.backgroundStrong,
-    },
+    ':active': { backgroundColor: t.colors.neutral.active },
   },
 }));
 
@@ -30,14 +25,31 @@ export default function TabOneScreen() {
   return (
     <YBox space="lg" {...styles.container.rnw()}>
       <MenuList>
-        <Link href="/button" asChild>
+        <Link
+          href="/button"
+          asChild
+          style={
+            (({ pressed }: { pressed: boolean }) =>
+              styles.item.rnw({ active: pressed }).style) as any
+          }
+        >
           <MenuItem>
             <MenuTitle>Button</MenuTitle>
+            <ChevronRight />
           </MenuItem>
         </Link>
-        <Link href="/menuList" asChild>
+        <MenuList.Divider />
+        <Link
+          href="/menuList"
+          asChild
+          style={
+            (({ pressed }: { pressed: boolean }) =>
+              styles.item.rnw({ active: pressed }).style) as any
+          }
+        >
           <MenuItem>
             <MenuTitle>MenuList</MenuTitle>
+            <ChevronRight />
           </MenuItem>
         </Link>
       </MenuList>

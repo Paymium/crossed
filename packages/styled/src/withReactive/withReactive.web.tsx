@@ -5,7 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { PropsWithChildren } from 'react';
+import type { ComponentType } from 'react';
 
-export const NativeImplementation = ({ children }: PropsWithChildren) =>
-  children;
+export const withReactive = <P extends Record<string, any>>(
+  Comp: ComponentType<P>
+) => Comp;

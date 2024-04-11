@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Registry } from '@crossed/styled/registry';
+import { Registry } from '@crossed/styled';
 import { Loader } from '../index';
 import { getAst } from './getAst';
 import { VariantsPlugin, BasePlugin } from '@crossed/styled/plugins';

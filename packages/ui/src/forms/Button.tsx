@@ -7,14 +7,26 @@
 
 'use client';
 
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import {
+  createStyles,
+  withReactive,
+  type ExtractForProps,
+} from '@crossed/styled';
 import { createButton } from '@crossed/primitive';
-import { Pressable, type PressableProps } from 'react-native';
+import { Pressable, View, type PressableProps } from 'react-native';
 import { Text as TextUi, type TextProps } from '../typography/Text';
 import { type GetProps, withDefaultProps } from '@crossed/core';
 import { XBox } from '../layout/XBox';
 import { Box } from '../layout/Box';
-import { createContext, forwardRef, useContext } from 'react';
+import {
+  cloneElement,
+  createContext,
+  forwardRef,
+  isValidElement,
+  useContext,
+  useMemo,
+  type PropsWithChildren,
+} from 'react';
 import { useInteraction } from '@crossed/styled/plugins';
 
 const buttonContext = createContext<
@@ -27,7 +39,7 @@ const buttonContext = createContext<
 >({});
 
 export const useButton = createStyles(
-  () =>
+  (t) =>
     ({
       error: {
         variants: {
@@ -43,6 +55,7 @@ export const useButton = createStyles(
               ':active': { borderColor: '#b42221' },
             },
             tertiary: { base: {} },
+            false: {},
           },
         },
       },
@@ -60,6 +73,7 @@ export const useButton = createStyles(
               ':hover': { color: '#d73636' },
               ':active': { color: '#b42221' },
             },
+            false: {},
           },
         },
       },
@@ -79,16 +93,26 @@ export const useButton = createStyles(
         variants: {
           variant: {
             primary: {
-              'base': { backgroundColor: '#4637ff', borderColor: '#4637ff' },
-              ':hover': { backgroundColor: '#2606c0', borderColor: '#2606c0' },
-              ':active': { backgroundColor: '#1e078f', borderColor: '#1e078f' },
+              'base': {
+                backgroundColor: t.colors.primary.default,
+                borderColor: t.colors.primary.default,
+              },
+              ':hover': {
+                backgroundColor: t.colors.primary.hover,
+                borderColor: t.colors.primary.hover,
+              },
+              ':active': {
+                backgroundColor: t.colors.primary.active,
+                borderColor: t.colors.primary.active,
+              },
             },
             secondary: {
-              'base': { borderColor: '#4637ff' },
-              ':hover': { backgroundColor: '#ebeaff' },
-              ':active': { backgroundColor: '#dad9ea' },
+              'base': { borderColor: t.colors.primary.default },
+              ':hover': { backgroundColor: t.colors.neutral.hover },
+              ':active': { backgroundColor: t.colors.neutral.active },
             },
             tertiary: { base: {} },
+            false: {},
           },
         },
       },
@@ -100,13 +124,14 @@ export const useButton = createStyles(
               base: { color: 'white' },
             },
             secondary: {
-              base: { color: '#4637ff' },
+              base: { color: t.colors.primary.default },
             },
             tertiary: {
-              'base': { color: '#4637ff' },
-              ':hover': { color: '#2606c0' },
-              ':active': { color: '#1e078f' },
+              'base': { color: t.colors.primary.default },
+              ':hover': { color: t.colors.primary.hover },
+              ':active': { color: t.colors.primary.active },
             },
+            false: {},
           },
         },
       },
@@ -119,57 +144,81 @@ type VariantButton = ExtractForProps<typeof useButton.root>;
 type RootProps = PressableProps &
   VariantButton['variants'] &
   Omit<VariantButton, 'variants'> & { error?: boolean };
-const Root = forwardRef(
-  ({ variant = 'primary', error = false, ...props }: RootProps, ref: any) => {
-    const { state, props: handleProps } = useInteraction(props);
-    return (
-      <buttonContext.Provider value={{ variant, error, state }}>
-        <Pressable
-          ref={ref}
-          {...props}
-          {...handleProps}
-          style={
-            useButton.root.rnw({
-              ...props,
-              ...state,
-              style: error
-                ? useButton.error.rnw({
-                    ...props,
-                    ...state,
-                    variants: { variant },
-                  }).style
-                : props.style,
-              variants: { variant },
-            }).style
-          }
-        />
-      </buttonContext.Provider>
-    );
-  }
-);
-
-const Text = (props: TextProps) => {
-  const { variant, error, state } = useContext(buttonContext);
-  return (
-    <TextUi
-      weight="semibold"
-      {...props}
-      style={
-        useButton.text.rnw({
-          ...props,
-          ...state,
-          style: error
-            ? useButton.errorText.rnw({
+const Root = withReactive(
+  forwardRef<View, RootProps>(
+    ({ variant = 'primary', error = false, ...props }, ref) => {
+      const { state, props: handleProps } = useInteraction(props);
+      return (
+        <buttonContext.Provider value={{ variant, error, state }}>
+          <Pressable
+            ref={ref}
+            {...props}
+            {...handleProps}
+            style={
+              useButton.root.rnw({
                 ...props,
                 ...state,
+                style: error
+                  ? useButton.error.rnw({
+                      ...props,
+                      ...state,
+                      variants: { variant },
+                    }).style
+                  : props.style,
                 variants: { variant },
               }).style
-            : props.style,
+            }
+          />
+        </buttonContext.Provider>
+      );
+    }
+  )
+);
+
+const Text = withReactive(
+  forwardRef<any, TextProps>((props, ref) => {
+    const { variant, error, state } = useContext(buttonContext);
+    return (
+      <TextUi
+        weight="semibold"
+        {...props}
+        style={
+          useButton.text.rnw({
+            ...props,
+            ...state,
+            style: error
+              ? useButton.errorText.rnw({
+                  ...props,
+                  ...state,
+                  variants: { variant },
+                }).style
+              : props.style,
+            variants: { variant },
+          }).style
+        }
+        ref={ref}
+      />
+    );
+  })
+);
+
+const ButtonIcon = ({ children }: PropsWithChildren) => {
+  const { variant, error, state } = useContext(buttonContext);
+  const color = useMemo(() => {
+    return useButton.text.style({
+      ...state,
+      style:
+        error &&
+        useButton.errorText.style({
+          ...state,
           variants: { variant },
-        }).style
-      }
-    />
-  );
+        }).style,
+      variants: { variant },
+    }).style.color as string;
+  }, [variant, error, state]);
+  return isValidElement(children)
+    ? cloneElement(children, { color } as any)
+    : children;
 };
 
 const Element = Box;
@@ -183,5 +232,5 @@ const Button = createButton({
 
 const { Text: ButtonText, Element: ButtonElement } = Button;
 
-export { ButtonText, ButtonElement, Button };
+export { ButtonText, ButtonElement, Button, ButtonIcon };
 export type ButtonProps = GetProps<typeof Button>;

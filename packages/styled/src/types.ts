@@ -6,6 +6,12 @@
  */
 
 import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
+import {
+  CrossedBasePlugin,
+  CrossedMediaQueriesPlugin,
+  CrossedPseudoClassPlugin,
+  CrossedWebPlugin,
+} from './plugins';
 
 type NestedKeys = 'shadowOffset' | 'transform' | 'textShadowOffset';
 
@@ -25,7 +31,16 @@ export type CrossedstyleValues = {
   [propName in AllAvailableKeys]?: AllAvailableStyles[propName];
 };
 
-export interface StyleSheet {}
+interface Variants
+  extends Record<string, Record<string, Omit<StyleSheet, 'variants'>>> {}
+
+export interface StyleSheet
+  extends CrossedBasePlugin,
+    CrossedWebPlugin,
+    CrossedPseudoClassPlugin,
+    CrossedMediaQueriesPlugin {
+  variants?: Variants;
+}
 
 export type CreateStylesParams<
   K extends string,
@@ -33,9 +48,7 @@ export type CreateStylesParams<
 > = <T extends Themes[keyof Themes]>(_theme: T) => Record<K, S>;
 
 export type ExtractForProps<S extends CrossedMethods<any>> =
-  S extends CrossedMethods<CrossedPropsExtended<infer D>>
-    ? CrossedPropsExtended<D>
-    : never;
+  S extends CrossedMethods<infer D, any> ? CrossedPropsExtended<D> : never;
 
 export type PluginContext<S> = {
   /**
@@ -76,15 +89,35 @@ export type PluginContext<S> = {
   }) => void;
 };
 
+type HasBooleanVariants<T> = T extends 'true'
+  ? true
+  : T extends 'false'
+  ? true
+  : false;
+
 export interface Themes {}
 
-// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-export interface CrossedPropsExtended<S = StyleSheet> {
+export interface CrossedPropsExtended<
+  S extends StyleSheet,
+  V = S['variants'],
+  MV = V extends object ? V : never
+> {
   className?: string;
-  style?: Record<string, any>;
+  style?: CrossedstyleValues;
+  focus?: true | false;
+  hover?: true | false;
+  active?: true | false;
+  variants?: {
+    [key in keyof MV]?: HasBooleanVariants<keyof MV[key]> extends false
+      ? keyof MV[key]
+      : keyof MV[key] | boolean;
+  };
 }
 
-export type CrossedMethods<P extends CrossedPropsExtended<StyleSheet>> = {
+export type CrossedMethods<
+  S extends StyleSheet,
+  P = CrossedPropsExtended<S>
+> = {
   style: (_p?: P) => { style: Record<string, string> };
   className: (_p?: P) => { className: string };
   rnw: (_p?: P) => { style: Record<string, any> };
