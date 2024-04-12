@@ -73,9 +73,11 @@ export const MediaQueriesPlugin = <
                   isWeb
                 );
                 const body = {
-                  [`${key}:${convertKeyToCss(
-                    keyProperty
-                  )}-[${valueNormalized}]`]: {
+                  [`${key}:${convertKeyToCss(keyProperty)}-[${
+                    Number(valueNormalized)
+                      ? valueNormalized
+                      : valueNormalized.replace(/ /g, '-')
+                  }]`]: {
                     [keyProperty]: valueNormalized,
                   },
                 };

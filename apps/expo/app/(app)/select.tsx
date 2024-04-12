@@ -29,7 +29,7 @@ export default function TabOneScreen() {
       ListHeaderComponent={
         <>
           <XBox alignItems="center" space="sm">
-            <Select>
+            <Select defaultValue="en">
               <Select.Trigger>
                 <XBox alignItems="center" justifyContent="between">
                   <Text>

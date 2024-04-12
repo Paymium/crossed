@@ -109,10 +109,9 @@ export class Loader {
         typeof value === 'string' ? value : this.styleToString(value);
 
       // escape some character in css
-      const css = `${obj.prefix ?? '.'}${key.replace(
-        /[#:\[\]\(\)%,]/g,
-        '\\$&'
-      )}${obj.suffix || ''} { ${styleParsed} }`;
+      const css = `${obj.prefix ?? '.'}${key
+        .replace(/[#:\[\]\(\)%,]/g, '\\$&')
+        .replace(/ /g, '-')}${obj.suffix || ''} { ${styleParsed} }`;
 
       // add css in cahce file
       this.fileCache.add(obj.wrapper ? obj.wrapper(css) : css);

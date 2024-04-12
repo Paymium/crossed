@@ -5,6 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+'use client';
+
 import { composeEventHandlers, useUncontrolled } from '@crossed/core';
 import { useCallback, useMemo, useTransition } from 'react';
 import type { PressableProps } from 'react-native';

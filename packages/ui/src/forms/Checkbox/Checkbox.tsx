@@ -40,6 +40,9 @@ const checkboxStyles = createStyles((t) => ({
       elevation: 5,
     },
     ':disabled': { backgroundColor: '#EBEAFE', borderColor: '#EBEAFE' },
+    'web': {
+      ':active': { boxShadow: '0px 0px 0px 2px #EDEDF6' },
+    },
     'variants': {
       checked: {
         true: {
@@ -84,7 +87,6 @@ export const Checkbox = ({ children }: PropsWithChildren) => {
       setChecked(!checked);
     });
   }, [setChecked, checked, setTransition]);
-
   return (
     <Pressable
       onPress={handlePress}

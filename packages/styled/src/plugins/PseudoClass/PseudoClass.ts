@@ -34,7 +34,11 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
         addClassname({
           suffix: `:${pseudoClass}`,
           body: {
-            [`${pseudoClass}:${convertKeyToCss(key)}-[${valueNormalized}]`]: {
+            [`${pseudoClass}:${convertKeyToCss(key)}-[${
+              Number(valueNormalized)
+                ? valueNormalized
+                : valueNormalized.replace(/ /g, '-')
+            }]`]: {
               [key]: valueNormalized,
             },
           },
@@ -43,7 +47,11 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
       if (props?.[pseudoClass] || !props) {
         addClassname({
           body: {
-            [`${convertKeyToCss(key)}-[${valueNormalized}]`]: {
+            [`${convertKeyToCss(key)}-[${
+              Number(valueNormalized)
+                ? valueNormalized
+                : valueNormalized.replace(/ /g, '-')
+            }]`]: {
               [key]: valueNormalized,
             },
           },

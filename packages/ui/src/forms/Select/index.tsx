@@ -29,7 +29,7 @@ import { Provider } from './Provider';
 import type { BottomSheetMethods } from '@devvie/bottom-sheet';
 import { useSelect } from './styles';
 import { ContentImpl } from './ContentImpl';
-import { useFocusScope } from 'react-focus-lock';
+import { useFocusScope } from './useFocusStop';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
@@ -161,20 +161,10 @@ const Option = ({
   ...props
 }: MenuItemProps & { value: string | number }) => {
   const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
-  const { focusNext, focusPrev } = useFocusScope();
+  const focusProps = useFocusScope();
   return (
     <MenuList.Item
-      {...{
-        onKeyDown: (e) => {
-          if (e.code === 'ArrowDown') {
-            focusNext();
-          } else if (e.code === 'ArrowUp') {
-            focusPrev();
-          } else if (e.code === 'Tab') {
-            setOpen(false);
-          }
-        },
-      }}
+      {...focusProps}
       active={value === valueGlobal}
       {...props}
       style={({ pressed }) => useSelect.options.rnw({ active: pressed }).style}
@@ -191,7 +181,7 @@ Option.displayName = 'Select.Option';
 
 const Value = () => {
   const { renderValue } = useSelectProvider();
-  return renderValue.current || '';
+  return renderValue.current;
 };
 
 Value.id = 'Select.Value';
