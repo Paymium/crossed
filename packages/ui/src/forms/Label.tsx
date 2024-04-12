@@ -5,6 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import { withReactive } from '@crossed/styled';
 import { form } from '../styles/form';
 import { Text, type TextProps } from '../typography';
 
@@ -33,11 +34,10 @@ import { Text, type TextProps } from '../typography';
 
 // export { Label, LabelText, LabelInput };
 
-export const Label = ({
-  disabled,
-  ...props
-}: TextProps & { disabled?: boolean }) => {
-  return <Text {...props} {...form.label.rnw({ ...props, disabled })} />;
-};
+export const Label = withReactive(
+  ({ disabled, ...props }: TextProps & { disabled?: boolean }) => {
+    return <Text {...props} {...form.label.rnw({ ...props, disabled })} />;
+  }
+);
 
 export {};

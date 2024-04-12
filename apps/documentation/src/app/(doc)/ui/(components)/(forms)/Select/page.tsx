@@ -9,7 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Select, Text } from '@crossed/ui';
+import { Select, Text, XBox } from '@crossed/ui';
 import { ChevronDown } from '@crossed/unicons';
 
 export default function CreateBadge() {
@@ -29,8 +29,10 @@ export default function CreateBadge() {
   defaultValue="en"
 >
   <Select.Trigger>
-    <Select.Value />
-    <ChevronDown />
+    <XBox alignItems="center" justifyContent="between">
+      <Select.Value />
+      <ChevronDown />
+    </XBox>
   </Select.Trigger>
   <Select.Content>
     <Select.Option value="fr">
@@ -42,7 +44,7 @@ export default function CreateBadge() {
   </Select.Content>
 </Select>
     `}
-      scope={{ Select, ChevronDown, Text }}
+      scope={{ Select, ChevronDown, Text, XBox }}
     />
   );
 }

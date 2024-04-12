@@ -10,3 +10,4 @@ export { Registry, parse } from './Registry';
 export type * from './types';
 export { useTheme } from './useTheme';
 export { withReactive } from './withReactive';
+export { isWeb } from './isWeb';

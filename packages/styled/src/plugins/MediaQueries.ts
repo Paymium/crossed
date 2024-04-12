@@ -8,6 +8,10 @@
 import type { CrossedstyleValues, Plugin } from '../types';
 import { convertKeyToCss, normalizeUnitPixel } from './utils';
 
+export let cacheBreakpoints: Partial<
+  Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>
+> = {};
+
 export interface CrossedMediaQueriesPlugin {
   media?: {
     xs?: CrossedstyleValues;
@@ -23,6 +27,7 @@ export const MediaQueriesPlugin = <
 >(
   breakpoints: B
 ): Plugin<CrossedMediaQueriesPlugin> => {
+  cacheBreakpoints = breakpoints;
   return {
     name: 'MediaQueriesPlugin',
     test: '^media$',

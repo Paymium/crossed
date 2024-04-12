@@ -12,3 +12,4 @@ export * from './Github';
 export * from './Moon';
 export * from './MousePointerClick';
 export * from './Sun';
+export * from './Check';

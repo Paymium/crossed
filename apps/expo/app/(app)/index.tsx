@@ -39,9 +39,27 @@ export default function TabOneScreen() {
             <ChevronRight />
           </MenuItem>
         </Link>
+        <Link href="/radio" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Radio</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/checkbox" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Checkbox</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
         <Link href="/menuList" asChild style={style}>
           <MenuItem>
             <MenuTitle>MenuList</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/select" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Select</MenuTitle>
             <ChevronRight />
           </MenuItem>
         </Link>

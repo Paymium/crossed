@@ -29,6 +29,13 @@ export const useXBox = createStyles(
             around: { base: { justifyContent: 'space-around' } },
             evenly: { base: { justifyContent: 'space-evenly' } },
           },
+          alignItems: {
+            'center': { base: { alignItems: 'center' } },
+            'baseline': { base: { alignItems: 'baseline' } },
+            'flex-end': { base: { alignItems: 'flex-end' } },
+            'flex-start': { base: { alignItems: 'flex-start' } },
+            'stretch': { base: { alignItems: 'stretch' } },
+          },
         },
       },
     } as const)
@@ -39,12 +46,15 @@ type Variant = ExtractForProps<typeof useXBox.root>;
 type XBoxPropsTmp = BoxProps & Variant['variants'];
 
 export const XBox = forwardRef(
-  ({ justifyContent, ...props }: XBoxPropsTmp, ref: any) => {
+  ({ justifyContent, alignItems, ...props }: XBoxPropsTmp, ref: any) => {
     return (
       <Box
         ref={ref}
         {...props}
-        {...useXBox.root.rnw({ ...props, variants: { justifyContent } })}
+        {...useXBox.root.rnw({
+          ...props,
+          variants: { justifyContent, alignItems },
+        })}
       />
     );
   }

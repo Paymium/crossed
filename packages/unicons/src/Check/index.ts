@@ -6,9 +6,7 @@
  */
 
 import { withDefaultProps } from '@crossed/core';
-import { ChevronRight as Base } from './ChevronRight';
+import { Check as Base } from './Check';
+import { Path, Svg } from 'react-native-svg';
 
-export const ChevronRight = withDefaultProps(Base, {
-  Svg: 'svg',
-  Path: 'path',
-});
+export const Check = withDefaultProps(Base, { Svg, Path });

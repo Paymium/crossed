@@ -84,7 +84,7 @@
     "@types/react-dom": "^18.2.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.73.5",
+    "react-native": "^0.73.6",
     "react-native-web": "^0.19.10",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.2"
@@ -92,7 +92,7 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.73.5",
+    "react-native": "^0.73.6",
     "react-native-web": "^0.19.10"
   },
   "dependencies": {
