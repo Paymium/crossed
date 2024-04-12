@@ -14,7 +14,7 @@ const styleBox = createStyles(
     ({
       root: {
         base: { display: 'flex' },
-        // web: { boxSizing: 'border-box' },
+        web: { base: { boxSizing: 'border-box' } },
         variants: {
           space: {
             xs: { base: { gap: t.space.xs } },
@@ -35,19 +35,10 @@ export type BoxProps = Pick<Variant['variants'], 'center' | 'space'> &
   Omit<Variant, 'variants'> &
   ViewProps;
 
-export const Box = forwardRef(
+export const Box = forwardRef<View, BoxProps>(
   (
-    {
-      style,
-      className,
-      space,
-      center,
-      active,
-      hover,
-      focus,
-      ...props
-    }: BoxProps,
-    ref: any
+    { style, className, space, center, active, hover, focus, ...props },
+    ref
   ) => (
     <View
       ref={ref}

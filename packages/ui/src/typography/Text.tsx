@@ -27,6 +27,7 @@ const useText = createStyles(
           fontFamily: t.fontFamily,
           fontWeight: '400',
           lineHeight: 20,
+          fontSize: 14,
         },
         variants: {
           weight: {

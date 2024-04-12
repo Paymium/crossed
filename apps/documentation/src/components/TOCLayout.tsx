@@ -8,11 +8,19 @@
 'use client';
 import '@/style.config';
 import { MenuList, XBox, YBox } from '@crossed/ui';
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+} from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { createStyles } from '@crossed/styled';
 import { menuStyle } from './menuSide.style';
+import { useUncontrolled } from '@crossed/core';
 
 const styles = createStyles(
   (t) =>
@@ -72,8 +80,6 @@ export const TOCLayout = ({
 }: PropsWithChildren<{ links?: Nav[] }>) => {
   const searchParams = useSearchParams();
   const [hash, setHash] = useState(undefined);
-  const pathname = usePathname();
-  const router = useRouter();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -100,23 +106,7 @@ export const TOCLayout = ({
           {links.map(({ href, title }) => {
             return (
               <YBox role="listitem" key={href || title} {...styles.li.rnw()}>
-                <MenuList.Item
-                  {...menuStyle.item.rnw({ hover: href === hash })}
-                  role="link"
-                  href={`${pathname}${href}`}
-                  onPress={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    router.push(href);
-                  }}
-                >
-                  <MenuList.Title
-                    {...menuStyle.itemText.rnw()}
-                    weight={href === hash ? 'semibold' : undefined}
-                  >
-                    {t(title)}
-                  </MenuList.Title>
-                </MenuList.Item>
+                <Item hash={hash} href={href} title={title} />
               </YBox>
             );
           })}
@@ -124,4 +114,53 @@ export const TOCLayout = ({
       </XBox>
     );
   }, [children, links, hash, t]);
+};
+
+const Item = ({
+  hash,
+  href,
+  title,
+}: {
+  hash: string;
+  href: string;
+  title: string;
+}) => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const { t } = useTranslation();
+  const [, setTransition] = useTransition();
+  const [hover, setHover] = useUncontrolled({
+    defaultValue: false,
+  });
+  const onHoverIn = useCallback(() => {
+    setTransition(() => {
+      setHover(true);
+    });
+  }, [setHover]);
+  const onHoverOut = useCallback(() => {
+    setTransition(() => {
+      setHover(false);
+    });
+  }, [setHover]);
+  return (
+    <MenuList.Item
+      onHoverOut={onHoverOut}
+      onHoverIn={onHoverIn}
+      {...menuStyle.item.rnw({ hover: href === hash || hover })}
+      role="link"
+      href={`${pathname}${href}`}
+      onPress={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        router.push(href);
+      }}
+    >
+      <MenuList.Title
+        {...menuStyle.itemText.rnw({ hover: href === hash || hover })}
+        weight={href === hash ? 'semibold' : undefined}
+      >
+        {t(title)}
+      </MenuList.Title>
+    </MenuList.Item>
+  );
 };

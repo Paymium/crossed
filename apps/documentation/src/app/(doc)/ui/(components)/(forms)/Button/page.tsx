@@ -9,7 +9,7 @@
 import '@/style.config';
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Button, Select, Text, Center, XBox } from '@crossed/ui';
+import { Button, Select, Text, Center, XBox, ButtonIcon } from '@crossed/ui';
 import { MousePointerClick } from '@crossed/unicons/MousePointerClick';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 import { useSignals } from '@preact/signals-react/runtime';
@@ -84,14 +84,14 @@ import { Button } from '@crossed/ui'
       example={`
   <Center>
     <Button variant="${variants}"${error ? ' error' : ''}>
-      <Button.Element>
+      <ButtonIcon>
         <MousePointerClick />
-      </Button.Element>
+      </ButtonIcon>
       <Button.Text>Try Me</Button.Text>
     </Button>
   </Center>
 `}
-      scope={{ Center, Button, MousePointerClick }}
+      scope={{ Center, Button, MousePointerClick, ButtonIcon }}
       variants={
         <>
           <Text>variant</Text>
@@ -102,8 +102,10 @@ import { Button } from '@crossed/ui'
             }}
           >
             <Select.Trigger>
-              <Select.Value />
-              <ChevronDown />
+              <XBox alignItems="center">
+                <Select.Value />
+                <ChevronDown />
+              </XBox>
             </Select.Trigger>
             <Select.Content>
               {['primary', 'secondary', 'tertiary'].map((key) => {

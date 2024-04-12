@@ -9,9 +9,10 @@ import type { CrossedstyleValues, Plugin } from '../../types';
 import { convertKeyToCss, normalizeUnitPixel } from './../utils';
 
 export interface CrossedPseudoClassProps {
-  focus?: true | false;
-  hover?: true | false;
-  active?: true | false;
+  'focus'?: true | false;
+  'hover'?: true | false;
+  'focus-visible'?: true | false;
+  'disabled'?: true | false;
 }
 
 export interface CrossedPseudoClassPlugin {
@@ -19,11 +20,12 @@ export interface CrossedPseudoClassPlugin {
   ':hover'?: CrossedstyleValues;
   ':active'?: CrossedstyleValues;
   ':focus-visible'?: CrossedstyleValues;
+  ':disabled'?: CrossedstyleValues;
 }
 
 export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
   name: 'PseudoClassPlugin',
-  test: '^:(hover|active|focus|focus-visible)$',
+  test: '^:(hover|active|focus|focus-visible|disabled)$',
   apply: ({ styles, key: ctxKey, addClassname, props, isWeb }) => {
     const pseudoClass = ctxKey.replace(/:/i, '');
     Object.entries(styles).forEach(([key, value]) => {
@@ -32,7 +34,11 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
         addClassname({
           suffix: `:${pseudoClass}`,
           body: {
-            [`${pseudoClass}:${convertKeyToCss(key)}-[${valueNormalized}]`]: {
+            [`${pseudoClass}:${convertKeyToCss(key)}-[${
+              Number(valueNormalized)
+                ? valueNormalized
+                : valueNormalized.replace(/ /g, '-')
+            }]`]: {
               [key]: valueNormalized,
             },
           },
@@ -41,7 +47,11 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
       if (props?.[pseudoClass] || !props) {
         addClassname({
           body: {
-            [`${convertKeyToCss(key)}-[${valueNormalized}]`]: {
+            [`${convertKeyToCss(key)}-[${
+              Number(valueNormalized)
+                ? valueNormalized
+                : valueNormalized.replace(/ /g, '-')
+            }]`]: {
               [key]: valueNormalized,
             },
           },

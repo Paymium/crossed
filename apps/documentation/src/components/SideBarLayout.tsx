@@ -8,11 +8,12 @@
 'use client';
 import '@/style.config';
 import { MenuList, XBox, YBox, YBoxProps } from '@crossed/ui';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useCallback, useTransition } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { createStyles } from '@crossed/styled';
 import { menuStyle } from './menuSide.style';
+import { useUncontrolled } from '@crossed/core';
 
 const styles = createStyles(
   (t) =>
@@ -88,10 +89,6 @@ export function SideBarLayout({
   children,
   menus,
 }: PropsWithChildren<{ menus: Nav[] }>) {
-  const pathname = usePathname();
-  const router = useRouter();
-  const { t } = useTranslation();
-
   return (
     <XBox {...styles.container.rnw()}>
       <MenuList
@@ -101,38 +98,7 @@ export function SideBarLayout({
         {menus.map(({ href, title }) => {
           return (
             <Li key={href || title} label={!href}>
-              {href ? (
-                <MenuList.Item
-                  role="link"
-                  href={`/crossed${href}`}
-                  onPress={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    router.push(href);
-                  }}
-                  style={[
-                    menuStyle.item.rnw({
-                      hover: href === pathname,
-                    }).style,
-                    styles.item.rnw().style,
-                  ]}
-                >
-                  <MenuList.Title
-                    {...menuStyle.itemText.rnw({ hover: href === pathname })}
-                    weight={href === pathname ? 'semibold' : undefined}
-                  >
-                    {t(title)}
-                  </MenuList.Title>
-                </MenuList.Item>
-              ) : (
-                <MenuList.Label
-                  hover={false}
-                  textAlign="right"
-                  weight="semibold"
-                >
-                  {t(title)}
-                </MenuList.Label>
-              )}
+              <Item href={href} title={title} />
             </Li>
           );
         })}
@@ -142,3 +108,51 @@ export function SideBarLayout({
     </XBox>
   );
 }
+
+const Item = ({ href, title }: { href: string; title: string }) => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const { t } = useTranslation();
+  const [, setTransition] = useTransition();
+  const [hover, setHover] = useUncontrolled({ defaultValue: false });
+  const onHoverIn = useCallback(() => {
+    setTransition(() => {
+      setHover(true);
+    });
+  }, [setHover]);
+  const onHoverOut = useCallback(() => {
+    setTransition(() => {
+      setHover(false);
+    });
+  }, [setHover]);
+  return href ? (
+    <MenuList.Item
+      role="link"
+      onHoverIn={onHoverIn}
+      onHoverOut={onHoverOut}
+      href={`/crossed${href}`}
+      onPress={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        router.push(href);
+      }}
+      style={[
+        menuStyle.item.rnw({
+          hover: href === pathname || hover,
+        }).style,
+        styles.item.rnw().style,
+      ]}
+    >
+      <MenuList.Title
+        {...menuStyle.itemText.rnw({ hover: href === pathname || hover })}
+        weight={hover ? 'semibold' : undefined}
+      >
+        {t(title)}
+      </MenuList.Title>
+    </MenuList.Item>
+  ) : (
+    <MenuList.Label hover={false} textAlign="right" weight="semibold">
+      {t(title)}
+    </MenuList.Label>
+  );
+};

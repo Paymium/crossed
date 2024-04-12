@@ -8,6 +8,7 @@
 export { BasePlugin, type CrossedBasePlugin } from './Base';
 export {
   MediaQueriesPlugin,
+  cacheBreakpoints,
   type CrossedMediaQueriesPlugin,
 } from './MediaQueries';
 export {

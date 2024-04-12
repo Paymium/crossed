@@ -8,4 +8,7 @@
 import { withDefaultProps } from '@crossed/core';
 import { ChevronRight as Base } from './ChevronRight';
 
-export const ChevronDown = withDefaultProps(Base, { Svg: 'svg', Path: 'path' });
+export const ChevronRight = withDefaultProps(Base, {
+  Svg: 'svg',
+  Path: 'path',
+});

@@ -22,33 +22,44 @@ const styles = createStyles((t) => ({
 }));
 
 export default function TabOneScreen() {
+  const style = (({ pressed }: { pressed: boolean }) =>
+    styles.item.rnw({ active: pressed }).style) as any;
   return (
     <YBox space="lg" {...styles.container.rnw()}>
       <MenuList>
-        <Link
-          href="/button"
-          asChild
-          style={
-            (({ pressed }: { pressed: boolean }) =>
-              styles.item.rnw({ active: pressed }).style) as any
-          }
-        >
+        <Link href="/button" asChild style={style}>
           <MenuItem>
             <MenuTitle>Button</MenuTitle>
             <ChevronRight />
           </MenuItem>
         </Link>
-        <MenuList.Divider />
-        <Link
-          href="/menuList"
-          asChild
-          style={
-            (({ pressed }: { pressed: boolean }) =>
-              styles.item.rnw({ active: pressed }).style) as any
-          }
-        >
+        <Link href="/input" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Input</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/radio" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Radio</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/checkbox" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Checkbox</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/menuList" asChild style={style}>
           <MenuItem>
             <MenuTitle>MenuList</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/select" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Select</MenuTitle>
             <ChevronRight />
           </MenuItem>
         </Link>

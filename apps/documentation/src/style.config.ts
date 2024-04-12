@@ -26,4 +26,4 @@ declare module '@crossed/styled' {
   export interface Themes extends ThemesCustom {}
 }
 
-Registry.setThemes(themes).setThemeName('dark');
+Registry.setThemes(themes).setThemeName('light');

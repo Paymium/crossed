@@ -102,12 +102,14 @@ export interface CrossedPropsExtended<
   V = S['variants'],
   MV = V extends object ? V : never
 > {
-  className?: string;
-  style?: CrossedstyleValues;
-  focus?: true | false;
-  hover?: true | false;
-  active?: true | false;
-  variants?: {
+  'className'?: string;
+  'style'?: CrossedstyleValues;
+  'focus'?: true | false;
+  'hover'?: true | false;
+  'active'?: true | false;
+  'focus-visible'?: true | false;
+  'disabled'?: true | false;
+  'variants'?: {
     [key in keyof MV]?: HasBooleanVariants<keyof MV[key]> extends false
       ? keyof MV[key]
       : keyof MV[key] | boolean;

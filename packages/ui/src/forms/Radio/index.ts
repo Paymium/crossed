@@ -5,4 +5,4 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export const useInteraction = () => ({});
+export { Radio } from './Radio';

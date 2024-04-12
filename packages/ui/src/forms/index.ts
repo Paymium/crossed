@@ -5,10 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-// export * from './Label';
+export * from './Label';
 export * from './Input';
 // export * from './Textarea';
 export * from './Button';
 export * from './Select';
-// export * from './Checkbox';
+export * from './Radio';
+export * from './Checkbox';
 // export * from './Switch';
