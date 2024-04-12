@@ -97,6 +97,7 @@ export const useButton = createStyles(
           paddingHorizontal: 16,
           borderRadius: 7,
           borderWidth: 2,
+          borderStyle: 'solid',
           borderColor: 'transparent',
           height: 44,
           flexDirection: 'row',
@@ -105,6 +106,7 @@ export const useButton = createStyles(
           backgroundColor: 'transparent',
           gap: 8,
         },
+        web: { base: { boxSizing: 'border-box' } },
         variants: {
           variant: {
             primary: {

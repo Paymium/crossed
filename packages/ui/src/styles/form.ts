@@ -19,8 +19,7 @@ export const form = createStyles((t) => ({
       paddingVertical: t.space.sm,
       paddingHorizontal: t.space.md,
       height: 44,
-      display: 'flex',
-      // flexDirection: 'column',
+      flexDirection: 'row',
       flex: 1,
     },
     ':hover': { borderColor: t.colors.primary.default },
@@ -30,6 +29,7 @@ export const form = createStyles((t) => ({
     'variants': {
       error: { true: { base: { borderColor: '#ef4444', color: '#ef4444' } } },
     },
+    'web': { base: { boxSizing: 'border-box' } },
   },
   placeholder: {
     base: { color: '#6F7995' },

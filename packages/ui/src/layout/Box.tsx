@@ -14,7 +14,7 @@ const styleBox = createStyles(
     ({
       root: {
         base: { display: 'flex' },
-        // web: { boxSizing: 'border-box' },
+        web: { base: { boxSizing: 'border-box' } },
         variants: {
           space: {
             xs: { base: { gap: t.space.xs } },
