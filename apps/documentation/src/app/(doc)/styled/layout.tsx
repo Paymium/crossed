@@ -14,15 +14,23 @@ export default withDefaultProps(SideBarLayout, {
     { href: '/styled/introduction', title: 'Introduction' },
     { href: '/styled/setup', title: 'Setup' },
     { href: '/styled/usage', title: 'Usage' },
-    { title: 'Plugin' },
-    { href: '/styled/plugins', title: 'Introduction' },
-    { href: '/styled/plugins/base', title: 'Base' },
-    { href: '/styled/plugins/variants', title: 'Variants' },
-    { href: '/styled/plugins/pseudoclass', title: 'PseudoClass' },
-    { href: '/styled/plugins/mediaqueries', title: 'MediaQueries' },
-    { href: '/styled/plugins/web', title: 'Web' },
-    { title: 'Reference' },
-    { href: '/styled/reference/createStyles', title: 'createStyles' },
-    { href: '/styled/reference/Registry', title: 'Registry' },
+    {
+      title: 'Plugin',
+      menus: [
+        { href: '/styled/plugins', title: 'Introduction' },
+        { href: '/styled/plugins/base', title: 'Base' },
+        { href: '/styled/plugins/variants', title: 'Variants' },
+        { href: '/styled/plugins/pseudoclass', title: 'PseudoClass' },
+        { href: '/styled/plugins/mediaqueries', title: 'MediaQueries' },
+        { href: '/styled/plugins/web', title: 'Web' },
+      ],
+    },
+    {
+      title: 'Reference',
+      menus: [
+        { href: '/styled/reference/createStyles', title: 'createStyles' },
+        { href: '/styled/reference/Registry', title: 'Registry' },
+      ],
+    },
   ],
 });
