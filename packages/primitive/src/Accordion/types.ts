@@ -55,7 +55,9 @@ export type UseFocus = (_p: { onPress: () => void }) => {
 // context
 ////////////////////////////////////////
 
-export type RootContext = Pick<AccordionProps, 'allowMultiple' | 'values'> & {
+export type RootContext = Required<
+  Pick<AccordionProps, 'allowMultiple' | 'values'>
+> & {
   setValues: (_value: string[]) => void;
 };
 

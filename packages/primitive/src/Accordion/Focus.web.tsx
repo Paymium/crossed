@@ -8,6 +8,7 @@
 import { View } from 'react-native';
 import type { FocusComponent, OnKeyDown, UseFocus } from './types';
 import ReactFocusLock, { useFocusScope } from 'react-focus-lock';
+import { useCallback } from 'react';
 
 export const Focus: FocusComponent = ({ children, ...props }) => {
   return (
@@ -19,22 +20,25 @@ export const Focus: FocusComponent = ({ children, ...props }) => {
 
 export const useFocus: UseFocus = ({ onPress }) => {
   const { focusNext, focusPrev } = useFocusScope();
-  const onKey: OnKeyDown = (event) => {
-    if (event.code === 'ArrowDown') {
-      focusNext();
-      event.stopPropagation();
-      event.preventDefault();
-    }
-    if (event.code === 'ArrowUp') {
-      event.stopPropagation();
-      event.preventDefault();
-      focusPrev();
-    }
-    if (event.code === 'Space') {
-      onPress();
-      event.stopPropagation();
-      event.preventDefault();
-    }
-  };
+  const onKey: OnKeyDown = useCallback(
+    (event) => {
+      if (event.code === 'ArrowDown') {
+        focusNext();
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      if (event.code === 'ArrowUp') {
+        event.stopPropagation();
+        event.preventDefault();
+        focusPrev();
+      }
+      if (event.code === 'Space') {
+        onPress();
+        event.stopPropagation();
+        event.preventDefault();
+      }
+    },
+    [focusNext, focusPrev, onPress]
+  );
   return { onKeyDown: onKey };
 };

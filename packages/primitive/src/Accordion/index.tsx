@@ -36,7 +36,7 @@ const createAccordion: CreateAccordion = () => {
   const Accordion: AccordionComponent = (props) => {
     const {
       children,
-      allowMultiple,
+      allowMultiple = false,
       defaultValues,
       values: valueProps,
       onChange,
@@ -71,7 +71,7 @@ const createAccordion: CreateAccordion = () => {
     (props, ref) => {
       const id = useId();
       const propsId = props.id || props.nativeID || `accordion-trigger-${id}`;
-      const { setValues, values = [], allowMultiple } = useContext(rootContext);
+      const { setValues, values, allowMultiple } = useContext(rootContext);
       const { value, buttonId, panelId } = useContext(itemContext);
       const onPress = useCallback(() => {
         setValues(
@@ -101,7 +101,7 @@ const createAccordion: CreateAccordion = () => {
     }
   );
   const AccordionPanel: AccordionPanelComponent = forwardRef((props, ref) => {
-    const { values = [] } = useContext(rootContext);
+    const { values } = useContext(rootContext);
     const { value, buttonId, panelId } = useContext(itemContext);
     const id = useId();
     const propsId = props.id || props.nativeID || `accordion-panel-${id}`;
