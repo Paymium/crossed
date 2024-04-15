@@ -8,6 +8,7 @@
 import './types';
 export * from './ChevronRight';
 export * from './ChevronDown';
+export * from './ChevronUp';
 export * from './Github';
 export * from './Moon';
 export * from './MousePointerClick';

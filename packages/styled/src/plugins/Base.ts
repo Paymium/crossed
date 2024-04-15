@@ -26,7 +26,7 @@ export const BasePlugin: Plugin<CrossedBasePlugin> = {
         const valueNormalized = normalizeUnitPixel(key, value, context.isWeb);
         acc[
           `${convertKeyToCss(key)}-[${
-            Number(valueNormalized)
+            typeof valueNormalized === 'number'
               ? valueNormalized
               : valueNormalized.replace(/ /g, '-')
           }]`

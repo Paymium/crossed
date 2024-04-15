@@ -35,7 +35,7 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
           suffix: `:${pseudoClass}`,
           body: {
             [`${pseudoClass}:${convertKeyToCss(key)}-[${
-              Number(valueNormalized)
+              typeof valueNormalized === 'number'
                 ? valueNormalized
                 : valueNormalized.replace(/ /g, '-')
             }]`]: {
@@ -48,7 +48,7 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
         addClassname({
           body: {
             [`${convertKeyToCss(key)}-[${
-              Number(valueNormalized)
+              typeof valueNormalized === 'number'
                 ? valueNormalized
                 : valueNormalized.replace(/ /g, '-')
             }]`]: {

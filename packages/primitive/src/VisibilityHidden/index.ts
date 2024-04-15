@@ -5,5 +5,5 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export * from './Tabs';
-export * from './Accordion';
+export * from './VisibilityHidden';
+export * from './types';
