@@ -20,10 +20,14 @@ import { Text } from 'react-native';
 describe('Accordion', () => {
   test('createAccordion', async () => {
     const components = createAccordion();
-    expect(components).toHaveProperty('Accordion');
-    expect(components).toHaveProperty('AccordionItem');
-    expect(components).toHaveProperty('AccordionPanel');
-    expect(components).toHaveProperty('AccordionTrigger');
+    expect(Object.keys(components)).toEqual([
+      'Accordion',
+      'AccordionItem',
+      'AccordionTrigger',
+      'AccordionPanel',
+      'rootContext',
+      'itemContext',
+    ]);
   });
 
   test('Show component, single', async () => {

@@ -7,6 +7,7 @@
 
 import type {
   ComponentType,
+  Context,
   ForwardRefExoticComponent,
   KeyboardEventHandler,
   MutableRefObject,
@@ -40,6 +41,8 @@ export type CreateAccordion = () => {
   AccordionItem: AccordionItemComponent;
   AccordionTrigger: AccordionTriggerComponent;
   AccordionPanel: AccordionPanelComponent;
+  itemContext: Context<ItemContext>;
+  rootContext: Context<RootContext>;
 };
 
 ////////////////////////////////////////

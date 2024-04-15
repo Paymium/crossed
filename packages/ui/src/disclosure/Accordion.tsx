@@ -13,7 +13,8 @@ import {
   type AccordionComponent,
 } from '@crossed/primitive';
 import { createStyles } from '@crossed/styled';
-import { forwardRef } from 'react';
+import { forwardRef, useContext } from 'react';
+import { ChevronDown, ChevronUp } from '@crossed/unicons';
 
 const accordionStyles = createStyles((t) => ({
   root: {
@@ -24,7 +25,12 @@ const accordionStyles = createStyles((t) => ({
     },
   },
   trigger: {
-    'base': { display: 'flex', padding: t.space.sm },
+    'base': {
+      display: 'flex',
+      padding: t.space.sm,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
     ':hover': { backgroundColor: t.colors.neutral.hover },
     ':active': { backgroundColor: t.colors.neutral.active },
     'web': { base: { transition: 'all 170ms' } },
@@ -42,6 +48,8 @@ const accordionStyles = createStyles((t) => ({
 }));
 
 const {
+  itemContext,
+  rootContext,
   Accordion: PAccordion,
   AccordionItem: PAccordionItem,
   AccordionPanel: PAccordionPanel,
@@ -76,4 +84,16 @@ const AccordionPanel: AccordionPanelComponent = forwardRef((props, ref) => {
   );
 });
 
-export { AccordionItem, AccordionPanel, AccordionTrigger, Accordion };
+const AccordionIcon = () => {
+  const { value } = useContext(itemContext);
+  const { values } = useContext(rootContext);
+  return values.includes(value) ? <ChevronUp /> : <ChevronDown />;
+};
+
+export {
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+  Accordion,
+  AccordionIcon,
+};

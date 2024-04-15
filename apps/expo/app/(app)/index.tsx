@@ -63,6 +63,12 @@ export default function TabOneScreen() {
             <ChevronRight />
           </MenuItem>
         </Link>
+        <Link href="/accordion" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Accordion</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
       </MenuList>
     </YBox>
   );

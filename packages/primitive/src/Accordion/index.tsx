@@ -125,7 +125,14 @@ const createAccordion: CreateAccordion = () => {
   AccordionTrigger.displayName = 'Accordion.Trigger';
   AccordionPanel.displayName = 'Accordion.Panel';
 
-  return { Accordion, AccordionItem, AccordionTrigger, AccordionPanel };
+  return {
+    Accordion,
+    AccordionItem,
+    AccordionTrigger,
+    AccordionPanel,
+    rootContext,
+    itemContext,
+  };
 };
 
 const { Accordion, AccordionItem, AccordionTrigger, AccordionPanel } =
