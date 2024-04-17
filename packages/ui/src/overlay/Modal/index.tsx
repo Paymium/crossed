@@ -1,0 +1,189 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
+import {
+  type ModalContentProps,
+  type ModalOverlayProps,
+  type ModalPortalProps,
+  type ModalProps,
+  type ModalTitleProps,
+  createModal,
+  type ModalBodyComponent,
+} from '@crossed/primitive';
+import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { createContext, useContext } from 'react';
+import { XBox } from '../../layout/XBox';
+import { Box, type BoxProps } from '../../layout/Box';
+import { withDefaultProps } from '@crossed/core';
+import { CloseButton } from '../../other/CloseButton';
+
+const modalStyles = createStyles((t) => ({
+  content: {
+    base: {
+      borderRadius: 8,
+      backgroundColor: t.colors.white,
+      margin: 'auto',
+      padding: t.space.xl,
+    },
+    variants: {
+      size: {
+        sm: {
+          media: {
+            xs: { width: '90%', height: '50%' },
+            md: { width: 560, height: 'auto' },
+          },
+        },
+        md: {
+          media: {
+            xs: { width: '90%', height: '50%' },
+            md: { width: 760, height: 'auto' },
+          },
+        },
+        lg: {
+          media: {
+            xs: { width: '90%', height: '50%' },
+            md: { width: 1024, height: 'auto' },
+          },
+        },
+      },
+    },
+    web: {
+      base: {
+        boxShadow: '0px 8px 24px 0px #0000001A',
+      },
+    },
+  },
+  overlay: {
+    base: {
+      position: 'absolute',
+      backgroundColor: t.colors.black,
+      opacity: 0.5,
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+    },
+  },
+  portal: {
+    base: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  },
+  header: {
+    media: {
+      xs: { flexDirection: 'column-reverse', alignItems: 'flex-end' },
+      md: { flexDirection: 'row' },
+    },
+  },
+  title: {
+    base: {
+      flex: 1,
+    },
+    media: {
+      xs: {
+        textAlign: 'center',
+        alignSelf: 'stretch',
+        fontWeight: '700',
+        lineHeight: 24,
+        fontSize: 18,
+      },
+      md: {
+        textAlign: 'left',
+        fontWeight: '800',
+        lineHeight: 32,
+        fontSize: 24,
+      },
+    },
+  },
+  body: {
+    base: { flex: 1 },
+  },
+}));
+const {
+  Modal: PModal,
+  ModalContent: PModalContent,
+  ModalOverlay: PModalOverlay,
+  ModalTitle: PModalTitle,
+  ModalTrigger: PModalTrigger,
+  ModalPortal: PModalPortal,
+  ModalBody: PModalBody,
+} = createModal();
+
+type VariantSize = ExtractForProps<typeof modalStyles.content>['variants'];
+
+const localContext = createContext<VariantSize>({ size: 'md' });
+const Modal = ({ size = 'md', ...props }: ModalProps & VariantSize) => {
+  return (
+    <localContext.Provider value={{ size }}>
+      <PModal {...props} />
+    </localContext.Provider>
+  );
+};
+const ModalContent = (props: ModalContentProps) => {
+  const { size } = useContext(localContext);
+  return (
+    <PModalContent
+      {...props}
+      {...modalStyles.content.rnw({ variants: { size } })}
+    />
+  );
+};
+const ModalOverlay = (props: ModalOverlayProps) => {
+  return <PModalOverlay {...props} {...modalStyles.overlay.rnw()} />;
+};
+const ModalTitle = (props: ModalTitleProps) => {
+  return <PModalTitle {...props} {...modalStyles.title.rnw()} />;
+};
+const ModalTrigger = PModalTrigger;
+
+const ModalBody: ModalBodyComponent = (props) => (
+  <PModalBody {...props} {...modalStyles.body.rnw()} />
+);
+
+const ModalHeader = ({ children, ...props }: BoxProps) => {
+  return (
+    <Box {...props} {...modalStyles.header.rnw(props)}>
+      {children}
+      <ModalTrigger asChild>
+        <CloseButton />
+      </ModalTrigger>
+    </Box>
+  );
+};
+const ModalPortal = ({ children, ...props }: ModalPortalProps) => {
+  const context = useContext(localContext);
+  return (
+    <PModalPortal {...props} {...modalStyles.portal.rnw()}>
+      <localContext.Provider value={context}>{children}</localContext.Provider>
+    </PModalPortal>
+  );
+};
+
+const ModalFooter = withDefaultProps(XBox, {
+  justifyContent: 'end',
+  space: 'md',
+});
+
+export {
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  ModalTitle,
+  ModalTrigger,
+  ModalPortal,
+  ModalFooter,
+  ModalHeader,
+  ModalBody,
+};
