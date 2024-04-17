@@ -9,6 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { Label, YBox } from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
@@ -20,8 +21,14 @@ export default function CreateBadge() {
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`// coming soon`}
-      scope={{}}
+      example={`
+<YBox space="sm">
+  <Label>Simple</Label>
+  <Label focus>Focused</Label>
+  <Label disabled>Disabled</Label>
+</YBox>
+`}
+      scope={{ Label, YBox }}
     />
   );
 }

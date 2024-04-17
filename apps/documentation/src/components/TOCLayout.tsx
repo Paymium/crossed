@@ -52,13 +52,13 @@ const styles = createStyles(
         base: {
           paddingHorizontal: 20,
           alignSelf: 'baseline',
-          display: 'none',
           height: 'auto',
           borderLeftWidth: 1,
           borderColor: t.colors.neutral.default,
           borderStyle: 'solid',
         },
         media: {
+          xs: { display: 'none' },
           xl: { display: 'flex' },
         },
       },

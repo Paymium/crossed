@@ -41,23 +41,6 @@ export default function Home() {
             </Trans>
           </Text>
         </Li>
-        <Li>
-          <Text>
-            <Trans>
-              <B>Higher Order Component (HOC):</B> Unlock the power of hover,
-              active, and focus states in your components effortlessly.
-            </Trans>
-          </Text>
-        </Li>
-        <Li>
-          <Text>
-            <Trans>
-              <B>React-Native-Unistyles Integration:</B> Familiar with
-              react-native-unistyles? Harness its potential with our library for
-              an enhanced styling experience.
-            </Trans>
-          </Text>
-        </Li>
       </Ul>
     </YBox>
   );

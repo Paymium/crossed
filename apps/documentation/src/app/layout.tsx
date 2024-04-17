@@ -32,7 +32,13 @@ export const metadata: Metadata = {
 
 const styleSheet = createStyles((t) => ({
   root: {
-    base: { height: '100%', display: 'flex', flexShrink: 1 },
+    base: {
+      height: '100%',
+      display: 'flex',
+      flexShrink: 1,
+      flexGrow: 1,
+      flexDirection: 'column',
+    },
   },
   body: {
     base: {

@@ -15,6 +15,7 @@ import {
   AccordionPanel,
   AccordionItem,
   Text,
+  AccordionIcon,
 } from '@crossed/ui';
 import { XBox } from '@crossed/ui';
 import { useState } from 'react';
@@ -49,6 +50,7 @@ export default function CreateBadge() {
       <Text>
         Section 1 title
       </Text>
+      <AccordionIcon />
     </AccordionTrigger>
     <AccordionPanel>
       <Text>
@@ -65,6 +67,7 @@ export default function CreateBadge() {
       <Text>
         Section 2 title
       </Text>
+      <AccordionIcon />
     </AccordionTrigger>
     <AccordionPanel>
       <Text>
@@ -82,6 +85,7 @@ export default function CreateBadge() {
         AccordionTrigger,
         AccordionPanel,
         AccordionItem,
+        AccordionIcon,
         Text,
       }}
     />
