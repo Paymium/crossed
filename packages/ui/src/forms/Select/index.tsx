@@ -22,14 +22,16 @@ import {
 } from 'react';
 import { Button, type ButtonProps } from '../Button';
 import { type MenuItemProps, MenuList } from '../../display/MenuList';
-import { Pressable, View, type LayoutRectangle } from 'react-native';
+import { Pressable, TextInput, View, type LayoutRectangle } from 'react-native';
 import { form } from '../../styles/form';
 import { useSelectProvider } from './context';
 import { Provider } from './Provider';
 import type { BottomSheetMethods } from '@devvie/bottom-sheet';
 import { useSelect } from './styles';
 import { ContentImpl } from './ContentImpl';
-import { useFocusScope } from './useFocusStop';
+import { Text } from '../../typography/Text';
+import { VisibilityHidden } from '@crossed/primitive';
+import { useFocusScope } from './Focus';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
@@ -57,7 +59,7 @@ const findChild = (
 };
 
 const SelectRoot = memo(
-  <V extends string | number>({
+  <V extends string>({
     value: valueProps,
     defaultValue,
     finalValue,
@@ -65,14 +67,26 @@ const SelectRoot = memo(
     variant,
     children,
     adapt = true,
+    onFocus,
+    onBlur,
+    id,
+    hover,
+    focus,
   }: PropsWithChildren<
     UseUncontrolledInput<V> &
-      Partial<Pick<ButtonProps, 'variant'>> & { adapt?: boolean }
+      Partial<
+        Pick<
+          ButtonProps,
+          'variant' | 'onFocus' | 'onBlur' | 'id' | 'hover' | 'focus'
+        >
+      > & {
+        adapt?: boolean;
+      }
   >) => {
     const bottomSheetModalRef = useRef<BottomSheetMethods>(null);
     const renderValue = useRef<ReactNode>();
     const triggerLayout = useRef<LayoutRectangle | undefined>();
-    const [value, setValue] = useUncontrolled<string | number>({
+    const [value, setValue] = useUncontrolled<V>({
       value: valueProps,
       defaultValue,
       finalValue,
@@ -84,7 +98,7 @@ const SelectRoot = memo(
     const [open, setOpen] = useUncontrolled<boolean>({
       defaultValue: false,
     });
-    renderValue.current = findChild(children, value) || 'rien trouvé';
+    renderValue.current = findChild(children, value) || '';
     return (
       <Provider
         value={value}
@@ -96,6 +110,11 @@ const SelectRoot = memo(
         triggerLayout={triggerLayout}
         sheet={bottomSheetModalRef}
         adapt={adapt}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        id={id}
+        hover={hover}
+        focus={focus}
       >
         {children}
       </Provider>
@@ -108,65 +127,92 @@ SelectRoot.id = 'Select';
 SelectRoot.displayName = 'Select';
 
 const Trigger = withStaticProperties(
-  memo((props: ButtonProps) => {
+  memo(({ children, ...props }: ButtonProps) => {
     const pressableRef = useRef<View>(null);
-    const { setOpen, open, variant, triggerLayout, sheet } =
-      useSelectProvider();
-    const onPress = useCallback(
-      composeEventHandlers(() => {
-        if (sheet.current) {
-          sheet.current.open();
+    const {
+      setOpen,
+      open,
+      variant,
+      triggerLayout,
+      sheet,
+      hover,
+      focus,
+      id,
+      onBlur,
+      onFocus,
+    } = useSelectProvider();
+    const onPress = useCallback(() => {
+      if (sheet.current) {
+        sheet.current.open();
+        setOpen(!open);
+      } else {
+        pressableRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
+          triggerLayout.current = {
+            left: pageX,
+            top: pageY,
+            width,
+            height,
+            pageX,
+            pageY,
+          } as any;
           setOpen(!open);
-        } else {
-          pressableRef.current?.measure(
-            (_x, _y, width, height, pageX, pageY) => {
-              triggerLayout.current = {
-                left: pageX,
-                top: pageY,
-                width,
-                height,
-                pageX,
-                pageY,
-              } as any;
-              setOpen(!open);
-            }
-          );
-        }
-      }, props.onPress),
-      [props.onPress, open]
+        });
+      }
+    }, [open, setOpen, sheet, triggerLayout]);
+    const inputRender = (
+      <VisibilityHidden hide>
+        <TextInput id={id} focusable={false} />
+      </VisibilityHidden>
     );
+
     return (
       <Pressable
         ref={pressableRef}
         variant={variant}
-        onLayout={({ nativeEvent: { layout } }: any) => {
+        onLayout={({ nativeEvent: { layout } }) => {
           triggerLayout.current = layout;
         }}
         {...props}
+        onFocus={composeEventHandlers(props.onFocus, onFocus)}
+        onBlur={composeEventHandlers(props.onBlur, onBlur)}
         style={({ pressed }) =>
           form.input.rnw({
             ...props,
-            active: props.active ?? (pressed || open),
+            hover,
+            'focus': focus ?? open,
+            'focus-visible': focus ?? open,
+            'active': props.active ?? pressed,
           }).style
         }
-        onPress={onPress}
-      />
+        onPress={composeEventHandlers(props.onPress, onPress)}
+      >
+        {typeof children === 'function' ? (
+          (e) => (
+            <>
+              {inputRender}
+              {children(e)}
+            </>
+          )
+        ) : (
+          <>
+            {inputRender}
+            {children}
+          </>
+        )}
+      </Pressable>
     );
   }),
   { Text: Button.Text }
 );
 
-const Option = ({
-  value,
-  ...props
-}: MenuItemProps & { value: string | number }) => {
+const Option = ({ value, ...props }: MenuItemProps & { value: string }) => {
   const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
   const focusProps = useFocusScope();
   return (
     <MenuList.Item
-      {...focusProps}
       active={value === valueGlobal}
       {...props}
+      {...focusProps}
       style={({ pressed }) => useSelect.options.rnw({ active: pressed }).style}
       onPress={composeEventHandlers(() => {
         setOpen(false);
@@ -181,7 +227,7 @@ Option.displayName = 'Select.Option';
 
 const Value = () => {
   const { renderValue } = useSelectProvider();
-  return renderValue.current;
+  return <Text>{renderValue.current}</Text>;
 };
 
 Value.id = 'Select.Value';

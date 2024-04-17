@@ -6,8 +6,7 @@
  */
 
 import { MenuList } from '../../display/MenuList';
-import { SelectProvider, useSelectProvider } from './context';
-import { Portal } from '@gorhom/portal';
+import { useSelectProvider } from './context';
 import type { ContentProps } from './types';
 import BottomSheet from '@devvie/bottom-sheet';
 import { useCallback } from 'react';
@@ -19,13 +18,9 @@ export const ContentNative = ({ sheetProps, ...props }: ContentProps) => {
     setOpen(false);
   }, [setOpen]);
   return (
-    <Portal>
-      <SelectProvider {...all}>
-        <BottomSheet ref={sheet} {...sheetProps} onClose={onClose}>
-          <MenuList {...props} />
-        </BottomSheet>
-      </SelectProvider>
-    </Portal>
+    <BottomSheet ref={sheet} {...sheetProps} onClose={onClose}>
+      <MenuList {...props} />
+    </BottomSheet>
   );
 };
 

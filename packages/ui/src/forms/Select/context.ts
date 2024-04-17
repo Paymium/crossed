@@ -8,7 +8,11 @@
 import { createScope } from '@crossed/core';
 import type { MutableRefObject, ReactNode } from 'react';
 import type { ButtonProps } from '../Button';
-import type { LayoutRectangle } from 'react-native';
+import type {
+  LayoutRectangle,
+  NativeSyntheticEvent,
+  TargetedEvent,
+} from 'react-native';
 import type { BottomSheetMethods } from '@devvie/bottom-sheet';
 
 export type Context = {
@@ -21,6 +25,11 @@ export type Context = {
   triggerLayout: MutableRefObject<LayoutRectangle | undefined>;
   sheet?: MutableRefObject<BottomSheetMethods | undefined>;
   adapt?: boolean;
+  onFocus?: (_e: NativeSyntheticEvent<TargetedEvent>) => void;
+  onBlur?: (_e: NativeSyntheticEvent<TargetedEvent>) => void;
+  id?: string;
+  hover?: boolean;
+  focus: boolean;
 };
 
 export const [SelectProvider, useSelectProvider] = createScope<Context>(

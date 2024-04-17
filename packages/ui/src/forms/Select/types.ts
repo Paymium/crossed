@@ -6,7 +6,12 @@
  */
 
 import type { BottomSheetProps } from '@devvie/bottom-sheet';
-import type { MenuListProps } from 'src/display';
+import type { MenuListProps } from '../../display/MenuList';
+import type { ComponentType } from 'react';
+import type { ReactFocusOnProps } from 'react-focus-on/dist/es5/types';
+
+export type FocusProps = ReactFocusOnProps;
+export type FocusComponent = ComponentType<FocusProps>;
 
 export type ContentProps = Partial<MenuListProps> & {
   sheetProps?: BottomSheetProps;
