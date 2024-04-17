@@ -23,7 +23,9 @@ const styleBox = createStyles(
             lg: { base: { gap: t.space.lg } },
             xl: { base: { gap: t.space.xl } },
           },
-          center: { true: { base: { alignItems: 'center' } } },
+          center: {
+            true: { base: { alignItems: 'center', justifyContent: 'center' } },
+          },
         },
       },
     } as const)
