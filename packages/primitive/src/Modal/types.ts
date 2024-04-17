@@ -13,7 +13,6 @@ import type {
 } from 'react';
 import type { PressableProps, TextProps, ViewProps } from 'react-native';
 import type { VisibilityHiddenProps } from '../VisibilityHidden';
-import type { ReactFocusOnProps } from 'react-focus-on/dist/es5/types';
 
 export type ModalProps = PropsWithChildren<{
   open?: boolean;
@@ -54,8 +53,8 @@ export type CreateModal = () => {
   ModalBody: ModalBodyComponent;
 };
 
-export type OnKeyDown = KeyboardEventHandler<HTMLButtonElement>;
+export type ModalOnKeyDown = KeyboardEventHandler<HTMLButtonElement>;
 
 export type UseEscape = (_e: () => void) => {
-  onKeyDown: OnKeyDown;
+  onKeyDown: ModalOnKeyDown;
 };

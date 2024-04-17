@@ -96,10 +96,8 @@ export class Loader {
     return Array.from(this.fileCache.values())
       .sort((a, b) => {
         if (!a.startsWith('@media')) return -1;
-        const [, widthA] =
-          a.match(/@media screen and \(min-width: ([0-9]+)px\)/i) || [];
-        const [, widthB] =
-          b.match(/@media screen and \(min-width: ([0-9]+)px\)/i) || [];
+        const [, widthA] = a.match(/@media \(min-width: ([0-9]+)px\)/i) || [];
+        const [, widthB] = b.match(/@media \(min-width: ([0-9]+)px\)/i) || [];
         if (!widthA) return -1;
         if (!widthB) return 1;
         return Number(widthA) < Number(widthB) ? -1 : 1;

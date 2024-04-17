@@ -146,6 +146,7 @@ export const createModal: CreateModal = () => {
         role="button"
         {...props}
         onPressOut={composeEventHandlers(props.onPressOut, onPressOut)}
+        onPress={composeEventHandlers(props.onPress, () => {})}
       >
         {children}
       </Pressable>

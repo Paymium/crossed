@@ -33,9 +33,9 @@ describe('media-query', () => {
       )
     );
     expect(loader.getCSS()).toEqual(
-      `.dark {  }
+      `.width-\\[50px\\] { width:50px; }
 .margin-top-\\[4px\\] { margin-top:4px; }
-.width-\\[50px\\] { width:50px; }
+.dark {  }
 @media (min-width: 768px) { .md\\:background-color-\\[red\\] { background-color:red; } }`
     );
   });
@@ -46,23 +46,23 @@ describe('media-query', () => {
     loader.parse(
       getAst(
         `()=>({
+            media: {
+              md: { backgroundColor: "red" },
+              sm : { backgroundColor: "green" },
+            },
             base: {
               marginTop: 4,
               width: 50,
               backgroundColor: "black"
-            },
-            media: {
-              sm : { backgroundColor: "green" },
-              md: { backgroundColor: "red" }
             }
           })`
       )
     );
     expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.margin-top-\\[4px\\] { margin-top:4px; }
+      `.background-color-\\[black\\] { background-color:black; }
 .width-\\[50px\\] { width:50px; }
-.background-color-\\[black\\] { background-color:black; }
+.margin-top-\\[4px\\] { margin-top:4px; }
+.dark {  }
 @media (min-width: 576px) { .sm\\:background-color-\\[green\\] { background-color:green; } }
 @media (min-width: 768px) { .md\\:background-color-\\[red\\] { background-color:red; } }`
     );

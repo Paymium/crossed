@@ -49,9 +49,9 @@ export type CreateAccordion = () => {
 // Focus
 ////////////////////////////////////////
 export type FocusComponent = ComponentType<ViewProps>;
-export type OnKeyDown = KeyboardEventHandler<HTMLButtonElement>;
-export type UseFocus = (_p: { onPress: () => void }) => {
-  onKeyDown: OnKeyDown;
+export type AccordionOnKeyDown = KeyboardEventHandler<HTMLButtonElement>;
+export type AccordionUseFocus = (_p: { onPress: () => void }) => {
+  onKeyDown: AccordionOnKeyDown;
 };
 
 ////////////////////////////////////////
