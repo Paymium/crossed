@@ -9,8 +9,10 @@ import { useUncontrolled } from '@crossed/core';
 import { createStyles } from '@crossed/styled';
 import { useInteraction } from '@crossed/styled/plugins';
 import { Check } from '@crossed/unicons';
-import { useCallback, useTransition, type PropsWithChildren } from 'react';
+import { useCallback, useTransition } from 'react';
 import { Pressable, View } from 'react-native';
+import { Implementation } from './Implementation';
+import type { CheckboxComponent } from './type';
 
 const checkboxStyles = createStyles((t) => ({
   pressable: {
@@ -18,6 +20,7 @@ const checkboxStyles = createStyles((t) => ({
       alignItems: 'center',
       display: 'flex',
       flexDirection: 'row',
+      gap: t.space.sm,
     },
   },
   root: {
@@ -77,8 +80,17 @@ const checkboxStyles = createStyles((t) => ({
   },
 }));
 
-export const Checkbox = ({ children }: PropsWithChildren) => {
-  const [checked, setChecked] = useUncontrolled({ defaultValue: false });
+export const Checkbox: CheckboxComponent = ({
+  children,
+  checked: checkedProps,
+  defaultChecked = false,
+  onChecked,
+}) => {
+  const [checked, setChecked] = useUncontrolled({
+    defaultValue: defaultChecked,
+    value: checkedProps,
+    onChange: onChecked,
+  });
   const { state, props } = useInteraction();
   const [, setTransition] = useTransition();
 
@@ -93,6 +105,7 @@ export const Checkbox = ({ children }: PropsWithChildren) => {
       {...props}
       {...checkboxStyles.pressable.rnw()}
     >
+      <Implementation checked={checked} />
       <View {...checkboxStyles.root.rnw({ ...state, variants: { checked } })}>
         {checked && <Check size={15} color="white" />}
       </View>

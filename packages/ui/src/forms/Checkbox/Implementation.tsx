@@ -5,4 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export { Checkbox } from './Checkbox';
+import type { ImplementationComponent } from './type';
+
+export const Implementation: ImplementationComponent = () => null;
