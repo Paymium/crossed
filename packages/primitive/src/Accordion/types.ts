@@ -42,7 +42,7 @@ export type CreateAccordion = () => {
   AccordionTrigger: AccordionTriggerComponent;
   AccordionPanel: AccordionPanelComponent;
   itemContext: Context<ItemContext>;
-  rootContext: Context<RootContext>;
+  rootContext: Context<AccordionRootContext>;
 };
 
 ////////////////////////////////////////
@@ -58,7 +58,7 @@ export type UseFocus = (_p: { onPress: () => void }) => {
 // context
 ////////////////////////////////////////
 
-export type RootContext = Required<
+export type AccordionRootContext = Required<
   Pick<AccordionProps, 'allowMultiple' | 'values'>
 > & {
   setValues: (_value: string[]) => void;

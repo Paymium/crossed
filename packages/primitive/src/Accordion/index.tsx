@@ -21,7 +21,7 @@ import type {
   AccordionTriggerComponent,
   CreateAccordion,
   ItemContext,
-  RootContext,
+  AccordionRootContext,
 } from './types';
 import { Focus, useFocus } from './Focus';
 import { composeEventHandlers, useUncontrolled } from '@crossed/core';
@@ -30,7 +30,9 @@ import { VisibilityHidden } from '../VisibilityHidden';
 export type * from './types';
 
 const createAccordion: CreateAccordion = () => {
-  const rootContext = createContext<RootContext>({} as RootContext);
+  const rootContext = createContext<AccordionRootContext>(
+    {} as AccordionRootContext
+  );
   const itemContext = createContext<ItemContext>({} as ItemContext);
 
   const Accordion: AccordionComponent = (props) => {
