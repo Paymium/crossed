@@ -9,7 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Kbd } from '@crossed/ui';
+import { Kbd, Text } from '@crossed/ui';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 
 export default function CreateBadge() {
@@ -37,8 +37,8 @@ export default function CreateBadge() {
 import { Kbd } from '@crossed/ui';
 
 <Kbd>Your text</Kbd>`}
-      example={`<Kbd>Ctrl + R</Kbd>`}
-      scope={{ Kbd }}
+      example={`<Text>For copy, the keyboard shortcup is <Kbd>ctrl + c</Kbd>, for paste <Kbd>ctrl + v</Kbd></Text>`}
+      scope={{ Kbd, Text }}
     />
   );
 }

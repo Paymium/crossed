@@ -5,69 +5,60 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { Colors } from './types';
+import type { Colors } from './types/color';
 
 export const colorsLight: Colors = {
-  // brand color
-  primary: {
-    default: '#4737FF',
-    hover: '#2606c0',
-    active: '#1e078f',
-    disabled: '#9088F7',
+  brand: {
+    bright: '#4737FF',
+    hight: '#9088F7',
+    low: '#EBEAFE',
+    muted: '#2606C0',
+    satured: '#1E078F',
   },
-  // secondary: { default: '#0f79d7', hover: '', active: '' },
-  // tertiary: { default: '#0f79d7', hover: '', active: '' },
-
-  // common colors
+  error: {
+    bright: '#EF4444',
+    muted: '#D73636',
+    satured: '#A21A1A',
+    low: '#FFE6E6',
+    hight: '#FEC4C4',
+  },
+  info: {
+    bright: '#93C5FD',
+    hight: '#93C5FD',
+    low: '#EEF6FF',
+    muted: '#93C5FD',
+    satured: '#285F9B',
+  },
+  success: {
+    bright: '#3ABB7D',
+    hight: '#C9EDDF',
+    low: '#EDFFF6',
+    muted: '#A4DCBE',
+    satured: '#188551',
+  },
+  warning: {
+    bright: '#F97316',
+    hight: '#F97316',
+    low: '#FFF0E6',
+    muted: '#F97316',
+    satured: '#AD5C23',
+  },
   neutral: {
-    default: '#DDDDDD',
-    hover: '#ebeaff',
-    active: '#dad9ea',
-    disabled: '#dad9ea',
+    bright: '#6F7995',
+    hight: '#AEB6CE',
+    low: '#DCDBEF',
+    muted: '#EBEAF8',
+    satured: '#F4F2FC',
+    '100': '#FFFFFF',
+    '200': '#F4F2FC',
+    '300': '#EBEAFE',
+    '400': '#DAD9EC',
+    '500': '#AEB6CE',
+    '600': '#5D607C',
+    '700': '#1D1D40',
+    '800': '#141430',
+    '900': '#000000',
   },
-  success: '#3abb7d',
-  info: '#93c5fd',
-  error: '#EF4444',
-  warning: '#AD5C23',
-  link: '#0f79d7',
-  white: '#ffffff',
-  black: '#000000',
-  default: '#000000',
+} as const;
 
-  // background colors
-  background: '#ffffff',
-  backgroundStrong: '#DDD',
-  backgroundSoft: '#ffffff',
-};
-export const colorsDark: Colors = {
-  // brand color
-  primary: {
-    default: '#0f79d7',
-    hover: '#0d66b5',
-    active: '#0b5597',
-    disabled: '#0b5597',
-  },
-  // secondary: { default: '#0f79d7', hover: '', active: '' },
-  // tertiary: { default: '#0f79d7', hover: '', active: '' },
-
-  // common colors
-  neutral: {
-    default: '#757474',
-    hover: '#5d5c5c',
-    active: '#414040',
-    disabled: '#414040',
-  },
-  success: '#3abb7d',
-  info: '#5795db',
-  error: '#C53030',
-  warning: '#994912',
-  link: '#0f79d7',
-  white: '#ffffff',
-  black: '#000000',
-  default: '#ffffff',
-
-  // background colors
-  background: '#000020',
-  backgroundStrong: '#000000',
-  backgroundSoft: '#262626',
-};
+export const colorsDark = { ...colorsLight };

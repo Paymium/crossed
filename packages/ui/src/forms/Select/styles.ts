@@ -15,13 +15,13 @@ export const useSelect = createStyles((t) => ({
     },
   },
   options: {
-    ':active': { backgroundColor: t.colors.neutral.active },
+    ':active': { backgroundColor: t.colors.neutral[400] },
   },
   content: {
     base: {
       position: 'absolute',
       maxWidth: 'auto',
-      backgroundColor: t.colors.background,
+      backgroundColor: t.colors.neutral[100],
       // padding: t.space.xs,
       zIndex: 100,
       // backgroundColor: t.colors.neutral,
@@ -30,8 +30,8 @@ export const useSelect = createStyles((t) => ({
       flexDirection: 'column',
       height: 'auto',
       alignItems: 'stretch',
-      paddingVertical: t.space.xs,
-      paddingHorizontal: t.space.xs,
+      paddingVertical: t.space.xxs,
+      paddingHorizontal: t.space.xxs,
     },
   },
 }));

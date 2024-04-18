@@ -24,7 +24,7 @@ import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
 import { Github } from '@crossed/unicons/Github';
 
-const useStyles = createStyles((t) => ({
+const useStyles = createStyles(() => ({
   description: {
     base: { textAlign: 'center', marginTop: 0 },
     media: { xs: { width: '90%' }, md: { width: '60%' } },
@@ -60,7 +60,7 @@ const useStyles = createStyles((t) => ({
     },
   },
   cardTitle: {
-    base: { textAlign: 'center', marginBottom: t.space.md },
+    base: { textAlign: 'center' },
   },
   cardDescription: { base: { textAlign: 'center' } },
 }));
@@ -70,12 +70,12 @@ export default function Home() {
   return (
     <Box role="main" {...useStyles.container.rnw()} space="lg">
       <Logo size={100} />
-      <H1 size={'4xl'}>Crossed</H1>
-      <H2 size="2xl" weight="medium" {...useStyles.description.rnw()}>
+      <H1 size={'md'}>Crossed</H1>
+      <H2 size="md" weight="medium" {...useStyles.description.rnw()}>
         <Trans>
           Explore our ecosystem to develop cross-platform applications with
           <br />
-          <B size="2xl">react-native</B> and <B size="2xl">react-native-web</B>
+          <B size="md">react-native</B> and <B size="md">react-native-web</B>
         </Trans>
       </H2>
       <Button
@@ -94,9 +94,9 @@ export default function Home() {
         <H3 {...useStyles.title.rnw()}>
           <Trans>Cross platform ecosystem</Trans>
         </H3>
-        <Box space="lg" {...useStyles.containerButtonCta.rnw()}>
+        <Box space="sm" {...useStyles.containerButtonCta.rnw()}>
           <Link href="/styled/introduction" passHref legacyBehavior>
-            <Card {...useStyles.card.rnw()} role="link">
+            <Card {...useStyles.card.rnw()} role="link" space="xxs">
               <Card.Title
                 role="heading"
                 aria-level={4}
@@ -110,7 +110,7 @@ export default function Home() {
             </Card>
           </Link>
           <Link href="/primitive/introduction" passHref legacyBehavior>
-            <Card {...useStyles.card.rnw()} role="link">
+            <Card {...useStyles.card.rnw()} role="link" space="xxs">
               <Card.Title
                 role="heading"
                 aria-level={4}
@@ -124,7 +124,7 @@ export default function Home() {
             </Card>
           </Link>
           <Link href="/ui/introduction" passHref legacyBehavior>
-            <Card {...useStyles.card.rnw()} role="link">
+            <Card {...useStyles.card.rnw()} role="link" space="xxs">
               <Card.Title
                 role="heading"
                 aria-level={4}

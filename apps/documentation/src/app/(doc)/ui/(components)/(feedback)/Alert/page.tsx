@@ -10,23 +10,12 @@
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
-import {
-  Alert,
-  AlertAction,
-  AlertDescription,
-  AlertTitle,
-  Box,
-  ButtonText,
-  Select,
-  Text,
-} from '@crossed/ui';
-import { useSignal } from '@preact/signals-react';
+import { Alert, AlertDescription, AlertIcon, YBox } from '@crossed/ui';
 import { useSignals } from '@preact/signals-react/runtime';
 
 export default function CreateBadge() {
   useSignals();
   const { t } = useTranslation();
-  const status = useSignal('info');
   return (
     <TemplatePrimitive
       title="Alert"
@@ -75,52 +64,33 @@ export default function CreateBadge() {
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`<>
-<Alert status="${status.value}"> 
-  <Alert.Title>Sollicitudin</Alert.Title>
-  <Alert.Description>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna
-  </Alert.Description>
-  <AlertAction>
-    <ButtonText>Button</ButtonText>
-  </AlertAction>
-</Alert>
-<br />
-<Alert status="${status.value}"> 
-<Alert.Title>Sollicitudin</Alert.Title>
-<Alert.Description>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-</Alert.Description>
-<AlertAction>
-  <ButtonText>Button</ButtonText>
-</AlertAction>
-</Alert>
-</>`}
-      scope={{ Alert, AlertDescription, AlertTitle, AlertAction, ButtonText }}
-      variants={
-        <Box>
-          <Select
-            value={status.value}
-            onChange={(e: string) => {
-              status.value = e;
-            }}
-          >
-            <Select.Trigger>
-              <Select.Value />
-            </Select.Trigger>
-            <Select.Content>
-              {['error', 'success', 'warning', 'info'].map((key) => {
-                return (
-                  <Select.Option value={key} key={key}>
-                    <Text>{key}</Text>
-                  </Select.Option>
-                );
-              })}
-            </Select.Content>
-          </Select>
-        </Box>
-      }
+      example={`<YBox space="xs">
+  <Alert status="info"> 
+    <AlertIcon />
+    <Alert.Description>
+      Lorem ipsum dolor sit amet
+    </Alert.Description>
+  </Alert>
+  <Alert status="error"> 
+    <AlertIcon />
+    <Alert.Description>
+      Lorem ipsum dolor sit amet
+    </Alert.Description>
+  </Alert>
+  <Alert status="success"> 
+    <AlertIcon />
+    <Alert.Description>
+      Lorem ipsum dolor sit amet
+    </Alert.Description>
+  </Alert>
+  <Alert status="warning"> 
+    <AlertIcon />
+    <Alert.Description>
+      Lorem ipsum dolor sit amet
+    </Alert.Description>
+  </Alert>
+</YBox>`}
+      scope={{ Alert, AlertDescription, AlertIcon, YBox }}
     />
   );
 }

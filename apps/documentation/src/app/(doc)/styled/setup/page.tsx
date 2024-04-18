@@ -8,13 +8,13 @@
 'use client';
 import '@/style.config';
 import { withDefaultProps } from '@crossed/core';
-import { H1, Text } from '@crossed/ui';
+import { Banner, H1, Text } from '@crossed/ui';
 import { CodeBlock } from '@/components/CodeBlock';
-import { Alert, H2, P, createTabs, YBox } from '@crossed/ui';
+import { H2, P, createTabs, YBox } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 
 const Description = withDefaultProps(Text, {
-  size: 'xl',
+  size: 'md',
   weight: 'medium',
 });
 
@@ -130,16 +130,16 @@ declare module '@crossed/styled' {
           <BuilderTabs.Panel value="next">
             <Text>{t('And import this file in your _app.tsx')}</Text>
             <CodeBlock fileName="./App.ts">import "./style.config";</CodeBlock>
-            <Alert status="warning">
+            <Banner status="warning">
               <YBox>
-                <Alert.Title>{t('Only for app Router')}</Alert.Title>
-                <Alert.Description>
+                <Banner.Title>{t('Only for app Router')}</Banner.Title>
+                <Banner.Description>
                   {t(
                     'You should import style.config on your _layout root file (for server component) and in your global client component (generaly theme context provider)'
                   )}
-                </Alert.Description>
+                </Banner.Description>
               </YBox>
-            </Alert>
+            </Banner>
           </BuilderTabs.Panel>
 
           <H2 id="usage">{t('importCss')}</H2>

@@ -26,7 +26,7 @@ export const ContentWeb = ({ sheetProps, ...props }: ContentProps) => {
       {...props}
       ref={ref}
       style={[
-        form.input.rnw({ style: useSelect.content.rnw().style }).style,
+        form.input.rnw({ style: useSelect.content.style().style }).style,
         {
           top: top + height + 5,
           left,

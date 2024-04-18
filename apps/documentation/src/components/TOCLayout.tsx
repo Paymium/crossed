@@ -30,7 +30,7 @@ const styles = createStyles(
         base: {
           flex: 1,
           width: '100%',
-          borderColor: t.colors.neutral.default,
+          borderColor: t.colors.neutral[500],
           flexDirection: 'column',
         },
         variants: {
@@ -45,7 +45,7 @@ const styles = createStyles(
         },
         media: {
           xs: { paddingHorizontal: t.space.md },
-          lg: { paddingHorizontal: t.space[100] },
+          lg: { paddingHorizontal: t.space.lg },
         },
       },
       menuList: {
@@ -54,7 +54,7 @@ const styles = createStyles(
           alignSelf: 'baseline',
           height: 'auto',
           borderLeftWidth: 1,
-          borderColor: t.colors.neutral.default,
+          borderColor: t.colors.neutral[500],
           borderStyle: 'solid',
         },
         media: {
@@ -63,7 +63,7 @@ const styles = createStyles(
         },
       },
       menuLabel: {
-        base: { fontSize: t.fontSize.lg },
+        base: { fontSize: t.font.text.md.fontSize },
       },
       li: { base: { alignItems: 'stretch' } },
     } as const)

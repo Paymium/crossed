@@ -24,8 +24,8 @@ const useMenuList = createStyles((t) => ({
   root: {
     base: {
       alignItems: 'stretch',
-      paddingVertical: t.space.xs,
-      paddingHorizontal: t.space.xs,
+      paddingVertical: t.space.xxs,
+      paddingHorizontal: t.space.xxs,
     },
   },
   item: {
@@ -33,16 +33,16 @@ const useMenuList = createStyles((t) => ({
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      paddingHorizontal: t.space.md,
+      paddingHorizontal: t.space.xs,
       justifyContent: 'flex-start',
       height: 42,
       backgroundColor: 'transparent',
       borderWidth: 0,
       borderRadius: 5,
     },
-    ':hover': { backgroundColor: t.colors.neutral.default },
+    ':hover': { backgroundColor: t.colors.neutral[500] },
     'web': {
-      ':focus': { outlineColor: t.colors.primary.default },
+      ':focus': { outlineColor: t.colors.neutral[600] },
     },
   },
 }));

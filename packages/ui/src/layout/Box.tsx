@@ -17,11 +17,13 @@ const styleBox = createStyles(
         web: { base: { boxSizing: 'border-box' } },
         variants: {
           space: {
+            xxs: { base: { gap: t.space.xxs } },
             xs: { base: { gap: t.space.xs } },
             sm: { base: { gap: t.space.sm } },
             md: { base: { gap: t.space.md } },
             lg: { base: { gap: t.space.lg } },
             xl: { base: { gap: t.space.xl } },
+            xxl: { base: { gap: t.space.xxl } },
           },
           center: {
             true: { base: { alignItems: 'center', justifyContent: 'center' } },

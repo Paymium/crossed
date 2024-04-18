@@ -24,7 +24,7 @@ export const ChevronUp = ({
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      stroke={color ?? (theme as any).colors.default}
+      stroke={color ?? theme.font.color}
     >
       <Path d="m18 15-6-6-6 6" />
     </Svg>

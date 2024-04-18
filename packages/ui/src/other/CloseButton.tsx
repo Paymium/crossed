@@ -12,7 +12,7 @@ import { Pressable, type PressableProps } from 'react-native';
 const styles = createStyles((t) => ({
   pressable: {
     base: {
-      padding: t.space.md,
+      padding: t.space.xs,
     },
   },
   icon: {

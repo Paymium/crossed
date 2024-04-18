@@ -24,7 +24,7 @@ export const Check = ({
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      stroke={color ?? (theme as any).colors.default}
+      stroke={color ?? theme.font.color}
     >
       <Path d="M20 6 9 17l-5-5" />
     </Svg>

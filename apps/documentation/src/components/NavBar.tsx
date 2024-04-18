@@ -70,37 +70,37 @@ export const NavBar = memo(() => {
 const useStyles = createStyles((t) => ({
   linkNav: {
     'base': {
-      fontFamily: t.fontFamily,
-      color: t.colors.default,
+      fontFamily: t.font.family,
+      color: t.font.color,
       transitionProperty: 'all',
       transitionDuration: '170ms',
     },
     'variants': {
       active: {
-        true: { base: { color: t.colors.default } },
+        true: { base: { color: t.font.color } },
         false: {},
       },
     },
     ':active': {
-      color: t.colors.default,
+      color: t.font.color,
     },
     ':hover': {
       textDecorationLine: 'none',
-      color: t.colors.default,
+      color: t.font.color,
     },
   },
   linkLogo: {
-    base: { alignItems: 'center', gap: t.space.sm, display: 'flex' },
+    base: { alignItems: 'center', gap: t.space.xxs, display: 'flex' },
   },
   nav: {
     base: {
-      backgroundColor: t.colors.backgroundStrong,
-      padding: t.space.lg,
+      backgroundColor: t.colors.neutral.low,
+      padding: t.space.xxs,
       justifyContent: 'space-between',
       flexDirection: 'row',
       borderBottomWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral.default,
+      borderColor: t.colors.neutral.hight,
       alignItems: 'center',
     },
   },

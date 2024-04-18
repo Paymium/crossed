@@ -11,12 +11,13 @@ import { Text, type TextProps } from '../typography/Text';
 const useKbd = createStyles((t) => ({
   root: {
     base: {
-      backgroundColor: t.colors.neutral.default,
+      backgroundColor: t.colors.neutral[500],
       paddingVertical: 1,
-      paddingHorizontal: t.space.xs,
+      paddingHorizontal: t.space.xxs,
       borderWidth: 1,
       borderStyle: 'solid',
       borderRadius: 4,
+      alignSelf: 'flex-start',
     },
   },
 }));

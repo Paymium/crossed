@@ -28,6 +28,7 @@ export default withDefaultProps(SideBarLayout, {
 
     { title: 'Feedback' },
     { href: '/ui/Alert', title: 'Alert' },
+    { href: '/ui/Banner', title: 'Banner' },
     { href: '/ui/Skeleton', title: 'Skeleton' },
     { href: '/ui/Spinner', title: 'Spinner' },
 

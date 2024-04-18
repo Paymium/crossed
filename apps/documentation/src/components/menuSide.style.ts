@@ -16,10 +16,9 @@ export const menuStyle = createStyles((t) => ({
       borderWidth: 0,
       borderRadius: 5,
     },
-    ':hover': { backgroundColor: t.colors.primary.default },
+    ':hover': { backgroundColor: t.colors.brand.bright },
   },
   itemText: {
-    base: { color: t.colors.default, fontWeight: '600' },
-    ':hover': { color: t.colors.white },
+    base: { color: t.font.color, fontWeight: '600' },
   },
 }));

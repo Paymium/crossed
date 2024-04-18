@@ -16,7 +16,7 @@ const styles = createStyles((t) => ({
   root: {
     base: {
       minHeight: '85%',
-      backgroundColor: t.colors.background,
+      backgroundColor: t.colors.neutral[100],
     },
   },
 }));

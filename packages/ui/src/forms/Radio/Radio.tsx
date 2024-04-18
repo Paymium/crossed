@@ -42,8 +42,8 @@ const radioStyles = createStyles((t) => ({
     'variants': {
       checked: {
         true: {
-          'base': { borderColor: t.colors.primary.default },
-          ':active': { borderColor: t.colors.primary.active },
+          'base': { borderColor: t.colors.brand.bright },
+          ':active': { borderColor: t.colors.brand.satured },
         },
       },
     },
@@ -59,8 +59,8 @@ const radioStyles = createStyles((t) => ({
     variants: {
       checked: {
         true: {
-          'base': { backgroundColor: t.colors.primary.default },
-          ':active': { backgroundColor: t.colors.primary.active },
+          'base': { backgroundColor: t.colors.brand.bright },
+          ':active': { backgroundColor: t.colors.brand.satured },
         },
       },
     },

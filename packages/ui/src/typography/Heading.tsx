@@ -15,34 +15,34 @@ type HeadingProps = TextProps & { 'aria-level'?: number };
 export const H1 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 1,
-  'size': '5xl',
+  // 'size': '5xl',
   'weight': 'bold',
 });
 
 export const H2 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 2,
-  'size': '4xl',
+  // 'size': '4xl',
   'weight': 'semibold',
 });
 
 export const H3 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 3,
-  'size': '3xl',
+  // 'size': '3xl',
 });
 export const H4 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 4,
-  'size': '2xl',
+  // 'size': '2xl',
 });
 export const H5 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 5,
-  'size': 'xl',
+  // 'size': 'xl',
 });
 export const H6 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 6,
-  'size': 'lg',
+  // 'size': 'lg',
 });

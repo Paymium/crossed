@@ -26,5 +26,6 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
+    "types": ["./../ui/lib/typescript/type.ts"]
   }
 }

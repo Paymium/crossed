@@ -17,7 +17,7 @@ export const useDivider = createStyles(
         base: {
           borderWidth: 0,
           borderStyle: 'solid',
-          borderColor: t.colors.neutral.default,
+          borderColor: t.colors.neutral[500],
         },
         variants: {
           direction: {

@@ -23,11 +23,9 @@ const useText = createStyles(
     ({
       root: {
         base: {
-          color: t.colors.default,
-          fontFamily: t.fontFamily,
-          fontWeight: '400',
-          lineHeight: 20,
-          fontSize: 14,
+          ...t.font.text.md,
+          color: t.font.color,
+          fontFamily: t.font.family,
         },
         variants: {
           weight: {
@@ -41,21 +39,13 @@ const useText = createStyles(
             black: { base: { fontWeight: '900' } },
           },
           size: {
-            'xxs': { base: { fontSize: t.fontSize.xxs, lineHeight: 12 } },
-            'xs': { base: { fontSize: t.fontSize.xs, lineHeight: 16 } },
-            'sm': { base: { fontSize: t.fontSize.sm, lineHeight: 20 } },
-            'md': { base: { fontSize: t.fontSize.md, lineHeight: 24 } },
-            'lg': { base: { fontSize: t.fontSize.lg, lineHeight: 28 } },
-            'xl': { base: { fontSize: t.fontSize.xl, lineHeight: 28 } },
-            '2xl': { base: { fontSize: t.fontSize['2xl'], lineHeight: 32 } },
-            '3xl': { base: { fontSize: t.fontSize['3xl'], lineHeight: 36 } },
-            '4xl': { base: { fontSize: t.fontSize['4xl'], lineHeight: 54 } },
-            '5xl': { base: { fontSize: t.fontSize['5xl'], lineHeight: 78 } },
+            'sm': { base: t.font.text.sm },
+            'md': { base: t.font.text.md },
           },
           color: {
-            warning: { base: { color: t.colors.warning } },
-            info: { base: { color: t.colors.info } },
-            link: { base: { color: t.colors.link } },
+            warning: { base: { color: t.colors.warning.satured } },
+            info: { base: { color: t.colors.info.satured } },
+            link: { base: { color: t.colors.brand.bright } },
           },
           textAlign: {
             auto: { base: { textAlign: 'auto' } },

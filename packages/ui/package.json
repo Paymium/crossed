@@ -108,7 +108,8 @@
     "react-focus-lock": "^2.11.2",
     "react-focus-on": "^3.9.2",
     "react-native-svg": "^15.1.0",
-    "react-native-unistyles": "^2.0.0"
+    "react-native-unistyles": "^2.0.0",
+    "ts-pattern": "^5.0.6"
   },
   "react-native-builder-bob": {
     "source": "src",
