@@ -96,6 +96,7 @@
     "tsconfig": "*"
   },
   "dependencies": {
+    "@crossed/theme": "1.0.0",
     "@expo/html-elements": "^0.5.1",
     "@floating-ui/react": "^0.25.1",
     "@gorhom/portal": "^1.0.14",

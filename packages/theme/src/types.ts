@@ -5,10 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { darkTheme, lightTheme } from './theme/theme';
+import type { themes } from './';
 
-const themes = { dark: darkTheme, light: lightTheme };
 type ThemesCustom = typeof themes;
+
 declare module '@crossed/styled' {
   export interface Themes extends ThemesCustom {}
 }

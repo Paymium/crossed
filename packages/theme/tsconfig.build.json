@@ -5,7 +5,8 @@
     "baseUrl": ".",
     "outDir": "./lib/typescript",
     "ignoreDeprecations": "5.0",
-    "noEmit": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
     "declaration": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": true,
@@ -26,6 +27,5 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["./node_modules/@crossed/theme/lib/typescript/types.d.ts"]
   }
 }

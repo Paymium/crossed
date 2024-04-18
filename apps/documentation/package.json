@@ -16,6 +16,7 @@
     "@crossed/next-adapter": "workspace:^",
     "@crossed/primitive": "workspace:^",
     "@crossed/styled": "workspace:^",
+    "@crossed/theme": "workspace:^",
     "@crossed/ui": "workspace:^",
     "@crossed/unicons": "workspace:*",
     "@preact/signals-react": "^2.0.0",
