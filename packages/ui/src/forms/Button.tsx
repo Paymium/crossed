@@ -47,12 +47,24 @@ export const useButton = createStyles(
   (t) =>
     ({
       error: {
+        web: {
+          ':focus': {
+            outlineWidth: '2px',
+            outlineOffset: '2px',
+            outlineStyle: 'solid',
+            outlineColor: '#EF4444',
+          },
+        },
         variants: {
           variant: {
             primary: {
               'base': { backgroundColor: '#ef4444', borderColor: '#ef4444' },
               ':hover': { backgroundColor: '#d73636', borderColor: '#d73636' },
               ':active': { backgroundColor: '#b42221', borderColor: '#b42221' },
+              ':focus': {
+                backgroundColor: '#b42221',
+                borderColor: '#b42221',
+              },
               ':disabled': {
                 backgroundColor: '#FAA4A3',
                 borderColor: '#FAA4A3',
@@ -99,15 +111,28 @@ export const useButton = createStyles(
           borderWidth: 2,
           borderStyle: 'solid',
           borderColor: 'transparent',
-          height: 44,
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: 'transparent',
           gap: 8,
         },
-        web: { base: { boxSizing: 'border-box' } },
+        web: {
+          'base': {
+            boxSizing: 'border-box',
+          },
+          ':focus': {
+            outlineWidth: '2px',
+            outlineOffset: '2px',
+            outlineStyle: 'solid',
+            outlineColor: '#9088F7',
+          },
+        },
         variants: {
+          size: {
+            false: { base: { height: 'auto' } },
+            true: { base: { height: 44 } },
+          },
           variant: {
             primary: {
               'base': {
@@ -135,7 +160,7 @@ export const useButton = createStyles(
                 borderColor: t.colors.primary.disabled,
               },
             },
-            tertiary: { base: {} },
+            tertiary: {},
             false: {},
           },
         },
@@ -176,6 +201,7 @@ const Root = withReactive(
     (
       {
         variant = 'primary',
+        size = true,
         error = false,
         disabled,
         loading,
@@ -212,7 +238,7 @@ const Root = withReactive(
                       variants: { variant },
                     }).style
                   : props.style,
-                variants: { variant },
+                variants: { variant, size },
               }).style
             }
           >

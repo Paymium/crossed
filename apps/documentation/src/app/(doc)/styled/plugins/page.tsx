@@ -5,6 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+'use client';
 import '@/style.config';
 import { CodeBlock } from '@/components/CodeBlock';
 import { createStyles } from '@crossed/styled';
@@ -22,6 +23,7 @@ import {
   Td,
   Th,
 } from '@crossed/ui';
+import { useTranslation } from 'react-i18next';
 
 const stylesSheet = createStyles(() => ({
   colRequired: { base: { width: 100 } },
@@ -29,16 +31,13 @@ const stylesSheet = createStyles(() => ({
 }));
 
 export default function PluginsPage() {
+  const { t } = useTranslation();
   return (
     <YBox space="md">
       <H1>Plugins</H1>
 
-      <P>
-        @crossed/styled se base sur un systeme de plugin afin de generer le
-        style ou les className pour le web. Cela permet une grande flexibilité
-        sur la manière d'écrire sont design system
-      </P>
-      <H2 id="migrate">Structure d'un plugin</H2>
+      <P>{t('plugins.intro')}</P>
+      <H2 id="migrate">{t('plugins.structure')}</H2>
       <CodeBlock>{`
 import { Registry, createStyles } from "@crossed/styled";
 import { normalizeUnitPixel } from "@crossed/styled/plugins";
@@ -80,18 +79,32 @@ createStyles(() => ({
   },
 }));
       `}</CodeBlock>
-      <H3>apply</H3>
+      <H3>{t('plugins.methodApply')}</H3>
+      <CodeBlock>{`
+apply(params: {
+  key: keyof S;
+  styles: S[keyof S];
+  isWeb?: boolean;
+  props?: any;
+  addClassname: (_params: {
+    suffix?: string;
+    prefix?: string;
+    wrapper?: (_str: string) => string;
+    body: Record<string, CrossedstyleValues>;
+  }) => void;
+})
+      `}</CodeBlock>
       <Table>
         <THead>
           <Tr>
             <Th {...stylesSheet.colName.className()}>
-              <Text>Name</Text>
+              <Text>{t('Name')}</Text>
             </Th>
             <Th {...stylesSheet.colName.className()}>
-              <Text>type</Text>
+              <Text>{t('Type')}</Text>
             </Th>
             <Th>
-              <Text>description</Text>
+              <Text>{t('Description')}</Text>
             </Th>
           </Tr>
         </THead>
@@ -154,7 +167,7 @@ createStyles(() => ({
         </TBody>
       </Table>
 
-      <H3>addClassname</H3>
+      <H3>{t('plugins.methodClassname')}</H3>
       <CodeBlock>{`
 addClassname(params: {
   suffix?: string;
@@ -167,13 +180,13 @@ addClassname(params: {
         <THead>
           <Tr>
             <Th {...stylesSheet.colName.className()}>
-              <Text>Name</Text>
+              <Text>{t('Name')}</Text>
             </Th>
             <Th {...stylesSheet.colRequired.className()}>
-              <Text>Required</Text>
+              <Text>{t('Required')}</Text>
             </Th>
             <Th>
-              <Text>Description</Text>
+              <Text>{t('Description')}</Text>
             </Th>
           </Tr>
         </THead>

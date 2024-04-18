@@ -22,9 +22,9 @@ const styles = createStyles(
         base: {
           paddingHorizontal: 20,
           alignSelf: 'baseline',
-          display: 'none',
         },
         media: {
+          xs: { display: 'none' },
           md: { display: 'flex' },
         },
       },
@@ -34,6 +34,7 @@ const styles = createStyles(
           justifyContent: 'center',
           paddingVertical: 15,
           minHeight: '95%',
+          alignSelf: 'center',
         },
         media: {
           xs: { maxWidth: '100%' },
@@ -48,6 +49,7 @@ const styles = createStyles(
           borderLeftWidth: 0,
           borderColor: t.colors.neutral.default,
           minHeight: '100%',
+          flexGrow: 1,
         },
         media: {
           md: { borderLeftWidth: 1 },

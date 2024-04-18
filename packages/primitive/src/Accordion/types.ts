@@ -42,23 +42,23 @@ export type CreateAccordion = () => {
   AccordionTrigger: AccordionTriggerComponent;
   AccordionPanel: AccordionPanelComponent;
   itemContext: Context<ItemContext>;
-  rootContext: Context<RootContext>;
+  rootContext: Context<AccordionRootContext>;
 };
 
 ////////////////////////////////////////
 // Focus
 ////////////////////////////////////////
 export type FocusComponent = ComponentType<ViewProps>;
-export type OnKeyDown = KeyboardEventHandler<HTMLButtonElement>;
-export type UseFocus = (_p: { onPress: () => void }) => {
-  onKeyDown: OnKeyDown;
+export type AccordionOnKeyDown = KeyboardEventHandler<HTMLButtonElement>;
+export type AccordionUseFocus = (_p: { onPress: () => void }) => {
+  onKeyDown: AccordionOnKeyDown;
 };
 
 ////////////////////////////////////////
 // context
 ////////////////////////////////////////
 
-export type RootContext = Required<
+export type AccordionRootContext = Required<
   Pick<AccordionProps, 'allowMultiple' | 'values'>
 > & {
   setValues: (_value: string[]) => void;

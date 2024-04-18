@@ -43,7 +43,7 @@ const useStyles = createStyles((t) => ({
       justifyContent: 'space-between',
       flexWrap: 'wrap',
     },
-    media: { xs: { flexDirection: 'column' }, md: { flexDirection: 'row' } },
+    media: { md: { flexDirection: 'row' } },
   },
   card: { base: { flex: 1 } },
   title: {
@@ -105,7 +105,7 @@ export default function Home() {
                 @crossed/styled
               </Card.Title>
               <Card.Description {...useStyles.cardDescription.rnw()}>
-                <Trans>Styled your component with unistyles</Trans>
+                <Trans>Styled your component</Trans>
               </Card.Description>
             </Card>
           </Link>
@@ -139,7 +139,7 @@ export default function Home() {
               </Card.Description>
             </Card>
           </Link>
-          <Card {...useStyles.card.rnw()}>
+          {/* <Card {...useStyles.card.rnw()}>
             <Card.Title
               role="heading"
               aria-level={4}
@@ -150,7 +150,7 @@ export default function Home() {
             <Card.Description {...useStyles.cardDescription.rnw()}>
               <Trans>Comming soon</Trans>
             </Card.Description>
-          </Card>
+          </Card> */}
         </Box>
       </YBox>
     </Box>

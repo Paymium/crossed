@@ -31,12 +31,20 @@ export default withDefaultProps(SideBarLayout, {
     { href: '/ui/Skeleton', title: 'Skeleton' },
     { href: '/ui/Spinner', title: 'Spinner' },
 
-    { title: 'Forms' },
+    { title: 'Buttons' },
     { href: '/ui/Button', title: 'Button' },
+    { href: '/ui/CloseButton', title: 'CloseButton' },
+
+    { title: 'Forms' },
+    { href: '/ui/Form', title: 'Form' },
+
+    { title: 'Overlay' },
+    { href: '/ui/Modal', title: 'Modal' },
+
+    { title: 'Input' },
     { href: '/ui/Checkbox', title: 'Checkbox' },
     // { href: '/ui/Form', title: 'Form' },
     { href: '/ui/Input', title: 'Input' },
-    { href: '/ui/Label', title: 'Label' },
     { href: '/ui/Radio', title: 'Radio' },
     { href: '/ui/Select', title: 'Select' },
     { href: '/ui/Slider', title: 'Slider' },
@@ -55,6 +63,7 @@ export default withDefaultProps(SideBarLayout, {
     { href: '/ui/B', title: 'B' },
     { href: '/ui/Heading', title: 'Heading' },
     { href: '/ui/I', title: 'I' },
+    { href: '/ui/Label', title: 'Label' },
     { href: '/ui/P', title: 'P' },
     { href: '/ui/Text', title: 'Text' },
   ],

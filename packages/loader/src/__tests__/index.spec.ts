@@ -8,11 +8,8 @@
 import { Loader } from '../index';
 import { getAst } from './getAst';
 import { Registry } from '@crossed/styled';
-import { BasePlugin } from '@crossed/styled/plugins';
 
-Registry.setThemes({ dark: {} })
-  .setThemeName('dark' as unknown as never)
-  .addPlugin(BasePlugin);
+Registry.setThemes({ dark: {} }).setThemeName('dark' as unknown as never);
 
 jest.mock('esbuild', () => {});
 
@@ -30,10 +27,10 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.margin-top-\\[4px\\] { margin-top:4px; }
+      `.background-color-\\[white\\] { background-color:white; }
 .width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
+.margin-top-\\[4px\\] { margin-top:4px; }
+.dark {  }`
     );
   });
 
@@ -50,10 +47,10 @@ describe('@crossed/loader', () => {
     })`)
     );
     expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.margin-top-\\[4px\\] { margin-top:4px; }
+      `.background-color-\\[white\\] { background-color:white; }
 .width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
+.margin-top-\\[4px\\] { margin-top:4px; }
+.dark {  }`
     );
   });
   test('arrow function explicit return', () => {
@@ -71,10 +68,10 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.margin-top-\\[4px\\] { margin-top:4px; }
+      `.background-color-\\[white\\] { background-color:white; }
 .width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
+.margin-top-\\[4px\\] { margin-top:4px; }
+.dark {  }`
     );
   });
 
@@ -93,10 +90,10 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.margin-top-\\[4px\\] { margin-top:4px; }
+      `.background-color-\\[white\\] { background-color:white; }
 .width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
+.margin-top-\\[4px\\] { margin-top:4px; }
+.dark {  }`
     );
   });
 });

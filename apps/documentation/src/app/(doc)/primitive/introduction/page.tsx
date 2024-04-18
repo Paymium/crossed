@@ -6,6 +6,7 @@
  */
 
 'use client';
+import '@/style.config';
 import { H1, P, YBox, Kbd } from '@crossed/ui';
 
 export default function Home() {

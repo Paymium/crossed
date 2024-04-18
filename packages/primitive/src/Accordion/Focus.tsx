@@ -6,10 +6,10 @@
  */
 
 import { View } from 'react-native';
-import type { FocusComponent, UseFocus } from './types';
+import type { FocusComponent, AccordionUseFocus } from './types';
 
 export const Focus: FocusComponent = View;
 
-export const useFocus: UseFocus = () => {
+export const useFocus: AccordionUseFocus = () => {
   return { onKeyDown: () => {} };
 };

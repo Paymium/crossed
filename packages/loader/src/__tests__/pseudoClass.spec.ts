@@ -31,10 +31,10 @@ describe('pseudoClass', () => {
         })`)
     );
     expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.background-color-\\[white\\] { background-color:white; }
+      `.background-color-\\[black\\] { background-color:black; }
 .hover\\:background-color-\\[black\\]:hover { background-color:black; }
-.background-color-\\[black\\] { background-color:black; }`
+.background-color-\\[white\\] { background-color:white; }
+.dark {  }`
     );
   });
 
@@ -52,10 +52,10 @@ describe('pseudoClass', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.background-color-\\[white\\] { background-color:white; }
+      `.background-color-\\[black\\] { background-color:black; }
 .focus\\:background-color-\\[black\\]:focus { background-color:black; }
-.background-color-\\[black\\] { background-color:black; }`
+.background-color-\\[white\\] { background-color:white; }
+.dark {  }`
     );
   });
 
@@ -73,10 +73,10 @@ describe('pseudoClass', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.background-color-\\[white\\] { background-color:white; }
+      `.background-color-\\[black\\] { background-color:black; }
 .active\\:background-color-\\[black\\]:active { background-color:black; }
-.background-color-\\[black\\] { background-color:black; }`
+.background-color-\\[white\\] { background-color:white; }
+.dark {  }`
     );
   });
 });

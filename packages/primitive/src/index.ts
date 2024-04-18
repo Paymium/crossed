@@ -17,3 +17,4 @@ export * from './Sheet';
 export * from './utils';
 export * from './Accordion';
 export type * from './types';
+export * from './VisibilityHidden';

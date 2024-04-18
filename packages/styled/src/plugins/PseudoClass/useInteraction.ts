@@ -41,63 +41,51 @@ export const useInteraction = (
   const onPressIn = useCallback(
     composeEventHandlers(props?.onPressIn || undefined, () => {
       setTransition(() => {
-        if (!active) {
-          setActive(true);
-        }
+        setActive(true);
       });
     }),
-    [active, setActive, props?.onPressIn]
+    [setActive, props?.onPressIn]
   );
   const onPressOut = useCallback(
     composeEventHandlers(props?.onPressOut || undefined, () => {
       setTransition(() => {
-        if (active) {
-          setActive(false);
-        }
+        setActive(false);
       });
     }),
-    [active, setActive, props?.onPressOut]
+    [setActive, props?.onPressOut]
   );
 
   const onHoverIn = useCallback(
     composeEventHandlers(props?.onHoverIn || undefined, () => {
       setTransition(() => {
-        if (!hover) {
-          setHover(true);
-        }
+        setHover(true);
       });
     }),
-    [hover, setHover, props?.onHoverIn]
+    [setHover, props?.onHoverIn]
   );
   const onHoverOut = useCallback(
     composeEventHandlers(props?.onHoverOut || undefined, () => {
       setTransition(() => {
-        if (!hover) {
-          setHover(false);
-        }
+        setHover(false);
       });
     }),
-    [hover, setHover, props?.onHoverOut]
+    [setHover, props?.onHoverOut]
   );
   const onFocus = useCallback(
     composeEventHandlers(props?.onFocus || undefined, () => {
       setTransition(() => {
-        if (!focus) {
-          setFocus(true);
-        }
+        setFocus(true);
       });
     }),
-    [focus, setFocus, props?.onFocus]
+    [setFocus, props?.onFocus]
   );
   const onBlur = useCallback(
     composeEventHandlers(props?.onBlur || undefined, () => {
       setTransition(() => {
-        if (focus) {
-          setFocus(false);
-        }
+        setFocus(false);
       });
     }),
-    [focus, setFocus, props?.onBlur]
+    [setFocus, props?.onBlur]
   );
 
   return useMemo(

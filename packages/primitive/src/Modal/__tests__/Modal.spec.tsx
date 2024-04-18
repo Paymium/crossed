@@ -6,65 +6,67 @@
  */
 
 import '@testing-library/jest-dom';
-import { render } from '@crossed/test';
+import { render, userEvent, screen } from '@crossed/test';
 
-import { createModalMain } from '../Modal';
-import React, { ReactNode, forwardRef } from 'react';
-import { Provider } from '../context';
-import { useUncontrolled } from '@crossed/core/src/useUncontrolled';
+import {
+  createModal,
+  Modal,
+  ModalContent,
+  ModalOverlay,
+  ModalTitle,
+  ModalTrigger,
+  ModalPortal,
+  ModalBody,
+} from '../';
+import { Text } from 'react-native';
+import { PortalProvider } from '@gorhom/portal';
 
-jest.mock('../context');
-jest.mock('@crossed/core/src/useUncontrolled');
-
-const useUncontrolledMocked = useUncontrolled as unknown as jest.Mock<
-  ReturnType<typeof useUncontrolled>
->;
-const ProviderMocked = Provider as unknown as jest.Mock<ReactNode>;
-
-const Comp = forwardRef((p: any, ref: any) => <div {...p} ref={ref} />);
-const NewComp = createModalMain(Comp);
-
-describe('createModalMain', () => {
-  const oldUseId = React.useId;
-
-  beforeEach(() => {
-    React.useId = jest.fn(() => 'id');
-    ProviderMocked.mockImplementation(({ children }: any) => <>{children}</>);
-    useUncontrolledMocked.mockImplementation(() => [false, () => {}] as any);
+describe('createModal', () => {
+  test('return from createModal', async () => {
+    const modal = createModal();
+    expect(Object.keys(modal)).toEqual([
+      'modalContext',
+      'Modal',
+      'ModalContent',
+      'ModalOverlay',
+      'ModalTitle',
+      'ModalTrigger',
+      'ModalPortal',
+      'ModalBody',
+    ]);
   });
 
-  afterEach(() => {
-    React.useId = oldUseId;
-    ProviderMocked.mockReset();
-    useUncontrolledMocked.mockReset();
-  });
+  test('open/close component', async () => {
+    const {} = render(
+      <PortalProvider>
+        <Modal>
+          <ModalTrigger testID="trigger">
+            <Text>toto</Text>
+          </ModalTrigger>
+          <ModalPortal>
+            <ModalOverlay testID="overlay" />
+            <ModalContent testID="content">
+              <ModalTitle>toto</ModalTitle>
+              <ModalTrigger testID="close">
+                <Text>close</Text>
+              </ModalTrigger>
+              <ModalBody>
+                <Text>toto</Text>
+              </ModalBody>
+            </ModalContent>
+          </ModalPortal>
+        </Modal>
+      </PortalProvider>
+    );
 
-  afterAll(() => {
-    jest.restoreAllMocks();
-  });
+    const open = async () => {
+      await userEvent.click(screen.getByTestId('trigger'));
+    };
 
-  test('simple', async () => {
-    render(<NewComp />);
-
-    expect(React.useId).toHaveBeenCalled();
-
-    // expect(useUncontrolledMocked).toHaveBeenCalled();
-    // expect(useUncontrolledMocked.mock.calls[0][0]).toHaveProperty(
-    //   'value',
-    //   undefined
-    // );
-    // expect(useUncontrolledMocked.mock.calls[0][0]).toHaveProperty(
-    //   'defaultValue',
-    //   false
-    // );
-    // expect(useUncontrolledMocked.mock.calls[0][0]).toHaveProperty(
-    //   'onChange',
-    //   undefined
-    // );
-
-    expect(ProviderMocked).toHaveBeenCalled();
-    expect(ProviderMocked.mock.calls[0][0]).toHaveProperty('id', 'id');
-    expect(ProviderMocked.mock.calls[0][0]).toHaveProperty('open', false);
-    expect(ProviderMocked.mock.calls[0][0]).toHaveProperty('children');
+    expect(() => screen.getByTestId('content')).toThrow();
+    await open();
+    expect(screen.getByTestId('content')).toBeVisible();
+    await userEvent.click(screen.getByTestId('close'));
+    expect(() => screen.getByTestId('content')).toThrow();
   });
 });

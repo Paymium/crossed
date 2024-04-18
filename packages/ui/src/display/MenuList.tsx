@@ -41,6 +41,9 @@ const useMenuList = createStyles((t) => ({
       borderRadius: 5,
     },
     ':hover': { backgroundColor: t.colors.neutral.default },
+    'web': {
+      ':focus': { outlineColor: t.colors.primary.default },
+    },
   },
 }));
 type ButtonVariantProps = Partial<Pick<ButtonProps, 'variant'>>;

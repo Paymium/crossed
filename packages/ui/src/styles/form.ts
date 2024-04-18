@@ -23,13 +23,19 @@ export const form = createStyles((t) => ({
       flex: 1,
     },
     ':hover': { borderColor: t.colors.primary.default },
-    ':active': { borderColor: t.colors.primary.default },
     ':focus': { borderColor: t.colors.primary.default },
+    ':active': { borderColor: t.colors.primary.default },
     ':disabled': { borderColor: '#EDEDF6', color: '#6F7995' },
     'variants': {
       error: { true: { base: { borderColor: '#ef4444', color: '#ef4444' } } },
     },
-    'web': { base: { boxSizing: 'border-box' } },
+    'web': {
+      'base': { boxSizing: 'border-box' },
+      ':focus-visible': { outlineWidth: 0 },
+      ':focus': {
+        outlineColor: t.colors.primary.default,
+      },
+    },
   },
   placeholder: {
     base: { color: '#6F7995' },

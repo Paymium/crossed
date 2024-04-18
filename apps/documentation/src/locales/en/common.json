@@ -63,5 +63,12 @@
   "Example": "Example",
   "Anatomy": "Anatomy",
   "Return": "Return",
-  "Type any code here": "Type any code here"
+  "Type any code here": "Type any code here",
+  "Required": "Required",
+  "plugins": {
+    "intro": "@crossed/styled is based on a plugin system to generate the style or className for the web. This allows great flexibility on how to write are design system",
+    "structure": "Structure of a plugin",
+    "methodApply": "Method apply",
+    "methodClassname": "Method addClassname"
+  }
 }

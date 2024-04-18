@@ -15,54 +15,27 @@ export default function UsagePage() {
     <YBox>
       <H1>Usage</H1>
 
-      <H2 id="create">Create component</H2>
-      <P>Create a new component by extending a react-native component</P>
+      <H2 id="create">Create style</H2>
+      <P>Create a new styles</P>
       <CodeBlock fileName="components/Body.tsx">{`
-import { styled, type GetProps } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
+
+export const styles = createStyles((t) => ({
+  color: {
+    base: { color: t.colorText }
+  }
+}));
+`}</CodeBlock>
+
+      <P>Import and use it</P>
+      <CodeBlock fileName="app/page.tsx">{`
 import { Text } from "react-native";
-
-export const Body = styled(Text, {
-  color: "red"
-});
-
-export type BodyProps = GetProps<typeof Body>;
-      `}</CodeBlock>
-
-      <P>Import and use it</P>
-      <CodeBlock fileName="app/page.tsx">{`
-import { Body } from "../components/Body";
+import { styles } from "./styles";
 
 function App () {
-  return <Body>Hello World!</Body>;
+  return <Text {...styles.color.rnw()}>Hello World!</Text>;
 }
-      `}</CodeBlock>
-
-      <H2 id="extend">Extend component</H2>
-      <P>You can extending from existing one </P>
-      <CodeBlock fileName="components/Heading.tsx">{`
-import { type GetProps, styled } from '@crossed/styled';
-import { Body } from "../components/Body";
-
-export const Heading = styled(Body, {
-  color: "orange"
-});
-
-export type HeadingProps = GetProps<typeof Heading>;
-      `}</CodeBlock>
-
-      <P>Import and use it</P>
-      <CodeBlock fileName="app/page.tsx">{`
-import { Heading } from "../components/Heading";
-
-function App () {
-  return (
-    <>
-      <Heading>Hello World!</Heading> {/* Will be \`orange\` */}
-      <Body>Lorem ipsum</Body> {/* Will be \`red\` */}
-    </>
-  );
-}
-      `}</CodeBlock>
+`}</CodeBlock>
     </YBox>
   );
 }

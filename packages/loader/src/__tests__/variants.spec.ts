@@ -41,14 +41,14 @@ describe('variants', () => {
     )
   );
   expect(loader.getCSS()).toEqual(
-    `.dark {  }
-.margin-top-\\[4px\\] { margin-top:4px; }
-.width-\\[50px\\] { width:50px; }
-.color-\\[white\\] { color:white; }
-.background-\\[white\\] { background:white; }
-.color-\\[black\\] { color:black; }
-.background-\\[black\\] { background:black; }
+    `.font-size-\\[14px\\] { font-size:14px; }
 .font-size-\\[11px\\] { font-size:11px; }
-.font-size-\\[14px\\] { font-size:14px; }`
+.background-\\[black\\] { background:black; }
+.color-\\[black\\] { color:black; }
+.background-\\[white\\] { background:white; }
+.color-\\[white\\] { color:white; }
+.width-\\[50px\\] { width:50px; }
+.margin-top-\\[4px\\] { margin-top:4px; }
+.dark {  }`
   );
 });

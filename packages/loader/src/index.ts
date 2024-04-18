@@ -93,7 +93,16 @@ export class Loader {
   };
 
   getCSS() {
-    return Array.from(this.fileCache.values()).join('\n');
+    return Array.from(this.fileCache.values())
+      .sort((a, b) => {
+        if (!a.startsWith('@media')) return -1;
+        const [, widthA] = a.match(/@media \(min-width: ([0-9]+)px\)/i) || [];
+        const [, widthB] = b.match(/@media \(min-width: ([0-9]+)px\)/i) || [];
+        if (!widthA) return -1;
+        if (!widthB) return 1;
+        return Number(widthA) < Number(widthB) ? -1 : 1;
+      })
+      .join('\n');
   }
 
   addClassname = (obj: {
@@ -110,7 +119,7 @@ export class Loader {
 
       // escape some character in css
       const css = `${obj.prefix ?? '.'}${key
-        .replace(/[#:\[\]\(\)%,]/g, '\\$&')
+        .replace(/[#:\[\]\(\)%,\.]/g, '\\$&')
         .replace(/ /g, '-')}${obj.suffix || ''} { ${styleParsed} }`;
 
       // add css in cahce file

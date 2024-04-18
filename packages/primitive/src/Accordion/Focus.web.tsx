@@ -6,7 +6,11 @@
  */
 
 import { View } from 'react-native';
-import type { FocusComponent, OnKeyDown, UseFocus } from './types';
+import type {
+  FocusComponent,
+  AccordionOnKeyDown,
+  AccordionUseFocus,
+} from './types';
 import ReactFocusLock, { useFocusScope } from 'react-focus-lock';
 import { useCallback } from 'react';
 
@@ -18,9 +22,9 @@ export const Focus: FocusComponent = ({ children, ...props }) => {
   );
 };
 
-export const useFocus: UseFocus = ({ onPress }) => {
+export const useFocus: AccordionUseFocus = ({ onPress }) => {
   const { focusNext, focusPrev } = useFocusScope();
-  const onKey: OnKeyDown = useCallback(
+  const onKey: AccordionOnKeyDown = useCallback(
     (event) => {
       if (event.code === 'ArrowDown') {
         focusNext();
