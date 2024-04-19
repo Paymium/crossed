@@ -8,11 +8,10 @@
 import { Text, type TextProps } from './Text';
 import { createStyles } from '@crossed/styled';
 
-const useP = createStyles((t) => ({
+const useP = createStyles(() => ({
   root: {
     base: {
       alignSelf: 'stretch',
-      marginVertical: t.space.md,
     },
   },
 }));

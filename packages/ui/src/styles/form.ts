@@ -19,6 +19,7 @@ export const form = createStyles((t) => ({
       paddingVertical: t.space.xxs,
       paddingHorizontal: t.space.xs,
       justifyContent: 'center',
+      alignItems: 'center',
       height: 44,
       flexDirection: 'row',
       flex: 1,

@@ -8,6 +8,9 @@
 import { createStyles } from '@crossed/styled';
 
 export const useSelect = createStyles((t) => ({
+  trigger: {
+    web: { base: { width: 'max-content', flexDirection: 'row' } },
+  },
   select: {
     base: {
       position: 'relative',
@@ -22,16 +25,14 @@ export const useSelect = createStyles((t) => ({
       position: 'absolute',
       maxWidth: 'auto',
       backgroundColor: t.colors.neutral[100],
-      // padding: t.space.xs,
       zIndex: 100,
-      // backgroundColor: t.colors.neutral,
-      // borderRadius: 4,
       display: 'flex',
       flexDirection: 'column',
       height: 'auto',
       alignItems: 'stretch',
       paddingVertical: t.space.xxs,
       paddingHorizontal: t.space.xxs,
+      gap: t.space.xxs,
     },
   },
 }));

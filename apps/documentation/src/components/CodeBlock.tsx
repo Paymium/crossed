@@ -17,9 +17,9 @@ const styles = createStyles((t) => ({
   liveEditor: {
     base: {
       width: '100%',
-      borderRadius: 4,
+      borderRadius: 14,
       fontFamily: t.font.family,
-      fontSize: t.font.text.sm.fontSize,
+      fontSize: t.font.text.md.fontSize,
     },
   },
   preview: {
@@ -34,8 +34,8 @@ const styles = createStyles((t) => ({
       borderWidth: 1,
       borderColor: t.colors.neutral[500],
       borderStyle: 'solid',
-      borderRadius: 4,
-      // justifyContent: 'center',
+      borderRadius: 14,
+      backgroundColor: t.colors.neutral['100'],
     },
   },
   containerVariants: {
@@ -62,7 +62,7 @@ const styles = createStyles((t) => ({
       borderBottomWidth: 1,
       borderColor: t.colors.neutral.bright,
       borderStyle: 'solid',
-      color: t.font.color,
+      color: t.colors.neutral['100'],
     },
   },
   liveError: { base: { color: t.colors.error.bright } },

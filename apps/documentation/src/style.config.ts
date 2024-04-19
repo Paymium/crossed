@@ -18,6 +18,7 @@ const themes = {
     ...defaultThemes.light,
     draculaTheme: primsThemes.dracula,
   },
+  paymium: defaultThemes.paymium,
 };
 
 type ThemesCustom = typeof themes;

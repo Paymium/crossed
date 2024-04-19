@@ -24,7 +24,7 @@ import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
 import { Github } from '@crossed/unicons/Github';
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((t) => ({
   description: {
     base: { textAlign: 'center', marginTop: 0 },
     media: { xs: { width: '90%' }, md: { width: '60%' } },
@@ -57,6 +57,7 @@ const useStyles = createStyles(() => ({
       alignItems: 'center',
       paddingVertical: 50,
       minHeight: '90%',
+      backgroundColor: t.colors.neutral[300]
     },
   },
   cardTitle: {

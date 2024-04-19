@@ -32,6 +32,8 @@ import { ContentImpl } from './ContentImpl';
 import { Text } from '../../typography/Text';
 import { VisibilityHidden } from '@crossed/primitive';
 import { useFocusScope } from './Focus';
+import { ChevronDown } from '@crossed/unicons/ChevronDown';
+import { composeStyles } from '@crossed/styled';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
@@ -132,7 +134,6 @@ const Trigger = withStaticProperties(
     const {
       setOpen,
       open,
-      variant,
       triggerLayout,
       sheet,
       hover,
@@ -167,8 +168,8 @@ const Trigger = withStaticProperties(
 
     return (
       <Pressable
+        role="button"
         ref={pressableRef}
-        variant={variant}
         onLayout={({ nativeEvent: { layout } }) => {
           triggerLayout.current = layout;
         }}
@@ -176,7 +177,7 @@ const Trigger = withStaticProperties(
         onFocus={composeEventHandlers(props.onFocus, onFocus)}
         onBlur={composeEventHandlers(props.onBlur, onBlur)}
         style={({ pressed }) =>
-          form.input.rnw({
+          composeStyles(form.input, useSelect.trigger).rnw({
             ...props,
             hover,
             'focus': focus ?? open,
@@ -191,12 +192,14 @@ const Trigger = withStaticProperties(
             <>
               {inputRender}
               {children(e)}
+              <ChevronDown />
             </>
           )
         ) : (
           <>
             {inputRender}
             {children}
+            <ChevronDown />
           </>
         )}
       </Pressable>

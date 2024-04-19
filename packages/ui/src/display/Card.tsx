@@ -16,7 +16,7 @@ const useCard = createStyles((t) => ({
     base: {
       padding: t.space.xs,
       borderRadius: t.space.xxs,
-      backgroundColor: t.colors.neutral.muted,
+      backgroundColor: t.colors.neutral['100'],
     },
     variants: {
       role: {

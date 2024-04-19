@@ -106,7 +106,7 @@ export const TemplatePrimitive = ({
   return (
     <YBox>
       <H1>{title}</H1>
-      {description && <P size="md">{description}</P>}
+      {description && <P size="lg">{description}</P>}
       {example && (
         <>
           <H2 id="example">{t('Example')}</H2>

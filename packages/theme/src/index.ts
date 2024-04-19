@@ -5,6 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { darkTheme, lightTheme } from './theme';
+import { darkTheme, lightTheme, paymiumTheme } from './theme';
 
-export const themes = { dark: darkTheme, light: lightTheme } as const;
+export const themes = {
+  dark: darkTheme,
+  light: lightTheme,
+  paymium: paymiumTheme,
+} as const;

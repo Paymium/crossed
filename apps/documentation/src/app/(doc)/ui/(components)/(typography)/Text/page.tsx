@@ -9,7 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Select, Text } from '@crossed/ui';
+import { Select, Text, YBox } from '@crossed/ui';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 import { useSignals } from '@preact/signals-react/runtime';
 import { useSignal } from '@preact/signals-react';
@@ -20,8 +20,6 @@ import { useSignal } from '@preact/signals-react';
 export default function CreateBadge() {
   useSignals();
   const { t } = useTranslation();
-  const colors = useSignal('default');
-  const size = useSignal('default');
   const weight = useSignal('default');
   const textAlign = useSignal('center');
   return (
@@ -66,65 +64,22 @@ import { Text } from "@crossed/ui"
 const MyComponent = () => {
   return (<Text>Write your text here</Text>)
 }`}
-      example={`
-<Text
-  color="${colors.value}"
-  size="${size}"
-  weight="${weight}"
-  textAlign="${textAlign}"
->
-  I'm a Text
-</Text>
+      example={`<YBox>
+      <Text size="h1">I'm a Text size h1</Text>
+      <Text size="h2">I'm a Text size h2</Text>
+      <Text size="h3">I'm a Text size h3</Text>
+      <Text size="h4">I'm a Text size h4</Text>
+      <Text size="h5">I'm a Text size h5</Text>
+      <Text size="h6">I'm a Text size h6</Text>
+      <Text size="xl">I'm a Text size xl</Text>
+      <Text size="lg">I'm a Text size lg</Text>
+      <Text size="md">I'm a Text size md</Text>
+      <Text size="sm">I'm a Text size sm</Text>
+      <Text size="xs">I'm a Text size xs</Text>
+</YBox>
 `}
       variants={
-        <>
-          <Select
-            value={colors.value}
-            onChange={(e: string) => {
-              colors.value = e;
-            }}
-          >
-            <Select.Trigger>
-              <Select.Value />
-            </Select.Trigger>
-            <Select.Content>
-              {/* {(Object.entries(colorsLight) as Entries<typeof colorsLight>).map(
-                ([key]) => {
-                  if (
-                    key !== 'background' &&
-                    key !== 'backgroundSoft' &&
-                    key !== 'backgroundStrong'
-                  ) {
-                    return (
-                      <Select.Option value={key} key={key}>
-                        <Text>{key}</Text>
-                      </Select.Option>
-                    );
-                  }
-                  return null;
-                }
-              )} */}
-            </Select.Content>
-          </Select>
-          <Select
-            value={size.value}
-            onChange={(e: string) => {
-              size.value = e;
-            }}
-          >
-            <Select.Trigger>
-              <Select.Value />
-            </Select.Trigger>
-            <Select.Content>
-              {/* {(Object.entries(fontSize) as Entries<typeof fontSize>).map(
-                ([key]) => (
-                  <Select.Option value={key} key={key}>
-                    <Text>{key}</Text>
-                  </Select.Option>
-                )
-              )} */}
-            </Select.Content>
-          </Select>
+        <YBox space="xs">
           <Select
             value={weight.value}
             onChange={(e: string) => {
@@ -171,9 +126,9 @@ const MyComponent = () => {
               )}
             </Select.Content>
           </Select>
-        </>
+        </YBox>
       }
-      scope={{ Text }}
+      scope={{ Text, YBox }}
     />
   );
 }

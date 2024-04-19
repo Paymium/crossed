@@ -9,7 +9,7 @@
 
 import '@/style.config';
 import { ChangeTheme } from './ChangeTheme';
-import { Box, XBox } from '@crossed/ui';
+import { Box, Text, XBox } from '@crossed/ui';
 import { Logo } from './Logo';
 import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
@@ -46,8 +46,10 @@ export const NavBar = memo(() => {
     <Nav role="navigation">
       <El>
         <LinkLogo href="/" size="lg">
-          <Logo />
-          Crossed
+          <Logo size={32} />
+          <Text size="xl" weight="semibold">
+            Crossed
+          </Text>
         </LinkLogo>
       </El>
       <El>
@@ -94,7 +96,7 @@ const useStyles = createStyles((t) => ({
   },
   nav: {
     base: {
-      backgroundColor: t.colors.neutral.low,
+      backgroundColor: t.colors.neutral['100'],
       padding: t.space.xxs,
       justifyContent: 'space-between',
       flexDirection: 'row',

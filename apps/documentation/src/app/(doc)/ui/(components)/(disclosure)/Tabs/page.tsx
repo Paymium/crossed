@@ -9,6 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { Tabs, Text } from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
@@ -22,8 +23,25 @@ export default function CreateBadge() {
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`// coming soon`}
-      scope={{}}
+      example={`<Tabs defaultValue="web">
+  <Tabs.List>
+    <Tabs.Tab value="web">
+      <Tabs.Tab.Text>web</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="native">
+      <Tabs.Tab.Text>native</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panels>
+    <Tabs.Panel value="web">
+    <Text>web</Text>
+    </Tabs.Panel>
+    <Tabs.Panel value="native">
+      <Text>native</Text>
+    </Tabs.Panel>
+  </PlatformTabs.Panels>
+</Tabs>`}
+      scope={{ Tabs, Text }}
     />
   );
 }

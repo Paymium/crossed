@@ -36,7 +36,7 @@ const accordionStyles = createStyles((t) => ({
     'web': { base: { transition: 'all 170ms' } },
   },
   panel: {
-    base: { padding: t.space.sm },
+    // base: { padding: t.space.sm },
   },
   item: {
     base: {
@@ -66,17 +66,22 @@ const AccordionItem: AccordionItemComponent = forwardRef((props, ref) => {
   );
 });
 
-const AccordionTrigger: AccordionTriggerComponent = forwardRef((props, ref) => {
-  return (
-    <PAccordionTrigger
-      {...props}
-      ref={ref}
-      style={({ pressed }) =>
-        accordionStyles.trigger.rnw({ active: pressed }).style
-      }
-    />
-  );
-});
+const AccordionTrigger: AccordionTriggerComponent = forwardRef(
+  ({ style, ...props }, ref) => {
+    return (
+      <PAccordionTrigger
+        {...props}
+        ref={ref}
+        style={({ pressed }) =>
+          accordionStyles.trigger.rnw({
+            style: typeof style === 'function' ? style({ pressed }) : style,
+            active: pressed,
+          }).style
+        }
+      />
+    );
+  }
+);
 
 const AccordionPanel: AccordionPanelComponent = forwardRef((props, ref) => {
   return (

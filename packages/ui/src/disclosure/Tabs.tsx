@@ -15,18 +15,99 @@ import {
   withStaticProperties,
 } from '@crossed/core';
 import { useCallback, type PropsWithChildren } from 'react';
-import { Button, type ButtonProps } from '../forms/Button';
+import {
+  Button,
+  type ButtonProps,
+  type ButtonTextProps,
+} from '../forms/Button';
 import { XBox, type XBoxProps } from '../layout/XBox';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { createStyles } from '@crossed/styled';
+import { Pressable } from 'react-native';
+import { Box } from '../layout/Box';
+import { useInteraction } from '@crossed/styled/plugins';
 
 const useStyles = createStyles((t) => ({
   list: {
     base: {
-      borderBottomWidth: 1,
-      borderStyle: 'solid',
-      borderColor: t.colors.neutral[600],
-      paddingBottom: t.space.xs,
+      // paddingBottom: t.space.xs,
+    },
+  },
+  trigger: {
+    base: {
+      height: 44,
+      paddingHorizontal: t.space.xs,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    variants: {
+      disabled: {
+        true: {
+          base: {
+            pointerEvents: 'none',
+          },
+        },
+      },
+    },
+    // variants: {
+    //   underline: {
+    //     true: {
+    //       'base': {
+    //         borderRadius: 0,
+    //         borderBottomWidth: 4,
+    //         borderBottomColor: 'transparent',
+    //       },
+    //       ':active': {
+    //         borderRadius: 0,
+    //         borderBottomColor: t.colors.brand.bright,
+    //       },
+    //       ':hover': {
+    //         borderRadius: 0,
+    //         borderBottomColor: t.colors.brand.bright,
+    //       },
+    //     },
+    //   },
+    // },
+  },
+  indicator: {
+    'base': {
+      height: 4,
+      backgroundColor: 'transparent',
+      borderRadius: 4,
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+    },
+    ':hover': { backgroundColor: t.colors.brand.bright },
+    'variants': {
+      disabled: {
+        true: {
+          base: {
+            backgroundColor: 'transparent',
+            pointerEvents: 'none',
+          },
+        },
+      },
+    },
+  },
+  triggerText: {
+    variants: {
+      underline: {
+        true: {
+          'base': { color: t.colors.neutral['600'] },
+          ':hover': { color: t.colors.brand.bright },
+        },
+      },
+      disabled: {
+        true: {
+          base: {
+            color: t.colors.neutral.low,
+            pointerEvents: 'none',
+          },
+        },
+      },
     },
   },
 }));
@@ -39,6 +120,7 @@ export const createTabs = () => {
   const [TabsProvider, useTabsContext] = createScope<TabsContext>(
     {} as TabsContext
   );
+  const [TriggerProvider, useTriggerContext] = createScope({});
 
   const TabsRoot = ({
     children,
@@ -76,12 +158,17 @@ export const createTabs = () => {
   const Panels = ({ children }: PropsWithChildren) => {
     return children;
   };
+
   const TabImpl = withStaticProperties(
     ({
       value: valueProps,
+      children,
+      disabled,
       ...props
     }: ButtonProps & Pick<TabsContext, 'value'>) => {
       const { variant, setValue, value } = useTabsContext();
+
+      const { state, props: interaction } = useInteraction(props);
 
       const onPress = useCallback(
         composeEventHandlers(() => {
@@ -91,16 +178,64 @@ export const createTabs = () => {
       );
 
       return (
-        <Button
-          variant={variant}
-          // size={size}
-          active={valueProps === value}
-          {...props}
-          onPress={onPress}
-        />
+        <TriggerProvider
+          {...state}
+          disabled={disabled}
+          hover={valueProps === value || state.hover}
+        >
+          <Pressable
+            role="button"
+            disabled={disabled}
+            {...props}
+            {...useStyles.trigger.rnw({
+              ...state,
+              hover: valueProps === value || state.hover,
+              variants: { disabled },
+            })}
+            {...interaction}
+            onPress={onPress}
+          >
+            {typeof children === 'function' ? (
+              (e) => (
+                <>
+                  {children(e)}
+                  <Box
+                    {...useStyles.indicator.rnw({
+                      hover: valueProps === value,
+                      variants: { disabled },
+                    })}
+                  />
+                </>
+              )
+            ) : (
+              <>
+                {children}
+                <Box
+                  {...useStyles.indicator.rnw({
+                    hover: valueProps === value,
+                    variants: { disabled },
+                  })}
+                />
+              </>
+            )}
+          </Pressable>
+        </TriggerProvider>
       );
     },
-    { Text: Button.Text }
+    {
+      Text: (props: ButtonTextProps) => {
+        const state = useTriggerContext();
+        return (
+          <Button.Text
+            {...useStyles.triggerText.rnw({
+              ...state,
+              variants: { underline: true, disabled: state.disabled },
+            })}
+            {...props}
+          />
+        );
+      },
+    }
   );
   const Panel = ({
     value: valueProps,

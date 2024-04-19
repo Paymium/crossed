@@ -36,11 +36,12 @@ const useMenuList = createStyles((t) => ({
       paddingHorizontal: t.space.xs,
       justifyContent: 'flex-start',
       height: 42,
-      backgroundColor: 'transparent',
+      // backgroundColor: 'transparent',
       borderWidth: 0,
       borderRadius: 5,
     },
-    ':hover': { backgroundColor: t.colors.neutral[500] },
+    ':hover': { backgroundColor: t.colors.neutral.satured },
+    ':active': { backgroundColor: t.colors.neutral.muted },
     'web': {
       ':focus': { outlineColor: t.colors.neutral[600] },
     },
@@ -69,19 +70,17 @@ const Item = withReactive(
     return (
       <Pressable
         {...props}
-        style={({ pressed }) => [
-          {
-            ...useMenuList.item.rnw({
-              active: active ?? pressed,
-              focus,
-              hover,
-              style:
-                typeof props.style === 'function'
-                  ? props.style({ pressed })
-                  : (props.style as any),
-            }),
-          }.style,
-        ]}
+        style={({ pressed }) =>
+          useMenuList.item.rnw({
+            active: active ?? pressed,
+            focus,
+            hover,
+            style:
+              typeof props.style === 'function'
+                ? props.style({ pressed })
+                : (props.style as any),
+          }).style
+        }
         ref={ref}
       />
     );

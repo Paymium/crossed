@@ -12,11 +12,13 @@ import {
   type TextProps as TextNativeProps,
 } from 'react-native';
 import {
+  composeStyles,
   createStyles,
   withReactive,
   type ExtractForProps,
 } from '@crossed/styled';
 import { forwardRef } from 'react';
+import { typoStyles, type Size } from '../styles/typography';
 
 const useText = createStyles(
   (t) =>
@@ -37,10 +39,6 @@ const useText = createStyles(
             bold: { base: { fontWeight: '700' } },
             extrabold: { base: { fontWeight: '800' } },
             black: { base: { fontWeight: '900' } },
-          },
-          size: {
-            'sm': { base: t.font.text.sm },
-            'md': { base: t.font.text.md },
           },
           color: {
             warning: { base: { color: t.colors.warning.satured } },
@@ -64,26 +62,26 @@ type VariantLocal = ExtractForProps<typeof useText.root>;
 
 export type TextProps = TextNativeProps &
   VariantLocal['variants'] &
-  Omit<VariantLocal, 'variants'>;
+  Omit<VariantLocal, 'variants'> &
+  Size['variants'];
 
 export const Text = withReactive(
   forwardRef(
-    ({ active, hover, focus, color, size, ...props }: TextProps, ref: any) => {
+    (
+      { active, hover, focus, color, weight, size, ...props }: TextProps,
+      ref: any
+    ) => {
       return (
         <TextNative
           ref={ref}
           {...props}
-          style={[
-            useText.root.rnw({
-              style: props.style,
-              className: props.className,
-              active,
-              hover,
-              focus,
-              variants: { color, size },
-            }).style,
-            props.style,
-          ]}
+          {...composeStyles(typoStyles.size, useText.root).rnw({
+            ...props,
+            active,
+            hover,
+            focus,
+            variants: { color, size, weight },
+          })}
         />
       );
     }

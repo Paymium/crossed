@@ -9,16 +9,14 @@ import { createStyles } from '@crossed/styled';
 
 export const menuStyle = createStyles((t) => ({
   item: {
-    'base': {
+    base: {
       height: 32,
       justifyContent: 'flex-start',
-      backgroundColor: 'transparent',
       borderWidth: 0,
       borderRadius: 5,
     },
-    ':hover': { backgroundColor: t.colors.brand.bright },
   },
   itemText: {
-    base: { color: t.font.color, fontWeight: '600' },
+    base: { color: t.colors.neutral['600'], fontWeight: '400' },
   },
 }));

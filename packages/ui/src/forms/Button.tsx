@@ -302,3 +302,4 @@ const { Text: ButtonText, Element: ButtonElement } = Button;
 
 export { ButtonText, ButtonElement, Button, ButtonIcon };
 export type ButtonProps = GetProps<typeof Button>;
+export type ButtonTextProps = GetProps<typeof ButtonText>;

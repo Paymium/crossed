@@ -17,7 +17,7 @@ const styles = createStyles(() => ({
       flex: 1,
       width: '100%',
       justifyContent: 'center',
-      paddingVertical: 15,
+      // paddingVertical: 15,
     },
   },
 }));
