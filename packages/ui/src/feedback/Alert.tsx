@@ -18,7 +18,7 @@ const alertStyles = createStyles(
   (t) =>
     ({
       description: {
-        base: { color: '#5D607C', flex: 1 },
+        base: { color: t.colors.neutral[600], flex: 1 },
         variants: {
           status: {
             error: { base: { color: t.colors.error.satured } },
@@ -36,10 +36,10 @@ const alertStyles = createStyles(
         },
         variants: {
           status: {
-            error: { base: { backgroundColor: '#FEC4C4' } },
-            success: { base: { backgroundColor: '#DCF6E9' } },
-            warning: { base: { backgroundColor: '#FFE0CA' } },
-            info: { base: { backgroundColor: '#D1E7FF' } },
+            error: { base: { backgroundColor: t.colors.error.hight } },
+            success: { base: { backgroundColor: t.colors.success.hight } },
+            warning: { base: { backgroundColor: t.colors.warning.hight } },
+            info: { base: { backgroundColor: t.colors.info.hight } },
           },
         },
       },

@@ -28,7 +28,7 @@ const useCard = createStyles((t) => ({
     },
   },
   title: {
-    base: { alignSelf: 'stretch', fontSize: t.font.heading.lg.fontSize },
+    base: { alignSelf: 'stretch', fontSize: t.font.fontSize.lg },
   },
   description: { base: { alignSelf: 'stretch' } },
 }));

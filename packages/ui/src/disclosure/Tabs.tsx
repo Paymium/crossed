@@ -120,7 +120,10 @@ export const createTabs = () => {
   const [TabsProvider, useTabsContext] = createScope<TabsContext>(
     {} as TabsContext
   );
-  const [TriggerProvider, useTriggerContext] = createScope({});
+  const [TriggerProvider, useTriggerContext] = createScope<{
+    disabled?: boolean;
+    hover?: boolean;
+  }>({});
 
   const TabsRoot = ({
     children,
@@ -166,7 +169,7 @@ export const createTabs = () => {
       disabled,
       ...props
     }: ButtonProps & Pick<TabsContext, 'value'>) => {
-      const { variant, setValue, value } = useTabsContext();
+      const { setValue, value } = useTabsContext();
 
       const { state, props: interaction } = useInteraction(props);
 

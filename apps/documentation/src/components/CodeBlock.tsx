@@ -19,7 +19,7 @@ const styles = createStyles((t) => ({
       width: '100%',
       borderRadius: 14,
       fontFamily: t.font.family,
-      fontSize: t.font.text.md.fontSize,
+      fontSize: t.font.fontSize.md,
     },
   },
   preview: {

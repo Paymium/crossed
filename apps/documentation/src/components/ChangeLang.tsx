@@ -9,7 +9,6 @@
 
 import '@/locales';
 import { Select, Text, XBox } from '@crossed/ui';
-import { ChevronDown } from '@crossed/unicons/ChevronDown';
 import { useTranslation } from 'react-i18next';
 
 export const ChangeLang = () => {
@@ -24,10 +23,7 @@ export const ChangeLang = () => {
       }}
     >
       <Select.Trigger>
-        <XBox alignItems="center">
-          <Select.Value />
-          <ChevronDown />
-        </XBox>
+        <Select.Value />
       </Select.Trigger>
       <Select.Content>
         <Select.Option value="fr">

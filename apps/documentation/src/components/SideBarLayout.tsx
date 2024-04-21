@@ -38,58 +38,42 @@ const styles = createStyles(
           height: '100%',
           width: 240,
         },
-        media: {
-          xs: { display: 'none' },
-          md: { display: 'flex' },
-        },
+        media: { xs: { display: 'none' }, md: { display: 'flex' } },
       },
-      container: {
-        base: {
-          width: '100%',
-          justifyContent: 'center',
-          height: '100%',
-        },
-      },
+      container: { base: { height: '100%' } },
       center: {
         base: {
           flex: 1,
           borderLeftWidth: 0,
-          borderColor: t.colors.neutral[500],
+          borderColor: t.colors.neutral.bright,
           minHeight: '100%',
           flexGrow: 1,
         },
-        media: {
-          md: { borderLeftWidth: 1 },
-        },
+        media: { md: { borderLeftWidth: 1 } },
       },
       li: { base: { alignItems: 'stretch' } },
       item: { base: { justifyContent: 'flex-end' } },
-      accordionTrigger: {
-        base: {
-          padding: t.space.xxs
-        },
-      },
+      accordionTrigger: { base: { padding: t.space.xxs } },
     } as const)
 );
 
 const Li = ({ label, ...props }: YBoxProps & { label?: boolean }) => (
-  <YBox
-    role="listitem"
-    {...props}
-    {...styles.li.rnw({ variants: { label } })}
-  />
+  <YBox role="listitem" {...props} {...styles.li.rnw()} />
 );
 
 type Nav =
-  | { href: string; title: string }
-  | { title: string }
-  | { title: string; menus: { href: string; title: string }[] };
+  | { href: string; title: string; menus?: never }
+  | { title: string; menus?: never; href?: never }
+  | {
+      title: string;
+      menus: { href: string; title: string; menus?: never }[];
+      href?: never;
+    };
 
 export function SideBarLayout({
   children,
   menus,
 }: PropsWithChildren<{ menus: Nav[] }>) {
-  const pathname = usePathname();
   return (
     <XBox {...styles.container.rnw()}>
       <ScrollView
@@ -148,9 +132,9 @@ const Item = ({ href, title, menus }: Nav) => {
         </AccordionTrigger>
         <AccordionPanel>
           {menus.map((item) => {
-            const { href, title, menus } = item;
+            const { href, title } = item;
             return (
-              <Li key={href || title} label={!href || Boolean(menus)}>
+              <Li key={href || title} label={!href || Boolean(item.menus)}>
                 <Item {...item} />
               </Li>
             );

@@ -7,7 +7,7 @@
 
 import type { Spaces } from './types/space';
 
-export const space: Spaces = {
+export const space = {
   xxs: 8,
   xs: 16,
   sm: 24,
@@ -15,4 +15,4 @@ export const space: Spaces = {
   lg: 40,
   xl: 56,
   xxl: 72,
-};
+} as const satisfies Spaces;

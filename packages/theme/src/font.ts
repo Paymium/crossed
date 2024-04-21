@@ -7,16 +7,46 @@
 
 import type { Font } from './types/font';
 
-export const font: Font = {
-  heading: {
-    md: { fontSize: 18, fontWeight: '700', lineHeight: 24 },
-    lg: { fontSize: 24, fontWeight: '800', lineHeight: 32 },
-    xl: { fontSize: 32, fontWeight: '900', lineHeight: 32 },
+export const font = {
+  lineHeight: {
+    xs: 13,
+    sm: 16,
+    md: 18,
+    lg: 21,
+    xl: 27,
+    h6: 32,
+    h5: 37,
+    h4: 41,
+    h3: 46,
+    h2: 51,
+    h1: 55,
   },
-  text: {
-    sm: { fontSize: 12, fontWeight: '400', lineHeight: 16 },
-    md: { fontSize: 16, fontWeight: '400', lineHeight: 24 },
+  fontSize: {
+    xs: 11,
+    sm: 14,
+    md: 16,
+    lg: 18,
+    xl: 24,
+    h6: 28,
+    h5: 32,
+    h4: 36,
+    h3: 40,
+    h2: 44,
+    h1: 48,
+  },
+  fontWeight: {
+    xs: '400',
+    sm: '400',
+    md: '400',
+    lg: '700',
+    xl: '700',
+    h6: '700',
+    h5: '700',
+    h4: '700',
+    h3: '700',
+    h2: '700',
+    h1: '700',
   },
   color: 'black',
   family: 'Arial',
-};
+} as const satisfies Font;

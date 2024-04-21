@@ -131,7 +131,7 @@ export const useButton = createStyles(
             outlineWidth: '2px',
             outlineOffset: '2px',
             outlineStyle: 'solid',
-            outlineColor: '#9088F7',
+            outlineColor: t.colors.brand.hight,
           },
         },
         variants: {

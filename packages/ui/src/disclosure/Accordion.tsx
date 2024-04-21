@@ -74,7 +74,9 @@ const AccordionTrigger: AccordionTriggerComponent = forwardRef(
         ref={ref}
         style={({ pressed }) =>
           accordionStyles.trigger.rnw({
-            style: typeof style === 'function' ? style({ pressed }) : style,
+            style: (typeof style === 'function'
+              ? style({ pressed })
+              : style) as any,
             active: pressed,
           }).style
         }

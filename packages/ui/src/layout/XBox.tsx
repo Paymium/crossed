@@ -18,7 +18,6 @@ export const useXBox = createStyles(
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'flex-start',
-          width: '100%',
           flexBasis: 'auto',
         },
         variants: {

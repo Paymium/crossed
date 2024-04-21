@@ -11,6 +11,7 @@ import merge from 'deepmerge';
 
 export type ExtractStyle<S extends CrossedMethods<any>> =
   S extends CrossedMethods<infer D, any> ? D : never;
+
 export const composeStyles = <
   F extends CrossedMethods<any> | false,
   S extends CrossedMethods<any> | false
@@ -33,7 +34,7 @@ export const composeStyles = <
     const styleMerged = merge<
       ExtractStyle<Exclude<typeof style1, false>>,
       ExtractStyle<Exclude<typeof style2, false>>
-    >(style1?.original, style2?.original);
+    >(style1.original, style2.original);
     return createMethods<typeof styleMerged>(styleMerged);
   }
   return createMethods<{}>({});

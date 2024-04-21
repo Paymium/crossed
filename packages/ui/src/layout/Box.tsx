@@ -6,8 +6,13 @@
  */
 
 import { View, type ViewProps } from 'react-native';
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  type ExtractForProps,
+} from '@crossed/styled';
 import { forwardRef } from 'react';
+import { baseStyle } from '../styles/base';
 
 const styleBox = createStyles(
   (t) =>
@@ -47,17 +52,14 @@ export const Box = forwardRef<View, BoxProps>(
     <View
       ref={ref}
       {...props}
-      style={[
-        styleBox.root.rnw({
-          // style,
-          className,
-          active,
-          hover,
-          focus,
-          variants: { space, center },
-        }).style,
+      {...composeStyles(styleBox.root, baseStyle.view).rnw({
         style,
-      ]}
+        className,
+        active,
+        hover,
+        focus,
+        variants: { space, center },
+      })}
     />
   )
 );

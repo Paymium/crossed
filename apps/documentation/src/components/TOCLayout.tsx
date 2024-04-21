@@ -29,9 +29,9 @@ const styles = createStyles(
       center: {
         base: {
           flex: 1,
-          width: '100%',
-          borderColor: t.colors.neutral[500],
+          borderColor: t.colors.neutral.bright,
           flexDirection: 'column',
+          alignItems: 'center',
           backgroundColor: t.colors.neutral.low,
         },
         variants: {
@@ -50,8 +50,12 @@ const styles = createStyles(
           paddingHorizontal: t.space.sm,
           alignSelf: 'baseline',
           height: '100%',
+          borderWidth: 1,
+          borderTopWidth: 0,
+          borderRightWidth: 0,
+          borderBottomWidth: 0,
           borderLeftWidth: 1,
-          borderColor: t.colors.neutral[500],
+          borderColor: t.colors.neutral.bright,
           borderStyle: 'solid',
         },
         media: {
@@ -60,7 +64,7 @@ const styles = createStyles(
         },
       },
       menuLabel: {
-        base: { fontSize: t.font.text.md.fontSize },
+        base: { fontSize: t.font.fontSize.md },
       },
       li: { base: { alignItems: 'stretch' } },
       position: {

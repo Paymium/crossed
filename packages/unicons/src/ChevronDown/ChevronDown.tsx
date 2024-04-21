@@ -13,10 +13,12 @@ export const ChevronDown = ({
   Path,
   color,
   size = 24,
+  ...other
 }: RequireOnly<'Path' | 'Svg'>) => {
   const theme = useTheme();
   return (
     <Svg
+      {...other}
       width={size}
       height={size}
       viewBox="0 0 24 24"

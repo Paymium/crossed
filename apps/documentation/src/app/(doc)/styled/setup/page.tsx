@@ -31,19 +31,23 @@ const styles = createStyles(() => ({
 
 export default function Home() {
   const { t } = useTranslation();
-  const [platform, setPlatform] = useState<'web' | 'native'>('web');
+  const [platform, setPlatform] = useState<string>('web');
   return (
-    <PlatformTabs defaultValue="web" value={platform} onChange={setPlatform}>
+    <PlatformTabs
+      defaultValue="web"
+      value={platform}
+      onChange={(e) => setPlatform(e.toString())}
+    >
       <BuilderTabs defaultValue="webpack">
         <H1>{t('Setup')}</H1>
         <Description>
           {t('Get @crossed/styled set up, step by step')}
         </Description>
 
-        <Card>
+        <Card space="sm">
           <PlatformTabs.Panels>
             <XBox space="xs">
-              <Select value={platform} onChange={setPlatform}>
+              <Select value={platform} onChange={(e) => setPlatform(e)}>
                 <Select.Trigger {...styles.selectTrigger.rnw()}>
                   <Select.Value />
                 </Select.Trigger>

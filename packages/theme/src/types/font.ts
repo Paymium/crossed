@@ -20,12 +20,24 @@ export type Headings = Record<HeadingName, FontStyle>;
 ////////////////////////
 // text
 ////////////////////////
-export type TextName = 'sm' | 'md';
+export type TextName =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | 'h6'
+  | 'h5'
+  | 'h4'
+  | 'h3'
+  | 'h2'
+  | 'h1';
 export type Texts = Record<TextName, FontStyle>;
 
 export type Font = {
-  heading: Headings;
-  text: Texts;
+  lineHeight: Record<TextName, CrossedstyleValues['lineHeight']>;
+  fontSize: Record<TextName, CrossedstyleValues['fontSize']>;
+  fontWeight: Record<TextName, CrossedstyleValues['fontWeight']>;
   color: string;
   family: string;
 };

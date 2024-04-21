@@ -20,15 +20,15 @@ const bannerStyles = createStyles(
   (t) =>
     ({
       action: { base: {} },
-      description: { base: { color: '#5D607C', flex: 1 } },
+      description: { base: { color: t.colors.neutral[600], flex: 1 } },
       title: {
         base: { fontWeight: '600' },
         variants: {
           status: {
-            error: { base: { color: '#A21A1A' } },
-            success: { base: { color: '#188551' } },
-            warning: { base: { color: '#AD5C23' } },
-            info: { base: { color: '#285F9B' } },
+            error: { base: { color: t.colors.error.satured } },
+            success: { base: { color: t.colors.success.satured } },
+            warning: { base: { color: t.colors.warning.satured } },
+            info: { base: { color: t.colors.info.satured } },
           },
         },
       },
@@ -37,10 +37,10 @@ const bannerStyles = createStyles(
         base: { borderRadius: 32, width: 32, height: 32 },
         variants: {
           status: {
-            error: { base: { backgroundColor: '#FEC4C4' } },
-            success: { base: { backgroundColor: '#DCF6E9' } },
-            warning: { base: { backgroundColor: '#FFE0CA' } },
-            info: { base: { backgroundColor: '#D1E7FF' } },
+            error: { base: { backgroundColor: t.colors.error.low } },
+            success: { base: { backgroundColor: t.colors.success.low } },
+            warning: { base: { backgroundColor: t.colors.warning.low } },
+            info: { base: { backgroundColor: t.colors.info.low } },
           },
         },
       },
@@ -55,10 +55,10 @@ const bannerStyles = createStyles(
         },
         variants: {
           status: {
-            error: { base: { borderColor: '#EF4444' } },
-            success: { base: { borderColor: '#3ABB7D' } },
-            warning: { base: { borderColor: '#F97316' } },
-            info: { base: { borderColor: '#93C5FD' } },
+            error: { base: { borderColor: t.colors.error.bright } },
+            success: { base: { borderColor: t.colors.success.bright } },
+            warning: { base: { borderColor: t.colors.warning.bright } },
+            info: { base: { borderColor: t.colors.info.bright } },
           },
         },
         media: { md: { flexDirection: 'row' } },

@@ -24,8 +24,7 @@ const useMenuList = createStyles((t) => ({
   root: {
     base: {
       alignItems: 'stretch',
-      paddingVertical: t.space.xxs,
-      paddingHorizontal: t.space.xxs,
+      padding: t.space.xxs,
     },
   },
   item: {
@@ -53,7 +52,7 @@ const MenuRoot = forwardRef((props: MenuRootProps, ref: any) => {
   return (
     <YBox
       {...props}
-      style={[useMenuList.root.rnw().style, props.style]}
+      {...useMenuList.root.rnw({ style: props.style })}
       ref={ref}
     />
   );

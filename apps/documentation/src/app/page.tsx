@@ -45,7 +45,7 @@ const useStyles = createStyles((t) => ({
     },
     media: { md: { flexDirection: 'row' } },
   },
-  card: { base: { flex: 1 } },
+  card: { base: { flexShrink: 1, flexBasis: 0, flexGrow: 1 } },
   title: {
     base: {
       textAlign: 'center',
@@ -57,7 +57,7 @@ const useStyles = createStyles((t) => ({
       alignItems: 'center',
       paddingVertical: 50,
       minHeight: '90%',
-      backgroundColor: t.colors.neutral[300]
+      backgroundColor: t.colors.neutral[300],
     },
   },
   cardTitle: {

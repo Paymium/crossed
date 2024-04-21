@@ -11,6 +11,7 @@ import { form } from '../../styles/form';
 import { useSelect } from './styles';
 import type { ContentProps } from './types';
 import { useRef } from 'react';
+import { composeStyles } from '@crossed/styled';
 
 export const ContentWeb = ({ sheetProps, ...props }: ContentProps) => {
   const ref = useRef(null);
@@ -26,14 +27,13 @@ export const ContentWeb = ({ sheetProps, ...props }: ContentProps) => {
       {...props}
       ref={ref}
       style={[
-        form.input.rnw({ style: useSelect.content.style().style }).style,
+        composeStyles(form.input, useSelect.content).rnw().style,
         {
           top: top + height + 5,
           left,
           minWidth: width,
           position: 'absolute',
         },
-        // props.style,
       ]}
     />
   ) : null;

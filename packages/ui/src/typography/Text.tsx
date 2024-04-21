@@ -25,7 +25,6 @@ const useText = createStyles(
     ({
       root: {
         base: {
-          ...t.font.text.md,
           color: t.font.color,
           fontFamily: t.font.family,
         },
@@ -68,7 +67,7 @@ export type TextProps = TextNativeProps &
 export const Text = withReactive(
   forwardRef(
     (
-      { active, hover, focus, color, weight, size, ...props }: TextProps,
+      { active, hover, focus, color, weight, size = 'md', ...props }: TextProps,
       ref: any
     ) => {
       return (

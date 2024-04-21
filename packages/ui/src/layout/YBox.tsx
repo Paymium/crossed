@@ -19,7 +19,6 @@ const useYBox = createStyles(
           display: 'flex',
           flexDirection: 'column',
           alignSelf: 'stretch',
-          maxWidth: '100%',
         },
       },
     } as const)

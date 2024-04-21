@@ -176,15 +176,16 @@ const Trigger = withStaticProperties(
         {...props}
         onFocus={composeEventHandlers(props.onFocus, onFocus)}
         onBlur={composeEventHandlers(props.onBlur, onBlur)}
-        style={({ pressed }) =>
-          composeStyles(form.input, useSelect.trigger).rnw({
+        style={({ pressed }) => {
+          const style = composeStyles(form.input, useSelect.trigger).rnw({
             ...props,
             hover,
             'focus': focus ?? open,
             'focus-visible': focus ?? open,
             'active': props.active ?? pressed,
-          }).style
-        }
+          }).style;
+          return style;
+        }}
         onPress={composeEventHandlers(props.onPress, onPress)}
       >
         {typeof children === 'function' ? (
@@ -192,14 +193,14 @@ const Trigger = withStaticProperties(
             <>
               {inputRender}
               {children(e)}
-              <ChevronDown />
+              <ChevronDown {...useSelect.icon.style()} />
             </>
           )
         ) : (
           <>
             {inputRender}
             {children}
-            <ChevronDown />
+            <ChevronDown {...useSelect.icon.style()} />
           </>
         )}
       </Pressable>
@@ -230,7 +231,7 @@ Option.displayName = 'Select.Option';
 
 const Value = () => {
   const { renderValue } = useSelectProvider();
-  return <Text>{renderValue.current}</Text>;
+  return <Text {...useSelect.value.rnw()}>{renderValue.current}</Text>;
 };
 
 Value.id = 'Select.Value';

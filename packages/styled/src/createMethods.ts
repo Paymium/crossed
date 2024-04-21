@@ -23,11 +23,13 @@ const apply = <S>(
 
 const cleanClassName = (classNames: string[]) => {
   return classNames.reduce((acc, className) => {
-    const [property] = className.match(/^([a-z\-:]+)/g) || [];
+    const [property] = className.match(/^([a-z\-:]+)\[/g) || [];
 
     if (property) {
       acc.forEach((accKey) => {
-        const [same] = accKey.match(new RegExp(`^${property}`, 'g')) || [];
+        const [same] =
+          accKey.match(new RegExp(`^${property.replace('[', '\\[')}`, 'g')) ||
+          [];
         if (same) {
           acc.delete(accKey);
         }
@@ -102,52 +104,43 @@ export const createMethods = <S>(styleOfKey: Record<string, any>) => {
       const classNames: string[] = props.className
         ? props.className.split(' ')
         : [];
-      const parentStyle = (
-        Array.isArray(props.style) ? props.style : [props.style]
-      ).reduce((acc, st: any) => {
-        if (!st) return acc;
-        if (!st.$$css) {
-          acc = { ...acc, ...st };
-        }
-        return acc;
-      }, {});
-      apply(
-        {
-          ...styleOfKey,
-          base: { ...(styleOfKey as any).base, ...parentStyle },
-        },
-        props,
-        ({ body }) => {
-          style = {
-            ...style,
-            ...Object.values(body).reduce((acc, e) => ({ ...acc, ...e }), {}),
-          };
-          classNames.push(...Object.keys(body));
-        }
-      );
 
-      (Array.isArray(props.style) ? props.style : [props.style]).forEach(
-        (st) => {
+      apply(styleOfKey, props, ({ body }) => {
+        style = {
+          ...style,
+          ...Object.values(body).reduce((acc, e) => ({ ...acc, ...e }), {}),
+        };
+        classNames.push(...Object.keys(body));
+      });
+
+      let styletmp = {};
+      (Array.isArray(props.style) ? props.style : [props.style])
+        .flat(Infinity)
+        .forEach((st) => {
           if (!st) return;
           if (st.$$css) {
             const { $$css, ...otherClassName } = st;
             classNames.push(...Object.keys(otherClassName));
           } else if (!st.$$css) {
             style = { ...style, ...st };
+            styletmp = { ...styletmp, ...st };
           }
-        }
-      );
+        });
+
       return {
         style: isWeb
-          ? Array.from(cleanClassName(classNames).values()).reduce<
-              Record<string, any>
-            >(
-              (acc2, cl) => {
-                acc2[cl] = cl;
-                return acc2;
-              },
-              { $$css: true }
-            )
+          ? [
+              Array.from(cleanClassName(classNames).values()).reduce<
+                Record<string, any>
+              >(
+                (acc2, cl) => {
+                  acc2[cl] = cl;
+                  return acc2;
+                },
+                { $$css: true }
+              ),
+              styletmp,
+            ]
           : style,
       };
     },

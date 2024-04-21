@@ -9,7 +9,14 @@ import { createStyles } from '@crossed/styled';
 
 export const useSelect = createStyles((t) => ({
   trigger: {
-    web: { base: { width: 'max-content', flexDirection: 'row' } },
+    base: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      flexShrink: 1,
+      display: 'flex',
+      flexBasis: 'auto',
+      // flex: ,
+    },
   },
   select: {
     base: {
@@ -19,6 +26,14 @@ export const useSelect = createStyles((t) => ({
   },
   options: {
     ':active': { backgroundColor: t.colors.neutral[400] },
+  },
+  value: {
+    base: {
+      alignItems: 'center',
+      display: 'flex',
+      flexBasis: 'auto',
+      width: 'auto',
+    },
   },
   content: {
     base: {
@@ -34,5 +49,8 @@ export const useSelect = createStyles((t) => ({
       paddingHorizontal: t.space.xxs,
       gap: t.space.xxs,
     },
+  },
+  icon: {
+    base: { flexShrink: 0 },
   },
 }));

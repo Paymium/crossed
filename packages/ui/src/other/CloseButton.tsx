@@ -16,8 +16,8 @@ const styles = createStyles((t) => ({
     },
   },
   icon: {
-    'base': { color: '#5D607C' },
-    ':disabled': { color: '#AEB6CE' },
+    'base': { color: t.colors.neutral[600] },
+    ':disabled': { color: t.colors.neutral.hight },
   },
 }));
 

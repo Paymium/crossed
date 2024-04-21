@@ -27,7 +27,10 @@ export const form = createStyles((t) => ({
     ':hover': { borderColor: t.colors.brand.bright },
     ':focus': { borderColor: t.colors.brand.bright },
     ':active': { borderColor: t.colors.brand.bright },
-    ':disabled': { borderColor: t.colors.neutral[200], color: '#6F7995' },
+    ':disabled': {
+      borderColor: t.colors.neutral[200],
+      color: t.colors.brand.bright,
+    },
     'variants': {
       error: {
         true: {
@@ -47,14 +50,12 @@ export const form = createStyles((t) => ({
     },
   },
   placeholder: {
-    base: { color: '#6F7995' },
+    base: { color: t.colors.brand.bright },
   },
   label: {
     'base': {
       color: t.font.color,
-      fontWeight: '600',
-      fontSize: 16,
-      lineHeight: 24,
+      fontWeight: t.font.fontWeight.lg,
     },
     ':focus': { color: t.colors.brand.muted },
     ':disabled': { color: t.colors.neutral[500] },

@@ -12,7 +12,7 @@ import { NavBar } from '@/components/NavBar';
 import { createStyles } from '@crossed/styled';
 import { FlatList } from 'react-native';
 
-const styleSheet = createStyles((t) => ({
+const styleSheet = createStyles(() => ({
   root: { base: { minHeight: '100%' } },
   container: {
     base: {
