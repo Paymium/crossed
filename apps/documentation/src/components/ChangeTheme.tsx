@@ -28,8 +28,11 @@ export const ChangeTheme = () => {
         <Select.Option value="dark">
           <Sun />
         </Select.Option>
-        <Select.Option value="paymium">
-          <Text>Paymium</Text>
+        <Select.Option value="paymiumLight">
+          <Text>Paymium light</Text>
+        </Select.Option>
+        <Select.Option value="paymiumDark">
+          <Text>Paymium dark</Text>
         </Select.Option>
       </Select.Content>
     </Select>

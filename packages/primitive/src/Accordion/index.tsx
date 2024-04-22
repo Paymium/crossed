@@ -113,11 +113,11 @@ const createAccordion: CreateAccordion = () => {
     return (
       <VisibilityHidden
         role="region"
-        {...props}
         ref={ref}
         id={propsId}
         aria-labelledby={buttonId.current}
         hide={!values.includes(value)}
+        {...props}
       />
     );
   });

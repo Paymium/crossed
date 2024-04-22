@@ -24,7 +24,9 @@ const useMenuList = createStyles((t) => ({
   root: {
     base: {
       alignItems: 'stretch',
-      padding: t.space.xxs,
+    },
+    variants: {
+      padded: { true: { base: { padding: t.space.xxs } } },
     },
   },
   item: {
@@ -48,17 +50,20 @@ const useMenuList = createStyles((t) => ({
 }));
 type ButtonVariantProps = Partial<Pick<ButtonProps, 'variant'>>;
 
-const MenuRoot = forwardRef((props: MenuRootProps, ref: any) => {
-  return (
-    <YBox
-      {...props}
-      {...useMenuList.root.rnw({ style: props.style })}
-      ref={ref}
-    />
-  );
-});
+const MenuRoot = forwardRef(
+  ({ padded = true, ...props }: MenuRootProps, ref: any) => {
+    return (
+      <YBox
+        {...props}
+        {...useMenuList.root.rnw({ style: props.style, variants: { padded } })}
+        ref={ref}
+      />
+    );
+  }
+);
 
-type MenuRootProps = YBoxProps;
+type MenuRootProps = YBoxProps &
+  ExtractForProps<typeof useMenuList.root>['variants'];
 
 const Divider = D;
 const Item = withReactive(

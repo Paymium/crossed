@@ -13,8 +13,9 @@ import {
   type AccordionComponent,
 } from '@crossed/primitive';
 import { createStyles } from '@crossed/styled';
-import { forwardRef, useContext } from 'react';
+import { forwardRef, useContext, useRef } from 'react';
 import { ChevronDown, ChevronUp } from '@crossed/unicons';
+import { View } from 'react-native';
 
 const accordionStyles = createStyles((t) => ({
   root: {
@@ -31,18 +32,32 @@ const accordionStyles = createStyles((t) => ({
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
-    ':hover': { backgroundColor: t.colors.neutral[300] },
-    ':active': { backgroundColor: t.colors.neutral[400] },
+    ':hover': { backgroundColor: t.colors.neutral.muted },
+    ':active': { backgroundColor: t.colors.neutral.satured },
     'web': { base: { transition: 'all 170ms' } },
   },
   panel: {
-    // base: { padding: t.space.sm },
+    variants: {
+      show: {
+        false: {
+          web: {
+            base: { height: 0 },
+          },
+        },
+      },
+    },
+    web: {
+      base: { overflow: 'hidden', transition: 'height 170ms ease-out' },
+    },
   },
   item: {
     base: {
       borderTopWidth: 1,
       borderColor: t.colors.neutral[500],
       borderStyle: 'solid',
+    },
+    web: {
+      base: { transition: 'height 1000ms ease' },
     },
   },
 }));
@@ -86,8 +101,29 @@ const AccordionTrigger: AccordionTriggerComponent = forwardRef(
 );
 
 const AccordionPanel: AccordionPanelComponent = forwardRef((props, ref) => {
+  const { value } = useContext(itemContext);
+  const { values } = useContext(rootContext);
+  const refLocal = useRef<number>();
   return (
-    <PAccordionPanel {...props} ref={ref} {...accordionStyles.panel.rnw()} />
+    <PAccordionPanel
+      {...props}
+      ref={ref}
+      hide={false}
+      style={[
+        accordionStyles.panel.rnw({
+          variants: { show: false },
+        }).style,
+        values.includes(value) && { height: refLocal.current },
+      ]}
+    >
+      <View
+        onLayout={({ nativeEvent: { layout } }) => {
+          refLocal.current = layout.height;
+        }}
+      >
+        {props.children}
+      </View>
+    </PAccordionPanel>
   );
 });
 

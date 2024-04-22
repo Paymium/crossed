@@ -86,7 +86,6 @@ import { CloseButton } from '@crossed/ui'
       //       <Select.Trigger>
       //         <XBox alignItems="center">
       //           <Select.Value />
-      //           <ChevronDown />
       //         </XBox>
       //       </Select.Trigger>
       //       <Select.Content>

@@ -10,30 +10,24 @@ import { useSelectProvider } from './context';
 import { form } from '../../styles/form';
 import { useSelect } from './styles';
 import type { ContentProps } from './types';
-import { useRef } from 'react';
 import { composeStyles } from '@crossed/styled';
 
 export const ContentWeb = ({ sheetProps, ...props }: ContentProps) => {
-  const ref = useRef(null);
-  const all = useSelectProvider();
+  const { triggerLayout, open, refs, floatingStyles } = useSelectProvider();
 
-  const { top, height, left, width } = (all.triggerLayout.current as any) || {
+  const { width } = (triggerLayout.current as any) || {
     top: 0,
     height: 0,
     left: 0,
   };
-  return all.open ? (
+  return open ? (
     <MenuList
       {...props}
-      ref={ref}
+      ref={refs.setFloating}
       style={[
         composeStyles(form.input, useSelect.content).rnw().style,
-        {
-          top: top + height + 5,
-          left,
-          minWidth: width,
-          position: 'absolute',
-        },
+        floatingStyles,
+        { minWidth: width },
       ]}
     />
   ) : null;

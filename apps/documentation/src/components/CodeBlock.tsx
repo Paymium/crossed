@@ -26,11 +26,12 @@ const styles = createStyles((t) => ({
     base: {
       padding: t.space.xs,
       alignItems: 'stretch',
-      flex: 1,
+      flexShrink: 1,
     },
   },
   containerPreview: {
     base: {
+      flexShrink: 1,
       borderWidth: 1,
       borderColor: t.colors.neutral[500],
       borderStyle: 'solid',

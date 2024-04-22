@@ -10,6 +10,7 @@ import {
   composeEventHandlers,
   useUncontrolled,
   withStaticProperties,
+  composeRefs,
 } from '@crossed/core';
 import {
   useCallback,
@@ -34,6 +35,7 @@ import { VisibilityHidden } from '@crossed/primitive';
 import { useFocusScope } from './Focus';
 import { ChevronDown } from '@crossed/unicons/ChevronDown';
 import { composeStyles } from '@crossed/styled';
+import { useFloating } from './useFloating';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
@@ -85,6 +87,7 @@ const SelectRoot = memo(
         adapt?: boolean;
       }
   >) => {
+    const { refs, floatingStyles } = useFloating();
     const bottomSheetModalRef = useRef<BottomSheetMethods>(null);
     const renderValue = useRef<ReactNode>();
     const triggerLayout = useRef<LayoutRectangle | undefined>();
@@ -117,6 +120,8 @@ const SelectRoot = memo(
         id={id}
         hover={hover}
         focus={focus}
+        refs={refs}
+        floatingStyles={floatingStyles}
       >
         {children}
       </Provider>
@@ -141,8 +146,10 @@ const Trigger = withStaticProperties(
       id,
       onBlur,
       onFocus,
+      value,
+      refs,
     } = useSelectProvider();
-    const onPress = useCallback(() => {
+    const onPressIn = useCallback(() => {
       if (sheet.current) {
         sheet.current.open();
         setOpen(!open);
@@ -162,31 +169,30 @@ const Trigger = withStaticProperties(
     }, [open, setOpen, sheet, triggerLayout]);
     const inputRender = (
       <VisibilityHidden hide>
-        <TextInput id={id} focusable={false} />
+        <TextInput id={id} focusable={false} value={value} />
       </VisibilityHidden>
     );
 
     return (
       <Pressable
         role="button"
-        ref={pressableRef}
         onLayout={({ nativeEvent: { layout } }) => {
           triggerLayout.current = layout;
         }}
         {...props}
+        ref={composeRefs(pressableRef, refs.setReference as any)}
         onFocus={composeEventHandlers(props.onFocus, onFocus)}
         onBlur={composeEventHandlers(props.onBlur, onBlur)}
         style={({ pressed }) => {
-          const style = composeStyles(form.input, useSelect.trigger).rnw({
+          return composeStyles(form.input, useSelect.trigger).rnw({
             ...props,
             hover,
             'focus': focus ?? open,
             'focus-visible': focus ?? open,
             'active': props.active ?? pressed,
           }).style;
-          return style;
         }}
-        onPress={composeEventHandlers(props.onPress, onPress)}
+        onPressIn={composeEventHandlers(props.onPressIn, onPressIn)}
       >
         {typeof children === 'function' ? (
           (e) => (

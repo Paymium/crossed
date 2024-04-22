@@ -8,7 +8,7 @@
 'use client';
 
 import '@/locales';
-import { Select, Text, XBox } from '@crossed/ui';
+import { Select, Text } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 
 export const ChangeLang = () => {

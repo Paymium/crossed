@@ -56,7 +56,7 @@ const useStyles = createStyles((t) => ({
       flexDirection: 'column',
       alignItems: 'center',
       paddingVertical: 50,
-      minHeight: '90%',
+      flex: 1,
       backgroundColor: t.colors.neutral[300],
     },
   },

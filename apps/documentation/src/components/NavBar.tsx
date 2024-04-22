@@ -96,6 +96,7 @@ const useStyles = createStyles((t) => ({
   },
   nav: {
     base: {
+      width: '100%',
       backgroundColor: t.colors.neutral['100'],
       padding: t.space.xxs,
       justifyContent: 'space-between',

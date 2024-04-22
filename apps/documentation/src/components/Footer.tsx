@@ -15,6 +15,7 @@ import { createStyles } from '@crossed/styled';
 const useStyles = createStyles((t) => ({
   container: {
     base: {
+      width: '100%',
       backgroundColor: t.colors.neutral['100'],
       padding: 15,
       justifyContent: 'center',

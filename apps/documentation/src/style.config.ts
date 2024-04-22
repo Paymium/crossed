@@ -18,8 +18,12 @@ const themes = {
     ...defaultThemes.light,
     draculaTheme: primsThemes.dracula,
   },
-  paymium: {
-    ...defaultThemes.paymium,
+  paymiumLight: {
+    ...defaultThemes.paymiumLight,
+    draculaTheme: primsThemes.dracula,
+  },
+  paymiumDark: {
+    ...defaultThemes.paymiumDark,
     draculaTheme: primsThemes.dracula,
   },
 };

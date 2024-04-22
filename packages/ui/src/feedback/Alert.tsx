@@ -45,6 +45,7 @@ const alertStyles = createStyles(
       },
       container: {
         base: {
+          padding: t.space.xxs,
           paddingVertical: t.space.xxs,
           paddingHorizontal: t.space.xs,
           borderRadius: 8,

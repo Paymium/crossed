@@ -19,7 +19,6 @@ import { match } from 'ts-pattern';
 const bannerStyles = createStyles(
   (t) =>
     ({
-      action: { base: {} },
       description: { base: { color: t.colors.neutral[600], flex: 1 } },
       title: {
         base: { fontWeight: '600' },
@@ -46,6 +45,7 @@ const bannerStyles = createStyles(
       },
       container: {
         base: {
+          padding: t.space.xs,
           paddingVertical: t.space.xs,
           paddingHorizontal: t.space.sm,
           borderRadius: 8,
@@ -127,14 +127,7 @@ const Description = (props: TextProps) => {
 };
 
 const Action = (props: ButtonProps) => {
-  return (
-    <Button
-      variant="tertiary"
-      size={false}
-      {...props}
-      {...bannerStyles.action.rnw()}
-    />
-  );
+  return <Button variant="tertiary" size={false} {...props} />;
 };
 
 const Banner = withStaticProperties(Container, {

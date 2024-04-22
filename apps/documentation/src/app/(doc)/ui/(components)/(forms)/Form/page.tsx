@@ -44,7 +44,6 @@ export default function CreateBadge() {
         <Select.Trigger>
           <XBox alignItems="center" justifyContent="between">
             <Select.Value />
-            <ChevronDown />
           </XBox>
         </Select.Trigger>
         <Select.Content>

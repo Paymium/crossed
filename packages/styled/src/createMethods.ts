@@ -113,7 +113,7 @@ export const createMethods = <S>(styleOfKey: Record<string, any>) => {
         classNames.push(...Object.keys(body));
       });
 
-      let styletmp = {};
+      let styletmp: object | undefined;
       (Array.isArray(props.style) ? props.style : [props.style])
         .flat(Infinity)
         .forEach((st) => {
@@ -126,22 +126,19 @@ export const createMethods = <S>(styleOfKey: Record<string, any>) => {
             styletmp = { ...styletmp, ...st };
           }
         });
-
+      const styletransformWeb = isWeb
+        ? Array.from(cleanClassName(classNames).values()).reduce<
+            Record<string, any>
+          >(
+            (acc2, cl) => {
+              acc2[cl] = cl;
+              return acc2;
+            },
+            { $$css: true }
+          )
+        : style;
       return {
-        style: isWeb
-          ? [
-              Array.from(cleanClassName(classNames).values()).reduce<
-                Record<string, any>
-              >(
-                (acc2, cl) => {
-                  acc2[cl] = cl;
-                  return acc2;
-                },
-                { $$css: true }
-              ),
-              styletmp,
-            ]
-          : style,
+        style: styletmp ? [styletransformWeb, styletmp] : styletransformWeb,
       };
     },
   };
