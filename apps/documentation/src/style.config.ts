@@ -6,16 +6,24 @@
  */
 
 import { Registry } from '@crossed/styled';
-import { darkTheme, lightTheme } from '@crossed/ui/theme';
+import { themes as defaultThemes } from '@crossed/theme';
 import { themes as primsThemes } from 'prism-react-renderer';
 
 const themes = {
   dark: {
-    ...darkTheme,
+    ...defaultThemes.dark,
     draculaTheme: primsThemes.dracula,
   },
   light: {
-    ...lightTheme,
+    ...defaultThemes.light,
+    draculaTheme: primsThemes.dracula,
+  },
+  paymiumLight: {
+    ...defaultThemes.paymiumLight,
+    draculaTheme: primsThemes.dracula,
+  },
+  paymiumDark: {
+    ...defaultThemes.paymiumDark,
     draculaTheme: primsThemes.dracula,
   },
 };

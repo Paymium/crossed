@@ -7,7 +7,7 @@
 
 'use client';
 import { CodeBlock } from '@/components/CodeBlock';
-import { H1, H2, YBox, Tabs } from '@crossed/ui';
+import { H1, H2, YBox, Tabs, Card } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <YBox role="main">
       <H1 id="introduction">Setup</H1>
-      <YBox space="md">
+      <Card space="md">
         <H2 id="install">{t('Install dependencies')}</H2>
         <Tabs defaultValue="pnpm">
           <Tabs.List>
@@ -41,7 +41,7 @@ export default function Home() {
             </Tabs.Panel>
           </Tabs.Panels>
         </Tabs>
-      </YBox>
+      </Card>
     </YBox>
   );
 }

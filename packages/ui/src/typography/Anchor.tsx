@@ -12,13 +12,13 @@ import { forwardRef } from 'react';
 export const useAnchor = createStyles((t) => ({
   anchor: {
     'base': {
-      fontFamily: t.fontFamily,
+      fontFamily: t.font.family,
       textDecorationLine: 'none',
       cursor: 'pointer',
     },
     ':hover': {
       textDecorationLine: 'underline',
-      color: t.colors.link,
+      color: t.colors.brand.bright,
     },
   },
 }));

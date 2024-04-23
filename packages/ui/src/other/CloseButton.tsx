@@ -12,12 +12,12 @@ import { Pressable, type PressableProps } from 'react-native';
 const styles = createStyles((t) => ({
   pressable: {
     base: {
-      padding: t.space.md,
+      padding: t.space.xs,
     },
   },
   icon: {
-    'base': { color: '#5D607C' },
-    ':disabled': { color: '#AEB6CE' },
+    'base': { color: t.colors.neutral[600] },
+    ':disabled': { color: t.colors.neutral.hight },
   },
 }));
 

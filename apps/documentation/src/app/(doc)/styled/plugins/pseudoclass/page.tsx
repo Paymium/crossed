@@ -8,20 +8,21 @@
 'use client';
 import { CodeBlock } from '@/components/CodeBlock';
 import '@/style.config';
-import { Code, H1, Text, YBox } from '@crossed/ui';
+import { Card, H1, Kbd, Text, YBox } from '@crossed/ui';
 
 export default function PluginsPage() {
   return (
     <YBox space="md">
       <H1>Pseudo class</H1>
-      <Text>
-        Pseudo class plugin is already include when you import Registry
-      </Text>
-      <Text>
-        Add <Code>:focus</Code>,<Code>:hover</Code>,<Code>:active</Code>,
-        <Code>:focus-visible</Code> and <Code>:disabled</Code> key on your style
-      </Text>
-      <CodeBlock>{`
+      <Card space="sm">
+        <Text>
+          Pseudo class plugin is already include when you import Registry
+        </Text>
+        <Text>
+          Add <Kbd>:focus</Kbd>,<Kbd>:hover</Kbd>,<Kbd>:active</Kbd>,
+          <Kbd>:focus-visible</Kbd> and <Kbd>:disabled</Kbd> key on your style
+        </Text>
+        <CodeBlock>{`
 createStyles(() => ({
   root:{
     ':focus': : { /** your style */ }
@@ -31,6 +32,7 @@ createStyles(() => ({
   }
 }))
 `}</CodeBlock>
+      </Card>
     </YBox>
   );
 }

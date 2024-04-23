@@ -31,10 +31,10 @@ describe('pseudoClass', () => {
         })`)
     );
     expect(loader.getCSS()).toEqual(
-      `.background-color-\\[black\\] { background-color:black; }
-.hover\\:background-color-\\[black\\]:hover { background-color:black; }
+      `.dark {  }
 .background-color-\\[white\\] { background-color:white; }
-.dark {  }`
+.background-color-\\[black\\] { background-color:black; }
+.hover\\:background-color-\\[black\\]:hover { background-color:black; }`
     );
   });
 
@@ -52,10 +52,10 @@ describe('pseudoClass', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.background-color-\\[black\\] { background-color:black; }
-.focus\\:background-color-\\[black\\]:focus { background-color:black; }
+      `.dark {  }
 .background-color-\\[white\\] { background-color:white; }
-.dark {  }`
+.background-color-\\[black\\] { background-color:black; }
+.focus\\:background-color-\\[black\\]:focus { background-color:black; }`
     );
   });
 
@@ -73,10 +73,10 @@ describe('pseudoClass', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.background-color-\\[black\\] { background-color:black; }
-.active\\:background-color-\\[black\\]:active { background-color:black; }
+      `.dark {  }
 .background-color-\\[white\\] { background-color:white; }
-.dark {  }`
+.background-color-\\[black\\] { background-color:black; }
+.active\\:background-color-\\[black\\]:active { background-color:black; }`
     );
   });
 });

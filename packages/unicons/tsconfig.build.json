@@ -27,11 +27,6 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "paths": {
-      "@crossed/core": ["./node_modules/@crossed/core/src"],
-      "@crossed/class-variance-authority": [
-        "./node_modules/@crossed/class-variance-authority/src"
-      ]
-    }
+    "types": ["./node_modules/@crossed/theme/lib/typescript/types.d.ts"]
   }
 }

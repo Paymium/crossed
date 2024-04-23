@@ -25,8 +25,8 @@ const useTable = createStyles((t) => ({
       borderRightWidth: 0,
       borderBottomWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral.default,
-      backgroundColor: t.colors.backgroundSoft,
+      borderColor: t.colors.neutral.bright,
+      backgroundColor: t.colors.neutral.low,
     },
   },
   tbody: { base: {} },
@@ -37,18 +37,13 @@ const useTable = createStyles((t) => ({
       borderRightWidth: 0,
       borderBottomWidth: 0,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral.default,
+      borderColor: t.colors.neutral[500],
     },
   },
   td: {
-    base: {
-      padding: t.space.sm,
-      // variants: {
-      //   textAlign,
-      // },
-    },
+    base: { padding: t.space.xs },
   },
-  th: { base: { textAlign: 'left', padding: t.space.sm } },
+  th: { base: { textAlign: 'left', padding: t.space.xs } },
 }));
 
 export const Table = (props: HTMLProps<HTMLTableElement>) => {

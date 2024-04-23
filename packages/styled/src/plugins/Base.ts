@@ -24,6 +24,7 @@ export const BasePlugin: Plugin<CrossedBasePlugin> = {
         Record<string, CrossedstyleValues>
       >((acc, [key, value]) => {
         const valueNormalized = normalizeUnitPixel(key, value, context.isWeb);
+
         acc[
           `${convertKeyToCss(key)}-[${
             typeof valueNormalized === 'number'

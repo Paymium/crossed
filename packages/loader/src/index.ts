@@ -93,15 +93,45 @@ export class Loader {
   };
 
   getCSS() {
-    return Array.from(this.fileCache.values())
-      .sort((a, b) => {
+    const values = Array.from(this.fileCache.values());
+    const { media, hover, focus, active, other } = values.reduce(
+      (acc, e) => {
+        if (e.startsWith('@media')) {
+          acc.media.push(e);
+        } else if (e.startsWith('.active')) {
+          acc.active.push(e);
+        } else if (e.startsWith('.focus')) {
+          acc.focus.push(e);
+        } else if (e.startsWith('.hover')) {
+          acc.hover.push(e);
+        } else {
+          acc.other.push(e);
+        }
+        return acc;
+      },
+      {
+        media: [],
+        hover: [],
+        focus: [],
+        active: [],
+        other: [],
+      }
+    );
+    return [
+      other,
+      hover,
+      focus,
+      active,
+      media.sort((a, b) => {
         if (!a.startsWith('@media')) return -1;
         const [, widthA] = a.match(/@media \(min-width: ([0-9]+)px\)/i) || [];
         const [, widthB] = b.match(/@media \(min-width: ([0-9]+)px\)/i) || [];
         if (!widthA) return -1;
         if (!widthB) return 1;
         return Number(widthA) < Number(widthB) ? -1 : 1;
-      })
+      }),
+    ]
+      .flat(Infinity)
       .join('\n');
   }
 

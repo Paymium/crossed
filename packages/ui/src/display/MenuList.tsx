@@ -24,8 +24,9 @@ const useMenuList = createStyles((t) => ({
   root: {
     base: {
       alignItems: 'stretch',
-      paddingVertical: t.space.xs,
-      paddingHorizontal: t.space.xs,
+    },
+    variants: {
+      padded: { true: { base: { padding: t.space.xxs } } },
     },
   },
   item: {
@@ -33,32 +34,36 @@ const useMenuList = createStyles((t) => ({
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      paddingHorizontal: t.space.md,
+      paddingHorizontal: t.space.xs,
       justifyContent: 'flex-start',
       height: 42,
-      backgroundColor: 'transparent',
+      // backgroundColor: 'transparent',
       borderWidth: 0,
       borderRadius: 5,
     },
-    ':hover': { backgroundColor: t.colors.neutral.default },
+    ':hover': { backgroundColor: t.colors.neutral.satured },
+    ':active': { backgroundColor: t.colors.neutral.muted },
     'web': {
-      ':focus': { outlineColor: t.colors.primary.default },
+      ':focus': { outlineColor: t.colors.neutral[600] },
     },
   },
 }));
 type ButtonVariantProps = Partial<Pick<ButtonProps, 'variant'>>;
 
-const MenuRoot = forwardRef((props: MenuRootProps, ref: any) => {
-  return (
-    <YBox
-      {...props}
-      style={[useMenuList.root.rnw().style, props.style]}
-      ref={ref}
-    />
-  );
-});
+const MenuRoot = forwardRef(
+  ({ padded = true, ...props }: MenuRootProps, ref: any) => {
+    return (
+      <YBox
+        {...props}
+        {...useMenuList.root.rnw({ style: props.style, variants: { padded } })}
+        ref={ref}
+      />
+    );
+  }
+);
 
-type MenuRootProps = YBoxProps;
+type MenuRootProps = YBoxProps &
+  ExtractForProps<typeof useMenuList.root>['variants'];
 
 const Divider = D;
 const Item = withReactive(
@@ -69,19 +74,17 @@ const Item = withReactive(
     return (
       <Pressable
         {...props}
-        style={({ pressed }) => [
-          {
-            ...useMenuList.item.rnw({
-              active: active ?? pressed,
-              focus,
-              hover,
-              style:
-                typeof props.style === 'function'
-                  ? props.style({ pressed })
-                  : (props.style as any),
-            }),
-          }.style,
-        ]}
+        style={({ pressed }) =>
+          useMenuList.item.rnw({
+            active: active ?? pressed,
+            focus,
+            hover,
+            style:
+              typeof props.style === 'function'
+                ? props.style({ pressed })
+                : (props.style as any),
+          }).style
+        }
         ref={ref}
       />
     );

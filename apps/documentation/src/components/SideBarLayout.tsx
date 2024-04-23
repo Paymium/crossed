@@ -7,85 +7,68 @@
 
 'use client';
 import '@/style.config';
-import { MenuList, XBox, YBox, YBoxProps } from '@crossed/ui';
+import {
+  Accordion,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+  MenuList,
+  Text,
+  XBox,
+  YBox,
+  YBoxProps,
+} from '@crossed/ui';
 import { PropsWithChildren, useCallback, useTransition } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { createStyles } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 import { menuStyle } from './menuSide.style';
 import { useUncontrolled } from '@crossed/core';
+import { ScrollView } from './ScrollView';
 
 const styles = createStyles(
   (t) =>
     ({
       root: {
         base: {
-          paddingHorizontal: 20,
-          alignSelf: 'baseline',
+          paddingHorizontal: t.space.sm,
+          alignSelf: 'flex-start',
+          flexGrow: 0,
+          height: '100%',
+          width: 240,
         },
-        media: {
-          xs: { display: 'none' },
-          md: { display: 'flex' },
-        },
+        media: { xs: { display: 'none' }, md: { display: 'flex' } },
       },
-      container: {
-        base: {
-          width: '100%',
-          justifyContent: 'center',
-          paddingVertical: 15,
-          minHeight: '95%',
-          alignSelf: 'center',
-        },
-        media: {
-          xs: { maxWidth: '100%' },
-          md: { maxWidth: 768 },
-          lg: { maxWidth: 900 },
-          xl: { maxWidth: 1200 },
-        },
-      },
+      container: { base: { height: '100%' } },
       center: {
         base: {
           flex: 1,
           borderLeftWidth: 0,
-          borderColor: t.colors.neutral.default,
+          borderColor: t.colors.neutral.bright,
           minHeight: '100%',
           flexGrow: 1,
         },
-        media: {
-          md: { borderLeftWidth: 1 },
-        },
+        media: { md: { borderLeftWidth: 1 } },
       },
-      li: {
-        base: {
-          alignItems: 'stretch',
-        },
-        variants: {
-          label: {
-            true: {
-              base: {
-                marginTop: t.space.xl,
-                borderBottomWidth: 1,
-                borderStyle: 'solid',
-                borderColor: t.colors.neutral.default,
-              },
-            },
-            false: {},
-          },
-        },
-      },
+      li: { base: { alignItems: 'stretch' } },
       item: { base: { justifyContent: 'flex-end' } },
+      accordionTrigger: { base: { padding: t.space.xxs } },
     } as const)
 );
 
 const Li = ({ label, ...props }: YBoxProps & { label?: boolean }) => (
-  <YBox
-    role="listitem"
-    {...props}
-    {...styles.li.rnw({ variants: { label } })}
-  />
+  <YBox role="listitem" {...props} {...styles.li.rnw()} />
 );
 
-type Nav = { href?: string; title: string };
+type Nav =
+  | { href: string; title: string; menus?: never }
+  | { title: string; menus?: never; href?: never }
+  | {
+      title: string;
+      menus: { href: string; title: string; menus?: never }[];
+      href?: never;
+    };
 
 export function SideBarLayout({
   children,
@@ -93,25 +76,29 @@ export function SideBarLayout({
 }: PropsWithChildren<{ menus: Nav[] }>) {
   return (
     <XBox {...styles.container.rnw()}>
-      <MenuList
-        space="xs"
+      <ScrollView
         style={[styles.root.rnw().style, { position: 'sticky', top: '75px' }]}
       >
-        {menus.map(({ href, title }) => {
-          return (
-            <Li key={href || title} label={!href}>
-              <Item href={href} title={title} />
-            </Li>
-          );
-        })}
-      </MenuList>
+        <MenuList>
+          <Accordion defaultValues={[]} allowMultiple>
+            {menus.map((item) => {
+              const { href, title, menus } = item;
+              return (
+                <Li key={href || title} label={!href || Boolean(menus)}>
+                  <Item {...item} />
+                </Li>
+              );
+            })}
+          </Accordion>
+        </MenuList>
+      </ScrollView>
 
       <YBox {...styles.center.rnw()}>{children}</YBox>
     </XBox>
   );
 }
 
-const Item = ({ href, title }: { href: string; title: string }) => {
+const Item = ({ href, title, menus }: Nav) => {
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
@@ -127,6 +114,35 @@ const Item = ({ href, title }: { href: string; title: string }) => {
       setHover(false);
     });
   }, [setHover]);
+
+  const style = useCallback(
+    ({ pressed }) =>
+      composeStyles(menuStyle.item, styles.item).rnw({
+        active: pressed,
+      }).style,
+    []
+  );
+
+  if (menus) {
+    return (
+      <AccordionItem value={title}>
+        <AccordionTrigger {...styles.accordionTrigger.rnw()}>
+          <Text>{title}</Text>
+          <AccordionIcon />
+        </AccordionTrigger>
+        <AccordionPanel>
+          {menus.map((item) => {
+            const { href, title } = item;
+            return (
+              <Li key={href || title} label={!href || Boolean(item.menus)}>
+                <Item {...item} />
+              </Li>
+            );
+          })}
+        </AccordionPanel>
+      </AccordionItem>
+    );
+  }
   return href ? (
     <MenuList.Item
       role="link"
@@ -138,22 +154,18 @@ const Item = ({ href, title }: { href: string; title: string }) => {
         e.preventDefault();
         router.push(href);
       }}
-      style={[
-        menuStyle.item.rnw({
-          hover: href === pathname || hover,
-        }).style,
-        styles.item.rnw().style,
-      ]}
+      hover={href === pathname || hover}
+      style={style}
     >
       <MenuList.Title
-        {...menuStyle.itemText.rnw({ hover: href === pathname || hover })}
-        weight={hover ? 'semibold' : undefined}
+        {...menuStyle.itemText.rnw()}
+        weight={hover ? 'semibold' : 'medium'}
       >
         {t(title)}
       </MenuList.Title>
     </MenuList.Item>
   ) : (
-    <MenuList.Label hover={false} textAlign="right" weight="semibold">
+    <MenuList.Label hover={false} textAlign="right" weight="bold">
       {t(title)}
     </MenuList.Label>
   );

@@ -10,45 +10,55 @@ import { createStyles, type ExtractForProps } from '@crossed/styled';
 export const form = createStyles((t) => ({
   input: {
     'base': {
-      color: t.colors.default,
+      color: t.font.color,
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: '#AEB6CE',
-      backgroundColor: '#EDEDF6',
+      borderColor: t.colors.neutral[500],
+      backgroundColor: t.colors.neutral[200],
       borderRadius: 8,
-      paddingVertical: t.space.sm,
-      paddingHorizontal: t.space.md,
+      paddingVertical: t.space.xxs,
+      paddingHorizontal: t.space.xs,
+      justifyContent: 'center',
+      alignItems: 'center',
       height: 44,
       flexDirection: 'row',
       flex: 1,
     },
-    ':hover': { borderColor: t.colors.primary.default },
-    ':focus': { borderColor: t.colors.primary.default },
-    ':active': { borderColor: t.colors.primary.default },
-    ':disabled': { borderColor: '#EDEDF6', color: '#6F7995' },
+    ':hover': { borderColor: t.colors.brand.bright },
+    ':focus': { borderColor: t.colors.brand.bright },
+    ':active': { borderColor: t.colors.brand.bright },
+    ':disabled': {
+      borderColor: t.colors.neutral[200],
+      color: t.colors.brand.bright,
+    },
     'variants': {
-      error: { true: { base: { borderColor: '#ef4444', color: '#ef4444' } } },
+      error: {
+        true: {
+          base: {
+            borderColor: t.colors.error.bright,
+            color: t.colors.error.bright,
+          },
+        },
+      },
     },
     'web': {
       'base': { boxSizing: 'border-box' },
       ':focus-visible': { outlineWidth: 0 },
       ':focus': {
-        outlineColor: t.colors.primary.default,
+        outlineColor: t.colors.brand.bright,
       },
     },
   },
   placeholder: {
-    base: { color: '#6F7995' },
+    base: { color: t.colors.brand.bright },
   },
   label: {
     'base': {
-      color: t.colors.default,
-      fontWeight: '600',
-      fontSize: 16,
-      lineHeight: 24,
+      color: t.font.color,
+      fontWeight: t.font.fontWeight.lg,
     },
-    ':focus': { color: t.colors.primary.hover },
-    ':disabled': { color: '#AEB6CE' },
+    ':focus': { color: t.colors.brand.muted },
+    ':disabled': { color: t.colors.neutral[500] },
   },
 }));
 

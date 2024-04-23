@@ -12,22 +12,21 @@ import {
   type TextProps as TextNativeProps,
 } from 'react-native';
 import {
+  composeStyles,
   createStyles,
   withReactive,
   type ExtractForProps,
 } from '@crossed/styled';
 import { forwardRef } from 'react';
+import { typoStyles, type Size } from '../styles/typography';
 
 const useText = createStyles(
   (t) =>
     ({
       root: {
         base: {
-          color: t.colors.default,
-          fontFamily: t.fontFamily,
-          fontWeight: '400',
-          lineHeight: 20,
-          fontSize: 14,
+          color: t.font.color,
+          fontFamily: t.font.family,
         },
         variants: {
           weight: {
@@ -40,22 +39,10 @@ const useText = createStyles(
             extrabold: { base: { fontWeight: '800' } },
             black: { base: { fontWeight: '900' } },
           },
-          size: {
-            'xxs': { base: { fontSize: t.fontSize.xxs, lineHeight: 12 } },
-            'xs': { base: { fontSize: t.fontSize.xs, lineHeight: 16 } },
-            'sm': { base: { fontSize: t.fontSize.sm, lineHeight: 20 } },
-            'md': { base: { fontSize: t.fontSize.md, lineHeight: 24 } },
-            'lg': { base: { fontSize: t.fontSize.lg, lineHeight: 28 } },
-            'xl': { base: { fontSize: t.fontSize.xl, lineHeight: 28 } },
-            '2xl': { base: { fontSize: t.fontSize['2xl'], lineHeight: 32 } },
-            '3xl': { base: { fontSize: t.fontSize['3xl'], lineHeight: 36 } },
-            '4xl': { base: { fontSize: t.fontSize['4xl'], lineHeight: 54 } },
-            '5xl': { base: { fontSize: t.fontSize['5xl'], lineHeight: 78 } },
-          },
           color: {
-            warning: { base: { color: t.colors.warning } },
-            info: { base: { color: t.colors.info } },
-            link: { base: { color: t.colors.link } },
+            warning: { base: { color: t.colors.warning.satured } },
+            info: { base: { color: t.colors.info.satured } },
+            link: { base: { color: t.colors.brand.bright } },
           },
           textAlign: {
             auto: { base: { textAlign: 'auto' } },
@@ -74,26 +61,26 @@ type VariantLocal = ExtractForProps<typeof useText.root>;
 
 export type TextProps = TextNativeProps &
   VariantLocal['variants'] &
-  Omit<VariantLocal, 'variants'>;
+  Omit<VariantLocal, 'variants'> &
+  Size['variants'];
 
 export const Text = withReactive(
   forwardRef(
-    ({ active, hover, focus, color, size, ...props }: TextProps, ref: any) => {
+    (
+      { active, hover, focus, color, weight, size = 'md', ...props }: TextProps,
+      ref: any
+    ) => {
       return (
         <TextNative
           ref={ref}
           {...props}
-          style={[
-            useText.root.rnw({
-              style: props.style,
-              className: props.className,
-              active,
-              hover,
-              focus,
-              variants: { color, size },
-            }).style,
-            props.style,
-          ]}
+          {...composeStyles(typoStyles.size, useText.root).rnw({
+            ...props,
+            active,
+            hover,
+            focus,
+            variants: { color, size, weight },
+          })}
         />
       );
     }

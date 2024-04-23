@@ -25,25 +25,28 @@ const radioStyles = createStyles((t) => ({
       height: 16,
       borderRadius: 44,
       borderWidth: 1,
-      borderColor: '#AEB6CE',
+      borderColor: t.colors.neutral.hight,
       alignItems: 'center',
       display: 'flex',
       justifyContent: 'center',
       backgroundColor: 'white',
     },
-    ':hover': { borderColor: '#5D607C' },
+    ':hover': { borderColor: t.colors.neutral[600] },
     ':active': {
-      borderColor: '#AEB6CE',
+      borderColor: t.colors.neutral.hight,
       shadowColor: 'black',
       shadowOpacity: 0.1,
       elevation: 5,
     },
-    ':disabled': { backgroundColor: '#EBEAFE', borderColor: '#EBEAFE' },
+    ':disabled': {
+      backgroundColor: t.colors.neutral.muted,
+      borderColor: t.colors.neutral.muted,
+    },
     'variants': {
       checked: {
         true: {
-          'base': { borderColor: t.colors.primary.default },
-          ':active': { borderColor: t.colors.primary.active },
+          'base': { borderColor: t.colors.brand.bright },
+          ':active': { borderColor: t.colors.brand.satured },
         },
       },
     },
@@ -59,8 +62,8 @@ const radioStyles = createStyles((t) => ({
     variants: {
       checked: {
         true: {
-          'base': { backgroundColor: t.colors.primary.default },
-          ':active': { backgroundColor: t.colors.primary.active },
+          'base': { backgroundColor: t.colors.brand.bright },
+          ':active': { backgroundColor: t.colors.brand.satured },
         },
       },
     },

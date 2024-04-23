@@ -14,24 +14,22 @@ import { forwardRef } from 'react';
 const useCard = createStyles((t) => ({
   root: {
     base: {
-      padding: t.space.md,
-      borderRadius: t.space.xs,
-      backgroundColor: t.colors.neutral.default,
+      padding: t.space.xs,
+      borderRadius: t.space.xxs,
+      backgroundColor: t.colors.neutral['100'],
     },
     variants: {
       role: {
         link: {
-          ':hover': {
-            backgroundColor: t.colors.backgroundStrong,
-          },
-          ':active': {
-            backgroundColor: t.colors.backgroundStrong,
-          },
+          ':hover': { backgroundColor: t.colors.neutral.low },
+          ':active': { backgroundColor: t.colors.neutral.hight },
         },
       },
     },
   },
-  title: { base: { alignSelf: 'stretch' } },
+  title: {
+    base: { alignSelf: 'stretch', fontSize: t.font.fontSize.lg },
+  },
   description: { base: { alignSelf: 'stretch' } },
 }));
 
@@ -51,7 +49,7 @@ const CardRoot = forwardRef(({ role, ...props }: CardProps, ref: any) => {
 });
 
 const Title = (props: TextProps) => {
-  return <Text size="lg" {...props} {...useCard.title.rnw(props)} />;
+  return <Text size="md" {...props} {...useCard.title.rnw(props)} />;
 };
 
 const Description = (props: TextProps) => {

@@ -13,36 +13,51 @@ import {
   type AccordionComponent,
 } from '@crossed/primitive';
 import { createStyles } from '@crossed/styled';
-import { forwardRef, useContext } from 'react';
+import { forwardRef, useContext, useRef } from 'react';
 import { ChevronDown, ChevronUp } from '@crossed/unicons';
+import { View } from 'react-native';
 
 const accordionStyles = createStyles((t) => ({
   root: {
     base: {
       borderBottomWidth: 1,
-      borderColor: t.colors.neutral.default,
+      borderColor: t.colors.neutral[500],
       borderStyle: 'solid',
     },
   },
   trigger: {
     'base': {
       display: 'flex',
-      padding: t.space.sm,
+      padding: t.space.xs,
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
-    ':hover': { backgroundColor: t.colors.neutral.hover },
-    ':active': { backgroundColor: t.colors.neutral.active },
+    ':hover': { backgroundColor: t.colors.neutral.muted },
+    ':active': { backgroundColor: t.colors.neutral.satured },
     'web': { base: { transition: 'all 170ms' } },
   },
   panel: {
-    base: { padding: t.space.sm },
+    variants: {
+      show: {
+        false: {
+          web: {
+            base: { height: 0 },
+          },
+        },
+      },
+    },
+    web: {
+      base: { overflow: 'hidden', transition: 'height 170ms ease-out' },
+    },
   },
   item: {
     base: {
       borderTopWidth: 1,
-      borderColor: t.colors.neutral.default,
+      borderColor: t.colors.neutral[500],
       borderStyle: 'solid',
+    },
+    web: {
+      base: { transition: 'height 1000ms ease' },
     },
   },
 }));
@@ -66,21 +81,49 @@ const AccordionItem: AccordionItemComponent = forwardRef((props, ref) => {
   );
 });
 
-const AccordionTrigger: AccordionTriggerComponent = forwardRef((props, ref) => {
-  return (
-    <PAccordionTrigger
-      {...props}
-      ref={ref}
-      style={({ pressed }) =>
-        accordionStyles.trigger.rnw({ active: pressed }).style
-      }
-    />
-  );
-});
+const AccordionTrigger: AccordionTriggerComponent = forwardRef(
+  ({ style, ...props }, ref) => {
+    return (
+      <PAccordionTrigger
+        {...props}
+        ref={ref}
+        style={({ pressed }) =>
+          accordionStyles.trigger.rnw({
+            style: (typeof style === 'function'
+              ? style({ pressed })
+              : style) as any,
+            active: pressed,
+          }).style
+        }
+      />
+    );
+  }
+);
 
 const AccordionPanel: AccordionPanelComponent = forwardRef((props, ref) => {
+  const { value } = useContext(itemContext);
+  const { values } = useContext(rootContext);
+  const refLocal = useRef<number>();
   return (
-    <PAccordionPanel {...props} ref={ref} {...accordionStyles.panel.rnw()} />
+    <PAccordionPanel
+      {...props}
+      ref={ref}
+      hide={false}
+      style={[
+        accordionStyles.panel.rnw({
+          variants: { show: false },
+        }).style,
+        values.includes(value) && { height: refLocal.current },
+      ]}
+    >
+      <View
+        onLayout={({ nativeEvent: { layout } }) => {
+          refLocal.current = layout.height;
+        }}
+      >
+        {props.children}
+      </View>
+    </PAccordionPanel>
   );
 });
 

@@ -14,6 +14,7 @@ import type {
   RefAttributes,
 } from 'react';
 import type { PressableProps, View, ViewProps } from 'react-native';
+import type { VisibilityHiddenProps } from 'src/VisibilityHidden';
 
 export type AccordionProps = ViewProps & {
   allowMultiple?: boolean;
@@ -23,7 +24,7 @@ export type AccordionProps = ViewProps & {
 };
 export type AccordionItemProps = ViewProps & { value: string };
 export type AccordionTriggerProps = PressableProps;
-export type AccordionPanelProps = ViewProps;
+export type AccordionPanelProps = VisibilityHiddenProps;
 
 export type AccordionComponent = ComponentType<AccordionProps>;
 export type AccordionItemComponent = ForwardRefExoticComponent<

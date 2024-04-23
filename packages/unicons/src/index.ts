@@ -16,3 +16,6 @@ export * from './MousePointerClick';
 export * from './Sun';
 export * from './Check';
 export * from './X';
+export * from './Info';
+export * from './AlertTriangle';
+export * from './XCircle';

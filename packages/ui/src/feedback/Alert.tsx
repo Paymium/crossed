@@ -8,30 +8,25 @@
 'use client';
 import { withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
-import { Button, type ButtonProps } from '../forms/Button';
 import { createStyles, type ExtractForProps } from '@crossed/styled';
 import { createContext, useContext } from 'react';
-import { CheckCircle } from '@crossed/unicons';
-import { Box } from '../layout/Box';
 import { YBox, type YBoxProps } from '../layout/YBox';
+import { match } from 'ts-pattern';
+import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
 
 const alertStyles = createStyles(
   (t) =>
     ({
-      action: { base: { paddingTop: 4 } },
-      description: { base: { color: '#5D607C', flex: 1, paddingTop: 6 } },
-      title: {
+      description: {
+        base: { color: t.colors.neutral[600], flex: 1 },
         variants: {
           status: {
-            error: { base: { color: '#A21A1A' } },
-            success: { base: { color: '#188551' } },
-            warning: { base: { color: '#AD5C23' } },
-            info: { base: { color: '#285F9B' } },
+            error: { base: { color: t.colors.error.satured } },
+            success: { base: { color: t.colors.success.satured } },
+            warning: { base: { color: t.colors.warning.satured } },
+            info: { base: { color: t.colors.info.satured } },
           },
         },
-      },
-      containerTitle: {
-        base: { flexDirection: 'row', alignItems: 'center' },
       },
       containerIcon: {
         base: {
@@ -41,34 +36,50 @@ const alertStyles = createStyles(
         },
         variants: {
           status: {
-            error: { base: { backgroundColor: '#FEC4C4' } },
-            success: { base: { backgroundColor: '#DCF6E9' } },
-            warning: { base: { backgroundColor: '#FFE0CA' } },
-            info: { base: { backgroundColor: '#D1E7FF' } },
+            error: { base: { backgroundColor: t.colors.error.hight } },
+            success: { base: { backgroundColor: t.colors.success.hight } },
+            warning: { base: { backgroundColor: t.colors.warning.hight } },
+            info: { base: { backgroundColor: t.colors.info.hight } },
           },
         },
       },
       container: {
         base: {
-          paddingVertical: t.space.md,
-          paddingHorizontal: t.space.xl,
+          padding: t.space.xxs,
+          paddingVertical: t.space.xxs,
+          paddingHorizontal: t.space.xs,
           borderRadius: 8,
           alignItems: 'center',
           borderWidth: 1,
           borderStyle: 'solid',
+          flexDirection: 'row',
         },
         variants: {
           status: {
-            error: { base: { borderColor: '#EF4444' } },
-            success: { base: { borderColor: '#3ABB7D' } },
-            warning: { base: { borderColor: '#F97316' } },
-            info: { base: { borderColor: '#93C5FD' } },
-          },
-        },
-        media: {
-          md: {
-            flexDirection: 'row',
-            alignItems: 'flex-start',
+            error: {
+              base: {
+                borderColor: t.colors.error.bright,
+                backgroundColor: t.colors.error.low,
+              },
+            },
+            success: {
+              base: {
+                borderColor: t.colors.success.bright,
+                backgroundColor: t.colors.success.low,
+              },
+            },
+            warning: {
+              base: {
+                borderColor: t.colors.warning.bright,
+                backgroundColor: t.colors.warning.low,
+              },
+            },
+            info: {
+              base: {
+                borderColor: t.colors.info.bright,
+                backgroundColor: t.colors.info.low,
+              },
+            },
           },
         },
       },
@@ -85,7 +96,7 @@ const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
   return (
     <alertContext.Provider value={{ status }}>
       <YBox
-        space="sm"
+        space="xs"
         role="alert"
         {...props}
         {...alertStyles.container.rnw({ variants: { status } })}
@@ -96,55 +107,35 @@ const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
   );
 };
 
-const Icon = () => {};
-
-const Title = (props: TextProps) => {
+const Icon = () => {
   const { status } = useContext(alertContext);
-  const { color } = alertStyles.title.style({ variants: { status } }).style;
-  return (
-    <Box space="xl" {...alertStyles.containerTitle.rnw()}>
-      <Box center {...alertStyles.containerIcon.rnw({ variants: { status } })}>
-        <CheckCircle color={color} size={16} />
-      </Box>
-      <Text
-        weight="semibold"
-        numberOfLines={1}
-        // ellipsizeMode='middle'
-        // lineBreakMode='middle'
-        // lineBreakStrategyIOS='standard'
-        {...props}
-        {...alertStyles.title.rnw({ variants: { status } })}
-      />
-    </Box>
-  );
-};
-const Description = (props: TextProps) => {
-  return <Text {...props} {...alertStyles.description.rnw()} />;
+  const { color } = alertStyles.description.style({
+    variants: { status },
+  }).style;
+  const Comp = match(status)
+    .with('error', () => XCircle)
+    .with('info', () => Info)
+    .with('success', () => CheckCircle)
+    .with('warning', () => AlertTriangle)
+    .exhaustive();
+  return <Comp color={color} size={16} />;
 };
 
-const Action = (props: ButtonProps) => {
+const Description = (props: TextProps) => {
+  const { status } = useContext(alertContext);
   return (
-    <Button
-      variant="tertiary"
-      size={false}
+    <Text
       {...props}
-      {...alertStyles.action.rnw()}
+      {...alertStyles.description.rnw({ variants: { status } })}
     />
   );
 };
 
 const Alert = withStaticProperties(Container, {
   Icon,
-  Title,
   Description,
-  Action,
 });
 
-const {
-  Icon: AlertIcon,
-  Title: AlertTitle,
-  Description: AlertDescription,
-  Action: AlertAction,
-} = Alert;
+const { Icon: AlertIcon, Description: AlertDescription } = Alert;
 
-export { Alert, AlertIcon, AlertTitle, AlertDescription, AlertAction };
+export { Alert, AlertIcon, AlertDescription };

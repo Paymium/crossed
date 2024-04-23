@@ -7,7 +7,7 @@
 
 'use client';
 import '@/style.config';
-import { createStyles } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 import { Center, Text, XBox, YBox } from '@crossed/ui';
 import { themes } from 'prism-react-renderer';
 import { PropsWithChildren, ReactNode, useCallback } from 'react';
@@ -17,41 +17,42 @@ const styles = createStyles((t) => ({
   liveEditor: {
     base: {
       width: '100%',
-      borderRadius: 4,
-      fontFamily: t.fontFamily,
-      fontSize: t.fontSize.sm,
+      borderRadius: 14,
+      fontFamily: t.font.family,
+      fontSize: t.font.fontSize.md,
     },
   },
   preview: {
     base: {
-      padding: t.space.md,
+      padding: t.space.xs,
       alignItems: 'stretch',
-      flex: 1,
+      flexShrink: 1,
     },
   },
   containerPreview: {
     base: {
-      padding: t.space.md,
+      flexShrink: 1,
       borderWidth: 1,
-      borderColor: t.colors.neutral.default,
+      borderColor: t.colors.neutral[500],
       borderStyle: 'solid',
-      borderRadius: 4,
-      // justifyContent: 'center',
+      borderRadius: 14,
+      backgroundColor: t.colors.neutral['100'],
     },
   },
   containerVariants: {
     base: {
       borderLeftWidth: 1,
-      borderColor: t.colors.neutral.default,
+      borderColor: t.colors.neutral[500],
       borderStyle: 'solid',
-      padding: t.space.md,
+      padding: t.space.xs,
+      width: 250,
     },
   },
   pre: {
     base: {
       backgroundColor: t.draculaTheme.plain.backgroundColor,
       width: '100%',
-      padding: t.space.md,
+      padding: t.space.xxs,
       boxSizing: 'border-box',
       margin: 0,
       borderTopLeftRadius: 4,
@@ -60,12 +61,12 @@ const styles = createStyles((t) => ({
       borderLeftWidth: 0,
       borderRightWidth: 0,
       borderBottomWidth: 1,
-      borderColor: t.colors.neutral.default,
+      borderColor: t.colors.neutral.bright,
       borderStyle: 'solid',
-      color: t.colors.white,
+      color: t.colors.neutral['100'],
     },
   },
-  liveError: { base: { color: t.colors.error } },
+  liveError: { base: { color: t.colors.error.bright } },
 }));
 
 export const CodeBlock = ({
@@ -110,7 +111,11 @@ export const CodeBlock = ({
               className: fileName ? 'filename' : '',
             })}
           />
-          {preview && <LiveError {...styles.pre.className()} />}
+          {preview && (
+            <LiveError
+              {...composeStyles(styles.pre, styles.liveError).className()}
+            />
+          )}
         </YBox>
       </LiveProvider>
     </YBox>

@@ -120,6 +120,7 @@ export type CrossedMethods<
   S extends StyleSheet,
   P = CrossedPropsExtended<S>
 > = {
+  original: S;
   style: (_p?: P) => { style: Record<string, string> };
   className: (_p?: P) => { className: string };
   rnw: (_p?: P) => { style: Record<string, any> };

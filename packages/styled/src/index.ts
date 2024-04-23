@@ -11,3 +11,4 @@ export type * from './types';
 export { useTheme } from './useTheme';
 export { withReactive } from './withReactive';
 export { isWeb } from './isWeb';
+export { composeStyles } from './composeStyles';

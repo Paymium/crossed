@@ -25,9 +25,9 @@ const modalStyles = createStyles((t) => ({
   content: {
     base: {
       borderRadius: 8,
-      backgroundColor: t.colors.white,
+      backgroundColor: t.colors.neutral[100],
       margin: 'auto',
-      padding: t.space.xl,
+      padding: t.space.xs,
     },
     variants: {
       size: {
@@ -60,7 +60,7 @@ const modalStyles = createStyles((t) => ({
   overlay: {
     base: {
       position: 'absolute',
-      backgroundColor: t.colors.black,
+      backgroundColor: t.colors.neutral[900],
       opacity: 0.5,
       top: 0,
       left: 0,
@@ -95,15 +95,15 @@ const modalStyles = createStyles((t) => ({
       xs: {
         textAlign: 'center',
         alignSelf: 'stretch',
-        fontWeight: '700',
-        lineHeight: 24,
-        fontSize: 18,
+        fontWeight: t.font.fontWeight.h6,
+        lineHeight: t.font.lineHeight.md,
+        fontSize: t.font.fontSize.md,
       },
       md: {
         textAlign: 'left',
-        fontWeight: '800',
-        lineHeight: 32,
-        fontSize: 24,
+        fontWeight: t.font.fontWeight.h6,
+        lineHeight: t.font.lineHeight.h6,
+        fontSize: t.font.fontSize.xl,
       },
     },
   },

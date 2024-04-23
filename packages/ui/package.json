@@ -96,7 +96,9 @@
     "tsconfig": "*"
   },
   "dependencies": {
+    "@crossed/theme": "1.0.0",
     "@expo/html-elements": "^0.5.1",
+    "@floating-ui/dom": "^1.6.3",
     "@floating-ui/react": "^0.25.1",
     "@gorhom/portal": "^1.0.14",
     "@iconscout/react-native-unicons": "^2.0.2",
@@ -108,7 +110,8 @@
     "react-focus-lock": "^2.11.2",
     "react-focus-on": "^3.9.2",
     "react-native-svg": "^15.1.0",
-    "react-native-unistyles": "^2.0.0"
+    "react-native-unistyles": "^2.0.0",
+    "ts-pattern": "^5.0.6"
   },
   "react-native-builder-bob": {
     "source": "src",

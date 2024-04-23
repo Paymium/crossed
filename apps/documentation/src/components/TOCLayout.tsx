@@ -7,7 +7,7 @@
 
 'use client';
 import '@/style.config';
-import { MenuList, XBox, YBox } from '@crossed/ui';
+import { Box, MenuList, XBox, YBox } from '@crossed/ui';
 import {
   PropsWithChildren,
   useCallback,
@@ -25,13 +25,14 @@ import { useUncontrolled } from '@crossed/core';
 const styles = createStyles(
   (t) =>
     ({
-      container: { base: { minHeight: '100%' } },
+      container: { base: { minHeight: '100%', flex: 1, flexDirection: 'row' } },
       center: {
         base: {
           flex: 1,
-          width: '100%',
-          borderColor: t.colors.neutral.default,
+          borderColor: t.colors.neutral.bright,
           flexDirection: 'column',
+          alignItems: 'center',
+          backgroundColor: t.colors.neutral.low,
         },
         variants: {
           bordered: {
@@ -43,18 +44,18 @@ const styles = createStyles(
             false: { base: { borderRightWidth: 0 } },
           },
         },
-        media: {
-          xs: { paddingHorizontal: t.space.md },
-          lg: { paddingHorizontal: t.space[100] },
-        },
       },
       menuList: {
         base: {
-          paddingHorizontal: 20,
+          paddingHorizontal: t.space.sm,
           alignSelf: 'baseline',
-          height: 'auto',
+          height: '100%',
+          borderWidth: 1,
+          borderTopWidth: 0,
+          borderRightWidth: 0,
+          borderBottomWidth: 0,
           borderLeftWidth: 1,
-          borderColor: t.colors.neutral.default,
+          borderColor: t.colors.neutral.bright,
           borderStyle: 'solid',
         },
         media: {
@@ -63,9 +64,20 @@ const styles = createStyles(
         },
       },
       menuLabel: {
-        base: { fontSize: t.fontSize.lg },
+        base: { fontSize: t.font.fontSize.md },
       },
       li: { base: { alignItems: 'stretch' } },
+      position: {
+        base: {
+          marginHorizontal: 'auto',
+          paddingVertical: t.space.xs,
+          paddingHorizontal: t.space.xs,
+        },
+        media: {
+          xs: { width: '100%' },
+          xl: { maxWidth: 920 },
+        },
+      },
     } as const)
 );
 
@@ -89,28 +101,24 @@ export const TOCLayout = ({
   return useMemo(() => {
     return (
       <XBox {...styles.container.rnw()}>
-        <YBox {...styles.center.rnw()}>{children}</YBox>
+        <YBox {...styles.center.rnw()}>
+          <Box {...styles.position.rnw()}>{children}</Box>
+        </YBox>
 
-        <MenuList
-          style={[
-            styles.menuList.rnw().style,
-            { position: 'sticky', top: '75px' },
-          ]}
-          space="xs"
-        >
-          {links.length > 0 && (
+        {links.length > 0 && (
+          <MenuList {...styles.menuList.rnw()}>
             <MenuList.Label {...styles.menuLabel.rnw()} weight="bold">
               {t('On this page')}
             </MenuList.Label>
-          )}
-          {links.map(({ href, title }) => {
-            return (
-              <YBox role="listitem" key={href || title} {...styles.li.rnw()}>
-                <Item hash={hash} href={href} title={title} />
-              </YBox>
-            );
-          })}
-        </MenuList>
+            {links.map(({ href, title }) => {
+              return (
+                <YBox role="listitem" key={href || title} {...styles.li.rnw()}>
+                  <Item hash={hash} href={href} title={title} />
+                </YBox>
+              );
+            })}
+          </MenuList>
+        )}
       </XBox>
     );
   }, [children, links, hash, t]);
@@ -146,7 +154,8 @@ const Item = ({
     <MenuList.Item
       onHoverOut={onHoverOut}
       onHoverIn={onHoverIn}
-      {...menuStyle.item.rnw({ hover: href === hash || hover })}
+      {...menuStyle.item.rnw()}
+      hover={href === hash || hover}
       role="link"
       href={`${pathname}${href}`}
       onPress={(e) => {
@@ -156,7 +165,7 @@ const Item = ({
       }}
     >
       <MenuList.Title
-        {...menuStyle.itemText.rnw({ hover: href === hash || hover })}
+        {...menuStyle.itemText.rnw()}
         weight={href === hash ? 'semibold' : undefined}
       >
         {t(title)}

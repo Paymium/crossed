@@ -11,12 +11,12 @@ import '@/locales';
 import type { Metadata } from 'next';
 import { NavBar } from '@/components/NavBar';
 import { PropsWithChildren, Suspense } from 'react';
-import { ScrollView } from '@/components/ScrollView';
 import { Footer } from '@/components/Footer';
 import { CrossedUIProvider } from '@crossed/ui';
 import { Registry } from '@crossed/styled';
 import { createStyles } from '@crossed/styled';
 import { Roboto } from 'next/font/google';
+import { ScrollView } from '@/components/ScrollView';
 
 const roboto = Roboto({
   variable: '--font-inter',
@@ -42,7 +42,7 @@ const styleSheet = createStyles((t) => ({
   },
   body: {
     base: {
-      backgroundColor: t.colors.background,
+      backgroundColor: t.colors.neutral['100'],
       minHeight: '100%',
       display: 'flex',
     },

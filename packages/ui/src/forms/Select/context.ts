@@ -14,12 +14,13 @@ import type {
   TargetedEvent,
 } from 'react-native';
 import type { BottomSheetMethods } from '@devvie/bottom-sheet';
+import type { UseFloatingReturn } from '@floating-ui/react';
 
 export type Context = {
   open: boolean;
   setOpen: (_p: boolean) => void;
-  value: string | number;
-  setValue: (_p: string | number) => void;
+  value: string;
+  setValue: (_p: string) => void;
   renderValue: MutableRefObject<ReactNode>;
   variant?: ButtonProps['variant'];
   triggerLayout: MutableRefObject<LayoutRectangle | undefined>;
@@ -30,6 +31,8 @@ export type Context = {
   id?: string;
   hover?: boolean;
   focus: boolean;
+  refs: UseFloatingReturn['refs'];
+  floatingStyles: UseFloatingReturn['floatingStyles'];
 };
 
 export const [SelectProvider, useSelectProvider] = createScope<Context>(

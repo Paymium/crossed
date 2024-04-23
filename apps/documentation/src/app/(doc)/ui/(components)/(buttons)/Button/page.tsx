@@ -14,7 +14,6 @@ import { MousePointerClick } from '@crossed/unicons/MousePointerClick';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 import { useSignals } from '@preact/signals-react/runtime';
 import { useState } from 'react';
-import { ChevronDown } from '@crossed/unicons';
 
 export default function CreateBadge() {
   useSignals();
@@ -104,7 +103,6 @@ import { Button } from '@crossed/ui'
             <Select.Trigger>
               <XBox alignItems="center">
                 <Select.Value />
-                <ChevronDown />
               </XBox>
             </Select.Trigger>
             <Select.Content>

@@ -8,7 +8,6 @@
 import { YBox, XBox, Select, Text } from '@crossed/ui';
 import { createStyles } from '@crossed/styled';
 import { FlatList } from 'react-native';
-import { ChevronDown } from '@crossed/unicons';
 
 const styles = createStyles(() => ({
   scrollview: { base: { paddingHorizontal: 10, paddingVertical: 10 } },
@@ -35,7 +34,6 @@ export default function TabOneScreen() {
                   <Text>
                     <Select.Value />
                   </Text>
-                  <ChevronDown />
                 </XBox>
               </Select.Trigger>
               <Select.Content>

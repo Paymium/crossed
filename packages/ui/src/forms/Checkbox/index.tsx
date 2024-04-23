@@ -20,7 +20,7 @@ const checkboxStyles = createStyles((t) => ({
       alignItems: 'center',
       display: 'flex',
       flexDirection: 'row',
-      gap: t.space.sm,
+      gap: t.space.xs,
     },
   },
   root: {
@@ -29,33 +29,36 @@ const checkboxStyles = createStyles((t) => ({
       height: 16,
       borderRadius: 4,
       borderWidth: 1,
-      borderColor: '#AEB6CE',
+      borderColor: t.colors.neutral[500],
       alignItems: 'center',
       display: 'flex',
       justifyContent: 'center',
       backgroundColor: 'white',
     },
-    ':hover': { borderColor: '#5D607C' },
+    ':hover': { borderColor: t.colors.neutral[600] },
     ':active': {
-      borderColor: '#AEB6CE',
+      borderColor: t.colors.neutral[500],
       shadowColor: 'black',
       shadowOpacity: 0.1,
       elevation: 5,
     },
-    ':disabled': { backgroundColor: '#EBEAFE', borderColor: '#EBEAFE' },
+    ':disabled': {
+      backgroundColor: t.colors.neutral[300],
+      borderColor: t.colors.neutral[300],
+    },
     'web': {
-      ':active': { boxShadow: '0px 0px 0px 2px #EDEDF6' },
+      ':active': { boxShadow: `0px 0px 0px 2px ${t.colors.neutral[300]}` },
     },
     'variants': {
       checked: {
         true: {
           'base': {
-            borderColor: t.colors.primary.default,
-            backgroundColor: t.colors.primary.default,
+            borderColor: t.colors.brand.bright,
+            backgroundColor: t.colors.brand.bright,
           },
           ':active': {
-            borderColor: t.colors.primary.active,
-            backgroundColor: t.colors.primary.active,
+            borderColor: t.colors.brand.satured,
+            backgroundColor: t.colors.brand.satured,
           },
         },
       },
@@ -72,8 +75,8 @@ const checkboxStyles = createStyles((t) => ({
     variants: {
       checked: {
         true: {
-          'base': { backgroundColor: t.colors.primary.default },
-          ':active': { backgroundColor: t.colors.primary.active },
+          'base': { backgroundColor: t.colors.brand.bright },
+          ':active': { backgroundColor: t.colors.brand.satured },
         },
       },
     },

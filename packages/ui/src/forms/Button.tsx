@@ -8,6 +8,7 @@
 'use client';
 
 import {
+  composeStyles,
   createStyles,
   withReactive,
   type ExtractForProps,
@@ -52,29 +53,34 @@ export const useButton = createStyles(
             outlineWidth: '2px',
             outlineOffset: '2px',
             outlineStyle: 'solid',
-            outlineColor: '#EF4444',
+            outlineColor: t.colors.error.bright,
           },
         },
         variants: {
           variant: {
             primary: {
-              'base': { backgroundColor: '#ef4444', borderColor: '#ef4444' },
-              ':hover': { backgroundColor: '#d73636', borderColor: '#d73636' },
-              ':active': { backgroundColor: '#b42221', borderColor: '#b42221' },
-              ':focus': {
-                backgroundColor: '#b42221',
-                borderColor: '#b42221',
+              'base': {
+                backgroundColor: t.colors.error.bright,
+                borderColor: t.colors.error.bright,
+              },
+              ':hover': {
+                backgroundColor: t.colors.error.muted,
+                borderColor: t.colors.error.muted,
+              },
+              ':active': {
+                backgroundColor: t.colors.error.satured,
+                borderColor: t.colors.error.satured,
               },
               ':disabled': {
-                backgroundColor: '#FAA4A3',
-                borderColor: '#FAA4A3',
+                backgroundColor: t.colors.error.hight,
+                borderColor: t.colors.error.hight,
               },
             },
             secondary: {
-              'base': { borderColor: '#ef4444' },
-              ':hover': { borderColor: '#d73636' },
-              ':active': { borderColor: '#b42221' },
-              ':disabled': { borderColor: '#FAA4A3' },
+              'base': { borderColor: t.colors.error.bright },
+              ':hover': { borderColor: t.colors.error.muted },
+              ':active': { borderColor: t.colors.error.satured },
+              ':disabled': { borderColor: t.colors.error.hight },
             },
             tertiary: { base: {} },
             false: {},
@@ -88,16 +94,16 @@ export const useButton = createStyles(
               base: { color: 'white' },
             },
             secondary: {
-              'base': { color: '#ef4444' },
-              ':hover': { color: '#d73636' },
-              ':active': { color: '#b42221' },
-              ':disabled': { color: '#FAA4A3' },
+              'base': { color: t.colors.error.bright },
+              ':hover': { color: t.colors.error.muted },
+              ':active': { color: t.colors.error.satured },
+              ':disabled': { color: t.colors.error.hight },
             },
             tertiary: {
-              'base': { color: '#ef4444' },
-              ':hover': { color: '#d73636' },
-              ':active': { color: '#b42221' },
-              ':disabled': { color: '#FAA4A3' },
+              'base': { color: t.colors.error.bright },
+              ':hover': { color: t.colors.error.muted },
+              ':active': { color: t.colors.error.satured },
+              ':disabled': { color: t.colors.error.hight },
             },
             false: {},
           },
@@ -106,7 +112,7 @@ export const useButton = createStyles(
       root: {
         base: {
           display: 'flex',
-          paddingHorizontal: 16,
+          paddingHorizontal: t.space.xs,
           borderRadius: 7,
           borderWidth: 2,
           borderStyle: 'solid',
@@ -125,7 +131,7 @@ export const useButton = createStyles(
             outlineWidth: '2px',
             outlineOffset: '2px',
             outlineStyle: 'solid',
-            outlineColor: '#9088F7',
+            outlineColor: t.colors.brand.hight,
           },
         },
         variants: {
@@ -136,29 +142,27 @@ export const useButton = createStyles(
           variant: {
             primary: {
               'base': {
-                backgroundColor: t.colors.primary.default,
-                borderColor: t.colors.primary.default,
-              },
-              ':hover': {
-                backgroundColor: t.colors.primary.hover,
-                borderColor: t.colors.primary.hover,
+                backgroundColor: t.colors.brand.bright,
+                borderColor: t.colors.brand.bright,
               },
               ':active': {
-                backgroundColor: t.colors.primary.active,
-                borderColor: t.colors.primary.active,
+                backgroundColor: t.colors.brand.satured,
+                borderColor: t.colors.brand.satured,
+              },
+              ':hover': {
+                backgroundColor: t.colors.brand.muted,
+                borderColor: t.colors.brand.muted,
               },
               ':disabled': {
-                backgroundColor: t.colors.primary.disabled,
-                borderColor: t.colors.primary.disabled,
+                backgroundColor: t.colors.brand.hight,
+                borderColor: t.colors.brand.hight,
               },
             },
             secondary: {
-              'base': { borderColor: t.colors.primary.default },
-              ':hover': { backgroundColor: t.colors.neutral.hover },
-              ':active': { backgroundColor: t.colors.neutral.active },
-              ':disabled': {
-                borderColor: t.colors.primary.disabled,
-              },
+              'base': { borderColor: t.colors.brand.bright },
+              ':hover': { backgroundColor: t.colors.neutral[300] },
+              ':active': { backgroundColor: t.colors.neutral[400] },
+              ':disabled': { borderColor: t.colors.brand.hight },
             },
             tertiary: {},
             false: {},
@@ -171,17 +175,17 @@ export const useButton = createStyles(
           variant: {
             primary: {
               'base': { color: 'white' },
-              ':disabled': { color: t.colors.neutral.disabled },
+              ':disabled': { color: t.colors.neutral[400] },
             },
             secondary: {
-              'base': { color: t.colors.primary.default },
-              ':disabled': { color: t.colors.primary.disabled },
+              'base': { color: t.colors.brand.bright },
+              ':disabled': { color: t.colors.brand.hight },
             },
             tertiary: {
-              'base': { color: t.colors.primary.default },
-              ':hover': { color: t.colors.primary.hover },
-              ':active': { color: t.colors.primary.active },
-              ':disabled': { color: t.colors.primary.disabled },
+              'base': { color: t.colors.brand.bright },
+              ':hover': { color: t.colors.brand.muted },
+              ':active': { color: t.colors.brand.satured },
+              ':disabled': { color: t.colors.brand.hight },
             },
             false: {},
           },
@@ -225,22 +229,12 @@ const Root = withReactive(
             ref={ref}
             {...props}
             {...handleProps}
-            style={
-              useButton.root.rnw({
-                ...props,
-                ...state,
-                disabled: disabled || loading,
-                style: error
-                  ? useButton.error.rnw({
-                      ...props,
-                      ...state,
-                      disabled: disabled || loading,
-                      variants: { variant },
-                    }).style
-                  : props.style,
-                variants: { variant, size },
-              }).style
-            }
+            {...composeStyles(useButton.root, error && useButton.error).rnw({
+              ...props,
+              ...state,
+              disabled: disabled || loading,
+              variants: { size, variant },
+            })}
           >
             {typeof children === 'function' ? (
               (e) => (
@@ -269,22 +263,12 @@ const Text = withReactive(
       <TextUi
         weight="semibold"
         {...props}
-        style={
-          useButton.text.rnw({
-            ...props,
-            ...state,
-            disabled,
-            style: error
-              ? useButton.errorText.rnw({
-                  ...props,
-                  ...state,
-                  disabled,
-                  variants: { variant },
-                }).style
-              : props.style,
-            variants: { variant },
-          }).style
-        }
+        {...composeStyles(useButton.text, error && useButton.errorText).rnw({
+          ...props,
+          ...state,
+          disabled,
+          variants: { variant },
+        })}
         ref={ref}
       />
     );
@@ -294,16 +278,9 @@ const Text = withReactive(
 const ButtonIcon = ({ children }: PropsWithChildren) => {
   const { variant, error, state, disabled } = useContext(buttonContext);
   const color = useMemo(() => {
-    return useButton.text.style({
+    return composeStyles(useButton.text, error && useButton.errorText).style({
       ...state,
       disabled,
-      style:
-        error &&
-        useButton.errorText.style({
-          ...state,
-          disabled,
-          variants: { variant },
-        }).style,
       variants: { variant },
     }).style.color as string;
   }, [variant, error, state, disabled]);
@@ -325,3 +302,4 @@ const { Text: ButtonText, Element: ButtonElement } = Button;
 
 export { ButtonText, ButtonElement, Button, ButtonIcon };
 export type ButtonProps = GetProps<typeof Button>;
+export type ButtonTextProps = GetProps<typeof ButtonText>;

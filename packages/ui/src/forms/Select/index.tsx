@@ -10,6 +10,7 @@ import {
   composeEventHandlers,
   useUncontrolled,
   withStaticProperties,
+  composeRefs,
 } from '@crossed/core';
 import {
   useCallback,
@@ -32,6 +33,9 @@ import { ContentImpl } from './ContentImpl';
 import { Text } from '../../typography/Text';
 import { VisibilityHidden } from '@crossed/primitive';
 import { useFocusScope } from './Focus';
+import { ChevronDown } from '@crossed/unicons/ChevronDown';
+import { composeStyles } from '@crossed/styled';
+import { useFloating } from './useFloating';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
@@ -83,6 +87,7 @@ const SelectRoot = memo(
         adapt?: boolean;
       }
   >) => {
+    const { refs, floatingStyles } = useFloating();
     const bottomSheetModalRef = useRef<BottomSheetMethods>(null);
     const renderValue = useRef<ReactNode>();
     const triggerLayout = useRef<LayoutRectangle | undefined>();
@@ -115,6 +120,8 @@ const SelectRoot = memo(
         id={id}
         hover={hover}
         focus={focus}
+        refs={refs}
+        floatingStyles={floatingStyles}
       >
         {children}
       </Provider>
@@ -132,7 +139,6 @@ const Trigger = withStaticProperties(
     const {
       setOpen,
       open,
-      variant,
       triggerLayout,
       sheet,
       hover,
@@ -140,8 +146,10 @@ const Trigger = withStaticProperties(
       id,
       onBlur,
       onFocus,
+      value,
+      refs,
     } = useSelectProvider();
-    const onPress = useCallback(() => {
+    const onPressIn = useCallback(() => {
       if (sheet.current) {
         sheet.current.open();
         setOpen(!open);
@@ -161,42 +169,44 @@ const Trigger = withStaticProperties(
     }, [open, setOpen, sheet, triggerLayout]);
     const inputRender = (
       <VisibilityHidden hide>
-        <TextInput id={id} focusable={false} />
+        <TextInput id={id} focusable={false} value={value} />
       </VisibilityHidden>
     );
 
     return (
       <Pressable
-        ref={pressableRef}
-        variant={variant}
+        role="button"
         onLayout={({ nativeEvent: { layout } }) => {
           triggerLayout.current = layout;
         }}
         {...props}
+        ref={composeRefs(pressableRef, refs.setReference as any)}
         onFocus={composeEventHandlers(props.onFocus, onFocus)}
         onBlur={composeEventHandlers(props.onBlur, onBlur)}
-        style={({ pressed }) =>
-          form.input.rnw({
+        style={({ pressed }) => {
+          return composeStyles(form.input, useSelect.trigger).rnw({
             ...props,
             hover,
             'focus': focus ?? open,
             'focus-visible': focus ?? open,
             'active': props.active ?? pressed,
-          }).style
-        }
-        onPress={composeEventHandlers(props.onPress, onPress)}
+          }).style;
+        }}
+        onPressIn={composeEventHandlers(props.onPressIn, onPressIn)}
       >
         {typeof children === 'function' ? (
           (e) => (
             <>
               {inputRender}
               {children(e)}
+              <ChevronDown {...useSelect.icon.style()} />
             </>
           )
         ) : (
           <>
             {inputRender}
             {children}
+            <ChevronDown {...useSelect.icon.style()} />
           </>
         )}
       </Pressable>
@@ -227,7 +237,7 @@ Option.displayName = 'Select.Option';
 
 const Value = () => {
   const { renderValue } = useSelectProvider();
-  return <Text>{renderValue.current}</Text>;
+  return <Text {...useSelect.value.rnw()}>{renderValue.current}</Text>;
 };
 
 Value.id = 'Select.Value';

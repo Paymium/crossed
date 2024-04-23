@@ -8,6 +8,16 @@
 import { createStyles } from '@crossed/styled';
 
 export const useSelect = createStyles((t) => ({
+  trigger: {
+    base: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      flexShrink: 1,
+      display: 'flex',
+      flexBasis: 'auto',
+      // flex: ,
+    },
+  },
   select: {
     base: {
       position: 'relative',
@@ -15,23 +25,32 @@ export const useSelect = createStyles((t) => ({
     },
   },
   options: {
-    ':active': { backgroundColor: t.colors.neutral.active },
+    ':active': { backgroundColor: t.colors.neutral[400] },
+  },
+  value: {
+    base: {
+      alignItems: 'center',
+      display: 'flex',
+      flexBasis: 'auto',
+      width: 'auto',
+    },
   },
   content: {
     base: {
       position: 'absolute',
       maxWidth: 'auto',
-      backgroundColor: t.colors.background,
-      // padding: t.space.xs,
+      backgroundColor: t.colors.neutral[100],
       zIndex: 100,
-      // backgroundColor: t.colors.neutral,
-      // borderRadius: 4,
       display: 'flex',
       flexDirection: 'column',
       height: 'auto',
       alignItems: 'stretch',
-      paddingVertical: t.space.xs,
-      paddingHorizontal: t.space.xs,
+      paddingVertical: t.space.xxs,
+      paddingHorizontal: t.space.xxs,
+      gap: t.space.xxs,
     },
+  },
+  icon: {
+    base: { flexShrink: 0 },
   },
 }));

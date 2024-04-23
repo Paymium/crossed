@@ -15,7 +15,7 @@ export const CheckCircle = ({
   size = 24,
 }: RequireOnly<'Path' | 'Svg'>) => {
   const theme = useTheme();
-  const stroke = color ?? (theme as any).colors.default;
+  const stroke = color ?? theme.font.color;
   return (
     <Svg
       width={size}

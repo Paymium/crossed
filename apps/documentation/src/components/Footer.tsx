@@ -15,12 +15,17 @@ import { createStyles } from '@crossed/styled';
 const useStyles = createStyles((t) => ({
   container: {
     base: {
-      backgroundColor: t.colors.backgroundStrong,
+      width: '100%',
+      backgroundColor: t.colors.neutral['100'],
       padding: 15,
       justifyContent: 'center',
+      borderWidth: 1,
+      borderBottomWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
       borderTopWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral.default,
+      borderColor: t.colors.neutral.hight,
       alignItems: 'center',
     },
   },
@@ -37,12 +42,12 @@ export const Footer = () => {
   return (
     <YBox space="xs" role="contentinfo" {...useStyles.container.rnw()}>
       <XBox {...useStyles.row.rnw()}>
-        <Text size="xs">Copyright © {new Date().getFullYear()}</Text>
-        <Link href="https://paymium.com" target="_blank">
+        <Text size="sm">Copyright © {new Date().getFullYear()}</Text>
+        <Link size="sm" href="https://paymium.com" target="_blank">
           Paymium
         </Link>
       </XBox>
-      <Text size="xxs">{t('Made with crossed ecosystem')}</Text>
+      <Text size="sm">{t('Made with crossed ecosystem')}</Text>
     </YBox>
   );
 };

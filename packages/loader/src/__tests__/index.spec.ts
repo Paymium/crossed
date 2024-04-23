@@ -27,10 +27,10 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.background-color-\\[white\\] { background-color:white; }
-.width-\\[50px\\] { width:50px; }
+      `.dark {  }
 .margin-top-\\[4px\\] { margin-top:4px; }
-.dark {  }`
+.width-\\[50px\\] { width:50px; }
+.background-color-\\[white\\] { background-color:white; }`
     );
   });
 
@@ -47,10 +47,10 @@ describe('@crossed/loader', () => {
     })`)
     );
     expect(loader.getCSS()).toEqual(
-      `.background-color-\\[white\\] { background-color:white; }
-.width-\\[50px\\] { width:50px; }
+      `.dark {  }
 .margin-top-\\[4px\\] { margin-top:4px; }
-.dark {  }`
+.width-\\[50px\\] { width:50px; }
+.background-color-\\[white\\] { background-color:white; }`
     );
   });
   test('arrow function explicit return', () => {
@@ -68,10 +68,10 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.background-color-\\[white\\] { background-color:white; }
-.width-\\[50px\\] { width:50px; }
+      `.dark {  }
 .margin-top-\\[4px\\] { margin-top:4px; }
-.dark {  }`
+.width-\\[50px\\] { width:50px; }
+.background-color-\\[white\\] { background-color:white; }`
     );
   });
 
@@ -90,10 +90,10 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.background-color-\\[white\\] { background-color:white; }
-.width-\\[50px\\] { width:50px; }
+      `.dark {  }
 .margin-top-\\[4px\\] { margin-top:4px; }
-.dark {  }`
+.width-\\[50px\\] { width:50px; }
+.background-color-\\[white\\] { background-color:white; }`
     );
   });
 });

@@ -9,7 +9,7 @@
 
 import '@/style.config';
 import { ChangeTheme } from './ChangeTheme';
-import { Box, XBox } from '@crossed/ui';
+import { Box, Text, XBox } from '@crossed/ui';
 import { Logo } from './Logo';
 import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
@@ -46,8 +46,10 @@ export const NavBar = memo(() => {
     <Nav role="navigation">
       <El>
         <LinkLogo href="/" size="lg">
-          <Logo />
-          Crossed
+          <Logo size={32} />
+          <Text size="xl" weight="semibold">
+            Crossed
+          </Text>
         </LinkLogo>
       </El>
       <El>
@@ -70,37 +72,42 @@ export const NavBar = memo(() => {
 const useStyles = createStyles((t) => ({
   linkNav: {
     'base': {
-      fontFamily: t.fontFamily,
-      color: t.colors.default,
+      fontFamily: t.font.family,
+      color: t.font.color,
       transitionProperty: 'all',
       transitionDuration: '170ms',
     },
     'variants': {
       active: {
-        true: { base: { color: t.colors.default } },
+        true: { base: { color: t.font.color } },
         false: {},
       },
     },
     ':active': {
-      color: t.colors.default,
+      color: t.font.color,
     },
     ':hover': {
       textDecorationLine: 'none',
-      color: t.colors.default,
+      color: t.font.color,
     },
   },
   linkLogo: {
-    base: { alignItems: 'center', gap: t.space.sm, display: 'flex' },
+    base: { alignItems: 'center', gap: t.space.xxs, display: 'flex' },
   },
   nav: {
     base: {
-      backgroundColor: t.colors.backgroundStrong,
-      padding: t.space.lg,
+      width: '100%',
+      backgroundColor: t.colors.neutral['100'],
+      padding: t.space.xxs,
       justifyContent: 'space-between',
       flexDirection: 'row',
+      borderWidth: 1,
+      borderTopWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
       borderBottomWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral.default,
+      borderColor: t.colors.neutral.bright,
       alignItems: 'center',
     },
   },
