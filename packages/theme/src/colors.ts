@@ -112,21 +112,6 @@ export const paymiumDark = {
     '800': '#DAD9EC',
     '900': '#F4F2FC',
   },
-
-  // 'bright': '#6F7995',
-  // 'hight': '#AEB6CE',
-  // 'low': '#DCDBEF',
-  // 'muted': '#EBEAF8',
-  // 'satured': '#F4F2FC',
-  // '100': '#FFFFFF',
-  // '200': '#F4F2FC',
-  // '300': '#EBEAFE',
-  // '400': '#DAD9EC',
-  // '500': '#AEB6CE',
-  // '600': '#5D607C',
-  // '700': '#1D1D40',
-  // '800': '#141430',
-  // '900': '#000000',
 } as const satisfies Colors;
 
 export const colorsLight = {

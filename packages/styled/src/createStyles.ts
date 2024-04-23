@@ -8,13 +8,14 @@
 import type { CrossedMethods, StyleSheet, Themes } from './types';
 import { Registry } from './Registry';
 import { createMethods } from './createMethods';
+import { isWeb } from './isWeb';
 
 export const createStyles = <O extends Record<C, StyleSheet>, C extends string>(
   stylesParam: (_theme: Themes[keyof Themes]) => {
     [key in keyof O]: O[key];
   }
 ) => {
-  let results = stylesParam(Registry.getTheme());
+  let results = stylesParam(Registry.getTheme(isWeb));
   const foo = new Proxy(
     Object.entries(results).reduce<{
       [key in keyof O]: CrossedMethods<O[key]>;
@@ -30,7 +31,7 @@ export const createStyles = <O extends Record<C, StyleSheet>, C extends string>(
   );
 
   Registry.subscribe(() => {
-    results = stylesParam(Registry.getTheme());
+    results = stylesParam(Registry.getTheme(isWeb));
   });
 
   return foo;

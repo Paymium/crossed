@@ -9,13 +9,14 @@
 import { useEffect, useState, useTransition } from 'react';
 import { Registry } from './Registry';
 import { Themes } from './types';
+import { isWeb } from './isWeb';
 
 export const useTheme = (): Themes[keyof Themes] => {
-  const [theme, setTheme] = useState<Themes[keyof Themes]>(Registry.getTheme());
+  const [theme, setTheme] = useState<Themes[keyof Themes]>(Registry.getTheme(isWeb));
   const [, setTransition] = useTransition();
   useEffect(() => {
     const unsubscribe = Registry.subscribe(() => {
-      setTransition(() => setTheme(Registry.getTheme()));
+      setTransition(() => setTheme(Registry.getTheme(isWeb)));
     });
     return () => {
       unsubscribe();

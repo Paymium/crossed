@@ -13,7 +13,7 @@ import type {
 } from '../types';
 import { setTheme } from '../setTheme';
 import { convertKeyToCss, normalizeUnitPixel } from '../plugins/utils';
-import { isWeb } from '../isWeb';
+import { isWeb as isWebFile } from '../isWeb';
 
 export const parse = <T extends Record<string, any>>(
   t: T,
@@ -93,7 +93,7 @@ export class RegistryBridge {
       console.warn('Themes are not set');
       return {} as Themes[keyof Themes];
     }
-    return parse(this.themes[this.themeName] || {}, undefined, web ?? isWeb)
+    return parse(this.themes[this.themeName] || {}, undefined, web ?? isWebFile)
       .theme as Themes[keyof Themes];
   }
   getThemes() {
