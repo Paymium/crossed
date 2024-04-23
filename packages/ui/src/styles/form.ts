@@ -44,21 +44,41 @@ export const form = createStyles((t) => ({
     'web': {
       'base': { boxSizing: 'border-box' },
       ':focus-visible': { outlineWidth: 0 },
-      ':focus': {
-        outlineColor: t.colors.brand.bright,
-      },
+      ':focus': { outlineColor: t.colors.brand.bright },
     },
   },
-  placeholder: {
-    base: { color: t.colors.brand.bright },
-  },
+  placeholder: { base: { color: t.colors.neutral.bright } },
   label: {
-    'base': {
-      color: t.font.color,
-      fontWeight: t.font.fontWeight.lg,
-    },
+    'base': { color: t.font.color, fontWeight: t.font.fontWeight.lg },
     ':focus': { color: t.colors.brand.muted },
     ':disabled': { color: t.colors.neutral[500] },
+  },
+  labelDescription: { base: { color: t.colors.neutral.bright } },
+  labelExtra: { base: { color: t.colors.neutral.bright, flex: 1 } },
+  containerLabel: {},
+  elementRight: {
+    base: {
+      position: 'absolute',
+      right: 0,
+      top: 0,
+      bottom: 0,
+      justifyContent: 'center',
+      padding: t.space.xs,
+      paddingVertical: 0,
+      alignItems: 'center',
+    },
+  },
+  elementLeft: {
+    base: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      bottom: 0,
+      paddingVertical: 0,
+      justifyContent: 'center',
+      padding: t.space.xs,
+      alignItems: 'center',
+    },
   },
 }));
 

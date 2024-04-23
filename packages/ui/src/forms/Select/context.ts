@@ -33,6 +33,12 @@ export type Context = {
   focus: boolean;
   refs: UseFloatingReturn['refs'];
   floatingStyles: UseFloatingReturn['floatingStyles'];
+
+  label?: string;
+  description?: string;
+  extra?: string;
+  clearable?: boolean;
+  error: string;
 };
 
 export const [SelectProvider, useSelectProvider] = createScope<Context>(

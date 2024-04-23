@@ -5,14 +5,27 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { form } from '../../styles/form';
 import type { LabelComponent } from './types';
+import { styles } from './styles';
 
-export const Label: LabelComponent = ({ disabled, ...props }) => {
+export const Label: LabelComponent = ({
+  disabled,
+  weight = 'lg',
+  size = 'md',
+  className,
+  style,
+  ...props
+}) => {
   return (
     <label
       {...props}
-      {...(form.label.className({ ...props, disabled }) as any)}
+      style={style}
+      {...(styles().className({
+        ...props,
+        className,
+        disabled,
+        variants: { size, weight },
+      }) as any)}
     />
   );
 };

@@ -7,35 +7,28 @@
 
 import { createMethods } from './createMethods';
 import { CrossedMethods } from './types';
-import merge from 'deepmerge';
+import { merge } from 'ts-deepmerge';
+
+type AllKeys<T> = T extends any ? keyof T : never;
+// eslint-disable-next-line no-unused-vars
+type PickType<T, K extends AllKeys<T>> = T extends { [k in K]?: any }
+  ? T[K]
+  : undefined;
+type Merge<T extends object> = {
+  [k in AllKeys<T>]: PickType<T, k>;
+};
 
 export type ExtractStyle<S extends CrossedMethods<any>> =
   S extends CrossedMethods<infer D, any> ? D : never;
-
 export const composeStyles = <
-  F extends CrossedMethods<any> | false,
-  S extends CrossedMethods<any> | false
+  T extends (CrossedMethods<any> | false)[],
+  P extends Exclude<T[number], false>
 >(
-  style1: F,
-  style2: S
-): ReturnType<
-  typeof createMethods<
-    ExtractStyle<Exclude<typeof style1, false>> &
-      ExtractStyle<Exclude<typeof style2, false>>
-  >
-> => {
-  if (!style1 && style2) {
-    return createMethods<typeof style2>(style2.original);
-  }
-  if (style1 && !style2) {
-    return createMethods<typeof style1>(style1.original);
-  }
-  if (style1 && style2) {
-    const styleMerged = merge<
-      ExtractStyle<Exclude<typeof style1, false>>,
-      ExtractStyle<Exclude<typeof style2, false>>
-    >(style1.original, style2.original);
-    return createMethods<typeof styleMerged>(styleMerged);
-  }
-  return createMethods<{}>({});
+  ...styles: T
+) => {
+  const stylesVerified = styles.filter((e) => !!e && e.original) as P[];
+  const styleMerged = merge(...stylesVerified.map((e) => e.original)) as Merge<
+    P['original']
+  >;
+  return createMethods<typeof styleMerged>(styleMerged);
 };

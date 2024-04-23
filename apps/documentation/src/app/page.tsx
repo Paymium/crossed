@@ -72,7 +72,7 @@ export default function Home() {
     <Box role="main" {...useStyles.container.rnw()} space="lg">
       <Logo size={100} />
       <H1 size={'md'}>Crossed</H1>
-      <H2 size="md" weight="medium" {...useStyles.description.rnw()}>
+      <H2 size="md" weight="md" {...useStyles.description.rnw()}>
         <Trans>
           Explore our ecosystem to develop cross-platform applications with
           <br />

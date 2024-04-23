@@ -6,7 +6,14 @@
  */
 
 import type { ComponentType } from 'react';
-import type { TextProps } from '../../typography/Text';
+import type { TextProps } from 'react-native';
+import type { Size, Weight } from '../../styles/typography';
 
-export type LabelProps = TextProps & { htmlFor?: string; disabled?: boolean };
+export type LabelProps = TextProps &
+  Size['variants'] &
+  Weight['variants'] & {
+    htmlFor?: string;
+    disabled?: boolean;
+    className?: string;
+  };
 export type LabelComponent = ComponentType<LabelProps>;

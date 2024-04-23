@@ -111,7 +111,7 @@ const Title = (props: TextProps) => {
     <Box space="sm" {...bannerStyles.containerTitle.rnw()}>
       <Icon />
       <Text
-        weight="semibold"
+        weight="lg"
         numberOfLines={1}
         // ellipsizeMode='middle'
         // lineBreakMode='middle'

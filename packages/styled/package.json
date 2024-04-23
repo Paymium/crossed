@@ -98,6 +98,6 @@
   },
   "dependencies": {
     "@crossed/core": "^0.8.1-beta.2",
-    "deepmerge": "^4.3.1"
+    "ts-deepmerge": "^7.0.0"
   }
 }

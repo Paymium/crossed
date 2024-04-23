@@ -29,10 +29,14 @@ const styles = createStyles(
       center: {
         base: {
           flex: 1,
+          flexGrow: 1,
+          flexShrink: 1,
           borderColor: t.colors.neutral.bright,
           flexDirection: 'column',
           alignItems: 'center',
           backgroundColor: t.colors.neutral.low,
+          padding: t.space.xxs,
+          paddingVertical: 0,
         },
         variants: {
           bordered: {
@@ -47,7 +51,7 @@ const styles = createStyles(
       },
       menuList: {
         base: {
-          paddingHorizontal: t.space.sm,
+          width: 170,
           alignSelf: 'baseline',
           height: '100%',
           borderWidth: 1,
@@ -57,6 +61,8 @@ const styles = createStyles(
           borderLeftWidth: 1,
           borderColor: t.colors.neutral.bright,
           borderStyle: 'solid',
+          flexShrink: 0,
+          flexGrow: 0,
         },
         media: {
           xs: { display: 'none' },
@@ -107,7 +113,7 @@ export const TOCLayout = ({
 
         {links.length > 0 && (
           <MenuList {...styles.menuList.rnw()}>
-            <MenuList.Label {...styles.menuLabel.rnw()} weight="bold">
+            <MenuList.Label {...styles.menuLabel.rnw()} weight="lg">
               {t('On this page')}
             </MenuList.Label>
             {links.map(({ href, title }) => {
@@ -166,7 +172,7 @@ const Item = ({
     >
       <MenuList.Title
         {...menuStyle.itemText.rnw()}
-        weight={href === hash ? 'semibold' : undefined}
+        weight={href === hash ? 'lg' : undefined}
       >
         {t(title)}
       </MenuList.Title>

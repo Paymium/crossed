@@ -5,71 +5,144 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createInput } from '@crossed/primitive';
 import { TextInput, type TextInputProps } from 'react-native';
-import { YBox, type YBoxProps } from '../layout/YBox';
-import { XBox } from '../layout/XBox';
-import { forwardRef } from 'react';
-import { createStyles } from '@crossed/styled';
+import {
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useCallback,
+  useState,
+  type ReactNode,
+} from 'react';
 import { form, type FormInput } from '../styles/form';
 import { useInteraction } from '@crossed/styled/plugins';
+import { FormControl, FormField, FormLabel } from './Form';
+import { CloseButton } from '../other/CloseButton';
+import { useUncontrolled } from '@crossed/core';
+import { XBox } from '../layout/XBox';
+import { Text } from '../typography/Text';
+import { YBox } from '../layout/YBox';
 
-const useInput = createStyles(() => ({
-  element: {
-    base: {
-      position: 'absolute',
-      right: 0,
-      top: 0,
-      bottom: 0,
-      color: 'white',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  },
-}));
+export type InputProps = Omit<TextInputProps, 'editable' | 'onChange'> &
+  Omit<FormInput, 'variants'> &
+  Pick<FormInput['variants'], 'error'> & {
+    label?: string;
+    clearable?: boolean;
+    elementLeft?: ReactNode;
+    elementRight?: ReactNode;
+    error?: string;
+    description?: string;
+    extra?: string;
+  };
 
-const Addon = YBox;
-const Element = (props: YBoxProps) => {
-  return <YBox {...props} {...useInput.element.rnw()} />;
-};
-const Group = XBox;
-
-const InputRoot = forwardRef(
+export const Input = forwardRef<TextInput, InputProps>(
   (
     {
       error,
+      label,
+      clearable,
+      defaultValue,
+      value: valueProps,
+      onChangeText,
       disabled,
+      elementRight,
+      elementLeft,
+      description,
+      extra,
       ...props
-    }: Omit<TextInputProps, 'editable'> &
-      Omit<FormInput, 'variants'> &
-      Pick<FormInput['variants'], 'error'>,
-    ref: any
+    },
+    ref
   ) => {
+    const [value, setValue] = useUncontrolled({
+      value: valueProps,
+      defaultValue,
+      onChange: onChangeText,
+    });
+    const [elementLeftWidth, setElementLeftWidth] = useState(0);
+    const [elementRightWidth, setElementRightWidth] = useState(0);
     const { state, props: propsInteraction } = useInteraction(props);
     const { color } = form.placeholder.style().style;
+
+    const onClear = useCallback(() => {
+      setValue('');
+    }, [setValue]);
+
+    const showClear = clearable && value;
     return (
-      <TextInput
-        ref={ref}
-        placeholderTextColor={color}
-        cursorColor={color}
-        editable={!disabled}
-        {...props}
-        {...propsInteraction}
-        {...form.input.rnw({
-          ...state,
-          disabled,
-          variants: { error },
-        })}
-      />
+      <FormField>
+        <YBox space="xxs">
+          {(label || description || extra) && (
+            <XBox alignItems="center" space="xxs">
+              {label && <FormLabel>{label}</FormLabel>}
+              {description && (
+                <Text {...form.labelDescription.rnw()}>{description}</Text>
+              )}
+              {extra && (
+                <Text {...form.labelExtra.rnw()} textAlign="right">
+                  {extra}
+                </Text>
+              )}
+            </XBox>
+          )}
+          <XBox>
+            {elementLeft && (
+              <XBox
+                {...form.elementLeft.rnw()}
+                onLayout={({ nativeEvent: { layout } }) =>
+                  setElementLeftWidth(layout.width)
+                }
+              >
+                {isValidElement(elementLeft) &&
+                typeof elementLeft.type !== 'string' &&
+                (elementLeft.type as any).displayName === 'CrossedText'
+                  ? cloneElement(elementLeft, {
+                      style: [(elementLeft as any).style, { color }],
+                    } as any)
+                  : elementLeft}
+              </XBox>
+            )}
+            <FormControl>
+              <TextInput
+                ref={ref}
+                placeholderTextColor={color}
+                cursorColor={color}
+                editable={!disabled}
+                {...props}
+                {...propsInteraction}
+                {...form.input.rnw({
+                  ...props,
+                  ...state,
+                  style: [
+                    props.style as any,
+                    elementLeftWidth && { paddingLeft: elementLeftWidth },
+                    elementRightWidth && { paddingRight: elementRightWidth },
+                  ],
+                  disabled,
+                  variants: { error: !!error },
+                })}
+                value={value}
+                onChangeText={setValue}
+              />
+            </FormControl>
+            <XBox
+              {...form.elementRight.rnw()}
+              onLayout={({ nativeEvent: { layout } }) =>
+                setElementRightWidth(layout.width)
+              }
+            >
+              {showClear && <CloseButton onPress={onClear} />}
+              {isValidElement(elementRight) &&
+              typeof elementRight.type !== 'string' &&
+              (elementRight.type as any).displayName === 'CrossedText'
+                ? cloneElement(elementRight, {
+                    style: [(elementRight as any).style, { color }],
+                  } as any)
+                : elementRight}
+            </XBox>
+          </XBox>
+          {error && <Text color="error">{error.toString()}</Text>}
+        </YBox>
+      </FormField>
     );
   }
 );
-
-const Input = createInput({
-  Addon,
-  Element,
-  Group,
-  Input: InputRoot,
-});
-
-export { Input };

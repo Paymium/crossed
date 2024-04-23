@@ -261,7 +261,7 @@ const Text = withReactive(
     const { variant, error, state, disabled } = useContext(buttonContext);
     return (
       <TextUi
-        weight="semibold"
+        weight="lg"
         {...props}
         {...composeStyles(useButton.text, error && useButton.errorText).rnw({
           ...props,

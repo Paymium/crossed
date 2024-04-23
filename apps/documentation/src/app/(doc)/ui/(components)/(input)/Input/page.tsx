@@ -9,10 +9,12 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Input } from '@crossed/ui';
+import { Checkbox, Input, Text, YBox } from '@crossed/ui';
+import { useState } from 'react';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
+  const [clearable, setClearable] = useState(false);
   return (
     <TemplatePrimitive
       title="Input"
@@ -23,8 +25,45 @@ export default function CreateBadge() {
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`<Input />`}
-      scope={{ Input }}
+      example={`<YBox space="sm">
+  <Input
+    placeholder="Placeholder"
+    clearable={${clearable}}
+  />
+  <Input
+    placeholder="Placeholder"
+    label="label"
+    description="description"
+    extra="extra"
+    clearable={${clearable}}
+  />
+  <Input
+    placeholder="Placeholder"
+    label="Error"
+    error="Your message"
+    clearable={${clearable}}
+  />
+  <Input
+    placeholder="Placeholder"
+    label="Error"
+    elementLeft={<Text>EUR</Text>}
+    clearable={${clearable}}
+  />
+  <Input
+    placeholder="Placeholder"
+    label="Error"
+    elementRight={<Text>EUR</Text>}
+    clearable={${clearable}}
+  />
+</YBox>`}
+      scope={{ Input, YBox, Text }}
+      variants={
+        <YBox>
+          <Checkbox onChecked={setClearable} checked={clearable}>
+            <Text>Clearable</Text>
+          </Checkbox>
+        </YBox>
+      }
     />
   );
 }

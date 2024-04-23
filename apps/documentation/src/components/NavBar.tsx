@@ -47,7 +47,7 @@ export const NavBar = memo(() => {
       <El>
         <LinkLogo href="/" size="lg">
           <Logo size={32} />
-          <Text size="xl" weight="semibold">
+          <Text size="xl" weight="lg">
             Crossed
           </Text>
         </LinkLogo>

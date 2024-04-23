@@ -7,11 +7,29 @@
 
 import { withReactive } from '@crossed/styled';
 import { Text } from '../../typography/Text';
-import { form } from '../../styles/form';
 import type { LabelComponent } from './types';
+import { styles } from './styles';
 
 export const Label: LabelComponent = withReactive(
-  ({ htmlFor: _u, disabled, ...props }) => {
-    return <Text {...props} {...form.label.rnw({ ...props, disabled })} />;
+  ({
+    htmlFor: _u,
+    disabled,
+    size = 'md',
+    weight = 'lg',
+    className,
+    style,
+    ...props
+  }) => {
+    return (
+      <Text
+        {...props}
+        {...styles().rnw({
+          ...props,
+          style: style as any,
+          className,
+          variants: { size, weight },
+        })}
+      />
+    );
   }
 );

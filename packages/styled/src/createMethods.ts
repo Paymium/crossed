@@ -118,10 +118,10 @@ export const createMethods = <S>(styleOfKey: Record<string, any>) => {
         .flat(Infinity)
         .forEach((st) => {
           if (!st) return;
-          if (st.$$css) {
-            const { $$css, ...otherClassName } = st;
+          if ((st as any).$$css) {
+            const { $$css, ...otherClassName } = st as any;
             classNames.push(...Object.keys(otherClassName));
-          } else if (!st.$$css) {
+          } else if (!(st as any).$$css) {
             style = { ...style, ...st };
             styletmp = { ...styletmp, ...st };
           }

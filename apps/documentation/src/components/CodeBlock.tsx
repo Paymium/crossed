@@ -27,6 +27,7 @@ const styles = createStyles((t) => ({
       padding: t.space.xs,
       alignItems: 'stretch',
       flexShrink: 1,
+      flex: 1,
     },
   },
   containerPreview: {

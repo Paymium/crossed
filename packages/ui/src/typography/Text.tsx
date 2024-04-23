@@ -18,7 +18,7 @@ import {
   type ExtractForProps,
 } from '@crossed/styled';
 import { forwardRef } from 'react';
-import { typoStyles, type Size } from '../styles/typography';
+import { typoStyles, type Size, type Weight } from '../styles/typography';
 
 const useText = createStyles(
   (t) =>
@@ -29,17 +29,8 @@ const useText = createStyles(
           fontFamily: t.font.family,
         },
         variants: {
-          weight: {
-            thin: { base: { fontWeight: '100' } },
-            extralight: { base: { fontWeight: '200' } },
-            light: { base: { fontWeight: '300' } },
-            medium: { base: { fontWeight: '500' } },
-            semibold: { base: { fontWeight: '600' } },
-            bold: { base: { fontWeight: '700' } },
-            extrabold: { base: { fontWeight: '800' } },
-            black: { base: { fontWeight: '900' } },
-          },
           color: {
+            error: { base: { color: t.colors.error.bright } },
             warning: { base: { color: t.colors.warning.satured } },
             info: { base: { color: t.colors.info.satured } },
             link: { base: { color: t.colors.brand.bright } },
@@ -62,27 +53,45 @@ type VariantLocal = ExtractForProps<typeof useText.root>;
 export type TextProps = TextNativeProps &
   VariantLocal['variants'] &
   Omit<VariantLocal, 'variants'> &
-  Size['variants'];
+  Size['variants'] &
+  Weight['variants'];
 
-export const Text = withReactive(
+const Text = withReactive(
   forwardRef(
     (
-      { active, hover, focus, color, weight, size = 'md', ...props }: TextProps,
+      {
+        active,
+        hover,
+        focus,
+        color,
+        weight,
+        textAlign,
+        size = 'md',
+        ...props
+      }: TextProps,
       ref: any
     ) => {
       return (
         <TextNative
           ref={ref}
           {...props}
-          {...composeStyles(typoStyles.size, useText.root).rnw({
+          {...composeStyles(
+            typoStyles.size,
+            useText.root,
+            typoStyles.weight
+          ).rnw({
             ...props,
             active,
             hover,
             focus,
-            variants: { color, size, weight },
+            variants: { color, size, weight, textAlign },
           })}
         />
       );
     }
   )
 );
+
+Text.displayName = 'CrossedText';
+
+export { Text };

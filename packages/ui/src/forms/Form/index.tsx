@@ -70,19 +70,20 @@ const FormControl: FormControlComponent = ({ children }) => {
   return cloneElement(children, {
     id,
     ...states,
-    onFocus: composeEventHandlers(children.props.onFocus, handles.onFocus),
-    onBlur: composeEventHandlers(children.props.onBlur, handles.onBlur),
+    onFocus: composeEventHandlers(handles.onFocus, children.props.onFocus),
+    onBlur: composeEventHandlers(handles.onBlur, children.props.onBlur),
   } as any);
 };
 const FormLabel: FormLabelComponent = (props) => {
   const { inputId, states, handles } = useContext(fieldContext);
+
   return (
     <Pressable
       {...{ tabIndex: '-1' }}
       onHoverIn={handles.onHoverIn}
       onHoverOut={handles.onHoverOut}
     >
-      <Label {...props} {...states} htmlFor={inputId.current} />
+      <Label {...states} {...props} htmlFor={inputId.current} />
     </Pressable>
   );
 };

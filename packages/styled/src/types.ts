@@ -103,7 +103,7 @@ export interface CrossedPropsExtended<
   MV = V extends object ? V : never
 > {
   'className'?: string;
-  'style'?: CrossedstyleValues;
+  'style'?: CrossedstyleValues | CrossedstyleValues[];
   'focus'?: true | false;
   'hover'?: true | false;
   'active'?: true | false;

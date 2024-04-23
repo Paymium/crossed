@@ -29,7 +29,7 @@ export const Anchor = forwardRef((props: AnchorProps, ref: any) => {
     <Text
       ref={ref}
       color="link"
-      weight="medium"
+      weight="md"
       role="link"
       {...props}
       {...useAnchor.anchor.rnw(props)}

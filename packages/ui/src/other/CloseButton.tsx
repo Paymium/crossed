@@ -29,6 +29,7 @@ export const CloseButton = ({
   const { color } = styles.icon.style({ disabled }).style;
   return (
     <Pressable
+      role="button"
       aria-label="Close"
       {...props}
       disabled={disabled}

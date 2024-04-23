@@ -32,11 +32,11 @@ const styles = createStyles(
     ({
       root: {
         base: {
-          paddingHorizontal: t.space.sm,
           alignSelf: 'flex-start',
           flexGrow: 0,
+          flexShrink: 0,
           height: '100%',
-          width: 240,
+          width: 170,
         },
         media: { xs: { display: 'none' }, md: { display: 'flex' } },
       },
@@ -48,6 +48,7 @@ const styles = createStyles(
           borderColor: t.colors.neutral.bright,
           minHeight: '100%',
           flexGrow: 1,
+          flexShrink: 1,
         },
         media: { md: { borderLeftWidth: 1 } },
       },
@@ -76,9 +77,7 @@ export function SideBarLayout({
 }: PropsWithChildren<{ menus: Nav[] }>) {
   return (
     <XBox {...styles.container.rnw()}>
-      <ScrollView
-        style={[styles.root.rnw().style, { position: 'sticky', top: '75px' }]}
-      >
+      <ScrollView {...styles.root.rnw()}>
         <MenuList>
           <Accordion defaultValues={[]} allowMultiple>
             {menus.map((item) => {
@@ -159,13 +158,13 @@ const Item = ({ href, title, menus }: Nav) => {
     >
       <MenuList.Title
         {...menuStyle.itemText.rnw()}
-        weight={hover ? 'semibold' : 'medium'}
+        weight={hover ? 'lg' : 'md'}
       >
         {t(title)}
       </MenuList.Title>
     </MenuList.Item>
   ) : (
-    <MenuList.Label hover={false} textAlign="right" weight="bold">
+    <MenuList.Label hover={false} textAlign="right" weight="lg">
       {t(title)}
     </MenuList.Label>
   );

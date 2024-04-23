@@ -25,7 +25,7 @@ import { Button, type ButtonProps } from '../Button';
 import { type MenuItemProps, MenuList } from '../../display/MenuList';
 import { Pressable, TextInput, View, type LayoutRectangle } from 'react-native';
 import { form } from '../../styles/form';
-import { useSelectProvider } from './context';
+import { useSelectProvider, type Context } from './context';
 import { Provider } from './Provider';
 import type { BottomSheetMethods } from '@devvie/bottom-sheet';
 import { useSelect } from './styles';
@@ -36,6 +36,10 @@ import { useFocusScope } from './Focus';
 import { ChevronDown } from '@crossed/unicons/ChevronDown';
 import { composeStyles } from '@crossed/styled';
 import { useFloating } from './useFloating';
+import { FormControl, FormField, FormLabel } from '../Form';
+import { XBox } from '../../layout/XBox';
+import { YBox } from '../../layout/YBox';
+import { CloseButton } from '../../other/CloseButton';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
@@ -62,8 +66,22 @@ const findChild = (
       }, undefined);
 };
 
+type SelectProps = PropsWithChildren<
+  UseUncontrolledInput<string> &
+    Partial<
+      Pick<
+        ButtonProps,
+        'variant' | 'onFocus' | 'onBlur' | 'id' | 'hover' | 'focus'
+      >
+    > & {
+      adapt?: boolean;
+    } & Partial<
+      Pick<Context, 'label' | 'description' | 'extra' | 'clearable' | 'error'>
+    >
+>;
+
 const SelectRoot = memo(
-  <V extends string>({
+  ({
     value: valueProps,
     defaultValue,
     finalValue,
@@ -76,22 +94,17 @@ const SelectRoot = memo(
     id,
     hover,
     focus,
-  }: PropsWithChildren<
-    UseUncontrolledInput<V> &
-      Partial<
-        Pick<
-          ButtonProps,
-          'variant' | 'onFocus' | 'onBlur' | 'id' | 'hover' | 'focus'
-        >
-      > & {
-        adapt?: boolean;
-      }
-  >) => {
+    label,
+    description,
+    extra,
+    clearable,
+    error,
+  }: SelectProps) => {
     const { refs, floatingStyles } = useFloating();
     const bottomSheetModalRef = useRef<BottomSheetMethods>(null);
     const renderValue = useRef<ReactNode>();
     const triggerLayout = useRef<LayoutRectangle | undefined>();
-    const [value, setValue] = useUncontrolled<V>({
+    const [value, setValue] = useUncontrolled<string>({
       value: valueProps,
       defaultValue,
       finalValue,
@@ -122,8 +135,13 @@ const SelectRoot = memo(
         focus={focus}
         refs={refs}
         floatingStyles={floatingStyles}
+        label={label}
+        description={description}
+        extra={extra}
+        clearable={clearable}
+        error={error}
       >
-        {children}
+        <FormField>{children}</FormField>
       </Provider>
     );
   }
@@ -148,6 +166,11 @@ const Trigger = withStaticProperties(
       onFocus,
       value,
       refs,
+      label,
+      description,
+      extra,
+      clearable,
+      error,
     } = useSelectProvider();
     const onPressIn = useCallback(() => {
       if (sheet.current) {
@@ -172,44 +195,80 @@ const Trigger = withStaticProperties(
         <TextInput id={id} focusable={false} value={value} />
       </VisibilityHidden>
     );
+    const showClear = clearable && value;
+
+    const states = {
+      hover,
+      'focus': open || focus,
+      'focus-visible': open || focus,
+      'active': props.active,
+    };
 
     return (
-      <Pressable
-        role="button"
-        onLayout={({ nativeEvent: { layout } }) => {
-          triggerLayout.current = layout;
-        }}
-        {...props}
-        ref={composeRefs(pressableRef, refs.setReference as any)}
-        onFocus={composeEventHandlers(props.onFocus, onFocus)}
-        onBlur={composeEventHandlers(props.onBlur, onBlur)}
-        style={({ pressed }) => {
-          return composeStyles(form.input, useSelect.trigger).rnw({
-            ...props,
-            hover,
-            'focus': focus ?? open,
-            'focus-visible': focus ?? open,
-            'active': props.active ?? pressed,
-          }).style;
-        }}
-        onPressIn={composeEventHandlers(props.onPressIn, onPressIn)}
-      >
-        {typeof children === 'function' ? (
-          (e) => (
-            <>
-              {inputRender}
-              {children(e)}
-              <ChevronDown {...useSelect.icon.style()} />
-            </>
-          )
-        ) : (
-          <>
-            {inputRender}
-            {children}
-            <ChevronDown {...useSelect.icon.style()} />
-          </>
+      <YBox space="xxs">
+        {(label || description || extra) && (
+          <XBox alignItems="center" space="xxs">
+            {label && <FormLabel {...states}>{label}</FormLabel>}
+            {description && (
+              <Text {...form.labelDescription.rnw()}>{description}</Text>
+            )}
+            {extra && (
+              <Text {...form.labelExtra.rnw()} textAlign="right">
+                {extra}
+              </Text>
+            )}
+          </XBox>
         )}
-      </Pressable>
+        <XBox>
+          <FormControl>
+            <Pressable
+              role="button"
+              onLayout={({ nativeEvent: { layout } }) => {
+                triggerLayout.current = layout;
+              }}
+              {...props}
+              ref={composeRefs(pressableRef, refs.setReference as any)}
+              onFocus={composeEventHandlers(props.onFocus, onFocus)}
+              onBlur={composeEventHandlers(props.onBlur, onBlur)}
+              style={({ pressed }) => {
+                return composeStyles(form.input, useSelect.trigger).rnw({
+                  ...props,
+                  ...states,
+                  active: props.active ?? pressed,
+                  variants: { error: !!error },
+                }).style;
+              }}
+              onPressIn={composeEventHandlers(props.onPressIn, onPressIn)}
+            >
+              {typeof children === 'function' ? (
+                (e) => (
+                  <>
+                    {inputRender}
+                    {children(e)}
+                    <ChevronDown
+                      {...useSelect.icon.style()}
+                      color={form.placeholder.style().style.color}
+                    />
+                  </>
+                )
+              ) : (
+                <>
+                  {inputRender}
+                  {children}
+                  <ChevronDown
+                    {...useSelect.icon.style()}
+                    color={form.placeholder.style().style.color}
+                  />
+                </>
+              )}
+            </Pressable>
+          </FormControl>
+          <XBox {...form.elementRight.rnw()}>
+            {showClear && <CloseButton />}
+          </XBox>
+        </XBox>
+        {error && <Text color="error">{error.toString()}</Text>}
+      </YBox>
     );
   }),
   { Text: Button.Text }

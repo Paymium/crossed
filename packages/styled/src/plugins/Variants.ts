@@ -52,7 +52,7 @@ export const VariantsPlugin: Plugin<CrossedVariantsPlugin> = {
       Object.entries(variantValues).forEach(([variantValue, style]) => {
         if (
           props &&
-          props.variants?.[variantName] &&
+          props.variants?.[variantName] !== undefined &&
           props.variants?.[variantName].toString() !== variantValue
         ) {
           return;

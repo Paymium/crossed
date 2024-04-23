@@ -17,7 +17,7 @@ import { createStyles } from '@crossed/styled';
 
 const Description = withDefaultProps(Text, {
   size: 'md',
-  weight: 'medium',
+  weight: 'md',
 });
 
 const PlatformTabs = createTabs();

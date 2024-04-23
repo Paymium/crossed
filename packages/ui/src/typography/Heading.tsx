@@ -16,14 +16,14 @@ export const H1 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 1,
   'size': 'h1',
-  'weight': 'bold',
+  'weight': 'h1',
 });
 
 export const H2 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 2,
   'size': 'h2',
-  'weight': 'semibold',
+  'weight': 'h2',
 });
 
 export const H3 = withDefaultProps<HeadingProps>(Text, {

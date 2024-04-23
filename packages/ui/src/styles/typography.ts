@@ -38,7 +38,26 @@ export const typoStyles = createStyles((t) => {
         },
       },
     },
+    weight: {
+      base: { fontWeight: t.font.fontWeight.md },
+      variants: {
+        weight: {
+          xs: { base: { fontWeight: t.font.fontWeight.xs } },
+          sm: { base: { fontWeight: t.font.fontWeight.sm } },
+          md: { base: { fontWeight: t.font.fontWeight.md } },
+          lg: { base: { fontWeight: t.font.fontWeight.lg } },
+          xl: { base: { fontWeight: t.font.fontWeight.xl } },
+          h6: { base: { fontWeight: t.font.fontWeight.h6 } },
+          h5: { base: { fontWeight: t.font.fontWeight.h5 } },
+          h4: { base: { fontWeight: t.font.fontWeight.h4 } },
+          h3: { base: { fontWeight: t.font.fontWeight.h3 } },
+          h2: { base: { fontWeight: t.font.fontWeight.h2 } },
+          h1: { base: { fontWeight: t.font.fontWeight.h1 } },
+        },
+      },
+    },
   };
 });
 
 export type Size = ExtractForProps<typeof typoStyles.size>;
+export type Weight = ExtractForProps<typeof typoStyles.weight>;

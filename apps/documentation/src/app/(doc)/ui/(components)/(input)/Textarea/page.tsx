@@ -9,9 +9,12 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
+import { Checkbox, Text, Textarea, YBox } from '@crossed/ui';
+import { useState } from 'react';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
+  const [clearable, setClearable] = useState(false);
   return (
     <TemplatePrimitive
       title="Textarea"
@@ -22,8 +25,45 @@ export default function CreateBadge() {
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`// coming soon`}
-      scope={{}}
+      example={`<YBox space="sm">
+  <Textarea
+    placeholder="Placeholder"
+    clearable={${clearable}}
+  />
+  <Textarea
+    placeholder="Placeholder"
+    label="label"
+    description="description"
+    extra="extra"
+    clearable={${clearable}}
+  />
+  <Textarea
+    placeholder="Placeholder"
+    label="Error"
+    error="Your message"
+    clearable={${clearable}}
+  />
+  <Textarea
+    placeholder="Placeholder"
+    label="Error"
+    elementLeft={<Text>EUR</Text>}
+    clearable={${clearable}}
+  />
+  <Textarea
+    placeholder="Placeholder"
+    label="Error"
+    elementRight={<Text>EUR</Text>}
+    clearable={${clearable}}
+  />
+</YBox>`}
+      scope={{ Textarea, YBox, Text }}
+      variants={
+        <YBox>
+          <Checkbox onChecked={setClearable} checked={clearable}>
+            <Text>Clearable</Text>
+          </Checkbox>
+        </YBox>
+      }
     />
   );
 }

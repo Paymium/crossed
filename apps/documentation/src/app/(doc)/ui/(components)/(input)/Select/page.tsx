@@ -9,8 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Select, Text, XBox } from '@crossed/ui';
-import { ChevronDown } from '@crossed/unicons';
+import { Select, Text, XBox, YBox } from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
@@ -24,15 +23,12 @@ export default function CreateBadge() {
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`
+      example={`<YBox space="sm">
 <Select
   defaultValue="en"
 >
   <Select.Trigger>
-    <XBox alignItems="center" justifyContent="between">
-      <Select.Value />
-      <ChevronDown />
-    </XBox>
+    <Select.Value />
   </Select.Trigger>
   <Select.Content>
     <Select.Option value="fr">
@@ -43,8 +39,46 @@ export default function CreateBadge() {
     </Select.Option>
   </Select.Content>
 </Select>
+<Select
+  defaultValue="en"
+  label="Label"
+  description="Description"
+  extra="Extra"
+>
+  <Select.Trigger>
+    <Select.Value />
+  </Select.Trigger>
+  <Select.Content>
+    <Select.Option value="fr">
+      <Text>🇫🇷 Français</Text>
+    </Select.Option>
+    <Select.Option value="en">
+      <Text>🇬🇧 Anglais</Text>
+    </Select.Option>
+  </Select.Content>
+</Select>
+<Select
+  defaultValue="en"
+  label="Label"
+  description="Description"
+  extra="Extra"
+  error="An error"
+>
+  <Select.Trigger>
+    <Select.Value />
+  </Select.Trigger>
+  <Select.Content>
+    <Select.Option value="fr">
+      <Text>🇫🇷 Français</Text>
+    </Select.Option>
+    <Select.Option value="en">
+      <Text>🇬🇧 Anglais</Text>
+    </Select.Option>
+  </Select.Content>
+</Select>
+</YBox>
     `}
-      scope={{ Select, ChevronDown, Text, XBox }}
+      scope={{ Select, Text, XBox, YBox }}
     />
   );
 }
