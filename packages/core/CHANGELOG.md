@@ -1,5 +1,12 @@
 # @crossed/core
 
+## 0.8.1-beta.3
+
+### Patch Changes
+
+- 3a58e76: add null type on composeEventHandler
+- 0cf4ddc: add select, checkbox, radio
+
 ## 0.8.1-beta.2
 
 ### Patch Changes

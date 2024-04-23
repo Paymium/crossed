@@ -1,5 +1,42 @@
 # @crossed/ui
 
+## 1.0.0-beta.7
+
+### Minor Changes
+
+- cd88165: add alert
+- 6bb68fe: add Modal
+- 2d1edd0: add accordion
+- 25db019: add Label
+- ea00f4a: add CloseButton
+- d55de73: add Form
+- 0cc712c: add checkbox
+
+### Patch Changes
+
+- 511e2e5: extract focus logic in seperate web native file
+- 9b40463: fix responsive web error focus lock
+- 0cf4ddc: add select, checkbox, radio
+- a17d0dc: some fix css behavior
+- 511e2e5: add web active style checkbox
+- Updated dependencies [6bb68fe]
+- Updated dependencies [c1e88c5]
+- Updated dependencies [3a58e76]
+- Updated dependencies [0cf4ddc]
+- Updated dependencies [511e2e5]
+- Updated dependencies [f768120]
+- Updated dependencies [017fd84]
+- Updated dependencies [4ae3b66]
+- Updated dependencies [511e2e5]
+- Updated dependencies [42ae419]
+- Updated dependencies [f768120]
+- Updated dependencies [f1c8cbd]
+  - @crossed/primitive@1.8.0-beta.3
+  - @crossed/styled@0.14.0-beta.7
+  - @crossed/core@0.8.1-beta.3
+  - @crossed/unicons@1.0.0-beta.7
+  - @crossed/theme@1.0.1-beta.0
+
 ## 1.0.0-beta.6
 
 ### Patch Changes

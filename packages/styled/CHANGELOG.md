@@ -1,5 +1,19 @@
 # @crossed/styled
 
+## 0.14.0-beta.7
+
+### Patch Changes
+
+- c1e88c5: missing max and min for height and width property in normalizeUnitPixel
+- 0cf4ddc: add select, checkbox, radio
+- 511e2e5: replace space by -
+- 017fd84: fix useInteraction wrong condition
+- 511e2e5: ameliorate web plugin and add types
+- f1c8cbd: fix valueNormalize is number
+- Updated dependencies [3a58e76]
+- Updated dependencies [0cf4ddc]
+  - @crossed/core@0.8.1-beta.3
+
 ## 0.14.0-beta.6
 
 ### Patch Changes

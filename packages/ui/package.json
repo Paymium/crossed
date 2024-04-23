@@ -1,7 +1,7 @@
 {
   "name": "@crossed/ui",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "1.0.0-beta.6",
+  "version": "1.0.0-beta.7",
   "keywords": [
     "React Native",
     "React",
@@ -64,21 +64,21 @@
   },
   "peerDependencies": {
     "@crossed/build": "*",
-    "@crossed/core": "0.8.1-beta.2",
-    "@crossed/primitive": "1.7.1-beta.2",
+    "@crossed/core": "0.8.1-beta.3",
+    "@crossed/primitive": "1.8.0-beta.3",
     "@crossed/styled": "workspace:^",
-    "@crossed/unicons": "1.0.0-beta.6",
+    "@crossed/unicons": "1.0.0-beta.7",
     "@devvie/bottom-sheet": "0.3.0",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-reanimated": "^3.6.2"
   },
   "devDependencies": {
     "@crossed/build": "*",
-    "@crossed/core": "0.8.1-beta.2",
-    "@crossed/primitive": "1.7.1-beta.2",
+    "@crossed/core": "0.8.1-beta.3",
+    "@crossed/primitive": "1.8.0-beta.3",
     "@crossed/styled": "workspace:^",
-    "@crossed/test": "*",
-    "@crossed/unicons": "1.0.0-beta.6",
+    "@crossed/test": "0.11.1-beta.0",
+    "@crossed/unicons": "1.0.0-beta.7",
     "@devvie/bottom-sheet": "0.3.0",
     "@jest/globals": "^29.7.0",
     "@jest/types": "28.1.1",
@@ -96,7 +96,7 @@
     "tsconfig": "*"
   },
   "dependencies": {
-    "@crossed/theme": "1.0.0",
+    "@crossed/theme": "1.0.1-beta.0",
     "@expo/html-elements": "^0.5.1",
     "@floating-ui/dom": "^1.6.3",
     "@floating-ui/react": "^0.25.1",

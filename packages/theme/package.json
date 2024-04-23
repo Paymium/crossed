@@ -1,13 +1,14 @@
 {
   "name": "@crossed/theme",
   "description": "unicons",
-  "version": "1.0.0",
+  "version": "1.0.1-beta.0",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
   "react-native": "src/index",
   "source": "src/index",
   "typings": "lib/typescript/index.d.ts",
+  "private": true,
   "keywords": [
     "React Native",
     "React",

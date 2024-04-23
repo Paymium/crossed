@@ -1,5 +1,25 @@
 # @crossed/unicons
 
+## 1.0.0-beta.7
+
+### Minor Changes
+
+- 4ae3b66: add CheckCircle and X
+
+### Patch Changes
+
+- 0cf4ddc: add select, checkbox, radio
+- Updated dependencies [c1e88c5]
+- Updated dependencies [3a58e76]
+- Updated dependencies [0cf4ddc]
+- Updated dependencies [511e2e5]
+- Updated dependencies [017fd84]
+- Updated dependencies [511e2e5]
+- Updated dependencies [f1c8cbd]
+  - @crossed/styled@0.14.0-beta.7
+  - @crossed/core@0.8.1-beta.3
+  - @crossed/theme@1.0.1-beta.0
+
 ## 1.0.0-beta.6
 
 ### Patch Changes

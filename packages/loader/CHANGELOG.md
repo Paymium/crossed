@@ -1,5 +1,19 @@
 # @crossed/loader
 
+## 1.0.0-beta.7
+
+### Patch Changes
+
+- 511e2e5: replace space by -
+- 9784bf6: sort media to be end of css, and order by width
+- Updated dependencies [c1e88c5]
+- Updated dependencies [0cf4ddc]
+- Updated dependencies [511e2e5]
+- Updated dependencies [017fd84]
+- Updated dependencies [511e2e5]
+- Updated dependencies [f1c8cbd]
+  - @crossed/styled@0.14.0-beta.7
+
 ## 1.0.0-beta.6
 
 ### Patch Changes

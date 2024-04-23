@@ -1,5 +1,42 @@
 # crossed-docs
 
+## 0.6.0-beta.10
+
+### Patch Changes
+
+- 0cf4ddc: add select, checkbox, radio
+- a87b7a0: update doc
+- 38c315d: update doc
+- Updated dependencies [511e2e5]
+- Updated dependencies [cd88165]
+- Updated dependencies [9b40463]
+- Updated dependencies [6bb68fe]
+- Updated dependencies [c1e88c5]
+- Updated dependencies [2d1edd0]
+- Updated dependencies [3a58e76]
+- Updated dependencies [25db019]
+- Updated dependencies [0cf4ddc]
+- Updated dependencies [511e2e5]
+- Updated dependencies [f768120]
+- Updated dependencies [a17d0dc]
+- Updated dependencies [ea00f4a]
+- Updated dependencies [017fd84]
+- Updated dependencies [4ae3b66]
+- Updated dependencies [511e2e5]
+- Updated dependencies [d55de73]
+- Updated dependencies [511e2e5]
+- Updated dependencies [0cc712c]
+- Updated dependencies [42ae419]
+- Updated dependencies [f768120]
+- Updated dependencies [f1c8cbd]
+  - @crossed/ui@1.0.0-beta.7
+  - @crossed/primitive@1.8.0-beta.3
+  - @crossed/styled@0.14.0-beta.7
+  - @crossed/core@0.8.1-beta.3
+  - @crossed/unicons@1.0.0-beta.7
+  - @crossed/theme@1.0.1-beta.0
+  - @crossed/next-adapter@0.5.2-beta.7
+
 ## 0.6.0-beta.9
 
 ## 0.6.0-beta.8
