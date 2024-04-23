@@ -169,7 +169,7 @@ importers:
         specifier: 0.4.0
         version: 0.4.0(react-native@0.73.6)(ts-node@10.8.1)
       '@crossed/core':
-        specifier: 0.8.1-beta.2
+        specifier: 0.8.1-beta.3
         version: link:../../packages/core
       '@crossed/demo':
         specifier: 0.3.1
@@ -178,7 +178,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages/styled
       '@crossed/ui':
-        specifier: 1.0.0-beta.6
+        specifier: 1.0.0-beta.8
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: workspace:*
@@ -323,7 +323,7 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/test':
-        specifier: '*'
+        specifier: 0.11.1-beta.0
         version: link:../test
       '@jest/types':
         specifier: 28.1.1
@@ -372,10 +372,10 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/styled':
-        specifier: 0.14.0-beta.6
+        specifier: 0.14.0-beta.8
         version: link:../styled
       '@crossed/test':
-        specifier: 0.11.0
+        specifier: 0.11.1-beta.0
         version: link:../test
       '@types/escodegen':
         specifier: ^0.0.10
@@ -415,7 +415,7 @@ importers:
   packages/next-adapter:
     dependencies:
       '@crossed/webpack':
-        specifier: 2.0.0-beta.6
+        specifier: 2.0.0-beta.8
         version: link:../webpack
       find-yarn-workspace-root:
         specifier: ^2.0.0
@@ -476,7 +476,7 @@ importers:
   packages/primitive:
     dependencies:
       '@crossed/core':
-        specifier: 0.8.1-beta.2
+        specifier: 0.8.1-beta.3
         version: link:../core
       '@floating-ui/react':
         specifier: ^0.25.1
@@ -507,7 +507,7 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/test':
-        specifier: '*'
+        specifier: 0.11.1-beta.0
         version: link:../test
       '@testing-library/jest-dom':
         specifier: ^6.1.3
@@ -546,7 +546,7 @@ importers:
   packages/styled:
     dependencies:
       '@crossed/core':
-        specifier: ^0.8.1-beta.2
+        specifier: ^0.8.1-beta.3
         version: link:../core
       ts-deepmerge:
         specifier: ^7.0.0
@@ -556,7 +556,7 @@ importers:
         specifier: ^0.5.0
         version: link:../build
       '@crossed/test':
-        specifier: 0.11.0
+        specifier: 0.11.1-beta.0
         version: link:../test
       '@types/jest':
         specifier: ^29.5.0
@@ -695,7 +695,7 @@ importers:
   packages/ui:
     dependencies:
       '@crossed/theme':
-        specifier: 1.0.0
+        specifier: 1.0.1-beta.1
         version: link:../theme
       '@expo/html-elements':
         specifier: ^0.5.1
@@ -747,19 +747,19 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/core':
-        specifier: 0.8.1-beta.2
+        specifier: 0.8.1-beta.3
         version: link:../core
       '@crossed/primitive':
-        specifier: 1.7.1-beta.2
+        specifier: 1.8.0-beta.3
         version: link:../primitive
       '@crossed/styled':
         specifier: workspace:^
         version: link:../styled
       '@crossed/test':
-        specifier: '*'
+        specifier: 0.11.1-beta.0
         version: link:../test
       '@crossed/unicons':
-        specifier: 1.0.0-beta.6
+        specifier: 1.0.0-beta.8
         version: link:../unicons
       '@devvie/bottom-sheet':
         specifier: 0.3.0
@@ -820,7 +820,7 @@ importers:
         specifier: workspace:^
         version: link:../styled
       '@crossed/theme':
-        specifier: 1.0.0
+        specifier: 1.0.1-beta.1
         version: link:../theme
       '@types/react':
         specifier: ^18.2.64
@@ -841,7 +841,7 @@ importers:
   packages/webpack:
     dependencies:
       '@crossed/loader':
-        specifier: 1.0.0-beta.6
+        specifier: 1.0.0-beta.8
         version: link:../loader
       '@crossed/log':
         specifier: '*'
@@ -860,7 +860,7 @@ importers:
         specifier: ^0.5.0
         version: link:../build
       '@crossed/styled':
-        specifier: 0.14.0-beta.6
+        specifier: 0.14.0-beta.8
         version: link:../styled
       '@types/node':
         specifier: ^20.11.16

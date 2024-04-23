@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.8
+
+### Patch Changes
+
+- 4f81cb4: fix registry isWeb
+
 ## 0.14.0-beta.7
 
 ### Patch Changes
