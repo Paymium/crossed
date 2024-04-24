@@ -45,7 +45,7 @@ const useText = createStyles(
           },
         },
       },
-    } as const)
+    }) as const
 );
 
 type VariantLocal = ExtractForProps<typeof useText.root>;

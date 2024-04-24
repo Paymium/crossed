@@ -35,12 +35,12 @@ export type GetProps<A extends StylableComponent<any>> =
   A extends StyledComponent<infer P>
     ? P
     : A extends ComponentType<infer P>
-    ? P
-    : A extends ElementType
-    ? HTMLProps<A>
-    : A extends new (_props: infer P) => any
-    ? P
-    : never;
+      ? P
+      : A extends ElementType
+        ? HTMLProps<A>
+        : A extends new (_props: infer P) => any
+          ? P
+          : never;
 
 export type ReactComponentWithRef<P> = ForwardRefExoticComponent<P>;
 

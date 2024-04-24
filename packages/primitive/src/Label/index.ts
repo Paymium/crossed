@@ -14,7 +14,7 @@ export { useContext as useLabelContext } from './context';
 
 export const createLabel = <
   LabelProps extends Record<string, any>,
-  TextProps extends Record<string, any>
+  TextProps extends Record<string, any>,
 >(components: {
   Root: ComponentType<LabelProps>;
   Text: ComponentType<TextProps>;

@@ -12,7 +12,9 @@ import { Themes } from './types';
 import { isWeb } from './isWeb';
 
 export const useTheme = (): Themes[keyof Themes] => {
-  const [theme, setTheme] = useState<Themes[keyof Themes]>(Registry.getTheme(isWeb));
+  const [theme, setTheme] = useState<Themes[keyof Themes]>(
+    Registry.getTheme(isWeb)
+  );
   const [, setTransition] = useTransition();
   useEffect(() => {
     const unsubscribe = Registry.subscribe(() => {

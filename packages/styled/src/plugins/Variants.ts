@@ -18,8 +18,8 @@ export interface CrossedVariantsPlugin {
 type HasBooleanVariants<T> = T extends 'true'
   ? true
   : T extends 'false'
-  ? true
-  : false;
+    ? true
+    : false;
 
 type AllKeys<T> = T extends any ? keyof T : never;
 // eslint-disable-next-line no-unused-vars
@@ -32,7 +32,7 @@ type Merge<T extends object> = {
 
 export interface CrossedVariantsPluginProps<
   V extends Variants | undefined,
-  MV = Merge<V>
+  MV = Merge<V>,
 > {
   variants?: {
     [key in keyof MV]?: HasBooleanVariants<keyof MV[key]> extends false

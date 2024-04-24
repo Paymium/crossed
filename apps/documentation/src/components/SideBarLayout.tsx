@@ -55,7 +55,7 @@ const styles = createStyles(
       li: { base: { alignItems: 'stretch' } },
       item: { base: { justifyContent: 'flex-end' } },
       accordionTrigger: { base: { padding: t.space.xxs } },
-    } as const)
+    }) as const
 );
 
 const Li = ({ label, ...props }: YBoxProps & { label?: boolean }) => (

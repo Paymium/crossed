@@ -16,7 +16,7 @@ export const createInput = <
   GroupProps extends Record<string, any>,
   IconProps extends Record<string, any>,
   ElementProps extends Record<string, any>,
-  InputProps extends Record<string, any>
+  InputProps extends Record<string, any>,
 >(components: {
   Group: ComponentType<GroupProps>;
   Addon: ComponentType<IconProps>;

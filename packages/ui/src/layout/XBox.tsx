@@ -37,7 +37,7 @@ export const useXBox = createStyles(
           },
         },
       },
-    } as const)
+    }) as const
 );
 
 type Variant = ExtractForProps<typeof useXBox.root>;

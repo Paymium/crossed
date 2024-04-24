@@ -23,7 +23,7 @@ export interface CrossedMediaQueriesPlugin {
 }
 
 export const MediaQueriesPlugin = <
-  B extends Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>
+  B extends Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>,
 >(
   breakpoints: B
 ): Plugin<CrossedMediaQueriesPlugin> => {
@@ -45,7 +45,7 @@ export const MediaQueriesPlugin = <
       Object.entries(styles).forEach(
         ([key, values]: [
           keyof CrossedMediaQueriesPlugin['media'],
-          CrossedstyleValues
+          CrossedstyleValues,
         ]) => {
           const breakpointsValue = normalizeUnitPixel(
             'width',

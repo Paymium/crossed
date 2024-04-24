@@ -22,7 +22,7 @@ export type ExtractStyle<S extends CrossedMethods<any>> =
   S extends CrossedMethods<infer D, any> ? D : never;
 export const composeStyles = <
   T extends (CrossedMethods<any> | false)[],
-  P extends Exclude<T[number], false>
+  P extends Exclude<T[number], false>,
 >(
   ...styles: T
 ) => {

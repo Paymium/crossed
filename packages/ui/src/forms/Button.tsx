@@ -191,7 +191,7 @@ export const useButton = createStyles(
           },
         },
       },
-    } as const)
+    }) as const
 );
 
 const Group = XBox;

@@ -328,8 +328,8 @@ function getDirectionAwareKey(key: string, dir?: Direction) {
   return key === 'ArrowLeft'
     ? 'ArrowRight'
     : key === 'ArrowRight'
-    ? 'ArrowLeft'
-    : key;
+      ? 'ArrowLeft'
+      : key;
 }
 
 type FocusIntent = 'first' | 'last' | 'prev' | 'next';

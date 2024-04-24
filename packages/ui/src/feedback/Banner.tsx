@@ -63,7 +63,7 @@ const bannerStyles = createStyles(
         },
         media: { md: { flexDirection: 'row' } },
       },
-    } as const)
+    }) as const
 );
 
 type Variant = ExtractForProps<typeof bannerStyles.container>;

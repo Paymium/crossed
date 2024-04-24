@@ -32,7 +32,7 @@ export const createSelect = <
   ItemProps extends Record<string, any>,
   DividerProps extends Record<string, any>,
   LabelProps extends Record<string, any>,
-  C extends Record<string, any>
+  C extends Record<string, any>,
 >(
   components: {
     Root: ComponentType<SelectProps>;
@@ -85,12 +85,15 @@ export const createSelect = <
       });
 
       const contextProps = useMemo(() => {
-        return Object.entries(context || {}).reduce<C>((acc, [key]) => {
-          if ((props as any)[key]) {
-            (acc as any)[key] = (props as any)[key];
-          }
-          return acc;
-        }, context || ({} as C));
+        return Object.entries(context || {}).reduce<C>(
+          (acc, [key]) => {
+            if ((props as any)[key]) {
+              (acc as any)[key] = (props as any)[key];
+            }
+            return acc;
+          },
+          context || ({} as C)
+        );
       }, [props]);
 
       return (

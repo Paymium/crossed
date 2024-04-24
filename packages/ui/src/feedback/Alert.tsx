@@ -83,7 +83,7 @@ const alertStyles = createStyles(
           },
         },
       },
-    } as const)
+    }) as const
 );
 
 type Variant = ExtractForProps<typeof alertStyles.container>;
