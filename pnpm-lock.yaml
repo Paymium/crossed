@@ -421,7 +421,7 @@ importers:
   packages/next-adapter:
     dependencies:
       '@crossed/webpack':
-        specifier: 2.0.0-beta.8
+        specifier: 2.0.0-beta.9
         version: link:../webpack
       find-yarn-workspace-root:
         specifier: ^2.0.0
@@ -847,7 +847,7 @@ importers:
   packages/webpack:
     dependencies:
       '@crossed/loader':
-        specifier: 1.0.0-beta.8
+        specifier: 1.0.0-beta.9
         version: link:../loader
       '@crossed/log':
         specifier: '*'
