@@ -20,7 +20,7 @@ export const createList = <
   TitleProps extends Record<string, any>,
   SubTitleProps extends Record<string, any>,
   LabelProps extends Record<string, any>,
-  DividerProps extends Record<string, any>
+  DividerProps extends Record<string, any>,
 >(components: {
   Root: ComponentType<ListProps>;
   Item: ComponentType<ItemProps>;

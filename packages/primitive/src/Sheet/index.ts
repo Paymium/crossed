@@ -22,7 +22,7 @@ export const createSheet = <
   ContentProps extends Record<string, any>,
   PortalProps extends Record<string, any>,
   OverlayProps extends Record<string, any>,
-  HandleProps extends PressableProps
+  HandleProps extends PressableProps,
 >(components: {
   Root: ComponentType<RootProps>;
   Trigger: ComponentType<TriggerProps>;

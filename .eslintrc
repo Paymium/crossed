@@ -1,8 +1,8 @@
 {
   "extends": [
     "@react-native-community",
-    "prettier",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
   ],
   "rules": {
     "prettier/prettier": [
@@ -35,8 +35,12 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": ["./packages/*/tsconfig.test.json", "./packages/*/tsconfig.json", "./apps/*/tsconfig.json"]
+    "project": [
+      "./packages/*/tsconfig.test.json",
+      "./packages/*/tsconfig.json",
+      "./apps/*/tsconfig.json"
+    ]
   },
-  "plugins": ["@typescript-eslint", "prettier", "license-header"],
-  "ignorePatterns": ["next-env.d.ts", "expo-env.d.ts", "lib"]
+  "plugins": ["@typescript-eslint", "react-hooks", "license-header"],
+  "ignorePatterns": ["next-env.d.ts", "expo-env.d.ts", "lib"],
 }

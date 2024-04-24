@@ -35,7 +35,7 @@ const styleBox = createStyles(
           },
         },
       },
-    } as const)
+    }) as const
 );
 
 type Variant = ExtractForProps<typeof styleBox.root>;

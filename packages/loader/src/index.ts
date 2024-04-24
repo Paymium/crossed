@@ -6,6 +6,7 @@
  */
 
 import path from 'path';
+import fs from 'fs';
 import {
   ArrowFunctionExpression,
   // CallExpression,
@@ -49,19 +50,18 @@ export class Loader {
 
     if (configPath) {
       try {
-        esbuild.buildSync({
-          bundle: true,
-          entryPoints: [path.resolve(process.cwd(), configPath)],
-          packages: 'external',
-          outfile: path.resolve(process.cwd(), './lib/style.config.js'),
-          target: 'node20',
+        const contentFileConfig = fs.readFileSync(
+          path.resolve(process.cwd(), configPath),
+          { encoding: 'utf8' }
+        );
+        const codeBuild = esbuild.transformSync(contentFileConfig, {
+          loader: 'ts',
+          platform: 'node',
+          format: 'cjs',
+          target: 'node14',
         });
-      } catch (e) {
-        this.logger.error(e.toString());
-      }
-
-      try {
-        require(path.resolve(process.cwd(), './lib/style.config'));
+        // eslint-disable-next-line no-eval
+        eval(codeBuild.code);
       } catch (e) {
         this.logger.error(e.toString());
       }

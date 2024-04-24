@@ -84,7 +84,7 @@ const styles = createStyles(
           xl: { maxWidth: 920 },
         },
       },
-    } as const)
+    }) as const
 );
 
 type Nav = {

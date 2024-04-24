@@ -36,7 +36,7 @@ export const useDivider = createStyles(
           },
         },
       },
-    } as const)
+    }) as const
 );
 
 type Variant = ExtractForProps<typeof useDivider.divider>;

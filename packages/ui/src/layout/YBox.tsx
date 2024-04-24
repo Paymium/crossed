@@ -21,7 +21,7 @@ const useYBox = createStyles(
           alignSelf: 'stretch',
         },
       },
-    } as const)
+    }) as const
 );
 
 export type YBoxProps = BoxProps;

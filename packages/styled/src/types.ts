@@ -44,7 +44,7 @@ export interface StyleSheet
 
 export type CreateStylesParams<
   K extends string,
-  S extends StyleSheet = StyleSheet
+  S extends StyleSheet = StyleSheet,
 > = <T extends Themes[keyof Themes]>(_theme: T) => Record<K, S>;
 
 export type ExtractForProps<S extends CrossedMethods<any>> =
@@ -92,15 +92,15 @@ export type PluginContext<S> = {
 type HasBooleanVariants<T> = T extends 'true'
   ? true
   : T extends 'false'
-  ? true
-  : false;
+    ? true
+    : false;
 
 export interface Themes {}
 
 export interface CrossedPropsExtended<
   S extends StyleSheet,
   V = S['variants'],
-  MV = V extends object ? V : never
+  MV = V extends object ? V : never,
 > {
   'className'?: string;
   'style'?: CrossedstyleValues | CrossedstyleValues[];
@@ -118,7 +118,7 @@ export interface CrossedPropsExtended<
 
 export type CrossedMethods<
   S extends StyleSheet,
-  P = CrossedPropsExtended<S>
+  P = CrossedPropsExtended<S>,
 > = {
   original: S;
   style: (_p?: P) => { style: Record<string, string> };

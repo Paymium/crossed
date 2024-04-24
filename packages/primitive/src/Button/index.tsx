@@ -20,7 +20,7 @@ export const createButton = <
   GroupProps extends Record<string, any>,
   ButtonProps extends Record<string, any>,
   TextProps extends NTextProps,
-  ElementProps extends Record<string, any>
+  ElementProps extends Record<string, any>,
 >(components: {
   Root: ComponentType<ButtonProps>;
   Group: ComponentType<GroupProps>;
