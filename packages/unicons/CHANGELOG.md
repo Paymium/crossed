@@ -1,5 +1,11 @@
 # @crossed/unicons
 
+## 1.0.0-beta.10
+
+### Patch Changes
+
+- 063b0b6: remove theme and force build
+
 ## 1.0.0-beta.8
 
 ### Patch Changes

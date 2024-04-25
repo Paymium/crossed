@@ -1,5 +1,13 @@
 # crossed-docs
 
+## 0.6.0-beta.13
+
+### Patch Changes
+
+- Updated dependencies [063b0b6]
+  - @crossed/unicons@1.0.0-beta.10
+  - @crossed/ui@1.0.0-beta.13
+
 ## 0.6.0-beta.12
 
 ### Patch Changes

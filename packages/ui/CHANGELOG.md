@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 1.0.0-beta.13
+
+### Patch Changes
+
+- 063b0b6: remove theme and force build
+- Updated dependencies [063b0b6]
+  - @crossed/unicons@1.0.0-beta.10
+
 ## 1.0.0-beta.8
 
 ### Patch Changes
