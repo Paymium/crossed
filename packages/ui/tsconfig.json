@@ -26,6 +26,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "target": "esnext",
-    "types": ["./node_modules/@crossed/theme/lib/typescript/types.d.ts"]
+    "types": ["../theme/lib/typescript/types.d.ts"]
   }
 }
