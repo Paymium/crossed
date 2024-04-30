@@ -1,5 +1,13 @@
 # @crossed/theme
 
+## 1.0.1-beta.3
+
+### Patch Changes
+
+- ffc415d: split files
+- Updated dependencies [ffc415d]
+  - @crossed/styled@0.14.0-beta.10
+
 ## 1.0.1-beta.2
 
 ### Patch Changes

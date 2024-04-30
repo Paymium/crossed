@@ -1,5 +1,14 @@
 # @crossed/loader
 
+## 1.0.0-beta.11
+
+### Patch Changes
+
+- Updated dependencies [ffc415d]
+- Updated dependencies [ffc415d]
+  - @crossed/styled@0.14.0-beta.10
+  - @crossed/theme@1.0.1-beta.3
+
 ## 1.0.0-beta.10
 
 ### Minor Changes

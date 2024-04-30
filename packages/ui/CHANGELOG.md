@@ -1,5 +1,16 @@
 # @crossed/ui
 
+## 1.0.0-beta.16
+
+### Patch Changes
+
+- ffc415d: apply theme actions
+- Updated dependencies [ffc415d]
+- Updated dependencies [ffc415d]
+  - @crossed/styled@0.14.0-beta.10
+  - @crossed/theme@1.0.1-beta.3
+  - @crossed/unicons@1.0.0-beta.13
+
 ## 1.0.0-beta.15
 
 ### Patch Changes
