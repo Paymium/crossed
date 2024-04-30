@@ -29,7 +29,7 @@ export const BasePlugin: Plugin<CrossedBasePlugin> = {
           `${convertKeyToCss(key)}-[${
             typeof valueNormalized === 'number'
               ? valueNormalized
-              : valueNormalized.replace(/ /g, '-')
+              : valueNormalized?.replace(/ /g, '-')
           }]`
         ] = {
           [key]: valueNormalized,

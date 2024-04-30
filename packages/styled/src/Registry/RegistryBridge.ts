@@ -72,12 +72,20 @@ export class RegistryBridge {
   private _themeName?: keyof Themes;
 
   setThemes(themes: Partial<Themes>) {
-    this.themes = { ...this.themes, ...themes };
+    this.themes = themes;
     return this;
   }
 
   get themeName() {
     return this._themeName;
+  }
+
+  setInitialThemeName(themeName: keyof Themes) {
+    if (!this._themeName) {
+      setTheme(this._themeName, themeName);
+      this._themeName = themeName;
+    }
+    return this;
   }
 
   setThemeName(themeName: keyof Themes) {
