@@ -16,6 +16,7 @@ export type StylePluginOptions = {
   configPath: string;
   level?: string;
   isServer?: boolean;
+  isWatch?: boolean;
 };
 
 let parseAst: Loader;
@@ -36,27 +37,41 @@ export default class StylePlugin {
     this.logger.debug('apply StylePlugin');
 
     /**
-     * Load loader if not already in cache
-     */
-    if (!parseAst) {
-      parseAst = new Loader({
-        configPath: this.options.configPath,
-        level: this.options.level,
-      });
-    }
-
-    /**
      * Add virtual module crossed.css
      */
     const virtualModules = new VirtualModulesPlugin();
     virtualModules.apply(compiler);
 
     /**
+     * Load loader if not already in cache
+     */
+    if (!parseAst) {
+      parseAst = new Loader({
+        configPath: this.options.configPath,
+        level: this.options.level,
+        isWatch: this.options.isWatch,
+        emit: () => {
+          virtualModules.writeModule(
+            'node_modules/crossed.css',
+            parseAst.getCSS() || ''
+          );
+          this.logger.info(
+            apiLog({
+              events: ['css_output_success'],
+            })
+          );
+        },
+      });
+    }
+
+    /**
      * Wait end parsing and write css
      */
     compiler.hooks.afterCompile.tap(pluginName, () => {
-      const newContent = parseAst.getCSS() || '';
-      virtualModules.writeModule('node_modules/crossed.css', newContent);
+      virtualModules.writeModule(
+        'node_modules/crossed.css',
+        parseAst.getCSS() || ''
+      );
 
       this.logger.info(
         apiLog({

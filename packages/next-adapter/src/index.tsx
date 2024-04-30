@@ -40,7 +40,11 @@ export const withCrossed = (options: StylePluginOptions) => {
         // if (!isServer) {
         config.plugins = [
           ...config.plugins,
-          new StylePlugin({ ...options, isServer }),
+          new StylePlugin({
+            ...options,
+            isWatch: config.mode === 'development',
+            isServer,
+          }),
         ];
         // }
 
