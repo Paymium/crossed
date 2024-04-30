@@ -383,9 +383,6 @@ importers:
       '@crossed/test':
         specifier: 0.11.1-beta.0
         version: link:../test
-      '@crossed/theme':
-        specifier: workspace:^
-        version: link:../theme
       '@types/escodegen':
         specifier: ^0.0.10
         version: 0.0.10
