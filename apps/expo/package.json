@@ -17,7 +17,7 @@
     "@crossed/core": "0.8.1-beta.3",
     "@crossed/demo": "0.3.1",
     "@crossed/styled": "workspace:^",
-    "@crossed/ui": "1.0.0-beta.14",
+    "@crossed/ui": "1.0.0-beta.15",
     "@crossed/unicons": "workspace:*",
     "@expo/vector-icons": "^14.0.0",
     "@devvie/bottom-sheet": "0.3.0",

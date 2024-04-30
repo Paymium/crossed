@@ -1,5 +1,12 @@
 # @crossed/styled
 
+## 0.14.0-beta.9
+
+### Patch Changes
+
+- 20288fe: add setInitialThemeName method
+- 20288fe: not change css theme className if already exist
+
 ## 0.14.0-beta.8
 
 ### Patch Changes

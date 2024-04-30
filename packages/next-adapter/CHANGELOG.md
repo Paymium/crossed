@@ -1,5 +1,16 @@
 # @crossed/next-adapter
 
+## 0.6.0-beta.10
+
+### Minor Changes
+
+- 09f4ad0: add hot reload when change theme config file
+
+### Patch Changes
+
+- Updated dependencies [09f4ad0]
+  - @crossed/webpack@2.0.0-beta.10
+
 ## 0.5.2-beta.9
 
 ### Patch Changes

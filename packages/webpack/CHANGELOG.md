@@ -1,5 +1,19 @@
 # @crossed/webpack
 
+## 2.0.0-beta.10
+
+### Minor Changes
+
+- 09f4ad0: add hot reload when change theme config file
+
+### Patch Changes
+
+- Updated dependencies [09f4ad0]
+- Updated dependencies [20288fe]
+- Updated dependencies [20288fe]
+  - @crossed/loader@1.0.0-beta.10
+  - @crossed/styled@0.14.0-beta.9
+
 ## 2.0.0-beta.9
 
 ### Patch Changes
