@@ -8,7 +8,6 @@
   "react-native": "src/index",
   "source": "src/index",
   "typings": "lib/typescript/index.d.ts",
-  "private": true,
   "keywords": [
     "React Native",
     "React",

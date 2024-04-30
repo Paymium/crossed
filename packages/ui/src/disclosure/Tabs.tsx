@@ -80,7 +80,9 @@ const useStyles = createStyles((t) => ({
       left: 0,
       right: 0,
     },
-    ':hover': { backgroundColor: t.colors.brand.bright },
+    ':hover': {
+      // backgroundColor: t.colors.brand.bright,
+    },
     'variants': {
       disabled: {
         true: {
@@ -97,13 +99,15 @@ const useStyles = createStyles((t) => ({
       underline: {
         true: {
           'base': { color: t.colors.neutral['600'] },
-          ':hover': { color: t.colors.brand.bright },
+          ':hover': {
+            // color: t.colors.brand.bright,
+          },
         },
       },
       disabled: {
         true: {
           base: {
-            color: t.colors.neutral.low,
+            // color: t.colors.neutral.low,
             pointerEvents: 'none',
           },
         },

@@ -6,6 +6,7 @@
  */
 
 import type { Colors } from './color';
+import type { Components } from './components';
 import type { Font } from './font';
 import type { Spaces } from './space';
 
@@ -13,4 +14,5 @@ export type Theme = {
   colors: Colors;
   space: Spaces;
   font: Font;
+  components?: Components;
 };

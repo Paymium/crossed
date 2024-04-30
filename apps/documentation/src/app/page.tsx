@@ -57,7 +57,7 @@ const useStyles = createStyles((t) => ({
       alignItems: 'center',
       paddingVertical: 50,
       flex: 1,
-      backgroundColor: t.colors.neutral[300],
+      backgroundColor: t.colors.neutral[0],
     },
   },
   cardTitle: {

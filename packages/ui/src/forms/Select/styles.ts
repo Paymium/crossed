@@ -25,7 +25,7 @@ export const useSelect = createStyles((t) => ({
     },
   },
   options: {
-    ':active': { backgroundColor: t.colors.neutral[400] },
+    // ':active': { backgroundColor: t.colors.neutral[400] },
   },
   value: {
     base: {
@@ -39,7 +39,7 @@ export const useSelect = createStyles((t) => ({
     base: {
       position: 'absolute',
       maxWidth: 'auto',
-      backgroundColor: t.colors.neutral[100],
+      // backgroundColor: t.colors.background.secondary,
       zIndex: 100,
       display: 'flex',
       flexDirection: 'column',

@@ -5,8 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export type ColorName = 'brand' | 'success' | 'info' | 'warning' | 'error';
-
 export type Color = {
   hight: string;
   low: string;
@@ -15,16 +13,67 @@ export type Color = {
   satured: string;
 };
 
-export type Colors = Record<ColorName, Color> & {
-  neutral: Color & {
+export type Colors = {
+  white: string;
+  black: string;
+  text: {
+    primary: string;
+    secondary: string;
+    brand: string;
+    invert: string;
+  };
+  background: {
+    primary: string;
+    secondary: string;
+    brand: string;
+  };
+  border: {
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    brand: string;
+  };
+  primary: {
     100: string;
-    200: string;
-    300: string;
-    400: string;
-    500: string;
-    600: string;
-    700: string;
-    800: string;
-    900: string;
+    90: string;
+    80: string;
+    70: string;
+    60: string;
+    50: string;
+    primary: string;
+    40: string;
+    30: string;
+    20: string;
+    10: string;
+    1: string;
+    0: string;
+  };
+  neutral: {
+    100: string;
+    90: string;
+    80: string;
+    70: string;
+  };
+  success: {
+    primary: string;
+    dark: string;
+    light: string;
+  };
+  warning: {
+    primary: string;
+    dark: string;
+    light: string;
+  };
+  info: {
+    primary: string;
+    dark: string;
+    light: string;
+  };
+  error: {
+    primary: string;
+    satured: string;
+    low: string;
+    hight: string;
+    muted: string;
   };
 };

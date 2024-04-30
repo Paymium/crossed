@@ -53,15 +53,15 @@ export const useButton = createStyles(
             outlineWidth: '2px',
             outlineOffset: '2px',
             outlineStyle: 'solid',
-            outlineColor: t.colors.error.bright,
+            outlineColor: t.colors.error.primary,
           },
         },
         variants: {
           variant: {
             primary: {
               'base': {
-                backgroundColor: t.colors.error.bright,
-                borderColor: t.colors.error.bright,
+                backgroundColor: t.colors.error.primary,
+                borderColor: t.colors.error.primary,
               },
               ':hover': {
                 backgroundColor: t.colors.error.muted,
@@ -77,7 +77,7 @@ export const useButton = createStyles(
               },
             },
             secondary: {
-              'base': { borderColor: t.colors.error.bright },
+              'base': { borderColor: t.colors.error.primary },
               ':hover': { borderColor: t.colors.error.muted },
               ':active': { borderColor: t.colors.error.satured },
               ':disabled': { borderColor: t.colors.error.hight },
@@ -94,13 +94,13 @@ export const useButton = createStyles(
               base: { color: 'white' },
             },
             secondary: {
-              'base': { color: t.colors.error.bright },
+              'base': { color: t.colors.error.primary },
               ':hover': { color: t.colors.error.muted },
               ':active': { color: t.colors.error.satured },
               ':disabled': { color: t.colors.error.hight },
             },
             tertiary: {
-              'base': { color: t.colors.error.bright },
+              'base': { color: t.colors.error.primary },
               ':hover': { color: t.colors.error.muted },
               ':active': { color: t.colors.error.satured },
               ':disabled': { color: t.colors.error.hight },
@@ -131,7 +131,7 @@ export const useButton = createStyles(
             outlineWidth: '2px',
             outlineOffset: '2px',
             outlineStyle: 'solid',
-            outlineColor: t.colors.brand.hight,
+            outlineColor: t.components.Action.primary.default.background,
           },
         },
         variants: {
@@ -142,27 +142,41 @@ export const useButton = createStyles(
           variant: {
             primary: {
               'base': {
-                backgroundColor: t.colors.brand.bright,
-                borderColor: t.colors.brand.bright,
+                backgroundColor: t.components.Action.primary.default.background,
+                borderColor: t.components.Action.primary.default.background,
               },
               ':active': {
-                backgroundColor: t.colors.brand.satured,
-                borderColor: t.colors.brand.satured,
+                backgroundColor: t.components.Action.primary.active.background,
+                borderColor: t.components.Action.primary.active.background,
               },
               ':hover': {
-                backgroundColor: t.colors.brand.muted,
-                borderColor: t.colors.brand.muted,
+                backgroundColor: t.components.Action.primary.hover.background,
+                borderColor: t.components.Action.primary.hover.background,
               },
               ':disabled': {
-                backgroundColor: t.colors.brand.hight,
-                borderColor: t.colors.brand.hight,
+                backgroundColor:
+                  t.components.Action.primary.disabled.background,
+                borderColor: t.components.Action.primary.disabled.background,
               },
             },
             secondary: {
-              'base': { borderColor: t.colors.brand.bright },
-              ':hover': { backgroundColor: t.colors.neutral[300] },
-              ':active': { backgroundColor: t.colors.neutral[400] },
-              ':disabled': { borderColor: t.colors.brand.hight },
+              'base': {
+                borderColor: t.components.Action.secondary.default.border,
+                backgroundColor: t.components.Action.primary.default.background,
+              },
+              ':hover': {
+                borderColor: t.components.Action.secondary.hover.border,
+                backgroundColor: t.components.Action.primary.hover.background,
+              },
+              ':active': {
+                borderColor: t.components.Action.secondary.active.border,
+                backgroundColor: t.components.Action.primary.active.background,
+              },
+              ':disabled': {
+                // borderColor: t.components.Action.secondary.disabled.border,
+                backgroundColor:
+                  t.components.Action.primary.disabled.background,
+              },
             },
             tertiary: {},
             false: {},
@@ -174,18 +188,19 @@ export const useButton = createStyles(
         variants: {
           variant: {
             primary: {
-              'base': { color: 'white' },
-              ':disabled': { color: t.colors.neutral[400] },
+              'base': { color: t.components.Action.primary.default.text },
+              ':hover': { color: t.components.Action.primary.hover.text },
+              // ':disabled': { color: t.colors.neutral[400] },
             },
             secondary: {
-              'base': { color: t.colors.brand.bright },
-              ':disabled': { color: t.colors.brand.hight },
+              base: { color: t.colors.text.brand },
+              // ':disabled': { color: t.colors.brand.hight },
             },
             tertiary: {
-              'base': { color: t.colors.brand.bright },
-              ':hover': { color: t.colors.brand.muted },
-              ':active': { color: t.colors.brand.satured },
-              ':disabled': { color: t.colors.brand.hight },
+              base: { color: t.colors.text.brand },
+              // ':hover': { color: t.colors.brand.muted },
+              // ':active': { color: t.colors.brand.satured },
+              // ':disabled': { color: t.colors.brand.hight },
             },
             false: {},
           },

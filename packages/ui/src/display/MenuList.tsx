@@ -41,11 +41,20 @@ const useMenuList = createStyles((t) => ({
       borderWidth: 0,
       borderRadius: 5,
     },
-    ':hover': { backgroundColor: t.colors.neutral.satured },
-    ':active': { backgroundColor: t.colors.neutral.muted },
-    'web': {
-      ':focus': { outlineColor: t.colors.neutral[600] },
+    ':hover': {
+      // backgroundColor: t.colors.neutral.satured,
     },
+    ':active': {
+      // backgroundColor: t.colors.neutral.muted,
+    },
+    'web': {
+      ':focus': {
+        // outlineColor: t.colors.neutral[600],
+      },
+    },
+  },
+  title: {
+    base: { color: t.font.color },
   },
 }));
 type ButtonVariantProps = Partial<Pick<ButtonProps, 'variant'>>;
@@ -102,7 +111,9 @@ const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
     />
   );
 });
-const Title = Button.Text;
+const Title = (props: TextProps) => (
+  <Text {...props} {...useMenuList.title.rnw(props)} />
+);
 const SubTitle = Button.Text;
 
 type ContextVariant = ButtonVariantProps & { active?: boolean };

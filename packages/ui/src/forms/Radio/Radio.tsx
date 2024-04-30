@@ -25,28 +25,27 @@ const radioStyles = createStyles((t) => ({
       height: 16,
       borderRadius: 44,
       borderWidth: 1,
-      borderColor: t.colors.neutral.hight,
+      borderColor: t.colors.border.secondary,
       alignItems: 'center',
       display: 'flex',
       justifyContent: 'center',
-      backgroundColor: 'white',
+      backgroundColor: t.colors.background.secondary,
     },
-    ':hover': { borderColor: t.colors.neutral[600] },
+    ':hover': { borderColor: t.colors.border.tertiary },
     ':active': {
-      borderColor: t.colors.neutral.hight,
       shadowColor: 'black',
       shadowOpacity: 0.1,
       elevation: 5,
     },
     ':disabled': {
-      backgroundColor: t.colors.neutral.muted,
-      borderColor: t.colors.neutral.muted,
+      backgroundColor: t.colors.primary[1],
+      borderColor: t.colors.primary[1],
     },
     'variants': {
       checked: {
         true: {
-          'base': { borderColor: t.colors.brand.bright },
-          ':active': { borderColor: t.colors.brand.satured },
+          'base': { borderColor: t.colors.border.primary },
+          ':active': { borderColor: t.colors.border.primary },
         },
       },
     },
@@ -62,8 +61,8 @@ const radioStyles = createStyles((t) => ({
     variants: {
       checked: {
         true: {
-          'base': { backgroundColor: t.colors.brand.bright },
-          ':active': { backgroundColor: t.colors.brand.satured },
+          'base': { backgroundColor: t.colors.background.primary },
+          ':active': { backgroundColor: t.colors.background.primary },
         },
       },
     },

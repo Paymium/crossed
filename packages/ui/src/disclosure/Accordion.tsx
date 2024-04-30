@@ -21,7 +21,7 @@ const accordionStyles = createStyles((t) => ({
   root: {
     base: {
       borderBottomWidth: 1,
-      borderColor: t.colors.neutral[500],
+      borderColor: t.colors.primary[1],
       borderStyle: 'solid',
     },
   },
@@ -32,8 +32,12 @@ const accordionStyles = createStyles((t) => ({
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
-    ':hover': { backgroundColor: t.colors.neutral.muted },
-    ':active': { backgroundColor: t.colors.neutral.satured },
+    ':hover': {
+      backgroundColor: t.colors.background.secondary,
+    },
+    ':active': {
+      backgroundColor: t.colors.background.primary,
+    },
     'web': { base: { transition: 'all 170ms' } },
   },
   panel: {
@@ -53,7 +57,7 @@ const accordionStyles = createStyles((t) => ({
   item: {
     base: {
       borderTopWidth: 1,
-      borderColor: t.colors.neutral[500],
+      // borderColor: t.colors.neutral[500],
       borderStyle: 'solid',
     },
     web: {

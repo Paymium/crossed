@@ -97,7 +97,7 @@ const useStyles = createStyles((t) => ({
   nav: {
     base: {
       width: '100%',
-      backgroundColor: t.colors.neutral['100'],
+      backgroundColor: t.colors.background.primary,
       padding: t.space.xxs,
       justifyContent: 'space-between',
       flexDirection: 'row',
@@ -107,7 +107,7 @@ const useStyles = createStyles((t) => ({
       borderRightWidth: 0,
       borderBottomWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral.bright,
+      borderColor: t.colors.border.secondary,
       alignItems: 'center',
     },
   },

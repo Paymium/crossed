@@ -21,8 +21,8 @@ const useCard = createStyles((t) => ({
     variants: {
       role: {
         link: {
-          ':hover': { backgroundColor: t.colors.neutral.low },
-          ':active': { backgroundColor: t.colors.neutral.hight },
+          // ':hover': { backgroundColor: t.colors.neutral.low },
+          // ':active': { backgroundColor: t.colors.neutral.hight },
         },
       },
     },

@@ -5,16 +5,97 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { colorsDark, colorsLight, paymiumDark, paymiumLight } from './colors';
+import { colorsDark, colorsLight } from './colors';
 import { font } from './font';
 import { space } from './space';
-import type { Font } from './types/font';
 import type { Theme } from './types/theme';
 
 export const lightTheme = {
   colors: colorsLight,
   space,
   font,
+  components: {
+    Banner: {
+      success: {
+        title: colorsLight.success.dark,
+        background: colorsLight.white,
+        border: colorsLight.success.primary,
+        icon: colorsLight.success.dark,
+        backgroundIcon: colorsLight.success.light,
+        subtitle: colorsLight.neutral[80],
+      },
+      info: {
+        title: colorsLight.info.dark,
+        background: colorsLight.white,
+        border: colorsLight.info.primary,
+        icon: colorsLight.info.dark,
+        backgroundIcon: colorsLight.info.light,
+        subtitle: colorsLight.neutral[80],
+      },
+      warning: {
+        title: colorsLight.warning.dark,
+        background: colorsLight.white,
+        border: colorsLight.warning.primary,
+        icon: colorsLight.warning.dark,
+        backgroundIcon: colorsLight.warning.light,
+        subtitle: colorsLight.neutral[80],
+      },
+      error: {
+        title: colorsLight.error.satured,
+        background: colorsLight.white,
+        border: colorsLight.error.primary,
+        icon: colorsLight.error.satured,
+        backgroundIcon: colorsLight.error.low,
+        subtitle: colorsLight.neutral[80],
+      },
+    },
+    Action: {
+      primary: {
+        default: {
+          background: colorsLight.primary.primary,
+          border: colorsLight.primary.primary,
+          text: colorsLight.white,
+          icon: '',
+        },
+        hover: {
+          background: colorsLight.primary[50],
+          border: colorsLight.primary[50],
+          text: colorsLight.white,
+          icon: '',
+        },
+        active: {
+          background: colorsLight.primary[60],
+          border: colorsLight.primary[60],
+          text: colorsLight.white,
+          icon: '',
+        },
+        focus: { background: '', text: '', icon: '', border: '' },
+        disabled: { background: '', text: '', icon: '', border: '' },
+      },
+      secondary: {
+        default: {
+          background: colorsLight.primary[10],
+          border: colorsLight.primary.primary,
+          text: colorsLight.white,
+          icon: '',
+        },
+        hover: {
+          background: colorsLight.primary[20],
+          border: colorsLight.primary[50],
+          text: colorsLight.white,
+          icon: '',
+        },
+        active: {
+          background: colorsLight.primary[30],
+          border: colorsLight.primary[60],
+          text: colorsLight.white,
+          icon: '',
+        },
+        focus: { background: '', text: '', icon: '', border: '' },
+        disabled: { background: '', text: '', icon: '', border: '' },
+      },
+    },
+  },
 } as const satisfies Theme;
 
 export const darkTheme = {
@@ -24,58 +105,86 @@ export const darkTheme = {
     ...font,
     color: 'white',
   },
-} as const satisfies Theme;
-
-const paymiumFont = {
-  lineHeight: {
-    xs: 14,
-    sm: 17,
-    md: 20,
-    lg: 23,
-    xl: 30,
-    h6: 36,
-    h5: 40,
-    h4: 46,
-    h3: 50,
-    h2: 56,
-    h1: 60,
+  components: {
+    Banner: {
+      success: {
+        title: colorsDark.success.dark,
+        background: colorsDark.background.secondary,
+        border: colorsDark.success.primary,
+        icon: colorsDark.white,
+        backgroundIcon: colorsDark.success.primary,
+        subtitle: colorsDark.neutral[70],
+      },
+      info: {
+        title: colorsDark.info.dark,
+        background: colorsDark.background.secondary,
+        border: colorsDark.info.primary,
+        icon: colorsDark.white,
+        backgroundIcon: colorsDark.info.primary,
+        subtitle: colorsDark.neutral[70],
+      },
+      warning: {
+        title: colorsDark.warning.dark,
+        background: colorsDark.background.secondary,
+        border: colorsDark.warning.primary,
+        icon: colorsDark.white,
+        backgroundIcon: colorsDark.warning.primary,
+        subtitle: colorsDark.neutral[70],
+      },
+      error: {
+        title: colorsDark.error.satured,
+        background: colorsDark.background.secondary,
+        border: colorsDark.error.primary,
+        icon: colorsDark.white,
+        backgroundIcon: colorsDark.error.primary,
+        subtitle: colorsDark.neutral[70],
+      },
+    },
+    Action: {
+      primary: {
+        default: {
+          background: colorsLight.primary.primary,
+          border: colorsLight.primary.primary,
+          text: colorsLight.white,
+          icon: '',
+        },
+        hover: {
+          background: colorsLight.primary[50],
+          border: colorsLight.primary[50],
+          text: colorsLight.white,
+          icon: '',
+        },
+        active: {
+          background: colorsLight.primary[60],
+          border: colorsLight.primary[60],
+          text: colorsLight.white,
+          icon: '',
+        },
+        focus: { background: '', text: '', icon: '', border: '' },
+        disabled: { background: '', text: '', icon: '', border: '' },
+      },
+      secondary: {
+        default: {
+          background: colorsLight.primary[10],
+          border: colorsLight.primary.primary,
+          text: colorsLight.white,
+          icon: '',
+        },
+        hover: {
+          background: colorsLight.primary[20],
+          border: colorsLight.primary[50],
+          text: colorsLight.white,
+          icon: '',
+        },
+        active: {
+          background: colorsLight.primary[30],
+          border: colorsLight.primary[60],
+          text: colorsLight.white,
+          icon: '',
+        },
+        focus: { background: '', text: '', icon: '', border: '' },
+        disabled: { background: '', text: '', icon: '', border: '' },
+      },
+    },
   },
-  fontSize: {
-    xs: 11,
-    sm: 14,
-    md: 16,
-    lg: 18,
-    xl: 24,
-    h6: 28,
-    h5: 32,
-    h4: 36,
-    h3: 40,
-    h2: 44,
-    h1: 48,
-  },
-  fontWeight: {
-    xs: '400',
-    sm: '400',
-    md: '400',
-    lg: '600',
-    xl: '700',
-    h6: '700',
-    h5: '700',
-    h4: '700',
-    h3: '700',
-    h2: '700',
-    h1: '700',
-  },
-  color: 'black',
-  family: 'Overpass',
-} as const satisfies Font;
-export const paymiumThemeDark = {
-  colors: paymiumDark,
-  space,
-  font: { ...paymiumFont, color: 'white' },
-} as const satisfies Theme;
-export const paymiumTheme = {
-  colors: paymiumLight,
-  space,
-  font: paymiumFont,
 } as const satisfies Theme;

@@ -18,14 +18,6 @@ const themes = {
     ...defaultThemes.light,
     draculaTheme: primsThemes.dracula,
   },
-  paymiumLight: {
-    ...defaultThemes.paymiumLight,
-    draculaTheme: primsThemes.dracula,
-  },
-  paymiumDark: {
-    ...defaultThemes.paymiumDark,
-    draculaTheme: primsThemes.dracula,
-  },
 };
 
 type ThemesCustom = typeof themes;
@@ -34,4 +26,6 @@ declare module '@crossed/styled' {
   export interface Themes extends ThemesCustom {}
 }
 
-Registry.setThemes(themes).setThemeName('light');
+Registry.setThemes(themes).setInitialThemeName('light');
+
+export default themes;
