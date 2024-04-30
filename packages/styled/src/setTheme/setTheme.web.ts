@@ -9,7 +9,9 @@ import type { SetTheme } from './types';
 
 export const setTheme: SetTheme = (old, theme) => {
   if (typeof window !== 'undefined') {
-    window.document.documentElement.classList.remove(old);
-    window.document.documentElement.classList.add(theme);
+    if (!window.document.documentElement.classList.contains(theme)) {
+      window.document.documentElement.classList.remove(old);
+      window.document.documentElement.classList.add(theme);
+    }
   }
 };

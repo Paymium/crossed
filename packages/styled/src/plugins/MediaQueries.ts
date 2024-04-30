@@ -76,7 +76,7 @@ export const MediaQueriesPlugin = <
                   [`${key}:${convertKeyToCss(keyProperty)}-[${
                     typeof valueNormalized === 'number'
                       ? valueNormalized
-                      : valueNormalized.replace(/ /g, '-')
+                      : valueNormalized?.replace(/ /g, '-')
                   }]`]: {
                     [keyProperty]: valueNormalized,
                   },
