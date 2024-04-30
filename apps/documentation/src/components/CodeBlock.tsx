@@ -34,16 +34,16 @@ const styles = createStyles((t) => ({
     base: {
       flexShrink: 1,
       borderWidth: 1,
-      borderColor: t.colors.neutral[500],
+      // borderColor: t.colors.primary[40],
       borderStyle: 'solid',
       borderRadius: 14,
-      backgroundColor: t.colors.neutral['100'],
+      backgroundColor: t.colors.background.primary,
     },
   },
   containerVariants: {
     base: {
       borderLeftWidth: 1,
-      borderColor: t.colors.neutral[500],
+      // borderColor: t.colors.neutral[500],
       borderStyle: 'solid',
       padding: t.space.xs,
       width: 250,
@@ -62,12 +62,16 @@ const styles = createStyles((t) => ({
       borderLeftWidth: 0,
       borderRightWidth: 0,
       borderBottomWidth: 1,
-      borderColor: t.colors.neutral.bright,
+      // borderColor: t.colors.neutral.bright,
       borderStyle: 'solid',
-      color: t.colors.neutral['100'],
+      // color: t.colors.neutral['100'],
     },
   },
-  liveError: { base: { color: t.colors.error.bright } },
+  liveError: {
+    base: {
+      // color: t.colors.error.bright,
+    },
+  },
 }));
 
 export const CodeBlock = ({

@@ -30,10 +30,10 @@ const useText = createStyles(
         },
         variants: {
           color: {
-            error: { base: { color: t.colors.error.bright } },
-            warning: { base: { color: t.colors.warning.satured } },
-            info: { base: { color: t.colors.info.satured } },
-            link: { base: { color: t.colors.brand.bright } },
+            error: { base: { color: t.colors.error.primary } },
+            warning: { base: { color: t.colors.warning.primary } },
+            info: { base: { color: t.colors.info.primary } },
+            link: { base: { color: t.colors.primary.primary } },
           },
           textAlign: {
             auto: { base: { textAlign: 'auto' } },

@@ -17,6 +17,6 @@ export const menuStyle = createStyles((t) => ({
     },
   },
   itemText: {
-    base: { color: t.colors.neutral['600'], fontWeight: '400' },
+    base: { color: t.font.color, fontWeight: '400' },
   },
 }));

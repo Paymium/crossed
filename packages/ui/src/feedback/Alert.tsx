@@ -18,13 +18,28 @@ const alertStyles = createStyles(
   (t) =>
     ({
       description: {
-        base: { color: t.colors.neutral[600], flex: 1 },
+        base: {
+          // color: t.colors.neutral[600],
+          flex: 1,
+        },
         variants: {
           status: {
             error: { base: { color: t.colors.error.satured } },
-            success: { base: { color: t.colors.success.satured } },
-            warning: { base: { color: t.colors.warning.satured } },
-            info: { base: { color: t.colors.info.satured } },
+            success: {
+              base: {
+                // color: t.colors.success.satured,
+              },
+            },
+            warning: {
+              base: {
+                // color: t.colors.warning.satured,
+              },
+            },
+            info: {
+              base: {
+                // color: t.colors.info.satured,
+              },
+            },
           },
         },
       },
@@ -37,9 +52,21 @@ const alertStyles = createStyles(
         variants: {
           status: {
             error: { base: { backgroundColor: t.colors.error.hight } },
-            success: { base: { backgroundColor: t.colors.success.hight } },
-            warning: { base: { backgroundColor: t.colors.warning.hight } },
-            info: { base: { backgroundColor: t.colors.info.hight } },
+            success: {
+              base: {
+                // backgroundColor: t.colors.success.hight,
+              },
+            },
+            warning: {
+              base: {
+                // backgroundColor: t.colors.warning.hight,
+              },
+            },
+            info: {
+              base: {
+                // backgroundColor: t.colors.info.hight,
+              },
+            },
           },
         },
       },
@@ -58,26 +85,26 @@ const alertStyles = createStyles(
           status: {
             error: {
               base: {
-                borderColor: t.colors.error.bright,
-                backgroundColor: t.colors.error.low,
+                // borderColor: t.colors.error.bright,
+                // backgroundColor: t.colors.error.low,
               },
             },
             success: {
               base: {
-                borderColor: t.colors.success.bright,
-                backgroundColor: t.colors.success.low,
+                // borderColor: t.colors.success.bright,
+                // backgroundColor: t.colors.success.low,
               },
             },
             warning: {
               base: {
-                borderColor: t.colors.warning.bright,
-                backgroundColor: t.colors.warning.low,
+                // borderColor: t.colors.warning.bright,
+                // backgroundColor: t.colors.warning.low,
               },
             },
             info: {
               base: {
-                borderColor: t.colors.info.bright,
-                backgroundColor: t.colors.info.low,
+                // borderColor: t.colors.info.bright,
+                // backgroundColor: t.colors.info.low,
               },
             },
           },

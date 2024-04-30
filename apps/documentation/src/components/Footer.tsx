@@ -12,11 +12,11 @@ import { Link } from './Link';
 import { useTranslation } from 'react-i18next';
 import { createStyles } from '@crossed/styled';
 
-const useStyles = createStyles((t) => ({
+const useStyles = createStyles(() => ({
   container: {
     base: {
       width: '100%',
-      backgroundColor: t.colors.neutral['100'],
+      // backgroundColor: t.colors.neutral['100'],
       padding: 15,
       justifyContent: 'center',
       borderWidth: 1,
@@ -25,7 +25,7 @@ const useStyles = createStyles((t) => ({
       borderRightWidth: 0,
       borderTopWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral.hight,
+      // borderColor: t.colors.neutral.hight,
       alignItems: 'center',
     },
   },

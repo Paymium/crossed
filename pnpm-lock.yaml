@@ -764,6 +764,9 @@ importers:
       '@crossed/test':
         specifier: 0.11.1-beta.0
         version: link:../test
+      '@crossed/theme':
+        specifier: workspace:^
+        version: link:../theme
       '@crossed/unicons':
         specifier: 1.0.0-beta.11
         version: link:../unicons
@@ -825,6 +828,9 @@ importers:
       '@crossed/styled':
         specifier: workspace:^
         version: link:../styled
+      '@crossed/theme':
+        specifier: workspace:^
+        version: link:../theme
       '@types/react':
         specifier: ^18.2.64
         version: 18.2.64

@@ -29,36 +29,40 @@ const checkboxStyles = createStyles((t) => ({
       height: 16,
       borderRadius: 4,
       borderWidth: 1,
-      borderColor: t.colors.neutral[500],
+      // borderColor: t.colors.neutral[500],
       alignItems: 'center',
       display: 'flex',
       justifyContent: 'center',
       backgroundColor: 'white',
     },
-    ':hover': { borderColor: t.colors.neutral[600] },
+    ':hover': {
+      // borderColor: t.colors.neutral[600],
+    },
     ':active': {
-      borderColor: t.colors.neutral[500],
+      // borderColor: t.colors.neutral[500],
       shadowColor: 'black',
       shadowOpacity: 0.1,
       elevation: 5,
     },
     ':disabled': {
-      backgroundColor: t.colors.neutral[300],
-      borderColor: t.colors.neutral[300],
+      // backgroundColor: t.colors.neutral[300],
+      // borderColor: t.colors.neutral[300],
     },
     'web': {
-      ':active': { boxShadow: `0px 0px 0px 2px ${t.colors.neutral[300]}` },
+      ':active': {
+        // boxShadow: `0px 0px 0px 2px ${t.colors.neutral[300]}`,
+      },
     },
     'variants': {
       checked: {
         true: {
           'base': {
-            borderColor: t.colors.brand.bright,
-            backgroundColor: t.colors.brand.bright,
+            borderColor: t.colors.primary.primary,
+            backgroundColor: t.colors.primary.primary,
           },
           ':active': {
-            borderColor: t.colors.brand.satured,
-            backgroundColor: t.colors.brand.satured,
+            borderColor: t.colors.primary.primary,
+            backgroundColor: t.colors.primary.primary,
           },
         },
       },
@@ -75,8 +79,8 @@ const checkboxStyles = createStyles((t) => ({
     variants: {
       checked: {
         true: {
-          'base': { backgroundColor: t.colors.brand.bright },
-          ':active': { backgroundColor: t.colors.brand.satured },
+          'base': { backgroundColor: t.colors.primary.primary },
+          ':active': { backgroundColor: t.colors.primary.primary },
         },
       },
     },

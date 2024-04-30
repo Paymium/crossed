@@ -8,7 +8,7 @@
 'use client';
 import { Sun } from '@crossed/unicons/Sun';
 import { Moon } from '@crossed/unicons/Moon';
-import { Select, Text } from '@crossed/ui';
+import { Select } from '@crossed/ui';
 import { useCallback } from 'react';
 import { Registry } from '@crossed/styled';
 
@@ -22,30 +22,13 @@ export const ChangeTheme = () => {
         <Select.Value />
       </Select.Trigger>
       <Select.Content>
-        <Select.Option value="light">
+        <Select.Option value="dark">
           <Moon />
         </Select.Option>
-        <Select.Option value="dark">
+        <Select.Option value="light">
           <Sun />
-        </Select.Option>
-        <Select.Option value="paymiumLight">
-          <Text>Paymium light</Text>
-        </Select.Option>
-        <Select.Option value="paymiumDark">
-          <Text>Paymium dark</Text>
         </Select.Option>
       </Select.Content>
     </Select>
-    // <Button
-    //   onPress={onPress}
-    //   variant={false}
-    //   accessibilityLabel={`Change to ${
-    //     Registry.themeName === 'light' ? 'dark' : 'light'
-    //   } theme`}
-    // >
-    //   <ButtonIcon>
-    //     {Registry.themeName === 'light' ? <Moon /> : <Sun />}
-    //   </ButtonIcon>
-    // </Button>
   );
 };

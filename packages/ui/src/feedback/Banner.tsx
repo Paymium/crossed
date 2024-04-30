@@ -19,27 +19,66 @@ import { match } from 'ts-pattern';
 const bannerStyles = createStyles(
   (t) =>
     ({
-      description: { base: { color: t.colors.neutral[600], flex: 1 } },
+      description: {
+        base: { flex: 1 },
+        variants: {
+          status: {
+            error: { base: { color: t.components.Banner.error.subtitle } },
+            success: { base: { color: t.components.Banner.success.subtitle } },
+            warning: { base: { color: t.components.Banner.warning.subtitle } },
+            info: { base: { color: t.components.Banner.info.subtitle } },
+          },
+        },
+      },
       title: {
         base: { fontWeight: '600' },
         variants: {
           status: {
-            error: { base: { color: t.colors.error.satured } },
-            success: { base: { color: t.colors.success.satured } },
-            warning: { base: { color: t.colors.warning.satured } },
-            info: { base: { color: t.colors.info.satured } },
+            error: { base: { color: t.components.Banner.error.title } },
+            success: { base: { color: t.components.Banner.success.title } },
+            warning: { base: { color: t.components.Banner.warning.title } },
+            info: { base: { color: t.components.Banner.info.title } },
           },
         },
       },
-      containerTitle: { base: { flexDirection: 'row', alignItems: 'center' } },
+      icon: {
+        base: { fontWeight: '600' },
+        variants: {
+          status: {
+            error: { base: { color: t.components.Banner.error.icon } },
+            success: { base: { color: t.components.Banner.success.icon } },
+            warning: { base: { color: t.components.Banner.warning.icon } },
+            info: { base: { color: t.components.Banner.info.icon } },
+          },
+        },
+      },
+      containerTitle: {
+        base: { flexDirection: 'row', alignItems: 'center' },
+      },
       containerIcon: {
         base: { borderRadius: 32, width: 32, height: 32 },
         variants: {
           status: {
-            error: { base: { backgroundColor: t.colors.error.low } },
-            success: { base: { backgroundColor: t.colors.success.low } },
-            warning: { base: { backgroundColor: t.colors.warning.low } },
-            info: { base: { backgroundColor: t.colors.info.low } },
+            error: {
+              base: {
+                backgroundColor: t.components.Banner.error.backgroundIcon,
+              },
+            },
+            success: {
+              base: {
+                backgroundColor: t.components.Banner.success.backgroundIcon,
+              },
+            },
+            warning: {
+              base: {
+                backgroundColor: t.components.Banner.warning.backgroundIcon,
+              },
+            },
+            info: {
+              base: {
+                backgroundColor: t.components.Banner.info.backgroundIcon,
+              },
+            },
           },
         },
       },
@@ -55,10 +94,30 @@ const bannerStyles = createStyles(
         },
         variants: {
           status: {
-            error: { base: { borderColor: t.colors.error.bright } },
-            success: { base: { borderColor: t.colors.success.bright } },
-            warning: { base: { borderColor: t.colors.warning.bright } },
-            info: { base: { borderColor: t.colors.info.bright } },
+            error: {
+              base: {
+                borderColor: t.components.Banner.error.border,
+                backgroundColor: t.components.Banner.error.background,
+              },
+            },
+            success: {
+              base: {
+                borderColor: t.components.Banner.success.border,
+                backgroundColor: t.components.Banner.success.background,
+              },
+            },
+            warning: {
+              base: {
+                borderColor: t.components.Banner.warning.border,
+                backgroundColor: t.components.Banner.warning.background,
+              },
+            },
+            info: {
+              base: {
+                borderColor: t.components.Banner.info.border,
+                backgroundColor: t.components.Banner.info.background,
+              },
+            },
           },
         },
         media: { md: { flexDirection: 'row' } },
@@ -89,7 +148,7 @@ const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
 
 const Icon = () => {
   const { status } = useContext(bannerContext);
-  const { color } = bannerStyles.title.style({
+  const { color } = bannerStyles.icon.style({
     variants: { status },
   }).style;
   const Comp = match(status)
@@ -123,7 +182,13 @@ const Title = (props: TextProps) => {
   );
 };
 const Description = (props: TextProps) => {
-  return <Text {...props} {...bannerStyles.description.rnw()} />;
+  const { status } = useContext(bannerContext);
+  return (
+    <Text
+      {...props}
+      {...bannerStyles.description.rnw({ ...props, variants: { status } })}
+    />
+  );
 };
 
 const Action = (props: ButtonProps) => {

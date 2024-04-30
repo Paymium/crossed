@@ -27,6 +27,6 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["../theme/lib/typescript/types.d.ts"]
+    "types": ["./node_modules/@crossed/theme/lib/typescript/types.d.ts"]
   }
 }

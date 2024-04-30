@@ -263,9 +263,11 @@ const Trigger = withStaticProperties(
               )}
             </Pressable>
           </FormControl>
-          <XBox {...form.elementRight.rnw()}>
-            {showClear && <CloseButton />}
-          </XBox>
+          {showClear && (
+            <XBox {...form.elementRight.rnw()}>
+              <CloseButton />
+            </XBox>
+          )}
         </XBox>
         {error && <Text color="error">{error.toString()}</Text>}
       </YBox>
@@ -302,7 +304,7 @@ const Value = () => {
 Value.id = 'Select.Value';
 Value.displayName = 'Select.Value';
 
-const Select = withStaticProperties(SelectRoot, {
+const Select = /*#__PURE__*/ withStaticProperties(SelectRoot, {
   Option,
   Content: ContentImpl,
   Trigger,
@@ -310,9 +312,9 @@ const Select = withStaticProperties(SelectRoot, {
 });
 
 const {
-  Option: SelectOption,
-  Content: SelectContent,
-  Value: SelectValue,
+  Option: /*#__PURE__*/ SelectOption,
+  Content: /*#__PURE__*/ SelectContent,
+  Value: /*#__PURE__*/ SelectValue,
 } = Select;
 
 export { Select, SelectOption, SelectContent, SelectValue };

@@ -25,7 +25,7 @@ const modalStyles = createStyles((t) => ({
   content: {
     base: {
       borderRadius: 8,
-      backgroundColor: t.colors.neutral[100],
+      // backgroundColor: t.colors.neutral[100],
       margin: 'auto',
       padding: t.space.xs,
     },
@@ -60,7 +60,7 @@ const modalStyles = createStyles((t) => ({
   overlay: {
     base: {
       position: 'absolute',
-      backgroundColor: t.colors.neutral[900],
+      // backgroundColor: t.colors.neutral[900],
       opacity: 0.5,
       top: 0,
       left: 0,

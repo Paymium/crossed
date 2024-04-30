@@ -8,17 +8,17 @@
 'use client';
 // react-native-unistyles/lib/typescript/src/types/core
 export * from './layout';
-// export * from './variants';
 export * from './typography';
 export * from './forms';
 export * from './disclosure';
 export * from './feedback';
 export * from './Provider';
-// export * from './animations';
 export * from './display';
 export * from './overlay';
 export * from './other';
 export * from './styles';
+// export * from './variants';
+// export * from './animations';
 // export * from '@crossed/unicons';
 // export {
 //   styled,

@@ -13,8 +13,8 @@ export const form = createStyles((t) => ({
       color: t.font.color,
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral[500],
-      backgroundColor: t.colors.neutral[200],
+      // borderColor: t.colors.neutral[500],
+      backgroundColor: t.colors.background.secondary,
       borderRadius: 8,
       paddingVertical: t.space.xxs,
       paddingHorizontal: t.space.xs,
@@ -24,19 +24,19 @@ export const form = createStyles((t) => ({
       flexDirection: 'row',
       flex: 1,
     },
-    ':hover': { borderColor: t.colors.brand.bright },
-    ':focus': { borderColor: t.colors.brand.bright },
-    ':active': { borderColor: t.colors.brand.bright },
+    ':hover': { borderColor: t.colors.border.brand },
+    ':focus': { borderColor: t.colors.border.brand },
+    ':active': { borderColor: t.colors.border.brand },
     ':disabled': {
-      borderColor: t.colors.neutral[200],
-      color: t.colors.brand.bright,
+      // borderColor: t.colors.neutral[200],
+      color: t.colors.text.secondary,
     },
     'variants': {
       error: {
         true: {
           base: {
-            borderColor: t.colors.error.bright,
-            color: t.colors.error.bright,
+            borderColor: t.colors.error.primary,
+            color: t.colors.error.primary,
           },
         },
       },
@@ -44,17 +44,17 @@ export const form = createStyles((t) => ({
     'web': {
       'base': { boxSizing: 'border-box' },
       ':focus-visible': { outlineWidth: 0 },
-      ':focus': { outlineColor: t.colors.brand.bright },
+      ':focus': { outlineColor: t.colors.border.brand },
     },
   },
-  placeholder: { base: { color: t.colors.neutral.bright } },
+  placeholder: { base: { color: t.colors.text.secondary } },
   label: {
     'base': { color: t.font.color, fontWeight: t.font.fontWeight.lg },
-    ':focus': { color: t.colors.brand.muted },
-    ':disabled': { color: t.colors.neutral[500] },
+    ':focus': { color: t.colors.text.brand },
+    // ':disabled': { color: t.colors.neutral[500] },
   },
-  labelDescription: { base: { color: t.colors.neutral.bright } },
-  labelExtra: { base: { color: t.colors.neutral.bright, flex: 1 } },
+  labelDescription: { base: { color: t.colors.text.secondary } },
+  labelExtra: { base: { color: t.colors.text.secondary, flex: 1 } },
   containerLabel: {},
   elementRight: {
     base: {

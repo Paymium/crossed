@@ -18,7 +18,7 @@ export const useAnchor = createStyles((t) => ({
     },
     ':hover': {
       textDecorationLine: 'underline',
-      color: t.colors.brand.bright,
+      color: t.colors.primary.primary,
     },
   },
 }));
