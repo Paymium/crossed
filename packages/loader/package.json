@@ -18,6 +18,7 @@
     "@crossed/build": "*",
     "@crossed/styled": "0.14.0-beta.8",
     "@crossed/test": "0.11.1-beta.0",
+    "@crossed/theme": "workspace:^",
     "@types/escodegen": "^0.0.10",
     "@types/esprima": "^4.0.6",
     "@types/estree": "^1.0.5",
@@ -26,7 +27,8 @@
     "typescript": "^5.4.2"
   },
   "peerDependencies": {
-    "@crossed/styled": "0.14.0-beta.8"
+    "@crossed/styled": "0.14.0-beta.8",
+    "@crossed/theme": "workspace:^"
   },
   "dependencies": {
     "@crossed/log": "*",

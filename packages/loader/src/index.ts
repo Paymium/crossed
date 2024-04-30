@@ -29,17 +29,36 @@ import * as esbuild from 'esbuild';
 
 type Style = Record<string, any>;
 
+const esmBuild = (configPath: string) => {
+  const contentFileConfig = fs.readFileSync(
+    path.resolve(process.cwd(), configPath),
+    { encoding: 'utf8' }
+  );
+  const codeBuild = esbuild.transformSync(contentFileConfig, {
+    loader: 'ts',
+    platform: 'browser',
+    format: 'cjs',
+    target: 'node14',
+  });
+  // eslint-disable-next-line no-eval
+  return codeBuild;
+};
+
 export class Loader {
   private logger: ReturnType<typeof createLogger>;
 
-  private fileCache: Set<string> = new Set();
+  private fileCache: Map<string, string> = new Map();
 
   constructor({
     level = 'info',
     configPath,
+    isWatch,
+    emit,
   }: {
     level?: string;
     configPath?: string;
+    isWatch?: boolean;
+    emit?: any;
   } = {}) {
     this.logger = createLogger({ label: 'CrossedLoader', level });
     this.logger.debug(
@@ -49,21 +68,52 @@ export class Loader {
     );
 
     if (configPath) {
+      let code: string;
       try {
-        const contentFileConfig = fs.readFileSync(
-          path.resolve(process.cwd(), configPath),
-          { encoding: 'utf8' }
-        );
-        const codeBuild = esbuild.transformSync(contentFileConfig, {
-          loader: 'ts',
-          platform: 'node',
-          format: 'cjs',
-          target: 'node14',
-        });
+        code = esmBuild(configPath).code;
         // eslint-disable-next-line no-eval
-        eval(codeBuild.code);
+        eval(code);
       } catch (e) {
         this.logger.error(e.toString());
+      }
+      if (isWatch && code) {
+        const handleWatch = () => {
+          try {
+            // eslint-disable-next-line no-eval
+            eval(esmBuild(configPath).code);
+          } catch (i) {
+            this.logger.error(`esmBuild ${i.toString()}`);
+          }
+          try {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            const { Registry: R } = require('@crossed/styled');
+            Object.entries(R.getThemes()).forEach(([themeName, theme]) => {
+              this.addClassname({
+                prefix: '.',
+                body: {
+                  [`${themeName}`]: parse(theme, undefined, true).values,
+                },
+              });
+            });
+          } catch (i) {
+            this.logger.error(i.toString());
+          }
+          emit();
+        };
+        const reg = /require\("(.*)"\)/gi;
+        const t = code.matchAll(reg);
+        for (const [, value] of t) {
+          fs.watch(require.resolve(value).replace(/(\/\w+\.js)$/g, ''), () => {
+            Object.keys(require.cache).forEach((key) => {
+              if (path.dirname(key) === path.dirname(require.resolve(value))) {
+                this.logger.debug(`delete cache of ${key}`);
+                delete require.cache[key];
+              }
+            });
+            handleWatch();
+          });
+        }
+        fs.watch(path.resolve(process.cwd(), configPath), handleWatch);
       }
     }
   }
@@ -93,6 +143,7 @@ export class Loader {
   };
 
   getCSS() {
+    // console.log(this.fileCache)
     const values = Array.from(this.fileCache.values());
     const { media, hover, focus, active, other } = values.reduce(
       (acc, e) => {
@@ -147,13 +198,14 @@ export class Loader {
       const styleParsed =
         typeof value === 'string' ? value : this.styleToString(value);
 
-      // escape some character in css
-      const css = `${obj.prefix ?? '.'}${key
+      const className = `${obj.prefix ?? '.'}${key
         .replace(/[#:\[\]\(\)%,\.]/g, '\\$&')
-        .replace(/ /g, '-')}${obj.suffix || ''} { ${styleParsed} }`;
+        .replace(/ /g, '-')}${obj.suffix || ''}`;
+      // escape some character in css
+      const css = `${className} { ${styleParsed} }`;
 
       // add css in cahce file
-      this.fileCache.add(obj.wrapper ? obj.wrapper(css) : css);
+      this.fileCache.set(className, obj.wrapper ? obj.wrapper(css) : css);
     });
   };
 
