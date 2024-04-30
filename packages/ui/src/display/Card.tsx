@@ -5,7 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { type GetProps, withStaticProperties } from '@crossed/core';
+import {
+  type GetProps,
+  withStaticProperties,
+  createScope,
+} from '@crossed/core';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { Text, type TextProps } from '../typography/Text';
 import { createStyles, type ExtractForProps } from '@crossed/styled';
@@ -16,44 +20,102 @@ const useCard = createStyles((t) => ({
     base: {
       padding: t.space.xs,
       borderRadius: t.space.xxs,
-      backgroundColor: t.colors.neutral['100'],
+      backgroundColor: t.colors.background.primary,
     },
     variants: {
       role: {
         link: {
-          // ':hover': { backgroundColor: t.colors.neutral.low },
-          // ':active': { backgroundColor: t.colors.neutral.hight },
+          'base': {
+            backgroundColor: t.components.Action.primary.default.background,
+          },
+          ':hover': {
+            backgroundColor: t.components.Action.primary.hover.background,
+          },
+          ':active': {
+            backgroundColor: t.components.Action.primary.active.background,
+          },
         },
       },
     },
   },
   title: {
     base: { alignSelf: 'stretch', fontSize: t.font.fontSize.lg },
+    variants: {
+      role: {
+        link: {
+          'base': {
+            color: t.components.Action.primary.hover.text,
+          },
+          ':hover': {
+            color: t.components.Action.primary.hover.text,
+          },
+          ':active': {
+            color: t.components.Action.primary.active.text,
+          },
+        },
+      },
+    },
   },
-  description: { base: { alignSelf: 'stretch' } },
+  description: {
+    base: { alignSelf: 'stretch' },
+    variants: {
+      role: {
+        link: {
+          'base': {
+            color: t.components.Action.primary.hover.text,
+          },
+          ':hover': {
+            color: t.components.Action.primary.hover.text,
+          },
+          ':active': {
+            color: t.components.Action.primary.active.text,
+          },
+        },
+      },
+    },
+  },
 }));
 
 type Variants = ExtractForProps<typeof useCard.root>;
+
+const [Provider, useProvider] = createScope<Variants>({} as Variants);
 
 type CardProps = YBoxProps & Variants['variants'];
 
 const CardRoot = forwardRef(({ role, ...props }: CardProps, ref: any) => {
   return (
-    <YBox
-      ref={ref}
-      role={role}
-      {...props}
-      {...useCard.root.rnw({ ...props, variants: { role } })}
-    />
+    <Provider
+      variants={{ role }}
+      hover={props.hover}
+      active={props.active}
+      focus={props.focus}
+    >
+      <YBox
+        ref={ref}
+        role={role}
+        {...props}
+        {...useCard.root.rnw({ ...props, variants: { role } })}
+      />
+    </Provider>
   );
 });
 
 const Title = (props: TextProps) => {
-  return <Text size="md" {...props} {...useCard.title.rnw(props)} />;
+  const values = useProvider();
+  return (
+    <Text
+      size="md"
+      {...props}
+      {...useCard.title.rnw({ ...values, ...props })}
+    />
+  );
 };
 
 const Description = (props: TextProps) => {
-  return <Text {...props} {...useCard.description.rnw(props)} />;
+  const values = useProvider();
+  return (
+    <Text {...props} {...useCard.description.rnw({ ...values, ...props })} />
+  );
 };
 const Card = withStaticProperties(CardRoot, {
   Title,

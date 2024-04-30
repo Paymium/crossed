@@ -5,7 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { darkTheme, lightTheme } from './theme';
+import darkTheme from './dark/theme';
+import lightTheme from './light/theme';
 
 export const themes = {
   dark: darkTheme,

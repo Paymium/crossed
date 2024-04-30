@@ -28,26 +28,24 @@ type ActionType = {
   disabled: Action;
   focus: Action;
 };
-type ActionIconType<T = Pick<Action, 'icon' | 'background'>> = {
-  default: T;
-  hover: T;
-  active: T;
-  disabled: T;
-  focus: T;
-};
+// type ActionIconType<T = Pick<Action, 'icon' | 'background'>> = {
+//   default: T;
+//   hover: T;
+//   active: T;
+//   disabled: T;
+//   focus: T;
+// };
 
 export type Components = {
-  Banner?: {
-    success?: Banner;
-    info?: Banner;
-    warning?: Banner;
-    error?: Banner;
+  Banner: {
+    success: Banner;
+    info: Banner;
+    warning: Banner;
+    error: Banner;
   };
-  Action?: {
-    primary?: ActionType;
-    secondary?: ActionType;
-    tertiary?: ActionType;
-    icon?: ActionIconType;
-    checkbox?: {};
+  Action: {
+    primary: ActionType;
+    secondary: ActionType;
+    tertiary: ActionType;
   };
 };

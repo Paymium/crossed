@@ -77,9 +77,18 @@ export const useButton = createStyles(
               },
             },
             secondary: {
-              'base': { borderColor: t.colors.error.primary },
-              ':hover': { borderColor: t.colors.error.muted },
-              ':active': { borderColor: t.colors.error.satured },
+              'base': {
+                borderColor: t.colors.error.primary,
+                backgroundColor: t.colors.error.low,
+              },
+              ':hover': {
+                borderColor: t.colors.error.muted,
+                backgroundColor: t.colors.error.low,
+              },
+              ':active': {
+                borderColor: t.colors.error.satured,
+                backgroundColor: t.colors.error.hight,
+              },
               ':disabled': { borderColor: t.colors.error.hight },
             },
             tertiary: { base: {} },
@@ -162,23 +171,44 @@ export const useButton = createStyles(
             secondary: {
               'base': {
                 borderColor: t.components.Action.secondary.default.border,
-                backgroundColor: t.components.Action.primary.default.background,
+                backgroundColor:
+                  t.components.Action.secondary.default.background,
               },
               ':hover': {
                 borderColor: t.components.Action.secondary.hover.border,
-                backgroundColor: t.components.Action.primary.hover.background,
+                backgroundColor: t.components.Action.secondary.hover.background,
               },
               ':active': {
                 borderColor: t.components.Action.secondary.active.border,
-                backgroundColor: t.components.Action.primary.active.background,
+                backgroundColor:
+                  t.components.Action.secondary.active.background,
               },
               ':disabled': {
-                // borderColor: t.components.Action.secondary.disabled.border,
+                borderColor: t.components.Action.secondary.disabled.border,
                 backgroundColor:
-                  t.components.Action.primary.disabled.background,
+                  t.components.Action.secondary.disabled.background,
               },
             },
-            tertiary: {},
+            tertiary: {
+              'base': {
+                borderColor: t.components.Action.tertiary.default.border,
+                backgroundColor:
+                  t.components.Action.tertiary.default.background,
+              },
+              ':hover': {
+                borderColor: t.components.Action.tertiary.hover.border,
+                backgroundColor: t.components.Action.tertiary.hover.background,
+              },
+              ':active': {
+                borderColor: t.components.Action.tertiary.active.border,
+                backgroundColor: t.components.Action.tertiary.active.background,
+              },
+              ':disabled': {
+                borderColor: t.components.Action.tertiary.disabled.border,
+                backgroundColor:
+                  t.components.Action.tertiary.disabled.background,
+              },
+            },
             false: {},
           },
         },
@@ -190,17 +220,17 @@ export const useButton = createStyles(
             primary: {
               'base': { color: t.components.Action.primary.default.text },
               ':hover': { color: t.components.Action.primary.hover.text },
-              // ':disabled': { color: t.colors.neutral[400] },
+              ':active': { color: t.components.Action.primary.active.text },
             },
             secondary: {
-              base: { color: t.colors.text.brand },
-              // ':disabled': { color: t.colors.brand.hight },
+              'base': { color: t.components.Action.secondary.default.text },
+              ':hover': { color: t.components.Action.secondary.hover.text },
+              ':active': { color: t.components.Action.secondary.active.text },
             },
             tertiary: {
-              base: { color: t.colors.text.brand },
-              // ':hover': { color: t.colors.brand.muted },
-              // ':active': { color: t.colors.brand.satured },
-              // ':disabled': { color: t.colors.brand.hight },
+              'base': { color: t.components.Action.tertiary.default.text },
+              ':hover': { color: t.components.Action.tertiary.hover.text },
+              ':active': { color: t.components.Action.tertiary.active.text },
             },
             false: {},
           },

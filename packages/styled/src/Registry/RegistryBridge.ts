@@ -33,12 +33,20 @@ export const parse = <T extends Record<string, any>>(
           if (Array.isArray(value)) {
           } else if (['number', 'string'].includes(typeof value)) {
             const name = convertKeyToCss(
-              `--${parentName ? `${parentName}-` : ''}${key}`
+              `${parentName ? `${parentName}-` : ''}${key}`
             );
-            (acc.theme as any)[key] = `var(${name})`;
-            acc.values[name] = normalizeUnitPixel('marginTop', value, isWeb);
+            (acc.theme as any)[key] = `var(--${name})`;
+            acc.values[`--${name}`] = normalizeUnitPixel(
+              'marginTop',
+              value,
+              isWeb
+            );
           } else if (typeof value === 'object') {
-            const toto = parse(value, key, isWeb);
+            const toto = parse(
+              value,
+              convertKeyToCss(`${parentName ? `${parentName}-` : ''}${key}`),
+              isWeb
+            );
             acc.theme = {
               ...acc.theme,
               ...Object.entries(toto.theme).reduce<T>(

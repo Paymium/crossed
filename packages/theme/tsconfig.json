@@ -1,8 +1,8 @@
 {
-  "include": ["./src", "src/unicons.ts"],
+  "include": ["./src", "./src/unicons.ts"],
   "exclude": ["node_modules", "example"],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "outDir": "./lib/typescript",
     "ignoreDeprecations": "5.0",
     "noEmit": true,
