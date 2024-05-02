@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 1.0.1-beta.4
+
+### Patch Changes
+
+- 9f9998b: wrong text primary color light mode
+
 ## 1.0.1-beta.3
 
 ### Patch Changes

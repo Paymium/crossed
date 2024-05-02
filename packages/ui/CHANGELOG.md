@@ -1,5 +1,20 @@
 # @crossed/ui
 
+## 1.0.0-beta.17
+
+### Minor Changes
+
+- 610980c: add Toast component
+- 610980c: Add adapt component, listen on with device
+
+### Patch Changes
+
+- 610980c: Select blink on open responsive
+- 610980c: banner fix responsive
+- Updated dependencies [9f9998b]
+  - @crossed/theme@1.0.1-beta.4
+  - @crossed/unicons@1.0.0-beta.14
+
 ## 1.0.0-beta.16
 
 ### Patch Changes
