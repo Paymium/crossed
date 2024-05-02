@@ -6,8 +6,8 @@
  */
 
 'use client';
-import { Sun } from '@crossed/unicons/Sun';
-import { Moon } from '@crossed/unicons/Moon';
+import { Sun } from '@crossed/unicons';
+import { Moon } from '@crossed/unicons';
 import { Select } from '@crossed/ui';
 import { useCallback } from 'react';
 import { Registry } from '@crossed/styled';

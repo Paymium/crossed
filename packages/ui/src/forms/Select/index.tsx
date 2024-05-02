@@ -33,7 +33,7 @@ import { ContentImpl } from './ContentImpl';
 import { Text } from '../../typography/Text';
 import { VisibilityHidden } from '@crossed/primitive';
 import { useFocusScope } from './Focus';
-import { ChevronDown } from '@crossed/unicons/ChevronDown';
+import { ChevronDown } from '@crossed/unicons';
 import { composeStyles } from '@crossed/styled';
 import { useFloating } from './useFloating';
 import { FormControl, FormField, FormLabel } from '../Form';

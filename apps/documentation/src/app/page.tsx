@@ -22,7 +22,7 @@ import {
 } from '@crossed/ui';
 import Link from 'next/link';
 import { Trans, useTranslation } from 'react-i18next';
-import { Github } from '@crossed/unicons/Github';
+import { Github } from '@crossed/unicons';
 
 const useStyles = createStyles((t) => ({
   description: {

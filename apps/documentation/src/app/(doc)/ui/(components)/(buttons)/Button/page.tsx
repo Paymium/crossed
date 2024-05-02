@@ -10,7 +10,7 @@ import '@/style.config';
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
 import { Button, Select, Text, Center, XBox, ButtonIcon } from '@crossed/ui';
-import { MousePointerClick } from '@crossed/unicons/MousePointerClick';
+import { MousePointerClick } from '@crossed/unicons';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 import { useSignals } from '@preact/signals-react/runtime';
 import { useState } from 'react';
