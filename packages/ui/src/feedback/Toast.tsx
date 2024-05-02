@@ -93,7 +93,7 @@ const toastStyles = createStyles(
               },
             },
             success: {
-              base: {
+              'base': {
                 borderColor: t.components.Banner.success.border,
                 backgroundColor: t.components.Banner.success.background,
               },
@@ -110,16 +110,6 @@ const toastStyles = createStyles(
                 backgroundColor: t.components.Banner.info.background,
               },
             },
-          },
-        },
-        media: {
-          xs: {
-            paddingVertical: t.space.xxs,
-            paddingHorizontal: t.space.xs,
-          },
-          md: {
-            paddingVertical: t.space.xs,
-            paddingHorizontal: t.space.sm,
           },
         },
       },

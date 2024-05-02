@@ -31,6 +31,7 @@ export default withDefaultProps(SideBarLayout, {
         { href: '/ui/Kbd', title: 'Kbd' },
         { href: '/ui/List', title: 'List' },
         { href: '/ui/MenuList', title: 'MenuList' },
+        { href: '/ui/Adapt', title: 'Adapt' },
       ],
     },
 

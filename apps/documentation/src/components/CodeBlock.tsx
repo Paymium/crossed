@@ -34,7 +34,7 @@ const styles = createStyles((t) => ({
     base: {
       flexShrink: 1,
       borderWidth: 1,
-      // borderColor: t.colors.primary[40],
+      borderColor: t.colors.border.secondary,
       borderStyle: 'solid',
       borderRadius: 14,
       backgroundColor: t.colors.background.primary,

@@ -43,7 +43,7 @@ export default function CreateBadge() {
   <Toast status="error"> 
     <Toast.Title>Sollicitudin</Toast.Title>
     <Toast.Description>
-      Lorem ipsum dolor sit amet
+      Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
     </Toast.Description>
   </Toast>
 </YBox>`}

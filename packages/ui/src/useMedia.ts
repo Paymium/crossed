@@ -11,10 +11,10 @@ import { cacheBreakpoints } from '@crossed/styled/plugins';
 export const useMedia = () => {
   const { width } = useWindowDimensions();
   return {
-    xs: cacheBreakpoints.xs > width,
-    sm: cacheBreakpoints.sm > width,
-    md: cacheBreakpoints.md > width,
-    lg: cacheBreakpoints.lg > width,
-    xl: cacheBreakpoints.xl > width,
+    xs: cacheBreakpoints.xs < width,
+    sm: cacheBreakpoints.sm < width,
+    md: cacheBreakpoints.md < width,
+    lg: cacheBreakpoints.lg < width,
+    xl: cacheBreakpoints.xl < width,
   };
 };
