@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.18
+
+### Patch Changes
+
+- 0f459e5: fix toast description, and adapt
+
 ## 1.0.0-beta.17
 
 ### Minor Changes
