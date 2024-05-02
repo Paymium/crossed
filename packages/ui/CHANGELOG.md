@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.19
+
+### Patch Changes
+
+- b5118a4: fix some error on Adapt, Select and feedback design
+
 ## 1.0.0-beta.18
 
 ### Patch Changes
