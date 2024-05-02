@@ -12,7 +12,7 @@ export default {
   black: 'black',
   white: 'white',
   text: {
-    primary: 'white',
+    primary: 'black',
     secondary: '#5D607C',
     brand: primary.primary,
     invert: 'white',
