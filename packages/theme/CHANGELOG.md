@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 1.1.0-beta.5
+
+### Minor Changes
+
+- 24cc920: add hover and active color
+
 ## 1.0.1-beta.4
 
 ### Patch Changes

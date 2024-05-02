@@ -1,5 +1,14 @@
 # @crossed/ui
 
+## 1.0.0-beta.20
+
+### Patch Changes
+
+- 24cc920: add props style on Toast
+- Updated dependencies [24cc920]
+  - @crossed/theme@1.1.0-beta.5
+  - @crossed/unicons@1.0.0-beta.15
+
 ## 1.0.0-beta.19
 
 ### Patch Changes

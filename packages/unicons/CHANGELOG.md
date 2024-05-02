@@ -1,5 +1,12 @@
 # @crossed/unicons
 
+## 1.0.0-beta.15
+
+### Patch Changes
+
+- Updated dependencies [24cc920]
+  - @crossed/theme@1.1.0-beta.5
+
 ## 1.0.0-beta.14
 
 ### Patch Changes
