@@ -21,6 +21,8 @@ export default {
     primary: primary[0],
     secondary: primary[1],
     brand: primary.primary,
+    hover: '#ececec',
+    active: '#cccccc',
   },
   border: {
     primary: '#C2FCFF',

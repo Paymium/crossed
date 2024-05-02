@@ -9,8 +9,17 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Toast, ToastDescription, ToastTitle, YBox } from '@crossed/ui';
+import { Center, Toast, ToastDescription, ToastTitle, YBox } from '@crossed/ui';
+import { ChevronRight } from '@crossed/unicons';
+import { createStyles } from '@crossed/styled';
 
+const styles = createStyles(({ colors: { background } }) => ({
+  container: {
+    'web': { base: { cursor: 'pointer' } },
+    ':hover': { backgroundColor: background.hover },
+    ':active': { backgroundColor: background.active },
+  },
+}));
 export default function CreateBadge() {
   const { t } = useTranslation();
   return (
@@ -46,12 +55,21 @@ export default function CreateBadge() {
       Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
     </Toast.Description>
   </Toast>
+  <Toast status="error" {...styles.container.rnw()} icon={<Center><ChevronRight /></Center>}> 
+    <Toast.Title>Sollicitudin</Toast.Title>
+    <Toast.Description>
+      Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+    </Toast.Description>
+  </Toast>
 </YBox>`}
       scope={{
         Toast,
         ToastDescription,
         ToastTitle,
         YBox,
+        ChevronRight,
+        Center,
+        styles,
       }}
     />
   );

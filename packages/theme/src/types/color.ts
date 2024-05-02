@@ -26,6 +26,8 @@ export type Colors = {
     primary: string;
     secondary: string;
     brand: string;
+    hover: string;
+    active: string;
   };
   border: {
     primary: string;

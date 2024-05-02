@@ -9,7 +9,7 @@
 import { withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
 import { createStyles, type ExtractForProps } from '@crossed/styled';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
 import { Box } from '../layout/Box';
 import { YBox, type YBoxProps } from '../layout/YBox';
@@ -22,7 +22,7 @@ const toastStyles = createStyles(
   (t) =>
     ({
       description: {
-        base: { flex: 1, color: t.colors.text.secondary, flexShrink: 1 },
+        base: { flex: 1, color: t.colors.text.secondary },
       },
       title: {
         base: { fontWeight: '600', color: t.colors.text.primary },
@@ -68,7 +68,7 @@ const toastStyles = createStyles(
           },
         },
       },
-      containerChildren: { base: { flex: 1 } },
+      containerChildren: { base: { flex: 1, flexShrink: 1 } },
       closeButton: {
         base: { paddingTop: 0, paddingRight: 0 },
       },
@@ -93,7 +93,7 @@ const toastStyles = createStyles(
               },
             },
             success: {
-              'base': {
+              base: {
                 borderColor: t.components.Banner.success.border,
                 backgroundColor: t.components.Banner.success.background,
               },
@@ -118,7 +118,8 @@ const toastStyles = createStyles(
 
 type Variant = ExtractForProps<typeof toastStyles.container>;
 
-type ContainerProps = YBoxProps & Variant['variants'] & { closable?: boolean };
+type ContainerProps = YBoxProps &
+  Variant['variants'] & { closable?: boolean; icon?: ReactNode };
 
 const toastContext = createContext<Pick<ContainerProps, 'status'>>({});
 
@@ -126,6 +127,7 @@ const Container = ({
   status = 'info',
   children,
   closable = false,
+  icon,
   ...props
 }: ContainerProps) => {
   const { md } = useMedia();
@@ -134,11 +136,12 @@ const Container = ({
       <XBox
         space={!md ? 'xs' : 'xxs'}
         {...props}
-        {...toastStyles.container.rnw({ variants: { status } })}
+        {...toastStyles.container.rnw({ ...props, variants: { status } })}
       >
         <Icon />
         <YBox {...toastStyles.containerChildren.rnw()}>{children}</YBox>
         {closable && <CloseButton {...toastStyles.closeButton.rnw()} />}
+        {icon}
       </XBox>
     </toastContext.Provider>
   );
