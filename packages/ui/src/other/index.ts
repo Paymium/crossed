@@ -6,3 +6,4 @@
  */
 
 export * from './CloseButton';
+export * from './Adapt';

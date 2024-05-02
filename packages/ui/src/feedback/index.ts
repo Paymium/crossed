@@ -7,3 +7,4 @@
 
 export * from './Alert';
 export * from './Banner';
+export * from './Toast';

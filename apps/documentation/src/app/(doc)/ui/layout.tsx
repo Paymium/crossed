@@ -39,6 +39,7 @@ export default withDefaultProps(SideBarLayout, {
       menus: [
         { href: '/ui/Alert', title: 'Alert' },
         { href: '/ui/Banner', title: 'Banner' },
+        { href: '/ui/Toast', title: 'Toast' },
         { href: '/ui/Skeleton', title: 'Skeleton' },
         { href: '/ui/Spinner', title: 'Spinner' },
       ],

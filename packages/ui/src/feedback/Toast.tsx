@@ -8,7 +8,6 @@
 'use client';
 import { withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
-import { Button, type ButtonProps } from '../forms/Button';
 import { createStyles, type ExtractForProps } from '@crossed/styled';
 import { createContext, useContext } from 'react';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
@@ -16,31 +15,17 @@ import { Box } from '../layout/Box';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
 import { useMedia } from '../useMedia';
+import { XBox } from '../layout/XBox';
+import { CloseButton } from '../other/CloseButton';
 
-const bannerStyles = createStyles(
+const toastStyles = createStyles(
   (t) =>
     ({
       description: {
-        base: { flex: 1 },
-        variants: {
-          status: {
-            error: { base: { color: t.components.Banner.error.subtitle } },
-            success: { base: { color: t.components.Banner.success.subtitle } },
-            warning: { base: { color: t.components.Banner.warning.subtitle } },
-            info: { base: { color: t.components.Banner.info.subtitle } },
-          },
-        },
+        base: { flex: 1, color: t.colors.text.secondary },
       },
       title: {
-        base: { fontWeight: '600' },
-        variants: {
-          status: {
-            error: { base: { color: t.components.Banner.error.title } },
-            success: { base: { color: t.components.Banner.success.title } },
-            warning: { base: { color: t.components.Banner.warning.title } },
-            info: { base: { color: t.components.Banner.info.title } },
-          },
-        },
+        base: { fontWeight: '600', color: t.colors.text.primary },
       },
       icon: {
         base: { fontWeight: '600' },
@@ -83,15 +68,21 @@ const bannerStyles = createStyles(
           },
         },
       },
-      action: {
-        media: { xs: { alignSelf: 'flex-end' }, md: { alignSelf: 'auto' } },
+      containerChildren: { base: { flex: 1 } },
+      closeButton: {
+        base: { paddingTop: 0, paddingRight: 0 },
       },
       container: {
         base: {
           padding: t.space.xs,
           borderRadius: 8,
-          borderWidth: 1,
+          borderWidth: 0,
           borderStyle: 'solid',
+        },
+        web: {
+          base: {
+            boxShadow: '0px 1px 4px 0px #00000026',
+          },
         },
         variants: {
           status: {
@@ -127,8 +118,6 @@ const bannerStyles = createStyles(
             paddingHorizontal: t.space.xs,
           },
           md: {
-            flexDirection: 'row',
-            alignItems: 'center',
             paddingVertical: t.space.xs,
             paddingHorizontal: t.space.sm,
           },
@@ -137,31 +126,37 @@ const bannerStyles = createStyles(
     }) as const
 );
 
-type Variant = ExtractForProps<typeof bannerStyles.container>;
+type Variant = ExtractForProps<typeof toastStyles.container>;
 
-type ContainerProps = YBoxProps & Variant['variants'];
+type ContainerProps = YBoxProps & Variant['variants'] & { closable?: boolean };
 
-const bannerContext = createContext<Pick<ContainerProps, 'status'>>({});
+const toastContext = createContext<Pick<ContainerProps, 'status'>>({});
 
-const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
+const Container = ({
+  status = 'info',
+  children,
+  closable = false,
+  ...props
+}: ContainerProps) => {
   const { md } = useMedia();
   return (
-    <bannerContext.Provider value={{ status }}>
-      <YBox
+    <toastContext.Provider value={{ status }}>
+      <XBox
         space={!md ? 'xs' : 'xxs'}
-        role="banner"
         {...props}
-        {...bannerStyles.container.rnw({ variants: { status } })}
+        {...toastStyles.container.rnw({ variants: { status } })}
       >
-        {children}
-      </YBox>
-    </bannerContext.Provider>
+        <Icon />
+        <YBox {...toastStyles.containerChildren.rnw()}>{children}</YBox>
+        {closable && <CloseButton {...toastStyles.closeButton.rnw()} />}
+      </XBox>
+    </toastContext.Provider>
   );
 };
 
 const Icon = () => {
-  const { status } = useContext(bannerContext);
-  const { color } = bannerStyles.icon.style({
+  const { status } = useContext(toastContext);
+  const { color } = toastStyles.icon.style({
     variants: { status },
   }).style;
   const Comp = match(status)
@@ -171,62 +166,44 @@ const Icon = () => {
     .with('warning', () => AlertTriangle)
     .exhaustive();
   return (
-    <Box center {...bannerStyles.containerIcon.rnw({ variants: { status } })}>
+    <Box center {...toastStyles.containerIcon.rnw({ variants: { status } })}>
       <Comp color={color} size={16} />
     </Box>
   );
 };
 
 const Title = (props: TextProps) => {
-  const { status } = useContext(bannerContext);
   return (
-    <Box space="sm" {...bannerStyles.containerTitle.rnw()}>
-      <Icon />
+    <Box space="sm" {...toastStyles.containerTitle.rnw()}>
       <Text
         weight="lg"
         numberOfLines={1}
-        // ellipsizeMode='middle'
-        // lineBreakMode='middle'
-        // lineBreakStrategyIOS='standard'
         {...props}
-        {...bannerStyles.title.rnw({ variants: { status } })}
+        {...toastStyles.title.rnw(props)}
       />
     </Box>
   );
 };
 const Description = (props: TextProps) => {
-  const { status } = useContext(bannerContext);
   return (
     <Text
+      role="alert"
       {...props}
-      {...bannerStyles.description.rnw({ ...props, variants: { status } })}
+      {...toastStyles.description.rnw({ ...props })}
     />
   );
 };
 
-const Action = (props: ButtonProps) => {
-  return (
-    <Button
-      variant="tertiary"
-      size={false}
-      {...props}
-      {...bannerStyles.action.rnw(props)}
-    />
-  );
-};
-
-const Banner = withStaticProperties(Container, {
+const Toast = withStaticProperties(Container, {
   Icon,
   Title,
   Description,
-  Action,
 });
 
 const {
-  Icon: BannerIcon,
-  Title: BannerTitle,
-  Description: BannerDescription,
-  Action: BannerAction,
-} = Banner;
+  Icon: ToastIcon,
+  Title: ToastTitle,
+  Description: ToastDescription,
+} = Toast;
 
-export { Banner, BannerIcon, BannerTitle, BannerDescription, BannerAction };
+export { Toast, ToastIcon, ToastTitle, ToastDescription };

@@ -172,7 +172,7 @@ const Trigger = withStaticProperties(
       clearable,
       error,
     } = useSelectProvider();
-    const onPressIn = useCallback(() => {
+    const onPress = useCallback(() => {
       if (sheet.current) {
         sheet.current.open();
         setOpen(!open);
@@ -238,7 +238,7 @@ const Trigger = withStaticProperties(
                   variants: { error: !!error },
                 }).style;
               }}
-              onPressIn={composeEventHandlers(props.onPressIn, onPressIn)}
+              onPress={composeEventHandlers(props.onPress, onPress)}
             >
               {typeof children === 'function' ? (
                 (e) => (
