@@ -22,7 +22,7 @@ const toastStyles = createStyles(
   (t) =>
     ({
       description: {
-        base: { flex: 1, color: t.colors.text.secondary },
+        base: { flex: 1, color: t.colors.text.secondary, flexShrink: 1 },
       },
       title: {
         base: { fontWeight: '600', color: t.colors.text.primary },

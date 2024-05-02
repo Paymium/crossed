@@ -5,11 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Suspense, type SuspenseProps } from 'react';
+import { type PropsWithChildren, type ReactNode } from 'react';
 import { useMedia } from '../useMedia';
 
-export type AdaptProps = SuspenseProps;
-export const Adapt = ({ children, ...props }: AdaptProps) => {
-  const { md } = useMedia();
-  return <Suspense {...props}>{md && children}</Suspense>;
+export type AdaptProps = PropsWithChildren<{ fallback?: ReactNode }>;
+export const Adapt = ({ children, fallback = null }: AdaptProps) => {
+  const { md, lg, xl } = useMedia();
+  return md || lg || xl ? children : fallback;
 };
