@@ -8,7 +8,7 @@
 import { TextInput, type TextInputProps } from 'react-native';
 import { forwardRef, useCallback, useState, type ReactNode } from 'react';
 import { form, type FormInput } from '../styles/form';
-import { useInteraction } from '@crossed/styled/plugins';
+import { useInteraction } from '@crossed/styled';
 import { FormControl, FormField, FormLabel } from './Form';
 import { CloseButton } from '../other/CloseButton';
 import { useUncontrolled } from '@crossed/core';

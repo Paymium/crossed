@@ -6,7 +6,7 @@
  */
 
 import { useWindowDimensions } from 'react-native';
-import { cacheBreakpoints } from '@crossed/styled/plugins';
+import { cacheBreakpoints } from '@crossed/styled';
 
 export const useMedia = () => {
   const { width } = useWindowDimensions();

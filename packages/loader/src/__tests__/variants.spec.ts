@@ -8,7 +8,7 @@
 import { Registry } from '@crossed/styled';
 import { Loader } from '../index';
 import { getAst } from './getAst';
-import { VariantsPlugin, BasePlugin } from '@crossed/styled/plugins';
+import { VariantsPlugin, BasePlugin } from '@crossed/styled';
 
 Registry.setThemes({ dark: {} })
   .setThemeName('dark' as unknown as never)

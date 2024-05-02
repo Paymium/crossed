@@ -25,7 +25,7 @@ import { YBox, type YBoxProps } from '../layout/YBox';
 import { createStyles } from '@crossed/styled';
 import { Pressable } from 'react-native';
 import { Box } from '../layout/Box';
-import { useInteraction } from '@crossed/styled/plugins';
+import { useInteraction } from '@crossed/styled';
 
 const useStyles = createStyles((t) => ({
   list: {

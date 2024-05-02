@@ -24,7 +24,7 @@ import {
 } from 'react';
 import { composeEventHandlers } from '@crossed/core';
 import { Label } from '../Label';
-import { useInteraction } from '@crossed/styled/plugins';
+import { useInteraction } from '@crossed/styled';
 import { YBox } from '../../layout/YBox';
 
 const fieldContext = createContext<FieldContext>({} as FieldContext);

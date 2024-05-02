@@ -23,7 +23,7 @@ import {
 import escodegen from 'escodegen';
 import { createLogger, apiLog } from '@crossed/log';
 import { Registry, parse } from '@crossed/styled';
-import { convertKeyToCss } from '@crossed/styled/plugins';
+import { convertKeyToCss } from '@crossed/styled';
 import type { CrossedstyleValues } from '@crossed/styled';
 import * as esbuild from 'esbuild';
 

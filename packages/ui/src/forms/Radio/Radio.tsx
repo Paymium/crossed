@@ -7,7 +7,7 @@
 
 import { useUncontrolled } from '@crossed/core';
 import { createStyles } from '@crossed/styled';
-import { useInteraction } from '@crossed/styled/plugins';
+import { useInteraction } from '@crossed/styled';
 import { useCallback, useTransition, type PropsWithChildren } from 'react';
 import { Pressable, View } from 'react-native';
 

@@ -33,7 +33,7 @@ import {
   useMemo,
   type PropsWithChildren,
 } from 'react';
-import { useInteraction } from '@crossed/styled/plugins';
+import { useInteraction } from '@crossed/styled';
 
 const buttonContext = createContext<
   Pick<RootProps, 'variant' | 'error' | 'disabled'> & {
