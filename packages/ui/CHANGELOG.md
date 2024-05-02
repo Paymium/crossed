@@ -1,5 +1,15 @@
 # @crossed/ui
 
+## 1.0.0-beta.21
+
+### Patch Changes
+
+- cd4d732: change import plugin
+- Updated dependencies [cd4d732]
+  - @crossed/styled@0.14.0-beta.11
+  - @crossed/theme@1.1.0-beta.6
+  - @crossed/unicons@1.0.0-beta.16
+
 ## 1.0.0-beta.20
 
 ### Patch Changes

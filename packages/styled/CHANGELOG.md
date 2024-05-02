@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.11
+
+### Patch Changes
+
+- cd4d732: change import plugin
+
 ## 0.14.0-beta.10
 
 ### Patch Changes
