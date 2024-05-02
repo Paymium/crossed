@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.22
+
+### Patch Changes
+
+- 57a8d6a: change import unicons
+
 ## 1.0.0-beta.21
 
 ### Patch Changes
