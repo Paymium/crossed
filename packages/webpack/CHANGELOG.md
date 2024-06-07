@@ -1,5 +1,11 @@
 # @crossed/webpack
 
+## 2.0.0-beta.15
+
+### Minor Changes
+
+- 412310b: add write css
+
 ## 2.0.0-beta.14
 
 ### Patch Changes

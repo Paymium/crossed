@@ -1,6 +1,6 @@
 {
   "name": "@crossed/webpack",
-  "version": "2.0.0-beta.14",
+  "version": "2.0.0-beta.15",
   "description": "",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
