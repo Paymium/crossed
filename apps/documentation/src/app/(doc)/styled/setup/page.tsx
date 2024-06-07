@@ -169,13 +169,6 @@ declare module '@crossed/styled' {
                 </YBox>
               </Banner>
             </BuilderTabs.Panel>
-
-            <H2 id="usage">{t('importCss')}</H2>
-            <CodeBlock fileName="style.css">
-              {`
-@import "node_modules/crossed.css";
-`}
-            </CodeBlock>
           </PlatformTabs.Panel>
 
           <YBox space="md">

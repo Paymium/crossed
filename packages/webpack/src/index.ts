@@ -50,19 +50,50 @@ export default class StylePlugin {
         configPath: this.options.configPath,
         level: this.options.level,
         isWatch: this.options.isWatch,
-        emit: () => {
-          virtualModules.writeModule(
-            'node_modules/crossed.css',
-            parseAst.getCSS() || ''
-          );
-          this.logger.info(
-            apiLog({
-              events: ['css_output_success'],
-            })
-          );
-        },
       });
     }
+
+    compiler.hooks.make.tap(pluginName, (compilation) => {
+      compilation.hooks.processAssets.tap(pluginName, (assets) => {
+        try {
+          const cssFiles = Object.keys(assets).filter((asset) =>
+            asset.endsWith('.css')
+          );
+          if (cssFiles.length === 0) {
+            return;
+          }
+
+          const combinedCSS = cssFiles.reduce((acc, file) => {
+            const cssContent = compilation.assets[file].source();
+            return `${acc}\n${cssContent}`;
+          }, parseAst.getCSS() || '');
+
+          // console.log("ici", combinedCSS)
+
+          for (const [index, cssFile] of (cssFiles as any).entries()) {
+            if (index > 0) {
+              compilation.updateAsset(
+                cssFile,
+                new compiler.webpack.sources.RawSource(``)
+              );
+            } else {
+              this.logger.info(
+                apiLog({
+                  events: ['css_output_success'],
+                })
+              );
+              // just replace the first one? hacky
+              compilation.updateAsset(
+                cssFile,
+                new compiler.webpack.sources.RawSource(Buffer.from(combinedCSS))
+              );
+            }
+          }
+        } catch (error: any) {
+          compilation.errors.push(error);
+        }
+      });
+    });
 
     /**
      * Wait end parsing and write css

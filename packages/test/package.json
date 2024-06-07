@@ -16,7 +16,6 @@
   "bin": {
     "crossed-test": "./src/bin.js"
   },
-  "scripts": {},
   "devDependencies": {
     "@jest/types": "28.1.1",
     "@swc/jest": "^0.2.29",

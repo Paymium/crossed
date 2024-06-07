@@ -105,7 +105,6 @@
     "@gorhom/portal": "^1.0.14",
     "@iconscout/react-native-unicons": "^2.0.2",
     "class-variance-authority": "^0.7.0",
-    "ts-deepmerge": "^7.0.0",
     "inline-style-prefixer": "^6.0.1",
     "normalize-css-color": "^1.0.2",
     "react-aria": "^3.27.0",
@@ -113,6 +112,7 @@
     "react-focus-on": "^3.9.2",
     "react-native-svg": "^15.1.0",
     "react-native-unistyles": "^2.0.0",
+    "ts-deepmerge": "^7.0.0",
     "ts-pattern": "^5.0.6"
   },
   "react-native-builder-bob": {
