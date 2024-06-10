@@ -9,6 +9,8 @@ import { Compiler } from 'webpack';
 import { createLogger, apiLog } from '@crossed/log';
 import { Loader } from '@crossed/loader';
 import VirtualModulesPlugin from 'webpack-virtual-modules';
+import { mkdirSync, readFileSync, statSync, writeFileSync } from 'fs';
+import path from 'path';
 
 const pluginName = 'CrossedPlugin';
 
@@ -33,6 +35,27 @@ export default class StylePlugin {
     });
   }
 
+  writeCss(virtualModules: VirtualModulesPlugin) {
+    const css = parseAst.getCSS() || '';
+    if (css) {
+      virtualModules.writeModule('node_modules/crossed.css', css);
+
+      const pathCss = path.resolve(process.cwd(), '.crossed');
+
+      try {
+        statSync(pathCss);
+      } catch {
+        mkdirSync(pathCss, 0o775);
+      }
+      writeFileSync(path.resolve(pathCss, 'crossed.css'), css);
+
+      this.logger.info(
+        apiLog({
+          events: ['css_output_success'],
+        })
+      );
+    }
+  }
   apply = (compiler: Compiler) => {
     this.logger.debug('apply StylePlugin');
 
@@ -50,65 +73,49 @@ export default class StylePlugin {
         configPath: this.options.configPath,
         level: this.options.level,
         isWatch: this.options.isWatch,
+        emit: () => {
+          this.writeCss(virtualModules);
+        },
       });
     }
-
-    compiler.hooks.make.tap(pluginName, (compilation) => {
-      compilation.hooks.processAssets.tap(pluginName, (assets) => {
-        try {
-          const cssFiles = Object.keys(assets).filter((asset) =>
-            asset.endsWith('.css')
-          );
-          if (cssFiles.length === 0) {
-            return;
-          }
-
-          const combinedCSS = cssFiles.reduce((acc, file) => {
-            const cssContent = compilation.assets[file].source();
-            return `${acc}\n${cssContent}`;
-          }, parseAst.getCSS() || '');
-
-          // console.log("ici", combinedCSS)
-
-          for (const [index, cssFile] of (cssFiles as any).entries()) {
-            if (index > 0) {
-              compilation.updateAsset(
-                cssFile,
-                new compiler.webpack.sources.RawSource(``)
-              );
-            } else {
-              this.logger.info(
-                apiLog({
-                  events: ['css_output_success'],
-                })
-              );
-              // just replace the first one? hacky
-              compilation.updateAsset(
-                cssFile,
-                new compiler.webpack.sources.RawSource(Buffer.from(combinedCSS))
-              );
-            }
-          }
-        } catch (error: any) {
-          compilation.errors.push(error);
-        }
-      });
-    });
 
     /**
      * Wait end parsing and write css
      */
     compiler.hooks.afterCompile.tap(pluginName, () => {
-      virtualModules.writeModule(
-        'node_modules/crossed.css',
-        parseAst.getCSS() || ''
-      );
+      this.writeCss(virtualModules);
+    });
 
-      this.logger.info(
-        apiLog({
-          events: ['css_output_success'],
-        })
-      );
+    /**
+     * Load at run css
+     */
+    compiler.hooks.beforeCompile.tap(pluginName, () => {
+      const css = parseAst.getCSS() || '';
+      virtualModules.writeModule('node_modules/crossed.css', css);
+      const pathCss = path.resolve(process.cwd(), '.crossed');
+
+      try {
+        statSync(pathCss);
+      } catch {
+        mkdirSync(pathCss, 0o775);
+      }
+      try {
+        const css = readFileSync(path.resolve(pathCss, 'crossed.css'), {
+          encoding: 'utf-8',
+        });
+        virtualModules.writeModule('node_modules/crossed.css', css);
+        this.logger.info(
+          apiLog({
+            events: ['css_output_success'],
+          })
+        );
+      } catch (e) {
+        this.logger.error(
+          apiLog({
+            events: ['css_output_error'],
+          })
+        );
+      }
     });
 
     /**
@@ -135,15 +142,21 @@ export default class StylePlugin {
                * call name expression is createStyle or withStyle
                * we can parsed argument
                */
+              //   console.log(apiLog({
+              //     events: ['detect_style_function'],
+              //   })
+              //   {
+              //     file: `${resource.replace(process.cwd(), '')}:${
+              //       e.loc.start.line
+              //     }`,
+              //   }
+              // ))
               this.logger.debug(
-                apiLog({
+                `${apiLog({
                   events: ['detect_style_function'],
-                }).message,
-                {
-                  file: `${resource.replace(process.cwd(), '')}:${
-                    e.loc.start.line
-                  }`,
-                }
+                })}      ${resource.replace(process.cwd(), '')}:${
+                  e.loc.start.line
+                }`
               );
               parseAst.parse(arg, isMulti);
             }

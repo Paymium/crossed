@@ -64,7 +64,7 @@ export class Loader {
     this.logger.debug(
       apiLog({
         events: ['create_instance_success'],
-      }).message
+      })
     );
 
     if (configPath) {
@@ -245,10 +245,9 @@ export class Loader {
           returnEl = eval(toto);
         } catch (e) {
           this.logger.error(
-            apiLog({
+            `${apiLog({
               events: ['eval_style_function_error'],
-            }).message,
-            { message: e.message }
+            })}: ${e.message}`
           );
         }
         return returnEl;
@@ -278,10 +277,9 @@ export class Loader {
           returnEl = eval(toto)(Registry.getTheme(true));
         } catch (e) {
           this.logger.error(
-            apiLog({
+            `${apiLog({
               events: ['eval_style_function_error'],
-            }).message,
-            { message: e.message }
+            })}: ${e.message}`
           );
         }
         return returnEl;
@@ -299,10 +297,9 @@ export class Loader {
       parsing = _parseFunctionExpression(ast);
     } else {
       this.logger.warn(
-        apiLog({
+        `${apiLog({
           events: ['ast_type_not_implemented'],
-        }).message,
-        { file: ast.type }
+        })}      ${ast.type}`
       );
     }
 
