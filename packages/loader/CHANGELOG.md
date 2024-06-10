@@ -1,5 +1,13 @@
 # @crossed/loader
 
+## 1.0.0-beta.15
+
+### Patch Changes
+
+- 429b40b: add cache css
+- Updated dependencies [429b40b]
+  - @crossed/log@0.1.1-beta.0
+
 ## 1.0.0-beta.14
 
 ### Patch Changes

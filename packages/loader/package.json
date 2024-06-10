@@ -1,7 +1,7 @@
 {
   "name": "@crossed/loader",
   "description": "",
-  "version": "1.0.0-beta.14",
+  "version": "1.0.0-beta.15",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
@@ -31,7 +31,7 @@
     "@crossed/theme": "workspace:^"
   },
   "dependencies": {
-    "@crossed/log": "*",
+    "@crossed/log": "0.1.1-beta.0",
     "esbuild": "^0.17.17",
     "escodegen": "^2.1.0",
     "esprima": "^4.0.1",

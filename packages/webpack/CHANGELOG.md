@@ -1,5 +1,14 @@
 # @crossed/webpack
 
+## 2.0.0-beta.16
+
+### Patch Changes
+
+- 429b40b: add cache css
+- Updated dependencies [429b40b]
+  - @crossed/loader@1.0.0-beta.15
+  - @crossed/log@0.1.1-beta.0
+
 ## 2.0.0-beta.15
 
 ### Minor Changes

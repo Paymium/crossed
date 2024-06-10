@@ -359,7 +359,7 @@ importers:
   packages/loader:
     dependencies:
       '@crossed/log':
-        specifier: '*'
+        specifier: 0.1.1-beta.0
         version: link:../log
       esbuild:
         specifier: ^0.17.17
@@ -430,7 +430,7 @@ importers:
   packages/next-adapter:
     dependencies:
       '@crossed/webpack':
-        specifier: 2.0.0-beta.15
+        specifier: 2.0.0-beta.16
         version: link:../webpack
       find-yarn-workspace-root:
         specifier: ^2.0.0
@@ -856,10 +856,10 @@ importers:
   packages/webpack:
     dependencies:
       '@crossed/loader':
-        specifier: 1.0.0-beta.14
+        specifier: 1.0.0-beta.15
         version: link:../loader
       '@crossed/log':
-        specifier: '*'
+        specifier: 0.1.1-beta.0
         version: link:../log
       static-eval:
         specifier: ^2.1.1

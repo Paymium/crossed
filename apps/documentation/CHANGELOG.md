@@ -1,5 +1,11 @@
 # crossed-docs
 
+## 0.6.0-beta.24
+
+### Patch Changes
+
+- @crossed/next-adapter@0.6.0-beta.16
+
 ## 0.6.0-beta.23
 
 ### Patch Changes
