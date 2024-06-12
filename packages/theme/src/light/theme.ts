@@ -122,5 +122,31 @@ export default {
         },
       },
     },
+    Alert: {
+      error: {
+        background: colors.error.low,
+        border: colors.error.primary,
+        icon: colors.error.satured,
+        text: colors.error.satured,
+      },
+      warning: {
+        background: colors.warning.light,
+        border: colors.warning.primary,
+        icon: colors.warning.dark,
+        text: colors.warning.dark,
+      },
+      info: {
+        background: colors.info.light,
+        border: colors.info.primary,
+        icon: colors.info.dark,
+        text: colors.info.dark,
+      },
+      success: {
+        background: colors.success.light,
+        border: colors.success.primary,
+        icon: colors.success.dark,
+        text: colors.success.dark,
+      },
+    },
   },
 } as const satisfies Theme;

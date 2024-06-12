@@ -13,33 +13,26 @@ import { createContext, useContext } from 'react';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
+import {
+  Button,
+  ButtonText,
+  type ButtonProps,
+  type ButtonTextProps,
+} from '../forms/Button';
 
-const alertStyles = createStyles(
-  (t) =>
+export const alertStyles = createStyles(
+  ({ components: { Alert }, space, colors }) =>
     ({
       description: {
         base: {
-          // color: t.colors.neutral[600],
           flex: 1,
         },
         variants: {
           status: {
-            error: { base: { color: t.colors.error.satured } },
-            success: {
-              base: {
-                // color: t.colors.success.satured,
-              },
-            },
-            warning: {
-              base: {
-                // color: t.colors.warning.satured,
-              },
-            },
-            info: {
-              base: {
-                // color: t.colors.info.satured,
-              },
-            },
+            error: { base: { color: Alert.error.text } },
+            success: { base: { color: Alert.success.text } },
+            warning: { base: { color: Alert.warning.text } },
+            info: { base: { color: Alert.info.text } },
           },
         },
       },
@@ -51,7 +44,7 @@ const alertStyles = createStyles(
         },
         variants: {
           status: {
-            error: { base: { backgroundColor: t.colors.error.hight } },
+            error: { base: { backgroundColor: colors.error.hight } },
             success: {
               base: {
                 // backgroundColor: t.colors.success.hight,
@@ -72,9 +65,9 @@ const alertStyles = createStyles(
       },
       container: {
         base: {
-          padding: t.space.xxs,
-          paddingVertical: t.space.xxs,
-          paddingHorizontal: t.space.xs,
+          padding: space.xxs,
+          paddingVertical: space.xxs,
+          paddingHorizontal: space.xs,
           borderRadius: 8,
           alignItems: 'center',
           borderWidth: 1,
@@ -85,27 +78,77 @@ const alertStyles = createStyles(
           status: {
             error: {
               base: {
-                // borderColor: t.colors.error.bright,
-                // backgroundColor: t.colors.error.low,
+                borderColor: Alert.error.border,
+                backgroundColor: Alert.error.background,
               },
             },
             success: {
               base: {
-                // borderColor: t.colors.success.bright,
-                // backgroundColor: t.colors.success.low,
+                borderColor: Alert.success.border,
+                backgroundColor: Alert.success.background,
               },
             },
             warning: {
               base: {
-                // borderColor: t.colors.warning.bright,
-                // backgroundColor: t.colors.warning.low,
+                borderColor: Alert.warning.border,
+                backgroundColor: Alert.warning.background,
               },
             },
             info: {
               base: {
-                // borderColor: t.colors.info.bright,
-                // backgroundColor: t.colors.info.low,
+                borderColor: Alert.info.border,
+                backgroundColor: Alert.info.background,
               },
+            },
+          },
+        },
+      },
+      action: {
+        web: {
+          'base': { boxSizing: 'border-box' },
+          ':focus': {
+            outlineWidth: '2px',
+            outlineOffset: '2px',
+            outlineStyle: 'solid',
+          },
+        },
+        variants: {
+          status: {
+            error: { web: { ':focus': { outlineColor: Alert.error.text } } },
+            success: {
+              web: { ':focus': { outlineColor: Alert.success.text } },
+            },
+            warning: {
+              web: { ':focus': { outlineColor: Alert.warning.text } },
+            },
+            info: {
+              web: { ':focus': { outlineColor: Alert.info.text } },
+            },
+          },
+        },
+      },
+      actionText: {
+        variants: {
+          status: {
+            error: {
+              'base': { color: Alert.error.text },
+              ':hover': { color: Alert.error.text },
+              ':active': { color: Alert.error.text },
+            },
+            success: {
+              'base': { color: Alert.success.text },
+              ':hover': { color: Alert.success.text },
+              ':active': { color: Alert.success.text },
+            },
+            warning: {
+              'base': { color: Alert.warning.text },
+              ':hover': { color: Alert.warning.text },
+              ':active': { color: Alert.warning.text },
+            },
+            info: {
+              'base': { color: Alert.info.text },
+              ':hover': { color: Alert.info.text },
+              ':active': { color: Alert.info.text },
             },
           },
         },
@@ -158,9 +201,32 @@ const Description = (props: TextProps) => {
   );
 };
 
+const Action = (props: ButtonProps) => {
+  const { status } = useContext(alertContext);
+  return (
+    <Button
+      variant="tertiary"
+      size={false}
+      {...props}
+      {...alertStyles.action.rnw({ ...props, variants: { status } })}
+    />
+  );
+};
+
+const ActionText = (props: ButtonTextProps) => {
+  const { status } = useContext(alertContext);
+  return (
+    <ButtonText
+      {...props}
+      {...alertStyles.actionText.rnw({ ...props, variants: { status } })}
+    />
+  );
+};
+
 const Alert = withStaticProperties(Container, {
   Icon,
   Description,
+  Action: withStaticProperties(Action, { Text: ActionText }),
 });
 
 const { Icon: AlertIcon, Description: AlertDescription } = Alert;

@@ -130,5 +130,31 @@ export default {
         },
       },
     },
+    Alert: {
+      error: {
+        background: colors.primary[70],
+        border: colors.primary[70],
+        icon: colors.error.primary,
+        text: colors.error.primary,
+      },
+      warning: {
+        background: colors.primary[70],
+        border: colors.primary[70],
+        icon: colors.warning.primary,
+        text: colors.warning.primary,
+      },
+      info: {
+        background: colors.primary[70],
+        border: colors.primary[70],
+        icon: colors.info.primary,
+        text: colors.info.primary,
+      },
+      success: {
+        background: colors.primary[70],
+        border: colors.primary[70],
+        icon: colors.success.primary,
+        text: colors.success.primary,
+      },
+    },
   },
 } as const satisfies Theme;

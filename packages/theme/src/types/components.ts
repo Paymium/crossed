@@ -13,6 +13,12 @@ type Banner = {
   backgroundIcon: string;
   border: string;
 };
+type Alert = {
+  icon: string;
+  text: string;
+  background: string;
+  border: string;
+};
 
 type Action = {
   text: string;
@@ -47,5 +53,11 @@ export type Components = {
     primary: ActionType;
     secondary: ActionType;
     tertiary: ActionType;
+  };
+  Alert: {
+    success: Alert;
+    info: Alert;
+    warning: Alert;
+    error: Alert;
   };
 };

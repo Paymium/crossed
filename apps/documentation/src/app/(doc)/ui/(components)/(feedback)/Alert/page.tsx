@@ -70,24 +70,44 @@ export default function CreateBadge() {
     <Alert.Description>
       Lorem ipsum dolor sit amet
     </Alert.Description>
+    <Alert.Action>
+      <Alert.Action.Text>
+        Lorem ipsum
+      </Alert.Action.Text>
+    </Alert.Action>
   </Alert>
   <Alert status="error"> 
     <AlertIcon />
     <Alert.Description>
       Lorem ipsum dolor sit amet
     </Alert.Description>
+    <Alert.Action>
+      <Alert.Action.Text>
+        Lorem ipsum
+      </Alert.Action.Text>
+    </Alert.Action>
   </Alert>
   <Alert status="success"> 
     <AlertIcon />
     <Alert.Description>
       Lorem ipsum dolor sit amet
     </Alert.Description>
+    <Alert.Action>
+      <Alert.Action.Text>
+        Lorem ipsum
+      </Alert.Action.Text>
+    </Alert.Action>
   </Alert>
   <Alert status="warning"> 
     <AlertIcon />
     <Alert.Description>
       Lorem ipsum dolor sit amet
     </Alert.Description>
+    <Alert.Action>
+      <Alert.Action.Text>
+        Lorem ipsum
+      </Alert.Action.Text>
+    </Alert.Action>
   </Alert>
 </YBox>`}
       scope={{ Alert, AlertDescription, AlertIcon, YBox }}
