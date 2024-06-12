@@ -1,5 +1,17 @@
 # @crossed/ui
 
+## 1.0.0-beta.23
+
+### Minor Changes
+
+- 8357e97: add theme for Alert component
+
+### Patch Changes
+
+- Updated dependencies [8357e97]
+  - @crossed/theme@1.1.0-beta.7
+  - @crossed/unicons@1.0.0-beta.17
+
 ## 1.0.0-beta.22
 
 ### Patch Changes

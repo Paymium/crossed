@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 1.1.0-beta.7
+
+### Minor Changes
+
+- 8357e97: add theme for Alert component
+
 ## 1.1.0-beta.6
 
 ### Patch Changes
