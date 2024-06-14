@@ -1,5 +1,12 @@
 # @crossed/theme
 
+## 1.1.0-beta.8
+
+### Patch Changes
+
+- Updated dependencies [9dc6752]
+  - @crossed/styled@0.14.0-beta.12
+
 ## 1.1.0-beta.7
 
 ### Minor Changes

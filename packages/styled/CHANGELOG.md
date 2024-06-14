@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.12
+
+### Patch Changes
+
+- 9dc6752: improve performance
+
 ## 0.14.0-beta.11
 
 ### Patch Changes
