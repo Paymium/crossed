@@ -9,6 +9,8 @@ import { Registry } from './Registry';
 import { isWeb } from './isWeb';
 import { CrossedPropsExtended, PluginContext } from './types';
 
+const cache = new Map();
+
 const apply = <S>(
   style: Record<string, any>,
   props: CrossedPropsExtended<S>,
@@ -18,6 +20,7 @@ const apply = <S>(
     isWeb,
     props,
     addClassname,
+    cache,
   });
 };
 
@@ -44,6 +47,10 @@ export const createMethods = <S>(styleOfKey: Record<string, any>) => {
   return {
     original: styleOfKey,
     style: (props: CrossedPropsExtended<S> = {}) => {
+      const old = cache.get({ style: styleOfKey, props });
+      if (old) {
+        return old;
+      }
       let style = {} as any;
       const parentStyle = (
         Array.isArray(props.style) ? props.style : [props.style]
@@ -55,21 +62,27 @@ export const createMethods = <S>(styleOfKey: Record<string, any>) => {
         return acc;
       }, {});
       apply(styleOfKey, props, ({ body, suffix, wrapper, prefix }) => {
-        if (!suffix && !wrapper && !prefix) {
+        if (body && !suffix && !wrapper && !prefix) {
           style = {
             ...style,
             ...Object.values(body).reduce((acc, e) => ({ ...acc, ...e }), {}),
           };
         }
       });
-      return {
+      const result = {
         style: {
           ...style,
           ...parentStyle,
         },
       };
+      cache.set({ style: styleOfKey, props }, result);
+      return result;
     },
     className: (props: CrossedPropsExtended<S> = {}) => {
+      const old = cache.get({ style: styleOfKey, props });
+      if (old) {
+        return old;
+      }
       const classNames: string[] = props.className
         ? props.className.split(' ')
         : [];
@@ -95,11 +108,18 @@ export const createMethods = <S>(styleOfKey: Record<string, any>) => {
           classNames.push(...Object.keys(body));
         }
       );
-      return {
+      const result = {
         className: Array.from(cleanClassName(classNames).values()).join(' '),
       };
+      cache.set({ style: styleOfKey, props }, result);
+      return result;
     },
     rnw: (props: CrossedPropsExtended<S> = {}) => {
+      const old = cache.get({ style: styleOfKey, props });
+      if (old) {
+        return old;
+      }
+
       let style = {} as any;
       const classNames: string[] = props.className
         ? props.className.split(' ')
@@ -137,9 +157,12 @@ export const createMethods = <S>(styleOfKey: Record<string, any>) => {
             { $$css: true }
           )
         : style;
-      return {
+
+      const result = {
         style: styletmp ? [styletransformWeb, styletmp] : styletransformWeb,
       };
+      cache.set({ style: styleOfKey, props }, result);
+      return result;
     },
   };
 };

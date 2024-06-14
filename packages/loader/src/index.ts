@@ -44,6 +44,8 @@ const esmBuild = (configPath: string) => {
   return codeBuild;
 };
 
+const cache = new Map();
+
 export class Loader {
   private logger: ReturnType<typeof createLogger>;
 
@@ -210,10 +212,10 @@ export class Loader {
   };
 
   parse(ast: Expression | SpreadElement, isMulti?: boolean) {
-    const plugins = Registry.getPlugins();
-    const ctx = plugins.reduce((acc, { utils }) => {
-      return { ...acc, ...(utils?.() || undefined) };
-    }, {});
+    // const plugins = Registry.getPlugins();
+    // const ctx = plugins.reduce((acc, { utils }) => {
+    //   return { ...acc, ...(utils?.() || undefined) };
+    // }, {});
 
     Object.entries(Registry.getThemes()).forEach(([themeName, theme]) => {
       this.addClassname({
@@ -224,9 +226,9 @@ export class Loader {
       });
     });
 
-    plugins.forEach(({ init }) =>
-      init?.({ addClassname: this.addClassname, isWeb: true, ...ctx })
-    );
+    // plugins.forEach(({ init }) =>
+    //   init?.({ addClassname: this.addClassname, isWeb: true, ...ctx })
+    // );
     const _parseObjectExpression = (arg: ObjectExpression) => {
       if (arg.type === 'ObjectExpression') {
         const ast = {
@@ -309,12 +311,14 @@ export class Loader {
           Registry.apply(() => p, {
             addClassname: this.addClassname,
             isWeb: true,
+            cache,
           });
         });
       } else {
         Registry.apply(() => parsing, {
           addClassname: this.addClassname,
           isWeb: true,
+          cache,
         });
       }
     }

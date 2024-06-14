@@ -5,12 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type {
-  CrossedstyleValues,
-  Plugin,
-  PluginContext,
-  Themes,
-} from '../types';
+import type { Plugin, PluginContext, Themes } from '../types';
 import { setTheme } from '../setTheme';
 import { convertKeyToCss, normalizeUnitPixel } from '../plugins/utils';
 import { isWeb as isWebFile } from '../isWeb';
@@ -144,21 +139,25 @@ export class RegistryBridge {
     }
   }
 
-  apply(
-    params: () => Record<string, any>,
+  apply<T extends Record<string, any>>(
+    params: () => T,
     options: Omit<PluginContext<Required<any>>, 'styles' | 'key'>
   ) {
     this.log(`Registry apply`);
-    Object.entries(params()).forEach(
-      ([key, styles]: [string, CrossedstyleValues]) => {
-        this.plugins.forEach(({ test, apply, name }) => {
-          const keyFind = key.match(new RegExp(test, 'g'));
-          if (test && keyFind && keyFind.length > 0) {
+
+    const par = params();
+
+    Object.keys(par).forEach((key: keyof T) => {
+      const styles = par[key];
+      this.plugins.forEach(({ test, apply, name }) => {
+        if (typeof key === 'string') {
+          const keyFind = test.includes(key);
+          if (keyFind) {
             this.log(`[${name}] Find "${key}" for "${name}" plugin`);
             apply?.({ ...options, key, styles });
           }
-        });
-      }
-    );
+        }
+      });
+    });
   }
 }

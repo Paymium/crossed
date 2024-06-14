@@ -43,8 +43,8 @@ export interface CrossedVariantsPluginProps<
 
 export const VariantsPlugin: Plugin<CrossedVariantsPlugin> = {
   name: 'VariantsPlugin',
-  test: '^variants$',
-  apply: ({ styles, addClassname, props, isWeb }) => {
+  test: ['variants'],
+  apply: ({ styles, addClassname, props, isWeb, cache }) => {
     Object.entries(styles).forEach(([variantName, variantValues]) => {
       if (props && props.variants?.[variantName] === undefined) {
         return;
@@ -61,6 +61,7 @@ export const VariantsPlugin: Plugin<CrossedVariantsPlugin> = {
           isWeb,
           props,
           addClassname,
+          cache,
         });
       });
     });

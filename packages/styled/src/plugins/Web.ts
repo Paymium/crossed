@@ -19,13 +19,14 @@ export interface CrossedWebPlugin {
 
 export const WebPlugin: Plugin<CrossedWebPlugin> = {
   name: 'WebPlugin',
-  test: '^web$',
-  apply: ({ addClassname, styles, isWeb, props }) => {
+  test: ['web'],
+  apply: ({ addClassname, styles, isWeb, cache, props }) => {
     if (isWeb) {
       Registry.apply(() => styles, {
         isWeb,
         props,
         addClassname,
+        cache,
       });
     }
   },

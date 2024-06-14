@@ -25,7 +25,7 @@ export interface CrossedPseudoClassPlugin {
 
 export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
   name: 'PseudoClassPlugin',
-  test: '^:(hover|active|focus|focus-visible|disabled)$',
+  test: [':hover', ':active', ':focus', ':focus-visible', ':disabled'],
   apply: ({ styles, key: ctxKey, addClassname, props, isWeb }) => {
     const pseudoClass = ctxKey.replace(/:/i, '');
     Object.entries(styles).forEach(([key, value]) => {

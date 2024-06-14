@@ -22,6 +22,9 @@ export interface CrossedMediaQueriesPlugin {
   };
 }
 
+let Dimensions: any;
+let Platform: any;
+
 export const MediaQueriesPlugin = <
   B extends Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>,
 >(
@@ -30,13 +33,11 @@ export const MediaQueriesPlugin = <
   cacheBreakpoints = breakpoints;
   return {
     name: 'MediaQueriesPlugin',
-    test: '^media$',
+    test: ['media'],
     apply: function MediaQueriesApply({ styles, addClassname, props, isWeb }) {
-      let Dimensions: any;
-      let Platform: any;
       // props only exists at runtime
       // Hack for load react-native only at runtime, not buildtime
-      if (props) {
+      if (props && !Dimensions && !Platform) {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         Dimensions = require('react-native').Dimensions;
         // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -87,7 +88,7 @@ export const MediaQueriesPlugin = <
                   body,
                 });
 
-                if (props && typeof window !== 'undefined') {
+                if (props && typeof window !== 'undefined' && Dimensions) {
                   if (breakpoints[key] < Dimensions.get('window').width) {
                     addClassname({ body });
                   }

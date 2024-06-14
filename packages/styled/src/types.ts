@@ -69,6 +69,9 @@ export type PluginContext<S> = {
    * props of component, only on runtime
    */
   props?: any;
+
+  cache: Map<S[keyof S], any>;
+
   /**
    * Callback function for add className and style object
    * @returns {void}
@@ -130,7 +133,7 @@ export type Plugin<S = any> = {
   /**
    * Test of key, if true, apply plugin
    */
-  test: string;
+  test: string[];
 
   name: string;
 
