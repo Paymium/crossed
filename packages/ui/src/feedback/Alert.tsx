@@ -69,10 +69,10 @@ export const alertStyles = createStyles(
           paddingVertical: space.xxs,
           paddingHorizontal: space.xs,
           borderRadius: 8,
-          alignItems: 'center',
           borderWidth: 1,
           borderStyle: 'solid',
-          flexDirection: 'row',
+          alignItems: 'center',
+          gap: space.xxs,
         },
         variants: {
           status: {
@@ -100,6 +100,12 @@ export const alertStyles = createStyles(
                 backgroundColor: Alert.info.background,
               },
             },
+          },
+        },
+        media: {
+          md: {
+            flexDirection: 'row',
+            gap: space.xs,
           },
         },
       },
@@ -169,7 +175,7 @@ const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
         space="xs"
         role="alert"
         {...props}
-        {...alertStyles.container.rnw({ variants: { status } })}
+        {...alertStyles.container.rnw({ ...props, variants: { status } })}
       >
         {children}
       </YBox>
@@ -196,7 +202,7 @@ const Description = (props: TextProps) => {
   return (
     <Text
       {...props}
-      {...alertStyles.description.rnw({ variants: { status } })}
+      {...alertStyles.description.rnw({ ...props, variants: { status } })}
     />
   );
 };
