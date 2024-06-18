@@ -139,11 +139,11 @@ const bannerStyles = createStyles(
 
 type Variant = ExtractForProps<typeof bannerStyles.container>;
 
-type ContainerProps = YBoxProps & Variant['variants'];
+export type BannerProps = YBoxProps & Variant['variants'];
 
-const bannerContext = createContext<Pick<ContainerProps, 'status'>>({});
+const bannerContext = createContext<Pick<BannerProps, 'status'>>({});
 
-const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
+const Container = ({ status = 'info', children, ...props }: BannerProps) => {
   const { md } = useMedia();
   return (
     <bannerContext.Provider value={{ status }}>

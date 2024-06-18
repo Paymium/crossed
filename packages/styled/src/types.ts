@@ -47,8 +47,12 @@ export type CreateStylesParams<
   S extends StyleSheet = StyleSheet,
 > = <T extends Themes[keyof Themes]>(_theme: T) => Record<K, S>;
 
-export type ExtractForProps<S extends CrossedMethods<any>> =
-  S extends CrossedMethods<infer D, any> ? CrossedPropsExtended<D> : never;
+export type ExtractForProps<S extends CrossedMethods<any, any>> =
+  S extends CrossedMethods<infer D, any>
+    ? CrossedPropsExtended<D>
+    : S extends { original: any }
+      ? CrossedPropsExtended<S['original']>
+      : never;
 
 export type PluginContext<S> = {
   /**
@@ -100,11 +104,7 @@ type HasBooleanVariants<T> = T extends 'true'
 
 export interface Themes {}
 
-export interface CrossedPropsExtended<
-  S extends StyleSheet,
-  V = S['variants'],
-  MV = V extends object ? V : never,
-> {
+export type BaseCrossedPropsExtended = {
   'className'?: string;
   'style'?: CrossedstyleValues | CrossedstyleValues[];
   'focus'?: true | false;
@@ -112,7 +112,14 @@ export interface CrossedPropsExtended<
   'active'?: true | false;
   'focus-visible'?: true | false;
   'disabled'?: true | false;
-  'variants'?: {
+};
+
+export interface CrossedPropsExtended<
+  S extends StyleSheet,
+  V = S['variants'],
+  MV = V extends object ? V : never,
+> extends BaseCrossedPropsExtended {
+  variants?: {
     [key in keyof MV]?: HasBooleanVariants<keyof MV[key]> extends false
       ? keyof MV[key]
       : keyof MV[key] | boolean;
