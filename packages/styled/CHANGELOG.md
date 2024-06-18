@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.13
+
+### Patch Changes
+
+- c4f8fd7: increase ExtractForProps behavior typescript
+
 ## 0.14.0-beta.12
 
 ### Patch Changes
