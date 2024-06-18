@@ -1,5 +1,12 @@
 # crossed-docs
 
+## 0.6.0-beta.28
+
+### Patch Changes
+
+- Updated dependencies [ba555d4]
+  - @crossed/ui@1.0.0-beta.26
+
 ## 0.6.0-beta.27
 
 ### Patch Changes

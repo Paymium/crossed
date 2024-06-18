@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.26
+
+### Patch Changes
+
+- ba555d4: typescript error
+
 ## 1.0.0-beta.25
 
 ### Patch Changes
