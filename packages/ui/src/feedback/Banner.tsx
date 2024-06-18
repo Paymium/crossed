@@ -177,21 +177,14 @@ const Icon = () => {
   );
 };
 
-const Title = (props: TextProps) => {
+const Title = ({ style, className, ...props }: TextProps) => {
   const { status } = useContext(bannerContext);
   return (
-    <Box space="sm" {...bannerStyles.containerTitle.rnw()}>
-      <Icon />
-      <Text
-        weight="lg"
-        numberOfLines={1}
-        // ellipsizeMode='middle'
-        // lineBreakMode='middle'
-        // lineBreakStrategyIOS='standard'
-        {...props}
-        {...bannerStyles.title.rnw({ variants: { status } })}
-      />
-    </Box>
+    <Text
+      weight="lg"
+      {...props}
+      {...bannerStyles.title.rnw({ style, className, variants: { status } })}
+    />
   );
 };
 const Description = (props: TextProps) => {

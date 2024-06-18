@@ -9,6 +9,7 @@ import { View, type ViewProps } from 'react-native';
 import {
   composeStyles,
   createStyles,
+  type BaseCrossedPropsExtended,
   type ExtractForProps,
 } from '@crossed/styled';
 import { forwardRef } from 'react';
@@ -40,8 +41,8 @@ const styleBox = createStyles(
 
 type Variant = ExtractForProps<typeof styleBox.root>;
 
-export type BoxProps = Pick<Variant['variants'], 'center' | 'space'> &
-  Omit<Variant, 'variants'> &
+export type BoxProps = Partial<Pick<Variant['variants'], 'center' | 'space'>> &
+  BaseCrossedPropsExtended &
   ViewProps;
 
 export const Box = forwardRef<View, BoxProps>(
