@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.27
+
+### Patch Changes
+
+- c81a12c: fix Alert responsive
+
 ## 1.0.0-beta.26
 
 ### Patch Changes
