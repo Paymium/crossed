@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.28
+
+### Patch Changes
+
+- 2ccc97a: add success variant on text style
+
 ## 1.0.0-beta.27
 
 ### Patch Changes
