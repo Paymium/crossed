@@ -20,6 +20,7 @@ export default function CreateBadge() {
   const { t } = useTranslation();
   const [variants, setVariants] = useState('primary');
   const [error, setError] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   return (
     <TemplatePrimitive
       title="Button"
@@ -82,7 +83,7 @@ import { Button } from '@crossed/ui'
 </Button>`}
       example={`
   <Center>
-    <Button variant="${variants}"${error ? ' error' : ''}>
+    <Button variant="${variants}"${error ? ' error' : ''} disabled={${disabled}}>
       <ButtonIcon>
         <MousePointerClick />
       </ButtonIcon>
@@ -122,6 +123,14 @@ import { Button } from '@crossed/ui'
               onChange={(e) => setError(e.target.checked)}
             />
             <Text>error</Text>
+          </XBox>
+          <XBox>
+            <input
+              type="checkbox"
+              checked={disabled}
+              onChange={(e) => setDisabled(e.target.checked)}
+            />
+            <Text>disabled</Text>
           </XBox>
         </>
       }

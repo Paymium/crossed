@@ -32,7 +32,7 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
       const valueNormalized = normalizeUnitPixel(key, value, isWeb);
       if (isWeb) {
         addClassname({
-          suffix: `:${pseudoClass}`,
+          suffix: `:${pseudoClass}${pseudoClass === 'hover' ? ':not(:disabled)' : ''}`,
           body: {
             [`${pseudoClass}:${convertKeyToCss(key)}-[${
               typeof valueNormalized === 'number'

@@ -33,7 +33,6 @@ import {
   useMemo,
   type PropsWithChildren,
 } from 'react';
-import { useInteraction } from '@crossed/styled';
 
 const buttonContext = createContext<
   Pick<RootProps, 'variant' | 'error' | 'disabled'> & {
@@ -214,8 +213,9 @@ export const useButton = createStyles(
         },
       },
       text: {
-        base: { fontWeight: 'bold' },
-        variants: {
+        'base': { fontWeight: 'bold' },
+        ':disabled': { pointerEvents: 'none' },
+        'variants': {
           variant: {
             primary: {
               'base': { color: t.components.Action.primary.default.text },
@@ -259,43 +259,44 @@ const Root = withReactive(
       },
       ref
     ) => {
-      const { state, props: handleProps } = useInteraction(props);
+      // const { state, props: handleProps } = useInteraction(props);
       const renderLoading = loading ? (
         <ButtonIcon>
           <ActivityIndicator />
         </ButtonIcon>
       ) : null;
       return (
-        <buttonContext.Provider
-          value={{ variant, error, state, disabled: disabled || loading }}
-        >
-          <Pressable
-            disabled={disabled || loading}
-            ref={ref}
-            {...props}
-            {...handleProps}
-            {...composeStyles(useButton.root, error && useButton.error).rnw({
+        <Pressable
+          disabled={disabled || loading}
+          ref={ref}
+          {...props}
+          // {...handleProps}
+          style={(e: any) =>
+            composeStyles(useButton.root, error && useButton.error).rnw({
               ...props,
-              ...state,
+              active: e.pressed,
+              hover: e.hovered,
               disabled: disabled || loading,
               variants: { size, variant },
-            })}
-          >
-            {typeof children === 'function' ? (
-              (e) => (
-                <>
-                  {renderLoading}
-                  {children(e)}
-                </>
-              )
-            ) : (
-              <>
+            }).style
+          }
+        >
+          {(e: any) => {
+            return (
+              <buttonContext.Provider
+                value={{
+                  variant,
+                  error,
+                  state: { active: e.pressed, hover: e.hovered },
+                  disabled: disabled || loading,
+                }}
+              >
                 {renderLoading}
-                {children}
-              </>
-            )}
-          </Pressable>
-        </buttonContext.Provider>
+                {typeof children === 'function' ? children(e) : children}
+              </buttonContext.Provider>
+            );
+          }}
+        </Pressable>
       );
     }
   )
