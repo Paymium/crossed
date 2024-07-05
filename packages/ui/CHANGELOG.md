@@ -1,5 +1,15 @@
 # @crossed/ui
 
+## 1.0.0-beta.29
+
+### Patch Changes
+
+- 1e28220: fix hover and disabled state conflict in className
+- Updated dependencies [1e28220]
+  - @crossed/styled@0.14.0-beta.14
+  - @crossed/theme@1.1.0-beta.10
+  - @crossed/unicons@1.0.0-beta.20
+
 ## 1.0.0-beta.28
 
 ### Patch Changes

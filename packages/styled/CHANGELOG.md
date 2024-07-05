@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.14
+
+### Patch Changes
+
+- 1e28220: fix hover and disabled state conflict in className
+
 ## 0.14.0-beta.13
 
 ### Patch Changes
