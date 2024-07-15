@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "@crossed/log": "0.1.1-beta.0",
+    "abstract-syntax-tree": "^2.22.0",
+    "ast-node-finder": "^5.1.0",
     "esbuild": "^0.17.17",
     "escodegen": "^2.1.0",
     "esprima": "^4.0.1",

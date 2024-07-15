@@ -43,7 +43,24 @@ const cleanClassName = (classNames: string[]) => {
   }, new Set<string>());
 };
 
-export const createMethods = (styleOfKey: Record<string, any>) => {
+export const createMethods = <S>(styleOfKey?: Record<string, any> | string) => {
+  // console.log("ici", typeof styleOfKey, styleOfKey)
+  if (typeof styleOfKey === 'undefined') {
+    return {
+      original: styleOfKey,
+      style: () => ({}),
+      rnw: () => ({}),
+      className: () => ({}),
+    };
+  }
+  if (typeof styleOfKey === 'string') {
+    return {
+      original: styleOfKey,
+      style: () => ({}),
+      rnw: () => ({}),
+      className: () => ({ className: styleOfKey }),
+    };
+  }
   return {
     original: styleOfKey,
     style: (props: CrossedPropsExtended = {}) => {

@@ -5,27 +5,22 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import path from 'path';
+import { parseScript } from 'esprima';
 import fs from 'fs';
 import {
   ArrowFunctionExpression,
-  // CallExpression,
   Expression,
   FunctionExpression,
-  // Identifier,
-  // Literal,
   ObjectExpression,
-  // Property,
-  // SequenceExpression,
   SpreadElement,
 } from 'estree';
-// import { parseScript as parse } from 'esprima';
 import escodegen from 'escodegen';
 import { createLogger, apiLog } from '@crossed/log';
 import { Registry, parse } from '@crossed/styled';
 import { convertKeyToCss } from '@crossed/styled';
 import type { CrossedstyleValues } from '@crossed/styled';
 import * as esbuild from 'esbuild';
+import path from 'path';
 
 type Style = Record<string, any>;
 
@@ -94,6 +89,7 @@ export class Loader {
           try {
             // eslint-disable-next-line @typescript-eslint/no-var-requires
             const { Registry: R } = require('@crossed/styled');
+            // console.log(R.getThemes())
             Object.entries(R.getThemes()).forEach(([themeName, theme]) => {
               this.addClassname({
                 prefix: '.',
@@ -235,24 +231,7 @@ export class Loader {
     });
   };
 
-  parse(ast: Expression | SpreadElement, isMulti?: boolean) {
-    // const plugins = Registry.getPlugins();
-    // const ctx = plugins.reduce((acc, { utils }) => {
-    //   return { ...acc, ...(utils?.() || undefined) };
-    // }, {});
-
-    Object.entries(Registry.getThemes()).forEach(([themeName, theme]) => {
-      this.addClassname({
-        prefix: '.',
-        body: {
-          [`${themeName}`]: parse(theme, undefined, true).values,
-        },
-      });
-    });
-
-    // plugins.forEach(({ init }) =>
-    //   init?.({ addClassname: this.addClassname, isWeb: true, ...ctx })
-    // );
+  parsingExpression(ast: Expression | SpreadElement) {
     const _parseObjectExpression = (arg: ObjectExpression) => {
       if (arg.type === 'ObjectExpression') {
         const ast = {
@@ -328,23 +307,55 @@ export class Loader {
         })}      ${ast.type}`
       );
     }
+    return parsing;
+  }
 
+  loader(t: string): string {
+    Object.entries(Registry.getThemes()).forEach(([themeName, theme]) => {
+      this.addClassname({
+        prefix: '.',
+        body: {
+          [`${themeName}`]: parse(theme, undefined, true).values,
+        },
+      });
+    });
+    const [ast] = parseScript(`const Foo = createStyles(${t})`)?.body || [];
+    if (
+      ast.type !== 'VariableDeclaration' ||
+      ast.declarations[0].init.type !== 'CallExpression'
+    ) {
+      throw new Error('getAst - wrong value');
+    }
+
+    const parsing = this.parsingExpression(
+      ast.declarations[0].init.arguments[0]
+    );
+    const result: Record<string, Record<string, string | boolean>> = {};
     if (parsing) {
-      if (isMulti) {
-        Object.entries(parsing).forEach(([, p]) => {
+      Object.entries(parsing).forEach(([key, p]) => {
+        if (typeof p !== 'string') {
           Registry.apply(() => p, {
-            addClassname: this.addClassname,
+            addClassname: (e) => {
+              if (!result[key]) {
+                result[key] = { $$css: true };
+              }
+              result[key] = Object.entries(e.body).reduce<
+                Record<string, string | boolean>
+              >((acc, [className, style]) => {
+                const [nameStyle] = Object.keys(style);
+                acc[nameStyle] = acc[nameStyle]
+                  ? `${acc[nameStyle]} ${className}`
+                  : className;
+                return acc;
+              }, result[key]);
+              this.addClassname(e);
+            },
             isWeb: true,
             cache,
           });
-        });
-      } else {
-        Registry.apply(() => parsing, {
-          addClassname: this.addClassname,
-          isWeb: true,
-          cache,
-        });
-      }
+        }
+      });
     }
+    return JSON.stringify(result);
   }
 }

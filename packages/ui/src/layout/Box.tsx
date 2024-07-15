@@ -7,12 +7,12 @@
 
 import { View, type ViewProps } from 'react-native';
 import {
-  composeStyles,
   createStyles,
+  rnw,
   type BaseCrossedPropsExtended,
   type CrossedMethods,
 } from '@crossed/styled';
-import { forwardRef } from 'react';
+import { forwardRef, memo } from 'react';
 import { baseStyle } from '../styles/base';
 import { gapStyles } from '../styles/gap';
 
@@ -35,28 +35,23 @@ export type BoxProps = {
   center?: boolean;
 } & Omit<BaseCrossedPropsExtended & ViewProps, 'style'>;
 
-export const Box = forwardRef<View, BoxProps>(
-  (
-    { style, className, space, center, active, hover, focus, ...props },
-    ref
-  ) => {
-    return (
+export const Box = memo(
+  forwardRef<View, BoxProps>(
+    (
+      { style, className, space, center, active, hover, focus, ...props },
+      ref
+    ) => (
       <View
         ref={ref}
         {...props}
-        {...composeStyles(
-          baseStyle.view,
+        {...rnw(
           styleBox.root,
+          baseStyle.view,
           center === true && styleBox.center,
           gapStyles[space],
           style
-        ).rnw({
-          className,
-          active,
-          hover,
-          focus,
-        })}
+        )}
       />
-    );
-  }
+    )
+  )
 );

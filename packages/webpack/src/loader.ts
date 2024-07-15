@@ -6,8 +6,6 @@
  */
 
 import { Loader } from '@crossed/loader';
-import { parseScript } from 'esprima';
-import * as ts from 'typescript';
 
 interface LoaderOptions {
   operations: any[];
@@ -51,31 +49,22 @@ export default function modifyModuleSourceLoader(
   this: ModifyModuleSourceLoader,
   source: string
 ): string {
-  const { constants, moduleRequest }: LoaderOptions = this.getOptions();
-  const { parseAst } = constants;
+  const options: LoaderOptions = this.getOptions();
 
-  const parse = (data: string[], isMulti: boolean) => {
-    if (data && Array.isArray(data) && data.length > 0) {
-      data.forEach((a) => {
-        let ast: any;
-        try {
-          ast = (parseScript(
-            ts.transpileModule(`const Foo = createStyles(${a})`, {
-              compilerOptions: { target: ts.ScriptTarget.ESNext },
-            }).outputText
-          )?.body || [])[0];
-          parseAst.parse(ast.declarations[0].init.arguments[0], isMulti);
-        } catch (e) {
-          // eslint-disable-next-line no-console
-          console.log(moduleRequest, e);
-        }
-      });
-    }
-  };
-
-  const t = extractArgument(source, /createStyles\s*\(/g);
-  const f = extractArgument(source, /inlineStyle\s*\(/g);
-  parse(t, true);
-  parse(f, false);
-  return source;
+  const { parseAst } = options.constants;
+  let sourceTmp = source;
+  const t = [
+    ...extractArgument(source, /createStyles\s*\(/g),
+    ...extractArgument(source, /inlineStyle\s*\(/g),
+  ];
+  if (t && Array.isArray(t) && t.length > 0) {
+    t.forEach((a) => {
+      try {
+        sourceTmp = sourceTmp.replace(a, parseAst.loader(a));
+      } catch (e) {
+        console.error(e);
+      }
+    });
+  }
+  return sourceTmp;
 }
