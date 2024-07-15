@@ -15,6 +15,10 @@ import {
 
 type NestedKeys = 'shadowOffset' | 'transform' | 'textShadowOffset';
 
+export type CrossedStyle = Record<string, StyleSheet | string>;
+
+export type CrossedStyleArray<T> = T | ReadonlyArray<CrossedStyleArray<T>>;
+
 export type CrossedstyleView = Omit<ViewStyle, NestedKeys>;
 export type CrossedstyleText = Omit<TextStyle, NestedKeys>;
 export type CrossedstyleImage = Omit<ImageStyle, NestedKeys>;

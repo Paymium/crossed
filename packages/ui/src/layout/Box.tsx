@@ -9,10 +9,11 @@ import { View, type ViewProps } from 'react-native';
 import {
   composeStyles,
   createStyles,
+  rnw,
   type BaseCrossedPropsExtended,
   type ExtractForProps,
 } from '@crossed/styled';
-import { forwardRef } from 'react';
+import { forwardRef, memo } from 'react';
 import { baseStyle } from '../styles/base';
 
 const styleBox = createStyles(
@@ -45,22 +46,25 @@ export type BoxProps = Partial<Pick<Variant['variants'], 'center' | 'space'>> &
   BaseCrossedPropsExtended &
   ViewProps;
 
-export const Box = forwardRef<View, BoxProps>(
-  (
-    { style, className, space, center, active, hover, focus, ...props },
-    ref
-  ) => (
-    <View
-      ref={ref}
-      {...props}
-      {...composeStyles(styleBox.root, baseStyle.view).rnw({
-        style,
-        className,
-        active,
-        hover,
-        focus,
-        variants: { space, center },
-      })}
-    />
+export const Box = memo(
+  forwardRef<View, BoxProps>(
+    (
+      { style, className, space, center, active, hover, focus, ...props },
+      ref
+    ) => (
+      <View
+        ref={ref}
+        {...props}
+        // {...styleBox.root.rnw({
+        //   // style,
+        //   // className,
+        //   // active,
+        //   // hover,
+        //   // focus,
+        //   variants: { space, center },
+        // })}
+        {...rnw(styleBox.root, baseStyle.view, style)}
+      />
+    )
   )
 );

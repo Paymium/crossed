@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { createStyles, rnw, type ExtractForProps } from '@crossed/styled';
 import { Box, type BoxProps } from './Box';
 import { forwardRef } from 'react';
 import type { GetProps } from '@crossed/core';
@@ -46,16 +46,7 @@ type XBoxPropsTmp = BoxProps & Variant['variants'];
 
 export const XBox = forwardRef(
   ({ justifyContent, alignItems, ...props }: XBoxPropsTmp, ref: any) => {
-    return (
-      <Box
-        ref={ref}
-        {...props}
-        {...useXBox.root.rnw({
-          ...props,
-          variants: { justifyContent, alignItems },
-        })}
-      />
-    );
+    return <Box ref={ref} {...props} {...rnw(useXBox.root, props.style)} />;
   }
 );
 

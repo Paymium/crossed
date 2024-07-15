@@ -109,6 +109,7 @@ const useStyles = createStyles((t) => ({
       borderStyle: 'solid',
       borderColor: t.colors.border.secondary,
       alignItems: 'center',
+      height: 60
     },
   },
   el: {

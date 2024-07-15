@@ -44,19 +44,19 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
           },
         });
       }
-      if (props?.[pseudoClass] || !props) {
-        addClassname({
-          body: {
-            [`${convertKeyToCss(key)}-[${
-              typeof valueNormalized === 'number'
-                ? valueNormalized
-                : valueNormalized?.replace(/ /g, '-')
-            }]`]: {
-              [key]: valueNormalized,
-            },
-          },
-        });
-      }
+      // if (props?.[pseudoClass] || !props) {
+      //   addClassname({
+      //     body: {
+      //       [`${convertKeyToCss(key)}-[${
+      //         typeof valueNormalized === 'number'
+      //           ? valueNormalized
+      //           : valueNormalized?.replace(/ /g, '-')
+      //       }]`]: {
+      //         [key]: valueNormalized,
+      //       },
+      //     },
+      //   });
+      // }
     }, {});
   },
 };
