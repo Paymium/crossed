@@ -1,5 +1,14 @@
 # crossed-docs
 
+## 0.6.0-beta.33
+
+### Patch Changes
+
+- 07d4024: fix padding error on alert
+- Updated dependencies [07d4024]
+  - @crossed/ui@1.0.0-beta.31
+  - @crossed/next-adapter@0.6.0-beta.21
+
 ## 0.6.0-beta.32
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.31
+
+### Patch Changes
+
+- 07d4024: fix padding error on alert
+
 ## 1.0.0-beta.30
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@crossed/webpack",
-  "version": "2.0.0-beta.20",
+  "version": "2.0.0-beta.21",
   "description": "",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@crossed/loader": "1.0.0-beta.19",
+    "@crossed/loader": "1.0.0-beta.20",
     "@crossed/log": "0.1.1-beta.0",
     "static-eval": "^2.1.1",
     "ts-pattern": "^5.0.6",
