@@ -40,8 +40,8 @@ const useStyles = createStyles(() => ({
 export const Footer = () => {
   const { t } = useTranslation();
   return (
-    <YBox space="xs" role="contentinfo" {...useStyles.container.rnw()}>
-      <XBox {...useStyles.row.rnw()}>
+    <YBox space="xs" role="contentinfo" style={useStyles.container}>
+      <XBox style={useStyles.row}>
         <Text size="sm">Copyright © {new Date().getFullYear()}</Text>
         <Link size="sm" href="https://paymium.com" target="_blank">
           Paymium

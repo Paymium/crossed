@@ -8,7 +8,7 @@
 import { Text } from './Text';
 import { XBox, type XBoxProps } from '../layout/XBox';
 import { YBox, type YBoxProps } from '../layout/YBox';
-import { createStyles } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 
 const useList = createStyles((t) => ({
   ul: { base: { gap: t.space.xxs } },
@@ -17,26 +17,16 @@ const useList = createStyles((t) => ({
 }));
 
 export type UlProps = YBoxProps;
-export const Ul = (props: UlProps) => {
-  return <YBox role="list" {...props} {...useList.ul.rnw()} />;
+export const Ul = ({ style, ...props }: UlProps) => {
+  return (
+    <YBox role="list" {...props} style={composeStyles(useList.ul, style)} />
+  );
 };
 
 export type LiProps = XBoxProps;
-export const Li = ({
-  children,
-  active,
-  hover,
-  focus,
-  style,
-  className,
-  ...props
-}: LiProps) => {
+export const Li = ({ children, style, ...props }: LiProps) => {
   return (
-    <XBox
-      {...props}
-      {...useList.li.rnw({ active, hover, focus, style, className })}
-      role="listitem"
-    >
+    <XBox {...props} style={composeStyles(useList.li, style)} role="listitem">
       <Text {...useList.disc.rnw()}>{'\u2B24'} </Text>
       {children as any}
     </XBox>

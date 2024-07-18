@@ -264,7 +264,7 @@ const Trigger = withStaticProperties(
             </Pressable>
           </FormControl>
           {showClear && (
-            <XBox {...form.elementRight.rnw()}>
+            <XBox style={form.elementRight}>
               <CloseButton />
             </XBox>
           )}

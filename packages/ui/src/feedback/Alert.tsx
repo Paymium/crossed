@@ -8,7 +8,11 @@
 'use client';
 import { withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  type CrossedMethods,
+} from '@crossed/styled';
 import { createContext, useContext } from 'react';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
@@ -65,43 +69,17 @@ export const alertStyles = createStyles(
       },
       container: {
         base: {
-          padding: space.xxs,
-          paddingVertical: space.xxs,
-          paddingHorizontal: space.xs,
+          paddingTop: space.xxs,
+          paddingBottom: space.xxs,
+          paddingRight: space.xs,
+          paddingLeft: space.xs,
           borderRadius: 8,
           borderWidth: 1,
           borderStyle: 'solid',
           alignItems: 'center',
           gap: space.xxs,
         },
-        variants: {
-          status: {
-            error: {
-              base: {
-                borderColor: Alert.error.border,
-                backgroundColor: Alert.error.background,
-              },
-            },
-            success: {
-              base: {
-                borderColor: Alert.success.border,
-                backgroundColor: Alert.success.background,
-              },
-            },
-            warning: {
-              base: {
-                borderColor: Alert.warning.border,
-                backgroundColor: Alert.warning.background,
-              },
-            },
-            info: {
-              base: {
-                borderColor: Alert.info.border,
-                backgroundColor: Alert.info.background,
-              },
-            },
-          },
-        },
+        variants: {},
         media: {
           md: {
             flexDirection: 'row',
@@ -159,23 +137,58 @@ export const alertStyles = createStyles(
           },
         },
       },
+      group: { base: { flex: 1 } },
     }) as const
 );
 
-type Variant = ExtractForProps<typeof alertStyles.container>;
+const containerStyles = createStyles(({ components: { Alert } }) => ({
+  error: {
+    base: {
+      borderColor: Alert.error.border,
+      backgroundColor: Alert.error.background,
+    },
+  },
+  success: {
+    base: {
+      borderColor: Alert.success.border,
+      backgroundColor: Alert.success.background,
+    },
+  },
+  warning: {
+    base: {
+      borderColor: Alert.warning.border,
+      backgroundColor: Alert.warning.background,
+    },
+  },
+  info: {
+    base: {
+      borderColor: Alert.info.border,
+      backgroundColor: Alert.info.background,
+    },
+  },
+}));
 
-type ContainerProps = YBoxProps & Variant['variants'];
+type ContainerProps = YBoxProps & { status?: keyof typeof containerStyles };
 
 const alertContext = createContext<Pick<ContainerProps, 'status'>>({});
 
-const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
+const Container = ({
+  status = 'info',
+  children,
+  style,
+  ...props
+}: ContainerProps) => {
   return (
     <alertContext.Provider value={{ status }}>
       <YBox
         space="xs"
         role="alert"
         {...props}
-        {...alertStyles.container.rnw({ ...props, variants: { status } })}
+        style={composeStyles(
+          alertStyles.container,
+          containerStyles[status],
+          style
+        )}
       >
         {children}
       </YBox>
@@ -207,6 +220,24 @@ const Description = (props: TextProps) => {
   );
 };
 
+export type GroupProps = { style?: CrossedMethods<any, any> } & Omit<
+  TextProps,
+  'style'
+>;
+
+const Group = ({ style, ...props }: GroupProps) => {
+  const { status } = useContext(alertContext);
+  return (
+    <YBox
+      {...props}
+      {...composeStyles(alertStyles.group, style).rnw({
+        ...props,
+        variants: { status },
+      })}
+    />
+  );
+};
+
 const Action = (props: ButtonProps) => {
   const { status } = useContext(alertContext);
   return (
@@ -233,8 +264,13 @@ const Alert = withStaticProperties(Container, {
   Icon,
   Description,
   Action: withStaticProperties(Action, { Text: ActionText }),
+  Group,
 });
 
-const { Icon: AlertIcon, Description: AlertDescription } = Alert;
+const {
+  Icon: AlertIcon,
+  Description: AlertDescription,
+  Group: AlertGroup,
+} = Alert;
 
-export { Alert, AlertIcon, AlertDescription };
+export { Alert, AlertIcon, AlertDescription, AlertGroup };

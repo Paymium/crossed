@@ -8,6 +8,7 @@
 'use client';
 import { createList } from '@crossed/primitive';
 import {
+  composeStyles,
   createStyles,
   withReactive,
   type ExtractForProps,
@@ -25,10 +26,9 @@ const useMenuList = createStyles((t) => ({
     base: {
       alignItems: 'stretch',
     },
-    variants: {
-      padded: { true: { base: { padding: t.space.xxs } } },
-    },
+    variants: {},
   },
+  padded: { base: { padding: t.space.xxs } },
   item: {
     'base': {
       display: 'flex',
@@ -64,15 +64,18 @@ const MenuRoot = forwardRef(
     return (
       <YBox
         {...props}
-        {...useMenuList.root.rnw({ style: props.style, variants: { padded } })}
+        style={composeStyles(
+          useMenuList.root,
+          padded && useMenuList.padded,
+          props.style
+        )}
         ref={ref}
       />
     );
   }
 );
 
-type MenuRootProps = YBoxProps &
-  ExtractForProps<typeof useMenuList.root>['variants'];
+type MenuRootProps = YBoxProps & { padded?: boolean };
 
 const Divider = D;
 const Item = withReactive(

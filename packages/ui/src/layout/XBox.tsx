@@ -5,10 +5,12 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 import { Box, type BoxProps } from './Box';
 import { forwardRef } from 'react';
 import type { GetProps } from '@crossed/core';
+import { justifyContentStyle } from '../styles/justifyContent';
+import { alignItemsStyle } from '../styles/alignItems';
 
 export const useXBox = createStyles(
   () =>
@@ -20,40 +22,27 @@ export const useXBox = createStyles(
           justifyContent: 'flex-start',
           flexBasis: 'auto',
         },
-        variants: {
-          justifyContent: {
-            start: { base: { justifyContent: 'flex-start' } },
-            end: { base: { justifyContent: 'flex-end' } },
-            between: { base: { justifyContent: 'space-between' } },
-            around: { base: { justifyContent: 'space-around' } },
-            evenly: { base: { justifyContent: 'space-evenly' } },
-          },
-          alignItems: {
-            'center': { base: { alignItems: 'center' } },
-            'baseline': { base: { alignItems: 'baseline' } },
-            'flex-end': { base: { alignItems: 'flex-end' } },
-            'flex-start': { base: { alignItems: 'flex-start' } },
-            'stretch': { base: { alignItems: 'stretch' } },
-          },
-        },
       },
     }) as const
 );
 
-type Variant = ExtractForProps<typeof useXBox.root>;
-
-type XBoxPropsTmp = BoxProps & Variant['variants'];
+type XBoxPropsTmp = BoxProps & {
+  justifyContent?: keyof typeof justifyContentStyle;
+  alignItems?: keyof typeof alignItemsStyle;
+};
 
 export const XBox = forwardRef(
-  ({ justifyContent, alignItems, ...props }: XBoxPropsTmp, ref: any) => {
+  ({ justifyContent, alignItems, style, ...props }: XBoxPropsTmp, ref: any) => {
     return (
       <Box
         ref={ref}
         {...props}
-        {...useXBox.root.rnw({
-          ...props,
-          variants: { justifyContent, alignItems },
-        })}
+        style={composeStyles(
+          useXBox.root,
+          justifyContentStyle[justifyContent],
+          alignItemsStyle[alignItems],
+          style
+        )}
       />
     );
   }

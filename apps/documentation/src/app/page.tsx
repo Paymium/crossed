@@ -69,7 +69,7 @@ const useStyles = createStyles((t) => ({
 export default function Home() {
   const { t } = useTranslation();
   return (
-    <Box role="main" {...useStyles.container.rnw()} space="lg">
+    <Box role="main" style={useStyles.container} space="lg">
       <Logo size={100} />
       <H1 size={'md'}>Crossed</H1>
       <H2 size="md" weight="md" {...useStyles.description.rnw()}>
@@ -91,13 +91,13 @@ export default function Home() {
           <Github />
         </ButtonIcon>
       </Button>
-      <YBox space="lg" {...useStyles.sectionCta.rnw()}>
+      <YBox space="lg" style={useStyles.sectionCta}>
         <H3 {...useStyles.title.rnw()}>
           <Trans>Cross platform ecosystem</Trans>
         </H3>
-        <Box space="sm" {...useStyles.containerButtonCta.rnw()}>
+        <Box space="sm" style={useStyles.containerButtonCta}>
           <Link href="/styled/introduction" passHref legacyBehavior>
-            <Card {...useStyles.card.rnw()} role="link" space="xxs">
+            <Card style={useStyles.card} role="link" space="xxs">
               <Card.Title
                 role="heading"
                 aria-level={4}
@@ -111,7 +111,7 @@ export default function Home() {
             </Card>
           </Link>
           <Link href="/primitive/introduction" passHref legacyBehavior>
-            <Card {...useStyles.card.rnw()} role="link" space="xxs">
+            <Card style={useStyles.card} role="link" space="xxs">
               <Card.Title
                 role="heading"
                 aria-level={4}
@@ -125,7 +125,7 @@ export default function Home() {
             </Card>
           </Link>
           <Link href="/ui/introduction" passHref legacyBehavior>
-            <Card {...useStyles.card.rnw()} role="link" space="xxs">
+            <Card style={useStyles.card} role="link" space="xxs">
               <Card.Title
                 role="heading"
                 aria-level={4}

@@ -12,7 +12,11 @@ import {
 } from '@crossed/core';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { Text, type TextProps } from '../typography/Text';
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  type ExtractForProps,
+} from '@crossed/styled';
 import { forwardRef } from 'react';
 
 const useCard = createStyles((t) => ({
@@ -22,56 +26,36 @@ const useCard = createStyles((t) => ({
       borderRadius: t.space.xxs,
       backgroundColor: t.colors.background.primary,
     },
-    variants: {
-      role: {
-        link: {
-          'base': {
-            backgroundColor: t.components.Action.primary.default.background,
-          },
-          ':hover': {
-            backgroundColor: t.components.Action.primary.hover.background,
-          },
-          ':active': {
-            backgroundColor: t.components.Action.primary.active.background,
-          },
-        },
-      },
-    },
+    variants: {},
   },
   title: {
     base: { alignSelf: 'stretch', fontSize: t.font.fontSize.lg },
-    variants: {
-      role: {
-        link: {
-          'base': {
-            color: t.components.Action.primary.hover.text,
-          },
-          ':hover': {
-            color: t.components.Action.primary.hover.text,
-          },
-          ':active': {
-            color: t.components.Action.primary.active.text,
-          },
-        },
-      },
-    },
+    variants: {},
   },
   description: {
     base: { alignSelf: 'stretch' },
-    variants: {
-      role: {
-        link: {
-          'base': {
-            color: t.components.Action.primary.hover.text,
-          },
-          ':hover': {
-            color: t.components.Action.primary.hover.text,
-          },
-          ':active': {
-            color: t.components.Action.primary.active.text,
-          },
-        },
-      },
+    variants: {},
+  },
+  linkText: {
+    'base': {
+      color: t.components.Action.primary.hover.text,
+    },
+    ':hover': {
+      color: t.components.Action.primary.hover.text,
+    },
+    ':active': {
+      color: t.components.Action.primary.active.text,
+    },
+  },
+  linkBackground: {
+    'base': {
+      backgroundColor: t.components.Action.primary.default.background,
+    },
+    ':hover': {
+      backgroundColor: t.components.Action.primary.hover.background,
+    },
+    ':active': {
+      backgroundColor: t.components.Action.primary.active.background,
     },
   },
 }));
@@ -82,23 +66,29 @@ const [Provider, useProvider] = createScope<Variants>({} as Variants);
 
 type CardProps = YBoxProps & Variants['variants'];
 
-const CardRoot = forwardRef(({ role, ...props }: CardProps, ref: any) => {
-  return (
-    <Provider
-      variants={{ role }}
-      hover={props.hover}
-      active={props.active}
-      focus={props.focus}
-    >
-      <YBox
-        ref={ref}
-        role={role}
-        {...props}
-        {...useCard.root.rnw({ ...props, variants: { role } })}
-      />
-    </Provider>
-  );
-});
+const CardRoot = forwardRef(
+  ({ role, style, ...props }: CardProps, ref: any) => {
+    return (
+      <Provider
+        variants={{ role }}
+        hover={props.hover}
+        active={props.active}
+        focus={props.focus}
+      >
+        <YBox
+          ref={ref}
+          role={role}
+          {...props}
+          style={composeStyles(
+            useCard.root,
+            role === 'link' && useCard.linkBackground,
+            style
+          )}
+        />
+      </Provider>
+    );
+  }
+);
 
 const Title = (props: TextProps) => {
   const values = useProvider();

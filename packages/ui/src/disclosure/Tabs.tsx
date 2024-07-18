@@ -22,7 +22,7 @@ import {
 } from '../forms/Button';
 import { XBox, type XBoxProps } from '../layout/XBox';
 import { YBox, type YBoxProps } from '../layout/YBox';
-import { createStyles } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 import { Pressable } from 'react-native';
 import { Box } from '../layout/Box';
 import { useInteraction } from '@crossed/styled';
@@ -158,8 +158,14 @@ export const createTabs = () => {
     );
   };
 
-  const List = (props: XBoxProps) => {
-    return <XBox space="xs" {...props} {...useStyles.list.rnw()} />;
+  const List = ({ style, ...props }: XBoxProps) => {
+    return (
+      <XBox
+        space="xs"
+        {...props}
+        style={composeStyles(useStyles.list, style)}
+      />
+    );
   };
 
   const Panels = ({ children }: PropsWithChildren) => {
@@ -207,10 +213,11 @@ export const createTabs = () => {
                 <>
                   {children(e)}
                   <Box
-                    {...useStyles.indicator.rnw({
-                      hover: valueProps === value,
-                      variants: { disabled },
-                    })}
+                    style={useStyles.indicator}
+                    // {...useStyles.indicator.rnw({
+                    //   hover: valueProps === value,
+                    //   variants: { disabled },
+                    // })}
                   />
                 </>
               )
@@ -218,10 +225,11 @@ export const createTabs = () => {
               <>
                 {children}
                 <Box
-                  {...useStyles.indicator.rnw({
-                    hover: valueProps === value,
-                    variants: { disabled },
-                  })}
+                  style={useStyles.indicator}
+                  // {...useStyles.indicator.rnw({
+                  //   hover: valueProps === value,
+                  //   variants: { disabled },
+                  // })}
                 />
               </>
             )}

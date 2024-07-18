@@ -9,7 +9,7 @@
 import { withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
 import { Button, type ButtonProps } from '../forms/Button';
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 import { createContext, useContext } from 'react';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
 import { Box } from '../layout/Box';
@@ -58,30 +58,7 @@ const bannerStyles = createStyles(
       },
       containerIcon: {
         base: { borderRadius: 32, width: 32, height: 32 },
-        variants: {
-          status: {
-            error: {
-              base: {
-                backgroundColor: t.components.Banner.error.backgroundIcon,
-              },
-            },
-            success: {
-              base: {
-                backgroundColor: t.components.Banner.success.backgroundIcon,
-              },
-            },
-            warning: {
-              base: {
-                backgroundColor: t.components.Banner.warning.backgroundIcon,
-              },
-            },
-            info: {
-              base: {
-                backgroundColor: t.components.Banner.info.backgroundIcon,
-              },
-            },
-          },
-        },
+        variants: {},
       },
       action: {
         media: { xs: { alignSelf: 'flex-end' }, md: { alignSelf: 'auto' } },
@@ -93,34 +70,7 @@ const bannerStyles = createStyles(
           borderWidth: 1,
           borderStyle: 'solid',
         },
-        variants: {
-          status: {
-            error: {
-              base: {
-                borderColor: t.components.Banner.error.border,
-                backgroundColor: t.components.Banner.error.background,
-              },
-            },
-            success: {
-              base: {
-                borderColor: t.components.Banner.success.border,
-                backgroundColor: t.components.Banner.success.background,
-              },
-            },
-            warning: {
-              base: {
-                borderColor: t.components.Banner.warning.border,
-                backgroundColor: t.components.Banner.warning.background,
-              },
-            },
-            info: {
-              base: {
-                borderColor: t.components.Banner.info.border,
-                backgroundColor: t.components.Banner.info.background,
-              },
-            },
-          },
-        },
+        variants: {},
         media: {
           xs: {
             paddingVertical: t.space.xxs,
@@ -137,13 +87,65 @@ const bannerStyles = createStyles(
     }) as const
 );
 
-type Variant = ExtractForProps<typeof bannerStyles.container>;
+const containerStyles = createStyles((t) => ({
+  error: {
+    base: {
+      borderColor: t.components.Banner.error.border,
+      backgroundColor: t.components.Banner.error.background,
+    },
+  },
+  success: {
+    base: {
+      borderColor: t.components.Banner.success.border,
+      backgroundColor: t.components.Banner.success.background,
+    },
+  },
+  warning: {
+    base: {
+      borderColor: t.components.Banner.warning.border,
+      backgroundColor: t.components.Banner.warning.background,
+    },
+  },
+  info: {
+    base: {
+      borderColor: t.components.Banner.info.border,
+      backgroundColor: t.components.Banner.info.background,
+    },
+  },
+}));
+const containerIconStyles = createStyles((t) => ({
+  error: {
+    base: {
+      backgroundColor: t.components.Banner.error.backgroundIcon,
+    },
+  },
+  success: {
+    base: {
+      backgroundColor: t.components.Banner.success.backgroundIcon,
+    },
+  },
+  warning: {
+    base: {
+      backgroundColor: t.components.Banner.warning.backgroundIcon,
+    },
+  },
+  info: {
+    base: {
+      backgroundColor: t.components.Banner.info.backgroundIcon,
+    },
+  },
+}));
 
-export type BannerProps = YBoxProps & Variant['variants'];
+export type BannerProps = YBoxProps & { status?: keyof typeof containerStyles };
 
 const bannerContext = createContext<Pick<BannerProps, 'status'>>({});
 
-const Container = ({ status = 'info', children, ...props }: BannerProps) => {
+const Container = ({
+  status = 'info',
+  children,
+  style,
+  ...props
+}: BannerProps) => {
   const { md } = useMedia();
   return (
     <bannerContext.Provider value={{ status }}>
@@ -151,7 +153,11 @@ const Container = ({ status = 'info', children, ...props }: BannerProps) => {
         space={!md ? 'xs' : 'xxs'}
         role="banner"
         {...props}
-        {...bannerStyles.container.rnw({ variants: { status } })}
+        style={composeStyles(
+          bannerStyles.container,
+          containerStyles[status],
+          style
+        )}
       >
         {children}
       </YBox>
@@ -171,7 +177,13 @@ const Icon = () => {
     .with('warning', () => AlertTriangle)
     .exhaustive();
   return (
-    <Box center {...bannerStyles.containerIcon.rnw({ variants: { status } })}>
+    <Box
+      center
+      style={composeStyles(
+        bannerStyles.containerIcon,
+        containerIconStyles[status]
+      )}
+    >
       <Comp color={color} size={16} />
     </Box>
   );

@@ -10,57 +10,53 @@ import {
   composeStyles,
   createStyles,
   type BaseCrossedPropsExtended,
-  type ExtractForProps,
+  type CrossedMethods,
 } from '@crossed/styled';
 import { forwardRef } from 'react';
 import { baseStyle } from '../styles/base';
+import { gapStyles } from '../styles/gap';
 
 const styleBox = createStyles(
-  (t) =>
+  () =>
     ({
       root: {
         base: { display: 'flex' },
         web: { base: { boxSizing: 'border-box' } },
-        variants: {
-          space: {
-            xxs: { base: { gap: t.space.xxs } },
-            xs: { base: { gap: t.space.xs } },
-            sm: { base: { gap: t.space.sm } },
-            md: { base: { gap: t.space.md } },
-            lg: { base: { gap: t.space.lg } },
-            xl: { base: { gap: t.space.xl } },
-            xxl: { base: { gap: t.space.xxl } },
-          },
-          center: {
-            true: { base: { alignItems: 'center', justifyContent: 'center' } },
-          },
-        },
+      },
+      center: {
+        base: { alignItems: 'center', justifyContent: 'center' },
       },
     }) as const
 );
 
-type Variant = ExtractForProps<typeof styleBox.root>;
-
-export type BoxProps = Partial<Pick<Variant['variants'], 'center' | 'space'>> &
-  BaseCrossedPropsExtended &
-  ViewProps;
+export type BoxProps = {
+  style?: CrossedMethods<any>;
+  space?: keyof typeof gapStyles;
+  center?: boolean;
+} & Omit<BaseCrossedPropsExtended & ViewProps, 'style'>;
 
 export const Box = forwardRef<View, BoxProps>(
   (
     { style, className, space, center, active, hover, focus, ...props },
     ref
-  ) => (
-    <View
-      ref={ref}
-      {...props}
-      {...composeStyles(styleBox.root, baseStyle.view).rnw({
-        style,
-        className,
-        active,
-        hover,
-        focus,
-        variants: { space, center },
-      })}
-    />
-  )
+  ) => {
+    return (
+      <View
+        ref={ref}
+        {...props}
+        {...composeStyles(
+          baseStyle.view,
+          styleBox.root,
+          center === true && styleBox.center,
+          gapStyles[space],
+          style
+        ).rnw({
+          className,
+          active,
+          hover,
+          focus,
+        })}
+      />
+    );
+  }
 );

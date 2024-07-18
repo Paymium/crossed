@@ -7,7 +7,7 @@
 
 'use client';
 
-import { createStyles } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 import { Box, type BoxProps } from './Box';
 import { forwardRef } from 'react';
 
@@ -28,6 +28,10 @@ export type YBoxProps = BoxProps;
 
 export const YBox = forwardRef((props: YBoxProps, ref: any) => {
   return (
-    <Box ref={ref} {...props} style={[useYBox.root.rnw().style, props.style]} />
+    <Box
+      ref={ref}
+      {...props}
+      style={composeStyles(useYBox.root, props.style)}
+    />
   );
 });

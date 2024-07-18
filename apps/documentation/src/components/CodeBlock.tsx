@@ -89,10 +89,10 @@ export const CodeBlock = ({
 }) => {
   const Component = useCallback(
     ({ children }: PropsWithChildren) => (
-      <XBox {...styles.containerPreview.rnw()}>
-        <Center {...styles.preview.rnw()}>{children}</Center>
+      <XBox style={styles.containerPreview}>
+        <Center style={styles.preview}>{children}</Center>
         {variants && (
-          <YBox space="md" {...styles.containerVariants.rnw()}>
+          <YBox space="md" style={styles.containerVariants}>
             {variants}
           </YBox>
         )}

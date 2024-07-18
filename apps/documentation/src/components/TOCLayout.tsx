@@ -107,19 +107,19 @@ export const TOCLayout = ({
 
   return useMemo(() => {
     return (
-      <XBox {...styles.container.rnw()}>
-        <YBox {...styles.center.rnw()}>
-          <Box {...styles.position.rnw()}>{children}</Box>
+      <XBox style={styles.container}>
+        <YBox style={styles.center}>
+          <Box style={styles.position}>{children}</Box>
         </YBox>
 
         {links.length > 0 && (
-          <MenuList {...styles.menuList.rnw()}>
+          <MenuList style={styles.menuList}>
             <MenuList.Label {...styles.menuLabel.rnw()} weight="lg">
               {t('On this page')}
             </MenuList.Label>
             {links.map(({ href, title }) => {
               return (
-                <YBox role="listitem" key={href || title} {...styles.li.rnw()}>
+                <YBox role="listitem" key={href || title} style={styles.li}>
                   <Item hash={hash} href={href} title={title} />
                 </YBox>
               );

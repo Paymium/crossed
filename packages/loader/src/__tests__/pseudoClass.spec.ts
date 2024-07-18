@@ -34,7 +34,7 @@ describe('pseudoClass', () => {
       `.dark {  }
 .background-color-\\[white\\] { background-color:white; }
 .background-color-\\[black\\] { background-color:black; }
-.hover\\:background-color-\\[black\\]:hover { background-color:black; }`
+.hover\\:background-color-\\[black\\]:hover:not(:disabled) { background-color:black; }`
     );
   });
 

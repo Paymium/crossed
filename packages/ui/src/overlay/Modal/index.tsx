@@ -14,7 +14,11 @@ import {
   createModal,
   type ModalBodyComponent,
 } from '@crossed/primitive';
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  type ExtractForProps,
+} from '@crossed/styled';
 import { createContext, useContext } from 'react';
 import { XBox } from '../../layout/XBox';
 import { Box, type BoxProps } from '../../layout/Box';
@@ -152,9 +156,9 @@ const ModalBody: ModalBodyComponent = (props) => (
   <PModalBody {...props} {...modalStyles.body.rnw()} />
 );
 
-const ModalHeader = ({ children, ...props }: BoxProps) => {
+const ModalHeader = ({ children, style, ...props }: BoxProps) => {
   return (
-    <Box {...props} {...modalStyles.header.rnw(props)}>
+    <Box {...props} style={composeStyles(modalStyles.header, style)}>
       {children}
       <ModalTrigger asChild>
         <CloseButton />

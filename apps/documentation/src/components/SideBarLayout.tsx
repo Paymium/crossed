@@ -59,8 +59,8 @@ const styles = createStyles(
     }) as const
 );
 
-const Li = ({ label, ...props }: YBoxProps & { label?: boolean }) => (
-  <YBox role="listitem" {...props} {...styles.li.rnw()} />
+const Li = ({ label, style, ...props }: YBoxProps & { label?: boolean }) => (
+  <YBox role="listitem" {...props} style={composeStyles(styles.li, style)} />
 );
 
 type Nav =
@@ -77,7 +77,7 @@ export function SideBarLayout({
   menus,
 }: PropsWithChildren<{ menus: Nav[] }>) {
   return (
-    <XBox {...styles.container.rnw()}>
+    <XBox style={styles.container}>
       <ScrollView {...styles.root.rnw()}>
         <MenuList>
           <Accordion defaultValues={[]} allowMultiple>
@@ -93,7 +93,7 @@ export function SideBarLayout({
         </MenuList>
       </ScrollView>
 
-      <YBox {...styles.center.rnw()}>{children}</YBox>
+      <YBox style={styles.center}>{children}</YBox>
     </XBox>
   );
 }

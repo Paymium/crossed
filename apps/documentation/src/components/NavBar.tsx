@@ -136,9 +136,9 @@ const LinkLogo = forwardRef((props: any, ref) => {
 });
 
 const Nav = forwardRef((props: any, ref) => {
-  return <XBox {...props} ref={ref} {...useStyles.nav.rnw(props)} />;
+  return <XBox {...props} ref={ref} style={useStyles.nav} />;
 });
 
 const El = forwardRef((props: any, ref) => {
-  return <Box {...props} ref={ref} {...useStyles.el.rnw(props)} />;
+  return <Box {...props} ref={ref} style={useStyles.el} />;
 });

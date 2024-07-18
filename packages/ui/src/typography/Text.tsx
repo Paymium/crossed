@@ -34,7 +34,7 @@ const useText = createStyles(
             warning: { base: { color: t.colors.warning.primary } },
             info: { base: { color: t.colors.info.primary } },
             link: { base: { color: t.colors.primary.primary } },
-            success: { base: {color: t.colors.success.primary}}
+            success: { base: { color: t.colors.success.primary } },
           },
           textAlign: {
             auto: { base: { textAlign: 'auto' } },

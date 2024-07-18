@@ -8,7 +8,7 @@
 'use client';
 import { withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 import { createContext, useContext, type ReactNode } from 'react';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
 import { Box } from '../layout/Box';
@@ -43,30 +43,7 @@ const toastStyles = createStyles(
       },
       containerIcon: {
         base: { borderRadius: 32, width: 32, height: 32 },
-        variants: {
-          status: {
-            error: {
-              base: {
-                backgroundColor: t.components.Banner.error.backgroundIcon,
-              },
-            },
-            success: {
-              base: {
-                backgroundColor: t.components.Banner.success.backgroundIcon,
-              },
-            },
-            warning: {
-              base: {
-                backgroundColor: t.components.Banner.warning.backgroundIcon,
-              },
-            },
-            info: {
-              base: {
-                backgroundColor: t.components.Banner.info.backgroundIcon,
-              },
-            },
-          },
-        },
+        variants: {},
       },
       containerChildren: { base: { flex: 1, flexShrink: 1 } },
       closeButton: {
@@ -84,42 +61,65 @@ const toastStyles = createStyles(
             boxShadow: '0px 1px 4px 0px #00000026',
           },
         },
-        variants: {
-          status: {
-            error: {
-              base: {
-                borderColor: t.components.Banner.error.border,
-                backgroundColor: t.components.Banner.error.background,
-              },
-            },
-            success: {
-              base: {
-                borderColor: t.components.Banner.success.border,
-                backgroundColor: t.components.Banner.success.background,
-              },
-            },
-            warning: {
-              base: {
-                borderColor: t.components.Banner.warning.border,
-                backgroundColor: t.components.Banner.warning.background,
-              },
-            },
-            info: {
-              base: {
-                borderColor: t.components.Banner.info.border,
-                backgroundColor: t.components.Banner.info.background,
-              },
-            },
-          },
-        },
+        variants: {},
       },
     }) as const
 );
 
-type Variant = ExtractForProps<typeof toastStyles.container>;
+const containerIconStyles = createStyles((t) => ({
+  error: {
+    base: {
+      backgroundColor: t.components.Banner.error.backgroundIcon,
+    },
+  },
+  success: {
+    base: {
+      backgroundColor: t.components.Banner.success.backgroundIcon,
+    },
+  },
+  warning: {
+    base: {
+      backgroundColor: t.components.Banner.warning.backgroundIcon,
+    },
+  },
+  info: {
+    base: {
+      backgroundColor: t.components.Banner.info.backgroundIcon,
+    },
+  },
+}));
+const containerStyles = createStyles((t) => ({
+  error: {
+    base: {
+      borderColor: t.components.Banner.error.border,
+      backgroundColor: t.components.Banner.error.background,
+    },
+  },
+  success: {
+    base: {
+      borderColor: t.components.Banner.success.border,
+      backgroundColor: t.components.Banner.success.background,
+    },
+  },
+  warning: {
+    base: {
+      borderColor: t.components.Banner.warning.border,
+      backgroundColor: t.components.Banner.warning.background,
+    },
+  },
+  info: {
+    base: {
+      borderColor: t.components.Banner.info.border,
+      backgroundColor: t.components.Banner.info.background,
+    },
+  },
+}));
 
-type ContainerProps = YBoxProps &
-  Variant['variants'] & { closable?: boolean; icon?: ReactNode };
+type ContainerProps = YBoxProps & {
+  closable?: boolean;
+  icon?: ReactNode;
+  status?: keyof typeof containerStyles;
+};
 
 const toastContext = createContext<Pick<ContainerProps, 'status'>>({});
 
@@ -128,6 +128,7 @@ const Container = ({
   children,
   closable = false,
   icon,
+  style,
   ...props
 }: ContainerProps) => {
   const { md } = useMedia();
@@ -136,10 +137,14 @@ const Container = ({
       <XBox
         space={!md ? 'xs' : 'xxs'}
         {...props}
-        {...toastStyles.container.rnw({ ...props, variants: { status } })}
+        style={composeStyles(
+          toastStyles.container,
+          containerStyles[status],
+          style
+        )}
       >
         <Icon />
-        <YBox {...toastStyles.containerChildren.rnw()}>{children}</YBox>
+        <YBox style={toastStyles.containerChildren}>{children}</YBox>
         {closable && <CloseButton {...toastStyles.closeButton.rnw()} />}
         {icon}
       </XBox>
@@ -159,7 +164,13 @@ const Icon = () => {
     .with('warning', () => AlertTriangle)
     .exhaustive();
   return (
-    <Box center {...toastStyles.containerIcon.rnw({ variants: { status } })}>
+    <Box
+      center
+      style={composeStyles(
+        toastStyles.containerIcon,
+        containerIconStyles[status]
+      )}
+    >
       <Comp color={color} size={16} />
     </Box>
   );
@@ -167,7 +178,7 @@ const Icon = () => {
 
 const Title = (props: TextProps) => {
   return (
-    <Box space="sm" {...toastStyles.containerTitle.rnw()}>
+    <Box space="sm" style={toastStyles.containerTitle}>
       <Text
         weight="lg"
         numberOfLines={1}

@@ -87,7 +87,7 @@ export const Input = forwardRef<TextInput, InputProps>(
           <XBox>
             {elementLeft && (
               <XBox
-                {...form.elementLeft.rnw()}
+                style={form.elementLeft}
                 onLayout={({ nativeEvent: { layout } }) =>
                   setElementLeftWidth(layout.width)
                 }
@@ -125,7 +125,7 @@ export const Input = forwardRef<TextInput, InputProps>(
               />
             </FormControl>
             <XBox
-              {...form.elementRight.rnw()}
+              style={form.elementRight}
               onLayout={({ nativeEvent: { layout } }) =>
                 setElementRightWidth(layout.width)
               }

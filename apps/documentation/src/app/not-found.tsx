@@ -24,7 +24,7 @@ const styles = createStyles((t) => ({
 export default function NotFound() {
   const { t } = useTranslation();
   return (
-    <Center {...styles.root.rnw()}>
+    <Center style={styles.root}>
       <H2>{t('Not Found')}</H2>
       <P textAlign="center">{t('Could not find requested resource')}</P>
       <Link href="/">{t('Return Home')}</Link>
