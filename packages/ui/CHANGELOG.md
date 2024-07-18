@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.30
+
+### Patch Changes
+
+- 70fac07: change box style props, accept now only CrossedMethods
+
 ## 1.0.0-beta.29
 
 ### Patch Changes
