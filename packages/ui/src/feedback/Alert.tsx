@@ -23,9 +23,10 @@ import {
   type ButtonProps,
   type ButtonTextProps,
 } from '../forms/Button';
+import { Box } from '../layout/Box';
 
 export const alertStyles = createStyles(
-  ({ components: { Alert }, space, colors }) =>
+  ({ components: { Alert }, space }) =>
     ({
       description: {
         base: {
@@ -41,38 +42,14 @@ export const alertStyles = createStyles(
         },
       },
       containerIcon: {
-        base: {
-          borderRadius: 32,
-          width: 32,
-          height: 32,
-        },
-        variants: {
-          status: {
-            error: { base: { backgroundColor: colors.error.hight } },
-            success: {
-              base: {
-                // backgroundColor: t.colors.success.hight,
-              },
-            },
-            warning: {
-              base: {
-                // backgroundColor: t.colors.warning.hight,
-              },
-            },
-            info: {
-              base: {
-                // backgroundColor: t.colors.info.hight,
-              },
-            },
-          },
-        },
+        base: { alignSelf: 'center' },
+        media: { md: { alignSelf: 'baseline', paddingTop: 3 } },
       },
       container: {
         base: {
-          paddingTop: space.xxs,
-          paddingBottom: space.xxs,
-          paddingRight: space.xs,
-          paddingLeft: space.xs,
+          paddingVertical: space.xxs,
+          paddingHorizontal: space.xs,
+          padding: space.xxs,
           borderRadius: 8,
           borderWidth: 1,
           borderStyle: 'solid',
@@ -88,6 +65,8 @@ export const alertStyles = createStyles(
         },
       },
       action: {
+        base: { alignSelf: 'center' },
+        media: { md: { alignSelf: 'baseline' } },
         web: {
           'base': { boxSizing: 'border-box' },
           ':focus': {
@@ -207,7 +186,11 @@ const Icon = () => {
     .with('success', () => CheckCircle)
     .with('warning', () => AlertTriangle)
     .exhaustive();
-  return <Comp color={color} size={16} />;
+  return (
+    <Box style={alertStyles.containerIcon}>
+      <Comp color={color} size={16} />
+    </Box>
+  );
 };
 
 const Description = (props: TextProps) => {
@@ -226,14 +209,11 @@ export type GroupProps = { style?: CrossedMethods<any, any> } & Omit<
 >;
 
 const Group = ({ style, ...props }: GroupProps) => {
-  const { status } = useContext(alertContext);
   return (
     <YBox
+      space="xs"
       {...props}
-      {...composeStyles(alertStyles.group, style).rnw({
-        ...props,
-        variants: { status },
-      })}
+      style={composeStyles(alertStyles.group, style)}
     />
   );
 };

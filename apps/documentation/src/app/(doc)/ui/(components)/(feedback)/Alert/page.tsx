@@ -109,6 +109,30 @@ export default function CreateBadge() {
       </Alert.Action.Text>
     </Alert.Action>
   </Alert>
+  <Alert status="warning"> 
+    <AlertIcon />
+    <Alert.Group>
+      <Alert.Description>
+        Les utilisateurs peuvent désactiver One Tap s'ils désactivent
+        l'indicateur d'invite de connexion au compte Google sur la page
+        Applications ayant accès à votre compte. Les sessions désactivées ne
+        s'affichent pas dans One Tap. Si toutes les sessions Google sont
+        désactivées, One Tap ne s'affiche pas.
+      </Alert.Description>
+      <Alert.Description>
+        Les utilisateurs peuvent désactiver One Tap s'ils désactivent
+        l'indicateur d'invite de connexion au compte Google sur la page
+        Applications ayant accès à votre compte. Les sessions désactivées ne
+        s'affichent pas dans One Tap. Si toutes les sessions Google sont
+        désactivées, One Tap ne s'affiche pas.
+      </Alert.Description>
+    </Alert.Group>
+    <Alert.Action>
+      <Alert.Action.Text>
+        Lorem ipsum
+      </Alert.Action.Text>
+    </Alert.Action>
+  </Alert>
 </YBox>`}
       scope={{ Alert, AlertDescription, AlertIcon, YBox }}
     />

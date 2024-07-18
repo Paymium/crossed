@@ -139,6 +139,14 @@ export class Loader {
         return `${acc}${convertKeyToCss(
           'paddingTop'
         )}:${value};${convertKeyToCss('paddingBottom')}:${value};`;
+      } else if (key === 'padding') {
+        return `${acc}${convertKeyToCss(
+          'paddingTop'
+        )}:${value};${convertKeyToCss(
+          'paddingBottom'
+        )}:${value};${convertKeyToCss(
+          'paddingLeft'
+        )}:${value};${convertKeyToCss('paddingRight')}:${value};`;
       }
       return `${acc}${convertKeyToCss(key)}:${value};`;
     }, '');
