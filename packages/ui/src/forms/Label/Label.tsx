@@ -25,6 +25,7 @@ export const Label: LabelComponent = withReactive(
         {...props}
         {...styles().rnw({
           ...props,
+          disabled,
           style: style as any,
           className,
           variants: { size, weight },

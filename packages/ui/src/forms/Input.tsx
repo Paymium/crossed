@@ -40,118 +40,115 @@ export type InputProps = Omit<TextInputProps, 'editable' | 'onChange'> &
     extra?: string;
   };
 
-export const Input = forwardRef<TextInput, InputProps>(
-  (
-    {
-      error,
-      label,
-      clearable,
-      defaultValue,
-      value: valueProps,
-      onChangeText,
-      disabled,
-      elementRight,
-      elementLeft,
-      description,
-      extra,
-      ...props
-    },
-    ref
-  ) => {
-    const [value, setValue] = useUncontrolled({
-      value: valueProps,
-      defaultValue,
-      onChange: onChangeText,
-    });
-    const [elementLeftWidth, setElementLeftWidth] = useState(0);
-    const [elementRightWidth, setElementRightWidth] = useState(0);
-    const { state, props: propsInteraction } = useInteraction(props);
-    const { color } = form.placeholder.style().style;
+export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
+  const {
+    error,
+    label,
+    clearable,
+    defaultValue,
+    value: valueProps,
+    onChangeText,
+    disabled,
+    elementRight,
+    elementLeft,
+    description,
+    extra,
+    ...props
+  } = allProps;
+  const [value, setValue] = useUncontrolled({
+    value: valueProps,
+    defaultValue,
+    onChange: onChangeText,
+  });
+  const [elementLeftWidth, setElementLeftWidth] = useState(0);
+  const [elementRightWidth, setElementRightWidth] = useState(0);
+  const { state, props: propsInteraction } = useInteraction(allProps);
+  const { color } = form.placeholder.style().style;
 
-    const onClear = useCallback(() => {
-      setValue('');
-    }, [setValue]);
+  const onClear = useCallback(() => {
+    setValue('');
+  }, [setValue]);
 
-    const showClear = clearable && value;
-    return (
-      <FormField>
-        <YBox space="xxs">
-          {(label || description || extra) && (
-            <XBox alignItems="center" space="xxs">
-              {label && <FormLabel>{label}</FormLabel>}
-              {description && (
-                <Text {...form.labelDescription.rnw()}>{description}</Text>
-              )}
-              {extra && (
-                <Text {...form.labelExtra.rnw()} textAlign="right">
-                  {extra}
-                </Text>
-              )}
-            </XBox>
-          )}
-          <XBox>
-            {elementLeft && (
-              <XBox
-                style={form.elementLeft}
-                onLayout={({ nativeEvent: { layout } }) =>
-                  setElementLeftWidth(layout.width)
-                }
-              >
-                {isValidElement(elementLeft) &&
-                typeof elementLeft.type !== 'string' &&
-                (elementLeft.type as any).displayName === 'CrossedText'
-                  ? cloneElement(elementLeft, {
-                      style: [(elementLeft as any).style, { color }],
-                    } as any)
-                  : elementLeft}
-              </XBox>
+  const showClear = clearable && value;
+  return (
+    <FormField
+      disabled={disabled || (!props.focusable && props.focusable !== undefined)}
+    >
+      <YBox space="xxs">
+        {(label || description || extra) && (
+          <XBox alignItems="center" space="xxs">
+            {label && <FormLabel>{label}</FormLabel>}
+            {description && (
+              <Text {...form.labelDescription.rnw()}>{description}</Text>
             )}
-            <FormControl>
-              <TextInput
-                ref={ref}
-                placeholderTextColor={color}
-                cursorColor={color}
-                editable={!disabled}
-                focusable={!disabled}
-                {...props}
-                {...propsInteraction}
-                {...form.input.rnw({
-                  ...props,
-                  ...state,
-                  focus: !disabled && state.focus,
-                  style: [
-                    props.style as any,
-                    elementLeftWidth && { paddingLeft: elementLeftWidth },
-                    elementRightWidth && { paddingRight: elementRightWidth },
-                  ],
-                  disabled,
-                  variants: { error: !!error },
-                })}
-                value={value}
-                onChangeText={setValue}
-              />
-            </FormControl>
+            {extra && (
+              <Text {...form.labelExtra.rnw()} textAlign="right">
+                {extra}
+              </Text>
+            )}
+          </XBox>
+        )}
+        <XBox>
+          {elementLeft && (
             <XBox
-              style={composeStyles(form.elementRight, gapStyles.xs)}
+              style={form.elementLeft}
               onLayout={({ nativeEvent: { layout } }) =>
-                setElementRightWidth(layout.width)
+                setElementLeftWidth(layout.width)
               }
             >
-              {isValidElement(elementRight) &&
-              typeof elementRight.type !== 'string' &&
-              (elementRight.type as any).displayName === 'CrossedText'
-                ? cloneElement(elementRight, {
-                    style: [(elementRight as any).style, { color }],
+              {isValidElement(elementLeft) &&
+              typeof elementLeft.type !== 'string' &&
+              (elementLeft.type as any).displayName === 'CrossedText'
+                ? cloneElement(elementLeft, {
+                    style: [(elementLeft as any).style, { color }],
                   } as any)
-                : elementRight}
-              {showClear && (
-                <CloseButton onPress={onClear} style={styles.close} />
-              )}
+                : elementLeft}
             </XBox>
+          )}
+          <FormControl>
+            <TextInput
+              ref={ref}
+              placeholderTextColor={color}
+              cursorColor={color}
+              editable={!disabled}
+              focusable={!disabled}
+              {...props}
+              {...propsInteraction}
+              {...form.input.rnw({
+                ...props,
+                ...state,
+                style: [
+                  props.style as any,
+                  elementLeftWidth && { paddingLeft: elementLeftWidth },
+                  elementRightWidth && { paddingRight: elementRightWidth },
+                ],
+                disabled,
+                variants: { error: !!error },
+              })}
+              value={value}
+              onChangeText={setValue}
+            />
+          </FormControl>
+          <XBox
+            style={composeStyles(form.elementRight, gapStyles.xs)}
+            onLayout={({ nativeEvent: { layout } }) =>
+              setElementRightWidth(layout.width)
+            }
+          >
+            {isValidElement(elementRight) &&
+            typeof elementRight.type !== 'string' &&
+            (elementRight.type as any).displayName === 'CrossedText'
+              ? cloneElement(elementRight, {
+                  style: [(elementRight as any).style, { color }],
+                } as any)
+              : elementRight}
+            {showClear && (
+              <CloseButton onPress={onClear} style={styles.close} />
+            )}
           </XBox>
-          {error && <Text color="error">{error.toString()}</Text>}
-        </YBox>
-      </FormField>
-    );
-  }
-);
+        </XBox>
+        {error && <Text color="error">{error.toString()}</Text>}
+      </YBox>
+    </FormField>
+  );
+});

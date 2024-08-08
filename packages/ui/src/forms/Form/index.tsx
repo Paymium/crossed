@@ -44,13 +44,14 @@ const FormField: FormFieldComponent = ({ name, ...props }) => {
   const {
     state: { focus, hover },
     props: { onFocus, onBlur, onHoverIn, onHoverOut },
-  } = useInteraction();
+  } = useInteraction(props);
+
   return (
     <fieldContext.Provider
       value={{
         name,
         inputId,
-        states: { focus, hover },
+        states: { focus, hover, disabled: props.disabled },
         handles: { onFocus, onBlur, onHoverIn, onHoverOut },
       }}
     >
@@ -83,7 +84,6 @@ const FormControl: FormControlComponent = ({ children }) => {
 };
 const FormLabel: FormLabelComponent = (props) => {
   const { inputId, states, handles } = useContext(fieldContext);
-
   return (
     <Pressable
       {...{ tabIndex: '-1' }}

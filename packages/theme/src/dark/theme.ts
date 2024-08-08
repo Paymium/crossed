@@ -161,5 +161,44 @@ export default {
         text: colors.success.primary,
       },
     },
+    Input: {
+      primary: {
+        default: {
+          background: colors.background.secondary,
+          border: colors.border.secondary,
+          text: colors.black,
+          icon: colors.black,
+          placeholder: colors.text.secondary,
+        },
+        active: {
+          background: colors.background.secondary,
+          border: colors.border.secondary,
+          text: colors.black,
+          icon: colors.black,
+          placeholder: colors.text.secondary,
+        },
+        disabled: {
+          background: colors.primary[10],
+          border: colors.primary[10],
+          text: colors.text.secondary,
+          icon: colors.text.secondary,
+          placeholder: colors.text.secondary,
+        },
+        focus: {
+          background: colors.background.secondary,
+          border: colors.border.brand,
+          text: colors.black,
+          icon: colors.black,
+          placeholder: colors.text.secondary,
+        },
+        hover: {
+          background: colors.background.secondary,
+          border: colors.border.brand,
+          text: colors.black,
+          icon: colors.black,
+          placeholder: colors.text.secondary,
+        },
+      },
+    },
   },
 } as const satisfies Theme;

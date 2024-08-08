@@ -16,7 +16,7 @@ import type { LabelProps } from '../Label/types';
 import type { YBoxProps } from '../../layout/YBox';
 
 export type FormProps = YBoxProps & { onSubmit: () => void; asChild?: boolean };
-export type FormFieldProps = ViewProps & { name?: string };
+export type FormFieldProps = ViewProps & { name?: string; disabled?: boolean };
 export type FormControlProps = PropsWithChildren<{}>;
 export type FormLabelProps = LabelProps;
 export type FormMessageProps = PropsWithChildren<{}>;
@@ -30,7 +30,7 @@ export type FormMessageComponent = ComponentType<FormMessageProps>;
 export type FieldContext = {
   name?: string;
   inputId: MutableRefObject<string>;
-  states: { focus: boolean; hover: boolean };
+  states: { focus: boolean; hover: boolean; disabled: boolean };
   handles: {
     onFocus: (_e: NativeSyntheticEvent<TargetedEvent>) => void;
     onBlur: (_e: NativeSyntheticEvent<TargetedEvent>) => void;

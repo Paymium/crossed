@@ -17,7 +17,9 @@ type PropsOverWrite =
   | 'onHoverIn'
   | 'onHoverOut'
   | 'onFocus'
-  | 'onBlur';
+  | 'onBlur'
+  | 'disabled'
+  | 'focusable';
 export const useInteraction = (
   props?: Pick<PressableProps, PropsOverWrite> & {
     active?: boolean;
@@ -25,6 +27,7 @@ export const useInteraction = (
     focus?: boolean;
   }
 ) => {
+  const { disabled, focusable } = props || {};
   const [active, setActive] = useUncontrolled({
     value: props?.active,
     defaultValue: false,
@@ -41,51 +44,57 @@ export const useInteraction = (
   const onPressIn = useCallback(
     composeEventHandlers(props?.onPressIn || undefined, () => {
       setTransition(() => {
-        setActive(true);
+        (!disabled || (!focusable && focusable !== undefined)) &&
+          setActive(true);
       });
     }),
-    [setActive, props?.onPressIn]
+    [setActive, props?.onPressIn, disabled, focusable]
   );
   const onPressOut = useCallback(
     composeEventHandlers(props?.onPressOut || undefined, () => {
       setTransition(() => {
-        setActive(false);
+        (!disabled || (!focusable && focusable !== undefined)) &&
+          setActive(false);
       });
     }),
-    [setActive, props?.onPressOut]
+    [setActive, props?.onPressOut, disabled, focusable]
   );
 
   const onHoverIn = useCallback(
     composeEventHandlers(props?.onHoverIn || undefined, () => {
       setTransition(() => {
-        setHover(true);
+        (!disabled || (!focusable && focusable !== undefined)) &&
+          setHover(true);
       });
     }),
-    [setHover, props?.onHoverIn]
+    [setHover, props?.onHoverIn, disabled, focusable]
   );
   const onHoverOut = useCallback(
     composeEventHandlers(props?.onHoverOut || undefined, () => {
       setTransition(() => {
-        setHover(false);
+        (!disabled || (!focusable && focusable !== undefined)) &&
+          setHover(false);
       });
     }),
-    [setHover, props?.onHoverOut]
+    [setHover, props?.onHoverOut, disabled, focusable]
   );
   const onFocus = useCallback(
     composeEventHandlers(props?.onFocus || undefined, () => {
       setTransition(() => {
-        setFocus(true);
+        (!disabled || (!focusable && focusable !== undefined)) &&
+          setFocus(true);
       });
     }),
-    [setFocus, props?.onFocus]
+    [setFocus, props?.onFocus, disabled, focusable]
   );
   const onBlur = useCallback(
     composeEventHandlers(props?.onBlur || undefined, () => {
       setTransition(() => {
-        setFocus(false);
+        (!disabled || (!focusable && focusable !== undefined)) &&
+          setFocus(false);
       });
     }),
-    [setFocus, props?.onBlur]
+    [setFocus, props?.onBlur, disabled, focusable]
   );
 
   return useMemo(

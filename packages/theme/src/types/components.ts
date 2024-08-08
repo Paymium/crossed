@@ -26,6 +26,13 @@ type Action = {
   background: string;
   border: string;
 };
+type Input = {
+  text: string;
+  icon: string;
+  background: string;
+  border: string;
+  placeholder: string;
+};
 
 type ActionType = {
   default: Action;
@@ -33,6 +40,13 @@ type ActionType = {
   active: Action;
   disabled: Action;
   focus: Action;
+};
+type InputType = {
+  default: Input;
+  hover: Input;
+  active: Input;
+  disabled: Input;
+  focus: Input;
 };
 // type ActionIconType<T = Pick<Action, 'icon' | 'background'>> = {
 //   default: T;
@@ -59,5 +73,8 @@ export type Components = {
     info: Alert;
     warning: Alert;
     error: Alert;
+  };
+  Input: {
+    primary: InputType;
   };
 };
