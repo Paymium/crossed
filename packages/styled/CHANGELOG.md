@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.15
+
+### Patch Changes
+
+- 5ef1603: some fix disabled on label and input and theme
+
 ## 0.14.0-beta.14
 
 ### Patch Changes

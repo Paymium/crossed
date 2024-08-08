@@ -1,5 +1,15 @@
 # @crossed/ui
 
+## 1.0.0-beta.33
+
+### Patch Changes
+
+- 5ef1603: some fix disabled on label and input and theme
+- Updated dependencies [5ef1603]
+  - @crossed/styled@0.14.0-beta.15
+  - @crossed/theme@1.1.0-beta.12
+  - @crossed/unicons@1.0.0-beta.22
+
 ## 1.0.0-beta.32
 
 ### Patch Changes
