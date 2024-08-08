@@ -1,5 +1,14 @@
 # @crossed/ui
 
+## 1.0.0-beta.32
+
+### Patch Changes
+
+- 6350321: fix error input disabled and change style props CloseButton
+- Updated dependencies [6350321]
+  - @crossed/theme@1.1.0-beta.11
+  - @crossed/unicons@1.0.0-beta.21
+
 ## 1.0.0-beta.31
 
 ### Patch Changes

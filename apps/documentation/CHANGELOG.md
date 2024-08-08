@@ -1,5 +1,15 @@
 # crossed-docs
 
+## 0.6.0-beta.34
+
+### Patch Changes
+
+- Updated dependencies [6350321]
+  - @crossed/theme@1.1.0-beta.11
+  - @crossed/ui@1.0.0-beta.32
+  - @crossed/unicons@1.0.0-beta.21
+  - @crossed/next-adapter@0.6.0-beta.22
+
 ## 0.6.0-beta.33
 
 ### Patch Changes
