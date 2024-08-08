@@ -73,7 +73,12 @@ export default {
           icon: '',
         },
         focus: { background: '', text: '', icon: '', border: '' },
-        disabled: { background: '', text: '', icon: '', border: '' },
+        disabled: {
+          background: colors.primary[90],
+          text: '',
+          icon: '',
+          border: '',
+        },
       },
       secondary: {
         default: {

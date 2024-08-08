@@ -15,13 +15,18 @@ import {
   type ReactNode,
 } from 'react';
 import { form, type FormInput } from '../styles/form';
-import { useInteraction } from '@crossed/styled';
+import { gapStyles } from '../styles/gap';
+import { useInteraction, createStyles, composeStyles } from '@crossed/styled';
 import { FormControl, FormField, FormLabel } from './Form';
 import { CloseButton } from '../other/CloseButton';
 import { useUncontrolled } from '@crossed/core';
 import { XBox } from '../layout/XBox';
 import { Text } from '../typography/Text';
 import { YBox } from '../layout/YBox';
+
+const styles = createStyles(() => ({
+  close: { base: { padding: 0 } },
+}));
 
 export type InputProps = Omit<TextInputProps, 'editable' | 'onChange'> &
   Omit<FormInput, 'variants'> &
@@ -107,11 +112,13 @@ export const Input = forwardRef<TextInput, InputProps>(
                 placeholderTextColor={color}
                 cursorColor={color}
                 editable={!disabled}
+                focusable={!disabled}
                 {...props}
                 {...propsInteraction}
                 {...form.input.rnw({
                   ...props,
                   ...state,
+                  focus: !disabled && state.focus,
                   style: [
                     props.style as any,
                     elementLeftWidth && { paddingLeft: elementLeftWidth },
@@ -125,12 +132,11 @@ export const Input = forwardRef<TextInput, InputProps>(
               />
             </FormControl>
             <XBox
-              style={form.elementRight}
+              style={composeStyles(form.elementRight, gapStyles.xs)}
               onLayout={({ nativeEvent: { layout } }) =>
                 setElementRightWidth(layout.width)
               }
             >
-              {showClear && <CloseButton onPress={onClear} />}
               {isValidElement(elementRight) &&
               typeof elementRight.type !== 'string' &&
               (elementRight.type as any).displayName === 'CrossedText'
@@ -138,6 +144,9 @@ export const Input = forwardRef<TextInput, InputProps>(
                     style: [(elementRight as any).style, { color }],
                   } as any)
                 : elementRight}
+              {showClear && (
+                <CloseButton onPress={onClear} style={styles.close} />
+              )}
             </XBox>
           </XBox>
           {error && <Text color="error">{error.toString()}</Text>}

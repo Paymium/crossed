@@ -7,12 +7,12 @@
 
 import { createStyles } from '@crossed/styled';
 
-export const gapStyles = createStyles((t) => ({
-  xxs: { base: { gap: t.space.xxs } },
-  xs: { base: { gap: t.space.xs } },
-  sm: { base: { gap: t.space.sm } },
-  md: { base: { gap: t.space.md } },
-  lg: { base: { gap: t.space.lg } },
-  xl: { base: { gap: t.space.xl } },
-  xxl: { base: { gap: t.space.xxl } },
+export const gapStyles = createStyles(({ space }) => ({
+  xxs: { base: { gap: space.xxs } },
+  xs: { base: { gap: space.xs } },
+  sm: { base: { gap: space.sm } },
+  md: { base: { gap: space.md } },
+  lg: { base: { gap: space.lg } },
+  xl: { base: { gap: space.xl } },
+  xxl: { base: { gap: space.xxl } },
 }));

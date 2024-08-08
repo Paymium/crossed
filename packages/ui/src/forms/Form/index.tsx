@@ -70,8 +70,15 @@ const FormControl: FormControlComponent = ({ children }) => {
   return cloneElement(children, {
     id,
     ...states,
-    onFocus: composeEventHandlers(handles.onFocus, children.props.onFocus),
-    onBlur: composeEventHandlers(handles.onBlur, children.props.onBlur),
+    ...([undefined, true].includes(children.props.focusable)
+      ? {
+          onFocus: composeEventHandlers(
+            handles.onFocus,
+            children.props.onFocus
+          ),
+          onBlur: composeEventHandlers(handles.onBlur, children.props.onBlur),
+        }
+      : {}),
   } as any);
 };
 const FormLabel: FormLabelComponent = (props) => {

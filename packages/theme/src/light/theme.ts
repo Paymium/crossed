@@ -70,7 +70,12 @@ export default {
           icon: colors.white,
         },
         focus: { background: '', text: '', icon: '', border: '' },
-        disabled: { background: '', text: '', icon: '', border: '' },
+        disabled: {
+          background: colors.primary[1],
+          text: '',
+          icon: '',
+          border: '',
+        },
       },
       secondary: {
         default: {

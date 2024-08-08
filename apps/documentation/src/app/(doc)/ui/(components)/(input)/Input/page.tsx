@@ -39,6 +39,14 @@ export default function CreateBadge() {
   />
   <Input
     placeholder="Placeholder"
+    label="disabled"
+    description="description"
+    extra="extra"
+    clearable={${clearable}}
+    disabled
+  />
+  <Input
+    placeholder="Placeholder"
     label="Error"
     error="Your message"
     clearable={${clearable}}

@@ -5,7 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createStyles } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  type CrossedMethods,
+} from '@crossed/styled';
 import { X } from '@crossed/unicons';
 import { Pressable, type PressableProps } from 'react-native';
 
@@ -25,7 +29,9 @@ export const CloseButton = ({
   style,
   disabled,
   ...props
-}: Omit<PressableProps, 'children'>) => {
+}: Omit<PressableProps, 'children' | 'style'> & {
+  style?: CrossedMethods<any>;
+}) => {
   const { color } = styles.icon.style({ disabled }).style;
   return (
     <Pressable
@@ -33,12 +39,12 @@ export const CloseButton = ({
       aria-label="Close"
       {...props}
       disabled={disabled}
-      style={({ pressed }) => [
-        styles.pressable.rnw({
+      style={({ pressed, hovered }: { pressed?: boolean; hovered?: boolean }) =>
+        composeStyles(styles.pressable, style).rnw({
           active: pressed,
-        }).style,
-        typeof style === 'function' ? style({ pressed }) : style,
-      ]}
+          hover: hovered,
+        }).style
+      }
     >
       <X color={color} size={16} />
     </Pressable>

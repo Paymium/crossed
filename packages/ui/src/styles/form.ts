@@ -30,6 +30,9 @@ export const form = createStyles((t) => ({
     ':disabled': {
       // borderColor: t.colors.neutral[200],
       color: t.colors.text.secondary,
+      backgroundColor: t.components.Action.primary.disabled.background,
+      borderWidth: 0,
+      cursor: 'not-allowed',
     },
     'variants': {
       error: {

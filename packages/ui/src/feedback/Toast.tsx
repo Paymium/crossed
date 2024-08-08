@@ -145,7 +145,7 @@ const Container = ({
       >
         <Icon />
         <YBox style={toastStyles.containerChildren}>{children}</YBox>
-        {closable && <CloseButton {...toastStyles.closeButton.rnw()} />}
+        {closable && <CloseButton style={toastStyles.closeButton} />}
         {icon}
       </XBox>
     </toastContext.Provider>
