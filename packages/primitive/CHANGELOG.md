@@ -1,5 +1,11 @@
 # @crossed/primitive
 
+## 1.8.0-beta.4
+
+### Minor Changes
+
+- 18018df: add icon in button
+
 ## 1.8.0-beta.3
 
 ### Minor Changes

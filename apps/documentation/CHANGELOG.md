@@ -1,5 +1,15 @@
 # crossed-docs
 
+## 0.6.0-beta.36
+
+### Patch Changes
+
+- Updated dependencies [cd82bb0]
+- Updated dependencies [18018df]
+  - @crossed/ui@1.0.0-beta.34
+  - @crossed/primitive@1.8.0-beta.4
+  - @crossed/next-adapter@0.6.0-beta.24
+
 ## 0.6.0-beta.35
 
 ### Patch Changes

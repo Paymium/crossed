@@ -1,5 +1,11 @@
 # @crossed/loader
 
+## 1.0.0-beta.23
+
+### Patch Changes
+
+- 714348b: add not hover on active css
+
 ## 1.0.0-beta.22
 
 ### Patch Changes

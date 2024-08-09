@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 1.0.0-beta.34
+
+### Patch Changes
+
+- cd82bb0: change Text style props
+- Updated dependencies [18018df]
+  - @crossed/primitive@1.8.0-beta.4
+
 ## 1.0.0-beta.33
 
 ### Patch Changes
