@@ -183,7 +183,7 @@ const Title = (props: TextProps) => {
         weight="lg"
         numberOfLines={1}
         {...props}
-        {...toastStyles.title.rnw(props)}
+        style={composeStyles(toastStyles.title, props.style)}
       />
     </Box>
   );
@@ -193,7 +193,7 @@ const Description = (props: TextProps) => {
     <Text
       role="alert"
       {...props}
-      {...toastStyles.description.rnw({ ...props })}
+      style={composeStyles(toastStyles.description, props.style)}
     />
   );
 };

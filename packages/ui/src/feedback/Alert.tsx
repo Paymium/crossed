@@ -25,22 +25,43 @@ import {
 } from '../forms/Button';
 import { Box } from '../layout/Box';
 
+export const alertDescriptionStyles = createStyles(
+  ({ components: { Alert } }) => ({
+    base: { base: { flex: 1 } },
+    error: { base: { color: Alert.error.text } },
+    success: { base: { color: Alert.success.text } },
+    warning: { base: { color: Alert.warning.text } },
+    info: { base: { color: Alert.info.text } },
+  })
+);
+export const alertActionTextStyles = createStyles(
+  ({ components: { Alert } }) => ({
+    error: {
+      'base': { color: Alert.error.text },
+      ':hover': { color: Alert.error.text },
+      ':active': { color: Alert.error.text },
+    },
+    success: {
+      'base': { color: Alert.success.text },
+      ':hover': { color: Alert.success.text },
+      ':active': { color: Alert.success.text },
+    },
+    warning: {
+      'base': { color: Alert.warning.text },
+      ':hover': { color: Alert.warning.text },
+      ':active': { color: Alert.warning.text },
+    },
+    info: {
+      'base': { color: Alert.info.text },
+      ':hover': { color: Alert.info.text },
+      ':active': { color: Alert.info.text },
+    },
+  })
+);
+
 export const alertStyles = createStyles(
   ({ components: { Alert }, space }) =>
     ({
-      description: {
-        base: {
-          flex: 1,
-        },
-        variants: {
-          status: {
-            error: { base: { color: Alert.error.text } },
-            success: { base: { color: Alert.success.text } },
-            warning: { base: { color: Alert.warning.text } },
-            info: { base: { color: Alert.info.text } },
-          },
-        },
-      },
       containerIcon: {
         base: { alignSelf: 'center' },
         media: { md: { alignSelf: 'baseline', paddingTop: 3 } },
@@ -90,33 +111,7 @@ export const alertStyles = createStyles(
           },
         },
       },
-      actionText: {
-        variants: {
-          status: {
-            error: {
-              'base': { color: Alert.error.text },
-              ':hover': { color: Alert.error.text },
-              ':active': { color: Alert.error.text },
-            },
-            success: {
-              'base': { color: Alert.success.text },
-              ':hover': { color: Alert.success.text },
-              ':active': { color: Alert.success.text },
-            },
-            warning: {
-              'base': { color: Alert.warning.text },
-              ':hover': { color: Alert.warning.text },
-              ':active': { color: Alert.warning.text },
-            },
-            info: {
-              'base': { color: Alert.info.text },
-              ':hover': { color: Alert.info.text },
-              ':active': { color: Alert.info.text },
-            },
-          },
-        },
-      },
-      group: { base: { flex: 1 } },
+      group: { base: { flex: 1, flexShrink: 1 } },
     }) as const
 );
 
@@ -177,9 +172,10 @@ const Container = ({
 
 const Icon = () => {
   const { status } = useContext(alertContext);
-  const { color } = alertStyles.description.style({
-    variants: { status },
-  }).style;
+  const { color } = composeStyles(
+    alertDescriptionStyles.base,
+    alertDescriptionStyles[status]
+  ).style().style;
   const Comp = match(status)
     .with('error', () => XCircle)
     .with('info', () => Info)
@@ -198,7 +194,11 @@ const Description = (props: TextProps) => {
   return (
     <Text
       {...props}
-      {...alertStyles.description.rnw({ ...props, variants: { status } })}
+      style={composeStyles(
+        alertDescriptionStyles.base,
+        alertDescriptionStyles[status],
+        props.style
+      )}
     />
   );
 };
@@ -235,7 +235,7 @@ const ActionText = (props: ButtonTextProps) => {
   return (
     <ButtonText
       {...props}
-      {...alertStyles.actionText.rnw({ ...props, variants: { status } })}
+      style={composeStyles(alertActionTextStyles[status], props.style)}
     />
   );
 };

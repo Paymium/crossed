@@ -43,6 +43,51 @@ const buttonContext = createContext<
   }
 >({});
 
+export const textStyles = createStyles((t) => ({
+  default: {
+    'base': { fontWeight: 'bold' },
+    ':disabled': { pointerEvents: 'none' },
+  },
+  primary: {
+    'base': { color: t.components.Action.primary.default.text },
+    ':hover': { color: t.components.Action.primary.hover.text },
+    ':active': { color: t.components.Action.primary.active.text },
+    ':disabled': { color: t.components.Action.primary.disabled.text },
+  },
+  secondary: {
+    'base': { color: t.components.Action.secondary.default.text },
+    ':hover': { color: t.components.Action.secondary.hover.text },
+    ':active': { color: t.components.Action.secondary.active.text },
+    ':disabled': { color: t.components.Action.secondary.disabled.text },
+  },
+  tertiary: {
+    'base': { color: t.components.Action.tertiary.default.text },
+    ':hover': { color: t.components.Action.tertiary.hover.text },
+    ':active': { color: t.components.Action.tertiary.active.text },
+    ':disabled': { color: t.components.Action.tertiary.disabled.text },
+  },
+  false: {},
+}));
+
+const textErrorStyles = createStyles((t) => ({
+  primary: {
+    base: { color: 'white' },
+  },
+  secondary: {
+    'base': { color: t.colors.error.primary },
+    ':hover': { color: t.colors.error.muted },
+    ':active': { color: t.colors.error.satured },
+    ':disabled': { color: t.colors.error.hight },
+  },
+  tertiary: {
+    'base': { color: t.colors.error.primary },
+    ':hover': { color: t.colors.error.muted },
+    ':active': { color: t.colors.error.satured },
+    ':disabled': { color: t.colors.error.hight },
+  },
+  false: {},
+}));
+
 export const useButton = createStyles(
   (t) =>
     ({
@@ -95,28 +140,6 @@ export const useButton = createStyles(
           },
         },
       },
-      errorText: {
-        variants: {
-          variant: {
-            primary: {
-              base: { color: 'white' },
-            },
-            secondary: {
-              'base': { color: t.colors.error.primary },
-              ':hover': { color: t.colors.error.muted },
-              ':active': { color: t.colors.error.satured },
-              ':disabled': { color: t.colors.error.hight },
-            },
-            tertiary: {
-              'base': { color: t.colors.error.primary },
-              ':hover': { color: t.colors.error.muted },
-              ':active': { color: t.colors.error.satured },
-              ':disabled': { color: t.colors.error.hight },
-            },
-            false: {},
-          },
-        },
-      },
       root: {
         base: {
           display: 'flex',
@@ -153,13 +176,13 @@ export const useButton = createStyles(
                 backgroundColor: t.components.Action.primary.default.background,
                 borderColor: t.components.Action.primary.default.background,
               },
-              ':active': {
-                backgroundColor: t.components.Action.primary.active.background,
-                borderColor: t.components.Action.primary.active.background,
-              },
               ':hover': {
                 backgroundColor: t.components.Action.primary.hover.background,
                 borderColor: t.components.Action.primary.hover.background,
+              },
+              ':active': {
+                backgroundColor: t.components.Action.primary.active.background,
+                borderColor: t.components.Action.primary.active.background,
               },
               ':disabled': {
                 backgroundColor:
@@ -212,30 +235,6 @@ export const useButton = createStyles(
           },
         },
       },
-      text: {
-        'base': { fontWeight: 'bold' },
-        ':disabled': { pointerEvents: 'none' },
-        'variants': {
-          variant: {
-            primary: {
-              'base': { color: t.components.Action.primary.default.text },
-              ':hover': { color: t.components.Action.primary.hover.text },
-              ':active': { color: t.components.Action.primary.active.text },
-            },
-            secondary: {
-              'base': { color: t.components.Action.secondary.default.text },
-              ':hover': { color: t.components.Action.secondary.hover.text },
-              ':active': { color: t.components.Action.secondary.active.text },
-            },
-            tertiary: {
-              'base': { color: t.components.Action.tertiary.default.text },
-              ':hover': { color: t.components.Action.tertiary.hover.text },
-              ':active': { color: t.components.Action.tertiary.active.text },
-            },
-            false: {},
-          },
-        },
-      },
     }) as const
 );
 
@@ -274,8 +273,8 @@ const Root = withReactive(
           style={(e: any) =>
             composeStyles(useButton.root, error && useButton.error).rnw({
               ...props,
-              active: e.pressed,
               hover: e.hovered,
+              active: e.pressed,
               disabled: disabled || loading,
               variants: { size, variant },
             }).style
@@ -305,30 +304,33 @@ const Root = withReactive(
 const Text = withReactive(
   forwardRef<any, TextProps>((props, ref) => {
     const { variant, error, state, disabled } = useContext(buttonContext);
+
     return (
       <TextUi
         weight="lg"
         {...props}
-        {...composeStyles(useButton.text, error && useButton.errorText).rnw({
-          ...props,
-          ...state,
-          disabled,
-          variants: { variant },
-        })}
+        disabled={disabled}
+        {...state}
+        style={composeStyles(
+          textStyles.default,
+          textStyles[(variant || '').toString()],
+          error && textErrorStyles[(variant || '').toString()],
+          props.style
+        )}
         ref={ref}
       />
     );
   })
 );
 
-const ButtonIcon = ({ children }: PropsWithChildren) => {
+const Icon = ({ children }: PropsWithChildren) => {
   const { variant, error, state, disabled } = useContext(buttonContext);
   const color = useMemo(() => {
-    return composeStyles(useButton.text, error && useButton.errorText).style({
-      ...state,
-      disabled,
-      variants: { variant },
-    }).style.color as string;
+    return composeStyles(
+      textStyles.default,
+      textStyles[(variant || '').toString()],
+      error && textErrorStyles[(variant || '').toString()]
+    ).style({ ...state, disabled }).style.color as string;
   }, [variant, error, state, disabled]);
   return isValidElement(children)
     ? cloneElement(children, { color } as any)
@@ -342,9 +344,10 @@ const Button = createButton({
   Root: withDefaultProps(Root, { variant: 'primary' }),
   Text,
   Element,
+  Icon,
 });
 
-const { Text: ButtonText, Element: ButtonElement } = Button;
+const { Text: ButtonText, Element: ButtonElement, Icon: ButtonIcon } = Button;
 
 export { ButtonText, ButtonElement, Button, ButtonIcon };
 export type ButtonProps = GetProps<typeof Button>;

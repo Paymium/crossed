@@ -70,8 +70,9 @@ const useStyles = createStyles((t) => ({
     //   },
     // },
   },
+  indicatorActive: { base: { backgroundColor: t.colors.background.active } },
   indicator: {
-    'base': {
+    base: {
       height: 4,
       backgroundColor: 'transparent',
       borderRadius: 4,
@@ -80,10 +81,7 @@ const useStyles = createStyles((t) => ({
       left: 0,
       right: 0,
     },
-    ':hover': {
-      // backgroundColor: t.colors.brand.bright,
-    },
-    'variants': {
+    variants: {
       disabled: {
         true: {
           base: {
@@ -92,6 +90,18 @@ const useStyles = createStyles((t) => ({
           },
         },
       },
+    },
+  },
+  underline: {
+    'base': { color: t.colors.neutral['600'] },
+    ':hover': {
+      // color: t.colors.brand.bright,
+    },
+  },
+  disabled: {
+    base: {
+      // color: t.colors.neutral.low,
+      pointerEvents: 'none',
     },
   },
   triggerText: {
@@ -213,7 +223,10 @@ export const createTabs = () => {
                 <>
                   {children(e)}
                   <Box
-                    style={useStyles.indicator}
+                    style={composeStyles(
+                      useStyles.indicator,
+                      valueProps === value && useStyles.indicatorActive
+                    )}
                     // {...useStyles.indicator.rnw({
                     //   hover: valueProps === value,
                     //   variants: { disabled },
@@ -225,7 +238,10 @@ export const createTabs = () => {
               <>
                 {children}
                 <Box
-                  style={useStyles.indicator}
+                  style={composeStyles(
+                    useStyles.indicator,
+                    valueProps === value && useStyles.indicatorActive
+                  )}
                   // {...useStyles.indicator.rnw({
                   //   hover: valueProps === value,
                   //   variants: { disabled },
@@ -242,10 +258,12 @@ export const createTabs = () => {
         const state = useTriggerContext();
         return (
           <Button.Text
-            {...useStyles.triggerText.rnw({
-              ...state,
-              variants: { underline: true, disabled: state.disabled },
-            })}
+            style={composeStyles(
+              useStyles.triggerText,
+              useStyles.underline,
+              state.disabled && useStyles.disabled
+            )}
+            {...state}
             {...props}
           />
         );

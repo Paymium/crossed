@@ -24,7 +24,7 @@ const useCode = createStyles((t) => ({
 type CodeProps = TextProps;
 
 const Code = (props: CodeProps) => {
-  return <Text {...props} {...useCode.root.rnw()} />;
+  return <Text {...props} style={useCode.root} />;
 };
 
 export { Code, type CodeProps };

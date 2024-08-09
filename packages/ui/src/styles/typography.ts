@@ -26,7 +26,13 @@ export const typoStyles = createStyles((t) => {
         size: {
           xs: { base: { fontSize: 11, lineHeight: 14 } },
           sm: { base: { fontSize: 14, lineHeight: 17 } },
-          md: { base },
+          md: {
+            base: {
+              fontSize: base.fontSize,
+              lineHeight: base.lineHeight,
+              fontWeight: base.fontWeight,
+            },
+          },
           lg: { base: { fontSize: 18, lineHeight: 23, fontWeight: '700' } },
           xl: { base: { fontSize: 24, lineHeight: 30, fontWeight: '700' } },
           h6: { base: { fontSize: 28, lineHeight: 36, fontWeight: '700' } },

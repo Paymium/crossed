@@ -104,25 +104,17 @@ const Item = withReactive(
 );
 
 const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
-  const variants = useVariantContext();
+  // const variants = useVariantContext();
 
-  return (
-    <Text
-      {...props}
-      {...useButton.root.rnw({ ...props, variants })}
-      ref={ref}
-    />
-  );
+  return <Text {...props} style={useButton.root} ref={ref} />;
 });
 const Title = (props: TextProps) => (
-  <Text {...props} {...useMenuList.title.rnw(props)} />
+  <Text {...props} style={useMenuList.title} />
 );
 const SubTitle = Button.Text;
 
 type ContextVariant = ButtonVariantProps & { active?: boolean };
-const [ProviderVariant, useVariantContext] = createScope<ContextVariant>(
-  {} as ContextVariant
-);
+const [ProviderVariant] = createScope<ContextVariant>({} as ContextVariant);
 
 const MenuList = createList({
   Root: memo(

@@ -15,6 +15,7 @@ import {
   composeStyles,
   createStyles,
   withReactive,
+  type CrossedMethods,
   type ExtractForProps,
 } from '@crossed/styled';
 import { forwardRef } from 'react';
@@ -51,11 +52,11 @@ const useText = createStyles(
 
 type VariantLocal = ExtractForProps<typeof useText.root>;
 
-export type TextProps = TextNativeProps &
+export type TextProps = Omit<TextNativeProps, 'style'> &
   VariantLocal['variants'] &
   Omit<VariantLocal, 'variants'> &
   Size['variants'] &
-  Weight['variants'];
+  Weight['variants'] & { style?: CrossedMethods<any, any> };
 
 const Text = withReactive(
   forwardRef(
@@ -68,6 +69,7 @@ const Text = withReactive(
         weight,
         textAlign,
         size = 'md',
+        style,
         ...props
       }: TextProps,
       ref: any
@@ -79,7 +81,8 @@ const Text = withReactive(
           {...composeStyles(
             typoStyles.size,
             useText.root,
-            typoStyles.weight
+            typoStyles.weight,
+            style
           ).rnw({
             ...props,
             active,

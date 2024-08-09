@@ -210,10 +210,10 @@ const Trigger = withStaticProperties(
           <XBox alignItems="center" space="xxs">
             {label && <FormLabel {...states}>{label}</FormLabel>}
             {description && (
-              <Text {...form.labelDescription.rnw()}>{description}</Text>
+              <Text style={form.labelDescription}>{description}</Text>
             )}
             {extra && (
-              <Text {...form.labelExtra.rnw()} textAlign="right">
+              <Text style={form.labelExtra} textAlign="right">
                 {extra}
               </Text>
             )}
@@ -298,7 +298,7 @@ Option.displayName = 'Select.Option';
 
 const Value = () => {
   const { renderValue } = useSelectProvider();
-  return <Text {...useSelect.value.rnw()}>{renderValue.current}</Text>;
+  return <Text style={useSelect.value}>{renderValue.current}</Text>;
 };
 
 Value.id = 'Select.Value';

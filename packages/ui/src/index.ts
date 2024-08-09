@@ -17,6 +17,7 @@ export * from './display';
 export * from './overlay';
 export * from './other';
 export * from './styles';
+export * from './useMedia';
 // export * from './variants';
 // export * from './animations';
 // export * from '@crossed/unicons';

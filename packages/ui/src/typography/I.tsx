@@ -6,7 +6,7 @@
  */
 
 import { Text, type TextProps } from './Text';
-import { createStyles } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 
 const useItalic = createStyles(() => ({
   root: {
@@ -18,5 +18,5 @@ const useItalic = createStyles(() => ({
 
 export type IProps = TextProps;
 export const I = (props: IProps) => {
-  return <Text {...props} {...useItalic.root.rnw()} />;
+  return <Text {...props} style={composeStyles(useItalic.root, props.style)} />;
 };

@@ -62,7 +62,7 @@ const useCard = createStyles((t) => ({
 
 type Variants = ExtractForProps<typeof useCard.root>;
 
-const [Provider, useProvider] = createScope<Variants>({} as Variants);
+const [Provider] = createScope<Variants>({} as Variants);
 
 type CardProps = YBoxProps & Variants['variants'];
 
@@ -91,20 +91,20 @@ const CardRoot = forwardRef(
 );
 
 const Title = (props: TextProps) => {
-  const values = useProvider();
+  // const values = useProvider();
   return (
     <Text
       size="md"
       {...props}
-      {...useCard.title.rnw({ ...values, ...props })}
+      style={composeStyles(useCard.title, props.style)}
     />
   );
 };
 
 const Description = (props: TextProps) => {
-  const values = useProvider();
+  // const values = useProvider();
   return (
-    <Text {...props} {...useCard.description.rnw({ ...values, ...props })} />
+    <Text {...props} style={composeStyles(useCard.description, props.style)} />
   );
 };
 const Card = withStaticProperties(CardRoot, {

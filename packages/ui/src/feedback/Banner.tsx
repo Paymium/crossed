@@ -17,31 +17,23 @@ import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
 import { useMedia } from '../useMedia';
 
+const titleStyle = createStyles((t) => ({
+  default: { base: { fontWeight: '600' } },
+  error: { base: { color: t.components.Banner.error.title } },
+  success: { base: { color: t.components.Banner.success.title } },
+  warning: { base: { color: t.components.Banner.warning.title } },
+  info: { base: { color: t.components.Banner.info.title } },
+}));
+const descriptionStyle = createStyles((t) => ({
+  default: { base: { flex: 1 } },
+  error: { base: { color: t.components.Banner.error.subtitle } },
+  success: { base: { color: t.components.Banner.success.subtitle } },
+  warning: { base: { color: t.components.Banner.warning.subtitle } },
+  info: { base: { color: t.components.Banner.info.subtitle } },
+}));
 const bannerStyles = createStyles(
   (t) =>
     ({
-      description: {
-        base: { flex: 1 },
-        variants: {
-          status: {
-            error: { base: { color: t.components.Banner.error.subtitle } },
-            success: { base: { color: t.components.Banner.success.subtitle } },
-            warning: { base: { color: t.components.Banner.warning.subtitle } },
-            info: { base: { color: t.components.Banner.info.subtitle } },
-          },
-        },
-      },
-      title: {
-        base: { fontWeight: '600' },
-        variants: {
-          status: {
-            error: { base: { color: t.components.Banner.error.title } },
-            success: { base: { color: t.components.Banner.success.title } },
-            warning: { base: { color: t.components.Banner.warning.title } },
-            info: { base: { color: t.components.Banner.info.title } },
-          },
-        },
-      },
       icon: {
         base: { fontWeight: '600' },
         variants: {
@@ -195,7 +187,7 @@ const Title = ({ style, className, ...props }: TextProps) => {
     <Text
       weight="lg"
       {...props}
-      {...bannerStyles.title.rnw({ style, className, variants: { status } })}
+      style={composeStyles(titleStyle.default, titleStyle[status], style)}
     />
   );
 };
@@ -204,7 +196,11 @@ const Description = (props: TextProps) => {
   return (
     <Text
       {...props}
-      {...bannerStyles.description.rnw({ ...props, variants: { status } })}
+      style={composeStyles(
+        descriptionStyle.default,
+        descriptionStyle[status],
+        props.style
+      )}
     />
   );
 };

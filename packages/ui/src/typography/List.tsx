@@ -27,7 +27,7 @@ export type LiProps = XBoxProps;
 export const Li = ({ children, style, ...props }: LiProps) => {
   return (
     <XBox {...props} style={composeStyles(useList.li, style)} role="listitem">
-      <Text {...useList.disc.rnw()}>{'\u2B24'} </Text>
+      <Text style={useList.disc}>{'\u2B24'} </Text>
       {children as any}
     </XBox>
   );

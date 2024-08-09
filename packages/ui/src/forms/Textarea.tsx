@@ -69,10 +69,10 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
             <XBox alignItems="center" space="xxs">
               {label && <FormLabel>{label}</FormLabel>}
               {description && (
-                <Text {...form.labelDescription.rnw()}>{description}</Text>
+                <Text style={form.labelDescription}>{description}</Text>
               )}
               {extra && (
-                <Text {...form.labelExtra.rnw()} textAlign="right">
+                <Text style={form.labelExtra} textAlign="right">
                   {extra}
                 </Text>
               )}
