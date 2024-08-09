@@ -21,13 +21,15 @@ export const createButton = <
   ButtonProps extends Record<string, any>,
   TextProps extends NTextProps,
   ElementProps extends Record<string, any>,
+  IconProps extends Record<string, any>,
 >(components: {
   Root: ComponentType<ButtonProps>;
   Group: ComponentType<GroupProps>;
   Text: ComponentType<TextProps>;
   Element: ComponentType<ElementProps>;
+  Icon: ComponentType<IconProps>;
 }) => {
-  const { Root, Group, Text, Element } = components;
+  const { Root, Group, Text, Element, Icon } = components;
   const ButtonGroup = createButtonGroup(Group);
   const Button = createButtonMain(Root);
   const ButtonText = createButtonText(Text);
@@ -42,6 +44,7 @@ export const createButton = <
     Group: ButtonGroup,
     Text: ButtonText,
     Element: ButtonElement,
+    Icon,
     displayName: 'Button',
   });
 };

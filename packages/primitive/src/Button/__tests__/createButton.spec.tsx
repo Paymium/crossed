@@ -54,6 +54,7 @@ describe('createButton', () => {
     const Element = forwardRef((p: any, ref: any) => <p {...p} ref={ref} />);
     const Group = forwardRef((p: any, ref: any) => <p {...p} ref={ref} />);
     const Root = forwardRef((p: any, ref: any) => <p {...p} ref={ref} />);
+    const Icon = forwardRef((p: any, ref: any) => <p {...p} ref={ref} />);
     const Text = forwardRef((p: any, ref: any) => (
       <p {...p} ref={ref} />
     )) as any;
@@ -63,6 +64,7 @@ describe('createButton', () => {
       Group,
       Root,
       Text,
+      Icon,
     });
 
     expect(createButtonMainMocked).toHaveBeenCalledWith(Root);
