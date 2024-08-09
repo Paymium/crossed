@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.16
+
+### Patch Changes
+
+- b002577: force publish
+
 ## 0.14.0-beta.15
 
 ### Patch Changes
