@@ -52,11 +52,12 @@ const useText = createStyles(
 
 type VariantLocal = ExtractForProps<typeof useText.root>;
 
-export type TextProps = Omit<TextNativeProps, 'style'> &
-  VariantLocal['variants'] &
-  Omit<VariantLocal, 'variants'> &
+export type TextProps = Omit<TextNativeProps, 'style'> & {
+  style?: CrossedMethods<any, any>;
+} & VariantLocal['variants'] &
+  Omit<VariantLocal, 'variants' | 'style'> &
   Size['variants'] &
-  Weight['variants'] & { style?: CrossedMethods<any, any> };
+  Weight['variants'];
 
 const Text = withReactive(
   forwardRef(

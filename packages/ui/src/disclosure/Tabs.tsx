@@ -254,14 +254,15 @@ export const createTabs = () => {
       );
     },
     {
-      Text: (props: ButtonTextProps) => {
+      Text: ({ style, ...props }: ButtonTextProps) => {
         const state = useTriggerContext();
         return (
           <Button.Text
             style={composeStyles(
               useStyles.triggerText,
               useStyles.underline,
-              state.disabled && useStyles.disabled
+              state.disabled && useStyles.disabled,
+              style
             )}
             {...state}
             {...props}

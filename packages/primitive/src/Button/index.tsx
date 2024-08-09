@@ -10,7 +10,6 @@ import type { ComponentType } from 'react';
 import { createButtonMain } from './Button';
 import { createButtonText } from './ButtonText';
 import { createButtonElement } from './ButtonElement';
-import type { TextProps as NTextProps } from 'react-native';
 import { createButtonGroup } from './ButtonGroup';
 export { useContext as useButtonContext } from './context';
 export { useContextGroup as useButtonGroupContext } from './contextGroup';
@@ -19,7 +18,7 @@ export { useButtonGroupCollection } from './contextCollection';
 export const createButton = <
   GroupProps extends Record<string, any>,
   ButtonProps extends Record<string, any>,
-  TextProps extends NTextProps,
+  TextProps extends Record<string, any>,
   ElementProps extends Record<string, any>,
   IconProps extends Record<string, any>,
 >(components: {
