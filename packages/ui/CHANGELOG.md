@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 1.0.0-beta.36
+
+### Patch Changes
+
+- 9ecd4b0: fix error text and button typescript
+- Updated dependencies [9ecd4b0]
+  - @crossed/primitive@1.8.0-beta.5
+
 ## 1.0.0-beta.35
 
 ### Patch Changes

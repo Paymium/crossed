@@ -1,5 +1,11 @@
 # @crossed/primitive
 
+## 1.8.0-beta.5
+
+### Patch Changes
+
+- 9ecd4b0: fix error text and button typescript
+
 ## 1.8.0-beta.4
 
 ### Minor Changes

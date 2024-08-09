@@ -184,7 +184,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages/styled
       '@crossed/ui':
-        specifier: 1.0.0-beta.35
+        specifier: 1.0.0-beta.36
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: workspace:*
@@ -771,7 +771,7 @@ importers:
         specifier: 0.8.1-beta.3
         version: link:../core
       '@crossed/primitive':
-        specifier: 1.8.0-beta.4
+        specifier: 1.8.0-beta.5
         version: link:../primitive
       '@crossed/styled':
         specifier: workspace:^
