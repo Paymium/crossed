@@ -34,7 +34,7 @@ describe('pseudoClass', () => {
       `.dark {  }
 .background-color-\\[white\\] { background-color:white; }
 .background-color-\\[black\\] { background-color:black; }
-.hover\\:background-color-\\[black\\]:hover:not(:disabled) { background-color:black; }`
+.hover\\:background-color-\\[black\\]:hover:not(:disabled):not(:active) { background-color:black; }`
     );
   });
 
@@ -76,7 +76,7 @@ describe('pseudoClass', () => {
       `.dark {  }
 .background-color-\\[white\\] { background-color:white; }
 .background-color-\\[black\\] { background-color:black; }
-.active\\:background-color-\\[black\\]:active { background-color:black; }`
+.active\\:background-color-\\[black\\]:active:not(:disabled) { background-color:black; }`
     );
   });
 });
