@@ -109,7 +109,7 @@ export const CodeBlock = ({
       >
         {preview && <LivePreview Component={Component} />}
         <YBox>
-          {fileName && <Text {...styles.pre.rnw()}>{fileName}</Text>}
+          {fileName && <Text style={styles.pre}>{fileName}</Text>}
           <LiveEditor
             theme={themes.dracula}
             {...styles.liveEditor.className({

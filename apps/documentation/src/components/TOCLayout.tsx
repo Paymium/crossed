@@ -114,7 +114,7 @@ export const TOCLayout = ({
 
         {links.length > 0 && (
           <MenuList style={styles.menuList}>
-            <MenuList.Label {...styles.menuLabel.rnw()} weight="lg">
+            <MenuList.Label style={styles.menuLabel} weight="lg">
               {t('On this page')}
             </MenuList.Label>
             {links.map(({ href, title }) => {
@@ -172,7 +172,7 @@ const Item = ({
       }}
     >
       <MenuList.Title
-        {...menuStyle.itemText.rnw()}
+        style={menuStyle.itemText}
         weight={href === hash ? 'lg' : undefined}
       >
         {t(title)}

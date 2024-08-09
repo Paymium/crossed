@@ -72,7 +72,7 @@ export default function Home() {
     <Box role="main" style={useStyles.container} space="lg">
       <Logo size={100} />
       <H1 size={'md'}>Crossed</H1>
-      <H2 size="md" weight="md" {...useStyles.description.rnw()}>
+      <H2 size="md" weight="md" style={useStyles.description}>
         <Trans>
           Explore our ecosystem to develop cross-platform applications with
           <br />
@@ -92,7 +92,7 @@ export default function Home() {
         </ButtonIcon>
       </Button>
       <YBox space="lg" style={useStyles.sectionCta}>
-        <H3 {...useStyles.title.rnw()}>
+        <H3 style={useStyles.title}>
           <Trans>Cross platform ecosystem</Trans>
         </H3>
         <Box space="sm" style={useStyles.containerButtonCta}>
@@ -101,11 +101,11 @@ export default function Home() {
               <Card.Title
                 role="heading"
                 aria-level={4}
-                {...useStyles.cardTitle.rnw()}
+                style={useStyles.cardTitle}
               >
                 @crossed/styled
               </Card.Title>
-              <Card.Description {...useStyles.cardDescription.rnw()}>
+              <Card.Description style={useStyles.cardDescription}>
                 <Trans>Styled your component</Trans>
               </Card.Description>
             </Card>
@@ -115,11 +115,11 @@ export default function Home() {
               <Card.Title
                 role="heading"
                 aria-level={4}
-                {...useStyles.cardTitle.rnw()}
+                style={useStyles.cardTitle}
               >
                 @crossed/primitive
               </Card.Title>
-              <Card.Description {...useStyles.cardDescription.rnw()}>
+              <Card.Description style={useStyles.cardDescription}>
                 <Trans>Create your accessible component from anything</Trans>
               </Card.Description>
             </Card>
@@ -129,11 +129,11 @@ export default function Home() {
               <Card.Title
                 role="heading"
                 aria-level={4}
-                {...useStyles.cardTitle.rnw()}
+                style={useStyles.cardTitle}
               >
                 @crossed/ui
               </Card.Title>
-              <Card.Description {...useStyles.cardDescription.rnw()}>
+              <Card.Description style={useStyles.cardDescription}>
                 <Trans>
                   UI Component made with @crossed/primitive and @crossed/styled
                 </Trans>

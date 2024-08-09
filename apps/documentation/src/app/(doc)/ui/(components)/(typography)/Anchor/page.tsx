@@ -9,7 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Anchor } from '@crossed/ui';
+import { Anchor, YBox } from '@crossed/ui';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
 
 export default function CreateBadge() {
@@ -39,8 +39,12 @@ import { Anchor } from "@crossed/ui"
 const MyComponent = () => {
   return (<Anchor>Write your text here</Anchor>)
 }`}
-      example={`<Anchor>I'm a Link</Anchor>`}
-      scope={{ Anchor }}
+      example={`<YBox>
+  <Anchor>I'm a Link</Anchor>
+  <Anchor primary={false}>I'm a Link</Anchor>
+  <Anchor underline={false}>I'm a Link</Anchor>
+</YBox>`}
+      scope={{ Anchor, YBox }}
     />
   );
 }

@@ -157,10 +157,7 @@ const Item = ({ href, title, menus }: Nav) => {
       hover={href === pathname || hover}
       style={style}
     >
-      <MenuList.Title
-        {...menuStyle.itemText.rnw()}
-        weight={hover ? 'lg' : 'md'}
-      >
+      <MenuList.Title style={menuStyle.itemText} weight={hover ? 'lg' : 'md'}>
         {t(title)}
       </MenuList.Title>
     </MenuList.Item>

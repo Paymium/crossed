@@ -126,8 +126,8 @@ importers:
         specifier: ^14.0.0
         version: 14.0.0(i18next@23.7.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)
       react-live:
-        specifier: ^4.1.5
-        version: 4.1.5(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^4.1.7
+        version: 4.1.7(react-dom@18.2.0)(react@18.2.0)
       react-native:
         specifier: 0.73.6
         version: 0.73.6(@babel/core@7.24.0)(@babel/preset-env@7.22.9)(react@18.2.0)
@@ -13258,6 +13258,7 @@ packages:
 
   /glob@7.1.6:
     resolution: {integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==}
+    deprecated: Glob versions prior to v9 are no longer supported
     dependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
@@ -19191,8 +19192,8 @@ packages:
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
 
-  /react-live@4.1.5(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-ul3Zwvqvh6KTg8j7xGCT26+c8J9vQ+LFUrZCbrrrzEExuVB/39s1GKG3NsywnL+aGAjpfnUTaVCe7KlKIvVPiw==}
+  /react-live@4.1.7(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-NTzl0POOAW3dkp7+QL30duOrIu2Vzf2LHdx4TaQ0BqOAtQcSTKEXujfm9jR2VoCHko0oi35PYp38yKQBXz4mrg==}
     engines: {node: '>= 0.12.0', npm: '>= 2.0.0'}
     peerDependencies:
       react: '>=18.0.0'
