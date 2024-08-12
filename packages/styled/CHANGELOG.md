@@ -1,5 +1,15 @@
 # @crossed/styled
 
+## 0.14.0-beta.17
+
+### Minor Changes
+
+- a2fd5e3: add Card theme
+
+### Patch Changes
+
+- abb1d02: remove registry.subscribe for web
+
 ## 0.14.0-beta.16
 
 ### Patch Changes

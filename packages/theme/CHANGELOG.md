@@ -1,5 +1,17 @@
 # @crossed/theme
 
+## 2.0.0-beta.14
+
+### Minor Changes
+
+- a2fd5e3: add Card theme
+
+### Patch Changes
+
+- Updated dependencies [abb1d02]
+- Updated dependencies [a2fd5e3]
+  - @crossed/styled@0.14.0-beta.17
+
 ## 1.1.0-beta.13
 
 ### Patch Changes

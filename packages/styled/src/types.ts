@@ -40,6 +40,13 @@ export interface StyleSheet
   variants?: Variants;
 }
 
+export type ExtractForProps<S extends CrossedMethods<any, any>> =
+  S extends CrossedMethods<infer D, any>
+    ? CrossedPropsExtended<D>
+    : S extends { original: any }
+      ? CrossedPropsExtended<S['original']>
+      : never;
+
 export type PluginContext<S> = {
   /**
    * Key detected

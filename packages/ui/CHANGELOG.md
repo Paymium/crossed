@@ -1,5 +1,19 @@
 # @crossed/ui
 
+## 1.0.0-beta.37
+
+### Minor Changes
+
+- a2fd5e3: add Card theme
+
+### Patch Changes
+
+- Updated dependencies [abb1d02]
+- Updated dependencies [a2fd5e3]
+  - @crossed/styled@0.14.0-beta.17
+  - @crossed/theme@2.0.0-beta.14
+  - @crossed/unicons@1.0.0-beta.24
+
 ## 1.0.0-beta.36
 
 ### Patch Changes
