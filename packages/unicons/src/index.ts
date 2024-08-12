@@ -19,3 +19,4 @@ export * from './X';
 export * from './Info';
 export * from './AlertTriangle';
 export * from './XCircle';
+export * from './Contrast';

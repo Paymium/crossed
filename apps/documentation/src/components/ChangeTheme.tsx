@@ -6,29 +6,20 @@
  */
 
 'use client';
-import { Sun } from '@crossed/unicons';
-import { Moon } from '@crossed/unicons';
-import { Select } from '@crossed/ui';
+import { Contrast } from '@crossed/unicons';
+import { Button } from '@crossed/ui';
 import { useCallback } from 'react';
 import { Registry } from '@crossed/styled';
 
 export const ChangeTheme = () => {
-  const onPress = useCallback((e) => {
-    Registry.setThemeName(e);
+  const onPress = useCallback(() => {
+    Registry.setThemeName(Registry.themeName === 'light' ? 'dark' : 'light');
   }, []);
   return (
-    <Select defaultValue={Registry.themeName} onChange={onPress}>
-      <Select.Trigger>
-        <Select.Value />
-      </Select.Trigger>
-      <Select.Content>
-        <Select.Option value="dark">
-          <Moon />
-        </Select.Option>
-        <Select.Option value="light">
-          <Sun />
-        </Select.Option>
-      </Select.Content>
-    </Select>
+    <Button variant="tertiary" onPress={onPress}>
+      <Button.Icon>
+        <Contrast />
+      </Button.Icon>
+    </Button>
   );
 };

@@ -23,8 +23,6 @@ export type AllAvailableStyles = CrossedstyleView &
   CrossedstyleText &
   CrossedstyleImage;
 
-export interface CrossedstyleTheme {}
-
 export type AllAvailableKeys = keyof AllAvailableStyles;
 
 export type CrossedstyleValues = {
@@ -41,18 +39,6 @@ export interface StyleSheet
     CrossedMediaQueriesPlugin {
   variants?: Variants;
 }
-
-export type CreateStylesParams<
-  K extends string,
-  S extends StyleSheet = StyleSheet,
-> = <T extends Themes[keyof Themes]>(_theme: T) => Record<K, S>;
-
-export type ExtractForProps<S extends CrossedMethods<any, any>> =
-  S extends CrossedMethods<infer D, any>
-    ? CrossedPropsExtended<D>
-    : S extends { original: any }
-      ? CrossedPropsExtended<S['original']>
-      : never;
 
 export type PluginContext<S> = {
   /**

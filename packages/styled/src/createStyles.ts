@@ -30,9 +30,10 @@ export const createStyles = <O extends Record<C, StyleSheet>, C extends string>(
     }
   );
 
-  Registry.subscribe(() => {
-    results = stylesParam(Registry.getTheme(isWeb));
-  });
+  !isWeb &&
+    Registry.subscribe(() => {
+      results = stylesParam(Registry.getTheme(isWeb));
+    });
 
   return foo;
 };
