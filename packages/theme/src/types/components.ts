@@ -34,6 +34,13 @@ type Input = {
   placeholder: string;
 };
 
+type Card = {
+  background: string;
+  title: string;
+  description: string;
+  border: string;
+};
+
 type ActionType = {
   default: Action;
   hover: Action;
@@ -74,7 +81,10 @@ export type Components = {
     warning: Alert;
     error: Alert;
   };
-  Input: {
-    primary: InputType;
+  Input: { primary: InputType };
+  Card: {
+    default: Card;
+    hover: Card;
+    active: Card;
   };
 };

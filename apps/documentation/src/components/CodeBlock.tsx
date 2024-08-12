@@ -34,16 +34,24 @@ const styles = createStyles((t) => ({
     base: {
       flexShrink: 1,
       borderWidth: 1,
-      borderColor: t.colors.border.secondary,
+      borderColor: t.colors.border.primary,
       borderStyle: 'solid',
-      borderRadius: 14,
-      backgroundColor: t.colors.background.primary,
+      borderRadius: 4,
+      backgroundColor: t.colors.background.hover,
+    },
+    web: {
+      base: {
+        boxShadow: '0px 1px 4px 0px #00000026',
+      },
     },
   },
   containerVariants: {
     base: {
-      borderLeftWidth: 1,
-      // borderColor: t.colors.neutral[500],
+      borderTopWidth: 0,
+      borderBottomWidth: 0,
+      borderRightWidth: 0,
+      borderWidth: 1,
+      borderColor: t.colors.border.primary,
       borderStyle: 'solid',
       padding: t.space.xs,
       width: 250,

@@ -15,48 +15,43 @@ import { Text, type TextProps } from '../typography/Text';
 import {
   composeStyles,
   createStyles,
+  type CrossedMethods,
   type ExtractForProps,
 } from '@crossed/styled';
 import { forwardRef } from 'react';
 
-const useCard = createStyles((t) => ({
+const useCard = createStyles(({ space, font, components }) => ({
   root: {
     base: {
-      padding: t.space.xs,
-      borderRadius: t.space.xxs,
-      backgroundColor: t.colors.background.primary,
+      padding: space.xs,
+      borderRadius: space.xxs,
+      backgroundColor: components.Action.secondary.default.background,
+      borderWidth: 1,
+      borderColor: components.Card.default.border,
+      gap: space.xxs,
     },
     variants: {},
   },
+  rootLink: {
+    'web': { base: { transition: 'all 0.27s ease' } },
+    ':hover': {
+      backgroundColor: components.Card.hover.background,
+    },
+    ':active': {
+      backgroundColor: components.Card.active.background,
+    },
+  },
   title: {
-    base: { alignSelf: 'stretch', fontSize: t.font.fontSize.lg },
+    base: {
+      color: components.Card.default.title,
+      alignSelf: 'stretch',
+      fontSize: font.fontSize.lg,
+    },
     variants: {},
   },
   description: {
-    base: { alignSelf: 'stretch' },
+    base: { alignSelf: 'stretch', color: components.Card.default.description },
     variants: {},
-  },
-  linkText: {
-    'base': {
-      color: t.components.Action.primary.hover.text,
-    },
-    ':hover': {
-      color: t.components.Action.primary.hover.text,
-    },
-    ':active': {
-      color: t.components.Action.primary.active.text,
-    },
-  },
-  linkBackground: {
-    'base': {
-      backgroundColor: t.components.Action.primary.default.background,
-    },
-    ':hover': {
-      backgroundColor: t.components.Action.primary.hover.background,
-    },
-    ':active': {
-      backgroundColor: t.components.Action.primary.active.background,
-    },
   },
 }));
 
@@ -64,7 +59,9 @@ type Variants = ExtractForProps<typeof useCard.root>;
 
 const [Provider] = createScope<Variants>({} as Variants);
 
-type CardProps = YBoxProps & Variants['variants'];
+type CardProps = Omit<YBoxProps & Variants['variants'], 'style'> & {
+  style?: CrossedMethods<any, any>;
+};
 
 const CardRoot = forwardRef(
   ({ role, style, ...props }: CardProps, ref: any) => {
@@ -81,7 +78,7 @@ const CardRoot = forwardRef(
           {...props}
           style={composeStyles(
             useCard.root,
-            role === 'link' && useCard.linkBackground,
+            role === 'link' && useCard.rootLink,
             style
           )}
         />
@@ -94,7 +91,7 @@ const Title = (props: TextProps) => {
   // const values = useProvider();
   return (
     <Text
-      size="md"
+      size="lg"
       {...props}
       style={composeStyles(useCard.title, props.style)}
     />

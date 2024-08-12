@@ -200,5 +200,25 @@ export default {
         },
       },
     },
+    Card: {
+      default: {
+        background: colors.primary[90],
+        border: colors.border.primary,
+        description: colors.text.secondary,
+        title: colors.text.primary,
+      },
+      active: {
+        background: colors.primary[70],
+        border: colors.border.primary,
+        description: colors.text.secondary,
+        title: colors.text.primary,
+      },
+      hover: {
+        background: colors.primary[80],
+        border: colors.border.primary,
+        description: colors.text.secondary,
+        title: colors.text.primary,
+      },
+    },
   },
 } as const satisfies Theme;

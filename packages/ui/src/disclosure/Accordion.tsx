@@ -21,7 +21,7 @@ const accordionStyles = createStyles((t) => ({
   root: {
     base: {
       borderBottomWidth: 1,
-      borderColor: t.colors.primary[1],
+      borderColor: t.colors.border.primary,
       borderStyle: 'solid',
     },
   },
@@ -57,7 +57,7 @@ const accordionStyles = createStyles((t) => ({
   item: {
     base: {
       borderTopWidth: 1,
-      // borderColor: t.colors.neutral[500],
+      borderColor: t.colors.border.primary,
       borderStyle: 'solid',
     },
     web: {

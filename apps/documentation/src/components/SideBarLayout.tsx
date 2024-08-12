@@ -46,7 +46,7 @@ const styles = createStyles(
         base: {
           flex: 1,
           borderLeftWidth: 0,
-          borderColor: t.colors.border.secondary,
+          borderColor: t.colors.border.primary,
           minHeight: '100%',
           flexGrow: 1,
           flexShrink: 1,

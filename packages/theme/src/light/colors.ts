@@ -25,8 +25,8 @@ export default {
     active: '#cccccc',
   },
   border: {
-    primary: '#C2FCFF',
-    secondary: '#AEB6CE',
+    primary: primary[10],
+    secondary: primary[1],
     tertiary: '#0A1648',
     brand: primary.primary,
   },

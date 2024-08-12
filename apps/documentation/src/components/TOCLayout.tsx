@@ -59,7 +59,7 @@ const styles = createStyles(
           borderRightWidth: 0,
           borderBottomWidth: 0,
           borderLeftWidth: 1,
-          borderColor: t.colors.border.secondary,
+          borderColor: t.colors.border.primary,
           backgroundColor: t.colors.background.primary,
           borderStyle: 'solid',
           flexShrink: 0,
