@@ -1,7 +1,7 @@
 {
   "name": "@crossed/log",
   "description": "",
-  "version": "0.1.0",
+  "version": "0.1.1-beta.0",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "human-logs": "^0.4.1",
+    "pino": "^9.1.0",
+    "pino-pretty": "^11.2.0",
     "winston": "^3.11.0"
   },
   "files": [

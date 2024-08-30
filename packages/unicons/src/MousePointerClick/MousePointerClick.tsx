@@ -6,7 +6,7 @@
  */
 
 import type { RequireOnly } from '../types';
-import { useTheme } from '@crossed/styled/plugins';
+import { useTheme } from '@crossed/styled';
 
 export const MousePointerClick = ({
   Svg,
@@ -14,14 +14,14 @@ export const MousePointerClick = ({
   color,
   size = 24,
 }: RequireOnly<'Svg' | 'Path'>) => {
-  const { theme } = useTheme();
+  const theme = useTheme();
   return (
     <Svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
       fill="none"
-      stroke={color ?? (theme as any).colors.default}
+      stroke={color ?? theme.font.color}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"

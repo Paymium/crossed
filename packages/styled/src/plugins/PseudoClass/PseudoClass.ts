@@ -8,32 +8,37 @@
 import type { CrossedstyleValues, Plugin } from '../../types';
 import { convertKeyToCss, normalizeUnitPixel } from './../utils';
 
-type CrossedPseudoClassList = 'focus' | 'hover' | 'active';
-
 export interface CrossedPseudoClassProps {
-  props: {
-    // eslint-disable-next-line no-unused-vars
-    [key in CrossedPseudoClassList]?: true | false;
-  };
+  'focus'?: true | false;
+  'hover'?: true | false;
+  'focus-visible'?: true | false;
+  'disabled'?: true | false;
 }
 
 export interface CrossedPseudoClassPlugin {
   ':focus'?: CrossedstyleValues;
   ':hover'?: CrossedstyleValues;
   ':active'?: CrossedstyleValues;
+  ':focus-visible'?: CrossedstyleValues;
+  ':disabled'?: CrossedstyleValues;
 }
 
 export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
-  test: '^:(hover|active|focus)$',
+  name: 'PseudoClassPlugin',
+  test: [':hover', ':active', ':focus', ':focus-visible', ':disabled'],
   apply: ({ styles, key: ctxKey, addClassname, props, isWeb }) => {
     const pseudoClass = ctxKey.replace(/:/i, '');
     Object.entries(styles).forEach(([key, value]) => {
       const valueNormalized = normalizeUnitPixel(key, value, isWeb);
       if (isWeb) {
         addClassname({
-          suffix: `:${pseudoClass}`,
+          suffix: `:${pseudoClass}${pseudoClass === 'hover' ? ':not(:disabled):not(:active)' : pseudoClass === 'active' ? ':not(:disabled)' : ''}`,
           body: {
-            [`${pseudoClass}:${convertKeyToCss(key)}-[${valueNormalized}]`]: {
+            [`${pseudoClass}:${convertKeyToCss(key)}-[${
+              typeof valueNormalized === 'number'
+                ? valueNormalized
+                : valueNormalized?.replace(/ /g, '-')
+            }]`]: {
               [key]: valueNormalized,
             },
           },
@@ -42,7 +47,11 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
       if (props?.[pseudoClass] || !props) {
         addClassname({
           body: {
-            [`${convertKeyToCss(key)}-[${valueNormalized}]`]: {
+            [`${convertKeyToCss(key)}-[${
+              typeof valueNormalized === 'number'
+                ? valueNormalized
+                : valueNormalized?.replace(/ /g, '-')
+            }]`]: {
               [key]: valueNormalized,
             },
           },

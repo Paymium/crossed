@@ -10,14 +10,12 @@
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
 import { TemplateDescriptionProps } from '../../TemplateDescriptionProps';
-import { Alert, AlertDescription, AlertTitle, Select, Text } from '@crossed/ui';
-import { useSignal } from '@preact/signals-react';
+import { Alert, AlertDescription, AlertIcon, YBox } from '@crossed/ui';
 import { useSignals } from '@preact/signals-react/runtime';
 
 export default function CreateBadge() {
   useSignals();
   const { t } = useTranslation();
-  const status = useSignal('default');
   return (
     <TemplatePrimitive
       title="Alert"
@@ -66,33 +64,77 @@ export default function CreateBadge() {
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`
-<Alert status="${status.value}"> 
-  <Alert.Title>Error</Alert.Title>
-  <Alert.Description>Status code 404</Alert.Description>
-</Alert>`}
-      scope={{ Alert, AlertDescription, AlertTitle }}
-      variants={
-        <Select
-          value={status.value}
-          onChange={(e: string) => {
-            status.value = e;
-          }}
-        >
-          <Select.Trigger>
-            <Select.Value />
-          </Select.Trigger>
-          <Select.Content>
-            {['error', 'success', 'warning', 'info'].map((key) => {
-              return (
-                <Select.Option value={key} key={key}>
-                  <Text>{key}</Text>
-                </Select.Option>
-              );
-            })}
-          </Select.Content>
-        </Select>
-      }
+      example={`<YBox space="xs">
+  <Alert status="info"> 
+    <AlertIcon />
+    <Alert.Description>
+      Lorem ipsum dolor sit amet
+    </Alert.Description>
+    <Alert.Action>
+      <Alert.Action.Text>
+        Lorem ipsum
+      </Alert.Action.Text>
+    </Alert.Action>
+  </Alert>
+  <Alert status="error"> 
+    <AlertIcon />
+    <Alert.Description>
+      Lorem ipsum dolor sit amet
+    </Alert.Description>
+    <Alert.Action>
+      <Alert.Action.Text>
+        Lorem ipsum
+      </Alert.Action.Text>
+    </Alert.Action>
+  </Alert>
+  <Alert status="success"> 
+    <AlertIcon />
+    <Alert.Description>
+      Lorem ipsum dolor sit amet
+    </Alert.Description>
+    <Alert.Action>
+      <Alert.Action.Text>
+        Lorem ipsum
+      </Alert.Action.Text>
+    </Alert.Action>
+  </Alert>
+  <Alert status="warning"> 
+    <AlertIcon />
+    <Alert.Description>
+      Lorem ipsum dolor sit amet
+    </Alert.Description>
+    <Alert.Action>
+      <Alert.Action.Text>
+        Lorem ipsum
+      </Alert.Action.Text>
+    </Alert.Action>
+  </Alert>
+  <Alert status="warning"> 
+    <AlertIcon />
+    <Alert.Group>
+      <Alert.Description>
+        Les utilisateurs peuvent désactiver One Tap s'ils désactivent
+        l'indicateur d'invite de connexion au compte Google sur la page
+        Applications ayant accès à votre compte. Les sessions désactivées ne
+        s'affichent pas dans One Tap. Si toutes les sessions Google sont
+        désactivées, One Tap ne s'affiche pas.
+      </Alert.Description>
+      <Alert.Description>
+        Les utilisateurs peuvent désactiver One Tap s'ils désactivent
+        l'indicateur d'invite de connexion au compte Google sur la page
+        Applications ayant accès à votre compte. Les sessions désactivées ne
+        s'affichent pas dans One Tap. Si toutes les sessions Google sont
+        désactivées, One Tap ne s'affiche pas.
+      </Alert.Description>
+    </Alert.Group>
+    <Alert.Action>
+      <Alert.Action.Text>
+        Lorem ipsum
+      </Alert.Action.Text>
+    </Alert.Action>
+  </Alert>
+</YBox>`}
+      scope={{ Alert, AlertDescription, AlertIcon, YBox }}
     />
   );
 }

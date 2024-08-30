@@ -6,28 +6,28 @@
  */
 
 'use client';
-
+import '@/style.config';
 import { Link } from '@/components/Link';
-import { withStyle } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 import { Center, H2, P } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 
-const Container = withStyle(Center, {
-  theme: (t) => ({
+const styles = createStyles((t) => ({
+  root: {
     base: {
       minHeight: '85%',
-      backgroundColor: t.colors.background,
+      backgroundColor: t.colors.neutral[0],
     },
-  }),
-});
+  },
+}));
 
 export default function NotFound() {
   const { t } = useTranslation();
   return (
-    <Container>
+    <Center style={styles.root}>
       <H2>{t('Not Found')}</H2>
       <P textAlign="center">{t('Could not find requested resource')}</P>
       <Link href="/">{t('Return Home')}</Link>
-    </Container>
+    </Center>
   );
 }

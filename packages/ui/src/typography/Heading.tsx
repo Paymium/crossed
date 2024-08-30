@@ -7,7 +7,6 @@
 
 'use client';
 
-import { withStyle } from '@crossed/styled';
 import { Text, type TextProps } from './Text';
 import { withDefaultProps } from '@crossed/core';
 
@@ -16,41 +15,34 @@ type HeadingProps = TextProps & { 'aria-level'?: number };
 export const H1 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 1,
-  'size': '5xl',
-  'weight': 'bold',
+  'size': 'h1',
+  'weight': 'h1',
 });
 
-export const H2 = withDefaultProps<HeadingProps>(
-  withStyle(Text, {
-    theme: (t) => ({
-      base: { marginTop: t.space.xl, marginBottom: t.space.md },
-    }),
-  }),
-  {
-    'role': 'heading',
-    'aria-level': 2,
-    'size': '4xl',
-    'weight': 'semibold',
-  }
-);
+export const H2 = withDefaultProps<HeadingProps>(Text, {
+  'role': 'heading',
+  'aria-level': 2,
+  'size': 'h2',
+  'weight': 'h2',
+});
 
 export const H3 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 3,
-  'size': '3xl',
+  'size': 'h3',
 });
 export const H4 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 4,
-  'size': '2xl',
+  'size': 'h4',
 });
 export const H5 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 5,
-  'size': 'xl',
+  'size': 'h5',
 });
 export const H6 = withDefaultProps<HeadingProps>(Text, {
   'role': 'heading',
   'aria-level': 6,
-  'size': 'lg',
+  'size': 'h6',
 });

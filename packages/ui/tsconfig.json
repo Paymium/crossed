@@ -6,10 +6,12 @@
     "outDir": "./lib/typescript",
     "ignoreDeprecations": "5.0",
     "declaration": true,
+    "isolatedModules": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": true,
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
+    "composite": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "lib": ["esnext", "dom"],
@@ -24,6 +26,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "target": "esnext",
-    "typeRoots": ["./src/type.ts"]
+    "types": ["./node_modules/@crossed/theme/lib/typescript/types.d.ts"]
   }
 }

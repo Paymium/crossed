@@ -1,5 +1,125 @@
 # @crossed/styled
 
+## 0.14.0-beta.17
+
+### Minor Changes
+
+- a2fd5e3: add Card theme
+
+### Patch Changes
+
+- abb1d02: remove registry.subscribe for web
+
+## 0.14.0-beta.16
+
+### Patch Changes
+
+- b002577: force publish
+
+## 0.14.0-beta.15
+
+### Patch Changes
+
+- 5ef1603: some fix disabled on label and input and theme
+
+## 0.14.0-beta.14
+
+### Patch Changes
+
+- 1e28220: fix hover and disabled state conflict in className
+
+## 0.14.0-beta.13
+
+### Patch Changes
+
+- c4f8fd7: increase ExtractForProps behavior typescript
+
+## 0.14.0-beta.12
+
+### Patch Changes
+
+- 9dc6752: improve performance
+
+## 0.14.0-beta.11
+
+### Patch Changes
+
+- cd4d732: change import plugin
+
+## 0.14.0-beta.10
+
+### Patch Changes
+
+- ffc415d: theme parse not apply parent name
+
+## 0.14.0-beta.9
+
+### Patch Changes
+
+- 20288fe: add setInitialThemeName method
+- 20288fe: not change css theme className if already exist
+
+## 0.14.0-beta.8
+
+### Patch Changes
+
+- 4f81cb4: fix registry isWeb
+
+## 0.14.0-beta.7
+
+### Patch Changes
+
+- c1e88c5: missing max and min for height and width property in normalizeUnitPixel
+- 0cf4ddc: add select, checkbox, radio
+- 511e2e5: replace space by -
+- 017fd84: fix useInteraction wrong condition
+- 511e2e5: ameliorate web plugin and add types
+- f1c8cbd: fix valueNormalize is number
+- Updated dependencies [3a58e76]
+- Updated dependencies [0cf4ddc]
+  - @crossed/core@0.8.1-beta.3
+
+## 0.14.0-beta.6
+
+### Patch Changes
+
+- some fix
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.2
+
+## 0.14.0-beta.5
+
+### Patch Changes
+
+- 63171a9: remove Theme plugin for add theme in core, delete withStyle, and createStyles return directly hooks
+
+## 0.14.0-beta.4
+
+### Patch Changes
+
+- fix typescript error not pass props
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.1
+
+## 0.14.0-beta.3
+
+### Patch Changes
+
+- 7a7a589: some fix after first usage in external project
+
+## 0.14.0-beta.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.0
+
+## 0.14.0-beta.1
+
+### Minor Changes
+
+- add plugin
+
 ## 0.14.0-beta.0
 
 ### Minor Changes

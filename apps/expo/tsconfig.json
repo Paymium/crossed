@@ -3,12 +3,14 @@
   "compilerOptions": {
     "strict": true,
     "moduleResolution": "Bundler",
+    "composite": true,
     "resolvePackageJsonImports": false,
     "paths": {
       "@/*": [
         "./*"
       ]
-    }
+    },
+    "typeRoots": ["./style.config.ts"]
   },
   "include": [
     "**/*.ts",

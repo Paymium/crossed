@@ -7,51 +7,123 @@
 
 'use client';
 import { createList } from '@crossed/primitive';
-import { withStyle, useStyles } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  withReactive,
+  type ExtractForProps,
+} from '@crossed/styled';
 import { Text, type TextProps } from '../typography/Text';
-import { YBox } from '../layout/YBox';
+import { YBox, type YBoxProps } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
-import { Button, type ButtonProps } from '../forms/Button';
+import { Button, useButton, type ButtonProps } from '../forms/Button';
 import { type GetProps, createScope } from '@crossed/core';
 import { forwardRef, memo } from 'react';
+import { Pressable, View, type PressableProps } from 'react-native';
 
-type ButtonVariantProps = Partial<
-  Pick<ButtonProps, 'size' | 'color' | 'variant'>
->;
-const MenuRoot = withStyle(YBox, {
-  base: {
-    alignItems: 'stretch',
+const useMenuList = createStyles((t) => ({
+  root: {
+    base: {
+      alignItems: 'stretch',
+    },
+    variants: {},
   },
-});
-type MenuRootProps = GetProps<typeof MenuRoot>;
+  padded: { base: { padding: t.space.xxs } },
+  item: {
+    'base': {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: t.space.xs,
+      justifyContent: 'flex-start',
+      height: 42,
+      // backgroundColor: 'transparent',
+      borderWidth: 0,
+      borderRadius: 5,
+    },
+    ':hover': {
+      // backgroundColor: t.colors.neutral.satured,
+    },
+    ':active': {
+      // backgroundColor: t.colors.neutral.muted,
+    },
+    'web': {
+      ':focus': {
+        // outlineColor: t.colors.neutral[600],
+      },
+    },
+  },
+  title: {
+    base: { color: t.font.color },
+  },
+}));
+type ButtonVariantProps = Partial<Pick<ButtonProps, 'variant'>>;
 
-const Divider = withStyle(D, { base: {} });
-const Item = Button;
-
-const Label = forwardRef((props: TextProps & ButtonVariantProps, ref) => {
-  const context = useVariantContext();
-  const { root } = useStyles(Button.styleSheet, {
-    ...context,
-    ...props,
-  });
-
-  return <Text {...props} style={[root.style, props.style]} ref={ref} />;
-});
-const Title = withStyle(Button.Text, { base: {} });
-const SubTitle = withStyle(Button.Text, { base: {} });
-
-type ContextVariant = ButtonVariantProps;
-const [ProviderVariant, useVariantContext] = createScope<ContextVariant>(
-  {} as ContextVariant
+const MenuRoot = forwardRef(
+  ({ padded = true, ...props }: MenuRootProps, ref: any) => {
+    return (
+      <YBox
+        {...props}
+        style={composeStyles(
+          useMenuList.root,
+          padded && useMenuList.padded,
+          props.style
+        )}
+        ref={ref}
+      />
+    );
+  }
 );
+
+type MenuRootProps = YBoxProps & { padded?: boolean };
+
+const Divider = D;
+const Item = withReactive(
+  forwardRef<
+    View,
+    PressableProps & Omit<ExtractForProps<typeof useMenuList.item>, 'variants'>
+  >(({ active, focus, hover, ...props }, ref) => {
+    return (
+      <Pressable
+        {...props}
+        style={({ pressed }) =>
+          useMenuList.item.rnw({
+            active: active ?? pressed,
+            focus,
+            hover,
+            style:
+              typeof props.style === 'function'
+                ? props.style({ pressed })
+                : (props.style as any),
+          }).style
+        }
+        ref={ref}
+      />
+    );
+  })
+);
+
+const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
+  // const variants = useVariantContext();
+
+  return <Text {...props} style={useButton.root} ref={ref} />;
+});
+const Title = (props: TextProps) => (
+  <Text {...props} style={useMenuList.title} />
+);
+const SubTitle = Button.Text;
+
+type ContextVariant = ButtonVariantProps & { active?: boolean };
+const [ProviderVariant] = createScope<ContextVariant>({} as ContextVariant);
 
 const MenuList = createList({
   Root: memo(
-    forwardRef((props: MenuRootProps & ButtonVariantProps, ref) => (
+    forwardRef((props: MenuRootProps & ButtonVariantProps, ref: any) => (
       <ProviderVariant
-        color={props.color}
-        size={props.size}
-        variant={props.variant || 'ghost'}
+        // color={props.color}
+        // size={props.size}
+        variant={props.variant || undefined}
+        active={props.active || undefined}
       >
         <MenuRoot {...props} ref={ref} />
       </ProviderVariant>

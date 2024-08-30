@@ -5,30 +5,36 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Registry } from '@crossed/styled/registry';
+import { Registry } from '@crossed/styled';
 import { Loader } from '../index';
 import { getAst } from './getAst';
-import { PseudoClassPlugin, BasePlugin } from '@crossed/styled/plugins';
+import { PseudoClassPlugin, BasePlugin } from '@crossed/styled';
 
-Registry.addPlugin(BasePlugin).addPlugin(PseudoClassPlugin);
+Registry.setThemes({ dark: {} })
+  .setThemeName('dark' as unknown as never)
+  .addPlugin(BasePlugin)
+  .addPlugin(PseudoClassPlugin);
+
+jest.mock('esbuild', () => {});
 
 describe('pseudoClass', () => {
   test('hover', () => {
     const loader = new Loader();
-
     loader.parse(
-      getAst(`{
-        base: {
-          backgroundColor: "white"
-        },
-        ':hover': {
-          backgroundColor: "black"
-        }
-    }`)
+      getAst(`()=>({
+            base: {
+              backgroundColor: "white"
+            },
+            ':hover': {
+              backgroundColor: "black"
+            }
+        })`)
     );
     expect(loader.getCSS()).toEqual(
-      `.background-color-\\[white\\] { background-color:white; }
-.hover\\:background-color-\\[black\\]:hover { background-color:black; }`
+      `.dark {  }
+.background-color-\\[white\\] { background-color:white; }
+.background-color-\\[black\\] { background-color:black; }
+.hover\\:background-color-\\[black\\]:hover:not(:disabled):not(:active) { background-color:black; }`
     );
   });
 
@@ -46,7 +52,9 @@ describe('pseudoClass', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.background-color-\\[white\\] { background-color:white; }
+      `.dark {  }
+.background-color-\\[white\\] { background-color:white; }
+.background-color-\\[black\\] { background-color:black; }
 .focus\\:background-color-\\[black\\]:focus { background-color:black; }`
     );
   });
@@ -65,8 +73,10 @@ describe('pseudoClass', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.background-color-\\[white\\] { background-color:white; }
-.active\\:background-color-\\[black\\]:active { background-color:black; }`
+      `.dark {  }
+.background-color-\\[white\\] { background-color:white; }
+.background-color-\\[black\\] { background-color:black; }
+.active\\:background-color-\\[black\\]:active:not(:disabled) { background-color:black; }`
     );
   });
 });

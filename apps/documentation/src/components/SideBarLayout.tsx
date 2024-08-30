@@ -6,125 +6,164 @@
  */
 
 'use client';
-import '@/types/unistyles';
-import { MenuList, XBox, YBox } from '@crossed/ui';
-import { PropsWithChildren } from 'react';
-import { withStyle } from '@crossed/styled';
+import '@/style.config';
+import {
+  Accordion,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+  MenuList,
+  Text,
+  XBox,
+  YBox,
+  YBoxProps,
+} from '@crossed/ui';
+import { PropsWithChildren, useCallback, useTransition } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
+import { composeStyles, createStyles } from '@crossed/styled';
+import { menuStyle } from './menuSide.style';
+import { useUncontrolled } from '@crossed/core';
+import { ScrollView } from './ScrollView';
 
-const Menu = withStyle(
-  withDefaultProps(MenuList, { space: 'xs', size: 'xs' }),
-  {
-    base: {
-      paddingHorizontal: 20,
-      alignSelf: 'baseline',
-      display: 'none',
-    },
-    media: {
-      md: { display: 'flex' },
-    },
-  }
-);
-const Container = withStyle(XBox, {
-  base: {
-    width: '100%',
-    justifyContent: 'center',
-    paddingVertical: 15,
-    minHeight: '95%',
-  },
-  media: {
-    xs: { maxWidth: '100%' },
-    md: { maxWidth: 768 },
-    lg: { maxWidth: 900 },
-    xl: { maxWidth: 1200 },
-  },
-});
-const Center = withStyle(YBox, {
-  theme: (t) => ({
-    base: {
-      flex: 1,
-      borderLeftWidth: 0,
-      borderColor: t.colors.neutral,
-      minHeight: '100%',
-    },
-    media: {
-      md: { borderLeftWidth: 1 },
-    },
-  }),
-});
-
-const Li = withStyle(withDefaultProps(YBox, { role: 'listitem' }), {
-  theme: (t) => ({
-    base: {
-      alignItems: 'stretch',
-    },
-    variants: {
-      label: {
-        true: {
-          base: {
-            marginTop: t.space.xl,
-            borderBottomWidth: 1,
-            borderStyle: 'solid',
-            borderColor: t.colors.neutral,
-          },
+const styles = createStyles(
+  (t) =>
+    ({
+      root: {
+        base: {
+          alignSelf: 'flex-start',
+          flexGrow: 0,
+          flexShrink: 0,
+          height: '100%',
+          width: 170,
+          backgroundColor: t.colors.background.primary,
         },
-        false: {},
+        media: { xs: { display: 'none' }, md: { display: 'flex' } },
       },
-    },
-  }),
-});
+      container: { base: { height: '100%' } },
+      center: {
+        base: {
+          flex: 1,
+          borderLeftWidth: 0,
+          borderColor: t.colors.border.primary,
+          minHeight: '100%',
+          flexGrow: 1,
+          flexShrink: 1,
+        },
+        media: { md: { borderLeftWidth: 1 } },
+      },
+      li: { base: { alignItems: 'stretch' } },
+      item: { base: { justifyContent: 'flex-end' } },
+      accordionTrigger: { base: { padding: t.space.xxs } },
+    }) as const
+);
 
-type Nav = { href?: string; title: string };
+const Li = ({ label, style, ...props }: YBoxProps & { label?: boolean }) => (
+  <YBox role="listitem" {...props} style={composeStyles(styles.li, style)} />
+);
+
+type Nav =
+  | { href: string; title: string; menus?: never }
+  | { title: string; menus?: never; href?: never }
+  | {
+      title: string;
+      menus: { href: string; title: string; menus?: never }[];
+      href?: never;
+    };
 
 export function SideBarLayout({
   children,
   menus,
 }: PropsWithChildren<{ menus: Nav[] }>) {
+  return (
+    <XBox style={styles.container}>
+      <ScrollView {...styles.root.rnw()}>
+        <MenuList>
+          <Accordion defaultValues={[]} allowMultiple>
+            {menus.map((item) => {
+              const { href, title, menus } = item;
+              return (
+                <Li key={href || title} label={!href || Boolean(menus)}>
+                  <Item {...item} />
+                </Li>
+              );
+            })}
+          </Accordion>
+        </MenuList>
+      </ScrollView>
+
+      <YBox style={styles.center}>{children}</YBox>
+    </XBox>
+  );
+}
+
+const Item = ({ href, title, menus }: Nav) => {
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
+  const [, setTransition] = useTransition();
+  const [hover, setHover] = useUncontrolled({ defaultValue: false });
+  const onHoverIn = useCallback(() => {
+    setTransition(() => {
+      setHover(true);
+    });
+  }, [setHover]);
+  const onHoverOut = useCallback(() => {
+    setTransition(() => {
+      setHover(false);
+    });
+  }, [setHover]);
 
-  return (
-    <Container>
-      <Menu style={{ position: 'sticky', top: '75px' } as any}>
-        {menus.map(({ href, title }) => {
-          return (
-            <Li
-              key={href || title}
-              label={Boolean(!href).toString() as 'true' | 'false'}
-            >
-              {href ? (
-                <MenuList.Item
-                  variant="ghost"
-                  size="xs"
-                  role="link"
-                  href={`/crossed${href}`}
-                  onPress={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    router.push(href);
-                  }}
-                  style={{ justifyContent: 'flex-end' }}
-                >
-                  <MenuList.Title
-                    weight={href === pathname ? 'semibold' : undefined}
-                  >
-                    {t(title)}
-                  </MenuList.Title>
-                </MenuList.Item>
-              ) : (
-                <MenuList.Label textAlign="right" weight="semibold">
-                  {t(title)}
-                </MenuList.Label>
-              )}
-            </Li>
-          );
-        })}
-      </Menu>
-
-      <Center>{children}</Center>
-    </Container>
+  const style = useCallback(
+    ({ pressed }) =>
+      composeStyles(menuStyle.item, styles.item).rnw({
+        active: pressed,
+      }).style,
+    []
   );
-}
+
+  if (menus) {
+    return (
+      <AccordionItem value={title}>
+        <AccordionTrigger {...styles.accordionTrigger.rnw()}>
+          <Text>{title}</Text>
+          <AccordionIcon />
+        </AccordionTrigger>
+        <AccordionPanel>
+          {menus.map((item) => {
+            const { href, title } = item;
+            return (
+              <Li key={href || title} label={!href || Boolean(item.menus)}>
+                <Item {...item} />
+              </Li>
+            );
+          })}
+        </AccordionPanel>
+      </AccordionItem>
+    );
+  }
+  return href ? (
+    <MenuList.Item
+      role="link"
+      onHoverIn={onHoverIn}
+      onHoverOut={onHoverOut}
+      href={`/crossed${href}`}
+      onPress={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        router.push(href);
+      }}
+      hover={href === pathname || hover}
+      style={style}
+    >
+      <MenuList.Title style={menuStyle.itemText} weight={hover ? 'lg' : 'md'}>
+        {t(title)}
+      </MenuList.Title>
+    </MenuList.Item>
+  ) : (
+    <MenuList.Label hover={false} textAlign="right" weight="lg">
+      {t(title)}
+    </MenuList.Label>
+  );
+};

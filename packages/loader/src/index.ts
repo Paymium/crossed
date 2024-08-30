@@ -6,7 +6,7 @@
  */
 
 import path from 'path';
-import { execSync } from 'child_process';
+import fs from 'fs';
 import {
   ArrowFunctionExpression,
   // CallExpression,
@@ -22,50 +22,100 @@ import {
 // import { parseScript as parse } from 'esprima';
 import escodegen from 'escodegen';
 import { createLogger, apiLog } from '@crossed/log';
-import { Registry } from '@crossed/styled/registry';
-import { convertKeyToCss } from '@crossed/styled/plugins';
+import { Registry, parse } from '@crossed/styled';
+import { convertKeyToCss } from '@crossed/styled';
 import type { CrossedstyleValues } from '@crossed/styled';
+import * as esbuild from 'esbuild';
 
 type Style = Record<string, any>;
+
+const esmBuild = (configPath: string) => {
+  const contentFileConfig = fs.readFileSync(
+    path.resolve(process.cwd(), configPath),
+    { encoding: 'utf8' }
+  );
+  const codeBuild = esbuild.transformSync(contentFileConfig, {
+    loader: 'ts',
+    platform: 'browser',
+    format: 'cjs',
+    target: 'node14',
+  });
+  // eslint-disable-next-line no-eval
+  return codeBuild;
+};
+
+const cache = new Map();
 
 export class Loader {
   private logger: ReturnType<typeof createLogger>;
 
-  private fileCache: Set<string> = new Set();
+  private fileCache: Map<string, string> = new Map();
 
   constructor({
     level = 'info',
     configPath,
+    isWatch,
+    emit,
   }: {
     level?: string;
     configPath?: string;
+    isWatch?: boolean;
+    emit?: any;
   } = {}) {
     this.logger = createLogger({ label: 'CrossedLoader', level });
     this.logger.debug(
       apiLog({
         events: ['create_instance_success'],
-      }).message
+      })
     );
 
     if (configPath) {
+      let code: string;
       try {
-        execSync(
-          `npx tsc --outDir ${path.resolve(
-            process.cwd(),
-            './lib'
-          )} ${path.resolve(
-            process.cwd(),
-            configPath
-          )} --skipLibCheck --module NodeNext --moduleResolution nodenext --esModuleInterop`
-        );
+        code = esmBuild(configPath).code;
+        // eslint-disable-next-line no-eval
+        eval(code);
       } catch (e) {
         this.logger.error(e.toString());
       }
-
-      try {
-        require(path.resolve(process.cwd(), './lib/style.config'));
-      } catch (e) {
-        this.logger.error(e.toString());
+      if (isWatch && code) {
+        const handleWatch = () => {
+          try {
+            // eslint-disable-next-line no-eval
+            eval(esmBuild(configPath).code);
+          } catch (i) {
+            this.logger.error(`esmBuild ${i.toString()}`);
+          }
+          try {
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            const { Registry: R } = require('@crossed/styled');
+            Object.entries(R.getThemes()).forEach(([themeName, theme]) => {
+              this.addClassname({
+                prefix: '.',
+                body: {
+                  [`${themeName}`]: parse(theme, undefined, true).values,
+                },
+              });
+            });
+          } catch (i) {
+            this.logger.error(i.toString());
+          }
+          emit();
+        };
+        const reg = /require\("(.*)"\)/gi;
+        const t = code.matchAll(reg);
+        for (const [, value] of t) {
+          fs.watch(require.resolve(value).replace(/(\/\w+\.js)$/g, ''), () => {
+            Object.keys(require.cache).forEach((key) => {
+              if (path.dirname(key) === path.dirname(require.resolve(value))) {
+                this.logger.debug(`delete cache of ${key}`);
+                delete require.cache[key];
+              }
+            });
+            handleWatch();
+          });
+        }
+        fs.watch(path.resolve(process.cwd(), configPath), handleWatch);
       }
     }
   }
@@ -89,13 +139,61 @@ export class Loader {
         return `${acc}${convertKeyToCss(
           'paddingTop'
         )}:${value};${convertKeyToCss('paddingBottom')}:${value};`;
+      } else if (key === 'padding') {
+        return `${acc}${convertKeyToCss(
+          'paddingTop'
+        )}:${value};${convertKeyToCss(
+          'paddingBottom'
+        )}:${value};${convertKeyToCss(
+          'paddingLeft'
+        )}:${value};${convertKeyToCss('paddingRight')}:${value};`;
       }
       return `${acc}${convertKeyToCss(key)}:${value};`;
     }, '');
   };
 
   getCSS() {
-    return Array.from(this.fileCache.values()).join('\n');
+    // console.log(this.fileCache)
+    const values = Array.from(this.fileCache.values());
+    const { media, hover, focus, active, other } = values.reduce(
+      (acc, e) => {
+        if (e.startsWith('@media')) {
+          acc.media.push(e);
+        } else if (e.startsWith('.active')) {
+          acc.active.push(e);
+        } else if (e.startsWith('.focus')) {
+          acc.focus.push(e);
+        } else if (e.startsWith('.hover')) {
+          acc.hover.push(e);
+        } else {
+          acc.other.push(e);
+        }
+        return acc;
+      },
+      {
+        media: [],
+        hover: [],
+        focus: [],
+        active: [],
+        other: [],
+      }
+    );
+    return [
+      other,
+      hover,
+      focus,
+      active,
+      media.sort((a, b) => {
+        if (!a.startsWith('@media')) return -1;
+        const [, widthA] = a.match(/@media \(min-width: ([0-9]+)px\)/i) || [];
+        const [, widthB] = b.match(/@media \(min-width: ([0-9]+)px\)/i) || [];
+        if (!widthA) return -1;
+        if (!widthB) return 1;
+        return Number(widthA) < Number(widthB) ? -1 : 1;
+      }),
+    ]
+      .flat(Infinity)
+      .join('\n');
   }
 
   addClassname = (obj: {
@@ -110,25 +208,35 @@ export class Loader {
       const styleParsed =
         typeof value === 'string' ? value : this.styleToString(value);
 
+      const className = `${obj.prefix ?? '.'}${key
+        .replace(/[#:\[\]\(\)%,\.]/g, '\\$&')
+        .replace(/ /g, '-')}${obj.suffix || ''}`;
       // escape some character in css
-      const css = `${obj.prefix ?? '.'}${key.replace(
-        /[#:\[\]\(\)%,]/g,
-        '\\$&'
-      )}${obj.suffix || ''} { ${styleParsed} }`;
+      const css = `${className} { ${styleParsed} }`;
 
       // add css in cahce file
-      this.fileCache.add(obj.wrapper ? obj.wrapper(css) : css);
+      this.fileCache.set(className, obj.wrapper ? obj.wrapper(css) : css);
     });
   };
 
   parse(ast: Expression | SpreadElement, isMulti?: boolean) {
-    const plugins = Registry.getPlugins();
-    const ctx = plugins.reduce((acc, { utils }) => {
-      return { ...acc, ...(utils?.() || undefined) };
-    }, {});
-    plugins.forEach(({ init }) =>
-      init?.({ addClassname: this.addClassname, isWeb: true, ...ctx })
-    );
+    // const plugins = Registry.getPlugins();
+    // const ctx = plugins.reduce((acc, { utils }) => {
+    //   return { ...acc, ...(utils?.() || undefined) };
+    // }, {});
+
+    Object.entries(Registry.getThemes()).forEach(([themeName, theme]) => {
+      this.addClassname({
+        prefix: '.',
+        body: {
+          [`${themeName}`]: parse(theme, undefined, true).values,
+        },
+      });
+    });
+
+    // plugins.forEach(({ init }) =>
+    //   init?.({ addClassname: this.addClassname, isWeb: true, ...ctx })
+    // );
     const _parseObjectExpression = (arg: ObjectExpression) => {
       if (arg.type === 'ObjectExpression') {
         const ast = {
@@ -147,10 +255,9 @@ export class Loader {
           returnEl = eval(toto);
         } catch (e) {
           this.logger.error(
-            apiLog({
+            `${apiLog({
               events: ['eval_style_function_error'],
-            }).message,
-            { message: e.message }
+            })}: ${e.message}`
           );
         }
         return returnEl;
@@ -177,13 +284,12 @@ export class Loader {
         let returnEl;
         try {
           // eslint-disable-next-line no-eval
-          returnEl = eval(toto)(ctx);
+          returnEl = eval(toto)(Registry.getTheme(true));
         } catch (e) {
           this.logger.error(
-            apiLog({
+            `${apiLog({
               events: ['eval_style_function_error'],
-            }).message,
-            { message: e.message }
+            })}: ${e.message}`
           );
         }
         return returnEl;
@@ -201,10 +307,9 @@ export class Loader {
       parsing = _parseFunctionExpression(ast);
     } else {
       this.logger.warn(
-        apiLog({
+        `${apiLog({
           events: ['ast_type_not_implemented'],
-        }).message,
-        { file: ast.type }
+        })}      ${ast.type}`
       );
     }
 
@@ -214,12 +319,14 @@ export class Loader {
           Registry.apply(() => p, {
             addClassname: this.addClassname,
             isWeb: true,
+            cache,
           });
         });
       } else {
         Registry.apply(() => parsing, {
           addClassname: this.addClassname,
           isWeb: true,
+          cache,
         });
       }
     }

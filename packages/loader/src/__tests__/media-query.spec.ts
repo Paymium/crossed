@@ -5,17 +5,13 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Registry } from '@crossed/styled/registry';
+import { Registry } from '@crossed/styled';
 import { Loader } from '../index';
 import { getAst } from './getAst';
-import { MediaQueriesPlugin, BasePlugin } from '@crossed/styled/plugins';
 
-Registry.addPlugin(BasePlugin).addPlugin(
-  MediaQueriesPlugin({
-    sm: 500,
-    md: 700,
-  })
-);
+Registry.setThemes({ dark: {} }).setThemeName('dark' as unknown as never);
+
+jest.mock('esbuild', () => {});
 
 describe('media-query', () => {
   test('only min', () => {
@@ -37,9 +33,10 @@ describe('media-query', () => {
       )
     );
     expect(loader.getCSS()).toEqual(
-      `.margin-top-\\[4px\\] { margin-top:4px; }
+      `.dark {  }
+.margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
-@media (min-width: 700px) { .md\\:background-color-\\[red\\] { background-color:red; } }`
+@media (min-width: 768px) { .md\\:background-color-\\[red\\] { background-color:red; } }`
     );
   });
 
@@ -49,24 +46,25 @@ describe('media-query', () => {
     loader.parse(
       getAst(
         `()=>({
+            media: {
+              md: { backgroundColor: "red" },
+              sm : { backgroundColor: "green" },
+            },
             base: {
               marginTop: 4,
               width: 50,
               backgroundColor: "black"
-            },
-            media: {
-              sm : { backgroundColor: "green" },
-              md: { backgroundColor: "red" }
             }
           })`
       )
     );
     expect(loader.getCSS()).toEqual(
-      `.margin-top-\\[4px\\] { margin-top:4px; }
+      `.dark {  }
+.margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
 .background-color-\\[black\\] { background-color:black; }
-@media (min-width: 500px) { .sm\\:background-color-\\[green\\] { background-color:green; } }
-@media (min-width: 700px) { .md\\:background-color-\\[red\\] { background-color:red; } }`
+@media (min-width: 576px) { .sm\\:background-color-\\[green\\] { background-color:green; } }
+@media (min-width: 768px) { .md\\:background-color-\\[red\\] { background-color:red; } }`
     );
   });
 });

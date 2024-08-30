@@ -8,12 +8,12 @@
 import { parseScript as parse } from 'esprima';
 
 export const getAst = (value: string) => {
-  const [ast] = parse(`const Foo = withStyle(() => null, ${value})`).body;
+  const [ast] = parse(`const Foo = createStyles(${value})`).body;
   if (
     ast.type !== 'VariableDeclaration' ||
     ast.declarations[0].init.type !== 'CallExpression'
   ) {
     throw new Error('getAst - wrong value');
   }
-  return ast.declarations[0].init.arguments[1];
+  return ast.declarations[0].init.arguments[0];
 };

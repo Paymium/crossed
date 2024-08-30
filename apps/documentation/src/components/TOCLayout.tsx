@@ -6,62 +6,87 @@
  */
 
 'use client';
-import { MenuList, XBox, YBox } from '@crossed/ui';
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
-import { withStyle } from '@crossed/styled';
+import '@/style.config';
+import { Box, MenuList, XBox, YBox } from '@crossed/ui';
+import {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+} from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { withDefaultProps } from '@crossed/core';
 import { useTranslation } from 'react-i18next';
+import { createStyles } from '@crossed/styled';
+import { menuStyle } from './menuSide.style';
+import { useUncontrolled } from '@crossed/core';
 
-const Container = withStyle(XBox, { base: { minHeight: '100%' } });
-
-const Center = withStyle(YBox, {
-  theme: (t) => ({
-    base: {
-      flex: 1,
-      width: '100%',
-      borderColor: t.colors.neutral,
-    },
-    variants: {
-      bordered: {
-        true: {
-          media: {
-            xl: { borderRightWidth: 1 },
+const styles = createStyles(
+  (t) =>
+    ({
+      container: { base: { minHeight: '100%', flex: 1, flexDirection: 'row' } },
+      center: {
+        base: {
+          flex: 1,
+          flexGrow: 1,
+          flexShrink: 1,
+          // borderColor: t.colors.neutral.bright,
+          flexDirection: 'column',
+          alignItems: 'center',
+          // backgroundColor: t.colors.neutral.low,
+          padding: t.space.xxs,
+          paddingVertical: 0,
+        },
+        variants: {
+          bordered: {
+            true: {
+              media: {
+                xl: { borderRightWidth: 1 },
+              },
+            },
+            false: { base: { borderRightWidth: 0 } },
           },
         },
-        false: { base: { borderRightWidth: 0 } },
       },
-    },
-    media: {
-      xs: { paddingHorizontal: t.space.md },
-      lg: { paddingHorizontal: t.space[100] },
-    },
-  }),
-});
-
-const Menu = withStyle(
-  withDefaultProps(MenuList, { space: 'xs', size: 'xs' }),
-  {
-    base: {
-      paddingHorizontal: 20,
-      alignSelf: 'baseline',
-      display: 'none',
-    },
-    media: {
-      xl: { display: 'flex' },
-    },
-  }
+      menuList: {
+        base: {
+          width: 170,
+          alignSelf: 'baseline',
+          height: '100%',
+          borderWidth: 1,
+          borderTopWidth: 0,
+          borderRightWidth: 0,
+          borderBottomWidth: 0,
+          borderLeftWidth: 1,
+          borderColor: t.colors.border.primary,
+          backgroundColor: t.colors.background.primary,
+          borderStyle: 'solid',
+          flexShrink: 0,
+          flexGrow: 0,
+        },
+        media: {
+          xs: { display: 'none' },
+          xl: { display: 'flex' },
+        },
+      },
+      menuLabel: {
+        base: { fontSize: t.font.fontSize.md },
+      },
+      li: { base: { alignItems: 'stretch' } },
+      position: {
+        base: {
+          marginHorizontal: 'auto',
+          paddingVertical: t.space.xs,
+          paddingHorizontal: t.space.xs,
+        },
+        media: {
+          xs: { width: '100%' },
+          xl: { maxWidth: 920 },
+        },
+      },
+    }) as const
 );
-
-const Label = withStyle(MenuList.Label, {
-  theme: (t) => ({
-    base: { fontSize: t.fontSize.lg },
-  }),
-});
-
-const Li = withStyle(withDefaultProps(YBox, { role: 'listitem' }), {
-  base: { alignItems: 'stretch' },
-});
 
 type Nav = {
   href: string;
@@ -74,8 +99,6 @@ export const TOCLayout = ({
 }: PropsWithChildren<{ links?: Nav[] }>) => {
   const searchParams = useSearchParams();
   const [hash, setHash] = useState(undefined);
-  const pathname = usePathname();
-  const router = useRouter();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -84,40 +107,76 @@ export const TOCLayout = ({
 
   return useMemo(() => {
     return (
-      <Container>
-        <Center bordered={(links.length !== 0).toString() as 'true' | 'false'}>
-          {children}
-        </Center>
+      <XBox style={styles.container}>
+        <YBox style={styles.center}>
+          <Box style={styles.position}>{children}</Box>
+        </YBox>
 
-        <Menu style={{ position: 'sticky', top: '75px' } as any}>
-          {links.length > 0 && <Label weight="bold">{t('On this page')}</Label>}
-          {links.map(({ href, title }) => {
-            return (
-              <Li key={href || title}>
-                <MenuList.Item
-                  variant="ghost"
-                  size="xs"
-                  role="link"
-                  href={`${pathname}${href}`}
-                  // hover={href === hash}
-                  onPress={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    router.push(href);
-                  }}
-                  style={{ justifyContent: 'flex-start' }}
-                >
-                  <MenuList.Title
-                    weight={href === hash ? 'semibold' : undefined}
-                  >
-                    {t(title)}
-                  </MenuList.Title>
-                </MenuList.Item>
-              </Li>
-            );
-          })}
-        </Menu>
-      </Container>
+        {links.length > 0 && (
+          <MenuList style={styles.menuList}>
+            <MenuList.Label style={styles.menuLabel} weight="lg">
+              {t('On this page')}
+            </MenuList.Label>
+            {links.map(({ href, title }) => {
+              return (
+                <YBox role="listitem" key={href || title} style={styles.li}>
+                  <Item hash={hash} href={href} title={title} />
+                </YBox>
+              );
+            })}
+          </MenuList>
+        )}
+      </XBox>
     );
   }, [children, links, hash, t]);
+};
+
+const Item = ({
+  hash,
+  href,
+  title,
+}: {
+  hash: string;
+  href: string;
+  title: string;
+}) => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const { t } = useTranslation();
+  const [, setTransition] = useTransition();
+  const [hover, setHover] = useUncontrolled({
+    defaultValue: false,
+  });
+  const onHoverIn = useCallback(() => {
+    setTransition(() => {
+      setHover(true);
+    });
+  }, [setHover]);
+  const onHoverOut = useCallback(() => {
+    setTransition(() => {
+      setHover(false);
+    });
+  }, [setHover]);
+  return (
+    <MenuList.Item
+      onHoverOut={onHoverOut}
+      onHoverIn={onHoverIn}
+      {...menuStyle.item.rnw()}
+      hover={href === hash || hover}
+      role="link"
+      href={`${pathname}${href}`}
+      onPress={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        router.push(href);
+      }}
+    >
+      <MenuList.Title
+        style={menuStyle.itemText}
+        weight={href === hash ? 'lg' : undefined}
+      >
+        {t(title)}
+      </MenuList.Title>
+    </MenuList.Item>
+  );
 };

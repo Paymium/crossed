@@ -6,6 +6,7 @@ module.exports = function (api) {
       // Required for expo-router
       // ['@crossed/babel-plugin', { tailwindPath: "./node_modules/@crossed/tailwind/tailwind.config.js" }],
       // 'expo-router/babel',
+      'react-native-reanimated/plugin'
     ],
   };
 };

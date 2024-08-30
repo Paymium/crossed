@@ -5,28 +5,28 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { CrossedstyleValues, Plugin } from '../types';
-import { convertKeyToCss, normalizeUnitPixel } from './utils';
+import { Registry } from '../Registry';
+import type { CrossedstyleValues, Plugin, StyleSheet } from '../types';
+import type * as CSS from 'csstype';
 
 export interface CrossedWebPlugin {
-  web?: CrossedstyleValues;
+  web?: {
+    [key in keyof StyleSheet]?: StyleSheet[key] extends CrossedstyleValues
+      ? CSS.Properties
+      : StyleSheet[key];
+  };
 }
 
 export const WebPlugin: Plugin<CrossedWebPlugin> = {
-  test: '^web$',
-  apply: ({ addClassname, styles, isWeb }) => {
+  name: 'WebPlugin',
+  test: ['web'],
+  apply: ({ addClassname, styles, isWeb, cache, props }) => {
     if (isWeb) {
-      addClassname({
-        body: Object.entries(styles).reduce<Record<string, CrossedstyleValues>>(
-          (acc, [key, value]) => {
-            const valueNormalized = normalizeUnitPixel(key, value, isWeb);
-            acc[`${convertKeyToCss(key)}-[${valueNormalized}]`] = {
-              [key]: valueNormalized,
-            };
-            return acc;
-          },
-          {}
-        ),
+      Registry.apply(() => styles, {
+        isWeb,
+        props,
+        addClassname,
+        cache,
       });
     }
   },

@@ -5,19 +5,24 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Registry } from '@crossed/styled/registry';
+import { Registry } from '@crossed/styled';
 import { Loader } from '../index';
 import { getAst } from './getAst';
-import { VariantsPlugin, BasePlugin } from '@crossed/styled/plugins';
+import { VariantsPlugin, BasePlugin } from '@crossed/styled';
 
-Registry.addPlugin(BasePlugin).addPlugin(VariantsPlugin);
+Registry.setThemes({ dark: {} })
+  .setThemeName('dark' as unknown as never)
+  .addPlugin(BasePlugin)
+  .addPlugin(VariantsPlugin);
+
+jest.mock('esbuild', () => {});
 
 describe('variants', () => {
   test('variant width media query', () => {});
   const loader = new Loader();
   loader.parse(
     getAst(
-      `{
+      `()=>({
         base: {
           marginTop: 4,
           width: 50,
@@ -32,17 +37,18 @@ describe('variants', () => {
             md: { base: { fontSize: 14 } }
           }
         }
-      }`
+      })`
     )
   );
   expect(loader.getCSS()).toEqual(
-    `.margin-top-\\[4px\\] { margin-top:4px; }
+    `.dark {  }
+.margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
-.color-white\\:color-\\[white\\] { color:white; }
-.color-white\\:background-\\[white\\] { background:white; }
-.color-black\\:color-\\[black\\] { color:black; }
-.color-black\\:background-\\[black\\] { background:black; }
-.size-sm\\:font-size-\\[11px\\] { font-size:11px; }
-.size-md\\:font-size-\\[14px\\] { font-size:14px; }`
+.color-\\[white\\] { color:white; }
+.background-\\[white\\] { background:white; }
+.color-\\[black\\] { color:black; }
+.background-\\[black\\] { background:black; }
+.font-size-\\[11px\\] { font-size:11px; }
+.font-size-\\[14px\\] { font-size:14px; }`
   );
 });

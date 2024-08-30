@@ -5,85 +5,71 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { YBox, H1, Button, Box, Text } from '@crossed/ui';
-import { createStyles, useStyles, withStyle } from '@crossed/styled';
-import { ThemeRegistry, useInteraction } from '@crossed/styled/plugins';
-import { Appearance, Text as NText, Pressable } from 'react-native';
-import { useTransition } from 'react';
+import { YBox, MenuList, MenuItem, MenuTitle } from '@crossed/ui';
+import { createStyles } from '@crossed/styled';
+import { Link } from 'expo-router';
+import { ChevronRight } from '@crossed/unicons';
 
-const TextTheme = withStyle(NText, {
-  media: {
-    xs: { color: 'red' },
-    sm: { color: 'green' },
-    md: { color: 'violet' },
-    lg: { color: 'blue' },
-  },
-});
-
-const globalStyles = createStyles({
+const styles = createStyles((t) => ({
   container: { base: { paddingHorizontal: 15 } },
-  text: {
-    theme: (t) => ({
-      base: { color: t.colors.default },
-    }),
-  },
-});
-
-const ButtonC = withStyle(Pressable, {
-  theme: (t) => ({
+  item: {
     'base': {
-      paddingHorizontal: 15,
-      paddingVertical: 10,
-      backgroundColor: t.colors.neutral,
+      justifyContent: 'space-between',
+      backgroundColor: t.colors.neutral.default,
     },
-    ':active': {
-      backgroundColor: t.colors.backgroundStrong,
-    },
-  }),
-});
-
-const ChangeTheme = () => {
-  const [, setTransition] = useTransition();
-  const { props, state } = useInteraction();
-  const { text } = useStyles(globalStyles);
-  return (
-    <ButtonC
-      {...props}
-      {...state}
-      onPress={() => {
-        setTransition(() => {
-          const theme = ThemeRegistry.themeName === 'dark' ? 'light' : 'dark';
-          Appearance.setColorScheme(theme);
-          ThemeRegistry.setThemeName(theme);
-        });
-      }}
-    >
-      <NText style={text.style}>toto</NText>
-    </ButtonC>
-  );
-};
+    ':active': { backgroundColor: t.colors.neutral.active },
+  },
+}));
 
 export default function TabOneScreen() {
-  const styles = useStyles(globalStyles);
+  const style = (({ pressed }: { pressed: boolean }) =>
+    styles.item.rnw({ active: pressed }).style) as any;
   return (
-    <YBox space="lg" style={styles.container.style}>
-      <ChangeTheme />
-      <H1 style={styles.text.style}>Heading</H1>
-      <TextTheme>Text</TextTheme>
-      <Button>
-        <TextTheme>Hello</TextTheme>
-      </Button>
-      <Button variant="outlined" aria-label="Press">
-        <Button.Text style={styles.text.style}>Press</Button.Text>
-      </Button>
-      <YBox>
-        <Box>
-          <Text style={styles.text.style}>Hello</Text>
-        </Box>
-        <Box>
-          <Text style={styles.text.style}>Hello</Text>
-        </Box>
-      </YBox>
+    <YBox space="lg" {...styles.container.rnw()}>
+      <MenuList>
+        <Link href="/button" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Button</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/input" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Input</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/radio" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Radio</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/checkbox" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Checkbox</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/menuList" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>MenuList</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/select" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Select</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+        <Link href="/accordion" asChild style={style}>
+          <MenuItem>
+            <MenuTitle>Accordion</MenuTitle>
+            <ChevronRight />
+          </MenuItem>
+        </Link>
+      </MenuList>
     </YBox>
   );
 }

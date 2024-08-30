@@ -6,66 +6,62 @@
  */
 
 'use client';
-
-import { GetProps } from '@crossed/core';
-import { withStyle } from '@crossed/styled';
-import { Alert, Center, Text, XBox, YBox } from '@crossed/ui';
+import '@/style.config';
+import { composeStyles, createStyles } from '@crossed/styled';
+import { Center, Text, XBox, YBox } from '@crossed/ui';
 import { themes } from 'prism-react-renderer';
 import { PropsWithChildren, ReactNode, useCallback } from 'react';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
-const StyledLiveEditor = withStyle(
-  ({ style, ...props }: GetProps<typeof LiveEditor>) => {
-    return <LiveEditor {...props} />;
-  },
-  {
-    theme: (t) => ({
-      base: {
-        width: '100%',
-        borderRadius: 4,
-        fontFamily: t.fontFamily,
-        fontSize: t.fontSize.sm,
-      },
-    }),
-  }
-);
-
-const RenderPreview = withStyle(Center, {
-  theme: (t) => ({
+const styles = createStyles((t) => ({
+  liveEditor: {
     base: {
-      padding: t.space.md,
-      alignItems: 'stretch',
+      width: '100%',
+      borderRadius: 14,
+      fontFamily: t.font.family,
+      fontSize: t.font.fontSize.md,
     },
-  }),
-});
-
-const ContainerPreview = withStyle(XBox, {
-  theme: (t) => ({
+  },
+  preview: {
     base: {
+      padding: t.space.xs,
+      alignItems: 'stretch',
+      flexShrink: 1,
+      flex: 1,
+    },
+  },
+  containerPreview: {
+    base: {
+      flexShrink: 1,
       borderWidth: 1,
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.border.primary,
       borderStyle: 'solid',
       borderRadius: 4,
+      backgroundColor: t.colors.background.hover,
     },
-  }),
-});
-const ContainerVariants = withStyle(YBox, {
-  theme: (t) => ({
+    web: {
+      base: {
+        boxShadow: '0px 1px 4px 0px #00000026',
+      },
+    },
+  },
+  containerVariants: {
     base: {
-      borderLeftWidth: 1,
-      borderColor: t.colors.neutral,
+      borderTopWidth: 0,
+      borderBottomWidth: 0,
+      borderRightWidth: 0,
+      borderWidth: 1,
+      borderColor: t.colors.border.primary,
       borderStyle: 'solid',
-      padding: t.space.md,
+      padding: t.space.xs,
+      width: 250,
     },
-  }),
-});
-
-const Pre = withStyle(Text, {
-  theme: (t) => ({
+  },
+  pre: {
     base: {
       backgroundColor: t.draculaTheme.plain.backgroundColor,
       width: '100%',
-      padding: t.space.md,
+      padding: t.space.xxs,
       boxSizing: 'border-box',
       margin: 0,
       borderTopLeftRadius: 4,
@@ -74,12 +70,17 @@ const Pre = withStyle(Text, {
       borderLeftWidth: 0,
       borderRightWidth: 0,
       borderBottomWidth: 1,
-      borderColor: t.colors.neutral,
+      // borderColor: t.colors.neutral.bright,
       borderStyle: 'solid',
-      color: t.colors.white,
+      // color: t.colors.neutral['100'],
     },
-  }),
-});
+  },
+  liveError: {
+    base: {
+      // color: t.colors.error.bright,
+    },
+  },
+}));
 
 export const CodeBlock = ({
   children,
@@ -96,12 +97,14 @@ export const CodeBlock = ({
 }) => {
   const Component = useCallback(
     ({ children }: PropsWithChildren) => (
-      <ContainerPreview>
-        <RenderPreview style={{ flex: 1 }}>{children}</RenderPreview>
+      <XBox style={styles.containerPreview}>
+        <Center style={styles.preview}>{children}</Center>
         {variants && (
-          <ContainerVariants space="md">{variants}</ContainerVariants>
+          <YBox space="md" style={styles.containerVariants}>
+            {variants}
+          </YBox>
         )}
-      </ContainerPreview>
+      </XBox>
     ),
     [variants, children]
   );
@@ -114,15 +117,17 @@ export const CodeBlock = ({
       >
         {preview && <LivePreview Component={Component} />}
         <YBox>
-          {fileName && <Pre>{fileName}</Pre>}
-          <StyledLiveEditor
+          {fileName && <Text style={styles.pre}>{fileName}</Text>}
+          <LiveEditor
             theme={themes.dracula}
-            className={fileName ? 'filename' : ''}
+            {...styles.liveEditor.className({
+              className: fileName ? 'filename' : '',
+            })}
           />
           {preview && (
-            <Alert>
-              <LiveError />
-            </Alert>
+            <LiveError
+              {...composeStyles(styles.pre, styles.liveError).className()}
+            />
           )}
         </YBox>
       </LiveProvider>

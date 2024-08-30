@@ -31,7 +31,7 @@ import { Ul, Li } from '@crossed/ui
       example={`
 <Ul>
   <Li>
-    Item 1
+    <Text>Item 1</Text>
   </Li>
   <Li>
     <Text>Item 2</Text>

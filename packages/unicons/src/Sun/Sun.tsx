@@ -6,7 +6,7 @@
  */
 
 import type { RequireOnly } from '../types';
-import { useTheme } from '@crossed/styled/plugins';
+import { useTheme } from '@crossed/styled';
 
 export const Sun = ({
   Svg,
@@ -15,27 +15,28 @@ export const Sun = ({
   color,
   size = 25,
 }: RequireOnly<'Svg' | 'Path' | 'Circle'>) => {
-  const { theme } = useTheme();
+  const theme = useTheme();
+  const stroke = theme.font.color;
   return (
     <Svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
       fill="none"
-      stroke={color ?? (theme as any).colors.default}
+      stroke={color ?? stroke}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <Circle cx="12" cy="12" r="4" stroke="var(--color)" />
-      <Path d="M12 2v2" stroke="var(--color)" />
-      <Path d="M12 20v2" stroke="var(--color)" />
-      <Path d="m4.93 4.93 1.41 1.41" stroke="var(--color)" />
-      <Path d="m17.66 17.66 1.41 1.41" stroke="var(--color)" />
-      <Path d="M2 12h2" stroke="var(--color)" />
-      <Path d="M20 12h2" stroke="var(--color)" />
-      <Path d="m6.34 17.66-1.41 1.41" stroke="var(--color)" />
-      <Path d="m19.07 4.93-1.41 1.41" stroke="var(--color)" />
+      <Circle cx="12" cy="12" r="4" stroke={color ?? stroke} />
+      <Path d="M12 2v2" stroke={color ?? stroke} />
+      <Path d="M12 20v2" stroke={color ?? stroke} />
+      <Path d="m4.93 4.93 1.41 1.41" stroke={color ?? stroke} />
+      <Path d="m17.66 17.66 1.41 1.41" stroke={color ?? stroke} />
+      <Path d="M2 12h2" stroke={color ?? stroke} />
+      <Path d="M20 12h2" stroke={color ?? stroke} />
+      <Path d="m6.34 17.66-1.41 1.41" stroke={color ?? stroke} />
+      <Path d="m19.07 4.93-1.41 1.41" stroke={color ?? stroke} />
     </Svg>
   );
 };

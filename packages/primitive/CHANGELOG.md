@@ -1,5 +1,55 @@
 # @crossed/primitive
 
+## 1.8.0-beta.5
+
+### Patch Changes
+
+- 9ecd4b0: fix error text and button typescript
+
+## 1.8.0-beta.4
+
+### Minor Changes
+
+- 18018df: add icon in button
+
+## 1.8.0-beta.3
+
+### Minor Changes
+
+- 6bb68fe: add Modal
+- f768120: add Accordion
+- f768120: add VisibilityHidden component
+
+### Patch Changes
+
+- 0cf4ddc: add select, checkbox, radio
+- 42ae419: change VisibilityHidden
+- Updated dependencies [3a58e76]
+- Updated dependencies [0cf4ddc]
+  - @crossed/core@0.8.1-beta.3
+
+## 1.7.1-beta.2
+
+### Patch Changes
+
+- some fix
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.2
+
+## 1.7.1-beta.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.1
+
+## 1.7.1-beta.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/core@0.8.1-beta.0
+
 ## 1.7.0
 
 ### Minor Changes

@@ -7,10 +7,11 @@
 
 import { Loader } from '../index';
 import { getAst } from './getAst';
-import { Registry } from '@crossed/styled/registry';
-import { BasePlugin } from '@crossed/styled/plugins';
+import { Registry } from '@crossed/styled';
 
-Registry.addPlugin(BasePlugin);
+Registry.setThemes({ dark: {} }).setThemeName('dark' as unknown as never);
+
+jest.mock('esbuild', () => {});
 
 describe('@crossed/loader', () => {
   test('simple', () => {
@@ -26,7 +27,8 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.margin-top-\\[4px\\] { margin-top:4px; }
+      `.dark {  }
+.margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
 .background-color-\\[white\\] { background-color:white; }`
     );
@@ -45,7 +47,8 @@ describe('@crossed/loader', () => {
     })`)
     );
     expect(loader.getCSS()).toEqual(
-      `.margin-top-\\[4px\\] { margin-top:4px; }
+      `.dark {  }
+.margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
 .background-color-\\[white\\] { background-color:white; }`
     );
@@ -65,7 +68,8 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.margin-top-\\[4px\\] { margin-top:4px; }
+      `.dark {  }
+.margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
 .background-color-\\[white\\] { background-color:white; }`
     );
@@ -86,7 +90,8 @@ describe('@crossed/loader', () => {
     }`)
     );
     expect(loader.getCSS()).toEqual(
-      `.margin-top-\\[4px\\] { margin-top:4px; }
+      `.dark {  }
+.margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
 .background-color-\\[white\\] { background-color:white; }`
     );

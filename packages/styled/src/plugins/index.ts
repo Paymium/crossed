@@ -6,9 +6,9 @@
  */
 
 export { BasePlugin, type CrossedBasePlugin } from './Base';
-export * from './Theme';
 export {
   MediaQueriesPlugin,
+  cacheBreakpoints,
   type CrossedMediaQueriesPlugin,
 } from './MediaQueries';
 export {

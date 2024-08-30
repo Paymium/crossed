@@ -13,7 +13,7 @@ import { createBadgeText } from './BadgeText';
 
 export const createBadge = <
   BadgeProps extends Record<string, any>,
-  TextProps extends NTextProps
+  TextProps extends NTextProps,
 >(components: {
   Root: ComponentType<BadgeProps>;
   Text: ComponentType<TextProps>;

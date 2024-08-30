@@ -6,8 +6,17 @@
  */
 
 import './types';
+export * from './ChevronRight';
 export * from './ChevronDown';
+export * from './ChevronUp';
+export * from './CheckCircle';
 export * from './Github';
 export * from './Moon';
 export * from './MousePointerClick';
 export * from './Sun';
+export * from './Check';
+export * from './X';
+export * from './Info';
+export * from './AlertTriangle';
+export * from './XCircle';
+export * from './Contrast';

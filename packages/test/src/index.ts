@@ -7,4 +7,5 @@
 
 export * from '@testing-library/react';
 export * from '@testing-library/user-event';
+export { renderHook, act } from '@testing-library/react-hooks';
 export * from './mocks/Signal';

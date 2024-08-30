@@ -21,6 +21,10 @@ export const convertToPx = [
   'borderLeftWidth',
   'borderRightWidth',
   'borderRadius',
+  'borderTopRightRadius',
+  'borderTopLeftRadius',
+  'borderBottomRightRadius',
+  'borderBottomLeftRadius',
   'padding',
   'paddingTop',
   'paddingBottom',
@@ -30,7 +34,11 @@ export const convertToPx = [
   'paddingVertical',
   'gap',
   'width',
+  'maxWidth',
+  'minWidth',
   'height',
+  'maxHeight',
+  'minHeight',
 ];
 
 export const normalizeUnitPixel = (key: string, value: any, isWeb?: boolean) =>
@@ -38,8 +46,21 @@ export const normalizeUnitPixel = (key: string, value: any, isWeb?: boolean) =>
     ? `${value}px`
     : value;
 
-export const convertKeyToCss = (key: string) =>
-  key
+const cache = new Map();
+export const convertKeyToCss = (key: string) => {
+  const old = cache.get(key);
+  if (old) return old;
+
+  const result = key
     .split(/(?=[A-Z])/)
     .join('-')
     .toLowerCase();
+  cache.set(key, result);
+  return result;
+};
+// export const convertKeyToCss = (key: string) => {
+//   return key
+//     .split(/(?=[A-Z])/)
+//     .join('-')
+//     .toLowerCase();
+// };

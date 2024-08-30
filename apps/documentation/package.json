@@ -1,6 +1,6 @@
 {
   "name": "crossed-docs",
-  "version": "0.6.0-beta.0",
+  "version": "0.6.0-beta.39",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -16,6 +16,7 @@
     "@crossed/next-adapter": "workspace:^",
     "@crossed/primitive": "workspace:^",
     "@crossed/styled": "workspace:^",
+    "@crossed/theme": "workspace:^",
     "@crossed/ui": "workspace:^",
     "@crossed/unicons": "workspace:*",
     "@preact/signals-react": "^2.0.0",
@@ -28,9 +29,9 @@
     "react": "^18.2.0",
     "react-dom": "^18",
     "react-i18next": "^14.0.0",
-    "react-live": "^4.1.5",
-    "react-native": "0.73.5",
-    "react-native-reanimated": "^3.5.1",
+    "react-live": "^4.1.7",
+    "react-native": "0.73.6",
+    "react-native-reanimated": "^3.6.2",
     "react-native-unistyles": "^2.0.0",
     "react-native-web": "^0.19.10",
     "serve": "^14.2.1"

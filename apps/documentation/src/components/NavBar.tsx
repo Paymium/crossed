@@ -8,15 +8,14 @@
 'use client';
 
 import '@/style.config';
-import { withStyle } from '@crossed/styled';
 import { ChangeTheme } from './ChangeTheme';
-import { Box } from '@crossed/ui';
+import { Box, Text, XBox } from '@crossed/ui';
 import { Logo } from './Logo';
-import { GetProps } from '@crossed/core';
 import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
 import { forwardRef, memo } from 'react';
 import LinkNext from 'next/link';
+import { createStyles } from '@crossed/styled';
 
 const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
   {
@@ -47,8 +46,10 @@ export const NavBar = memo(() => {
     <Nav role="navigation">
       <El>
         <LinkLogo href="/" size="lg">
-          <Logo />
-          Crossed
+          <Logo size={32} />
+          <Text size="xl" weight="lg">
+            Crossed
+          </Text>
         </LinkLogo>
       </El>
       <El>
@@ -68,63 +69,76 @@ export const NavBar = memo(() => {
   );
 });
 
-const LinkNav = withStyle<GetProps<typeof LinkNext>>(
-  forwardRef(({ style, active: _a, ...props }: any, ref) => (
-    <LinkNext {...props} ref={ref} />
-  )),
-  {
-    theme: (t) => ({
-      'base': {
-        fontFamily: t.fontFamily,
-        color: t.colors.default,
-        transitionProperty: 'all',
-        transitionDuration: '170ms',
+const useStyles = createStyles((t) => ({
+  linkNav: {
+    'base': {
+      fontFamily: t.font.family,
+      color: t.font.color,
+      transitionProperty: 'all',
+      transitionDuration: '170ms',
+    },
+    'variants': {
+      active: {
+        true: { base: { color: t.font.color } },
+        false: {},
       },
-      'variants': {
-        active: {
-          true: { base: { color: t.colors.default } },
-          false: {},
-        },
-      },
-      ':active': {
-        color: t.colors.default,
-      },
-      ':hover': {
-        textDecorationLine: 'none',
-        color: t.colors.default,
-      },
-    }),
-  }
-);
-
-const LinkLogo = withStyle(LinkNav, {
-  theme: (theme) => ({
-    base: { alignItems: 'center', gap: theme.space.sm, display: 'flex' },
-  }),
-});
-
-const Nav = withStyle(Box, {
-  theme: (t) => ({
+    },
+    ':active': {
+      color: t.font.color,
+    },
+    ':hover': {
+      textDecorationLine: 'none',
+      color: t.font.color,
+    },
+  },
+  linkLogo: {
+    base: { alignItems: 'center', gap: t.space.xxs, display: 'flex' },
+  },
+  nav: {
     base: {
-      backgroundColor: t.colors.backgroundStrong,
-      padding: t.space.lg,
+      width: '100%',
+      backgroundColor: t.colors.background.primary,
+      padding: t.space.xxs,
       justifyContent: 'space-between',
       flexDirection: 'row',
+      borderWidth: 1,
+      borderTopWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
       borderBottomWidth: 1,
       borderStyle: 'solid',
-      borderColor: t.colors.neutral,
+      borderColor: t.colors.border.primary,
       alignItems: 'center',
     },
-  }),
-});
-
-const El = withStyle(Box, {
-  theme: (t) => ({
+  },
+  el: {
     base: {
       alignItems: 'center',
       gap: t.space.sm,
       display: 'flex',
       flexDirection: 'row',
     },
-  }),
+  },
+}));
+
+const LinkNav = forwardRef(({ style, active: _a, ...props }: any, ref) => {
+  return (
+    <LinkNext
+      {...props}
+      ref={ref}
+      {...useStyles.linkNav.className({ style, active: _a })}
+    />
+  );
+});
+
+const LinkLogo = forwardRef((props: any, ref) => {
+  return <LinkNav {...props} ref={ref} {...useStyles.linkLogo.rnw(props)} />;
+});
+
+const Nav = forwardRef((props: any, ref) => {
+  return <XBox {...props} ref={ref} style={useStyles.nav} />;
+});
+
+const El = forwardRef((props: any, ref) => {
+  return <Box {...props} ref={ref} style={useStyles.el} />;
 });

@@ -9,6 +9,8 @@ import { Compiler } from 'webpack';
 import { createLogger, apiLog } from '@crossed/log';
 import { Loader } from '@crossed/loader';
 import VirtualModulesPlugin from 'webpack-virtual-modules';
+import { mkdirSync, readFileSync, statSync, writeFileSync } from 'fs';
+import path from 'path';
 
 const pluginName = 'CrossedPlugin';
 
@@ -16,6 +18,7 @@ export type StylePluginOptions = {
   configPath: string;
   level?: string;
   isServer?: boolean;
+  isWatch?: boolean;
 };
 
 let parseAst: Loader;
@@ -32,8 +35,35 @@ export default class StylePlugin {
     });
   }
 
+  writeCss(virtualModules: VirtualModulesPlugin) {
+    const css = parseAst.getCSS() || '';
+    if (css) {
+      virtualModules.writeModule('node_modules/crossed.css', css);
+
+      const pathCss = path.resolve(process.cwd(), '.crossed');
+
+      try {
+        statSync(pathCss);
+      } catch {
+        mkdirSync(pathCss, 0o775);
+      }
+      writeFileSync(path.resolve(pathCss, 'crossed.css'), css);
+
+      this.logger.info(
+        apiLog({
+          events: ['css_output_success'],
+        })
+      );
+    }
+  }
   apply = (compiler: Compiler) => {
     this.logger.debug('apply StylePlugin');
+
+    /**
+     * Add virtual module crossed.css
+     */
+    const virtualModules = new VirtualModulesPlugin();
+    virtualModules.apply(compiler);
 
     /**
      * Load loader if not already in cache
@@ -42,28 +72,50 @@ export default class StylePlugin {
       parseAst = new Loader({
         configPath: this.options.configPath,
         level: this.options.level,
+        isWatch: this.options.isWatch,
+        emit: () => {
+          this.writeCss(virtualModules);
+        },
       });
     }
-
-    /**
-     * Add virtual module crossed.css
-     */
-    const virtualModules = new VirtualModulesPlugin();
-    compiler.options.plugins.push(virtualModules);
 
     /**
      * Wait end parsing and write css
      */
     compiler.hooks.afterCompile.tap(pluginName, () => {
-      // get css from loader and apply on css with virtual module crossed.css
-      const newContent = parseAst.getCSS();
-      virtualModules.writeModule('node_modules/crossed.css', newContent || '');
+      this.writeCss(virtualModules);
+    });
 
-      this.logger.info(
-        apiLog({
-          events: ['css_output_success'],
-        })
-      );
+    /**
+     * Load at run css
+     */
+    compiler.hooks.beforeCompile.tap(pluginName, () => {
+      const css = parseAst.getCSS() || '';
+      virtualModules.writeModule('node_modules/crossed.css', css);
+      const pathCss = path.resolve(process.cwd(), '.crossed');
+
+      try {
+        statSync(pathCss);
+      } catch {
+        mkdirSync(pathCss, 0o775);
+      }
+      try {
+        const css = readFileSync(path.resolve(pathCss, 'crossed.css'), {
+          encoding: 'utf-8',
+        });
+        virtualModules.writeModule('node_modules/crossed.css', css);
+        this.logger.info(
+          apiLog({
+            events: ['css_output_success'],
+          })
+        );
+      } catch (e) {
+        this.logger.error(
+          apiLog({
+            events: ['css_output_error'],
+          })
+        );
+      }
     });
 
     /**
@@ -90,15 +142,21 @@ export default class StylePlugin {
                * call name expression is createStyle or withStyle
                * we can parsed argument
                */
+              //   console.log(apiLog({
+              //     events: ['detect_style_function'],
+              //   })
+              //   {
+              //     file: `${resource.replace(process.cwd(), '')}:${
+              //       e.loc.start.line
+              //     }`,
+              //   }
+              // ))
               this.logger.debug(
-                apiLog({
+                `${apiLog({
                   events: ['detect_style_function'],
-                }).message,
-                {
-                  file: `${resource.replace(process.cwd(), '')}:${
-                    e.loc.start.line
-                  }`,
-                }
+                })}      ${resource.replace(process.cwd(), '')}:${
+                  e.loc.start.line
+                }`
               );
               parseAst.parse(arg, isMulti);
             }

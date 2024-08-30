@@ -40,7 +40,11 @@ const MyComponent = () => {
   return (<Code>Type any code here</Code>)
 }`}
       example={`
-      <Code>const toto = () => console.log("tata") </Code>`}
+<Code>{\`const toto = () => console.log("tata");
+
+export { toto };
+\`}</Code>
+      `}
       scope={{ Code }}
     />
   );

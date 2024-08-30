@@ -13,21 +13,37 @@ export interface CrossedBasePlugin {
 }
 
 export const BasePlugin: Plugin<CrossedBasePlugin> = {
-  test: '^base$',
-  apply: (context) => {
+  name: 'BasePlugin',
+  test: ['base'],
+  apply: ({ addClassname, styles, isWeb, cache }) => {
     /**
      * {".bg-color": { backgroundColor: "black" } }
      */
-    context.addClassname({
-      body: Object.entries(context.styles).reduce<
-        Record<string, CrossedstyleValues>
-      >((acc, [key, value]) => {
-        const valueNormalized = normalizeUnitPixel(key, value, context.isWeb);
-        acc[`${convertKeyToCss(key)}-[${valueNormalized}]`] = {
+    const old = cache.get(styles);
+    if (old) {
+      addClassname(old);
+      return;
+    }
+    const body = Object.keys(styles).reduce<Record<string, CrossedstyleValues>>(
+      (acc, key: keyof typeof styles) => {
+        const value = styles[key];
+        const valueNormalized = normalizeUnitPixel(key, value, isWeb);
+
+        acc[
+          `${convertKeyToCss(key)}-[${
+            typeof valueNormalized === 'number'
+              ? valueNormalized
+              : valueNormalized?.replace(/ /g, '-')
+          }]`
+        ] = {
           [key]: valueNormalized,
         };
         return acc;
-      }, {}),
-    });
+      },
+      {}
+    );
+    const result = { body };
+    cache.set(styles, result);
+    addClassname(result);
   },
 };

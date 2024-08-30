@@ -5,8 +5,14 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { States, createScope } from '@crossed/core';
+import { createScope } from '@crossed/core';
 import type { MutableRefObject } from 'react';
+
+export type States = {
+  isActive: boolean;
+  isFocus: boolean;
+  isHover: boolean;
+};
 
 export type StyleRef = {
   style?: any;

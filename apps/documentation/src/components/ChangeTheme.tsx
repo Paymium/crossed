@@ -6,50 +6,20 @@
  */
 
 'use client';
-// import { UnistylesRuntime } from '@crossed/styled';
-// import { Sun } from '@crossed/unicons/Sun';
-import { Moon } from '@crossed/unicons/Moon';
+import { Contrast } from '@crossed/unicons';
 import { Button } from '@crossed/ui';
-import { VisibilityHidden } from '@crossed/primitive';
 import { useCallback } from 'react';
-import { ThemeRegistry } from '@crossed/styled/plugins';
-
-// const Button = styled(Pressable, (theme) => ({
-//   'borderRadius': theme.space.lg,
-//   'padding': theme.space.sm,
-//   'hover:': {
-//     backgroundColor: theme.colors.backgroundHover,
-//   },
-//   'active:': {
-//     backgroundColor: theme.colors.backgroundPress,
-//   }
-// }));
-
-// const Text = styled(TextNative, {
-//   color: 'black',
-// });
+import { Registry } from '@crossed/styled';
 
 export const ChangeTheme = () => {
   const onPress = useCallback(() => {
-    ThemeRegistry.setThemeName(
-      ThemeRegistry.themeName === 'dark' ? 'light' : 'dark'
-    );
-    // Registry.setTheme(Registry.themeName === 'dark' ? 'light' : 'dark');
-    // UnistylesRuntime.setTheme(
-    //   UnistylesRuntime.themeName === 'dark' ? 'light' : 'dark'
-    // );
+    Registry.setThemeName(Registry.themeName === 'light' ? 'dark' : 'light');
   }, []);
   return (
-    <Button onPress={onPress} variant="ghost">
-      <VisibilityHidden hidden>
-        <Button.Text>
-          Change to
-          {/* {UnistylesRuntime.themeName === 'light' ? 'dark' : 'light'}{' '} */}
-          mode
-        </Button.Text>
-      </VisibilityHidden>
-      <Moon />
-      {/* {UnistylesRuntime.themeName === 'light' ? <Moon /> : <Sun />} */}
+    <Button variant="tertiary" onPress={onPress}>
+      <Button.Icon>
+        <Contrast />
+      </Button.Icon>
     </Button>
   );
 };

@@ -5,20 +5,18 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Text } from './Text';
-import { withStyle } from '@crossed/styled';
-import { withDefaultProps } from '@crossed/core';
+import { Text, type TextProps } from './Text';
+import { createStyles } from '@crossed/styled';
 
-export const P = withStyle(
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore error un react-native, work for web
-  withDefaultProps(Text, { role: 'paragraph' }),
-  {
-    theme: (t) => ({
-      base: {
-        alignSelf: 'stretch',
-        marginVertical: t.space.md,
-      },
-    }),
-  }
-);
+const useP = createStyles(() => ({
+  root: {
+    base: {
+      alignSelf: 'stretch',
+    },
+  },
+}));
+
+export const P = (props: TextProps) => {
+  // @ts-expect-error role not defined in typed
+  return <Text role="paragraph" {...props} {...useP.root.rnw(props)} />;
+};

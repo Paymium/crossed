@@ -5,33 +5,17 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Registry } from '@crossed/styled/registry';
-import {
-  BasePlugin,
-  PseudoClassPlugin,
-  VariantsPlugin,
-  MediaQueriesPlugin,
-  type CrossedBasePlugin,
-  type CrossedVariantsPlugin,
-  type CrossedMediaQueriesPlugin,
-  type CrossedPseudoClassPlugin,
-  type CrossedVariantsPluginProps,
-  ThemePlugin,
-  CrossedThemePlugin,
-  CrossedWebPlugin,
-  WebPlugin,
-} from '@crossed/styled/plugins';
-import { darkTheme, lightTheme } from '@crossed/ui/theme';
+import { Registry } from '@crossed/styled';
+import { themes as defaultThemes } from '@crossed/theme';
 import { themes as primsThemes } from 'prism-react-renderer';
 
-const breakpoints = { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200 };
 const themes = {
   dark: {
-    ...darkTheme,
+    ...defaultThemes.dark,
     draculaTheme: primsThemes.dracula,
   },
   light: {
-    ...lightTheme,
+    ...defaultThemes.light,
     draculaTheme: primsThemes.dracula,
   },
 };
@@ -39,25 +23,9 @@ const themes = {
 type ThemesCustom = typeof themes;
 
 declare module '@crossed/styled' {
-  export interface StyleSheet
-    extends CrossedBasePlugin,
-      CrossedVariantsPlugin,
-      CrossedThemePlugin,
-      CrossedWebPlugin,
-      CrossedMediaQueriesPlugin<keyof typeof breakpoints>,
-      CrossedPseudoClassPlugin {}
-
-  export interface CrossedPropsExtended<S extends StyleSheet>
-    extends CrossedVariantsPluginProps<ReturnType<S['theme']>['variants']> {}
-}
-
-declare module '@crossed/styled/plugins' {
   export interface Themes extends ThemesCustom {}
 }
 
-Registry.addPlugin(BasePlugin)
-  .addPlugin(ThemePlugin(themes, 'dark'))
-  .addPlugin(PseudoClassPlugin)
-  .addPlugin(VariantsPlugin)
-  .addPlugin(WebPlugin)
-  .addPlugin(MediaQueriesPlugin(breakpoints));
+Registry.setThemes(themes).setInitialThemeName('light');
+
+export default themes;

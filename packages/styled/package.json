@@ -1,7 +1,7 @@
 {
   "name": "@crossed/styled",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "0.14.0-beta.0",
+  "version": "0.14.0-beta.17",
   "types": "lib/typescript/index.d.ts",
   "typings": "lib/typescript/index.d.ts",
   "main": "lib/commonjs/index.js",
@@ -29,7 +29,10 @@
     "generator"
   ],
   "scripts": {
+    "clean": "rm -rf lib",
+    "type-check": "tsc --noEmit",
     "test": "crossed-test",
+    "benchmark": "jest --projects ./node_modules/@crossed/test/src/jest-bench.config.ts",
     "watch": "crossed-build --watch",
     "build": "crossed-build"
   },
@@ -43,21 +46,21 @@
       "require": "./lib/commonjs/index.js",
       "import": "./lib/module/index.js",
       "default": "./lib/module/index.js",
-      "react-native": "./src/index.ts",
+      "react-native": "./module/index.ts",
       "types": "./lib/typescript/index.d.ts"
     },
     "./registry": {
       "require": "./lib/commonjs/Registry.js",
       "import": "./lib/module/Registry.js",
       "default": "./lib/module/Registry.js",
-      "react-native": "./src/Registry.ts",
+      "react-native": "./module/Registry.ts",
       "types": "./lib/typescript/Registry.d.ts"
     },
     "./plugins": {
       "require": "./lib/commonjs/plugins/index.js",
       "import": "./lib/module/plugins/index.js",
       "default": "./lib/module/plugins/index.js",
-      "react-native": "./src/plugins/index.ts",
+      "react-native": "./module/plugins/index.ts",
       "types": "./lib/typescript/plugins/index.d.ts"
     }
   },
@@ -76,13 +79,16 @@
   },
   "devDependencies": {
     "@crossed/build": "^0.5.0",
-    "@crossed/test": "0.11.0",
+    "@crossed/test": "0.11.1-beta.0",
     "@types/jest": "^29.5.0",
+    "@types/node": "^20.14.2",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.18",
+    "csstype": "3.1.3",
+    "jest-bench": "^29.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.73.5",
+    "react-native": "^0.73.6",
     "react-native-web": "^0.19.10",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.2"
@@ -90,10 +96,11 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.73.5",
+    "react-native": "^0.73.6",
     "react-native-web": "^0.19.10"
   },
   "dependencies": {
-    "@crossed/core": "^0.8.0"
+    "@crossed/core": "^0.8.1-beta.3",
+    "ts-deepmerge": "^7.0.0"
   }
 }

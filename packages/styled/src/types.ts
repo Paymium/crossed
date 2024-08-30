@@ -6,6 +6,12 @@
  */
 
 import type { ImageStyle, TextStyle, ViewStyle } from 'react-native';
+import {
+  CrossedBasePlugin,
+  CrossedMediaQueriesPlugin,
+  CrossedPseudoClassPlugin,
+  CrossedWebPlugin,
+} from './plugins';
 
 type NestedKeys = 'shadowOffset' | 'transform' | 'textShadowOffset';
 
@@ -17,20 +23,29 @@ export type AllAvailableStyles = CrossedstyleView &
   CrossedstyleText &
   CrossedstyleImage;
 
-export interface CrossedstyleTheme {}
-export interface CrossedstyleThemes extends Record<string, CrossedstyleTheme> {}
-
 export type AllAvailableKeys = keyof AllAvailableStyles;
 
 export type CrossedstyleValues = {
   [propName in AllAvailableKeys]?: AllAvailableStyles[propName];
 };
 
-export interface StyleSheet {}
+interface Variants
+  extends Record<string, Record<string, Omit<StyleSheet, 'variants'>>> {}
 
-export type CreateStyleParams = StyleSheet;
+export interface StyleSheet
+  extends CrossedBasePlugin,
+    CrossedWebPlugin,
+    CrossedPseudoClassPlugin,
+    CrossedMediaQueriesPlugin {
+  variants?: Variants;
+}
 
-export type CreateStylesParams<K extends string> = Record<K, StyleSheet>;
+export type ExtractForProps<S extends CrossedMethods<any, any>> =
+  S extends CrossedMethods<infer D, any>
+    ? CrossedPropsExtended<D>
+    : S extends { original: any }
+      ? CrossedPropsExtended<S['original']>
+      : never;
 
 export type PluginContext<S> = {
   /**
@@ -51,6 +66,9 @@ export type PluginContext<S> = {
    * props of component, only on runtime
    */
   props?: any;
+
+  cache: Map<S[keyof S], any>;
+
   /**
    * Callback function for add className and style object
    * @returns {void}
@@ -71,15 +89,53 @@ export type PluginContext<S> = {
   }) => void;
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore S should exists
-export interface CrossedPropsExtended<S extends StyleSheet> {} // eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars
+type HasBooleanVariants<T> = T extends 'true'
+  ? true
+  : T extends 'false'
+    ? true
+    : false;
+
+export interface Themes {}
+
+export type BaseCrossedPropsExtended = {
+  'className'?: string;
+  'style'?: CrossedstyleValues | CrossedstyleValues[];
+  'focus'?: true | false;
+  'hover'?: true | false;
+  'active'?: true | false;
+  'focus-visible'?: true | false;
+  'disabled'?: true | false;
+};
+
+export interface CrossedPropsExtended<
+  S extends StyleSheet,
+  V = S['variants'],
+  MV = V extends object ? V : never,
+> extends BaseCrossedPropsExtended {
+  variants?: {
+    [key in keyof MV]?: HasBooleanVariants<keyof MV[key]> extends false
+      ? keyof MV[key]
+      : keyof MV[key] | boolean;
+  };
+}
+
+export type CrossedMethods<
+  S extends StyleSheet,
+  P = CrossedPropsExtended<S>,
+> = {
+  original: S;
+  style: (_p?: P) => { style: Record<string, string> };
+  className: (_p?: P) => { className: string };
+  rnw: (_p?: P) => { style: Record<string, any> };
+};
 
 export type Plugin<S = any> = {
   /**
    * Test of key, if true, apply plugin
    */
-  test: string;
+  test: string[];
+
+  name: string;
 
   /**
    * init plugin

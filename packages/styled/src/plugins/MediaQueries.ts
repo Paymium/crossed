@@ -8,67 +8,96 @@
 import type { CrossedstyleValues, Plugin } from '../types';
 import { convertKeyToCss, normalizeUnitPixel } from './utils';
 
-export interface CrossedMediaQueriesPlugin<K extends string | number | symbol> {
-  media?: Partial<Record<K, CrossedstyleValues>>;
+export let cacheBreakpoints: Partial<
+  Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>
+> = {};
+
+export interface CrossedMediaQueriesPlugin {
+  media?: {
+    xs?: CrossedstyleValues;
+    sm?: CrossedstyleValues;
+    md?: CrossedstyleValues;
+    lg?: CrossedstyleValues;
+    xl?: CrossedstyleValues;
+  };
 }
 
-export const MediaQueriesPlugin = <B extends Record<string, number>>(
+let Dimensions: any;
+let Platform: any;
+
+export const MediaQueriesPlugin = <
+  B extends Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>,
+>(
   breakpoints: B
-): Plugin<CrossedMediaQueriesPlugin<keyof B>> => {
+): Plugin<CrossedMediaQueriesPlugin> => {
+  cacheBreakpoints = breakpoints;
   return {
-    test: '^media$',
+    name: 'MediaQueriesPlugin',
+    test: ['media'],
     apply: function MediaQueriesApply({ styles, addClassname, props, isWeb }) {
-      let Dimensions: any;
-      let Platform: any;
       // props only exists at runtime
       // Hack for load react-native only at runtime, not buildtime
-      if (props) {
+      if (props && !Dimensions && !Platform) {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         Dimensions = require('react-native').Dimensions;
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         Platform = require('react-native').Platform;
       }
-      Object.entries(styles).forEach(([key, values]) => {
-        const breakpointsValue = normalizeUnitPixel(
-          'width',
-          breakpoints[key],
-          isWeb
-        );
-        if (values) {
-          Object.entries(values).forEach(([keyProperty, valueProperty]) => {
-            if (Platform && Dimensions && Platform.OS !== 'web') {
-              // apply style for native
-              if (breakpoints[key] < Dimensions.get('screen').width) {
-                addClassname({
-                  body: {
-                    [``]: {
-                      [keyProperty]: valueProperty,
+      Object.entries(styles).forEach(
+        ([key, values]: [
+          keyof CrossedMediaQueriesPlugin['media'],
+          CrossedstyleValues,
+        ]) => {
+          const breakpointsValue = normalizeUnitPixel(
+            'width',
+            breakpoints[key],
+            isWeb
+          );
+          if (values) {
+            Object.entries(values).forEach(([keyProperty, valueProperty]) => {
+              if (Platform && Dimensions && Platform.OS !== 'web') {
+                // apply style for native
+                if (breakpoints[key] < Dimensions.get('window').width) {
+                  addClassname({
+                    body: {
+                      [``]: {
+                        [keyProperty]: valueProperty,
+                      },
                     },
-                  },
-                });
-              }
-            } else {
-              // apply style for web
-              const valueNormalized = normalizeUnitPixel(
-                keyProperty,
-                valueProperty,
-                isWeb
-              );
-              addClassname({
-                wrapper: (str) =>
-                  `@media (min-width: ${breakpointsValue}) { ${str} }`,
-                body: {
-                  [`${key}:${convertKeyToCss(
-                    keyProperty
-                  )}-[${valueNormalized}]`]: {
+                  });
+                }
+              } else {
+                // apply style for web
+                const valueNormalized = normalizeUnitPixel(
+                  keyProperty,
+                  valueProperty,
+                  isWeb
+                );
+                const body = {
+                  [`${key}:${convertKeyToCss(keyProperty)}-[${
+                    typeof valueNormalized === 'number'
+                      ? valueNormalized
+                      : valueNormalized?.replace(/ /g, '-')
+                  }]`]: {
                     [keyProperty]: valueNormalized,
                   },
-                },
-              });
-            }
-          });
+                };
+                addClassname({
+                  wrapper: (str) =>
+                    `@media (min-width: ${breakpointsValue}) { ${str} }`,
+                  body,
+                });
+
+                if (props && typeof window !== 'undefined' && Dimensions) {
+                  if (breakpoints[key] < Dimensions.get('window').width) {
+                    addClassname({ body });
+                  }
+                }
+              }
+            });
+          }
         }
-      });
+      );
     },
   };
 };
