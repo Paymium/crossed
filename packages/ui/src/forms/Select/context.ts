@@ -29,8 +29,8 @@ export type Context = {
   onFocus?: (_e: NativeSyntheticEvent<TargetedEvent>) => void;
   onBlur?: (_e: NativeSyntheticEvent<TargetedEvent>) => void;
   id?: string;
-  hover?: boolean;
-  focus: boolean;
+  // hover?: boolean;
+  // focus: boolean;
   refs: UseFloatingReturn['refs'];
   floatingStyles: UseFloatingReturn['floatingStyles'];
 

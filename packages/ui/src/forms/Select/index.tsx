@@ -34,7 +34,7 @@ import { Text } from '../../typography/Text';
 import { VisibilityHidden } from '@crossed/primitive';
 import { useFocusScope } from './Focus';
 import { ChevronDown } from '@crossed/unicons';
-import { composeStyles } from '@crossed/styled';
+import { composeStyles, pressable } from '@crossed/styled';
 import { useFloating } from './useFloating';
 import { FormControl, FormField, FormLabel } from '../Form';
 import { XBox } from '../../layout/XBox';
@@ -68,12 +68,7 @@ const findChild = (
 
 type SelectProps = PropsWithChildren<
   UseUncontrolledInput<string> &
-    Partial<
-      Pick<
-        ButtonProps,
-        'variant' | 'onFocus' | 'onBlur' | 'id' | 'hover' | 'focus'
-      >
-    > & {
+    Partial<Pick<ButtonProps, 'variant' | 'onFocus' | 'onBlur' | 'id'>> & {
       adapt?: boolean;
     } & Partial<
       Pick<Context, 'label' | 'description' | 'extra' | 'clearable' | 'error'>
@@ -92,8 +87,6 @@ const SelectRoot = memo(
     onFocus,
     onBlur,
     id,
-    hover,
-    focus,
     label,
     description,
     extra,
@@ -131,8 +124,6 @@ const SelectRoot = memo(
         onFocus={onFocus}
         onBlur={onBlur}
         id={id}
-        hover={hover}
-        focus={focus}
         refs={refs}
         floatingStyles={floatingStyles}
         label={label}
@@ -159,8 +150,8 @@ const Trigger = withStaticProperties(
       open,
       triggerLayout,
       sheet,
-      hover,
-      focus,
+      // hover,
+      // focus,
       id,
       onBlur,
       onFocus,
@@ -198,10 +189,10 @@ const Trigger = withStaticProperties(
     const showClear = clearable && value;
 
     const states = {
-      hover,
+      // hover,
       'focus': open || focus,
       'focus-visible': open || focus,
-      'active': props.active,
+      // 'active': props.active,
     };
 
     return (
@@ -230,14 +221,15 @@ const Trigger = withStaticProperties(
               ref={composeRefs(pressableRef, refs.setReference as any)}
               onFocus={composeEventHandlers(props.onFocus, onFocus)}
               onBlur={composeEventHandlers(props.onBlur, onBlur)}
-              style={({ pressed }) => {
-                return composeStyles(form.input, useSelect.trigger).rnw({
-                  ...props,
-                  ...states,
-                  active: props.active ?? pressed,
-                  variants: { error: !!error },
-                }).style;
-              }}
+              {...pressable(form.input, useSelect.trigger)}
+              // style={({ pressed }) => {
+              //   return composeStyles(form.input, useSelect.trigger).rnw({
+              //     ...props,
+              //     ...states,
+              //     active: props.active ?? pressed,
+              //     variants: { error: !!error },
+              //   }).style;
+              // }}
               onPress={composeEventHandlers(props.onPress, onPress)}
             >
               {typeof children === 'function' ? (
@@ -246,8 +238,8 @@ const Trigger = withStaticProperties(
                     {inputRender}
                     {children(e)}
                     <ChevronDown
-                      {...useSelect.icon.style()}
-                      color={form.placeholder.style().style.color}
+                    // {...rnw(useSelect.icon)}
+                    // color={rnw(form.placeholder).style.color}
                     />
                   </>
                 )
@@ -256,8 +248,8 @@ const Trigger = withStaticProperties(
                   {inputRender}
                   {children}
                   <ChevronDown
-                    {...useSelect.icon.style()}
-                    color={form.placeholder.style().style.color}
+                  // {...rnw(useSelect.icon)}
+                  // color={rnw(form.placeholder).style.color}
                   />
                 </>
               )}
@@ -269,7 +261,7 @@ const Trigger = withStaticProperties(
             </XBox>
           )}
         </XBox>
-        {error && <Text color="error">{error.toString()}</Text>}
+        {error && <Text>{error.toString()}</Text>}
       </YBox>
     );
   }),
@@ -277,14 +269,19 @@ const Trigger = withStaticProperties(
 );
 
 const Option = ({ value, ...props }: MenuItemProps & { value: string }) => {
-  const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
+  const {
+    setOpen,
+    setValue,
+    //  value: valueGlobal
+  } = useSelectProvider();
   const focusProps = useFocusScope();
   return (
     <MenuList.Item
-      active={value === valueGlobal}
+      // active={value === valueGlobal}
       {...props}
       {...focusProps}
-      style={({ pressed }) => useSelect.options.rnw({ active: pressed }).style}
+      style={composeStyles(useSelect.options)}
+      // style={({ pressed }) => useSelect.options.rnw({ active: pressed }).style}
       onPress={composeEventHandlers(() => {
         setOpen(false);
         setValue(value);

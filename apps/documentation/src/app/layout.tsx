@@ -13,7 +13,7 @@ import { NavBar } from '@/components/NavBar';
 import { PropsWithChildren, Suspense } from 'react';
 import { Footer } from '@/components/Footer';
 import { CrossedUIProvider } from '@crossed/ui';
-import { Registry } from '@crossed/styled';
+import { className, Registry, rnw } from '@crossed/styled';
 import { createStyles } from '@crossed/styled';
 import { Roboto } from 'next/font/google';
 import { ScrollView } from '@/components/ScrollView';
@@ -47,19 +47,20 @@ const styleSheet = createStyles((t) => ({
       display: 'flex',
     },
   },
+  contentContainer: { base: { minHeight: '100%' } },
 }));
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang={'en'} className={`${Registry.themeName} ${roboto.className}`}>
       <head />
-      <body {...styleSheet.body.className()}>
+      <body {...className(styleSheet.body)}>
         <CrossedUIProvider>
           <Suspense>
             <ScrollView
               stickyHeaderIndices={[0]}
-              {...styleSheet.root.rnw()}
-              contentContainerStyle={{ minHeight: '100%' }}
+              {...rnw(styleSheet.root)}
+              contentContainerStyle={rnw(styleSheet.contentContainer).style}
             >
               <NavBar />
               {children}

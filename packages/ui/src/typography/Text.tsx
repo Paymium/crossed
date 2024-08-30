@@ -12,85 +12,43 @@ import {
   type TextProps as TextNativeProps,
 } from 'react-native';
 import {
-  composeStyles,
   createStyles,
+  rnw,
   withReactive,
-  type CrossedMethods,
-  type ExtractForProps,
+  type CrossedStyle,
 } from '@crossed/styled';
 import { forwardRef } from 'react';
-import { typoStyles, type Size, type Weight } from '../styles/typography';
+import { fontWeightStyles, fontSizeStyles } from '../styles/typography';
+import { textAlignStyles } from '../styles/textAlign';
 
-const useText = createStyles(
-  (t) =>
-    ({
-      root: {
-        base: {
-          color: t.font.color,
-          fontFamily: t.font.family,
-        },
-        variants: {
-          color: {
-            error: { base: { color: t.colors.error.primary } },
-            warning: { base: { color: t.colors.warning.primary } },
-            info: { base: { color: t.colors.info.primary } },
-            link: { base: { color: t.colors.primary.primary } },
-            success: { base: { color: t.colors.success.primary } },
-          },
-          textAlign: {
-            auto: { base: { textAlign: 'auto' } },
-            justify: { base: { textAlign: 'justify' } },
-            default: { base: { textAlign: 'left' } },
-            center: { base: { textAlign: 'center' } },
-            left: { base: { textAlign: 'left' } },
-            right: { base: { textAlign: 'right' } },
-          },
-        },
-      },
-    }) as const
-);
-
-type VariantLocal = ExtractForProps<typeof useText.root>;
+const useText = createStyles((t) => ({
+  root: { base: { color: t.font.color, fontFamily: t.font.family } },
+}));
 
 export type TextProps = Omit<TextNativeProps, 'style'> & {
-  style?: CrossedMethods<any, any>;
-} & VariantLocal['variants'] &
-  Omit<VariantLocal, 'variants' | 'style'> &
-  Size['variants'] &
-  Weight['variants'];
+  style?: CrossedStyle;
+  weight?: keyof typeof fontWeightStyles;
+  size?: keyof typeof fontSizeStyles;
+  textAlign?: keyof typeof textAlignStyles;
+};
 
 const Text = withReactive(
   forwardRef(
     (
-      {
-        active,
-        hover,
-        focus,
-        color,
-        weight,
-        textAlign,
-        size = 'md',
-        style,
-        ...props
-      }: TextProps,
+      { weight = 'md', textAlign, size = 'md', style, ...props }: TextProps,
       ref: any
     ) => {
       return (
         <TextNative
           ref={ref}
           {...props}
-          {...composeStyles(
-            typoStyles.size,
+          {...rnw(
+            textAlignStyles[textAlign],
+            fontSizeStyles[size],
+            fontWeightStyles[weight],
             useText.root,
-            typoStyles.weight,
             style
-          ).rnw({
-            ...props,
-            active,
-            hover,
-            focus,
-            variants: { color, size, weight, textAlign },
-          })}
+          )}
         />
       );
     }

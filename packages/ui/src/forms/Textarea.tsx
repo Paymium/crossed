@@ -7,26 +7,38 @@
 
 import { TextInput, type TextInputProps } from 'react-native';
 import { forwardRef, useCallback, useState, type ReactNode } from 'react';
-import { form, type FormInput } from '../styles/form';
-import { useInteraction } from '@crossed/styled';
+import { form } from '../styles/form';
+import {
+  createStyles,
+  rnw,
+  useInteraction,
+  useTheme,
+  type AllAvailableStyles,
+} from '@crossed/styled';
 import { FormControl, FormField, FormLabel } from './Form';
 import { CloseButton } from '../other/CloseButton';
 import { useUncontrolled } from '@crossed/core';
 import { XBox } from '../layout/XBox';
 import { Text } from '../typography/Text';
 import { YBox } from '../layout/YBox';
+import { fontColorStyles } from '../styles/typography';
 
-export type TextareaProps = Omit<TextInputProps, 'editable' | 'onChange'> &
-  Omit<FormInput, 'variants'> &
-  Pick<FormInput['variants'], 'error'> & {
-    label?: string;
-    clearable?: boolean;
-    elementLeft?: ReactNode;
-    elementRight?: ReactNode;
-    error?: string;
-    description?: string;
-    extra?: string;
-  };
+const styles = createStyles(() => ({
+  dynamic: (e: AllAvailableStyles) => {
+    return e;
+  },
+}));
+
+export type TextareaProps = Omit<TextInputProps, 'editable' | 'onChange'> & {
+  label?: string;
+  clearable?: boolean;
+  elementLeft?: ReactNode;
+  elementRight?: ReactNode;
+  error?: string;
+  description?: string;
+  extra?: string;
+  disabled?: boolean;
+};
 
 export const Textarea = forwardRef<TextInput, TextareaProps>(
   (
@@ -53,8 +65,8 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
     });
     const [elementLeftWidth, setElementLeftWidth] = useState(0);
     const [elementRightWidth, setElementRightWidth] = useState(0);
-    const { state, props: propsInteraction } = useInteraction(props);
-    const { color } = form.placeholder.style().style;
+    const { props: propsInteraction } = useInteraction(props);
+    const color = useTheme().components.Input.primary.default.placeholder;
 
     const onClear = useCallback(() => {
       setValue('');
@@ -99,18 +111,15 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
                 numberOfLines={10}
                 {...props}
                 {...propsInteraction}
-                {...form.input.rnw({
-                  ...props,
-                  ...state,
-                  style: [
-                    { minHeight: 88, textAlignVertical: 'top' },
-                    props.style as any,
-                    elementLeftWidth && { paddingLeft: elementLeftWidth },
-                    elementRightWidth && { paddingRight: elementRightWidth },
-                  ],
-                  disabled,
-                  variants: { error: !!error },
-                })}
+                {...rnw(
+                  styles.dynamic({ minHeight: 88, textAlignVertical: 'top' }),
+                  form.input,
+                  error && form.inputError,
+                  elementLeftWidth &&
+                    styles.dynamic({ paddingLeft: elementLeftWidth }),
+                  elementRightWidth &&
+                    styles.dynamic({ paddingRight: elementRightWidth })
+                )}
                 value={value}
                 onChangeText={setValue}
               />
@@ -125,7 +134,9 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
               {elementRight}
             </XBox>
           </XBox>
-          {error && <Text color="error">{error.toString()}</Text>}
+          {error && (
+            <Text style={fontColorStyles.error}>{error.toString()}</Text>
+          )}
         </YBox>
       </FormField>
     );

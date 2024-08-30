@@ -22,7 +22,7 @@ import {
 } from '../forms/Button';
 import { XBox, type XBoxProps } from '../layout/XBox';
 import { YBox, type YBoxProps } from '../layout/YBox';
-import { composeStyles, createStyles } from '@crossed/styled';
+import { composeStyles, createStyles, pressable } from '@crossed/styled';
 import { Pressable } from 'react-native';
 import { Box } from '../layout/Box';
 import { useInteraction } from '@crossed/styled';
@@ -33,6 +33,7 @@ const useStyles = createStyles((t) => ({
       // paddingBottom: t.space.xs,
     },
   },
+  triggerDisabled: { base: { pointerEvents: 'none' } },
   trigger: {
     base: {
       height: 44,
@@ -40,15 +41,6 @@ const useStyles = createStyles((t) => ({
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-    },
-    variants: {
-      disabled: {
-        true: {
-          base: {
-            pointerEvents: 'none',
-          },
-        },
-      },
     },
     // variants: {
     //   underline: {
@@ -105,24 +97,24 @@ const useStyles = createStyles((t) => ({
     },
   },
   triggerText: {
-    variants: {
-      underline: {
-        true: {
-          'base': { color: t.colors.neutral['600'] },
-          ':hover': {
-            // color: t.colors.brand.bright,
-          },
-        },
-      },
-      disabled: {
-        true: {
-          base: {
-            // color: t.colors.neutral.low,
-            pointerEvents: 'none',
-          },
-        },
-      },
-    },
+    // variants: {
+    //   underline: {
+    //     true: {
+    //       'base': { color: t.colors.neutral['600'] },
+    //       ':hover': {
+    //         // color: t.colors.brand.bright,
+    //       },
+    //     },
+    //   },
+    //   disabled: {
+    //     true: {
+    //       base: {
+    //         // color: t.colors.neutral.low,
+    //         pointerEvents: 'none',
+    //       },
+    //     },
+    //   },
+    // },
   },
 }));
 
@@ -210,11 +202,15 @@ export const createTabs = () => {
             role="button"
             disabled={disabled}
             {...props}
-            {...useStyles.trigger.rnw({
-              ...state,
-              hover: valueProps === value || state.hover,
-              variants: { disabled },
-            })}
+            {...pressable(
+              useStyles.trigger,
+              disabled && useStyles.triggerDisabled
+            )}
+            // {...useStyles.trigger.rnw({
+            //   ...state,
+            //   hover: valueProps === value || state.hover,
+            //   variants: { disabled },
+            // })}
             {...interaction}
             onPress={onPress}
           >

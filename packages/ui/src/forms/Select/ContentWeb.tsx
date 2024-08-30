@@ -10,18 +10,16 @@ import { useSelectProvider } from './context';
 import { form } from '../../styles/form';
 import { useSelect } from './styles';
 import type { ContentProps } from './types';
-import {
-  composeStyles,
-  // createStyles
-} from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 
-// const styles = createStyles(() => ({ dynamic: (e) => e }));
+const styles = createStyles(() => ({ dynamic: (e: any) => e }));
 export const ContentWeb = ({ sheetProps, ...props }: ContentProps) => {
   const {
     // triggerLayout,
     open,
     refs,
-    // floatingStyles,
+    floatingStyles,
+    error,
   } = useSelectProvider();
 
   // const { width } = (triggerLayout.current as any) || {
@@ -29,20 +27,17 @@ export const ContentWeb = ({ sheetProps, ...props }: ContentProps) => {
   //   height: 0,
   //   left: 0,
   // };
+
   return open ? (
     <MenuList
       {...props}
       ref={refs.setFloating}
       style={composeStyles(
         form.input,
-        useSelect.content
-        // styles.dynamic(floatingStyles)
+        error && form.inputError,
+        useSelect.content,
+        styles.dynamic(floatingStyles)
       )}
-      // style={[
-      //   composeStyles(form.input, useSelect.content).rnw().style,
-      //   floatingStyles,
-      //   { minWidth: width },
-      // ]}
     />
   ) : null;
 };

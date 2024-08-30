@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { CrossedUIProvider } from '@crossed/ui';
+// import { CrossedUIProvider } from '@crossed/ui';
 import { Slot, SplashScreen } from 'expo-router';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useEffect } from 'react';
@@ -37,12 +37,12 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const theme = useColorScheme();
   return (
-    <CrossedUIProvider>
-      <ThemeProvider value={theme === 'dark' ? DarkTheme : DefaultTheme}>
-        <SafeAreaProvider>
-          <Slot />
-        </SafeAreaProvider>
-      </ThemeProvider>
-    </CrossedUIProvider>
+    // <CrossedUIProvider>
+    <ThemeProvider value={theme === 'dark' ? DarkTheme : DefaultTheme}>
+      <SafeAreaProvider>
+        <Slot />
+      </SafeAreaProvider>
+    </ThemeProvider>
+    // </CrossedUIProvider>
   );
 }

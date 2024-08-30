@@ -5,27 +5,23 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import path from 'path';
+import { parseScript } from 'esprima';
 import fs from 'fs';
 import {
   ArrowFunctionExpression,
-  // CallExpression,
   Expression,
   FunctionExpression,
-  // Identifier,
-  // Literal,
   ObjectExpression,
-  // Property,
-  // SequenceExpression,
   SpreadElement,
 } from 'estree';
-// import { parseScript as parse } from 'esprima';
 import escodegen from 'escodegen';
 import { createLogger, apiLog } from '@crossed/log';
 import { Registry, parse } from '@crossed/styled';
 import { convertKeyToCss } from '@crossed/styled';
 import type { CrossedstyleValues } from '@crossed/styled';
 import * as esbuild from 'esbuild';
+import path from 'path';
+import * as ts from 'typescript';
 
 type Style = Record<string, any>;
 
@@ -139,14 +135,14 @@ export class Loader {
         return `${acc}${convertKeyToCss(
           'paddingTop'
         )}:${value};${convertKeyToCss('paddingBottom')}:${value};`;
-      } else if (key === 'padding') {
-        return `${acc}${convertKeyToCss(
-          'paddingTop'
-        )}:${value};${convertKeyToCss(
-          'paddingBottom'
-        )}:${value};${convertKeyToCss(
-          'paddingLeft'
-        )}:${value};${convertKeyToCss('paddingRight')}:${value};`;
+        // } else if (key === 'padding') {
+        //   return `${acc}${convertKeyToCss(
+        //     'paddingTop'
+        //   )}:${value};${convertKeyToCss(
+        //     'paddingBottom'
+        //   )}:${value};${convertKeyToCss(
+        //     'paddingLeft'
+        //   )}:${value};${convertKeyToCss('paddingRight')}:${value};`;
       }
       return `${acc}${convertKeyToCss(key)}:${value};`;
     }, '');
@@ -219,24 +215,39 @@ export class Loader {
     });
   };
 
-  parse(ast: Expression | SpreadElement, isMulti?: boolean) {
-    // const plugins = Registry.getPlugins();
-    // const ctx = plugins.reduce((acc, { utils }) => {
-    //   return { ...acc, ...(utils?.() || undefined) };
-    // }, {});
+  _parseFunctionExpression = (
+    arg: ArrowFunctionExpression | FunctionExpression
+  ) => {
+    if (
+      arg.type === 'ArrowFunctionExpression' ||
+      arg.type === 'FunctionExpression'
+    ) {
+      const ast = {
+        type: 'Program',
+        body: [
+          {
+            type: 'ExpressionStatement',
+            expression: arg,
+          },
+        ],
+      };
+      const toto = escodegen.generate(ast);
+      let returnEl;
+      try {
+        // eslint-disable-next-line no-eval
+        returnEl = eval(toto)(Registry.getTheme(true));
+      } catch (e) {
+        this.logger.error(
+          `${apiLog({
+            events: ['eval_style_function_error'],
+          })}: ${e.message}`
+        );
+      }
+      return returnEl;
+    }
+  };
 
-    Object.entries(Registry.getThemes()).forEach(([themeName, theme]) => {
-      this.addClassname({
-        prefix: '.',
-        body: {
-          [`${themeName}`]: parse(theme, undefined, true).values,
-        },
-      });
-    });
-
-    // plugins.forEach(({ init }) =>
-    //   init?.({ addClassname: this.addClassname, isWeb: true, ...ctx })
-    // );
+  parsingExpression(ast: Expression | SpreadElement) {
     const _parseObjectExpression = (arg: ObjectExpression) => {
       if (arg.type === 'ObjectExpression') {
         const ast = {
@@ -264,38 +275,6 @@ export class Loader {
       }
     };
 
-    const _parseFunctionExpression = (
-      arg: ArrowFunctionExpression | FunctionExpression
-    ) => {
-      if (
-        arg.type === 'ArrowFunctionExpression' ||
-        arg.type === 'FunctionExpression'
-      ) {
-        const ast = {
-          type: 'Program',
-          body: [
-            {
-              type: 'ExpressionStatement',
-              expression: arg,
-            },
-          ],
-        };
-        const toto = escodegen.generate(ast);
-        let returnEl;
-        try {
-          // eslint-disable-next-line no-eval
-          returnEl = eval(toto)(Registry.getTheme(true));
-        } catch (e) {
-          this.logger.error(
-            `${apiLog({
-              events: ['eval_style_function_error'],
-            })}: ${e.message}`
-          );
-        }
-        return returnEl;
-      }
-    };
-
     let parsing: Record<string, any>;
 
     if (ast.type === 'ObjectExpression') {
@@ -304,7 +283,7 @@ export class Loader {
       ast.type === 'ArrowFunctionExpression' ||
       ast.type === 'FunctionExpression'
     ) {
-      parsing = _parseFunctionExpression(ast);
+      parsing = this._parseFunctionExpression(ast);
     } else {
       this.logger.warn(
         `${apiLog({
@@ -312,23 +291,99 @@ export class Loader {
         })}      ${ast.type}`
       );
     }
+    return parsing;
+  }
 
-    if (parsing) {
-      if (isMulti) {
-        Object.entries(parsing).forEach(([, p]) => {
-          Registry.apply(() => p, {
-            addClassname: this.addClassname,
-            isWeb: true,
-            cache,
-          });
-        });
-      } else {
-        Registry.apply(() => parsing, {
-          addClassname: this.addClassname,
-          isWeb: true,
-          cache,
-        });
-      }
+  loader(t: string): string {
+    Object.entries(Registry.getThemes()).forEach(([themeName, theme]) => {
+      this.addClassname({
+        prefix: '.',
+        body: {
+          [`${themeName}`]: parse(theme, undefined, true).values,
+        },
+      });
+    });
+    let ast: any;
+    try {
+      ast = (parseScript(
+        ts.transpileModule(`const Foo = createStyles(${t})`, {
+          compilerOptions: { target: ts.ScriptTarget.ESNext },
+        }).outputText
+      )?.body || [])[0];
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(e);
     }
+    if (
+      ast.type !== 'VariableDeclaration' ||
+      ast.declarations[0].init.type !== 'CallExpression'
+    ) {
+      throw new Error('getAst - wrong value');
+    }
+
+    const parsing = this.parsingExpression(
+      ast.declarations[0].init.arguments[0]
+    );
+    const result: Record<string, Record<string, string | boolean>> = {};
+    const dynamicStyles: string[] = [];
+    if (parsing) {
+      Object.entries(parsing).forEach(([key, p]) => {
+        if (typeof p === 'object') {
+          const { $$css, ...obj } = p;
+          if ($$css) {
+            result[key] = { $$$css: true, ...obj };
+          } else {
+            Registry.apply(() => obj, {
+              addClassname: (e) => {
+                if (!result[key]) {
+                  result[key] = { $$$css: true };
+                }
+                result[key] = Object.entries(e.body).reduce<
+                  Record<string, string | boolean>
+                >((acc, [className, style]) => {
+                  const [nameStyle] = Object.keys(style);
+                  acc[nameStyle] = acc[nameStyle]
+                    ? `${acc[nameStyle]} ${className}`
+                    : className;
+                  return acc;
+                }, result[key]);
+                this.addClassname(e);
+              },
+              isWeb: true,
+              cache,
+            });
+          }
+        } else if (typeof p === 'function') {
+          const properties = [];
+
+          if (ast.declarations[0].init?.arguments[0]?.body?.properties) {
+            properties.push(
+              ...ast.declarations[0].init?.arguments[0]?.body?.properties
+            );
+          } else if (
+            ast.declarations[0].init?.arguments[0].type === 'ObjectExpression'
+          ) {
+            properties.push(
+              ...ast.declarations[0].init?.arguments[0].properties
+            );
+          }
+          const property = properties.find(
+            ({ key: { name } }: any) => name === key
+          );
+          if (property) {
+            try {
+              dynamicStyles.push(
+                `${key}:${escodegen.generate(property.value)}`
+              );
+            } catch (e) {
+              console.error(e);
+            }
+          }
+        }
+      });
+    }
+    const str = JSON.stringify(result);
+    const completeResult = `${str.replace(/}$/g, '')}${str !== '{}' ? ',' : ''}${dynamicStyles.join(',')}}`;
+    return completeResult;
   }
 }

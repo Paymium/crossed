@@ -21,6 +21,7 @@ import {
   Th,
   Tr,
   YBox,
+  fontColorStyles,
 } from '@crossed/ui';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
@@ -82,7 +83,7 @@ export type StylesParams = ExtractForProps<typeof styles.body>;
               <Text>styles</Text>
             </Td>
             <Td>
-              <I color="warning">
+              <I style={fontColorStyles.warning}>
                 {`(theme: Themes[keyof Themes]) =>
   Record<string, StyleSheet>`}
               </I>
@@ -131,7 +132,7 @@ text.className()
               <Text>style</Text>
             </Td>
             <Td>
-              <I color="warning">
+              <I style={fontColorStyles.warning}>
                 {`(e: Params) => {
   style:
     | CSSProperties
@@ -150,7 +151,7 @@ text.className()
               <Text>rnw</Text>
             </Td>
             <Td>
-              <I color="warning">
+              <I style={fontColorStyles.warning}>
                 {`(e: Params) => {
   style:
     | ViewStyle
@@ -173,7 +174,9 @@ text.className()
               <Text>className</Text>
             </Td>
             <Td>
-              <I color="warning">{'(e: Params) => { className: string }'}</I>
+              <I style={fontColorStyles.warning}>
+                {'(e: Params) => { className: string }'}
+              </I>
             </Td>
             <Td>
               <Text>get className for web</Text>

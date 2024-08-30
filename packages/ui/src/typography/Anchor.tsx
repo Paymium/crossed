@@ -9,7 +9,7 @@ import {
   composeStyles,
   createStyles,
   useInteraction,
-  type CrossedMethods,
+  type CrossedStyle,
 } from '@crossed/styled';
 import { Text, type TextProps } from './Text';
 import { forwardRef } from 'react';
@@ -58,7 +58,7 @@ export type AnchorProps = Omit<TextProps, 'style'> & {
    *
    * @type {CrossedMethods<any, any>}
    */
-  style?: CrossedMethods<any, any>;
+  style?: CrossedStyle;
   /**
    * Indicates whether the anchor should use the "primary" style. Default is true.
    *

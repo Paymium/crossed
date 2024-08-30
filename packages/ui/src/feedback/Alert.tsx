@@ -11,7 +11,9 @@ import { Text, type TextProps } from '../typography/Text';
 import {
   composeStyles,
   createStyles,
-  type CrossedMethods,
+  isWeb,
+  useTheme,
+  type CrossedStyle,
 } from '@crossed/styled';
 import { createContext, useContext } from 'react';
 import { YBox, type YBoxProps } from '../layout/YBox';
@@ -60,7 +62,7 @@ export const alertActionTextStyles = createStyles(
 );
 
 export const alertStyles = createStyles(
-  ({ components: { Alert }, space }) =>
+  ({ space }) =>
     ({
       containerIcon: {
         base: { alignSelf: 'center' },
@@ -85,35 +87,31 @@ export const alertStyles = createStyles(
           },
         },
       },
-      action: {
-        base: { alignSelf: 'center' },
-        media: { md: { alignSelf: 'baseline' } },
-        web: {
-          'base': { boxSizing: 'border-box' },
-          ':focus': {
-            outlineWidth: '2px',
-            outlineOffset: '2px',
-            outlineStyle: 'solid',
-          },
-        },
-        variants: {
-          status: {
-            error: { web: { ':focus': { outlineColor: Alert.error.text } } },
-            success: {
-              web: { ':focus': { outlineColor: Alert.success.text } },
-            },
-            warning: {
-              web: { ':focus': { outlineColor: Alert.warning.text } },
-            },
-            info: {
-              web: { ':focus': { outlineColor: Alert.info.text } },
-            },
-          },
-        },
-      },
       group: { base: { flex: 1, flexShrink: 1 } },
     }) as const
 );
+
+const actionStyles = createStyles(() => ({
+  base: {
+    base: { alignSelf: 'center' },
+    media: { md: { alignSelf: 'baseline' } },
+    web: {
+      'base': { boxSizing: 'border-box' },
+      ':focus': {
+        outlineWidth: '2px',
+        outlineOffset: '2px',
+        outlineStyle: 'solid',
+      },
+    },
+  },
+}));
+
+const webStyle = createStyles(({ components: { Alert } }) => ({
+  error: { ':focus': { outlineColor: Alert.error.text } },
+  success: { ':focus': { outlineColor: Alert.success.text } },
+  warning: { ':focus': { outlineColor: Alert.warning.text } },
+  info: { ':focus': { outlineColor: Alert.info.text } },
+}));
 
 const containerStyles = createStyles(({ components: { Alert } }) => ({
   error: {
@@ -172,19 +170,20 @@ const Container = ({
 
 const Icon = () => {
   const { status } = useContext(alertContext);
-  const { color } = composeStyles(
-    alertDescriptionStyles.base,
-    alertDescriptionStyles[status]
-  ).style().style;
+  const {
+    components: { Alert },
+  } = useTheme();
+
   const Comp = match(status)
     .with('error', () => XCircle)
     .with('info', () => Info)
     .with('success', () => CheckCircle)
     .with('warning', () => AlertTriangle)
     .exhaustive();
+
   return (
     <Box style={alertStyles.containerIcon}>
-      <Comp color={color} size={16} />
+      <Comp color={Alert[status].text} size={16} />
     </Box>
   );
 };
@@ -203,10 +202,7 @@ const Description = (props: TextProps) => {
   );
 };
 
-export type GroupProps = { style?: CrossedMethods<any, any> } & Omit<
-  TextProps,
-  'style'
->;
+export type GroupProps = { style?: CrossedStyle } & Omit<TextProps, 'style'>;
 
 const Group = ({ style, ...props }: GroupProps) => {
   return (
@@ -225,7 +221,7 @@ const Action = (props: ButtonProps) => {
       variant="tertiary"
       size={false}
       {...props}
-      {...alertStyles.action.rnw({ ...props, variants: { status } })}
+      style={composeStyles(actionStyles.base, isWeb && webStyle[status])}
     />
   );
 };

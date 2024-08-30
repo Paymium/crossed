@@ -9,7 +9,7 @@
 import { withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
 import { Button, type ButtonProps } from '../forms/Button';
-import { composeStyles, createStyles } from '@crossed/styled';
+import { composeStyles, createStyles, useTheme } from '@crossed/styled';
 import { createContext, useContext } from 'react';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
 import { Box } from '../layout/Box';
@@ -159,9 +159,8 @@ const Container = ({
 
 const Icon = () => {
   const { status } = useContext(bannerContext);
-  const { color } = bannerStyles.icon.style({
-    variants: { status },
-  }).style;
+  const theme = useTheme();
+  const color = theme.components.Banner[status].icon;
   const Comp = match(status)
     .with('error', () => XCircle)
     .with('info', () => Info)
@@ -181,7 +180,7 @@ const Icon = () => {
   );
 };
 
-const Title = ({ style, className, ...props }: TextProps) => {
+const Title = ({ style, ...props }: TextProps) => {
   const { status } = useContext(bannerContext);
   return (
     <Text
@@ -211,7 +210,7 @@ const Action = (props: ButtonProps) => {
       variant="tertiary"
       size={false}
       {...props}
-      {...bannerStyles.action.rnw(props)}
+      style={bannerStyles.action}
     />
   );
 };

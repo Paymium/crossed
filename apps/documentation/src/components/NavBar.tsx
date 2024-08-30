@@ -15,18 +15,13 @@ import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
 import { forwardRef, memo } from 'react';
 import LinkNext from 'next/link';
-import { createStyles } from '@crossed/styled';
+import { className, createStyles } from '@crossed/styled';
 
 const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
   {
     href: '/styled/introduction',
     activeFor: /\/styled/g,
     title: 'styled()',
-  },
-  {
-    href: '/primitive/introduction',
-    activeFor: /\/primitive/g,
-    title: 'primitive',
   },
   {
     href: '/ui/introduction',
@@ -126,13 +121,14 @@ const LinkNav = forwardRef(({ style, active: _a, ...props }: any, ref) => {
     <LinkNext
       {...props}
       ref={ref}
-      {...useStyles.linkNav.className({ style, active: _a })}
+      {...className(useStyles.linkNav, style)}
+      // {...useStyles.linkNav.className({ style, active: _a })}
     />
   );
 });
 
 const LinkLogo = forwardRef((props: any, ref) => {
-  return <LinkNav {...props} ref={ref} {...useStyles.linkLogo.rnw(props)} />;
+  return <LinkNav {...props} ref={ref} style={useStyles.linkLogo} />;
 });
 
 const Nav = forwardRef((props: any, ref) => {

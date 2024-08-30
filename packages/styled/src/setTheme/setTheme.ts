@@ -7,4 +7,11 @@
 
 import type { SetTheme } from './types';
 
-export const setTheme: SetTheme = () => {};
+export const setTheme: SetTheme = (old, theme) => {
+  if (typeof window !== 'undefined') {
+    if (!window.document.documentElement.classList.contains(theme)) {
+      window.document.documentElement.classList.remove(old);
+      window.document.documentElement.classList.add(theme);
+    }
+  }
+};

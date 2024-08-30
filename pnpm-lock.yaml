@@ -183,6 +183,9 @@ importers:
       '@crossed/styled':
         specifier: workspace:^
         version: link:../../packages/styled
+      '@crossed/theme':
+        specifier: workspace:^
+        version: link:../../packages/theme
       '@crossed/ui':
         specifier: 1.0.0-beta.39
         version: link:../../packages/ui

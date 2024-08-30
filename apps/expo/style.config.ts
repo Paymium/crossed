@@ -6,12 +6,7 @@
  */
 
 import { Registry } from '@crossed/styled';
-import { darkTheme, lightTheme } from '@crossed/ui/theme';
-
-const themes = {
-  dark: darkTheme,
-  light: lightTheme,
-};
+import { themes } from '@crossed/theme';
 
 type ThemesCustom = typeof themes;
 

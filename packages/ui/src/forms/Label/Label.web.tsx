@@ -6,26 +6,27 @@
  */
 
 import type { LabelComponent } from './types';
-import { styles } from './styles';
+import { className } from '@crossed/styled';
+import { form } from '../../styles/form';
 
 export const Label: LabelComponent = ({
   disabled,
-  weight = 'lg',
-  size = 'md',
-  className,
+  weight: _weight = 'lg',
+  size: _size = 'md',
+  // className,
   style,
   ...props
 }) => {
   return (
     <label
       {...props}
-      style={style}
-      {...(styles().className({
-        ...props,
-        className,
-        disabled,
-        variants: { size, weight },
-      }) as any)}
+      {...className(form.label, style)}
+      //   .className({
+      //   ...props,
+      //   className,
+      //   disabled,
+      //   variants: { size, weight },
+      // }) as any)}
     />
   );
 };

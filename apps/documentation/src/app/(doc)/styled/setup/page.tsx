@@ -13,7 +13,7 @@ import { CodeBlock } from '@/components/CodeBlock';
 import { H2, P, createTabs, YBox } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { createStyles } from '@crossed/styled';
+import { composeStyles, createStyles, isWeb } from '@crossed/styled';
 
 const Description = withDefaultProps(Text, {
   size: 'md',
@@ -25,7 +25,7 @@ const BuilderTabs = createTabs();
 
 const styles = createStyles(() => ({
   selectTrigger: {
-    web: { base: { maxWidth: '150px', justifyContent: 'space-between' } },
+    base: { maxWidth: '150px', justifyContent: 'space-between' },
   },
 }));
 
@@ -48,7 +48,9 @@ export default function Home() {
           <PlatformTabs.Panels>
             <XBox space="xs">
               <Select value={platform} onChange={(e) => setPlatform(e)}>
-                <Select.Trigger {...styles.selectTrigger.rnw()}>
+                <Select.Trigger
+                  style={composeStyles(isWeb && styles.selectTrigger)}
+                >
                   <Select.Value />
                 </Select.Trigger>
                 <Select.Content defaultValue="web">

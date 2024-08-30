@@ -5,11 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import {
-  composeStyles,
-  createStyles,
-  type CrossedMethods,
-} from '@crossed/styled';
+import { createStyles, pressable, type CrossedStyle } from '@crossed/styled';
 import { X } from '@crossed/unicons';
 import { Pressable, type PressableProps } from 'react-native';
 
@@ -30,23 +26,24 @@ export const CloseButton = ({
   disabled,
   ...props
 }: Omit<PressableProps, 'children' | 'style'> & {
-  style?: CrossedMethods<any>;
+  style?: CrossedStyle;
 }) => {
-  const { color } = styles.icon.style({ disabled }).style;
+  // const { color } = styles.icon.style({ disabled }).style;
   return (
     <Pressable
       role="button"
       aria-label="Close"
       {...props}
       disabled={disabled}
-      style={({ pressed, hovered }: { pressed?: boolean; hovered?: boolean }) =>
-        composeStyles(styles.pressable, style).rnw({
-          active: pressed,
-          hover: hovered,
-        }).style
-      }
+      {...pressable(styles.pressable, style)}
+      // style={({ pressed, hovered }: { pressed?: boolean; hovered?: boolean }) =>
+      //   composeStyles(styles.pressable, style).rnw({
+      //     active: pressed,
+      //     hover: hovered,
+      //   }).style
+      // }
     >
-      <X color={color} size={16} />
+      <X size={16} />
     </Pressable>
   );
 };

@@ -5,115 +5,123 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createStyles } from '../../src/createStyles';
-import { BasePlugin } from '../../src/plugins/Base';
 import { PseudoClassPlugin } from '../../src/plugins/PseudoClass';
-import { Registry } from '../../src/Registry';
 
 jest.mock('../../src/isWeb/isWeb', () => {
   return { isWeb: true };
 });
 
 describe('PseudoClassPlugin', () => {
-  beforeAll(() => {
-    Registry.addPlugin(BasePlugin).addPlugin(PseudoClassPlugin);
-  });
-  test('basic', () => {
-    const style = createStyles(() => ({
-      container: {
-        'base': { color: 'black' },
-        ':hover': { color: 'white' },
-        ':active': { color: 'red' },
-      },
-    }));
-    expect(style.container.style()).toStrictEqual({
-      style: { color: 'black' },
-    });
-    expect(style.container.style({})).toStrictEqual({
-      style: { color: 'black' },
-    });
-    expect(style.container.style({ hover: false })).toStrictEqual({
-      style: { color: 'black' },
-    });
-    expect(style.container.style({ hover: true })).toStrictEqual({
-      style: { color: 'white' },
-    });
+  test('check all properties', () => {
+    expect(PseudoClassPlugin.name).toEqual('PseudoClassPlugin');
+    expect(PseudoClassPlugin.test).toEqual([
+      ':hover',
+      ':active',
+      ':focus',
+      ':focus-visible',
+      ':disabled',
+    ]);
+    expect(PseudoClassPlugin.apply).toBeTruthy();
   });
 
-  test('className', () => {
-    const style = createStyles(() => ({
-      container: {
-        'base': { color: 'black' },
-        ':hover': { color: 'white' },
-        ':active': { color: 'red' },
-      },
-    }));
-    expect(style.container.className()).toStrictEqual({
-      className: 'color-[black] hover:color-[white] active:color-[red]',
-    });
-    expect(style.container.className({})).toStrictEqual({
-      className: 'color-[black] hover:color-[white] active:color-[red]',
-    });
-    expect(style.container.className({ hover: true })).toStrictEqual({
-      className: 'hover:color-[white] color-[white] active:color-[red]',
-    });
+  test('apply not call addClassname if isWeb false', () => {
+    const addClassname = jest.fn();
     expect(
-      style.container.className({ hover: true, active: true })
-    ).toStrictEqual({
-      className: 'hover:color-[white] active:color-[red] color-[red]',
-    });
-    expect(style.container.className({ active: true })).toStrictEqual({
-      className: 'hover:color-[white] active:color-[red] color-[red]',
+      PseudoClassPlugin.apply({
+        addClassname,
+        styles: { backgroundColor: 'red' },
+        key: ':focus',
+      })
+    ).toBeFalsy();
+    expect(addClassname).not.toBeCalled();
+  });
+
+  test('apply call addClassname when detect pseudoclass', () => {
+    const addClassname = jest.fn();
+    expect(
+      PseudoClassPlugin.apply({
+        isWeb: true,
+        addClassname,
+        styles: { backgroundColor: 'red' },
+        key: ':focus',
+      })
+    ).toBeFalsy();
+    expect(addClassname).toBeCalledTimes(1);
+    expect(addClassname).toBeCalledWith({
+      body: { 'focus:background-color-[red]': { backgroundColor: 'red' } },
+      suffix: ':focus',
     });
   });
 
-  test('rnw', () => {
-    const style = createStyles(() => ({
-      container: {
-        'base': { color: 'black' },
-        ':hover': { color: 'white' },
-        ':active': { color: 'red' },
-      },
-    }));
-    expect(style.container.rnw()).toStrictEqual({
-      style: {
-        '$$css': true,
-        'active:color-[red]': 'active:color-[red]',
-        'color-[black]': 'color-[black]',
-        'hover:color-[white]': 'hover:color-[white]',
-      },
+  test('several style should call several times addClassname', () => {
+    const addClassname = jest.fn();
+    expect(
+      PseudoClassPlugin.apply({
+        isWeb: true,
+        addClassname,
+        styles: { backgroundColor: 'red', color: 'red' },
+        key: ':focus',
+      })
+    ).toBeFalsy();
+    expect(addClassname).toBeCalledTimes(2);
+    expect(addClassname).nthCalledWith(1, {
+      body: { 'focus:background-color-[red]': { backgroundColor: 'red' } },
+      suffix: ':focus',
     });
-    expect(style.container.rnw({})).toStrictEqual({
-      style: {
-        '$$css': true,
-        'active:color-[red]': 'active:color-[red]',
-        'color-[black]': 'color-[black]',
-        'hover:color-[white]': 'hover:color-[white]',
-      },
+    expect(addClassname).nthCalledWith(2, {
+      body: { 'focus:color-[red]': { color: 'red' } },
+      suffix: ':focus',
     });
-    expect(style.container.rnw({ hover: true })).toStrictEqual({
-      style: {
-        '$$css': true,
-        'active:color-[red]': 'active:color-[red]',
-        'hover:color-[white]': 'hover:color-[white]',
-        'color-[white]': 'color-[white]',
-      },
+  });
+
+  test('apply check if value is number', () => {
+    const addClassname = jest.fn();
+    expect(
+      PseudoClassPlugin.apply({
+        isWeb: true,
+        addClassname,
+        styles: { zIndex: 13 },
+        key: ':focus',
+      })
+    ).toBeFalsy();
+    expect(addClassname).toBeCalledTimes(1);
+    expect(addClassname).toBeCalledWith({
+      body: { 'focus:z-index-[13]': { zIndex: 13 } },
+      suffix: ':focus',
     });
-    expect(style.container.rnw({ active: true })).toStrictEqual({
-      style: {
-        '$$css': true,
-        'active:color-[red]': 'active:color-[red]',
-        'hover:color-[white]': 'hover:color-[white]',
-        'color-[red]': 'color-[red]',
-      },
+  });
+
+  test('apply active pseudo class', () => {
+    const addClassname = jest.fn();
+    expect(
+      PseudoClassPlugin.apply({
+        isWeb: true,
+        addClassname,
+        styles: { fontSize: 13 },
+        key: ':active',
+      })
+    ).toBeFalsy();
+    expect(addClassname).toBeCalledTimes(1);
+    expect(addClassname).toBeCalledWith({
+      body: { 'active:font-size-[13px]': { fontSize: '13px' } },
+      suffix: ':active:not(:disabled)',
     });
-    expect(style.container.rnw({ active: true, hover: true })).toStrictEqual({
-      style: {
-        '$$css': true,
-        'active:color-[red]': 'active:color-[red]',
-        'hover:color-[white]': 'hover:color-[white]',
-        'color-[red]': 'color-[red]',
-      },
+  });
+
+  test('apply hover pseudo class', () => {
+    const addClassname = jest.fn();
+    expect(
+      PseudoClassPlugin.apply({
+        isWeb: true,
+        addClassname,
+        styles: { fontSize: 13 },
+        key: ':hover',
+      })
+    ).toBeFalsy();
+    expect(addClassname).toBeCalledTimes(1);
+    expect(addClassname).toBeCalledWith({
+      body: { 'hover:font-size-[13px]': { fontSize: '13px' } },
+      suffix: ':hover:not(:disabled):not(:active)',
     });
   });
 });

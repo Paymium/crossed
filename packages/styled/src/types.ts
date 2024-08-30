@@ -10,10 +10,33 @@ import {
   CrossedBasePlugin,
   CrossedMediaQueriesPlugin,
   CrossedPseudoClassPlugin,
-  CrossedWebPlugin,
 } from './plugins';
+import type * as CSS from 'csstype';
 
 type NestedKeys = 'shadowOffset' | 'transform' | 'textShadowOffset';
+
+// interface DeepArray<T> extends Array<T | DeepArray<T>> {}
+
+type DeepArray<T> = {
+  [K in keyof T]: T[K] extends number | string | symbol // Is it a primitive? Then make it readonly
+    ? T[K]
+    : // Is it an array of items? Then make the array readonly and the item as well
+      T[K] extends Array<infer A>
+      ? Array<DeepArray<A>>
+      : // It is some other object, make it readonly as well
+        DeepArray<T[K]>;
+};
+
+type ParamCompose = boolean | undefined | null | StyleSheet;
+export type CrossedStyle = DeepArray<ParamCompose>;
+
+export type ParamComposeIntern =
+  | ParamCompose
+  | (Record<string, any> & { $$css: true });
+
+export type CrossedStyleIntern = DeepArray<ParamComposeIntern>;
+
+export type CrossedStyleArray<T> = T | ReadonlyArray<CrossedStyleArray<T>>;
 
 export type CrossedstyleView = Omit<ViewStyle, NestedKeys>;
 export type CrossedstyleText = Omit<TextStyle, NestedKeys>;
@@ -25,27 +48,16 @@ export type AllAvailableStyles = CrossedstyleView &
 
 export type AllAvailableKeys = keyof AllAvailableStyles;
 
-export type CrossedstyleValues = {
-  [propName in AllAvailableKeys]?: AllAvailableStyles[propName];
-};
-
-interface Variants
-  extends Record<string, Record<string, Omit<StyleSheet, 'variants'>>> {}
+export type CrossedstyleValues =
+  | {
+      [propName in AllAvailableKeys]?: AllAvailableStyles[propName];
+    }
+  | CSS.Properties;
 
 export interface StyleSheet
   extends CrossedBasePlugin,
-    CrossedWebPlugin,
     CrossedPseudoClassPlugin,
-    CrossedMediaQueriesPlugin {
-  variants?: Variants;
-}
-
-export type ExtractForProps<S extends CrossedMethods<any, any>> =
-  S extends CrossedMethods<infer D, any>
-    ? CrossedPropsExtended<D>
-    : S extends { original: any }
-      ? CrossedPropsExtended<S['original']>
-      : never;
+    CrossedMediaQueriesPlugin {}
 
 export type PluginContext<S> = {
   /**
@@ -67,7 +79,7 @@ export type PluginContext<S> = {
    */
   props?: any;
 
-  cache: Map<S[keyof S], any>;
+  cache?: Map<S[keyof S], any>;
 
   /**
    * Callback function for add className and style object
@@ -89,45 +101,7 @@ export type PluginContext<S> = {
   }) => void;
 };
 
-type HasBooleanVariants<T> = T extends 'true'
-  ? true
-  : T extends 'false'
-    ? true
-    : false;
-
 export interface Themes {}
-
-export type BaseCrossedPropsExtended = {
-  'className'?: string;
-  'style'?: CrossedstyleValues | CrossedstyleValues[];
-  'focus'?: true | false;
-  'hover'?: true | false;
-  'active'?: true | false;
-  'focus-visible'?: true | false;
-  'disabled'?: true | false;
-};
-
-export interface CrossedPropsExtended<
-  S extends StyleSheet,
-  V = S['variants'],
-  MV = V extends object ? V : never,
-> extends BaseCrossedPropsExtended {
-  variants?: {
-    [key in keyof MV]?: HasBooleanVariants<keyof MV[key]> extends false
-      ? keyof MV[key]
-      : keyof MV[key] | boolean;
-  };
-}
-
-export type CrossedMethods<
-  S extends StyleSheet,
-  P = CrossedPropsExtended<S>,
-> = {
-  original: S;
-  style: (_p?: P) => { style: Record<string, string> };
-  className: (_p?: P) => { className: string };
-  rnw: (_p?: P) => { style: Record<string, any> };
-};
 
 export type Plugin<S = any> = {
   /**

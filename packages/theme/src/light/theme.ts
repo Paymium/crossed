@@ -72,8 +72,8 @@ export default {
         focus: { background: '', text: '', icon: '', border: '' },
         disabled: {
           background: colors.primary[1],
-          text: '',
-          icon: '',
+          text: colors.white,
+          icon: colors.white,
           border: '',
         },
       },
@@ -158,15 +158,15 @@ export default {
         default: {
           background: colors.background.secondary,
           border: colors.border.secondary,
-          text: colors.white,
-          icon: colors.white,
+          text: colors.black,
+          icon: colors.black,
           placeholder: colors.text.secondary,
         },
         active: {
           background: colors.background.secondary,
           border: colors.border.secondary,
-          text: colors.white,
-          icon: colors.white,
+          text: colors.black,
+          icon: colors.black,
           placeholder: colors.text.secondary,
         },
         disabled: {

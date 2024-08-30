@@ -75,8 +75,8 @@ export default {
         focus: { background: '', text: '', icon: '', border: '' },
         disabled: {
           background: colors.primary[90],
-          text: '',
-          icon: '',
+          text: colors.white,
+          icon: colors.white,
           border: '',
         },
       },

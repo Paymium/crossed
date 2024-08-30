@@ -5,35 +5,52 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { YBox, MenuList, MenuItem, MenuTitle } from '@crossed/ui';
-import { createStyles } from '@crossed/styled';
+import { YBox, MenuList } from '@crossed/ui';
+import {
+  createStyles,
+  rnw,
+  // pressable,
+  // Registry,
+  withReactive,
+} from '@crossed/styled';
+// import { memo } from 'react';
 import { Link } from 'expo-router';
 import { ChevronRight } from '@crossed/unicons';
+// import { View, Text, Pressable } from 'react-native';
 
 const styles = createStyles((t) => ({
-  container: { base: { paddingHorizontal: 15 } },
+  container: { base: { padding: 15 } },
+  text: { base: { color: t.colors.text.primary } },
   item: {
     'base': {
       justifyContent: 'space-between',
-      backgroundColor: t.colors.neutral.default,
+      backgroundColor: t.colors.background.primary,
     },
-    ':active': { backgroundColor: t.colors.neutral.active },
+    ':active': { backgroundColor: 'gray' },
+  },
+  dynamic(opacity: number, size: number = 16) {
+    return {
+      opacity,
+      fontSize: size,
+    };
   },
 }));
 
-export default function TabOneScreen() {
-  const style = (({ pressed }: { pressed: boolean }) =>
-    styles.item.rnw({ active: pressed }).style) as any;
+export default withReactive(function TabOneScreen() {
+  const { style } = rnw(styles.item);
+  // const style = (({ pressed }: { pressed: boolean }) =>
+  //   styles.item.rnw({ active: pressed }).style) as any;
+
   return (
-    <YBox space="lg" {...styles.container.rnw()}>
+    <YBox space="lg" style={styles.container}>
       <MenuList>
         <Link href="/button" asChild style={style}>
-          <MenuItem>
-            <MenuTitle>Button</MenuTitle>
+          <MenuList.Item>
+            <MenuList.Title>Button</MenuList.Title>
             <ChevronRight />
-          </MenuItem>
+          </MenuList.Item>
         </Link>
-        <Link href="/input" asChild style={style}>
+        {/* <Link href="/input" asChild style={style}>
           <MenuItem>
             <MenuTitle>Input</MenuTitle>
             <ChevronRight />
@@ -68,8 +85,8 @@ export default function TabOneScreen() {
             <MenuTitle>Accordion</MenuTitle>
             <ChevronRight />
           </MenuItem>
-        </Link>
+        </Link> */}
       </MenuList>
     </YBox>
   );
-}
+});

@@ -110,20 +110,6 @@ export default function Home() {
               </Card.Description>
             </Card>
           </Link>
-          <Link href="/primitive/introduction" passHref legacyBehavior>
-            <Card style={useStyles.card} role="link" space="xxs">
-              <Card.Title
-                role="heading"
-                aria-level={4}
-                style={useStyles.cardTitle}
-              >
-                @crossed/primitive
-              </Card.Title>
-              <Card.Description style={useStyles.cardDescription}>
-                <Trans>Create your accessible component from anything</Trans>
-              </Card.Description>
-            </Card>
-          </Link>
           <Link href="/ui/introduction" passHref legacyBehavior>
             <Card style={useStyles.card} role="link" space="xxs">
               <Card.Title
@@ -134,24 +120,10 @@ export default function Home() {
                 @crossed/ui
               </Card.Title>
               <Card.Description style={useStyles.cardDescription}>
-                <Trans>
-                  UI Component made with @crossed/primitive and @crossed/styled
-                </Trans>
+                <Trans>UI Component made with @crossed/styled</Trans>
               </Card.Description>
             </Card>
           </Link>
-          {/* <Card {...useStyles.card.rnw()}>
-            <Card.Title
-              role="heading"
-              aria-level={4}
-              {...useStyles.cardTitle.rnw()}
-            >
-              @crossed/router
-            </Card.Title>
-            <Card.Description {...useStyles.cardDescription.rnw()}>
-              <Trans>Comming soon</Trans>
-            </Card.Description>
-          </Card> */}
         </Box>
       </YBox>
     </Box>

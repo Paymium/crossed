@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 
 export const form = createStyles(
   ({ space, font, colors, components: { Input } }) => ({
@@ -28,26 +28,21 @@ export const form = createStyles(
       ':hover': { borderColor: Input.primary.hover.border },
       ':focus': { borderColor: Input.primary.focus.border },
       ':active': { borderColor: Input.primary.active.border },
-      ':disabled': {
-        backgroundColor: Input.primary.disabled.background,
-        borderColor: Input.primary.disabled.border,
-        cursor: 'not-allowed',
-      },
-      'variants': {
-        error: {
-          true: {
-            base: {
-              borderColor: colors.error.primary,
-              color: colors.error.primary,
-            },
-          },
-        },
-      },
       'web': {
         'base': { boxSizing: 'border-box' },
         ':focus-visible': { outlineWidth: 0 },
         ':focus': { outlineColor: Input.primary.focus.border },
       },
+    },
+    inputDisabled: {
+      base: {
+        backgroundColor: Input.primary.disabled.background,
+        borderColor: Input.primary.disabled.border,
+        cursor: 'not-allowed',
+      },
+    },
+    inputError: {
+      base: { borderColor: colors.error.primary, color: colors.error.primary },
     },
     placeholder: { base: { color: Input.primary.default.placeholder } },
     label: {
@@ -84,6 +79,3 @@ export const form = createStyles(
     },
   })
 );
-
-export type FormInput = ExtractForProps<typeof form.input>;
-export type FormLabel = ExtractForProps<typeof form.label>;

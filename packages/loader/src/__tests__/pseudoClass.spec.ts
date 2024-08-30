@@ -7,7 +7,6 @@
 
 import { Registry } from '@crossed/styled';
 import { Loader } from '../index';
-import { getAst } from './getAst';
 import { PseudoClassPlugin, BasePlugin } from '@crossed/styled';
 
 Registry.setThemes({ dark: {} })
@@ -20,20 +19,23 @@ jest.mock('esbuild', () => {});
 describe('pseudoClass', () => {
   test('hover', () => {
     const loader = new Loader();
-    loader.parse(
-      getAst(`()=>({
-            base: {
+    expect(
+      loader.loader(
+        `()=>({
+            root:{base: {
               backgroundColor: "white"
             },
             ':hover': {
               backgroundColor: "black"
-            }
-        })`)
+            }}
+        })`
+      )
+    ).toEqual(
+      '{"root":{"$$$css":true,"backgroundColor":"background-color-[white] background-color-[white] hover:background-color-[black] hover:background-color-[black]"},}'
     );
     expect(loader.getCSS()).toEqual(
       `.dark {  }
 .background-color-\\[white\\] { background-color:white; }
-.background-color-\\[black\\] { background-color:black; }
 .hover\\:background-color-\\[black\\]:hover:not(:disabled):not(:active) { background-color:black; }`
     );
   });
@@ -41,20 +43,23 @@ describe('pseudoClass', () => {
   test('focus', () => {
     const loader = new Loader();
 
-    loader.parse(
-      getAst(`{
+    expect(
+      loader.loader(
+        `()=>({root:{
         base: {
           backgroundColor: "white"
         },
         ':focus': {
           backgroundColor: "black"
-        }
-    }`)
+        }}
+      })`
+      )
+    ).toEqual(
+      '{"root":{"$$$css":true,"backgroundColor":"background-color-[white] background-color-[white] focus:background-color-[black] focus:background-color-[black]"},}'
     );
     expect(loader.getCSS()).toEqual(
       `.dark {  }
 .background-color-\\[white\\] { background-color:white; }
-.background-color-\\[black\\] { background-color:black; }
 .focus\\:background-color-\\[black\\]:focus { background-color:black; }`
     );
   });
@@ -62,20 +67,23 @@ describe('pseudoClass', () => {
   test('active', () => {
     const loader = new Loader();
 
-    loader.parse(
-      getAst(`{
+    expect(
+      loader.loader(
+        `() => ({root:{
         base: {
           backgroundColor: "white"
         },
         ':active': {
           backgroundColor: "black"
-        }
-    }`)
+        }}
+      })`
+      )
+    ).toEqual(
+      '{"root":{"$$$css":true,"backgroundColor":"background-color-[white] background-color-[white] active:background-color-[black] active:background-color-[black]"},}'
     );
     expect(loader.getCSS()).toEqual(
       `.dark {  }
 .background-color-\\[white\\] { background-color:white; }
-.background-color-\\[black\\] { background-color:black; }
 .active\\:background-color-\\[black\\]:active:not(:disabled) { background-color:black; }`
     );
   });

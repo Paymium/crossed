@@ -19,12 +19,11 @@ import {
   YBox,
   YBoxProps,
 } from '@crossed/ui';
-import { PropsWithChildren, useCallback, useTransition } from 'react';
+import { PropsWithChildren } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { composeStyles, createStyles } from '@crossed/styled';
+import { composeStyles, createStyles, rnw } from '@crossed/styled';
 import { menuStyle } from './menuSide.style';
-import { useUncontrolled } from '@crossed/core';
 import { ScrollView } from './ScrollView';
 
 const styles = createStyles(
@@ -78,7 +77,7 @@ export function SideBarLayout({
 }: PropsWithChildren<{ menus: Nav[] }>) {
   return (
     <XBox style={styles.container}>
-      <ScrollView {...styles.root.rnw()}>
+      <ScrollView {...rnw(styles.root)}>
         <MenuList>
           <Accordion defaultValues={[]} allowMultiple>
             {menus.map((item) => {
@@ -102,31 +101,11 @@ const Item = ({ href, title, menus }: Nav) => {
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
-  const [, setTransition] = useTransition();
-  const [hover, setHover] = useUncontrolled({ defaultValue: false });
-  const onHoverIn = useCallback(() => {
-    setTransition(() => {
-      setHover(true);
-    });
-  }, [setHover]);
-  const onHoverOut = useCallback(() => {
-    setTransition(() => {
-      setHover(false);
-    });
-  }, [setHover]);
-
-  const style = useCallback(
-    ({ pressed }) =>
-      composeStyles(menuStyle.item, styles.item).rnw({
-        active: pressed,
-      }).style,
-    []
-  );
 
   if (menus) {
     return (
       <AccordionItem value={title}>
-        <AccordionTrigger {...styles.accordionTrigger.rnw()}>
+        <AccordionTrigger style={styles.accordionTrigger}>
           <Text>{title}</Text>
           <AccordionIcon />
         </AccordionTrigger>
@@ -146,23 +125,25 @@ const Item = ({ href, title, menus }: Nav) => {
   return href ? (
     <MenuList.Item
       role="link"
-      onHoverIn={onHoverIn}
-      onHoverOut={onHoverOut}
       href={`/crossed${href}`}
       onPress={(e) => {
         e.stopPropagation();
         e.preventDefault();
         router.push(href);
       }}
-      hover={href === pathname || hover}
-      style={style}
+      style={composeStyles(menuStyle.item, styles.item)}
     >
-      <MenuList.Title style={menuStyle.itemText} weight={hover ? 'lg' : 'md'}>
-        {t(title)}
-      </MenuList.Title>
+      {({ hovered }) => (
+        <MenuList.Title
+          style={menuStyle.itemText}
+          weight={href === pathname || hovered ? 'lg' : 'md'}
+        >
+          {t(title)}
+        </MenuList.Title>
+      )}
     </MenuList.Item>
   ) : (
-    <MenuList.Label hover={false} textAlign="right" weight="lg">
+    <MenuList.Label textAlign="right" weight="lg">
       {t(title)}
     </MenuList.Label>
   );

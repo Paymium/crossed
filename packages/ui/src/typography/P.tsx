@@ -6,7 +6,7 @@
  */
 
 import { Text, type TextProps } from './Text';
-import { createStyles } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 
 const useP = createStyles(() => ({
   root: {
@@ -17,6 +17,12 @@ const useP = createStyles(() => ({
 }));
 
 export const P = (props: TextProps) => {
-  // @ts-expect-error role not defined in typed
-  return <Text role="paragraph" {...props} {...useP.root.rnw(props)} />;
+  return (
+    <Text
+      // @ts-expect-error role not defined in typed
+      role="paragraph"
+      {...props}
+      style={composeStyles(useP.root, props.style)}
+    />
+  );
 };
