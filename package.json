@@ -48,5 +48,5 @@
   "resolutions": {
     "react-refresh": "~0.14.0"
   },
-  "packageManager": "yarn@3.6.4"
+  "packageManager": "pnpm@8.7.4"
 }
