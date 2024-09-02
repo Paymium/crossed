@@ -9,15 +9,15 @@ const nextConfig = withCrossed({
   reactStrictMode: false,
   // transpilePackages: ['react-native', 'react-native-reanimated'],
   basePath: '/crossed',
-  // webpack: (config, { webpack, isServer }) => {
-  //   config.plugins.push(
-  //     new webpack.DefinePlugin({
-  //       __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
-  //     })
-  //   );
+  webpack: (config, { webpack, isServer }) => {
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
+      })
+    );
 
-  //   return config;
-  // },
+    return config;
+  },
 });
 
 module.exports = nextConfig;
