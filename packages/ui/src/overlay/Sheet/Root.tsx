@@ -6,7 +6,12 @@
  */
 
 import { useUncontrolled } from '@crossed/core';
-import { type PropsWithChildren, useCallback } from 'react';
+import {
+  forwardRef,
+  type PropsWithChildren,
+  useCallback,
+  useImperativeHandle,
+} from 'react';
 import { type SheetContext, sheetContext } from './context';
 import { useSharedValue } from 'react-native-reanimated';
 
@@ -18,43 +23,58 @@ export type SheetProps = PropsWithChildren<{
 }> &
   Pick<SheetContext, 'dismissOnOverlayPress' | 'hideHandle'>;
 
-export const Root = ({
-  open: openProps,
-  defaultValue: defaultValueProps = false,
-  onOpenChange,
-  children,
-  dismissOnOverlayPress = true,
-  hideHandle,
-  offset = 20,
-}: SheetProps) => {
-  const [open, setOpen] = useUncontrolled({
-    value: openProps,
-    defaultValue: defaultValueProps,
-    onChange: onOpenChange,
-  });
-  const isMove = useSharedValue(false);
-  const height = useSharedValue(0);
-  const snapInitialHeight = useSharedValue(0);
-  const onClose = useCallback(() => {
-    setOpen(false);
-    height.value = 0;
-  }, [setOpen, height]);
-
-  return (
-    <sheetContext.Provider
-      value={{
-        open,
-        setOpen,
-        dismissOnOverlayPress,
-        hideHandle,
-        isMove,
-        height,
-        onClose,
-        snapInitialHeight,
-        offset: offset + 40,
-      }}
-    >
-      {children}
-    </sheetContext.Provider>
-  );
+export type RootRef = {
+  close: () => void;
+  open: () => void;
 };
+
+export const Root = forwardRef<RootRef, SheetProps>(
+  (
+    {
+      open: openProps,
+      defaultValue: defaultValueProps = false,
+      onOpenChange,
+      children,
+      dismissOnOverlayPress = true,
+      hideHandle,
+      offset = 20,
+    },
+    ref
+  ) => {
+    const [open, setOpen] = useUncontrolled({
+      value: openProps,
+      defaultValue: defaultValueProps,
+      onChange: onOpenChange,
+    });
+    const isMove = useSharedValue(false);
+    const height = useSharedValue(0);
+    const snapInitialHeight = useSharedValue(0);
+    const onClose = useCallback(() => {
+      setOpen(false);
+      height.value = 0;
+    }, [setOpen, height]);
+
+    useImperativeHandle(ref, () => ({
+      close: onClose,
+      open: () => setOpen(true),
+    }), [onClose, setOpen]);
+
+    return (
+      <sheetContext.Provider
+        value={{
+          open,
+          setOpen,
+          dismissOnOverlayPress,
+          hideHandle,
+          isMove,
+          height,
+          onClose,
+          snapInitialHeight,
+          offset: offset + 40,
+        }}
+      >
+        {children}
+      </sheetContext.Provider>
+    );
+  }
+);
