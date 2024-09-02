@@ -5,6 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import React from 'react';
 import { Root } from '../Root';
 import { render } from '@crossed/test';
 import { sheetContext } from '../context';
@@ -21,6 +22,11 @@ describe('SheetRoot', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   test('pass Child', async () => {
     const onOpenChange = jest.fn();
     render(<Root onOpenChange={onOpenChange}>toto</Root>);

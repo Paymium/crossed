@@ -26,8 +26,8 @@ export default function CreateBadge() {
       anatomy={`// coming soon`}
       example={`
 <Sheet hideHandle={${handle}} dismissOnOverlayPress={${dismissOnOverlayPress}} offset={"${offset}"}>
-  <Sheet.Trigger asChild  onPress={()=>console.log("la")}>
-    <Button onPress={()=>console.log("ici")}>
+  <Sheet.Trigger asChild>
+    <Button>
       <Button.Text>open</Button.Text>
     </Button>
   </Sheet.Trigger>

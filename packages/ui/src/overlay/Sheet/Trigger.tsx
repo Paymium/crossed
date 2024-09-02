@@ -31,6 +31,7 @@ export const Trigger = forwardRef<View, TriggerProps>(
     return (
       <Pressable
         ref={ref}
+        role="button"
         {...props}
         children={children}
         onPress={composeEventHandlers(props.onPress, onPress)}

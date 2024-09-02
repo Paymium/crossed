@@ -9,12 +9,10 @@ import { withStaticProperties } from '@crossed/core';
 import { Root } from './Root';
 import { Trigger } from './Trigger';
 import { Frame } from './Frame';
-import { Handle } from './Handle';
 import { SnapVisible } from './SnapVisible';
 
 export const Sheet = withStaticProperties(Root, {
   Trigger,
   Frame,
-  Handle,
   SnapVisible,
 });

@@ -105,6 +105,7 @@
     "@floating-ui/react": "^0.25.1",
     "@gorhom/portal": "^1.0.14",
     "@iconscout/react-native-unicons": "^2.0.2",
+    "@testing-library/react-native": "^12.6.1",
     "class-variance-authority": "^0.7.0",
     "inline-style-prefixer": "^6.0.1",
     "normalize-css-color": "^1.0.2",

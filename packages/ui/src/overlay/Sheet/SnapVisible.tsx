@@ -20,7 +20,7 @@ export const SnapVisible = (props: YBoxProps) => {
       if (Math.floor(snapInitialHeight.value) !== Math.floor(OFFSET))
         snapInitialHeight.value = OFFSET;
     },
-    [snapInitialHeight]
+    [snapInitialHeight, offset]
   );
 
   return (

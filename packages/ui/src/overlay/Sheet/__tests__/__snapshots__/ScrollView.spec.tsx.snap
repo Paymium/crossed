@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScrollView not open 1`] = `
+<div
+  class="css-view-175oi2r r-WebkitOverflowScrolling-150rngu r-flexDirection-eqz5dr r-flexGrow-16y2uox r-flexShrink-1wbh5a2 r-overflowX-11yh6sk r-transform-agouwx"
+  data-testid="test"
+  style="position: fixed; bottom: 0px; right: 0px; left: 0px; z-index: 100000; border-top-left-radius: 24px; border-top-right-radius: 24px; max-height: 100%; box-sizing: content-box; height: 0px; overflow-y: auto; webkit-user-select: none; user-select: none;"
+>
+  <div
+    class="css-view-175oi2r"
+  >
+    <div
+      class="css-view-175oi2r r-cursor-1loqt21 r-touchAction-1otgn73 justify-content-[center] height-[40px]"
+      tabindex="0"
+    >
+      <div
+        class="css-view-175oi2r border-style-[solid] border-width-[0px] align-items-[stretch] background-color-[var(--colors-primary-20)] display-[flex] flex-basis-[auto] flex-direction-[column] flex-shrink-[0] list-style-[none] margin-[0px] min-height-[0px] min-width-[0px] padding-[0px] position-[relative] text-decoration-[none] z-index-[0] width-[54px] height-[5px] align-self-[center] border-radius-[14px] box-sizing-[border-box]"
+      />
+    </div>
+    <div
+      class="css-text-146c3p1 color-[var(--font-color)] font-family-[var(--font-family)] font-size-[16px] line-height-[20px] font-weight-[400]"
+      dir="auto"
+    >
+      toto
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ScrollView open 1`] = `
+<div
+  class="css-view-175oi2r r-WebkitOverflowScrolling-150rngu r-flexDirection-eqz5dr r-flexGrow-16y2uox r-flexShrink-1wbh5a2 r-overflowX-11yh6sk r-transform-agouwx"
+  data-testid="test"
+  style="position: fixed; bottom: 0px; right: 0px; left: 0px; z-index: 100000; border-top-left-radius: 24px; border-top-right-radius: 24px; max-height: 100%; box-sizing: content-box; height: 300px; overflow-y: hidden; webkit-user-select: none; user-select: none;"
+>
+  <div
+    class="css-view-175oi2r"
+  >
+    <div
+      class="css-view-175oi2r r-cursor-1loqt21 r-touchAction-1otgn73 justify-content-[center] height-[40px]"
+      tabindex="0"
+    >
+      <div
+        class="css-view-175oi2r border-style-[solid] border-width-[0px] align-items-[stretch] background-color-[var(--colors-primary-20)] display-[flex] flex-basis-[auto] flex-direction-[column] flex-shrink-[0] list-style-[none] margin-[0px] min-height-[0px] min-width-[0px] padding-[0px] position-[relative] text-decoration-[none] z-index-[0] width-[54px] height-[5px] align-self-[center] border-radius-[14px] box-sizing-[border-box]"
+      />
+    </div>
+    <div
+      class="css-text-146c3p1 color-[var(--font-color)] font-family-[var(--font-family)] font-size-[16px] line-height-[20px] font-weight-[400]"
+      dir="auto"
+    >
+      toto
+    </div>
+  </div>
+</div>
+`;
