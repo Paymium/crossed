@@ -18,6 +18,7 @@
     "@crossed/theme": "1.0.0"
   },
   "changesets": [
+    "afraid-trees-cry",
     "beige-crabs-visit",
     "blue-cameras-itch",
     "brave-buckets-smash",

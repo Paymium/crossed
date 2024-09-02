@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.39
+
+### Patch Changes
+
+- 81b564d: add ref imperatif handler to sheet
+
 ## 1.0.0-beta.38
 
 ### Minor Changes
