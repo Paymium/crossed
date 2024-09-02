@@ -5,9 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import type { InferRef } from '@crossed/core';
 import { ComponentType, forwardRef } from 'react';
 
 export const createBadgeText = <T,>(StyledText: ComponentType<T>) =>
-  forwardRef<any, T>((props, ref) => {
-    return <StyledText {...props} ref={ref} />;
+  forwardRef<InferRef<typeof StyledText>, T>((props, ref) => {
+    return <StyledText {...(props as any)} ref={ref} />;
   });

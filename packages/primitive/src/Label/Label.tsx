@@ -7,14 +7,15 @@
 
 import { useId, type ComponentType, useRef, forwardRef } from 'react';
 import { Provider } from './context';
+import type { InferRef } from '@crossed/core';
 
 export const createLabelMain = <P,>(StyledRoot: ComponentType<P>) =>
-  forwardRef<any, P>((props, ref) => {
+  forwardRef<InferRef<typeof StyledRoot>, P>((props, ref) => {
     const id = useId();
     const inputRef = useRef();
     return (
       <Provider id={id} inputRef={inputRef}>
-        <StyledRoot {...props} ref={ref} />
+        <StyledRoot {...(props as any)} ref={ref} />
       </Provider>
     );
   });

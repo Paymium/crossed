@@ -5,7 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import type { InferRef } from '@crossed/core';
 import { forwardRef, type ComponentType } from 'react';
 
 export const createListLabel = <P,>(Styled: ComponentType<P>) =>
-  forwardRef<any, P>((props, ref) => <Styled {...props} ref={ref} />);
+  forwardRef<InferRef<typeof Styled>, P>((props, ref) => (
+    <Styled {...(props as any)} ref={ref} />
+  ));

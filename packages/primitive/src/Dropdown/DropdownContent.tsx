@@ -9,16 +9,17 @@ import { forwardRef, type ComponentType } from 'react';
 import { useContext } from './context';
 import { RovingFocus } from '../utils/RovingFocus';
 import { VisibilityHidden } from '../utils/VisibilityHidden';
+import type { InferRef } from '@crossed/core';
 
 export const createDropdownContent = <P,>(StyledRoot: ComponentType<P>) =>
-  forwardRef<any, P>((props, ref) => {
+  forwardRef<InferRef<typeof StyledRoot>, P>((props, ref) => {
     const { id, open } = useContext();
     return (
       <RovingFocus>
         <VisibilityHidden hidden={!open}>
           <StyledRoot
             role="menu"
-            {...props}
+            {...(props as any)}
             ref={ref}
             id={id}
             aria-labelledby={`label-${id}`}

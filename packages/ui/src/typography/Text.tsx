@@ -17,7 +17,6 @@ import {
   withReactive,
   type CrossedStyle,
 } from '@crossed/styled';
-import { forwardRef } from 'react';
 import { fontWeightStyles, fontSizeStyles } from '../styles/typography';
 import { textAlignStyles } from '../styles/textAlign';
 
@@ -32,27 +31,22 @@ export type TextProps = Omit<TextNativeProps, 'style'> & {
   textAlign?: keyof typeof textAlignStyles;
 };
 
-const Text = withReactive(
-  forwardRef(
-    (
-      { weight = 'md', textAlign, size = 'md', style, ...props }: TextProps,
-      ref: any
-    ) => {
-      return (
-        <TextNative
-          ref={ref}
-          {...props}
-          {...rnw(
-            textAlignStyles[textAlign],
-            fontSizeStyles[size],
-            fontWeightStyles[weight],
-            useText.root,
-            style
-          )}
-        />
-      );
-    }
-  )
+const Text = withReactive<TextNative, TextProps>(
+  ({ weight = 'md', textAlign, size = 'md', style, ...props }, ref) => {
+    return (
+      <TextNative
+        ref={ref}
+        {...props}
+        {...rnw(
+          textAlignStyles[textAlign],
+          fontSizeStyles[size],
+          fontWeightStyles[weight],
+          useText.root,
+          style
+        )}
+      />
+    );
+  }
 );
 
 Text.displayName = 'CrossedText';

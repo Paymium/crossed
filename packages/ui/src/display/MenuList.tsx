@@ -84,17 +84,15 @@ const Divider = D;
 export type MenuItemProps = Omit<PressableProps, 'style'> & {
   style?: CrossedStyle;
 };
-const Item = withReactive(
-  forwardRef<View, MenuItemProps>((props, ref) => {
-    return (
-      <Pressable
-        {...props}
-        {...pressable(useMenuList.item, props.style)}
-        ref={ref}
-      />
-    );
-  })
-);
+const Item = withReactive<View, MenuItemProps>((props, ref) => {
+  return (
+    <Pressable
+      {...props}
+      {...pressable(useMenuList.item, props.style)}
+      ref={ref}
+    />
+  );
+});
 
 const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
   // const variants = useVariantContext();

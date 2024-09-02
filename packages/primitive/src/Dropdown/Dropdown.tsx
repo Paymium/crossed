@@ -5,9 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import type { InferRef } from '@crossed/core';
 import { forwardRef, type ComponentType } from 'react';
 
 export const createDropdownMain = <P,>(StyledRoot: ComponentType<P>) =>
-  forwardRef<any, P>((props, ref) => {
-    return <StyledRoot {...props} ref={ref} />;
+  forwardRef<InferRef<typeof StyledRoot>, P>((props, ref) => {
+    return <StyledRoot {...(props as any)} ref={ref} />;
   });

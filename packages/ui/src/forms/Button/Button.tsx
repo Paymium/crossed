@@ -20,6 +20,7 @@ import {
   ActivityIndicator,
   Pressable,
   View,
+  type Text as TextN,
   type PressableProps,
 } from 'react-native';
 import { Text as TextUi, type TextProps } from '../../typography/Text';
@@ -29,7 +30,6 @@ import { Box } from '../../layout/Box';
 import {
   cloneElement,
   createContext,
-  forwardRef,
   isValidElement,
   useContext,
   useMemo,
@@ -122,96 +122,92 @@ type RootProps = Omit<PressableProps, 'style'> & {
   size?: boolean;
 };
 
-const Root = withReactive(
-  forwardRef<View, RootProps>(
-    (
-      {
-        variant = 'primary',
-        error = false,
-        disabled,
-        loading,
-        size = true,
-        children,
-        ...props
-      },
-      ref
-    ) => {
-      const renderLoading = loading ? (
-        <ButtonIcon>
-          <ActivityIndicator />
-        </ButtonIcon>
-      ) : null;
-
-      return (
-        <Pressable
-          disabled={disabled || loading}
-          ref={ref}
-          {...props}
-          {...pressable(
-            buttonStyles.root,
-            buttonSizeStyles[size.toString()],
-            variant && buttonStyles[variant],
-            (disabled || loading) &&
-              variant &&
-              buttonStyles[variant][':disabled'] && {
-                base: buttonStyles[variant][':disabled'],
-              },
-            error && buttonErrorStyles.error,
-            variant && error && buttonErrorStyles[variant],
-            (disabled || loading) &&
-              variant &&
-              error &&
-              buttonErrorStyles[variant][':disabled'] && {
-                base: buttonErrorStyles[variant][':disabled'],
-              },
-            props.style
-          )}
-        >
-          {(e: any) => {
-            return (
-              <buttonContext.Provider
-                value={{
-                  variant,
-                  error,
-                  state: { active: e.pressed, hover: e.hovered },
-                  disabled: disabled || loading,
-                }}
-              >
-                {renderLoading}
-                {typeof children === 'function' ? children(e) : children}
-              </buttonContext.Provider>
-            );
-          }}
-        </Pressable>
-      );
-    }
-  )
-);
-
-const Text = withReactive(
-  forwardRef<any, TextProps>((props, ref) => {
-    const { variant, error, state, disabled } = useContext(buttonContext);
+const Root = withReactive<View, RootProps>(
+  (
+    {
+      variant = 'primary',
+      error = false,
+      disabled,
+      loading,
+      size = true,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const renderLoading = loading ? (
+      <ButtonIcon>
+        <ActivityIndicator />
+      </ButtonIcon>
+    ) : null;
 
     return (
-      <TextUi
-        weight="lg"
+      <Pressable
+        disabled={disabled || loading}
+        ref={ref}
         {...props}
-        disabled={disabled}
-        {...state}
-        style={composeStyles(
-          textStyles.default,
-          variant && textStyles[variant],
-          disabled && textStyles.disabled,
-          disabled && variant && textDisabledStyles[variant],
-          variant && error && textErrorStyles[variant],
-          disabled && variant && error && textErrorDisabledStyles[variant],
+        {...pressable(
+          buttonStyles.root,
+          buttonSizeStyles[size.toString()],
+          variant && buttonStyles[variant],
+          (disabled || loading) &&
+            variant &&
+            buttonStyles[variant][':disabled'] && {
+              base: buttonStyles[variant][':disabled'],
+            },
+          error && buttonErrorStyles.error,
+          variant && error && buttonErrorStyles[variant],
+          (disabled || loading) &&
+            variant &&
+            error &&
+            buttonErrorStyles[variant][':disabled'] && {
+              base: buttonErrorStyles[variant][':disabled'],
+            },
           props.style
         )}
-        ref={ref}
-      />
+      >
+        {(e: any) => {
+          return (
+            <buttonContext.Provider
+              value={{
+                variant,
+                error,
+                state: { active: e.pressed, hover: e.hovered },
+                disabled: disabled || loading,
+              }}
+            >
+              {renderLoading}
+              {typeof children === 'function' ? children(e) : children}
+            </buttonContext.Provider>
+          );
+        }}
+      </Pressable>
     );
-  })
+  }
 );
+
+const Text = withReactive<TextN, TextProps>((props, ref) => {
+  const { variant, error, state, disabled } = useContext(buttonContext);
+
+  return (
+    <TextUi
+      weight="lg"
+      {...props}
+      disabled={disabled}
+      {...state}
+      style={composeStyles(
+        textStyles.default,
+        variant && textStyles[variant],
+        disabled && textStyles.disabled,
+        disabled && variant && textDisabledStyles[variant],
+        variant && error && textErrorStyles[variant],
+        disabled && variant && error && textErrorDisabledStyles[variant],
+        props.style
+      )}
+      ref={ref}
+    />
+  );
+});
 
 const Icon = ({ children }: PropsWithChildren) => {
   const { variant, error, state, disabled } = useContext(buttonContext);

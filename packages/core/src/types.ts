@@ -31,6 +31,13 @@ export type State<P> = {
 export type StyledComponent<P extends Record<string, any>> =
   ForwardRefExoticComponent<P & RefAttributes<any>>;
 
+export type InferRef<T> =
+  T extends ForwardRefExoticComponent<infer Ref>
+    ? Ref extends RefAttributes<infer RefElement>
+      ? RefElement
+      : never
+    : never;
+
 export type GetProps<A extends StylableComponent<any>> =
   A extends StyledComponent<infer P>
     ? P

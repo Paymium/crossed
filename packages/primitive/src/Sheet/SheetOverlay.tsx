@@ -7,14 +7,14 @@
 
 import { ComponentType, forwardRef } from 'react';
 import { useContext } from './context';
-import { composeEventHandlers } from '@crossed/core';
+import { composeEventHandlers, InferRef } from '@crossed/core';
 
 export const createSheetOverlay = <P,>(Styled: ComponentType<P>) =>
-  forwardRef<any, P>((props, ref) => {
+  forwardRef<InferRef<typeof Styled>, P>((props, ref) => {
     const { setOpen } = useContext();
     return (
       <Styled
-        {...props}
+        {...(props as any)}
         onPress={composeEventHandlers((props as any).onPress, () => {
           setOpen(false);
         })}
