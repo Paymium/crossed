@@ -1,5 +1,17 @@
 # @crossed/ui
 
+## 1.0.0-beta.38
+
+### Minor Changes
+
+- 87479d1: add sheet component
+
+### Patch Changes
+
+- @crossed/core@0.8.1-beta.3
+- @crossed/primitive@1.8.0-beta.5
+- @crossed/styled@0.14.0-beta.17
+
 ## 1.0.0-beta.37
 
 ### Minor Changes
