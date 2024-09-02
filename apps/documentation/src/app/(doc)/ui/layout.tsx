@@ -56,7 +56,13 @@ export default withDefaultProps(SideBarLayout, {
 
     { title: 'Forms', menus: [{ href: '/ui/Form', title: 'Form' }] },
 
-    { title: 'Overlay', menus: [{ href: '/ui/Modal', title: 'Modal' }] },
+    {
+      title: 'Overlay',
+      menus: [
+        { href: '/ui/Modal', title: 'Modal' },
+        { href: '/ui/Sheet', title: 'Sheet' },
+      ],
+    },
 
     {
       title: 'Input',

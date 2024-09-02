@@ -41,15 +41,22 @@ const config: Config.InitialOptions = {
     // '^@preact/signals-core$':
     //   '<rootDir>/node_modules/@crossed/styled/node_modules/@preact/signals-react/runtime/dist/runtime.js',
     '^react-native$': 'react-native-web',
-    '^react-native-reanimated$':
-      '<rootDir>/node_modules/react-native-reanimated/mock',
+    // '^react-native-reanimated$':
+    //   '<rootDir>/node_modules/react-native-reanimated/mock',
   },
   coveragePathIgnorePatterns: ['/node_modules/', '__tests__'],
   testRegex: '\\.spec\\.[jt]sx?$',
   transformIgnorePatterns: [
-    // 'node_modules/(?!((.pnpm/)?((jest-)?react-native|@react-native(-community)?))|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|tamagui|@tamagui/.*|@crossed/.*|react-native-reanimated|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)',
-    'node_modules/(?!((.pnpm/)?(@preact)))',
+    // `${path.join(
+    //   __dirname,
+    //   '../..'
+    // )}/node_modules/.pnpm/(?!(react-native|react-native-reanimated))`,
+    'node_modules/(?!((.pnpm/)?(@preact|react-native)))',
   ],
+  // transformIgnorePatterns: [
+  //   // 'node_modules/(?!((.pnpm/)?((jest-)?react-native|@react-native(-community)?))|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|tamagui|@tamagui/.*|@crossed/.*|react-native-reanimated|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)',
+  //   'node_modules/(?!((.pnpm/)?(@preact)))',
+  // ],
   modulePathIgnorePatterns: ['lib', 'coverage'],
   moduleDirectories: ['./node_modules', 'src'],
   setupFilesAfterEnv: [
