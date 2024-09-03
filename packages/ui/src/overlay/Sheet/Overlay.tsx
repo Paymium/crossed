@@ -9,7 +9,6 @@ import { forwardRef, useEffect, useState } from 'react';
 import { type View } from 'react-native';
 import { useSheetContext } from './context';
 import {
-  composeStyles,
   createStyles,
   CrossedStyle,
   rnw,
