@@ -6,9 +6,9 @@
  */
 
 import { useSheetContext } from './context';
-import { createStyles } from '@crossed/styled';
+import { createStyles, CrossedStyle, rnw } from '@crossed/styled';
 import { Box } from '../../layout/Box';
-import { Pressable } from 'react-native';
+import { Pressable, PressableProps } from 'react-native';
 
 const styles = createStyles(({ colors }) => ({
   handle: {
@@ -24,11 +24,15 @@ const styles = createStyles(({ colors }) => ({
   pressable: { base: { justifyContent: 'center', height: 40 }, variants: {} },
 }));
 
-export const Handle = () => {
+export type HandleProps = Omit<PressableProps, 'style'> & {
+  style?: CrossedStyle;
+};
+
+export const Handle = ({ style, ...props }: HandleProps) => {
   const { hideHandle } = useSheetContext();
 
   return !hideHandle ? (
-    <Pressable {...styles.pressable.rnw()}>
+    <Pressable {...props} {...rnw(styles.pressable, style)}>
       <Box style={styles.handle} />
     </Pressable>
   ) : null;

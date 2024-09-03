@@ -9,9 +9,10 @@ import { forwardRef, useEffect, useState } from 'react';
 import { type View } from 'react-native';
 import { useSheetContext } from './context';
 import {
-  type CrossedMethods,
   composeStyles,
   createStyles,
+  CrossedStyle,
+  rnw,
 } from '@crossed/styled';
 import { Portal } from '@gorhom/portal';
 import { Pressable, type PressableProps } from 'react-native';
@@ -38,7 +39,7 @@ const styles = createStyles(({ colors }) => ({
 }));
 
 export type OverlayProps = Omit<PressableProps, 'style'> & {
-  style?: CrossedMethods<any, any>;
+  style?: CrossedStyle;
 };
 
 export const OverlayLogical = forwardRef<View, OverlayProps>(
@@ -67,14 +68,14 @@ export const OverlayLogical = forwardRef<View, OverlayProps>(
       <Animated.View
         ref={ref}
         style={[
-          composeStyles(styles.box, styleProps || false).rnw().style,
+          rnw(styles.box, styleProps || false).style,
           style,
         ]}
       >
         <Pressable
           disabled={!dismissOnOverlayPress}
-          style={styles.pressable.rnw().style}
           {...props}
+          {...rnw(styles.pressable)}
           onPress={composeEventHandlers(
             (dismissOnOverlayPress && onClose) || undefined,
             onPressProps || undefined

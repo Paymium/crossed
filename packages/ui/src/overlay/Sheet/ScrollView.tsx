@@ -6,12 +6,7 @@
  */
 
 import { forwardRef, useCallback, useMemo, useRef } from 'react';
-import {
-  type CrossedMethods,
-  composeStyles,
-  createStyles,
-  isWeb,
-} from '@crossed/styled';
+import { createStyles, CrossedStyle, isWeb, rnw } from '@crossed/styled';
 import Animated, {
   type AnimatedScrollViewProps,
   runOnJS,
@@ -57,14 +52,12 @@ const styles = createStyles(({ colors, space }) => ({
     },
     variants: {},
   },
-  fixed: {
-    web: { base: { position: 'fixed' as any, boxSizing: 'content-box' } },
-  },
+  fixed: { base: { position: 'fixed' as any, boxSizing: 'content-box' } },
   maxHeight: { base: { maxHeight: '100%' } },
 }));
 
 export type SheetScrollViewProps = Omit<AnimatedScrollViewProps, 'style'> & {
-  style?: CrossedMethods<any, any>;
+  style?: CrossedStyle;
   padded?: boolean;
 };
 
@@ -225,18 +218,12 @@ export const ScrollView = forwardRef<Animated.ScrollView, SheetScrollViewProps>(
           onScroll={onScroll}
           onContentSizeChange={onContentSizeChange}
           contentContainerStyle={
-            composeStyles(
-              padded && styles.container,
-              padded && styles.containerPadded
-            ).style().style
+            rnw(padded && styles.container, padded && styles.containerPadded)
+              .style
           }
           {...props}
           style={[
-            composeStyles(
-              styles.box,
-              isWeb && styles.fixed,
-              styleProps || false
-            ).style().style,
+            rnw(styles.box, isWeb && styles.fixed, styleProps || false).style,
             styleAnimated,
           ]}
         >
