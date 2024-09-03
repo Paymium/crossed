@@ -67,10 +67,7 @@ export const OverlayLogical = forwardRef<View, OverlayProps>(
     return (
       <Animated.View
         ref={ref}
-        style={[
-          rnw(styles.box, styleProps || false).style,
-          style,
-        ]}
+        style={[rnw(styles.box, styleProps || false).style, style]}
       >
         <Pressable
           disabled={!dismissOnOverlayPress}
