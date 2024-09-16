@@ -1,5 +1,14 @@
 # @crossed/loader
 
+## 1.0.0-beta.26
+
+### Patch Changes
+
+- e965552: remove variants
+- Updated dependencies [e965552]
+  - @crossed/styled@0.14.0-beta.18
+  - @crossed/theme@2.0.0-beta.15
+
 ## 1.0.0-beta.25
 
 ### Patch Changes

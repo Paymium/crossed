@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.18
+
+### Patch Changes
+
+- e965552: remove variants
+
 ## 0.14.0-beta.17
 
 ### Minor Changes

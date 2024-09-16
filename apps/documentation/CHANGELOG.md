@@ -1,5 +1,17 @@
 # crossed-docs
 
+## 0.6.0-beta.42
+
+### Patch Changes
+
+- e965552: remove variants
+- Updated dependencies [e965552]
+  - @crossed/styled@0.14.0-beta.18
+  - @crossed/ui@1.0.0-beta.40
+  - @crossed/theme@2.0.0-beta.15
+  - @crossed/unicons@1.0.0-beta.25
+  - @crossed/next-adapter@0.6.0-beta.27
+
 ## 0.6.0-beta.41
 
 ### Patch Changes
