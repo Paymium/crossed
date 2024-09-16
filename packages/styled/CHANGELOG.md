@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.19
+
+### Patch Changes
+
+- 9f30f85: add undefined in combineStyles
+
 ## 0.14.0-beta.18
 
 ### Patch Changes
