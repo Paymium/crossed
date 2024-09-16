@@ -42,15 +42,15 @@ const useStyles = createStyles((t) => ({
       flexDirection: 'row',
       alignItems: 'center',
     },
-    variants: {
-      disabled: {
-        true: {
-          base: {
-            pointerEvents: 'none',
-          },
-        },
-      },
-    },
+    // variants: {
+    //   disabled: {
+    //     true: {
+    //       base: {
+    //         pointerEvents: 'none',
+    //       },
+    //     },
+    //   },
+    // },
     // variants: {
     //   underline: {
     //     true: {

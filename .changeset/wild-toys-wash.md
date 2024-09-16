@@ -1,0 +1,5 @@
+---
+"@crossed/styled": patch
+---
+
+type

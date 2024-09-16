@@ -21,8 +21,8 @@ type Merge<T extends object> = {
 export type ExtractStyle<S extends CrossedMethods<any>> =
   S extends CrossedMethods<infer D, any> ? D : never;
 export const composeStyles = <
-  T extends (CrossedMethods<any> | false | undefined)[],
-  P extends Exclude<T[number], false>,
+  T extends (CrossedMethods<any> | false | void)[],
+  P extends Exclude<T[number], false | void>,
 >(
   ...styles: T
 ) => {
