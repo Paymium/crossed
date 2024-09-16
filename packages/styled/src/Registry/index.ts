@@ -9,7 +9,6 @@ import {
   BasePlugin,
   MediaQueriesPlugin,
   PseudoClassPlugin,
-  VariantsPlugin,
   WebPlugin,
 } from '../plugins';
 export { Registry } from './Registry';
@@ -21,6 +20,5 @@ export { breakpoints };
 
 Registry.addPlugin(BasePlugin)
   .addPlugin(PseudoClassPlugin)
-  .addPlugin(VariantsPlugin)
   .addPlugin(WebPlugin)
   .addPlugin(MediaQueriesPlugin(breakpoints));

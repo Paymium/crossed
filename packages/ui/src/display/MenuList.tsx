@@ -16,7 +16,7 @@ import {
 import { Text, type TextProps } from '../typography/Text';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
-import { Button, useButton, type ButtonProps } from '../forms/Button';
+import { Button, type ButtonProps } from '../forms/Button';
 import { type GetProps, createScope } from '@crossed/core';
 import { forwardRef, memo } from 'react';
 import { Pressable, View, type PressableProps } from 'react-native';
@@ -106,7 +106,7 @@ const Item = withReactive(
 const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
   // const variants = useVariantContext();
 
-  return <Text {...props} style={useButton.root} ref={ref} />;
+  return <Text {...props} ref={ref} />;
 });
 const Title = (props: TextProps) => (
   <Text {...props} style={useMenuList.title} />

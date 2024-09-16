@@ -7,8 +7,8 @@
 
 import { TextInput, type TextInputProps } from 'react-native';
 import { forwardRef, useCallback, useState, type ReactNode } from 'react';
-import { form, type FormInput } from '../styles/form';
-import { useInteraction } from '@crossed/styled';
+import { form } from '../styles/form';
+import { composeStyles, CrossedMethods, useInteraction } from '@crossed/styled';
 import { FormControl, FormField, FormLabel } from './Form';
 import { CloseButton } from '../other/CloseButton';
 import { useUncontrolled } from '@crossed/core';
@@ -16,17 +16,17 @@ import { XBox } from '../layout/XBox';
 import { Text } from '../typography/Text';
 import { YBox } from '../layout/YBox';
 
-export type TextareaProps = Omit<TextInputProps, 'editable' | 'onChange'> &
-  Omit<FormInput, 'variants'> &
-  Pick<FormInput['variants'], 'error'> & {
-    label?: string;
-    clearable?: boolean;
-    elementLeft?: ReactNode;
-    elementRight?: ReactNode;
-    error?: string;
-    description?: string;
-    extra?: string;
-  };
+export type TextareaProps = Omit<TextInputProps, 'editable' | 'onChange'> & {
+  label?: string;
+  clearable?: boolean;
+  elementLeft?: ReactNode;
+  elementRight?: ReactNode;
+  error?: string;
+  description?: string;
+  extra?: string;
+  style?: CrossedMethods<any>;
+  disabled?: boolean;
+};
 
 export const Textarea = forwardRef<TextInput, TextareaProps>(
   (
@@ -99,17 +99,16 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
                 numberOfLines={10}
                 {...props}
                 {...propsInteraction}
-                {...form.input.rnw({
+                {...composeStyles(form.input, error && form.inputError).rnw({
                   ...props,
                   ...state,
+                  disabled,
                   style: [
                     { minHeight: 88, textAlignVertical: 'top' },
                     props.style as any,
                     elementLeftWidth && { paddingLeft: elementLeftWidth },
                     elementRightWidth && { paddingRight: elementRightWidth },
                   ],
-                  disabled,
-                  variants: { error: !!error },
                 })}
                 value={value}
                 onChangeText={setValue}

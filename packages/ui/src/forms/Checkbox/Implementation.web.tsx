@@ -8,10 +8,17 @@
 import { VisibilityHidden } from '@crossed/primitive';
 import type { ImplementationComponent } from './type';
 
-export const Implementation: ImplementationComponent = ({ checked }) => {
+export const Implementation: ImplementationComponent = ({
+  checked,
+  setChecked,
+}) => {
   return (
     <VisibilityHidden hide>
-      <input type="checkbox" checked={checked} />
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={() => setChecked(!checked)}
+      />
     </VisibilityHidden>
   );
 };

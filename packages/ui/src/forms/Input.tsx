@@ -14,9 +14,14 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { form, type FormInput } from '../styles/form';
+import { form } from '../styles/form';
 import { gapStyles } from '../styles/gap';
-import { useInteraction, createStyles, composeStyles } from '@crossed/styled';
+import {
+  useInteraction,
+  createStyles,
+  composeStyles,
+  CrossedMethods,
+} from '@crossed/styled';
 import { FormControl, FormField, FormLabel } from './Form';
 import { CloseButton } from '../other/CloseButton';
 import { useUncontrolled } from '@crossed/core';
@@ -28,17 +33,20 @@ const styles = createStyles(() => ({
   close: { base: { padding: 0 } },
 }));
 
-export type InputProps = Omit<TextInputProps, 'editable' | 'onChange'> &
-  Omit<FormInput, 'variants'> &
-  Pick<FormInput['variants'], 'error'> & {
-    label?: string;
-    clearable?: boolean;
-    elementLeft?: ReactNode;
-    elementRight?: ReactNode;
-    error?: string;
-    description?: string;
-    extra?: string;
-  };
+export type InputProps = Omit<
+  TextInputProps,
+  'editable' | 'onChange' | 'style'
+> & {
+  label?: string;
+  clearable?: boolean;
+  elementLeft?: ReactNode;
+  elementRight?: ReactNode;
+  error?: string;
+  description?: string;
+  extra?: string;
+  disabled?: boolean;
+  style?: CrossedMethods<any>;
+};
 
 export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
   const {
@@ -114,16 +122,18 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
               focusable={!disabled}
               {...props}
               {...propsInteraction}
-              {...form.input.rnw({
+              {...composeStyles(
+                form.input,
+                error && form.inputError,
+                props.style
+              ).rnw({
                 ...props,
                 ...state,
+                disabled,
                 style: [
-                  props.style as any,
                   elementLeftWidth && { paddingLeft: elementLeftWidth },
                   elementRightWidth && { paddingRight: elementRightWidth },
                 ],
-                disabled,
-                variants: { error: !!error },
               })}
               value={value}
               onChangeText={setValue}

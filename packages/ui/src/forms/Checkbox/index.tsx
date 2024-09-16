@@ -6,7 +6,7 @@
  */
 
 import { useUncontrolled } from '@crossed/core';
-import { createStyles } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 import { useInteraction } from '@crossed/styled';
 import { Check } from '@crossed/unicons';
 import { useCallback, useTransition } from 'react';
@@ -53,36 +53,15 @@ const checkboxStyles = createStyles((t) => ({
         // boxShadow: `0px 0px 0px 2px ${t.colors.neutral[300]}`,
       },
     },
-    'variants': {
-      checked: {
-        true: {
-          'base': {
-            borderColor: t.colors.primary.primary,
-            backgroundColor: t.colors.primary.primary,
-          },
-          ':active': {
-            borderColor: t.colors.primary.primary,
-            backgroundColor: t.colors.primary.primary,
-          },
-        },
-      },
-    },
   },
-  thumb: {
-    base: {
-      width: 10,
-      height: 10,
-      borderRadius: 10,
-      overflow: 'hidden',
-      backgroundColor: 'white',
+  checked: {
+    'base': {
+      borderColor: t.colors.primary.primary,
+      backgroundColor: t.colors.primary.primary,
     },
-    variants: {
-      checked: {
-        true: {
-          'base': { backgroundColor: t.colors.primary.primary },
-          ':active': { backgroundColor: t.colors.primary.primary },
-        },
-      },
+    ':active': {
+      borderColor: t.colors.primary.primary,
+      backgroundColor: t.colors.primary.primary,
     },
   },
 }));
@@ -98,7 +77,7 @@ export const Checkbox: CheckboxComponent = ({
     value: checkedProps,
     onChange: onChecked,
   });
-  const { state, props } = useInteraction();
+  const { props } = useInteraction();
   const [, setTransition] = useTransition();
 
   const handlePress = useCallback(() => {
@@ -110,10 +89,29 @@ export const Checkbox: CheckboxComponent = ({
     <Pressable
       onPress={handlePress}
       {...props}
-      {...checkboxStyles.pressable.rnw()}
+      style={({
+        pressed,
+        hovered,
+        focused,
+      }: {
+        pressed: boolean;
+        hovered?: boolean;
+        focused?: boolean;
+      }) =>
+        checkboxStyles.pressable.rnw({
+          active: pressed,
+          hover: hovered,
+          focus: focused,
+        }).style
+      }
     >
-      <Implementation checked={checked} />
-      <View {...checkboxStyles.root.rnw({ ...state, variants: { checked } })}>
+      <Implementation checked={checked} setChecked={setChecked} />
+      <View
+        {...composeStyles(
+          checkboxStyles.root,
+          checked && checkboxStyles.checked
+        ).rnw()}
+      >
         {checked && <Check size={15} color="white" />}
       </View>
       {children}

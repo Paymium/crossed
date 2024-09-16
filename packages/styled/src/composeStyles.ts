@@ -30,5 +30,5 @@ export const composeStyles = <
   const styleMerged = merge(...stylesVerified.map((e) => e.original)) as Merge<
     P['original']
   >;
-  return createMethods<typeof styleMerged>(styleMerged);
+  return createMethods(styleMerged);
 };

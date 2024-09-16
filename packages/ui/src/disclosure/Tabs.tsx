@@ -33,6 +33,7 @@ const useStyles = createStyles((t) => ({
       // paddingBottom: t.space.xs,
     },
   },
+  triggerDisabled: { base: { pointerEvents: 'none' } },
   trigger: {
     base: {
       height: 44,
@@ -105,24 +106,24 @@ const useStyles = createStyles((t) => ({
     },
   },
   triggerText: {
-    variants: {
-      underline: {
-        true: {
-          'base': { color: t.colors.neutral['600'] },
-          ':hover': {
-            // color: t.colors.brand.bright,
-          },
-        },
-      },
-      disabled: {
-        true: {
-          base: {
-            // color: t.colors.neutral.low,
-            pointerEvents: 'none',
-          },
-        },
-      },
-    },
+    // variants: {
+    //   underline: {
+    //     true: {
+    //       'base': { color: t.colors.neutral['600'] },
+    //       ':hover': {
+    //         // color: t.colors.brand.bright,
+    //       },
+    //     },
+    //   },
+    //   disabled: {
+    //     true: {
+    //       base: {
+    //         // color: t.colors.neutral.low,
+    //         pointerEvents: 'none',
+    //       },
+    //     },
+    //   },
+    // },
   },
 }));
 
@@ -210,10 +211,12 @@ export const createTabs = () => {
             role="button"
             disabled={disabled}
             {...props}
-            {...useStyles.trigger.rnw({
+            {...composeStyles(
+              useStyles.trigger,
+              disabled && useStyles.triggerDisabled
+            ).rnw({
               ...state,
               hover: valueProps === value || state.hover,
-              variants: { disabled },
             })}
             {...interaction}
             onPress={onPress}

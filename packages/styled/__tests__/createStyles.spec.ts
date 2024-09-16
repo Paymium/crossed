@@ -10,7 +10,6 @@
 import { createStyles } from '../src/createStyles';
 import { BasePlugin } from '../src/plugins/Base';
 import { PseudoClassPlugin } from '../src/plugins/PseudoClass';
-import { VariantsPlugin } from '../src/plugins/Variants';
 import { Registry } from '../src/Registry';
 
 jest.mock('../src/isWeb/isWeb', () => {
@@ -19,9 +18,7 @@ jest.mock('../src/isWeb/isWeb', () => {
 
 describe('createStyles', () => {
   beforeAll(() => {
-    Registry.addPlugin(BasePlugin)
-      .addPlugin(PseudoClassPlugin)
-      .addPlugin(VariantsPlugin);
+    Registry.addPlugin(BasePlugin).addPlugin(PseudoClassPlugin);
   });
   test('should return function', () => {
     const style = createStyles(() => ({ container: {} }));

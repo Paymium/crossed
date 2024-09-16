@@ -21,9 +21,9 @@ describe('Registry', () => {
 
   test('can add/get plugins', () => {
     const plugins = {} as any;
-    expect(Registry.getPlugins().length).toEqual(5);
+    expect(Registry.getPlugins().length).toEqual(4);
     expect(Registry.addPlugin(plugins)).toBe(Registry);
     expect(Registry.addPlugin(plugins)).toBe(Registry);
-    expect(Registry.getPlugins().length).toEqual(7);
+    expect(Registry.getPlugins().length).toEqual(6);
   });
 });

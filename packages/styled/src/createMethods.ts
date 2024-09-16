@@ -13,7 +13,7 @@ const cache = new Map();
 
 const apply = <S>(
   style: Record<string, any>,
-  props: CrossedPropsExtended<S>,
+  props: CrossedPropsExtended,
   addClassname: PluginContext<S>['addClassname']
 ) => {
   Registry.apply(() => style, {
@@ -43,10 +43,10 @@ const cleanClassName = (classNames: string[]) => {
   }, new Set<string>());
 };
 
-export const createMethods = <S>(styleOfKey: Record<string, any>) => {
+export const createMethods = (styleOfKey: Record<string, any>) => {
   return {
     original: styleOfKey,
-    style: (props: CrossedPropsExtended<S> = {}) => {
+    style: (props: CrossedPropsExtended = {}) => {
       const old = cache.get({ style: styleOfKey, props });
       if (old) {
         return old;
@@ -78,7 +78,7 @@ export const createMethods = <S>(styleOfKey: Record<string, any>) => {
       cache.set({ style: styleOfKey, props }, result);
       return result;
     },
-    className: (props: CrossedPropsExtended<S> = {}) => {
+    className: (props: CrossedPropsExtended = {}) => {
       const old = cache.get({ style: styleOfKey, props });
       if (old) {
         return old;
@@ -114,7 +114,7 @@ export const createMethods = <S>(styleOfKey: Record<string, any>) => {
       cache.set({ style: styleOfKey, props }, result);
       return result;
     },
-    rnw: (props: CrossedPropsExtended<S> = {}) => {
+    rnw: (props: CrossedPropsExtended = {}) => {
       const old = cache.get({ style: styleOfKey, props });
       if (old) {
         return old;

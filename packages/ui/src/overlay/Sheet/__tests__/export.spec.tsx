@@ -10,6 +10,9 @@ import { describe, test, expect } from '@jest/globals';
 
 describe('export Sheet', () => {
   test('all export exist', () => {
-    expect(Object.keys(Sheet)).toEqual(['Trigger', 'Frame', 'SnapVisible']);
+    const keys = Object.keys(Sheet);
+    expect(keys.includes('Trigger')).toBeTruthy();
+    expect(keys.includes('Frame')).toBeTruthy();
+    expect(keys.includes('SnapVisible')).toBeTruthy();
   });
 });

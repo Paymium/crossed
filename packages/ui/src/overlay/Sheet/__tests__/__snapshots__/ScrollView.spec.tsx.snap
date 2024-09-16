@@ -18,7 +18,7 @@ exports[`ScrollView not open 1`] = `
       />
     </div>
     <div
-      class="css-text-146c3p1 color-[var(--font-color)] font-family-[var(--font-family)] font-size-[16px] line-height-[20px] font-weight-[400]"
+      class="css-text-146c3p1 font-size-[16px] line-height-[20px] font-weight-[var(--font-font-weight-md)] color-[var(--colors-text-primary)] font-family-[var(--font-family)]"
       dir="auto"
     >
       toto
@@ -45,7 +45,7 @@ exports[`ScrollView open 1`] = `
       />
     </div>
     <div
-      class="css-text-146c3p1 color-[var(--font-color)] font-family-[var(--font-family)] font-size-[16px] line-height-[20px] font-weight-[400]"
+      class="css-text-146c3p1 font-size-[16px] line-height-[20px] font-weight-[var(--font-font-weight-md)] color-[var(--colors-text-primary)] font-family-[var(--font-family)]"
       dir="auto"
     >
       toto

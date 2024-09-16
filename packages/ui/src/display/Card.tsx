@@ -5,19 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import {
-  type GetProps,
-  withStaticProperties,
-  createScope,
-} from '@crossed/core';
+import { type GetProps, withStaticProperties } from '@crossed/core';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { Text, type TextProps } from '../typography/Text';
-import {
-  composeStyles,
-  createStyles,
-  type CrossedMethods,
-  type ExtractForProps,
-} from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 import { forwardRef } from 'react';
 
 const useCard = createStyles(({ space, font, components }) => ({
@@ -30,7 +21,6 @@ const useCard = createStyles(({ space, font, components }) => ({
       borderColor: components.Card.default.border,
       gap: space.xxs,
     },
-    variants: {},
   },
   rootLink: {
     'web': { base: { transition: 'all 0.27s ease' } },
@@ -47,42 +37,27 @@ const useCard = createStyles(({ space, font, components }) => ({
       alignSelf: 'stretch',
       fontSize: font.fontSize.lg,
     },
-    variants: {},
   },
   description: {
     base: { alignSelf: 'stretch', color: components.Card.default.description },
-    variants: {},
   },
 }));
 
-type Variants = ExtractForProps<typeof useCard.root>;
-
-const [Provider] = createScope<Variants>({} as Variants);
-
-type CardProps = Omit<YBoxProps & Variants['variants'], 'style'> & {
-  style?: CrossedMethods<any, any>;
-};
+type CardProps = YBoxProps;
 
 const CardRoot = forwardRef(
   ({ role, style, ...props }: CardProps, ref: any) => {
     return (
-      <Provider
-        variants={{ role }}
-        hover={props.hover}
-        active={props.active}
-        focus={props.focus}
-      >
-        <YBox
-          ref={ref}
-          role={role}
-          {...props}
-          style={composeStyles(
-            useCard.root,
-            role === 'link' && useCard.rootLink,
-            style
-          )}
-        />
-      </Provider>
+      <YBox
+        ref={ref}
+        role={role}
+        {...props}
+        style={composeStyles(
+          useCard.root,
+          role === 'link' && useCard.rootLink,
+          style
+        )}
+      />
     );
   }
 );
