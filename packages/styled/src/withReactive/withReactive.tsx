@@ -13,5 +13,5 @@ export const withReactive = <Ref, P = {}>(
 ) =>
   forwardRef<Ref, P>((props, ref) => {
     useTheme();
-    return <Comp {...(props as any)} ref={ref} />;
+    return <Comp {...props} ref={ref} />;
   });
