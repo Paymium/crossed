@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.20
+
+### Patch Changes
+
+- 029c76f: missign type
+
 ## 0.14.0-beta.19
 
 ### Patch Changes
