@@ -7,7 +7,6 @@
 
 import { Registry } from '@crossed/styled';
 import { Loader } from '../index';
-import { getAst } from './getAst';
 
 Registry.setThemes({ dark: {} }).setThemeName('dark' as unknown as never);
 
@@ -17,9 +16,10 @@ describe('media-query', () => {
   test('only min', () => {
     const loader = new Loader();
 
-    loader.parse(
-      getAst(
+    expect(
+      loader.loader(
         `()=>({
+            root:{
             base: {
               marginTop: 4,
               width: 50,
@@ -29,8 +29,11 @@ describe('media-query', () => {
                 backgroundColor: "red"
               }
             }
+              }
           })`
       )
+    ).toEqual(
+      '{"root":{"$$$css":true,"marginTop":"margin-top-[4px]","width":"width-[50px]","backgroundColor":"md:background-color-[red]"},}'
     );
     expect(loader.getCSS()).toEqual(
       `.dark {  }
@@ -43,20 +46,24 @@ describe('media-query', () => {
   test('sm/md', () => {
     const loader = new Loader();
 
-    loader.parse(
-      getAst(
+    expect(
+      loader.loader(
         `()=>({
-            media: {
-              md: { backgroundColor: "red" },
-              sm : { backgroundColor: "green" },
-            },
-            base: {
-              marginTop: 4,
-              width: 50,
-              backgroundColor: "black"
+          root:{
+          media: {
+            md: { backgroundColor: "red" },
+            sm : { backgroundColor: "green" },
+          },
+          base: {
+            marginTop: 4,
+            width: 50,
+            backgroundColor: "black"
+          }
             }
-          })`
+        })`
       )
+    ).toEqual(
+      '{"root":{"$$$css":true,"backgroundColor":"md:background-color-[red] sm:background-color-[green] background-color-[black]","marginTop":"margin-top-[4px]","width":"width-[50px]"},}'
     );
     expect(loader.getCSS()).toEqual(
       `.dark {  }

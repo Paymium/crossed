@@ -6,12 +6,7 @@
  */
 
 import { View, type ViewProps } from 'react-native';
-import {
-  composeStyles,
-  createStyles,
-  type BaseCrossedPropsExtended,
-  type CrossedMethods,
-} from '@crossed/styled';
+import { createStyles, rnw, type CrossedStyle } from '@crossed/styled';
 import { forwardRef } from 'react';
 import { baseStyle } from '../styles/base';
 import { gapStyles } from '../styles/gap';
@@ -30,32 +25,24 @@ const styleBox = createStyles(
 );
 
 export type BoxProps = {
-  style?: CrossedMethods<any>;
+  style?: CrossedStyle;
   space?: keyof typeof gapStyles;
   center?: boolean;
-} & Omit<BaseCrossedPropsExtended & ViewProps, 'style'>;
+} & Omit<ViewProps, 'style'>;
 
 export const Box = forwardRef<View, BoxProps>(
-  (
-    { style, className, space, center, active, hover, focus, ...props },
-    ref
-  ) => {
+  ({ style, space, center, ...props }, ref) => {
     return (
       <View
         ref={ref}
         {...props}
-        {...composeStyles(
+        {...rnw(
           baseStyle.view,
           styleBox.root,
           center === true && styleBox.center,
           gapStyles[space],
-          style
-        ).rnw({
-          className,
-          active,
-          hover,
-          focus,
-        })}
+          ...(Array.isArray(style) ? style : [style])
+        )}
       />
     );
   }

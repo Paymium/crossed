@@ -21,6 +21,7 @@ import {
   Th,
   Tr,
   YBox,
+  fontColorStyles,
 } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 import { Fragment, ReactNode } from 'react';
@@ -64,7 +65,7 @@ const PropsTable = ({ params }: { params: PropsParams }) => {
                     <Text>{name}</Text>
                   </Td>
                   <Td>
-                    <I color="info">{type || '-'}</I>
+                    <I style={fontColorStyles.info}>{type || '-'}</I>
                   </Td>
                   <Td>
                     <Text>{description}</Text>
@@ -157,7 +158,7 @@ export const TemplatePrimitive = ({
                       <Text>{name}</Text>
                     </Td>
                     <Td>
-                      <Text color="warning">{type || '-'}</Text>
+                      <Text style={fontColorStyles.warning}>{type || '-'}</Text>
                     </Td>
                     <Td>
                       <Text>{description}</Text>
@@ -194,7 +195,7 @@ export const TemplatePrimitive = ({
                       <Text>{name}</Text>
                     </Td>
                     <Td>
-                      <Text color="warning">{type || '-'}</Text>
+                      <Text style={fontColorStyles.warning}>{type || '-'}</Text>
                     </Td>
                     <Td>
                       <Text>{description}</Text>

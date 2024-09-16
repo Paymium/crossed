@@ -8,19 +8,11 @@
 'use client';
 import '@/style.config';
 import { Box, MenuList, XBox, YBox } from '@crossed/ui';
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  useTransition,
-} from 'react';
+import { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { createStyles } from '@crossed/styled';
 import { menuStyle } from './menuSide.style';
-import { useUncontrolled } from '@crossed/core';
 
 const styles = createStyles(
   (t) =>
@@ -143,26 +135,9 @@ const Item = ({
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
-  const [, setTransition] = useTransition();
-  const [hover, setHover] = useUncontrolled({
-    defaultValue: false,
-  });
-  const onHoverIn = useCallback(() => {
-    setTransition(() => {
-      setHover(true);
-    });
-  }, [setHover]);
-  const onHoverOut = useCallback(() => {
-    setTransition(() => {
-      setHover(false);
-    });
-  }, [setHover]);
   return (
     <MenuList.Item
-      onHoverOut={onHoverOut}
-      onHoverIn={onHoverIn}
-      {...menuStyle.item.rnw()}
-      hover={href === hash || hover}
+      style={menuStyle.item}
       role="link"
       href={`${pathname}${href}`}
       onPress={(e) => {
@@ -171,12 +146,14 @@ const Item = ({
         router.push(href);
       }}
     >
-      <MenuList.Title
-        style={menuStyle.itemText}
-        weight={href === hash ? 'lg' : undefined}
-      >
-        {t(title)}
-      </MenuList.Title>
+      {({ hovered }) => (
+        <MenuList.Title
+          style={menuStyle.itemText}
+          weight={href === hash || hovered ? 'lg' : undefined}
+        >
+          {t(title)}
+        </MenuList.Title>
+      )}
     </MenuList.Item>
   );
 };

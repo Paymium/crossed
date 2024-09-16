@@ -7,23 +7,23 @@
 
 import { forwardRef, type ComponentType } from 'react';
 import { withStaticProperties } from './withStaticProperties';
+import type { InferRef } from './types';
 
-export function withDefaultProps<P extends Record<string, any>>(
+export function withDefaultProps<P>(
   Comp: ComponentType<P>,
   defaultProps: Partial<P>
 ) {
-  const { id, styleSheet, displayName } = Comp as any;
+  const { id, displayName } = Comp as any;
   return withStaticProperties(
-    forwardRef(function WithDefaultPropsRender(
-      props: Omit<P, keyof typeof defaultProps> &
-        Partial<Pick<P, keyof typeof defaultProps>>,
-      ref: any
-    ) {
+    forwardRef<
+      InferRef<typeof Comp>,
+      Omit<P, keyof typeof defaultProps> &
+        Partial<Pick<P, keyof typeof defaultProps>>
+    >(function WithDefaultPropsRender(props, ref) {
       return <Comp {...defaultProps} {...(props as any)} ref={ref} />;
     }),
-    { id, styleSheet, displayName } as {
+    { id, displayName } as {
       id?: string;
-      styleSheet: () => unknown;
       displayName?: string;
     }
   );

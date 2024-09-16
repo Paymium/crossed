@@ -7,12 +7,17 @@
 
 import {
   createAccordion,
-  type AccordionTriggerComponent,
+  type AccordionTriggerProps as AccordionTriggerPropsP,
   type AccordionPanelComponent,
   type AccordionItemComponent,
   type AccordionComponent,
 } from '@crossed/primitive';
-import { createStyles } from '@crossed/styled';
+import {
+  createStyles,
+  pressable,
+  rnw,
+  type CrossedStyle,
+} from '@crossed/styled';
 import { forwardRef, useContext, useRef } from 'react';
 import { ChevronDown, ChevronUp } from '@crossed/unicons';
 import { View } from 'react-native';
@@ -41,18 +46,18 @@ const accordionStyles = createStyles((t) => ({
     'web': { base: { transition: 'all 170ms' } },
   },
   panel: {
-    variants: {
-      show: {
-        false: {
-          web: {
-            base: { height: 0 },
-          },
-        },
-      },
-    },
-    web: {
-      base: { overflow: 'hidden', transition: 'height 170ms ease-out' },
-    },
+    // variants: {
+    //   show: {
+    //     false: {
+    //       web: {
+    //         base: { height: 0 },
+    //       },
+    //     },
+    //   },
+    // },
+    // web: {
+    //   base: { overflow: 'hidden', transition: 'height 170ms ease-out' },
+    // },
   },
   item: {
     base: {
@@ -64,6 +69,7 @@ const accordionStyles = createStyles((t) => ({
       base: { transition: 'height 1000ms ease' },
     },
   },
+  height: (height: number) => ({ height }),
 }));
 
 const {
@@ -76,29 +82,24 @@ const {
 } = createAccordion();
 
 const Accordion: AccordionComponent = (props) => {
-  return <PAccordion {...props} {...accordionStyles.root.rnw()} />;
+  return <PAccordion {...props} {...rnw(accordionStyles.root)} />;
 };
 
 const AccordionItem: AccordionItemComponent = forwardRef((props, ref) => {
-  return (
-    <PAccordionItem {...props} ref={ref} {...accordionStyles.item.rnw()} />
-  );
+  return <PAccordionItem {...props} ref={ref} {...rnw(accordionStyles.item)} />;
 });
 
-const AccordionTrigger: AccordionTriggerComponent = forwardRef(
+export type AccordionTriggerProps = Omit<AccordionTriggerPropsP, 'style'> & {
+  style?: CrossedStyle;
+};
+
+const AccordionTrigger = forwardRef<View, AccordionTriggerProps>(
   ({ style, ...props }, ref) => {
     return (
       <PAccordionTrigger
         {...props}
         ref={ref}
-        style={({ pressed }) =>
-          accordionStyles.trigger.rnw({
-            style: (typeof style === 'function'
-              ? style({ pressed })
-              : style) as any,
-            active: pressed,
-          }).style
-        }
+        {...pressable(accordionStyles.trigger, style)}
       />
     );
   }
@@ -113,12 +114,10 @@ const AccordionPanel: AccordionPanelComponent = forwardRef((props, ref) => {
       {...props}
       ref={ref}
       hide={false}
-      style={[
-        accordionStyles.panel.rnw({
-          variants: { show: false },
-        }).style,
-        values.includes(value) && { height: refLocal.current },
-      ]}
+      {...rnw(
+        accordionStyles.panel,
+        values.includes(value) && accordionStyles.height(refLocal.current)
+      )}
     >
       <View
         onLayout={({ nativeEvent: { layout } }) => {

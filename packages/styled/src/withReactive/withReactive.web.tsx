@@ -5,8 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { ComponentType } from 'react';
+import { forwardRef, ForwardRefRenderFunction, type ComponentType } from 'react';
 
-export const withReactive = <P extends Record<string, any>>(
-  Comp: ComponentType<P>
-) => Comp;
+export const withReactive = <Ref, P = {}>(
+  Comp: ForwardRefRenderFunction<Ref, P>
+) => forwardRef(Comp);

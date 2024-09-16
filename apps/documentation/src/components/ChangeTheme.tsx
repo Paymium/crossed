@@ -16,7 +16,7 @@ export const ChangeTheme = () => {
     Registry.setThemeName(Registry.themeName === 'light' ? 'dark' : 'light');
   }, []);
   return (
-    <Button variant="tertiary" onPress={onPress}>
+    <Button variant={false} onPress={onPress}>
       <Button.Icon>
         <Contrast />
       </Button.Icon>

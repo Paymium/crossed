@@ -23,6 +23,7 @@ import {
   Td,
   Th,
   Card,
+  fontColorStyles,
 } from '@crossed/ui';
 import { useTranslation } from 'react-i18next';
 
@@ -99,10 +100,10 @@ apply(params: {
         <Table>
           <THead>
             <Tr>
-              <Th {...stylesSheet.colName.className()}>
+              <Th style={stylesSheet.colName}>
                 <Text>{t('Name')}</Text>
               </Th>
-              <Th {...stylesSheet.colName.className()}>
+              <Th style={stylesSheet.colName}>
                 <Text>{t('Type')}</Text>
               </Th>
               <Th>
@@ -116,7 +117,7 @@ apply(params: {
                 <Text>key</Text>
               </Td>
               <Td>
-                <Text color="info">string</Text>
+                <Text style={fontColorStyles.info}>string</Text>
               </Td>
               <Td>
                 <Text>Key detected</Text>
@@ -127,7 +128,7 @@ apply(params: {
                 <Text>styles</Text>
               </Td>
               <Td>
-                <Text color="info">any</Text>
+                <Text style={fontColorStyles.info}>any</Text>
               </Td>
               <Td>
                 <Text>style correspond of test key</Text>
@@ -138,7 +139,7 @@ apply(params: {
                 <Text>isWeb</Text>
               </Td>
               <Td>
-                <Text color="info">boolean</Text>
+                <Text style={fontColorStyles.info}>boolean</Text>
               </Td>
               <Td>
                 <Text>isWeb is true when plugin loaded by @crossed/loader</Text>
@@ -149,7 +150,7 @@ apply(params: {
                 <Text>props</Text>
               </Td>
               <Td>
-                <Text color="info">any | undefined</Text>
+                <Text style={fontColorStyles.info}>any | undefined</Text>
               </Td>
               <Td>
                 <Text>props of component, undefined at buildtime if pass</Text>
@@ -160,7 +161,7 @@ apply(params: {
                 <Text>addClassname</Text>
               </Td>
               <Td>
-                <Text color="info">Function</Text>
+                <Text style={fontColorStyles.info}>Function</Text>
               </Td>
               <Td>
                 <Text>
@@ -183,10 +184,10 @@ addClassname(params: {
         <Table>
           <THead>
             <Tr>
-              <Th {...stylesSheet.colName.className()}>
+              <Th style={stylesSheet.colName}>
                 <Text>{t('Name')}</Text>
               </Th>
-              <Th {...stylesSheet.colRequired.className()}>
+              <Th style={stylesSheet.colRequired}>
                 <Text>{t('Required')}</Text>
               </Th>
               <Th>

@@ -5,9 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { ComponentType, forwardRef } from 'react';
+import { withDefaultProps } from '@crossed/core';
+import type { ComponentType } from 'react';
 
-export const createListMain = <P,>(StyledRoot: ComponentType<P>) =>
-  forwardRef<any, P>((props, ref) => (
-    <StyledRoot role="list" {...props} ref={ref} />
-  ));
+export const createListMain = <P extends Record<string, any>>(
+  StyledRoot: ComponentType<P>
+) => withDefaultProps(StyledRoot, { role: 'list' } as any);

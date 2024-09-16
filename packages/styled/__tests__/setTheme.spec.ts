@@ -6,7 +6,7 @@
  */
 
 import { setTheme } from '../src/setTheme/setTheme';
-import { setTheme as setThemeWeb } from '../src/setTheme/setTheme.web';
+import { setTheme as setThemeWeb } from '../src/setTheme/setTheme';
 
 jest.mock('../src/isWeb/isWeb', () => {
   return { isWeb: true };

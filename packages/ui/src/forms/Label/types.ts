@@ -7,13 +7,14 @@
 
 import type { ComponentType } from 'react';
 import type { TextProps } from 'react-native';
-import type { Size, Weight } from '../../styles/typography';
+import type { fontSizeStyles, fontWeightStyles } from '../../styles/typography';
+import type { CrossedStyle } from '@crossed/styled';
 
-export type LabelProps = TextProps &
-  Size['variants'] &
-  Weight['variants'] & {
-    htmlFor?: string;
-    disabled?: boolean;
-    className?: string;
-  };
+export type LabelProps = Omit<TextProps, 'style'> & {
+  size?: keyof typeof fontSizeStyles;
+  weight?: keyof typeof fontWeightStyles;
+  htmlFor?: string;
+  disabled?: boolean;
+  style?: CrossedStyle;
+};
 export type LabelComponent = ComponentType<LabelProps>;

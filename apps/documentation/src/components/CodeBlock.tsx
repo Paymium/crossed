@@ -7,7 +7,7 @@
 
 'use client';
 import '@/style.config';
-import { composeStyles, createStyles } from '@crossed/styled';
+import { className, createStyles } from '@crossed/styled';
 import { Center, Text, XBox, YBox } from '@crossed/ui';
 import { themes } from 'prism-react-renderer';
 import { PropsWithChildren, ReactNode, useCallback } from 'react';
@@ -72,7 +72,7 @@ const styles = createStyles((t) => ({
       borderBottomWidth: 1,
       // borderColor: t.colors.neutral.bright,
       borderStyle: 'solid',
-      // color: t.colors.neutral['100'],
+      color: t.colors.white,
     },
   },
   liveError: {
@@ -120,14 +120,10 @@ export const CodeBlock = ({
           {fileName && <Text style={styles.pre}>{fileName}</Text>}
           <LiveEditor
             theme={themes.dracula}
-            {...styles.liveEditor.className({
-              className: fileName ? 'filename' : '',
-            })}
+            className={`${className(styles.liveEditor).className}${fileName ? ' filename' : ''}`}
           />
           {preview && (
-            <LiveError
-              {...composeStyles(styles.pre, styles.liveError).className()}
-            />
+            <LiveError {...className(styles.pre, styles.liveError)} />
           )}
         </YBox>
       </LiveProvider>

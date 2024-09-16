@@ -5,35 +5,32 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { CrossedMethods, StyleSheet, Themes } from './types';
-import { Registry } from './Registry';
-import { createMethods } from './createMethods';
 import { isWeb } from './isWeb';
+import { Registry } from './Registry';
+import type {
+  AllAvailableStyles,
+  CrossedStyle,
+  StyleSheet,
+  Themes,
+} from './types';
 
-export const createStyles = <O extends Record<C, StyleSheet>, C extends string>(
-  stylesParam: (_theme: Themes[keyof Themes]) => {
+export const createStyles = <
+  O extends Record<C, StyleSheet | F>,
+  C extends string,
+  F extends (..._params: unknown[]) => AllAvailableStyles,
+  R extends {
     [key in keyof O]: O[key];
-  }
-) => {
-  let results = stylesParam(Registry.getTheme(isWeb));
-  const foo = new Proxy(
-    Object.entries(results).reduce<{
-      [key in keyof O]: CrossedMethods<O[key]>;
-    }>((acc, [keyStyle, styleOfKey]) => {
-      (acc as any)[keyStyle] = createMethods(styleOfKey);
-      return acc;
-    }, {} as any),
-    {
-      get(cible, prop) {
-        return createMethods((results as any)[prop]);
-      },
-    }
-  );
-
-  !isWeb &&
-    Registry.subscribe(() => {
-      results = stylesParam(Registry.getTheme(isWeb));
-    });
-
-  return foo;
+  },
+>(
+  stylesParam: (_theme: Themes[keyof Themes]) => R
+): {
+  [key in keyof R]: R[key] extends (..._p: infer P) => any
+    ? (..._p: P) => CrossedStyle
+    : CrossedStyle;
+} => {
+  return (
+    typeof stylesParam === 'function'
+      ? stylesParam(Registry.getTheme(isWeb))
+      : stylesParam
+  ) as any;
 };

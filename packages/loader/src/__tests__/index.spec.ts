@@ -6,94 +6,55 @@
  */
 
 import { Loader } from '../index';
-import { getAst } from './getAst';
 import { Registry } from '@crossed/styled';
 
 Registry.setThemes({ dark: {} }).setThemeName('dark' as unknown as never);
 
 jest.mock('esbuild', () => {});
 
-describe('@crossed/loader', () => {
-  test('simple', () => {
-    const loader = new Loader();
-
-    loader.parse(
-      getAst(`{
-        base: {
-          marginTop: 4,
-          width: 50,
-          backgroundColor: "white"
-        }
-    }`)
-    );
-    expect(loader.getCSS()).toEqual(
-      `.dark {  }
+const value = `{
+  base: {
+    base:{
+      marginTop: 4,
+      width: 50,
+      backgroundColor: "white"
+      }
+    }
+}`;
+const rnwResult =
+  '{"base":{"$$$css":true,"marginTop":"margin-top-[4px]","width":"width-[50px]","backgroundColor":"background-color-[white]"},}';
+const cssGnerated = `.dark {  }
 .margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
-    );
-  });
+.background-color-\\[white\\] { background-color:white; }`;
 
+describe('@crossed/loader', () => {
   test('arrow function no explicit return', () => {
     const loader = new Loader();
 
-    loader.parse(
-      getAst(`() => ({
-        base: {
-          marginTop: 4,
-          width: 50,
-          backgroundColor: "white"
-        }
-    })`)
-    );
-    expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.margin-top-\\[4px\\] { margin-top:4px; }
-.width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
-    );
+    expect(loader.loader(`() => (${value})`)).toEqual(rnwResult);
+    expect(loader.getCSS()).toEqual(cssGnerated);
   });
+
   test('arrow function explicit return', () => {
     const loader = new Loader();
 
-    loader.parse(
-      getAst(`() => {
-        return {
-          base: {
-            marginTop: 4,
-            width: 50,
-            backgroundColor: "white"
-          }
-        }
-    }`)
-    );
-    expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.margin-top-\\[4px\\] { margin-top:4px; }
-.width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
-    );
+    expect(
+      loader.loader(`() => {
+          return ${value}
+      }`)
+    ).toEqual(rnwResult);
+    expect(loader.getCSS()).toEqual(cssGnerated);
   });
 
   test('Named function explicit return', () => {
     const loader = new Loader();
 
-    loader.parse(
-      getAst(`function Bar() {
-        return {
-          base: {
-            marginTop: 4,
-            width: 50,
-            backgroundColor: "white"
-          }
-        }
-    }`)
-    );
-    expect(loader.getCSS()).toEqual(
-      `.dark {  }
-.margin-top-\\[4px\\] { margin-top:4px; }
-.width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
-    );
+    expect(
+      loader.loader(`function Bar() {
+          return ${value}
+      }`)
+    ).toEqual(rnwResult);
+    expect(loader.getCSS()).toEqual(cssGnerated);
   });
 });

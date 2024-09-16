@@ -15,7 +15,7 @@ import {
   Box,
   ButtonIcon,
 } from '@crossed/ui';
-import { createStyles } from '@crossed/styled';
+import { createStyles, rnw } from '@crossed/styled';
 import { SectionList } from 'react-native';
 import { Github } from '@crossed/unicons';
 
@@ -29,12 +29,14 @@ const styles = createStyles(() => ({
     },
   },
   end: { base: { alignSelt: 'flex-end', flexDirection: 'row' } },
+  itemSeparator: { base: { height: 5 } },
+  sectionSeparator: { base: { height: 5 } },
 }));
 
 const states = [
   { title: 'Default', props: {} },
-  { title: 'Hover', props: { hover: true } },
-  { title: 'Active', props: { active: true } },
+  // { title: 'Hover', props: { hover: true } },
+  // { title: 'Active', props: { active: true } },
   { title: 'Disabled', props: { disabled: true } },
   { title: 'Loading', props: { loading: true } },
   { title: 'Error', props: { error: true } },
@@ -50,22 +52,22 @@ const variantList = [
 export default function TabOneScreen() {
   return (
     <SectionList
-      contentContainerStyle={styles.scrollview.rnw().style}
+      contentContainerStyle={rnw(styles.scrollview).style}
       sections={variantList}
       ListHeaderComponent={
         <Button>
           <ButtonText>Button</ButtonText>
         </Button>
       }
-      ItemSeparatorComponent={() => <YBox style={{ height: 5 }} />}
-      SectionSeparatorComponent={() => <YBox style={{ height: 10 }} />}
+      ItemSeparatorComponent={() => <YBox style={styles.itemSeparator} />}
+      SectionSeparatorComponent={() => <YBox style={styles.sectionSeparator} />}
       renderItem={({
         item: { title, props },
         section: { title: titleVariant, props: propsVariant },
       }) => (
-        <XBox {...styles.between.rnw()} key={`${titleVariant}${title}`}>
-          <Text weight="semibold">{title}</Text>
-          <Box {...styles.end.rnw()} space="sm">
+        <XBox style={styles.between} key={`${titleVariant}${title}`}>
+          <Text weight="lg">{title}</Text>
+          <Box style={styles.end} space="sm">
             <Button {...props} {...propsVariant}>
               <ButtonText>Button</ButtonText>
             </Button>
@@ -80,37 +82,5 @@ export default function TabOneScreen() {
       )}
       renderSectionHeader={({ section: { title } }) => <H2>{title}</H2>}
     />
-    // <ScrollView contentContainerStyle={styles.scrollview.rnw().style}>
-    //   <Button>
-    //     <ButtonText>Button</ButtonText>
-    //   </Button>
-    //   {variantList.map(({ title: titleVariant, props: propsVariant }) => {
-    //     return (
-    //       <YBox space="lg" key={titleVariant}>
-    //         <H2>{titleVariant}</H2>
-    //         {states.map(({ title, props }) => {
-    //           return (
-    //             <XBox {...styles.between.rnw()} key={`${titleVariant}${title}`}>
-    //               <Text weight="semibold" size="lg">
-    //                 {title}
-    //               </Text>
-    //               <Box {...styles.end.rnw()} space="sm">
-    //                 <Button {...props} {...propsVariant}>
-    //                   <ButtonText>Button</ButtonText>
-    //                 </Button>
-    //                 <Button {...props} {...propsVariant}>
-    //                   <ButtonIcon>
-    //                     <Github />
-    //                   </ButtonIcon>
-    //                   <ButtonText>Button</ButtonText>
-    //                 </Button>
-    //               </Box>
-    //             </XBox>
-    //           );
-    //         })}
-    //       </YBox>
-    //     );
-    //   })}
-    // </ScrollView>
   );
 }

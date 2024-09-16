@@ -7,13 +7,13 @@
 
 'use client';
 import '@/style.config';
-import { H1, YBox, Text } from '@crossed/ui';
+import { H1, YBox, Text, fontColorStyles } from '@crossed/ui';
 
 export default function PluginsPage() {
   return (
     <YBox space="md">
       <H1>Web</H1>
-      <Text color="info">{'// comming soon'}</Text>
+      <Text style={fontColorStyles.info}>{'// comming soon'}</Text>
     </YBox>
   );
 }

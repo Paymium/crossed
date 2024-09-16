@@ -8,8 +8,8 @@
 'use client';
 import { withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
-import { composeStyles, createStyles } from '@crossed/styled';
-import { createContext, useContext, type ReactNode } from 'react';
+import { composeStyles, createStyles, useTheme } from '@crossed/styled';
+import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
 import { Box } from '../layout/Box';
 import { YBox, type YBoxProps } from '../layout/YBox';
@@ -154,9 +154,14 @@ const Container = ({
 
 const Icon = () => {
   const { status } = useContext(toastContext);
-  const { color } = toastStyles.icon.style({
-    variants: { status },
-  }).style;
+  const {
+    components: { Banner },
+  } = useTheme();
+
+  const color = useMemo(() => {
+    return Banner[status].icon;
+  }, [status, Banner]);
+
   const Comp = match(status)
     .with('error', () => XCircle)
     .with('info', () => Info)

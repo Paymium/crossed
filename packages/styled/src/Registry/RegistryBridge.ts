@@ -145,9 +145,9 @@ export class RegistryBridge {
   ) {
     this.log(`Registry apply`);
 
-    const par = params();
+    const par = typeof params === 'object' ? params : params();
 
-    Object.keys(par).forEach((key: keyof T) => {
+    Object.keys(par || {}).forEach((key: keyof T) => {
       const styles = par[key];
       this.plugins.forEach(({ test, apply, name }) => {
         if (typeof key === 'string') {

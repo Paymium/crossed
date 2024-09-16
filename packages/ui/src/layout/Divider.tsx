@@ -8,7 +8,7 @@
 'use client';
 
 import { View, type ViewProps } from 'react-native';
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { createStyles, rnw } from '@crossed/styled';
 
 export const useDivider = createStyles(
   () =>
@@ -19,38 +19,33 @@ export const useDivider = createStyles(
           borderStyle: 'solid',
           // borderColor: t.colors.neutral[500],
         },
-        variants: {
-          direction: {
-            vertical: {
-              base: {
-                borderLeftWidth: 1,
-                height: '100%',
-              },
-            },
-            horizontal: {
-              base: {
-                borderTopWidth: 1,
-                width: '100%',
-              },
-            },
-          },
+      },
+      vertical: {
+        base: {
+          borderLeftWidth: 1,
+          height: '100%',
+        },
+      },
+      horizontal: {
+        base: {
+          borderTopWidth: 1,
+          width: '100%',
         },
       },
     }) as const
 );
 
-type Variant = ExtractForProps<typeof useDivider.divider>;
+export type DividerProps = ViewProps & { direction: 'horizontal' | 'vertical' };
 
-export type DividerProps = ViewProps & Variant['variants'];
-
-export const Divider = ({ direction, ...props }: DividerProps) => {
+export const Divider = ({
+  direction = 'horizontal',
+  ...props
+}: DividerProps) => {
   return (
     <View
       role="separator"
       {...props}
-      {...useDivider.divider.rnw({
-        variants: { direction: direction ?? 'horizontal' },
-      })}
+      {...rnw(useDivider.divider, useDivider[direction])}
     />
   );
 };

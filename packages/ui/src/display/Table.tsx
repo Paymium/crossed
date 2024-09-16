@@ -7,7 +7,7 @@
 
 import type { HTMLProps } from 'react';
 import { Text } from '../typography/Text';
-import { createStyles } from '@crossed/styled';
+import { className, createStyles, type CrossedStyle } from '@crossed/styled';
 
 const useTable = createStyles((t) => ({
   table: {
@@ -46,49 +46,75 @@ const useTable = createStyles((t) => ({
   th: { base: { textAlign: 'left', padding: t.space.xs } },
 }));
 
-export const Table = (props: HTMLProps<HTMLTableElement>) => {
-  return <table {...props} {...useTable.table.className()} />;
+export const Table = ({
+  style,
+  ...props
+}: Omit<HTMLProps<HTMLTableElement>, 'style'> & { style?: CrossedStyle }) => {
+  return <table {...props} {...className(useTable.table, style)} />;
 };
 
-export const THead = (props: HTMLProps<HTMLTableSectionElement>) => {
-  return <thead {...props} {...useTable.thead.className()} />;
+export const THead = ({
+  style,
+  ...props
+}: Omit<HTMLProps<HTMLTableSectionElement>, 'style'> & {
+  style?: CrossedStyle;
+}) => {
+  return <thead {...props} {...className(useTable.thead, style)} />;
 };
 
 export const TBody = ({
   children,
+  style,
   ...props
-}: HTMLProps<HTMLTableSectionElement>) => {
+}: Omit<HTMLProps<HTMLTableSectionElement>, 'style'> & {
+  style?: CrossedStyle;
+}) => {
   const newChild =
     (Array.isArray(children) && children.length > 0) || children ? (
       children
     ) : (
       <Tr>
         <Td>
-          <Text color="warning">-</Text>
+          <Text>-</Text>
         </Td>
         <Td>
-          <Text color="warning">-</Text>
+          <Text>-</Text>
         </Td>
         <Td>
-          <Text color="warning">-</Text>
+          <Text>-</Text>
         </Td>
       </Tr>
     );
   return (
-    <tbody {...props} {...useTable.tbody.className()}>
+    <tbody {...props} {...className(useTable.tbody, style)}>
       {newChild}
     </tbody>
   );
 };
-export const Tr = (props: HTMLProps<HTMLTableRowElement>) => {
-  return <tr {...props} {...useTable.tr.className()} />;
+export const Tr = ({
+  style,
+  ...props
+}: Omit<HTMLProps<HTMLTableRowElement>, 'style'> & {
+  style?: CrossedStyle;
+}) => {
+  return <tr {...props} {...className(useTable.tr, style)} />;
 };
 
 (Tr as any).id = 'Table.Tr';
 
-export const Td = (props: HTMLProps<HTMLTableCellElement>) => {
-  return <td {...props} {...useTable.td.className()} />;
+export const Td = ({
+  style,
+  ...props
+}: Omit<HTMLProps<HTMLTableCellElement>, 'style'> & {
+  style?: CrossedStyle;
+}) => {
+  return <td {...props} {...className(useTable.td, style)} />;
 };
-export const Th = (props: HTMLProps<HTMLTableCellElement>) => {
-  return <th {...props} {...useTable.th.className()} />;
+export const Th = ({
+  style,
+  ...props
+}: Omit<HTMLProps<HTMLTableCellElement>, 'style'> & {
+  style?: CrossedStyle;
+}) => {
+  return <th {...props} {...className(useTable.th, style)} />;
 };

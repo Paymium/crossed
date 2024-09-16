@@ -7,7 +7,7 @@
 
 import { forwardRef, Fragment } from 'react';
 import { useSheetContext } from './context';
-import { createStyles, isWeb } from '@crossed/styled';
+import { createStyles, isWeb, className } from '@crossed/styled';
 import { Portal } from '@gorhom/portal';
 import Animated from 'react-native-reanimated';
 import { sheetContext } from './context';
@@ -48,7 +48,7 @@ export const Frame = forwardRef<Animated.ScrollView, FrameProps>(
     return (
       <Portal>
         <sheetContext.Provider value={sheetContextValue}>
-          <RS enabled={open} {...styles.maxHeight.style()}>
+          <RS enabled={open} {...className(styles.maxHeight)}>
             <OverlayLogical {...overlayProps} />
             <ScrollView ref={ref} padded={padded} {...props}>
               {children}

@@ -10,16 +10,18 @@ import { createList } from '@crossed/primitive';
 import {
   composeStyles,
   createStyles,
+  pressable,
   withReactive,
-  type ExtractForProps,
+  type CrossedStyle,
 } from '@crossed/styled';
 import { Text, type TextProps } from '../typography/Text';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
-import { Button, useButton, type ButtonProps } from '../forms/Button';
+import { Button, type ButtonProps } from '../forms/Button';
 import { type GetProps, createScope } from '@crossed/core';
 import { forwardRef, memo } from 'react';
 import { Pressable, View, type PressableProps } from 'react-native';
+import { buttonStyles } from '../forms/Button/styles';
 
 const useMenuList = createStyles((t) => ({
   root: {
@@ -78,35 +80,24 @@ const MenuRoot = forwardRef(
 type MenuRootProps = YBoxProps & { padded?: boolean };
 
 const Divider = D;
-const Item = withReactive(
-  forwardRef<
-    View,
-    PressableProps & Omit<ExtractForProps<typeof useMenuList.item>, 'variants'>
-  >(({ active, focus, hover, ...props }, ref) => {
-    return (
-      <Pressable
-        {...props}
-        style={({ pressed }) =>
-          useMenuList.item.rnw({
-            active: active ?? pressed,
-            focus,
-            hover,
-            style:
-              typeof props.style === 'function'
-                ? props.style({ pressed })
-                : (props.style as any),
-          }).style
-        }
-        ref={ref}
-      />
-    );
-  })
-);
+
+export type MenuItemProps = Omit<PressableProps, 'style'> & {
+  style?: CrossedStyle;
+};
+const Item = withReactive<View, MenuItemProps>((props, ref) => {
+  return (
+    <Pressable
+      {...props}
+      {...pressable(useMenuList.item, props.style)}
+      ref={ref}
+    />
+  );
+});
 
 const Label = forwardRef((props: TextProps & ButtonVariantProps, ref: any) => {
   // const variants = useVariantContext();
 
-  return <Text {...props} style={useButton.root} ref={ref} />;
+  return <Text {...props} style={buttonStyles.root} ref={ref} />;
 });
 const Title = (props: TextProps) => (
   <Text {...props} style={useMenuList.title} />
@@ -123,7 +114,7 @@ const MenuList = createList({
         // color={props.color}
         // size={props.size}
         variant={props.variant || undefined}
-        active={props.active || undefined}
+        // active={props.active || undefined}
       >
         <MenuRoot {...props} ref={ref} />
       </ProviderVariant>
@@ -145,6 +136,5 @@ const {
 } = MenuList;
 
 export type MenuListProps = GetProps<typeof MenuList>;
-export type MenuItemProps = GetProps<typeof MenuItem>;
 
 export { MenuList, MenuDivider, MenuItem, MenuLabel, MenuTitle, MenuSubTitle };

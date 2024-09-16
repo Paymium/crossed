@@ -23,10 +23,10 @@ export interface CrossedPseudoClassPlugin {
   ':disabled'?: CrossedstyleValues;
 }
 
-export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
+export const PseudoClassPlugin = {
   name: 'PseudoClassPlugin',
   test: [':hover', ':active', ':focus', ':focus-visible', ':disabled'],
-  apply: ({ styles, key: ctxKey, addClassname, props, isWeb }) => {
+  apply: ({ styles, key: ctxKey, addClassname, isWeb }) => {
     const pseudoClass = ctxKey.replace(/:/i, '');
     Object.entries(styles).forEach(([key, value]) => {
       const valueNormalized = normalizeUnitPixel(key, value, isWeb);
@@ -44,19 +44,19 @@ export const PseudoClassPlugin: Plugin<CrossedPseudoClassPlugin> = {
           },
         });
       }
-      if (props?.[pseudoClass] || !props) {
-        addClassname({
-          body: {
-            [`${convertKeyToCss(key)}-[${
-              typeof valueNormalized === 'number'
-                ? valueNormalized
-                : valueNormalized?.replace(/ /g, '-')
-            }]`]: {
-              [key]: valueNormalized,
-            },
-          },
-        });
-      }
+      // if (props?.[pseudoClass] || !props) {
+      //   addClassname({
+      //     body: {
+      //       [`${convertKeyToCss(key)}-[${
+      //         typeof valueNormalized === 'number'
+      //           ? valueNormalized
+      //           : valueNormalized?.replace(/ /g, '-')
+      //       }]`]: {
+      //         [key]: valueNormalized,
+      //       },
+      //     },
+      //   });
+      // }
     }, {});
   },
-};
+} satisfies Plugin<CrossedPseudoClassPlugin>;

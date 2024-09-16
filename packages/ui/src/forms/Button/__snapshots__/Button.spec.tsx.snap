@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checks if the form is valid: active 1`] = `
+<button
+  aria-labelledby=":r0:"
+  class="css-view-175oi2r r-cursor-1loqt21 r-touchAction-1otgn73"
+  id=":r0:"
+  role="button"
+  style="display: flex; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; flex-direction: row; align-items: center; justify-content: center; gap: 8px; height: 44px;"
+  tabindex="0"
+  type="button"
+>
+  <div
+    class="css-text-146c3p1"
+    dir="auto"
+    id=":r0:"
+    style="font-size: 16px; line-height: 20px; font-weight: bold; font-family: var(--font-family);"
+  >
+    Button
+  </div>
+</button>
+`;
+
+exports[`Checks if the form is valid: focus 1`] = `
+<button
+  aria-labelledby=":r0:"
+  class="css-view-175oi2r r-cursor-1loqt21 r-touchAction-1otgn73"
+  id=":r0:"
+  role="button"
+  style="display: flex; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; flex-direction: row; align-items: center; justify-content: center; gap: 8px; height: 44px;"
+  tabindex="0"
+  type="button"
+>
+  <div
+    class="css-text-146c3p1"
+    dir="auto"
+    id=":r0:"
+    style="font-size: 16px; line-height: 20px; font-weight: bold; font-family: var(--font-family);"
+  >
+    Button
+  </div>
+</button>
+`;
+
+exports[`Checks if the form is valid: focus 2`] = `
+<button
+  aria-labelledby=":r0:"
+  class="css-view-175oi2r r-cursor-1loqt21 r-touchAction-1otgn73"
+  id=":r0:"
+  role="button"
+  style="display: flex; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; flex-direction: row; align-items: center; justify-content: center; gap: 8px; height: 44px;"
+  tabindex="0"
+  type="button"
+>
+  <div
+    class="css-text-146c3p1"
+    dir="auto"
+    id=":r0:"
+    style="font-size: 16px; line-height: 20px; font-weight: bold; font-family: var(--font-family);"
+  >
+    Button
+  </div>
+</button>
+`;
+
+exports[`Checks if the form is valid: hover 1`] = `
+<button
+  aria-labelledby=":r0:"
+  class="css-view-175oi2r r-cursor-1loqt21 r-touchAction-1otgn73"
+  id=":r0:"
+  role="button"
+  style="display: flex; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; flex-direction: row; align-items: center; justify-content: center; gap: 8px; height: 44px;"
+  tabindex="0"
+  type="button"
+>
+  <div
+    class="css-text-146c3p1"
+    dir="auto"
+    id=":r0:"
+    style="font-size: 16px; line-height: 20px; font-weight: bold; font-family: var(--font-family);"
+  >
+    Button
+  </div>
+</button>
+`;
+
+exports[`Checks if the form is valid: simple 1`] = `
+<button
+  aria-labelledby=":r0:"
+  class="css-view-175oi2r r-cursor-1loqt21 r-touchAction-1otgn73"
+  id=":r0:"
+  role="button"
+  style="display: flex; border-top-left-radius: 7px; border-top-right-radius: 7px; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; flex-direction: row; align-items: center; justify-content: center; gap: 8px; height: 44px;"
+  tabindex="0"
+  type="button"
+>
+  <div
+    class="css-text-146c3p1"
+    dir="auto"
+    id=":r0:"
+    style="font-size: 16px; line-height: 20px; font-weight: bold; font-family: var(--font-family);"
+  >
+    Button
+  </div>
+</button>
+`;

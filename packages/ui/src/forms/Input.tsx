@@ -14,9 +14,16 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { form, type FormInput } from '../styles/form';
+import { form } from '../styles/form';
 import { gapStyles } from '../styles/gap';
-import { useInteraction, createStyles, composeStyles } from '@crossed/styled';
+import {
+  useInteraction,
+  createStyles,
+  composeStyles,
+  rnw,
+  useTheme,
+  type AllAvailableStyles,
+} from '@crossed/styled';
 import { FormControl, FormField, FormLabel } from './Form';
 import { CloseButton } from '../other/CloseButton';
 import { useUncontrolled } from '@crossed/core';
@@ -26,19 +33,19 @@ import { YBox } from '../layout/YBox';
 
 const styles = createStyles(() => ({
   close: { base: { padding: 0 } },
+  dynamic: (e: AllAvailableStyles) => e,
 }));
 
-export type InputProps = Omit<TextInputProps, 'editable' | 'onChange'> &
-  Omit<FormInput, 'variants'> &
-  Pick<FormInput['variants'], 'error'> & {
-    label?: string;
-    clearable?: boolean;
-    elementLeft?: ReactNode;
-    elementRight?: ReactNode;
-    error?: string;
-    description?: string;
-    extra?: string;
-  };
+export type InputProps = Omit<TextInputProps, 'editable' | 'onChange'> & {
+  label?: string;
+  clearable?: boolean;
+  elementLeft?: ReactNode;
+  elementRight?: ReactNode;
+  error?: string;
+  description?: string;
+  extra?: string;
+  disabled?: boolean;
+};
 
 export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
   const {
@@ -62,8 +69,9 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
   });
   const [elementLeftWidth, setElementLeftWidth] = useState(0);
   const [elementRightWidth, setElementRightWidth] = useState(0);
-  const { state, props: propsInteraction } = useInteraction(allProps);
-  const { color } = form.placeholder.style().style;
+  const { props: propsInteraction } = useInteraction(allProps);
+  const { components } = useTheme();
+  const color = components.Input.primary.default.placeholder;
 
   const onClear = useCallback(() => {
     setValue('');
@@ -114,17 +122,15 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
               focusable={!disabled}
               {...props}
               {...propsInteraction}
-              {...form.input.rnw({
-                ...props,
-                ...state,
-                style: [
-                  props.style as any,
-                  elementLeftWidth && { paddingLeft: elementLeftWidth },
-                  elementRightWidth && { paddingRight: elementRightWidth },
-                ],
-                disabled,
-                variants: { error: !!error },
-              })}
+              {...rnw(
+                form.input,
+                error && form.inputError,
+                disabled && form.inputDisabled,
+                elementLeftWidth &&
+                  styles.dynamic({ paddingLeft: elementLeftWidth }),
+                elementRightWidth &&
+                  styles.dynamic({ paddingRight: elementRightWidth })
+              )}
               value={value}
               onChangeText={setValue}
             />
@@ -147,7 +153,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
             )}
           </XBox>
         </XBox>
-        {error && <Text color="error">{error.toString()}</Text>}
+        {error && <Text>{error.toString()}</Text>}
       </YBox>
     </FormField>
   );

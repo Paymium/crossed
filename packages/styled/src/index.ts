@@ -12,4 +12,7 @@ export { useTheme } from './useTheme';
 export { withReactive } from './withReactive';
 export { isWeb } from './isWeb';
 export { composeStyles } from './composeStyles';
+export { rnw } from './rnw';
+export { pressable } from './pressable';
+export { className } from './classNames';
 export * from './plugins';

@@ -7,7 +7,7 @@
 
 import { Sun, Moon } from '@crossed/unicons';
 import { Registry, createStyles } from '@crossed/styled';
-import { Button, ButtonIcon } from '@crossed/ui';
+import { Button } from '@crossed/ui';
 import { Stack } from 'expo-router';
 import { useCallback } from 'react';
 import { Appearance } from 'react-native';
@@ -15,7 +15,7 @@ import { useInteraction } from '@crossed/styled/plugins';
 
 const styles = createStyles((t) => ({
   buttonTheme: {
-    ':active': { backgroundColor: t.colors.neutral.hover },
+    base: { backgroundColor: t.colors.background.hover },
   },
 }));
 
@@ -30,6 +30,7 @@ const ChangeTheme = () => {
     Registry.setThemeName(theme);
     Appearance.setColorScheme(theme);
   }, []);
+
   return (
     <Button
       onPress={onPress}
@@ -38,11 +39,11 @@ const ChangeTheme = () => {
       accessibilityLabel={`Change to ${
         Registry.themeName === 'light' ? 'dark' : 'light'
       } theme`}
-      {...styles.buttonTheme.rnw({ active: state.active })}
+      style={state.active && styles.buttonTheme}
     >
-      <ButtonIcon>
+      <Button.Icon>
         {Registry.themeName === 'light' ? <Moon /> : <Sun />}
-      </ButtonIcon>
+      </Button.Icon>
     </Button>
   );
 };
