@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.21
+
+### Patch Changes
+
+- 98b55c6: type
+
 ## 0.14.0-beta.20
 
 ### Patch Changes

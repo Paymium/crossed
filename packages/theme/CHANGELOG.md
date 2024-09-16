@@ -1,5 +1,12 @@
 # @crossed/theme
 
+## 2.0.0-beta.18
+
+### Patch Changes
+
+- Updated dependencies [98b55c6]
+  - @crossed/styled@0.14.0-beta.21
+
 ## 2.0.0-beta.17
 
 ### Patch Changes
