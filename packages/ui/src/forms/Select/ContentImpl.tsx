@@ -11,7 +11,7 @@ import { SelectProvider, useSelectProvider } from './context';
 import { Portal } from '@gorhom/portal';
 import { Focus } from './Focus';
 import { useCallback } from 'react';
-import { Adapt } from '../../other/Adapt';
+import { Responsive } from '../../other/Adapt';
 
 export const ContentImpl = (props) => {
   const all = useSelectProvider();
@@ -30,9 +30,9 @@ export const ContentImpl = (props) => {
           onActivation={() => onFocus?.({} as any)}
           onDeactivation={() => onBlur?.({} as any)}
         >
-          <Adapt fallback={<ContentNative {...props} />}>
+          <Responsive media="md" fallback={<ContentNative {...props} />}>
             <ContentWeb {...props} />
-          </Adapt>
+          </Responsive>
         </Focus>
       </SelectProvider>
     </Portal>
