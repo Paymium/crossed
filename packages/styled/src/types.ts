@@ -29,22 +29,17 @@ export type CrossedstyleValues = {
   [propName in AllAvailableKeys]?: AllAvailableStyles[propName];
 };
 
-interface Variants
-  extends Record<string, Record<string, Omit<StyleSheet, 'variants'>>> {}
-
 export interface StyleSheet
   extends CrossedBasePlugin,
     CrossedWebPlugin,
     CrossedPseudoClassPlugin,
-    CrossedMediaQueriesPlugin {
-  variants?: Variants;
-}
+    CrossedMediaQueriesPlugin {}
 
 export type ExtractForProps<S extends CrossedMethods<any, any>> =
-  S extends CrossedMethods<infer D, any>
-    ? CrossedPropsExtended<D>
+  S extends CrossedMethods<any, any>
+    ? CrossedPropsExtended
     : S extends { original: any }
-      ? CrossedPropsExtended<S['original']>
+      ? CrossedPropsExtended
       : never;
 
 export type PluginContext<S> = {
@@ -89,12 +84,6 @@ export type PluginContext<S> = {
   }) => void;
 };
 
-type HasBooleanVariants<T> = T extends 'true'
-  ? true
-  : T extends 'false'
-    ? true
-    : false;
-
 export interface Themes {}
 
 export type BaseCrossedPropsExtended = {
@@ -107,22 +96,9 @@ export type BaseCrossedPropsExtended = {
   'disabled'?: true | false;
 };
 
-export interface CrossedPropsExtended<
-  S extends StyleSheet,
-  V = S['variants'],
-  MV = V extends object ? V : never,
-> extends BaseCrossedPropsExtended {
-  variants?: {
-    [key in keyof MV]?: HasBooleanVariants<keyof MV[key]> extends false
-      ? keyof MV[key]
-      : keyof MV[key] | boolean;
-  };
-}
+export interface CrossedPropsExtended extends BaseCrossedPropsExtended {}
 
-export type CrossedMethods<
-  S extends StyleSheet,
-  P = CrossedPropsExtended<S>,
-> = {
+export type CrossedMethods<S extends StyleSheet, P = CrossedPropsExtended> = {
   original: S;
   style: (_p?: P) => { style: Record<string, string> };
   className: (_p?: P) => { className: string };

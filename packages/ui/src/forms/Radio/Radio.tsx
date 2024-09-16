@@ -6,21 +6,13 @@
  */
 
 import { useUncontrolled } from '@crossed/core';
-import { createStyles } from '@crossed/styled';
-import { useInteraction } from '@crossed/styled';
+import { composeStyles, createStyles } from '@crossed/styled';
 import { useCallback, useTransition, type PropsWithChildren } from 'react';
 import { Pressable, View } from 'react-native';
 
-const radioStyles = createStyles((t) => ({
-  pressable: {
+const rootStyles = createStyles((t) => ({
+  default: {
     base: {
-      alignItems: 'center',
-      display: 'flex',
-      flexDirection: 'row',
-    },
-  },
-  root: {
-    'base': {
       width: 16,
       height: 16,
       borderRadius: 44,
@@ -31,26 +23,31 @@ const radioStyles = createStyles((t) => ({
       justifyContent: 'center',
       backgroundColor: t.colors.background.secondary,
     },
-    ':hover': { borderColor: t.colors.border.tertiary },
-    ':active': {
-      shadowColor: 'black',
-      shadowOpacity: 0.1,
-      elevation: 5,
-    },
-    ':disabled': {
+  },
+  hover: { base: { borderColor: t.colors.border.tertiary } },
+  active: { base: { shadowColor: 'black', shadowOpacity: 0.1, elevation: 5 } },
+  disabled: {
+    base: {
       backgroundColor: t.colors.primary[1],
       borderColor: t.colors.primary[1],
     },
-    'variants': {
-      checked: {
-        true: {
-          'base': { borderColor: t.colors.border.primary },
-          ':active': { borderColor: t.colors.border.primary },
-        },
-      },
+  },
+  checked: { base: { borderColor: t.colors.border.primary } },
+  checkedActive: { base: { borderColor: t.colors.border.primary } },
+}));
+
+const pressableStyles = createStyles(() => ({
+  pressable: {
+    base: {
+      alignItems: 'center',
+      display: 'flex',
+      flexDirection: 'row',
     },
   },
-  thumb: {
+}));
+
+const thumbStyles = createStyles((t) => ({
+  default: {
     base: {
       width: 10,
       height: 10,
@@ -58,20 +55,20 @@ const radioStyles = createStyles((t) => ({
       overflow: 'hidden',
       backgroundColor: 'white',
     },
-    variants: {
-      checked: {
-        true: {
-          'base': { backgroundColor: t.colors.background.primary },
-          ':active': { backgroundColor: t.colors.background.primary },
-        },
-      },
-    },
+  },
+  checked: {
+    base: { backgroundColor: t.colors.background.primary },
+  },
+  checkedActive: {
+    base: { backgroundColor: t.colors.background.primary },
   },
 }));
 
-export const Radio = ({ children }: PropsWithChildren) => {
+export const Radio = ({
+  children,
+  disabled,
+}: PropsWithChildren<{ disabled?: boolean }>) => {
   const [checked, setChecked] = useUncontrolled({ defaultValue: false });
-  const { state, props } = useInteraction();
   const [, setTransition] = useTransition();
 
   const handlePress = useCallback(() => {
@@ -83,13 +80,44 @@ export const Radio = ({ children }: PropsWithChildren) => {
   return (
     <Pressable
       onPress={handlePress}
-      {...props}
-      {...radioStyles.pressable.rnw()}
+      style={({
+        pressed,
+        hovered,
+        focused,
+      }: {
+        pressed: boolean;
+        hovered?: boolean;
+        focused?: boolean;
+      }) =>
+        composeStyles(pressableStyles.pressable).rnw({
+          active: pressed,
+          hover: hovered,
+          focus: focused,
+        }).style
+      }
     >
-      <View {...radioStyles.root.rnw({ ...state, variants: { checked } })}>
-        <View {...radioStyles.thumb.rnw({ ...state, variants: { checked } })} />
-      </View>
-      {children}
+      {({ hovered, pressed }: { hovered?: boolean; pressed: boolean }) => (
+        <>
+          <View
+            {...composeStyles(
+              rootStyles.default,
+              hovered && rootStyles.hover,
+              pressed && rootStyles.active,
+              checked && rootStyles.checked,
+              checked && pressed && rootStyles.checkedActive,
+              disabled && rootStyles.disabled
+            ).rnw()}
+          >
+            <View
+              {...composeStyles(
+                thumbStyles.default,
+                checked && thumbStyles.checked
+              ).rnw()}
+            />
+          </View>
+          {children}
+        </>
+      )}
     </Pressable>
   );
 };

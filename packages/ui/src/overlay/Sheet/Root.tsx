@@ -54,10 +54,14 @@ export const Root = forwardRef<RootRef, SheetProps>(
       height.value = 0;
     }, [setOpen, height]);
 
-    useImperativeHandle(ref, () => ({
-      close: onClose,
-      open: () => setOpen(true),
-    }), [onClose, setOpen]);
+    useImperativeHandle(
+      ref,
+      () => ({
+        close: onClose,
+        open: () => setOpen(true),
+      }),
+      [onClose, setOpen]
+    );
 
     return (
       <sheetContext.Provider

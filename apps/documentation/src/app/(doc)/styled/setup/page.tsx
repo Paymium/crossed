@@ -48,7 +48,7 @@ export default function Home() {
           <PlatformTabs.Panels>
             <XBox space="xs">
               <Select value={platform} onChange={(e) => setPlatform(e)}>
-                <Select.Trigger {...styles.selectTrigger.rnw()}>
+                <Select.Trigger style={styles.selectTrigger}>
                   <Select.Value />
                 </Select.Trigger>
                 <Select.Content defaultValue="web">

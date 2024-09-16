@@ -41,15 +41,6 @@ const accordionStyles = createStyles((t) => ({
     'web': { base: { transition: 'all 170ms' } },
   },
   panel: {
-    variants: {
-      show: {
-        false: {
-          web: {
-            base: { height: 0 },
-          },
-        },
-      },
-    },
     web: {
       base: { overflow: 'hidden', transition: 'height 170ms ease-out' },
     },
@@ -114,9 +105,7 @@ const AccordionPanel: AccordionPanelComponent = forwardRef((props, ref) => {
       ref={ref}
       hide={false}
       style={[
-        accordionStyles.panel.rnw({
-          variants: { show: false },
-        }).style,
+        accordionStyles.panel.rnw().style,
         values.includes(value) && { height: refLocal.current },
       ]}
     >

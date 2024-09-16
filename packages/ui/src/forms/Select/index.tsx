@@ -68,12 +68,7 @@ const findChild = (
 
 type SelectProps = PropsWithChildren<
   UseUncontrolledInput<string> &
-    Partial<
-      Pick<
-        ButtonProps,
-        'variant' | 'onFocus' | 'onBlur' | 'id' | 'hover' | 'focus'
-      >
-    > & {
+    Partial<Pick<ButtonProps, 'variant' | 'onFocus' | 'onBlur' | 'id'>> & {
       adapt?: boolean;
     } & Partial<
       Pick<Context, 'label' | 'description' | 'extra' | 'clearable' | 'error'>
@@ -92,8 +87,8 @@ const SelectRoot = memo(
     onFocus,
     onBlur,
     id,
-    hover,
-    focus,
+    // hover,
+    // focus,
     label,
     description,
     extra,
@@ -131,8 +126,8 @@ const SelectRoot = memo(
         onFocus={onFocus}
         onBlur={onBlur}
         id={id}
-        hover={hover}
-        focus={focus}
+        // hover={hover}
+        // focus={focus}
         refs={refs}
         floatingStyles={floatingStyles}
         label={label}
@@ -159,8 +154,8 @@ const Trigger = withStaticProperties(
       open,
       triggerLayout,
       sheet,
-      hover,
-      focus,
+      // hover,
+      // focus,
       id,
       onBlur,
       onFocus,
@@ -198,10 +193,10 @@ const Trigger = withStaticProperties(
     const showClear = clearable && value;
 
     const states = {
-      hover,
-      'focus': open || focus,
-      'focus-visible': open || focus,
-      'active': props.active,
+      // hover,
+      'focus': open,
+      'focus-visible': open,
+      // 'active': props.active,
     };
 
     return (
@@ -231,11 +226,14 @@ const Trigger = withStaticProperties(
               onFocus={composeEventHandlers(props.onFocus, onFocus)}
               onBlur={composeEventHandlers(props.onBlur, onBlur)}
               style={({ pressed }) => {
-                return composeStyles(form.input, useSelect.trigger).rnw({
-                  ...props,
-                  ...states,
-                  active: props.active ?? pressed,
-                  variants: { error: !!error },
+                return composeStyles(
+                  form.input,
+                  error && form.inputError,
+                  useSelect.trigger,
+                  props.style
+                ).rnw({
+                  // ...states,
+                  active: pressed,
                 }).style;
               }}
               onPress={composeEventHandlers(props.onPress, onPress)}

@@ -60,7 +60,7 @@ export const alertActionTextStyles = createStyles(
 );
 
 export const alertStyles = createStyles(
-  ({ components: { Alert }, space }) =>
+  ({ space }) =>
     ({
       containerIcon: {
         base: { alignSelf: 'center' },
@@ -85,35 +85,34 @@ export const alertStyles = createStyles(
           },
         },
       },
-      action: {
-        base: { alignSelf: 'center' },
-        media: { md: { alignSelf: 'baseline' } },
-        web: {
-          'base': { boxSizing: 'border-box' },
-          ':focus': {
-            outlineWidth: '2px',
-            outlineOffset: '2px',
-            outlineStyle: 'solid',
-          },
-        },
-        variants: {
-          status: {
-            error: { web: { ':focus': { outlineColor: Alert.error.text } } },
-            success: {
-              web: { ':focus': { outlineColor: Alert.success.text } },
-            },
-            warning: {
-              web: { ':focus': { outlineColor: Alert.warning.text } },
-            },
-            info: {
-              web: { ':focus': { outlineColor: Alert.info.text } },
-            },
-          },
-        },
-      },
       group: { base: { flex: 1, flexShrink: 1 } },
     }) as const
 );
+
+const actionStyles = createStyles(({ components: { Alert } }) => ({
+  base: {
+    base: { alignSelf: 'center' },
+    media: { md: { alignSelf: 'baseline' } },
+    web: {
+      'base': { boxSizing: 'border-box' },
+      ':focus': {
+        outlineWidth: '2px',
+        outlineOffset: '2px',
+        outlineStyle: 'solid',
+      },
+    },
+  },
+  error: { web: { ':focus': { outlineColor: Alert.error.text } } },
+  success: {
+    web: { ':focus': { outlineColor: Alert.success.text } },
+  },
+  warning: {
+    web: { ':focus': { outlineColor: Alert.warning.text } },
+  },
+  info: {
+    web: { ':focus': { outlineColor: Alert.info.text } },
+  },
+}));
 
 const containerStyles = createStyles(({ components: { Alert } }) => ({
   error: {
@@ -225,7 +224,7 @@ const Action = (props: ButtonProps) => {
       variant="tertiary"
       size={false}
       {...props}
-      {...alertStyles.action.rnw({ ...props, variants: { status } })}
+      style={composeStyles(actionStyles.base, actionStyles[status])}
     />
   );
 };

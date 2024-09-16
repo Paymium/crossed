@@ -6,26 +6,10 @@
  */
 
 import type { LabelComponent } from './types';
-import { styles } from './styles';
+import { composeStyles } from '@crossed/styled';
+import { form } from '../../styles/form';
 
-export const Label: LabelComponent = ({
-  disabled,
-  weight = 'lg',
-  size = 'md',
-  className,
-  style,
-  ...props
-}) => {
-  return (
-    <label
-      {...props}
-      style={style}
-      {...(styles().className({
-        ...props,
-        className,
-        disabled,
-        variants: { size, weight },
-      }) as any)}
-    />
-  );
+export const Label: LabelComponent = (props) => {
+  const { disabled, focus, hover, style, ...other } = props as any;
+  return <label {...other} {...composeStyles(form.label, style).className()} />;
 };

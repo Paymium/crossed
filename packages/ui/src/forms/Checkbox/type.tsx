@@ -12,7 +12,10 @@ export type CheckboxProps = PropsWithChildren<{
   defaultChecked?: boolean;
   onChecked?: (_c: boolean) => void;
 }>;
-export type ImplementationProps = { checked: boolean };
+export type ImplementationProps = {
+  checked: boolean;
+  setChecked: (_c: boolean) => void;
+};
 
 export type CheckboxComponent = ComponentType<CheckboxProps>;
 

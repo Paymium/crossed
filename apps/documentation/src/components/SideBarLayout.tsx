@@ -162,7 +162,7 @@ const Item = ({ href, title, menus }: Nav) => {
       </MenuList.Title>
     </MenuList.Item>
   ) : (
-    <MenuList.Label hover={false} textAlign="right" weight="lg">
+    <MenuList.Label textAlign="right" weight="lg">
       {t(title)}
     </MenuList.Label>
   );

@@ -9,6 +9,12 @@ import { createStyles, type ExtractForProps } from '@crossed/styled';
 
 export const form = createStyles(
   ({ space, font, colors, components: { Input } }) => ({
+    inputError: {
+      base: {
+        borderColor: colors.error.primary,
+        color: colors.error.primary,
+      },
+    },
     input: {
       'base': {
         color: Input.primary.default.text,
@@ -32,16 +38,6 @@ export const form = createStyles(
         backgroundColor: Input.primary.disabled.background,
         borderColor: Input.primary.disabled.border,
         cursor: 'not-allowed',
-      },
-      'variants': {
-        error: {
-          true: {
-            base: {
-              borderColor: colors.error.primary,
-              color: colors.error.primary,
-            },
-          },
-        },
       },
       'web': {
         'base': { boxSizing: 'border-box' },
