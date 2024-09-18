@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.44
+
+### Patch Changes
+
+- f90dc55: export style button
+
 ## 1.0.0-beta.43
 
 ### Patch Changes

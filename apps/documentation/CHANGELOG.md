@@ -1,5 +1,12 @@
 # crossed-docs
 
+## 0.6.0-beta.46
+
+### Patch Changes
+
+- Updated dependencies [f90dc55]
+  - @crossed/ui@1.0.0-beta.44
+
 ## 0.6.0-beta.45
 
 ### Patch Changes
