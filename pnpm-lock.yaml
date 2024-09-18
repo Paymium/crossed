@@ -184,7 +184,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages/styled
       '@crossed/ui':
-        specifier: 1.0.0-beta.44
+        specifier: 1.0.0-beta.45
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: workspace:*

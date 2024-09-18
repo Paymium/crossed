@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.45
+
+### Patch Changes
+
+- 8cc4de7: force build
+
 ## 1.0.0-beta.44
 
 ### Patch Changes
