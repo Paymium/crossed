@@ -8,6 +8,7 @@
 import { Compiler, NormalModule } from 'webpack';
 import { createLogger, apiLog } from '@crossed/log';
 import { Loader } from '@crossed/loader';
+import { mkdirSync, readFileSync, statSync, writeFileSync } from 'fs';
 import VirtualModulesPlugin from 'webpack-virtual-modules';
 import path from 'path';
 
@@ -38,6 +39,15 @@ export default class StylePlugin {
     const css = parseAst.getCSS() || '';
     if (css) {
       virtualModules.writeModule('node_modules/crossed.css', css);
+
+      const pathCss = path.resolve(process.cwd(), '.crossed');
+
+      try {
+        statSync(pathCss);
+      } catch {
+        mkdirSync(pathCss, 0o775);
+      }
+      writeFileSync(path.resolve(pathCss, 'crossed.css'), css);
 
       this.logger.info(
         apiLog({
@@ -142,6 +152,31 @@ export default class StylePlugin {
     compiler.hooks.beforeCompile.tap(pluginName, () => {
       const css = parseAst.getCSS() || '';
       virtualModules.writeModule('node_modules/crossed.css', css);
+
+      const pathCss = path.resolve(process.cwd(), '.crossed');
+
+      try {
+        statSync(pathCss);
+      } catch {
+        mkdirSync(pathCss, 0o775);
+      }
+      try {
+        const css = readFileSync(path.resolve(pathCss, 'crossed.css'), {
+          encoding: 'utf-8',
+        });
+        virtualModules.writeModule('node_modules/crossed.css', css);
+        this.logger.info(
+          apiLog({
+            events: ['css_output_success'],
+          })
+        );
+      } catch (e) {
+        this.logger.error(
+          apiLog({
+            events: ['css_output_error'],
+          })
+        );
+      }
     });
   };
 }
