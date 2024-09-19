@@ -49,6 +49,8 @@ const cache = new Map();
 export class Loader {
   private logger: ReturnType<typeof createLogger>;
 
+  private css: string;
+
   private fileCache: Map<string, string> = new Map();
 
   constructor({
@@ -56,12 +58,15 @@ export class Loader {
     configPath,
     isWatch,
     emit,
+    css,
   }: {
     level?: string;
     configPath?: string;
     isWatch?: boolean;
     emit?: any;
+    css?: string;
   } = {}) {
+    this.css = css || '';
     this.logger = createLogger({ label: 'CrossedLoader', level });
     this.logger.debug(
       apiLog({
@@ -154,19 +159,30 @@ export class Loader {
 
   getCSS() {
     // console.log(this.fileCache)
-    const values = Array.from(this.fileCache.values());
+    const values = Array.from([
+      ...this.fileCache.values(),
+      ...this.css.split(/\r?\n/),
+    ]);
     const { media, hover, focus, active, other } = values.reduce(
       (acc, e) => {
-        if (e.startsWith('@media')) {
-          acc.media.push(e);
-        } else if (e.startsWith('.active')) {
-          acc.active.push(e);
-        } else if (e.startsWith('.focus')) {
-          acc.focus.push(e);
-        } else if (e.startsWith('.hover')) {
-          acc.hover.push(e);
-        } else {
-          acc.other.push(e);
+        if (
+          !acc.media.includes(e) &&
+          !acc.active.includes(e) &&
+          !acc.focus.includes(e) &&
+          !acc.hover.includes(e) &&
+          !acc.other.includes(e)
+        ) {
+          if (e.startsWith('@media')) {
+            acc.media.push(e);
+          } else if (e.startsWith('.active')) {
+            acc.active.push(e);
+          } else if (e.startsWith('.focus')) {
+            acc.focus.push(e);
+          } else if (e.startsWith('.hover')) {
+            acc.hover.push(e);
+          } else {
+            acc.other.push(e);
+          }
         }
         return acc;
       },
