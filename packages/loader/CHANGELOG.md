@@ -1,5 +1,11 @@
 # @crossed/loader
 
+## 1.0.0-beta.30
+
+### Patch Changes
+
+- 33e1cec: increase behavior cache
+
 ## 1.0.0-beta.29
 
 ### Patch Changes

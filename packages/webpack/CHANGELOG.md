@@ -1,5 +1,13 @@
 # @crossed/webpack
 
+## 2.0.0-beta.33
+
+### Patch Changes
+
+- 33e1cec: increase behavior cache
+- Updated dependencies [33e1cec]
+  - @crossed/loader@1.0.0-beta.30
+
 ## 2.0.0-beta.32
 
 ### Patch Changes
