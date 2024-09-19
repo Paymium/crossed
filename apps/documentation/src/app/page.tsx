@@ -110,7 +110,7 @@ export default function Home() {
               </Card.Description>
             </Card>
           </Link>
-          <Link href="/primitive/introduction" passHref legacyBehavior>
+          {/* <Link href="/primitive/introduction" passHref legacyBehavior>
             <Card style={useStyles.card} role="link" space="xxs">
               <Card.Title
                 role="heading"
@@ -123,7 +123,7 @@ export default function Home() {
                 <Trans>Create your accessible component from anything</Trans>
               </Card.Description>
             </Card>
-          </Link>
+          </Link> */}
           <Link href="/ui/introduction" passHref legacyBehavior>
             <Card style={useStyles.card} role="link" space="xxs">
               <Card.Title
@@ -134,9 +134,7 @@ export default function Home() {
                 @crossed/ui
               </Card.Title>
               <Card.Description style={useStyles.cardDescription}>
-                <Trans>
-                  UI Component made with @crossed/primitive and @crossed/styled
-                </Trans>
+                <Trans>UI Component made with @crossed/styled</Trans>
               </Card.Description>
             </Card>
           </Link>

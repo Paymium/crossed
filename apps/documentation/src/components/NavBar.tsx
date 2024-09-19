@@ -23,20 +23,15 @@ const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
     activeFor: /\/styled/g,
     title: 'styled()',
   },
-  {
-    href: '/primitive/introduction',
-    activeFor: /\/primitive/g,
-    title: 'primitive',
-  },
+  // {
+  //   href: '/primitive/introduction',
+  //   activeFor: /\/primitive/g,
+  //   title: 'primitive',
+  // },
   {
     href: '/ui/introduction',
     activeFor: /\/ui/g,
     title: 'ui',
-  },
-  {
-    href: '/router/introduction',
-    activeFor: /\/router/g,
-    title: 'router',
   },
 ];
 

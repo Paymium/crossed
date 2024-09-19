@@ -5,11 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Compiler } from 'webpack';
+import { Compiler, NormalModule } from 'webpack';
 import { createLogger, apiLog } from '@crossed/log';
 import { Loader } from '@crossed/loader';
 import VirtualModulesPlugin from 'webpack-virtual-modules';
-import { mkdirSync, readFileSync, statSync, writeFileSync } from 'fs';
 import path from 'path';
 
 const pluginName = 'CrossedPlugin';
@@ -39,15 +38,6 @@ export default class StylePlugin {
     const css = parseAst.getCSS() || '';
     if (css) {
       virtualModules.writeModule('node_modules/crossed.css', css);
-
-      const pathCss = path.resolve(process.cwd(), '.crossed');
-
-      try {
-        statSync(pathCss);
-      } catch {
-        mkdirSync(pathCss, 0o775);
-      }
-      writeFileSync(path.resolve(pathCss, 'crossed.css'), css);
 
       this.logger.info(
         apiLog({
@@ -79,6 +69,66 @@ export default class StylePlugin {
       });
     }
 
+    compiler.hooks.make.tap(pluginName, (compilation) => {
+      const debug = true;
+      const constants = {
+        configPath: this.options.configPath,
+        parseAst,
+      };
+
+      const tapCallback = (_: any, normalModule: NormalModule) => {
+        const userRequest = normalModule.resource || '';
+
+        const startIndex =
+          userRequest.lastIndexOf('!') === -1
+            ? 0
+            : userRequest.lastIndexOf('!') + 1;
+
+        const moduleRequest = userRequest
+          .substring(startIndex)
+          .replace(/\\/g, '/');
+
+        if (
+          /\.jsx?/.test(path.extname(userRequest)) ||
+          /\.tsx?/.test(path.extname(userRequest))
+        ) {
+          type NormalModuleLoader = {
+            loader: string;
+            options: any;
+            ident?: string;
+            type?: string;
+          };
+
+          (normalModule.loaders as NormalModuleLoader[]).push({
+            loader: require.resolve('./loader'),
+            options: {
+              moduleRequest,
+              operations: [],
+              constants: { ...constants, userRequest },
+            },
+          });
+
+          if (debug) {
+            // eslint-disable-next-line no-console
+            // console.log(`\n[${pluginName}] Use loader for "${moduleRequest}".`);
+          }
+        }
+      };
+
+      const NormalModuleD = compiler.webpack?.NormalModule;
+      const isNormalModuleAvailable =
+        Boolean(NormalModuleD) && Boolean(NormalModuleD.getCompilationHooks);
+
+      if (isNormalModuleAvailable) {
+        NormalModuleD.getCompilationHooks(compilation).loader.tap(
+          pluginName,
+          tapCallback
+        );
+      } else {
+        compilation.hooks.normalModuleLoader.tap(pluginName, tapCallback);
+      }
+    });
+
     /**
      * Wait end parsing and write css
      */
@@ -92,77 +142,6 @@ export default class StylePlugin {
     compiler.hooks.beforeCompile.tap(pluginName, () => {
       const css = parseAst.getCSS() || '';
       virtualModules.writeModule('node_modules/crossed.css', css);
-      const pathCss = path.resolve(process.cwd(), '.crossed');
-
-      try {
-        statSync(pathCss);
-      } catch {
-        mkdirSync(pathCss, 0o775);
-      }
-      try {
-        const css = readFileSync(path.resolve(pathCss, 'crossed.css'), {
-          encoding: 'utf-8',
-        });
-        virtualModules.writeModule('node_modules/crossed.css', css);
-        this.logger.info(
-          apiLog({
-            events: ['css_output_success'],
-          })
-        );
-      } catch (e) {
-        this.logger.error(
-          apiLog({
-            events: ['css_output_error'],
-          })
-        );
-      }
-    });
-
-    /**
-     * Parse files
-     */
-    compiler.hooks.normalModuleFactory.tap(pluginName, (factory) => {
-      factory.hooks.parser.for('javascript/auto').tap(pluginName, (c) => {
-        /**
-         * Get all call expression and filter by name (createStyle, withStyle)
-         */
-        c.hooks.evaluate.for('CallExpression').tap(pluginName, (e: any) => {
-          const resource = c.state.current.resource;
-          let arg;
-          if (e.callee.type === 'Identifier') {
-            const isMulti = e.callee?.name === 'createStyles';
-            if (e.callee?.name === 'createStyle' || isMulti) {
-              arg = e.arguments[0];
-            }
-            if (e.callee?.name === 'withStyle') {
-              arg = e.arguments[1];
-            }
-            if (arg) {
-              /**
-               * call name expression is createStyle or withStyle
-               * we can parsed argument
-               */
-              //   console.log(apiLog({
-              //     events: ['detect_style_function'],
-              //   })
-              //   {
-              //     file: `${resource.replace(process.cwd(), '')}:${
-              //       e.loc.start.line
-              //     }`,
-              //   }
-              // ))
-              this.logger.debug(
-                `${apiLog({
-                  events: ['detect_style_function'],
-                })}      ${resource.replace(process.cwd(), '')}:${
-                  e.loc.start.line
-                }`
-              );
-              parseAst.parse(arg, isMulti);
-            }
-          }
-        });
-      });
     });
   };
 }
