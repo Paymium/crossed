@@ -1,5 +1,12 @@
 # crossed-docs
 
+## 0.6.0-beta.48
+
+### Patch Changes
+
+- 4688511: change how get style to use loader
+  - @crossed/next-adapter@0.6.0-beta.31
+
 ## 0.6.0-beta.47
 
 ### Patch Changes

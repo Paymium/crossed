@@ -1,5 +1,11 @@
 # @crossed/webpack
 
+## 2.0.0-beta.31
+
+### Patch Changes
+
+- 4688511: change how get style to use loader
+
 ## 2.0.0-beta.30
 
 ### Patch Changes
