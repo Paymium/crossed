@@ -1,5 +1,11 @@
 # @crossed/webpack
 
+## 2.0.0-beta.32
+
+### Patch Changes
+
+- 6204eca: write tmp file
+
 ## 2.0.0-beta.31
 
 ### Patch Changes
