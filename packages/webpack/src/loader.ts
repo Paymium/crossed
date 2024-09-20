@@ -22,13 +22,12 @@ interface ModifyModuleSourceLoader {
   getOptions?: () => LoaderOptions;
 }
 
-function extractArgument(str: string) {
-  const regex = /createStyles\s*\(/g;
+function extractArgument(str: string, regex: RegExp) {
   let match;
   const results = [];
 
   while ((match = regex.exec(str)) !== null) {
-    let startIndex = match.index + match[0].length;
+    const startIndex = match.index + match[0].length;
     let openParentheses = 1;
     let endIndex = startIndex;
 
@@ -54,23 +53,29 @@ export default function modifyModuleSourceLoader(
 ): string {
   const { constants, moduleRequest }: LoaderOptions = this.getOptions();
   const { parseAst } = constants;
-  const t = extractArgument(source);
-  // console.log(sourceTmp, t)
-  if (t && Array.isArray(t) && t.length > 0) {
-    t.forEach((a) => {
-      let ast: any;
-      try {
-        ast = (parseScript(
-          ts.transpileModule(`const Foo = createStyles(${a})`, {
-            compilerOptions: { target: ts.ScriptTarget.ESNext },
-          }).outputText
-        )?.body || [])[0];
-        parseAst.parse(ast.declarations[0].init.arguments[0], true);
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(moduleRequest, e);
-      }
-    });
-  }
+
+  const parse = (data: string[], isMulti: boolean) => {
+    if (data && Array.isArray(data) && data.length > 0) {
+      data.forEach((a) => {
+        let ast: any;
+        try {
+          ast = (parseScript(
+            ts.transpileModule(`const Foo = createStyles(${a})`, {
+              compilerOptions: { target: ts.ScriptTarget.ESNext },
+            }).outputText
+          )?.body || [])[0];
+          parseAst.parse(ast.declarations[0].init.arguments[0], isMulti);
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.log(moduleRequest, e);
+        }
+      });
+    }
+  };
+
+  const t = extractArgument(source, /createStyles\s*\(/g);
+  const f = extractArgument(source, /inlineStyle\s*\(/g);
+  parse(t, true);
+  parse(f, false);
   return source;
 }

@@ -6,6 +6,7 @@
  */
 
 export { createStyles } from './createStyles';
+export { inlineStyle } from './inlineStyle';
 export { Registry, parse } from './Registry';
 export type * from './types';
 export { useTheme } from './useTheme';
