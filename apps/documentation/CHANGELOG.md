@@ -1,5 +1,20 @@
 # crossed-docs
 
+## 0.6.0-beta.51
+
+### Minor Changes
+
+- 42c47b7: add inlineStyle
+
+### Patch Changes
+
+- Updated dependencies [42c47b7]
+  - @crossed/styled@0.14.0-beta.22
+  - @crossed/next-adapter@0.6.0-beta.34
+  - @crossed/theme@2.0.0-beta.19
+  - @crossed/ui@1.0.0-beta.46
+  - @crossed/unicons@1.0.0-beta.29
+
 ## 0.6.0-beta.50
 
 ### Patch Changes

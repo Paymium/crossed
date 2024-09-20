@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.22
+
+### Minor Changes
+
+- 42c47b7: add inlineStyle
+
 ## 0.14.0-beta.21
 
 ### Patch Changes

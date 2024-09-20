@@ -1,5 +1,17 @@
 # @crossed/webpack
 
+## 2.0.0-beta.34
+
+### Minor Changes
+
+- 42c47b7: add inlineStyle
+
+### Patch Changes
+
+- Updated dependencies [42c47b7]
+  - @crossed/styled@0.14.0-beta.22
+  - @crossed/loader@1.0.0-beta.31
+
 ## 2.0.0-beta.33
 
 ### Patch Changes
