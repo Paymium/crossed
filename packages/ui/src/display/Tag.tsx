@@ -9,7 +9,7 @@ import { Text, type TextProps } from '../typography/Text';
 import { composeStyles, createStyles } from '@crossed/styled';
 import { forwardRef } from 'react';
 
-const styles = createStyles(({ font, space, components }) => ({
+const styles = createStyles(({ space, components }) => ({
   default: {
     base: {
       flex: 0,
@@ -18,7 +18,6 @@ const styles = createStyles(({ font, space, components }) => ({
       padding: space.xxs,
       borderRadius: space.xxs,
       backgroundColor: components.Tag.default.background,
-      fontSize: font.fontSize.xs,
       color: components.Tag.default.text,
     },
   },
@@ -39,11 +38,10 @@ const styles = createStyles(({ font, space, components }) => ({
 type TagProps = TextProps & { color?: keyof typeof styles };
 
 const Tag = forwardRef(
-  ({ role, style, color = 'default', ...props }: TagProps, ref: any) => {
+  ({ style, color = 'default', ...props }: TagProps, ref: any) => {
     return (
       <Text
         ref={ref}
-        role={role}
         {...props}
         style={composeStyles(styles.default, styles[color], style)}
       />
