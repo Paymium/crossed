@@ -30,7 +30,8 @@ describe('@crossed/loader', () => {
       `.dark {  }
 .margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
+.background-color-\\[white\\] { background-color:white; }
+`
     );
   });
 
@@ -50,7 +51,8 @@ describe('@crossed/loader', () => {
       `.dark {  }
 .margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
+.background-color-\\[white\\] { background-color:white; }
+`
     );
   });
   test('arrow function explicit return', () => {
@@ -71,7 +73,8 @@ describe('@crossed/loader', () => {
       `.dark {  }
 .margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
+.background-color-\\[white\\] { background-color:white; }
+`
     );
   });
 
@@ -93,7 +96,8 @@ describe('@crossed/loader', () => {
       `.dark {  }
 .margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
-.background-color-\\[white\\] { background-color:white; }`
+.background-color-\\[white\\] { background-color:white; }
+`
     );
   });
 });
