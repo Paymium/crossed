@@ -35,15 +35,15 @@ const styles = createStyles(({ space, components }) => ({
   },
 }));
 
-type TagProps = TextProps & { color?: keyof typeof styles };
+type TagProps = TextProps & { variant?: keyof typeof styles };
 
 const Tag = forwardRef(
-  ({ style, color = 'default', ...props }: TagProps, ref: any) => {
+  ({ style, variant = 'default', ...props }: TagProps, ref: any) => {
     return (
       <Text
         ref={ref}
         {...props}
-        style={composeStyles(styles.default, styles[color], style)}
+        style={composeStyles(styles.default, styles[variant], style)}
       />
     );
   }

@@ -25,7 +25,7 @@ export default function CreateBadge() {
       anatomy={`// coming soon`}
       example={`<XBox alignItems="center" justifyContent="between">
       <Text>Promo25</Text>
-      <Tag color="${color}">Appliqué</Tag>
+      <Tag variant="${color}">Appliqué</Tag>
       </XBox>`}
       scope={{ Tag, XBox, Text }}
       variants={
