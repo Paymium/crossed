@@ -1,7 +1,7 @@
 {
   "name": "@crossed/loader",
   "description": "",
-  "version": "1.0.0-beta.31",
+  "version": "1.0.0-beta.32",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",

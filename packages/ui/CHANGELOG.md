@@ -1,5 +1,17 @@
 # @crossed/ui
 
+## 1.0.0-beta.47
+
+### Minor Changes
+
+- 3a5f196: add Tag component
+
+### Patch Changes
+
+- Updated dependencies [3a5f196]
+  - @crossed/theme@2.0.0-beta.20
+  - @crossed/unicons@1.0.0-beta.30
+
 ## 1.0.0-beta.46
 
 ### Patch Changes
