@@ -220,5 +220,13 @@ export default {
         title: colors.text.primary,
       },
     },
+    Tag: {
+      default: {
+        background: colors.background.primary,
+        text: colors.text.primary,
+      },
+      green: { background: '#306C60', text: colors.success.light },
+      red: { background: '#A21A1A', text: colors.error.low },
+    },
   },
 } as const satisfies Theme;

@@ -11,3 +11,4 @@ export * from './MenuList';
 export * from './Kbd';
 export * from './Code';
 export * from './Table';
+export * from './Tag';
