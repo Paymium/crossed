@@ -1,5 +1,11 @@
 # @crossed/next-adapter
 
+## 0.6.0-beta.36
+
+### Patch Changes
+
+- @crossed/webpack@2.0.0-beta.36
+
 ## 0.6.0-beta.35
 
 ### Patch Changes

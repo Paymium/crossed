@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 2.0.0-beta.21
+
+### Minor Changes
+
+- 10f885c: add Tag component
+
 ## 2.0.0-beta.20
 
 ### Minor Changes

@@ -1,5 +1,19 @@
 # crossed-docs
 
+## 0.6.0-beta.53
+
+### Minor Changes
+
+- 10f885c: add Tag component
+
+### Patch Changes
+
+- Updated dependencies [10f885c]
+  - @crossed/theme@2.0.0-beta.21
+  - @crossed/ui@1.0.0-beta.48
+  - @crossed/unicons@1.0.0-beta.31
+  - @crossed/next-adapter@0.6.0-beta.36
+
 ## 0.6.0-beta.52
 
 ### Patch Changes
