@@ -36,6 +36,7 @@ describe('media-query', () => {
       `.dark {  }
 .margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
+
 @media (min-width: 768px) { .md\\:background-color-\\[red\\] { background-color:red; } }`
     );
   });
@@ -63,6 +64,7 @@ describe('media-query', () => {
 .margin-top-\\[4px\\] { margin-top:4px; }
 .width-\\[50px\\] { width:50px; }
 .background-color-\\[black\\] { background-color:black; }
+
 @media (min-width: 576px) { .sm\\:background-color-\\[green\\] { background-color:green; } }
 @media (min-width: 768px) { .md\\:background-color-\\[red\\] { background-color:red; } }`
     );

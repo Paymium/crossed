@@ -40,6 +40,10 @@ type Card = {
   description: string;
   border: string;
 };
+type Tag = {
+  background: string;
+  text: string;
+};
 
 type ActionType = {
   default: Action;
@@ -86,5 +90,10 @@ export type Components = {
     default: Card;
     hover: Card;
     active: Card;
+  };
+  Tag: {
+    default: Tag;
+    green: Tag;
+    red: Tag;
   };
 };

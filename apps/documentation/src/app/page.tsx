@@ -8,7 +8,7 @@
 'use client';
 import '@/style.config';
 import { Logo } from '@/components/Logo';
-import { createStyles, inlineStyle } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 import {
   B,
   Box,
