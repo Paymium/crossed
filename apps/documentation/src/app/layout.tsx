@@ -17,6 +17,7 @@ import { Registry } from '@crossed/styled';
 import { createStyles } from '@crossed/styled';
 import { Roboto } from 'next/font/google';
 import { ScrollView } from '@/components/ScrollView';
+import { className, rnw } from '@crossed/styled';
 
 const roboto = Roboto({
   variable: '--font-inter',
@@ -53,12 +54,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang={'en'} className={`${Registry.themeName} ${roboto.className}`}>
       <head />
-      <body {...styleSheet.body.className()}>
+      <body {...className(styleSheet.body)}>
         <CrossedUIProvider>
           <Suspense>
             <ScrollView
               stickyHeaderIndices={[0]}
-              {...styleSheet.root.rnw()}
+              {...rnw(styleSheet.root)}
               contentContainerStyle={{ minHeight: '100%' }}
             >
               <NavBar />

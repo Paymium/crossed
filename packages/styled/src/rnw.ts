@@ -5,34 +5,28 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-type RnwStyle = string | null | false | undefined;
+import { merge } from 'ts-deepmerge';
+import { CrossedStyle } from './types';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export const rnw = (
-  ...className: RnwStyle[]
-): { style: Record<string, string | number | boolean> } => {
-  const cache = new Map();
-  // console.log('params', className);
-  className.forEach((c) => {
-    if (!c || c === null) {
-      return;
+  ...styles: CrossedStyle[]
+): { style: StyleProp<ViewStyle | TextStyle> } => {
+  const styleOriginal: any[] = [];
+  const stylesRnw = styles.flat(Infinity as 10).reduce((acc, e) => {
+    if (!e || e === true) return acc;
+
+    if ('base' in e) {
+      acc.push(e.base);
+    } else if (typeof e === 'object') {
+      if ('$$css' in e) {
+        acc.push(e);
+      } else {
+        styleOriginal.push(e as any);
+      }
     }
-    let classNam = c;
-    if (typeof classNam === 'object' && 'className' in classNam) {
-      classNam = classNam.className().className;
-    }
-    // console.log(classNam);
-    const [result] = classNam.match(/^(.*?)-(?=\[)/i) || [];
-    if (result) {
-      cache.set(result, classNam);
-    }
+    return acc;
   }, []);
-  return {
-    style: Array.from(cache.values()).reduce(
-      (acc, cla) => {
-        acc[cla] = cla;
-        return acc;
-      },
-      { $$css: true }
-    ),
-  };
+  const style = merge(...stylesRnw);
+  return { style: [style, ...styleOriginal] };
 };

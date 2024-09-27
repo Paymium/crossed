@@ -26,8 +26,7 @@ describe('@crossed/loader', () => {
   }`);
 
     loader.parse(ast);
-    const className =
-      'margin-top-[4px] width-[50px] background-color-[white]';
+    const className = 'margin-top-[4px] width-[50px] background-color-[white]';
     expect(ast).toEqual({
       properties: [
         {

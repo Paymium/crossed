@@ -15,7 +15,26 @@ import {
 
 type NestedKeys = 'shadowOffset' | 'transform' | 'textShadowOffset';
 
-export type CrossedStyle = Record<string, StyleSheet | string>;
+// interface DeepArray<T> extends Array<T | DeepArray<T>> {}
+
+type DeepArray<T> = {
+  [K in keyof T]: T[K] extends number | string | symbol // Is it a primitive? Then make it readonly
+    ? T[K]
+    : // Is it an array of items? Then make the array readonly and the item as well
+      T[K] extends Array<infer A>
+      ? Array<DeepArray<A>>
+      : // It is some other object, make it readonly as well
+        DeepArray<T[K]>;
+};
+
+type ParamCompose = boolean | undefined | null | StyleSheet;
+export type CrossedStyle = DeepArray<ParamCompose>;
+
+export type ParamComposeIntern =
+  | ParamCompose
+  | (Record<string, any> & { $$css: true });
+
+export type CrossedStyleIntern = DeepArray<ParamComposeIntern>;
 
 export type CrossedStyleArray<T> = T | ReadonlyArray<CrossedStyleArray<T>>;
 

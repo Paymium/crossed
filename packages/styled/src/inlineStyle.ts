@@ -6,12 +6,12 @@
  */
 
 import type { CrossedMethods, StyleSheet, Themes } from './types';
-import { Registry } from './Registry';
-import { createMethods } from './createMethods';
-import { isWeb } from './isWeb';
 
 export const inlineStyle = <O extends StyleSheet>(
   stylesParam: (_theme: Themes[keyof Themes]) => O
 ): CrossedMethods<any> => {
-  return createMethods(stylesParam(Registry.getTheme(isWeb)));
+  const isFunction = typeof stylesParam === 'function';
+  // console.log({isFunction}, stylesParam)
+  if (!isFunction) return stylesParam;
+  // return createMethods(stylesParam(Registry.getTheme(isWeb)));
 };

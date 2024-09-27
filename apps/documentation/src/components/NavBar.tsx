@@ -15,7 +15,7 @@ import { usePathname } from 'next/navigation';
 import { ChangeLang } from './ChangeLang';
 import { forwardRef, memo } from 'react';
 import LinkNext from 'next/link';
-import { createStyles } from '@crossed/styled';
+import { className, createStyles } from '@crossed/styled';
 
 const navLinks: { href: string; title: string; activeFor: RegExp }[] = [
   {
@@ -104,7 +104,7 @@ const useStyles = createStyles((t) => ({
       borderStyle: 'solid',
       borderColor: t.colors.border.primary,
       alignItems: 'center',
-      height: 60
+      height: 60,
     },
   },
   el: {
@@ -122,7 +122,7 @@ const LinkNav = forwardRef(({ style, active: _a, ...props }: any, ref) => {
     <LinkNext
       {...props}
       ref={ref}
-      {...useStyles.linkNav.className({ style, active: _a })}
+      {...className(useStyles.linkNav, style)}
     />
   );
 });

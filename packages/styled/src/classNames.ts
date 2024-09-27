@@ -8,23 +8,30 @@
 import { merge } from 'ts-deepmerge';
 import { CrossedStyle } from './types';
 
-const cache = new Map();
 export const className = (
   ...classNames: CrossedStyle[]
-): { className: string } => {
-  const cacheValue = cache.get(classNames);
+): { className: string; style: any } => {
+  const { className, style } = classNames.flat(Infinity as 10).reduce(
+    (acc, e) => {
+      if (!e || Array.isArray(e) || typeof e === 'boolean') return acc;
+      if (typeof e === 'string' && (e === 'true' || e === 'false')) return acc;
 
-  if (cacheValue) return cacheValue;
+      if (typeof e === 'object') {
+        if ('$$css' in e) {
+          const { $$css, ...other } = e;
+          acc.className.push(other);
+        } else acc.style.push(e);
+      }
+
+      return acc;
+    },
+    { className: [], style: [] }
+  );
+
   const result = {
-    className: Object.values(
-      merge(
-        ...classNames
-          .flat(Infinity)
-          .filter((e) => !!e && typeof e !== 'boolean')
-      )
-    ).join(' '),
+    className: Object.values(merge(...className)).join(' '),
+    style: merge(...style),
   };
-  cache.set(classNames, result);
 
   return result;
 };
