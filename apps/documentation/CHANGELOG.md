@@ -1,5 +1,13 @@
 # crossed-docs
 
+## 0.6.0-beta.55
+
+### Patch Changes
+
+- 3894720: fix tabs
+- Updated dependencies [3894720]
+  - @crossed/ui@1.0.0-beta.50
+
 ## 0.6.0-beta.54
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.0-beta.50
+
+### Patch Changes
+
+- 3894720: fix tabs
+
 ## 1.0.0-beta.49
 
 ### Patch Changes
