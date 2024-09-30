@@ -75,7 +75,7 @@ export const textDisabledStyles = createStyles((t) => ({
     base: { color: t.components.Action.secondary.disabled.text },
   },
   tertiary: {
-    base: { color: t.components.Action.tertiary.disabled.text },
+    base: { color: t.components.Action.tertiary.disabled.text, opacity: 0.5 },
   },
   false: {},
 }));
@@ -217,7 +217,10 @@ const Text = withReactive(
   })
 );
 
-const Icon = ({ children }: PropsWithChildren) => {
+const Icon = ({
+  children,
+  style,
+}: PropsWithChildren<{ style?: CrossedMethods<any> }>) => {
   const { variant, error, state, disabled } = useContext(buttonContext);
 
   const color = useMemo(() => {
@@ -227,7 +230,8 @@ const Icon = ({ children }: PropsWithChildren) => {
       disabled && textStyles.disabled,
       disabled && variant && textDisabledStyles[variant],
       variant && error && textErrorStyles[variant],
-      disabled && variant && error && textErrorDisabledStyles[variant]
+      disabled && variant && error && textErrorDisabledStyles[variant],
+      style
     ).style(state).style.color;
   }, [variant, error, disabled, state]);
 

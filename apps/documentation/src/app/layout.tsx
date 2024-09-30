@@ -42,7 +42,7 @@ const styleSheet = createStyles((t) => ({
   },
   body: {
     base: {
-      backgroundColor: t.colors.background.secondary,
+      backgroundColor: t.colors.background.primary,
       minHeight: '100%',
       display: 'flex',
     },

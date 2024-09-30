@@ -61,6 +61,7 @@ describe('extends with createStyles', () => {
       })
     ).toStrictEqual({
       className: 'color-[black]',
+      style: {},
     });
   });
 
@@ -71,6 +72,7 @@ describe('extends with createStyles', () => {
       })
     ).toStrictEqual({
       className: 'color color-[white]',
+      style: {},
     });
   });
 

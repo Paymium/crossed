@@ -37,7 +37,7 @@ const styles = createStyles(
           flexShrink: 0,
           height: '100%',
           width: 170,
-          backgroundColor: t.colors.background.primary,
+          backgroundColor: t.colors.background.secondary,
         },
         media: { xs: { display: 'none' }, md: { display: 'flex' } },
       },

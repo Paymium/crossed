@@ -50,20 +50,25 @@ describe('PseudoClassPlugin', () => {
     }));
     expect(style.container.className()).toStrictEqual({
       className: 'color-[black] hover:color-[white] active:color-[red]',
+      style: {},
     });
     expect(style.container.className({})).toStrictEqual({
       className: 'color-[black] hover:color-[white] active:color-[red]',
+      style: {},
     });
     expect(style.container.className({ hover: true })).toStrictEqual({
       className: 'hover:color-[white] color-[white] active:color-[red]',
+      style: {},
     });
     expect(
       style.container.className({ hover: true, active: true })
     ).toStrictEqual({
       className: 'hover:color-[white] active:color-[red] color-[red]',
+      style: {},
     });
     expect(style.container.className({ active: true })).toStrictEqual({
       className: 'hover:color-[white] active:color-[red] color-[red]',
+      style: {},
     });
   });
 
@@ -76,44 +81,59 @@ describe('PseudoClassPlugin', () => {
       },
     }));
     expect(style.container.rnw()).toStrictEqual({
-      style: {
-        '$$css': true,
-        'active:color-[red]': 'active:color-[red]',
-        'color-[black]': 'color-[black]',
-        'hover:color-[white]': 'hover:color-[white]',
-      },
+      style: [
+        {
+          '$$css': true,
+          'active:color-[red]': 'active:color-[red]',
+          'color-[black]': 'color-[black]',
+          'hover:color-[white]': 'hover:color-[white]',
+        },
+        {},
+      ],
     });
     expect(style.container.rnw({})).toStrictEqual({
-      style: {
-        '$$css': true,
-        'active:color-[red]': 'active:color-[red]',
-        'color-[black]': 'color-[black]',
-        'hover:color-[white]': 'hover:color-[white]',
-      },
+      style: [
+        {
+          '$$css': true,
+          'active:color-[red]': 'active:color-[red]',
+          'color-[black]': 'color-[black]',
+          'hover:color-[white]': 'hover:color-[white]',
+        },
+        {},
+      ],
     });
     expect(style.container.rnw({ hover: true })).toStrictEqual({
-      style: {
-        '$$css': true,
-        'active:color-[red]': 'active:color-[red]',
-        'hover:color-[white]': 'hover:color-[white]',
-        'color-[white]': 'color-[white]',
-      },
+      style: [
+        {
+          '$$css': true,
+          'active:color-[red]': 'active:color-[red]',
+          'hover:color-[white]': 'hover:color-[white]',
+          'color-[white]': 'color-[white]',
+        },
+        {},
+      ],
     });
     expect(style.container.rnw({ active: true })).toStrictEqual({
-      style: {
-        '$$css': true,
-        'active:color-[red]': 'active:color-[red]',
-        'hover:color-[white]': 'hover:color-[white]',
-        'color-[red]': 'color-[red]',
-      },
+      style: [
+        {
+          '$$css': true,
+          'active:color-[red]': 'active:color-[red]',
+          'hover:color-[white]': 'hover:color-[white]',
+          'color-[red]': 'color-[red]',
+        },
+        {},
+      ],
     });
     expect(style.container.rnw({ active: true, hover: true })).toStrictEqual({
-      style: {
-        '$$css': true,
-        'active:color-[red]': 'active:color-[red]',
-        'hover:color-[white]': 'hover:color-[white]',
-        'color-[red]': 'color-[red]',
-      },
+      style: [
+        {
+          '$$css': true,
+          'active:color-[red]': 'active:color-[red]',
+          'hover:color-[white]': 'hover:color-[white]',
+          'color-[red]': 'color-[red]',
+        },
+        {},
+      ],
     });
   });
 });

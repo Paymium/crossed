@@ -55,6 +55,7 @@ describe('createStyles', () => {
     }));
     expect(style.container.className()).toStrictEqual({
       className: 'color-[white] border-color-[red]',
+      style: {},
     });
     expect(
       style.container.className({
@@ -62,6 +63,7 @@ describe('createStyles', () => {
       })
     ).toStrictEqual({
       className: 'color-[black] border-color-[red] background-color-[white]',
+      style: {},
     });
     expect(
       style.container.className({
@@ -71,6 +73,7 @@ describe('createStyles', () => {
     ).toStrictEqual({
       className:
         'toto color-[black] border-color-[red] background-color-[white]',
+      style: {},
     });
   });
 
@@ -79,11 +82,14 @@ describe('createStyles', () => {
       container: { base },
     }));
     expect(style.container.rnw()).toStrictEqual({
-      style: {
-        '$$css': true,
-        'color-[white]': 'color-[white]',
-        'border-color-[red]': 'border-color-[red]',
-      },
+      style: [
+        {
+          '$$css': true,
+          'color-[white]': 'color-[white]',
+          'border-color-[red]': 'border-color-[red]',
+        },
+        {},
+      ],
     });
     expect(
       style.container.rnw({
@@ -97,6 +103,7 @@ describe('createStyles', () => {
           'color-[white]': 'color-[white]',
         },
         { color: 'black', backgroundColor: 'white' },
+        {},
       ],
     });
     expect(
@@ -113,6 +120,7 @@ describe('createStyles', () => {
           'toto': 'toto',
         },
         { color: 'black', backgroundColor: 'white' },
+        {},
       ],
     });
   });

@@ -34,19 +34,22 @@ describe('WebPlugin', () => {
       },
     }));
     expect(style.container.rnw()).toStrictEqual({
-      style: {
-        '$$css': true,
-        'align-items-[center]': 'align-items-[center]',
-        'border-radius-[8px]': 'border-radius-[8px]',
-        'border-style-[solid]': 'border-style-[solid]',
-        'border-width-[1px]': 'border-width-[1px]',
-        'box-sizing-[border-box]': 'box-sizing-[border-box]',
-        'flex-[1]': 'flex-[1]',
-        'focus-visible:outline-width-[0]': 'focus-visible:outline-width-[0]',
-        'height-[44px]': 'height-[44px]',
-        'justify-content-[center]': 'justify-content-[center]',
-        'flex-direction-[row]': 'flex-direction-[row]',
-      },
+      style: [
+        {
+          '$$css': true,
+          'align-items-[center]': 'align-items-[center]',
+          'border-radius-[8px]': 'border-radius-[8px]',
+          'border-style-[solid]': 'border-style-[solid]',
+          'border-width-[1px]': 'border-width-[1px]',
+          'box-sizing-[border-box]': 'box-sizing-[border-box]',
+          'flex-[1]': 'flex-[1]',
+          'focus-visible:outline-width-[0]': 'focus-visible:outline-width-[0]',
+          'height-[44px]': 'height-[44px]',
+          'justify-content-[center]': 'justify-content-[center]',
+          'flex-direction-[row]': 'flex-direction-[row]',
+        },
+        {},
+      ],
     });
   });
 });

@@ -92,7 +92,7 @@ const useStyles = createStyles((t) => ({
   nav: {
     base: {
       width: '100%',
-      backgroundColor: t.colors.background.primary,
+      backgroundColor: t.colors.background.secondary,
       padding: t.space.xxs,
       justifyContent: 'space-between',
       flexDirection: 'row',

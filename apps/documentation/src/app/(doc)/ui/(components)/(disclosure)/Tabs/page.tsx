@@ -9,7 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Tabs, Text } from '@crossed/ui';
+import { Tabs, Text, YBox } from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
@@ -23,13 +23,21 @@ export default function CreateBadge() {
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`<Tabs defaultValue="web">
+      example={`<YBox space="md">
+        <Tabs defaultValue="web">
   <Tabs.List>
+  <Tabs.Indicator />
     <Tabs.Tab value="web">
       <Tabs.Tab.Text>web</BuilderTabs.Tab.Text>
     </Tabs.Tab>
     <Tabs.Tab value="native">
       <Tabs.Tab.Text>native</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="disabled" disabled>
+      <Tabs.Tab.Text>disabled</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="other">
+      <Tabs.Tab.Text>other</BuilderTabs.Tab.Text>
     </Tabs.Tab>
   </Tabs.List>
   <Tabs.Panels>
@@ -39,9 +47,66 @@ export default function CreateBadge() {
     <Tabs.Panel value="native">
       <Text>native</Text>
     </Tabs.Panel>
+    <Tabs.Panel value="disabled">
+      <Text>disabled</Text>
+    </Tabs.Panel>
+    <Tabs.Panel value="other">
+      <Text>other</Text>
+    </Tabs.Panel>
   </PlatformTabs.Panels>
-</Tabs>`}
-      scope={{ Tabs, Text }}
+</Tabs><Tabs defaultValue="native" variant="underline">
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value="web">
+      <Tabs.Tab.Text>web</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="native">
+      <Tabs.Tab.Text>native</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="disabled" disabled>
+      <Tabs.Tab.Text>disabled</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="other1">
+      <Tabs.Tab.Text>An other 1</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="other2">
+      <Tabs.Tab.Text>An other 2</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="other3">
+      <Tabs.Tab.Text>An other 3</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="other4">
+      <Tabs.Tab.Text>An other 4</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="other5">
+      <Tabs.Tab.Text>An other 5</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value="other6">
+      <Tabs.Tab.Text>An other 6</BuilderTabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panels>
+    <Tabs.Panel value="web"><button>click</button>
+    <Text>web</Text>
+    <Text>web</Text>
+    <Text>web</Text>
+    <Text>web</Text>
+    <Text>web</Text>
+    <Text>web</Text>
+    </Tabs.Panel>
+    <Tabs.Panel value="native">
+      <Text>native</Text>
+    </Tabs.Panel>
+    <Tabs.Panel value="disabled">
+      <Text>disabled</Text>
+    </Tabs.Panel>
+    <Tabs.Panel value="other">
+      <Text>other</Text>
+    </Tabs.Panel>
+  </PlatformTabs.Panels>
+</Tabs>
+        </YBox>`}
+      scope={{ Tabs, Text, YBox }}
     />
   );
 }

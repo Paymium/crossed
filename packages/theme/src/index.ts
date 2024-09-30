@@ -8,7 +8,14 @@
 import darkTheme from './dark/theme';
 import lightTheme from './light/theme';
 
-export const themes = {
+let themes = {
   dark: darkTheme,
   light: lightTheme,
 } as const;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+if (process.env.NEXT_PUBLIC_CUSTOM) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  themes = require('./custom').themes as typeof themes;
+}
+export { themes };

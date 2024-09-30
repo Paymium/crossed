@@ -14,122 +14,125 @@ import {
   useUncontrolled,
   withStaticProperties,
 } from '@crossed/core';
-import { useCallback, type PropsWithChildren } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type PropsWithChildren,
+} from 'react';
 import {
   Button,
   type ButtonProps,
   type ButtonTextProps,
 } from '../forms/Button';
-import { XBox, type XBoxProps } from '../layout/XBox';
 import { YBox, type YBoxProps } from '../layout/YBox';
-import { composeStyles, createStyles } from '@crossed/styled';
-import { Pressable } from 'react-native';
+import {
+  composeStyles,
+  createStyles,
+  CrossedMethods,
+  inlineStyle,
+  isTouchable,
+} from '@crossed/styled';
+import { Pressable, PressableProps, ScrollViewProps, View } from 'react-native';
 import { Box } from '../layout/Box';
 import { useInteraction } from '@crossed/styled';
+import { Card, CardProps } from '../display/Card';
+import Animated, {
+  FadeIn,
+  FadeOut,
+  SharedValue,
+  useAnimatedReaction,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import { ScrollView } from 'react-native-gesture-handler';
+import { ChevronRight, ChevronLeft } from '@crossed/unicons';
+import { XBox } from '../layout/XBox';
 
-const useStyles = createStyles((t) => ({
-  list: {
+const indicatorUnderlineStyles = createStyles(({ colors }) => ({
+  active: { base: { borderBottomColor: colors.border.brand } },
+  default: {
     base: {
-      // paddingBottom: t.space.xs,
+      borderBottomWidth: 4,
+      height: 4,
+      borderBottomColor: 'transparent',
+      borderRadius: 4,
+      position: 'absolute',
+      bottom: 0,
     },
   },
-  triggerDisabled: { base: { pointerEvents: 'none' } },
+}));
+
+const indicatorRoundedStyles = createStyles(({ colors }) => ({
+  active: { base: { backgroundColor: colors.background.secondary } },
+  default: {
+    base: {
+      height: 44,
+      backgroundColor: 'transparent',
+      borderRadius: 24,
+      position: 'absolute',
+    },
+  },
+}));
+
+const indicatorDynamicStyles = createStyles(() => ({
+  dyn: (left: SharedValue<number>, width: SharedValue<number>) =>
+    ({ width, transform: [{ translateX: left }] }) as any,
+}));
+
+const tabTitleStyles = createStyles(({ colors }) => ({
+  default: { base: { color: colors.text.secondary } },
+  hover: { base: { color: colors.text.primary } },
+  active: { base: { color: colors.text.brand } },
+}));
+
+const triggerStyles = createStyles(({ space }) => ({
+  disabled: {
+    base: { cursor: 'not-allowed', opacity: 0.5, pointerEvents: 'none' },
+  },
   trigger: {
     base: {
       height: 44,
-      paddingHorizontal: t.space.xs,
+      paddingHorizontal: space.xs,
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
     },
-    // variants: {
-    //   disabled: {
-    //     true: {
-    //       base: {
-    //         pointerEvents: 'none',
-    //       },
-    //     },
-    //   },
-    // },
-    // variants: {
-    //   underline: {
-    //     true: {
-    //       'base': {
-    //         borderRadius: 0,
-    //         borderBottomWidth: 4,
-    //         borderBottomColor: 'transparent',
-    //       },
-    //       ':active': {
-    //         borderRadius: 0,
-    //         borderBottomColor: t.colors.brand.bright,
-    //       },
-    //       ':hover': {
-    //         borderRadius: 0,
-    //         borderBottomColor: t.colors.brand.bright,
-    //       },
-    //     },
-    //   },
-    // },
   },
-  indicatorActive: { base: { backgroundColor: t.colors.background.active } },
-  indicator: {
-    base: {
-      height: 4,
-      backgroundColor: 'transparent',
-      borderRadius: 4,
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-    },
-    variants: {
-      disabled: {
-        true: {
-          base: {
-            backgroundColor: 'transparent',
-            pointerEvents: 'none',
-          },
-        },
+}));
+
+const focusStyles = createStyles(({ colors }) => ({
+  rounded: {
+    web: {
+      ':focus-visible': {
+        outlineColor: colors.border.brand,
+        outlineOffset: '4px',
       },
     },
   },
   underline: {
-    'base': { color: t.colors.neutral['600'] },
-    ':hover': {
-      // color: t.colors.brand.bright,
+    web: {
+      ':focus-visible': {
+        outlineColor: colors.border.brand,
+        outlineOffset: '4px',
+      },
     },
-  },
-  disabled: {
-    base: {
-      // color: t.colors.neutral.low,
-      pointerEvents: 'none',
-    },
-  },
-  triggerText: {
-    // variants: {
-    //   underline: {
-    //     true: {
-    //       'base': { color: t.colors.neutral['600'] },
-    //       ':hover': {
-    //         // color: t.colors.brand.bright,
-    //       },
-    //     },
-    //   },
-    //   disabled: {
-    //     true: {
-    //       base: {
-    //         // color: t.colors.neutral.low,
-    //         pointerEvents: 'none',
-    //       },
-    //     },
-    //   },
-    // },
   },
 }));
 
-type TabsContext = Pick<ButtonProps, 'variant'> & {
+type TabsContext = {
   value: string | number;
   setValue: (_value: string | number) => void;
+  id: string;
+  variant?: 'underline' | 'rounded';
+  listTabRef: React.MutableRefObject<ScrollView>;
+  indicator: { left: SharedValue<number>; width: SharedValue<number> };
+  scroll: SharedValue<number>;
+  shouldShow: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  widthLayout: SharedValue<number>;
 };
 export const createTabs = () => {
   const [TabsProvider, useTabsContext] = createScope<TabsContext>(
@@ -138,6 +141,7 @@ export const createTabs = () => {
   const [TriggerProvider, useTriggerContext] = createScope<{
     disabled?: boolean;
     hover?: boolean;
+    selected?: boolean;
   }>({});
 
   const TabsRoot = ({
@@ -146,7 +150,7 @@ export const createTabs = () => {
     defaultValue,
     finalValue,
     onChange,
-    variant = undefined,
+    variant = 'rounded',
     ...props
   }: PropsWithChildren<
     Partial<Pick<TabsContext, 'variant'>> &
@@ -159,99 +163,358 @@ export const createTabs = () => {
       finalValue,
       onChange,
     });
+    const listTabRef = useRef<ScrollView>();
+    const left = useSharedValue(0);
+    const width = useSharedValue(0);
+    const scroll = useSharedValue(0);
+    const widthLayout = useSharedValue(0);
+    const id = useId();
+
+    const [shouldShow, setShow] = useState(false);
 
     return (
-      <TabsProvider value={value} variant={variant} setValue={setValue}>
-        <YBox space="md" {...props}>
+      <TabsProvider
+        value={value}
+        variant={variant}
+        setValue={setValue}
+        id={id}
+        indicator={{ left, width }}
+        listTabRef={listTabRef}
+        scroll={scroll}
+        setShow={setShow}
+        shouldShow={shouldShow}
+        widthLayout={widthLayout}
+      >
+        <YBox space="sm" {...props}>
           {children}
         </YBox>
       </TabsProvider>
     );
   };
 
-  const List = ({ style, ...props }: XBoxProps) => {
+  const ButtonScroll = ({
+    children,
+    style,
+    ...rest
+  }: Omit<ButtonProps, 'children'> & Pick<ButtonTextProps, 'children'>) => {
     return (
-      <XBox
-        space="xs"
-        {...props}
-        style={composeStyles(useStyles.list, style)}
-      />
+      <Animated.View
+        entering={FadeIn}
+        exiting={FadeOut}
+        style={style}
+        {...composeStyles(
+          inlineStyle(() => ({
+            base: { position: 'absolute', top: 0, bottom: 0, zIndex: 100 },
+          })),
+          style
+        ).style()}
+      >
+        <Button
+          variant="tertiary"
+          style={composeStyles(
+            inlineStyle(({ space }) => ({
+              base: { paddingHorizontal: space.xxs, height: '100%' },
+            })),
+            rest.disabled && inlineStyle(() => ({ base: { opacity: 0.5 } }))
+          )}
+          {...rest}
+        >
+          <Button.Icon
+            style={inlineStyle(({ colors }) => ({
+              'base': { color: colors.text.secondary },
+              ':hover': { color: colors.text.primary },
+            }))}
+          >
+            {children}
+          </Button.Icon>
+        </Button>
+      </Animated.View>
     );
   };
 
-  const Panels = ({ children }: PropsWithChildren) => {
-    return children;
+  const PrevButton = ({
+    widthLayout,
+  }: {
+    widthLayout: SharedValue<number>;
+  }) => {
+    const { listTabRef, scroll } = useTabsContext();
+    const [disabled, setDisabled] = useState(false);
+
+    useAnimatedReaction(
+      () => {
+        return scroll.value;
+      },
+      (currentValue, previousValue) => {
+        if (currentValue !== previousValue) {
+          setDisabled(currentValue === 0);
+        }
+      },
+      [widthLayout, scroll]
+    );
+
+    return (
+      <ButtonScroll
+        variant="tertiary"
+        disabled={disabled}
+        onPress={() => {
+          listTabRef.current?.scrollTo({
+            x:
+              scroll.value >= widthLayout.value
+                ? scroll.value - widthLayout.value
+                : 0,
+          });
+        }}
+        style={inlineStyle(({ colors }) => ({
+          base: { left: 0 },
+          web: {
+            base: {
+              background: `linear-gradient(to right, ${colors.background.hover} 70%, transparent)`,
+            },
+          },
+        }))}
+      >
+        <ChevronLeft />
+      </ButtonScroll>
+    );
   };
+  const NextButton = ({
+    widthLayout,
+    widthContent,
+  }: {
+    widthLayout: SharedValue<number>;
+    widthContent: SharedValue<number>;
+  }) => {
+    const { listTabRef, scroll } = useTabsContext();
+    const [disabled, setDisabled] = useState(false);
+
+    useAnimatedReaction(
+      () => {
+        return scroll.value;
+      },
+      (currentValue, previousValue) => {
+        if (currentValue !== previousValue) {
+          setDisabled(currentValue + widthLayout.value >= widthContent.value);
+        }
+      },
+      [widthLayout, scroll, widthContent]
+    );
+
+    return (
+      <ButtonScroll
+        variant="tertiary"
+        disabled={disabled}
+        onPress={() => {
+          scroll.value <= widthLayout.value
+            ? listTabRef.current?.scrollTo({
+                x: scroll.value + widthLayout.value,
+              })
+            : listTabRef.current?.scrollToEnd();
+        }}
+        style={inlineStyle(({ colors }) => ({
+          base: { right: 0 },
+          web: {
+            base: {
+              background: `linear-gradient(to left, ${colors.background.hover} 70%, transparent)`,
+            },
+          },
+        }))}
+      >
+        <ChevronRight />
+      </ButtonScroll>
+    );
+  };
+
+  const List = ({ children, ...props }: Omit<ScrollViewProps, 'style'>) => {
+    const { listTabRef, scroll, shouldShow, setShow, widthLayout } =
+      useTabsContext();
+
+    const widthContent = useSharedValue(0);
+    useAnimatedReaction(
+      () => {
+        return widthLayout.value;
+      },
+      (currentValue, previousValue) => {
+        if (currentValue !== previousValue && !isTouchable) {
+          setShow(currentValue < widthContent.value);
+        }
+      },
+      [widthLayout, widthContent, setShow]
+    );
+
+    return (
+      <XBox
+        justifyContent="between"
+        style={inlineStyle(() => ({
+          base: { zIndex: 1, height: 54 },
+        }))}
+      >
+        {shouldShow && <PrevButton widthLayout={widthLayout} />}
+        {shouldShow && (
+          <NextButton widthLayout={widthLayout} widthContent={widthContent} />
+        )}
+        <ScrollView
+          space="xs"
+          role="tablist"
+          ref={listTabRef}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          scrollEventThrottle={16}
+          onScroll={({ nativeEvent }) => {
+            scroll.value = nativeEvent.contentOffset.x;
+          }}
+          onContentSizeChange={(width) => {
+            widthContent.value = width - (shouldShow ? 60 : 0);
+          }}
+          onLayout={({ nativeEvent: { layout } }) => {
+            widthLayout.value = layout.width;
+          }}
+          stickyHeaderIndices={shouldShow ? [0] : []}
+          {...props}
+          contentContainerStyle={
+            composeStyles(
+              inlineStyle(() => ({ base: { alignItems: 'center' } }))
+            ).rnw().style
+          }
+          {...composeStyles(
+            shouldShow &&
+              inlineStyle(() => ({
+                base: {
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  zIndex: 30,
+                },
+              }))
+          ).rnw()}
+        >
+          {shouldShow && (
+            <Box style={inlineStyle(() => ({ base: { width: 30 } }))} />
+          )}
+          {children}
+          {shouldShow && (
+            <Box style={inlineStyle(() => ({ base: { width: 30 } }))} />
+          )}
+        </ScrollView>
+      </XBox>
+    );
+  };
+
+  const Panels = ({ children }: PropsWithChildren) => children;
 
   const TabImpl = withStaticProperties(
     ({
       value: valueProps,
       children,
       disabled,
+      style,
       ...props
-    }: ButtonProps & Pick<TabsContext, 'value'>) => {
-      const { setValue, value } = useTabsContext();
+    }: Pick<TabsContext, 'value'> &
+      Omit<PressableProps, 'style'> &
+      PropsWithChildren<{
+        style?: CrossedMethods<any>;
+      }>) => {
+      const {
+        setValue,
+        value,
+        id,
+        variant,
+        listTabRef,
+        indicator,
+        scroll,
+        shouldShow,
+        widthLayout,
+      } = useTabsContext();
+
+      const selected = valueProps === value;
 
       const { state, props: interaction } = useInteraction(props);
+
+      const measure = () => {
+        if (listTabRef.current) {
+          ref.current?.measureLayout(
+            listTabRef.current as any,
+            (left: number, _top: number, width: number) => {
+              const offset = shouldShow ? 30 : 0;
+              const positionLeft = left + scroll.value;
+              indicator.left.value = withTiming(positionLeft);
+              indicator.width.value = withTiming(width);
+              if (
+                widthLayout.value + scroll.value <
+                positionLeft + width + offset
+              ) {
+                listTabRef.current?.scrollTo({
+                  x: positionLeft + width - widthLayout.value + offset,
+                });
+              } else if (
+                positionLeft <= offset ||
+                positionLeft < scroll.value
+              ) {
+                listTabRef.current?.scrollTo({
+                  x: positionLeft - offset,
+                });
+              }
+            }
+          );
+        }
+      };
 
       const onPress = useCallback(
         composeEventHandlers(() => {
           setValue(valueProps);
+          measure();
         }, props.onPress),
         [props.onPress, setValue]
       );
+
+      useEffect(() => {
+        if (shouldShow && selected) {
+          measure();
+        }
+      }, [shouldShow]);
+
+      const onLayout = useCallback(
+        composeEventHandlers(({ nativeEvent: { layout } }) => {
+          if (selected) {
+            indicator.left.value = layout.x + scroll.value;
+            indicator.width.value = layout.width;
+          }
+        }, props.onLayout),
+        [props.onLayout, setValue, selected, shouldShow]
+      );
+
+      const ref = useRef<View>();
 
       return (
         <TriggerProvider
           {...state}
           disabled={disabled}
-          hover={valueProps === value || state.hover}
+          selected={selected}
+          hover={selected || state.hover}
         >
           <Pressable
-            role="button"
+            role="tab"
+            ref={ref}
             disabled={disabled}
+            aria-selected={selected.toString()}
+            aria-control={`${id}-panel-${valueProps}`}
+            id={`${id}-tab-${valueProps}`}
             {...props}
             {...composeStyles(
-              useStyles.trigger,
-              disabled && useStyles.triggerDisabled
+              triggerStyles.trigger,
+              focusStyles[variant],
+              disabled && triggerStyles.disabled,
+              style
             ).rnw({
               ...state,
-              hover: valueProps === value || state.hover,
+              hover: selected || state.hover,
             })}
             {...interaction}
             onPress={onPress}
+            onLayout={onLayout}
           >
-            {typeof children === 'function' ? (
-              (e) => (
-                <>
-                  {children(e)}
-                  <Box
-                    style={composeStyles(
-                      useStyles.indicator,
-                      valueProps === value && useStyles.indicatorActive
-                    )}
-                    // {...useStyles.indicator.rnw({
-                    //   hover: valueProps === value,
-                    //   variants: { disabled },
-                    // })}
-                  />
-                </>
-              )
-            ) : (
-              <>
-                {children}
-                <Box
-                  style={composeStyles(
-                    useStyles.indicator,
-                    valueProps === value && useStyles.indicatorActive
-                  )}
-                  // {...useStyles.indicator.rnw({
-                  //   hover: valueProps === value,
-                  //   variants: { disabled },
-                  // })}
-                />
-              </>
-            )}
+            {(e) => (typeof children === 'function' ? children(e) : children)}
           </Pressable>
         </TriggerProvider>
       );
@@ -262,9 +525,12 @@ export const createTabs = () => {
         return (
           <Button.Text
             style={composeStyles(
-              useStyles.triggerText,
-              useStyles.underline,
-              state.disabled && useStyles.disabled,
+              tabTitleStyles.default,
+              state.selected && tabTitleStyles.active,
+              !state.selected &&
+                !state.disabled &&
+                state.hover &&
+                tabTitleStyles.hover,
               style
             )}
             {...state}
@@ -276,10 +542,33 @@ export const createTabs = () => {
   );
   const Panel = ({
     value: valueProps,
-    children,
-  }: PropsWithChildren<{ value: string | number }>) => {
-    const { value } = useTabsContext();
-    return valueProps === value ? children : null;
+    ...props
+  }: CardProps & { value: string | number }) => {
+    const { value, id } = useTabsContext();
+    return valueProps === value ? (
+      <Card
+        id={`${id}-panel-${valueProps}`}
+        role="tabpanel"
+        aria-labelledby={`${id}-tab-${valueProps}`}
+        {...props}
+      />
+    ) : null;
+  };
+
+  const Indicator = ({ style }: { style: CrossedMethods<any> }) => {
+    const { variant, indicator } = useTabsContext();
+    const indicatorStyle =
+      variant === 'rounded' ? indicatorRoundedStyles : indicatorUnderlineStyles;
+    return (
+      <Animated.View
+        {...composeStyles(
+          indicatorStyle.default,
+          indicatorStyle.active,
+          indicatorDynamicStyles.dyn(indicator.left, indicator.width),
+          style
+        ).style()}
+      />
+    );
   };
 
   return withStaticProperties(TabsRoot, {
@@ -287,12 +576,19 @@ export const createTabs = () => {
     Panels,
     Tab: TabImpl,
     Panel,
+    Indicator,
   });
 };
 
 const Tabs = createTabs();
 
-const { List: TabList, Panels: TabPanels, Tab, Panel: TabPanel } = Tabs;
+const {
+  List: TabList,
+  Panels: TabPanels,
+  Tab,
+  Panel: TabPanel,
+  Indicator: TabIndicator,
+} = Tabs;
 const { Text: TabText } = Tab;
 
-export { Tabs, TabList, TabPanels, Tab, TabText, TabPanel };
+export { Tabs, TabList, TabPanels, Tab, TabText, TabPanel, TabIndicator };

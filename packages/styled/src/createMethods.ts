@@ -43,9 +43,14 @@ const cleanClassName = (classNames: string[]) => {
   }, new Set<string>());
 };
 
-export const createMethods = (styleOfKey: Record<string, any>) => {
+export const createMethods = (
+  styleOfKey: Record<string, any> | (() => unknown),
+  stylesParent: Record<string, any> = {}
+) => {
+  // console.log(stylesParent)
   return {
     original: styleOfKey,
+    stylesParent,
     style: (props: CrossedPropsExtended = {}) => {
       const old = cache.get({ style: styleOfKey, props });
       if (old) {
@@ -60,7 +65,7 @@ export const createMethods = (styleOfKey: Record<string, any>) => {
           acc = { ...acc, ...st };
         }
         return acc;
-      }, {});
+      }, stylesParent);
       apply(styleOfKey, props, ({ body, suffix, wrapper, prefix }) => {
         if (body && !suffix && !wrapper && !prefix) {
           style = {
@@ -110,12 +115,13 @@ export const createMethods = (styleOfKey: Record<string, any>) => {
       );
       const result = {
         className: Array.from(cleanClassName(classNames).values()).join(' '),
+        style: stylesParent,
       };
       cache.set({ style: styleOfKey, props }, result);
       return result;
     },
     rnw: (props: CrossedPropsExtended = {}) => {
-      const old = cache.get({ style: styleOfKey, props });
+      const old = cache.get({ style: styleOfKey, props, stylesParent });
       if (old) {
         return old;
       }
@@ -159,9 +165,11 @@ export const createMethods = (styleOfKey: Record<string, any>) => {
         : style;
 
       const result = {
-        style: styletmp ? [styletransformWeb, styletmp] : styletransformWeb,
+        style: styletmp
+          ? [styletransformWeb, styletmp, stylesParent]
+          : [styletransformWeb, stylesParent],
       };
-      cache.set({ style: styleOfKey, props }, result);
+      cache.set({ style: styleOfKey, props, stylesParent }, result);
       return result;
     },
   };

@@ -6,7 +6,7 @@
  */
 
 import { createMethods } from './createMethods';
-import { CrossedMethods } from './types';
+import { AllAvailableStyles, CrossedMethods } from './types';
 import { merge } from 'ts-deepmerge';
 
 type AllKeys<T> = T extends any ? keyof T : never;
@@ -21,14 +21,29 @@ type Merge<T extends object> = {
 export type ExtractStyle<S extends CrossedMethods<any>> =
   S extends CrossedMethods<infer D, any> ? D : never;
 export const composeStyles = <
-  T extends (CrossedMethods<any> | false | void)[],
-  P extends Exclude<T[number], false | void>,
+  T extends (CrossedMethods<any> | AllAvailableStyles | false | void)[],
+  P extends Exclude<T[number], false | void | AllAvailableStyles>,
 >(
   ...styles: T
 ) => {
-  const stylesVerified = styles.filter((e) => !!e && e.original) as P[];
-  const styleMerged = merge(...stylesVerified.map((e) => e.original)) as Merge<
-    P['original']
-  >;
-  return createMethods(styleMerged);
+  // console.log(styles);
+  let stylesNative = {};
+  const stylesVerified = styles.flat(Infinity).reduce((acc, e: any) => {
+    if (!e) return acc;
+    if ('original' in e && e.original) {
+      acc.push(e.original);
+    }
+    if ('stylesParent' in e && e.stylesParent) {
+      stylesNative = { ...stylesNative, ...e.stylesParent };
+      return acc;
+    }
+    if (typeof e !== 'function' && typeof e === 'object' && !e.style) {
+      stylesNative = { ...stylesNative, ...e };
+    }
+    return acc;
+  }, []) as P[];
+
+  const styleMerged = merge(...stylesVerified) as Merge<P['original']>;
+
+  return createMethods(styleMerged, stylesNative);
 };

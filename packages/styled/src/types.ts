@@ -98,7 +98,10 @@ export type BaseCrossedPropsExtended = {
 
 export interface CrossedPropsExtended extends BaseCrossedPropsExtended {}
 
-export type CrossedMethods<S extends StyleSheet, P = CrossedPropsExtended> = {
+export type CrossedMethods<
+  S extends StyleSheet | ((..._p: any[]) => any),
+  P = CrossedPropsExtended,
+> = {
   original: S;
   style: (_p?: P) => { style: Record<string, string> };
   className: (_p?: P) => { className: string };
