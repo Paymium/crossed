@@ -5,21 +5,37 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useMemo, type PropsWithChildren, type ReactNode } from 'react';
+import { memo, useMemo, type PropsWithChildren, type ReactNode } from 'react';
 import { useMedia } from '../useMedia';
+import { Platform, PlatformOSType } from 'react-native';
 
-export type AdaptProps = PropsWithChildren<{
+export const createSelect = (name: PlatformOSType) =>
+  memo(({ children }: PropsWithChildren) => {
+    return Platform.select({
+      [name]: children,
+    });
+  });
+
+export const Native = createSelect('native');
+export const Web = createSelect('web');
+export const IOs = createSelect('ios');
+export const Android = createSelect('android');
+export const MacOS = createSelect('macos');
+export const Windows = createSelect('windows');
+
+export type ResponsiveProps = PropsWithChildren<{
   fallback?: ReactNode;
-  size?: keyof ReturnType<typeof useMedia>;
+  media: keyof ReturnType<typeof useMedia>;
 }>;
-export const Adapt = ({
-  children,
-  size = 'md',
-  fallback = null,
-}: AdaptProps) => {
-  const media = useMedia();
-  const isShow = useMemo(() => {
-    return media[size];
-  }, [size, media]);
-  return isShow ? children : fallback;
-};
+export const Responsive = memo(
+  ({ media, children, fallback }: ResponsiveProps) => {
+    const allMedia = useMedia();
+    const isShow = useMemo(() => {
+      return allMedia[media];
+    }, [media, allMedia]);
+    return useMemo(
+      () => (isShow ? children : fallback),
+      [isShow, children, fallback]
+    );
+  }
+);

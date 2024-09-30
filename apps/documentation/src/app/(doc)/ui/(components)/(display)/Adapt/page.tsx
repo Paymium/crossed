@@ -9,7 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Adapt, Text } from '@crossed/ui';
+import { Responsive, Text } from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
@@ -21,8 +21,8 @@ export default function CreateBadge() {
       return={[]}
       types={[]}
       anatomy={`// coming soon`}
-      example={`<Adapt fallback={<Text>sm</Text>}><Text>md</Text></Adapt>`}
-      scope={{ Adapt, Text }}
+      example={`<Responsive fallback={<Text>sm</Text>}><Text>md</Text></Responsive>`}
+      scope={{ Responsive, Text }}
     />
   );
 }
