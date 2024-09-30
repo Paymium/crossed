@@ -65,6 +65,35 @@ const indicatorUnderlineStyles = createStyles(({ colors }) => ({
   },
 }));
 
+const linearGradientRounded = createStyles(({ colors }) => ({
+  prev: {
+    base: {
+      left: 0,
+      background: `linear-gradient(to right, ${colors.background.primary} 70%, transparent)`,
+    },
+  },
+  next: {
+    base: {
+      right: 0,
+      background: `linear-gradient(to left, ${colors.background.primary} 70%, transparent)`,
+    },
+  },
+}));
+const linearGradientUnderline = createStyles(({ colors }) => ({
+  prev: {
+    base: {
+      left: 0,
+      background: `linear-gradient(to right, ${colors.background.secondary} 70%, transparent)`,
+    },
+  },
+  next: {
+    base: {
+      right: 0,
+      background: `linear-gradient(to left, ${colors.background.secondary} 70%, transparent)`,
+    },
+  },
+}));
+
 const indicatorRoundedStyles = createStyles(({ colors }) => ({
   active: { base: { backgroundColor: colors.background.secondary } },
   default: {
@@ -204,7 +233,12 @@ export const createTabs = () => {
         style={style}
         {...composeStyles(
           inlineStyle(() => ({
-            base: { position: 'absolute', top: 0, bottom: 0, zIndex: 100 },
+            base: {
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              zIndex: 100,
+            },
           })),
           style
         ).style()}
@@ -212,8 +246,8 @@ export const createTabs = () => {
         <Button
           variant="tertiary"
           style={composeStyles(
-            inlineStyle(({ space }) => ({
-              base: { paddingHorizontal: space.xxs, height: '100%' },
+            inlineStyle(() => ({
+              base: { paddingHorizontal: 0, height: '100%', width: 30 },
             })),
             rest.disabled && inlineStyle(() => ({ base: { opacity: 0.5 } }))
           )}
@@ -221,7 +255,7 @@ export const createTabs = () => {
         >
           <Button.Icon
             style={inlineStyle(({ colors }) => ({
-              'base': { color: colors.text.secondary },
+              'base': { color: colors.text.secondary, flexShrink: 0 },
               ':hover': { color: colors.text.primary },
             }))}
           >
@@ -237,7 +271,7 @@ export const createTabs = () => {
   }: {
     widthLayout: SharedValue<number>;
   }) => {
-    const { listTabRef, scroll } = useTabsContext();
+    const { listTabRef, scroll, variant } = useTabsContext();
     const [disabled, setDisabled] = useState(false);
 
     useAnimatedReaction(
@@ -252,6 +286,9 @@ export const createTabs = () => {
       [widthLayout, scroll]
     );
 
+    const style =
+      variant === 'rounded' ? linearGradientRounded : linearGradientUnderline;
+
     return (
       <ButtonScroll
         variant="tertiary"
@@ -264,14 +301,7 @@ export const createTabs = () => {
                 : 0,
           });
         }}
-        style={inlineStyle(({ colors }) => ({
-          base: { left: 0 },
-          web: {
-            base: {
-              background: `linear-gradient(to right, ${colors.background.hover} 70%, transparent)`,
-            },
-          },
-        }))}
+        style={style.prev}
       >
         <ChevronLeft />
       </ButtonScroll>
@@ -284,7 +314,7 @@ export const createTabs = () => {
     widthLayout: SharedValue<number>;
     widthContent: SharedValue<number>;
   }) => {
-    const { listTabRef, scroll } = useTabsContext();
+    const { listTabRef, scroll, variant } = useTabsContext();
     const [disabled, setDisabled] = useState(false);
 
     useAnimatedReaction(
@@ -299,6 +329,9 @@ export const createTabs = () => {
       [widthLayout, scroll, widthContent]
     );
 
+    const style =
+      variant === 'rounded' ? linearGradientRounded : linearGradientUnderline;
+
     return (
       <ButtonScroll
         variant="tertiary"
@@ -310,14 +343,16 @@ export const createTabs = () => {
               })
             : listTabRef.current?.scrollToEnd();
         }}
-        style={inlineStyle(({ colors }) => ({
-          base: { right: 0 },
-          web: {
-            base: {
-              background: `linear-gradient(to left, ${colors.background.hover} 70%, transparent)`,
-            },
-          },
-        }))}
+        style={
+          style.next
+          //   inlineStyle(({ colors }) => ({
+          //   base: { right: 0 },
+          //   web: {
+          //     base: {
+          //       background: `linear-gradient(to left, ${colors.background.hover} 70%, transparent)`,
+          //     },
+          //   },
+        }
       >
         <ChevronRight />
       </ButtonScroll>
@@ -542,15 +577,27 @@ export const createTabs = () => {
   );
   const Panel = ({
     value: valueProps,
+    style,
     ...props
   }: CardProps & { value: string | number }) => {
-    const { value, id } = useTabsContext();
+    const { value, id, variant } = useTabsContext();
     return valueProps === value ? (
       <Card
         id={`${id}-panel-${valueProps}`}
         role="tabpanel"
         aria-labelledby={`${id}-tab-${valueProps}`}
         {...props}
+        style={composeStyles(
+          variant === 'underline' &&
+            inlineStyle(() => ({
+              base: {
+                backgroundColor: 'transparent',
+                borderWidth: 0,
+                padding: 0,
+              },
+            })),
+          style
+        )}
       />
     ) : null;
   };

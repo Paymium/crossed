@@ -11,13 +11,13 @@ import { View, type ViewProps } from 'react-native';
 import { createStyles, composeStyles } from '@crossed/styled';
 
 export const useDivider = createStyles(
-  () =>
+  ({ colors }) =>
     ({
       divider: {
         base: {
-          borderWidth: 0,
+          // borderWidth: 0,
           borderStyle: 'solid',
-          // borderColor: t.colors.neutral[500],
+          borderColor: colors.border.secondary,
         },
       },
       vertical: {

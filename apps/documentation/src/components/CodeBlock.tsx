@@ -36,8 +36,8 @@ const styles = createStyles((t) => ({
       borderWidth: 1,
       borderColor: t.colors.border.primary,
       borderStyle: 'solid',
-      borderRadius: 4,
-      backgroundColor: t.colors.background.hover,
+      borderRadius: 8,
+      backgroundColor: t.colors.background.primary,
     },
     web: {
       base: {

@@ -9,7 +9,7 @@
 
 import { useTranslation } from 'react-i18next';
 import { TemplatePrimitive } from '../../templatePrimitive';
-import { Tabs, Text, YBox } from '@crossed/ui';
+import { Card, Divider, Tabs, Text, YBox } from '@crossed/ui';
 
 export default function CreateBadge() {
   const { t } = useTranslation();
@@ -54,7 +54,7 @@ export default function CreateBadge() {
       <Text>other</Text>
     </Tabs.Panel>
   </PlatformTabs.Panels>
-</Tabs><Tabs defaultValue="native" variant="underline">
+</Tabs><Divider /><Card><Tabs defaultValue="native" variant="underline">
   <Tabs.List>
     <Tabs.Indicator />
     <Tabs.Tab value="web">
@@ -104,9 +104,9 @@ export default function CreateBadge() {
       <Text>other</Text>
     </Tabs.Panel>
   </PlatformTabs.Panels>
-</Tabs>
+</Tabs></Card>
         </YBox>`}
-      scope={{ Tabs, Text, YBox }}
+      scope={{ Tabs, Text, YBox, Card, Divider }}
     />
   );
 }
