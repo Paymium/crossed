@@ -1,5 +1,13 @@
 # @crossed/loader
 
+## 1.0.0-beta.34
+
+### Patch Changes
+
+- Updated dependencies [b134732]
+  - @crossed/styled@0.14.0-beta.23
+  - @crossed/theme@2.0.0-beta.22
+
 ## 1.0.0-beta.33
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @crossed/theme
 
+## 2.0.0-beta.22
+
+### Patch Changes
+
+- b134732: add dynamic style, add Tabs component design
+- Updated dependencies [b134732]
+  - @crossed/styled@0.14.0-beta.23
+
 ## 2.0.0-beta.21
 
 ### Minor Changes

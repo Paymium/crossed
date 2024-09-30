@@ -1,5 +1,17 @@
 # crossed-docs
 
+## 0.6.0-beta.54
+
+### Patch Changes
+
+- b134732: add dynamic style, add Tabs component design
+- Updated dependencies [b134732]
+  - @crossed/unicons@1.0.0-beta.32
+  - @crossed/styled@0.14.0-beta.23
+  - @crossed/theme@2.0.0-beta.22
+  - @crossed/ui@1.0.0-beta.49
+  - @crossed/next-adapter@0.6.0-beta.37
+
 ## 0.6.0-beta.53
 
 ### Minor Changes

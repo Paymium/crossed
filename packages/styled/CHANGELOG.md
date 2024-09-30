@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.0-beta.23
+
+### Patch Changes
+
+- b134732: add dynamic style, add Tabs component design
+
 ## 0.14.0-beta.22
 
 ### Minor Changes
