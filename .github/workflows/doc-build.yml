@@ -29,7 +29,7 @@ jobs:
       - name: Linter
         run: pnpm lint
       - name: Build
-        run: pnpm -F crossed-docs build
+        run: pnpm -F crossed-doc build-storybook
       # 👆 Build steps
       - name: Setup Pages
         uses: actions/configure-pages@v1
@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # 👇 Specify build output path
-          path: ./apps/documentation/out
+          path: ./apps/doc/storybook-static
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
