@@ -1,0 +1,117 @@
+import { createTabs } from '@crossed/ui';
+import { Source } from '@storybook/blocks';
+
+export const PlatformTab = createTabs();
+export const BuilderTab = createTabs();
+export const confiregureWebpack = `
+const StylePlugin = require('@crossed/webpack');
+
+module.exports = {
+/** your webpack config **/
+plugins: [new StylePlugin({ configPath: './src/style.config.ts' })]
+};
+`;
+export const confiregureNext =`
+const withCrossed = require('@crossed/next-adapter');
+
+const nextConfig = withCrossed({
+configPath: './src/style.config.ts',
+})({/* * your next config here */});
+
+module.exports = nextConfig;
+`;
+export const styleConfig =`
+import { Registry } from '@crossed/styled';
+
+// add base plugin or add yours
+const themes = {
+dark: { colorText: "white" },
+light: { colorText: "black" },
+};
+type CustomThemes = typeof themes;
+
+Registry.setThemes(themes).setThemeName("dark");
+
+declare module '@crossed/styled' {
+export interface Themes extends CustomThemes {}
+}
+`;
+
+# Setup
+
+<PlatformTab defaultValue="web" variant="underline">
+  <BuilderTab defaultValue="webpack" variant="underline">
+    <PlatformTab.List>
+      <PlatformTab.Indicator />
+      <PlatformTab.Tab value="web">
+        <PlatformTab.Tab.Text>Web</PlatformTab.Tab.Text>
+      </PlatformTab.Tab>
+      <PlatformTab.Tab value="native">
+        <PlatformTab.Tab.Text>Native</PlatformTab.Tab.Text>
+      </PlatformTab.Tab>
+    </PlatformTab.List>
+    <PlatformTab.Panel value="web">
+        <BuilderTab.List>
+          <BuilderTab.Indicator />
+          <BuilderTab.Tab value="webpack">
+            <BuilderTab.Tab.Text>webpack</BuilderTab.Tab.Text>
+          </BuilderTab.Tab>
+          <BuilderTab.Tab value="next">
+            <BuilderTab.Tab.Text>next</BuilderTab.Tab.Text>
+          </BuilderTab.Tab>
+        </BuilderTab.List>
+        <BuilderTab.Panels>
+          <BuilderTab.Panel value="webpack">
+            <Source language='bash' code={`pnpm i @crossed/styled @crossed/webpack`} />
+          </BuilderTab.Panel>
+          <BuilderTab.Panel value="next">
+            <Source language='bash' code={`pnpm i @crossed/styled @crossed/next-adapter`} />
+          </BuilderTab.Panel>
+        </BuilderTab.Panels>
+    </PlatformTab.Panel>
+    <PlatformTab.Panel value="native">
+      <Source language='bash' code={`pnpm i @crossed/styled`} />
+    </PlatformTab.Panel>
+    <PlatformTab.Panel value="web">
+      ## Configure builder
+      <BuilderTab.Panel value="webpack">
+        <Source code={confiregureWebpack} />
+      </BuilderTab.Panel>
+      <BuilderTab.Panel value="next">
+        <Source code={confiregureNext} />
+      </BuilderTab.Panel>
+    </PlatformTab.Panel>
+
+    ## Init registry
+
+Create style.config.ts file <Source code={styleConfig} language='jsx' format />
+And import this file only once in your entry file<Source code={`import "./style.config";`} language='jsx' format />
+
+## Usage
+<Source code={`
+import { createStyles } from '@crossed/styled';
+import { Text } from "react-native";
+
+const styles = createStyles((t) => ({
+  root: {
+    base: { color: t.colorText }
+  }
+}));
+
+function App () {
+  return (
+    <>
+      {/* react-native + web */}
+      <Text {...styles.root.style()}>Hello World!</Text>
+
+      {/* react-native + web */}
+      <Text {...styles.root.rnw()}>Hello World!</Text>
+
+      {/* web */}
+      <p {...styles.root.className()}>Hello World!</p>
+    </>
+  );
+}
+`} language='jsx' format />
+  </BuilderTab>
+</PlatformTab>

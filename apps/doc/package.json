@@ -1,0 +1,62 @@
+{
+  "name": "crossed-doc",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_4047e48604d2a77"
+  },
+  "dependencies": {
+    "@crossed/styled": "workspace:0.14.0-beta.23",
+    "@crossed/theme": "workspace:2.0.0-beta.22",
+    "@crossed/ui": "workspace:1.0.0-beta.50",
+    "@crossed/webpack": "workspace:2.0.0-beta.37",
+    "@gorhom/portal": "^1.0.14",
+    "@storybook/theming": "^8.3.4",
+    "os-browserify": "^0.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-native-web": "^0.19.10",
+    "ts-loader": "^9.5.1",
+    "tty-browserify": "^0.0.1"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.9.0",
+    "@eslint/js": "^9.9.0",
+    "@storybook/addon-essentials": "^8.3.4",
+    "@storybook/addon-interactions": "^8.3.4",
+    "@storybook/addon-links": "^8.3.4",
+    "@storybook/addon-onboarding": "^8.3.4",
+    "@storybook/addon-styling-webpack": "^1.0.0",
+    "@storybook/blocks": "^8.3.4",
+    "@storybook/react": "^8.3.4",
+    "@storybook/react-vite": "^8.3.4",
+    "@storybook/react-webpack5": "^8.3.4",
+    "@storybook/test": "^8.3.4",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "chromatic": "^11.11.0",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "eslint-plugin-storybook": "^0.9.0",
+    "globals": "^15.9.0",
+    "mini-css-extract-plugin": "^2.9.1",
+    "storybook": "^8.3.4",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.0.1",
+    "vite": "^5.4.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
+  }
+}

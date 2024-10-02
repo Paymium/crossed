@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // "ignoreDeprecations": "5.0",
+    // "declaration": true,
+    // "isolatedModules": true,
+    // "allowUnreachableCode": false,
+    // "allowUnusedLabels": true,
+    "esModuleInterop": true
+    // "verbatimModuleSyntax": false,
+    // "composite": true,
+    // "forceConsistentCasingInFileNames": true,
+    // "jsx": "react-jsx",
+    // "lib": ["esnext", "dom"],
+    // "module": "esnext",
+    // "moduleResolution": "node",
+    // "noFallthroughCasesInSwitch": true,
+    // "noImplicitReturns": true,
+    // "noImplicitUseStrict": false,
+    // "noStrictGenericChecks": false,
+    // "noUnusedLocals": false,
+    // "noUnusedParameters": true,
+    // "resolveJsonModule": true,
+    // "skipLibCheck": true,
+    // "target": "esnext",
+    // "types": ["./node_modules/@crossed/theme/lib/typescript/types.d.ts"]
+  },
+  "include": ["./src"]
+}

@@ -43,6 +43,12 @@
       "import": "./lib/module/theme/theme.js",
       "default": "./lib/module/theme/theme.js",
       "types": "./lib/typescript/theme/theme.d.ts"
+    },
+    "./src/*": {
+      "require": "./src",
+      "import": "./src",
+      "default": "./src",
+      "types": "./src"
     }
   },
   "typesVersions": {
@@ -52,6 +58,9 @@
       ],
       "theme": [
         "lib/typescript/theme/theme.d.ts"
+      ],
+      "./src/*": [
+        "src"
       ]
     }
   },

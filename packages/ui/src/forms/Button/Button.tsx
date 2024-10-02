@@ -36,7 +36,7 @@ import {
 import { buttonErrorStyles, buttonSizeStyles, buttonStyles } from './styles';
 
 const buttonContext = createContext<
-  Pick<RootProps, 'variant' | 'error' | 'disabled'> & {
+  Pick<ButtonProps, 'variant' | 'error' | 'disabled'> & {
     state?: {
       active?: boolean;
       hover?: boolean;
@@ -112,16 +112,36 @@ const textErrorDisabledStyles = createStyles((t) => ({
 const Group = XBox;
 
 type Variants = 'primary' | 'tertiary' | 'secondary' | false;
-type RootProps = Omit<PressableProps, 'style'> & {
+export type ButtonProps = Omit<PressableProps, 'style'> & {
+  /**
+   * Select button variant
+   * @default primary
+   */
   variant?: Variants;
+  /**
+   * Select error colors
+   * @type {boolean}
+   */
   error?: boolean;
+  /**
+   * Loading state of button
+   * @type {boolean}
+   */
   loading?: boolean;
+  /**
+   * Extend style of button
+   * @type {boolean}
+   */
   style?: CrossedMethods<any>;
+  /**
+   * Disable size
+   * @type {boolean}
+   */
   size?: boolean;
 };
 
 const Root = withReactive(
-  forwardRef<View, RootProps>(
+  forwardRef<View, ButtonProps>(
     (
       {
         variant = 'primary',
@@ -253,5 +273,4 @@ const Button = createButton({
 const { Text: ButtonText, Element: ButtonElement, Icon: ButtonIcon } = Button;
 
 export { ButtonText, ButtonElement, Button, ButtonIcon };
-export type ButtonProps = GetProps<typeof Button>;
 export type ButtonTextProps = GetProps<typeof ButtonText>;
