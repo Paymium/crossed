@@ -37,7 +37,7 @@ describe('createLabel', () => {
   });
 
   test('check exports', () => {
-    expect(Object.keys(allExport)).toEqual(['useLabelContext', 'createLabel']);
+    expect(Object.keys(allExport)).toEqual(['createLabel', 'useLabelContext']);
   });
 
   test('init', async () => {

@@ -79,7 +79,7 @@ export const createModal: CreateModal = () => {
     }, [setOpen]);
     return (
       <Pressable
-        {...props}
+        {...(props as any)}
         disabled={!closeOnPress}
         focusable={false}
         aria-hidden

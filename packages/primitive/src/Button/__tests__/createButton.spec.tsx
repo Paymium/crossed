@@ -43,10 +43,10 @@ describe('createButton', () => {
 
   test('check exports', () => {
     expect(Object.keys(allExport)).toEqual([
-      'useButtonContext',
-      'useButtonGroupContext',
-      'useButtonGroupCollection',
       'createButton',
+      'useButtonContext',
+      'useButtonGroupCollection',
+      'useButtonGroupContext',
     ]);
   });
 

@@ -119,7 +119,8 @@ const tabTitleStyles = createStyles(({ colors }) => ({
 
 const triggerStyles = createStyles(({ space }) => ({
   disabled: {
-    base: { cursor: 'not-allowed', opacity: 0.5, pointerEvents: 'none' },
+    base: { opacity: 0.5, pointerEvents: 'none' },
+    web: { base: { cursor: 'not-allowed' } },
   },
   trigger: {
     base: {

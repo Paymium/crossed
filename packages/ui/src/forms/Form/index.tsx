@@ -86,7 +86,7 @@ const FormLabel: FormLabelComponent = (props) => {
   const { inputId, states, handles } = useContext(fieldContext);
   return (
     <Pressable
-      {...{ tabIndex: '-1' }}
+      {...({ tabIndex: '-1' } as any)}
       onHoverIn={handles.onHoverIn}
       onHoverOut={handles.onHoverOut}
     >

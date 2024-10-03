@@ -37,12 +37,12 @@ export const form = createStyles(
       ':disabled': {
         backgroundColor: Input.primary.disabled.background,
         borderColor: Input.primary.disabled.border,
-        cursor: 'not-allowed',
       },
       'web': {
         'base': { boxSizing: 'border-box' },
         ':focus-visible': { outlineWidth: 0 },
         ':focus': { outlineColor: Input.primary.focus.border },
+        ':disabled': { cursor: 'not-allowed' },
       },
     },
     placeholder: { base: { color: Input.primary.default.placeholder } },

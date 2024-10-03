@@ -67,6 +67,7 @@ const config: Config.InitialOptions = {
   globals: {
     __DEV__: true,
   },
+  maxWorkers: 1,
 };
 
 export default config;
