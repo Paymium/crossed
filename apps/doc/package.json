@@ -1,7 +1,7 @@
 {
   "name": "crossed-doc",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "@crossed/styled": "workspace:0.14.0",
-    "@crossed/theme": "workspace:2.0.0",
-    "@crossed/ui": "workspace:1.0.0",
-    "@crossed/webpack": "workspace:2.0.0",
+    "@crossed/theme": "workspace:2.0.1",
+    "@crossed/ui": "workspace:1.0.1",
+    "@crossed/webpack": "workspace:2.0.1",
     "@gorhom/portal": "^1.0.14",
     "@storybook/theming": "^8.3.4",
     "os-browserify": "^0.3.0",

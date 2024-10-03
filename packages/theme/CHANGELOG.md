@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 2.0.1
+
+### Patch Changes
+
+- not load custom
+
 ## 2.0.0
 
 ### Minor Changes

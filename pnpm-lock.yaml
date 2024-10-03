@@ -82,15 +82,15 @@ importers:
         version: link:../../packages/core
       '@crossed/demo':
         specifier: 0.3.1
-        version: 0.3.1(@babel/core@7.25.7)(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1)(ts-node@10.8.1)
+        version: 0.3.1(@babel/core@7.25.7)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-web@0.19.12)(react-native@0.75.3)(react@18.3.1)
       '@crossed/styled':
         specifier: workspace:^
         version: link:../../packages/styled
       '@crossed/theme':
-        specifier: workspace:2.0.0
+        specifier: workspace:2.0.1
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: 1.0.0
+        specifier: 1.0.1
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: workspace:*
@@ -175,13 +175,13 @@ importers:
         specifier: workspace:0.14.0
         version: link:../../packages/styled
       '@crossed/theme':
-        specifier: workspace:2.0.0
+        specifier: workspace:2.0.1
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: workspace:1.0.0
+        specifier: workspace:1.0.1
         version: link:../../packages/ui
       '@crossed/webpack':
-        specifier: workspace:2.0.0
+        specifier: workspace:2.0.1
         version: link:../../packages/webpack
       '@gorhom/portal':
         specifier: ^1.0.14
@@ -424,7 +424,7 @@ importers:
   packages/next-adapter:
     dependencies:
       '@crossed/webpack':
-        specifier: 2.0.0
+        specifier: 2.0.1
         version: link:../webpack
       find-yarn-workspace-root:
         specifier: ^2.0.0
@@ -795,7 +795,7 @@ importers:
         specifier: workspace:^
         version: link:../theme
       '@crossed/unicons':
-        specifier: 1.0.0
+        specifier: 1.0.1
         version: link:../unicons
       '@devvie/bottom-sheet':
         specifier: 0.3.0
@@ -877,7 +877,7 @@ importers:
   packages/webpack:
     dependencies:
       '@crossed/loader':
-        specifier: 1.0.0
+        specifier: 1.0.1
         version: link:../loader
       '@crossed/log':
         specifier: 0.1.1
@@ -2706,21 +2706,21 @@ packages:
       - ts-node
     dev: false
 
-  /@crossed/core@0.8.0(react-native@0.75.3)(react@18.3.1):
-    resolution: {integrity: sha512-Ra744/gE65uFSNzMnRKoICSMICOtxWeMjtFYx7UYPJdZMMTk8h1Hzr4CNAaAXsVi2MrUNOP+AH6JBenbYanIpA==}
+  /@crossed/core@0.8.1(react-native@0.75.3)(react@18.3.1):
+    resolution: {integrity: sha512-jcxNUA2StwcKHm93i0vqRVWFmpX7shSE46u/Biz/Co6SleJkDwI6ZO5RUBMjdYIq3+z6In/uWF+QJB1PyF8OPg==}
     peerDependencies:
-      react: ^18.2.0
-      react-native: ^0.72.3
+      react: ^18.3.1
+      react-native: ^0.75.3
     dependencies:
       react: 18.3.1
       react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
     dev: false
 
-  /@crossed/demo@0.3.1(@babel/core@7.25.7)(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1)(ts-node@10.8.1):
+  /@crossed/demo@0.3.1(@babel/core@7.25.7)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-web@0.19.12)(react-native@0.75.3)(react@18.3.1):
     resolution: {integrity: sha512-KeQqltKtDL+u5bXFIV4DO5ZiKlu5xe6ZOc3g/HcouTzYHMS+TAtTvnqDbv/btDhi17jX3aFmpuXp3ob0bCwtiQ==}
     dependencies:
       '@crossed/primitive': 1.7.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1)
-      '@crossed/ui': 0.9.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1)(ts-node@10.8.1)
+      '@crossed/ui': 0.9.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native-web@0.19.12)(react-native@0.75.3)(react@18.3.1)
       '@floating-ui/react': 0.25.4(react-dom@18.3.1)(react@18.3.1)
       '@gorhom/bottom-sheet': 4.6.4(@types/react@18.3.11)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native@0.75.3)(react@18.3.1)
       '@gorhom/portal': 1.0.14(react-native@0.75.3)(react@18.3.1)
@@ -2735,14 +2735,14 @@ packages:
       - react
       - react-dom
       - react-native
+      - react-native-web
       - supports-color
-      - ts-node
     dev: false
 
   /@crossed/primitive@1.7.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1):
     resolution: {integrity: sha512-2oIIMkP35Y3aqKuPgucGw9q9MNj+vafIRuBB73lWyiJ5Xfr68r86DWeyYBPkt7qbBmQ+dNAlwVxZ2PQ4/Uksyw==}
     dependencies:
-      '@crossed/core': 0.8.0(react-native@0.75.3)(react@18.3.1)
+      '@crossed/core': 0.8.1(react-native@0.75.3)(react@18.3.1)
       '@floating-ui/react': 0.25.4(react-dom@18.3.1)(react@18.3.1)
       '@gorhom/portal': 1.0.14(react-native@0.75.3)(react@18.3.1)
       '@react-native-aria/focus': 0.2.9(react-native@0.75.3)(react@18.3.1)
@@ -2756,25 +2756,47 @@ packages:
       - react-native
     dev: false
 
-  /@crossed/styled@0.13.0(react-native@0.75.3)(react@18.3.1)(ts-node@10.8.1):
-    resolution: {integrity: sha512-IOw8O5N14gHjLbzj3ioFCEWC+cPaHxNQuGQ9JkX/xVeT8NOIlj4fasi7tY4bdgGBD90fO9DrUnUJcXgLfRS2TQ==}
+  /@crossed/primitive@1.8.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1):
+    resolution: {integrity: sha512-bJe3AqheryCqOKEfUdftXLFLn3QrHMz0cC64ueRZ0iLbD5Lt8ExTNyH2JrR1BzveW6pGbLjvCxOuQgDuB4p8Xg==}
     dependencies:
-      '@crossed/core': 0.8.0(react-native@0.75.3)(react@18.3.1)
-      clsx: 2.0.0
-      tailwind-merge: 1.14.0
-      twrnc: 3.6.8(react-native@0.75.3)(ts-node@10.8.1)
+      '@crossed/core': 0.8.1(react-native@0.75.3)(react@18.3.1)
+      '@floating-ui/react': 0.25.4(react-dom@18.3.1)(react@18.3.1)
+      '@gorhom/portal': 1.0.14(react-native@0.75.3)(react@18.3.1)
+      '@react-native-aria/focus': 0.2.9(react-native@0.75.3)(react@18.3.1)
+      '@react-native-aria/interactions': 0.2.13(react-native@0.75.3)(react@18.3.1)
+      react-aria: 3.35.0(react-dom@18.3.1)(react@18.3.1)
+      react-focus-lock: 2.13.2(@types/react@18.3.11)(react@18.3.1)
+      react-focus-on: 3.9.4(@types/react@18.3.11)(react@18.3.1)
+      react-remove-scroll: 2.6.0(@types/react@18.3.11)(react@18.3.1)
     transitivePeerDependencies:
+      - '@types/react'
       - react
+      - react-dom
       - react-native
-      - ts-node
     dev: false
 
-  /@crossed/ui@0.9.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1)(ts-node@10.8.1):
+  /@crossed/styled@0.14.0(react-dom@18.3.1)(react-native-web@0.19.12)(react-native@0.75.3)(react@18.3.1):
+    resolution: {integrity: sha512-08W1zIOTF93t9e3rWSlwr9BDcDn8oR89mMudRnK7CFhfjp8MhpA3frCEOy9Y+CwBuQlWcWyGtUzVkOXciCxeVA==}
+    peerDependencies:
+      react: ^18.3.1
+      react-dom: ^18.3.1
+      react-native: ^0.75.3
+      react-native-web: ^0.19.10
+    dependencies:
+      '@crossed/core': 0.8.1(react-native@0.75.3)(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
+      react-native-web: 0.19.12(react-dom@18.3.1)(react@18.3.1)
+      ts-deepmerge: 7.0.1
+    dev: false
+
+  /@crossed/ui@0.9.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native-web@0.19.12)(react-native@0.75.3)(react@18.3.1):
     resolution: {integrity: sha512-mrGQE6Mb1xbmpVPCe/PCXpNn15+zOAv+2HmXun1ftW5HyBKA7PpiFqdgkvl96+Q1d5oIWWUCgGIVluZJoGcSpw==}
     dependencies:
-      '@crossed/core': 0.8.0(react-native@0.75.3)(react@18.3.1)
-      '@crossed/primitive': 1.7.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1)
-      '@crossed/styled': 0.13.0(react-native@0.75.3)(react@18.3.1)(ts-node@10.8.1)
+      '@crossed/core': 0.8.1(react-native@0.75.3)(react@18.3.1)
+      '@crossed/primitive': 1.8.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1)
+      '@crossed/styled': 0.14.0(react-dom@18.3.1)(react-native-web@0.19.12)(react-native@0.75.3)(react@18.3.1)
       '@crossed/unicons': 0.6.0(react-native-svg@13.14.1)(react-native@0.75.3)(react@18.3.1)
       '@expo/html-elements': 0.5.1
       '@floating-ui/react': 0.25.4(react-dom@18.3.1)(react@18.3.1)
@@ -2790,7 +2812,7 @@ packages:
       - react
       - react-dom
       - react-native
-      - ts-node
+      - react-native-web
     dev: false
 
   /@crossed/unicons@0.6.0(react-native-svg@13.14.1)(react-native@0.75.3)(react@18.3.1):
@@ -20737,10 +20759,6 @@ packages:
       slice-ansi: 2.1.0
       string-width: 3.1.0
     dev: true
-
-  /tailwind-merge@1.14.0:
-    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
-    dev: false
 
   /tailwindcss@3.4.13(ts-node@10.8.1):
     resolution: {integrity: sha512-KqjHOJKogOUt5Bs752ykCeiwvi0fKVkr5oqsFNt/8px/tA8scFPIlkygsf6jXrfCqGHz7VflA6+yytWuM+XhFw==}
