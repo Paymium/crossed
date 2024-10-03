@@ -25,6 +25,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "target": "esnext",
-    "types": ["@crossed/theme"]
+    "types": ["@crossed/theme", "node"]
   }
 }

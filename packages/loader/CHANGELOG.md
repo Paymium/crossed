@@ -1,5 +1,11 @@
 # @crossed/loader
 
+## 1.0.2
+
+### Patch Changes
+
+- fix build css
+
 ## 1.0.1
 
 ### Patch Changes

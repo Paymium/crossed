@@ -1,17 +1,17 @@
 import { create } from '@storybook/theming';
 
 import { themes } from '@crossed/theme';
-
+// @ts-ignore
+const isDev = process.env.NODE_ENV === 'development';
 export default create({
   base: 'light',
   brandTitle: 'Crossed',
-  brandUrl: '/crossed',
-  brandImage: '/logo.png',
+  brandUrl: isDev ? '/' : '/crossed',
+  brandImage: isDev ? '/logo.png' : '/crossed/logo.png',
   brandTarget: '_self',
 
   // colorPrimary: themes.light.colors.primary[1],
   // colorSecondary: themes.light.colors.primary[0],
-
 
   // // UI
   // appBg: themes.light.colors.background.primary,
@@ -29,7 +29,7 @@ export default create({
   // barSelectedColor: themes.light.colors.text.brand,
   // barHoverColor: themes.light.colors.text.primary,
   // barBg: themes.light.colors.background.primary,
- 
+
   // // Form colors
   // inputBg: themes.light.colors.background.primary,
   // inputBorder: themes.light.colors.border.primary,

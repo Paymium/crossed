@@ -54,6 +54,12 @@ export default class StylePlugin {
           events: ['css_output_success'],
         })
       );
+    } else {
+      this.logger.error(
+        apiLog({
+          events: ['css_output_error'],
+        })
+      );
     }
   }
   apply = (compiler: Compiler) => {
@@ -133,7 +139,8 @@ export default class StylePlugin {
 
         if (
           /\.jsx?/.test(path.extname(userRequest)) ||
-          /\.tsx?/.test(path.extname(userRequest))
+          /\.tsx?/.test(path.extname(userRequest)) ||
+          /\.mdx?/.test(path.extname(userRequest))
         ) {
           type NormalModuleLoader = {
             loader: string;
@@ -170,6 +177,7 @@ export default class StylePlugin {
       } else {
         compilation.hooks.normalModuleLoader.tap(pluginName, tapCallback);
       }
+      this.writeCss(virtualModules);
     });
 
     /**
@@ -177,16 +185,6 @@ export default class StylePlugin {
      */
     compiler.hooks.afterCompile.tap(pluginName, () => {
       this.writeCss(virtualModules);
-    });
-
-    /**
-     * Load at run css
-     */
-    compiler.hooks.beforeCompile.tap(pluginName, () => {
-      virtualModules.writeModule(
-        'node_modules/crossed.css',
-        parseAst.getCSS() || ''
-      );
     });
   };
 }

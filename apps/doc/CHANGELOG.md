@@ -1,5 +1,13 @@
 # crossed-doc
 
+## 0.1.8
+
+### Patch Changes
+
+- fix build css
+- Updated dependencies
+  - @crossed/webpack@2.0.3
+
 ## 0.1.7
 
 ### Patch Changes

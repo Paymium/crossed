@@ -47,6 +47,7 @@ const esmBuild = (configPath: string) => {
 const cache = new Map();
 
 export class Loader {
+  private emit?: () => void;
   private logger: ReturnType<typeof createLogger>;
 
   private css: string;
@@ -66,6 +67,7 @@ export class Loader {
     emit?: any;
     css?: string;
   } = {}) {
+    this.emit = emit;
     this.css = css || '';
     this.logger = createLogger({ label: 'CrossedLoader', level });
     this.logger.debug(
@@ -105,7 +107,7 @@ export class Loader {
           } catch (i) {
             this.logger.error(i.toString());
           }
-          emit();
+          this.emit?.();
         };
         const reg = /require\("(.*)"\)/gi;
         const t = code.matchAll(reg);
@@ -232,6 +234,7 @@ export class Loader {
 
       // add css in cahce file
       this.fileCache.set(className, obj.wrapper ? obj.wrapper(css) : css);
+      this.emit?.();
     });
   };
 
