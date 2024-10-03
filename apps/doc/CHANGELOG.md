@@ -1,5 +1,11 @@
 # crossed-doc
 
+## 0.1.4
+
+### Patch Changes
+
+- 0bbe81a: fix load style
+
 ## 0.1.3
 
 ### Patch Changes
