@@ -1,5 +1,11 @@
 # crossed-doc
 
+## 0.1.1
+
+### Patch Changes
+
+- f908c22: force build
+
 ## 0.1.0
 
 ### Minor Changes
