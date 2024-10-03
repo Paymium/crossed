@@ -165,7 +165,7 @@ export class Loader {
       ...this.fileCache.values(),
       ...this.css.split(/\r?\n/),
     ]);
-    const { media, hover, focus, active, other } = values.reduce(
+    const { media, hover, focus, active, other, theme } = values.reduce(
       (acc, e) => {
         if (
           !acc.media.includes(e) &&
@@ -182,6 +182,8 @@ export class Loader {
             acc.focus.push(e);
           } else if (e.startsWith('.hover')) {
             acc.hover.push(e);
+          } else if (e.startsWith('.dark') || e.startsWith('.light')) {
+            acc.theme.push(e);
           } else {
             acc.other.push(e);
           }
@@ -194,11 +196,13 @@ export class Loader {
         focus: [],
         active: [],
         other: [],
+        theme: [],
       }
     );
     return [
-      other,
+      theme,
       hover,
+      other,
       focus,
       active,
       media.sort((a, b) => {
@@ -211,6 +215,7 @@ export class Loader {
       }),
     ]
       .flat(Infinity)
+      .filter((value, index, array) => array.indexOf(value) === index)
       .join('\n');
   }
 

@@ -19,6 +19,7 @@ export type StylePluginOptions = {
   level?: string;
   isServer?: boolean;
   isWatch?: boolean;
+  out?: string;
 };
 
 let parseAst: Loader;
@@ -40,7 +41,8 @@ export default class StylePlugin {
     if (css) {
       virtualModules.writeModule('node_modules/crossed.css', css);
 
-      const pathCss = path.resolve(process.cwd(), '.crossed');
+      const pathCss =
+        this.options.out ?? path.resolve(process.cwd(), '.crossed');
 
       try {
         statSync(pathCss);
@@ -71,7 +73,7 @@ export default class StylePlugin {
     const virtualModules = new VirtualModulesPlugin();
     virtualModules.apply(compiler);
 
-    const pathCss = path.resolve(process.cwd(), '.crossed');
+    const pathCss = this.options.out ?? path.resolve(process.cwd(), '.crossed');
 
     let css = '';
     try {
@@ -177,7 +179,6 @@ export default class StylePlugin {
       } else {
         compilation.hooks.normalModuleLoader.tap(pluginName, tapCallback);
       }
-      this.writeCss(virtualModules);
     });
 
     /**
