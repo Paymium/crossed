@@ -84,11 +84,17 @@ export default class StylePlugin {
         })
       );
     } catch (e) {
-      this.logger.error(
-        apiLog({
-          events: ['css_output_error'],
-        })
-      );
+      try {
+        writeFileSync(path.resolve(pathCss, 'crossed.css'), '', {
+          encoding: 'utf-8',
+        });
+      } catch (y) {
+        this.logger.error(
+          apiLog({
+            events: ['css_output_error'],
+          })
+        );
+      }
     }
 
     /**

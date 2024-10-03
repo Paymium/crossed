@@ -1,5 +1,11 @@
 # @crossed/webpack
 
+## 2.0.2
+
+### Patch Changes
+
+- should try write css tmp
+
 ## 2.0.1
 
 ### Patch Changes
