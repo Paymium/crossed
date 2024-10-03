@@ -1,5 +1,11 @@
 # crossed-doc
 
+## 0.1.6
+
+### Patch Changes
+
+- force build
+
 ## 0.1.5
 
 ### Patch Changes
