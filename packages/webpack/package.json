@@ -1,6 +1,6 @@
 {
   "name": "@crossed/webpack",
-  "version": "2.0.0-beta.37",
+  "version": "2.0.0",
   "description": "",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -18,8 +18,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@crossed/loader": "1.0.0-beta.34",
-    "@crossed/log": "0.1.1-beta.0",
+    "@crossed/loader": "1.0.0",
+    "@crossed/log": "0.1.1",
     "esprima": "^4.0.1",
     "static-eval": "^2.1.1",
     "ts-pattern": "^5.0.6",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@crossed/build": "^0.5.0",
-    "@crossed/styled": "0.14.0-beta.23",
+    "@crossed/styled": "0.14.0",
     "@types/esprima": "^4.0.6",
     "@types/node": "^20.11.16",
     "ts-loader": "^9.5.1",
@@ -37,6 +37,6 @@
     "webpack-dev-server": "^4.15.1"
   },
   "peerDependencies": {
-    "@crossed/styled": "0.14.0-beta.23"
+    "@crossed/styled": "0.14.0"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@crossed/loader",
   "description": "",
-  "version": "1.0.0-beta.34",
+  "version": "1.0.0",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
@@ -16,8 +16,8 @@
   },
   "devDependencies": {
     "@crossed/build": "*",
-    "@crossed/styled": "0.14.0-beta.23",
-    "@crossed/test": "0.12.0-beta.1",
+    "@crossed/styled": "0.14.0",
+    "@crossed/test": "0.12.0",
     "@crossed/theme": "workspace:^",
     "@types/escodegen": "^0.0.10",
     "@types/esprima": "^4.0.6",
@@ -27,11 +27,11 @@
     "typescript": "^5.4.2"
   },
   "peerDependencies": {
-    "@crossed/styled": "0.14.0-beta.23",
+    "@crossed/styled": "0.14.0",
     "@crossed/theme": "workspace:^"
   },
   "dependencies": {
-    "@crossed/log": "0.1.1-beta.0",
+    "@crossed/log": "0.1.1",
     "esbuild": "^0.17.17",
     "escodegen": "^2.1.0",
     "esprima": "^4.0.1",

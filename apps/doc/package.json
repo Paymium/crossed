@@ -1,7 +1,7 @@
 {
   "name": "crossed-doc",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,10 +13,10 @@
     "chromatic": "npx chromatic --project-token=chpt_4047e48604d2a77"
   },
   "dependencies": {
-    "@crossed/styled": "workspace:0.14.0-beta.23",
-    "@crossed/theme": "workspace:2.0.0-beta.22",
-    "@crossed/ui": "workspace:1.0.0-beta.50",
-    "@crossed/webpack": "workspace:2.0.0-beta.37",
+    "@crossed/styled": "workspace:0.14.0",
+    "@crossed/theme": "workspace:2.0.0",
+    "@crossed/ui": "workspace:1.0.0",
+    "@crossed/webpack": "workspace:2.0.0",
     "@gorhom/portal": "^1.0.14",
     "@storybook/theming": "^8.3.4",
     "os-browserify": "^0.3.0",

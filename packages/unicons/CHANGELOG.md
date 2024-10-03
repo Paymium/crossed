@@ -1,5 +1,63 @@
 # @crossed/unicons
 
+## 1.0.0
+
+### Minor Changes
+
+- 4ae3b66: add CheckCircle and X
+
+### Patch Changes
+
+- b134732: add dynamic style, add Tabs component design
+- 0cf4ddc: add select, checkbox, radio
+- 063b0b6: remove theme and force build
+- 73aac8d: remove theme
+- Updated dependencies [1e28220]
+- Updated dependencies [3a5f196]
+- Updated dependencies [31d39e1]
+- Updated dependencies [5ef1603]
+- Updated dependencies [9dc6752]
+- Updated dependencies [9f9998b]
+- Updated dependencies [ffc415d]
+- Updated dependencies [b134732]
+- Updated dependencies [1fc6595]
+- Updated dependencies [c1e88c5]
+- Updated dependencies [eecd156]
+- Updated dependencies [3a58e76]
+- Updated dependencies [d9f9372]
+- Updated dependencies [7a7a589]
+- Updated dependencies [0cf4ddc]
+- Updated dependencies [20288fe]
+- Updated dependencies [10f885c]
+- Updated dependencies [511e2e5]
+- Updated dependencies [42c47b7]
+- Updated dependencies [6350321]
+- Updated dependencies [31e0003]
+- Updated dependencies [c7e44dc]
+- Updated dependencies [24cc920]
+- Updated dependencies [45ad4d6]
+- Updated dependencies [ffc415d]
+- Updated dependencies [abb1d02]
+- Updated dependencies [b002577]
+- Updated dependencies [a2fd5e3]
+- Updated dependencies [017fd84]
+- Updated dependencies [029c76f]
+- Updated dependencies [20288fe]
+- Updated dependencies [e965552]
+- Updated dependencies [c4f8fd7]
+- Updated dependencies [511e2e5]
+- Updated dependencies [cd4d732]
+- Updated dependencies [8357e97]
+- Updated dependencies [8917db4]
+- Updated dependencies [98b55c6]
+- Updated dependencies [f1c8cbd]
+- Updated dependencies [4f81cb4]
+- Updated dependencies [9f30f85]
+- Updated dependencies [63171a9]
+  - @crossed/styled@0.14.0
+  - @crossed/theme@2.0.0
+  - @crossed/core@0.8.1
+
 ## 1.0.0-beta.32
 
 ### Patch Changes

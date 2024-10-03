@@ -1,5 +1,15 @@
 # @crossed/core
 
+## 0.8.1
+
+### Patch Changes
+
+- 1fc6595: some fix
+- eecd156: remove helper
+- 3a58e76: add null type on composeEventHandler
+- 0cf4ddc: add select, checkbox, radio
+- 45ad4d6: fix typescript error not pass props
+
 ## 0.8.1-beta.3
 
 ### Patch Changes

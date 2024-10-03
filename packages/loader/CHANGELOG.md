@@ -1,5 +1,71 @@
 # @crossed/loader
 
+## 1.0.0
+
+### Minor Changes
+
+- eaafec9: not build config in out, but build in memory
+- 09f4ad0: add hot reload when change theme config file
+
+### Patch Changes
+
+- 1fc6595: some fix
+- 33e1cec: increase behavior cache
+- 7a7a589: some fix after first usage in external project
+- 511e2e5: replace space by -
+- 9784bf6: sort media to be end of css, and order by width
+- 429b40b: add cache css
+- 714348b: add not hover on active css
+- 07d4024: fix padding error on alert
+- e965552: remove variants
+- 10f885c: fix test
+- cd4d732: change import plugin
+- 63171a9: remove Theme plugin for add theme in core, delete withStyle, and createStyles return directly hooks
+- Updated dependencies [1e28220]
+- Updated dependencies [3a5f196]
+- Updated dependencies [31d39e1]
+- Updated dependencies [5ef1603]
+- Updated dependencies [9dc6752]
+- Updated dependencies [9f9998b]
+- Updated dependencies [ffc415d]
+- Updated dependencies [b134732]
+- Updated dependencies [1fc6595]
+- Updated dependencies [c1e88c5]
+- Updated dependencies [d9f9372]
+- Updated dependencies [7a7a589]
+- Updated dependencies [0cf4ddc]
+- Updated dependencies [20288fe]
+- Updated dependencies [10f885c]
+- Updated dependencies [511e2e5]
+- Updated dependencies [42c47b7]
+- Updated dependencies [6350321]
+- Updated dependencies [31e0003]
+- Updated dependencies [c7e44dc]
+- Updated dependencies [24cc920]
+- Updated dependencies [45ad4d6]
+- Updated dependencies [ffc415d]
+- Updated dependencies [429b40b]
+- Updated dependencies [abb1d02]
+- Updated dependencies [b002577]
+- Updated dependencies [a2fd5e3]
+- Updated dependencies [017fd84]
+- Updated dependencies [029c76f]
+- Updated dependencies [20288fe]
+- Updated dependencies [e965552]
+- Updated dependencies [c4f8fd7]
+- Updated dependencies [511e2e5]
+- Updated dependencies [cd4d732]
+- Updated dependencies [8357e97]
+- Updated dependencies [8917db4]
+- Updated dependencies [98b55c6]
+- Updated dependencies [f1c8cbd]
+- Updated dependencies [4f81cb4]
+- Updated dependencies [9f30f85]
+- Updated dependencies [63171a9]
+  - @crossed/styled@0.14.0
+  - @crossed/theme@2.0.0
+  - @crossed/log@0.1.1
+
 ## 1.0.0-beta.34
 
 ### Patch Changes

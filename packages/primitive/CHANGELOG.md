@@ -1,5 +1,27 @@
 # @crossed/primitive
 
+## 1.8.0
+
+### Minor Changes
+
+- 6bb68fe: add Modal
+- f768120: add Accordion
+- 18018df: add icon in button
+- f768120: add VisibilityHidden component
+
+### Patch Changes
+
+- 1fc6595: some fix
+- 0cf4ddc: add select, checkbox, radio
+- 42ae419: change VisibilityHidden
+- 9ecd4b0: fix error text and button typescript
+- Updated dependencies [1fc6595]
+- Updated dependencies [eecd156]
+- Updated dependencies [3a58e76]
+- Updated dependencies [0cf4ddc]
+- Updated dependencies [45ad4d6]
+  - @crossed/core@0.8.1
+
 ## 1.8.0-beta.5
 
 ### Patch Changes

@@ -1,5 +1,57 @@
 # @crossed/theme
 
+## 2.0.0
+
+### Minor Changes
+
+- 3a5f196: add Tag component
+- 10f885c: add Tag component
+- 24cc920: add hover and active color
+- a2fd5e3: add Card theme
+- 8357e97: add theme for Alert component
+
+### Patch Changes
+
+- 5ef1603: some fix disabled on label and input and theme
+- 9f9998b: wrong text primary color light mode
+- b134732: add dynamic style, add Tabs component design
+- 6350321: fix error input disabled and change style props CloseButton
+- ffc415d: split files
+- Updated dependencies [1e28220]
+- Updated dependencies [31d39e1]
+- Updated dependencies [5ef1603]
+- Updated dependencies [9dc6752]
+- Updated dependencies [ffc415d]
+- Updated dependencies [b134732]
+- Updated dependencies [1fc6595]
+- Updated dependencies [c1e88c5]
+- Updated dependencies [d9f9372]
+- Updated dependencies [7a7a589]
+- Updated dependencies [0cf4ddc]
+- Updated dependencies [20288fe]
+- Updated dependencies [511e2e5]
+- Updated dependencies [42c47b7]
+- Updated dependencies [31e0003]
+- Updated dependencies [c7e44dc]
+- Updated dependencies [45ad4d6]
+- Updated dependencies [abb1d02]
+- Updated dependencies [b002577]
+- Updated dependencies [a2fd5e3]
+- Updated dependencies [017fd84]
+- Updated dependencies [029c76f]
+- Updated dependencies [20288fe]
+- Updated dependencies [e965552]
+- Updated dependencies [c4f8fd7]
+- Updated dependencies [511e2e5]
+- Updated dependencies [cd4d732]
+- Updated dependencies [8917db4]
+- Updated dependencies [98b55c6]
+- Updated dependencies [f1c8cbd]
+- Updated dependencies [4f81cb4]
+- Updated dependencies [9f30f85]
+- Updated dependencies [63171a9]
+  - @crossed/styled@0.14.0
+
 ## 2.0.0-beta.22
 
 ### Patch Changes

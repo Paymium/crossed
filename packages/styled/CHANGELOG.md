@@ -1,5 +1,52 @@
 # @crossed/styled
 
+## 0.14.0
+
+### Minor Changes
+
+- 31d39e1: add plugin
+- 42c47b7: add inlineStyle
+- 31e0003: feat(styled): add exports in package.json
+- a2fd5e3: add Card theme
+
+### Patch Changes
+
+- 1e28220: fix hover and disabled state conflict in className
+- 5ef1603: some fix disabled on label and input and theme
+- 9dc6752: improve performance
+- ffc415d: theme parse not apply parent name
+- b134732: add dynamic style, add Tabs component design
+- 1fc6595: some fix
+- c1e88c5: missing max and min for height and width property in normalizeUnitPixel
+- d9f9372: not pass state props on component styled
+- 7a7a589: some fix after first usage in external project
+- 0cf4ddc: add select, checkbox, radio
+- 20288fe: add setInitialThemeName method
+- 511e2e5: replace space by -
+- c7e44dc: wrong export type of unistyles
+- 45ad4d6: fix typescript error not pass props
+- abb1d02: remove registry.subscribe for web
+- b002577: force publish
+- 017fd84: fix useInteraction wrong condition
+- 029c76f: missign type
+- 20288fe: not change css theme className if already exist
+- e965552: remove variants
+- c4f8fd7: increase ExtractForProps behavior typescript
+- 511e2e5: ameliorate web plugin and add types
+- cd4d732: change import plugin
+- 8917db4: state not apply (hovered, active, focus)
+- 98b55c6: type
+- f1c8cbd: fix valueNormalize is number
+- 4f81cb4: fix registry isWeb
+- 9f30f85: add undefined in combineStyles
+- 63171a9: remove Theme plugin for add theme in core, delete withStyle, and createStyles return directly hooks
+- Updated dependencies [1fc6595]
+- Updated dependencies [eecd156]
+- Updated dependencies [3a58e76]
+- Updated dependencies [0cf4ddc]
+- Updated dependencies [45ad4d6]
+  - @crossed/core@0.8.1
+
 ## 0.14.0-beta.23
 
 ### Patch Changes
