@@ -30,10 +30,25 @@ const useText = createStyles((t) => ({
 }));
 
 export type TextProps = Omit<TextNativeProps, 'style'> & {
+  /**
+   * Color of text
+   */
   color?: keyof typeof fontColorStyles;
+  /**
+   * Extends style
+   */
   style?: CrossedMethods<any>;
+  /**
+   * Select font-weight
+   */
   weight?: keyof typeof fontWeightStyles;
+  /**
+   * select font-size
+   */
   size?: keyof typeof fontSizeStyles;
+  /**
+   * select text-align
+   */
   textAlign?: keyof typeof textAlignStyles;
 };
 
@@ -47,7 +62,7 @@ const Text = withReactive(
         size = 'md',
         style,
         ...props
-      },
+      }: TextProps,
       ref
     ) => {
       return (

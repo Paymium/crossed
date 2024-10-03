@@ -141,16 +141,24 @@ const containerStyles = createStyles(({ components: { Alert } }) => ({
   },
 }));
 
-type ContainerProps = YBoxProps & { status?: keyof typeof containerStyles };
+type Status = keyof typeof containerStyles;
 
-const alertContext = createContext<Pick<ContainerProps, 'status'>>({});
+export type AlertProps = YBoxProps & {
+  /**
+   * Select style of alert
+   * @default 'infos'
+   */
+  status?: Status;
+};
+
+const alertContext = createContext<Pick<AlertProps, 'status'>>({});
 
 const Container = ({
   status = 'info',
   children,
   style,
   ...props
-}: ContainerProps) => {
+}: AlertProps) => {
   return (
     <alertContext.Provider value={{ status }}>
       <YBox
@@ -168,6 +176,7 @@ const Container = ({
     </alertContext.Provider>
   );
 };
+Container.displayName = 'Alert';
 
 const Icon = () => {
   const { status } = useContext(alertContext);
@@ -187,6 +196,7 @@ const Icon = () => {
     </Box>
   );
 };
+Icon.displayName = 'Alert.Icon';
 
 const Description = (props: TextProps) => {
   const { status } = useContext(alertContext);
@@ -201,6 +211,7 @@ const Description = (props: TextProps) => {
     />
   );
 };
+Description.displayName = 'Alert.Description';
 
 export type GroupProps = { style?: CrossedMethods<any, any> } & Omit<
   TextProps,
@@ -216,6 +227,7 @@ const Group = ({ style, ...props }: GroupProps) => {
     />
   );
 };
+Group.displayName = 'Alert.Group';
 
 const Action = (props: ButtonProps) => {
   const { status } = useContext(alertContext);
@@ -228,6 +240,7 @@ const Action = (props: ButtonProps) => {
     />
   );
 };
+Action.displayName = 'Alert.Action';
 
 const ActionText = (props: ButtonTextProps) => {
   const { status } = useContext(alertContext);
@@ -238,6 +251,7 @@ const ActionText = (props: ButtonTextProps) => {
     />
   );
 };
+ActionText.displayName = 'Alert..ActionText';
 
 const Alert = withStaticProperties(Container, {
   Icon,

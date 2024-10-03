@@ -6,10 +6,15 @@
  */
 
 'use client';
-import { withStaticProperties } from '@crossed/core';
+import { withDefaultProps, withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
 import { Button, type ButtonProps } from '../forms/Button';
-import { composeStyles, createStyles, useTheme } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  CrossedMethods,
+  useTheme,
+} from '@crossed/styled';
 import { createContext, useContext } from 'react';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
 import { Box } from '../layout/Box';
@@ -156,8 +161,16 @@ const Container = ({
     </bannerContext.Provider>
   );
 };
+Container.displayName = 'Banner';
 
-const Icon = () => {
+const BannerIcon = ({
+  style,
+}: {
+  /**
+   * Style of container Box
+   */
+  style?: CrossedMethods<any>;
+}) => {
   const { status } = useContext(bannerContext);
   const theme = useTheme();
   const color = theme.components.Banner[status].icon;
@@ -172,15 +185,17 @@ const Icon = () => {
       center
       style={composeStyles(
         bannerStyles.containerIcon,
-        containerIconStyles[status]
+        containerIconStyles[status],
+        style
       )}
     >
       <Comp color={color} size={16} />
     </Box>
   );
 };
+BannerIcon.displayName = 'Banner.Icon';
 
-const Title = ({ style, ...props }: TextProps) => {
+const BannerTitle = ({ style, ...props }: TextProps) => {
   const { status } = useContext(bannerContext);
   return (
     <Text
@@ -190,7 +205,9 @@ const Title = ({ style, ...props }: TextProps) => {
     />
   );
 };
-const Description = (props: TextProps) => {
+BannerTitle.displayName = 'Banner.Title';
+
+const BannerDescription = (props: TextProps) => {
   const { status } = useContext(bannerContext);
   return (
     <Text
@@ -203,30 +220,30 @@ const Description = (props: TextProps) => {
     />
   );
 };
+BannerDescription.displayName = 'Banner.Description';
 
-const Action = (props: ButtonProps) => {
-  return (
-    <Button
-      variant="tertiary"
-      size={false}
-      {...props}
-      style={bannerStyles.action}
-    />
-  );
-};
+// const BannerAction = (props: ButtonProps) => {
+//   return (
+//     <Button
+//       variant="tertiary"
+//       size={false}
+//       {...props}
+//       style={bannerStyles.action}
+//     />
+//   );
+// };
+const BannerAction = withDefaultProps<ButtonProps>(Button, {
+  variant: 'tertiary',
+  size: false,
+  style: bannerStyles.action,
+});
+BannerAction.displayName = 'Banner.Action';
 
 const Banner = withStaticProperties(Container, {
-  Icon,
-  Title,
-  Description,
-  Action,
-});
-
-const {
   Icon: BannerIcon,
   Title: BannerTitle,
   Description: BannerDescription,
   Action: BannerAction,
-} = Banner;
+});
 
 export { Banner, BannerIcon, BannerTitle, BannerDescription, BannerAction };

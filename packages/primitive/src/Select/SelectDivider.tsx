@@ -7,7 +7,9 @@
 
 import { forwardRef, type ComponentType } from 'react';
 
-export const createSelectDivider = <P,>(StyledRoot: ComponentType<P>) =>
-  forwardRef<any, P>((props, ref) => {
-    return <StyledRoot role="separator" {...props} ref={ref} />;
+export const createSelectDivider = <P extends Record<string, any>>(
+  StyledRoot: ComponentType<P>
+) =>
+  forwardRef<P['ref'], P>((props, ref) => {
+    return <StyledRoot role="separator" {...(props as any)} ref={ref} />;
   });

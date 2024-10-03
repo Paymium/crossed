@@ -14,7 +14,7 @@ export const createSheetOverlay = <P,>(Styled: ComponentType<P>) =>
     const { setOpen } = useContext();
     return (
       <Styled
-        {...props}
+        {...(props as any)}
         onPress={composeEventHandlers((props as any).onPress, () => {
           setOpen(false);
         })}

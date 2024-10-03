@@ -9,7 +9,6 @@ import { ComponentType, forwardRef } from 'react';
 import { useContext } from './context';
 import { composeEventHandlers } from '@crossed/core';
 import { RovingFocus } from '../utils/RovingFocus';
-import type { RequiredAccessibilityProps } from '../types';
 
 export type DropdownItemProps = {
   disabled?: boolean;
@@ -19,10 +18,7 @@ export const createDropdownItem = <P extends Record<string, any>>(
 ) =>
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
-  forwardRef<
-    any,
-    DropdownItemProps & RequiredAccessibilityProps<P, 'aria-label'>
-  >((props, ref) => {
+  forwardRef<any, DropdownItemProps>((props, ref) => {
     const { setOpen } = useContext();
     return (
       <RovingFocus.Item ref={ref} focusable={!props.disabled}>

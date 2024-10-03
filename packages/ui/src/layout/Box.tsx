@@ -30,8 +30,18 @@ const styleBox = createStyles(
 );
 
 export type BoxProps = {
+  /**
+   * extends style
+   */
   style?: CrossedMethods<any>;
+  /**
+   * Gap between children
+   */
   space?: keyof typeof gapStyles;
+  /**
+   * Center content
+   * @default false
+   */
   center?: boolean;
 } & Omit<BaseCrossedPropsExtended & ViewProps, 'style'>;
 

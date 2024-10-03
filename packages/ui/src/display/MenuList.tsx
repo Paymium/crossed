@@ -10,15 +10,22 @@ import { createList } from '@crossed/primitive';
 import {
   composeStyles,
   createStyles,
+  CrossedMethods,
   withReactive,
-  type ExtractForProps,
+  // type ExtractForProps,
 } from '@crossed/styled';
 import { Text, type TextProps } from '../typography/Text';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { Divider as D } from '../layout/Divider';
 import { Button, type ButtonProps } from '../forms/Button';
 import { type GetProps, createScope } from '@crossed/core';
-import { forwardRef, memo } from 'react';
+import {
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  memo,
+  useCallback,
+} from 'react';
 import { Pressable, View, type PressableProps } from 'react-native';
 
 const useMenuList = createStyles((t) => ({
@@ -81,24 +88,28 @@ const Divider = D;
 const Item = withReactive(
   forwardRef<
     View,
-    PressableProps & Omit<ExtractForProps<typeof useMenuList.item>, 'variants'>
-  >(({ active, focus, hover, ...props }, ref) => {
-    return (
-      <Pressable
-        {...props}
-        style={({ pressed }) =>
-          useMenuList.item.rnw({
-            active: active ?? pressed,
-            focus,
-            hover,
-            style:
-              typeof props.style === 'function'
-                ? props.style({ pressed })
-                : (props.style as any),
-          }).style
-        }
-        ref={ref}
-      />
+    Omit<PressableProps, 'style'> & {
+      asChild?: boolean;
+      style?: CrossedMethods<any>;
+    }
+  >(({ asChild, style, children, ...props }, ref) => {
+    const styleCallback = useCallback(
+      ({ pressed }) =>
+        composeStyles(useMenuList.item, style).rnw({
+          active: pressed,
+          // focus,
+          // hover,
+        }).style,
+      [style]
+    );
+    return asChild && isValidElement(children) ? (
+      cloneElement(children, {
+        style: styleCallback,
+      } as any)
+    ) : (
+      <Pressable {...props} style={styleCallback} ref={ref}>
+        {children}
+      </Pressable>
     );
   })
 );

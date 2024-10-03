@@ -275,14 +275,14 @@ const Trigger = withStaticProperties(
 );
 
 const Option = ({ value, ...props }: MenuItemProps & { value: string }) => {
-  const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
+  const { setOpen, setValue } = useSelectProvider();
   const focusProps = useFocusScope();
   return (
     <MenuList.Item
-      active={value === valueGlobal}
+      // active={value === valueGlobal}
       {...props}
       {...focusProps}
-      style={({ pressed }) => useSelect.options.rnw({ active: pressed }).style}
+      style={useSelect.options}
       onPress={composeEventHandlers(() => {
         setOpen(false);
         setValue(value);

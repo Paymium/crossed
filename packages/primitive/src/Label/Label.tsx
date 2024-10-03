@@ -14,7 +14,7 @@ export const createLabelMain = <P,>(StyledRoot: ComponentType<P>) =>
     const inputRef = useRef();
     return (
       <Provider id={id} inputRef={inputRef}>
-        <StyledRoot {...props} ref={ref} />
+        <StyledRoot {...(props as any)} ref={ref} />
       </Provider>
     );
   });

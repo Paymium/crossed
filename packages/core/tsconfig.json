@@ -9,7 +9,6 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": true,
     "esModuleInterop": true,
-    "importsNotUsedAsValues": "error",
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "lib": ["esnext", "dom"],
@@ -24,6 +23,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "types": ["jest"]
   }
 }

@@ -17,7 +17,7 @@ export const createButtonGroup = <T,>(StyledGroup: ComponentType<T>) =>
         <RovingFocusGroup orientation={props.orientation ?? 'horizontal'}>
           <ButtonGroupCollection.Provider>
             <ButtonGroupCollection.Slot>
-              <StyledGroup {...props} ref={ref} />
+              <StyledGroup {...(props as any)} ref={ref} />
             </ButtonGroupCollection.Slot>
           </ButtonGroupCollection.Provider>
         </RovingFocusGroup>
