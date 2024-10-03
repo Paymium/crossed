@@ -186,5 +186,15 @@ export default class StylePlugin {
     compiler.hooks.afterCompile.tap(pluginName, () => {
       this.writeCss(virtualModules);
     });
+
+    /**
+     * Load at run css
+     */
+    compiler.hooks.beforeCompile.tap(pluginName, () => {
+      virtualModules.writeModule(
+        'node_modules/crossed.css',
+        parseAst.getCSS() || ''
+      );
+    });
   };
 }
