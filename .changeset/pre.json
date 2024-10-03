@@ -2,8 +2,7 @@
   "mode": "pre",
   "tag": "beta",
   "initialVersions": {
-    "crossed-docs": "0.5.2",
-    "crossed-expo": "0.1.1",
+    "crossed-doc": "0.5.2",
     "@crossed/build": "0.5.0",
     "@crossed/core": "0.8.0",
     "@crossed/loader": "0.1.0",

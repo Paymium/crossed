@@ -1,5 +1,5 @@
 ---
-"crossed-docs": minor
+"crossed-doc": minor
 "@crossed/webpack": minor
 "@crossed/styled": minor
 ---

@@ -1,5 +1,5 @@
 ---
-'crossed-docs': patch
+'crossed-doc': patch
 '@crossed/core': patch
 '@crossed/loader': patch
 '@crossed/primitive': patch

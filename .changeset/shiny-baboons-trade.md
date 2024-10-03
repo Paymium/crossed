@@ -1,5 +1,5 @@
 ---
-'crossed-docs': minor
+'crossed-doc': minor
 '@crossed/ui': minor
 ---
 
