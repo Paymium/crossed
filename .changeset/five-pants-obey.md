@@ -1,5 +1,5 @@
 ---
-"crossed-docs": patch
+"crossed-doc": patch
 "@crossed/unicons": patch
 "@crossed/styled": patch
 "@crossed/theme": patch
