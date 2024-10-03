@@ -93,7 +93,7 @@ importers:
         specifier: 1.0.1
         version: link:../../packages/ui
       '@crossed/unicons':
-        specifier: workspace:*
+        specifier: 1.0.1
         version: link:../../packages/unicons
       '@react-native/gradle-plugin':
         specifier: ^0.75.3
@@ -180,6 +180,9 @@ importers:
       '@crossed/ui':
         specifier: workspace:1.0.1
         version: link:../../packages/ui
+      '@crossed/unicons':
+        specifier: 1.0.1
+        version: link:../../packages/unicons
       '@crossed/webpack':
         specifier: workspace:2.0.2
         version: link:../../packages/webpack
