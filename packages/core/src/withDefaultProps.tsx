@@ -6,25 +6,19 @@
  */
 
 import { forwardRef, type ComponentType } from 'react';
-import { withStaticProperties } from './withStaticProperties';
+type Compact<A> = { [K in keyof A]: A[K] };
 
-export function withDefaultProps<P extends Record<string, any>>(
-  Comp: ComponentType<P>,
-  defaultProps: Partial<P>
+type Diff<A extends object, OK extends keyof A> = Compact<
+  { [K in Exclude<keyof A, OK>]: A[K] } & { [K in OK]?: A[K] }
+>;
+
+export function withDefaultProps<A extends Record<string, any>>(
+  Comp: ComponentType<A>,
+  defaultProps: Partial<A>
 ) {
-  const { id, styleSheet, displayName } = Comp as any;
-  return withStaticProperties(
-    forwardRef(function WithDefaultPropsRender(
-      props: Omit<P, keyof typeof defaultProps> &
-        Partial<Pick<P, keyof typeof defaultProps>>,
-      ref: any
-    ) {
+  return forwardRef<A['ref'], Diff<A, keyof typeof defaultProps>>(
+    function WithDefaultPropsRender(props, ref) {
       return <Comp {...defaultProps} {...(props as any)} ref={ref} />;
-    }),
-    { id, styleSheet, displayName } as {
-      id?: string;
-      styleSheet: () => unknown;
-      displayName?: string;
     }
   );
 }

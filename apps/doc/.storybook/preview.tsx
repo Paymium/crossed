@@ -1,4 +1,4 @@
-import '../style.config';
+import '../src/style.config';
 import 'crossed.css';
 import * as React from 'react';
 import type { Preview } from '@storybook/react';

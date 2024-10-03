@@ -1,0 +1,14 @@
+import { Source } from '@storybook/blocks';
+
+# composeStyles
+
+composeStyles allows you to merge the styles passed as parameters in priority order, the last one being of high priority
+
+<Source
+  language='tsx'
+  code={`composeStyles(
+  styles.default,
+  props.disabled && styles.disabled,
+  props.variant === "toto" && [variantsStyles.default, variantsStyles.toto]
+)`}
+/>

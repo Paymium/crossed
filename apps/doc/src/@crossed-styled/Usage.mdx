@@ -1,0 +1,36 @@
+import { Source } from '@storybook/blocks';
+
+# Usage
+
+Create your styles
+<Source language='tsx' code={`
+import { createStyle } from '@crossed/styled';
+
+const styles = createStyle(()=> ({
+  disabled: { base: { opacity: 0.5, pointerEvent: "none", cursor: "not-allowed" } },
+  button: { base: { backgroundColor: "cyan" }, ':hover': { backgroundColor: "blue" } },
+  text: { base: { color: "white" } },
+}));
+`} />
+
+Use it
+<Source language='tsx' code={`
+import { Text, type TextProps } from "react-native";
+import { type CrossedMethods, composeStyles } from '@crossed/styled';
+
+type MyComponentProps = Omit<TextProps, "style"> & { style?: CrossedMethods<any>, title: string },
+
+export const MyComponent = ({title, style, ...props}: MyComponentProps) => {
+  return (
+    <Pressable style={({ pressed, hovered, focused })=>composeStyles(
+        styles.button,
+        props.disabled && styles.disabled,
+        style
+      ).rnw({ active: pressed, hover: hovered, focus: focused }).style}>
+      <Text {...props} {...styles.text.rnw()}>
+        {title}
+      </Text>
+    </Pressable>
+  );
+};
+`} />

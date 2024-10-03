@@ -22,7 +22,7 @@
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {
-    "react": "18.2.0"
+    "react": "18.3.1"
   },
   "husky": {
     "hooks": {
@@ -45,11 +45,11 @@
     "@size-limit/preset-small-lib": "^8.1.2",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "18.11.10",
-    "@types/react": "^18.2.64",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "husky": "^8.0.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "size-limit": "^8.1.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.5.0",

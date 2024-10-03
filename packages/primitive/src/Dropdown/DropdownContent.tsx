@@ -18,7 +18,7 @@ export const createDropdownContent = <P,>(StyledRoot: ComponentType<P>) =>
         <VisibilityHidden hidden={!open}>
           <StyledRoot
             role="menu"
-            {...props}
+            {...(props as any)}
             ref={ref}
             id={id}
             aria-labelledby={`label-${id}`}

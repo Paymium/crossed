@@ -1,3 +1,95 @@
-import { Meta } from '@storybook/blocks';
+import { Button, Text, Card, XBox } from '@crossed/ui';
+import { Pressable } from 'react-native';
+import { Github } from '@crossed/unicons';
+import { createStyles, inlineStyle } from '@crossed/styled';
+import LinkTo from '@storybook/addon-links/react';
 
-# Doc
+<div
+  {...inlineStyle(() => ({
+    base: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  })).style()}
+>
+  ![image](/logo.svg)
+</div>
+<div
+  {...inlineStyle(() => ({
+    base: { textAlign: 'center' },
+  })).style()}
+>
+  # Crossed
+</div>
+
+<div
+  {...inlineStyle(() => ({
+    base: {
+      textAlign: 'center',
+      maxWidth: '50%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      fontSize: 24,
+    },
+  })).style()}
+>
+  Explore our ecosystem to develop cross-platform applications with react-native
+  and react-native-web
+</div>
+<div
+  {...inlineStyle(() => ({
+    base: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  })).style()}
+>
+  <Button>
+    <Button.Text>Star us</Button.Text>
+    <Button.Icon>
+      <Github />
+    </Button.Icon>
+  </Button>
+</div>
+
+<div
+  {...inlineStyle(() => ({
+    base: {
+      textAlign: 'center',
+      maxWidth: '50%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: 50
+    },
+  })).style()}
+>
+## Cross platform ecosystem
+
+<XBox space="md">
+<LinkTo kind='@crossed-styled-introduction' story='docs' {...inlineStyle(()=>({base:{flex:1, display: "block"}})).style()}>
+  <Card style={inlineStyle(()=>({base:{flex:1}}))}>
+    <Card.Title textAlign="center">
+      @crossed/styled
+    </Card.Title>
+    <Card.Description textAlign="center">
+      <b>Styled your component</b>
+    </Card.Description>
+  </Card>
+  </LinkTo>
+
+<LinkTo kind='@crossed⁄ui-Alert' story='docs' {...inlineStyle(()=>({base:{flex:1, display: "block"}})).style()}>
+  <Card style={inlineStyle(()=>({base:{flex:1}}))}>
+    <Card.Title textAlign="center">
+      @crossed/ui
+    </Card.Title>
+    <Card.Description textAlign="center">
+      <b>UI Component made with @crossed/styled</b>
+    </Card.Description>
+  </Card>
+  </LinkTo>
+</XBox>
+</div>

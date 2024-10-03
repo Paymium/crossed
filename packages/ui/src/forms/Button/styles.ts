@@ -12,7 +12,7 @@ export const buttonErrorStyles = createStyles(
     ({
       error: {
         web: {
-          ':focus': {
+          ':focus-visible': {
             outlineColor: t.colors.error.primary,
           },
         },
@@ -79,7 +79,7 @@ export const buttonStyles = createStyles(
           'base': {
             boxSizing: 'border-box',
           },
-          ':focus': {
+          ':focus-visible': {
             outlineWidth: '2px',
             outlineOffset: '2px',
             outlineStyle: 'solid',
@@ -106,7 +106,7 @@ export const buttonStyles = createStyles(
         },
 
         'web': {
-          ':focus': {
+          ':focus-visible': {
             outlineColor: t.components.Action.primary.default.background,
           },
         },

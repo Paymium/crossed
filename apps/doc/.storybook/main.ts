@@ -47,7 +47,7 @@ const config: StorybookConfig = {
         __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
       }),
       new StylePlugin({
-        configPath: './style.config.ts',
+        configPath: './src/style.config.ts',
         level: 'debug',
       }),
     ];

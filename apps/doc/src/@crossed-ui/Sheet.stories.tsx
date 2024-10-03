@@ -1,9 +1,15 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Sheet, Text, YBox } from '@crossed/ui';
 import { inlineStyle } from '@crossed/styled';
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Sheet> = {
   title: '@crossed⁄ui/Sheet',
   component: Sheet,

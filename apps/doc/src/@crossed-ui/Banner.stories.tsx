@@ -1,16 +1,24 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import type { Meta, StoryObj } from '@storybook/react';
 // import { fn } from '@storybook/test';
 
-import { Alert } from '@crossed/ui/src/feedback/Alert';
+import { Banner } from '@crossed/ui/src/feedback/Banner';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof Alert> = {
-  title: '@crossed⁄ui/Alert',
-  component: Alert,
+const meta: Meta<typeof Banner> = {
+  title: '@crossed⁄ui/Banner',
+  component: Banner,
   subcomponents: {
-    'Alert.Description': Alert.Description,
-    'Alert.Icon': Alert.Icon,
-    'Alert.Group': Alert.Group,
+    'Banner.Description': Banner.Description,
+    'Banner.Icon': Banner.Icon,
+    'Banner.Title': Banner.Title,
+    'Banner.Action': Banner.Action,
   },
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
@@ -26,15 +34,15 @@ const meta: Meta<typeof Alert> = {
     center: { control: 'boolean' },
   },
   render: (e) => (
-    <Alert {...e}>
-      <Alert.Icon />
-      <Alert.Description>Description</Alert.Description>
-    </Alert>
+    <Banner {...e}>
+      <Banner.Icon />
+      <Banner.Description>Description</Banner.Description>
+    </Banner>
   ),
 };
 
 export default meta;
-type Story = StoryObj<typeof Alert>;
+type Story = StoryObj<typeof Banner>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
