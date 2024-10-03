@@ -1,5 +1,5 @@
 import '../src/style.config';
-import 'crossed.css';
+import './style.css';
 import * as React from 'react';
 import type { Preview } from '@storybook/react';
 import { PortalProvider } from '@gorhom/portal';
