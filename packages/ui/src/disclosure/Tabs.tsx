@@ -294,6 +294,9 @@ export const createTabs = () => {
       <ButtonScroll
         variant="tertiary"
         disabled={disabled}
+        testID="toLeft"
+        aria-label="Slide to left"
+        style={style.prev}
         onPress={() => {
           listTabRef.current?.scrollTo({
             x:
@@ -302,7 +305,6 @@ export const createTabs = () => {
                 : 0,
           });
         }}
-        style={style.prev}
       >
         <ChevronLeft />
       </ButtonScroll>
@@ -337,6 +339,9 @@ export const createTabs = () => {
       <ButtonScroll
         variant="tertiary"
         disabled={disabled}
+        style={style.next}
+        testID="toRight"
+        aria-label="Slide to right"
         onPress={() => {
           scroll.value <= widthLayout.value
             ? listTabRef.current?.scrollTo({
@@ -344,16 +349,6 @@ export const createTabs = () => {
               })
             : listTabRef.current?.scrollToEnd();
         }}
-        style={
-          style.next
-          //   inlineStyle(({ colors }) => ({
-          //   base: { right: 0 },
-          //   web: {
-          //     base: {
-          //       background: `linear-gradient(to left, ${colors.background.hover} 70%, transparent)`,
-          //     },
-          //   },
-        }
       >
         <ChevronRight />
       </ButtonScroll>

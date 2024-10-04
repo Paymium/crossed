@@ -6,7 +6,7 @@
  */
 
 import { Registry } from '@crossed/styled';
-import { themes } from '@crossed/theme';
+import { themes } from './theme';
 
 type ThemesCustom = typeof themes;
 

@@ -9,6 +9,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 // import { fn } from '@storybook/test';
 
 import { Tabs } from '@crossed/ui/src/disclosure/Tabs';
+import { Text } from '@crossed/ui';
+import { userEvent, waitFor, within } from '@storybook/test';
+import { act } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Tabs> = {
@@ -45,9 +48,15 @@ const meta: Meta<typeof Tabs> = {
             <Tabs.Tab.Text>Tab 3</Tabs.Tab.Text>
           </Tabs.Tab>
         </Tabs.List>
-        <Tabs.Panel value="tab1">Content tab 1</Tabs.Panel>
-        <Tabs.Panel value="tab2">Content tab 2</Tabs.Panel>
-        <Tabs.Panel value="tab3">Content tab 3</Tabs.Panel>
+        <Tabs.Panel value="tab1">
+          <Text>Content tab 1</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab2">
+          <Text>Content tab 2</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab3">
+          <Text>Content tab 3</Text>
+        </Tabs.Panel>
       </Tabs>
     );
   },
@@ -59,13 +68,29 @@ type Story = StoryObj<typeof Tabs>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Rounded: Story = {
   args: { variant: 'rounded' },
+  parameters: {
+    backgrounds: {
+      default: 'Primary',
+    },
+  },
 };
 export const Underline: Story = {
-  args: { variant: 'rounded' },
+  args: { variant: 'underline' },
+  parameters: {
+    backgrounds: {
+      default: 'Secondary',
+    },
+  },
 };
 
 export const RoundedArrow: Story = {
-  args: { variant: 'rounded' },
+  ...Rounded,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await waitFor(async () => {
+      await userEvent.click(canvas.getByTestId('toRight'));
+    });
+  },
   render: (e) => {
     return (
       <Tabs defaultValue="tab1" {...e}>
@@ -102,16 +127,36 @@ export const RoundedArrow: Story = {
             <Tabs.Tab.Text>Tab 10</Tabs.Tab.Text>
           </Tabs.Tab>
         </Tabs.List>
-        <Tabs.Panel value="tab1">Content tab 1</Tabs.Panel>
-        <Tabs.Panel value="tab2">Content tab 2</Tabs.Panel>
-        <Tabs.Panel value="tab3">Content tab 3</Tabs.Panel>
-        <Tabs.Panel value="tab4">Content tab 4</Tabs.Panel>
-        <Tabs.Panel value="tab5">Content tab 5</Tabs.Panel>
-        <Tabs.Panel value="tab6">Content tab 6</Tabs.Panel>
-        <Tabs.Panel value="tab7">Content tab 7</Tabs.Panel>
-        <Tabs.Panel value="tab8">Content tab 8</Tabs.Panel>
-        <Tabs.Panel value="tab9">Content tab 9</Tabs.Panel>
-        <Tabs.Panel value="tab10">Content tab 10</Tabs.Panel>
+        <Tabs.Panel value="tab1">
+          <Text>Content tab 1</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab2">
+          <Text>Content tab 2</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab3">
+          <Text>Content tab 3</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab4">
+          <Text>Content tab 4</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab5">
+          <Text>Content tab 5</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab6">
+          <Text>Content tab 6</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab7">
+          <Text>Content tab 7</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab8">
+          <Text>Content tab 8</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab9">
+          <Text>Content tab 9</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab10">
+          <Text>Content tab 10</Text>
+        </Tabs.Panel>
       </Tabs>
     );
   },
@@ -119,5 +164,5 @@ export const RoundedArrow: Story = {
 
 export const UnderlineArrow: Story = {
   ...RoundedArrow,
-  args: { variant: 'underline' },
+  ...Underline,
 };
