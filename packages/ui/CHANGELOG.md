@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.0.2
+
+### Patch Changes
+
+- 61b92eb: tabs indicator wrong style type
+
 ## 1.0.1
 
 ### Patch Changes
