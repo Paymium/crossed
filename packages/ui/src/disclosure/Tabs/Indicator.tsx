@@ -1,0 +1,36 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
+import { composeStyles, CrossedMethods } from '@crossed/styled';
+import {
+  indicatorDynamicStyles,
+  indicatorRoundedStyles,
+  indicatorUnderlineStyles,
+} from './styles';
+import Animated from 'react-native-reanimated';
+import { TabsContext } from './context';
+
+export const createIndicator = (useTabsContext: () => TabsContext) => {
+  const Indicator = ({ style }: { style?: CrossedMethods<any> }) => {
+    const { variant, indicator } = useTabsContext();
+    const indicatorStyle =
+      !variant || variant === 'rounded'
+        ? indicatorRoundedStyles
+        : indicatorUnderlineStyles;
+    return (
+      <Animated.View
+        {...composeStyles(
+          indicatorStyle.default,
+          indicatorStyle.active,
+          indicatorDynamicStyles.dyn(indicator.left, indicator.width),
+          style
+        ).style()}
+      />
+    );
+  };
+  return Indicator;
+};

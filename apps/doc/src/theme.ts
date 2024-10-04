@@ -5,14 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Registry } from '@crossed/styled';
-/**
- * Copyright (c) Paymium.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root of this projects source tree.
- */
-
 import { Theme, Colors, Font, Spaces } from '@crossed/theme';
 
 type CustomTheme = Theme & { boxShadow: string };
@@ -647,8 +639,8 @@ export const themes = {
   dark: paymiumThemeDark,
   light: paymiumTheme,
 };
+type ThemesCustom = typeof themes;
 
 declare module '@crossed/styled' {
-  export interface Themes extends CustomTheme {}
+  export interface Themes extends ThemesCustom {}
 }
-Registry.setThemes(themes).setThemeName('light');

@@ -189,6 +189,9 @@ importers:
       '@gorhom/portal':
         specifier: ^1.0.14
         version: 1.0.14(react-native@0.75.3)(react@18.3.1)
+      '@storybook/manager-api':
+        specifier: ^8.3.5
+        version: 8.3.5(storybook@8.3.4)
       '@storybook/theming':
         specifier: ^8.3.4
         version: 8.3.4(storybook@8.3.4)
@@ -204,6 +207,9 @@ importers:
       react-native-web:
         specifier: ^0.19.10
         version: 0.19.12(react-dom@18.3.1)(react@18.3.1)
+      storybook-dark-mode:
+        specifier: ^4.0.2
+        version: 4.0.2(react-dom@18.3.1)(react@18.3.1)(storybook@8.3.4)
       ts-loader:
         specifier: ^9.5.1
         version: 9.5.1(typescript@5.6.2)(webpack@5.95.0)
@@ -217,6 +223,9 @@ importers:
       '@eslint/js':
         specifier: ^9.9.0
         version: 9.11.1
+      '@storybook/addon-a11y':
+        specifier: ^8.3.5
+        version: 8.3.5(storybook@8.3.4)
       '@storybook/addon-essentials':
         specifier: ^8.3.4
         version: 8.3.4(storybook@8.3.4)
@@ -235,6 +244,9 @@ importers:
       '@storybook/blocks':
         specifier: ^8.3.4
         version: 8.3.4(react-dom@18.3.1)(react@18.3.1)(storybook@8.3.4)
+      '@storybook/preview-api':
+        specifier: ^8.3.5
+        version: 8.3.5(storybook@8.3.4)
       '@storybook/react':
         specifier: ^8.3.4
         version: 8.3.4(@storybook/test@8.3.4)(react-dom@18.3.1)(react@18.3.1)(storybook@8.3.4)(typescript@5.6.2)
@@ -292,6 +304,9 @@ importers:
       vite:
         specifier: ^5.4.1
         version: 5.4.8(@types/node@22.7.4)
+      webpack:
+        specifier: ^5.90.0
+        version: 5.95.0(esbuild@0.23.1)
 
   packages/build:
     dependencies:
@@ -2726,7 +2741,7 @@ packages:
     resolution: {integrity: sha512-KeQqltKtDL+u5bXFIV4DO5ZiKlu5xe6ZOc3g/HcouTzYHMS+TAtTvnqDbv/btDhi17jX3aFmpuXp3ob0bCwtiQ==}
     dependencies:
       '@crossed/primitive': 1.7.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1)
-      '@crossed/ui': 1.0.1(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.3)(react-test-renderer@18.3.1)(react@18.3.1)
+      '@crossed/ui': 1.0.2(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.3)(react-test-renderer@18.3.1)(react@18.3.1)
       '@floating-ui/react': 0.25.4(react-dom@18.3.1)(react@18.3.1)
       '@gorhom/bottom-sheet': 4.6.4(@types/react@18.3.11)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native@0.75.3)(react@18.3.1)
       '@gorhom/portal': 1.0.14(react-native@0.75.3)(react@18.3.1)
@@ -2774,8 +2789,8 @@ packages:
       - react-native
     dev: false
 
-  /@crossed/ui@1.0.1(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.3)(react-test-renderer@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-NDcjT64l9M6BhcMm89E5GjPOL4lxcciZUisgiC6u2qe2jphGeCi8f6ohdkCQ7u7VOR0VNA58DpgjpMLW2VfMaw==}
+  /@crossed/ui@1.0.2(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.3)(react-test-renderer@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-F5DBK7RVl0wvbr9c1hs9JSdhVwTvTRStshzkrutVQZY9tD++8c2wWGix9tM+/0s3UGBPAy7w3AHx7Hu7nDVxxw==}
     peerDependencies:
       '@crossed/build': '*'
       '@crossed/core': 0.8.1
@@ -6025,7 +6040,7 @@ packages:
       invariant: 2.2.4
       nullthrows: 1.1.1
       react: 18.3.1
-      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
+      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
 
   /@react-navigation/core@6.4.17(react@18.3.1):
     resolution: {integrity: sha512-Nd76EpomzChWAosGqWOYE3ItayhDzIEzzZsT7PfGcRFDgW5miHV2t4MZcq9YIK4tzxZjVVpYbIynOOQQd1e0Cg==}
@@ -7010,6 +7025,16 @@ packages:
       size-limit: 8.2.6
     dev: true
 
+  /@storybook/addon-a11y@8.3.5(storybook@8.3.4):
+    resolution: {integrity: sha512-/19UO8IXbyfcYK5K8ejSYF+hC+EK79c0bBPHMNeYSFOHSqQM3KoMo+TLIcLsuhuRClmlM+4Zs+VSIYDwc+d3ig==}
+    peerDependencies:
+      storybook: ^8.3.5
+    dependencies:
+      '@storybook/addon-highlight': 8.3.5(storybook@8.3.4)
+      axe-core: 4.10.0
+      storybook: 8.3.4
+    dev: true
+
   /@storybook/addon-actions@8.3.4(storybook@8.3.4):
     resolution: {integrity: sha512-1y0yD3upKcyzNwwA6loAGW2cRDqExwl4oAT7GJQA4tmabI+fNwmANSgU/ezLvvSUf4Qo0eJHg2Zcn8y+Apq2eA==}
     peerDependencies:
@@ -7092,6 +7117,15 @@ packages:
     resolution: {integrity: sha512-rxZTeuZyZ7RnU+xmRhS01COFLbGnVEmlUNxBw8ArsrTEZKW5PbKpIxNLTj9F0zdH8H0MfryJGP+Aadcm0oHWlw==}
     peerDependencies:
       storybook: ^8.3.4
+    dependencies:
+      '@storybook/global': 5.0.0
+      storybook: 8.3.4
+    dev: true
+
+  /@storybook/addon-highlight@8.3.5(storybook@8.3.4):
+    resolution: {integrity: sha512-ku0epul9aReCR3Gv/emwYnsqg3vgux5OmYMjoDcJC7s+LyfweSzLV/f5t9gSHazikJElh5TehtVkWbC4QfbGSw==}
+    peerDependencies:
+      storybook: ^8.3.5
     dependencies:
       '@storybook/global': 5.0.0
       storybook: 8.3.4
@@ -7302,7 +7336,14 @@ packages:
       storybook: ^8.3.4
     dependencies:
       storybook: 8.3.4
-    dev: true
+
+  /@storybook/core-events@8.3.5(storybook@8.3.4):
+    resolution: {integrity: sha512-tA4ptifvmxDd4n5CYpL2ksEg2YuLr3a9IPvEww+XJWsyx+lTQ5rwbaRyu8CUxJfOsppyz5cf9OOqRcZ0ENcrpQ==}
+    peerDependencies:
+      storybook: ^8.3.5
+    dependencies:
+      storybook: 8.3.4
+    dev: false
 
   /@storybook/core-webpack@8.3.4(storybook@8.3.4):
     resolution: {integrity: sha512-Ftsk/8RANt46roiHT0hTyqfMPUO2/jV7EvlOR5H2XKhSbssA9njK04O2ry+BbfgKItIDIx0LTiz/I575qBCCnQ==}
@@ -7359,7 +7400,6 @@ packages:
 
   /@storybook/global@5.0.0:
     resolution: {integrity: sha512-FcOqPAXACP0I3oJ/ws6/rrPT9WGhu915Cg8D02a9YxLo0DE9zI+a9A5gRGvmQ09fiWPukqI8ZAEoQEdWUKMQdQ==}
-    dev: true
 
   /@storybook/icons@1.2.12(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-UxgyK5W3/UV4VrI3dl6ajGfHM4aOqMAkFLWe2KibeQudLf6NJpDrDMSHwZj+3iKC4jFU7dkKbbtH2h/al4sW3Q==}
@@ -7370,7 +7410,6 @@ packages:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-    dev: true
 
   /@storybook/instrumenter@8.3.4(storybook@8.3.4):
     resolution: {integrity: sha512-jVhfNOPekOyJmta0BTkQl9Z6rgRbFHlc0eV4z1oSrzaawSlc9TFzAeDCtCP57vg3FuBX8ydDYAvyZ7s4xPpLyg==}
@@ -7383,13 +7422,12 @@ packages:
       util: 0.12.5
     dev: true
 
-  /@storybook/manager-api@8.3.4(storybook@8.3.4):
-    resolution: {integrity: sha512-tBx7MBfPUrKSlD666zmVjtIvoNArwCciZiW/UJ8IWmomrTJRfFBnVvPVM2gp1lkDIzRHYmz5x9BHbYaEDNcZWQ==}
+  /@storybook/manager-api@8.3.5(storybook@8.3.4):
+    resolution: {integrity: sha512-fEQoKKi7h7pzh2z9RfuzatJxubrsfL/CB99fNXQ0wshMSY/7O4ckd18pK4fzG9ErnCtLAO9qsim4N/4eQC+/8Q==}
     peerDependencies:
-      storybook: ^8.3.4
+      storybook: ^8.3.5
     dependencies:
       storybook: 8.3.4
-    dev: true
 
   /@storybook/node-logger@8.3.4(storybook@8.3.4):
     resolution: {integrity: sha512-BI84BmJ7Rn2StDrtQqffpoqxaVIvDjdYLaadm6z2xFtIatK4+YCU7GS2Hy7E00zorXITelkTauphseOb92vEaA==}
@@ -7437,10 +7475,10 @@ packages:
       - webpack-cli
     dev: true
 
-  /@storybook/preview-api@8.3.4(storybook@8.3.4):
-    resolution: {integrity: sha512-/YKQ3QDVSHmtFXXCShf5w0XMlg8wkfTpdYxdGv1CKFV8DU24f3N7KWulAgeWWCWQwBzZClDa9kzxmroKlQqx3A==}
+  /@storybook/preview-api@8.3.5(storybook@8.3.4):
+    resolution: {integrity: sha512-VPqpudE8pmjTLvdNJoW/2//nqElDgUOmIn3QxbbCmdZTHDg5tFtxuqwdlNfArF0TxvTSBDIulXt/Q6K56TAfTg==}
     peerDependencies:
-      storybook: ^8.3.4
+      storybook: ^8.3.5
     dependencies:
       storybook: 8.3.4
     dev: true
@@ -7555,8 +7593,8 @@ packages:
     dependencies:
       '@storybook/components': 8.3.4(storybook@8.3.4)
       '@storybook/global': 5.0.0
-      '@storybook/manager-api': 8.3.4(storybook@8.3.4)
-      '@storybook/preview-api': 8.3.4(storybook@8.3.4)
+      '@storybook/manager-api': 8.3.5(storybook@8.3.4)
+      '@storybook/preview-api': 8.3.5(storybook@8.3.4)
       '@storybook/react-dom-shim': 8.3.4(react-dom@18.3.1)(react@18.3.1)(storybook@8.3.4)
       '@storybook/test': 8.3.4(storybook@8.3.4)
       '@storybook/theming': 8.3.4(storybook@8.3.4)
@@ -16665,7 +16703,6 @@ packages:
 
   /map-or-similar@1.5.0:
     resolution: {integrity: sha512-0aF7ZmVon1igznGI4VS30yugpduQW3y3GkcgGJOp7d8x8QrizhigUxjI/m2UojsXXto+jLAH3KSz+xOJTiORjg==}
-    dev: true
 
   /map-visit@1.0.0:
     resolution: {integrity: sha512-4y7uGv8bd2WdM9vpQsiQNo41Ln1NvhvDRuVt0k2JZQ+ezN2uaQes7lZeZ+QQUHOLQAtDaBJ+7wCbi+ab/KFs+w==}
@@ -16710,7 +16747,6 @@ packages:
     resolution: {integrity: sha512-/EuHYwAPdLtXwAwSZkh/Gutery6pD2KYd44oQLhAvQp/50mpyduZh8Q7PYHXTCJ+wuXxt7oij2LXyIJOOYFPog==}
     dependencies:
       map-or-similar: 1.5.0
-    dev: true
 
   /meow@8.1.2:
     resolution: {integrity: sha512-r85E3NdZ+mpYk1C6RjPFEMSE+s1iZMuHtsHAqY0DT3jZczl0diWUZ8g6oU7h0M9cD2EL+PzaYghhCLzR0ZNn5Q==}
@@ -20424,6 +20460,23 @@ packages:
     dependencies:
       internal-slot: 1.0.7
     dev: true
+
+  /storybook-dark-mode@4.0.2(react-dom@18.3.1)(react@18.3.1)(storybook@8.3.4):
+    resolution: {integrity: sha512-zjcwwQ01R5t1VsakA6alc2JDIRVtavryW8J3E3eKLDIlAMcvsgtpxlelWkZs2cuNspk6Z10XzhQVrUWtYc3F0w==}
+    dependencies:
+      '@storybook/components': 8.3.4(storybook@8.3.4)
+      '@storybook/core-events': 8.3.5(storybook@8.3.4)
+      '@storybook/global': 5.0.0
+      '@storybook/icons': 1.2.12(react-dom@18.3.1)(react@18.3.1)
+      '@storybook/manager-api': 8.3.5(storybook@8.3.4)
+      '@storybook/theming': 8.3.4(storybook@8.3.4)
+      fast-deep-equal: 3.1.3
+      memoizerific: 1.11.3
+    transitivePeerDependencies:
+      - react
+      - react-dom
+      - storybook
+    dev: false
 
   /storybook@8.3.4:
     resolution: {integrity: sha512-nzvuK5TsEgJwcWGLGgafabBOxKn37lfJVv7ZoUVPgJIjk2mNRyJDFwYRJzUZaD37eiR/c/lQ6MoaeqlGwiXoxw==}
