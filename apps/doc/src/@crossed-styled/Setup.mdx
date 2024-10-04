@@ -1,8 +1,6 @@
 import { createTabs } from '@crossed/ui';
 import { Source } from '@storybook/blocks';
 
-export const PlatformTab = createTabs();
-export const BuilderTab = createTabs();
 export const confiregureWebpack = `
 const StylePlugin = require('@crossed/webpack');
 
@@ -37,8 +35,10 @@ export interface Themes extends CustomThemes {}
 }
 `;
 
-# Setup
+export const PlatformTab = createTabs();
+export const BuilderTab = createTabs();
 
+# Setup
 <PlatformTab defaultValue="web" variant="underline">
   <BuilderTab defaultValue="webpack" variant="underline">
     <PlatformTab.List>
@@ -51,23 +51,21 @@ export interface Themes extends CustomThemes {}
       </PlatformTab.Tab>
     </PlatformTab.List>
     <PlatformTab.Panel value="web">
-        <BuilderTab.List>
-          <BuilderTab.Indicator />
-          <BuilderTab.Tab value="webpack">
-            <BuilderTab.Tab.Text>webpack</BuilderTab.Tab.Text>
-          </BuilderTab.Tab>
-          <BuilderTab.Tab value="next">
-            <BuilderTab.Tab.Text>next</BuilderTab.Tab.Text>
-          </BuilderTab.Tab>
-        </BuilderTab.List>
-        <BuilderTab.Panels>
-          <BuilderTab.Panel value="webpack">
-            <Source language='bash' code={`pnpm i @crossed/styled @crossed/webpack`} />
-          </BuilderTab.Panel>
-          <BuilderTab.Panel value="next">
-            <Source language='bash' code={`pnpm i @crossed/styled @crossed/next-adapter`} />
-          </BuilderTab.Panel>
-        </BuilderTab.Panels>
+      <BuilderTab.List>
+        <BuilderTab.Indicator />
+        <BuilderTab.Tab value="webpack">
+          <BuilderTab.Tab.Text>webpack</BuilderTab.Tab.Text>
+        </BuilderTab.Tab>
+        <BuilderTab.Tab value="next">
+          <BuilderTab.Tab.Text>next</BuilderTab.Tab.Text>
+        </BuilderTab.Tab>
+      </BuilderTab.List>
+        <BuilderTab.Panel value="webpack">
+          <Source language='bash' code={`pnpm i @crossed/styled @crossed/webpack`} />
+        </BuilderTab.Panel>
+        <BuilderTab.Panel value="next">
+          <Source language='bash' code={`pnpm i @crossed/styled @crossed/next-adapter`} />
+        </BuilderTab.Panel>
     </PlatformTab.Panel>
     <PlatformTab.Panel value="native">
       <Source language='bash' code={`pnpm i @crossed/styled`} />
@@ -115,3 +113,4 @@ function App () {
 `} language='jsx' format />
   </BuilderTab>
 </PlatformTab>
+

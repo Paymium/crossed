@@ -18,7 +18,6 @@ const meta: Meta<typeof Tabs> = {
   component: Tabs,
   subcomponents: {
     'Tabs.List': Tabs.List,
-    'Tabs.Panels': Tabs.Panels,
     'Tabs.Tab': Tabs.Tab,
     'Tabs.Tab.Text': Tabs.Tab.Text,
     'Tabs.Panel': Tabs.Panel,
