@@ -201,8 +201,8 @@ export class Loader {
     );
     return [
       theme,
-      hover,
       other,
+      hover,
       focus,
       active,
       media.sort((a, b) => {
