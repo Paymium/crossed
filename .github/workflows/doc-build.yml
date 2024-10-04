@@ -25,11 +25,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build
-        run: pnpm build
-      - name: Linter
-        run: pnpm lint
-      - name: Build
-        run: pnpm -F crossed-doc build-storybook
+        run: pnpm turbo run build --filter=crossed-doc
       # 👆 Build steps
       - name: Setup Pages
         uses: actions/configure-pages@v1

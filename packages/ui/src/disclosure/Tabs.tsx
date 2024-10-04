@@ -603,7 +603,7 @@ export const createTabs = () => {
     ) : null;
   };
 
-  const Indicator = ({ style }: { style: CrossedMethods<any> }) => {
+  const Indicator = ({ style }: { style?: CrossedMethods<any> }) => {
     const { variant, indicator } = useTabsContext();
     const indicatorStyle =
       variant === 'rounded' ? indicatorRoundedStyles : indicatorUnderlineStyles;

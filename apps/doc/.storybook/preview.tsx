@@ -1,8 +1,12 @@
 import '../src/style.config';
-import './style.css';
 import * as React from 'react';
 import type { Preview } from '@storybook/react';
 import { PortalProvider } from '@gorhom/portal';
+
+if (process.env.NODE_ENV === 'development') {
+  // @ts-expect-error
+  import('./style.css');
+}
 
 const preview: Preview = {
   parameters: {

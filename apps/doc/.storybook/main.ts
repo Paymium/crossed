@@ -2,6 +2,7 @@ import type { StorybookConfig } from '@storybook/react-webpack5';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import StylePlugin from '@crossed/webpack';
 import webpack from 'webpack';
+import path from "path"
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -49,6 +50,7 @@ const config: StorybookConfig = {
       new StylePlugin({
         configPath: './src/style.config.ts',
         level: 'debug',
+        out: path.resolve(__dirname, '../storybook-static')
       }),
     ];
     config.module.rules.push({
