@@ -1,5 +1,17 @@
 # crossed-doc
 
+## 0.1.10
+
+### Patch Changes
+
+- e50a74e: increase doc
+- Updated dependencies [e50a74e]
+- Updated dependencies [e50a74e]
+  - @crossed/ui@1.0.3
+  - @crossed/theme@2.0.2
+  - @crossed/unicons@1.0.2
+  - @crossed/webpack@2.0.4
+
 ## 0.1.9
 
 ### Patch Changes

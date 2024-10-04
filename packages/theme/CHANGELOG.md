@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 2.0.2
+
+### Patch Changes
+
+- e50a74e: remove custom and export type
+
 ## 2.0.1
 
 ### Patch Changes
