@@ -9,7 +9,7 @@
 
 import { composeStyles, withReactive } from '@crossed/styled';
 import { ActivityIndicator, Pressable, View } from 'react-native';
-import { forwardRef } from 'react';
+import { forwardRef, useId, useState } from 'react';
 import { buttonErrorStyles, buttonSizeStyles, buttonStyles } from './styles';
 import { ButtonProps } from './types';
 import { ButtonIcon } from './Icon';
@@ -34,9 +34,15 @@ export const Button = withReactive(
           <ActivityIndicator />
         </ButtonIcon>
       ) : null;
+      const id = useId();
+      const [textId, setTextId] = useState(id);
 
       return (
         <Pressable
+          aria-disabled={Boolean(disabled ?? false)}
+          aria-labelledby={textId}
+          role="button"
+          tabIndex={disabled ? -1 : 0}
           disabled={disabled || loading}
           ref={ref}
           {...props}
@@ -74,6 +80,8 @@ export const Button = withReactive(
                   error,
                   state: { active: e.pressed, hover: e.hovered },
                   disabled: disabled || loading,
+                  textId,
+                  setTextId,
                 }}
               >
                 {renderLoading}

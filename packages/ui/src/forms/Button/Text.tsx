@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef, useContext } from 'react';
+import { forwardRef, useContext, useEffect } from 'react';
 import { Text, type TextProps } from '../../typography/Text';
 import { buttonContext } from './context';
 import { composeStyles } from '@crossed/styled';
@@ -20,7 +20,14 @@ type ButtonTextProps = TextProps;
 
 const ButtonText = forwardRef<any, ButtonTextProps>(
   (props: ButtonTextProps, ref) => {
-    const { variant, error, state, disabled } = useContext(buttonContext);
+    const { variant, error, state, disabled, setTextId, textId } =
+      useContext(buttonContext);
+
+    useEffect(() => {
+      if (props.id && textId !== props.id) {
+        setTextId(props.id);
+      }
+    }, [props.id, textId, setTextId]);
 
     return (
       <Text
@@ -28,6 +35,7 @@ const ButtonText = forwardRef<any, ButtonTextProps>(
         {...props}
         // disabled={disabled}
         {...state}
+        id={textId}
         style={composeStyles(
           textStyles.default,
           variant && textStyles[variant],

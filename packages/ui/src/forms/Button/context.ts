@@ -24,8 +24,11 @@ export const buttonContext = createContext<
       active?: boolean;
       hover?: boolean;
     };
+    textId: string;
+    // eslint-disable-next-line no-unused-vars
+    setTextId: (p: string) => void;
   }
->({});
+>({} as any);
 
 type ButtonGroupContext = {
   orientation: Orientation;
