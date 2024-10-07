@@ -7,6 +7,71 @@
 
 import { createStyles } from '@crossed/styled';
 
+export const textStyles = createStyles((t) => ({
+  default: {
+    base: { fontWeight: 'bold' },
+  },
+  disabled: { base: { pointerEvents: 'none' } },
+  primary: {
+    'base': { color: t.components.Action.primary.default.text },
+    ':hover': { color: t.components.Action.primary.hover.text },
+    ':active': { color: t.components.Action.primary.active.text },
+  },
+  secondary: {
+    'base': { color: t.components.Action.secondary.default.text },
+    ':hover': { color: t.components.Action.secondary.hover.text },
+    ':active': { color: t.components.Action.secondary.active.text },
+  },
+  tertiary: {
+    'base': { color: t.components.Action.tertiary.default.text },
+    ':hover': { color: t.components.Action.tertiary.hover.text },
+    ':active': { color: t.components.Action.tertiary.active.text },
+  },
+  false: {},
+}));
+
+export const textDisabledStyles = createStyles((t) => ({
+  primary: {
+    base: { color: t.components.Action.primary.disabled.text },
+  },
+  secondary: {
+    base: { color: t.components.Action.secondary.disabled.text },
+  },
+  tertiary: {
+    base: { color: t.components.Action.tertiary.disabled.text, opacity: 0.5 },
+  },
+  false: {},
+}));
+
+export const textErrorStyles = createStyles((t) => ({
+  primary: {
+    base: { color: 'white' },
+  },
+  secondary: {
+    'base': { color: t.colors.error.primary },
+    ':hover': { color: t.colors.error.muted },
+    ':active': { color: t.colors.error.satured },
+    ':disabled': { color: t.colors.error.hight },
+  },
+  tertiary: {
+    'base': { color: t.colors.error.primary },
+    ':hover': { color: t.colors.error.muted },
+    ':active': { color: t.colors.error.satured },
+    ':disabled': { color: t.colors.error.hight },
+  },
+}));
+export const textErrorDisabledStyles = createStyles((t) => ({
+  primary: {
+    base: { color: 'white' },
+  },
+  secondary: {
+    base: { color: t.colors.error.hight },
+  },
+  tertiary: {
+    base: { color: t.colors.error.hight },
+  },
+}));
+
 export const buttonErrorStyles = createStyles(
   (t) =>
     ({

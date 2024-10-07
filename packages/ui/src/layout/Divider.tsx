@@ -13,13 +13,9 @@ import { createStyles, composeStyles } from '@crossed/styled';
 export const useDivider = createStyles(
   ({ colors }) =>
     ({
-      divider: {
-        base: {
-          // borderWidth: 0,
-          borderStyle: 'solid',
-          borderColor: colors.border.secondary,
-        },
-      },
+      divider: { base: { borderStyle: 'solid' } },
+      primary: { base: { borderColor: colors.border.primary } },
+      secondary: { base: { borderColor: colors.border.secondary } },
       vertical: {
         base: {
           borderLeftWidth: 1,
@@ -35,17 +31,32 @@ export const useDivider = createStyles(
     }) as const
 );
 
-export type DividerProps = ViewProps & { direction: 'horizontal' | 'vertical' };
+export type DividerProps = ViewProps & {
+  /**
+   * Direction of divider
+   */
+  direction?: 'horizontal' | 'vertical';
+
+  /**
+   * Color of divider
+   */
+  color?: 'primary' | 'secondary';
+};
 
 export const Divider = ({
   direction = 'horizontal',
+  color = 'primary',
   ...props
 }: DividerProps) => {
   return (
     <View
       role="separator"
       {...props}
-      {...composeStyles(useDivider.divider, useDivider[direction]).rnw()}
+      {...composeStyles(
+        useDivider.divider,
+        useDivider[direction],
+        useDivider[color]
+      ).rnw()}
     />
   );
 };

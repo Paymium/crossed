@@ -13,7 +13,7 @@ import {
   createStyles,
   type CrossedMethods,
 } from '@crossed/styled';
-import { createContext, useContext } from 'react';
+import { ComponentType, createContext, useContext } from 'react';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
@@ -178,7 +178,7 @@ const Container = ({
 };
 Container.displayName = 'Alert';
 
-const Icon = () => {
+const AlertIcon = () => {
   const { status } = useContext(alertContext);
   const { color } = composeStyles(
     alertDescriptionStyles.base,
@@ -196,9 +196,9 @@ const Icon = () => {
     </Box>
   );
 };
-Icon.displayName = 'Alert.Icon';
+AlertIcon.displayName = 'Alert.Icon';
 
-const Description = (props: TextProps) => {
+const AlertDescription = (props: TextProps) => {
   const { status } = useContext(alertContext);
   return (
     <Text
@@ -211,14 +211,14 @@ const Description = (props: TextProps) => {
     />
   );
 };
-Description.displayName = 'Alert.Description';
+AlertDescription.displayName = 'Alert.Description';
 
 export type GroupProps = { style?: CrossedMethods<any, any> } & Omit<
   TextProps,
   'style'
 >;
 
-const Group = ({ style, ...props }: GroupProps) => {
+const AlertGroup = ({ style, ...props }: GroupProps) => {
   return (
     <YBox
       space="xs"
@@ -227,9 +227,9 @@ const Group = ({ style, ...props }: GroupProps) => {
     />
   );
 };
-Group.displayName = 'Alert.Group';
+AlertGroup.displayName = 'Alert.Group';
 
-const Action = (props: ButtonProps) => {
+const AlertAction = (props: ButtonProps) => {
   const { status } = useContext(alertContext);
   return (
     <Button
@@ -240,7 +240,7 @@ const Action = (props: ButtonProps) => {
     />
   );
 };
-Action.displayName = 'Alert.Action';
+AlertAction.displayName = 'Alert.Action';
 
 const ActionText = (props: ButtonTextProps) => {
   const { status } = useContext(alertContext);
@@ -251,19 +251,13 @@ const ActionText = (props: ButtonTextProps) => {
     />
   );
 };
-ActionText.displayName = 'Alert..ActionText';
+ActionText.displayName = 'Alert.Action.Text';
 
 const Alert = withStaticProperties(Container, {
-  Icon,
-  Description,
-  Action: withStaticProperties(Action, { Text: ActionText }),
-  Group,
-});
-
-const {
   Icon: AlertIcon,
   Description: AlertDescription,
+  Action: withStaticProperties(AlertAction, { Text: ActionText }),
   Group: AlertGroup,
-} = Alert;
+});
 
-export { Alert, AlertIcon, AlertDescription, AlertGroup };
+export { Alert, AlertIcon, ActionText, AlertDescription, AlertGroup };

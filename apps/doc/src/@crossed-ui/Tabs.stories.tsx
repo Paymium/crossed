@@ -14,7 +14,6 @@ import { userEvent, waitFor, within } from '@storybook/test';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Tabs> = {
-  title: '@crossed⁄ui/Tabs',
   component: Tabs,
   subcomponents: {
     'Tabs.List': Tabs.List,

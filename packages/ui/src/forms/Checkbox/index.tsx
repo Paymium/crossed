@@ -118,3 +118,4 @@ export const Checkbox: CheckboxComponent = ({
     </Pressable>
   );
 };
+Checkbox.displayName = 'Checkbox';

@@ -121,3 +121,4 @@ export const Radio = ({
     </Pressable>
   );
 };
+Radio.displayName = 'Radio';

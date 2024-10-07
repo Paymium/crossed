@@ -7,11 +7,10 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Sheet, Text, YBox } from '@crossed/ui';
+import { Button, Sheet, Text, YBox } from '@crossed/ui';
 import { inlineStyle } from '@crossed/styled';
 
 const meta: Meta<typeof Sheet> = {
-  title: '@crossed⁄ui/Sheet',
   component: Sheet,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
@@ -24,7 +23,11 @@ const meta: Meta<typeof Sheet> = {
     return (
       <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
         <Sheet {...e}>
-          <Sheet.Trigger>Button</Sheet.Trigger>
+          <Sheet.Trigger asChild>
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Sheet.Trigger>
           <Sheet.Frame>
             <Text>Hello world</Text>
           </Sheet.Frame>

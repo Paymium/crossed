@@ -14,3 +14,11 @@ export type ContextButton = {
 export const [Provider, useContext] = createScope<ContextButton>(
   {} as ContextButton
 );
+
+type ButtonGroupContext = {
+  orientation: 'horizontal' | 'vertical';
+  grouped?: boolean;
+};
+export const [ProviderGroup, useContextGroup] = createScope<ButtonGroupContext>(
+  { orientation: 'horizontal' } as ButtonGroupContext
+);
