@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 1.1.1
+
+### Patch Changes
+
+- 04f9d21: Button not good accessibility label
+
 ## 1.1.0
 
 ### Minor Changes
