@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.1
+
+### Patch Changes
+
+- f7446d3: fix typescript args composeStyles
+
 ## 0.14.0
 
 ### Minor Changes

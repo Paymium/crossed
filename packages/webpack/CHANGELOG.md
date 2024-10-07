@@ -1,5 +1,14 @@
 # @crossed/webpack
 
+## 2.0.5
+
+### Patch Changes
+
+- f7446d3: not write css on each emit
+- Updated dependencies [f7446d3]
+  - @crossed/styled@0.14.1
+  - @crossed/loader@1.0.4
+
 ## 2.0.4
 
 ### Patch Changes

@@ -1,5 +1,19 @@
 # @crossed/ui
 
+## 1.1.0
+
+### Minor Changes
+
+- f7446d3: add MenuList, fix Banner and Alert, remove primitive for Button, clean Checkbox and Radio, use dynamic style for select
+
+### Patch Changes
+
+- f7446d3: experiment Slot component
+- Updated dependencies [f7446d3]
+  - @crossed/styled@0.14.1
+  - @crossed/theme@2.0.3
+  - @crossed/unicons@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes
