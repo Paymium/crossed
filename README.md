@@ -12,15 +12,13 @@
 <h1 style="border-bottom: 0; font-size: 5rem; ">crossed UI</h1>
 
  <h2 style="text-align: center; border-bottom: 0;">
- Universal Headless Components built with
- <a title="react-native-unistyles" href="https://github.com/jpudysz/react-native-unistyles" target="_blank">react-native-unistyles</a>
- for react-native + web
+ Universal Headless Components for react-native + web
  <h2>
  </div>
 
 ### Introduction
 
-Crossed is UI lib component which worked on react-native and web based on [react-native-unistyles](https://github.com/jpudysz/react-native-unistyles).
+Crossed is UI lib component which worked on react-native and web.
 
 ### Documentation
 
@@ -29,6 +27,7 @@ See [documentation](https://paymium.github.io/crossed).
 ### Inspiration
 
 - [tamagui](https://tamagui.dev/)
+- [stylexjs](https://stylexjs.com/)
 
 ## Contribution
 

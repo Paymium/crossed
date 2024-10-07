@@ -12,8 +12,9 @@ import { Portal } from '@gorhom/portal';
 import { Focus } from './Focus';
 import { useCallback } from 'react';
 import { Adapt } from '../../other/Adapt';
+import { ContentProps } from './types';
 
-export const ContentImpl = (props) => {
+export const SelectContent = (props: ContentProps) => {
   const all = useSelectProvider();
   const { setOpen, open, onFocus, onBlur } = all;
 

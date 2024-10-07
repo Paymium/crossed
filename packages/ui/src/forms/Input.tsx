@@ -37,14 +37,36 @@ export type InputProps = Omit<
   TextInputProps,
   'editable' | 'onChange' | 'style'
 > & {
+  /**
+   * Label of input
+   */
   label?: string;
+
+  /**
+   * Render clearable button if value is filled
+   */
   clearable?: boolean;
   elementLeft?: ReactNode;
   elementRight?: ReactNode;
+  /**
+   * Error to render
+   */
   error?: string;
+  /**
+   * Description of input
+   */
   description?: string;
+  /**
+   * Extra of label
+   */
   extra?: string;
+  /**
+   * Disabled state
+   */
   disabled?: boolean;
+  /**
+   * style to extends
+   */
   style?: CrossedMethods<any>;
 };
 
@@ -162,3 +184,5 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
     </FormField>
   );
 });
+
+Input.displayName = 'Input';

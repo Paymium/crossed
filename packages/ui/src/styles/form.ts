@@ -33,7 +33,7 @@ export const form = createStyles(
       },
       ':hover': { borderColor: Input.primary.hover.border },
       ':focus': { borderColor: Input.primary.focus.border },
-      ':active': { borderColor: Input.primary.active.border },
+      ':active': { borderColor: Input.primary.focus.border },
       ':disabled': {
         backgroundColor: Input.primary.disabled.background,
         borderColor: Input.primary.disabled.border,

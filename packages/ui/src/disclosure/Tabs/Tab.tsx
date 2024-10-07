@@ -21,6 +21,11 @@ import { View } from 'react-native-reanimated/lib/typescript/Animated';
 import { focusStyles, tabTitleStyles, triggerStyles } from './styles';
 import { Button, ButtonTextProps } from '../../forms/Button';
 
+export type TabsTabProps = Pick<TabsContext, 'value'> &
+  Omit<PressableProps, 'style'> &
+  PropsWithChildren<{
+    style?: CrossedMethods<any>;
+  }>;
 export const createTab = ({
   useTriggerContext,
   useTabsContext,
@@ -36,11 +41,7 @@ export const createTab = ({
     disabled,
     style,
     ...props
-  }: Pick<TabsContext, 'value'> &
-    Omit<PressableProps, 'style'> &
-    PropsWithChildren<{
-      style?: CrossedMethods<any>;
-    }>) => {
+  }: TabsTabProps) => {
     const {
       setValue,
       value,
@@ -51,6 +52,7 @@ export const createTab = ({
       scroll,
       shouldShow,
       widthLayout,
+      size,
     } = useTabsContext();
 
     const selected = valueProps === value;
@@ -126,6 +128,7 @@ export const createTab = ({
           {...props}
           {...composeStyles(
             triggerStyles.trigger,
+            triggerStyles[size],
             focusStyles[variant],
             disabled && triggerStyles.disabled,
             style
@@ -144,6 +147,7 @@ export const createTab = ({
   };
 
   const Text = ({ style, ...props }: ButtonTextProps) => {
+    const { size } = useTabsContext();
     const state = useTriggerContext();
     return (
       <Button.Text
@@ -156,6 +160,7 @@ export const createTab = ({
             tabTitleStyles.hover,
           style
         )}
+        size={size === 'sm' ? 'sm' : 'md'}
         {...state}
         {...props}
       />

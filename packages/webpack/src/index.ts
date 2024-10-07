@@ -115,7 +115,7 @@ export default class StylePlugin {
         level: this.options.level,
         isWatch: this.options.isWatch,
         emit: () => {
-          this.writeCss(virtualModules);
+          // this.writeCss(virtualModules);
         },
       });
     }

@@ -100,7 +100,7 @@ export class RegistryBridge {
 
   getTheme(web?: boolean) {
     if (!this.themes) {
-      // throw new Error('themes are not set');
+      // throw new Error('Themes are not set');
       console.warn('Themes are not set');
       return {} as Themes[keyof Themes];
     }

@@ -9,6 +9,9 @@ import {
 } from 'storybook-dark-mode';
 import { addons } from '@storybook/preview-api';
 import { Registry } from '@crossed/styled';
+import { Title, Subtitle, Description, Primary, Controls, Stories, } from '@storybook/blocks';
+import ImportPath from '../src/components/ImportPath';
+
 
 const channel = addons.getChannel();
 
@@ -19,6 +22,19 @@ if (process.env.NODE_ENV === 'development') {
 
 const preview: Preview = {
   parameters: {
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <ImportPath />
+          <Primary />
+          <Controls />
+          <Stories />
+        </>
+      ),
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -39,7 +55,7 @@ const preview: Preview = {
       values: [
         { name: 'Primary', value: 'var(--colors-background-primary)' },
         { name: 'Secondary', value: 'var(--colors-background-secondary)' },
-      ]
+      ],
     },
   },
 };
@@ -59,24 +75,10 @@ export const decorators = [
 const ThemeProvider = ({ children }) => {
   React.useEffect(() => {
     const setDark = (e: boolean) => {
-      Registry.setThemeName(e ? 'dark' : 'light');
+      Registry.setThemeName(e ? 'dark' : 'light' as any);
     };
     channel.on(DARK_MODE_EVENT_NAME, setDark);
     return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
   }, [channel]);
   return children;
 };
-
-// export const parameters = {
-//   darkMode: {
-//     current: 'light',
-//     // Override the default dark theme
-//     dark: {...dark},
-//     // Override the default light theme
-//     light: {...light},
-//     darkClass: 'dark',
-//     lightClass: 'light',
-//     classTarget: 'html',
-//     stylePreview: true,
-//   },
-// };

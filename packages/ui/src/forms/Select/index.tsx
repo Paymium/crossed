@@ -22,15 +22,15 @@ import {
   type PropsWithChildren,
 } from 'react';
 import { Button, type ButtonProps } from '../Button';
-import { type MenuItemProps, MenuList } from '../../display/MenuList';
+import { type MenuListItemProps, MenuList } from '../../display/MenuList';
 import { Pressable, TextInput, View, type LayoutRectangle } from 'react-native';
 import { form } from '../../styles/form';
 import { useSelectProvider, type Context } from './context';
 import { Provider } from './Provider';
 import type { BottomSheetMethods } from '@devvie/bottom-sheet';
 import { useSelect } from './styles';
-import { ContentImpl } from './ContentImpl';
-import { Text } from '../../typography/Text';
+import { SelectContent } from './ContentImpl';
+import { Text, TextProps } from '../../typography/Text';
 import { VisibilityHidden } from '@crossed/primitive';
 import { useFocusScope } from './Focus';
 import { ChevronDown } from '@crossed/unicons';
@@ -54,7 +54,7 @@ const findChild = (
         if (acc || !isValidElement(e)) {
           return acc;
         }
-        if (e.type && (e.type as any)?.id === 'Select.Option') {
+        if (e.type && (e.type as any)?.displayName === 'Select.Option') {
           if (e.props?.value === value) {
             acc = e.props.children;
           }
@@ -146,8 +146,8 @@ const SelectRoot = memo(
 SelectRoot.id = 'Select';
 SelectRoot.displayName = 'Select';
 
-const Trigger = withStaticProperties(
-  memo(({ children, ...props }: ButtonProps) => {
+const SelectTrigger = withStaticProperties(
+  memo<ButtonProps>(({ children, ...props }: ButtonProps) => {
     const pressableRef = useRef<View>(null);
     const {
       setOpen,
@@ -273,8 +273,10 @@ const Trigger = withStaticProperties(
   }),
   { Text: Button.Text }
 );
+SelectTrigger.displayName = 'Select.Trigger';
 
-const Option = ({ value, ...props }: MenuItemProps & { value: string }) => {
+type SelectOptionProps = MenuListItemProps & { value: string };
+const SelectOption = ({ value, ...props }: SelectOptionProps) => {
   const { setOpen, setValue } = useSelectProvider();
   const focusProps = useFocusScope();
   return (
@@ -290,29 +292,24 @@ const Option = ({ value, ...props }: MenuItemProps & { value: string }) => {
     />
   );
 };
+SelectOption.displayName = 'Select.Option';
 
-Option.id = 'Select.Option';
-Option.displayName = 'Select.Option';
-
-const Value = () => {
+const SelectValue = ({ style, ...props }: Omit<TextProps, 'children'>) => {
   const { renderValue } = useSelectProvider();
-  return <Text style={useSelect.value}>{renderValue.current}</Text>;
+  return (
+    <Text {...props} style={composeStyles(useSelect.value, style)}>
+      {renderValue.current}
+    </Text>
+  );
 };
-
-Value.id = 'Select.Value';
-Value.displayName = 'Select.Value';
+SelectValue.id = 'Select.Value';
+SelectValue.displayName = 'Select.Value';
 
 const Select = /*#__PURE__*/ withStaticProperties(SelectRoot, {
-  Option,
-  Content: ContentImpl,
-  Trigger,
-  Value,
+  Option: SelectOption,
+  Content: SelectContent,
+  Trigger: SelectTrigger,
+  Value: SelectValue,
 });
-
-const {
-  Option: /*#__PURE__*/ SelectOption,
-  Content: /*#__PURE__*/ SelectContent,
-  Value: /*#__PURE__*/ SelectValue,
-} = Select;
 
 export { Select, SelectOption, SelectContent, SelectValue };

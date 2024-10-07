@@ -5,10 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { cloneElement, forwardRef, isValidElement, useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
 import { Pressable, type PressableProps, type View } from 'react-native';
 import { useSheetContext } from './context';
 import { composeEventHandlers } from '@crossed/core';
+import { Slot } from '../../Slot';
 
 export type TriggerProps = PressableProps & {
   /**
@@ -18,27 +19,17 @@ export type TriggerProps = PressableProps & {
 };
 
 export const Trigger = forwardRef<View, TriggerProps>(
-  ({ children, asChild, ...props }: TriggerProps, ref) => {
+  (props: TriggerProps, ref) => {
     const { open, setOpen } = useSheetContext();
     const onPress = useCallback(() => {
       setOpen(!open);
     }, [open, setOpen]);
-
-    if (asChild && isValidElement(children)) {
-      return cloneElement(children, {
-        onPress: composeEventHandlers(
-          children.props.onPress,
-          composeEventHandlers(props.onPress, onPress)
-        ),
-      } as any);
-    }
-
     return (
-      <Pressable
+      <Slot
+        Comp={Pressable}
         ref={ref}
         role="button"
         {...props}
-        children={children}
         onPress={composeEventHandlers(props.onPress, onPress)}
       />
     );

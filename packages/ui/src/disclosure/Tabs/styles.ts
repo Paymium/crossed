@@ -55,10 +55,12 @@ export const indicatorRoundedStyles = createStyles(({ colors }) => ({
   active: { base: { backgroundColor: colors.background.secondary } },
   default: {
     base: {
-      height: 44,
       backgroundColor: 'transparent',
       borderRadius: 24,
       position: 'absolute',
+    },
+    web: {
+      base: { boxShadow: '0px 1px 4px 0px #1018280A' },
     },
   },
 }));
@@ -81,13 +83,20 @@ export const triggerStyles = createStyles(({ space }) => ({
   },
   trigger: {
     base: {
-      height: 44,
-      paddingHorizontal: space.xs,
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
     },
   },
+  sm: { base: { paddingHorizontal: space.xxs } },
+  md: { base: { paddingHorizontal: space.xs } },
+  lg: { base: { paddingHorizontal: space.sm } },
+}));
+
+export const heightStyles = createStyles(() => ({
+  sm: { base: { height: 28 } },
+  md: { base: { height: 36 } },
+  lg: { base: { height: 44 } },
 }));
 
 export const focusStyles = createStyles(({ colors }) => ({

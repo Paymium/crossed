@@ -47,7 +47,16 @@ export type BoxProps = {
 
 export const Box = forwardRef<View, BoxProps>(
   (
-    { style, className, space, center, active, hover, focus, ...props },
+    {
+      style,
+      className,
+      space,
+      center,
+      active,
+      hover,
+      focus,
+      ...props
+    }: BoxProps,
     ref
   ) => {
     return (

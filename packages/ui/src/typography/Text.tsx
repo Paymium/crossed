@@ -83,6 +83,6 @@ const Text = withReactive(
   )
 );
 
-Text.displayName = 'CrossedText';
+Text.displayName = 'Text';
 
 export { Text };

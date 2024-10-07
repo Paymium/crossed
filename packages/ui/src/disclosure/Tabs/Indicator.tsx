@@ -7,6 +7,7 @@
 
 import { composeStyles, CrossedMethods } from '@crossed/styled';
 import {
+  heightStyles,
   indicatorDynamicStyles,
   indicatorRoundedStyles,
   indicatorUnderlineStyles,
@@ -16,7 +17,7 @@ import { TabsContext } from './context';
 
 export const createIndicator = (useTabsContext: () => TabsContext) => {
   const Indicator = ({ style }: { style?: CrossedMethods<any> }) => {
-    const { variant, indicator } = useTabsContext();
+    const { variant, indicator, size } = useTabsContext();
     const indicatorStyle =
       !variant || variant === 'rounded'
         ? indicatorRoundedStyles
@@ -26,6 +27,7 @@ export const createIndicator = (useTabsContext: () => TabsContext) => {
         {...composeStyles(
           indicatorStyle.default,
           indicatorStyle.active,
+          variant === 'rounded' && heightStyles[size],
           indicatorDynamicStyles.dyn(indicator.left, indicator.width),
           style
         ).style()}

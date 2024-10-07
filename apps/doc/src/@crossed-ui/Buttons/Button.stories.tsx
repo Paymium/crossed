@@ -7,14 +7,26 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '@crossed/ui';
+import { Button } from '@crossed/ui/src/forms/Button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Button> = {
-  title: '@crossed⁄ui/Button',
   component: Button,
+  subcomponents: {
+    'Button.Text': Button.Text,
+    'Button.Element': Button.Element,
+    'Button.Group': Button.Group,
+    'Button.Icon': Button.Icon,
+  },
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
+  parameters: {
+    layout: 'centered',
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Ke8D4tdGD8lCjNYY5NO33R/Design-system?node-id=3-299&t=2ZiT8Ks6ZLwLW9X6-4',
+    },
+    docs: { description: { component: 'Button component' } },
+  },
   render(e) {
     return (
       <Button {...e}>
@@ -42,7 +54,19 @@ export const Primary: Story = {
 };
 export const Secondary: Story = {
   args: { ...Primary.args, variant: 'secondary' },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Ke8D4tdGD8lCjNYY5NO33R/Design-system?node-id=3-317&t=2ZiT8Ks6ZLwLW9X6-4',
+    },
+  },
 };
 export const tertiary: Story = {
   args: { ...Primary.args, variant: 'tertiary' },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Ke8D4tdGD8lCjNYY5NO33R/Design-system?node-id=3-301&t=2ZiT8Ks6ZLwLW9X6-4',
+    },
+  },
 };

@@ -13,16 +13,28 @@ import Animated, {
   useAnimatedReaction,
   useSharedValue,
 } from 'react-native-reanimated';
-import { composeStyles, inlineStyle, isTouchable } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  inlineStyle,
+  isTouchable,
+} from '@crossed/styled';
 import { XBox } from '../../layout/XBox';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Box } from '../../layout/Box';
 import { Button, ButtonProps, ButtonTextProps } from '../../forms/Button';
 import { useState } from 'react';
-import { linearGradientRounded, linearGradientUnderline } from './styles';
+import {
+  heightStyles,
+  linearGradientRounded,
+  linearGradientUnderline,
+} from './styles';
 import { ChevronLeft, ChevronRight } from '@crossed/unicons';
 import { TabsContext } from './context';
 
+const styles = createStyles(() => ({
+  default: { base: { zIndex: 1 } },
+}));
 const ButtonScroll = ({
   children,
   style,
@@ -157,7 +169,7 @@ export const createList = (useTabsContext: () => TabsContext) => {
     );
   };
   return ({ children, ...props }: Omit<ScrollViewProps, 'style'>) => {
-    const { listTabRef, scroll, shouldShow, setShow, widthLayout } =
+    const { listTabRef, scroll, shouldShow, setShow, widthLayout, size } =
       useTabsContext();
 
     const widthContent = useSharedValue(0);
@@ -176,9 +188,7 @@ export const createList = (useTabsContext: () => TabsContext) => {
     return (
       <XBox
         justifyContent="between"
-        style={inlineStyle(() => ({
-          base: { zIndex: 1, height: 54 },
-        }))}
+        style={composeStyles(styles.default, heightStyles[size])}
       >
         {shouldShow && <PrevButton widthLayout={widthLayout} />}
         {shouldShow && (

@@ -18,7 +18,8 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions',
     "@chromatic-com/storybook",
     'storybook-dark-mode',
-    '@storybook/addon-a11y'
+    '@storybook/addon-a11y',
+    "@storybook/addon-designs"
   ],
   framework: {
     name: '@storybook/react-webpack5',

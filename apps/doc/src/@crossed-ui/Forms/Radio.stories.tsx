@@ -6,23 +6,25 @@
  */
 
 import type { Meta, StoryObj } from '@storybook/react';
-// import { fn } from '@storybook/test';
 
-import { CloseButton } from '@crossed/ui/src/other/CloseButton';
+import { Radio } from '@crossed/ui/src/forms/Radio';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof CloseButton> = {
-  title: '@crossed⁄ui/CloseButton',
-  component: CloseButton,
-  parameters: { layout: 'centered' },
+const meta: Meta<typeof Radio> = {
+  component: Radio,
   tags: ['autodocs'],
-  argTypes: {},
+  parameters: { layout: 'padded' },
+  argTypes: {
+    disabled: { control: 'boolean' },
+  },
 };
 
 export default meta;
-type Story = StoryObj<typeof CloseButton>;
+type Story = StoryObj<typeof Radio>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
-  args: {},
+  args: {
+    children: 'My label',
+  },
 };

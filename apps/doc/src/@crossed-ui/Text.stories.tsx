@@ -11,7 +11,6 @@ import { Text } from '@crossed/ui/src/typography/Text';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Text> = {
-  title: '@crossed⁄ui/Text',
   component: Text,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
@@ -68,5 +67,10 @@ type Story = StoryObj<typeof Text>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
+  parameters: {
+    docs: {
+      source: { language: 'tsx' },
+    },
+  },
   args: { children: 'Text' },
 };

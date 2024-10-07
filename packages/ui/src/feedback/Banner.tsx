@@ -6,9 +6,13 @@
  */
 
 'use client';
-import { withDefaultProps, withStaticProperties } from '@crossed/core';
+import { withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
-import { Button, type ButtonProps } from '../forms/Button';
+import {
+  Button,
+  type ButtonTextProps,
+  type ButtonProps,
+} from '../forms/Button';
 import {
   composeStyles,
   createStyles,
@@ -222,28 +226,33 @@ const BannerDescription = (props: TextProps) => {
 };
 BannerDescription.displayName = 'Banner.Description';
 
-// const BannerAction = (props: ButtonProps) => {
-//   return (
-//     <Button
-//       variant="tertiary"
-//       size={false}
-//       {...props}
-//       style={bannerStyles.action}
-//     />
-//   );
-// };
-const BannerAction = withDefaultProps<ButtonProps>(Button, {
-  variant: 'tertiary',
-  size: false,
-  style: bannerStyles.action,
-});
+const BannerAction = (props: ButtonProps) => {
+  return (
+    <Button
+      variant="tertiary"
+      size={false}
+      {...props}
+      style={bannerStyles.action}
+    />
+  );
+};
 BannerAction.displayName = 'Banner.Action';
+
+const BannerActionText = (props: ButtonTextProps) => <Button.Text {...props} />;
+BannerAction.displayName = 'Banner.Action.Text';
 
 const Banner = withStaticProperties(Container, {
   Icon: BannerIcon,
   Title: BannerTitle,
   Description: BannerDescription,
-  Action: BannerAction,
+  Action: withStaticProperties(BannerAction, { Text: BannerActionText }),
 });
 
-export { Banner, BannerIcon, BannerTitle, BannerDescription, BannerAction };
+export {
+  Banner,
+  BannerIcon,
+  BannerTitle,
+  BannerActionText,
+  BannerDescription,
+  BannerAction,
+};
