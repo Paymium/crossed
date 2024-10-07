@@ -22,12 +22,21 @@ const meta: Meta<typeof Tabs> = {
     'Tabs.Panel': Tabs.Panel,
     'Tabs.Indicator': Tabs.Indicator,
   },
-  // parameters: { layout: 'centered' },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Ke8D4tdGD8lCjNYY5NO33R/Design-system?node-id=5-1976&node-type=frame&t=eYEziXxTDSk3oIPa-0',
+    },
+  },
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
       options: ['rounded', 'underline'],
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
     },
   },
   render: (e) => {
@@ -44,6 +53,9 @@ const meta: Meta<typeof Tabs> = {
           <Tabs.Tab value="tab3">
             <Tabs.Tab.Text>Tab 3</Tabs.Tab.Text>
           </Tabs.Tab>
+          <Tabs.Tab value="tab4" disabled>
+            <Tabs.Tab.Text>Tab 4</Tabs.Tab.Text>
+          </Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="tab1">
           <Text>Content tab 1</Text>
@@ -53,6 +65,9 @@ const meta: Meta<typeof Tabs> = {
         </Tabs.Panel>
         <Tabs.Panel value="tab3">
           <Text>Content tab 3</Text>
+        </Tabs.Panel>
+        <Tabs.Panel value="tab4">
+          <Text>Content tab 4</Text>
         </Tabs.Panel>
       </Tabs>
     );
@@ -64,13 +79,20 @@ type Story = StoryObj<typeof Tabs>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Rounded: Story = {
-  args: { variant: 'rounded' },
+  args: { variant: 'rounded', size: undefined },
   parameters: {
-    backgrounds: {
-      default: 'Primary',
-    },
+    backgrounds: { default: 'Primary' },
   },
 };
+export const RoundedSM: Story = {
+  ...Rounded,
+  args: { ...Rounded.args, size: 'sm' },
+};
+export const RoundedLg: Story = {
+  ...Rounded,
+  args: { ...Rounded.args, size: 'lg' },
+};
+
 export const Underline: Story = {
   args: { variant: 'underline' },
   parameters: {

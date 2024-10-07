@@ -14,6 +14,7 @@ export type TabsContext = {
   setValue: (_value: string | number) => void;
   id: string;
   variant?: 'underline' | 'rounded';
+  size?: 'sm' | 'md' | 'lg';
   listTabRef: React.MutableRefObject<ScrollView>;
   indicator: { left: SharedValue<number>; width: SharedValue<number> };
   scroll: SharedValue<number>;

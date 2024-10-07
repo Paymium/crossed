@@ -10,7 +10,7 @@ import {
 import { addons } from '@storybook/preview-api';
 import { Registry } from '@crossed/styled';
 import { Title, Subtitle, Description, Primary, Controls, Stories, } from '@storybook/blocks';
-import ImportPath from '../components/ImportPath';
+import ImportPath from '../src/components/ImportPath';
 
 
 const channel = addons.getChannel();

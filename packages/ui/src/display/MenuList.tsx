@@ -67,8 +67,8 @@ const itemStyles = createStyles((t) => ({
   },
 }));
 
-const MenuRoot = forwardRef<View, MenuRootProps>(
-  ({ padded = true, bordered = true, ...props }: MenuRootProps, ref: any) => {
+const MenuRoot = forwardRef<View, MenuListProps>(
+  ({ padded = true, bordered = true, ...props }: MenuListProps, ref: any) => {
     return (
       <YBox
         role="list"
@@ -86,7 +86,7 @@ const MenuRoot = forwardRef<View, MenuRootProps>(
 );
 MenuRoot.displayName = 'MenuList';
 
-type MenuRootProps = YBoxProps & {
+export type MenuListProps = YBoxProps & {
   /**
    * Apply padding
    */

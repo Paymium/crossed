@@ -6210,7 +6210,7 @@ packages:
       invariant: 2.2.4
       nullthrows: 1.1.1
       react: 18.3.1
-      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
+      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
 
   /@react-navigation/core@6.4.17(react@18.3.1):
     resolution: {integrity: sha512-Nd76EpomzChWAosGqWOYE3ItayhDzIEzzZsT7PfGcRFDgW5miHV2t4MZcq9YIK4tzxZjVVpYbIynOOQQd1e0Cg==}

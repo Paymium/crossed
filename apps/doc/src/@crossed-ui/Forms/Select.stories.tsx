@@ -8,7 +8,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Select } from '@crossed/ui/src/forms/Select';
-import { Text, YBox } from '@crossed/ui';
+import { YBox } from '@crossed/ui';
 import { inlineStyle } from '@crossed/styled';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -26,13 +26,9 @@ const meta: Meta<typeof Select> = {
   argTypes: {
     label: { control: 'text' },
     clearable: { control: 'boolean' },
-    // elementLeft?: ReactNode;
-    // elementRight?: ReactNode;
     error: { control: 'text' },
     description: { control: 'text' },
     extra: { control: 'text' },
-    // disabled: { control: 'boolean' },
-    // style?: CrossedMethods<any>;
   },
   render: (e) => (
     <YBox {...e} style={inlineStyle(() => ({ base: { padding: 100 } }))}>
@@ -52,7 +48,6 @@ const meta: Meta<typeof Select> = {
 export default meta;
 type Story = StoryObj<typeof Select>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   parameters: {
     docs: {
@@ -65,17 +60,8 @@ export const Primary: Story = {
     extra: '',
     clearable: false,
     error: '',
-    // disabled: false,
   },
 };
-
-// export const Disabled: Story = {
-//   ...Primary,
-//   args: {
-//     ...Primary.args,
-//     disabled: true,
-//   },
-// };
 export const Clearabled: Story = {
   ...Primary,
   args: {

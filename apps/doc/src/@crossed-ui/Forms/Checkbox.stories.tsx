@@ -8,20 +8,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Checkbox } from '@crossed/ui/src/forms/Checkbox';
-import { Text, YBox } from '@crossed/ui';
-import { inlineStyle } from '@crossed/styled';
 import { fn } from '@storybook/test';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Checkbox> = {
   component: Checkbox,
-  // subcomponents: {
-  //   'Select.Trigger': Select.Trigger,
-  //   'Select.Trigger.Text': Select.Trigger.Text,
-  //   'Select.Value': Select.Value,
-  //   'Select.Content': Select.Content,
-  //   'Select.Option': Select.Option,
-  // },
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
   argTypes: {
@@ -34,7 +25,6 @@ const meta: Meta<typeof Checkbox> = {
 export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
     children: 'My label',

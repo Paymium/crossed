@@ -13,7 +13,7 @@ import {
   createStyles,
   type CrossedMethods,
 } from '@crossed/styled';
-import { ComponentType, createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
