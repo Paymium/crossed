@@ -16,12 +16,24 @@ import { type SheetContext, sheetContext } from './context';
 import { useSharedValue } from 'react-native-reanimated';
 
 export type SheetProps = PropsWithChildren<{
+  /**
+   * Controlled state
+   */
   open?: boolean;
+  /**
+   * default open
+   */
   defaultValue?: boolean;
+  /**
+   * Fire changed open
+   */
   onOpenChange?: (_value: boolean) => void;
+  /**
+   * Size keep with top of window
+   */
   offset?: number;
 }> &
-  Pick<SheetContext, 'dismissOnOverlayPress' | 'hideHandle'>;
+  Pick<SheetContext, 'dismissOnOverlayPress' | 'hideHandle' | 'full'>;
 
 export type RootRef = {
   close: () => void;
@@ -38,6 +50,7 @@ export const Root = forwardRef<RootRef, SheetProps>(
       dismissOnOverlayPress = true,
       hideHandle,
       offset = 20,
+      full,
     },
     ref
   ) => {
@@ -75,6 +88,7 @@ export const Root = forwardRef<RootRef, SheetProps>(
           onClose,
           snapInitialHeight,
           offset: offset + 40,
+          full,
         }}
       >
         {children}
@@ -82,3 +96,4 @@ export const Root = forwardRef<RootRef, SheetProps>(
     );
   }
 );
+Root.displayName = 'Sheet';

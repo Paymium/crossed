@@ -32,7 +32,7 @@ const styles = createStyles(({ colors }) => ({
       backgroundColor: colors.black,
       zIndex: 10000,
     },
-    variants: {},
+    web: { base: { position: 'fixed' } },
   },
   pressable: { base: { height: '100%', width: '100%' } },
 }));

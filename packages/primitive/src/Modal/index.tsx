@@ -72,7 +72,10 @@ export const createModal: CreateModal = () => {
     );
   };
 
-  const ModalOverlay: ModalOverlayComponent = ({ closeOnPress, ...props }) => {
+  const ModalOverlay: ModalOverlayComponent = ({
+    closeOnPress = true,
+    ...props
+  }) => {
     const { setOpen } = useContext(modalContext);
     const onPress = useCallback(() => {
       setOpen(false);

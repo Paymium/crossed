@@ -5,6 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export * from './Modal';
-export * from './Sheet';
-export * from './Floating';
+export const FloatingOverlay = () => {
+  return null;
+};
+FloatingOverlay.displayName = 'Floating.Overlay';

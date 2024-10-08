@@ -78,6 +78,7 @@ export const ScrollView = forwardRef<Animated.ScrollView, SheetScrollViewProps>(
       onClose,
       snapInitialHeight,
       offset,
+      full,
     } = useSheetContext();
     const { height: heightDimensions } = useWindowDimensions();
 
@@ -201,7 +202,7 @@ export const ScrollView = forwardRef<Animated.ScrollView, SheetScrollViewProps>(
 
     const onContentSizeChange = useDebouncedCallback(
       (_w: number, h: number) => {
-        heightLayout.value = Math.floor(h);
+        heightLayout.value = full ? heightDimensions : Math.floor(h);
       },
       100
     );

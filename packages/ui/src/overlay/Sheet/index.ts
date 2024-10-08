@@ -5,14 +5,26 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { withStaticProperties } from '@crossed/core';
+import { withDefaultProps, withStaticProperties } from '@crossed/core';
 import { Root } from './Root';
 import { Trigger } from './Trigger';
 import { Frame } from './Frame';
 import { SnapVisible } from './SnapVisible';
+import { SheetTitle } from './Title';
+import { SheetHeader } from './Header';
+import { XBox } from '../../layout/XBox';
+
+const SheetFooter = withDefaultProps(XBox, {
+  justifyContent: 'end',
+  space: 'xs',
+});
+SheetFooter.displayName = 'Sheet.Footer';
 
 export const Sheet = withStaticProperties(Root, {
   Trigger,
   Frame,
   SnapVisible,
+  Title: SheetTitle,
+  Header: SheetHeader,
+  Footer: SheetFooter,
 });

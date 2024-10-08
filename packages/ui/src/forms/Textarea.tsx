@@ -65,13 +65,13 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
     return (
       <FormField>
         <YBox space="xxs">
-          {(label || description || extra) && (
+          {Boolean(label || description || extra) && (
             <XBox alignItems="center" space="xxs">
-              {label && <FormLabel>{label}</FormLabel>}
-              {description && (
+              {Boolean(label) && <FormLabel>{label}</FormLabel>}
+              {Boolean(description) && (
                 <Text style={form.labelDescription}>{description}</Text>
               )}
-              {extra && (
+              {Boolean(extra) && (
                 <Text style={form.labelExtra} textAlign="right">
                   {extra}
                 </Text>
@@ -124,7 +124,7 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
               {elementRight}
             </XBox>
           </XBox>
-          {error && <Text color="error">{error.toString()}</Text>}
+          {Boolean(error) && <Text color="error">{error.toString()}</Text>}
         </YBox>
       </FormField>
     );

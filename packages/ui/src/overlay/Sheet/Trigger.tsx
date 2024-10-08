@@ -20,10 +20,11 @@ export type TriggerProps = PressableProps & {
 
 export const Trigger = forwardRef<View, TriggerProps>(
   (props: TriggerProps, ref) => {
-    const { open, setOpen } = useSheetContext();
+    const { open, setOpen, onClose } = useSheetContext();
     const onPress = useCallback(() => {
-      setOpen(!open);
-    }, [open, setOpen]);
+      if (open) onClose();
+      else setOpen(true);
+    }, [open, setOpen, onClose]);
     return (
       <Slot
         Comp={Pressable}

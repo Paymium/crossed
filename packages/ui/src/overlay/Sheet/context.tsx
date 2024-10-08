@@ -18,6 +18,10 @@ export type SheetContext = {
   onClose: () => void;
   snapInitialHeight: SharedValue<number>;
   offset: number;
+  /**
+   * Full height
+   */
+  full?: boolean;
 };
 
 export const sheetContext = createContext<SheetContext>({} as SheetContext);

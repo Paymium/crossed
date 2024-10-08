@@ -13,6 +13,7 @@ import { useCallback, useTransition } from 'react';
 import { Pressable, View } from 'react-native';
 import { Implementation } from './Implementation';
 import type { CheckboxComponent } from './type';
+import { Text } from '../../typography/Text';
 
 const checkboxStyles = createStyles((t) => ({
   pressable: {
@@ -114,7 +115,7 @@ export const Checkbox: CheckboxComponent = ({
       >
         {checked && <Check size={15} color="white" />}
       </View>
-      {children}
+      <Text>{children}</Text>
     </Pressable>
   );
 };

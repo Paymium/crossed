@@ -104,12 +104,6 @@ export const Underline: Story = {
 
 export const RoundedArrow: Story = {
   ...Rounded,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await waitFor(async () => {
-      await userEvent.click(canvas.getByTestId('toRight'));
-    });
-  },
   render: (e) => {
     return (
       <Tabs defaultValue="tab1" {...e}>

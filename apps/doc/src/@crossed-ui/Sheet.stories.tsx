@@ -18,6 +18,8 @@ const meta: Meta<typeof Sheet> = {
     'Sheet.Trigger': Sheet.Trigger,
     'Sheet.Frame': Sheet.Frame,
     'Sheet.SnapVisible': Sheet.SnapVisible,
+    'Sheet.Title': Sheet.Title,
+    'Sheet.Header': Sheet.Header,
   },
   render(e) {
     return (
@@ -29,13 +31,25 @@ const meta: Meta<typeof Sheet> = {
             </Button>
           </Sheet.Trigger>
           <Sheet.Frame>
+            <Sheet.Header>
+              <Sheet.Title>Title</Sheet.Title>
+            </Sheet.Header>
             <Text>Hello world</Text>
+            <Sheet.Footer>
+              <Sheet.Trigger asChild>
+                <Button>
+                  <Button.Text>Close</Button.Text>
+                </Button>
+              </Sheet.Trigger>
+            </Sheet.Footer>
           </Sheet.Frame>
         </Sheet>
       </YBox>
     );
   },
-  argTypes: {},
+  argTypes: {
+    full: { control: 'boolean' },
+  },
 };
 
 export default meta;
@@ -44,4 +58,8 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {},
+};
+export const FullHeight: Story = {
+  ...Primary,
+  args: { full: true },
 };
