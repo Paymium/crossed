@@ -10,9 +10,11 @@ import { FloatingTrigger } from './Trigger';
 import { FloatingContent } from './Content';
 import { FloatingOverlay } from './Overlay';
 import { FloatingRoot } from './Root';
+import { FloatingPortal } from './Portal';
 
 export const Floating = withStaticProperties(FloatingRoot, {
   Trigger: FloatingTrigger,
   Content: FloatingContent,
+  Portal: FloatingPortal,
   Overlay: FloatingOverlay,
 });

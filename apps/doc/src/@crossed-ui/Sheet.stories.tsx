@@ -63,3 +63,34 @@ export const FullHeight: Story = {
   ...Primary,
   args: { full: true },
 };
+export const WithScroll: Story = {
+  ...Primary,
+  render(e) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+        <Sheet {...e}>
+          <Sheet.Trigger asChild>
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Sheet.Trigger>
+          <Sheet.Frame>
+            <Sheet.Header>
+              <Sheet.Title>Title</Sheet.Title>
+            </Sheet.Header>
+            {Array.from(Array(60).keys()).map((i) => (
+              <Text key={`${i}-render test`}>Hello world {i}</Text>
+            ))}
+            <Sheet.Footer>
+              <Sheet.Trigger asChild>
+                <Button>
+                  <Button.Text>Close</Button.Text>
+                </Button>
+              </Sheet.Trigger>
+            </Sheet.Footer>
+          </Sheet.Frame>
+        </Sheet>
+      </YBox>
+    );
+  },
+};

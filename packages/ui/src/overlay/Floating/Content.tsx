@@ -5,24 +5,24 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useFloatingContext } from './context';
-import { Portal } from '@gorhom/portal';
-import { YBox, YBoxProps } from '../../layout/YBox';
-import { VisibilityHidden } from '@crossed/primitive';
+import { FocusScope, FocusScopeProps } from '@crossed/primitive';
+import { PropsWithChildren } from 'react';
+import { CrossedMethods } from '@crossed/styled';
+import Animated, { AnimatedProps } from 'react-native-reanimated';
+import { Slot, SlotProps } from '../../Slot';
+import { ViewProps } from 'react-native';
+// import { modalStyles } from '../styles';
 
-export type FloatingContentProps = YBoxProps;
+export type FloatingContentProps = Omit<
+  SlotProps<AnimatedProps<ViewProps>>,
+  'Comp'
+>;
+
 export const FloatingContent = (props: FloatingContentProps) => {
-  const { open, visibilityHidden } = useFloatingContext();
   return (
-    <Portal>
-      {visibilityHidden ? (
-        <VisibilityHidden hide={!open}>
-          <YBox {...props} />
-        </VisibilityHidden>
-      ) : open ? (
-        <YBox {...props} />
-      ) : null}
-    </Portal>
+    <FocusScope trapped loop>
+      <Slot Comp={Animated.View} {...props} />
+    </FocusScope>
   );
 };
 FloatingContent.displayName = 'Floating.Content';

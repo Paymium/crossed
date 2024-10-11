@@ -70,3 +70,38 @@ export const ClickOverlayNotClose: Story = {
 export const AdaptToSheet: Story = {
   args: { adapt: true },
 };
+export const Scrollview: Story = {
+  render({ closeOnPress, ...e }: any) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+        <Modal {...e}>
+          <Modal.Trigger asChild>
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Modal.Trigger>
+          <Modal.Content>
+            <Modal.Header>
+              <Modal.Title>Title</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {Array.from(Array(60).keys()).map((i) => (
+                <Text key={`render${i}`}>Hello world {i}</Text>
+              ))}
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button variant="tertiary">
+                <Button.Text>Button</Button.Text>
+              </Button>
+
+              <Button>
+                <Button.Text>Button</Button.Text>
+              </Button>
+            </Modal.Footer>
+          </Modal.Content>
+        </Modal>
+      </YBox>
+    );
+  },
+};

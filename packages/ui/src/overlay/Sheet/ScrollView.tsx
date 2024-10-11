@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef, useCallback, useMemo, useRef } from 'react';
+import { forwardRef, useCallback } from 'react';
 import {
   type CrossedMethods,
   composeStyles,
@@ -28,22 +28,11 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useWindowDimensions } from 'react-native';
 import { composeRefs } from '@crossed/core';
 import { useDebouncedCallback } from 'use-debounce';
+import { sheetStyles } from '../styles';
+import { useFloatingContext } from '../Floating/context';
+import { useMaxHeight } from './useMaxHeight';
 
-const styles = createStyles(({ colors, space }) => ({
-  box: {
-    base: {
-      position: 'absolute',
-      bottom: 0,
-      right: 0,
-      left: 0,
-      backgroundColor: colors.background.secondary,
-      zIndex: 100000,
-      borderTopLeftRadius: 24,
-      borderTopRightRadius: 24,
-      maxHeight: '100%',
-    },
-    variants: {},
-  },
+const styles = createStyles(({ space }) => ({
   container: {
     base: {
       paddingBottom: space.md,
@@ -70,32 +59,21 @@ export type SheetScrollViewProps = Omit<AnimatedScrollViewProps, 'style'> & {
 
 export const ScrollView = forwardRef<Animated.ScrollView, SheetScrollViewProps>(
   ({ children, style: styleProps, padded = true, ...props }, ref) => {
-    const {
-      open,
-      isMove,
-      hideHandle,
-      height,
-      onClose,
-      snapInitialHeight,
-      offset,
-      full,
-    } = useSheetContext();
+    const { isMove, hideHandle, height, scrollRef, snapInitialHeight, full } =
+      useSheetContext();
+    const { open, onClose } = useFloatingContext();
     const { height: heightDimensions } = useWindowDimensions();
-
-    const scrollRef = useRef<Animated.ScrollView>(null);
 
     const heightLayout = useSharedValue(0);
     const scroll = useSharedValue(0);
     const initialHeight = useSharedValue(0);
     const scrollViewEnable = useSharedValue(false);
 
-    const maxHeight = useMemo(
-      () => heightDimensions - offset,
-      [heightDimensions, offset]
-    );
+    const maxHeight = useMaxHeight();
 
     const styleAnimated = useAnimatedStyle(() => {
       const duration = 300;
+      console.log('useAnimatedStyle', height.value);
       return {
         height: withTiming(height.value, {
           duration: isMove.value ? 0 : duration,
@@ -108,25 +86,23 @@ export const ScrollView = forwardRef<Animated.ScrollView, SheetScrollViewProps>(
       };
     }, [height, isMove, maxHeight]);
 
-    const handleClose = useCallback(() => {
-      onClose();
-      scrollRef.current?.scrollTo({ y: 0, animated: false });
-    }, [onClose]);
-
     useAnimatedReaction(
       () => {
-        return snapInitialHeight.value
-          ? snapInitialHeight.value
-          : heightLayout.value >= maxHeight
-            ? maxHeight
-            : heightLayout.value;
+        return heightLayout.value;
       },
-      (currentValue) => {
-        if (open && Math.floor(height.value) !== Math.floor(currentValue)) {
-          scrollViewEnable.value = currentValue === maxHeight;
-          height.value = currentValue;
-        } else if (!open && scroll.value !== 0 && scrollRef.current) {
-          runOnJS(scrollRef.current.scrollTo)({ y: 0, animated: false });
+      (currentValue, previousValue) => {
+        if (currentValue !== previousValue) {
+          const v = snapInitialHeight.value
+            ? snapInitialHeight.value
+            : heightLayout.value >= maxHeight
+              ? maxHeight
+              : heightLayout.value;
+          if (open && Math.floor(height.value) !== Math.floor(v)) {
+            scrollViewEnable.value = v === maxHeight;
+            height.value = v;
+          } else if (!open && scroll.value !== 0 && scrollRef.current) {
+            runOnJS(scrollRef.current.scrollTo)({ y: 0, animated: false });
+          }
         }
       },
       [open]
@@ -172,7 +148,7 @@ export const ScrollView = forwardRef<Animated.ScrollView, SheetScrollViewProps>(
             Math.abs(e.velocityY) > Math.abs(e.translationY) ||
             e.translationY >= initialHeight.value / 2
           ) {
-            runOnJS(handleClose)();
+            runOnJS(onClose)();
             return;
           }
           height.value = initialHeight.value;
@@ -200,11 +176,16 @@ export const ScrollView = forwardRef<Animated.ScrollView, SheetScrollViewProps>(
         initialHeight.value = 0;
       });
 
-    const onContentSizeChange = useDebouncedCallback(
+    const onContentSizeChange = useCallback(
       (_w: number, h: number) => {
+        console.log({
+          heightDimensions,
+          h: Math.floor(h),
+          result: full ? heightDimensions : Math.floor(h),
+        });
         heightLayout.value = full ? heightDimensions : Math.floor(h);
       },
-      100
+      [full, heightDimensions]
     );
 
     const onScroll = useAnimatedScrollHandler((e) => {
@@ -233,11 +214,8 @@ export const ScrollView = forwardRef<Animated.ScrollView, SheetScrollViewProps>(
           }
           {...props}
           style={[
-            composeStyles(
-              styles.box,
-              isWeb && styles.fixed,
-              styleProps || false
-            ).style().style,
+            composeStyles(sheetStyles.content, styleProps || false).style()
+              .style,
             styleAnimated,
           ]}
         >

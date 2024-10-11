@@ -12,21 +12,37 @@ import {
   useImperativeHandle,
 } from 'react';
 import { FloatingProvider } from './context';
-import { useUncontrolled } from '@crossed/core';
+import { useUncontrolled, UseUncontrolledInput } from '@crossed/core';
 
-export type FloatingProps = PropsWithChildren<{
-  /**
-   * if true, render but hide it in css
-   */
-  visibilityHidden?: boolean;
-}>;
+export type FloatingProps = PropsWithChildren<
+  {
+    /**
+     * if true, render but hide it in css
+     */
+    visibilityHidden?: boolean;
+    /**
+     * if false, press on overlay not close the modal
+     */
+    closeOverlayPress?: boolean;
+  } & Omit<UseUncontrolledInput<boolean>, 'finalValue'>
+>;
 export type FloatingRef = {
   onClose: () => void;
   onOpen: () => void;
 };
 export const FloatingRoot = forwardRef<FloatingRef, FloatingProps>(
-  ({ children, visibilityHidden }: FloatingProps, ref) => {
-    const [open, setOpen] = useUncontrolled({ defaultValue: false });
+  (
+    {
+      children,
+      visibilityHidden,
+      defaultValue = false,
+      onChange,
+      value,
+      closeOverlayPress,
+    }: FloatingProps,
+    ref
+  ) => {
+    const [open, setOpen] = useUncontrolled({ defaultValue, onChange, value });
     const onClose = useCallback(() => {
       setOpen(false);
     }, [setOpen]);
@@ -42,6 +58,7 @@ export const FloatingRoot = forwardRef<FloatingRef, FloatingProps>(
         onClose={onClose}
         onOpen={onOpen}
         visibilityHidden={visibilityHidden}
+        closeOverlayPress={closeOverlayPress ?? true}
       >
         {children}
       </FloatingProvider>

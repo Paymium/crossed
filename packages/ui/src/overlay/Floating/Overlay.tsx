@@ -5,7 +5,56 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
+import { PressableProps } from 'react-native';
+import { FloatingTrigger } from './Trigger';
+import { useFloatingContext } from './context';
+import Animated, {
+  FadeIn,
+  FadeOut,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
+import { overlayStyles } from '../styles';
+import { useEffect, useState } from 'react';
+import { positionStyles } from '../../styles/position';
+
+export type FloatingOverlayProps = Omit<PressableProps, 'style'> & {
+  style?: CrossedMethods<any>;
+};
 export const FloatingOverlay = () => {
-  return null;
+  const { open, closeOverlayPress } = useFloatingContext();
+
+  const [interShow, setIternShow] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setIternShow(open);
+      return () => {};
+    }
+    const time = setTimeout(() => setIternShow(false), 300);
+    return () => clearTimeout(time);
+  }, [open]);
+
+  const style = useAnimatedStyle(
+    () => ({
+      opacity: withTiming(open ? 0.7 : 0),
+    }),
+    [open, interShow]
+  );
+
+  return open || interShow ? (
+    <FloatingTrigger
+      disabled={!closeOverlayPress}
+      style={composeStyles(
+        positionStyles.absoluteFill,
+        inlineStyle(() => ({ web: { base: { position: 'fixed' } } }))
+      )}
+    >
+      <Animated.View entering={FadeIn} exiting={FadeOut}>
+        <Animated.View style={[overlayStyles.root.style().style, style]} />
+      </Animated.View>
+    </FloatingTrigger>
+  ) : null;
 };
 FloatingOverlay.displayName = 'Floating.Overlay';

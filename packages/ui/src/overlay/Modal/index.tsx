@@ -5,55 +5,17 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import {
-  type ModalContentProps,
-  type ModalOverlayProps,
-  type ModalPortalProps,
-  type ModalProps,
-  type ModalTitleProps,
-  createModal,
-  type ModalBodyComponent,
-} from '@crossed/primitive';
-import { composeStyles, createStyles } from '@crossed/styled';
-import { createContext, useContext } from 'react';
+import { composeStyles, createStyles, inlineStyle } from '@crossed/styled';
 import { XBox } from '../../layout/XBox';
 import { Box, type BoxProps } from '../../layout/Box';
 import { withDefaultProps, withStaticProperties } from '@crossed/core';
 import { CloseButton } from '../../other/CloseButton';
+import { ModalRoot } from './Root';
+import { ModalContent } from './Content';
+import { Floating } from '../Floating';
+import { Text, TextProps } from '../../typography/Text';
 
-const modalStyles = createStyles((t) => ({
-  content: {
-    base: {
-      borderRadius: 16,
-      backgroundColor: t.colors.background.secondary,
-      margin: 'auto',
-      padding: t.space.md,
-      gap: t.space.md,
-    },
-    web: {
-      base: {
-        boxShadow: '0px 8px 24px 0px #0000001A',
-      },
-    },
-  },
-  sm: {
-    media: {
-      xs: { width: '90%', height: '50%' },
-      md: { width: 560, height: 'auto' },
-    },
-  },
-  md: {
-    media: {
-      xs: { width: '90%', height: '50%' },
-      md: { width: 760, height: 'auto' },
-    },
-  },
-  lg: {
-    media: {
-      xs: { width: '90%', height: '50%' },
-      md: { width: 1024, height: 'auto' },
-    },
-  },
+const styles = createStyles((t) => ({
   overlay: {
     base: {
       position: 'absolute',
@@ -109,81 +71,35 @@ const modalStyles = createStyles((t) => ({
     base: { flex: 1 },
   },
 }));
-const {
-  Modal: PModal,
-  ModalContent: PModalContent,
-  ModalOverlay: PModalOverlay,
-  ModalTitle: PModalTitle,
-  ModalTrigger: PModalTrigger,
-  ModalPortal: PModalPortal,
-  ModalBody: PModalBody,
-} = createModal();
 
-type VariantSize = { size: 'sm' | 'md' | 'lg' };
-
-const localContext = createContext<VariantSize>({ size: 'md' });
-const ModalRoot = ({ size = 'md', ...props }: ModalProps & VariantSize) => {
-  return (
-    <localContext.Provider value={{ size }}>
-      <PModal {...props} />
-    </localContext.Provider>
-  );
-};
-ModalRoot.displayName = 'Modal';
-
-const ModalContent = ({
-  children,
-  closeOnPress = true,
-  ...props
-}: ModalContentProps & Pick<ModalOverlayProps, 'closeOnPress'>) => {
-  const { size } = useContext(localContext);
-  return (
-    <ModalPortal>
-      <ModalOverlay closeOnPress={closeOnPress} />
-      <PModalContent
-        {...props}
-        {...composeStyles(modalStyles.content, modalStyles[size]).rnw()}
-      >
-        {children}
-      </PModalContent>
-    </ModalPortal>
-  );
-};
-ModalContent.displayName = 'Modal.Content';
-const ModalOverlay = (props: ModalOverlayProps) => {
-  return (
-    <PModalOverlay {...props} {...composeStyles(modalStyles.overlay).rnw()} />
-  );
-};
-const ModalTitle = (props: ModalTitleProps) => {
-  return <PModalTitle {...props} {...composeStyles(modalStyles.title).rnw()} />;
+const ModalTitle = (props: TextProps) => {
+  return <Text {...props} {...composeStyles(styles.title).rnw()} />;
 };
 ModalTitle.displayName = 'Modal.Title';
-const ModalTrigger = PModalTrigger;
 
-const ModalBody: ModalBodyComponent = (props) => (
-  <PModalBody {...props} {...composeStyles(modalStyles.body).rnw()} />
+const ModalTrigger = Floating.Trigger;
+ModalTrigger.displayName = 'Modal.Trigger';
+
+const ModalBody = (props: BoxProps) => (
+  <Box {...props} {...composeStyles(styles.body).rnw()} />
 );
+ModalBody.displayName = 'Modal.Body';
 
 const ModalHeader = ({ children, style, ...props }: BoxProps) => {
   return (
-    <Box {...props} style={composeStyles(modalStyles.header, style)}>
+    <Box {...props} style={composeStyles(styles.header, style)}>
       {children}
-      <ModalTrigger asChild>
-        <CloseButton />
-      </ModalTrigger>
+      <Floating.Trigger asChild>
+        <CloseButton
+          style={inlineStyle(() => ({
+            base: { position: 'absolute', right: 0 },
+          }))}
+        />
+      </Floating.Trigger>
     </Box>
   );
 };
-ModalHeader.displayName = 'Modal.Footer';
-const ModalPortal = ({ children, ...props }: ModalPortalProps) => {
-  const context = useContext(localContext);
-  return (
-    <PModalPortal {...props} {...composeStyles(modalStyles.portal).rnw()}>
-      <localContext.Provider value={context}>{children}</localContext.Provider>
-    </PModalPortal>
-  );
-};
+ModalHeader.displayName = 'Modal.Header';
 
 const ModalFooter = withDefaultProps(XBox, {
   justifyContent: 'end',
@@ -193,10 +109,8 @@ ModalFooter.displayName = 'Modal.Footer';
 
 export const Modal = withStaticProperties(ModalRoot, {
   Content: ModalContent,
-  Overlay: ModalOverlay,
   Title: ModalTitle,
   Trigger: ModalTrigger,
-  Portal: ModalPortal,
   Footer: ModalFooter,
   Header: ModalHeader,
   Body: ModalBody,
@@ -204,10 +118,8 @@ export const Modal = withStaticProperties(ModalRoot, {
 
 export {
   ModalContent,
-  ModalOverlay,
   ModalTitle,
   ModalTrigger,
-  ModalPortal,
   ModalFooter,
   ModalHeader,
   ModalBody,

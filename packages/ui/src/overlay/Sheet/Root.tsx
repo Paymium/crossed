@@ -5,15 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useUncontrolled } from '@crossed/core';
-import {
-  forwardRef,
-  type PropsWithChildren,
-  useCallback,
-  useImperativeHandle,
-} from 'react';
+import { forwardRef, type PropsWithChildren, useCallback, useRef } from 'react';
 import { type SheetContext, sheetContext } from './context';
-import { useSharedValue } from 'react-native-reanimated';
+import Animated, { useSharedValue } from 'react-native-reanimated';
+import { Floating } from '../Floating';
+import { FloatingProps, FloatingRef } from '../Floating/Root';
 
 export type SheetProps = PropsWithChildren<{
   /**
@@ -35,16 +31,11 @@ export type SheetProps = PropsWithChildren<{
 }> &
   Pick<SheetContext, 'dismissOnOverlayPress' | 'hideHandle' | 'full'>;
 
-export type RootRef = {
-  close: () => void;
-  open: () => void;
-};
-
-export const Root = forwardRef<RootRef, SheetProps>(
+export const Root = forwardRef<FloatingRef, SheetProps>(
   (
     {
-      open: openProps,
-      defaultValue: defaultValueProps = false,
+      open,
+      defaultValue,
       onOpenChange,
       children,
       dismissOnOverlayPress = true,
@@ -54,45 +45,43 @@ export const Root = forwardRef<RootRef, SheetProps>(
     },
     ref
   ) => {
-    const [open, setOpen] = useUncontrolled({
-      value: openProps,
-      defaultValue: defaultValueProps,
-      onChange: onOpenChange,
-    });
     const isMove = useSharedValue(false);
     const height = useSharedValue(0);
     const snapInitialHeight = useSharedValue(0);
-    const onClose = useCallback(() => {
-      setOpen(false);
-      height.value = 0;
-    }, [setOpen, height]);
+    const scrollRef = useRef<Animated.ScrollView>(null);
 
-    useImperativeHandle(
-      ref,
-      () => ({
-        close: onClose,
-        open: () => setOpen(true),
-      }),
-      [onClose, setOpen]
+    const onChange: FloatingProps['onChange'] = useCallback(
+      (e) => {
+        onOpenChange?.(e);
+        if (!e) {
+          height.value = 0;
+        }
+      },
+      [onOpenChange]
     );
 
     return (
-      <sheetContext.Provider
-        value={{
-          open,
-          setOpen,
-          dismissOnOverlayPress,
-          hideHandle,
-          isMove,
-          height,
-          onClose,
-          snapInitialHeight,
-          offset: offset + 40,
-          full,
-        }}
+      <Floating
+        ref={ref}
+        value={open}
+        defaultValue={defaultValue}
+        onChange={onChange}
       >
-        {children}
-      </sheetContext.Provider>
+        <sheetContext.Provider
+          value={{
+            dismissOnOverlayPress,
+            hideHandle,
+            isMove,
+            height,
+            snapInitialHeight,
+            offset: offset + 40,
+            full,
+            scrollRef,
+          }}
+        >
+          {children}
+        </sheetContext.Provider>
+      </Floating>
     );
   }
 );

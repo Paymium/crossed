@@ -19,6 +19,7 @@ const meta: Meta<typeof Floating> = {
     'Floating.Trigger': Floating.Trigger,
     'Floating.Content': Floating.Content,
     'Floating.Overlay': Floating.Overlay,
+    'Floating.Portal': Floating.Portal,
   },
   render({ closeOnPress, ...e }: any) {
     return (
@@ -29,9 +30,15 @@ const meta: Meta<typeof Floating> = {
               <Button.Text>Button</Button.Text>
             </Button>
           </Floating.Trigger>
-          <Floating.Content>
-            <Text>Hello world</Text>
-          </Floating.Content>
+          <Floating.Portal>
+            <Floating.Overlay />
+            <Floating.Content>
+              <Text>Hello world</Text>
+              <Button>
+                <Button.Text>focus</Button.Text>
+              </Button>
+            </Floating.Content>
+          </Floating.Portal>
         </Floating>
       </YBox>
     );

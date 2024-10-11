@@ -5,34 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef, useCallback } from 'react';
-import { Pressable, type PressableProps, type View } from 'react-native';
-import { useSheetContext } from './context';
-import { composeEventHandlers } from '@crossed/core';
-import { Slot } from '../../Slot';
+import { Floating } from '../Floating';
 
-export type TriggerProps = PressableProps & {
-  /**
-   * Send logic and propr to children
-   */
-  asChild?: boolean;
-};
-
-export const Trigger = forwardRef<View, TriggerProps>(
-  (props: TriggerProps, ref) => {
-    const { open, setOpen, onClose } = useSheetContext();
-    const onPress = useCallback(() => {
-      if (open) onClose();
-      else setOpen(true);
-    }, [open, setOpen, onClose]);
-    return (
-      <Slot
-        Comp={Pressable}
-        ref={ref}
-        role="button"
-        {...props}
-        onPress={composeEventHandlers(props.onPress, onPress)}
-      />
-    );
-  }
-);
+export const Trigger = Floating.Trigger;

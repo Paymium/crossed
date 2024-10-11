@@ -10,10 +10,15 @@ import { Slot, type SlotProps } from '../../Slot';
 import { useFloatingContext } from './context';
 import { useCallback } from 'react';
 import { composeEventHandlers } from '@crossed/core';
+import { CrossedMethods } from '@crossed/styled';
 
-export const FloatingTrigger = (
-  props: Omit<SlotProps<PressableProps>, 'Comp'>
-) => {
+export const FloatingTrigger = ({
+  style,
+  ...props
+}: Omit<
+  SlotProps<Omit<PressableProps, 'style'> & { style?: CrossedMethods<any> }>,
+  'Comp'
+>) => {
   const { open, onClose, onOpen } = useFloatingContext();
   const toggle = useCallback(() => {
     if (open) onClose();
@@ -23,6 +28,7 @@ export const FloatingTrigger = (
     <Slot
       Comp={Pressable}
       {...props}
+      {...style?.rnw()}
       onPress={composeEventHandlers(toggle, props.onPress)}
     />
   );
