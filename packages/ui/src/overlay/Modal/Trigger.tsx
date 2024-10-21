@@ -5,6 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export * from './CloseButton';
-export * from './Adapt';
-export * from './ScrollView';
+import { Floating } from '../Floating';
+
+export const ModalTrigger = Floating.Trigger;
+ModalTrigger.displayName = 'Modal.Trigger';

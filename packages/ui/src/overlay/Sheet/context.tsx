@@ -5,22 +5,27 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createContext, MutableRefObject, useContext } from 'react';
+import { createContext, useContext } from 'react';
 import type { SharedValue } from 'react-native-reanimated';
-import Animated from 'react-native-reanimated';
 
 export type SheetContext = {
   dismissOnOverlayPress?: boolean;
   hideHandle?: boolean;
-  isMove: SharedValue<boolean>;
-  height: SharedValue<number>;
   snapInitialHeight: SharedValue<number>;
   offset: number;
   /**
    * Full height
    */
   full?: boolean;
-  scrollRef?: MutableRefObject<Animated.ScrollView>;
+  /**
+   * enable Sticky header
+   */
+  stickyHeader?: boolean;
+  /**
+   * enable sticky footer
+   */
+  stickyFooter?: boolean;
+  detach?: boolean;
 };
 
 export const sheetContext = createContext<SheetContext>({} as SheetContext);

@@ -5,9 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useSheetContext } from '@crossed/primitive';
 import { useMemo } from 'react';
 import { useWindowDimensions } from 'react-native';
+import { useSheetContext } from './context';
 
 export const useMaxHeight = () => {
   const { offset } = useSheetContext();

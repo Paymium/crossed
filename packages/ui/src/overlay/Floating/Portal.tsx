@@ -16,7 +16,7 @@ import { VisibilityHidden } from '@crossed/primitive';
 export const FloatingPortal = ({
   children,
   style,
-}: PropsWithChildren<{ style?: CrossedMethods<any> }>) => {
+}: PropsWithChildren<{ style?: CrossedMethods<any>; wait?: number }>) => {
   const floatingContext = useFloatingContext();
   const [interShow, setIternShow] = useState(false);
 
@@ -25,11 +25,9 @@ export const FloatingPortal = ({
       setIternShow(floatingContext.open);
       return () => {};
     }
-    const time = setTimeout(() => setIternShow(false), 300);
+    const time = setTimeout(() => setIternShow(false), floatingContext.wait);
     return () => clearTimeout(time);
-  }, [floatingContext.open]);
-
-  // const newContext = {...floatingContext, open:}
+  }, [floatingContext.open, floatingContext.wait]);
 
   return (
     <Portal>
@@ -43,9 +41,7 @@ export const FloatingPortal = ({
           ).className()}
         >
           {floatingContext.visibilityHidden ? (
-            <VisibilityHidden hide={!floatingContext.open}>
-              {children}
-            </VisibilityHidden>
+            <VisibilityHidden hide={!interShow}>{children}</VisibilityHidden>
           ) : interShow ? (
             children
           ) : null}

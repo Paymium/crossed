@@ -555,8 +555,8 @@ importers:
         specifier: 0.8.1
         version: link:../core
       '@floating-ui/react':
-        specifier: ^0.25.1
-        version: 0.25.4(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.26.25
+        version: 0.26.25(react-dom@18.3.1)(react@18.3.1)
       '@gorhom/portal':
         specifier: ^1.0.14
         version: 1.0.14(react-native@0.75.3)(react@18.3.1)
@@ -786,20 +786,26 @@ importers:
         specifier: ^1.6.3
         version: 1.6.11
       '@floating-ui/react':
-        specifier: ^0.25.1
-        version: 0.25.4(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.26.25
+        version: 0.26.25(react-dom@18.3.1)(react@18.3.1)
       '@gorhom/portal':
         specifier: ^1.0.14
         version: 1.0.14(react-native@0.75.3)(react@18.3.1)
       '@iconscout/react-native-unicons':
         specifier: ^2.0.2
         version: 2.0.2(react-native-svg@15.7.1)(react-native@0.75.3)(react@18.3.1)
+      '@react-aria/select':
+        specifier: ^3.14.11
+        version: 3.14.11(react-dom@18.3.1)(react@18.3.1)
       '@react-navigation/native':
         specifier: ^6.0.2
         version: 6.1.18(react-native@0.75.3)(react@18.3.1)
       '@react-navigation/native-stack':
         specifier: ^6.11.0
         version: 6.11.0(@react-navigation/native@6.1.18)(react-native-safe-area-context@4.10.5)(react-native-screens@3.29.0)(react-native@0.75.3)(react@18.3.1)
+      '@react-stately/select':
+        specifier: ^3.6.8
+        version: 3.6.8(react@18.3.1)
       '@testing-library/react-native':
         specifier: ^12.7.2
         version: 12.7.2(jest@29.7.0)(react-native@0.75.3)(react-test-renderer@18.3.1)(react@18.3.1)
@@ -813,7 +819,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       react-aria:
-        specifier: ^3.27.0
+        specifier: ^3.35.0
         version: 3.35.0(react-dom@18.3.1)(react@18.3.1)
       react-focus-lock:
         specifier: ^2.11.2
@@ -898,8 +904,8 @@ importers:
         specifier: ^0.75.3
         version: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
       react-native-gesture-handler:
-        specifier: ~2.14.0
-        version: 2.14.1(react-native@0.75.3)(react@18.3.1)
+        specifier: ~2.20.0
+        version: 2.20.0(react-native@0.75.3)(react@18.3.1)
       react-native-reanimated:
         specifier: ^3.10.1
         version: 3.15.4(@babel/core@7.25.7)(react-native@0.75.3)(react@18.3.1)
@@ -2787,7 +2793,7 @@ packages:
     resolution: {integrity: sha512-KeQqltKtDL+u5bXFIV4DO5ZiKlu5xe6ZOc3g/HcouTzYHMS+TAtTvnqDbv/btDhi17jX3aFmpuXp3ob0bCwtiQ==}
     dependencies:
       '@crossed/primitive': 1.7.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.3)(react@18.3.1)
-      '@crossed/ui': 1.1.0(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.3)(react-test-renderer@18.3.1)(react@18.3.1)
+      '@crossed/ui': 1.1.1(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.3)(react-test-renderer@18.3.1)(react@18.3.1)
       '@floating-ui/react': 0.25.4(react-dom@18.3.1)(react@18.3.1)
       '@gorhom/bottom-sheet': 4.6.4(@types/react@18.3.11)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native@0.75.3)(react@18.3.1)
       '@gorhom/portal': 1.0.14(react-native@0.75.3)(react@18.3.1)
@@ -2835,8 +2841,8 @@ packages:
       - react-native
     dev: false
 
-  /@crossed/ui@1.1.0(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.3)(react-test-renderer@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-lsr72lbCqFYixtBGEjxABQFDXczHcx8Waw+d6g1dkpJ/fv7XXbz5fqgBscKM52HsO+8BQvqidFPqEbd/2w8ICQ==}
+  /@crossed/ui@1.1.1(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.3)(react-test-renderer@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-wXLFQC7RY+Qlq0kVMMnMfBxl3YUeLVu8a3eUSXLEUkmXbgwEguy18GxWmRQxsFD69YOjhlCnNR4oibyyYaoIjQ==}
     peerDependencies:
       '@crossed/build': '*'
       '@crossed/core': 0.8.1
@@ -2913,7 +2919,7 @@ packages:
       react-native: '*'
     dependencies:
       react: 18.3.1
-      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
+      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
 
   /@discoveryjs/json-ext@0.5.7:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
@@ -3870,6 +3876,19 @@ packages:
     dependencies:
       '@floating-ui/react-dom': 2.1.2(react-dom@18.3.1)(react@18.3.1)
       '@floating-ui/utils': 0.1.6
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      tabbable: 6.2.0
+    dev: false
+
+  /@floating-ui/react@0.26.25(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-hZOmgN0NTOzOuZxI1oIrDu3Gcl8WViIkvPMpB4xdd4QD6xAMtwgwr3VPoiyH/bLtRcS1cDnhxLSD1NsMJmwh/A==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@floating-ui/react-dom': 2.1.2(react-dom@18.3.1)(react@18.3.1)
+      '@floating-ui/utils': 0.2.8
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       tabbable: 6.2.0
@@ -5143,6 +5162,32 @@ packages:
       react: 18.3.1
     dev: false
 
+  /@react-aria/focus@3.18.4(react@18.3.1):
+    resolution: {integrity: sha512-91J35077w9UNaMK1cpMUEFRkNNz0uZjnSwiyBCFuRdaVuivO53wNC9XtWSDNDdcO5cGy87vfJRVAiyoCn/mjqA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+    dependencies:
+      '@react-aria/interactions': 3.22.4(react@18.3.1)
+      '@react-aria/utils': 3.25.3(react@18.3.1)
+      '@react-types/shared': 3.25.0(react@18.3.1)
+      '@swc/helpers': 0.5.13
+      clsx: 2.1.1
+      react: 18.3.1
+    dev: false
+
+  /@react-aria/form@3.0.10(react@18.3.1):
+    resolution: {integrity: sha512-hWBrqEXxBxcpYTJv0telQKaiu2728EUFHta8/RGBqJ4+MhKKxI7+PnLoms78IuiK0MCYvukHfun1fuQvK+8jsg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+    dependencies:
+      '@react-aria/interactions': 3.22.4(react@18.3.1)
+      '@react-aria/utils': 3.25.3(react@18.3.1)
+      '@react-stately/form': 3.0.6(react@18.3.1)
+      '@react-types/shared': 3.25.0(react@18.3.1)
+      '@swc/helpers': 0.5.13
+      react: 18.3.1
+    dev: false
+
   /@react-aria/form@3.0.9(react@18.3.1):
     resolution: {integrity: sha512-9M6IfC5t47G19c8roHWnkKd275BrECTzyTsc4rzf5OepJfHfG4evST6x+4gGOFYi8soC9XoQdJl4TRh/mft+gw==}
     peerDependencies:
@@ -5228,6 +5273,18 @@ packages:
       react: 18.3.1
     dev: false
 
+  /@react-aria/interactions@3.22.4(react@18.3.1):
+    resolution: {integrity: sha512-E0vsgtpItmknq/MJELqYJwib+YN18Qag8nroqwjk1qOnBa9ROIkUhWJerLi1qs5diXq9LHKehZDXRlwPvdEFww==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+    dependencies:
+      '@react-aria/ssr': 3.9.6(react@18.3.1)
+      '@react-aria/utils': 3.25.3(react@18.3.1)
+      '@react-types/shared': 3.25.0(react@18.3.1)
+      '@swc/helpers': 0.5.13
+      react: 18.3.1
+    dev: false
+
   /@react-aria/label@3.7.12(react@18.3.1):
     resolution: {integrity: sha512-u9xT90lAlgb7xiv+p0md9QwCHz65XL7tjS5e29e88Rs3ptkv3aQubTqxVOUTEwzbNUT4A1QqTjUm1yfHewIRUw==}
     peerDependencies:
@@ -5272,6 +5329,25 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
+  /@react-aria/listbox@3.13.5(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-tn32L/PIELIPYfDWCJ3OBRvvb/jCEvIzs6IYs8xCISV5W4853Je/WnA8wumWnz07U9sODYFmHUx2ThO7Z7dH7Q==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+    dependencies:
+      '@react-aria/interactions': 3.22.4(react@18.3.1)
+      '@react-aria/label': 3.7.12(react@18.3.1)
+      '@react-aria/selection': 3.20.1(react-dom@18.3.1)(react@18.3.1)
+      '@react-aria/utils': 3.25.3(react@18.3.1)
+      '@react-stately/collections': 3.11.0(react@18.3.1)
+      '@react-stately/list': 3.11.0(react@18.3.1)
+      '@react-types/listbox': 3.5.2(react@18.3.1)
+      '@react-types/shared': 3.25.0(react@18.3.1)
+      '@swc/helpers': 0.5.13
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
   /@react-aria/live-announcer@3.4.0:
     resolution: {integrity: sha512-VBxEdMq2SbtRbNTQNcDR2G6E3lEl5cJSBiHTTO8Ln1AL76LiazrylIXGgoktqzCfRQmyq0v8CHk1cNKDU9mvJg==}
     dependencies:
@@ -5289,6 +5365,29 @@ packages:
       '@react-aria/interactions': 3.22.3(react@18.3.1)
       '@react-aria/overlays': 3.23.3(react-dom@18.3.1)(react@18.3.1)
       '@react-aria/selection': 3.20.0(react-dom@18.3.1)(react@18.3.1)
+      '@react-aria/utils': 3.25.3(react@18.3.1)
+      '@react-stately/collections': 3.11.0(react@18.3.1)
+      '@react-stately/menu': 3.8.3(react@18.3.1)
+      '@react-stately/tree': 3.8.5(react@18.3.1)
+      '@react-types/button': 3.10.0(react@18.3.1)
+      '@react-types/menu': 3.9.12(react@18.3.1)
+      '@react-types/shared': 3.25.0(react@18.3.1)
+      '@swc/helpers': 0.5.13
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
+  /@react-aria/menu@3.15.5(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-ygfS032hJSZCYYbMHnUSmUTVMaz99L9AUZ9kMa6g+k2X1t92K1gXfhYYkoClQD6+G0ch7zm0SwYFlUmRf9yOEA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+    dependencies:
+      '@react-aria/focus': 3.18.4(react@18.3.1)
+      '@react-aria/i18n': 3.12.3(react@18.3.1)
+      '@react-aria/interactions': 3.22.4(react@18.3.1)
+      '@react-aria/overlays': 3.23.4(react-dom@18.3.1)(react@18.3.1)
+      '@react-aria/selection': 3.20.1(react-dom@18.3.1)(react@18.3.1)
       '@react-aria/utils': 3.25.3(react@18.3.1)
       '@react-stately/collections': 3.11.0(react@18.3.1)
       '@react-stately/menu': 3.8.3(react@18.3.1)
@@ -5355,6 +5454,27 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
+  /@react-aria/overlays@3.23.4(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-MZUW6SUlTWOwKuFTqUTxW5BnvdW3Y9cEwanWuz98NX3ST7JYe/3ZcZhb37/fGW4uoGHnQ9icEwVf0rbMrK2STg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+    dependencies:
+      '@react-aria/focus': 3.18.4(react@18.3.1)
+      '@react-aria/i18n': 3.12.3(react@18.3.1)
+      '@react-aria/interactions': 3.22.4(react@18.3.1)
+      '@react-aria/ssr': 3.9.6(react@18.3.1)
+      '@react-aria/utils': 3.25.3(react@18.3.1)
+      '@react-aria/visually-hidden': 3.8.17(react@18.3.1)
+      '@react-stately/overlays': 3.6.11(react@18.3.1)
+      '@react-types/button': 3.10.0(react@18.3.1)
+      '@react-types/overlays': 3.8.10(react@18.3.1)
+      '@react-types/shared': 3.25.0(react@18.3.1)
+      '@swc/helpers': 0.5.13
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
   /@react-aria/progress@3.4.17(react@18.3.1):
     resolution: {integrity: sha512-5+01WNibLoNS5KcfU5p6vg7Lhz17plqqzv/uITx28zzj3saaj0VLR7n57Ig2fXe8ZEQoUS89BS3sIEsIf96S1A==}
     peerDependencies:
@@ -5403,21 +5523,21 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@react-aria/select@3.14.10(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-xHkAJqvfKgnH5mVYwZj3ME7/Q3wUzgUZDK/iVuXUs3cAYap8ybM2d/2zOGcqv1keZHBUzwp9QtaN//FYK13jIA==}
+  /@react-aria/select@3.14.11(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-rX5U4JcPNV41lNEF1tAxNxqrGENnLGZL/D5Y+YNpqKSU5U09+hD3ovsflNkF/d+deb25zg45JRxumwOCQ+rfyw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
     dependencies:
-      '@react-aria/form': 3.0.9(react@18.3.1)
+      '@react-aria/form': 3.0.10(react@18.3.1)
       '@react-aria/i18n': 3.12.3(react@18.3.1)
-      '@react-aria/interactions': 3.22.3(react@18.3.1)
+      '@react-aria/interactions': 3.22.4(react@18.3.1)
       '@react-aria/label': 3.7.12(react@18.3.1)
-      '@react-aria/listbox': 3.13.4(react-dom@18.3.1)(react@18.3.1)
-      '@react-aria/menu': 3.15.4(react-dom@18.3.1)(react@18.3.1)
-      '@react-aria/selection': 3.20.0(react-dom@18.3.1)(react@18.3.1)
+      '@react-aria/listbox': 3.13.5(react-dom@18.3.1)(react@18.3.1)
+      '@react-aria/menu': 3.15.5(react-dom@18.3.1)(react@18.3.1)
+      '@react-aria/selection': 3.20.1(react-dom@18.3.1)(react@18.3.1)
       '@react-aria/utils': 3.25.3(react@18.3.1)
-      '@react-aria/visually-hidden': 3.8.16(react@18.3.1)
+      '@react-aria/visually-hidden': 3.8.17(react@18.3.1)
       '@react-stately/select': 3.6.8(react@18.3.1)
       '@react-types/button': 3.10.0(react@18.3.1)
       '@react-types/select': 3.9.7(react@18.3.1)
@@ -5436,6 +5556,23 @@ packages:
       '@react-aria/focus': 3.18.3(react@18.3.1)
       '@react-aria/i18n': 3.12.3(react@18.3.1)
       '@react-aria/interactions': 3.22.3(react@18.3.1)
+      '@react-aria/utils': 3.25.3(react@18.3.1)
+      '@react-stately/selection': 3.17.0(react@18.3.1)
+      '@react-types/shared': 3.25.0(react@18.3.1)
+      '@swc/helpers': 0.5.13
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
+  /@react-aria/selection@3.20.1(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-My0w8UC/7PAkz/1yZUjr2VRuzDZz1RrbgTqP36j5hsJx8RczDTjI4TmKtQNKG0ggaP4w83G2Og5JPTq3w3LMAw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+    dependencies:
+      '@react-aria/focus': 3.18.4(react@18.3.1)
+      '@react-aria/i18n': 3.12.3(react@18.3.1)
+      '@react-aria/interactions': 3.22.4(react@18.3.1)
       '@react-aria/utils': 3.25.3(react@18.3.1)
       '@react-stately/selection': 3.17.0(react@18.3.1)
       '@react-types/shared': 3.25.0(react@18.3.1)
@@ -5646,6 +5783,18 @@ packages:
       react: 18.3.1
     dev: false
 
+  /@react-aria/visually-hidden@3.8.17(react@18.3.1):
+    resolution: {integrity: sha512-WFgny1q2CbxxU6gu46TGQXf1DjsnuSk+RBDP4M7bm1mUVZzoCp7U7AtjNmsBrWg0NejxUdgD7+7jkHHCQ91qRA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
+    dependencies:
+      '@react-aria/interactions': 3.22.4(react@18.3.1)
+      '@react-aria/utils': 3.25.3(react@18.3.1)
+      '@react-types/shared': 3.25.0(react@18.3.1)
+      '@swc/helpers': 0.5.13
+      react: 18.3.1
+    dev: false
+
   /@react-native-aria/focus@0.2.9(react-native@0.75.3)(react@18.3.1):
     resolution: {integrity: sha512-zVgOIzKwnsyyurUxlZnzUKB2ekK/cmK64sQJIKKUlkJKVxd2EAFf7Sjz/NVEoMhTODN3qGRASTv9bMk/pBzzVA==}
     peerDependencies:
@@ -5701,6 +5850,7 @@ packages:
       joi: 17.13.3
     transitivePeerDependencies:
       - typescript
+    dev: false
 
   /@react-native-community/cli-config@14.1.0(typescript@5.4.2):
     resolution: {integrity: sha512-P3FK2rPUJBD1fmQHLgTqpHxsc111pnMdEEFR7KeqprCNz+Qr2QpPxfNy0V7s15tGL5rAv+wpbOGcioIV50EbxA==}
@@ -5713,6 +5863,7 @@ packages:
       joi: 17.13.3
     transitivePeerDependencies:
       - typescript
+    dev: true
 
   /@react-native-community/cli-config@14.1.0(typescript@5.6.2):
     resolution: {integrity: sha512-P3FK2rPUJBD1fmQHLgTqpHxsc111pnMdEEFR7KeqprCNz+Qr2QpPxfNy0V7s15tGL5rAv+wpbOGcioIV50EbxA==}
@@ -5754,6 +5905,7 @@ packages:
       yaml: 2.5.1
     transitivePeerDependencies:
       - typescript
+    dev: false
 
   /@react-native-community/cli-doctor@14.1.0(typescript@5.4.2):
     resolution: {integrity: sha512-xIf0oQDRKt7lufUenRwcLYdINGc0x1FSXHaHjd7lQDGT5FJnCEYlIkYEDDgAl5tnVJSvM/IL2c6O+mffkNEPzQ==}
@@ -5776,6 +5928,7 @@ packages:
       yaml: 2.5.1
     transitivePeerDependencies:
       - typescript
+    dev: true
 
   /@react-native-community/cli-doctor@14.1.0(typescript@5.6.2):
     resolution: {integrity: sha512-xIf0oQDRKt7lufUenRwcLYdINGc0x1FSXHaHjd7lQDGT5FJnCEYlIkYEDDgAl5tnVJSvM/IL2c6O+mffkNEPzQ==}
@@ -5886,6 +6039,7 @@ packages:
       - supports-color
       - typescript
       - utf-8-validate
+    dev: false
 
   /@react-native-community/cli@14.1.0(typescript@5.4.2):
     resolution: {integrity: sha512-k7aTdKNZIec7WMSqMJn9bDVLWPPOaYmshXcnjWy6t5ItsJnREju9p2azMTR5tXY5uIeynose3cxettbhk2Tbnw==}
@@ -5913,6 +6067,7 @@ packages:
       - supports-color
       - typescript
       - utf-8-validate
+    dev: true
 
   /@react-native-community/cli@14.1.0(typescript@5.6.2):
     resolution: {integrity: sha512-k7aTdKNZIec7WMSqMJn9bDVLWPPOaYmshXcnjWy6t5ItsJnREju9p2azMTR5tXY5uIeynose3cxettbhk2Tbnw==}
@@ -6210,7 +6365,7 @@ packages:
       invariant: 2.2.4
       nullthrows: 1.1.1
       react: 18.3.1
-      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
+      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
 
   /@react-navigation/core@6.4.17(react@18.3.1):
     resolution: {integrity: sha512-Nd76EpomzChWAosGqWOYE3ItayhDzIEzzZsT7PfGcRFDgW5miHV2t4MZcq9YIK4tzxZjVVpYbIynOOQQd1e0Cg==}
@@ -6236,7 +6391,7 @@ packages:
     dependencies:
       '@react-navigation/native': 6.1.18(react-native@0.75.3)(react@18.3.1)
       react: 18.3.1
-      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
+      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
       react-native-safe-area-context: 4.10.5(react-native@0.75.3)(react@18.3.1)
     dev: false
 
@@ -6287,7 +6442,7 @@ packages:
       fast-deep-equal: 3.1.3
       nanoid: 3.3.7
       react: 18.3.1
-      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
+      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
     dev: false
 
   /@react-navigation/routers@6.1.9:
@@ -11110,6 +11265,7 @@ packages:
       js-yaml: 4.1.0
       parse-json: 5.2.0
       typescript: 5.0.4
+    dev: false
 
   /cosmiconfig@9.0.0(typescript@5.4.2):
     resolution: {integrity: sha512-itvL5h8RETACmOTFc4UfIyB2RfEHi71Ax6E/PivVxq9NseKbOWpeyHEOIbmAw1rs8Ak0VursQNww7lf7YtUwzg==}
@@ -11125,6 +11281,7 @@ packages:
       js-yaml: 4.1.0
       parse-json: 5.2.0
       typescript: 5.4.2
+    dev: true
 
   /cosmiconfig@9.0.0(typescript@5.6.2):
     resolution: {integrity: sha512-itvL5h8RETACmOTFc4UfIyB2RfEHi71Ax6E/PivVxq9NseKbOWpeyHEOIbmAw1rs8Ak0VursQNww7lf7YtUwzg==}
@@ -18966,7 +19123,7 @@ packages:
       '@react-aria/progress': 3.4.17(react@18.3.1)
       '@react-aria/radio': 3.10.8(react@18.3.1)
       '@react-aria/searchfield': 3.7.9(react@18.3.1)
-      '@react-aria/select': 3.14.10(react-dom@18.3.1)(react@18.3.1)
+      '@react-aria/select': 3.14.11(react-dom@18.3.1)(react@18.3.1)
       '@react-aria/selection': 3.20.0(react-dom@18.3.1)(react@18.3.1)
       '@react-aria/separator': 3.4.3(react@18.3.1)
       '@react-aria/slider': 3.7.12(react@18.3.1)
@@ -19145,8 +19302,8 @@ packages:
       react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
     dev: false
 
-  /react-native-gesture-handler@2.14.1(react-native@0.75.3)(react@18.3.1):
-    resolution: {integrity: sha512-YiM1BApV4aKeuwsM6O4C2ufwewYEKk6VMXOt0YqEZFMwABBFWhXLySFZYjBSNRU2USGppJbfHP1q1DfFQpKhdA==}
+  /react-native-gesture-handler@2.20.0(react-native@0.75.3)(react@18.3.1):
+    resolution: {integrity: sha512-rFKqgHRfxQ7uSAivk8vxCiW4SB3G0U7jnv7kZD4Y90K5kp6YrU8Q3tWhxe3Rx55BIvSd3mBe9ZWbWVJ0FsSHPA==}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -19154,7 +19311,6 @@ packages:
       '@egjs/hammerjs': 2.0.17
       hoist-non-react-statics: 3.3.2
       invariant: 2.2.4
-      lodash: 4.17.21
       prop-types: 15.8.1
       react: 18.3.1
       react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
@@ -19180,7 +19336,7 @@ packages:
       convert-source-map: 2.0.0
       invariant: 2.2.4
       react: 18.3.1
-      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.4.2)
+      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -19191,7 +19347,7 @@ packages:
       react-native: '*'
     dependencies:
       react: 18.3.1
-      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
+      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
     dev: false
 
   /react-native-screens@3.29.0(react-native@0.75.3)(react@18.3.1):
@@ -19227,7 +19383,7 @@ packages:
       css-select: 5.1.0
       css-tree: 1.1.3
       react: 18.3.1
-      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
+      react-native: 0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2)
       warn-once: 0.1.1
 
   /react-native-unistyles@2.10.0(@react-native/normalize-colors@0.75.4)(react-native-web@0.19.12)(react-native@0.75.3)(react@18.3.1):
@@ -19356,6 +19512,7 @@ packages:
       - supports-color
       - typescript
       - utf-8-validate
+    dev: false
 
   /react-native@0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.4.2):
     resolution: {integrity: sha512-+Ne6u5H+tPo36sme19SCd1u2UID2uo0J/XzAJarxmrDj4Nsdi44eyUDKtQHmhgxjRGsuVJqAYrMK0abLSq8AHw==}
@@ -19417,6 +19574,7 @@ packages:
       - supports-color
       - typescript
       - utf-8-validate
+    dev: true
 
   /react-native@0.75.3(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.6.2):
     resolution: {integrity: sha512-+Ne6u5H+tPo36sme19SCd1u2UID2uo0J/XzAJarxmrDj4Nsdi44eyUDKtQHmhgxjRGsuVJqAYrMK0abLSq8AHw==}

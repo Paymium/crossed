@@ -7,7 +7,7 @@
 
 import { Text, TextProps } from '../../typography/Text';
 
-export const SheetTitle = ({ style, ...props }: TextProps) => (
-  <Text size="xl" weight="xl" {...props} />
-);
-SheetTitle.displayName = 'Sheet.Title';
+export const ModalTitle = (props: TextProps) => {
+  return <Text size="h6" weight="h6" {...props} />;
+};
+ModalTitle.displayName = 'Modal.Title';

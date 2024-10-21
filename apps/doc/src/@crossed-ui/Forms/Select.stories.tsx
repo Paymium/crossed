@@ -7,19 +7,19 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Select } from '@crossed/ui/src/forms/Select';
+import { SelectNew } from '@crossed/ui/src/forms/SelectNew';
 import { YBox } from '@crossed/ui';
 import { inlineStyle } from '@crossed/styled';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof Select> = {
-  component: Select,
+const meta: Meta<typeof SelectNew> = {
+  component: SelectNew,
   subcomponents: {
-    'Select.Trigger': Select.Trigger,
-    'Select.Trigger.Text': Select.Trigger.Text,
-    'Select.Value': Select.Value,
-    'Select.Content': Select.Content,
-    'Select.Option': Select.Option,
+    'Select.Trigger': SelectNew.Trigger,
+    // 'Select.Trigger.Text': Select.Trigger.Text,
+    'Select.Value': SelectNew.Value,
+    'Select.Content': SelectNew.Content,
+    'Select.Option': SelectNew.Option,
   },
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
@@ -32,15 +32,15 @@ const meta: Meta<typeof Select> = {
   },
   render: (e) => (
     <YBox {...e} style={inlineStyle(() => ({ base: { padding: 100 } }))}>
-      <Select>
-        <Select.Trigger>
-          <Select.Value />
-        </Select.Trigger>
-        <Select.Content>
-          <Select.Option value="Select 1">Select 1</Select.Option>
-          <Select.Option value="Select 2">Select 2</Select.Option>
-        </Select.Content>
-      </Select>
+      <SelectNew>
+        <SelectNew.Trigger>
+          <SelectNew.Value />
+        </SelectNew.Trigger>
+        <SelectNew.Content>
+          <SelectNew.Option value="Select 1">Select 1</SelectNew.Option>
+          <SelectNew.Option value="Select 2">Select 2</SelectNew.Option>
+        </SelectNew.Content>
+      </SelectNew>
     </YBox>
   ),
 };

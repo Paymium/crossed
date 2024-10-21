@@ -7,7 +7,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button, Sheet, Text, YBox } from '@crossed/ui';
+import { Button, Input, Sheet, Text, YBox } from '@crossed/ui';
 import { inlineStyle } from '@crossed/styled';
 
 const meta: Meta<typeof Sheet> = {
@@ -19,7 +19,6 @@ const meta: Meta<typeof Sheet> = {
     'Sheet.Frame': Sheet.Frame,
     'Sheet.SnapVisible': Sheet.SnapVisible,
     'Sheet.Title': Sheet.Title,
-    'Sheet.Header': Sheet.Header,
   },
   render(e) {
     return (
@@ -31,9 +30,9 @@ const meta: Meta<typeof Sheet> = {
             </Button>
           </Sheet.Trigger>
           <Sheet.Frame>
-            <Sheet.Header>
-              <Sheet.Title>Title</Sheet.Title>
-            </Sheet.Header>
+            <Sheet.Title>
+              <Input />
+            </Sheet.Title>
             <Text>Hello world</Text>
             <Sheet.Footer>
               <Sheet.Trigger asChild>
@@ -75,9 +74,7 @@ export const WithScroll: Story = {
             </Button>
           </Sheet.Trigger>
           <Sheet.Frame>
-            <Sheet.Header>
-              <Sheet.Title>Title</Sheet.Title>
-            </Sheet.Header>
+            <Sheet.Title>Title</Sheet.Title>
             {Array.from(Array(60).keys()).map((i) => (
               <Text key={`${i}-render test`}>Hello world {i}</Text>
             ))}
@@ -93,4 +90,22 @@ export const WithScroll: Story = {
       </YBox>
     );
   },
+};
+
+export const WithScrollStickyHeader: Story = {
+  ...WithScroll,
+  args: { stickyHeader: true },
+};
+export const WithScrollStickyFooter: Story = {
+  ...WithScroll,
+  args: { stickyFooter: true },
+};
+export const WithScrollStickyHeaderAndFooter: Story = {
+  ...WithScroll,
+  args: { stickyHeader: true, stickyFooter: true },
+};
+
+export const WithScrollDetach: Story = {
+  ...Primary,
+  args: { detach: true, stickyFooter: true },
 };

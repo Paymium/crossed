@@ -5,11 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef, type PropsWithChildren, useCallback, useRef } from 'react';
+import { forwardRef, type PropsWithChildren } from 'react';
 import { type SheetContext, sheetContext } from './context';
-import Animated, { useSharedValue } from 'react-native-reanimated';
+import { useSharedValue } from 'react-native-reanimated';
 import { Floating } from '../Floating';
-import { FloatingProps, FloatingRef } from '../Floating/Root';
+import { FloatingRef } from '../Floating/Root';
 
 export type SheetProps = PropsWithChildren<{
   /**
@@ -28,8 +28,19 @@ export type SheetProps = PropsWithChildren<{
    * Size keep with top of window
    */
   offset?: number;
+  /**
+   * if true detach sheet from bottom
+   */
+  detach?: boolean;
 }> &
-  Pick<SheetContext, 'dismissOnOverlayPress' | 'hideHandle' | 'full'>;
+  Pick<
+    SheetContext,
+    | 'dismissOnOverlayPress'
+    | 'hideHandle'
+    | 'full'
+    | 'stickyFooter'
+    | 'stickyHeader'
+  >;
 
 export const Root = forwardRef<FloatingRef, SheetProps>(
   (
@@ -42,41 +53,31 @@ export const Root = forwardRef<FloatingRef, SheetProps>(
       hideHandle,
       offset = 20,
       full,
+      stickyFooter,
+      stickyHeader,
+      detach,
     },
     ref
   ) => {
-    const isMove = useSharedValue(false);
-    const height = useSharedValue(0);
     const snapInitialHeight = useSharedValue(0);
-    const scrollRef = useRef<Animated.ScrollView>(null);
-
-    const onChange: FloatingProps['onChange'] = useCallback(
-      (e) => {
-        onOpenChange?.(e);
-        if (!e) {
-          height.value = 0;
-        }
-      },
-      [onOpenChange]
-    );
 
     return (
       <Floating
         ref={ref}
         value={open}
         defaultValue={defaultValue}
-        onChange={onChange}
+        onChange={onOpenChange}
       >
         <sheetContext.Provider
           value={{
             dismissOnOverlayPress,
             hideHandle,
-            isMove,
-            height,
             snapInitialHeight,
             offset: offset + 40,
             full,
-            scrollRef,
+            stickyFooter,
+            stickyHeader,
+            detach,
           }}
         >
           {children}

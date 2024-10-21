@@ -7,6 +7,17 @@
 
 import { createContext } from 'react';
 
-export type VariantSize = { size: 'sm' | 'md' | 'lg' };
+export type VariantSize = {
+  /**
+   * Size of modal
+   */
+  size: 'sm' | 'md' | 'lg';
+};
 
-export const localContext = createContext<VariantSize>({ size: 'md' });
+export type LocalContext = VariantSize & {
+  showSheet?: boolean;
+  stickyHeader?: boolean;
+  stickyFooter?: boolean;
+};
+
+export const localContext = createContext<LocalContext>({ size: 'md' });

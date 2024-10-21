@@ -19,11 +19,13 @@ import { overlayStyles } from '../styles';
 import { useEffect, useState } from 'react';
 import { positionStyles } from '../../styles/position';
 
-export type FloatingOverlayProps = Omit<PressableProps, 'style'> & {
+export type FloatingOverlayProps = {
   style?: CrossedMethods<any>;
 };
-export const FloatingOverlay = () => {
-  const { open, closeOverlayPress } = useFloatingContext();
+export const FloatingOverlay = ({
+  style: styleProps,
+}: FloatingOverlayProps) => {
+  const { wait, open, closeOverlayPress } = useFloatingContext();
 
   const [interShow, setIternShow] = useState(false);
 
@@ -32,9 +34,9 @@ export const FloatingOverlay = () => {
       setIternShow(open);
       return () => {};
     }
-    const time = setTimeout(() => setIternShow(false), 300);
+    const time = setTimeout(() => setIternShow(false), wait);
     return () => clearTimeout(time);
-  }, [open]);
+  }, [open, wait]);
 
   const style = useAnimatedStyle(
     () => ({
@@ -48,7 +50,8 @@ export const FloatingOverlay = () => {
       disabled={!closeOverlayPress}
       style={composeStyles(
         positionStyles.absoluteFill,
-        inlineStyle(() => ({ web: { base: { position: 'fixed' } } }))
+        inlineStyle(() => ({ web: { base: { position: 'fixed' } } })),
+        styleProps
       )}
     >
       <Animated.View entering={FadeIn} exiting={FadeOut}>

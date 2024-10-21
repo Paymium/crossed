@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { View, type ViewProps } from 'react-native';
+import { StyleProp, View, ViewStyle, type ViewProps } from 'react-native';
 import {
   composeStyles,
   createStyles,
@@ -15,6 +15,7 @@ import {
 import { forwardRef } from 'react';
 import { baseStyle } from '../styles/base';
 import { gapStyles } from '../styles/gap';
+import Animated, { AnimatedStyle } from 'react-native-reanimated';
 
 const styleBox = createStyles(
   () =>
@@ -43,6 +44,11 @@ export type BoxProps = {
    * @default false
    */
   center?: boolean;
+
+  /**
+   * Animatedstyled
+   */
+  animatedStyle?: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>;
 } & Omit<BaseCrossedPropsExtended & ViewProps, 'style'>;
 
 export const Box = forwardRef<View, BoxProps>(
@@ -55,26 +61,30 @@ export const Box = forwardRef<View, BoxProps>(
       active,
       hover,
       focus,
+      animatedStyle,
       ...props
     }: BoxProps,
     ref
   ) => {
     return (
-      <View
+      <Animated.View
         ref={ref}
         {...props}
-        {...composeStyles(
-          baseStyle.view,
-          styleBox.root,
-          center === true && styleBox.center,
-          gapStyles[space],
-          style
-        ).rnw({
-          className,
-          active,
-          hover,
-          focus,
-        })}
+        style={[
+          composeStyles(
+            baseStyle.view,
+            styleBox.root,
+            center === true && styleBox.center,
+            gapStyles[space],
+            style
+          ).rnw({
+            className,
+            active,
+            hover,
+            focus,
+          }).style,
+          animatedStyle,
+        ]}
       />
     );
   }

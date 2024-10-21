@@ -9,7 +9,7 @@ export * from './Label';
 export * from './Input';
 export * from './Textarea';
 export * from './Button';
-export * from './Select';
+export * from './SelectNew';
 export * from './Radio';
 export * from './Checkbox';
 export * from './Form';

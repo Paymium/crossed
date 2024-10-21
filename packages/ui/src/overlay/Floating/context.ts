@@ -13,6 +13,7 @@ export type FloatingContext = {
   onOpen: () => void;
   visibilityHidden?: boolean;
   closeOverlayPress?: boolean;
+  wait?: number;
 };
 
 export const [FloatingProvider, useFloatingContext] =

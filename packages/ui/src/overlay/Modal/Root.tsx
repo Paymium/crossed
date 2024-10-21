@@ -9,19 +9,52 @@ import { PropsWithChildren } from 'react';
 import { Floating } from '../Floating';
 import { localContext, VariantSize } from './context';
 import { FloatingProps } from '../Floating/Root';
+import { SheetProps } from '../Sheet/Root';
+import { Sheet } from '../Sheet';
+import { useMedia } from '../../useMedia';
+import type { ScrollViewProps } from '../../other/ScrollView';
 
-export type ModalProps = PropsWithChildren<VariantSize> & {
-  floatingProps?: FloatingProps;
-};
+type ChildWithViariant = PropsWithChildren<VariantSize>;
+export type ModalProps = ChildWithViariant &
+  Pick<ScrollViewProps<any>, 'stickyHeader' | 'stickyFooter'> & {
+    /**
+     * Props send to Floating copmponent
+     */
+    floatingProps?: FloatingProps;
+    /**
+     * Adapt to sheet responsive
+     */
+    adapt?: boolean;
+    /**
+     * pass to sheet when adapt is true
+     */
+    sheetProps?: SheetProps;
+  };
 export const ModalRoot = ({
   size = 'md',
   children,
   floatingProps,
+  adapt,
+  sheetProps,
+  stickyFooter,
+  stickyHeader,
 }: ModalProps) => {
+  const { md } = useMedia();
+  const showSheet = adapt && !md;
   return (
-    <Floating {...floatingProps}>
-      <localContext.Provider value={{ size }}>{children}</localContext.Provider>
-    </Floating>
+    <Sheet
+      stickyFooter={stickyFooter}
+      stickyHeader={stickyHeader}
+      {...sheetProps}
+    >
+      <Floating {...floatingProps}>
+        <localContext.Provider
+          value={{ size, showSheet, stickyFooter, stickyHeader }}
+        >
+          {children}
+        </localContext.Provider>
+      </Floating>
+    </Sheet>
   );
 };
 ModalRoot.displayName = 'Modal';

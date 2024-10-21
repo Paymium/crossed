@@ -5,11 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useSheetContext } from './context';
 import { createStyles } from '@crossed/styled';
 import { Box } from '../../layout/Box';
 import { Pressable } from 'react-native';
-import { Adapt } from '../../other/Adapt';
 
 const styles = createStyles(({ colors }) => ({
   handle: {
@@ -27,16 +25,9 @@ const styles = createStyles(({ colors }) => ({
 }));
 
 export const Handle = () => {
-  const { hideHandle } = useSheetContext();
-
-  return !hideHandle ? (
-    <Adapt
-      size="sm"
-      fallback={
-        <Pressable {...styles.pressable.rnw()}>
-          <Box style={styles.handle} />
-        </Pressable>
-      }
-    />
-  ) : null;
+  return (
+    <Pressable {...styles.pressable.rnw()}>
+      <Box style={styles.handle} />
+    </Pressable>
+  );
 };

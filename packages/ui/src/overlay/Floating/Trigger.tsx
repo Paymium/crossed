@@ -5,20 +5,20 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Pressable, type PressableProps } from 'react-native';
+import { Pressable, type View, type PressableProps } from 'react-native';
 import { Slot, type SlotProps } from '../../Slot';
 import { useFloatingContext } from './context';
-import { useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
 import { composeEventHandlers } from '@crossed/core';
 import { CrossedMethods } from '@crossed/styled';
 
-export const FloatingTrigger = ({
-  style,
-  ...props
-}: Omit<
-  SlotProps<Omit<PressableProps, 'style'> & { style?: CrossedMethods<any> }>,
-  'Comp'
->) => {
+export const FloatingTrigger = forwardRef<
+  View,
+  Omit<
+    SlotProps<Omit<PressableProps, 'style'> & { style?: CrossedMethods<any> }>,
+    'Comp'
+  >
+>(({ style, ...props }, ref) => {
   const { open, onClose, onOpen } = useFloatingContext();
   const toggle = useCallback(() => {
     if (open) onClose();
@@ -26,11 +26,12 @@ export const FloatingTrigger = ({
   }, [open, onClose, onOpen]);
   return (
     <Slot
+      ref={ref}
       Comp={Pressable}
       {...props}
       {...style?.rnw()}
       onPress={composeEventHandlers(toggle, props.onPress)}
     />
   );
-};
+});
 FloatingTrigger.displayName = 'Floating.Trigger';

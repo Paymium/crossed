@@ -5,6 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export * from './CloseButton';
-export * from './Adapt';
-export * from './ScrollView';
+import type { UseFloating } from './types';
+
+export const useFloating: UseFloating = () => {
+  return {
+    refs: {},
+    floatingStyles: {},
+  } as any;
+};

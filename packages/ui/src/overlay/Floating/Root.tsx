@@ -24,6 +24,7 @@ export type FloatingProps = PropsWithChildren<
      * if false, press on overlay not close the modal
      */
     closeOverlayPress?: boolean;
+    wait?: number;
   } & Omit<UseUncontrolledInput<boolean>, 'finalValue'>
 >;
 export type FloatingRef = {
@@ -39,6 +40,7 @@ export const FloatingRoot = forwardRef<FloatingRef, FloatingProps>(
       onChange,
       value,
       closeOverlayPress,
+      wait = 300
     }: FloatingProps,
     ref
   ) => {
@@ -59,6 +61,7 @@ export const FloatingRoot = forwardRef<FloatingRef, FloatingProps>(
         onOpen={onOpen}
         visibilityHidden={visibilityHidden}
         closeOverlayPress={closeOverlayPress ?? true}
+        wait={wait}
       >
         {children}
       </FloatingProvider>
