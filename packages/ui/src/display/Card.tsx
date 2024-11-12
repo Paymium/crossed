@@ -21,6 +21,11 @@ const useCard = createStyles(({ space, font, components }) => ({
       borderColor: components.Card.default.border,
       gap: space.xxs,
     },
+    media: {
+      xs: { padding: space.xs, gap: space.xxs },
+      md: { padding: space.sm, gap: space.xs },
+      xl: { padding: space.md, gap: space.sm },
+    },
   },
   rootLink: {
     'web': { base: { transition: 'all 0.27s ease' } },
@@ -35,11 +40,19 @@ const useCard = createStyles(({ space, font, components }) => ({
     base: {
       color: components.Card.default.title,
       alignSelf: 'stretch',
-      fontSize: font.fontSize.lg,
+      fontSize: font.fontSize.xl,
+      fontWeight: font.fontWeight.h1,
+      lineHeight: font.lineHeight.xl,
     },
   },
   description: {
     base: { alignSelf: 'stretch', color: components.Card.default.description },
+  },
+  extra: {
+    base: {
+      color: components.Card.default.description,
+      fontWeight: font.fontWeight.xl,
+    },
   },
 }));
 
@@ -79,20 +92,33 @@ const Description = (props: TextProps) => {
     <Text {...props} style={composeStyles(useCard.description, props.style)} />
   );
 };
+
+const Extra = (props: TextProps) => {
+  return <Text {...props} style={composeStyles(useCard.extra, props.style)} />;
+};
+
 const Card = withStaticProperties(CardRoot, {
   Title,
   Description,
+  Extra,
 });
-const { Title: CardTitle, Description: CardDescription } = Card;
+const {
+  Title: CardTitle,
+  Description: CardDescription,
+  Extra: CardExtra,
+} = Card;
 
 type CardTitleProps = GetProps<typeof CardTitle>;
 type CardDescriptionProps = GetProps<typeof CardDescription>;
+type CardExtraProps = GetProps<typeof CardExtra>;
 
 export {
   Card,
   CardTitle,
   CardDescription,
+  CardExtra,
   type CardProps,
   type CardTitleProps,
   type CardDescriptionProps,
+  type CardExtraProps,
 };
