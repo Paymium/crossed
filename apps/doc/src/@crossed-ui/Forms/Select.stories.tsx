@@ -31,14 +31,14 @@ const meta: Meta<typeof SelectNew> = {
     extra: { control: 'text' },
   },
   render: (e) => (
-    <YBox {...e} style={inlineStyle(() => ({ base: { padding: 100 } }))}>
-      <SelectNew>
+    <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+      <SelectNew {...e} >
         <SelectNew.Trigger>
           <SelectNew.Value />
         </SelectNew.Trigger>
         <SelectNew.Content>
-          <SelectNew.Option value="Select 1">Select 1</SelectNew.Option>
-          <SelectNew.Option value="Select 2">Select 2</SelectNew.Option>
+          <SelectNew.Option value="1">Select 1</SelectNew.Option>
+          <SelectNew.Option value="2">Select 2</SelectNew.Option>
         </SelectNew.Content>
       </SelectNew>
     </YBox>
@@ -46,7 +46,7 @@ const meta: Meta<typeof SelectNew> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Select>;
+type Story = StoryObj<typeof SelectNew>;
 
 export const Primary: Story = {
   parameters: {
@@ -60,6 +60,13 @@ export const Primary: Story = {
     extra: '',
     clearable: false,
     error: '',
+  },
+};
+export const DefaultValue: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    value: '2',
   },
 };
 export const Clearabled: Story = {

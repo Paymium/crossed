@@ -7,10 +7,19 @@
 
 import { composeStyles, createStyles } from '@crossed/styled';
 import { Box, BoxProps } from '../../layout/Box';
+import { useContext } from 'react';
+import { localContext } from './context';
 
 const styles = createStyles(() => ({ body: { base: {} } }));
 
-export const ModalBody = (props: BoxProps) => (
-  <Box {...props} {...composeStyles(styles.body).rnw()} />
-);
+export const ModalBody = (props: BoxProps) => {
+  const { idRef } = useContext(localContext);
+  return (
+    <Box
+      id={`${idRef}-description`}
+      {...props}
+      {...composeStyles(styles.body).rnw()}
+    />
+  );
+};
 ModalBody.displayName = 'Modal.Body';

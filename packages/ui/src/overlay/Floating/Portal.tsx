@@ -7,46 +7,56 @@
 
 import { Portal } from '@gorhom/portal';
 import { FloatingProvider, useFloatingContext } from './context';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { memo, PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
-import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
+import { composeStyles, CrossedMethods } from '@crossed/styled';
 import { positionStyles } from '../../styles/position';
-import { VisibilityHidden } from '@crossed/primitive';
+import { visibility } from '../../styles/visibilityHidden';
 
-export const FloatingPortal = ({
-  children,
-  style,
-}: PropsWithChildren<{ style?: CrossedMethods<any>; wait?: number }>) => {
-  const floatingContext = useFloatingContext();
-  const [interShow, setIternShow] = useState(false);
+export const FloatingPortal = memo(
+  ({
+    children,
+    style,
+    Provider = ({ children }) => children,
+  }: PropsWithChildren<{
+    style?: CrossedMethods<any>;
+    Provider?: (_p: PropsWithChildren) => ReactNode;
+  }>) => {
+    const floatingContext = useFloatingContext();
+    const [interShow, setIternShow] = useState(false);
 
-  useEffect(() => {
-    if (floatingContext.open) {
-      setIternShow(floatingContext.open);
-      return () => {};
-    }
-    const time = setTimeout(() => setIternShow(false), floatingContext.wait);
-    return () => clearTimeout(time);
-  }, [floatingContext.open, floatingContext.wait]);
+    useEffect(() => {
+      if (floatingContext.open) {
+        setIternShow(floatingContext.open);
+        return () => {};
+      }
+      const time = setTimeout(() => setIternShow(false), floatingContext.wait);
+      return () => clearTimeout(time);
+    }, [floatingContext.open, floatingContext.wait]);
 
-  return (
-    <Portal>
-      <FloatingProvider {...floatingContext}>
-        <RemoveScroll
-          enabled={interShow}
-          {...composeStyles(
-            interShow && positionStyles.absoluteFill,
-            inlineStyle(() => ({ web: { base: { position: 'fixed' } } })),
-            style
-          ).className()}
-        >
-          {floatingContext.visibilityHidden ? (
-            <VisibilityHidden hide={!interShow}>{children}</VisibilityHidden>
-          ) : interShow ? (
-            children
-          ) : null}
-        </RemoveScroll>
-      </FloatingProvider>
-    </Portal>
-  );
-};
+    return (
+      <Portal>
+        <Provider>
+          <FloatingProvider {...floatingContext}>
+            <RemoveScroll
+              enabled={floatingContext.removeScroll && interShow}
+              {...composeStyles(
+                interShow && positionStyles.absoluteFill,
+                !interShow && visibility.hidden,
+                style
+              ).className()}
+            >
+              {floatingContext.visibilityHidden
+                ? children
+                : interShow
+                  ? children
+                  : null}
+            </RemoveScroll>
+          </FloatingProvider>
+        </Provider>
+      </Portal>
+    );
+  }
+);
+
+FloatingPortal.displayName = 'Floating.Portal';

@@ -5,7 +5,13 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { cloneElement, ComponentType, forwardRef, isValidElement } from 'react';
+import {
+  Children,
+  cloneElement,
+  ComponentType,
+  forwardRef,
+  isValidElement,
+} from 'react';
 
 export type SlotProps<P> = P & {
   Comp: ComponentType<P>;
@@ -16,10 +22,27 @@ export const Slot = forwardRef(
     { Comp, asChild, ...props }: SlotProps<P>,
     ref: P['ref']
   ) => {
-    if (asChild && 'children' in props && isValidElement(props.children)) {
-      const { children, ...rest } = props;
-      return cloneElement(children, rest);
+    if (asChild && 'children' in props) {
+      return Children.toArray(props.children).map((c) => {
+        if (isValidElement(c)) {
+          const { children, ...rest } = props;
+          // console.log(c.props, rest);
+          return cloneElement(c, {
+            ...c.props,
+            ...rest,
+            ...(c.props.style && rest.style
+              ? { style: [c.props.style, rest.style] }
+              : {}),
+            ref,
+          });
+        } else {
+          console.log('not found');
+          return c;
+        }
+      });
     }
     return <Comp {...(props as any)} ref={ref} />;
   }
 );
+
+Slot.displayName = 'Slot';

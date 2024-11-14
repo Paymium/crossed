@@ -1,11 +1,21 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import { composeStyles, createStyles } from '@crossed/styled';
 import { Floating } from '../../overlay/Floating';
 import { form } from '../../styles/form';
 import { ChevronDown } from '@crossed/unicons/ChevronDown';
-import { useSelectAriaContext, useSelectContext } from './context';
-import { XBox } from '../../layout/XBox';
-import { FormLabel } from '../Form';
-import { composeEventHandlers, composeRefs } from '@crossed/core';
+import { useSelectContext } from './context';
+// import { XBox } from '../../layout/XBox';
+// import { FormLabel } from '../Form';
+// import { useFloatingContext } from '../../overlay/Floating/context';
+import { useRef } from 'react';
+import { View } from 'react-native';
+import { composeRefs } from '@crossed/core';
 
 const styles = createStyles(() => ({
   icon: {
@@ -22,10 +32,19 @@ const styles = createStyles(() => ({
   },
 }));
 export const SelectTrigger = ({ children }) => {
-  const { refs, label, description, extra } = useSelectContext();
+  const { refs } = useSelectContext();
+  // const { open } = useFloatingContext();
+  const ref = useRef<View>();
   return (
     <Floating.Trigger
-      ref={refs.setReference as any}
+      ref={composeRefs(ref, refs.trigger)}
+      style={composeStyles(
+        form.input,
+        // open && form.inputFocus,
+        // error && form.inputError,
+        styles.trigger
+        // props.style
+      )}
       // style={composeStyles(
       //   form.input,
       //   // error && form.inputError,
@@ -33,33 +52,37 @@ export const SelectTrigger = ({ children }) => {
       //   // props.style
       // )}
     >
-      {Boolean(label || description || extra) && (
+      {/* {Boolean(label || description || extra) && (
         <XBox alignItems="center" space="xxs">
           {Boolean(label) && <FormLabel>{label}</FormLabel>}
-          {/* {Boolean(description) && (
+          {Boolean(description) && (
             <Text style={form.labelDescription}>{description}</Text>
           )}
           {Boolean(extra) && (
             <Text style={form.labelExtra} textAlign="right">
               {extra}
             </Text>
-          )} */}
+          )}
         </XBox>
-      )}
-      <XBox
+      )} */}
+      {/* <XBox
+        ref={ref}
         style={composeStyles(
           form.input,
+          open && form.inputFocus,
           // error && form.inputError,
           styles.trigger
           // props.style
         )}
-      >
-        {children}
-        <ChevronDown
-          {...styles.icon.style()}
-          color={form.placeholder.style().style.color}
-        />
-      </XBox>
+      > */}
+      {children}
+      <ChevronDown
+        {...styles.icon.style()}
+        color={form.placeholder.style().style.color}
+      />
+      {/* </XBox> */}
     </Floating.Trigger>
   );
 };
+
+SelectTrigger.displayName = 'Select.Trigger';

@@ -18,6 +18,9 @@ export type LocalContext = VariantSize & {
   showSheet?: boolean;
   stickyHeader?: boolean;
   stickyFooter?: boolean;
+  idRef: string;
 };
 
-export const localContext = createContext<LocalContext>({ size: 'md' });
+export const localContext = createContext<LocalContext>({
+  size: 'md',
+} as LocalContext);

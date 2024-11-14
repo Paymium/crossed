@@ -11,7 +11,8 @@ import {
   type CrossedMethods,
 } from '@crossed/styled';
 import { X } from '@crossed/unicons';
-import { Pressable, type PressableProps } from 'react-native';
+import { forwardRef } from 'react';
+import { Pressable, View, type PressableProps } from 'react-native';
 
 const styles = createStyles((t) => ({
   pressable: {
@@ -25,28 +26,35 @@ const styles = createStyles((t) => ({
   },
 }));
 
-export const CloseButton = ({
-  style,
-  disabled,
-  ...props
-}: Omit<PressableProps, 'children' | 'style'> & {
+export type CloseButtonProps = Omit<PressableProps, 'children' | 'style'> & {
   style?: CrossedMethods<any>;
-}) => {
-  const { color } = styles.icon.style({ disabled }).style;
-  return (
-    <Pressable
-      role="button"
-      aria-label="Close"
-      {...props}
-      disabled={disabled}
-      style={({ pressed, hovered }: { pressed?: boolean; hovered?: boolean }) =>
-        composeStyles(styles.pressable, style).rnw({
-          active: pressed,
-          hover: hovered,
-        }).style
-      }
-    >
-      <X color={color} size={16} />
-    </Pressable>
-  );
 };
+
+export const CloseButton = forwardRef<View, CloseButtonProps>(
+  ({ style, disabled, ...props }: CloseButtonProps, ref) => {
+    const { color } = styles.icon.style({ disabled }).style;
+    return (
+      <Pressable
+        role="button"
+        aria-label="Close"
+        {...props}
+        ref={ref}
+        disabled={disabled}
+        style={({
+          pressed,
+          hovered,
+        }: {
+          pressed?: boolean;
+          hovered?: boolean;
+        }) =>
+          composeStyles(styles.pressable, style).rnw({
+            active: pressed,
+            hover: hovered,
+          }).style
+        }
+      >
+        <X color={color} size={16} />
+      </Pressable>
+    );
+  }
+);

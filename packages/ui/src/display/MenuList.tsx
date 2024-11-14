@@ -21,7 +21,7 @@ import { cloneElement, forwardRef, isValidElement, useCallback } from 'react';
 import { Pressable, View, type PressableProps } from 'react-native';
 import { Slot } from '../Slot';
 
-const rootStyle = createStyles(({ colors, space }) => ({
+export const rootStyle = createStyles(({ colors, space }) => ({
   default: {
     base: {
       alignItems: 'stretch',

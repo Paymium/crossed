@@ -70,7 +70,7 @@ export const SizeMd: Story = { args: { size: 'md' } };
 export const SizeLg: Story = { args: { size: 'lg' } };
 
 export const ClickOverlayNotClose: Story = {
-  args: { closeOnPress: false } as any,
+  args: { floatingProps: { closeOverlayPress: false } },
 };
 export const AdaptToSheet: Story = {
   args: { adapt: true },
@@ -189,9 +189,9 @@ export const ModalOpenSheet: Story = {
                     <Button.Text>Open</Button.Text>
                   </Button>
                 </Sheet.Trigger>
-                <Sheet.Frame>
+                <Sheet.Content>
                   <Text>Sheet content</Text>
-                </Sheet.Frame>
+                </Sheet.Content>
               </Sheet>
             </Modal.Body>
           </Modal.Content>

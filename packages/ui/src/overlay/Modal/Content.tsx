@@ -5,7 +5,16 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Children, useContext, useMemo } from 'react';
+import {
+  Children,
+  KeyboardEventHandler,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+} from 'react';
+import { Key } from 'ts-key-enum';
 import { Floating } from '../Floating';
 import { composeStyles, inlineStyle } from '@crossed/styled';
 import { modalStyles } from '../styles';
@@ -18,6 +27,14 @@ import { ModalHeader } from './Header';
 import { ModalBody } from './Body';
 import { ModalFooter } from './Footer';
 import { Sheet } from '../Sheet';
+import { useFloatingContext } from '../Floating/context';
+import {
+  FadeIn,
+  FadeOut,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
+import { FocusScope } from '../../other/FocusScope';
 
 const styles = createStyles(() => ({
   default: { base: { maxHeight: '95%' } },
@@ -41,11 +58,39 @@ const styles = createStyles(() => ({
   },
 }));
 
-export const ModalContent = ({ children, ...props }: YBoxProps) => {
+export type ModalOnKeyDown = KeyboardEventHandler<HTMLButtonElement>;
+
+export type UseKeyDown = (
+  // eslint-disable-next-line no-unused-vars
+  _e: { [_key in keyof typeof Key]?: () => void },
+  _config: { enable?: boolean }
+) => void;
+export const useKeyDown: UseKeyDown = (keyEvent, { enable }) => {
+  const onKeyDown = useCallback(
+    (e: DocumentEventMap['keydown']) => {
+      keyEvent[e.key]?.();
+    },
+    [keyEvent]
+  );
+
+  useEffect(() => {
+    if (enable) {
+      document.addEventListener('keydown', onKeyDown);
+      return () => {
+        document.removeEventListener('keydown', onKeyDown);
+      };
+    }
+  }, [onKeyDown, enable]);
+};
+
+export const ModalContent = ({ children }: YBoxProps) => {
+  // const [visibility, setVisibility] = useState(false);
   const localContextInstance = useContext(localContext);
   const sheetContextValue = useSheetContext();
+  const { open, onClose } = useFloatingContext();
 
-  const { size, showSheet, stickyFooter, stickyHeader } = localContextInstance;
+  const { size, showSheet, stickyFooter, stickyHeader, idRef } =
+    localContextInstance;
 
   const title = useMemo(() => {
     if (!children || typeof children === 'number') return null;
@@ -68,6 +113,25 @@ export const ModalContent = ({ children, ...props }: YBoxProps) => {
     );
   }, [children]);
 
+  const Provider = useCallback(
+    ({ children: c }: PropsWithChildren) => {
+      return (
+        <localContext.Provider value={localContextInstance}>
+          <sheetContext.Provider value={sheetContextValue}>
+            {c}
+          </sheetContext.Provider>
+        </localContext.Provider>
+      );
+    },
+    [localContextInstance, sheetContextValue]
+  );
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return { opacity: withTiming(open ? 1 : 0) };
+  }, [open]);
+
+  useKeyDown({ Escape: onClose }, { enable: open });
+
   return (
     <Floating.Portal
       style={inlineStyle(() => ({
@@ -77,45 +141,50 @@ export const ModalContent = ({ children, ...props }: YBoxProps) => {
           alignItems: 'center',
         },
       }))}
+      Provider={Provider}
     >
-      <localContext.Provider value={localContextInstance}>
-        <sheetContext.Provider value={sheetContextValue}>
-          {showSheet ? (
-            <Sheet.Frame portal={false}>
-              <Sheet.Title>{title}</Sheet.Title>
-              {body}
-              <Sheet.Footer>{footer}</Sheet.Footer>
-            </Sheet.Frame>
-          ) : (
-            <>
-              <Floating.Overlay />
-              <Floating.Content
-                style={[
-                  composeStyles(
-                    !showSheet && modalStyles.content,
-                    !showSheet && styles.default,
-                    !showSheet && styles[size]
-                  ).style().style,
-                ]}
+      {showSheet ? (
+        <Sheet.Content
+          role="dialog"
+          aria-labelledby={`${idRef}-title`}
+          aria-describedby={`${idRef}-description`}
+        >
+          <Sheet.Title>{title}</Sheet.Title>
+          {body}
+          <Sheet.Footer>{footer}</Sheet.Footer>
+        </Sheet.Content>
+      ) : (
+        <>
+          <Floating.Overlay
+            animatedProps={{ exiting: FadeOut, entering: FadeIn }}
+          />
+          <FocusScope trapped={open} enabled={open}>
+            <Floating.Content
+              role="dialog"
+              aria-labelledby={`${idRef}-title`}
+              aria-describedby={`${idRef}-description`}
+              animatedStyle={animatedStyle}
+              style={composeStyles(
+                !showSheet && modalStyles.content,
+                !showSheet && styles.default,
+                !showSheet && styles[size]
+              )}
+            >
+              <SV
+                containerProps={{
+                  style: inlineStyle(() => ({ base: { flex: 1 } })),
+                }}
+                stickyHeader={stickyHeader}
+                stickyFooter={stickyFooter}
               >
-                <SV
-                  containerProps={{
-                    style: [
-                      inlineStyle(() => ({ base: { flex: 1 } })).style().style,
-                    ],
-                  }}
-                  stickyHeader={stickyHeader}
-                  stickyFooter={stickyFooter}
-                >
-                  <SV.Title>{title}</SV.Title>
-                  <SV.Body>{body}</SV.Body>
-                  <SV.Footer>{footer}</SV.Footer>
-                </SV>
-              </Floating.Content>
-            </>
-          )}
-        </sheetContext.Provider>
-      </localContext.Provider>
+                <SV.Title>{title}</SV.Title>
+                <SV.Body>{body}</SV.Body>
+                <SV.Footer>{footer}</SV.Footer>
+              </SV>
+            </Floating.Content>
+          </FocusScope>
+        </>
+      )}
     </Floating.Portal>
   );
 };

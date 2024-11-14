@@ -16,7 +16,7 @@ const meta: Meta<typeof Sheet> = {
   parameters: { layout: 'padded' },
   subcomponents: {
     'Sheet.Trigger': Sheet.Trigger,
-    'Sheet.Frame': Sheet.Frame,
+    'Sheet.Content': Sheet.Content,
     'Sheet.SnapVisible': Sheet.SnapVisible,
     'Sheet.Title': Sheet.Title,
   },
@@ -29,7 +29,7 @@ const meta: Meta<typeof Sheet> = {
               <Button.Text>Button</Button.Text>
             </Button>
           </Sheet.Trigger>
-          <Sheet.Frame>
+          <Sheet.Content>
             <Sheet.Title>
               <Input />
             </Sheet.Title>
@@ -41,13 +41,14 @@ const meta: Meta<typeof Sheet> = {
                 </Button>
               </Sheet.Trigger>
             </Sheet.Footer>
-          </Sheet.Frame>
+          </Sheet.Content>
         </Sheet>
       </YBox>
     );
   },
   argTypes: {
     full: { control: 'boolean' },
+    detach: { control: 'boolean' },
   },
 };
 
@@ -62,8 +63,9 @@ export const FullHeight: Story = {
   ...Primary,
   args: { full: true },
 };
-export const WithScroll: Story = {
+export const WithFlatList: Story = {
   ...Primary,
+  args: { detach: false },
   render(e) {
     return (
       <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
@@ -73,39 +75,30 @@ export const WithScroll: Story = {
               <Button.Text>Button</Button.Text>
             </Button>
           </Sheet.Trigger>
-          <Sheet.Frame>
-            <Sheet.Title>Title</Sheet.Title>
-            {Array.from(Array(60).keys()).map((i) => (
-              <Text key={`${i}-render test`}>Hello world {i}</Text>
-            ))}
-            <Sheet.Footer>
-              <Sheet.Trigger asChild>
-                <Button>
-                  <Button.Text>Close</Button.Text>
-                </Button>
-              </Sheet.Trigger>
-            </Sheet.Footer>
-          </Sheet.Frame>
+          <Sheet.FlatList
+            data={Array.from(Array(60).keys())}
+            renderItem={({ item }) => <Text>{item}</Text>}
+          />
         </Sheet>
       </YBox>
     );
   },
 };
 
-export const WithScrollStickyHeader: Story = {
-  ...WithScroll,
-  args: { stickyHeader: true },
-};
-export const WithScrollStickyFooter: Story = {
-  ...WithScroll,
-  args: { stickyFooter: true },
-};
-export const WithScrollStickyHeaderAndFooter: Story = {
-  ...WithScroll,
-  args: { stickyHeader: true, stickyFooter: true },
-};
+// export const WithScrollStickyHeader: Story = {
+//   ...WithScroll,
+//   args: { stickyHeader: true },
+// };
+// export const WithScrollStickyFooter: Story = {
+//   ...WithScroll,
+//   args: { stickyFooter: true },
+// };
+// export const WithScrollStickyHeaderAndFooter: Story = {
+//   ...WithScroll,
+//   args: { stickyHeader: true, stickyFooter: true },
+// };
 
-export const WithScrollDetach: Story = {
-  ...Primary,
-  args: { detach: true, stickyFooter: true },
-};
+// export const WithScrollDetach: Story = {
+//   ...Primary,
+//   args: { detach: true, stickyFooter: true },
+// };

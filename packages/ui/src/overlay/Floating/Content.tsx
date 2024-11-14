@@ -5,22 +5,32 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { FocusScope } from '@crossed/primitive';
 import Animated, { AnimatedProps } from 'react-native-reanimated';
-import { Slot, SlotProps } from '../../Slot';
 import { View, ViewProps } from 'react-native';
-import { forwardRef } from 'react';
-// import { modalStyles } from '../styles';
+import { forwardRef, memo } from 'react';
+import { CrossedMethods } from '@crossed/styled';
 
-export type FloatingContentProps = Partial<SlotProps<AnimatedProps<ViewProps>>>;
+export type FloatingContentProps = Partial<AnimatedProps<ViewProps>> & {
+  style?: CrossedMethods<any>;
+  animatedStyle?: AnimatedProps<ViewProps>['style'];
+};
 
-export const FloatingContent = forwardRef<View, FloatingContentProps>(
-  (props: FloatingContentProps, ref) => {
-    return (
-      <FocusScope trapped loop ref={ref as any}>
-        <Animated.View {...props}  />
-      </FocusScope>
-    );
-  }
+export const FloatingContent = memo(
+  forwardRef<View, FloatingContentProps>(
+    ({ style, animatedStyle, ...props }: FloatingContentProps, ref) => {
+      return (
+        <Animated.View
+          {...props}
+          style={[
+            ...(Array.isArray(style) ? style : [style]).map((e) =>
+              e?.style ? e.style().style : e
+            ),
+            animatedStyle,
+          ]}
+          ref={ref}
+        />
+      );
+    }
+  )
 );
 FloatingContent.displayName = 'Floating.Content';

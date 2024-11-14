@@ -23,7 +23,7 @@ export const overlayStyles = createStyles(({ colors }) => ({
   },
 }));
 
-export const sheetStyles = createStyles(({ colors }) => ({
+export const sheetStyles = createStyles(({ colors, boxShadow, space }) => ({
   content: {
     base: {
       position: 'absolute',
@@ -36,7 +36,16 @@ export const sheetStyles = createStyles(({ colors }) => ({
       borderTopRightRadius: 24,
       maxHeight: '100%',
     },
-    web: { base: { position: 'fixed' as any, boxSizing: 'content-box' } },
+    web: { base: { position: 'fixed' as any, boxShadow } },
+  },
+  padding: { base: { paddingHorizontal: space.md, paddingVertical: space.md } },
+  detach: {
+    base: {
+      borderRadius: 12,
+      borderTopLeftRadius: 12,
+      borderTopRightRadius: 12,
+      margin: space.xs,
+    },
   },
 }));
 export const modalStyles = createStyles(({ colors, space }) => ({

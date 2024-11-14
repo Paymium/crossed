@@ -10,4 +10,5 @@ export * from './RemoveScroll';
 export * from './RovingFocus';
 // export * from './VisibilityHidden';
 export * from './Slot';
+export { useEvent } from './useEvent';
 export { FocusScope, FocusScopeProps } from './FocusScope';

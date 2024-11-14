@@ -18,3 +18,5 @@ export const Floating = withStaticProperties(FloatingRoot, {
   Portal: FloatingPortal,
   Overlay: FloatingOverlay,
 });
+
+export type { FloatingContentProps } from './Content';

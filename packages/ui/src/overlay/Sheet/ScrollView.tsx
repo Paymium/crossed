@@ -196,6 +196,7 @@ export const ScrollView = forwardRef<
           style: [
             composeStyles(
               sheetStyles.content,
+              sheetStyles.padding,
               detach &&
                 inlineStyle(({ space }) => ({
                   base: {

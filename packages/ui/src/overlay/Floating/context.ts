@@ -14,6 +14,7 @@ export type FloatingContext = {
   visibilityHidden?: boolean;
   closeOverlayPress?: boolean;
   wait?: number;
+  removeScroll: boolean;
 };
 
 export const [FloatingProvider, useFloatingContext] =

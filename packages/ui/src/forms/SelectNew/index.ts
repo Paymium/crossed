@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import { withStaticProperties } from '@crossed/core';
 import { SelectRoot } from './Root';
 import { SelectContent } from './Content';
@@ -11,4 +18,4 @@ export const SelectNew = withStaticProperties(SelectRoot, {
   Value: SelectValue,
   Option: SelectOption,
 });
-// export { SelectContent, SelectTrigger, SelectValue, SelectOption };
+export { SelectContent, SelectTrigger, SelectValue, SelectOption };

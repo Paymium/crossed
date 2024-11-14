@@ -5,13 +5,18 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef, type PropsWithChildren } from 'react';
+import { forwardRef, memo, type PropsWithChildren } from 'react';
 import { type SheetContext, sheetContext } from './context';
 import { useSharedValue } from 'react-native-reanimated';
 import { Floating } from '../Floating';
 import { FloatingRef } from '../Floating/Root';
 
 export type SheetProps = PropsWithChildren<{
+  /**
+   * Place content in portal
+   * @default true
+   */
+  portal?: boolean;
   /**
    * Controlled state
    */
@@ -42,32 +47,29 @@ export type SheetProps = PropsWithChildren<{
     | 'stickyHeader'
   >;
 
-export const Root = forwardRef<FloatingRef, SheetProps>(
-  (
-    {
-      open,
-      defaultValue,
-      onOpenChange,
-      children,
-      dismissOnOverlayPress = true,
-      hideHandle,
-      offset = 20,
-      full,
-      stickyFooter,
-      stickyHeader,
-      detach,
-    },
-    ref
-  ) => {
-    const snapInitialHeight = useSharedValue(0);
+export const Root = memo(
+  forwardRef<FloatingRef, SheetProps>(
+    (
+      {
+        open,
+        defaultValue,
+        onOpenChange,
+        children,
+        dismissOnOverlayPress = true,
+        hideHandle,
+        offset = 20,
+        full,
+        stickyFooter,
+        stickyHeader,
+        detach,
+        portal = true,
+      },
+      ref
+    ) => {
+      const snapInitialHeight = useSharedValue(0);
+      const translateY = useSharedValue<number | null>(null);
 
-    return (
-      <Floating
-        ref={ref}
-        value={open}
-        defaultValue={defaultValue}
-        onChange={onOpenChange}
-      >
+      return (
         <sheetContext.Provider
           value={{
             dismissOnOverlayPress,
@@ -78,12 +80,23 @@ export const Root = forwardRef<FloatingRef, SheetProps>(
             stickyFooter,
             stickyHeader,
             detach,
+            portal,
+            translateY,
           }}
         >
-          {children}
+          <Floating
+            ref={ref}
+            value={open}
+            defaultValue={defaultValue}
+            onChange={onOpenChange}
+            visibilityHidden
+            wait={300}
+          >
+            {children}
+          </Floating>
         </sheetContext.Provider>
-      </Floating>
-    );
-  }
+      );
+    }
+  )
 );
 Root.displayName = 'Sheet';

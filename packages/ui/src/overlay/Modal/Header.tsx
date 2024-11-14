@@ -23,7 +23,7 @@ const styles = createStyles(() => ({
 
 export const ModalHeader = ({ children, style, ...props }: BoxProps) => {
   const { showSheet } = useContext(localContext);
-  console.log(showSheet)
+
   return (
     <Box {...props} style={composeStyles(styles.header, style)}>
       <Box style={inlineStyle(() => ({ base: { flex: 1 } }))}>{children}</Box>

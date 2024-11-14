@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useId } from 'react';
 import { Floating } from '../Floating';
 import { localContext, VariantSize } from './context';
 import { FloatingProps } from '../Floating/Root';
@@ -14,9 +14,9 @@ import { Sheet } from '../Sheet';
 import { useMedia } from '../../useMedia';
 import type { ScrollViewProps } from '../../other/ScrollView';
 
-type ChildWithViariant = PropsWithChildren<VariantSize>;
+type ChildWithViariant = PropsWithChildren<Partial<VariantSize>>;
 export type ModalProps = ChildWithViariant &
-  Pick<ScrollViewProps<any>, 'stickyHeader' | 'stickyFooter'> & {
+  Pick<ScrollViewProps, 'stickyHeader' | 'stickyFooter'> & {
     /**
      * Props send to Floating copmponent
      */
@@ -41,15 +41,17 @@ export const ModalRoot = ({
 }: ModalProps) => {
   const { md } = useMedia();
   const showSheet = adapt && !md;
+  const id = useId();
   return (
     <Sheet
       stickyFooter={stickyFooter}
       stickyHeader={stickyHeader}
+      portal={false}
       {...sheetProps}
     >
-      <Floating {...floatingProps}>
+      <Floating visibilityHidden wait={300} {...floatingProps}>
         <localContext.Provider
-          value={{ size, showSheet, stickyFooter, stickyHeader }}
+          value={{ size, showSheet, stickyFooter, stickyHeader, idRef: id }}
         >
           {children}
         </localContext.Provider>

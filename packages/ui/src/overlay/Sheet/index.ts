@@ -8,14 +8,16 @@
 import { withStaticProperties } from '@crossed/core';
 import { Root } from './Root';
 import { Trigger } from './Trigger';
-import { Frame } from './Frame';
+import { SheetContent } from './Content';
+import { SheetFlatList } from './FlatList';
 import { SnapVisible } from './SnapVisible';
 import { SheetTitle } from './Title';
 import { SheetFooter } from './Footer';
 
 export const Sheet = withStaticProperties(Root, {
   Trigger,
-  Frame,
+  Content: SheetContent,
+  FlatList: SheetFlatList,
   SnapVisible,
   Title: SheetTitle,
   Footer: SheetFooter,

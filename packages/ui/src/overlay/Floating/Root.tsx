@@ -7,6 +7,7 @@
 
 import {
   forwardRef,
+  memo,
   PropsWithChildren,
   useCallback,
   useImperativeHandle,
@@ -24,6 +25,15 @@ export type FloatingProps = PropsWithChildren<
      * if false, press on overlay not close the modal
      */
     closeOverlayPress?: boolean;
+    /**
+     * remove scroll behavior
+     * @default true
+     */
+    removeScroll?: boolean;
+    /**
+     * wait in ms for hide content on exiting (use for animate)
+     * @default true
+     */
     wait?: number;
   } & Omit<UseUncontrolledInput<boolean>, 'finalValue'>
 >;
@@ -31,41 +41,49 @@ export type FloatingRef = {
   onClose: () => void;
   onOpen: () => void;
 };
-export const FloatingRoot = forwardRef<FloatingRef, FloatingProps>(
-  (
-    {
-      children,
-      visibilityHidden,
-      defaultValue = false,
-      onChange,
-      value,
-      closeOverlayPress,
-      wait = 300
-    }: FloatingProps,
-    ref
-  ) => {
-    const [open, setOpen] = useUncontrolled({ defaultValue, onChange, value });
-    const onClose = useCallback(() => {
-      setOpen(false);
-    }, [setOpen]);
-    const onOpen = useCallback(() => {
-      setOpen(true);
-    }, [setOpen]);
+export const FloatingRoot = memo(
+  forwardRef<FloatingRef, FloatingProps>(
+    (
+      {
+        children,
+        visibilityHidden,
+        defaultValue = false,
+        onChange,
+        value,
+        closeOverlayPress,
+        wait = 0,
+        removeScroll = true,
+      }: FloatingProps,
+      ref
+    ) => {
+      const [open, setOpen] = useUncontrolled({
+        defaultValue,
+        onChange,
+        value,
+      });
+      const onClose = useCallback(() => {
+        setOpen(false);
+      }, [setOpen]);
+      const onOpen = useCallback(() => {
+        setOpen(true);
+      }, [setOpen]);
 
-    useImperativeHandle(ref, () => ({ onClose, onOpen }), [onClose, onOpen]);
+      useImperativeHandle(ref, () => ({ onClose, onOpen }), [onClose, onOpen]);
 
-    return (
-      <FloatingProvider
-        open={open}
-        onClose={onClose}
-        onOpen={onOpen}
-        visibilityHidden={visibilityHidden}
-        closeOverlayPress={closeOverlayPress ?? true}
-        wait={wait}
-      >
-        {children}
-      </FloatingProvider>
-    );
-  }
+      return (
+        <FloatingProvider
+          open={open}
+          onClose={onClose}
+          onOpen={onOpen}
+          visibilityHidden={visibilityHidden}
+          closeOverlayPress={closeOverlayPress ?? true}
+          wait={wait}
+          removeScroll={removeScroll}
+        >
+          {children}
+        </FloatingProvider>
+      );
+    }
+  )
 );
 FloatingRoot.displayName = 'Floating';

@@ -26,6 +26,7 @@ export type SheetContext = {
    */
   stickyFooter?: boolean;
   detach?: boolean;
+  portal?: boolean;
 };
 
 export const sheetContext = createContext<SheetContext>({} as SheetContext);
