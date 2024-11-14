@@ -5,52 +5,56 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef, useCallback, useMemo, useRef } from 'react';
+import {
+  Children,
+  forwardRef,
+  PropsWithChildren,
+  useCallback,
+  // useEffect,
+  useMemo,
+  // useRef,
+  useState,
+} from 'react';
 import {
   type CrossedMethods,
   composeStyles,
   createStyles,
-  isWeb,
+  inlineStyle,
 } from '@crossed/styled';
-import Animated, {
+import {
   type AnimatedScrollViewProps,
   runOnJS,
-  useAnimatedProps,
+  // useAnimatedProps,
   useAnimatedReaction,
   useAnimatedScrollHandler,
-  useAnimatedStyle,
+  // useAnimatedStyle,
   useSharedValue,
-  withTiming,
+  // withTiming,
 } from 'react-native-reanimated';
 import { useSheetContext } from './context';
 import { Handle } from './Handle';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { useWindowDimensions } from 'react-native';
-import { composeRefs } from '@crossed/core';
-import { useDebouncedCallback } from 'use-debounce';
+// import { composeRefs } from '@crossed/core';
+import { sheetStyles } from '../styles';
+import { useFloatingContext } from '../Floating/context';
+import { useMaxHeight } from './useMaxHeight';
+import { ScrollView as SV } from '../../other/ScrollView';
+import { SheetTitle } from './Title';
+import { SheetFooter } from './Footer';
+import { FlatList } from 'react-native';
+import { YBox } from '../../layout/YBox';
+// import { useGesturePan } from './useGesturePan';
+import { useGesture } from './useGesture';
 
-const styles = createStyles(({ colors, space }) => ({
-  box: {
-    base: {
-      position: 'absolute',
-      bottom: 0,
-      right: 0,
-      left: 0,
-      backgroundColor: colors.background.secondary,
-      zIndex: 100000,
-      borderTopLeftRadius: 24,
-      borderTopRightRadius: 24,
-      maxHeight: '100%',
-    },
-    variants: {},
-  },
+const styles = createStyles(({ space, colors }) => ({
   container: {
     base: {
-      paddingBottom: space.md,
       paddingTop: space.xxs,
+      gap: space.md,
     },
     variants: {},
   },
+  containerPaddingBottom: { base: { paddingBottom: space.md } },
   containerPadded: {
     base: {
       paddingHorizontal: space.md,
@@ -61,6 +65,19 @@ const styles = createStyles(({ colors, space }) => ({
     web: { base: { position: 'fixed' as any, boxSizing: 'content-box' } },
   },
   maxHeight: { base: { maxHeight: '100%' } },
+  titleStyles: {
+    web: {
+      base: {
+        background: `linear-gradient(${colors.background.secondary} 90%, transparent)`,
+      },
+    },
+  },
+  footer: {
+    base: {
+      paddingHorizontal: space.md,
+      background: `linear-gradient(transparent 10%, ${colors.background.secondary})`,
+    },
+  },
 }));
 
 export type SheetScrollViewProps = Omit<AnimatedScrollViewProps, 'style'> & {
@@ -68,184 +85,151 @@ export type SheetScrollViewProps = Omit<AnimatedScrollViewProps, 'style'> & {
   padded?: boolean;
 };
 
-export const ScrollView = forwardRef<Animated.ScrollView, SheetScrollViewProps>(
-  ({ children, style: styleProps, padded = true, ...props }, ref) => {
-    const {
-      open,
-      isMove,
-      hideHandle,
-      height,
-      onClose,
-      snapInitialHeight,
-      offset,
-    } = useSheetContext();
-    const { height: heightDimensions } = useWindowDimensions();
+export const ScrollView = forwardRef<
+  FlatList<any>,
+  PropsWithChildren<Omit<SheetScrollViewProps, 'children'>>
+>(({ children, style: styleProps, padded = true }, _ref) => {
+  const {
+    hideHandle,
+    snapInitialHeight,
+    full,
+    stickyFooter,
+    stickyHeader,
+    detach,
+  } = useSheetContext();
+  const {
+    open,
+    // onClose
+  } = useFloatingContext();
 
-    const scrollRef = useRef<Animated.ScrollView>(null);
+  // const scrollRef = useRef<FlatList<any>>(null);
 
-    const heightLayout = useSharedValue(0);
-    const scroll = useSharedValue(0);
-    const initialHeight = useSharedValue(0);
-    const scrollViewEnable = useSharedValue(false);
+  const isMove = useSharedValue(false);
+  const height = useSharedValue(0);
+  const heightLayout = useSharedValue(0);
+  const scroll = useSharedValue(0);
+  const initialHeight = useSharedValue(0);
+  // const scrollViewEnable = useSharedValue(false);
+  const [scrollEnabled, setScrollEnabled] = useState(false);
 
-    const maxHeight = useMemo(
-      () => heightDimensions - offset,
-      [heightDimensions, offset]
-    );
+  const maxHeight = useMaxHeight();
 
-    const styleAnimated = useAnimatedStyle(() => {
-      const duration = 300;
-      return {
-        height: withTiming(height.value, {
-          duration: isMove.value ? 0 : duration,
-        }),
-        ...(isWeb
-          ? height.value === maxHeight
-            ? { touchAction: 'auto', overflowY: 'auto' }
-            : { touchAction: 'none', overflowY: 'hidden' }
-          : {}),
-      };
-    }, [height, isMove, maxHeight]);
+  const native = Gesture.Native();
+  const {
+    gesturePan,
+    // styleAnimated
+  } = useGesture({
+    isMove,
+    height,
+    scroll,
+    initialHeight,
+    setScrollEnabled,
+    scrollEnabled,
+    // snapInitialHeight,
+    // heightLayout,
+  });
 
-    const handleClose = useCallback(() => {
-      onClose();
-      scrollRef.current?.scrollTo({ y: 0, animated: false });
-    }, [onClose]);
-
-    useAnimatedReaction(
-      () => {
-        return snapInitialHeight.value
-          ? snapInitialHeight.value
-          : heightLayout.value >= maxHeight
-            ? maxHeight
-            : heightLayout.value;
-      },
-      (currentValue) => {
+  useAnimatedReaction(
+    () => {
+      return snapInitialHeight.value
+        ? snapInitialHeight.value
+        : heightLayout.value >= maxHeight
+          ? maxHeight
+          : heightLayout.value;
+    },
+    (currentValue, previousValue) => {
+      if (currentValue !== previousValue) {
         if (open && Math.floor(height.value) !== Math.floor(currentValue)) {
-          scrollViewEnable.value = currentValue === maxHeight;
+          runOnJS(setScrollEnabled)(currentValue === maxHeight);
           height.value = currentValue;
-        } else if (!open && scroll.value !== 0 && scrollRef.current) {
-          runOnJS(scrollRef.current.scrollTo)({ y: 0, animated: false });
         }
-      },
-      [open]
+      }
+    },
+    [heightLayout, open, maxHeight]
+  );
+
+  const onContentSizeChange = useCallback(
+    (_w: number, h: number) => {
+      heightLayout.value = full ? maxHeight : Math.floor(h);
+    },
+    [full, maxHeight, heightLayout]
+  );
+
+  const onScroll = useAnimatedScrollHandler((e) => {
+    scroll.value = e.contentOffset.y;
+  });
+
+  const title = useMemo(() => {
+    if (!children || typeof children === 'number') return null;
+    return Children.toArray(children).find(
+      (e) => typeof e === 'object' && 'type' in e && e.type === SheetTitle
     );
-
-    const native = Gesture.Native();
-    const gesturePan = Gesture.Pan()
-      .onTouchesDown(() => {
-        isMove.value = true;
-        initialHeight.value = height.value;
-
-        scrollViewEnable.value = initialHeight.value === maxHeight;
-      })
-      .onChange((e) => {
-        const newHeight =
-          height.value - (hideHandle ? e.changeY / 3 : e.changeY);
-
-        if (
-          scroll.value <= 0 &&
-          (height.value !== maxHeight || e.changeY > 0)
-        ) {
-          height.value = newHeight <= maxHeight ? newHeight : maxHeight;
-        }
-
-        const isMax = height.value === maxHeight;
-        if (
-          scroll.value <= 0 &&
-          !isMax &&
-          e.changeY > 0 &&
-          scrollViewEnable.value
-        ) {
-          scrollViewEnable.value = false;
-          return;
-        }
-
-        if (!scrollViewEnable.value && isMax) {
-          scrollViewEnable.value = true;
-        }
-      })
-      .onEnd((e) => {
-        if (e.translationY > 0 && scroll.value <= 0) {
-          if (
-            Math.abs(e.velocityY) > Math.abs(e.translationY) ||
-            e.translationY >= initialHeight.value / 2
-          ) {
-            runOnJS(handleClose)();
-            return;
-          }
-          height.value = initialHeight.value;
-          return;
-        }
-
-        if (e.translationY < 0) {
-          if (hideHandle) {
-            height.value = initialHeight.value;
-            return;
-          }
-          scrollViewEnable.value = true;
-          if (
-            Math.abs(e.velocityY) > Math.abs(e.translationY) ||
-            height.value >= initialHeight.value + initialHeight.value / 2
-          ) {
-            height.value = maxHeight;
-            return;
-          }
-          height.value = initialHeight.value;
-        }
-      })
-      .onFinalize(() => {
-        isMove.value = false;
-        initialHeight.value = 0;
-      });
-
-    const onContentSizeChange = useDebouncedCallback(
-      (_w: number, h: number) => {
-        heightLayout.value = Math.floor(h);
-      },
-      100
+  }, [children]);
+  const footer = useMemo(() => {
+    if (!children) return null;
+    return Children.toArray(children).find(
+      (e) => typeof e === 'object' && 'type' in e && e.type === SheetFooter
     );
-
-    const onScroll = useAnimatedScrollHandler((e) => {
-      scroll.value = e.contentOffset.y;
-    });
-
-    const animatedProps = useAnimatedProps(() => {
-      return {
-        scrollEnabled: scrollViewEnable.value,
-      };
-    }, [scrollViewEnable]);
-
-    return (
-      <GestureDetector gesture={Gesture.Simultaneous(native, gesturePan)}>
-        <Animated.ScrollView
-          ref={composeRefs(ref, scrollRef)}
-          scrollEventThrottle={16}
-          animatedProps={animatedProps}
-          onScroll={onScroll}
-          onContentSizeChange={onContentSizeChange}
-          contentContainerStyle={
-            composeStyles(
-              padded && styles.container,
-              padded && styles.containerPadded
-            ).style().style
-          }
-          {...props}
-          style={[
-            composeStyles(
-              styles.box,
-              isWeb && styles.fixed,
-              styleProps || false
-            ).style().style,
-            styleAnimated,
-          ]}
-        >
-          {!hideHandle && <Handle />}
-          {children as React.ReactNode}
-        </Animated.ScrollView>
-      </GestureDetector>
+  }, [children]);
+  const body = useMemo(() => {
+    if (!children) return null;
+    return Children.toArray(children).filter(
+      (e) =>
+        typeof e === 'object' &&
+        'type' in e &&
+        e.type !== SheetFooter &&
+        e.type !== SheetTitle
     );
-  }
-);
+  }, [children]);
+
+  return (
+    <GestureDetector gesture={Gesture.Simultaneous(gesturePan, native)}>
+      <SV
+        // ref={composeRefs(ref, scrollRef)}
+        scrollEventThrottle={16}
+        scrollEnabled={scrollEnabled}
+        onScroll={onScroll}
+        onContentSizeChange={onContentSizeChange}
+        contentContainerStyle={
+          composeStyles(
+            padded && styles.container,
+            !stickyFooter && styles.containerPaddingBottom,
+            padded && styles.containerPadded
+          ).style().style
+        }
+        style={{ zIndex: 1 }}
+        containerProps={{
+          // animatedStyle: styleAnimated,
+          style: composeStyles(
+            sheetStyles.content,
+            sheetStyles.padding,
+            detach &&
+              inlineStyle(({ space }) => ({
+                base: {
+                  right: space.xs,
+                  left: space.xs,
+                  bottom: space.xs,
+                  borderBottomLeftRadius: 24,
+                  borderBottomRightRadius: 24,
+                },
+              })),
+            styleProps || false
+          ),
+        }}
+        stickyHeader={stickyHeader}
+        stickyFooter={stickyFooter}
+      >
+        <SV.Title>
+          <YBox style={styles.titleStyles}>
+            {!hideHandle && <Handle />}
+            {title}
+          </YBox>
+        </SV.Title>
+        <SV.Body>{body}</SV.Body>
+        {Boolean(footer) && <SV.Footer>{footer}</SV.Footer>}
+      </SV>
+    </GestureDetector>
+  );
+});
 
 ScrollView.displayName = 'SheetScrollView';

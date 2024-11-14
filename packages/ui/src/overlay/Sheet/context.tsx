@@ -9,15 +9,25 @@ import { createContext, useContext } from 'react';
 import type { SharedValue } from 'react-native-reanimated';
 
 export type SheetContext = {
-  open: boolean;
-  setOpen: (_value: boolean) => void;
   dismissOnOverlayPress?: boolean;
   hideHandle?: boolean;
-  isMove: SharedValue<boolean>;
-  height: SharedValue<number>;
-  onClose: () => void;
   snapInitialHeight: SharedValue<number>;
   offset: number;
+  /**
+   * Full height
+   */
+  full?: boolean;
+  /**
+   * enable Sticky header
+   */
+  stickyHeader?: boolean;
+  /**
+   * enable sticky footer
+   */
+  stickyFooter?: boolean;
+  detach?: boolean;
+  portal?: boolean;
+  translateY?: SharedValue<number>;
 };
 
 export const sheetContext = createContext<SheetContext>({} as SheetContext);

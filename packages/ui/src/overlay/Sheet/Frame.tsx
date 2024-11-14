@@ -5,57 +5,91 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef, Fragment } from 'react';
 import { useSheetContext } from './context';
-import { createStyles, isWeb } from '@crossed/styled';
-import { Portal } from '@gorhom/portal';
-import Animated from 'react-native-reanimated';
 import { sheetContext } from './context';
-import { RemoveScroll } from 'react-remove-scroll';
-import { ScrollView, type SheetScrollViewProps } from './ScrollView';
-import type { IRemoveScrollProps } from 'react-remove-scroll/dist/es5/types';
-import type { ViewStyle } from 'react-native';
-import { OverlayLogical, type OverlayProps } from './Overlay';
+import { Floating, FloatingContentProps } from '../Floating';
+import {
+  forwardRef,
+  Fragment,
+  memo,
+  PropsWithChildren,
+  useCallback,
+  useMemo,
+  // useRef,
+  useState,
+} from 'react';
+import { composeStyles, inlineStyle } from '@crossed/styled';
+import { View } from 'react-native';
+import { FadeIn, FadeOut } from 'react-native-reanimated';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import {
+  //runOnJS,
+  useSharedValue,
+} from 'react-native-reanimated';
+// import { useMaxHeight } from './useMaxHeight';
+// import { useFloatingContext } from '../Floating/context';
+import { useGesture } from './useGesture';
 
-const styles = createStyles(() => ({
-  maxHeight: {
-    base: {
-      maxHeight: '100%',
-    },
-  },
-}));
+export type FrameProps = FloatingContentProps;
 
-export type FrameProps = SheetScrollViewProps & {
-  padded?: boolean;
-  overlayProps?: OverlayProps;
-};
+export const Frame = memo(
+  forwardRef<View, FrameProps>(
+    ({ children, style, animatedStyle, ...props }: FrameProps, ref) => {
+      const sheetContextValue = useSheetContext();
+      const { portal } = sheetContextValue;
+      const P = portal ? Floating.Portal : Fragment;
 
-const RS = ({
-  children,
-  ...props
-}: Omit<IRemoveScrollProps, 'style'> & { style?: ViewStyle }) =>
-  isWeb ? (
-    <RemoveScroll {...(props as any)} children={children} />
-  ) : (
-    <Fragment children={children} />
-  );
+      const height = useSharedValue(0);
+      const isMove = useSharedValue(false);
+      const initialHeight = useSharedValue(0);
+      const scroll = useSharedValue(0);
+      const [scrollEnabled, setScrollEnabled] = useState(false);
 
-export const Frame = forwardRef<Animated.ScrollView, FrameProps>(
-  ({ children, padded = true, overlayProps, ...props }, ref) => {
-    const sheetContextValue = useSheetContext();
-    const { open } = sheetContextValue;
+      const native = Gesture.Native();
+      const { gesturePan /*, styleAnimated*/ } = useGesture({
+        isMove,
+        height,
+        scroll,
+        initialHeight,
+        setScrollEnabled,
+        scrollEnabled,
+      });
 
-    return (
-      <Portal>
-        <sheetContext.Provider value={sheetContextValue}>
-          <RS enabled={open} {...styles.maxHeight.style()}>
-            <OverlayLogical {...overlayProps} />
-            <ScrollView ref={ref} padded={padded} {...props}>
+      const Provider = useCallback(
+        ({ children: c }: PropsWithChildren) => {
+          return (
+            <sheetContext.Provider value={sheetContextValue}>
+              {c}
+            </sheetContext.Provider>
+          );
+        },
+        [sheetContextValue]
+      );
+
+      const portalProps = useMemo(() => {
+        return portal ? { Provider } : {};
+      }, [Provider, portal]);
+
+      return (
+        <P {...portalProps}>
+          <Floating.Overlay
+            animatedProps={{ entering: FadeIn, exiting: FadeOut }}
+          />
+          <GestureDetector gesture={Gesture.Simultaneous(gesturePan, native)}>
+            <Floating.Content
+              ref={ref}
+              animatedStyle={[animatedStyle]}
+              style={composeStyles(
+                inlineStyle(() => ({ base: { zIndex: 1 } })),
+                style
+              )}
+              {...props}
+            >
               {children}
-            </ScrollView>
-          </RS>
-        </sheetContext.Provider>
-      </Portal>
-    );
-  }
+            </Floating.Content>
+          </GestureDetector>
+        </P>
+      );
+    }
+  )
 );

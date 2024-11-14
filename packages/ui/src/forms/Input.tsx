@@ -105,13 +105,13 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
       disabled={disabled || (!props.focusable && props.focusable !== undefined)}
     >
       <YBox space="xxs">
-        {(label || description || extra) && (
+        {Boolean(label || description || extra) && (
           <XBox alignItems="center" space="xxs">
-            {label && <FormLabel>{label}</FormLabel>}
-            {description && (
+            {Boolean(label) && <FormLabel>{label}</FormLabel>}
+            {Boolean(description) && (
               <Text style={form.labelDescription}>{description}</Text>
             )}
-            {extra && (
+            {Boolean(extra) && (
               <Text style={form.labelExtra} textAlign="right">
                 {extra}
               </Text>
@@ -119,7 +119,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
           </XBox>
         )}
         <XBox>
-          {elementLeft && (
+          {Boolean(elementLeft) && (
             <XBox
               style={form.elementLeft}
               onLayout={({ nativeEvent: { layout } }) =>
@@ -179,7 +179,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
             )}
           </XBox>
         </XBox>
-        {error && <Text color="error">{error.toString()}</Text>}
+        {Boolean(error) && <Text color="error">{error.toString()}</Text>}
       </YBox>
     </FormField>
   );

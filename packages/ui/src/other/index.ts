@@ -7,3 +7,5 @@
 
 export * from './CloseButton';
 export * from './Adapt';
+export * from './ScrollView';
+export * from './FocusScope';

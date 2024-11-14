@@ -8,49 +8,57 @@
 import React from 'react';
 import { Trigger } from '../Trigger';
 import { render, screen, userEvent } from '@crossed/test';
-import { SheetContext, sheetContext } from '../context';
 import { expect, describe, test, jest } from '@jest/globals';
 import { Text } from '../../../typography/Text';
 import { Button } from '../../../forms/Button';
+import { FloatingProvider } from '../../../overlay/Floating/context';
 
 describe('SheetRoot', () => {
   test('onPress event should open', async () => {
     const onPress = jest.fn();
     const setOpen = jest.fn();
+    const onClose = jest.fn();
     render(
-      <sheetContext.Provider
-        value={{ open: false, setOpen } as unknown as SheetContext}
+      <FloatingProvider
+        open={false}
+        onOpen={setOpen}
+        onClose={onClose}
+        removeScroll={false}
       >
         <Trigger onPress={onPress}>
           <Text>toto</Text>
         </Trigger>
-      </sheetContext.Provider>
+      </FloatingProvider>
     );
 
     expect(onPress).toBeCalledTimes(0);
     await userEvent.click(await screen.findByRole('button'));
     expect(onPress).toBeCalledTimes(1);
-    expect(setOpen).toBeCalledWith(true);
+    expect(setOpen).toBeCalledTimes(1);
   });
 
   describe('asChild', () => {
     test('onPress event should open', async () => {
       const onPress = jest.fn();
       const setOpen = jest.fn();
+      const onClose = jest.fn();
       render(
-        <sheetContext.Provider
-          value={{ open: false, setOpen } as unknown as SheetContext}
+        <FloatingProvider
+          open={false}
+          onOpen={setOpen}
+          onClose={onClose}
+          removeScroll={false}
         >
           <Trigger onPress={onPress} asChild>
             <Button />
           </Trigger>
-        </sheetContext.Provider>
+        </FloatingProvider>
       );
 
       expect(onPress).toBeCalledTimes(0);
       await userEvent.click(await screen.findByRole('button'));
       expect(onPress).toBeCalledTimes(1);
-      expect(setOpen).toBeCalledWith(true);
+      expect(setOpen).toBeCalledTimes(1);
     });
   });
 });

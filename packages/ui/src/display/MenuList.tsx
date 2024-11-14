@@ -19,8 +19,9 @@ import { Divider as D, DividerProps } from '../layout/Divider';
 import { withStaticProperties } from '@crossed/core';
 import { cloneElement, forwardRef, isValidElement, useCallback } from 'react';
 import { Pressable, View, type PressableProps } from 'react-native';
+import { Slot } from '../Slot';
 
-const rootStyle = createStyles(({ colors, space }) => ({
+export const rootStyle = createStyles(({ colors, space }) => ({
   default: {
     base: {
       alignItems: 'stretch',
@@ -70,7 +71,8 @@ const itemStyles = createStyles((t) => ({
 const MenuRoot = forwardRef<View, MenuListProps>(
   ({ padded = true, bordered = true, ...props }: MenuListProps, ref: any) => {
     return (
-      <YBox
+      <Slot
+        Comp={YBox}
         role="list"
         {...props}
         style={composeStyles(

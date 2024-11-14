@@ -7,46 +7,46 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Select } from '@crossed/ui/src/forms/Select';
+import { SelectNew } from '@crossed/ui/src/forms/SelectNew';
 import { YBox } from '@crossed/ui';
 import { inlineStyle } from '@crossed/styled';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof Select> = {
-  component: Select,
+const meta: Meta<typeof SelectNew> = {
+  component: SelectNew,
   subcomponents: {
-    'Select.Trigger': Select.Trigger,
-    'Select.Trigger.Text': Select.Trigger.Text,
-    'Select.Value': Select.Value,
-    'Select.Content': Select.Content,
-    'Select.Option': Select.Option,
+    'Select.Trigger': SelectNew.Trigger,
+    // 'Select.Trigger.Text': Select.Trigger.Text,
+    'Select.Value': SelectNew.Value,
+    'Select.Content': SelectNew.Content,
+    'Select.Option': SelectNew.Option,
   },
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
   argTypes: {
     label: { control: 'text' },
-    clearable: { control: 'boolean' },
-    error: { control: 'text' },
-    description: { control: 'text' },
-    extra: { control: 'text' },
+    // clearable: { control: 'boolean' },
+    // error: { control: 'text' },
+    // description: { control: 'text' },
+    // extra: { control: 'text' },
   },
   render: (e) => (
-    <YBox {...e} style={inlineStyle(() => ({ base: { padding: 100 } }))}>
-      <Select>
-        <Select.Trigger>
-          <Select.Value />
-        </Select.Trigger>
-        <Select.Content>
-          <Select.Option value="Select 1">Select 1</Select.Option>
-          <Select.Option value="Select 2">Select 2</Select.Option>
-        </Select.Content>
-      </Select>
+    <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+      <SelectNew {...e}>
+        <SelectNew.Trigger>
+          <SelectNew.Value />
+        </SelectNew.Trigger>
+        <SelectNew.Content>
+          <SelectNew.Option value="1">Select 1</SelectNew.Option>
+          <SelectNew.Option value="2">Select 2</SelectNew.Option>
+        </SelectNew.Content>
+      </SelectNew>
     </YBox>
   ),
 };
 
 export default meta;
-type Story = StoryObj<typeof Select>;
+type Story = StoryObj<typeof SelectNew>;
 
 export const Primary: Story = {
   parameters: {
@@ -56,17 +56,24 @@ export const Primary: Story = {
   },
   args: {
     label: 'My label',
-    description: 'Your description',
-    extra: '',
-    clearable: false,
-    error: '',
+    // description: 'Your description',
+    // extra: '',
+    // clearable: false,
+    // error: '',
+  },
+};
+export const DefaultValue: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    value: '2',
   },
 };
 export const Clearabled: Story = {
   ...Primary,
   args: {
     ...Primary.args,
-    clearable: true,
+    // clearable: true,
   },
 };
 
@@ -74,7 +81,7 @@ export const Error: Story = {
   ...Primary,
   args: {
     ...Primary.args,
-    error: 'One error',
+    // error: 'One error',
   },
 };
 

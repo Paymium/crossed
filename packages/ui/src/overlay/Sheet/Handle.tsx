@@ -5,7 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useSheetContext } from './context';
 import { createStyles } from '@crossed/styled';
 import { Box } from '../../layout/Box';
 import { Pressable } from 'react-native';
@@ -22,14 +21,13 @@ const styles = createStyles(({ colors }) => ({
     variants: {},
   },
   pressable: { base: { justifyContent: 'center', height: 40 }, variants: {} },
+  closeButton: { base: { alignSelf: 'flex-end' } },
 }));
 
 export const Handle = () => {
-  const { hideHandle } = useSheetContext();
-
-  return !hideHandle ? (
+  return (
     <Pressable {...styles.pressable.rnw()}>
       <Box style={styles.handle} />
     </Pressable>
-  ) : null;
+  );
 };

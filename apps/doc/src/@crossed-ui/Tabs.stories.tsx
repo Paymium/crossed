@@ -10,7 +10,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Tabs } from '@crossed/ui/src/disclosure/Tabs';
 import { Text } from '@crossed/ui';
-import { userEvent, waitFor, within } from '@storybook/test';
+// import { userEvent, waitFor, within } from '@storybook/test';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Tabs> = {
@@ -104,12 +104,6 @@ export const Underline: Story = {
 
 export const RoundedArrow: Story = {
   ...Rounded,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await waitFor(async () => {
-      await userEvent.click(canvas.getByTestId('toRight'));
-    });
-  },
   render: (e) => {
     return (
       <Tabs defaultValue="tab1" {...e}>

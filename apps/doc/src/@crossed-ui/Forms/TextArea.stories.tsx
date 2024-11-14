@@ -91,7 +91,7 @@ export const WithLeftElement: Story = {
   ...Primary,
   args: {
     ...Primary.args,
-    elementLeft: <Text>Left</Text>,
+    // elementLeft: <Text>Left</Text>,
     value: 'one value',
   },
 };

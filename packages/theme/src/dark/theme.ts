@@ -11,6 +11,7 @@ import { font } from '../font';
 import type { Theme } from '../types/theme';
 
 export default {
+  boxShadow: '0 0 10px #0e0e22',
   colors: colors,
   space,
   font: {
