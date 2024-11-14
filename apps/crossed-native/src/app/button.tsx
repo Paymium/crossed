@@ -19,6 +19,7 @@ import {
 } from '@crossed/ui';
 import { createStyles, inlineStyle } from '@crossed/styled';
 import { SectionList } from 'react-native';
+import { Github } from '@crossed/unicons';
 // import {Github} from '@crossed/unicons';
 
 const styles = createStyles(() => ({
@@ -74,7 +75,9 @@ export default function ButtonScreen() {
               <ButtonText>Button</ButtonText>
             </Button>
             <Button {...props} {...propsVariant}>
-              <ButtonIcon>{/* <Github /> */}</ButtonIcon>
+              <ButtonIcon>
+                <Github />
+              </ButtonIcon>
               <ButtonText>Button</ButtonText>
             </Button>
           </Box>

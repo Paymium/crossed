@@ -15,6 +15,7 @@ import { BannerScreen } from './src/app/banner';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStyles } from '@crossed/styled';
 import { AlertScreen } from './src/app/alert';
+import AccordionScreen from './src/app/accordion';
 import type { RootStackParamList } from './src/routes';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -29,6 +30,7 @@ function App(): React.JSX.Element {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="/index">
           <Stack.Screen name="/index" component={TabOneScreen} />
+          <Stack.Screen name="/accordion" component={AccordionScreen} />
           <Stack.Screen name="/button" component={ButtonScreen} />
           <Stack.Screen name="/banner" component={BannerScreen} />
           <Stack.Screen name="/alert" component={AlertScreen} />

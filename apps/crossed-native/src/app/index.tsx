@@ -18,6 +18,7 @@ const styles = createStyles((t) => ({
     'base': {
       width: '100%',
       flex: 1,
+      flexDirection: 'row',
       justifyContent: 'space-between',
       backgroundColor: t.colors.background.secondary,
     },
@@ -28,14 +29,14 @@ const styles = createStyles((t) => ({
 type Menu = { to: keyof RootStackParamList; title: string };
 
 const menus: Menu[] = [
-  { to: '/button', title: 'Button' },
-  { to: '/banner', title: 'Banner' },
+  { to: '/accordion', title: 'Accordion' },
   { to: '/alert', title: 'Alert' },
+  { to: '/banner', title: 'Banner' },
+  { to: '/button', title: 'Button' },
+  { to: '/checkbox', title: 'Checkbox' },
   { to: '/input', title: 'Input' },
   { to: '/radio', title: 'Radio' },
-  { to: '/checkbox', title: 'Checkbox' },
   { to: '/select', title: 'Select' },
-  { to: '/accordion', title: 'Accordion' },
 ] as const;
 
 export default function TabOneScreen({ navigation }: IndexScreenProps) {
