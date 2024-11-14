@@ -6,10 +6,15 @@
  */
 
 import { withStaticProperties } from '@crossed/core';
+export { FloatingTrigger, type FloatingTriggerProps } from './Trigger';
 import { FloatingTrigger } from './Trigger';
+export { FloatingContent, type FloatingContentProps } from './Content';
 import { FloatingContent } from './Content';
+export { FloatingOverlay, type FloatingOverlayProps } from './Overlay';
 import { FloatingOverlay } from './Overlay';
+export { type FloatingProps, type FloatingRef } from './Root';
 import { FloatingRoot } from './Root';
+export { FloatingPortal, type FloatingPortalProps } from './Portal';
 import { FloatingPortal } from './Portal';
 
 export const Floating = withStaticProperties(FloatingRoot, {
@@ -18,5 +23,3 @@ export const Floating = withStaticProperties(FloatingRoot, {
   Portal: FloatingPortal,
   Overlay: FloatingOverlay,
 });
-
-export type { FloatingContentProps } from './Content';

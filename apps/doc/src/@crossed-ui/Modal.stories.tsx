@@ -11,7 +11,61 @@ import { YBox, Button, Text, Input, Sheet, SelectNew } from '@crossed/ui';
 import { Modal } from '@crossed/ui/src/overlay/Modal';
 import { inlineStyle } from '@crossed/styled';
 import { useState } from 'react';
-import { ScrollView } from 'react-native-web';
+import { ModalProps } from '@crossed/ui/src/overlay/Modal/Root';
+// import { ScrollView } from 'react-native-web';
+
+const Render = (e: ModalProps) => {
+  const [value, setValue] = useState('');
+  return (
+    <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+      <Modal {...e}>
+        <Modal.Trigger asChild>
+          <Button>
+            <Button.Text>Button</Button.Text>
+          </Button>
+        </Modal.Trigger>
+        <Modal.Content>
+          <Modal.Header />
+          <Modal.Body>
+            <Input onChangeText={setValue} value={value} />
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+    </YBox>
+  );
+};
+
+const RenderBasic = (e: ModalProps) => {
+  return (
+    <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+      <Modal {...e}>
+        <Modal.Trigger asChild>
+          <Button>
+            <Button.Text>Button</Button.Text>
+          </Button>
+        </Modal.Trigger>
+        <Modal.Content>
+          <Modal.Header>
+            <Modal.Title>Title</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Text>Hello world</Text>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="tertiary">
+              <Button.Text>Button</Button.Text>
+            </Button>
+
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
+    </YBox>
+  );
+};
 
 const meta: Meta<typeof Modal> = {
   component: Modal,
@@ -24,37 +78,7 @@ const meta: Meta<typeof Modal> = {
     'Modal.Footer': Modal.Footer,
     'Modal.Content': Modal.Content,
   },
-  render(e) {
-    return (
-      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
-        <Modal {...e}>
-          <Modal.Trigger asChild>
-            <Button>
-              <Button.Text>Button</Button.Text>
-            </Button>
-          </Modal.Trigger>
-          <Modal.Content>
-            <Modal.Header>
-              <Modal.Title>Title</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Text>Hello world</Text>
-            </Modal.Body>
-
-            <Modal.Footer>
-              <Button variant="tertiary">
-                <Button.Text>Button</Button.Text>
-              </Button>
-
-              <Button>
-                <Button.Text>Button</Button.Text>
-              </Button>
-            </Modal.Footer>
-          </Modal.Content>
-        </Modal>
-      </YBox>
-    );
-  },
+  render: RenderBasic,
   argTypes: { size: { control: 'select', options: ['sm', 'md', 'lg'] } },
 };
 
@@ -77,26 +101,7 @@ export const AdaptToSheet: Story = {
 };
 export const AdaptToSheetWithInput: Story = {
   args: { adapt: true },
-  render(e) {
-    const [value, setValue] = useState('');
-    return (
-      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
-        <Modal {...e}>
-          <Modal.Trigger asChild>
-            <Button>
-              <Button.Text>Button</Button.Text>
-            </Button>
-          </Modal.Trigger>
-          <Modal.Content>
-            <Modal.Header />
-            <Modal.Body>
-              <Input onChangeText={setValue} value={value} />
-            </Modal.Body>
-          </Modal.Content>
-        </Modal>
-      </YBox>
-    );
-  },
+  render: Render,
 };
 export const Scrollview: Story = {
   render(e) {
@@ -166,75 +171,78 @@ export const ScrollviewWithAdaptStickyHeaderAndFooter: Story = {
   args: { adapt: true, stickyHeader: true, stickyFooter: true },
 };
 
+const RenderOther = (e: ModalProps) => {
+  return (
+    <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+      <Modal {...e}>
+        <Modal.Trigger asChild>
+          <Button>
+            <Button.Text>Button</Button.Text>
+          </Button>
+        </Modal.Trigger>
+        <Modal.Content>
+          <Modal.Header>
+            <Modal.Title>Title</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Sheet>
+              <Sheet.Trigger asChild>
+                <Button>
+                  <Button.Text>Open</Button.Text>
+                </Button>
+              </Sheet.Trigger>
+              <Sheet.Content>
+                <Text>Sheet content</Text>
+              </Sheet.Content>
+            </Sheet>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+    </YBox>
+  );
+};
 export const ModalOpenSheet: Story = {
   ...Scrollview,
   args: { adapt: true },
-  render: (e) => {
-    return (
-      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
-        <Modal {...e}>
-          <Modal.Trigger asChild>
-            <Button>
-              <Button.Text>Button</Button.Text>
-            </Button>
-          </Modal.Trigger>
-          <Modal.Content>
-            <Modal.Header>
-              <Modal.Title>Title</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Sheet>
-                <Sheet.Trigger asChild>
-                  <Button>
-                    <Button.Text>Open</Button.Text>
-                  </Button>
-                </Sheet.Trigger>
-                <Sheet.Content>
+  render: RenderOther,
+};
+
+const RenderSelect = (e: ModalProps) => {
+  return (
+    <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+      <Modal {...e}>
+        <Modal.Trigger asChild>
+          <Button>
+            <Button.Text>Button</Button.Text>
+          </Button>
+        </Modal.Trigger>
+        <Modal.Content>
+          <Modal.Header>
+            <Modal.Title>Title</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <SelectNew>
+              <SelectNew.Trigger>
+                <SelectNew.Value />
+              </SelectNew.Trigger>
+              <SelectNew.Content>
+                <SelectNew.Option value="select1">
                   <Text>Sheet content</Text>
-                </Sheet.Content>
-              </Sheet>
-            </Modal.Body>
-          </Modal.Content>
-        </Modal>
-      </YBox>
-    );
-  },
+                </SelectNew.Option>
+                <SelectNew.Option value="select2">
+                  <Text>Sheet content</Text>
+                </SelectNew.Option>
+              </SelectNew.Content>
+            </SelectNew>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+    </YBox>
+  );
 };
 
 export const ModalWithSelect: Story = {
   ...Scrollview,
   args: { adapt: true },
-  render: (e) => {
-    return (
-      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
-        <Modal {...e}>
-          <Modal.Trigger asChild>
-            <Button>
-              <Button.Text>Button</Button.Text>
-            </Button>
-          </Modal.Trigger>
-          <Modal.Content>
-            <Modal.Header>
-              <Modal.Title>Title</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <SelectNew>
-                <SelectNew.Trigger>
-                  <SelectNew.Value />
-                </SelectNew.Trigger>
-                <SelectNew.Content>
-                  <SelectNew.Option value="select1">
-                    <Text>Sheet content</Text>
-                  </SelectNew.Option>
-                  <SelectNew.Option value="select2">
-                    <Text>Sheet content</Text>
-                  </SelectNew.Option>
-                </SelectNew.Content>
-              </SelectNew>
-            </Modal.Body>
-          </Modal.Content>
-        </Modal>
-      </YBox>
-    );
-  },
+  render: RenderSelect,
 };

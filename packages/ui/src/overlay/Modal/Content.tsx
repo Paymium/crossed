@@ -80,6 +80,7 @@ export const useKeyDown: UseKeyDown = (keyEvent, { enable }) => {
         document.removeEventListener('keydown', onKeyDown);
       };
     }
+    return () => {};
   }, [onKeyDown, enable]);
 };
 
@@ -163,6 +164,7 @@ export const ModalContent = ({ children }: YBoxProps) => {
               role="dialog"
               aria-labelledby={`${idRef}-title`}
               aria-describedby={`${idRef}-description`}
+              aria-hidden={!open}
               animatedStyle={animatedStyle}
               style={composeStyles(
                 !showSheet && modalStyles.content,

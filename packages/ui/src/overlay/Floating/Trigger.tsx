@@ -12,16 +12,12 @@ import { forwardRef, memo, useCallback } from 'react';
 import { composeEventHandlers } from '@crossed/core';
 import { CrossedMethods } from '@crossed/styled';
 
+export type FloatingTriggerProps = Omit<
+  SlotProps<Omit<PressableProps, 'style'> & { style?: CrossedMethods<any> }>,
+  'Comp'
+>;
 export const FloatingTrigger = memo(
-  forwardRef<
-    View,
-    Omit<
-      SlotProps<
-        Omit<PressableProps, 'style'> & { style?: CrossedMethods<any> }
-      >,
-      'Comp'
-    >
-  >(({ style, ...props }, ref) => {
+  forwardRef<View, FloatingTriggerProps>(({ style, ...props }, ref) => {
     const { open, onClose, onOpen } = useFloatingContext();
     const toggle = useCallback(() => {
       if (open) onClose();
@@ -31,6 +27,7 @@ export const FloatingTrigger = memo(
       <Slot
         ref={ref}
         Comp={Pressable}
+        role="button"
         {...props}
         {...style?.rnw()}
         onPress={composeEventHandlers(props.onPress, toggle)}

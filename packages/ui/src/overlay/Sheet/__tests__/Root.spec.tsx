@@ -38,31 +38,16 @@ describe('SheetRoot', () => {
     expect(Provider).toBeCalledTimes(1);
 
     const params = Provider.mock.calls[0][0];
-    expect(params.children).toEqual('toto');
     expect(params.value).toHaveProperty('dismissOnOverlayPress', true);
-    expect(params.value).toHaveProperty('height', { value: 0 });
     expect(params.value).toHaveProperty('snapInitialHeight', { value: 0 });
-    expect(params.value).toHaveProperty('isMove', { value: false });
     expect(params.value).toHaveProperty('offset', 60);
-    expect(params.value).toHaveProperty('open', false);
     expect(params.value).toHaveProperty('hideHandle', undefined);
-    expect(params.value).toHaveProperty('onClose');
-    expect(params.value).toHaveProperty('setOpen');
+    expect(params.value).toHaveProperty('full', undefined);
+    expect(params.value).toHaveProperty('stickyFooter', undefined);
+    expect(params.value).toHaveProperty('stickyHeader', undefined);
+    expect(params.value).toHaveProperty('detach', undefined);
+    expect(params.value).toHaveProperty('portal', true);
+    expect(params.value).toHaveProperty('translateY', { value: null });
     expect(onOpenChange).toBeCalledTimes(0);
-  });
-
-  test('event onOpenChange', async () => {
-    const onOpenChange = jest.fn();
-    render(<Root onOpenChange={onOpenChange}>toto</Root>);
-
-    const params = (
-      sheetContext.Provider as unknown as jest.Mock<
-        typeof sheetContext.Provider
-      >
-    ).mock.calls[0][0];
-
-    expect(onOpenChange).toBeCalledTimes(0);
-    params.value.onClose();
-    expect(onOpenChange).toBeCalledWith(false);
   });
 });

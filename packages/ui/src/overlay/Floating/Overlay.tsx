@@ -6,7 +6,7 @@
  */
 
 import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
-import { FloatingTrigger } from './Trigger';
+import { FloatingTrigger, FloatingTriggerProps } from './Trigger';
 import { useFloatingContext } from './context';
 import Animated, { AnimatedProps } from 'react-native-reanimated';
 import { overlayStyles } from '../styles';
@@ -18,15 +18,21 @@ import { memo } from 'react';
 export type FloatingOverlayProps = {
   style?: CrossedMethods<any>;
   animatedProps?: AnimatedProps<ViewProps>;
+  triggerProps?: FloatingTriggerProps;
 };
 export const FloatingOverlay = memo(
-  ({ style: styleProps, animatedProps }: FloatingOverlayProps) => {
+  ({
+    style: styleProps,
+    animatedProps,
+    triggerProps,
+  }: FloatingOverlayProps) => {
     const { open, closeOverlayPress } = useFloatingContext();
 
     return open ? (
       <FloatingTrigger
         tabIndex={-1}
         disabled={!closeOverlayPress}
+        {...triggerProps}
         style={composeStyles(
           positionStyles.absoluteFill,
           inlineStyle(() => ({ web: { base: { position: 'fixed' } } })),

@@ -25,14 +25,14 @@ const meta: Meta<typeof SelectNew> = {
   parameters: { layout: 'padded' },
   argTypes: {
     label: { control: 'text' },
-    clearable: { control: 'boolean' },
-    error: { control: 'text' },
-    description: { control: 'text' },
-    extra: { control: 'text' },
+    // clearable: { control: 'boolean' },
+    // error: { control: 'text' },
+    // description: { control: 'text' },
+    // extra: { control: 'text' },
   },
   render: (e) => (
     <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
-      <SelectNew {...e} >
+      <SelectNew {...e}>
         <SelectNew.Trigger>
           <SelectNew.Value />
         </SelectNew.Trigger>
@@ -56,10 +56,10 @@ export const Primary: Story = {
   },
   args: {
     label: 'My label',
-    description: 'Your description',
-    extra: '',
-    clearable: false,
-    error: '',
+    // description: 'Your description',
+    // extra: '',
+    // clearable: false,
+    // error: '',
   },
 };
 export const DefaultValue: Story = {
@@ -73,7 +73,7 @@ export const Clearabled: Story = {
   ...Primary,
   args: {
     ...Primary.args,
-    clearable: true,
+    // clearable: true,
   },
 };
 
@@ -81,7 +81,7 @@ export const Error: Story = {
   ...Primary,
   args: {
     ...Primary.args,
-    error: 'One error',
+    // error: 'One error',
   },
 };
 

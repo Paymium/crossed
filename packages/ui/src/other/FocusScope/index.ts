@@ -6,3 +6,4 @@
  */
 
 export * from './FocusScope';
+export type { FocusScopeProps } from './FocusScopeProps';

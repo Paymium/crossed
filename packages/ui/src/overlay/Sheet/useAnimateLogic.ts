@@ -8,7 +8,7 @@
 import { useEffect, useRef } from 'react';
 import {
   useAnimatedStyle,
-  useSharedValue,
+  // useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import { View } from 'react-native';
@@ -37,7 +37,7 @@ export const useAnimateLogic = () => {
 
   useEffect(() => {
     const time = setTimeout(() => {
-      ref.current?.measure((x, y, width, height) => {
+      ref.current?.measure((_x, _y, _width, height) => {
         if (translateY.value === null) {
           translateY.value = withTiming(height);
           setTimeout(() => {

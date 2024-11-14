@@ -15,16 +15,19 @@ import {
   PropsWithChildren,
   useCallback,
   useMemo,
-  useRef,
+  // useRef,
   useState,
 } from 'react';
 import { composeStyles, inlineStyle } from '@crossed/styled';
 import { View } from 'react-native';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { runOnJS, useSharedValue } from 'react-native-reanimated';
-import { useMaxHeight } from './useMaxHeight';
-import { useFloatingContext } from '../Floating/context';
+import {
+  //runOnJS,
+  useSharedValue,
+} from 'react-native-reanimated';
+// import { useMaxHeight } from './useMaxHeight';
+// import { useFloatingContext } from '../Floating/context';
 import { useGesture } from './useGesture';
 
 export type FrameProps = FloatingContentProps;
@@ -43,7 +46,7 @@ export const Frame = memo(
       const [scrollEnabled, setScrollEnabled] = useState(false);
 
       const native = Gesture.Native();
-      const { gesturePan, styleAnimated } = useGesture({
+      const { gesturePan /*, styleAnimated*/ } = useGesture({
         isMove,
         height,
         scroll,

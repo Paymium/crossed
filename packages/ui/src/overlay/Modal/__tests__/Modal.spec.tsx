@@ -46,13 +46,13 @@ describe('Modal spec accessibility', () => {
 
     expect(
       screen.getByRole('dialog', { hidden: true }).getAttribute('data-hidden')
-    ).toBe('false');
+    ).toBe(null);
     await userEvent.click(screen.getByLabelText('Trigger'));
 
     expect(screen.getByRole('dialog')).toBeTruthy();
     expect(screen.getByLabelText('Close')).toBeTruthy();
 
     await userEvent.click(screen.getByLabelText('Close'));
-    expect(screen.getByRole('dialog')).toBeTruthy();
+    expect(() => screen.getByRole('dialog')).toThrow();
   });
 });

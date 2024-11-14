@@ -79,8 +79,8 @@ export function useFocusScope(
 
   // Takes care of trapping focus if focus is moved outside programmatically for example
   React.useEffect(() => {
-    if (!enabled) return;
-    if (!trapped) return;
+    if (!enabled) return () => {};
+    if (!trapped) return () => {};
     function handleFocusIn(event: FocusEvent) {
       if (focusScope.paused || !container) return;
       const target = event.target as HTMLElement | null;
@@ -104,12 +104,12 @@ export function useFocusScope(
       document.removeEventListener('focusin', handleFocusIn);
       document.removeEventListener('focusout', handleFocusOut);
     };
-  }, [trapped, forceUnmount, container, focusScope.paused]);
+  }, [trapped, forceUnmount, container, focusScope.paused, enabled]);
 
   React.useEffect(() => {
-    if (!enabled) return;
-    if (!container) return;
-    if (forceUnmount) return;
+    if (!enabled) return () => {};
+    if (!container) return () => {};
+    if (forceUnmount) return () => {};
 
     focusScopesStack.add(focusScope);
     const previouslyFocusedElement =
@@ -168,13 +168,13 @@ export function useFocusScope(
       const focusedElement = document.activeElement as HTMLElement | null;
 
       if (isTabKey && focusedElement) {
-        const container = event.currentTarget as HTMLElement;
-        const [first, last] = getTabbableEdges(container);
+        const containers = event.currentTarget as HTMLElement;
+        const [first, last] = getTabbableEdges(containers);
         const hasTabbableElementsInside = first && last;
 
         // we can only wrap focus if we have tabbable edges
         if (!hasTabbableElementsInside) {
-          if (focusedElement === container) event.preventDefault();
+          if (focusedElement === containers) event.preventDefault();
         } else {
           if (!event.shiftKey && focusedElement === last) {
             event.preventDefault();
@@ -258,7 +258,10 @@ function getTabbableCandidates(container: HTMLElement) {
  * Returns the first visible element in a list.
  * NOTE: Only checks visibility up to the `container`.
  */
-function findVisible(elements: HTMLElement[], container: HTMLElement) {
+function findVisible(
+  elements: HTMLElement[],
+  container: HTMLElement
+): HTMLElement | void {
   for (const element of elements) {
     // we stop checking if it's hidden at the `container` level (excluding)
     if (!isHidden(element, { upTo: container })) return element;

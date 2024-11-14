@@ -13,15 +13,17 @@ import { composeStyles, CrossedMethods } from '@crossed/styled';
 import { positionStyles } from '../../styles/position';
 import { visibility } from '../../styles/visibilityHidden';
 
+export type FloatingPortalProps = PropsWithChildren<{
+  style?: CrossedMethods<any>;
+  Provider?: (_p: PropsWithChildren) => ReactNode;
+}>;
+
 export const FloatingPortal = memo(
   ({
     children,
     style,
     Provider = ({ children }) => children,
-  }: PropsWithChildren<{
-    style?: CrossedMethods<any>;
-    Provider?: (_p: PropsWithChildren) => ReactNode;
-  }>) => {
+  }: FloatingPortalProps) => {
     const floatingContext = useFloatingContext();
     const [interShow, setIternShow] = useState(false);
 

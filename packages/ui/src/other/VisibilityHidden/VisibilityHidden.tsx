@@ -8,9 +8,10 @@
 import { forwardRef } from 'react';
 import type { VisibilityHiddenComponent } from './types';
 import { View } from 'react-native';
+import { Slot } from '../../Slot';
 
 export const VisibilityHidden: VisibilityHiddenComponent = forwardRef(
   ({ hide, ...props }, ref) => {
-    return hide ? null : <View {...props} ref={ref} />;
+    return hide ? null : <Slot Comp={View} {...props} ref={ref} />;
   }
 );

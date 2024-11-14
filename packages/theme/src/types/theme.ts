@@ -14,5 +14,6 @@ export type Theme = {
   colors: Colors;
   space: Spaces;
   font: Font;
+  boxShadow: string;
   components?: Components;
 };

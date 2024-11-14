@@ -8,3 +8,4 @@
 import { Floating } from '../Floating';
 
 export const Trigger = Floating.Trigger;
+Trigger.displayName = 'Sheet.Trigger';

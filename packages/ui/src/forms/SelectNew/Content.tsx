@@ -59,7 +59,7 @@ export const SelectContent = memo(({ children }: PropsWithChildren) => {
         widthShared.value = width;
       });
     }
-  }, [open, refs.trigger]);
+  }, [open, refs.trigger, left, top, widthShared]);
 
   useEffect(() => {
     if (open) {
@@ -71,16 +71,20 @@ export const SelectContent = memo(({ children }: PropsWithChildren) => {
       window.addEventListener('scroll', onScroll);
       return () => window.removeEventListener('scroll', onScroll);
     }
+    return () => {};
   }, [open, onClose]);
 
   return showSheet ? (
-    <Sheet.Frame style={inlineStyle(() => ({ base: { gap: 8 } }))} role="list">
+    <Sheet.Content
+      style={inlineStyle(() => ({ base: { gap: 8 } }))}
+      role="list"
+    >
       <SelectProvider {...selectContext}>
         {/* <Sheet.Title>{title}</Sheet.Title> */}
         <YBox space="xs">{children}</YBox>
       </SelectProvider>
       {/* <Sheet.Footer>{footer}</Sheet.Footer> */}
-    </Sheet.Frame>
+    </Sheet.Content>
   ) : (
     <Floating.Portal Provider={Provider}>
       <Floating.Overlay style={inlineStyle(() => ({ base: { opacity: 0 } }))} />
@@ -98,13 +102,11 @@ export const SelectContent = memo(({ children }: PropsWithChildren) => {
           >
             <Floating.Content
               ref={refs.content}
-              style={[
-                inlineStyle(({ boxShadow, space }) => ({
-                  base: { zIndex: 1000, marginTop: space.xs },
-                  web: { base: { boxShadow } },
-                })).style().style,
-                animatedStyle,
-              ]}
+              animatedStyle={animatedStyle}
+              style={inlineStyle(({ boxShadow, space }) => ({
+                base: { zIndex: 1000, marginTop: space.xs },
+                web: { base: { boxShadow } },
+              }))}
             >
               {children}
             </Floating.Content>

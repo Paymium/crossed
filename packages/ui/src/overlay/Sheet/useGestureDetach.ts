@@ -1,7 +1,14 @@
+/**
+ * Copyright (c) Paymium.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root of this projects source tree.
+ */
+
 import { useEffect, useRef } from 'react';
 import { Gesture } from 'react-native-gesture-handler';
 import { useMaxHeight } from './useMaxHeight';
-import { useSheetContext } from './context';
+// import { useSheetContext } from './context';
 import {
   runOnJS,
   useAnimatedReaction,
@@ -12,22 +19,22 @@ import {
 import { useFloatingContext } from '../Floating/context';
 
 export const useGestureDetach = ({
-  isMove,
+  // isMove,
   height,
   scroll,
-  initialHeight,
+  // initialHeight,
   setScrollEnabled,
   scrollEnabled,
   // snapInitialHeight,
-  heightLayout,
+  // heightLayout,
 }) => {
   const initialY = useSharedValue(0);
   const maxHeight = useMaxHeight();
   const yPosition = useSharedValue(maxHeight);
   const { open, onClose } = useFloatingContext();
-  const { hideHandle } = useSheetContext();
+  // const { hideHandle } = useSheetContext();
   const styleAnimated = useAnimatedStyle(() => {
-    console.log("useAnimatedStyle", yPosition.value, height.value)
+    // console.log('useAnimatedStyle', yPosition.value, height.value);
     return {
       transform: [{ translateY: yPosition.value }],
     };
@@ -43,7 +50,7 @@ export const useGestureDetach = ({
     () => height.value,
     (currentValue, previousValue) => {
       if (currentValue && currentValue !== previousValue) {
-        console.log("useAnimatedReaction", open ? 0 : height.value)
+        // console.log('useAnimatedReaction', open ? 0 : height.value);
         yPosition.value = withTiming(open ? 0 : height.value);
       }
     },
@@ -58,9 +65,9 @@ export const useGestureDetach = ({
         // runOnJS(setScrollEnabled)(initialHeight.value === maxHeight);
       })
       .onChange((e) => {
-        const newHeight =
-          height.value - (hideHandle ? e.changeY / 3 : e.changeY);
-        yPosition.value = initialY.value + e.translationY;
+        // const newHeight =
+        //   height.value - (hideHandle ? e.changeY / 3 : e.changeY);
+        // yPosition.value = initialY.value + e.translationY;
         // if (
         //   scroll.value <= 0 &&
         //   (height.value !== maxHeight || e.changeY > 0)
@@ -88,8 +95,11 @@ export const useGestureDetach = ({
           e.velocityY > e.translationY ||
           yPosition.value > height.value / 2
         ) {
-          console.log('onEnd', Math.abs(e.velocityY) > Math.abs(e.translationY));
-          yPosition.value = withTiming(height.value)
+          // console.log(
+          //   'onEnd',
+          //   Math.abs(e.velocityY) > Math.abs(e.translationY)
+          // );
+          yPosition.value = withTiming(height.value);
           runOnJS(onClose)();
         }
         // if (e.translationY > 0 && scroll.value <= 0) {
