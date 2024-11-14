@@ -1,5 +1,13 @@
 # @crossed/primitive
 
+## 1.8.1
+
+### Patch Changes
+
+- 024830a: downgrade react-native
+- Updated dependencies [024830a]
+  - @crossed/core@0.8.2
+
 ## 1.8.0
 
 ### Minor Changes

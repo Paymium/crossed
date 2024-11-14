@@ -78,7 +78,7 @@ importers:
         specifier: 0.4.0
         version: 0.4.0(react-native@0.75.2)(ts-node@10.8.1)
       '@crossed/core':
-        specifier: 0.8.1
+        specifier: 0.8.2
         version: link:../../packages/core
       '@crossed/demo':
         specifier: 0.3.1
@@ -87,10 +87,10 @@ importers:
         specifier: workspace:^
         version: link:../../packages/styled
       '@crossed/theme':
-        specifier: workspace:2.0.3
+        specifier: workspace:2.0.4
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: 1.1.1
+        specifier: 1.1.2
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: workspace:*
@@ -172,19 +172,19 @@ importers:
   apps/doc:
     dependencies:
       '@crossed/styled':
-        specifier: workspace:0.14.1
+        specifier: workspace:0.14.2
         version: link:../../packages/styled
       '@crossed/theme':
-        specifier: workspace:2.0.3
+        specifier: workspace:2.0.4
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: workspace:1.1.1
+        specifier: workspace:1.1.2
         version: link:../../packages/ui
       '@crossed/unicons':
-        specifier: 1.0.3
+        specifier: 1.0.4
         version: link:../../packages/unicons
       '@crossed/webpack':
-        specifier: workspace:2.0.5
+        specifier: workspace:2.0.6
         version: link:../../packages/webpack
       '@gorhom/portal':
         specifier: ^1.0.14
@@ -390,7 +390,7 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/test':
-        specifier: 0.12.0
+        specifier: 0.12.1
         version: link:../test
       '@jest/types':
         specifier: 29.6.3
@@ -439,10 +439,10 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/styled':
-        specifier: 0.14.1
+        specifier: 0.14.2
         version: link:../styled
       '@crossed/test':
-        specifier: 0.12.0
+        specifier: 0.12.1
         version: link:../test
       '@crossed/theme':
         specifier: workspace:^
@@ -491,7 +491,7 @@ importers:
   packages/next-adapter:
     dependencies:
       '@crossed/webpack':
-        specifier: 2.0.5
+        specifier: 2.0.6
         version: link:../webpack
       find-yarn-workspace-root:
         specifier: ^2.0.0
@@ -552,7 +552,7 @@ importers:
   packages/primitive:
     dependencies:
       '@crossed/core':
-        specifier: 0.8.1
+        specifier: 0.8.2
         version: link:../core
       '@floating-ui/react':
         specifier: ^0.25.1
@@ -583,7 +583,7 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/test':
-        specifier: 0.12.0
+        specifier: 0.12.1
         version: link:../test
       '@testing-library/jest-dom':
         specifier: ^6.5.0
@@ -622,7 +622,7 @@ importers:
   packages/styled:
     dependencies:
       '@crossed/core':
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../core
       ts-deepmerge:
         specifier: ^7.0.0
@@ -632,7 +632,7 @@ importers:
         specifier: ^0.5.0
         version: link:../build
       '@crossed/test':
-        specifier: 0.12.0
+        specifier: 0.12.1
         version: link:../test
       '@types/jest':
         specifier: ^29.5.13
@@ -847,22 +847,22 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/core':
-        specifier: 0.8.1
+        specifier: 0.8.2
         version: link:../core
       '@crossed/primitive':
-        specifier: 1.8.0
+        specifier: 1.8.1
         version: link:../primitive
       '@crossed/styled':
         specifier: workspace:^
         version: link:../styled
       '@crossed/test':
-        specifier: 0.12.0
+        specifier: 0.12.1
         version: link:../test
       '@crossed/theme':
         specifier: workspace:^
         version: link:../theme
       '@crossed/unicons':
-        specifier: 1.0.3
+        specifier: 1.0.4
         version: link:../unicons
       '@devvie/bottom-sheet':
         specifier: 0.3.0
@@ -944,7 +944,7 @@ importers:
   packages/webpack:
     dependencies:
       '@crossed/loader':
-        specifier: 1.0.4
+        specifier: 1.0.5
         version: link:../loader
       '@crossed/log':
         specifier: 0.1.1
@@ -966,7 +966,7 @@ importers:
         specifier: ^0.5.0
         version: link:../build
       '@crossed/styled':
-        specifier: 0.14.1
+        specifier: 0.14.2
         version: link:../styled
       '@types/esprima':
         specifier: ^4.0.6

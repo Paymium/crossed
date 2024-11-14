@@ -1,5 +1,13 @@
 # @crossed/styled
 
+## 0.14.2
+
+### Patch Changes
+
+- 024830a: downgrade react-native
+- Updated dependencies [024830a]
+  - @crossed/core@0.8.2
+
 ## 0.14.1
 
 ### Patch Changes

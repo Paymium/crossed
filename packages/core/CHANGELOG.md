@@ -1,5 +1,11 @@
 # @crossed/core
 
+## 0.8.2
+
+### Patch Changes
+
+- 024830a: downgrade react-native
+
 ## 0.8.1
 
 ### Patch Changes

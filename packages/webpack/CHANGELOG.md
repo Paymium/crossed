@@ -1,5 +1,13 @@
 # @crossed/webpack
 
+## 2.0.6
+
+### Patch Changes
+
+- Updated dependencies [024830a]
+  - @crossed/styled@0.14.2
+  - @crossed/loader@1.0.5
+
 ## 2.0.5
 
 ### Patch Changes

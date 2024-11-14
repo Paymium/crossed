@@ -1,5 +1,14 @@
 # @crossed/unicons
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [024830a]
+  - @crossed/styled@0.14.2
+  - @crossed/core@0.8.2
+  - @crossed/theme@2.0.4
+
 ## 1.0.3
 
 ### Patch Changes

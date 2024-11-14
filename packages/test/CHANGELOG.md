@@ -1,5 +1,11 @@
 # @crossed/test
 
+## 0.12.1
+
+### Patch Changes
+
+- 024830a: downgrade react-native
+
 ## 0.12.0
 
 ### Minor Changes

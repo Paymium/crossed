@@ -1,5 +1,17 @@
 # @crossed/ui
 
+## 1.1.2
+
+### Patch Changes
+
+- 024830a: downgrade react-native
+- Updated dependencies [024830a]
+  - @crossed/primitive@1.8.1
+  - @crossed/styled@0.14.2
+  - @crossed/core@0.8.2
+  - @crossed/theme@2.0.4
+  - @crossed/unicons@1.0.4
+
 ## 1.1.1
 
 ### Patch Changes
