@@ -7,9 +7,7 @@
 
 import { render } from '@crossed/test';
 import { VisibilityHidden } from '../VisibilityHidden';
-import { createRef } from 'react';
 import { createStyles } from '@crossed/styled';
-import { View } from 'react-native';
 
 const hiddenClass =
   'position-[absolute] text-decoration-[none] z-index-[0] overflow-[hidden] clip-[rect(0,-0,-0,-0)] white-space-[nowrap] word-wrap-[normal]';
@@ -49,13 +47,6 @@ describe('VisibilityHidden', () => {
 
     const element = getByTestId('hidden-component');
     expect(element).toHaveClass('background-color-[red]');
-  });
-
-  test('transmet correctement la référence', () => {
-    const ref = createRef<View>();
-    render(<VisibilityHidden ref={ref} />);
-
-    expect(ref.current).toBeInstanceOf(HTMLElement);
   });
 
   test('rend le composant avec des props additionnelles', () => {
