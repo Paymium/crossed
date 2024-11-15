@@ -57,7 +57,6 @@ export const Primary: Story = {
 
 const Render2 = (e: FocusScopeProps) => {
   const [enable, setEnable] = useState(false);
-  const ref = useRef();
   const style = useRef(
     createStyles(() => ({
       focus: { ':focus': { backgroundColor: 'green' } },
