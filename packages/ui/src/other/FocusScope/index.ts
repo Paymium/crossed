@@ -5,6 +5,5 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export * from './CloseButton';
-export * from './Adapt';
-export * from './FocusScope';
+export { FocusScope } from './FocusScope';
+export type { FocusScopeProps } from './FocusScopeProps';
