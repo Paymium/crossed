@@ -27,7 +27,7 @@ const modalStyles = createStyles((t) => ({
       borderRadius: 8,
       // backgroundColor: t.colors.neutral[100],
       margin: 'auto',
-      padding: t.space.xs,
+      padding: t.space.md,
     },
     web: {
       base: {

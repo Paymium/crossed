@@ -21,16 +21,16 @@ import { Divider } from '../layout/Divider';
 
 const spacingStyle = createStyles(({ space }) => ({
   basic: {
-    base: { padding: space.xs, gap: space.xxs },
+    base: { padding: space.md, gap: space.xs },
     media: {
-      md: { padding: space.sm, gap: space.xs },
-      xl: { padding: space.md, gap: space.sm },
+      md: { padding: space.lg, gap: space.md },
+      xl: { padding: space.xl, gap: space.lg },
     },
   },
   composed: {
     media: {
-      md: { paddingVertical: space.xs },
-      xl: { paddingVertical: space.xs },
+      md: { paddingVertical: space.md },
+      xl: { paddingVertical: space.md },
     },
   },
 }));
@@ -38,7 +38,7 @@ const spacingStyle = createStyles(({ space }) => ({
 const cardStyles = createStyles(({ space, font, components }) => ({
   root: {
     base: {
-      borderRadius: space.xxs,
+      borderRadius: space.xs,
       backgroundColor: components.Action.secondary.default.background,
       borderWidth: 1,
       borderColor: components.Card.default.border,
@@ -84,7 +84,7 @@ const cardStyles = createStyles(({ space, font, components }) => ({
       borderBottomWidth: 0,
       borderRadius: 0,
       borderTopWidth: 0,
-      paddingVertical: space.xs,
+      paddingVertical: space.md,
     },
   },
   last: {

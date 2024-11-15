@@ -8,10 +8,10 @@
 import { createStyles } from '@crossed/styled';
 
 export const gapStyles = createStyles(({ space }) => ({
-  xxs: { base: { gap: space.xxs } },
-  xs: { base: { gap: space.xs } },
-  sm: { base: { gap: space.sm } },
-  md: { base: { gap: space.md } },
+  xxs: { base: { gap: space.xs } },
+  xs: { base: { gap: space.md } },
+  sm: { base: { gap: space.lg } },
+  md: { base: { gap: space.xl } },
   lg: { base: { gap: space.lg } },
   xl: { base: { gap: space.xl } },
   xxl: { base: { gap: space.xxl } },

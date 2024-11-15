@@ -66,7 +66,7 @@ const bannerStyles = createStyles(
       },
       container: {
         base: {
-          padding: t.space.xs,
+          padding: t.space.md,
           borderRadius: 8,
           borderWidth: 1,
           borderStyle: 'solid',
@@ -74,14 +74,14 @@ const bannerStyles = createStyles(
         variants: {},
         media: {
           xs: {
-            paddingVertical: t.space.xxs,
-            paddingHorizontal: t.space.xs,
+            paddingVertical: t.space.xs,
+            paddingHorizontal: t.space.md,
           },
           md: {
             flexDirection: 'row',
             alignItems: 'center',
-            paddingVertical: t.space.xs,
-            paddingHorizontal: t.space.sm,
+            paddingVertical: t.space.md,
+            paddingHorizontal: t.space.lg,
           },
         },
       },

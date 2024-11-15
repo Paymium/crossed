@@ -30,8 +30,8 @@ export const modalStyles = createStyles(({ colors, space }) => ({
       borderRadius: 16,
       backgroundColor: colors.background.secondary,
       margin: 'auto',
-      padding: space.md,
-      gap: space.md,
+      padding: space.xl,
+      gap: space.xl,
     },
     // web: {
     //   base: {

@@ -46,14 +46,14 @@ const styles = createStyles(({ colors, space }) => ({
   },
   container: {
     base: {
-      paddingBottom: space.md,
-      paddingTop: space.xxs,
+      paddingBottom: space.xl,
+      paddingTop: space.xs,
     },
     variants: {},
   },
   containerPadded: {
     base: {
-      paddingHorizontal: space.md,
+      paddingHorizontal: space.xl,
     },
     variants: {},
   },
