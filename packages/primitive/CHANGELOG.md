@@ -1,5 +1,11 @@
 # @crossed/primitive
 
+## 1.9.0
+
+### Minor Changes
+
+- 901fdca: add focusScope component
+
 ## 1.8.1
 
 ### Patch Changes

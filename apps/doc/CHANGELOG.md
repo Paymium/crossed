@@ -1,5 +1,24 @@
 # crossed-doc
 
+## 0.2.0
+
+### Minor Changes
+
+- b869959: add VisibilityHidden component
+- 901fdca: add focusScope component
+- 3638317: add ScrollView and FlatList
+
+### Patch Changes
+
+- 4c6f6f9: fix alert flex, use flexShrink instead
+- Updated dependencies [b869959]
+- Updated dependencies [4c6f6f9]
+- Updated dependencies [901fdca]
+- Updated dependencies [3638317]
+- Updated dependencies [a1fc505]
+  - @crossed/ui@2.0.0
+  - @crossed/styled@0.14.2
+
 ## 0.1.15
 
 ### Patch Changes
