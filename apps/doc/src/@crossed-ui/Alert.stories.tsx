@@ -19,7 +19,6 @@ const meta: Meta<typeof Alert> = {
     'Alert.Action': Alert.Action,
     'Alert.Action.Text': Alert.Action.Text,
   },
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {
     status: {
@@ -44,9 +43,48 @@ export default meta;
 type Story = StoryObj<typeof Alert>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary: Story = {
-  args: {
-    status: 'info',
-    center: false,
-  },
+export const Info: Story = {
+  args: { status: 'info', center: false },
+};
+export const Success: Story = {
+  ...Info,
+  args: { ...Info.args, status: 'success' },
+};
+export const Warning: Story = {
+  ...Info,
+  args: { ...Info.args, status: 'warning' },
+};
+export const Error: Story = {
+  ...Info,
+  args: { ...Info.args, status: 'error' },
+};
+
+export const Action: Story = {
+  ...Info,
+  render: (e) => (
+    <Alert {...e}>
+      <Alert.Icon />
+      <Alert.Description>Description</Alert.Description>
+      <Alert.Action>
+        <Alert.Action.Text>Action</Alert.Action.Text>
+      </Alert.Action>
+    </Alert>
+  ),
+};
+
+export const Group: Story = {
+  ...Info,
+  render: (e) => (
+    <Alert {...e}>
+      <Alert.Icon />
+      <Alert.Group>
+        <Alert.Description>Description</Alert.Description>
+
+        <Alert.Description>Description</Alert.Description>
+      </Alert.Group>
+      <Alert.Action>
+        <Alert.Action.Text>Action</Alert.Action.Text>
+      </Alert.Action>
+    </Alert>
+  ),
 };
