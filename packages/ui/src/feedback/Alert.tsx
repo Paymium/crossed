@@ -13,7 +13,7 @@ import {
   createStyles,
   type CrossedMethods,
 } from '@crossed/styled';
-import { createContext, useContext } from 'react';
+import { createContext, memo, useContext } from 'react';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
@@ -198,7 +198,7 @@ const AlertIcon = () => {
 };
 AlertIcon.displayName = 'Alert.Icon';
 
-const AlertDescription = (props: TextProps) => {
+const AlertDescription = memo<TextProps>((props) => {
   const { status } = useContext(alertContext);
   return (
     <Text
@@ -210,7 +210,7 @@ const AlertDescription = (props: TextProps) => {
       )}
     />
   );
-};
+});
 AlertDescription.displayName = 'Alert.Description';
 
 export type GroupProps = { style?: CrossedMethods<any, any> } & Omit<

@@ -13,10 +13,20 @@ import {
   isValidElement,
 } from 'react';
 
-export type SlotProps<P> = P & {
+export type SlotProps<P> = P & SlotPropsInterface<P>;
+
+export interface SlotPropsInterface<P> {
   Comp: ComponentType<P>;
+
+  /**
+   * When true, component expects a single child element.
+   * Instead of rendering its own element, it will pass all props to that child,
+   * merging together any event handling props.
+   * When "except-style", the same behavior except Tamagui won't pass styles down from the parent,
+   * only non-style props
+   */
   asChild?: boolean;
-};
+}
 export const Slot = forwardRef(
   <P extends Record<string, any>>(
     { Comp, asChild, ...props }: SlotProps<P>,

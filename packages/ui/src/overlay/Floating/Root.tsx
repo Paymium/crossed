@@ -9,39 +9,56 @@ import {
   forwardRef,
   memo,
   PropsWithChildren,
+  RefAttributes,
   useCallback,
   useImperativeHandle,
 } from 'react';
 import { FloatingProvider } from './context';
-import { useUncontrolled, UseUncontrolledInput } from '@crossed/core';
+import { useUncontrolled } from '@crossed/core';
 
-export type FloatingProps = PropsWithChildren<
-  {
-    /**
-     * if true, render but hide it in css
-     */
-    visibilityHidden?: boolean;
-    /**
-     * if false, press on overlay not close the modal
-     */
-    closeOverlayPress?: boolean;
-    /**
-     * remove scroll behavior
-     * @default true
-     */
-    removeScroll?: boolean;
-    /**
-     * wait in ms for hide content on exiting (use for animate)
-     * @default true
-     */
-    wait?: number;
-  } & Omit<UseUncontrolledInput<boolean>, 'finalValue'>
->;
+export type FloatingProps = PropsWithChildren & {
+  /**
+   * if true, render but hide it in css
+   */
+  visibilityHidden?: boolean;
+
+  /**
+   * if false, press on overlay not close the modal
+   */
+  closeOverlayPress?: boolean;
+
+  /**
+   * remove scroll behavior
+   * @default true
+   */
+  removeScroll?: boolean;
+
+  /**
+   * wait in ms for hide content on exiting (use for animate)
+   * @default true
+   */
+  wait?: number;
+
+  /**
+   * Initial value for uncontrolled state
+   */
+  defaultValue?: boolean;
+
+  /**
+   * Value for controlled state
+   */
+  value?: boolean;
+
+  /**
+   * Controlled state onChange handler
+   */
+  onChange?: (_p: boolean) => void;
+};
 export type FloatingRef = {
   onClose: () => void;
   onOpen: () => void;
 };
-export const FloatingRoot = memo(
+export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
   forwardRef<FloatingRef, FloatingProps>(
     (
       {

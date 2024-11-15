@@ -7,30 +7,37 @@
 
 import Animated, { AnimatedProps } from 'react-native-reanimated';
 import { View, ViewProps } from 'react-native';
-import { forwardRef, memo } from 'react';
-import { CrossedMethods } from '@crossed/styled';
+import { memo, Ref } from 'react';
+import { CrossedMethods, inlineStyle } from '@crossed/styled';
 
 export type FloatingContentProps = Partial<AnimatedProps<ViewProps>> & {
+  /**
+   * Crossed style
+   */
   style?: CrossedMethods<any>;
+  /**
+   * Animated view style
+   */
   animatedStyle?: AnimatedProps<ViewProps>['style'];
+
+  ref?: Ref<View>;
 };
 
-export const FloatingContent = memo(
-  forwardRef<View, FloatingContentProps>(
-    ({ style, animatedStyle, ...props }: FloatingContentProps, ref) => {
-      return (
-        <Animated.View
-          {...props}
-          style={[
-            ...(Array.isArray(style) ? style : [style]).map((e) =>
-              e?.style ? e.style().style : e
-            ),
-            animatedStyle,
-          ]}
-          ref={ref}
-        />
-      );
-    }
-  )
+export const FloatingContent = memo<FloatingContentProps>(
+  ({ style, animatedStyle, ...props }) => {
+    return (
+      <Animated.View
+        {...props}
+        style={[
+          inlineStyle(() => ({ base: { zIndex: 1 } })).style().style,
+          ...(Array.isArray(style) ? style : [style]).map((e) =>
+            e?.style ? e.style().style : e
+          ),
+          animatedStyle,
+        ]}
+        ref={props.ref}
+      />
+    );
+  }
 );
 FloatingContent.displayName = 'Floating.Content';

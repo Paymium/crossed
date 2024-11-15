@@ -23,51 +23,57 @@ import {
   fontColorStyles,
 } from '../styles/typography';
 import { textAlignStyles } from '../styles/textAlign';
-import { forwardRef } from 'react';
+import { memo } from 'react';
 
 const useText = createStyles((t) => ({
   root: { base: { color: t.font.color, fontFamily: t.font.family } },
 }));
 
-export type TextProps = Omit<TextNativeProps, 'style'> & {
+export interface TextProps extends Omit<TextNativeProps, 'style'> {
   /**
    * Color of text
    */
   color?: keyof typeof fontColorStyles;
+
   /**
    * Extends style
    */
   style?: CrossedMethods<any>;
+
   /**
    * Select font-weight
    */
   weight?: keyof typeof fontWeightStyles;
+
   /**
    * select font-size
    */
   size?: keyof typeof fontSizeStyles;
+
   /**
    * select text-align
    */
   textAlign?: keyof typeof textAlignStyles;
-};
 
-const Text = withReactive(
-  forwardRef<TextNative, TextProps>(
-    (
-      {
-        weight = 'md',
-        color = 'primary',
-        textAlign,
-        size = 'md',
-        style,
-        ...props
-      }: TextProps,
-      ref
-    ) => {
+  /**
+   * Element ref
+   */
+  ref?: React.Ref<TextNative> | undefined;
+}
+
+const Text = memo<TextProps>(
+  withReactive(
+    ({
+      weight = 'md',
+      color = 'primary',
+      textAlign,
+      size = 'md',
+      style,
+      ...props
+    }) => {
       return (
         <TextNative
-          ref={ref}
+          ref={props.ref}
           {...props}
           {...composeStyles(
             textAlignStyles[textAlign],
@@ -82,7 +88,6 @@ const Text = withReactive(
     }
   )
 );
-
 Text.displayName = 'Text';
 
 export { Text };

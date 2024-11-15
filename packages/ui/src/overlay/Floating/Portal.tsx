@@ -13,10 +13,19 @@ import { composeStyles, CrossedMethods } from '@crossed/styled';
 import { positionStyles } from '../../styles/position';
 import { visibility } from '../../styles/visibilityHidden';
 
-export type FloatingPortalProps = PropsWithChildren<{
+export type FloatingPortalProps = {
+  children?: ReactNode;
+
+  /**
+   * Crossed style
+   */
   style?: CrossedMethods<any>;
+
+  /**
+   * Pass context to portal
+   */
   Provider?: (_p: PropsWithChildren) => ReactNode;
-}>;
+};
 
 export const FloatingPortal = memo(
   ({

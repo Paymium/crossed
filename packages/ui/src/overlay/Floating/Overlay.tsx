@@ -16,8 +16,20 @@ import { ViewProps } from 'react-native';
 import { memo } from 'react';
 
 export type FloatingOverlayProps = {
+  /**
+   * Crossed style
+   */
   style?: CrossedMethods<any>;
+
+  /**
+   * Animated style
+   */
   animatedProps?: AnimatedProps<ViewProps>;
+
+  /**
+   * Trigger props
+   * see FloatingTriggerProps
+   */
   triggerProps?: FloatingTriggerProps;
 };
 export const FloatingOverlay = memo(

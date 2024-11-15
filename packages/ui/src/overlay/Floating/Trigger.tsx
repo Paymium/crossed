@@ -8,16 +8,24 @@
 import { Pressable, type View, type PressableProps } from 'react-native';
 import { Slot, type SlotProps } from '../../Slot';
 import { useFloatingContext } from './context';
-import { forwardRef, memo, useCallback } from 'react';
+import { memo, Ref, useCallback } from 'react';
 import { composeEventHandlers } from '@crossed/core';
 import { CrossedMethods } from '@crossed/styled';
 
-export type FloatingTriggerProps = Omit<
-  SlotProps<Omit<PressableProps, 'style'> & { style?: CrossedMethods<any> }>,
-  'Comp'
->;
-export const FloatingTrigger = memo(
-  forwardRef<View, FloatingTriggerProps>(({ style, ...props }, ref) => {
+export type FloatingTriggerProps = Omit<SlotProps<PressableProps>, 'Comp'> & {
+  /**
+   * Crossed style
+   */
+  style?: CrossedMethods<any>;
+
+  /**
+   * Element ref
+   */
+  ref?: Ref<View>;
+};
+
+export const FloatingTrigger = memo<FloatingTriggerProps>(
+  ({ style, ...props }: FloatingTriggerProps) => {
     const { open, onClose, onOpen } = useFloatingContext();
     const toggle = useCallback(() => {
       if (open) onClose();
@@ -25,7 +33,7 @@ export const FloatingTrigger = memo(
     }, [open, onClose, onOpen]);
     return (
       <Slot
-        ref={ref}
+        ref={props.ref}
         Comp={Pressable}
         role="button"
         {...props}
@@ -33,6 +41,6 @@ export const FloatingTrigger = memo(
         onPress={composeEventHandlers(props.onPress, toggle)}
       />
     );
-  })
+  }
 );
 FloatingTrigger.displayName = 'Floating.Trigger';
