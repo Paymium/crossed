@@ -90,7 +90,7 @@ importers:
         specifier: workspace:2.0.4
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: 1.1.2
+        specifier: 2.0.0
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: workspace:*
@@ -178,7 +178,7 @@ importers:
         specifier: workspace:2.0.4
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: workspace:1.1.2
+        specifier: workspace:2.0.0
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: 1.0.4
@@ -324,7 +324,7 @@ importers:
         version: link:../../packages/theme
       '@crossed/ui':
         specifier: ^1.0.3
-        version: link:../../packages/ui
+        version: 1.1.2(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.8.1)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1)
       next:
         specifier: 14.2.14
         version: 14.2.14(@babel/core@7.25.7)(react-dom@18.3.1)(react@18.3.1)
@@ -390,7 +390,7 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/test':
-        specifier: 0.12.1
+        specifier: 0.13.0
         version: link:../test
       '@jest/types':
         specifier: 29.6.3
@@ -442,7 +442,7 @@ importers:
         specifier: 0.14.2
         version: link:../styled
       '@crossed/test':
-        specifier: 0.12.1
+        specifier: 0.13.0
         version: link:../test
       '@crossed/theme':
         specifier: workspace:^
@@ -583,7 +583,7 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/test':
-        specifier: 0.12.1
+        specifier: 0.13.0
         version: link:../test
       '@testing-library/jest-dom':
         specifier: ^6.5.0
@@ -632,7 +632,7 @@ importers:
         specifier: ^0.5.0
         version: link:../build
       '@crossed/test':
-        specifier: 0.12.1
+        specifier: 0.13.0
         version: link:../test
       '@types/jest':
         specifier: ^29.5.13
@@ -850,13 +850,13 @@ importers:
         specifier: 0.8.2
         version: link:../core
       '@crossed/primitive':
-        specifier: 1.8.1
+        specifier: 1.9.0
         version: link:../primitive
       '@crossed/styled':
         specifier: workspace:^
         version: link:../styled
       '@crossed/test':
-        specifier: 0.12.1
+        specifier: 0.13.0
         version: link:../test
       '@crossed/theme':
         specifier: workspace:^
@@ -2833,6 +2833,16 @@ packages:
       - ts-node
     dev: false
 
+  /@crossed/core@0.8.2(react-native@0.73.11)(react@18.3.1):
+    resolution: {integrity: sha512-i4IQR3CWDkdEmBWOq6LoxiPtm2zt4HDvx/DGsqf+XvBvej7VV5999MJ+3naL32gQiyjZ8hjI2id+zujllO0h6g==}
+    peerDependencies:
+      react: ^18.3.1
+      react-native: ^0.73.6
+    dependencies:
+      react: 18.3.1
+      react-native: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
+    dev: false
+
   /@crossed/core@0.8.2(react-native@0.75.2)(react@18.3.1):
     resolution: {integrity: sha512-i4IQR3CWDkdEmBWOq6LoxiPtm2zt4HDvx/DGsqf+XvBvej7VV5999MJ+3naL32gQiyjZ8hjI2id+zujllO0h6g==}
     peerDependencies:
@@ -2887,6 +2897,25 @@ packages:
       '@react-native-aria/focus': 0.2.9(react-native@0.75.2)(react@18.3.1)
       '@react-native-aria/interactions': 0.2.13(react-native@0.75.2)(react@18.3.1)
       react-aria: 3.35.0(react-dom@18.3.1)(react@18.3.1)
+      react-remove-scroll: 2.6.0(@types/react@18.3.11)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - react
+      - react-dom
+      - react-native
+    dev: false
+
+  /@crossed/primitive@1.8.1(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.73.11)(react@18.3.1):
+    resolution: {integrity: sha512-KOAuJSjIqxhKTcOKTtRdgNaIRbzERHTrI+hFAAMN5WsYnNc4gV00g1/mz2PzL5njcmwoM8AGBUa6RGcbr5+1KQ==}
+    dependencies:
+      '@crossed/core': 0.8.2(react-native@0.73.11)(react@18.3.1)
+      '@floating-ui/react': 0.25.4(react-dom@18.3.1)(react@18.3.1)
+      '@gorhom/portal': 1.0.14(react-native@0.73.11)(react@18.3.1)
+      '@react-native-aria/focus': 0.2.9(react-native@0.73.11)(react@18.3.1)
+      '@react-native-aria/interactions': 0.2.13(react-native@0.73.11)(react@18.3.1)
+      react-aria: 3.35.0(react-dom@18.3.1)(react@18.3.1)
+      react-focus-lock: 2.13.2(@types/react@18.3.11)(react@18.3.1)
+      react-focus-on: 3.9.4(@types/react@18.3.11)(react@18.3.1)
       react-remove-scroll: 2.6.0(@types/react@18.3.11)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
@@ -2953,6 +2982,64 @@ packages:
       - react-test-renderer
     dev: false
 
+  /@crossed/ui@1.1.2(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.8.1)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-GxI/iX5l2S/TlCNMrz2xz9Wrelz8WMkjwF4/ktSwT7zLKIu+/ZtLB/4Pr4rc+DoVc0kwEe8ZodmgVIVeWvvd3g==}
+    peerDependencies:
+      '@crossed/build': '*'
+      '@crossed/core': 0.8.2
+      '@crossed/primitive': 1.8.1
+      '@crossed/styled': ^0.14.2
+      '@crossed/theme': ^2.0.4
+      '@crossed/unicons': 1.0.4
+      '@devvie/bottom-sheet': 0.3.0
+      react-native: ^0.73.6
+      react-native-gesture-handler: ~2.14.0
+      react-native-reanimated: ^3.10.1
+    dependencies:
+      '@crossed/build': link:packages/build
+      '@crossed/core': link:packages/core
+      '@crossed/primitive': 1.8.1(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.73.11)(react@18.3.1)
+      '@crossed/styled': link:packages/styled
+      '@crossed/theme': link:packages/theme
+      '@crossed/unicons': link:packages/unicons
+      '@devvie/bottom-sheet': 0.3.0(react-native@0.73.11)(react@18.3.1)
+      '@expo/html-elements': 0.5.1
+      '@floating-ui/dom': 1.6.11
+      '@floating-ui/react': 0.25.4(react-dom@18.3.1)(react@18.3.1)
+      '@gorhom/portal': 1.0.14(react-native@0.73.11)(react@18.3.1)
+      '@iconscout/react-native-unicons': 2.0.2(react-native-svg@15.7.1)(react-native@0.73.11)(react@18.3.1)
+      '@react-navigation/native': 6.1.18(react-native@0.73.11)(react@18.3.1)
+      '@react-navigation/native-stack': 6.11.0(@react-navigation/native@6.1.18)(react-native-safe-area-context@4.10.5)(react-native-screens@3.29.0)(react-native@0.73.11)(react@18.3.1)
+      '@testing-library/react-native': 12.7.2(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1)
+      class-variance-authority: 0.7.0
+      inline-style-prefixer: 6.0.4
+      normalize-css-color: 1.0.2
+      react-aria: 3.35.0(react-dom@18.3.1)(react@18.3.1)
+      react-focus-lock: 2.13.2(@types/react@18.3.11)(react@18.3.1)
+      react-focus-on: 3.9.4(@types/react@18.3.11)(react@18.3.1)
+      react-native: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
+      react-native-gesture-handler: 2.14.1(react-native@0.73.11)(react@18.3.1)
+      react-native-reanimated: 3.15.4(@babel/core@7.25.7)(react-native@0.73.11)(react@18.3.1)
+      react-native-screens: 3.29.0(react-native@0.73.11)(react@18.3.1)
+      react-native-svg: 15.7.1(react-native@0.73.11)(react@18.3.1)
+      react-native-unistyles: 2.10.0(@react-native/normalize-colors@0.75.4)(react-native@0.73.11)(react@18.3.1)
+      react-remove-scroll: 2.6.0(@types/react@18.3.11)(react@18.3.1)
+      ts-deepmerge: 7.0.1
+      ts-pattern: 5.4.0
+      use-debounce: 10.0.3(react@18.3.1)
+    transitivePeerDependencies:
+      - '@react-native/normalize-colors'
+      - '@types/react'
+      - jest
+      - react
+      - react-dom
+      - react-native-macos
+      - react-native-safe-area-context
+      - react-native-web
+      - react-native-windows
+      - react-test-renderer
+    dev: false
+
   /@cspotcode/source-map-support@0.8.1:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
@@ -2975,7 +3062,6 @@ packages:
     dependencies:
       react: 18.3.1
       react-native: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
-    dev: true
 
   /@devvie/bottom-sheet@0.3.0(react-native@0.75.2)(react@18.3.1):
     resolution: {integrity: sha512-Cchl99PwSh+O/keyKHqXLfe+EqWwDIkMjPw50f4tlMrpaNE0PV7egQC5cTPZK6GRgj27mB4ZqsIZbeacwZkw+w==}
@@ -8595,6 +8681,25 @@ packages:
       pretty-format: 29.7.0
       react: 18.3.1
       react-native: 0.75.2(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
+      react-test-renderer: 18.3.1(react@18.3.1)
+      redent: 3.0.0
+    dev: false
+
+  /@testing-library/react-native@12.7.2(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-fSUIruOUFcuwssC8+m9H+9ib7P/+JrtIszHS4eZ6O9e4FjpjS3m24UnkJXTRl+FCbknz8oxH5Tw+thzy0qsIMg==}
+    peerDependencies:
+      jest: '>=28.0.0'
+      react: '>=16.8.0'
+      react-native: '>=0.59'
+      react-test-renderer: '>=16.8.0'
+    peerDependenciesMeta:
+      jest:
+        optional: true
+    dependencies:
+      jest-matcher-utils: 29.7.0
+      pretty-format: 29.7.0
+      react: 18.3.1
+      react-native: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
       react-test-renderer: 18.3.1(react@18.3.1)
       redent: 3.0.0
     dev: false
@@ -19750,7 +19855,6 @@ packages:
       prop-types: 15.8.1
       react: 18.3.1
       react-native: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
-    dev: true
 
   /react-native-reanimated@3.15.4(@babel/core@7.25.7)(react-native@0.73.11)(react@18.3.1):
     resolution: {integrity: sha512-jcpHE+MnsvSbClhHgAFoken7SnaHrUJ5gVA8BUw8S1j6rkrw2VzRpht6cxn14NlqYx5ytjfG9IXJDOzq8tFvfw==}
@@ -19775,7 +19879,6 @@ packages:
       react-native: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /react-native-reanimated@3.15.4(@babel/core@7.25.7)(react-native@0.75.2)(react@18.3.1):
     resolution: {integrity: sha512-jcpHE+MnsvSbClhHgAFoken7SnaHrUJ5gVA8BUw8S1j6rkrw2VzRpht6cxn14NlqYx5ytjfG9IXJDOzq8tFvfw==}
@@ -19905,6 +20008,29 @@ packages:
       react: 18.3.1
       react-native: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
       react-native-web: 0.19.12(react-dom@18.3.1)(react@18.3.1)
+    dev: false
+
+  /react-native-unistyles@2.10.0(@react-native/normalize-colors@0.75.4)(react-native@0.73.11)(react@18.3.1):
+    resolution: {integrity: sha512-vghSdN9IkHxJLdFLHCETBGNXe3WU9qEdz0l8MxVjqVma/B55N5okp//JCKNSrDxnahF7p3OFWxlbd2Hzehchfg==}
+    engines: {node: '>= 20.0.0'}
+    peerDependencies:
+      '@react-native/normalize-colors': '*'
+      react: '*'
+      react-native: '*'
+      react-native-macos: '*'
+      react-native-web: '*'
+      react-native-windows: '*'
+    peerDependenciesMeta:
+      react-native-macos:
+        optional: true
+      react-native-web:
+        optional: true
+      react-native-windows:
+        optional: true
+    dependencies:
+      '@react-native/normalize-colors': 0.75.4
+      react: 18.3.1
+      react-native: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
     dev: false
 
   /react-native-unistyles@2.10.0(@react-native/normalize-colors@0.75.4)(react-native@0.75.2)(react@18.3.1):

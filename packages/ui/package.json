@@ -1,7 +1,7 @@
 {
   "name": "@crossed/ui",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "sideEffects": false,
   "keywords": [
     "React Native",
@@ -76,7 +76,7 @@
   "peerDependencies": {
     "@crossed/build": "*",
     "@crossed/core": "0.8.2",
-    "@crossed/primitive": "1.8.1",
+    "@crossed/primitive": "1.9.0",
     "@crossed/styled": "workspace:^",
     "@crossed/theme": "workspace:^",
     "@crossed/unicons": "1.0.4",
@@ -88,9 +88,9 @@
   "devDependencies": {
     "@crossed/build": "*",
     "@crossed/core": "0.8.2",
-    "@crossed/primitive": "1.8.1",
+    "@crossed/primitive": "1.9.0",
     "@crossed/styled": "workspace:^",
-    "@crossed/test": "0.12.1",
+    "@crossed/test": "0.13.0",
     "@crossed/theme": "workspace:^",
     "@crossed/unicons": "1.0.4",
     "@devvie/bottom-sheet": "0.3.0",

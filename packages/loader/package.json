@@ -17,7 +17,7 @@
   "devDependencies": {
     "@crossed/build": "*",
     "@crossed/styled": "0.14.2",
-    "@crossed/test": "0.12.1",
+    "@crossed/test": "0.13.0",
     "@crossed/theme": "workspace:^",
     "@types/escodegen": "^0.0.10",
     "@types/esprima": "^4.0.6",

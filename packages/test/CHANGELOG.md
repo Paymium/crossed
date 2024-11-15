@@ -1,5 +1,11 @@
 # @crossed/test
 
+## 0.13.0
+
+### Minor Changes
+
+- 901fdca: add focusScope component
+
 ## 0.12.1
 
 ### Patch Changes

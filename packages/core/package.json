@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@crossed/build": "*",
-    "@crossed/test": "0.12.1",
+    "@crossed/test": "0.13.0",
     "@jest/types": "29.6.3",
     "@testing-library/jest-dom": "^6.5.0",
     "@types/jest": "^29.5.13",
