@@ -1,5 +1,4 @@
 import './style.config';
-
 import React from 'react';
 
 import { jest } from '@jest/globals';

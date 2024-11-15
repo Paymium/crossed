@@ -14,7 +14,7 @@ export const ImportPath = () => {
   return preparedMeta ? (
     <Source
       language="jsx"
-      code={`import { ${preparedMeta.component.displayName} } from '@crossed/ui'`}
+      code={`import { ${preparedMeta.component?.displayName} } from '@crossed/ui'`}
     />
   ) : null;
 };

@@ -48,6 +48,7 @@
     "@preact/signals-react-transform": "^0.3.0",
     "babel-preset-flow": "^6.23.0",
     "jest-bench": "^29.7.1",
+    "jest-dom": "^4.0.0",
     "ts-jest": "^29.1.1"
   }
 }

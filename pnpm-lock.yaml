@@ -64,7 +64,7 @@ importers:
         version: 1.1.4(typescript@5.6.2)
       turbo:
         specifier: latest
-        version: 2.2.3
+        version: 2.3.0
       typescript:
         specifier: ^5.4.2
         version: 5.6.2
@@ -688,6 +688,9 @@ importers:
       jest-bench:
         specifier: ^29.7.1
         version: 29.7.1(jest@29.7.0)
+      jest-dom:
+        specifier: ^4.0.0
+        version: 4.0.0
       ts-jest:
         specifier: ^29.1.1
         version: 29.2.5(@babel/core@7.25.7)(@jest/types@29.6.3)(jest@29.7.0)(typescript@5.4.2)
@@ -800,9 +803,6 @@ importers:
       '@react-navigation/native-stack':
         specifier: ^6.11.0
         version: 6.11.0(@react-navigation/native@6.1.18)(react-native-safe-area-context@4.10.5)(react-native-screens@3.29.0)(react-native@0.73.11)(react@18.3.1)
-      '@testing-library/react-native':
-        specifier: ^12.7.2
-        version: 12.7.2(jest@29.7.0)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -876,6 +876,9 @@ importers:
       '@testing-library/jest-dom':
         specifier: ^6.5.0
         version: 6.5.0
+      '@testing-library/react-native':
+        specifier: ^12.7.2
+        version: 12.7.2(jest@29.7.0)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1)
       '@types/jest':
         specifier: ^29.5.13
         version: 29.5.13
@@ -2830,11 +2833,11 @@ packages:
       - ts-node
     dev: false
 
-  /@crossed/core@0.8.1(react-native@0.75.2)(react@18.3.1):
-    resolution: {integrity: sha512-jcxNUA2StwcKHm93i0vqRVWFmpX7shSE46u/Biz/Co6SleJkDwI6ZO5RUBMjdYIq3+z6In/uWF+QJB1PyF8OPg==}
+  /@crossed/core@0.8.2(react-native@0.75.2)(react@18.3.1):
+    resolution: {integrity: sha512-i4IQR3CWDkdEmBWOq6LoxiPtm2zt4HDvx/DGsqf+XvBvej7VV5999MJ+3naL32gQiyjZ8hjI2id+zujllO0h6g==}
     peerDependencies:
       react: ^18.3.1
-      react-native: ^0.75.3
+      react-native: ^0.73.6
     dependencies:
       react: 18.3.1
       react-native: 0.75.2(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
@@ -2844,7 +2847,7 @@ packages:
     resolution: {integrity: sha512-KeQqltKtDL+u5bXFIV4DO5ZiKlu5xe6ZOc3g/HcouTzYHMS+TAtTvnqDbv/btDhi17jX3aFmpuXp3ob0bCwtiQ==}
     dependencies:
       '@crossed/primitive': 1.7.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.2)(react@18.3.1)
-      '@crossed/ui': 1.1.1(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.2)(react-test-renderer@18.3.1)(react@18.3.1)
+      '@crossed/ui': 1.1.2(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.2)(react-test-renderer@18.3.1)(react@18.3.1)
       '@floating-ui/react': 0.25.4(react-dom@18.3.1)(react@18.3.1)
       '@gorhom/bottom-sheet': 4.6.4(@types/react@18.3.11)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native@0.75.2)(react@18.3.1)
       '@gorhom/portal': 1.0.14(react-native@0.75.2)(react@18.3.1)
@@ -2878,7 +2881,7 @@ packages:
   /@crossed/primitive@1.7.0(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.75.2)(react@18.3.1):
     resolution: {integrity: sha512-2oIIMkP35Y3aqKuPgucGw9q9MNj+vafIRuBB73lWyiJ5Xfr68r86DWeyYBPkt7qbBmQ+dNAlwVxZ2PQ4/Uksyw==}
     dependencies:
-      '@crossed/core': 0.8.1(react-native@0.75.2)(react@18.3.1)
+      '@crossed/core': 0.8.2(react-native@0.75.2)(react@18.3.1)
       '@floating-ui/react': 0.25.4(react-dom@18.3.1)(react@18.3.1)
       '@gorhom/portal': 1.0.14(react-native@0.75.2)(react@18.3.1)
       '@react-native-aria/focus': 0.2.9(react-native@0.75.2)(react@18.3.1)
@@ -2892,16 +2895,17 @@ packages:
       - react-native
     dev: false
 
-  /@crossed/ui@1.1.1(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.2)(react-test-renderer@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-wXLFQC7RY+Qlq0kVMMnMfBxl3YUeLVu8a3eUSXLEUkmXbgwEguy18GxWmRQxsFD69YOjhlCnNR4oibyyYaoIjQ==}
+  /@crossed/ui@1.1.2(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.7.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(jest@29.7.0)(react-dom@18.3.1)(react-native-gesture-handler@2.12.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.75.2)(react-test-renderer@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-GxI/iX5l2S/TlCNMrz2xz9Wrelz8WMkjwF4/ktSwT7zLKIu+/ZtLB/4Pr4rc+DoVc0kwEe8ZodmgVIVeWvvd3g==}
     peerDependencies:
       '@crossed/build': '*'
-      '@crossed/core': 0.8.1
-      '@crossed/primitive': 1.8.0
-      '@crossed/styled': ^0.14.1
-      '@crossed/theme': ^2.0.3
-      '@crossed/unicons': 1.0.3
+      '@crossed/core': 0.8.2
+      '@crossed/primitive': 1.8.1
+      '@crossed/styled': ^0.14.2
+      '@crossed/theme': ^2.0.4
+      '@crossed/unicons': 1.0.4
       '@devvie/bottom-sheet': 0.3.0
+      react-native: ^0.73.6
       react-native-gesture-handler: ~2.14.0
       react-native-reanimated: ^3.10.1
     dependencies:
@@ -2926,6 +2930,7 @@ packages:
       react-aria: 3.35.0(react-dom@18.3.1)(react@18.3.1)
       react-focus-lock: 2.13.2(@types/react@18.3.11)(react@18.3.1)
       react-focus-on: 3.9.4(@types/react@18.3.11)(react@18.3.1)
+      react-native: 0.75.2(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)(typescript@5.0.4)
       react-native-gesture-handler: 2.12.1(react-native@0.75.2)(react@18.3.1)
       react-native-reanimated: 3.15.4(@babel/core@7.25.7)(react-native@0.75.2)(react@18.3.1)
       react-native-screens: 3.29.0(react-native@0.75.2)(react@18.3.1)
@@ -2941,7 +2946,6 @@ packages:
       - jest
       - react
       - react-dom
-      - react-native
       - react-native-macos
       - react-native-safe-area-context
       - react-native-web
@@ -8573,7 +8577,7 @@ packages:
       react-native: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
       react-test-renderer: 18.3.1(react@18.3.1)
       redent: 3.0.0
-    dev: false
+    dev: true
 
   /@testing-library/react-native@12.7.2(jest@29.7.0)(react-native@0.75.2)(react-test-renderer@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-fSUIruOUFcuwssC8+m9H+9ib7P/+JrtIszHS4eZ6O9e4FjpjS3m24UnkJXTRl+FCbknz8oxH5Tw+thzy0qsIMg==}
@@ -16292,6 +16296,11 @@ packages:
     dependencies:
       detect-newline: 3.1.0
 
+  /jest-dom@4.0.0:
+    resolution: {integrity: sha512-gBxYZlZB1Jgvf2gP2pRfjjUWF8woGBHj/g5rAQgFPB/0K2atGuhVcPO+BItyjWeKg9zM+dokgcMOH01vrWVMFA==}
+    deprecated: '🚨 jest-dom has moved to @testing-library/jest-dom. Please uninstall jest-dom and install @testing-library/jest-dom instead, or use an older version of jest-dom. Learn more about this change here: https://github.com/testing-library/dom-testing-library/issues/260 Thanks! :)'
+    dev: false
+
   /jest-each@25.5.0:
     resolution: {integrity: sha512-QBogUxna3D8vtiItvn54xXde7+vuzqRrEeaw8r1s+1TG9eZLVJE5ZkKoSUlqFwRjnlaA4hyKGiu9OlkFIuKnjA==}
     engines: {node: '>= 8.3'}
@@ -22504,64 +22513,64 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /turbo-darwin-64@2.2.3:
-    resolution: {integrity: sha512-Rcm10CuMKQGcdIBS3R/9PMeuYnv6beYIHqfZFeKWVYEWH69sauj4INs83zKMTUiZJ3/hWGZ4jet9AOwhsssLyg==}
+  /turbo-darwin-64@2.3.0:
+    resolution: {integrity: sha512-pji+D49PhFItyQjf2QVoLZw2d3oRGo8gJgKyOiRzvip78Rzie74quA8XNwSg/DuzM7xx6gJ3p2/LylTTlgZXxQ==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64@2.2.3:
-    resolution: {integrity: sha512-+EIMHkuLFqUdJYsA3roj66t9+9IciCajgj+DVek+QezEdOJKcRxlvDOS2BUaeN8kEzVSsNiAGnoysFWYw4K0HA==}
+  /turbo-darwin-arm64@2.3.0:
+    resolution: {integrity: sha512-AJrGIL9BO41mwDF/IBHsNGwvtdyB911vp8f5mbNo1wG66gWTvOBg7WCtYQBvCo11XTenTfXPRSsAb7w3WAZb6w==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64@2.2.3:
-    resolution: {integrity: sha512-UBhJCYnqtaeOBQLmLo8BAisWbc9v9daL9G8upLR+XGj6vuN/Nz6qUAhverN4Pyej1g4Nt1BhROnj6GLOPYyqxQ==}
+  /turbo-linux-64@2.3.0:
+    resolution: {integrity: sha512-jZqW6vc2sPJT3M/3ZmV1Cg4ecQVPqsbHncG/RnogHpBu783KCSXIndgxvUQNm9qfgBYbZDBnP1md63O4UTElhw==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64@2.2.3:
-    resolution: {integrity: sha512-hJYT9dN06XCQ3jBka/EWvvAETnHRs3xuO/rb5bESmDfG+d9yQjeTMlhRXKrr4eyIMt6cLDt1LBfyi+6CQ+VAwQ==}
+  /turbo-linux-arm64@2.3.0:
+    resolution: {integrity: sha512-HUbDLJlvd/hxuyCNO0BmEWYQj0TugRMvSQeG8vHJH+Lq8qOgDAe7J0K73bFNbZejZQxW3C3XEiZFB3pnpO78+A==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64@2.2.3:
-    resolution: {integrity: sha512-NPrjacrZypMBF31b4HE4ROg4P3nhMBPHKS5WTpMwf7wydZ8uvdEHpESVNMOtqhlp857zbnKYgP+yJF30H3N2dQ==}
+  /turbo-windows-64@2.3.0:
+    resolution: {integrity: sha512-c5rxrGNTYDWX9QeMzWLFE9frOXnKjHGEvQMp1SfldDlbZYsloX9UKs31TzUThzfTgTiz8NYuShaXJ2UvTMnV/g==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64@2.2.3:
-    resolution: {integrity: sha512-fnNrYBCqn6zgKPKLHu4sOkihBI/+0oYFr075duRxqUZ+1aLWTAGfHZLgjVeLh3zR37CVzuerGIPWAEkNhkWEIw==}
+  /turbo-windows-arm64@2.3.0:
+    resolution: {integrity: sha512-7qfUuYhfIVb1AZgs89DxhXK+zZez6O2ocmixEQ4hXZK7ytnBt5vaz2zGNJJKFNYIL5HX1C3tuHolnpNgDNCUIg==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo@2.2.3:
-    resolution: {integrity: sha512-5lDvSqIxCYJ/BAd6rQGK/AzFRhBkbu4JHVMLmGh/hCb7U3CqSnr5Tjwfy9vc+/5wG2DJ6wttgAaA7MoCgvBKZQ==}
+  /turbo@2.3.0:
+    resolution: {integrity: sha512-/uOq5o2jwRPyaUDnwBpOR5k9mQq4c3wziBgWNWttiYQPmbhDtrKYPRBxTvA2WpgQwRIbt8UM612RMN8n/TvmHA==}
     hasBin: true
     optionalDependencies:
-      turbo-darwin-64: 2.2.3
-      turbo-darwin-arm64: 2.2.3
-      turbo-linux-64: 2.2.3
-      turbo-linux-arm64: 2.2.3
-      turbo-windows-64: 2.2.3
-      turbo-windows-arm64: 2.2.3
+      turbo-darwin-64: 2.3.0
+      turbo-darwin-arm64: 2.3.0
+      turbo-linux-64: 2.3.0
+      turbo-linux-arm64: 2.3.0
+      turbo-windows-64: 2.3.0
+      turbo-windows-arm64: 2.3.0
     dev: true
 
   /tween-functions@1.2.0:
