@@ -10,16 +10,24 @@
 import { useState } from 'react';
 
 export interface UseUncontrolledInput<T> {
-  /** Value for controlled state */
+  /**
+   * Value for controlled state
+   */
   value?: T;
 
-  /** Initial value for uncontrolled state */
+  /**
+   * Initial value for uncontrolled state
+   */
   defaultValue?: T;
 
-  /** Final value for uncontrolled state when value and defaultValue are not provided */
+  /**
+   * Final value for uncontrolled state when value and defaultValue are not provided
+   */
   finalValue?: T;
 
-  /** Controlled state onChange handler */
+  /**
+   * Controlled state onChange handler
+   */
   onChange?(_value: T): void;
 }
 

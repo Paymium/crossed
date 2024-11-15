@@ -21,6 +21,15 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
     "@storybook/addon-designs"
   ],
+  // typescript: {
+  //   reactDocgen: 'react-docgen-typescript',
+  //   reactDocgenTypescriptOptions: {
+  //     compilerOptions: {
+  //       allowSyntheticDefaultImports: false,
+  //       esModuleInterop: false,
+  //     },
+  //   },
+  // },
   framework: {
     name: '@storybook/react-webpack5',
     options: {},
