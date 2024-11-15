@@ -28,7 +28,7 @@ const accordionStyles = createStyles((t) => ({
   trigger: {
     'base': {
       display: 'flex',
-      padding: t.space.xs,
+      padding: t.space.md,
       flexDirection: 'row',
       justifyContent: 'space-between',
     },

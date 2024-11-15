@@ -37,7 +37,7 @@ const button = createStyles(
       root: {
         base: {
           display: 'flex',
-          paddingHorizontal: 't.space.xs',
+          paddingHorizontal: 't.space.md',
           borderRadius: 7,
           borderWidth: 2,
           borderStyle: 'solid',

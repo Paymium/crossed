@@ -67,20 +67,20 @@ export const alertStyles = createStyles(
       },
       container: {
         base: {
-          paddingVertical: space.xxs,
-          paddingHorizontal: space.xs,
-          padding: space.xxs,
+          paddingVertical: space.xs,
+          paddingHorizontal: space.md,
+          padding: space.xs,
           borderRadius: 8,
           borderWidth: 1,
           borderStyle: 'solid',
           alignItems: 'center',
-          gap: space.xxs,
+          gap: space.xs,
         },
         variants: {},
         media: {
           md: {
             flexDirection: 'row',
-            gap: space.xs,
+            gap: space.md,
           },
         },
       },
