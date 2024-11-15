@@ -13,13 +13,12 @@ import {
   createStyles,
   type CrossedMethods,
 } from '@crossed/styled';
-import { createContext, useContext } from 'react';
+import { createContext, memo, useContext } from 'react';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
 import {
   Button,
-  ButtonText,
   type ButtonProps,
   type ButtonTextProps,
 } from '../forms/Button';
@@ -27,7 +26,7 @@ import { Box } from '../layout/Box';
 
 export const alertDescriptionStyles = createStyles(
   ({ components: { Alert } }) => ({
-    base: { base: { flex: 1 } },
+    base: { base: { flexShrink: 1 } },
     error: { base: { color: Alert.error.text } },
     success: { base: { color: Alert.success.text } },
     warning: { base: { color: Alert.warning.text } },
@@ -198,7 +197,7 @@ const AlertIcon = () => {
 };
 AlertIcon.displayName = 'Alert.Icon';
 
-const AlertDescription = (props: TextProps) => {
+const AlertDescription = memo<TextProps>((props) => {
   const { status } = useContext(alertContext);
   return (
     <Text
@@ -210,7 +209,7 @@ const AlertDescription = (props: TextProps) => {
       )}
     />
   );
-};
+});
 AlertDescription.displayName = 'Alert.Description';
 
 export type GroupProps = { style?: CrossedMethods<any, any> } & Omit<
@@ -245,7 +244,7 @@ AlertAction.displayName = 'Alert.Action';
 const ActionText = (props: ButtonTextProps) => {
   const { status } = useContext(alertContext);
   return (
-    <ButtonText
+    <Button.Text
       {...props}
       style={composeStyles(alertActionTextStyles[status], props.style)}
     />

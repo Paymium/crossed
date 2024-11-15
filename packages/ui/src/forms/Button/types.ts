@@ -9,30 +9,34 @@ import { CrossedMethods } from '@crossed/styled';
 import { PressableProps } from 'react-native';
 
 type Variants = 'primary' | 'tertiary' | 'secondary' | false;
-export type ButtonProps = Omit<PressableProps, 'style'> & {
+export interface ButtonProps extends Omit<PressableProps, 'style'> {
   /**
    * Select button variant
    * @default primary
    */
   variant?: Variants;
+
   /**
    * Select error colors
    * @type {boolean}
    */
   error?: boolean;
+
   /**
    * Loading state of button
    * @type {boolean}
    */
   loading?: boolean;
+
   /**
    * Extend style of button
    * @type {boolean}
    */
   style?: CrossedMethods<any>;
+
   /**
    * Disable size
    * @type {boolean}
    */
   size?: boolean;
-};
+}
