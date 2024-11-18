@@ -88,9 +88,9 @@ export const triggerStyles = createStyles(({ space }) => ({
       alignItems: 'center',
     },
   },
-  sm: { base: { paddingHorizontal: space.xxs } },
-  md: { base: { paddingHorizontal: space.xs } },
-  lg: { base: { paddingHorizontal: space.sm } },
+  sm: { base: { paddingHorizontal: space.xs } },
+  md: { base: { paddingHorizontal: space.md } },
+  lg: { base: { paddingHorizontal: space.lg } },
 }));
 
 export const heightStyles = createStyles(() => ({

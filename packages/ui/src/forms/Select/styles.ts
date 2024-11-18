@@ -45,9 +45,9 @@ export const useSelect = createStyles((t) => ({
       flexDirection: 'column',
       height: 'auto',
       alignItems: 'stretch',
-      paddingVertical: t.space.xxs,
-      paddingHorizontal: t.space.xxs,
-      gap: t.space.xxs,
+      paddingVertical: t.space.xs,
+      paddingHorizontal: t.space.xs,
+      gap: t.space.xs,
     },
   },
   icon: {

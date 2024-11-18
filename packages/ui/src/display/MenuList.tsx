@@ -25,7 +25,7 @@ const rootStyle = createStyles(({ colors, space }) => ({
     base: {
       alignItems: 'stretch',
       backgroundColor: colors.background.secondary,
-      gap: space.xxs,
+      gap: space.xs,
     },
   },
   border: {
@@ -35,7 +35,7 @@ const rootStyle = createStyles(({ colors, space }) => ({
       borderRadius: 8,
     },
   },
-  padded: { base: { padding: space.xxs } },
+  padded: { base: { padding: space.xs } },
 }));
 const itemStyles = createStyles((t) => ({
   item: {
@@ -43,13 +43,13 @@ const itemStyles = createStyles((t) => ({
       display: 'flex',
       flexDirection: 'column',
       // alignItems: 'center',
-      paddingHorizontal: t.space.xs,
+      paddingHorizontal: t.space.md,
       justifyContent: 'center',
       // height: 42,
-      paddingTop: t.space.xxs,
-      paddingBottom: t.space.xxs,
-      paddingLeft: t.space.xs,
-      paddingRight: t.space.xs,
+      paddingTop: t.space.xs,
+      paddingBottom: t.space.xs,
+      paddingLeft: t.space.md,
+      paddingRight: t.space.md,
       borderWidth: 0,
       borderRadius: 5,
     },

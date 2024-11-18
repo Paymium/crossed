@@ -12,8 +12,8 @@ const useCode = createStyles((t) => ({
   root: {
     base: {
       // backgroundColor: t.colors.neutral[500],
-      paddingVertical: t.space.xxs,
-      paddingHorizontal: t.space.xs,
+      paddingVertical: t.space.xs,
+      paddingHorizontal: t.space.md,
       borderWidth: 1,
       borderStyle: 'solid',
       borderRadius: 4,

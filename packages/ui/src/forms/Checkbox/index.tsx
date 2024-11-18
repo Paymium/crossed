@@ -20,7 +20,7 @@ const checkboxStyles = createStyles((t) => ({
       alignItems: 'center',
       display: 'flex',
       flexDirection: 'row',
-      gap: t.space.xs,
+      gap: t.space.md,
     },
   },
   root: {
