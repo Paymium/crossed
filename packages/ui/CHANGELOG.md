@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 2.0.2
+
+### Patch Changes
+
+- f51eefd: fix card border
+
 ## 2.0.1
 
 ### Patch Changes
