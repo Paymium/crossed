@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.14.3
+
+### Patch Changes
+
+- b363df9: update sizing
+
 ## 0.14.2
 
 ### Patch Changes

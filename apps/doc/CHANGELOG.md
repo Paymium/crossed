@@ -1,5 +1,16 @@
 # crossed-doc
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [b363df9]
+  - @crossed/styled@0.14.3
+  - @crossed/ui@2.0.1
+  - @crossed/theme@2.0.5
+  - @crossed/unicons@1.0.5
+  - @crossed/webpack@2.0.7
+
 ## 0.2.0
 
 ### Minor Changes
