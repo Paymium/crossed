@@ -38,7 +38,7 @@ const spacingStyle = createStyles(({ space }) => ({
 const cardStyles = createStyles(({ space, font, components }) => ({
   root: {
     base: {
-      borderRadius: space.xs,
+      borderRadius: space.md,
       backgroundColor: components.Action.secondary.default.background,
       borderWidth: 1,
       borderColor: components.Card.default.border,
