@@ -1,5 +1,15 @@
 # @crossed/ui
 
+## 2.0.1
+
+### Patch Changes
+
+- b363df9: update sizing
+- Updated dependencies [b363df9]
+  - @crossed/styled@0.14.3
+  - @crossed/theme@2.0.5
+  - @crossed/unicons@1.0.5
+
 ## 2.0.0
 
 ### Minor Changes

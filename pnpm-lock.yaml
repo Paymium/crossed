@@ -87,10 +87,10 @@ importers:
         specifier: workspace:^
         version: link:../../packages/styled
       '@crossed/theme':
-        specifier: workspace:2.0.4
+        specifier: workspace:2.0.5
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: 2.0.0
+        specifier: 2.0.1
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: workspace:*
@@ -172,19 +172,19 @@ importers:
   apps/doc:
     dependencies:
       '@crossed/styled':
-        specifier: workspace:0.14.2
+        specifier: workspace:0.14.3
         version: link:../../packages/styled
       '@crossed/theme':
-        specifier: workspace:2.0.4
+        specifier: workspace:2.0.5
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: workspace:2.0.0
+        specifier: workspace:2.0.1
         version: link:../../packages/ui
       '@crossed/unicons':
-        specifier: 1.0.4
+        specifier: 1.0.5
         version: link:../../packages/unicons
       '@crossed/webpack':
-        specifier: workspace:2.0.6
+        specifier: workspace:2.0.7
         version: link:../../packages/webpack
       '@gorhom/portal':
         specifier: ^1.0.14
@@ -324,7 +324,7 @@ importers:
         version: link:../../packages/theme
       '@crossed/ui':
         specifier: ^1.0.3
-        version: 1.1.2(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.8.1)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1)
+        version: 1.1.2(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.8.1)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@1.0.4)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1)
       next:
         specifier: 14.2.14
         version: 14.2.14(@babel/core@7.25.7)(react-dom@18.3.1)(react@18.3.1)
@@ -439,7 +439,7 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/styled':
-        specifier: 0.14.2
+        specifier: 0.14.3
         version: link:../styled
       '@crossed/test':
         specifier: 0.13.0
@@ -491,7 +491,7 @@ importers:
   packages/next-adapter:
     dependencies:
       '@crossed/webpack':
-        specifier: 2.0.6
+        specifier: 2.0.7
         version: link:../webpack
       find-yarn-workspace-root:
         specifier: ^2.0.0
@@ -862,7 +862,7 @@ importers:
         specifier: workspace:^
         version: link:../theme
       '@crossed/unicons':
-        specifier: 1.0.4
+        specifier: 1.0.5
         version: link:../unicons
       '@devvie/bottom-sheet':
         specifier: 0.3.0
@@ -947,7 +947,7 @@ importers:
   packages/webpack:
     dependencies:
       '@crossed/loader':
-        specifier: 1.0.5
+        specifier: 1.0.6
         version: link:../loader
       '@crossed/log':
         specifier: 0.1.1
@@ -969,7 +969,7 @@ importers:
         specifier: ^0.5.0
         version: link:../build
       '@crossed/styled':
-        specifier: 0.14.2
+        specifier: 0.14.3
         version: link:../styled
       '@types/esprima':
         specifier: ^4.0.6
@@ -2982,7 +2982,7 @@ packages:
       - react-test-renderer
     dev: false
 
-  /@crossed/ui@1.1.2(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.8.1)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@packages+unicons)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1):
+  /@crossed/ui@1.1.2(@crossed/build@packages+build)(@crossed/core@packages+core)(@crossed/primitive@1.8.1)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@1.0.4)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.75.4)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.15.4)(react-native-safe-area-context@4.10.5)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-GxI/iX5l2S/TlCNMrz2xz9Wrelz8WMkjwF4/ktSwT7zLKIu+/ZtLB/4Pr4rc+DoVc0kwEe8ZodmgVIVeWvvd3g==}
     peerDependencies:
       '@crossed/build': '*'
@@ -3001,7 +3001,7 @@ packages:
       '@crossed/primitive': 1.8.1(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.73.11)(react@18.3.1)
       '@crossed/styled': link:packages/styled
       '@crossed/theme': link:packages/theme
-      '@crossed/unicons': link:packages/unicons
+      '@crossed/unicons': 1.0.4(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(react-native-svg@15.7.1)(react-native@0.73.11)(react@18.3.1)
       '@devvie/bottom-sheet': 0.3.0(react-native@0.73.11)(react@18.3.1)
       '@expo/html-elements': 0.5.1
       '@floating-ui/dom': 1.6.11
@@ -3038,6 +3038,23 @@ packages:
       - react-native-web
       - react-native-windows
       - react-test-renderer
+    dev: false
+
+  /@crossed/unicons@1.0.4(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(react-native-svg@15.7.1)(react-native@0.73.11)(react@18.3.1):
+    resolution: {integrity: sha512-gRQ7OguKgEnFB2ITIQpqdkPCiRUm7HxrxU4IeCgVFuWf+Gaa64kVOrlJBIwHDxpGjIloUG2C6m5BiSBEDrc2oA==}
+    peerDependencies:
+      '@crossed/styled': ^0.14.2
+      '@crossed/theme': ^2.0.4
+      react: ^18.3.1
+      react-native-svg: ^15.1.0
+    dependencies:
+      '@crossed/core': 0.8.2(react-native@0.73.11)(react@18.3.1)
+      '@crossed/styled': link:packages/styled
+      '@crossed/theme': link:packages/theme
+      react: 18.3.1
+      react-native-svg: 15.7.1(react-native@0.73.11)(react@18.3.1)
+    transitivePeerDependencies:
+      - react-native
     dev: false
 
   /@cspotcode/source-map-support@0.8.1:
