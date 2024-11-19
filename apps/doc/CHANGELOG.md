@@ -4,6 +4,7 @@
 
 ### Patch Changes
 
+- 716bc0f: build documentation
 - Updated dependencies [f51eefd]
   - @crossed/ui@2.0.2
 
