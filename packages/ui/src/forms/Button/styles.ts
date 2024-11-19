@@ -130,7 +130,6 @@ export const buttonStyles = createStyles(
         base: {
           display: 'flex',
           paddingHorizontal: t.space.md,
-          paddingVertical: t.space.sm,
           borderRadius: 7,
           borderWidth: 2,
           borderStyle: 'solid',
