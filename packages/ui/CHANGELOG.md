@@ -1,5 +1,16 @@
 # @crossed/ui
 
+## 2.1.0
+
+### Minor Changes
+
+- 4fb7ec9: add accordion
+- 4fb7ec9: Add portal props to floating
+
+### Patch Changes
+
+- ed6ea64: fix padding button
+
 ## 2.0.2
 
 ### Patch Changes

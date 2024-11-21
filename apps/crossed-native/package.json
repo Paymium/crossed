@@ -15,7 +15,7 @@
     "@crossed/demo": "0.3.1",
     "@crossed/styled": "workspace:^",
     "@crossed/theme": "workspace:2.0.5",
-    "@crossed/ui": "2.0.2",
+    "@crossed/ui": "2.1.0",
     "@crossed/unicons": "workspace:*",
     "@react-native/gradle-plugin": "^0.75.3",
     "@react-navigation/native": "^6.0.2",

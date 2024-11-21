@@ -1,5 +1,18 @@
 # crossed-doc
 
+## 0.3.0
+
+### Minor Changes
+
+- 4fb7ec9: add accordion
+
+### Patch Changes
+
+- Updated dependencies [ed6ea64]
+- Updated dependencies [4fb7ec9]
+- Updated dependencies [4fb7ec9]
+  - @crossed/ui@2.1.0
+
 ## 0.2.2
 
 ### Patch Changes
