@@ -15,6 +15,7 @@ export type FloatingContext = {
   closeOverlayPress?: boolean;
   wait?: number;
   removeScroll: boolean;
+  portal?: boolean;
 };
 
 export const [FloatingProvider, useFloatingContext] =

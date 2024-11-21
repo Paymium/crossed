@@ -7,7 +7,14 @@
 
 import { Portal } from '@gorhom/portal';
 import { FloatingProvider, useFloatingContext } from './context';
-import { memo, PropsWithChildren, ReactNode, useEffect, useState } from 'react';
+import {
+  Fragment,
+  memo,
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import { composeStyles, CrossedMethods } from '@crossed/styled';
 import { positionStyles } from '../../styles/position';
@@ -45,8 +52,10 @@ export const FloatingPortal = memo(
       return () => clearTimeout(time);
     }, [floatingContext.open, floatingContext.wait]);
 
+    const PortalComponent = floatingContext.portal ? Portal : Fragment;
+
     return (
-      <Portal>
+      <PortalComponent>
         <Provider>
           <FloatingProvider {...floatingContext}>
             <RemoveScroll
@@ -65,7 +74,7 @@ export const FloatingPortal = memo(
             </RemoveScroll>
           </FloatingProvider>
         </Provider>
-      </Portal>
+      </PortalComponent>
     );
   }
 );
