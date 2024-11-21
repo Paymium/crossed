@@ -8,9 +8,9 @@
 import { composeStyles, createStyles } from '@crossed/styled';
 import { Box, type BoxProps } from './Box';
 import { forwardRef } from 'react';
-import type { GetProps } from '@crossed/core';
 import { justifyContentStyle } from '../styles/justifyContent';
 import { alignItemsStyle } from '../styles/alignItems';
+import { View } from 'react-native';
 
 export const useXBox = createStyles(
   () =>
@@ -26,13 +26,13 @@ export const useXBox = createStyles(
     }) as const
 );
 
-type XBoxPropsTmp = BoxProps & {
+export type XBoxProps = BoxProps & {
   justifyContent?: keyof typeof justifyContentStyle;
   alignItems?: keyof typeof alignItemsStyle;
 };
 
-export const XBox = forwardRef(
-  ({ justifyContent, alignItems, style, ...props }: XBoxPropsTmp, ref: any) => {
+export const XBox = forwardRef<View, XBoxProps>(
+  ({ justifyContent, alignItems, style, ...props }, ref) => {
     return (
       <Box
         ref={ref}
@@ -47,5 +47,3 @@ export const XBox = forwardRef(
     );
   }
 );
-
-export type XBoxProps = GetProps<typeof XBox>;

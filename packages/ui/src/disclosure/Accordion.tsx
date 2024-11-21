@@ -5,17 +5,27 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import { composeStyles, createStyles, inlineStyle } from '@crossed/styled';
 import {
-  createAccordion,
-  type AccordionTriggerComponent,
-  type AccordionPanelComponent,
-  type AccordionItemComponent,
-  type AccordionComponent,
-} from '@crossed/primitive';
-import { createStyles } from '@crossed/styled';
-import { forwardRef, useContext, useRef } from 'react';
-import { ChevronDown, ChevronUp } from '@crossed/unicons';
-import { View } from 'react-native';
+  createContext,
+  forwardRef,
+  type MutableRefObject,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useRef,
+} from 'react';
+import { ChevronUp } from '@crossed/unicons';
+import { LayoutChangeEvent, View, type ViewProps } from 'react-native';
+import { useUncontrolled, withStaticProperties } from '@crossed/core';
+import { Box } from '../layout';
+import { Floating, FloatingTriggerProps } from '../overlay/Floating';
+import Animated, {
+  LinearTransition,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 const accordionStyles = createStyles((t) => ({
   root: {
@@ -27,18 +37,9 @@ const accordionStyles = createStyles((t) => ({
   },
   trigger: {
     'base': {
-      display: 'flex',
-      padding: t.space.md,
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
-    ':hover': {
-      backgroundColor: t.colors.background.secondary,
-    },
-    ':active': {
-      backgroundColor: t.colors.background.primary,
-    },
-    'web': { base: { transition: 'all 170ms' } },
   },
   panel: {
     web: {
@@ -57,79 +58,149 @@ const accordionStyles = createStyles((t) => ({
   },
 }));
 
-const {
-  itemContext,
-  rootContext,
-  Accordion: PAccordion,
-  AccordionItem: PAccordionItem,
-  AccordionPanel: PAccordionPanel,
-  AccordionTrigger: PAccordionTrigger,
-} = createAccordion();
-
-const Accordion: AccordionComponent = (props) => {
-  return <PAccordion {...props} {...accordionStyles.root.rnw()} />;
+export type AccordionProps = ViewProps & {
+  allowMultiple?: boolean;
+  defaultValues?: string[];
+  values?: string[];
+  onChange?: (_p: string[]) => void;
 };
 
-const AccordionItem: AccordionItemComponent = forwardRef((props, ref) => {
-  return (
-    <PAccordionItem {...props} ref={ref} {...accordionStyles.item.rnw()} />
-  );
-});
+export type AccordionRootContext = Required<
+  Pick<AccordionProps, 'allowMultiple' | 'values'>
+> & {
+  setValues: (_value: string[]) => void;
+};
 
-const AccordionTrigger: AccordionTriggerComponent = forwardRef(
-  ({ style, ...props }, ref) => {
-    return (
-      <PAccordionTrigger
-        {...props}
-        ref={ref}
-        style={({ pressed }) =>
-          accordionStyles.trigger.rnw({
-            style: (typeof style === 'function'
-              ? style({ pressed })
-              : style) as any,
-            active: pressed,
-          }).style
-        }
-      />
-    );
-  }
+const rootContext = createContext<AccordionRootContext>(
+  {} as AccordionRootContext
 );
-
-const AccordionPanel: AccordionPanelComponent = forwardRef((props, ref) => {
-  const { value } = useContext(itemContext);
-  const { values } = useContext(rootContext);
-  const refLocal = useRef<number>();
+export type AccordionItemProps = ViewProps & { value: string };
+export type ItemContext = Pick<AccordionItemProps, 'value'> & {
+  buttonId: MutableRefObject<string | undefined>;
+  panelId: MutableRefObject<string | undefined>;
+};
+const itemContext = createContext<ItemContext>({} as ItemContext);
+const Root = (props: AccordionProps) => {
+  const {
+    children,
+    allowMultiple = false,
+    defaultValues,
+    values: valueProps,
+    onChange,
+  } = props;
+  const [values, setValues] = useUncontrolled({
+    defaultValue: defaultValues ?? [],
+    value: valueProps,
+    onChange,
+  });
   return (
-    <PAccordionPanel
+    <rootContext.Provider value={{ values, setValues, allowMultiple }}>
+      {children}
+    </rootContext.Provider>
+  );
+};
+Root.displayName = 'Accordion';
+
+const AccordionItem = ({ children, value }: AccordionItemProps) => {
+  const { setValues, values, allowMultiple } = useContext(rootContext);
+  const buttonId = useRef<string>();
+  const panelId = useRef<string>();
+  const handleChange = useCallback(() => {
+    setValues(
+      allowMultiple
+        ? values.includes(value)
+          ? values.filter((e) => e !== value)
+          : [...values, value]
+        : [value]
+    );
+  }, [setValues, value, values, allowMultiple]);
+  return (
+    <itemContext.Provider value={{ value, buttonId, panelId }}>
+      <Floating
+        onChange={handleChange}
+        value={values.includes(value)}
+        visibilityHidden
+        portal={false}
+        removeScroll={false}
+      >
+        {children}
+      </Floating>
+    </itemContext.Provider>
+  );
+};
+AccordionItem.displayName = 'Accordion.Item';
+
+export type AccordionTriggerProps = FloatingTriggerProps;
+
+const AccordionTrigger = forwardRef<View, AccordionTriggerProps>(
+  ({ style, ...props }, ref) => (
+    <Floating.Trigger
       {...props}
       ref={ref}
-      hide={false}
-      style={[
-        accordionStyles.panel.rnw().style,
-        values.includes(value) && { height: refLocal.current },
-      ]}
-    >
-      <View
-        onLayout={({ nativeEvent: { layout } }) => {
-          refLocal.current = layout.height;
-        }}
-      >
-        {props.children}
-      </View>
-    </PAccordionPanel>
+      style={composeStyles(accordionStyles.trigger, style)}
+    />
+  )
+);
+AccordionTrigger.displayName = 'Accordion.Trigger';
+
+const Provider = ({ children }: PropsWithChildren) => {
+  const height = useSharedValue(0);
+  const handleLayout = useCallback(
+    ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
+      height.value = layout.height;
+    },
+    [height]
   );
-});
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      height: withTiming(height.value),
+    };
+  }, [height]);
+  return (
+    <Floating.Content
+      animatedStyle={animatedStyle}
+      style={inlineStyle(() => ({ base: { overflow: 'hidden' } }))}
+      layout={LinearTransition}
+    >
+      <Box onLayout={handleLayout}>{children}</Box>
+    </Floating.Content>
+  );
+};
+export type AccordionPanelProps = PropsWithChildren;
+const AccordionPanel = ({ children }: AccordionPanelProps) => {
+  return (
+    <Floating.Portal
+      style={inlineStyle(() => ({ base: { position: 'relative' } }))}
+      Provider={Provider}
+    >
+      {children}
+    </Floating.Portal>
+  );
+};
+AccordionPanel.displayName = 'Accordion.Panel';
 
 const AccordionIcon = () => {
   const { value } = useContext(itemContext);
   const { values } = useContext(rootContext);
-  return values.includes(value) ? <ChevronUp /> : <ChevronDown />;
+  const isOpen = values.includes(value);
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ rotate: withTiming(isOpen ? '-180deg' : '0deg') }],
+    };
+  }, [isOpen]);
+  return (
+    <Animated.View style={animatedStyle}>
+      <ChevronUp />
+    </Animated.View>
+  );
 };
+AccordionIcon.displayName = 'Accordion.Icon';
 
-export {
-  AccordionItem,
-  AccordionPanel,
-  AccordionTrigger,
-  Accordion,
-  AccordionIcon,
-};
+export const Accordion = withStaticProperties(Root, {
+  Item: AccordionItem,
+  Panel: AccordionPanel,
+  Trigger: AccordionTrigger,
+  Icon: AccordionIcon,
+});
+
+export { AccordionItem, AccordionPanel, AccordionTrigger, AccordionIcon };

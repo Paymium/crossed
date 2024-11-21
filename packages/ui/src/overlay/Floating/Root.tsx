@@ -53,6 +53,11 @@ export type FloatingProps = PropsWithChildren & {
    * Controlled state onChange handler
    */
   onChange?: (_p: boolean) => void;
+
+  /**
+   * If false, not render in portal
+   */
+  portal?: boolean;
 };
 export type FloatingRef = {
   onClose: () => void;
@@ -70,6 +75,7 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
         closeOverlayPress,
         wait = 0,
         removeScroll = true,
+        portal = true,
       }: FloatingProps,
       ref
     ) => {
@@ -96,6 +102,7 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
           closeOverlayPress={closeOverlayPress ?? true}
           wait={wait}
           removeScroll={removeScroll}
+          portal={portal}
         >
           {children}
         </FloatingProvider>
