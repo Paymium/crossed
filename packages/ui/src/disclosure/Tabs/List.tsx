@@ -22,7 +22,7 @@ import {
 import { XBox } from '../../layout/XBox';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Box } from '../../layout/Box';
-import { Button, ButtonProps, ButtonTextProps } from '../../forms/Button';
+import { Button, ButtonProps, ButtonTextProps } from '../../buttons/Button';
 import { useState } from 'react';
 import {
   heightStyles,

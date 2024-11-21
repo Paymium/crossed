@@ -134,6 +134,29 @@ export default {
           border: 'transparent',
         },
       },
+      icon: {
+        default: {
+          color: colors.primary.primary,
+          background: 'transparent',
+          border: 'transparent',
+        },
+        hover: {
+          color: colors.primary[50],
+          background: 'transparent',
+          border: 'transparent',
+        },
+        active: {
+          color: colors.primary[60],
+          background: 'transparent',
+          border: 'transparent',
+        },
+        focus: { background: '', color: '', border: '' },
+        disabled: {
+          color: colors.primary[10],
+          background: 'transparent',
+          border: 'transparent',
+        },
+      },
     },
     Alert: {
       error: {

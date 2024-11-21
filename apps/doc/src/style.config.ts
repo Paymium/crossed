@@ -322,6 +322,33 @@ export const paymiumThemeDark = {
           border: 'transparent',
         },
       },
+      icon: {
+        default: {
+          color: paymiumDark.white,
+          background: 'transparent',
+          border: 'transparent',
+        },
+        hover: {
+          color: paymiumDark.white,
+          background: paymiumDark.primary[70],
+          border: paymiumDark.primary[70],
+        },
+        active: {
+          color: paymiumDark.white,
+          background: paymiumDark.primary[70],
+          border: paymiumDark.primary[70],
+        },
+        focus: {
+          background: paymiumDark.primary[70],
+          color: paymiumDark.white,
+          border: paymiumDark.primary[40],
+        },
+        disabled: {
+          color: paymiumDark.white,
+          background: paymiumDark.primary[70],
+          border: 'transparent',
+        },
+      },
     },
     Alert: {
       error: {
@@ -536,6 +563,33 @@ export const paymiumTheme = {
         disabled: {
           text: paymiumLight.primary[10],
           icon: paymiumLight.primary[10],
+          background: 'transparent',
+          border: 'transparent',
+        },
+      },
+      icon: {
+        default: {
+          color: paymiumLight.neutral[80],
+          background: 'transparent',
+          border: 'transparent',
+        },
+        hover: {
+          color: paymiumLight.neutral[80],
+          background: paymiumLight.primary[1],
+          border: paymiumLight.primary[1],
+        },
+        active: {
+          color: paymiumLight.neutral[80],
+          background: paymiumLight.primary[10],
+          border: paymiumLight.primary[10],
+        },
+        focus: {
+          background: paymiumLight.primary[1],
+          color: paymiumLight.neutral[80],
+          border: paymiumLight.primary[40],
+        },
+        disabled: {
+          color: paymiumLight.neutral[80],
           background: 'transparent',
           border: 'transparent',
         },

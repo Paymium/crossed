@@ -45,12 +45,12 @@ type Tag = {
   text: string;
 };
 
-type ActionType = {
-  default: Action;
-  hover: Action;
-  active: Action;
-  disabled: Action;
-  focus: Action;
+type ActionType<T = Action> = {
+  default: T;
+  hover: T;
+  active: T;
+  disabled: T;
+  focus: T;
 };
 type InputType = {
   default: Input;
@@ -68,16 +68,12 @@ type InputType = {
 // };
 
 export type Components = {
-  Banner: {
-    success: Banner;
-    info: Banner;
-    warning: Banner;
-    error: Banner;
-  };
+  Banner: { success: Banner; info: Banner; warning: Banner; error: Banner };
   Action: {
     primary: ActionType;
     secondary: ActionType;
     tertiary: ActionType;
+    icon: ActionType<{ color: string; background: string; border: string }>;
   };
   Alert: {
     success: Alert;

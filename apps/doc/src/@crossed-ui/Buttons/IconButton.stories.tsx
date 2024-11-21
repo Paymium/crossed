@@ -8,18 +8,24 @@
 import type { Meta, StoryObj } from '@storybook/react';
 // import { fn } from '@storybook/test';
 
-import { CloseButton } from '@crossed/ui/src/buttons/CloseButton';
+import { IconButton } from '@crossed/ui/src/buttons/IconButton';
+import { Github } from '@crossed/unicons';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof CloseButton> = {
-  component: CloseButton,
+const meta: Meta<typeof IconButton> = {
+  component: IconButton,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   argTypes: {},
+  render: (args) => (
+    <IconButton {...args}>
+      <Github />
+    </IconButton>
+  ),
 };
 
 export default meta;
-type Story = StoryObj<typeof CloseButton>;
+type Story = StoryObj<typeof IconButton>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {

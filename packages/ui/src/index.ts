@@ -6,7 +6,6 @@
  */
 
 'use client';
-// react-native-unistyles/lib/typescript/src/types/core
 export * from './layout';
 export * from './typography';
 export * from './forms';
@@ -19,17 +18,4 @@ export * from './other';
 export * from './styles';
 export * from './useMedia';
 export * from './scroll';
-// export * from './variants';
-// export * from './animations';
-// export * from '@crossed/unicons';
-// export {
-//   styled,
-//   // useAnimationState,
-//   useDeviceContext,
-//   useAppColorScheme,
-//   useUncontrolled,
-//   // useDynamicAnimation,
-//   type GetProps,
-//   withStaticProperties,
-//   tw,
-// } from '@crossed/core';
+export * from './buttons';

@@ -21,7 +21,7 @@ import {
   Button,
   type ButtonProps,
   type ButtonTextProps,
-} from '../forms/Button';
+} from '../buttons/Button';
 import { Box } from '../layout/Box';
 
 export const alertDescriptionStyles = createStyles(

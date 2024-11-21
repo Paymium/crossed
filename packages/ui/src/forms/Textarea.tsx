@@ -10,7 +10,7 @@ import { forwardRef, useCallback, useState, type ReactNode } from 'react';
 import { form } from '../styles/form';
 import { composeStyles, CrossedMethods, useInteraction } from '@crossed/styled';
 import { FormControl, FormField, FormLabel } from './Form';
-import { CloseButton } from '../other/CloseButton';
+import { CloseButton } from '../buttons/CloseButton';
 import { useUncontrolled } from '@crossed/core';
 import { XBox } from '../layout/XBox';
 import { Text } from '../typography/Text';

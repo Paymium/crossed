@@ -11,7 +11,7 @@ import { render, screen, userEvent } from '@crossed/test';
 import { SheetContext, sheetContext } from '../context';
 import { expect, describe, test, jest } from '@jest/globals';
 import { Text } from '../../../typography/Text';
-import { Button } from '../../../forms/Button';
+import { Button } from '../../../buttons/Button';
 
 describe('SheetRoot', () => {
   test('onPress event should open', async () => {

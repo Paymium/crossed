@@ -19,7 +19,7 @@ import { composeStyles, CrossedMethods, useInteraction } from '@crossed/styled';
 import { withTiming } from 'react-native-reanimated';
 import { View } from 'react-native-reanimated/lib/typescript/Animated';
 import { focusStyles, tabTitleStyles, triggerStyles } from './styles';
-import { Button, ButtonTextProps } from '../../forms/Button';
+import { Button, ButtonTextProps } from '../../buttons/Button';
 
 export type TabsTabProps = Pick<TabsContext, 'value'> &
   Omit<PressableProps, 'style'> &
