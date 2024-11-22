@@ -8,6 +8,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Alert, AlertDescription } from '@crossed/ui/src/feedback/Alert';
+import { inlineStyle } from '@crossed/styled';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Alert> = {
