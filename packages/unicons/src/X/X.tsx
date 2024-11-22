@@ -18,8 +18,6 @@ export const X = ({
   const stroke = color ?? theme.font.color;
   return (
     <Svg
-      testID="X"
-      data-testid="X"
       width={size}
       height={size}
       viewBox="0 0 24 24"
