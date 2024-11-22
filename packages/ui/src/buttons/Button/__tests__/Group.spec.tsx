@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen, fireEvent } from '@crossed/test';
+import { render, screen } from '@crossed/test';
 import { ButtonGroup } from '../Group';
 import { Button } from '../index';
 
