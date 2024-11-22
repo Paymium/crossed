@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useContext, useEffect } from 'react';
+import { forwardRef, useContext, useEffect } from 'react';
 import { Text, type TextProps } from '../../typography/Text';
 import { buttonContext } from './context';
 import { composeStyles } from '@crossed/styled';
@@ -17,9 +17,11 @@ import {
   buttonTertiaryStyles,
   textStyles,
 } from './styles';
+import { Text as TextNative } from 'react-native';
+
 type ButtonTextProps = TextProps;
 
-const ButtonText = (props: ButtonTextProps) => {
+const ButtonText = forwardRef<TextNative, ButtonTextProps>((props, ref) => {
   const { variant, state, disabled, size, setTextId, textId } =
     useContext(buttonContext);
 
@@ -53,10 +55,10 @@ const ButtonText = (props: ButtonTextProps) => {
         disabled && textStyles.disabled,
         props.style
       )}
-      ref={props.ref}
+      ref={ref}
     />
   );
-};
+});
 ButtonText.displayName = 'Button.Text';
 
 export { ButtonText, type ButtonTextProps };

@@ -16,7 +16,10 @@ export type ButtonGroupProps = XBoxProps & { orientation?: Orientation };
 export const ButtonGroup = forwardRef<View, ButtonGroupProps>(
   (props: ButtonGroupProps, ref) => (
     <ProviderGroup grouped orientation={props.orientation ?? 'horizontal'}>
-      <RovingFocusGroup orientation={props.orientation ?? 'horizontal'}>
+      <RovingFocusGroup
+        role={'group'}
+        orientation={props.orientation ?? 'horizontal'}
+      >
         <ButtonGroupCollection.Provider>
           <ButtonGroupCollection.Slot>
             <XBox {...(props as any)} ref={ref} />

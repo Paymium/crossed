@@ -69,7 +69,7 @@ export const IconButton = memo<IconButtonProps>(
           disabled: props.disabled,
         }).style;
       },
-      [props.disabled]
+      [props.disabled, style]
     );
     const { components } = useTheme();
     const child = useCallback(

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconButton renders function-based children correctly 1`] = `
+<button
+  class="css-view-175oi2r r-cursor-1loqt21 r-touchAction-1otgn73"
+  role="button"
+  style="border-top-left-radius: 50px; border-top-right-radius: 50px; border-bottom-right-radius: 50px; border-bottom-left-radius: 50px; height: 40px; width: 40px; align-items: center; justify-content: center; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px;"
+  tabindex="0"
+  type="button"
+>
+  <svg
+    fill="none"
+    height="16"
+    stroke="var(--components--action-icon-default-color)"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    width="16"
+  >
+    <path
+      d="M18 6 6 18"
+      stroke="var(--components--action-icon-default-color)"
+    />
+    <path
+      d="m6 6 12 12"
+      stroke="var(--components--action-icon-default-color)"
+    />
+  </svg>
+</button>
+`;
+
+exports[`IconButton renders the provided children 1`] = `
+<button
+  class="css-view-175oi2r r-cursor-1loqt21 r-touchAction-1otgn73"
+  role="button"
+  style="border-top-left-radius: 50px; border-top-right-radius: 50px; border-bottom-right-radius: 50px; border-bottom-left-radius: 50px; height: 40px; width: 40px; align-items: center; justify-content: center; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px;"
+  tabindex="0"
+  type="button"
+>
+  <svg
+    fill="none"
+    height="16"
+    stroke="var(--components--action-icon-default-color)"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    width="16"
+  >
+    <path
+      d="M18 6 6 18"
+      stroke="var(--components--action-icon-default-color)"
+    />
+    <path
+      d="m6 6 12 12"
+      stroke="var(--components--action-icon-default-color)"
+    />
+  </svg>
+</button>
+`;
