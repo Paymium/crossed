@@ -62,22 +62,6 @@ export const Button = withReactive(
               variant === 'tertiary' && buttonTertiaryStyles.root,
               variant === 'error' && buttonErrorStyles.root,
               variant === 'success' && buttonSuccessStyles.root,
-              // buttonStyles.root,
-              // buttonSizeStyles[size.toString()],
-              // variant && buttonStyles[variant],
-              // (disabled || loading) &&
-              //   variant &&
-              //   buttonStyles[variant][':disabled'] && {
-              //     base: buttonStyles[variant][':disabled'],
-              //   },
-              // error && buttonErrorStyles.error,
-              // variant && error && buttonErrorStyles[variant],
-              // (disabled || loading) &&
-              //   variant &&
-              //   error &&
-              //   buttonErrorStyles[variant][':disabled'] && {
-              //     base: buttonErrorStyles[variant][':disabled'],
-              //   },
               props.style
             ).rnw({
               hover: e.hovered,
