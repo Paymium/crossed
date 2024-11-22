@@ -1,5 +1,21 @@
 # crossed-doc
 
+## 0.4.0
+
+### Minor Changes
+
+- da6ac41: add IconButton component
+
+### Patch Changes
+
+- Updated dependencies [da6ac41]
+- Updated dependencies [da6ac41]
+- Updated dependencies [da6ac41]
+  - @crossed/theme@2.1.0
+  - @crossed/ui@3.0.0
+  - @crossed/unicons@2.0.0
+  - @crossed/webpack@2.0.8
+
 ## 0.3.0
 
 ### Minor Changes

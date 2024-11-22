@@ -1,5 +1,19 @@
 # @crossed/ui
 
+## 3.0.0
+
+### Minor Changes
+
+- da6ac41: add IconButton component
+- da6ac41: increase Button behavior
+- da6ac41: increase closeButton behavior
+
+### Patch Changes
+
+- Updated dependencies [da6ac41]
+  - @crossed/theme@2.1.0
+  - @crossed/unicons@2.0.0
+
 ## 2.1.0
 
 ### Minor Changes

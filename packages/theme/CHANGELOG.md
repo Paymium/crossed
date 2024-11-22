@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 2.1.0
+
+### Minor Changes
+
+- da6ac41: add IconButton component
+
 ## 2.0.5
 
 ### Patch Changes
