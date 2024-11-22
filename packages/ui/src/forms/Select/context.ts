@@ -7,7 +7,7 @@
 
 import { createScope } from '@crossed/core';
 import type { MutableRefObject, ReactNode } from 'react';
-import type { ButtonProps } from '../Button';
+import type { ButtonProps } from '../../buttons/Button';
 import type {
   LayoutRectangle,
   NativeSyntheticEvent,

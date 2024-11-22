@@ -21,7 +21,7 @@ import {
   isValidElement,
   type PropsWithChildren,
 } from 'react';
-import { Button, type ButtonProps } from '../Button';
+import { Button, type ButtonProps } from '../../buttons/Button';
 import { type MenuListItemProps, MenuList } from '../../display/MenuList';
 import { Pressable, TextInput, View, type LayoutRectangle } from 'react-native';
 import { form } from '../../styles/form';
@@ -39,7 +39,7 @@ import { useFloating } from './useFloating';
 import { FormControl, FormField, FormLabel } from '../Form';
 import { XBox } from '../../layout/XBox';
 import { YBox } from '../../layout/YBox';
-import { CloseButton } from '../../other/CloseButton';
+import { CloseButton } from '../../buttons/CloseButton';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),

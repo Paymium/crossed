@@ -7,7 +7,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '@crossed/ui/src/forms/Button';
+import { Button } from '@crossed/ui/src/buttons/Button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Button> = {
@@ -37,10 +37,13 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
-    error: { control: 'boolean' },
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary'],
+      options: ['primary', 'secondary', 'tertiary', 'success', 'error'],
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'false'],
     },
   },
 };
@@ -50,7 +53,7 @@ type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
-  args: { variant: 'primary', loading: false, disabled: false, error: false },
+  args: { variant: 'primary', loading: false, disabled: false },
 };
 export const Secondary: Story = {
   args: { ...Primary.args, variant: 'secondary' },
@@ -61,8 +64,28 @@ export const Secondary: Story = {
     },
   },
 };
-export const tertiary: Story = {
+export const Tertiary: Story = {
   args: { ...Primary.args, variant: 'tertiary' },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Ke8D4tdGD8lCjNYY5NO33R/Design-system?node-id=3-301&t=2ZiT8Ks6ZLwLW9X6-4',
+    },
+  },
+};
+
+export const Success: Story = {
+  args: { ...Primary.args, variant: 'success' },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Ke8D4tdGD8lCjNYY5NO33R/Design-system?node-id=3-301&t=2ZiT8Ks6ZLwLW9X6-4',
+    },
+  },
+};
+
+export const Error: Story = {
+  args: { ...Primary.args, variant: 'error' },
   parameters: {
     design: {
       type: 'figma',

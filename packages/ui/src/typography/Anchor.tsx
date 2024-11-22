@@ -13,7 +13,7 @@ import {
 } from '@crossed/styled';
 import { Text, type TextProps } from './Text';
 import { forwardRef } from 'react';
-import { textStyles } from '../forms/Button';
+import { textStyles } from '../buttons/Button';
 
 export const useAnchor = createStyles((t) => ({
   anchor: {

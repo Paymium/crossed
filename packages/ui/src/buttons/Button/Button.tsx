@@ -10,7 +10,14 @@
 import { composeStyles, withReactive } from '@crossed/styled';
 import { ActivityIndicator, Pressable, View } from 'react-native';
 import { forwardRef, useId, useState } from 'react';
-import { buttonErrorStyles, buttonSizeStyles, buttonStyles } from './styles';
+import {
+  buttonErrorStyles,
+  buttonPrimaryStyles,
+  buttonSecondaryStyles,
+  buttonSizeStyles,
+  buttonSuccessStyles,
+  buttonTertiaryStyles,
+} from './styles';
 import { ButtonProps } from './types';
 import { ButtonIcon } from './Icon';
 import { buttonContext } from './context';
@@ -20,10 +27,9 @@ export const Button = withReactive(
     (
       {
         variant = 'primary',
-        error = false,
         disabled,
         loading,
-        size = true,
+        size = 'md',
         children,
         ...props
       }: ButtonProps,
@@ -49,22 +55,13 @@ export const Button = withReactive(
           {...props}
           style={(e: any) =>
             composeStyles(
-              buttonStyles.root,
-              buttonSizeStyles[size.toString()],
-              variant && buttonStyles[variant],
-              (disabled || loading) &&
-                variant &&
-                buttonStyles[variant][':disabled'] && {
-                  base: buttonStyles[variant][':disabled'],
-                },
-              error && buttonErrorStyles.error,
-              variant && error && buttonErrorStyles[variant],
-              (disabled || loading) &&
-                variant &&
-                error &&
-                buttonErrorStyles[variant][':disabled'] && {
-                  base: buttonErrorStyles[variant][':disabled'],
-                },
+              buttonSizeStyles.default,
+              size && buttonSizeStyles[size],
+              variant === 'primary' && buttonPrimaryStyles.root,
+              variant === 'secondary' && buttonSecondaryStyles.root,
+              variant === 'tertiary' && buttonTertiaryStyles.root,
+              variant === 'error' && buttonErrorStyles.root,
+              variant === 'success' && buttonSuccessStyles.root,
               props.style
             ).rnw({
               hover: e.hovered,
@@ -78,7 +75,7 @@ export const Button = withReactive(
               <buttonContext.Provider
                 value={{
                   variant,
-                  error,
+                  size,
                   state: { active: e.pressed, hover: e.hovered },
                   disabled: disabled || loading,
                   textId,

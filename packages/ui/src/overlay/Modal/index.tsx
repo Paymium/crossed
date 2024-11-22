@@ -19,7 +19,7 @@ import { createContext, useContext } from 'react';
 import { XBox } from '../../layout/XBox';
 import { Box, type BoxProps } from '../../layout/Box';
 import { withDefaultProps } from '@crossed/core';
-import { CloseButton } from '../../other/CloseButton';
+import { CloseButton } from '../../buttons/CloseButton';
 
 const modalStyles = createStyles((t) => ({
   content: {

@@ -12,7 +12,7 @@ import {
   Button,
   type ButtonTextProps,
   type ButtonProps,
-} from '../forms/Button';
+} from '../buttons/Button';
 import {
   composeStyles,
   createStyles,

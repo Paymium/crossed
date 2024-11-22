@@ -16,7 +16,7 @@ import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
 import { useMedia } from '../useMedia';
 import { XBox } from '../layout/XBox';
-import { CloseButton } from '../other/CloseButton';
+import { CloseButton } from '../buttons/CloseButton';
 
 const toastStyles = createStyles(
   (t) =>
