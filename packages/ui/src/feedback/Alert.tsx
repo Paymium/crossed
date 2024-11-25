@@ -177,7 +177,8 @@ const Container = ({
 };
 Container.displayName = 'Alert';
 
-const AlertIcon = () => {
+export type AlertIconProps = { style?: CrossedMethods<any> };
+const AlertIcon = ({ style }: AlertIconProps) => {
   const { status } = useContext(alertContext);
   const { color } = composeStyles(
     alertDescriptionStyles.base,
@@ -190,7 +191,7 @@ const AlertIcon = () => {
     .with('warning', () => AlertTriangle)
     .exhaustive();
   return (
-    <Box style={alertStyles.containerIcon}>
+    <Box style={composeStyles(alertStyles.containerIcon, style)}>
       <Comp color={color} size={16} />
     </Box>
   );
