@@ -1,5 +1,18 @@
 # crossed-doc
 
+## 0.4.1
+
+### Patch Changes
+
+- a891433: some fix
+- 7aa7ebc: allow passing style to alert icon
+- Updated dependencies [a891433]
+- Updated dependencies [7aa7ebc]
+  - @crossed/theme@2.1.1
+  - @crossed/ui@3.0.1
+  - @crossed/unicons@2.0.1
+  - @crossed/webpack@2.0.9
+
 ## 0.4.0
 
 ### Minor Changes

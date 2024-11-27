@@ -1,5 +1,12 @@
 # @crossed/loader
 
+## 2.0.1
+
+### Patch Changes
+
+- Updated dependencies [a891433]
+  - @crossed/theme@2.1.1
+
 ## 2.0.0
 
 ### Patch Changes

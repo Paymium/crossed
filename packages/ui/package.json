@@ -1,7 +1,7 @@
 {
   "name": "@crossed/ui",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "sideEffects": false,
   "keywords": [
     "React Native",
@@ -79,7 +79,7 @@
     "@crossed/primitive": "1.9.0",
     "@crossed/styled": "workspace:^",
     "@crossed/theme": "workspace:^",
-    "@crossed/unicons": "2.0.0",
+    "@crossed/unicons": "2.0.1",
     "@devvie/bottom-sheet": "0.3.0",
     "react-native": "^0.73.6",
     "react-native-gesture-handler": "~2.14.0",
@@ -92,7 +92,7 @@
     "@crossed/styled": "workspace:^",
     "@crossed/test": "0.13.0",
     "@crossed/theme": "workspace:^",
-    "@crossed/unicons": "2.0.0",
+    "@crossed/unicons": "2.0.1",
     "@devvie/bottom-sheet": "0.3.0",
     "@jest/globals": "^29.7.0",
     "@jest/types": "29.6.3",

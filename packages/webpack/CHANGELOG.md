@@ -1,5 +1,11 @@
 # @crossed/webpack
 
+## 2.0.9
+
+### Patch Changes
+
+- @crossed/loader@2.0.1
+
 ## 2.0.8
 
 ### Patch Changes
