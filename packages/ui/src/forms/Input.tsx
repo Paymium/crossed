@@ -99,19 +99,19 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
     setValue('');
   }, [setValue]);
 
-  const showClear = clearable && value;
+  const showClear = !!(clearable && value);
   return (
     <FormField
       disabled={disabled || (!props.focusable && props.focusable !== undefined)}
     >
       <YBox space="xxs">
-        {(label || description || extra) && (
+        {!!(label || description || extra) && (
           <XBox alignItems="center" space="xxs">
-            {label && <FormLabel>{label}</FormLabel>}
-            {description && (
+            {!!label && <FormLabel>{label}</FormLabel>}
+            {!!description && (
               <Text style={form.labelDescription}>{description}</Text>
             )}
-            {extra && (
+            {!!extra && (
               <Text style={form.labelExtra} textAlign="right">
                 {extra}
               </Text>
@@ -174,7 +174,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
                   style: [(elementRight as any).style, { color }],
                 } as any)
               : elementRight}
-            {showClear && (
+            {!!showClear && (
               <CloseButton onPress={onClear} style={styles.close} />
             )}
           </XBox>

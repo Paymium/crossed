@@ -61,14 +61,14 @@ export const BuilderTab = createTabs();
         </BuilderTab.Tab>
       </BuilderTab.List>
         <BuilderTab.Panel value="webpack">
-          <Source language='bash' code={`pnpm i @crossed/styled @crossed/webpack`} />
+          <Source language='bash' code={"pnpm i @crossed/styled @crossed/webpack"} />
         </BuilderTab.Panel>
         <BuilderTab.Panel value="next">
-          <Source language='bash' code={`pnpm i @crossed/styled @crossed/next-adapter`} />
+          <Source language='bash' code={"pnpm i @crossed/styled @crossed/next-adapter"} />
         </BuilderTab.Panel>
     </PlatformTab.Panel>
     <PlatformTab.Panel value="native">
-      <Source language='bash' code={`pnpm i @crossed/styled`} />
+      <Source language='bash' code={"pnpm i @crossed/styled"} />
     </PlatformTab.Panel>
     <PlatformTab.Panel value="web">
       ## Configure builder
@@ -83,10 +83,10 @@ export const BuilderTab = createTabs();
     ## Init registry
 
 Create `style.config.ts` file <Source code={styleConfig} language='jsx' format />
-And import this file only once in your entry file<Source code={`import "./style.config";`} language='jsx' format />
+And import this file only once in your entry file<Source code={"import './style.config';"} language='jsx' format />
 <PlatformTab.Panel value="web">
-  add css in your js<Source code={`import "crossed.css";`} language='jsx' format />
-  or in your css<Source code={`@import "crossed.css";`} language='css' format />
+  add css in your js<Source code={'import "crossed.css";'} language='jsx' format />
+  or in your css<Source code={'@import "crossed.css";'} language='css' format />
 </PlatformTab.Panel>
 
 ## Usage
@@ -117,4 +117,3 @@ function App () {
 `} language='jsx' format />
   </BuilderTab>
 </PlatformTab>
-

@@ -66,7 +66,7 @@ export const IconButton = memo<IconButtonProps>(
           hover: hovered,
           focus: focused,
           active: pressed,
-          disabled: props.disabled,
+          disabled: !!props.disabled,
         }).style;
       },
       [props.disabled, style]

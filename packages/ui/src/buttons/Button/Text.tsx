@@ -25,7 +25,7 @@ const ButtonText = forwardRef<TextNative, ButtonTextProps>((props, ref) => {
   const { variant, state, disabled, size, setTextId, textId } =
     useContext(buttonContext);
 
-  const { hover, active } = state;
+  const { hover, active } = state || {};
 
   useEffect(() => {
     if (props.id && textId !== props.id) {
