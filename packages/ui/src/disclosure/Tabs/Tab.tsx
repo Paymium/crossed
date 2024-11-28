@@ -118,30 +118,28 @@ export const createTab = ({
         selected={selected}
         hover={selected || state.hover}
       >
-        <Pressable
+        <Button
           role="tab"
           ref={ref}
           disabled={disabled}
-          aria-selected={selected.toString()}
+          variant={'tertiary'}
+          aria-selected={selected}
           aria-control={`${id}-panel-${valueProps}`}
           id={`${id}-tab-${valueProps}`}
           {...props}
-          {...composeStyles(
+          style={composeStyles(
             triggerStyles.trigger,
             triggerStyles[size],
             focusStyles[variant],
             disabled && triggerStyles.disabled,
             style
-          ).rnw({
-            ...state,
-            hover: selected || state.hover,
-          })}
+          )}
           {...interaction}
           onPress={onPress}
           onLayout={onLayout}
         >
           {(e) => (typeof children === 'function' ? children(e) : children)}
-        </Pressable>
+        </Button>
       </TriggerProvider>
     );
   };
