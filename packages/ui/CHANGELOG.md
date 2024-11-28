@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.0.2
+
+### Patch Changes
+
+- bc7710a: fix tab error
+
 ## 3.0.1
 
 ### Patch Changes
