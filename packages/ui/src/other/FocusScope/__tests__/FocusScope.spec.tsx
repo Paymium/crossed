@@ -6,7 +6,7 @@
  */
 
 import { render, fireEvent, screen } from '@crossed/test';
-import { FocusScope } from '../FocusScope';
+import { FocusScope } from '../FocusScope.web';
 
 describe('FocusScope', () => {
   test('rend l’enfant passé en prop', () => {

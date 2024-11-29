@@ -12,7 +12,8 @@ import { cardStyles } from './styles';
 export const Title = (props: TextProps) => {
   return (
     <Text
-      size="lg"
+      size="xl"
+      weight="h1"
       {...props}
       style={composeStyles(cardStyles.title, props.style)}
     />

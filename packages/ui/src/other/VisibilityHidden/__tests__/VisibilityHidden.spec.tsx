@@ -6,7 +6,7 @@
  */
 
 import { render } from '@crossed/test';
-import { VisibilityHidden } from '../VisibilityHidden';
+import { VisibilityHidden } from '../VisibilityHidden.web';
 import { createStyles } from '@crossed/styled';
 
 const hiddenClass =

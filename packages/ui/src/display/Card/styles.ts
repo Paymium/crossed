@@ -53,8 +53,6 @@ export const cardStyles = createStyles(({ space, font, components }) => ({
     base: {
       color: components.Card.default.title,
       alignSelf: 'stretch',
-      fontSize: font.fontSize.xl,
-      fontWeight: font.fontWeight.h1,
       lineHeight: font.lineHeight.xl,
     },
   },

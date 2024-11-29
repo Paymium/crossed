@@ -5,36 +5,15 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+import { forwardRef } from 'react';
 import type { VisibilityHiddenComponent } from './types';
+import { View } from 'react-native';
 import { Slot } from '../../Slot';
-import { Box } from '../../layout/Box';
-import { composeStyles, inlineStyle } from '@crossed/styled';
 
-export const VisibilityHidden: VisibilityHiddenComponent = ({
-  hide,
-  ...props
-}) => {
-  return (
-    <Slot
-      Comp={Box}
-      {...props}
-      ref={props.ref}
-      aria-hidden={hide}
-      style={composeStyles(
-        hide &&
-          inlineStyle(() => ({
-            base: {
-              position: 'absolute',
-              overflow: 'hidden',
-              clip: 'rect(0, 0, 0, 0)',
-              whiteSpace: 'nowrap',
-              wordWrap: 'normal',
-            },
-          })),
-        props.style
-      )}
-    />
-  );
-};
+export const VisibilityHidden: VisibilityHiddenComponent = forwardRef(
+  ({ hide, ...props }, ref) => {
+    return hide ? null : <Slot Comp={View} {...props} ref={ref} />;
+  }
+);
 
 VisibilityHidden.displayName = 'VisibilityHidden';
