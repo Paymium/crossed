@@ -60,11 +60,11 @@ export const FloatingPortal = memo(
           <FloatingProvider {...floatingContext}>
             <RemoveScroll
               enabled={floatingContext.removeScroll && interShow}
-              {...composeStyles(
+              style={composeStyles(
                 interShow && positionStyles.absoluteFill,
                 !interShow && visibility.hidden,
                 style
-              ).className()}
+              )}
             >
               {floatingContext.visibilityHidden
                 ? children
