@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.1.3
+
+### Patch Changes
+
+- 6ff40d0: fix portal floating
+
 ## 3.1.2
 
 ### Patch Changes
