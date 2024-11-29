@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.1.0
+
+### Minor Changes
+
+- d70e8e6: add size props on Card component
+
 ## 3.0.2
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # crossed-doc
 
+## 0.5.0
+
+### Minor Changes
+
+- d70e8e6: add size props on Card component
+
+### Patch Changes
+
+- Updated dependencies [d70e8e6]
+  - @crossed/ui@3.1.0
+
 ## 0.4.2
 
 ### Patch Changes
