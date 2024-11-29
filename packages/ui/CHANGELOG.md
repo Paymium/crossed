@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.1.1
+
+### Patch Changes
+
+- 2cfda1f: fix card size, fix load file web and native
+
 ## 3.1.0
 
 ### Minor Changes
