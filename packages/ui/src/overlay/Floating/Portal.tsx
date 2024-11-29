@@ -15,7 +15,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { RemoveScroll } from 'react-remove-scroll';
+import { RemoveScroll } from './RemoveScroll';
 import { composeStyles, CrossedMethods } from '@crossed/styled';
 import { positionStyles } from '../../styles/position';
 import { visibility } from '../../styles/visibilityHidden';
