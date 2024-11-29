@@ -38,9 +38,7 @@ type Story = StoryObj<typeof Card>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
-  args: {
-    center: false,
-  },
+  args: { center: false },
   render: (e) => (
     <Card {...e}>
       <Card.Title>This is a Title</Card.Title>
@@ -48,6 +46,23 @@ export const Primary: Story = {
       <Card.Extra>This is a litle Extra</Card.Extra>
     </Card>
   ),
+};
+
+export const SizeXs: Story = {
+  ...Primary,
+  args: { size: 'xs' },
+};
+export const SizeSm: Story = {
+  ...Primary,
+  args: { size: 'sm' },
+};
+export const SizeMd: Story = {
+  ...Primary,
+  args: { size: 'md' },
+};
+export const SizeLg: Story = {
+  ...Primary,
+  args: { size: 'lg' },
 };
 
 export const OtherCard: Story = {

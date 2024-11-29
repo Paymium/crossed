@@ -7,7 +7,7 @@
 
 import { composeEventHandlers, withStaticProperties } from '@crossed/core';
 import { TabsContext, TriggerContext } from './context';
-import { Pressable, PressableProps } from 'react-native';
+import { PressableProps } from 'react-native';
 import {
   PropsWithChildren,
   ReactNode,

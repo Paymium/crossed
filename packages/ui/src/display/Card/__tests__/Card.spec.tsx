@@ -7,15 +7,15 @@
 
 import { render, screen } from '@crossed/test';
 import '@testing-library/jest-dom';
-import { Text } from '../../typography';
-import { Divider } from '../../layout';
+import { Text } from '../../../typography';
+import { Divider } from '../../../layout';
 import {
   Card,
   CardTitle,
   CardDescription,
   CardGroup,
   CardExtra,
-} from '../Card';
+} from '../index';
 
 expect(Card).toBeDefined();
 expect(CardTitle).toBeDefined();
