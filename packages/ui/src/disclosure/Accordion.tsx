@@ -13,19 +13,24 @@ import {
   PropsWithChildren,
   useCallback,
   useContext,
+  useEffect,
   useRef,
 } from 'react';
 import { ChevronUp } from '@crossed/unicons';
-import { LayoutChangeEvent, View, type ViewProps } from 'react-native';
+import {
+  ScrollView,
+  ScrollViewProps,
+  View,
+  type ViewProps,
+} from 'react-native';
 import { useUncontrolled, withStaticProperties } from '@crossed/core';
-import { Box } from '../layout';
 import { Floating, FloatingTriggerProps } from '../overlay/Floating';
 import Animated, {
-  LinearTransition,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { useFloatingContext } from '../overlay/Floating/context';
 
 const accordionStyles = createStyles((t) => ({
   root: {
@@ -144,25 +149,35 @@ const AccordionTrigger = forwardRef<View, AccordionTriggerProps>(
 AccordionTrigger.displayName = 'Accordion.Trigger';
 
 const Provider = ({ children }: PropsWithChildren) => {
+  const openSharedValue = useSharedValue(false);
+  const { open } = useFloatingContext();
   const height = useSharedValue(0);
-  const handleLayout = useCallback(
-    ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-      height.value = layout.height;
+  const handleLayout = useCallback<
+    NonNullable<ScrollViewProps['onContentSizeChange']>
+  >(
+    (_w, h) => {
+      height.value = h;
     },
     [height]
   );
+
+  useEffect(() => {
+    openSharedValue.value = open;
+  }, [open]);
+
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      height: withTiming(height.value),
+      height: withTiming(openSharedValue.value ? height.value : 0),
     };
-  }, [height]);
+  }, [height, openSharedValue]);
   return (
     <Floating.Content
       animatedStyle={animatedStyle}
-      style={inlineStyle(() => ({ base: { overflow: 'hidden' } }))}
-      layout={LinearTransition}
+      style={inlineStyle(() => ({
+        base: { overflow: 'hidden' },
+      }))}
     >
-      <Box onLayout={handleLayout}>{children}</Box>
+      <ScrollView onContentSizeChange={handleLayout}>{children}</ScrollView>
     </Floating.Content>
   );
 };

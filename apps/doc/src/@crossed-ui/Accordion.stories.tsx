@@ -8,7 +8,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Accordion } from '@crossed/ui/src/disclosure/Accordion';
-import { Box, Text } from '@crossed/ui';
+import { Box, Text, YBox } from '@crossed/ui';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Accordion> = {
@@ -41,7 +41,12 @@ const meta: Meta<typeof Accordion> = {
             <Accordion.Icon />
           </Accordion.Trigger>
           <Accordion.Panel>
-            <Text>Content 2</Text>
+            <YBox>
+              <Text>Content 2</Text>
+              <Text>Content 2</Text>
+              <Text>Content 2</Text>
+              <Text>Content 2</Text>
+            </YBox>
           </Accordion.Panel>
         </Accordion.Item>
         <Accordion.Item value="3">
@@ -50,7 +55,10 @@ const meta: Meta<typeof Accordion> = {
             <Accordion.Icon />
           </Accordion.Trigger>
           <Accordion.Panel>
-            <Text>Content 3</Text>
+            <YBox>
+              <Text>Content 3</Text>
+              <Text>Content 3</Text>
+            </YBox>
           </Accordion.Panel>
         </Accordion.Item>
         <Accordion.Item value="4">
