@@ -1,5 +1,13 @@
 # crossed-doc
 
+## 0.5.4
+
+### Patch Changes
+
+- 2081542: Accordion on native not show content
+- Updated dependencies [2081542]
+  - @crossed/ui@3.1.4
+
 ## 0.5.3
 
 ### Patch Changes
