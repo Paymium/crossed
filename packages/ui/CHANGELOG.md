@@ -1,5 +1,12 @@
 # @crossed/ui
 
+## 3.1.5
+
+### Patch Changes
+
+- 0954e09: rewrite space/gap Card component
+- 0954e09: add Style to accordion panel
+
 ## 3.1.4
 
 ### Patch Changes
