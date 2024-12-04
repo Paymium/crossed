@@ -29,6 +29,9 @@ const styleBox = createStyles(
     }) as const
 );
 
+/**
+ * Represents the properties for a Box component.
+ */
 export type BoxProps = {
   /**
    * extends style
@@ -36,8 +39,9 @@ export type BoxProps = {
   style?: CrossedMethods<any>;
   /**
    * Gap between children
+   * if null, disable gap
    */
-  space?: keyof typeof gapStyles;
+  space?: null | keyof typeof gapStyles;
   /**
    * Center content
    * @default false

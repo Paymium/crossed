@@ -27,7 +27,7 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     space: {
       control: 'select',
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', null],
     },
     center: { control: 'boolean' },
   },

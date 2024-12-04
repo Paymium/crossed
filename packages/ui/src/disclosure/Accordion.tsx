@@ -5,7 +5,12 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { composeStyles, createStyles, inlineStyle } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  CrossedMethods,
+  inlineStyle,
+} from '@crossed/styled';
 import {
   createContext,
   forwardRef,
@@ -181,11 +186,32 @@ const Provider = ({ children }: PropsWithChildren) => {
     </Floating.Content>
   );
 };
-export type AccordionPanelProps = PropsWithChildren;
-const AccordionPanel = ({ children }: AccordionPanelProps) => {
+/**
+ * AccordionPanelProps defines the properties for the AccordionPanel component.
+ *
+ * The AccordionPanel component is typically used within an Accordion component
+ * to display a collapsible and expandable content panel. This type extends
+ * React's PropsWithChildren, allowing it to include children components or elements.
+ *
+ * Properties:
+ * @typedef {Object} AccordionPanelProps
+ *
+ * @property {CrossedMethods<any>} [style] - An optional style property that allows
+ * for the application of custom styling methods. This style attribute can be
+ * manipulated using methods defined in CrossedMethods, which might include utility
+ * methods for advanced styling techniques or conditional styles based on theme
+ * or state.
+ */
+export type AccordionPanelProps = PropsWithChildren<{
+  style?: CrossedMethods<any>;
+}>;
+const AccordionPanel = ({ children, style }: AccordionPanelProps) => {
   return (
     <Floating.Portal
-      style={inlineStyle(() => ({ base: { position: 'relative' } }))}
+      style={composeStyles(
+        inlineStyle(() => ({ base: { position: 'relative' } })),
+        style
+      )}
       Provider={Provider}
     >
       {children}
