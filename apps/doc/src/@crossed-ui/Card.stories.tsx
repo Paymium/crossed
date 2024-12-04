@@ -27,7 +27,7 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     space: {
       control: 'select',
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', null],
     },
     center: { control: 'boolean' },
   },
@@ -50,7 +50,7 @@ export const Primary: Story = {
 
 export const SizeXs: Story = {
   ...Primary,
-  args: { size: 'xs' },
+  args: { size: 'xs', space: "xxs" },
 };
 export const SizeSm: Story = {
   ...Primary,

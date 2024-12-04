@@ -8,10 +8,10 @@
 import { createStyles } from '@crossed/styled';
 
 export const spacingStyle = createStyles(({ space }) => {
-  const xs = { padding: space.sm, gap: space.xxs };
-  const sm = { padding: space.md, gap: space.xs };
-  const md = { padding: space.lg, gap: space.md };
-  const lg = { padding: space.xl, gap: space.lg };
+  const xs = { padding: space.sm };
+  const sm = { padding: space.md };
+  const md = { padding: space.lg };
+  const lg = { padding: space.xl };
   return {
     auto: {
       base: sm,

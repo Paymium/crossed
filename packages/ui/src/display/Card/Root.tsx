@@ -5,10 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { YBox, type YBoxProps } from '../../layout';
 import { composeStyles } from '@crossed/styled';
 import { cardStyles, spacingStyle } from './styles';
+import { useMedia } from '../../useMedia';
 
 /**
  * Represents the properties for a card component.
@@ -34,10 +35,21 @@ type CardProps = YBoxProps & { size?: 'auto' | 'xs' | 'sm' | 'md' | 'lg' };
  */
 export const CardRoot = forwardRef(
   ({ role, style, size = 'auto', ...props }: CardProps, ref: any) => {
+    const { md, xl } = useMedia();
+    const space = useMemo<YBoxProps['space']>(() => {
+      if (size === 'sm') return 'xs';
+      if (size === 'xs') return 'xxs';
+      if (size === 'auto') {
+        if (xl) return 'lg';
+        if (md) return 'md';
+      }
+      return 'xs';
+    }, [size, md, xl]);
     return (
       <YBox
         ref={ref}
         role={role}
+        space={space}
         {...props}
         style={composeStyles(
           cardStyles.root,
