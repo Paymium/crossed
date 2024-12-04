@@ -50,7 +50,7 @@ export const Primary: Story = {
 
 export const SizeXs: Story = {
   ...Primary,
-  args: { size: 'xs', space: "xxs" },
+  args: { size: 'xs' },
 };
 export const SizeSm: Story = {
   ...Primary,
