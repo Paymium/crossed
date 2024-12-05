@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@crossed/test';
+import { render, screen, fireEvent } from '@crossed/test';
 import '@testing-library/jest-dom';
 import { Box } from '../Box';
 import { inlineStyle } from '@crossed/styled';
@@ -52,5 +52,29 @@ describe('Box component', () => {
     render(<Box alignSelf="center" testID="box" />);
     const boxElement = screen.getByTestId('box');
     expect(boxElement).toHaveClass('align-self-[center]');
+  });
+
+  it('Pressable box event hover', () => {
+    const onPress = jest.fn();
+    render(<Box pressable testID="box" onPointerEnter={onPress} />);
+    const boxElement = screen.getByTestId('box');
+    fireEvent.pointerEnter(boxElement);
+    expect(onPress).toBeCalledTimes(1);
+  });
+
+  it('Pressable box event onPress', () => {
+    const onPress = jest.fn();
+    render(<Box pressable testID="box" onPress={onPress} />);
+    const boxElement = screen.getByTestId('box');
+    fireEvent.click(boxElement);
+    expect(onPress).toBeCalledTimes(1);
+  });
+
+  it('view box not event onPress', () => {
+    const onPress = jest.fn();
+    render(<Box testID="box" onPress={onPress} />);
+    const boxElement = screen.getByTestId('box');
+    fireEvent.click(boxElement);
+    expect(onPress).toBeCalledTimes(0);
   });
 });

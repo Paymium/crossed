@@ -19,7 +19,7 @@ export const ContentNative = ({ sheetProps, ...props }: ContentProps) => {
   }, [setOpen]);
   return (
     <BottomSheet ref={sheet} {...sheetProps} onClose={onClose}>
-      <MenuList {...props} />
+      <MenuList {...(props as any)} />
     </BottomSheet>
   );
 };

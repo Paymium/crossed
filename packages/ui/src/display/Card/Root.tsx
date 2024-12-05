@@ -54,7 +54,7 @@ export const CardRoot = forwardRef(
         style={composeStyles(
           cardStyles.root,
           spacingStyle[size],
-          role === 'link' && cardStyles.rootLink,
+          props.pressable && cardStyles.rootLink,
           style
         )}
       />
