@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.4.0
+
+### Minor Changes
+
+- 63a2aba: Box can be pressable
+
 ## 3.3.1
 
 ### Patch Changes

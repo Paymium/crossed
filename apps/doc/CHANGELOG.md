@@ -1,5 +1,12 @@
 # crossed-doc
 
+## 0.5.9
+
+### Patch Changes
+
+- Updated dependencies [63a2aba]
+  - @crossed/ui@3.4.0
+
 ## 0.5.8
 
 ### Patch Changes
