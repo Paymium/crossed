@@ -1,5 +1,15 @@
 # @crossed/ui
 
+## 3.3.0
+
+### Minor Changes
+
+- 61e7f43: add alignSelf props to button
+
+### Patch Changes
+
+- 61e7f43: remove alignSelf, justifyContent style on Xbox, YBox
+
 ## 3.2.0
 
 ### Minor Changes
