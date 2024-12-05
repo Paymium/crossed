@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.3.1
+
+### Patch Changes
+
+- a9b20a0: fix card
+
 ## 3.3.0
 
 ### Minor Changes
