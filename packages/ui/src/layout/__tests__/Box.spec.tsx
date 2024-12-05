@@ -5,23 +5,52 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Box } from '../Box';
-import '@testing-library/jest-dom';
-
-import { describe, test } from '@jest/globals';
-
+import React from 'react';
 import { render, screen } from '@crossed/test';
-import { Text } from 'react-native';
+import '@testing-library/jest-dom';
+import { Box } from '../Box';
+import { inlineStyle } from '@crossed/styled';
 
-describe('Box', () => {
-  test('init', async () => {
-    const child = 'Pass child';
-    render(
-      <Box>
-        <Text>{child}</Text>
-      </Box>
-    );
+describe('Box component', () => {
+  it('renders correctly with default props', () => {
+    render(<Box testID="box" />);
+    const boxElement = screen.getByTestId('box');
+    expect(boxElement).toBeInTheDocument();
+    expect(boxElement).toHaveClass('display-[flex]');
+  });
 
-    await screen.findByText(child);
+  it('applies center styles when "center" is true', () => {
+    render(<Box center testID="box" />);
+    const boxElement = screen.getByTestId('box');
+    expect(boxElement).toHaveClass('align-items-[center]');
+    expect(boxElement).toHaveClass('justify-content-[center]');
+  });
+
+  it('applies custom gap styles', () => {
+    render(<Box space="lg" testID="box" />);
+    const boxElement = screen.getByTestId('box');
+    expect(boxElement).toHaveClass('gap-[var(--space-lg)]');
+  });
+
+  it('applies justify-content and align-items styles', () => {
+    render(<Box justifyContent="between" alignItems="flex-end" testID="box" />);
+    const boxElement = screen.getByTestId('box');
+    expect(boxElement).toHaveClass('justify-content-[space-between]');
+    expect(boxElement).toHaveClass('align-items-[flex-end]');
+  });
+
+  it('applies custom styles via "style" prop', () => {
+    const customStyle = inlineStyle(() => ({
+      base: { backgroundColor: 'blue' },
+    }));
+    render(<Box style={customStyle} testID="box" />);
+    const boxElement = screen.getByTestId('box');
+    expect(boxElement).toHaveClass('background-color-[blue]');
+  });
+
+  it('applies align-self styles', () => {
+    render(<Box alignSelf="center" testID="box" />);
+    const boxElement = screen.getByTestId('box');
+    expect(boxElement).toHaveClass('align-self-[center]');
   });
 });

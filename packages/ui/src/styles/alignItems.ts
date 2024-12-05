@@ -14,3 +14,11 @@ export const alignItemsStyle = createStyles(() => ({
   'flex-start': { base: { alignItems: 'flex-start' } },
   'stretch': { base: { alignItems: 'stretch' } },
 }));
+
+export const alignSelfStyle = createStyles(() => ({
+  'center': { base: { alignSelf: 'center' } },
+  'baseline': { base: { alignSelf: 'baseline' } },
+  'flex-end': { base: { alignSelf: 'flex-end' } },
+  'flex-start': { base: { alignSelf: 'flex-start' } },
+  'stretch': { base: { alignSelf: 'stretch' } },
+}));

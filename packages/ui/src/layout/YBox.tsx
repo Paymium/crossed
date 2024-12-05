@@ -5,8 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-'use client';
-
 import { composeStyles, createStyles } from '@crossed/styled';
 import { Box, type BoxProps } from './Box';
 import { forwardRef } from 'react';

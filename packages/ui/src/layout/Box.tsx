@@ -15,6 +15,8 @@ import {
 import { forwardRef } from 'react';
 import { baseStyle } from '../styles/base';
 import { gapStyles } from '../styles/gap';
+import { justifyContentStyle } from '../styles/justifyContent';
+import { alignItemsStyle, alignSelfStyle } from '../styles/alignItems';
 
 const styleBox = createStyles(
   () =>
@@ -47,6 +49,21 @@ export type BoxProps = {
    * @default false
    */
   center?: boolean;
+
+  /**
+   * Set justify-content style
+   */
+  justifyContent?: keyof typeof justifyContentStyle;
+
+  /**
+   * Set align-items style
+   */
+  alignItems?: keyof typeof alignItemsStyle;
+
+  /**
+   * Set align-self style
+   */
+  alignSelf?: keyof typeof alignSelfStyle;
 } & Omit<BaseCrossedPropsExtended & ViewProps, 'style'>;
 
 export const Box = forwardRef<View, BoxProps>(
@@ -59,6 +76,9 @@ export const Box = forwardRef<View, BoxProps>(
       active,
       hover,
       focus,
+      justifyContent,
+      alignItems,
+      alignSelf,
       ...props
     }: BoxProps,
     ref
@@ -70,6 +90,9 @@ export const Box = forwardRef<View, BoxProps>(
         {...composeStyles(
           baseStyle.view,
           styleBox.root,
+          justifyContentStyle[justifyContent],
+          alignItemsStyle[alignItems],
+          alignSelfStyle[alignSelf],
           center === true && styleBox.center,
           gapStyles[space],
           style
