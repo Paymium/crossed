@@ -15,7 +15,7 @@ import {
 import { Divider } from '../../layout';
 import { composeStyles } from '@crossed/styled';
 import { CardRoot } from './Root';
-import { cardStyles, spacingStyle } from './styles';
+import { cardStyles } from './styles';
 
 export const CardGroup = ({ children }: PropsWithChildren) => {
   const childTmp = Children.toArray(children);
