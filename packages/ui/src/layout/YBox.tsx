@@ -8,6 +8,7 @@
 import { composeStyles, createStyles } from '@crossed/styled';
 import { Box, type BoxProps } from './Box';
 import { forwardRef } from 'react';
+import { View } from 'react-native';
 
 const useYBox = createStyles(
   () =>
@@ -23,7 +24,7 @@ const useYBox = createStyles(
 
 export type YBoxProps = BoxProps;
 
-export const YBox = forwardRef((props: YBoxProps, ref: any) => {
+export const YBox = forwardRef<View, YBoxProps>((props, ref) => {
   return (
     <Box
       ref={ref}

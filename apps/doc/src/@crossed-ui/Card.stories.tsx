@@ -13,6 +13,7 @@ import { Text } from '@crossed/ui/src/typography/Text';
 import { Divider } from '@crossed/ui/src/layout/Divider';
 import { Box } from '@crossed/ui/src/layout/Box';
 import { inlineStyle } from '@crossed/styled';
+import { fn } from '@storybook/test';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Card> = {
@@ -38,7 +39,7 @@ type Story = StoryObj<typeof Card>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
-  args: { center: false },
+  args: { center: false, onPress: fn() },
   render: (e) => (
     <Card {...e}>
       <Card.Title>This is a Title</Card.Title>
@@ -46,6 +47,11 @@ export const Primary: Story = {
       <Card.Extra>This is a litle Extra</Card.Extra>
     </Card>
   ),
+};
+
+export const Pressable: Story = {
+  ...Primary,
+  args: { pressable: true, onPress: fn() },
 };
 
 export const SizeXs: Story = {

@@ -27,7 +27,7 @@ export const ContentWeb = ({ sheetProps, ...props }: ContentProps) => {
   };
   return open ? (
     <MenuList
-      {...props}
+      {...(props as any)}
       ref={refs.setFloating as any}
       style={composeStyles(
         form.input,

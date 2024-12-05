@@ -158,15 +158,14 @@ describe('Card Group', () => {
 });
 
 describe('Card', () => {
-  test('if role link, link style is applied', () => {
+  test('if pressable, link style is applied', () => {
     render(
-      <Card role="link" testID="card">
+      <Card pressable testID="card">
         <Card.Title>Toto</Card.Title>
       </Card>
     );
     expect(screen.getByTestId('card')).toHaveClass(
       'active:background-color-[var(--components--card-active-background)]'
     );
-    expect(screen.getByTestId('card')).toHaveAttribute('role', 'link');
   });
 });
