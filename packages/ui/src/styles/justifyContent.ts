@@ -13,4 +13,5 @@ export const justifyContentStyle = createStyles(() => ({
   between: { base: { justifyContent: 'space-between' } },
   around: { base: { justifyContent: 'space-around' } },
   evenly: { base: { justifyContent: 'space-evenly' } },
+  center: { base: { justifyContent: 'center' } },
 }));

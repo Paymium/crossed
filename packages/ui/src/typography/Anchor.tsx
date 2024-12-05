@@ -8,31 +8,13 @@
 import {
   composeStyles,
   createStyles,
-  useInteraction,
   type CrossedMethods,
 } from '@crossed/styled';
 import { Text, type TextProps } from './Text';
 import { forwardRef } from 'react';
-import { textStyles } from '../buttons/Button';
-
-export const useAnchor = createStyles((t) => ({
-  anchor: {
-    'base': {
-      fontFamily: t.font.family,
-      textDecorationLine: 'none',
-      cursor: 'pointer',
-    },
-    ':hover': {
-      textDecorationLine: 'underline',
-      color: t.colors.primary.primary,
-    },
-  },
-}));
 
 export const anchorStyles = createStyles(({ colors }) => ({
-  text: {
-    base: { textDecorationLine: 'underline' },
-  },
+  text: { web: { base: { cursor: 'pointer' } } },
   underline: {
     ':hover': { textDecorationLine: 'underline' },
     ':active': { textDecorationLine: 'underline' },
@@ -59,19 +41,14 @@ export type AnchorProps = Omit<TextProps, 'style'> & {
    * @type {CrossedMethods<any, any>}
    */
   style?: CrossedMethods<any, any>;
+
   /**
    * Indicates whether the anchor should use the "primary" style. Default is true.
    *
    * @type {boolean}
+   * @default true
    */
   primary?: boolean;
-
-  /**
-   * Indicates whether the anchor text should be underlined. Default is true.
-   *
-   * @type {boolean}
-   */
-  underline?: boolean;
 
   /**
    * The target URL the anchor points to.
@@ -82,22 +59,16 @@ export type AnchorProps = Omit<TextProps, 'style'> & {
 };
 
 export const Anchor = forwardRef<Text, AnchorProps>(
-  ({ primary = true, underline = true, style, href = '', ...props }, ref) => {
-    const { state, props: interactionProps } = useInteraction(props);
-
+  ({ primary = true, style, ...props }, ref) => {
     return (
       <Text
         role="link"
-        {...({ href: href || '' } as any)}
         weight="lg"
         {...props}
-        {...state}
-        {...interactionProps}
         style={composeStyles(
-          textStyles.default,
           anchorStyles.text,
+          anchorStyles.underline,
           primary ? anchorStyles.primary : anchorStyles.default,
-          underline && anchorStyles.underline,
           style
         )}
         ref={ref as any}
@@ -105,3 +76,4 @@ export const Anchor = forwardRef<Text, AnchorProps>(
     );
   }
 );
+Anchor.displayName = 'Anchor';
