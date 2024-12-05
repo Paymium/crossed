@@ -1,5 +1,15 @@
 # @crossed/ui
 
+## 3.2.0
+
+### Minor Changes
+
+- 1a52ff3: move props style justifyAlign, alignItems and alignSelf to box directly
+
+### Patch Changes
+
+- 6d9919b: fix anchor behavior
+
 ## 3.1.5
 
 ### Patch Changes
