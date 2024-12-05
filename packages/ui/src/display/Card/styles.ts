@@ -21,12 +21,6 @@ export const spacingStyle = createStyles(({ space }) => {
     sm: { base: sm },
     md: { base: md },
     lg: { base: lg },
-    composed: {
-      media: {
-        md: { paddingVertical: space.md },
-        xl: { paddingVertical: space.md },
-      },
-    },
   };
 });
 
@@ -77,7 +71,6 @@ export const cardStyles = createStyles(({ space, font, components }) => ({
       borderBottomWidth: 0,
       borderRadius: 0,
       borderTopWidth: 0,
-      paddingVertical: space.md,
     },
   },
   last: {

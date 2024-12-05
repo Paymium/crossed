@@ -32,11 +32,10 @@ export const CardGroup = ({ children }: PropsWithChildren) => {
         ...acc,
         cloneElement(child, {
           style: composeStyles(
-            child.props.style,
             isFirst && !isLast && cardStyles.first,
             isLast && !isFirst && cardStyles.last,
             isMiddle && cardStyles.middle,
-            (isMiddle || isLast) && !isFirst && spacingStyle.composed
+            child.props.style
           ),
         } as any),
       ];
