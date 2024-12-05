@@ -16,7 +16,6 @@ const useYBox = createStyles(
         base: {
           display: 'flex',
           flexDirection: 'column',
-          alignSelf: 'stretch',
         },
       },
     }) as const
@@ -28,6 +27,7 @@ export const YBox = forwardRef((props: YBoxProps, ref: any) => {
   return (
     <Box
       ref={ref}
+      alignSelf={'stretch'}
       {...props}
       style={composeStyles(useYBox.root, props.style)}
     />

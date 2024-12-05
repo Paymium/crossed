@@ -21,6 +21,7 @@ import {
 import { ButtonProps } from './types';
 import { ButtonIcon } from './Icon';
 import { buttonContext } from './context';
+import { alignSelfStyle } from '../../styles/alignItems';
 
 export const Button = withReactive(
   forwardRef<View, ButtonProps>(
@@ -31,6 +32,7 @@ export const Button = withReactive(
         loading,
         size = 'md',
         children,
+        alignSelf,
         ...props
       }: ButtonProps,
       ref
@@ -57,6 +59,7 @@ export const Button = withReactive(
             composeStyles(
               buttonSizeStyles.default,
               size && buttonSizeStyles[size],
+              alignSelf && alignSelfStyle[alignSelf],
               variant === 'primary' && buttonPrimaryStyles.root,
               variant === 'secondary' && buttonSecondaryStyles.root,
               variant === 'tertiary' && buttonTertiaryStyles.root,

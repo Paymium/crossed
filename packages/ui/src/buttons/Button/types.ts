@@ -7,6 +7,7 @@
 
 import { CrossedMethods } from '@crossed/styled';
 import { PressableProps } from 'react-native';
+import { alignSelfStyle } from '../../styles/alignItems';
 
 type Variants =
   | 'primary'
@@ -40,4 +41,9 @@ export interface ButtonProps extends Omit<PressableProps, 'style'> {
    * @default md
    */
   size?: Sizes;
+
+  /**
+   * Set align-self style
+   */
+  alignSelf?: keyof typeof alignSelfStyle;
 }

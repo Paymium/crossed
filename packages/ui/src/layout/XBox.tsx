@@ -17,7 +17,6 @@ export const useXBox = createStyles(
         base: {
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'flex-start',
           flexBasis: 'auto',
         },
       },
@@ -28,6 +27,11 @@ export type XBoxProps = BoxProps;
 
 export const XBox = forwardRef<View, XBoxProps>(({ style, ...props }, ref) => {
   return (
-    <Box ref={ref} {...props} style={composeStyles(useXBox.root, style)} />
+    <Box
+      ref={ref}
+      justifyContent={'start'}
+      {...props}
+      style={composeStyles(useXBox.root, style)}
+    />
   );
 });
