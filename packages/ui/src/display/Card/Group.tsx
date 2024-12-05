@@ -15,7 +15,7 @@ import {
 import { Divider } from '../../layout';
 import { composeStyles } from '@crossed/styled';
 import { CardRoot } from './Root';
-import { cardStyles, spacingStyle } from './styles';
+import { cardStyles } from './styles';
 
 export const CardGroup = ({ children }: PropsWithChildren) => {
   const childTmp = Children.toArray(children);
@@ -32,11 +32,10 @@ export const CardGroup = ({ children }: PropsWithChildren) => {
         ...acc,
         cloneElement(child, {
           style: composeStyles(
-            child.props.style,
             isFirst && !isLast && cardStyles.first,
             isLast && !isFirst && cardStyles.last,
             isMiddle && cardStyles.middle,
-            (isMiddle || isLast) && !isFirst && spacingStyle.composed
+            child.props.style
           ),
         } as any),
       ];
