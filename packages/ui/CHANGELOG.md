@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.4.1
+
+### Patch Changes
+
+- remove withDefaultProps from render for box
+
 ## 3.4.0
 
 ### Minor Changes

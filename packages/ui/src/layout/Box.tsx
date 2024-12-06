@@ -122,10 +122,14 @@ export const Box: BoxComponent = forwardRef(
       [styles]
     );
     const Comp = useMemo(() => {
-      return pressable
-        ? withDefaultProps(Pressable, { style: handleStyles })
-        : withDefaultProps(View, { style: styles.rnw().style });
-    }, [pressable, styles, handleStyles]);
-    return <Comp ref={ref} {...(props as any)} />;
+      return pressable ? Pressable : View;
+    }, [pressable]);
+    return (
+      <Comp
+        ref={ref}
+        {...(props as any)}
+        style={pressable ? handleStyles : styles.rnw().style}
+      />
+    );
   }
 );
