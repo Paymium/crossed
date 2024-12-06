@@ -7,9 +7,9 @@
 
 import { CrossedPropsExtended } from '../types';
 import { isWeb } from '../isWeb';
-import { cleanClassName } from './cleanClassName';
 import { cache } from './cache';
 import { apply } from './apply';
+import { cleanClassName } from './cleanClassName';
 
 export const rnw =
   ({
@@ -32,6 +32,10 @@ export const rnw =
           finalStyle[nameStyle] = finalStyle[nameStyle]
             ? `${finalStyle[nameStyle]} ${className}`
             : className;
+
+          finalStyle[nameStyle] = Array.from(
+            cleanClassName(finalStyle[nameStyle].split(' ')).values()
+          ).join(' ');
         });
       } else {
         finalStyle = { ...finalStyle, ...Object.values(body)[0] };

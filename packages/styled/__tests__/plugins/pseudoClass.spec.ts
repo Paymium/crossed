@@ -84,9 +84,7 @@ describe('PseudoClassPlugin', () => {
       style: [
         {
           '$$css': true,
-          'active:color-[red]': 'active:color-[red]',
-          'color-[black]': 'color-[black]',
-          'hover:color-[white]': 'hover:color-[white]',
+          'color': 'color-[black] hover:color-[white] active:color-[red]',
         },
         {},
       ],
@@ -95,9 +93,7 @@ describe('PseudoClassPlugin', () => {
       style: [
         {
           '$$css': true,
-          'active:color-[red]': 'active:color-[red]',
-          'color-[black]': 'color-[black]',
-          'hover:color-[white]': 'hover:color-[white]',
+          'color': 'color-[black] hover:color-[white] active:color-[red]',
         },
         {},
       ],
@@ -106,9 +102,7 @@ describe('PseudoClassPlugin', () => {
       style: [
         {
           '$$css': true,
-          'active:color-[red]': 'active:color-[red]',
-          'hover:color-[white]': 'hover:color-[white]',
-          'color-[white]': 'color-[white]',
+          'color': 'hover:color-[white] color-[white] active:color-[red]',
         },
         {},
       ],
@@ -117,9 +111,7 @@ describe('PseudoClassPlugin', () => {
       style: [
         {
           '$$css': true,
-          'active:color-[red]': 'active:color-[red]',
-          'hover:color-[white]': 'hover:color-[white]',
-          'color-[red]': 'color-[red]',
+          'color': 'hover:color-[white] active:color-[red] color-[red]',
         },
         {},
       ],
@@ -128,9 +120,7 @@ describe('PseudoClassPlugin', () => {
       style: [
         {
           '$$css': true,
-          'active:color-[red]': 'active:color-[red]',
-          'hover:color-[white]': 'hover:color-[white]',
-          'color-[red]': 'color-[red]',
+          'color': 'hover:color-[white] active:color-[red] color-[red]',
         },
         {},
       ],

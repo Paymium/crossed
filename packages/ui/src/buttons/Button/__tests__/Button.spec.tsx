@@ -68,22 +68,30 @@ describe('Button', () => {
 
   it('applies the correct styles for primary variant', () => {
     render(<Button variant="primary">Primary</Button>);
-    expect(screen.getByRole('button')).toMatchSnapshot();
+    expect(screen.getByRole('button')).toHaveClass(
+      'background-color-[var(--components--action-primary-default-background)]'
+    );
   });
 
   it('applies the correct styles for secondary variant', () => {
     render(<Button variant="secondary">Secondary</Button>);
-    expect(screen.getByRole('button')).toMatchSnapshot();
+    expect(screen.getByRole('button')).toHaveClass(
+      'background-color-[var(--components--action-secondary-default-background)]'
+    );
   });
 
   it('applies the correct styles for lg size', () => {
     render(<Button size="lg">Large Button</Button>);
-    expect(screen.getByRole('button')).toMatchSnapshot();
+    expect(screen.getByRole('button')).toHaveClass(
+      'padding-horizontal-[var(--space-lg)]'
+    );
   });
 
   it('applies the correct styles for sm size', () => {
     render(<Button size="sm">Small Button</Button>);
-    expect(screen.getByRole('button')).toMatchSnapshot();
+    expect(screen.getByRole('button')).toHaveClass(
+      'padding-horizontal-[var(--space-xs)]'
+    );
   });
 
   it('supports forwarding refs', () => {

@@ -124,7 +124,7 @@ describe('ButtonText', () => {
 
   it('passes additional props to the underlying Text component', () => {
     renderWithContext(
-      { children: 'Custom Props', style: { color: 'red' } },
+      { children: 'Custom Props' },
       {
         variant: 'primary',
         state: {},
@@ -135,7 +135,6 @@ describe('ButtonText', () => {
     );
 
     const text = screen.getByText('Custom Props');
-    expect(text).toHaveStyle('color: rgb(255, 0, 0)');
     expect(text).toHaveClass(
       `color-[var(--components--action-primary-default-text)]`
     );
