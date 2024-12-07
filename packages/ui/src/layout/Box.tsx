@@ -16,7 +16,6 @@ import { baseStyle } from '../styles/base';
 import { gapStyles } from '../styles/gap';
 import { justifyContentStyle } from '../styles/justifyContent';
 import { alignItemsStyle, alignSelfStyle } from '../styles/alignItems';
-import { withDefaultProps } from '@crossed/core';
 
 const styleBox = createStyles(
   () =>
