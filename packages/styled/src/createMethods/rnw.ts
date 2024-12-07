@@ -38,7 +38,10 @@ export const rnw =
           ).join(' ');
         });
       } else {
-        finalStyle = { ...finalStyle, ...Object.values(body)[0] };
+        finalStyle = Object.values(body).reduce(
+          (acc, curr) => ({ ...acc, ...curr }),
+          finalStyle
+        );
       }
     });
     const result = {
