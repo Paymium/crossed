@@ -40,7 +40,7 @@ const esmBuild = (configPath: string) => {
     format: 'cjs',
     target: 'node14',
   });
-  // eslint-disable-next-line no-eval
+
   return codeBuild;
 };
 
@@ -248,15 +248,17 @@ export class Loader {
     // const ctx = plugins.reduce((acc, { utils }) => {
     //   return { ...acc, ...(utils?.() || undefined) };
     // }, {});
-
-    Object.entries(Registry.getThemes()).forEach(([themeName, theme]) => {
-      this.addClassname({
-        prefix: '.',
-        body: {
-          [`${themeName}`]: parse(theme, undefined, true).values,
-        },
+    const theme = Registry.getThemes();
+    if (theme) {
+      Object.entries(Registry.getThemes()).forEach(([themeName, theme]) => {
+        this.addClassname({
+          prefix: '.',
+          body: {
+            [`${themeName}`]: parse(theme, undefined, true).values,
+          },
+        });
       });
-    });
+    }
 
     // plugins.forEach(({ init }) =>
     //   init?.({ addClassname: this.addClassname, isWeb: true, ...ctx })
