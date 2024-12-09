@@ -44,8 +44,19 @@ export const rnw =
         );
       }
     });
+    let styletmp: object | undefined;
+    (Array.isArray(props.style) ? props.style : [props.style])
+      .flat(Infinity)
+      .forEach((st) => {
+        if (!st) return;
+        if (!(st as any).$$css) {
+          styletmp = { ...styletmp, ...st };
+        }
+      });
     const result = {
-      style: [finalStyle, stylesParent],
+      style: styletmp
+        ? [finalStyle, styletmp, stylesParent]
+        : [finalStyle, stylesParent],
     };
     cache.set({ style: styleOfKey, props, stylesParent }, result);
     return result;

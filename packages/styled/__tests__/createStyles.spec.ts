@@ -102,6 +102,7 @@ describe('createStyles', () => {
           'borderColor': 'border-color-[red]',
           'color': 'color-[white]',
         },
+        { color: 'black', backgroundColor: 'white' },
         {},
       ],
     });
@@ -117,6 +118,7 @@ describe('createStyles', () => {
           'borderColor': 'border-color-[red]',
           'color': 'color-[white]',
         },
+        { color: 'black', backgroundColor: 'white' },
         {},
       ],
     });
