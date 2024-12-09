@@ -8,7 +8,7 @@
     "documentation": "turbo run dev --filter=crossed-doc",
     "test": "turbo run test --concurrency 1",
     "dev": "turbo run dev",
-    "watch": "turbo run watch --filter=@crossed* --no-cache",
+    "watch": "turbo run watch --filter=@crossed* --filter=vite-plugin-crossed-styled --no-cache",
     "build": "turbo run build --filter=@crossed* --no-cache",
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mdx}\"",
