@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { YBox, XBox, Select, Text, Sheet, Button } from '@crossed/ui';
+import { XBox, Text, Sheet, Button } from '@crossed/ui';
 import { createStyles } from '@crossed/styled';
 import { FlatList } from 'react-native';
 
@@ -17,7 +17,7 @@ const styles = createStyles(() => ({
       justifyContent: 'space-between',
     },
   },
-  end: { base: { alignSelt: 'flex-end', flexDirection: 'row' } },
+  end: { base: { alignSelf: 'flex-end', flexDirection: 'row' } },
 }));
 
 export default function SheetScreen() {

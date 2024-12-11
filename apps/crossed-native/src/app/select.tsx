@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { YBox, XBox, Select, Text } from '@crossed/ui';
+import { XBox, Select, Text } from '@crossed/ui';
 import { createStyles } from '@crossed/styled';
 import { FlatList } from 'react-native';
 

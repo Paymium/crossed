@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { composeRefs, useUncontrolled } from '@crossed/core';
+import { useUncontrolled } from '@crossed/core';
 import { forwardRef, type PropsWithChildren, useCallback, useRef } from 'react';
 import { type SheetContext, sheetContext } from './context';
 import { useSharedValue } from 'react-native-reanimated';
