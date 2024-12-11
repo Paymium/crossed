@@ -1,5 +1,16 @@
 # crossed-doc
 
+## 0.6.0
+
+### Minor Changes
+
+- decec7a: change completly sheet and adapt select
+
+### Patch Changes
+
+- Updated dependencies [decec7a]
+  - @crossed/ui@3.5.0
+
 ## 0.5.11
 
 ### Patch Changes
