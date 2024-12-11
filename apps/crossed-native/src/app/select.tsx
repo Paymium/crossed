@@ -28,7 +28,7 @@ export default function TabOneScreen() {
       ListHeaderComponent={
         <>
           <XBox alignItems="center" space="sm">
-            <Select defaultValue="en">
+            <Select>
               <Select.Trigger>
                 <XBox alignItems="center" justifyContent="between">
                   <Text>
@@ -48,7 +48,6 @@ export default function TabOneScreen() {
           </XBox>
         </>
       }
-      ItemSeparatorComponent={() => <YBox style={{ height: 5 }} />}
       renderItem={() => null}
     />
   );

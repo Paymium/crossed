@@ -16,7 +16,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStyles } from '@crossed/styled';
 import { AlertScreen } from './src/app/alert';
 import AccordionScreen from './src/app/accordion';
+import SelectScreen from './src/app/select';
 import type { RootStackParamList } from './src/routes';
+import SheetScreen from './src/app/sheet';
+import { CrossedUIProvider } from '@crossed/ui';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -25,18 +28,22 @@ const styles = createStyles(() => ({ safeArea: { base: { flex: 1 } } }));
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <SafeAreaView {...styles.safeArea.style()}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="/index">
-          <Stack.Screen name="/index" component={TabOneScreen} />
-          <Stack.Screen name="/accordion" component={AccordionScreen} />
-          <Stack.Screen name="/button" component={ButtonScreen} />
-          <Stack.Screen name="/banner" component={BannerScreen} />
-          <Stack.Screen name="/alert" component={AlertScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+    <CrossedUIProvider>
+      <SafeAreaView {...styles.safeArea.style()}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="/index">
+            <Stack.Screen name="/index" component={TabOneScreen} />
+            <Stack.Screen name="/accordion" component={AccordionScreen} />
+            <Stack.Screen name="/button" component={ButtonScreen} />
+            <Stack.Screen name="/banner" component={BannerScreen} />
+            <Stack.Screen name="/alert" component={AlertScreen} />
+            <Stack.Screen name="/sheet" component={SheetScreen} />
+            <Stack.Screen name="/select" component={SelectScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </CrossedUIProvider>
   );
 }
 

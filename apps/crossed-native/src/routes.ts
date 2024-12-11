@@ -17,6 +17,7 @@ export type RootStackParamList = {
   '/input': undefined;
   '/radio': undefined;
   '/select': undefined;
+  '/sheet': undefined;
 };
 
 export type AccordionScreenProps = NativeStackScreenProps<
