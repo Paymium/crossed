@@ -47,7 +47,6 @@
   },
   "dependencies": {
     "@crossed/core": "0.8.2",
-    "@floating-ui/react": "^0.25.1",
     "@gorhom/portal": "^1.0.14",
     "@react-native-aria/focus": "^0.2.8",
     "@react-native-aria/interactions": "^0.2.10",

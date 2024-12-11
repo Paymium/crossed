@@ -12,7 +12,6 @@
     "@babel/runtime": "^7.23.8",
     "@crossed/babel-plugin": "0.4.0",
     "@crossed/core": "0.8.2",
-    "@crossed/demo": "0.3.1",
     "@crossed/styled": "workspace:^",
     "@crossed/theme": "workspace:2.1.1",
     "@crossed/ui": "3.4.1",

@@ -112,8 +112,6 @@
   },
   "dependencies": {
     "@expo/html-elements": "^0.5.1",
-    "@floating-ui/dom": "^1.6.3",
-    "@floating-ui/react": "^0.25.1",
     "@gorhom/portal": "^1.0.14",
     "@iconscout/react-native-unicons": "^2.0.2",
     "@react-navigation/native": "^6.0.2",

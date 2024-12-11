@@ -10,7 +10,6 @@ import {
   composeEventHandlers,
   useUncontrolled,
   withStaticProperties,
-  composeRefs,
 } from '@crossed/core';
 import {
   useCallback,
@@ -35,7 +34,7 @@ import { VisibilityHidden } from '@crossed/primitive';
 import { useFocusScope } from './Focus';
 import { ChevronDown } from '@crossed/unicons';
 import { composeStyles } from '@crossed/styled';
-import { useFloating } from './useFloating';
+// import { useFloating } from './useFloating';
 import { FormControl, FormField, FormLabel } from '../Form';
 import { XBox } from '../../layout/XBox';
 import { YBox } from '../../layout/YBox';
@@ -95,7 +94,7 @@ const SelectRoot = memo(
     clearable,
     error,
   }: SelectProps) => {
-    const { refs, floatingStyles } = useFloating();
+    // const { refs, floatingStyles } = useFloating();
     const bottomSheetModalRef = useRef<BottomSheetMethods>(null);
     const renderValue = useRef<ReactNode>();
     const triggerLayout = useRef<LayoutRectangle | undefined>();
@@ -128,8 +127,8 @@ const SelectRoot = memo(
         id={id}
         // hover={hover}
         // focus={focus}
-        refs={refs}
-        floatingStyles={floatingStyles}
+        // refs={refs}
+        // floatingStyles={floatingStyles}
         label={label}
         description={description}
         extra={extra}
@@ -160,7 +159,7 @@ const SelectTrigger = withStaticProperties(
       onBlur,
       onFocus,
       value,
-      refs,
+      // refs,
       label,
       description,
       extra,
@@ -222,7 +221,7 @@ const SelectTrigger = withStaticProperties(
                 triggerLayout.current = layout;
               }}
               {...props}
-              ref={composeRefs(pressableRef, refs.setReference as any)}
+              ref={pressableRef}
               onFocus={composeEventHandlers(props.onFocus, onFocus)}
               onBlur={composeEventHandlers(props.onBlur, onBlur)}
               style={({ pressed }) => {

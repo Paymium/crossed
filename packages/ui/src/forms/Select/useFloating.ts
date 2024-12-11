@@ -5,11 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { UseFloating } from './types';
+// import type { UseFloating } from './types';
 
-export const useFloating: UseFloating = () => {
-  return {
-    refs: {},
-    floatingStyles: {},
-  } as any;
+export const useFloating = () => {
+  // return {
+  //   refs: {},
+  //   floatingStyles: {},
+  // } as any;
 };
