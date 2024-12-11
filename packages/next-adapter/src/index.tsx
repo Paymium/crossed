@@ -12,6 +12,7 @@ export const withCrossed = (options: StylePluginOptions) => {
       ...nextConfig,
       transpilePackages: [
         ...(nextConfig.transpilePackages || []),
+        'react-native-actions-sheet',
         'react-native',
       ],
       webpack: (config: any, context: any) => {

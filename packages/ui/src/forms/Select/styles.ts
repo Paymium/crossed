@@ -48,6 +48,7 @@ export const useSelect = createStyles((t) => ({
       paddingVertical: t.space.xs,
       paddingHorizontal: t.space.xs,
       gap: t.space.xs,
+      maxHeight: 250,
     },
   },
   icon: {

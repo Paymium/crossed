@@ -20,12 +20,13 @@ import {
   Children,
   isValidElement,
   type PropsWithChildren,
+  useId,
 } from 'react';
 import { Button, type ButtonProps } from '../../buttons/Button';
 import { type MenuListItemProps, MenuList } from '../../display/MenuList';
 import { Pressable, TextInput, View, type LayoutRectangle } from 'react-native';
 import { form } from '../../styles/form';
-import { useSelectProvider, type Context } from './context';
+import { useSelectProvider, type Context, Value } from './context';
 import { Provider } from './Provider';
 import type { BottomSheetMethods } from '@devvie/bottom-sheet';
 import { useSelect } from './styles';
@@ -40,40 +41,48 @@ import { FormControl, FormField, FormLabel } from '../Form';
 import { XBox } from '../../layout/XBox';
 import { YBox } from '../../layout/YBox';
 import { CloseButton } from '../../buttons/CloseButton';
-import { Center } from '../../layout';
+import { Box, Center } from '../../layout';
+import { Checkbox } from '../Checkbox';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
-  value: string | number
-): ReactNode | undefined => {
+  value: Value
+): ReactNode[] | undefined => {
   if (!children) {
     return undefined;
   }
   return typeof children === 'function'
     ? undefined
-    : Children.toArray(children).reduce<ReactNode | undefined>((acc, e) => {
-        if (acc || !isValidElement(e)) {
-          return acc;
-        }
-        if (e.type && (e.type as any)?.displayName === 'Select.Option') {
-          if (e.props?.value === value) {
-            acc = e.props.children;
+    : Children.toArray(children)
+        .reduce<ReactNode[]>((acc, e) => {
+          if (!isValidElement(e)) return acc;
+          if (e.type && (e.type as any)?.displayName === 'Select.Option') {
+            if (
+              (Array.isArray(value) && value.includes(e.props?.value)) ||
+              e.props?.value === value
+            ) {
+              acc.push(e.props.children);
+            }
+            return acc;
+          } else {
+            acc = findChild(e?.props?.children, value) || [];
           }
           return acc;
-        } else {
-          acc = findChild(e?.props?.children, value);
-        }
-        return acc;
-      }, undefined);
+        }, [])
+        .filter(Boolean);
 };
 
 type SelectProps = PropsWithChildren<
-  UseUncontrolledInput<string> &
-    Partial<Pick<ButtonProps, 'variant' | 'onFocus' | 'onBlur' | 'id'>> & {
+  UseUncontrolledInput<Value> &
+    Partial<Pick<ButtonProps, 'variant' | 'onFocus' | 'onBlur' | 'id'>> &
+    Partial<
+      Pick<
+        Context,
+        'label' | 'description' | 'extra' | 'clearable' | 'error' | 'multiple'
+      >
+    > & {
       adapt?: boolean;
-    } & Partial<
-      Pick<Context, 'label' | 'description' | 'extra' | 'clearable' | 'error'>
-    >
+    }
 >;
 
 const SelectRoot = memo(
@@ -88,6 +97,7 @@ const SelectRoot = memo(
     onFocus,
     onBlur,
     id,
+    multiple,
     // hover,
     // focus,
     label,
@@ -100,9 +110,9 @@ const SelectRoot = memo(
     const bottomSheetModalRef = useRef<BottomSheetMethods>(null);
     const renderValue = useRef<ReactNode>();
     const triggerLayout = useRef<LayoutRectangle | undefined>();
-    const [value, setValue] = useUncontrolled<string>({
+    const [value, setValue] = useUncontrolled<Value>({
       value: valueProps,
-      defaultValue,
+      defaultValue: defaultValue ?? (multiple ? [] : ''),
       finalValue,
       onChange: (e) => {
         onChange?.(e as any);
@@ -136,6 +146,7 @@ const SelectRoot = memo(
         extra={extra}
         clearable={clearable}
         error={error}
+        multiple={multiple}
       >
         <FormField>{children}</FormField>
       </Provider>
@@ -189,7 +200,11 @@ const SelectTrigger = withStaticProperties(
     }, [open, setOpen, sheet, triggerLayout]);
     const inputRender = (
       <VisibilityHidden hide>
-        <TextInput id={id} focusable={false} value={value} />
+        <TextInput
+          id={id}
+          focusable={false}
+          value={Array.isArray(value) ? value.join(', ') : value}
+        />
       </VisibilityHidden>
     );
     const showClear = clearable && value;
@@ -219,13 +234,13 @@ const SelectTrigger = withStaticProperties(
 
     return (
       <YBox space="xxs">
-        {(label || description || extra) && (
+        {!!(label || description || extra) && (
           <XBox alignItems="center" space="xxs">
-            {label && <FormLabel {...states}>{label}</FormLabel>}
-            {description && (
+            {!!label && <FormLabel {...states}>{label}</FormLabel>}
+            {!!description && (
               <Text style={form.labelDescription}>{description}</Text>
             )}
-            {extra && (
+            {!!extra && (
               <Text style={form.labelExtra} textAlign="right">
                 {extra}
               </Text>
@@ -272,7 +287,7 @@ const SelectTrigger = withStaticProperties(
             </XBox>
           )}
         </XBox>
-        {error && <Text color="error">{error.toString()}</Text>}
+        {!!error && <Text color="error">{error.toString()}</Text>}
       </YBox>
     );
   }),
@@ -282,40 +297,54 @@ SelectTrigger.displayName = 'Select.Trigger';
 
 type SelectOptionProps = MenuListItemProps & { value: string };
 const SelectOption = ({ value, children, ...props }: SelectOptionProps) => {
-  const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
+  const {
+    setOpen,
+    setValue,
+    value: valueGlobal,
+    multiple,
+  } = useSelectProvider();
   const focusProps = useFocusScope();
   const { colors } = useTheme();
   const handleRender = useCallback(
-    (e) => (
-      <>
-        {value === valueGlobal && (
-          <Center
-            style={inlineStyle(({ space }) => ({
-              base: {
-                position: 'absolute',
-                left: space.xxs,
-                top: 0,
-                bottom: 0,
-              },
-            }))}
-          >
-            <Check size={16} color={colors.text.secondary} />
-          </Center>
-        )}
-        {typeof children === 'function' ? children(e) : children}
-      </>
-    ),
-    [colors]
+    (e) => {
+      const checked =
+        value === valueGlobal ||
+        (Array.isArray(valueGlobal) && valueGlobal.includes(value));
+      return (
+        <XBox space={'xxs'}>
+          {multiple ? (
+            <Checkbox checked={checked} onChecked={onPress} />
+          ) : value === valueGlobal ? (
+            <Center>
+              <Check size={16} color={colors.text.secondary} />
+            </Center>
+          ) : (
+            <Box style={inlineStyle(() => ({ base: { width: 16 } }))} />
+          )}
+          {typeof children === 'function' ? children(e) : children}
+        </XBox>
+      );
+    },
+    [colors, children, multiple, valueGlobal, value]
   );
+  const onPress = useCallback(() => {
+    if (!multiple) setOpen(false);
+    if (multiple && Array.isArray(valueGlobal)) {
+      setValue(
+        valueGlobal.includes(value)
+          ? valueGlobal.filter((t) => t !== value)
+          : [...valueGlobal, value]
+      );
+      return;
+    }
+    setValue(value);
+  }, [setOpen, setValue, valueGlobal, multiple, value]);
   return (
     <MenuList.Item
       {...props}
       {...focusProps}
       style={useSelect.options}
-      onPress={composeEventHandlers(() => {
-        setOpen(false);
-        setValue(value);
-      }, props.onPress)}
+      onPress={composeEventHandlers(onPress, props.onPress)}
     >
       {handleRender}
     </MenuList.Item>
@@ -329,11 +358,39 @@ const SelectOptionText = (props: TextProps) => {
 SelectOptionText.displayName = 'Select.Option.Text';
 
 const SelectValue = ({ style, ...props }: Omit<TextProps, 'children'>) => {
-  const { renderValue } = useSelectProvider();
+  const { renderValue, multiple } = useSelectProvider();
+  const id = useId();
+  const tmp = Array.isArray(renderValue.current)
+    ? renderValue.current
+    : [renderValue.current];
+  const toRender = tmp.length > 4 ? tmp.slice(0, 4) : tmp;
+
   return (
-    <Text {...props} style={composeStyles(useSelect.value, style)}>
-      {renderValue.current}
-    </Text>
+    <XBox style={inlineStyle(() => ({ base: { gap: 5 } }))}>
+      {toRender.map((e, i) => (
+        <Text
+          key={`${id}-${e}`}
+          {...props}
+          style={composeStyles(
+            useSelect.value,
+            multiple &&
+              inlineStyle(({ colors, space }) => ({
+                base: {
+                  backgroundColor: colors.info.light,
+                  padding: space.xxs,
+                  borderRadius: 4,
+                  borderWidth: 1,
+                  borderColor: colors.info.primary,
+                  color: colors.info.dark,
+                },
+              })),
+            style
+          )}
+        >
+          {i === 3 ? '...' : e}
+        </Text>
+      ))}
+    </XBox>
   );
 };
 SelectValue.id = 'Select.Value';

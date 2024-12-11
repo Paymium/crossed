@@ -10,7 +10,7 @@ import { useSelectProvider } from './context';
 import { form } from '../../styles/form';
 import { useSelect } from './styles';
 import type { ContentProps } from './types';
-import { composeStyles, createStyles } from '@crossed/styled';
+import { composeStyles, createStyles, inlineStyle } from '@crossed/styled';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 const duration = 100;
@@ -34,6 +34,7 @@ export const ContentWeb = ({ sheetProps, ...props }: ContentProps) => {
         style={composeStyles(
           form.input,
           useSelect.content,
+          inlineStyle(() => ({ web: { base: { overflowY: 'auto' } } })),
           styles.dynamic({ ...floatingStyles, minWidth: width })
         )}
       />

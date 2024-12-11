@@ -44,6 +44,21 @@ const meta: Meta<typeof Select> = {
           <Select.Option value="Select 2">
             <Select.Option.Text>Select 2</Select.Option.Text>
           </Select.Option>
+          <Select.Option value="Select 3">
+            <Select.Option.Text>Select 3</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 4">
+            <Select.Option.Text>Select 4</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 5">
+            <Select.Option.Text>Select 5</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 6">
+            <Select.Option.Text>Select 6</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 7">
+            <Select.Option.Text>Select 7</Select.Option.Text>
+          </Select.Option>
         </Select.Content>
       </Select>
     </YBox>
@@ -87,5 +102,12 @@ export const WithRightElement: Story = {
   ...Primary,
   args: {
     ...Primary.args,
+  },
+};
+export const Multiple: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    multiple: true,
   },
 };

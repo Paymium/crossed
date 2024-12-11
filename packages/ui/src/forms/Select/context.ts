@@ -16,11 +16,14 @@ import type {
 import type { BottomSheetMethods } from '@devvie/bottom-sheet';
 import type { UseFloatingReturn } from '@floating-ui/react';
 
+export type Value = string | string[];
+
 export type Context = {
+  multiple?: boolean;
   open: boolean;
   setOpen: (_p: boolean) => void;
-  value: string;
-  setValue: (_p: string) => void;
+  value: Value;
+  setValue: (_p: Value) => void;
   renderValue: MutableRefObject<ReactNode>;
   variant?: ButtonProps['variant'];
   triggerLayout: MutableRefObject<LayoutRectangle | undefined>;
