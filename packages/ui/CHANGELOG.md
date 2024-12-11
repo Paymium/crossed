@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 3.4.2
+
+### Patch Changes
+
+- 2559c35: remove floating
+- Updated dependencies [2559c35]
+  - @crossed/primitive@1.9.1
+
 ## 3.4.1
 
 ### Patch Changes

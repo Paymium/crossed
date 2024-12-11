@@ -1,5 +1,11 @@
 # @crossed/primitive
 
+## 1.9.1
+
+### Patch Changes
+
+- 2559c35: remove floating
+
 ## 1.9.0
 
 ### Minor Changes
