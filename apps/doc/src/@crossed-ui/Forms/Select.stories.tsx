@@ -20,9 +20,10 @@ const meta: Meta<typeof Select> = {
     'Select.Value': Select.Value,
     'Select.Content': Select.Content,
     'Select.Option': Select.Option,
+    'Select.Option.Text': Select.Option.Text,
   },
   tags: ['autodocs'],
-  parameters: { layout: 'padded' },
+  parameters: { layout: 'centered' },
   argTypes: {
     label: { control: 'text' },
     clearable: { control: 'boolean' },
@@ -31,14 +32,18 @@ const meta: Meta<typeof Select> = {
     extra: { control: 'text' },
   },
   render: (e) => (
-    <YBox {...e} style={inlineStyle(() => ({ base: { padding: 100 } }))}>
-      <Select>
+    <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
+      <Select {...e}>
         <Select.Trigger>
           <Select.Value />
         </Select.Trigger>
         <Select.Content>
-          <Select.Option value="Select 1">Select 1</Select.Option>
-          <Select.Option value="Select 2">Select 2</Select.Option>
+          <Select.Option value="Select 1">
+            <Select.Option.Text>Select 1</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 2">
+            <Select.Option.Text>Select 2</Select.Option.Text>
+          </Select.Option>
         </Select.Content>
       </Select>
     </YBox>

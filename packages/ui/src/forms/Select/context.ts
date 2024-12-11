@@ -14,7 +14,7 @@ import type {
   TargetedEvent,
 } from 'react-native';
 import type { BottomSheetMethods } from '@devvie/bottom-sheet';
-// import type { UseFloatingReturn } from '@floating-ui/react';
+import type { UseFloatingReturn } from '@floating-ui/react';
 
 export type Context = {
   open: boolean;
@@ -31,8 +31,8 @@ export type Context = {
   id?: string;
   // hover?: boolean;
   // focus: boolean;
-  // refs: UseFloatingReturn['refs'];
-  // floatingStyles: UseFloatingReturn['floatingStyles'];
+  refs: UseFloatingReturn['refs'];
+  floatingStyles: UseFloatingReturn['floatingStyles'];
 
   label?: string;
   description?: string;

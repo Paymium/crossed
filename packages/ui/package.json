@@ -82,7 +82,7 @@
     "@crossed/unicons": "2.0.1",
     "@devvie/bottom-sheet": "0.3.0",
     "react-native": "^0.73.6",
-    "react-native-gesture-handler": "~2.14.0",
+    "react-native-gesture-handler": "~2.21.2",
     "react-native-reanimated": "^3.10.1"
   },
   "devDependencies": {
@@ -105,13 +105,16 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-native": "^0.73.6",
-    "react-native-gesture-handler": "~2.14.0",
+    "react-native-gesture-handler": "~2.21.2",
     "react-native-reanimated": "^3.10.1",
     "react-native-web": "^0.19.10",
     "tsconfig": "*"
   },
   "dependencies": {
     "@expo/html-elements": "^0.5.1",
+    "@floating-ui/dom": "^1.6.12",
+    "@floating-ui/react": "^0.27.0",
+    "@gorhom/bottom-sheet": "^5.0.6",
     "@gorhom/portal": "^1.0.14",
     "@iconscout/react-native-unicons": "^2.0.2",
     "@react-navigation/native": "^6.0.2",
@@ -122,6 +125,7 @@
     "react-aria": "^3.27.0",
     "react-focus-lock": "^2.11.2",
     "react-focus-on": "^3.9.2",
+    "react-native-actions-sheet": "^0.9.7",
     "react-native-screens": "~3.29.0",
     "react-native-svg": "^15.1.0",
     "react-native-unistyles": "^2.0.0",

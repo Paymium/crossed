@@ -10,7 +10,14 @@
 // export { CrossedTheme, useCrossedTheme } from '@crossed/styled';
 import { PortalProvider } from '@gorhom/portal';
 import type { PropsWithChildren } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export const CrossedUIProvider = ({ children }: PropsWithChildren) => {
-  return <PortalProvider>{children}</PortalProvider>;
+  return (
+    <PortalProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        {children}
+      </GestureHandlerRootView>
+    </PortalProvider>
+  );
 };

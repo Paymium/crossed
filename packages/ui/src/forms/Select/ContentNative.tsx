@@ -6,21 +6,34 @@
  */
 
 import { MenuList } from '../../display/MenuList';
+import { Sheet } from '../../overlay/Sheet';
 import { useSelectProvider } from './context';
 import type { ContentProps } from './types';
-import BottomSheet from '@devvie/bottom-sheet';
-import { useCallback } from 'react';
+import { useEffect, useRef } from 'react';
+import { composeStyles, inlineStyle } from '@crossed/styled';
 
 export const ContentNative = ({ sheetProps, ...props }: ContentProps) => {
   const all = useSelectProvider();
-  const { sheet, setOpen } = all;
-  const onClose = useCallback(() => {
-    setOpen(false);
-  }, [setOpen]);
+  const { open } = all;
+  const refSheet = useRef(null);
+  useEffect(() => {
+    if (open) refSheet.current.show();
+    else refSheet.current.hide();
+  }, [open]);
   return (
-    <BottomSheet ref={sheet} {...sheetProps} onClose={onClose}>
-      <MenuList {...(props as any)} />
-    </BottomSheet>
+    <Sheet ref={refSheet}>
+      <Sheet.ScrollView contentProps={{ isModal: false }} padded={false}>
+        <MenuList
+          {...(props as any)}
+          style={composeStyles(
+            inlineStyle(({ space }) => ({
+              base: { borderWidth: 0, marginBottom: space.md },
+            })),
+            props.style
+          )}
+        />
+      </Sheet.ScrollView>
+    </Sheet>
   );
 };
 

@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { YBox, XBox, Select, Text } from '@crossed/ui';
+import { XBox, Select, Text } from '@crossed/ui';
 import { createStyles } from '@crossed/styled';
 import { FlatList } from 'react-native';
 
@@ -28,7 +28,7 @@ export default function TabOneScreen() {
       ListHeaderComponent={
         <>
           <XBox alignItems="center" space="sm">
-            <Select defaultValue="en">
+            <Select>
               <Select.Trigger>
                 <XBox alignItems="center" justifyContent="between">
                   <Text>
@@ -48,7 +48,6 @@ export default function TabOneScreen() {
           </XBox>
         </>
       }
-      ItemSeparatorComponent={() => <YBox style={{ height: 5 }} />}
       renderItem={() => null}
     />
   );

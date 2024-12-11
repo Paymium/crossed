@@ -16,8 +16,9 @@ const meta: Meta<typeof Sheet> = {
   parameters: { layout: 'padded' },
   subcomponents: {
     'Sheet.Trigger': Sheet.Trigger,
-    'Sheet.Frame': Sheet.Frame,
-    'Sheet.SnapVisible': Sheet.SnapVisible,
+    'Sheet.Content': Sheet.Content,
+    'Sheet.ScrollView': Sheet.ScrollView,
+    'Sheet.FlatList': Sheet.FlatList,
   },
   render(e) {
     return (
@@ -28,9 +29,9 @@ const meta: Meta<typeof Sheet> = {
               <Button.Text>Button</Button.Text>
             </Button>
           </Sheet.Trigger>
-          <Sheet.Frame>
+          <Sheet.Content>
             <Text>Hello world</Text>
-          </Sheet.Frame>
+          </Sheet.Content>
         </Sheet>
       </YBox>
     );
@@ -41,7 +42,29 @@ const meta: Meta<typeof Sheet> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {},
+};
+
+export const ScrollView: Story = {
+  args: {},
+
+  render(e) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+        <Sheet {...e}>
+          <Sheet.Trigger asChild>
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Sheet.Trigger>
+          <Sheet.ScrollView>
+            {Array.from(Array(100).keys()).map((i) => (
+              <Text key={`renderscrollviewvody-${i}`}>Description {i}</Text>
+            ))}
+          </Sheet.ScrollView>
+        </Sheet>
+      </YBox>
+    );
+  },
 };

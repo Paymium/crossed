@@ -6,14 +6,10 @@
  */
 
 import { useUncontrolled } from '@crossed/core';
-import {
-  forwardRef,
-  type PropsWithChildren,
-  useCallback,
-  useImperativeHandle,
-} from 'react';
+import { forwardRef, type PropsWithChildren, useCallback, useRef } from 'react';
 import { type SheetContext, sheetContext } from './context';
 import { useSharedValue } from 'react-native-reanimated';
+import { ActionSheetRef } from 'react-native-actions-sheet';
 
 export type SheetProps = PropsWithChildren<{
   open?: boolean;
@@ -23,12 +19,7 @@ export type SheetProps = PropsWithChildren<{
 }> &
   Pick<SheetContext, 'dismissOnOverlayPress' | 'hideHandle'>;
 
-export type RootRef = {
-  close: () => void;
-  open: () => void;
-};
-
-export const Root = forwardRef<RootRef, SheetProps>(
+export const Root = forwardRef<ActionSheetRef, SheetProps>(
   (
     {
       open: openProps,
@@ -54,14 +45,7 @@ export const Root = forwardRef<RootRef, SheetProps>(
       height.value = 0;
     }, [setOpen, height]);
 
-    useImperativeHandle(
-      ref,
-      () => ({
-        close: onClose,
-        open: () => setOpen(true),
-      }),
-      [onClose, setOpen]
-    );
+    const actionSheetRef = useRef<ActionSheetRef>(null);
 
     return (
       <sheetContext.Provider
@@ -75,6 +59,8 @@ export const Root = forwardRef<RootRef, SheetProps>(
           onClose,
           snapInitialHeight,
           offset: offset + 40,
+          ref,
+          actionSheetRef,
         }}
       >
         {children}
