@@ -11,7 +11,9 @@ import { form } from '../../styles/form';
 import { useSelect } from './styles';
 import type { ContentProps } from './types';
 import { composeStyles, createStyles } from '@crossed/styled';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
+const duration = 100;
 const styles = createStyles(() => ({ dynamic: (e) => e }));
 export const ContentWeb = ({ sheetProps, ...props }: ContentProps) => {
   const { triggerLayout, open, refs, floatingStyles } = useSelectProvider();
@@ -22,15 +24,20 @@ export const ContentWeb = ({ sheetProps, ...props }: ContentProps) => {
     left: 0,
   };
   return open ? (
-    <MenuList
-      {...(props as any)}
-      ref={refs.setFloating as any}
-      style={composeStyles(
-        form.input,
-        useSelect.content,
-        styles.dynamic({ ...floatingStyles, minWidth: width })
-      )}
-    />
+    <Animated.View
+      exiting={FadeOut.duration(duration)}
+      entering={FadeIn.duration(duration)}
+    >
+      <MenuList
+        {...(props as any)}
+        ref={refs.setFloating as any}
+        style={composeStyles(
+          form.input,
+          useSelect.content,
+          styles.dynamic({ ...floatingStyles, minWidth: width })
+        )}
+      />
+    </Animated.View>
   ) : null;
 };
 

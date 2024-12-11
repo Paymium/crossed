@@ -60,6 +60,7 @@ const itemStyles = createStyles((t) => ({
       backgroundColor: t.colors.background.active,
     },
     'web': {
+      base: { transition: 'all 170ms ease' },
       ':focus-visible': {
         outlineColor: t.colors.border.brand,
       },

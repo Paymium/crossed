@@ -33,13 +33,14 @@ import { SelectContent } from './ContentImpl';
 import { Text, TextProps } from '../../typography/Text';
 import { VisibilityHidden } from '@crossed/primitive';
 import { useFocusScope } from './Focus';
-import { ChevronDown } from '@crossed/unicons';
-import { composeStyles } from '@crossed/styled';
+import { Check, ChevronDown } from '@crossed/unicons';
+import { composeStyles, inlineStyle, useTheme } from '@crossed/styled';
 import { useFloating } from './useFloating';
 import { FormControl, FormField, FormLabel } from '../Form';
 import { XBox } from '../../layout/XBox';
 import { YBox } from '../../layout/YBox';
 import { CloseButton } from '../../buttons/CloseButton';
+import { Center } from '../../layout';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
@@ -159,6 +160,7 @@ const SelectTrigger = withStaticProperties(
       id,
       onBlur,
       onFocus,
+      setValue,
       value,
       refs,
       label,
@@ -192,12 +194,28 @@ const SelectTrigger = withStaticProperties(
     );
     const showClear = clearable && value;
 
+    const handleClear = useCallback(() => setValue(''), [setValue]);
+
     const states = {
       // hover,
       'focus': open,
       'focus-visible': open,
       // 'active': props.active,
     };
+
+    const handleRender = useCallback(
+      (e) => (
+        <>
+          {inputRender}
+          {typeof children === 'function' ? children(e) : children}
+          <ChevronDown
+            {...useSelect.icon.style()}
+            color={form.placeholder.style().style.color}
+          />
+        </>
+      ),
+      [children, inputRender]
+    );
 
     return (
       <YBox space="xxs">
@@ -238,32 +256,19 @@ const SelectTrigger = withStaticProperties(
               }}
               onPress={composeEventHandlers(props.onPress, onPress)}
             >
-              {typeof children === 'function' ? (
-                (e) => (
-                  <>
-                    {inputRender}
-                    {children(e)}
-                    <ChevronDown
-                      {...useSelect.icon.style()}
-                      color={form.placeholder.style().style.color}
-                    />
-                  </>
-                )
-              ) : (
-                <>
-                  {inputRender}
-                  {children}
-                  <ChevronDown
-                    {...useSelect.icon.style()}
-                    color={form.placeholder.style().style.color}
-                  />
-                </>
-              )}
+              {handleRender}
             </Pressable>
           </FormControl>
           {showClear && (
-            <XBox style={form.elementRight}>
-              <CloseButton />
+            <XBox
+              style={composeStyles(
+                form.elementRight,
+                inlineStyle(({ space }) => ({
+                  base: { marginRight: space.md },
+                }))
+              )}
+            >
+              <CloseButton onPress={handleClear} />
             </XBox>
           )}
         </XBox>
@@ -276,12 +281,34 @@ const SelectTrigger = withStaticProperties(
 SelectTrigger.displayName = 'Select.Trigger';
 
 type SelectOptionProps = MenuListItemProps & { value: string };
-const SelectOption = ({ value, ...props }: SelectOptionProps) => {
-  const { setOpen, setValue } = useSelectProvider();
+const SelectOption = ({ value, children, ...props }: SelectOptionProps) => {
+  const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
   const focusProps = useFocusScope();
+  const { colors } = useTheme();
+  const handleRender = useCallback(
+    (e) => (
+      <>
+        {value === valueGlobal && (
+          <Center
+            style={inlineStyle(({ space }) => ({
+              base: {
+                position: 'absolute',
+                left: space.xxs,
+                top: 0,
+                bottom: 0,
+              },
+            }))}
+          >
+            <Check size={16} color={colors.text.secondary} />
+          </Center>
+        )}
+        {typeof children === 'function' ? children(e) : children}
+      </>
+    ),
+    [colors]
+  );
   return (
     <MenuList.Item
-      // active={value === valueGlobal}
       {...props}
       {...focusProps}
       style={useSelect.options}
@@ -289,7 +316,9 @@ const SelectOption = ({ value, ...props }: SelectOptionProps) => {
         setOpen(false);
         setValue(value);
       }, props.onPress)}
-    />
+    >
+      {handleRender}
+    </MenuList.Item>
   );
 };
 SelectOption.displayName = 'Select.Option';

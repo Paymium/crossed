@@ -7,7 +7,6 @@
 
 import { ComponentProps, memo } from 'react';
 import { Content, ContentProps } from './Content';
-import { inlineStyle } from '@crossed/styled';
 import { ScrollView as SV } from 'react-native-actions-sheet';
 import { paddedContainerStyle } from './styles';
 
@@ -19,13 +18,7 @@ type ScrollViewProps = ComponentProps<typeof SV> & {
 export const ScrollView = memo(
   ({ padded = true, ...props }: ScrollViewProps) => {
     return (
-      <Content
-        padded={false}
-        useBottomSafeAreaPadding
-        containerStyle={inlineStyle(() => ({
-          base: { borderWidth: 1 },
-        }))}
-      >
+      <Content padded={false} useBottomSafeAreaPadding>
         <SV
           {...(props as any)}
           contentContainerStyle={paddedContainerStyle(padded).style().style}
