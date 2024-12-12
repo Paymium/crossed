@@ -20,6 +20,7 @@ export type Value = string | string[];
 
 export type Context = {
   multiple?: boolean;
+  searchable?: boolean;
   open: boolean;
   setOpen: (_p: boolean) => void;
   value: Value;

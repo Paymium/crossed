@@ -16,7 +16,7 @@ import { ContentProps } from './types';
 
 export const SelectContent = (props: ContentProps) => {
   const all = useSelectProvider();
-  const { setOpen, open, onFocus, onBlur } = all;
+  const { setOpen, open, onFocus, onBlur, searchable } = all;
 
   const onClose = useCallback(() => {
     setOpen(false);
@@ -27,7 +27,7 @@ export const SelectContent = (props: ContentProps) => {
         <Focus
           onEscapeKey={onClose}
           onClickOutside={onClose}
-          enabled={open}
+          enabled={open && !searchable}
           onActivation={() => onFocus?.({} as any)}
           onDeactivation={() => onBlur?.({} as any)}
         >

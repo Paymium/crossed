@@ -21,6 +21,8 @@ import {
   isValidElement,
   type PropsWithChildren,
   useId,
+  useEffect,
+  useTransition,
 } from 'react';
 import { Button, type ButtonProps } from '../../buttons/Button';
 import { type MenuListItemProps, MenuList } from '../../display/MenuList';
@@ -43,6 +45,7 @@ import { YBox } from '../../layout/YBox';
 import { CloseButton } from '../../buttons/CloseButton';
 import { Box, Center } from '../../layout';
 import { Checkbox } from '../Checkbox';
+import { Input } from '../Input';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
@@ -78,7 +81,13 @@ type SelectProps = PropsWithChildren<
     Partial<
       Pick<
         Context,
-        'label' | 'description' | 'extra' | 'clearable' | 'error' | 'multiple'
+        | 'label'
+        | 'description'
+        | 'extra'
+        | 'clearable'
+        | 'error'
+        | 'multiple'
+        | 'searchable'
       >
     > & {
       adapt?: boolean;
@@ -96,6 +105,7 @@ const SelectRoot = memo(
     adapt = true,
     onFocus,
     onBlur,
+    searchable,
     id,
     multiple,
     // hover,
@@ -137,6 +147,7 @@ const SelectRoot = memo(
         onFocus={onFocus}
         onBlur={onBlur}
         id={id}
+        searchable={searchable}
         // hover={hover}
         // focus={focus}
         refs={refs}
@@ -168,6 +179,7 @@ const SelectTrigger = withStaticProperties(
       sheet,
       // hover,
       // focus,
+      searchable,
       id,
       onBlur,
       onFocus,
@@ -198,18 +210,16 @@ const SelectTrigger = withStaticProperties(
         });
       }
     }, [open, setOpen, sheet, triggerLayout]);
-    const inputRender = (
-      <VisibilityHidden hide>
-        <TextInput
-          id={id}
-          focusable={false}
-          value={Array.isArray(value) ? value.join(', ') : value}
-        />
-      </VisibilityHidden>
-    );
     const showClear = clearable && value;
 
     const handleClear = useCallback(() => setValue(''), [setValue]);
+    const inputRef = useRef<TextInput>();
+
+    useEffect(() => {
+      if (!open) {
+        inputRef.current?.blur();
+      }
+    }, [open]);
 
     const states = {
       // hover,
@@ -217,19 +227,42 @@ const SelectTrigger = withStaticProperties(
       'focus-visible': open,
       // 'active': props.active,
     };
+    const [, setTransition] = useTransition();
 
     const handleRender = useCallback(
-      (e) => (
-        <>
-          {inputRender}
-          {typeof children === 'function' ? children(e) : children}
-          <ChevronDown
-            {...useSelect.icon.style()}
-            color={form.placeholder.style().style.color}
+      (e) =>
+        searchable && open ? (
+          <Input
+            autoFocus
+            style={inlineStyle(() => ({ base: { flexGrow: 1 } }))}
+            ref={inputRef}
+            onBlur={() => {
+              setTimeout(() => setOpen(false), 200);
+            }}
+            elementRight={
+              <ChevronDown
+                {...useSelect.icon.style()}
+                color={form.placeholder.style().style.color}
+              />
+            }
           />
-        </>
-      ),
-      [children, inputRender]
+        ) : (
+          <>
+            <VisibilityHidden hide>
+              <TextInput
+                id={id}
+                focusable={false}
+                value={Array.isArray(value) ? value.join(', ') : value}
+              />
+            </VisibilityHidden>
+            {typeof children === 'function' ? children(e) : children}
+            <ChevronDown
+              {...useSelect.icon.style()}
+              color={form.placeholder.style().style.color}
+            />
+          </>
+        ),
+      [children, searchable, open]
     );
 
     return (
@@ -260,7 +293,8 @@ const SelectTrigger = withStaticProperties(
               onBlur={composeEventHandlers(props.onBlur, onBlur)}
               style={({ pressed }) => {
                 return composeStyles(
-                  form.input,
+                  (!searchable || (searchable && !open)) && form.input,
+                  inlineStyle(() => ({ base: { flex: 1 } })),
                   error && form.inputError,
                   useSelect.trigger,
                   props.style
@@ -312,15 +346,7 @@ const SelectOption = ({ value, children, ...props }: SelectOptionProps) => {
         (Array.isArray(valueGlobal) && valueGlobal.includes(value));
       return (
         <XBox space={'xxs'}>
-          {multiple ? (
-            <Checkbox checked={checked} onChecked={onPress} />
-          ) : value === valueGlobal ? (
-            <Center>
-              <Check size={16} color={colors.text.secondary} />
-            </Center>
-          ) : (
-            <Box style={inlineStyle(() => ({ base: { width: 16 } }))} />
-          )}
+          {multiple && <Checkbox checked={checked} onChecked={onPress} />}
           {typeof children === 'function' ? children(e) : children}
         </XBox>
       );
@@ -343,7 +369,14 @@ const SelectOption = ({ value, children, ...props }: SelectOptionProps) => {
     <MenuList.Item
       {...props}
       {...focusProps}
-      style={useSelect.options}
+      style={composeStyles(
+        useSelect.options,
+        value === valueGlobal &&
+          inlineStyle(({ colors }) => ({
+            base: { backgroundColor: colors.background.active },
+            ':hover': { backgroundColor: colors.background.active },
+          }))
+      )}
       onPress={composeEventHandlers(onPress, props.onPress)}
     >
       {handleRender}

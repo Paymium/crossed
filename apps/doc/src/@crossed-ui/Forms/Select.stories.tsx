@@ -111,3 +111,21 @@ export const Multiple: Story = {
     multiple: true,
   },
 };
+
+export const Searchable: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    searchable: true,
+  },
+};
+
+
+export const SearchableMultible: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    searchable: true,
+    multiple: true,
+  },
+};

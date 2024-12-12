@@ -11,11 +11,20 @@
 import { PortalProvider } from '@gorhom/portal';
 import type { PropsWithChildren } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
 
-export const CrossedUIProvider = ({ children }: PropsWithChildren) => {
+export const CrossedUIProvider = ({
+  children,
+  style,
+}: PropsWithChildren<{ style?: CrossedMethods<any> }>) => {
   return (
     <PortalProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView
+        {...composeStyles(
+          inlineStyle(() => ({ base: { flex: 1 } })),
+          style
+        ).rnw()}
+      >
         {children}
       </GestureHandlerRootView>
     </PortalProvider>
