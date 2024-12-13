@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.6.3
+
+### Patch Changes
+
+- 5ea982d: add enabled props to floating
+
 ## 3.6.2
 
 ### Patch Changes
