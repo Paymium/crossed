@@ -70,6 +70,10 @@ export type InputProps = Omit<
    * style to extends
    */
   style?: CrossedMethods<any>;
+  /**
+   * formField style to extends
+   */
+  formFieldStyle?: CrossedMethods<any>;
 };
 
 export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
@@ -85,6 +89,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
     elementLeft,
     description,
     extra,
+    formFieldStyle,
     ...props
   } = allProps;
   const [value, setValue] = useUncontrolled({
@@ -106,7 +111,10 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
   return (
     <FormField
       disabled={disabled || (!props.focusable && props.focusable !== undefined)}
-      {...inlineStyle(() => ({ base: { flexGrow: 1 } })).rnw()}
+      {...composeStyles(
+        inlineStyle(() => ({ base: { flexGrow: 1 } })),
+        formFieldStyle
+      ).rnw()}
     >
       <YBox space="xxs">
         {!!(label || description || extra) && (

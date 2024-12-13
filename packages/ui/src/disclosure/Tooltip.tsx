@@ -17,6 +17,7 @@ import { withStaticProperties } from '@crossed/core';
 import {
   composeStyles,
   createStyles,
+  CrossedMethods,
   inlineStyle,
   isWeb,
 } from '@crossed/styled';
@@ -25,6 +26,7 @@ import { useFloatingContext } from '../overlay/Floating/context';
 import { Box } from '../layout';
 import { Text, TextProps } from '../typography/Text';
 
+const zIndexBox = inlineStyle(() => ({ base: { zIndex: 1 } }));
 type RootProps = ComponentProps<typeof Floating>;
 export const Root = memo(({ children, ...props }: RootProps) => {
   return (
@@ -35,28 +37,35 @@ export const Root = memo(({ children, ...props }: RootProps) => {
       visibilityHidden
       {...props}
     >
-      <Box>{children}</Box>
+      <Box style={zIndexBox}>{children}</Box>
     </Floating>
   );
 });
+Root.displayName = 'Tooltip.Root';
 
-export const Trigger = memo(({ children }: PropsWithChildren) => {
-  return <Floating.Trigger>{children}</Floating.Trigger>;
-});
+export const Trigger = memo<ComponentProps<typeof Floating.Trigger>>(
+  (props) => {
+    return <Floating.Trigger {...props} />;
+  }
+);
+Trigger.displayName = 'Tooltip.Trigger';
 
-export const Content = memo(({ children }: PropsWithChildren) => {
-  return (
-    <>
-      {isWeb ? (
-        <Adapt fallback={<ContentNative children={children} />}>
-          <ContentWeb children={children} />
-        </Adapt>
-      ) : (
-        <ContentNative children={children} />
-      )}
-    </>
-  );
-});
+export const Content = memo(
+  ({ children, style }: PropsWithChildren<{ style?: CrossedMethods<any> }>) => {
+    return (
+      <>
+        {isWeb ? (
+          <Adapt fallback={<ContentNative children={children} style={style} />}>
+            <ContentWeb children={children} style={style} />
+          </Adapt>
+        ) : (
+          <ContentNative children={children} style={style} />
+        )}
+      </>
+    );
+  }
+);
+Content.displayName = 'Tooltip.Content';
 
 const positionStyles = createStyles(() => ({
   top: { base: { bottom: '100%' } },
@@ -73,23 +82,29 @@ const tooltipStyles = inlineStyle(({ colors, space }) => ({
   },
 }));
 
-const ContentWeb = memo<PropsWithChildren>(({ children }) => {
-  return (
-    <Floating.Portal
-      style={composeStyles(
-        inlineStyle(() => ({
-          base: { bottom: 'auto', right: undefined },
-        })),
-        tooltipStyles,
-        positionStyles.bottom
-      )}
-    >
-      <Floating.Content>{children}</Floating.Content>
-    </Floating.Portal>
-  );
-});
+const ContentWeb = memo<PropsWithChildren<{ style?: CrossedMethods<any> }>>(
+  ({ children, style }) => {
+    return (
+      <Floating.Portal
+        style={composeStyles(
+          inlineStyle(() => ({
+            base: { bottom: 'auto', right: undefined },
+          })),
+          tooltipStyles,
+          positionStyles.bottom,
+          style
+        )}
+      >
+        <Floating.Content>{children}</Floating.Content>
+      </Floating.Portal>
+    );
+  }
+);
+ContentWeb.displayName = 'Tooltip.ContentWeb';
 
-const ContentNative = ({ children }: PropsWithChildren) => {
+const ContentNative = ({
+  children,
+}: PropsWithChildren<{ style?: CrossedMethods<any> }>) => {
   const { open, onClose } = useFloatingContext();
   const refSheet = useRef(null);
   useEffect(() => {
@@ -105,10 +120,12 @@ const ContentNative = ({ children }: PropsWithChildren) => {
     </Sheet>
   );
 };
+ContentNative.displayName = 'Tooltip.ContentNative';
 
 const TooltipText = (props: TextProps) => {
   return <Text color={'invert'} {...props} />;
 };
+TooltipText.displayName = 'Tooltip.Text';
 
 export const Tooltip = withStaticProperties(Root, {
   Trigger,

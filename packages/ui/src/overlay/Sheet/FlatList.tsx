@@ -5,23 +5,27 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { ComponentProps, memo } from 'react';
+import { ComponentProps, forwardRef, memo, RefAttributes } from 'react';
 import { Content, ContentProps } from './Content';
 import { FlatList as FL } from 'react-native-actions-sheet';
+import { FlatList as RNFL } from 'react-native';
 import { paddedContainerStyle } from './styles';
 
 type FlatListProps = ComponentProps<typeof FL> & {
   padded?: boolean;
   contentProps?: ContentProps;
 };
-export const FlatList = memo(
-  ({ padded = true, contentProps, ...props }: FlatListProps) => (
-    <Content padded={false} {...contentProps}>
-      <FL
-        {...props}
-        contentContainerStyle={paddedContainerStyle(padded).style().style}
-      />
-    </Content>
+export const FlatList = memo<FlatListProps & RefAttributes<RNFL>>(
+  forwardRef<RNFL, FlatListProps>(
+    ({ padded = true, contentProps, ...props }, ref) => (
+      <Content padded={false} {...contentProps}>
+        <FL
+          {...props}
+          ref={ref}
+          contentContainerStyle={paddedContainerStyle(padded).style().style}
+        />
+      </Content>
+    )
   )
 );
 FlatList.displayName = 'Sheet.FlatList';

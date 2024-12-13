@@ -7,9 +7,13 @@
 
 import { composeStyles, CrossedMethods } from '@crossed/styled';
 import { styles } from './styles';
-import ActionSheet, { ActionSheetProps } from 'react-native-actions-sheet';
+import ActionSheet, {
+  ActionSheetProps,
+  ActionSheetRef,
+} from 'react-native-actions-sheet';
 import { useSheetContext } from './context';
 import { composeRefs } from '@crossed/core';
+import { forwardRef, memo, RefAttributes } from 'react';
 
 export type ContentProps = Omit<
   ActionSheetProps,
@@ -19,30 +23,32 @@ export type ContentProps = Omit<
   indicatorStyle?: CrossedMethods<any>;
   padded?: boolean;
 };
-export const Content = ({
-  containerStyle,
-  indicatorStyle,
-  padded = true,
-  ...props
-}: ContentProps) => {
-  const { actionSheetRef, ref } = useSheetContext();
-  return (
-    <ActionSheet
-      gestureEnabled
-      snapPoints={[90]}
-      {...props}
-      ref={composeRefs(actionSheetRef, ref)}
-      containerStyle={
-        composeStyles(
-          styles.box,
-          padded && styles.containerPadded,
-          padded && styles.container,
-          containerStyle
-        ).style().style
-      }
-      indicatorStyle={
-        composeStyles(styles.indicator, indicatorStyle).style().style
-      }
-    />
-  );
-};
+export const Content = memo<ContentProps & RefAttributes<ActionSheetRef>>(
+  forwardRef<ActionSheetRef, ContentProps>(
+    (
+      { containerStyle, indicatorStyle, padded = true, ...props },
+      parentRef
+    ) => {
+      const { actionSheetRef, ref } = useSheetContext();
+      return (
+        <ActionSheet
+          gestureEnabled
+          snapPoints={[90]}
+          {...props}
+          ref={composeRefs(parentRef, actionSheetRef, ref)}
+          containerStyle={
+            composeStyles(
+              styles.box,
+              padded && styles.containerPadded,
+              padded && styles.container,
+              containerStyle
+            ).style().style
+          }
+          indicatorStyle={
+            composeStyles(styles.indicator, indicatorStyle).style().style
+          }
+        />
+      );
+    }
+  )
+);
