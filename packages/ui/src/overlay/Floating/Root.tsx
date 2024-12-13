@@ -81,7 +81,7 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
         removeScroll = true,
         portal = true,
         triggerStrategy = 'onPress',
-        enabled,
+        enabled = true,
       }: FloatingProps,
       ref
     ) => {
