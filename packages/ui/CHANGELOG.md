@@ -1,5 +1,15 @@
 # @crossed/ui
 
+## 3.7.0
+
+### Minor Changes
+
+- 8f180b4: add Modal
+
+### Patch Changes
+
+- 8f180b4: fix floating
+
 ## 3.6.4
 
 ### Patch Changes
