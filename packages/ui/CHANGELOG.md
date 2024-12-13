@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 3.6.1
+
+### Patch Changes
+
+- 1179a6b: Fix Tooltip zIndex
+- 1179a6b: add style props for FormField
+- 1179a6b: SHEET: pass props to trigger, forward ref
+
 ## 3.6.0
 
 ### Minor Changes
