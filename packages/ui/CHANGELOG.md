@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.6.4
+
+### Patch Changes
+
+- 2c6c738: enabled should be true by default
+
 ## 3.6.3
 
 ### Patch Changes
