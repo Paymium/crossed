@@ -21,7 +21,7 @@ export type FloatingTriggerProps = Omit<SlotProps<PressableProps>, 'Comp'> & {
 
 export const FloatingTrigger = memo<FloatingTriggerProps & RefAttributes<View>>(
   forwardRef<View, FloatingTriggerProps>(({ style, ...props }, ref) => {
-    const { triggerStrategy } = useFloatingConfig();
+    const { triggerStrategy, enabled } = useFloatingConfig();
     const { open, onClose, onOpen } = useFloatingContext();
 
     const toggle = useCallback(() => {
@@ -30,8 +30,9 @@ export const FloatingTrigger = memo<FloatingTriggerProps & RefAttributes<View>>(
     }, [open, onClose, onOpen]);
 
     const propsExtended = useMemo(() => {
-      const eventStrategiy =
-        triggerStrategy === 'onPress'
+      const eventStrategiy = !enabled
+        ? {}
+        : triggerStrategy === 'onPress'
           ? {
               onPress: composeEventHandlers(toggle, props.onPress),
             }
@@ -50,7 +51,7 @@ export const FloatingTrigger = memo<FloatingTriggerProps & RefAttributes<View>>(
         ...style?.rnw(),
         ...eventStrategiy,
       };
-    }, [props, toggle]);
+    }, [props, toggle, enabled]);
 
     return <Slot ref={ref} Comp={Pressable} role="button" {...propsExtended} />;
   })
