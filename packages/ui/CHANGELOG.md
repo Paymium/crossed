@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.6.2
+
+### Patch Changes
+
+- 1c34ef7: add style to root Tooltip
+
 ## 3.6.1
 
 ### Patch Changes
