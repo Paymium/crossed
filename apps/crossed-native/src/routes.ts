@@ -18,6 +18,7 @@ export type RootStackParamList = {
   '/radio': undefined;
   '/select': undefined;
   '/sheet': undefined;
+  '/tooltip': undefined;
 };
 
 export type AccordionScreenProps = NativeStackScreenProps<

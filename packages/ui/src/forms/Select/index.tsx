@@ -63,7 +63,7 @@ const findChild = (
         .filter(Boolean);
 };
 
-type SelectProps = PropsWithChildren<
+export type SelectProps = PropsWithChildren<
   UseUncontrolledInput<Value> &
     Partial<Pick<ButtonProps, 'variant' | 'onFocus' | 'onBlur' | 'id'>> &
     Partial<
@@ -168,13 +168,13 @@ const SelectValue = ({ style, ...props }: Omit<TextProps, 'children'>) => {
   const tmp = Array.isArray(renderValue.current)
     ? renderValue.current
     : [renderValue.current];
-  const toRender = tmp.length > 4 ? tmp.slice(0, 4) : tmp;
+  const toRender = tmp.length > 3 ? tmp.slice(0, 3) : tmp;
 
   return (
     <XBox style={inlineStyle(() => ({ base: { gap: 5 } }))}>
       {toRender.map((e, i) => (
         <Text
-          key={`${id}-${e}`}
+          key={`${id}-${e.props.children}`}
           {...props}
           style={composeStyles(
             useSelect.value,
@@ -192,7 +192,7 @@ const SelectValue = ({ style, ...props }: Omit<TextProps, 'children'>) => {
             style
           )}
         >
-          {i === 3 ? '...' : e}
+          {i === 3 ? `...+${toRender.length - 3}` : e}
         </Text>
       ))}
     </XBox>

@@ -19,6 +19,7 @@ import AccordionScreen from './src/app/accordion';
 import SelectScreen from './src/app/select';
 import type { RootStackParamList } from './src/routes';
 import SheetScreen from './src/app/sheet';
+import TooltipScreen from './src/app/tooltip';
 import { CrossedUIProvider } from '@crossed/ui';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -40,6 +41,7 @@ function App(): React.JSX.Element {
             <Stack.Screen name="/alert" component={AlertScreen} />
             <Stack.Screen name="/sheet" component={SheetScreen} />
             <Stack.Screen name="/select" component={SelectScreen} />
+            <Stack.Screen name="/tooltip" component={TooltipScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

@@ -17,7 +17,7 @@ import { isWeb } from '@crossed/styled';
 
 export const SelectContent = (props: ContentProps) => {
   const all = useSelectProvider();
-  const { setOpen, open, onFocus, onBlur, searchable } = all;
+  const { setOpen, open, onFocus, onBlur } = all;
 
   const onClose = useCallback(() => {
     setOpen(false);

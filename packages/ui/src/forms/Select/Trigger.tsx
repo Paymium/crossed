@@ -64,7 +64,7 @@ export const SelectTrigger = withStaticProperties(
         });
       }
     }, [open, setOpen, sheet, triggerLayout]);
-    const showClear = clearable && value;
+    const showClear = !!(clearable && value);
 
     const handleClear = useCallback(() => setValue(''), [setValue]);
 

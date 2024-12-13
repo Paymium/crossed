@@ -59,6 +59,12 @@ const meta: Meta<typeof Select> = {
           <Select.Option value="Select 7">
             <Select.Option.Text>Select 7</Select.Option.Text>
           </Select.Option>
+          <Select.Option value="Select 8">
+            <Select.Option.Text>Select 8</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 9">
+            <Select.Option.Text>Select 9</Select.Option.Text>
+          </Select.Option>
         </Select.Content>
       </Select>
     </YBox>
@@ -119,7 +125,6 @@ export const Searchable: Story = {
     searchable: true,
   },
 };
-
 
 export const SearchableMultible: Story = {
   ...Primary,

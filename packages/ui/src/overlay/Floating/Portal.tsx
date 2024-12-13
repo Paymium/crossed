@@ -8,6 +8,7 @@
 import { Portal } from '@gorhom/portal';
 import { FloatingProvider, useFloatingContext } from './context';
 import {
+  forwardRef,
   Fragment,
   memo,
   PropsWithChildren,
@@ -34,49 +35,51 @@ export type FloatingPortalProps = {
   Provider?: (_p: PropsWithChildren) => ReactNode;
 };
 
-export const FloatingPortal = memo(
-  ({
-    children,
-    style,
-    Provider = ({ children }) => children,
-  }: FloatingPortalProps) => {
-    const floatingContext = useFloatingContext();
-    const [interShow, setIternShow] = useState(false);
+export const FloatingPortal = memo<FloatingPortalProps>(
+  forwardRef<HTMLElement, FloatingPortalProps>(
+    ({ children, style, Provider = ({ children }) => children }, ref) => {
+      const floatingContext = useFloatingContext();
+      const [interShow, setIternShow] = useState(false);
 
-    useEffect(() => {
-      if (floatingContext.open) {
-        setIternShow(floatingContext.open);
-        return () => {};
-      }
-      const time = setTimeout(() => setIternShow(false), floatingContext.wait);
-      return () => clearTimeout(time);
-    }, [floatingContext.open, floatingContext.wait]);
+      useEffect(() => {
+        if (floatingContext.open) {
+          setIternShow(floatingContext.open);
+          return () => {};
+        }
+        const time = setTimeout(
+          () => setIternShow(false),
+          floatingContext.wait
+        );
+        return () => clearTimeout(time);
+      }, [floatingContext.open, floatingContext.wait]);
 
-    const PortalComponent = floatingContext.portal ? Portal : Fragment;
+      const PortalComponent = floatingContext.portal ? Portal : Fragment;
 
-    return (
-      <PortalComponent>
-        <Provider>
-          <FloatingProvider {...floatingContext}>
-            <RemoveScroll
-              enabled={floatingContext.removeScroll && interShow}
-              style={composeStyles(
-                interShow && positionStyles.absoluteFill,
-                !interShow && visibility.hidden,
-                style
-              )}
-            >
-              {floatingContext.visibilityHidden
-                ? children
-                : interShow
+      return (
+        <PortalComponent>
+          <Provider>
+            <FloatingProvider {...floatingContext}>
+              <RemoveScroll
+                ref={ref}
+                enabled={floatingContext.removeScroll && interShow}
+                style={composeStyles(
+                  interShow && positionStyles.absoluteFill,
+                  !interShow && visibility.hidden,
+                  style
+                )}
+              >
+                {floatingContext.visibilityHidden
                   ? children
-                  : null}
-            </RemoveScroll>
-          </FloatingProvider>
-        </Provider>
-      </PortalComponent>
-    );
-  }
+                  : interShow
+                    ? children
+                    : null}
+              </RemoveScroll>
+            </FloatingProvider>
+          </Provider>
+        </PortalComponent>
+      );
+    }
+  )
 );
 
 FloatingPortal.displayName = 'Floating.Portal';

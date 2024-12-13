@@ -15,7 +15,7 @@ import { Checkbox } from '../Checkbox';
 import { useSelect } from './styles';
 import { composeEventHandlers } from '@crossed/core';
 
-type SelectOptionProps = MenuListItemProps & { value: string };
+type SelectOptionProps = MenuListItemProps & { value: string; search?: string };
 export const SelectOption = ({
   value,
   children,
@@ -46,12 +46,16 @@ export const SelectOption = ({
   );
   const onPress = useCallback(() => {
     if (!multiple) setOpen(false);
-    if (multiple && Array.isArray(valueGlobal)) {
-      setValue(
-        valueGlobal.includes(value)
-          ? valueGlobal.filter((t) => t !== value)
-          : [...valueGlobal, value]
-      );
+    if (multiple) {
+      if (!valueGlobal) {
+        setValue([value]);
+      } else if (Array.isArray(valueGlobal)) {
+        setValue(
+          valueGlobal.includes(value)
+            ? valueGlobal.filter((t) => t !== value)
+            : [...valueGlobal, value]
+        );
+      }
       return;
     }
     setValue(value);
