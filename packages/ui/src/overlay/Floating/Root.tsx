@@ -13,7 +13,11 @@ import {
   useCallback,
   useImperativeHandle,
 } from 'react';
-import { FloatingProvider } from './context';
+import {
+  FloatingConfig,
+  FloatingConfigProvider,
+  FloatingProvider,
+} from './context';
 import { useUncontrolled } from '@crossed/core';
 
 export type FloatingProps = PropsWithChildren & {
@@ -58,7 +62,7 @@ export type FloatingProps = PropsWithChildren & {
    * If false, not render in portal
    */
   portal?: boolean;
-};
+} & Partial<Pick<FloatingConfig, 'triggerStrategy'>>;
 export type FloatingRef = {
   onClose: () => void;
   onOpen: () => void;
@@ -76,6 +80,7 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
         wait = 0,
         removeScroll = true,
         portal = true,
+        triggerStrategy = 'onPress',
       }: FloatingProps,
       ref
     ) => {
@@ -94,18 +99,20 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
       useImperativeHandle(ref, () => ({ onClose, onOpen }), [onClose, onOpen]);
 
       return (
-        <FloatingProvider
-          open={open}
-          onClose={onClose}
-          onOpen={onOpen}
-          visibilityHidden={visibilityHidden}
-          closeOverlayPress={closeOverlayPress ?? true}
-          wait={wait}
-          removeScroll={removeScroll}
-          portal={portal}
-        >
-          {children}
-        </FloatingProvider>
+        <FloatingConfigProvider triggerStrategy={triggerStrategy}>
+          <FloatingProvider
+            open={open}
+            onClose={onClose}
+            onOpen={onOpen}
+            visibilityHidden={visibilityHidden}
+            closeOverlayPress={closeOverlayPress ?? true}
+            wait={wait}
+            removeScroll={removeScroll}
+            portal={portal}
+          >
+            {children}
+          </FloatingProvider>
+        </FloatingConfigProvider>
       );
     }
   )

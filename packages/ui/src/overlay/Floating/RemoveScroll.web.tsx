@@ -5,13 +5,17 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { ComponentProps } from 'react';
+import { ComponentProps, forwardRef, memo } from 'react';
 import { RemoveScroll as RS } from 'react-remove-scroll';
-import { CrossedMethods } from '@crossed/styled';
+import { composeStyles, CrossedMethods } from '@crossed/styled';
 
-export const RemoveScroll = ({
-  style,
-  ...props
-}: Omit<ComponentProps<typeof RS>, 'className'> & {
-  style?: CrossedMethods<any>;
-}) => <RS {...(props as any)} {...style.className()} />;
+export const RemoveScroll = memo(
+  forwardRef<
+    HTMLElement,
+    Omit<ComponentProps<typeof RS>, 'className'> & {
+      style?: CrossedMethods<any>;
+    }
+  >(({ style, ...props }, ref) => (
+    <RS ref={ref} {...(props as any)} {...composeStyles(style).className()} />
+  ))
+);

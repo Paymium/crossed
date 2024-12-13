@@ -5,13 +5,17 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { offset, useFloating as useDefault } from '@floating-ui/react';
+import {
+  autoUpdate,
+  offset,
+  useFloating as useDefault,
+} from '@floating-ui/react';
 import { shift } from '@floating-ui/dom';
 import type { UseFloating } from './types';
 
 export const useFloating: UseFloating = () => {
   return useDefault({
-    placement: 'bottom-start',
     middleware: [shift({ crossAxis: true }), offset(8)],
+    whileElementsMounted: autoUpdate,
   });
 };

@@ -8,7 +8,7 @@
 import type { RemoveScroll as RS } from 'react-remove-scroll';
 import type { ComponentProps } from 'react';
 import { View } from 'react-native';
-import { CrossedMethods } from '@crossed/styled';
+import { composeStyles, CrossedMethods } from '@crossed/styled';
 
 export const RemoveScroll = ({
   style,
@@ -26,4 +26,4 @@ export const RemoveScroll = ({
   ...props
 }: Omit<ComponentProps<typeof RS>, 'className'> & {
   style?: CrossedMethods<any>;
-}) => <View {...(props as any)} {...style?.style()} />;
+}) => <View {...(props as any)} {...composeStyles(style).style()} />;

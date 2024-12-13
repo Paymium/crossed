@@ -7,73 +7,79 @@
 
 import {
   type UseUncontrolledInput,
-  composeEventHandlers,
   useUncontrolled,
   withStaticProperties,
-  composeRefs,
 } from '@crossed/core';
 import {
-  useCallback,
   memo,
   type ReactNode,
   useRef,
   Children,
   isValidElement,
   type PropsWithChildren,
+  useId,
 } from 'react';
-import { Button, type ButtonProps } from '../../buttons/Button';
-import { type MenuListItemProps, MenuList } from '../../display/MenuList';
-import { Pressable, TextInput, View, type LayoutRectangle } from 'react-native';
-import { form } from '../../styles/form';
-import { useSelectProvider, type Context } from './context';
+import { type ButtonProps } from '../../buttons/Button';
+import { MenuList } from '../../display/MenuList';
+import { type LayoutRectangle } from 'react-native';
+import { useSelectProvider, type Context, Value } from './context';
 import { Provider } from './Provider';
 import type { BottomSheetMethods } from '@devvie/bottom-sheet';
 import { useSelect } from './styles';
 import { SelectContent } from './ContentImpl';
 import { Text, TextProps } from '../../typography/Text';
-import { VisibilityHidden } from '@crossed/primitive';
-import { useFocusScope } from './Focus';
-import { Check, ChevronDown } from '@crossed/unicons';
-import { composeStyles, inlineStyle, useTheme } from '@crossed/styled';
+import { composeStyles, inlineStyle } from '@crossed/styled';
 import { useFloating } from './useFloating';
-import { FormControl, FormField, FormLabel } from '../Form';
+import { FormField } from '../Form';
 import { XBox } from '../../layout/XBox';
-import { YBox } from '../../layout/YBox';
-import { CloseButton } from '../../buttons/CloseButton';
-import { Center } from '../../layout';
+import { SelectTrigger } from './Trigger';
+import { SelectOption } from './Option';
 
 const findChild = (
   children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
-  value: string | number
-): ReactNode | undefined => {
+  value: Value
+): ReactNode[] | undefined => {
   if (!children) {
     return undefined;
   }
   return typeof children === 'function'
     ? undefined
-    : Children.toArray(children).reduce<ReactNode | undefined>((acc, e) => {
-        if (acc || !isValidElement(e)) {
-          return acc;
-        }
-        if (e.type && (e.type as any)?.displayName === 'Select.Option') {
-          if (e.props?.value === value) {
-            acc = e.props.children;
+    : Children.toArray(children)
+        .reduce<ReactNode[]>((acc, e) => {
+          if (!isValidElement(e)) return acc;
+          if (e.type && (e.type as any)?.displayName === 'Select.Option') {
+            if (
+              (Array.isArray(value) && value.includes(e.props?.value)) ||
+              e.props?.value === value
+            ) {
+              acc.push(e.props.children);
+            }
+            return acc;
+          } else {
+            acc = findChild(e?.props?.children, value) || [];
           }
           return acc;
-        } else {
-          acc = findChild(e?.props?.children, value);
-        }
-        return acc;
-      }, undefined);
+        }, [])
+        .filter(Boolean);
 };
 
-type SelectProps = PropsWithChildren<
-  UseUncontrolledInput<string> &
-    Partial<Pick<ButtonProps, 'variant' | 'onFocus' | 'onBlur' | 'id'>> & {
+export type SelectProps = PropsWithChildren<
+  UseUncontrolledInput<Value> &
+    Partial<Pick<ButtonProps, 'variant' | 'onFocus' | 'onBlur' | 'id'>> &
+    Partial<
+      Pick<
+        Context,
+        | 'label'
+        | 'description'
+        | 'extra'
+        | 'clearable'
+        | 'error'
+        | 'multiple'
+        | 'searchable'
+      >
+    > & {
       adapt?: boolean;
-    } & Partial<
-      Pick<Context, 'label' | 'description' | 'extra' | 'clearable' | 'error'>
-    >
+    }
 >;
 
 const SelectRoot = memo(
@@ -87,7 +93,9 @@ const SelectRoot = memo(
     adapt = true,
     onFocus,
     onBlur,
+    searchable,
     id,
+    multiple,
     // hover,
     // focus,
     label,
@@ -100,9 +108,9 @@ const SelectRoot = memo(
     const bottomSheetModalRef = useRef<BottomSheetMethods>(null);
     const renderValue = useRef<ReactNode>();
     const triggerLayout = useRef<LayoutRectangle | undefined>();
-    const [value, setValue] = useUncontrolled<string>({
+    const [value, setValue] = useUncontrolled<Value>({
       value: valueProps,
-      defaultValue,
+      defaultValue: defaultValue ?? (multiple ? [] : ''),
       finalValue,
       onChange: (e) => {
         onChange?.(e as any);
@@ -127,6 +135,7 @@ const SelectRoot = memo(
         onFocus={onFocus}
         onBlur={onBlur}
         id={id}
+        searchable={searchable}
         // hover={hover}
         // focus={focus}
         refs={refs}
@@ -136,6 +145,7 @@ const SelectRoot = memo(
         extra={extra}
         clearable={clearable}
         error={error}
+        multiple={multiple}
       >
         <FormField>{children}</FormField>
       </Provider>
@@ -147,193 +157,45 @@ const SelectRoot = memo(
 SelectRoot.id = 'Select';
 SelectRoot.displayName = 'Select';
 
-const SelectTrigger = withStaticProperties(
-  memo<ButtonProps>(({ children, ...props }: ButtonProps) => {
-    const pressableRef = useRef<View>(null);
-    const {
-      setOpen,
-      open,
-      triggerLayout,
-      sheet,
-      // hover,
-      // focus,
-      id,
-      onBlur,
-      onFocus,
-      setValue,
-      value,
-      refs,
-      label,
-      description,
-      extra,
-      clearable,
-      error,
-    } = useSelectProvider();
-    const onPress = useCallback(() => {
-      if (sheet.current) {
-        sheet.current.open();
-        setOpen(!open);
-      } else {
-        pressableRef.current?.measure((_x, _y, width, height, pageX, pageY) => {
-          triggerLayout.current = {
-            left: pageX,
-            top: pageY,
-            width,
-            height,
-            pageX,
-            pageY,
-          } as any;
-          setOpen(!open);
-        });
-      }
-    }, [open, setOpen, sheet, triggerLayout]);
-    const inputRender = (
-      <VisibilityHidden hide>
-        <TextInput id={id} focusable={false} value={value} />
-      </VisibilityHidden>
-    );
-    const showClear = clearable && value;
-
-    const handleClear = useCallback(() => setValue(''), [setValue]);
-
-    const states = {
-      // hover,
-      'focus': open,
-      'focus-visible': open,
-      // 'active': props.active,
-    };
-
-    const handleRender = useCallback(
-      (e) => (
-        <>
-          {inputRender}
-          {typeof children === 'function' ? children(e) : children}
-          <ChevronDown
-            {...useSelect.icon.style()}
-            color={form.placeholder.style().style.color}
-          />
-        </>
-      ),
-      [children, inputRender]
-    );
-
-    return (
-      <YBox space="xxs">
-        {(label || description || extra) && (
-          <XBox alignItems="center" space="xxs">
-            {label && <FormLabel {...states}>{label}</FormLabel>}
-            {description && (
-              <Text style={form.labelDescription}>{description}</Text>
-            )}
-            {extra && (
-              <Text style={form.labelExtra} textAlign="right">
-                {extra}
-              </Text>
-            )}
-          </XBox>
-        )}
-        <XBox>
-          <FormControl>
-            <Pressable
-              role="button"
-              onLayout={({ nativeEvent: { layout } }) => {
-                triggerLayout.current = layout;
-              }}
-              {...props}
-              ref={composeRefs(pressableRef, refs.setReference as any)}
-              onFocus={composeEventHandlers(props.onFocus, onFocus)}
-              onBlur={composeEventHandlers(props.onBlur, onBlur)}
-              style={({ pressed }) => {
-                return composeStyles(
-                  form.input,
-                  error && form.inputError,
-                  useSelect.trigger,
-                  props.style
-                ).rnw({
-                  // ...states,
-                  active: pressed,
-                }).style;
-              }}
-              onPress={composeEventHandlers(props.onPress, onPress)}
-            >
-              {handleRender}
-            </Pressable>
-          </FormControl>
-          {showClear && (
-            <XBox
-              style={composeStyles(
-                form.elementRight,
-                inlineStyle(({ space }) => ({
-                  base: { marginRight: space.md },
-                }))
-              )}
-            >
-              <CloseButton onPress={handleClear} />
-            </XBox>
-          )}
-        </XBox>
-        {error && <Text color="error">{error.toString()}</Text>}
-      </YBox>
-    );
-  }),
-  { Text: Button.Text }
-);
-SelectTrigger.displayName = 'Select.Trigger';
-
-type SelectOptionProps = MenuListItemProps & { value: string };
-const SelectOption = ({ value, children, ...props }: SelectOptionProps) => {
-  const { setOpen, setValue, value: valueGlobal } = useSelectProvider();
-  const focusProps = useFocusScope();
-  const { colors } = useTheme();
-  const handleRender = useCallback(
-    (e) => (
-      <>
-        {value === valueGlobal && (
-          <Center
-            style={inlineStyle(({ space }) => ({
-              base: {
-                position: 'absolute',
-                left: space.xxs,
-                top: 0,
-                bottom: 0,
-              },
-            }))}
-          >
-            <Check size={16} color={colors.text.secondary} />
-          </Center>
-        )}
-        {typeof children === 'function' ? children(e) : children}
-      </>
-    ),
-    [colors]
-  );
-  return (
-    <MenuList.Item
-      {...props}
-      {...focusProps}
-      style={useSelect.options}
-      onPress={composeEventHandlers(() => {
-        setOpen(false);
-        setValue(value);
-      }, props.onPress)}
-    >
-      {handleRender}
-    </MenuList.Item>
-  );
-};
-SelectOption.displayName = 'Select.Option';
-
 const SelectOptionText = (props: TextProps) => {
   return <MenuList.Title {...props} />;
 };
 SelectOptionText.displayName = 'Select.Option.Text';
 
 const SelectValue = ({ style, ...props }: Omit<TextProps, 'children'>) => {
-  const { renderValue } = useSelectProvider();
+  const { renderValue, multiple } = useSelectProvider();
+  const id = useId();
+  const tmp = Array.isArray(renderValue.current)
+    ? renderValue.current
+    : [renderValue.current];
+  const toRender = tmp.length > 3 ? tmp.slice(0, 3) : tmp;
+
   return (
-    <Text {...props} style={composeStyles(useSelect.value, style)}>
-      {renderValue.current}
-    </Text>
+    <XBox style={inlineStyle(() => ({ base: { gap: 5 } }))}>
+      {toRender.map((e, i) => (
+        <Text
+          key={`${id}-${e.props.children}`}
+          {...props}
+          style={composeStyles(
+            useSelect.value,
+            multiple &&
+              inlineStyle(({ colors, space }) => ({
+                base: {
+                  backgroundColor: colors.info.light,
+                  padding: space.xxs,
+                  borderRadius: 4,
+                  borderWidth: 1,
+                  borderColor: colors.info.primary,
+                  color: colors.info.dark,
+                },
+              })),
+            style
+          )}
+        >
+          {i === 3 ? `...+${toRender.length - 3}` : e}
+        </Text>
+      ))}
+    </XBox>
   );
 };
 SelectValue.id = 'Select.Value';

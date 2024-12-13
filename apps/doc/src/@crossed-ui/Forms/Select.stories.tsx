@@ -44,6 +44,27 @@ const meta: Meta<typeof Select> = {
           <Select.Option value="Select 2">
             <Select.Option.Text>Select 2</Select.Option.Text>
           </Select.Option>
+          <Select.Option value="Select 3">
+            <Select.Option.Text>Select 3</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 4">
+            <Select.Option.Text>Select 4</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 5">
+            <Select.Option.Text>Select 5</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 6">
+            <Select.Option.Text>Select 6</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 7">
+            <Select.Option.Text>Select 7</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 8">
+            <Select.Option.Text>Select 8</Select.Option.Text>
+          </Select.Option>
+          <Select.Option value="Select 9">
+            <Select.Option.Text>Select 9</Select.Option.Text>
+          </Select.Option>
         </Select.Content>
       </Select>
     </YBox>
@@ -87,5 +108,29 @@ export const WithRightElement: Story = {
   ...Primary,
   args: {
     ...Primary.args,
+  },
+};
+export const Multiple: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    multiple: true,
+  },
+};
+
+export const Searchable: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    searchable: true,
+  },
+};
+
+export const SearchableMultible: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    searchable: true,
+    multiple: true,
   },
 };

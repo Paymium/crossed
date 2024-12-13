@@ -49,4 +49,6 @@ export const fontColorStyles = createStyles((t) => ({
   warning: { base: { color: t.colors.warning.primary } },
   error: { base: { color: t.colors.error.primary } },
   success: { base: { color: t.colors.success.primary } },
+  brand: { base: { color: t.colors.text.brand } },
+  invert: { base: { color: t.colors.text.invert } },
 }));

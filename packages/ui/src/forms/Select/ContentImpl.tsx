@@ -13,6 +13,7 @@ import { Focus } from './Focus';
 import { useCallback } from 'react';
 import { Adapt } from '../../other/Adapt';
 import { ContentProps } from './types';
+import { isWeb } from '@crossed/styled';
 
 export const SelectContent = (props: ContentProps) => {
   const all = useSelectProvider();
@@ -31,9 +32,13 @@ export const SelectContent = (props: ContentProps) => {
           onActivation={() => onFocus?.({} as any)}
           onDeactivation={() => onBlur?.({} as any)}
         >
-          <Adapt fallback={<ContentNative {...props} />}>
-            <ContentWeb {...props} />
-          </Adapt>
+          {isWeb ? (
+            <Adapt fallback={<ContentNative {...props} />}>
+              <ContentWeb {...props} />
+            </Adapt>
+          ) : (
+            <ContentNative {...props} />
+          )}
         </Focus>
       </SelectProvider>
     </Portal>

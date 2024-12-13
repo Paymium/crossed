@@ -7,7 +7,7 @@
 
 import { render, screen, userEvent } from '@crossed/test';
 import { FloatingTrigger } from '../Trigger';
-import { FloatingProvider } from '../context';
+import { FloatingProvider, FloatingConfigProvider } from '../context';
 import { act } from 'react';
 
 describe('Floating.Trigger', () => {
@@ -17,14 +17,16 @@ describe('Floating.Trigger', () => {
     const onOpen = jest.fn();
 
     render(
-      <FloatingProvider
-        onClose={onClose}
-        onOpen={onOpen}
-        open={open ?? false}
-        removeScroll={false}
-      >
-        <FloatingTrigger testID="trigger" />
-      </FloatingProvider>
+      <FloatingConfigProvider triggerStrategy={'onPress'}>
+        <FloatingProvider
+          onClose={onClose}
+          onOpen={onOpen}
+          open={open ?? false}
+          removeScroll={false}
+        >
+          <FloatingTrigger testID="trigger" />
+        </FloatingProvider>
+      </FloatingConfigProvider>
     );
     return { onClose, onOpen };
   };

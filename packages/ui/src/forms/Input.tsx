@@ -21,6 +21,8 @@ import {
   createStyles,
   composeStyles,
   CrossedMethods,
+  inlineStyle,
+  useTheme,
 } from '@crossed/styled';
 import { FormControl, FormField, FormLabel } from './Form';
 import { CloseButton } from '../buttons/CloseButton';
@@ -93,7 +95,8 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
   const [elementLeftWidth, setElementLeftWidth] = useState(0);
   const [elementRightWidth, setElementRightWidth] = useState(0);
   const { state, props: propsInteraction } = useInteraction(allProps);
-  const { color } = form.placeholder.style().style;
+  const { colors } = useTheme();
+  const color = colors.text.secondary;
 
   const onClear = useCallback(() => {
     setValue('');
@@ -103,6 +106,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
   return (
     <FormField
       disabled={disabled || (!props.focusable && props.focusable !== undefined)}
+      {...inlineStyle(() => ({ base: { flexGrow: 1 } })).rnw()}
     >
       <YBox space="xxs">
         {!!(label || description || extra) && (

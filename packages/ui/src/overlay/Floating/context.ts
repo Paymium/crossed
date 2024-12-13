@@ -20,3 +20,8 @@ export type FloatingContext = {
 
 export const [FloatingProvider, useFloatingContext] =
   createScope<FloatingContext>({} as FloatingContext);
+
+type TriggerType = 'onPress' | 'onPointerEnter';
+export type FloatingConfig = { triggerStrategy: TriggerType };
+export const [FloatingConfigProvider, useFloatingConfig] =
+  createScope<FloatingConfig>({} as FloatingConfig);
