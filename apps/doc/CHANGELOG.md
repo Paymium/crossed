@@ -1,5 +1,17 @@
 # crossed-doc
 
+## 0.7.0
+
+### Minor Changes
+
+- c484bf5: add multiple on select
+
+### Patch Changes
+
+- Updated dependencies [7074ed2]
+- Updated dependencies [c484bf5]
+  - @crossed/ui@3.6.0
+
 ## 0.6.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @crossed/next-adapter
 
+## 0.6.10
+
+### Patch Changes
+
+- c484bf5: fix missing build deps
+
 ## 0.6.9
 
 ### Patch Changes

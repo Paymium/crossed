@@ -1,5 +1,12 @@
 # @crossed/ui
 
+## 3.6.0
+
+### Minor Changes
+
+- 7074ed2: add Tooltib, and add select searchable
+- c484bf5: add multiple on select
+
 ## 3.5.0
 
 ### Minor Changes
