@@ -51,7 +51,7 @@ export const FloatingTrigger = memo<FloatingTriggerProps & RefAttributes<View>>(
         ...style?.rnw(),
         ...eventStrategiy,
       };
-    }, [props, toggle, enabled]);
+    }, [props, toggle, enabled, onClose, onOpen]);
 
     return <Slot ref={ref} Comp={Pressable} role="button" {...propsExtended} />;
   })

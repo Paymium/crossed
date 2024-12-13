@@ -6,7 +6,12 @@
  */
 
 import { Portal } from '@gorhom/portal';
-import { FloatingProvider, useFloatingContext } from './context';
+import {
+  FloatingConfigProvider,
+  FloatingProvider,
+  useFloatingConfig,
+  useFloatingContext,
+} from './context';
 import {
   forwardRef,
   Fragment,
@@ -39,6 +44,7 @@ export const FloatingPortal = memo<FloatingPortalProps>(
   forwardRef<HTMLElement, FloatingPortalProps>(
     ({ children, style, Provider = ({ children }) => children }, ref) => {
       const floatingContext = useFloatingContext();
+      const config = useFloatingConfig();
       const [interShow, setIternShow] = useState(false);
 
       useEffect(() => {
@@ -58,23 +64,25 @@ export const FloatingPortal = memo<FloatingPortalProps>(
       return (
         <PortalComponent>
           <Provider>
-            <FloatingProvider {...floatingContext}>
-              <RemoveScroll
-                ref={ref}
-                enabled={floatingContext.removeScroll && interShow}
-                style={composeStyles(
-                  interShow && positionStyles.absoluteFill,
-                  !interShow && visibility.hidden,
-                  style
-                )}
-              >
-                {floatingContext.visibilityHidden
-                  ? children
-                  : interShow
+            <FloatingConfigProvider {...config}>
+              <FloatingProvider {...floatingContext}>
+                <RemoveScroll
+                  ref={ref}
+                  enabled={floatingContext.removeScroll && interShow}
+                  style={composeStyles(
+                    interShow && positionStyles.absoluteFill,
+                    !interShow && visibility.hidden,
+                    style
+                  )}
+                >
+                  {floatingContext.visibilityHidden
                     ? children
-                    : null}
-              </RemoveScroll>
-            </FloatingProvider>
+                    : interShow
+                      ? children
+                      : null}
+                </RemoveScroll>
+              </FloatingProvider>
+            </FloatingConfigProvider>
           </Provider>
         </PortalComponent>
       );

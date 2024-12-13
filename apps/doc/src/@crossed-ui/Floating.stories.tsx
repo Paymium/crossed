@@ -14,7 +14,7 @@ import { inlineStyle } from '@crossed/styled';
 const meta: Meta<typeof Floating> = {
   component: Floating,
   tags: ['autodocs'],
-  parameters: { layout: 'padded' },
+  parameters: { layout: '' },
   subcomponents: {
     'Floating.Trigger': Floating.Trigger,
     'Floating.Content': Floating.Content,
@@ -34,9 +34,11 @@ const meta: Meta<typeof Floating> = {
             <Floating.Overlay />
             <Floating.Content>
               <Text>Hello world</Text>
-              <Button>
-                <Button.Text>focus</Button.Text>
-              </Button>
+              <Floating.Trigger asChild>
+                <Button>
+                  <Button.Text>close</Button.Text>
+                </Button>
+              </Floating.Trigger>
             </Floating.Content>
           </Floating.Portal>
         </Floating>

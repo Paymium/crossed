@@ -8,7 +8,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Select } from '@crossed/ui/src/forms/Select';
-import { YBox } from '@crossed/ui';
+import { Modal, YBox, Text } from '@crossed/ui';
 import { inlineStyle } from '@crossed/styled';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -132,5 +132,63 @@ export const SearchableMultible: Story = {
     ...Primary.args,
     searchable: true,
     multiple: true,
+  },
+};
+
+export const SelectInDialog: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    searchable: true,
+    multiple: true,
+  },
+  render(e) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
+        <Modal size={'md'}>
+          <Modal.Trigger>
+            <Text>Button</Text>
+          </Modal.Trigger>
+          <Modal.Content>
+            <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
+              <Select {...e}>
+                <Select.Trigger>
+                  <Select.Value />
+                </Select.Trigger>
+                <Select.Content>
+                  <Select.Option value="Select 1">
+                    <Select.Option.Text>Select 1</Select.Option.Text>
+                  </Select.Option>
+                  <Select.Option value="Select 2">
+                    <Select.Option.Text>Select 2</Select.Option.Text>
+                  </Select.Option>
+                  <Select.Option value="Select 3">
+                    <Select.Option.Text>Select 3</Select.Option.Text>
+                  </Select.Option>
+                  <Select.Option value="Select 4">
+                    <Select.Option.Text>Select 4</Select.Option.Text>
+                  </Select.Option>
+                  <Select.Option value="Select 5">
+                    <Select.Option.Text>Select 5</Select.Option.Text>
+                  </Select.Option>
+                  <Select.Option value="Select 6">
+                    <Select.Option.Text>Select 6</Select.Option.Text>
+                  </Select.Option>
+                  <Select.Option value="Select 7">
+                    <Select.Option.Text>Select 7</Select.Option.Text>
+                  </Select.Option>
+                  <Select.Option value="Select 8">
+                    <Select.Option.Text>Select 8</Select.Option.Text>
+                  </Select.Option>
+                  <Select.Option value="Select 9">
+                    <Select.Option.Text>Select 9</Select.Option.Text>
+                  </Select.Option>
+                </Select.Content>
+              </Select>
+            </YBox>
+          </Modal.Content>
+        </Modal>
+      </YBox>
+    );
   },
 };
