@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.7.1
+
+### Patch Changes
+
+- b624557: add sindex to animated select
+
 ## 3.7.0
 
 ### Minor Changes
