@@ -27,8 +27,10 @@ import { Box } from '../layout';
 import { Text, TextProps } from '../typography/Text';
 
 const zIndexBox = inlineStyle(() => ({ base: { zIndex: 1 } }));
-type RootProps = ComponentProps<typeof Floating>;
-export const Root = memo(({ children, ...props }: RootProps) => {
+type RootProps = ComponentProps<typeof Floating> & {
+  style?: CrossedMethods<any>;
+};
+export const Root = memo(({ children, style, ...props }: RootProps) => {
   return (
     <Floating
       triggerStrategy={isWeb ? 'onPointerEnter' : 'onPress'}
@@ -37,7 +39,7 @@ export const Root = memo(({ children, ...props }: RootProps) => {
       visibilityHidden
       {...props}
     >
-      <Box style={zIndexBox}>{children}</Box>
+      <Box style={composeStyles(zIndexBox, style)}>{children}</Box>
     </Floating>
   );
 });
