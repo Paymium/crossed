@@ -68,6 +68,7 @@ export const ContentWeb = ({
     <Animated.View
       exiting={FadeOut.duration(duration)}
       entering={FadeIn.duration(duration)}
+      {...inlineStyle(() => ({ base: { zIndex: 1 } })).style()}
     >
       <MenuList
         {...(props as any)}
