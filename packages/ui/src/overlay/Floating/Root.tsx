@@ -22,11 +22,6 @@ import { useUncontrolled } from '@crossed/core';
 
 export type FloatingProps = PropsWithChildren & {
   /**
-   * if true, render but hide it in css
-   */
-  visibilityHidden?: boolean;
-
-  /**
    * if false, press on overlay not close the modal
    */
   closeOverlayPress?: boolean;
@@ -57,11 +52,6 @@ export type FloatingProps = PropsWithChildren & {
    * Controlled state onChange handler
    */
   onChange?: (_p: boolean) => void;
-
-  /**
-   * If false, not render in portal
-   */
-  portal?: boolean;
 } & Partial<Pick<FloatingConfig, 'triggerStrategy' | 'enabled'>>;
 export type FloatingRef = {
   onClose: () => void;
@@ -72,14 +62,12 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
     (
       {
         children,
-        visibilityHidden,
         defaultValue = false,
         onChange,
         value,
         closeOverlayPress,
         wait = 0,
         removeScroll = true,
-        portal = true,
         triggerStrategy = 'onPress',
         enabled = true,
       }: FloatingProps,
@@ -108,11 +96,9 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
             open={open}
             onClose={onClose}
             onOpen={onOpen}
-            visibilityHidden={visibilityHidden}
             closeOverlayPress={closeOverlayPress ?? true}
             wait={wait}
             removeScroll={removeScroll}
-            portal={portal}
           >
             {children}
           </FloatingProvider>

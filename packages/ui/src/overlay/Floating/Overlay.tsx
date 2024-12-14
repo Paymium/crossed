@@ -5,12 +5,14 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
-import { FloatingTrigger, FloatingTriggerProps } from './Trigger';
+import { composeStyles, CrossedMethods } from '@crossed/styled';
 import { useFloatingContext } from './context';
-import Animated, { AnimatedProps } from 'react-native-reanimated';
+import Animated, {
+  AnimatedProps,
+  FadeIn,
+  FadeOut,
+} from 'react-native-reanimated';
 import { overlayStyles } from '../styles';
-import { positionStyles } from '../../styles/position';
 import { Box } from '../../layout/Box';
 import { ViewProps } from 'react-native';
 import { memo } from 'react';
@@ -25,37 +27,20 @@ export type FloatingOverlayProps = {
    * Animated style
    */
   animatedProps?: AnimatedProps<ViewProps>;
-
-  /**
-   * Trigger props
-   * see FloatingTriggerProps
-   */
-  triggerProps?: FloatingTriggerProps;
 };
 export const FloatingOverlay = memo(
-  ({
-    style: styleProps,
-    animatedProps,
-    triggerProps,
-  }: FloatingOverlayProps) => {
-    const { open, closeOverlayPress } = useFloatingContext();
+  ({ style, animatedProps }: FloatingOverlayProps) => {
+    const { open, onClose, closeOverlayPress } = useFloatingContext();
 
     return open ? (
-      <FloatingTrigger
-        // @ts-expect-error update react-native
-        tabIndex={-1}
-        disabled={!closeOverlayPress}
-        {...triggerProps}
-        style={composeStyles(
-          positionStyles.absoluteFill,
-          inlineStyle(() => ({ web: { base: { position: 'fixed' } } })),
-          styleProps
-        )}
+      <Animated.View
+        onPointerUp={closeOverlayPress ? onClose : undefined}
+        entering={FadeIn}
+        exiting={FadeOut}
+        {...animatedProps}
       >
-        <Animated.View {...animatedProps}>
-          <Box style={overlayStyles.root} />
-        </Animated.View>
-      </FloatingTrigger>
+        <Box style={composeStyles(overlayStyles.root, style)} />
+      </Animated.View>
     ) : null;
   }
 );

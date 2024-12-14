@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { PropsWithChildren, useId } from 'react';
+import { memo, PropsWithChildren, useId } from 'react';
 import { Floating } from '../Floating';
 import { localContext, VariantSize } from './context';
 import { FloatingProps } from '../Floating/Root';
@@ -23,21 +23,18 @@ export type ModalProps = ChildWithViariant & {
    */
   adapt?: boolean;
 };
-export const ModalRoot = ({
-  size = 'md',
-  children,
-  floatingProps,
-  adapt,
-}: ModalProps) => {
-  const { md } = useMedia();
-  const showSheet = adapt && !md;
-  const id = useId();
-  return (
-    <Floating visibilityHidden wait={300} {...floatingProps}>
-      <localContext.Provider value={{ size, showSheet, idRef: id }}>
-        {children}
-      </localContext.Provider>
-    </Floating>
-  );
-};
+export const ModalRoot = memo<ModalProps>(
+  ({ size = 'md', children, floatingProps, adapt }) => {
+    const { md } = useMedia();
+    const showSheet = adapt && !md;
+    const id = useId();
+    return (
+      <Floating {...floatingProps}>
+        <localContext.Provider value={{ size, showSheet, idRef: id }}>
+          {children}
+        </localContext.Provider>
+      </Floating>
+    );
+  }
+);
 ModalRoot.displayName = 'Modal';

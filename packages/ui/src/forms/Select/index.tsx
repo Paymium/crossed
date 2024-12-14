@@ -29,7 +29,9 @@ export type SelectProps = Pick<
   'label' | 'description' | 'extra'
 > &
   Pick<SelectConfigContext, 'multiple' | 'clearable' | 'searchable'> &
-  Pick<UseUncontrolledInput<ValueType>, 'defaultValue' | 'onChange'> &
+  Partial<
+    Pick<UseUncontrolledInput<ValueType>, 'value' | 'defaultValue' | 'onChange'>
+  > &
   Pick<SelectValueContext, 'items' | 'value'> & {
     error?: string;
   };
@@ -70,11 +72,7 @@ export const Select = memo<SelectProps>((e) => {
       searchable={searchable}
     >
       <SelectValueProvider value={value} setValue={setValue} items={items}>
-        <Floating
-          removeScroll={false}
-          visibilityHidden
-          onChange={handleOpenChange}
-        >
+        <Floating removeScroll={false} onChange={handleOpenChange}>
           <Sheet ref={refSheet}>
             <FormField>
               <YBox space="xxs">

@@ -129,7 +129,6 @@ const AccordionItem = ({ children, value }: AccordionItemProps) => {
       <Floating
         onChange={handleChange}
         value={values.includes(value)}
-        portal={false}
         removeScroll={false}
       >
         {children}

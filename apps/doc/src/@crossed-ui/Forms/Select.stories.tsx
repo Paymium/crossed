@@ -9,8 +9,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Select } from '@crossed/ui/src/forms/Select';
 import { countries } from './countriesFixtures';
-import { Modal, YBox, Text } from '@crossed/ui';
+import { Modal } from '@crossed/ui/src/overlay/Modal';
+import { YBox } from '@crossed/ui/src/layout';
+import { Text } from '@crossed/ui/src/typography';
 import { inlineStyle } from '@crossed/styled';
+import { useState } from 'react';
 
 const items = [
   { value: 'Select 1', label: 'Select 1' },
@@ -101,23 +104,29 @@ export const SearchableMultible: Story = {
   args: { ...SearchablePerf.args, searchable: true, multiple: true },
 };
 
+const Render = (e) => {
+  const [value, setValue] = useState('');
+  return (
+    <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
+      <Modal size={'md'} adapt>
+        <Modal.Trigger>
+          <Text>Button</Text>
+        </Modal.Trigger>
+        <Modal.Content
+          style={inlineStyle(() => ({
+            base: {
+              maxHeight: 'auto',
+            },
+          }))}
+        >
+          <Select {...e} value={value} onChange={setValue} />
+        </Modal.Content>
+      </Modal>
+    </YBox>
+  );
+};
 export const SelectInDialog: Story = {
   ...Primary,
   args: { ...Primary.args },
-  render(e) {
-    return (
-      <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
-        <Modal size={'md'}>
-          <Modal.Trigger>
-            <Text>Button</Text>
-          </Modal.Trigger>
-          <Modal.Content>
-            <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
-              <Select {...e} />
-            </YBox>
-          </Modal.Content>
-        </Modal>
-      </YBox>
-    );
-  },
+  render: Render,
 };

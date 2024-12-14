@@ -35,8 +35,6 @@ export const Root = memo(({ children, style, ...props }: RootProps) => {
     <Floating
       triggerStrategy={isWeb ? 'onPointerEnter' : 'onPress'}
       removeScroll={false}
-      portal={false}
-      visibilityHidden
       {...props}
     >
       <Box style={composeStyles(zIndexBox, style)}>{children}</Box>
@@ -88,7 +86,7 @@ const ContentWeb = memo<PropsWithChildren<{ style?: CrossedMethods<any> }>>(
   ({ children, style }) => {
     return (
       <Floating.Portal>
-        <Floating.Content
+        <Floating.VisibilityHidden
           style={composeStyles(
             inlineStyle(() => ({
               base: { bottom: 'auto', right: undefined },
@@ -99,7 +97,7 @@ const ContentWeb = memo<PropsWithChildren<{ style?: CrossedMethods<any> }>>(
           )}
         >
           {children}
-        </Floating.Content>
+        </Floating.VisibilityHidden>
       </Floating.Portal>
     );
   }

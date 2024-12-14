@@ -42,7 +42,6 @@ describe('Floating.Root', () => {
     expect(call).toHaveProperty('onOpen');
     expect(call).toHaveProperty('open', false);
     expect(call).toHaveProperty('removeScroll', true);
-    expect(call).toHaveProperty('visibilityHidden', undefined);
     expect(call).toHaveProperty('wait', 0);
     expect(ref.current).toHaveProperty('onOpen');
     expect(ref.current).toHaveProperty('onClose');

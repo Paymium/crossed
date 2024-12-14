@@ -11,6 +11,7 @@ import {
   memo,
   RefAttributes,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -84,6 +85,12 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
       [onClose, setValue, valueGlobal, multiple]
     );
 
+    useEffect(() => {
+      if (!open) {
+        setSearch('');
+      }
+    }, [open]);
+
     const renderItem = useCallback(
       ({ item }) => {
         const checked =
@@ -115,7 +122,6 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
 
     const renderSearch = searchable ? (
       <Input
-        // ref={inputRef}
         formFieldStyle={inlineStyle(() => ({ base: { flexGrow: 0 } }))}
         value={search}
         onChangeText={setSearch}
@@ -141,7 +147,7 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
     );
 
     return (
-      <>
+      <Floating.Portal>
         {isWeb ? (
           <Adapt size={'md'} fallback={sheetRender}>
             <Focus
@@ -149,7 +155,7 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
               onClickOutside={onClose}
               enabled={open}
             >
-              <Floating.Content
+              <Floating.VisibilityHidden
                 exiting={FadeOut.duration(duration)}
                 entering={FadeIn.duration(duration)}
                 style={composeStyles(
@@ -175,13 +181,13 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
                     renderItem={renderItem}
                   />
                 </MenuList>
-              </Floating.Content>
+              </Floating.VisibilityHidden>
             </Focus>
           </Adapt>
         ) : (
           sheetRender
         )}
-      </>
+      </Floating.Portal>
     );
   })
 );

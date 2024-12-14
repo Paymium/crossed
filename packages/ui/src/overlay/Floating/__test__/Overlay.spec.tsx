@@ -20,7 +20,7 @@ describe('Floating.Overlay', () => {
         open={open ?? false}
         removeScroll={false}
       >
-        <FloatingOverlay triggerProps={{ testID: 'trigger' }} />
+        <FloatingOverlay animatedProps={{ testID: 'trigger' }} />
       </FloatingProvider>
     );
   };

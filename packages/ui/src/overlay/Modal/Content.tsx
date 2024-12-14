@@ -7,6 +7,7 @@
 
 import {
   KeyboardEventHandler,
+  memo,
   PropsWithChildren,
   useCallback,
   useContext,
@@ -14,20 +15,14 @@ import {
   useRef,
 } from 'react';
 import { Floating } from '../Floating';
-import { composeStyles } from '@crossed/styled';
+import { composeStyles, CrossedMethods } from '@crossed/styled';
 import { modalStyles } from '../styles';
 import { createStyles } from '@crossed/styled';
 import { localContext } from './context';
-import { YBoxProps } from '../../layout/YBox';
 import { sheetContext, useSheetContext } from '../Sheet/context';
 import { Sheet } from '../Sheet';
 import { useFloatingContext } from '../Floating/context';
-import {
-  FadeIn,
-  FadeOut,
-  useAnimatedStyle,
-  withTiming,
-} from 'react-native-reanimated';
+import { FadeIn, FadeOut } from 'react-native-reanimated';
 import { FocusScope } from '../../other/FocusScope';
 
 const styles = createStyles(() => ({
@@ -35,22 +30,16 @@ const styles = createStyles(() => ({
     base: { maxHeight: '95%', alignSelf: 'center' },
   },
   sm: {
-    media: {
-      xs: { width: '90%', maxHeight: '90%' },
-      md: { maxWidth: 560, height: 'auto' },
-    },
+    base: { width: '90%', maxHeight: '90%' },
+    media: { md: { maxWidth: 560, height: 'auto' } },
   },
   md: {
-    media: {
-      xs: { width: '90%', maxHeight: '90%' },
-      md: { maxWidth: 760, height: 'auto' },
-    },
+    base: { width: '90%', maxHeight: '90%' },
+    media: { md: { maxWidth: 760, height: 'auto' } },
   },
   lg: {
-    media: {
-      xs: { width: '90%', maxHeight: '90%' },
-      md: { maxWidth: 1024, height: 'auto' },
-    },
+    base: { width: '90%', maxHeight: '90%' },
+    media: { md: { maxWidth: 1024, height: 'auto' } },
   },
 }));
 
@@ -92,70 +81,49 @@ const SheetComponent = ({ children }: PropsWithChildren) => {
   );
 };
 
-export const ModalContent = ({ children }: YBoxProps) => {
+type ModalContentProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
+export const ModalContent = memo<ModalContentProps>(({ children, style }) => {
   // const [visibility, setVisibility] = useState(false);
   const localContextInstance = useContext(localContext);
   const sheetContextValue = useSheetContext();
   const { open, onClose } = useFloatingContext();
 
-  const { size, showSheet, idRef } = localContextInstance;
-
-  const Provider = useCallback(
-    ({ children: c }: PropsWithChildren) => {
-      return (
-        <localContext.Provider value={localContextInstance}>
-          <sheetContext.Provider value={sheetContextValue}>
-            {c}
-          </sheetContext.Provider>
-        </localContext.Provider>
-      );
-    },
-    [localContextInstance, sheetContextValue]
-  );
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return { opacity: withTiming(open ? 1 : 0) };
-  }, [open]);
+  const { size, idRef, showSheet } = localContextInstance;
 
   useKeyDown({ Escape: onClose }, { enable: open });
 
   return (
-    <Floating.Portal
-      // style={inlineStyle(() => ({
-      //   base: {
-      //     display: 'flex',
-      //     justifyContent: 'center',
-      //     alignItems: 'center',
-      //   },
-      // }))}
-      Provider={Provider}
-    >
-      {showSheet ? (
-        <SheetComponent>{children}</SheetComponent>
-      ) : (
-        <>
-          <Floating.Overlay
-            animatedProps={{ exiting: FadeOut, entering: FadeIn }}
-          />
-          <FocusScope trapped={open} enabled={open}>
-            <Floating.Content
-              role="dialog"
-              aria-labelledby={`${idRef}-title`}
-              aria-describedby={`${idRef}-description`}
-              aria-hidden={!open}
-              animatedStyle={animatedStyle}
-              style={composeStyles(
-                !showSheet && modalStyles.content,
-                !showSheet && styles.default,
-                !showSheet && styles[size]
-              )}
-            >
-              {children}
-            </Floating.Content>
-          </FocusScope>
-        </>
-      )}
+    <Floating.Portal>
+      <localContext.Provider value={localContextInstance}>
+        <sheetContext.Provider value={sheetContextValue}>
+          {showSheet ? (
+            <SheetComponent>{children}</SheetComponent>
+          ) : (
+            <>
+              <Floating.Overlay />
+              <FocusScope trapped={open} enabled={open}>
+                <Floating.Content
+                  role="dialog"
+                  aria-labelledby={`${idRef}-title`}
+                  aria-describedby={`${idRef}-description`}
+                  aria-hidden={!open}
+                  entering={FadeIn}
+                  exiting={FadeOut}
+                  style={composeStyles(
+                    modalStyles.content,
+                    styles.default,
+                    styles[size],
+                    style
+                  )}
+                >
+                  {children}
+                </Floating.Content>
+              </FocusScope>
+            </>
+          )}
+        </sheetContext.Provider>
+      </localContext.Provider>
     </Floating.Portal>
   );
-};
+});
 ModalContent.displayName = 'Modal.Content';

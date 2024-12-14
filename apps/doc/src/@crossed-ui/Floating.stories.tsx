@@ -7,9 +7,10 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { YBox, Button, Text } from '@crossed/ui';
+import { YBox, Button, Text, Select } from '@crossed/ui';
 import { Floating } from '@crossed/ui/src/overlay/Floating';
 import { inlineStyle } from '@crossed/styled';
+import { useState } from 'react';
 
 const meta: Meta<typeof Floating> = {
   component: Floating,
@@ -82,4 +83,43 @@ export const VisibilityHidden: Story = {
       </YBox>
     );
   },
+};
+
+const Render = () => {
+  const [state, setState] = useState('');
+  return (
+    <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+      <Floating>
+        <Floating.Trigger asChild>
+          <Button>
+            <Button.Text>Button</Button.Text>
+          </Button>
+        </Floating.Trigger>
+        <Floating.Portal>
+          <Floating.Overlay />
+          <Floating.VisibilityHidden>
+            <Text>Hello world</Text>
+            <Select
+              value={state}
+              onChange={setState as any}
+              items={[
+                { value: 'one', label: 'one' },
+                { value: 'two', label: 'two' },
+                { value: 'three', label: 'three' },
+              ]}
+            />
+            <Floating.Trigger asChild>
+              <Button>
+                <Button.Text>close</Button.Text>
+              </Button>
+            </Floating.Trigger>
+          </Floating.VisibilityHidden>
+        </Floating.Portal>
+      </Floating>
+    </YBox>
+  );
+};
+export const ChangeParentState: Story = {
+  args: {},
+  render: Render,
 };
