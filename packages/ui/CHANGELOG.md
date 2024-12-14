@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.7.4
+
+### Patch Changes
+
+- a54dbd9: fix floating provider re-render, wrong concept
+
 ## 3.7.3
 
 ### Patch Changes
