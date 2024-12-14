@@ -5,186 +5,95 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import {
-  type UseUncontrolledInput,
-  useUncontrolled,
-  withStaticProperties,
-} from '@crossed/core';
-import { memo, useRef, type PropsWithChildren, useId } from 'react';
-import { type ButtonProps } from '../../buttons/Button';
-import { MenuList } from '../../display/MenuList';
-import { type LayoutRectangle } from 'react-native';
-import { useSelectProvider, type Context, Value } from './context';
-import { Provider } from './Provider';
-import type { BottomSheetMethods } from '@devvie/bottom-sheet';
-import { useSelect } from './styles';
-import { SelectContent } from './ContentImpl';
-import { Text, TextProps } from '../../typography/Text';
-import { composeStyles, inlineStyle } from '@crossed/styled';
-import { useFloating } from './useFloating';
+import { memo, useCallback, useRef } from 'react';
+import { YBox } from '../../layout';
 import { FormField } from '../Form';
-import { XBox } from '../../layout/XBox';
+import { Text } from '../../typography';
+import { Floating, Sheet } from '../../overlay';
+import { SelectLabel, SelectLabelProps } from './Label';
+import {
+  SelectConfigContext,
+  SelectConfigProvider,
+  SelectValueContext,
+  SelectValueProvider,
+} from './context';
+import { useUncontrolled, UseUncontrolledInput } from '@crossed/core';
+import { ValueType } from './types';
 import { SelectTrigger } from './Trigger';
-import { SelectOption } from './Option';
+import { SelectContent } from './Content';
+import { useFloating } from './useFloating';
+import { ActionSheetRef } from 'react-native-actions-sheet';
 
-export type SelectProps = PropsWithChildren<
-  UseUncontrolledInput<Value> &
-    Partial<Pick<ButtonProps, 'variant' | 'onFocus' | 'onBlur' | 'id'>> &
-    Partial<
-      Pick<
-        Context,
-        | 'label'
-        | 'description'
-        | 'extra'
-        | 'clearable'
-        | 'error'
-        | 'multiple'
-        | 'searchable'
-        | 'items'
-        | 'renderValue'
-      >
-    > & {
-      adapt?: boolean;
-    }
->;
+export type SelectProps = Pick<
+  SelectLabelProps,
+  'label' | 'description' | 'extra'
+> &
+  Pick<SelectConfigContext, 'multiple' | 'clearable' | 'searchable'> &
+  Pick<UseUncontrolledInput<ValueType>, 'defaultValue' | 'onChange'> &
+  Pick<SelectValueContext, 'items' | 'value'> & {
+    error?: string;
+  };
 
-const SelectRoot = memo(
-  ({
-    value: valueProps,
-    defaultValue,
-    finalValue,
-    onChange,
-    variant,
-    children,
-    adapt = true,
-    onFocus,
-    onBlur,
-    searchable,
-    id,
-    multiple,
-    items,
-    renderValue,
-    // hover,
-    // focus,
+export const Select = memo<SelectProps>((e) => {
+  const {
     label,
     description,
     extra,
-    clearable,
     error,
-  }: SelectProps) => {
-    const { refs, floatingStyles } = useFloating();
-    const bottomSheetModalRef = useRef<BottomSheetMethods>(null);
-    const triggerLayout = useRef<LayoutRectangle | undefined>();
-    const [value, setValue] = useUncontrolled<Value>({
-      value: valueProps,
-      defaultValue: defaultValue ?? (multiple ? [] : ''),
-      finalValue,
-      onChange: (e) => {
-        onChange?.(e as any);
-        bottomSheetModalRef.current?.close();
-      },
-    });
-    const [open, setOpen] = useUncontrolled<boolean>({
-      defaultValue: false,
-    });
-    return (
-      <Provider
-        value={value}
-        setValue={setValue}
-        open={open}
-        setOpen={setOpen}
-        renderValue={renderValue}
-        variant={variant}
-        triggerLayout={triggerLayout}
-        sheet={bottomSheetModalRef}
-        adapt={adapt}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        id={id}
-        searchable={searchable}
-        // hover={hover}
-        // focus={focus}
-        refs={refs}
-        floatingStyles={floatingStyles}
-        label={label}
-        description={description}
-        extra={extra}
-        clearable={clearable}
-        error={error}
-        multiple={multiple}
-        items={items}
-      >
-        <FormField>{children}</FormField>
-      </Provider>
-    );
-  }
-);
+    multiple,
+    clearable,
+    searchable,
+    value: valueProps,
+    onChange,
+    defaultValue,
+    items,
+  } = e;
 
-// @ts-expect-error because id not exists in type
-SelectRoot.id = 'Select';
-SelectRoot.displayName = 'Select';
+  const refSheet = useRef<ActionSheetRef>();
+  const [value, setValue] = useUncontrolled({
+    value: valueProps,
+    onChange,
+    defaultValue,
+  });
 
-const SelectOptionText = (props: TextProps) => {
-  return <MenuList.Title {...props} />;
-};
-SelectOptionText.displayName = 'Select.Option.Text';
+  const { refs, floatingStyles } = useFloating();
 
-const SelectValue = ({ style, ...props }: Omit<TextProps, 'children'>) => {
-  const { renderValue, value, items, multiple } = useSelectProvider();
-  const id = useId();
-  const tmp = !value ? [] : Array.isArray(value) ? value : [value];
-  const toRender = tmp && tmp.length > 3 ? tmp.slice(0, 3) : tmp;
-  const labelByValue = items.reduce((acc, i) => ({ ...acc, [i.value]: i }), {});
+  const handleOpenChange = useCallback((open) => {
+    if (open) refSheet.current?.show();
+    else refSheet.current?.hide();
+  }, []);
 
   return (
-    <XBox style={inlineStyle(() => ({ base: { gap: 5 } }))}>
-      {toRender.map(
-        (e, i) =>
-          renderValue?.(e) || (
-            <Text
-              key={`${id}-${e}`}
-              {...props}
-              style={composeStyles(
-                useSelect.value,
-                multiple &&
-                  inlineStyle(({ colors, space }) => ({
-                    base: {
-                      backgroundColor: colors.info.light,
-                      padding: space.xxs,
-                      borderRadius: 4,
-                      borderWidth: 1,
-                      borderColor: colors.info.primary,
-                      color: colors.info.dark,
-                    },
-                  })),
-                style
-              )}
-            >
-              {i === 3 ? `...+${toRender.length - 3}` : labelByValue[e].label}
-            </Text>
-          )
-      )}
-    </XBox>
-  );
-};
-SelectValue.id = 'Select.Value';
-SelectValue.displayName = 'Select.Value';
-/*#__PURE__*/ withStaticProperties(SelectRoot, {
-  Option: withStaticProperties(SelectOption, { Text: SelectOptionText }),
-  Content: SelectContent,
-  Trigger: SelectTrigger,
-  Value: SelectValue,
-});
-
-const Select = memo((e) => {
-  return (
-    <SelectRoot {...e}>
-      <SelectTrigger>
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent />
-    </SelectRoot>
+    <SelectConfigProvider
+      multiple={multiple}
+      clearable={clearable}
+      searchable={searchable}
+    >
+      <SelectValueProvider value={value} setValue={setValue} items={items}>
+        <Floating
+          removeScroll={false}
+          visibilityHidden
+          onChange={handleOpenChange}
+        >
+          <Sheet ref={refSheet}>
+            <FormField>
+              <YBox space="xxs">
+                <SelectLabel
+                  label={label}
+                  description={description}
+                  extra={extra}
+                />
+                <SelectTrigger ref={refs.setReference as any} />
+                {!!error && <Text color="error">{error.toString()}</Text>}
+              </YBox>
+              <SelectContent
+                ref={refs.setFloating as any}
+                floatingStyles={floatingStyles}
+              />
+            </FormField>
+          </Sheet>
+        </Floating>
+      </SelectValueProvider>
+    </SelectConfigProvider>
   );
 });
-
-export { Select, SelectOption, SelectContent, SelectValue };

@@ -16,10 +16,12 @@ export { type FloatingProps, type FloatingRef } from './Root';
 import { FloatingRoot } from './Root';
 export { FloatingPortal, type FloatingPortalProps } from './Portal';
 import { FloatingPortal } from './Portal';
+import { FloatingVisibilityHidden } from './VisibilityHidden';
 
 export const Floating = withStaticProperties(FloatingRoot, {
   Trigger: FloatingTrigger,
   Content: FloatingContent,
+  VisibilityHidden: FloatingVisibilityHidden,
   Portal: FloatingPortal,
   Overlay: FloatingOverlay,
 });

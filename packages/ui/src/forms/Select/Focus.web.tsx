@@ -8,8 +8,8 @@
 import { FocusOn } from 'react-focus-on';
 import type { FocusComponent } from './types';
 import { useFocusScope as useOriginal } from 'react-focus-lock';
-import { useSelectProvider } from './context';
 import { useMemo } from 'react';
+import { useFloatingContext } from '../../overlay/Floating/context';
 
 export const Focus: FocusComponent = (props) => {
   return <FocusOn {...props} />;
@@ -17,7 +17,7 @@ export const Focus: FocusComponent = (props) => {
 
 export const useFocusScope = () => {
   const { focusNext, focusPrev } = useOriginal();
-  const { setOpen } = useSelectProvider();
+  const { onClose } = useFloatingContext();
   return useMemo(
     () => ({
       onKeyDown: (e) => {
@@ -26,10 +26,10 @@ export const useFocusScope = () => {
         } else if (e.code === 'ArrowUp') {
           focusPrev();
         } else if (e.code === 'Tab') {
-          setOpen(false);
+          onClose();
         }
       },
     }),
-    [focusNext, focusPrev, setOpen]
+    [focusNext, focusPrev, onClose]
   );
 };

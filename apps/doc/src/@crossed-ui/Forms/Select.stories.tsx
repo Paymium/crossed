@@ -9,6 +9,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Select } from '@crossed/ui/src/forms/Select';
 import { countries } from './countriesFixtures';
+import { Modal, YBox, Text } from '@crossed/ui';
+import { inlineStyle } from '@crossed/styled';
 
 const items = [
   { value: 'Select 1', label: 'Select 1' },
@@ -63,32 +65,22 @@ export const Clearabled: Story = {
 
 export const Error: Story = {
   ...Primary,
-  args: {
-    ...Primary.args,
-    error: 'One error',
-  },
+  args: { ...Primary.args, error: 'One error' },
 };
 
 export const WithRightElement: Story = {
   ...Primary,
-  args: {
-    ...Primary.args,
-  },
+  args: { ...Primary.args },
 };
+
 export const Multiple: Story = {
   ...Primary,
-  args: {
-    ...Primary.args,
-    multiple: true,
-  },
+  args: { ...Primary.args, multiple: true },
 };
 
 export const Searchable: Story = {
   ...Primary,
-  args: {
-    ...Primary.args,
-    searchable: true,
-  },
+  args: { ...Primary.args, searchable: true },
 };
 
 export const SearchablePerf: Story = {
@@ -106,67 +98,26 @@ export const SearchablePerf: Story = {
 
 export const SearchableMultible: Story = {
   ...SearchablePerf,
-  args: {
-    ...SearchablePerf.args,
-    searchable: true,
-    multiple: true,
-  },
+  args: { ...SearchablePerf.args, searchable: true, multiple: true },
 };
 
-// export const SelectInDialog: Story = {
-//   ...Primary,
-//   args: {
-//     ...Primary.args,
-//     searchable: true,
-//     multiple: true,
-//   },
-//   render(e) {
-//     return (
-//       <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
-//         <Modal size={'md'}>
-//           <Modal.Trigger>
-//             <Text>Button</Text>
-//           </Modal.Trigger>
-//           <Modal.Content>
-//             <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
-//               <Select {...e}>
-//                 <Select.Trigger>
-//                   <Select.Value />
-//                 </Select.Trigger>
-//                 <Select.Content>
-//                   <Select.Option value="Select 1">
-//                     <Select.Option.Text>Select 1</Select.Option.Text>
-//                   </Select.Option>
-//                   <Select.Option value="Select 2">
-//                     <Select.Option.Text>Select 2</Select.Option.Text>
-//                   </Select.Option>
-//                   <Select.Option value="Select 3">
-//                     <Select.Option.Text>Select 3</Select.Option.Text>
-//                   </Select.Option>
-//                   <Select.Option value="Select 4">
-//                     <Select.Option.Text>Select 4</Select.Option.Text>
-//                   </Select.Option>
-//                   <Select.Option value="Select 5">
-//                     <Select.Option.Text>Select 5</Select.Option.Text>
-//                   </Select.Option>
-//                   <Select.Option value="Select 6">
-//                     <Select.Option.Text>Select 6</Select.Option.Text>
-//                   </Select.Option>
-//                   <Select.Option value="Select 7">
-//                     <Select.Option.Text>Select 7</Select.Option.Text>
-//                   </Select.Option>
-//                   <Select.Option value="Select 8">
-//                     <Select.Option.Text>Select 8</Select.Option.Text>
-//                   </Select.Option>
-//                   <Select.Option value="Select 9">
-//                     <Select.Option.Text>Select 9</Select.Option.Text>
-//                   </Select.Option>
-//                 </Select.Content>
-//               </Select>
-//             </YBox>
-//           </Modal.Content>
-//         </Modal>
-//       </YBox>
-//     );
-//   },
-// };
+export const SelectInDialog: Story = {
+  ...Primary,
+  args: { ...Primary.args },
+  render(e) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
+        <Modal size={'md'}>
+          <Modal.Trigger>
+            <Text>Button</Text>
+          </Modal.Trigger>
+          <Modal.Content>
+            <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
+              <Select {...e} />
+            </YBox>
+          </Modal.Content>
+        </Modal>
+      </YBox>
+    );
+  },
+};

@@ -14,7 +14,7 @@ import {
   useRef,
 } from 'react';
 import { Floating } from '../Floating';
-import { composeStyles, inlineStyle } from '@crossed/styled';
+import { composeStyles } from '@crossed/styled';
 import { modalStyles } from '../styles';
 import { createStyles } from '@crossed/styled';
 import { localContext } from './context';
@@ -31,7 +31,9 @@ import {
 import { FocusScope } from '../../other/FocusScope';
 
 const styles = createStyles(() => ({
-  default: { base: { maxHeight: '95%' } },
+  default: {
+    base: { maxHeight: '95%', alignSelf: 'center' },
+  },
   sm: {
     media: {
       xs: { width: '90%', maxHeight: '90%' },
@@ -119,13 +121,13 @@ export const ModalContent = ({ children }: YBoxProps) => {
 
   return (
     <Floating.Portal
-      style={inlineStyle(() => ({
-        base: {
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        },
-      }))}
+      // style={inlineStyle(() => ({
+      //   base: {
+      //     display: 'flex',
+      //     justifyContent: 'center',
+      //     alignItems: 'center',
+      //   },
+      // }))}
       Provider={Provider}
     >
       {showSheet ? (

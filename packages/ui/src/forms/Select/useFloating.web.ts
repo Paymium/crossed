@@ -9,13 +9,23 @@ import {
   autoUpdate,
   offset,
   useFloating as useDefault,
+  size,
+  shift,
 } from '@floating-ui/react';
-import { shift } from '@floating-ui/dom';
 import type { UseFloating } from './types';
 
 export const useFloating: UseFloating = () => {
   return useDefault({
-    middleware: [shift({ crossAxis: true }), offset(8)],
+    placement: 'bottom-start',
+    middleware: [
+      shift({ crossAxis: true }),
+      offset(8),
+      size({
+        apply({ rects: { reference }, elements: { floating } }) {
+          floating.style.minWidth = `${reference.width}px`;
+        },
+      }),
+    ],
     whileElementsMounted: autoUpdate,
   });
 };

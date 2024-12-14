@@ -5,55 +5,49 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createScope } from '@crossed/core';
-import type { MutableRefObject, ReactNode } from 'react';
-import type { ButtonProps } from '../../buttons/Button';
-import type {
-  LayoutRectangle,
-  NativeSyntheticEvent,
-  TargetedEvent,
-} from 'react-native';
-import type { BottomSheetMethods } from '@devvie/bottom-sheet';
+import { createScope, useUncontrolled } from '@crossed/core';
+import { Item, ValueType, ValueTypeMultiple } from './types';
 import type { UseFloatingReturn } from '@floating-ui/react';
 
-export type Value = string | string[];
-
-export type Context = {
-  multiple?: boolean;
+/**
+ * Config context
+ * contains all boolean activation
+ */
+export type SelectConfigContext = {
   searchable?: boolean;
-  open: boolean;
-  setOpen: (_p: boolean) => void;
-  value: Value;
-  setValue: (_p: Value) => void;
-  variant?: ButtonProps['variant'];
-  triggerLayout: MutableRefObject<LayoutRectangle | undefined>;
-  sheet?: MutableRefObject<BottomSheetMethods | undefined>;
-  adapt?: boolean;
-  onFocus?: (_e: NativeSyntheticEvent<TargetedEvent>) => void;
-  onBlur?: (_e: NativeSyntheticEvent<TargetedEvent>) => void;
-  id?: string;
-  // hover?: boolean;
-  // focus: boolean;
-  refs: UseFloatingReturn['refs'];
-  floatingStyles: UseFloatingReturn['floatingStyles'];
-
-  label?: string;
-  description?: string;
-  extra?: string;
+  multiple?: boolean;
   clearable?: boolean;
-  error: string;
+};
 
+export const [SelectConfigProvider, useSelectConfig] =
+  createScope<SelectConfigContext>({} as SelectConfigContext);
+
+/**
+ * Value context
+ * contains value and method change value
+ */
+type UseUncontrolled = typeof useUncontrolled<ValueType | ValueTypeMultiple>;
+export type SelectValueContext = {
+  value: ReturnType<UseUncontrolled>[0];
+  setValue: ReturnType<UseUncontrolled>[1];
   items: Item[];
-
-  renderValue?: (_item: Value) => ReactNode;
 };
 
-export type Item = {
-  value: string | number;
-  label: ReactNode;
-  search?: string | number;
+export const [SelectValueProvider, useSelectValue] =
+  createScope<SelectValueContext>({} as SelectValueContext);
+
+/**
+ * Floating context
+ * contains value and method change value
+ */
+export type SelectFloatingRefsContext = {
+  refs: UseFloatingReturn['refs'];
+};
+export const [SelectFloatingRefsProvider, useSelectFloatingRefs] =
+  createScope<SelectFloatingRefsContext>({} as SelectFloatingRefsContext);
+export type SelectFloatingStylesContext = {
+  floatingStyles: UseFloatingReturn['floatingStyles'];
 };
 
-export const [SelectProvider, useSelectProvider] = createScope<Context>(
-  {} as Context
-);
+export const [SelectFloatingStylesProvider, useSelectFloatingStyles] =
+  createScope<SelectFloatingStylesContext>({} as SelectFloatingStylesContext);

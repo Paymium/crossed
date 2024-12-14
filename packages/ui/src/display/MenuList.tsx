@@ -17,7 +17,14 @@ import { Text, TextProps } from '../typography/Text';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { Divider as D, DividerProps } from '../layout/Divider';
 import { withStaticProperties } from '@crossed/core';
-import { cloneElement, forwardRef, isValidElement, useCallback } from 'react';
+import {
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  memo,
+  RefAttributes,
+  useCallback,
+} from 'react';
 import { Pressable, View, type PressableProps } from 'react-native';
 
 const rootStyle = createStyles(({ colors, space }) => ({
@@ -68,22 +75,24 @@ const itemStyles = createStyles((t) => ({
   },
 }));
 
-const MenuRoot = forwardRef<View, MenuListProps>(
-  ({ padded = true, bordered = true, ...props }: MenuListProps, ref: any) => {
-    return (
-      <YBox
-        role="list"
-        {...props}
-        style={composeStyles(
-          rootStyle.default,
-          bordered && rootStyle.border,
-          padded && rootStyle.padded,
-          props.style
-        )}
-        ref={ref}
-      />
-    );
-  }
+const MenuRoot = memo<MenuListProps & RefAttributes<View>>(
+  forwardRef<View, MenuListProps>(
+    ({ padded = true, bordered = true, ...props }: MenuListProps, ref: any) => {
+      return (
+        <YBox
+          role="list"
+          {...props}
+          style={composeStyles(
+            rootStyle.default,
+            bordered && rootStyle.border,
+            padded && rootStyle.padded,
+            props.style
+          )}
+          ref={ref}
+        />
+      );
+    }
+  )
 );
 MenuRoot.displayName = 'MenuList';
 

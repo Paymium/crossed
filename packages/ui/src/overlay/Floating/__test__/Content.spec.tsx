@@ -8,12 +8,17 @@
 import { render, screen } from '@crossed/test';
 import { FloatingContent } from '../Content';
 import { inlineStyle } from '@crossed/styled';
+import { FloatingProvider } from '../context';
 
 describe('Floating.Content', () => {
-  const mount = async (style?: any) => {
+  const mount = (style?: any) => {
     expect(FloatingContent.displayName).toEqual('Floating.Content');
 
-    render(<FloatingContent testID="Animated" style={style} />);
+    render(
+      <FloatingProvider {...({ open: true } as any)}>
+        <FloatingContent testID="Animated" style={style} />
+      </FloatingProvider>
+    );
     expect(screen.getByTestId('Animated')).toBeTruthy();
   };
 

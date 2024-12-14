@@ -9,10 +9,13 @@ import Animated, { AnimatedProps } from 'react-native-reanimated';
 import { View, ViewProps } from 'react-native';
 import { forwardRef, memo, RefAttributes } from 'react';
 import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
+import { visibility } from '../../styles/visibilityHidden';
 import { useFloatingContext } from './context';
 import { positionStyles } from '../../styles/position';
 
-export type FloatingContentProps = Partial<AnimatedProps<ViewProps>> & {
+export type FloatingVisibilityHiddenProps = Partial<
+  AnimatedProps<ViewProps>
+> & {
   /**
    * Crossed style
    */
@@ -23,26 +26,30 @@ export type FloatingContentProps = Partial<AnimatedProps<ViewProps>> & {
   animatedStyle?: AnimatedProps<ViewProps>['style'];
 };
 
-export const FloatingContent = memo<FloatingContentProps & RefAttributes<View>>(
-  forwardRef<View, FloatingContentProps>(
+export const FloatingVisibilityHidden = memo<
+  FloatingVisibilityHiddenProps & RefAttributes<View>
+>(
+  forwardRef<View, FloatingVisibilityHiddenProps>(
     ({ style, animatedStyle, ...props }, ref) => {
       const { open } = useFloatingContext();
-
-      return open ? (
+      return (
         <Animated.View
           {...props}
           style={[
             composeStyles(
               inlineStyle(() => ({ base: { zIndex: 1 } })),
               open && positionStyles.absoluteFill,
-              style
+              !open && visibility.hidden
             ).style().style,
+            ...(Array.isArray(style) ? style : [style]).map((e) =>
+              e?.style ? e.style().style : e
+            ),
             animatedStyle,
           ]}
           ref={ref}
         />
-      ) : null;
+      );
     }
   )
 );
-FloatingContent.displayName = 'Floating.Content';
+FloatingVisibilityHidden.displayName = 'Floating.VisibilityHidden';

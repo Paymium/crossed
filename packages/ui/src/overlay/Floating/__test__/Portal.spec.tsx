@@ -50,13 +50,4 @@ describe('Floating.Portal', () => {
     mount({ open: true, removeScroll: false });
     expect(() => screen.getByTestId('children')).toBeTruthy();
   });
-  test('visibilityHidden true', async () => {
-    mount({ visibilityHidden: true });
-    expect(screen.getByTestId('children')).toBeTruthy();
-  });
-
-  test('visibilityHidden false', async () => {
-    mount({ visibilityHidden: false });
-    expect(() => screen.getByTestId('children')).toThrow();
-  });
 });

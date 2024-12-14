@@ -129,7 +129,6 @@ const AccordionItem = ({ children, value }: AccordionItemProps) => {
       <Floating
         onChange={handleChange}
         value={values.includes(value)}
-        visibilityHidden
         portal={false}
         removeScroll={false}
       >
@@ -153,7 +152,26 @@ const AccordionTrigger = forwardRef<View, AccordionTriggerProps>(
 );
 AccordionTrigger.displayName = 'Accordion.Trigger';
 
-const Provider = ({ children }: PropsWithChildren) => {
+/**
+ * AccordionPanelProps defines the properties for the AccordionPanel component.
+ *
+ * The AccordionPanel component is typically used within an Accordion component
+ * to display a collapsible and expandable content panel. This type extends
+ * React's PropsWithChildren, allowing it to include children components or elements.
+ *
+ * Properties:
+ * @typedef {Object} AccordionPanelProps
+ *
+ * @property {CrossedMethods<any>} [style] - An optional style property that allows
+ * for the application of custom styling methods. This style attribute can be
+ * manipulated using methods defined in CrossedMethods, which might include utility
+ * methods for advanced styling techniques or conditional styles based on theme
+ * or state.
+ */
+export type AccordionPanelProps = PropsWithChildren<{
+  style?: CrossedMethods<any>;
+}>;
+const AccordionPanel = ({ children, style }: AccordionPanelProps) => {
   const openSharedValue = useSharedValue(false);
   const { open } = useFloatingContext();
   const height = useSharedValue(0);
@@ -176,46 +194,19 @@ const Provider = ({ children }: PropsWithChildren) => {
     };
   }, [height, openSharedValue]);
   return (
-    <Floating.Content
+    <Floating.VisibilityHidden
       animatedStyle={animatedStyle}
-      style={inlineStyle(() => ({
-        base: { overflow: 'hidden' },
-      }))}
-    >
-      <ScrollView onContentSizeChange={handleLayout}>{children}</ScrollView>
-    </Floating.Content>
-  );
-};
-/**
- * AccordionPanelProps defines the properties for the AccordionPanel component.
- *
- * The AccordionPanel component is typically used within an Accordion component
- * to display a collapsible and expandable content panel. This type extends
- * React's PropsWithChildren, allowing it to include children components or elements.
- *
- * Properties:
- * @typedef {Object} AccordionPanelProps
- *
- * @property {CrossedMethods<any>} [style] - An optional style property that allows
- * for the application of custom styling methods. This style attribute can be
- * manipulated using methods defined in CrossedMethods, which might include utility
- * methods for advanced styling techniques or conditional styles based on theme
- * or state.
- */
-export type AccordionPanelProps = PropsWithChildren<{
-  style?: CrossedMethods<any>;
-}>;
-const AccordionPanel = ({ children, style }: AccordionPanelProps) => {
-  return (
-    <Floating.Portal
       style={composeStyles(
-        inlineStyle(() => ({ base: { position: 'relative' } })),
+        inlineStyle(() => ({
+          base: { position: 'relative' },
+        })),
         style
       )}
-      Provider={Provider}
     >
-      {children}
-    </Floating.Portal>
+      <ScrollView onContentSizeChange={handleLayout} scrollEnabled={false}>
+        {children}
+      </ScrollView>
+    </Floating.VisibilityHidden>
   );
 };
 AccordionPanel.displayName = 'Accordion.Panel';

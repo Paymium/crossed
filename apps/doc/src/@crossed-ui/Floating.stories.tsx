@@ -18,6 +18,7 @@ const meta: Meta<typeof Floating> = {
   subcomponents: {
     'Floating.Trigger': Floating.Trigger,
     'Floating.Content': Floating.Content,
+    'Floating.VisibilityHidden': Floating.VisibilityHidden,
     'Floating.Overlay': Floating.Overlay,
     'Floating.Portal': Floating.Portal,
   },
@@ -45,9 +46,6 @@ const meta: Meta<typeof Floating> = {
       </YBox>
     );
   },
-  argTypes: {
-    visibilityHidden: { control: 'boolean' },
-  },
 };
 
 export default meta;
@@ -56,4 +54,32 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {},
+};
+
+export const VisibilityHidden: Story = {
+  args: {},
+  render({ closeOnPress, ...e }: any) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+        <Floating {...e}>
+          <Floating.Trigger asChild>
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Floating.Trigger>
+          <Floating.Portal>
+            <Floating.Overlay />
+            <Floating.VisibilityHidden>
+              <Text>Hello world</Text>
+              <Floating.Trigger asChild>
+                <Button>
+                  <Button.Text>close</Button.Text>
+                </Button>
+              </Floating.Trigger>
+            </Floating.VisibilityHidden>
+          </Floating.Portal>
+        </Floating>
+      </YBox>
+    );
+  },
 };

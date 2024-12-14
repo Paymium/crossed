@@ -87,17 +87,19 @@ const tooltipStyles = inlineStyle(({ colors, space }) => ({
 const ContentWeb = memo<PropsWithChildren<{ style?: CrossedMethods<any> }>>(
   ({ children, style }) => {
     return (
-      <Floating.Portal
-        style={composeStyles(
-          inlineStyle(() => ({
-            base: { bottom: 'auto', right: undefined },
-          })),
-          tooltipStyles,
-          positionStyles.bottom,
-          style
-        )}
-      >
-        <Floating.Content>{children}</Floating.Content>
+      <Floating.Portal>
+        <Floating.Content
+          style={composeStyles(
+            inlineStyle(() => ({
+              base: { bottom: 'auto', right: undefined },
+            })),
+            tooltipStyles,
+            positionStyles.bottom,
+            style
+          )}
+        >
+          {children}
+        </Floating.Content>
       </Floating.Portal>
     );
   }
