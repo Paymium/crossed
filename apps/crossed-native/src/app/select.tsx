@@ -5,11 +5,10 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { XBox, Select, Text, YBox } from '@crossed/ui';
+import { Select, YBox } from '@crossed/ui';
 import { createStyles } from '@crossed/styled';
 import { FlatList } from 'react-native';
 import { SelectProps } from '@crossed/ui';
-import { useId } from 'react';
 import { countries } from './countriesFixtures.ts';
 
 const styles = createStyles(() => ({
@@ -24,7 +23,6 @@ const styles = createStyles(() => ({
 }));
 
 const Example = (props: Omit<SelectProps, 'items'>) => {
-  const id = useId();
   return (
     <Select
       {...props}

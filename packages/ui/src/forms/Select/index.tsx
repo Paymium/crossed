@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { memo, useCallback, useRef } from 'react';
+import { memo } from 'react';
 import { YBox } from '../../layout';
 import { FormField } from '../Form';
 import { Text } from '../../typography';
@@ -22,7 +22,6 @@ import { ValueType } from './types';
 import { SelectTrigger } from './Trigger';
 import { SelectContent } from './Content';
 import { useFloating } from './useFloating';
-import { ActionSheetRef } from 'react-native-actions-sheet';
 
 export type SelectProps = Pick<
   SelectLabelProps,
