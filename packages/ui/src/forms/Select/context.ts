@@ -25,7 +25,6 @@ export type Context = {
   setOpen: (_p: boolean) => void;
   value: Value;
   setValue: (_p: Value) => void;
-  renderValue: MutableRefObject<ReactNode>;
   variant?: ButtonProps['variant'];
   triggerLayout: MutableRefObject<LayoutRectangle | undefined>;
   sheet?: MutableRefObject<BottomSheetMethods | undefined>;
@@ -43,6 +42,16 @@ export type Context = {
   extra?: string;
   clearable?: boolean;
   error: string;
+
+  items: Item[];
+
+  renderValue?: (_item: Value) => ReactNode;
+};
+
+export type Item = {
+  value: string | number;
+  label: ReactNode;
+  search?: string | number;
 };
 
 export const [SelectProvider, useSelectProvider] = createScope<Context>(

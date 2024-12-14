@@ -8,41 +8,16 @@
 import { MenuList } from '../../display/MenuList';
 import { Sheet } from '../../overlay/Sheet';
 import { useSelectProvider } from './context';
-import type { ContentProps } from './types';
-import {
-  Children,
-  isValidElement,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { composeStyles, inlineStyle } from '@crossed/styled';
 import { Input } from '../Input';
-import { ScrollView, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import Fuse from 'fuse.js';
 import { SelectOption } from './Option';
 
-const ScrollComponent = (props) => {
-  return (
-    <MenuList
-      {...(props as any)}
-      style={composeStyles(
-        inlineStyle(({ space }) => ({
-          base: { borderWidth: 0, marginBottom: space.md, flexShrink: 1 },
-        }))
-      )}
-    >
-      <ScrollView {...props} />
-    </MenuList>
-  );
-};
-
-export const ContentNative = ({ children: childrenProps }: ContentProps) => {
+export const ContentNative = () => {
   const all = useSelectProvider();
-  const { open, searchable, label, setOpen } = all;
+  const { open, searchable, items, setOpen } = all;
   const refSheet = useRef(null);
   useEffect(() => {
     if (open) {
@@ -56,33 +31,29 @@ export const ContentNative = ({ children: childrenProps }: ContentProps) => {
   const inputRef = useRef<TextInput>();
   const [search, setSearch] = useState<string>('');
 
-  const childrenOption = useMemo(() => {
-    const children = Children.toArray(childrenProps);
-    return children.reduce<ReactNode[]>((acc, c) => {
-      if (isValidElement(c) && c.type === SelectOption) {
-        acc.push(c);
-      }
-      return acc;
-    }, []);
-  }, [searchable, childrenProps]);
-
   const fuse = useMemo(
-    () => new Fuse(childrenOption, { keys: ['props.search', 'props.value'] }),
-    [childrenOption]
+    () =>
+      new Fuse(items, {
+        keys: ['search', 'value'],
+      }),
+    [items]
   );
 
   const children = useMemo(() => {
-    return search
-      ? fuse.search(search).map(({ item }) => item)
-      : childrenOption;
-  }, [fuse, search, childrenOption]);
+    return search ? fuse.search(search).map(({ item }) => item) : items;
+  }, [fuse, search, items]);
 
-  const renderItem = useCallback(({ item }) => item, []);
+  const renderItem = useCallback(({ item }) => {
+    return (
+      <SelectOption value={item.value}>
+        <MenuList.Title>{item.label}</MenuList.Title>
+      </SelectOption>
+    );
+  }, []);
   return (
     <Sheet ref={refSheet}>
       <Sheet.FlatList
-        stickyHeaderIndices={searchable ? [0] : []}
-        renderScrollComponent={ScrollComponent}
+        // renderScrollComponent={ScrollComponent}
         contentProps={{
           onClose: () => setOpen(false),
           snapPoints: searchable ? [100] : undefined,
@@ -90,23 +61,23 @@ export const ContentNative = ({ children: childrenProps }: ContentProps) => {
             searchable && inlineStyle(() => ({ base: { height: '100%' } }))
           ),
         }}
-        data={
-          searchable
-            ? [
-                <Input
-                  ref={inputRef}
-                  value={search}
-                  onChangeText={setSearch}
-                  clearable
-                />,
-                ...children,
-              ]
-            : label
-              ? [<MenuList.Label>{label}</MenuList.Label>, ...children]
-              : children
-        }
+        padded={false}
+        style={{ flex: 1 }}
+        data={children}
         renderItem={renderItem}
-      />
+      >
+        {searchable && (
+          <MenuList.Item>
+            <Input
+              ref={inputRef}
+              value={search}
+              onChangeText={setSearch}
+              clearable
+              autoFocus
+            />
+          </MenuList.Item>
+        )}
+      </Sheet.FlatList>
     </Sheet>
   );
 };

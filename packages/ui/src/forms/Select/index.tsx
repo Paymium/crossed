@@ -10,15 +10,7 @@ import {
   useUncontrolled,
   withStaticProperties,
 } from '@crossed/core';
-import {
-  memo,
-  type ReactNode,
-  useRef,
-  Children,
-  isValidElement,
-  type PropsWithChildren,
-  useId,
-} from 'react';
+import { memo, useRef, type PropsWithChildren, useId } from 'react';
 import { type ButtonProps } from '../../buttons/Button';
 import { MenuList } from '../../display/MenuList';
 import { type LayoutRectangle } from 'react-native';
@@ -35,34 +27,6 @@ import { XBox } from '../../layout/XBox';
 import { SelectTrigger } from './Trigger';
 import { SelectOption } from './Option';
 
-const findChild = (
-  children: ReactNode | ReactNode[] | ((_args: any) => ReactNode),
-  value: Value
-): ReactNode[] | undefined => {
-  if (!children) {
-    return undefined;
-  }
-  return typeof children === 'function'
-    ? undefined
-    : Children.toArray(children)
-        .reduce<ReactNode[]>((acc, e) => {
-          if (!isValidElement(e)) return acc;
-          if (e.type && (e.type as any)?.displayName === 'Select.Option') {
-            if (
-              (Array.isArray(value) && value.includes(e.props?.value)) ||
-              e.props?.value === value
-            ) {
-              acc.push(e.props.children);
-            }
-            return acc;
-          } else {
-            acc = findChild(e?.props?.children, value) || [];
-          }
-          return acc;
-        }, [])
-        .filter(Boolean);
-};
-
 export type SelectProps = PropsWithChildren<
   UseUncontrolledInput<Value> &
     Partial<Pick<ButtonProps, 'variant' | 'onFocus' | 'onBlur' | 'id'>> &
@@ -76,6 +40,8 @@ export type SelectProps = PropsWithChildren<
         | 'error'
         | 'multiple'
         | 'searchable'
+        | 'items'
+        | 'renderValue'
       >
     > & {
       adapt?: boolean;
@@ -96,6 +62,8 @@ const SelectRoot = memo(
     searchable,
     id,
     multiple,
+    items,
+    renderValue,
     // hover,
     // focus,
     label,
@@ -106,7 +74,6 @@ const SelectRoot = memo(
   }: SelectProps) => {
     const { refs, floatingStyles } = useFloating();
     const bottomSheetModalRef = useRef<BottomSheetMethods>(null);
-    const renderValue = useRef<ReactNode>();
     const triggerLayout = useRef<LayoutRectangle | undefined>();
     const [value, setValue] = useUncontrolled<Value>({
       value: valueProps,
@@ -120,7 +87,6 @@ const SelectRoot = memo(
     const [open, setOpen] = useUncontrolled<boolean>({
       defaultValue: false,
     });
-    renderValue.current = findChild(children, value) || '';
     return (
       <Provider
         value={value}
@@ -146,6 +112,7 @@ const SelectRoot = memo(
         clearable={clearable}
         error={error}
         multiple={multiple}
+        items={items}
       >
         <FormField>{children}</FormField>
       </Provider>
@@ -163,49 +130,61 @@ const SelectOptionText = (props: TextProps) => {
 SelectOptionText.displayName = 'Select.Option.Text';
 
 const SelectValue = ({ style, ...props }: Omit<TextProps, 'children'>) => {
-  const { renderValue, multiple } = useSelectProvider();
+  const { renderValue, value, items, multiple } = useSelectProvider();
   const id = useId();
-  const tmp = Array.isArray(renderValue.current)
-    ? renderValue.current
-    : [renderValue.current];
-  const toRender = tmp.length > 3 ? tmp.slice(0, 3) : tmp;
+  const tmp = !value ? [] : Array.isArray(value) ? value : [value];
+  const toRender = tmp && tmp.length > 3 ? tmp.slice(0, 3) : tmp;
+  const labelByValue = items.reduce((acc, i) => ({ ...acc, [i.value]: i }), {});
 
   return (
     <XBox style={inlineStyle(() => ({ base: { gap: 5 } }))}>
-      {toRender.map((e, i) => (
-        <Text
-          key={`${id}-${e.props.children}`}
-          {...props}
-          style={composeStyles(
-            useSelect.value,
-            multiple &&
-              inlineStyle(({ colors, space }) => ({
-                base: {
-                  backgroundColor: colors.info.light,
-                  padding: space.xxs,
-                  borderRadius: 4,
-                  borderWidth: 1,
-                  borderColor: colors.info.primary,
-                  color: colors.info.dark,
-                },
-              })),
-            style
-          )}
-        >
-          {i === 3 ? `...+${toRender.length - 3}` : e}
-        </Text>
-      ))}
+      {toRender.map(
+        (e, i) =>
+          renderValue?.(e) || (
+            <Text
+              key={`${id}-${e}`}
+              {...props}
+              style={composeStyles(
+                useSelect.value,
+                multiple &&
+                  inlineStyle(({ colors, space }) => ({
+                    base: {
+                      backgroundColor: colors.info.light,
+                      padding: space.xxs,
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: colors.info.primary,
+                      color: colors.info.dark,
+                    },
+                  })),
+                style
+              )}
+            >
+              {i === 3 ? `...+${toRender.length - 3}` : labelByValue[e].label}
+            </Text>
+          )
+      )}
     </XBox>
   );
 };
 SelectValue.id = 'Select.Value';
 SelectValue.displayName = 'Select.Value';
-
-const Select = /*#__PURE__*/ withStaticProperties(SelectRoot, {
+/*#__PURE__*/ withStaticProperties(SelectRoot, {
   Option: withStaticProperties(SelectOption, { Text: SelectOptionText }),
   Content: SelectContent,
   Trigger: SelectTrigger,
   Value: SelectValue,
+});
+
+const Select = memo((e) => {
+  return (
+    <SelectRoot {...e}>
+      <SelectTrigger>
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent />
+    </SelectRoot>
+  );
 });
 
 export { Select, SelectOption, SelectContent, SelectValue };

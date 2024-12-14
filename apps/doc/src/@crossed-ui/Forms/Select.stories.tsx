@@ -8,20 +8,22 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Select } from '@crossed/ui/src/forms/Select';
-import { Modal, YBox, Text } from '@crossed/ui';
-import { inlineStyle } from '@crossed/styled';
+import { countries } from './countriesFixtures';
 
+const items = [
+  { value: 'Select 1', label: 'Select 1' },
+  { value: 'Select 2', label: 'Select 2' },
+  { value: 'Select 3', label: 'Select 3' },
+  { value: 'Select 4', label: 'Select 4' },
+  { value: 'Select 5', label: 'Select 5' },
+  { value: 'Select 6', label: 'Select 6' },
+  { value: 'Select 7', label: 'Select 7' },
+  { value: 'Select 8', label: 'Select 8' },
+  { value: 'Select 9', label: 'Select 9' },
+];
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Select> = {
   component: Select,
-  subcomponents: {
-    'Select.Trigger': Select.Trigger,
-    'Select.Trigger.Text': Select.Trigger.Text,
-    'Select.Value': Select.Value,
-    'Select.Content': Select.Content,
-    'Select.Option': Select.Option,
-    'Select.Option.Text': Select.Option.Text,
-  },
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
@@ -31,44 +33,6 @@ const meta: Meta<typeof Select> = {
     description: { control: 'text' },
     extra: { control: 'text' },
   },
-  render: (e) => (
-    <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
-      <Select {...e}>
-        <Select.Trigger>
-          <Select.Value />
-        </Select.Trigger>
-        <Select.Content>
-          <Select.Option value="Select 1">
-            <Select.Option.Text>Select 1</Select.Option.Text>
-          </Select.Option>
-          <Select.Option value="Select 2">
-            <Select.Option.Text>Select 2</Select.Option.Text>
-          </Select.Option>
-          <Select.Option value="Select 3">
-            <Select.Option.Text>Select 3</Select.Option.Text>
-          </Select.Option>
-          <Select.Option value="Select 4">
-            <Select.Option.Text>Select 4</Select.Option.Text>
-          </Select.Option>
-          <Select.Option value="Select 5">
-            <Select.Option.Text>Select 5</Select.Option.Text>
-          </Select.Option>
-          <Select.Option value="Select 6">
-            <Select.Option.Text>Select 6</Select.Option.Text>
-          </Select.Option>
-          <Select.Option value="Select 7">
-            <Select.Option.Text>Select 7</Select.Option.Text>
-          </Select.Option>
-          <Select.Option value="Select 8">
-            <Select.Option.Text>Select 8</Select.Option.Text>
-          </Select.Option>
-          <Select.Option value="Select 9">
-            <Select.Option.Text>Select 9</Select.Option.Text>
-          </Select.Option>
-        </Select.Content>
-      </Select>
-    </YBox>
-  ),
 };
 
 export default meta;
@@ -86,6 +50,7 @@ export const Primary: Story = {
     extra: '',
     clearable: false,
     error: '',
+    items,
   },
 };
 export const Clearabled: Story = {
@@ -126,69 +91,82 @@ export const Searchable: Story = {
   },
 };
 
-export const SearchableMultible: Story = {
+export const SearchablePerf: Story = {
   ...Primary,
   args: {
     ...Primary.args,
+    searchable: true,
+    items: countries.map((country) => ({
+      label: country.name_fr,
+      value: country.iso_alpha2,
+      search: country.name_fr,
+    })),
+  },
+};
+
+export const SearchableMultible: Story = {
+  ...SearchablePerf,
+  args: {
+    ...SearchablePerf.args,
     searchable: true,
     multiple: true,
   },
 };
 
-export const SelectInDialog: Story = {
-  ...Primary,
-  args: {
-    ...Primary.args,
-    searchable: true,
-    multiple: true,
-  },
-  render(e) {
-    return (
-      <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
-        <Modal size={'md'}>
-          <Modal.Trigger>
-            <Text>Button</Text>
-          </Modal.Trigger>
-          <Modal.Content>
-            <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
-              <Select {...e}>
-                <Select.Trigger>
-                  <Select.Value />
-                </Select.Trigger>
-                <Select.Content>
-                  <Select.Option value="Select 1">
-                    <Select.Option.Text>Select 1</Select.Option.Text>
-                  </Select.Option>
-                  <Select.Option value="Select 2">
-                    <Select.Option.Text>Select 2</Select.Option.Text>
-                  </Select.Option>
-                  <Select.Option value="Select 3">
-                    <Select.Option.Text>Select 3</Select.Option.Text>
-                  </Select.Option>
-                  <Select.Option value="Select 4">
-                    <Select.Option.Text>Select 4</Select.Option.Text>
-                  </Select.Option>
-                  <Select.Option value="Select 5">
-                    <Select.Option.Text>Select 5</Select.Option.Text>
-                  </Select.Option>
-                  <Select.Option value="Select 6">
-                    <Select.Option.Text>Select 6</Select.Option.Text>
-                  </Select.Option>
-                  <Select.Option value="Select 7">
-                    <Select.Option.Text>Select 7</Select.Option.Text>
-                  </Select.Option>
-                  <Select.Option value="Select 8">
-                    <Select.Option.Text>Select 8</Select.Option.Text>
-                  </Select.Option>
-                  <Select.Option value="Select 9">
-                    <Select.Option.Text>Select 9</Select.Option.Text>
-                  </Select.Option>
-                </Select.Content>
-              </Select>
-            </YBox>
-          </Modal.Content>
-        </Modal>
-      </YBox>
-    );
-  },
-};
+// export const SelectInDialog: Story = {
+//   ...Primary,
+//   args: {
+//     ...Primary.args,
+//     searchable: true,
+//     multiple: true,
+//   },
+//   render(e) {
+//     return (
+//       <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
+//         <Modal size={'md'}>
+//           <Modal.Trigger>
+//             <Text>Button</Text>
+//           </Modal.Trigger>
+//           <Modal.Content>
+//             <YBox style={inlineStyle(() => ({ base: { minWidth: 600 } }))}>
+//               <Select {...e}>
+//                 <Select.Trigger>
+//                   <Select.Value />
+//                 </Select.Trigger>
+//                 <Select.Content>
+//                   <Select.Option value="Select 1">
+//                     <Select.Option.Text>Select 1</Select.Option.Text>
+//                   </Select.Option>
+//                   <Select.Option value="Select 2">
+//                     <Select.Option.Text>Select 2</Select.Option.Text>
+//                   </Select.Option>
+//                   <Select.Option value="Select 3">
+//                     <Select.Option.Text>Select 3</Select.Option.Text>
+//                   </Select.Option>
+//                   <Select.Option value="Select 4">
+//                     <Select.Option.Text>Select 4</Select.Option.Text>
+//                   </Select.Option>
+//                   <Select.Option value="Select 5">
+//                     <Select.Option.Text>Select 5</Select.Option.Text>
+//                   </Select.Option>
+//                   <Select.Option value="Select 6">
+//                     <Select.Option.Text>Select 6</Select.Option.Text>
+//                   </Select.Option>
+//                   <Select.Option value="Select 7">
+//                     <Select.Option.Text>Select 7</Select.Option.Text>
+//                   </Select.Option>
+//                   <Select.Option value="Select 8">
+//                     <Select.Option.Text>Select 8</Select.Option.Text>
+//                   </Select.Option>
+//                   <Select.Option value="Select 9">
+//                     <Select.Option.Text>Select 9</Select.Option.Text>
+//                   </Select.Option>
+//                 </Select.Content>
+//               </Select>
+//             </YBox>
+//           </Modal.Content>
+//         </Modal>
+//       </YBox>
+//     );
+//   },
+// };

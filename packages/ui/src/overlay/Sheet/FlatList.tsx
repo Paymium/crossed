@@ -17,8 +17,9 @@ type FlatListProps = ComponentProps<typeof FL> & {
 };
 export const FlatList = memo<FlatListProps & RefAttributes<RNFL>>(
   forwardRef<RNFL, FlatListProps>(
-    ({ padded = true, contentProps, ...props }, ref) => (
+    ({ padded = true, contentProps, children, ...props }, ref) => (
       <Content padded={false} {...contentProps}>
+        {children}
         <FL
           {...props}
           ref={ref}

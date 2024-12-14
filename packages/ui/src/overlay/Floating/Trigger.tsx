@@ -10,9 +10,12 @@ import { Slot, type SlotProps } from '../../Slot';
 import { useFloatingConfig, useFloatingContext } from './context';
 import { forwardRef, memo, RefAttributes, useCallback, useMemo } from 'react';
 import { composeEventHandlers } from '@crossed/core';
-import { CrossedMethods } from '@crossed/styled';
+import { composeStyles, CrossedMethods } from '@crossed/styled';
 
-export type FloatingTriggerProps = Omit<SlotProps<PressableProps>, 'Comp'> & {
+export type FloatingTriggerProps = Omit<
+  SlotProps<PressableProps>,
+  'Comp' | 'style'
+> & {
   /**
    * Crossed style
    */
@@ -53,7 +56,15 @@ export const FloatingTrigger = memo<FloatingTriggerProps & RefAttributes<View>>(
       };
     }, [props, toggle, enabled, onClose, onOpen]);
 
-    return <Slot ref={ref} Comp={Pressable} role="button" {...propsExtended} />;
+    return (
+      <Slot
+        ref={ref}
+        Comp={Pressable}
+        role="button"
+        {...propsExtended}
+        {...composeStyles(propsExtended.style).style()}
+      />
+    );
   })
 );
 FloatingTrigger.displayName = 'Floating.Trigger';

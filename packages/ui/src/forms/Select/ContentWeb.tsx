@@ -13,15 +13,8 @@ import type { ContentProps } from './types';
 import { composeStyles, createStyles, inlineStyle } from '@crossed/styled';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { Input } from '../Input';
-import {
-  Children,
-  isValidElement,
-  ReactNode,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { TextInput } from 'react-native';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FlatList, TextInput } from 'react-native';
 import { SelectOption } from './Option';
 import Fuse from 'fuse.js';
 
@@ -32,37 +25,42 @@ export const ContentWeb = ({
   children: childrenProps,
   ...props
 }: ContentProps) => {
-  const { triggerLayout, open, refs, floatingStyles, searchable } =
+  const { triggerLayout, open, searchable, refs, floatingStyles, items } =
     useSelectProvider();
 
   const inputRef = useRef<TextInput>();
   const [search, setSearch] = useState<string>('');
+
+  useEffect(() => {
+    if (!open) {
+      setSearch('');
+    }
+  }, [open]);
 
   const { width } = (triggerLayout.current as any) || {
     top: 0,
     height: 0,
     left: 0,
   };
-  const fuse = useRef(
-    new Fuse([], { keys: ['props.search', 'props.value'] })
-  ).current;
-
-  const childrenOption = useMemo(() => {
-    const children = Children.toArray(childrenProps);
-    return children.reduce<ReactNode[]>((acc, c) => {
-      if (isValidElement(c) && c.type === SelectOption) {
-        fuse.add(c);
-        acc.push(c);
-      }
-      return acc;
-    }, []);
-  }, [childrenProps]);
+  const fuse = useMemo(
+    () =>
+      new Fuse(items, {
+        keys: ['search', 'value'],
+      }),
+    [items]
+  );
 
   const children = useMemo(() => {
-    return search
-      ? fuse.search(search).map(({ item }) => item)
-      : childrenOption;
-  }, [fuse, search, childrenOption]);
+    return search ? fuse.search(search).map(({ item }) => item) : items;
+  }, [fuse, search, items]);
+
+  const renderItem = useCallback(({ item }) => {
+    return (
+      <SelectOption value={item.value}>
+        <MenuList.Title>{item.label}</MenuList.Title>
+      </SelectOption>
+    );
+  }, []);
 
   return open ? (
     <Animated.View
@@ -76,19 +74,24 @@ export const ContentWeb = ({
         style={composeStyles(
           form.input,
           useSelect.content,
-          inlineStyle(() => ({ web: { base: { overflowY: 'auto' } } })),
+          inlineStyle(() => ({
+            web: { base: { overflowY: 'auto' } },
+          })),
           styles.dynamic({ ...floatingStyles, minWidth: width })
         )}
       >
         {searchable && (
-          <Input
-            ref={inputRef}
-            value={search}
-            onChangeText={setSearch}
-            clearable
-          />
+          <MenuList>
+            <Input
+              ref={inputRef}
+              value={search}
+              onChangeText={setSearch}
+              clearable
+              autoFocus
+            />
+          </MenuList>
         )}
-        {children}
+        <FlatList style={{ flex: 1 }} data={children} renderItem={renderItem} />
       </MenuList>
     </Animated.View>
   ) : null;
