@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.7.2
+
+### Patch Changes
+
+- 26e9053: some fix
+
 ## 3.7.1
 
 ### Patch Changes
