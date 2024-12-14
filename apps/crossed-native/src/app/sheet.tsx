@@ -45,11 +45,15 @@ export default function SheetScreen() {
                   <Button.Text>Scrollview</Button.Text>
                 </Button>
               </Sheet.Trigger>
-              <Sheet.ScrollView>
-                {Array.from(Array(100).keys()).map((i) => (
-                  <Text key={`renderscrollviewvody-${i}`}>Description {i}</Text>
-                ))}
-              </Sheet.ScrollView>
+              <Sheet.Content>
+                <Sheet.ScrollView>
+                  {Array.from(Array(100).keys()).map((i) => (
+                    <Text key={`renderscrollviewvody-${i}`}>
+                      Description {i}
+                    </Text>
+                  ))}
+                </Sheet.ScrollView>
+              </Sheet.Content>
             </Sheet>
           </XBox>
         </>

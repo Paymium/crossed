@@ -15,7 +15,6 @@ export type FloatingContext = {
   closeOverlayPress?: boolean;
   wait?: number;
   removeScroll: boolean;
-  portal?: boolean;
 };
 
 export const [FloatingProvider, useFloatingContext] =
@@ -28,6 +27,7 @@ export type FloatingConfig = {
    * If false, disable behavior
    */
   enabled?: boolean;
+  portal: boolean;
 };
 export const [FloatingConfigProvider, useFloatingConfig] =
   createScope<FloatingConfig>({} as FloatingConfig);

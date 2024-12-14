@@ -15,19 +15,19 @@ import {
   useRef,
 } from 'react';
 import { Floating } from '../Floating';
-import { composeStyles, CrossedMethods } from '@crossed/styled';
+import { composeStyles, CrossedMethods, isWeb } from '@crossed/styled';
 import { modalStyles } from '../styles';
 import { createStyles } from '@crossed/styled';
 import { localContext } from './context';
-import { sheetContext, useSheetContext } from '../Sheet/context';
 import { Sheet } from '../Sheet';
 import { useFloatingContext } from '../Floating/context';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
 import { FocusScope } from '../../other/FocusScope';
+import { RemoveScroll } from '../../other';
 
 const styles = createStyles(() => ({
   default: {
-    base: { maxHeight: '95%', alignSelf: 'center' },
+    base: { maxHeight: '95%' },
   },
   sm: {
     base: { width: '90%', maxHeight: '90%' },
@@ -54,7 +54,7 @@ export const useKeyDown = (keyEvent, { enable }) => {
   );
 
   useEffect(() => {
-    if (enable) {
+    if (enable && isWeb) {
       document.addEventListener('keydown', onKeyDown);
       return () => {
         document.removeEventListener('keydown', onKeyDown);
@@ -66,14 +66,17 @@ export const useKeyDown = (keyEvent, { enable }) => {
 
 const SheetComponent = ({ children }: PropsWithChildren) => {
   const { open, onClose } = useFloatingContext();
+  const { showSheet } = useContext(localContext);
   const refSheet = useRef(null);
   useEffect(() => {
-    if (open) {
-      refSheet.current.show();
-    } else {
-      refSheet.current.hide();
+    if (showSheet) {
+      if (open) {
+        refSheet.current.show();
+      } else {
+        refSheet.current.hide();
+      }
     }
-  }, [open]);
+  }, [open, showSheet]);
   return (
     <Sheet ref={refSheet}>
       <Sheet.Content onClose={onClose}>{children}</Sheet.Content>
@@ -83,9 +86,7 @@ const SheetComponent = ({ children }: PropsWithChildren) => {
 
 type ModalContentProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
 export const ModalContent = memo<ModalContentProps>(({ children, style }) => {
-  // const [visibility, setVisibility] = useState(false);
   const localContextInstance = useContext(localContext);
-  const sheetContextValue = useSheetContext();
   const { open, onClose } = useFloatingContext();
 
   const { size, idRef, showSheet } = localContextInstance;
@@ -95,12 +96,12 @@ export const ModalContent = memo<ModalContentProps>(({ children, style }) => {
   return (
     <Floating.Portal>
       <localContext.Provider value={localContextInstance}>
-        <sheetContext.Provider value={sheetContextValue}>
-          {showSheet ? (
-            <SheetComponent>{children}</SheetComponent>
-          ) : (
-            <>
-              <Floating.Overlay />
+        {showSheet ? (
+          <SheetComponent>{children}</SheetComponent>
+        ) : (
+          <>
+            <Floating.Overlay />
+            <RemoveScroll enabled={open}>
               <FocusScope trapped={open} enabled={open}>
                 <Floating.Content
                   role="dialog"
@@ -119,9 +120,9 @@ export const ModalContent = memo<ModalContentProps>(({ children, style }) => {
                   {children}
                 </Floating.Content>
               </FocusScope>
-            </>
-          )}
-        </sheetContext.Provider>
+            </RemoveScroll>
+          </>
+        )}
       </localContext.Provider>
     </Floating.Portal>
   );

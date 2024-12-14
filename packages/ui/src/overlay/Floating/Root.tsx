@@ -52,6 +52,11 @@ export type FloatingProps = PropsWithChildren & {
    * Controlled state onChange handler
    */
   onChange?: (_p: boolean) => void;
+
+  /**
+   * If false, not render in portal
+   */
+  portal?: boolean;
 } & Partial<Pick<FloatingConfig, 'triggerStrategy' | 'enabled'>>;
 export type FloatingRef = {
   onClose: () => void;
@@ -70,6 +75,7 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
         removeScroll = true,
         triggerStrategy = 'onPress',
         enabled = true,
+        portal = true,
       }: FloatingProps,
       ref
     ) => {
@@ -91,6 +97,7 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
         <FloatingConfigProvider
           triggerStrategy={triggerStrategy}
           enabled={enabled}
+          portal={portal}
         >
           <FloatingProvider
             open={open}

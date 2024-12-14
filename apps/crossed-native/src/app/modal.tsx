@@ -5,12 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { XBox, Select, Text, YBox } from '@crossed/ui';
+import { Text, YBox, Modal } from '@crossed/ui';
 import { createStyles } from '@crossed/styled';
 import { FlatList } from 'react-native';
-import { SelectProps } from '@crossed/ui';
-import { useId } from 'react';
-import { countries } from './countriesFixtures.ts';
 
 const styles = createStyles(() => ({
   scrollview: { base: { paddingHorizontal: 10, paddingVertical: 10 } },
@@ -23,30 +20,37 @@ const styles = createStyles(() => ({
   end: { base: { alignSelt: 'flex-end', flexDirection: 'row' } },
 }));
 
-const Example = (props: Omit<SelectProps, 'items'>) => {
-  const id = useId();
+const Example = () => {
   return (
-    <Select
-      {...props}
-      items={countries.map(({ name_fr, iso_alpha2 }) => ({
-        value: iso_alpha2,
-        label: name_fr,
-      }))}
-    />
+    <Modal>
+      <Modal.Trigger>
+        <Text>Open</Text>
+      </Modal.Trigger>
+      <Modal.Content>
+        <Modal.Header>
+          <Modal.Title>Title</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Text>content</Text>
+        </Modal.Body>
+        <Modal.Footer>
+          <Modal.Trigger>
+            <Text>Close</Text>
+          </Modal.Trigger>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal>
   );
 };
 
-export default function TabOneScreen() {
+export default function ModalScreen() {
   return (
     <FlatList
       contentContainerStyle={styles.scrollview.rnw().style}
       data={[]}
       ListHeaderComponent={
         <YBox alignItems="stretch" space="sm">
-          <Example label={'Basic'} />
-          <Example label={'Multiple'} multiple />
-          <Example label={'Search'} searchable />
-          <Example label={'Seach Multiple'} multiple searchable />
+          <Example />
         </YBox>
       }
       renderItem={() => null}

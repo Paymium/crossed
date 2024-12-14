@@ -24,7 +24,7 @@ export type ModalProps = ChildWithViariant & {
   adapt?: boolean;
 };
 export const ModalRoot = memo<ModalProps>(
-  ({ size = 'md', children, floatingProps, adapt }) => {
+  ({ size = 'md', children, floatingProps, adapt = true }) => {
     const { md } = useMedia();
     const showSheet = adapt && !md;
     const id = useId();

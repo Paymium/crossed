@@ -11,6 +11,7 @@
 import { PortalProvider } from '@gorhom/portal';
 import type { PropsWithChildren } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SheetProvider } from 'react-native-actions-sheet';
 import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
 
 export const CrossedUIProvider = ({
@@ -25,7 +26,7 @@ export const CrossedUIProvider = ({
           style
         ).rnw()}
       >
-        {children}
+        <SheetProvider>{children}</SheetProvider>
       </GestureHandlerRootView>
     </PortalProvider>
   );

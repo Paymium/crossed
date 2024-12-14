@@ -17,7 +17,7 @@ describe('Floating.Trigger', () => {
     const onOpen = jest.fn();
 
     render(
-      <FloatingConfigProvider triggerStrategy={'onPress'} enabled>
+      <FloatingConfigProvider triggerStrategy={'onPress'} enabled portal>
         <FloatingProvider
           onClose={onClose}
           onOpen={onOpen}

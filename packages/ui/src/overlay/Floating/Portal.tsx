@@ -22,8 +22,8 @@ export const FloatingPortal = memo<FloatingPortalProps>(({ children }) => {
   const floatingContext = useFloatingContext();
   const config = useFloatingConfig();
   const PortalComponent = useMemo(
-    () => (floatingContext.portal ? Portal : Fragment),
-    [floatingContext.portal]
+    () => (config.portal ? Portal : Fragment),
+    [config.portal]
   );
   return (
     <PortalComponent>

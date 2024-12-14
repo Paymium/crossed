@@ -7,12 +7,16 @@
 
 import Animated, { AnimatedProps } from 'react-native-reanimated';
 import { View, ViewProps } from 'react-native';
-import { forwardRef, memo, RefAttributes } from 'react';
+import { forwardRef, memo, ReactNode, RefAttributes } from 'react';
 import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
 import { useFloatingContext } from './context';
 import { positionStyles } from '../../styles/position';
+import { Box } from '../../layout';
 
-export type FloatingContentProps = Partial<AnimatedProps<ViewProps>> & {
+export type FloatingContentProps = Omit<
+  Partial<AnimatedProps<ViewProps>>,
+  'children'
+> & {
   /**
    * Crossed style
    */
@@ -21,6 +25,8 @@ export type FloatingContentProps = Partial<AnimatedProps<ViewProps>> & {
    * Animated view style
    */
   animatedStyle?: AnimatedProps<ViewProps>['style'];
+
+  children?: ReactNode;
 };
 
 export const FloatingContent = memo<FloatingContentProps & RefAttributes<View>>(
@@ -29,18 +35,21 @@ export const FloatingContent = memo<FloatingContentProps & RefAttributes<View>>(
       const { open } = useFloatingContext();
 
       return open ? (
-        <Animated.View
-          {...props}
-          style={[
-            composeStyles(
-              inlineStyle(() => ({ base: { zIndex: 1 } })),
-              open && positionStyles.absoluteFill,
-              style
-            ).style().style,
-            animatedStyle,
-          ]}
-          ref={ref}
-        />
+        <Box style={positionStyles.absoluteFill}>
+          <Animated.View
+            {...props}
+            style={[
+              composeStyles(
+                inlineStyle(() => ({ base: { zIndex: 1 } })),
+                style
+              ).style().style,
+              animatedStyle,
+            ]}
+            ref={ref}
+          >
+            <Box style={style}>{props.children}</Box>
+          </Animated.View>
+        </Box>
       ) : null;
     }
   )

@@ -13,6 +13,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { Floating } from '../../overlay/Floating';
@@ -38,6 +39,8 @@ import { Checkbox } from '../Checkbox';
 import { XBox } from '../../layout';
 import { Adapt } from '../../other';
 import { Sheet } from '../../overlay/Sheet';
+import { ActionSheetRef } from 'react-native-actions-sheet';
+import { positionStyles } from '../../styles/position';
 
 const duration = 100;
 
@@ -87,7 +90,10 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
 
     useEffect(() => {
       if (!open) {
+        totoRef.current?.hide();
         setSearch('');
+      } else {
+        totoRef.current?.show();
       }
     }, [open]);
 
@@ -130,19 +136,19 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
       />
     ) : null;
 
+    const totoRef = useRef<ActionSheetRef>();
+
     const sheetRender = (
       <Sheet.Content
+        ref={totoRef}
         padded={false}
         onClose={onClose}
+        initialSnapIndex={0}
         snapPoints={searchable ? [100] : undefined}
+        containerStyle={inlineStyle(() => ({ base: { height: '100%' } }))}
       >
         <MenuList.Item>{renderSearch}</MenuList.Item>
-        <Sheet.FlatList
-          scrollEnabled
-          style={{ flex: 1 }}
-          data={children}
-          renderItem={renderItem}
-        />
+        <Sheet.FlatList scrollEnabled data={children} renderItem={renderItem} />
       </Sheet.Content>
     );
 
@@ -154,8 +160,11 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
               onEscapeKey={onClose}
               onClickOutside={onClose}
               enabled={open}
+              {...composeStyles(
+                open ? positionStyles.absoluteFill : visibility.hidden
+              ).style()}
             >
-              <Floating.VisibilityHidden
+              <Floating.Content
                 exiting={FadeOut.duration(duration)}
                 entering={FadeIn.duration(duration)}
                 style={composeStyles(
@@ -170,7 +179,6 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
                     inlineStyle(() => ({
                       web: { base: { overflowY: 'auto' } },
                     })),
-                    !open && visibility.hidden,
                     styles.dynamic(floatingStyles)
                   )}
                 >
@@ -181,7 +189,7 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
                     renderItem={renderItem}
                   />
                 </MenuList>
-              </Floating.VisibilityHidden>
+              </Floating.Content>
             </Focus>
           </Adapt>
         ) : (

@@ -29,10 +29,9 @@ export type SelectProps = Pick<
   'label' | 'description' | 'extra'
 > &
   Pick<SelectConfigContext, 'multiple' | 'clearable' | 'searchable'> &
-  Partial<
-    Pick<UseUncontrolledInput<ValueType>, 'value' | 'defaultValue' | 'onChange'>
-  > &
-  Pick<SelectValueContext, 'items' | 'value'> & {
+  Partial<Pick<UseUncontrolledInput<ValueType>, 'defaultValue' | 'onChange'>> &
+  Pick<SelectValueContext, 'items'> &
+  Partial<Pick<SelectValueContext, 'value'>> & {
     error?: string;
   };
 
@@ -51,7 +50,6 @@ export const Select = memo<SelectProps>((e) => {
     items,
   } = e;
 
-  const refSheet = useRef<ActionSheetRef>();
   const [value, setValue] = useUncontrolled({
     value: valueProps,
     onChange,
@@ -60,11 +58,6 @@ export const Select = memo<SelectProps>((e) => {
 
   const { refs, floatingStyles } = useFloating();
 
-  const handleOpenChange = useCallback((open) => {
-    if (open) refSheet.current?.show();
-    else refSheet.current?.hide();
-  }, []);
-
   return (
     <SelectConfigProvider
       multiple={multiple}
@@ -72,8 +65,8 @@ export const Select = memo<SelectProps>((e) => {
       searchable={searchable}
     >
       <SelectValueProvider value={value} setValue={setValue} items={items}>
-        <Floating removeScroll={false} onChange={handleOpenChange}>
-          <Sheet ref={refSheet}>
+        <Floating removeScroll={false}>
+          <Sheet>
             <FormField>
               <YBox space="xxs">
                 <SelectLabel

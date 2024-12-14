@@ -21,6 +21,7 @@ import type { RootStackParamList } from './src/routes';
 import SheetScreen from './src/app/sheet';
 import TooltipScreen from './src/app/tooltip';
 import { CrossedUIProvider } from '@crossed/ui';
+import ModalScreen from './src/app/modal.tsx';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -42,6 +43,7 @@ function App(): React.JSX.Element {
             <Stack.Screen name="/sheet" component={SheetScreen} />
             <Stack.Screen name="/select" component={SelectScreen} />
             <Stack.Screen name="/tooltip" component={TooltipScreen} />
+            <Stack.Screen name="/modal" component={ModalScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

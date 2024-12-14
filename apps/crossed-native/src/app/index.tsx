@@ -39,6 +39,7 @@ const menus: Menu[] = [
   { to: '/select', title: 'Select' },
   { to: '/sheet', title: 'Sheet' },
   { to: '/tooltip', title: 'Tooltip' },
+  { to: '/modal', title: 'Modal' },
 ] as const;
 
 export default function TabOneScreen({ navigation }: IndexScreenProps) {

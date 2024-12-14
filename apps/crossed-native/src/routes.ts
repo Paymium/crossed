@@ -19,6 +19,7 @@ export type RootStackParamList = {
   '/select': undefined;
   '/sheet': undefined;
   '/tooltip': undefined;
+  '/modal': undefined;
 };
 
 export type AccordionScreenProps = NativeStackScreenProps<
