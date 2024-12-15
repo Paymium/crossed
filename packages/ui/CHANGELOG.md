@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 3.7.6
+
+### Patch Changes
+
+- 7737783: add missing export
+
 ## 3.7.5
 
 ### Patch Changes

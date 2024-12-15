@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { createStyles, type ExtractForProps } from '@crossed/styled';
+import { createStyles } from '@crossed/styled';
 
 export const form = createStyles(
   ({ space, font, colors, components: { Input } }) => ({
@@ -80,6 +80,3 @@ export const form = createStyles(
     },
   })
 );
-
-export type FormInput = ExtractForProps<typeof form.input>;
-export type FormLabel = ExtractForProps<typeof form.label>;
