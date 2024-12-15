@@ -17,6 +17,7 @@ import { FloatingRoot } from './Root';
 export { FloatingPortal, type FloatingPortalProps } from './Portal';
 import { FloatingPortal } from './Portal';
 import { FloatingVisibilityHidden } from './VisibilityHidden';
+export { useFloatingConfig, useFloatingContext } from './context';
 
 export const Floating = withStaticProperties(FloatingRoot, {
   Trigger: FloatingTrigger,

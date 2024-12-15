@@ -6,3 +6,11 @@
  */
 
 export * from './typography';
+export * from './alignItems';
+export * from './base';
+export * from './form';
+export * from './gap';
+export * from './justifyContent';
+export * from './position';
+export * from './textAlign';
+export * from './visibilityHidden';
