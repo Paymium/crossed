@@ -1,5 +1,11 @@
 # crossed-doc
 
+## 0.8.7
+
+### Patch Changes
+
+- 6665d48: align tag github
+
 ## 0.8.1
 
 ### Patch Changes
