@@ -31,6 +31,7 @@ export const Content = memo<ContentProps & RefAttributes<ActionSheetRef>>(
         <ActionSheet
           gestureEnabled
           snapPoints={[90]}
+          isModal={false}
           {...props}
           ref={composeRefs(parentRef, actionSheetRef, ref)}
           containerStyle={

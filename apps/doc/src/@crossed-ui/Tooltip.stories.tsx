@@ -8,7 +8,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { YBox, Text } from '@crossed/ui';
-import { Tooltip } from 'packages/ui/src/overlay/Tooltip';
+import { Tooltip } from '@crossed/ui/src/overlay/Tooltip';
 import { inlineStyle } from '@crossed/styled';
 
 const meta: Meta<typeof Tooltip> = {
@@ -32,9 +32,6 @@ const meta: Meta<typeof Tooltip> = {
         </Tooltip>
       </YBox>
     );
-  },
-  argTypes: {
-    visibilityHidden: { control: 'boolean' },
   },
 };
 
