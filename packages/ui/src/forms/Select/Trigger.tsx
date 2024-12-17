@@ -6,19 +6,29 @@
  */
 
 import { withStaticProperties } from '@crossed/core';
-import { forwardRef, memo, RefAttributes, useCallback, useId } from 'react';
-import { Button, ButtonProps, CloseButton } from '../../buttons';
+import {
+  ComponentProps,
+  forwardRef,
+  memo,
+  RefAttributes,
+  useCallback,
+  useId,
+} from 'react';
 import { composeStyles, inlineStyle } from '@crossed/styled';
 import { ChevronDown } from '@crossed/unicons';
 import { form } from '../../styles/form';
-import { XBox } from '../../layout';
-import { FormControl } from '../Form';
-import { Text } from '../../typography';
+import { VisibilityHidden } from '../../other/VisibilityHidden';
+import { CloseButton } from '../../buttons/CloseButton';
+import { Button } from '../../buttons/Button';
+import { XBox } from '../../layout/XBox';
+import { Text } from '../../typography/Text';
+import { FormControl } from '../../forms/Form';
 import { useSelectConfig, useSelectValue } from './context';
-import { Floating } from '../../overlay/Floating';
 import { useSelect } from './styles';
-import { VisibilityHidden } from '@crossed/primitive';
 import { TextInput, View } from 'react-native';
+import { Floating } from '../../overlay/Floating';
+
+type ButtonProps = ComponentProps<typeof Button>;
 
 const ClearButton = memo(() => {
   const { value, setValue } = useSelectValue();
@@ -39,7 +49,7 @@ const ClearButton = memo(() => {
 });
 
 const Value = () => {
-  const { value, items } = useSelectValue();
+  const { value, items, renderValue } = useSelectValue();
   const { multiple } = useSelectConfig();
   const id = useId();
 
@@ -49,7 +59,6 @@ const Value = () => {
     (acc, i) => ({ ...acc, [`${i.value}`]: i }),
     {}
   );
-
   return (
     <>
       <VisibilityHidden hide>
@@ -59,29 +68,35 @@ const Value = () => {
           value={`${Array.isArray(value) ? value.join(', ') : value}`}
         />
       </VisibilityHidden>
-      <XBox style={inlineStyle(() => ({ base: { gap: 5 } }))}>
-        {toRender.map((e, i) => (
-          <Text
-            key={`${id}-${e}`}
-            style={composeStyles(
-              useSelect.value,
-              multiple &&
-                inlineStyle(({ colors, space }) => ({
-                  base: {
-                    backgroundColor: colors.info.light,
-                    padding: space.xxs,
-                    borderRadius: 4,
-                    borderWidth: 1,
-                    borderColor: colors.info.primary,
-                    color: colors.info.dark,
-                  },
-                }))
-              // style
-            )}
-          >
-            {i === 2 ? `...+${tmp.length - i}` : labelByValue[`${e}`]?.label}
-          </Text>
-        ))}
+      <XBox style={inlineStyle(() => ({ base: { gap: 5, flexShrink: 1 } }))}>
+        {renderValue
+          ? renderValue(value as any)
+          : toRender.map((e, i) => (
+              <Text
+                ellipsizeMode={'tail'}
+                numberOfLines={1}
+                key={`${id}-${e}`}
+                style={composeStyles(
+                  useSelect.value,
+                  multiple &&
+                    inlineStyle(({ colors, space }) => ({
+                      base: {
+                        backgroundColor: colors.info.light,
+                        padding: space.xxs,
+                        borderRadius: 4,
+                        borderWidth: 1,
+                        borderColor: colors.info.primary,
+                        color: colors.info.dark,
+                      },
+                    }))
+                  // style
+                )}
+              >
+                {i === 2
+                  ? `...+${tmp.length - i}`
+                  : (labelByValue as any)[`${e}`]?.label}
+              </Text>
+            ))}
       </XBox>
     </>
   );
@@ -89,12 +104,14 @@ const Value = () => {
 
 export const SelectTrigger = withStaticProperties(
   memo<ButtonProps & RefAttributes<View>>(
-    forwardRef(({ children, ...props }, ref) => {
+    forwardRef((props, ref) => {
       const { clearable } = useSelectConfig();
+
       return (
         <XBox>
           <FormControl>
             <Floating.Trigger
+              {...props}
               style={composeStyles(
                 form.input,
                 inlineStyle(() => ({ base: { flex: 1 } })),

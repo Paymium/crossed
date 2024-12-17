@@ -5,17 +5,32 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { composeStyles, CrossedMethods } from '@crossed/styled';
+import { composeStyles, createStyles, CrossedMethods } from '@crossed/styled';
 import { useFloatingContext } from './context';
 import Animated, {
   AnimatedProps,
   FadeIn,
   FadeOut,
 } from 'react-native-reanimated';
-import { overlayStyles } from '../styles';
 import { Box } from '../../layout/Box';
 import { ViewProps } from 'react-native';
 import { memo } from 'react';
+
+export const overlayStyles = createStyles(({ colors }) => ({
+  root: {
+    base: {
+      position: 'absolute',
+      backgroundColor: colors.black,
+      opacity: 0.7,
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 1,
+    },
+    web: { base: { position: 'fixed' } },
+  },
+}));
 
 export type FloatingOverlayProps = {
   /**

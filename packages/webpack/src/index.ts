@@ -161,7 +161,6 @@ export default class StylePlugin {
           });
 
           if (debug) {
-            // eslint-disable-next-line no-console
             // console.log(`\n[${pluginName}] Use loader for "${moduleRequest}".`);
           }
         }

@@ -11,10 +11,9 @@ import { forwardRef, memo, RefAttributes } from 'react';
 import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
 import { visibility } from '../../styles/visibilityHidden';
 import { useFloatingContext } from './context';
-import { positionStyles } from '../../styles/position';
 
 export type FloatingVisibilityHiddenProps = Partial<
-  AnimatedProps<ViewProps>
+  Omit<AnimatedProps<ViewProps>, 'style'>
 > & {
   /**
    * Crossed style
@@ -38,12 +37,9 @@ export const FloatingVisibilityHidden = memo<
           style={[
             composeStyles(
               inlineStyle(() => ({ base: { zIndex: 1 } })),
-              open && positionStyles.absoluteFill,
-              !open && visibility.hidden
+              !open && visibility.hidden,
+              style
             ).style().style,
-            ...(Array.isArray(style) ? style : [style]).map((e) =>
-              e?.style ? e.style().style : e
-            ),
             animatedStyle,
           ]}
           ref={ref}

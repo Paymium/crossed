@@ -8,6 +8,7 @@
 import { createScope, useUncontrolled } from '@crossed/core';
 import { Item, ValueType, ValueTypeMultiple } from './types';
 import type { UseFloatingReturn } from '@floating-ui/react';
+import { ReactNode } from 'react';
 
 /**
  * Config context
@@ -17,6 +18,7 @@ export type SelectConfigContext = {
   searchable?: boolean;
   multiple?: boolean;
   clearable?: boolean;
+  disabled?: boolean;
 };
 
 export const [SelectConfigProvider, useSelectConfig] =
@@ -31,6 +33,7 @@ export type SelectValueContext = {
   value: ReturnType<UseUncontrolled>[0];
   setValue: ReturnType<UseUncontrolled>[1];
   items: Item[];
+  renderValue?: (_value: ValueType) => ReactNode;
 };
 
 export const [SelectValueProvider, useSelectValue] =

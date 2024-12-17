@@ -5,19 +5,26 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { ComponentProps, forwardRef, memo, RefAttributes } from 'react';
-import { FlatList as FL } from 'react-native-actions-sheet';
+import {
+  ComponentPropsWithoutRef,
+  forwardRef,
+  memo,
+  RefAttributes,
+} from 'react';
+import { FlatList as FL } from '@crossed/sheet';
 import { FlatList as RNFL } from 'react-native';
 import { paddedContainerStyle } from './styles';
+import '@crossed/sheet';
+import 'react-native';
 
-type FlatListProps = ComponentProps<typeof FL> & {
+type FlatListProps = ComponentPropsWithoutRef<typeof RNFL<any>> & {
   padded?: boolean;
 };
-export const FlatList = memo<FlatListProps & RefAttributes<RNFL>>(
-  forwardRef<RNFL, FlatListProps>(({ padded = true, ...props }, ref) => (
+export const FlatList = memo<FlatListProps & RefAttributes<typeof RNFL<any>>>(
+  forwardRef(({ padded = true, ...props }, ref) => (
     <FL
-      {...props}
-      ref={ref}
+      {...(props as any)}
+      ref={ref as any}
       contentContainerStyle={paddedContainerStyle(padded).style().style}
     />
   ))

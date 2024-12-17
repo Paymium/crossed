@@ -5,17 +5,22 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { ComponentProps, forwardRef, memo, RefAttributes } from 'react';
-import { ScrollView as SV } from 'react-native-actions-sheet';
+import {
+  ComponentPropsWithoutRef,
+  forwardRef,
+  memo,
+  RefAttributes,
+} from 'react';
+import { ScrollView as SV } from '@crossed/sheet';
 import { ScrollView as RNSV } from 'react-native';
 import { paddedContainerStyle } from './styles';
 
-type ScrollViewProps = ComponentProps<typeof SV> & {
+type ScrollViewProps = ComponentPropsWithoutRef<typeof RNSV> & {
   padded?: boolean;
 };
 
-export const ScrollView = memo<ScrollViewProps & RefAttributes<RNSV>>(
-  forwardRef<RNSV, ScrollViewProps>(({ padded = true, ...props }, ref) => {
+export const ScrollView = memo<ScrollViewProps & RefAttributes<typeof RNSV>>(
+  forwardRef(({ padded = true, ...props }, ref) => {
     return (
       <SV
         {...(props as any)}

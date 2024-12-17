@@ -12,3 +12,4 @@ export * from './Kbd';
 export * from './Code';
 export * from './Table';
 export * from './Tag';
+export * from './Spinner';

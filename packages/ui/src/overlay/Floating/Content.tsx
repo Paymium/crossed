@@ -10,12 +10,10 @@ import { View, ViewProps } from 'react-native';
 import { forwardRef, memo, ReactNode, RefAttributes } from 'react';
 import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
 import { useFloatingContext } from './context';
-import { positionStyles } from '../../styles/position';
-import { Box } from '../../layout';
 
 export type FloatingContentProps = Omit<
   Partial<AnimatedProps<ViewProps>>,
-  'children'
+  'children' | 'style'
 > & {
   /**
    * Crossed style
@@ -35,21 +33,19 @@ export const FloatingContent = memo<FloatingContentProps & RefAttributes<View>>(
       const { open } = useFloatingContext();
 
       return open ? (
-        <Box style={positionStyles.absoluteFill}>
-          <Animated.View
-            {...props}
-            style={[
-              composeStyles(
-                inlineStyle(() => ({ base: { zIndex: 1 } })),
-                style
-              ).style().style,
-              animatedStyle,
-            ]}
-            ref={ref}
-          >
-            <Box style={style}>{props.children}</Box>
-          </Animated.View>
-        </Box>
+        <Animated.View
+          {...props}
+          style={[
+            composeStyles(
+              inlineStyle(() => ({ base: { zIndex: 1 } })),
+              style
+            ).style().style,
+            animatedStyle,
+          ]}
+          ref={ref}
+        >
+          {props.children}
+        </Animated.View>
       ) : null;
     }
   )

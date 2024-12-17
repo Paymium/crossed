@@ -6,11 +6,9 @@
  */
 
 import { memo, PropsWithChildren, useId } from 'react';
-import { Floating } from '../Floating';
-import { localContext, VariantSize } from './context';
-import { FloatingProps } from '../Floating/Root';
 import { useMedia } from '../../useMedia';
-// import type { ScrollViewProps } from '../../other/ScrollView';
+import { Floating, FloatingProps } from '../Floating';
+import { localContext, VariantSize } from './context';
 
 type ChildWithViariant = PropsWithChildren<Partial<VariantSize>>;
 export type ModalProps = ChildWithViariant & {

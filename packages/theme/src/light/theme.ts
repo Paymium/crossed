@@ -11,6 +11,7 @@ import colors from './colors';
 import { font } from '../font';
 
 export default {
+  boxShadow: '0px 4px 12px 0px rgba(0, 0, 0, 0.1)',
   colors: colors,
   space,
   font,

@@ -6,7 +6,6 @@
  */
 
 import { withDefaultProps } from '@crossed/core';
-
 import { XBox } from '../../layout/XBox';
 
 export const ModalFooter = withDefaultProps(XBox, {

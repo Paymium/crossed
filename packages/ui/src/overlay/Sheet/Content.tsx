@@ -7,10 +7,7 @@
 
 import { composeStyles, CrossedMethods } from '@crossed/styled';
 import { styles } from './styles';
-import ActionSheet, {
-  ActionSheetProps,
-  ActionSheetRef,
-} from 'react-native-actions-sheet';
+import ActionSheet, { ActionSheetProps, ActionSheetRef } from '@crossed/sheet';
 import { useSheetContext } from './context';
 import { composeRefs } from '@crossed/core';
 import { forwardRef, memo, RefAttributes } from 'react';

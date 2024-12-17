@@ -9,7 +9,7 @@ import { FocusOn } from 'react-focus-on';
 import type { FocusComponent } from './types';
 import { useFocusScope as useOriginal } from 'react-focus-lock';
 import { useMemo } from 'react';
-import { useFloatingContext } from '../../overlay/Floating/context';
+import { useFloatingContext } from '../../overlay/Floating';
 
 export const Focus: FocusComponent = (props) => {
   return <FocusOn {...props} />;
@@ -20,7 +20,7 @@ export const useFocusScope = () => {
   const { onClose } = useFloatingContext();
   return useMemo(
     () => ({
-      onKeyDown: (e) => {
+      onKeyDown: (e: any) => {
         if (e.code === 'ArrowDown') {
           focusNext();
         } else if (e.code === 'ArrowUp') {

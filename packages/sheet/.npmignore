@@ -1,0 +1,13 @@
+# OSX
+.DS_Store
+
+# Node Module
+node_modules/
+
+# assets/
+assets/
+
+# Example
+README.md
+tsconfig.json
+

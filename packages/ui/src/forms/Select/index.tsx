@@ -6,10 +6,10 @@
  */
 
 import { memo } from 'react';
-import { YBox } from '../../layout';
-import { FormField } from '../Form';
-import { Text } from '../../typography';
-import { Floating, Sheet } from '../../overlay';
+import { Sheet } from '../../overlay/Sheet';
+import { YBox } from '../../layout/YBox';
+import { Text } from '../../typography/Text';
+import { FormField } from '../../forms/Form';
 import { SelectLabel, SelectLabelProps } from './Label';
 import {
   SelectConfigContext,
@@ -22,6 +22,7 @@ import { ValueType } from './types';
 import { SelectTrigger } from './Trigger';
 import { SelectContent } from './Content';
 import { useFloating } from './useFloating';
+import { Floating } from '../../overlay/Floating';
 
 export type SelectProps = Pick<
   SelectLabelProps,
@@ -29,9 +30,16 @@ export type SelectProps = Pick<
 > &
   Pick<SelectConfigContext, 'multiple' | 'clearable' | 'searchable'> &
   Partial<Pick<UseUncontrolledInput<ValueType>, 'defaultValue' | 'onChange'>> &
-  Pick<SelectValueContext, 'items'> &
+  Pick<SelectValueContext, 'items' | 'renderValue'> &
   Partial<Pick<SelectValueContext, 'value'>> & {
     error?: string;
+
+    disabled?: boolean;
+
+    id?: string;
+
+    onSearch?: (_search: string) => void;
+    loading?: boolean;
   };
 
 export const Select = memo<SelectProps>((e) => {
@@ -47,6 +55,11 @@ export const Select = memo<SelectProps>((e) => {
     onChange,
     defaultValue,
     items,
+    disabled,
+    id,
+    onSearch,
+    loading,
+    renderValue,
   } = e;
 
   const [value, setValue] = useUncontrolled({
@@ -62,23 +75,31 @@ export const Select = memo<SelectProps>((e) => {
       multiple={multiple}
       clearable={clearable}
       searchable={searchable}
+      disabled={disabled}
     >
-      <SelectValueProvider value={value} setValue={setValue} items={items}>
+      <SelectValueProvider
+        value={value}
+        setValue={setValue}
+        renderValue={renderValue}
+        items={items}
+      >
         <Floating removeScroll={false}>
           <Sheet>
-            <FormField>
+            <FormField disabled={disabled}>
               <YBox space="xxs">
                 <SelectLabel
                   label={label}
                   description={description}
                   extra={extra}
                 />
-                <SelectTrigger ref={refs.setReference as any} />
+                <SelectTrigger ref={refs.setReference as any} id={id} />
                 {!!error && <Text color="error">{error.toString()}</Text>}
               </YBox>
               <SelectContent
                 ref={refs.setFloating as any}
                 floatingStyles={floatingStyles}
+                onSearch={onSearch}
+                loading={loading}
               />
             </FormField>
           </Sheet>

@@ -11,6 +11,7 @@ import type { Font } from './font';
 import type { Spaces } from './space';
 
 export type Theme = {
+  boxShadow: string;
   colors: Colors;
   space: Spaces;
   font: Font;

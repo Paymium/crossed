@@ -5,14 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import {
-  createContext,
-  ForwardedRef,
-  MutableRefObject,
-  useContext,
-} from 'react';
+import { createContext, ForwardedRef, RefObject, useContext } from 'react';
 import type { SharedValue } from 'react-native-reanimated';
-import { ActionSheetRef } from 'react-native-actions-sheet';
+import { ActionSheetRef } from '@crossed/sheet';
 
 export type SheetContext = {
   open: boolean;
@@ -25,7 +20,7 @@ export type SheetContext = {
   snapInitialHeight: SharedValue<number>;
   offset: number;
   ref: ForwardedRef<ActionSheetRef>;
-  actionSheetRef: MutableRefObject<ActionSheetRef>;
+  actionSheetRef: RefObject<ActionSheetRef>;
 };
 
 export const sheetContext = createContext<SheetContext>({} as SheetContext);

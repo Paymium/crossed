@@ -8,7 +8,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { YBox, Text } from '@crossed/ui';
-import { Tooltip } from '@crossed/ui/src/disclosure/Tooltip';
+import { Tooltip } from 'packages/ui/src/overlay/Tooltip';
 import { inlineStyle } from '@crossed/styled';
 
 const meta: Meta<typeof Tooltip> = {

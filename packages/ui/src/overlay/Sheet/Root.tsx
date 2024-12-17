@@ -9,7 +9,7 @@ import { useUncontrolled } from '@crossed/core';
 import { forwardRef, type PropsWithChildren, useCallback, useRef } from 'react';
 import { type SheetContext, sheetContext } from './context';
 import { useSharedValue } from 'react-native-reanimated';
-import { ActionSheetRef } from 'react-native-actions-sheet';
+import { ActionSheetRef } from '@crossed/sheet';
 
 export type SheetProps = PropsWithChildren<{
   open?: boolean;

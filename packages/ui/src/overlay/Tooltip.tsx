@@ -12,7 +12,7 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import { Floating, Sheet } from '../overlay';
+import { Floating, Sheet } from './index';
 import { withStaticProperties } from '@crossed/core';
 import {
   composeStyles,
@@ -22,7 +22,7 @@ import {
   isWeb,
 } from '@crossed/styled';
 import { Adapt } from '../other';
-import { useFloatingContext } from '../overlay/Floating/context';
+import { useFloatingContext } from './Floating/context';
 import { Box } from '../layout';
 import { Text, TextProps } from '../typography/Text';
 

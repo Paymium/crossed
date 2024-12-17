@@ -11,7 +11,7 @@
 import { PortalProvider } from '@gorhom/portal';
 import type { PropsWithChildren } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SheetProvider } from 'react-native-actions-sheet';
+import { SheetProvider } from '@crossed/sheet';
 import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
 
 export const CrossedUIProvider = ({

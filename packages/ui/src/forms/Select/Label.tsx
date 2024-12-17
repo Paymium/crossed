@@ -6,10 +6,10 @@
  */
 
 import { memo } from 'react';
-import { XBox } from '../../layout';
-import { FormLabel } from '../Form';
-import { Text } from '../../typography';
 import { form } from '../../styles/form';
+import { XBox } from '../../layout/XBox';
+import { Text } from '../../typography/Text';
+import { FormLabel } from '../../forms/Form';
 
 export type SelectLabelProps = {
   label?: string;

@@ -46,7 +46,7 @@ const accordionStyles = createStyles((t) => ({
     },
   },
   trigger: {
-    'base': {
+    base: {
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
@@ -202,7 +202,7 @@ const AccordionPanel = ({ children, style }: AccordionPanelProps) => {
         style
       )}
     >
-      <ScrollView onContentSizeChange={handleLayout} scrollEnabled={false}>
+      <ScrollView onContentSizeChange={handleLayout} style={{ flex: 1 }}>
         {children}
       </ScrollView>
     </Floating.VisibilityHidden>

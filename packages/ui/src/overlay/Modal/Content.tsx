@@ -14,16 +14,36 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import { Floating } from '../Floating';
-import { composeStyles, CrossedMethods, isWeb } from '@crossed/styled';
-import { modalStyles } from '../styles';
+import { FocusScope } from '../../other/FocusScope';
+import { alignItemsStyle } from '../../styles/alignItems';
+import { justifyContentStyle } from '../../styles/justifyContent';
+import { positionStyles } from '../../styles/position';
+import { RemoveScroll } from '../../other/RemoveScroll';
+import {
+  composeStyles,
+  CrossedMethods,
+  inlineStyle,
+  isWeb,
+} from '@crossed/styled';
 import { createStyles } from '@crossed/styled';
 import { localContext } from './context';
-import { Sheet } from '../Sheet';
-import { useFloatingContext } from '../Floating/context';
+import { Sheet } from '../Sheet/index';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
-import { FocusScope } from '../../other/FocusScope';
-import { RemoveScroll } from '../../other';
+import { ActionSheetRef } from '@crossed/sheet';
+import { Floating, useFloatingContext } from '../Floating';
+
+export const modalStyles = createStyles(({ colors, space }) => ({
+  content: {
+    base: {
+      zIndex: 100000,
+      borderRadius: 16,
+      backgroundColor: colors.background.secondary,
+      margin: 'auto',
+      padding: space.xl,
+      gap: space.xl,
+    },
+  },
+}));
 
 const styles = createStyles(() => ({
   default: {
@@ -45,7 +65,7 @@ const styles = createStyles(() => ({
 
 export type ModalOnKeyDown = KeyboardEventHandler<HTMLButtonElement>;
 
-export const useKeyDown = (keyEvent, { enable }) => {
+export const useKeyDown = (keyEvent: any, { enable }: any) => {
   const onKeyDown = useCallback(
     (e: DocumentEventMap['keydown']) => {
       keyEvent[e.key]?.();
@@ -67,19 +87,21 @@ export const useKeyDown = (keyEvent, { enable }) => {
 const SheetComponent = ({ children }: PropsWithChildren) => {
   const { open, onClose } = useFloatingContext();
   const { showSheet } = useContext(localContext);
-  const refSheet = useRef(null);
+  const refSheet = useRef<ActionSheetRef>(null);
   useEffect(() => {
     if (showSheet) {
       if (open) {
-        refSheet.current.show();
+        refSheet.current?.show();
       } else {
-        refSheet.current.hide();
+        refSheet.current?.hide();
       }
     }
   }, [open, showSheet]);
   return (
-    <Sheet ref={refSheet}>
-      <Sheet.Content onClose={onClose}>{children}</Sheet.Content>
+    <Sheet ref={refSheet as any}>
+      <Sheet.Content onClose={onClose} padded={false}>
+        <Sheet.ScrollView>{children}</Sheet.ScrollView>
+      </Sheet.Content>
     </Sheet>
   );
 };
@@ -99,29 +121,35 @@ export const ModalContent = memo<ModalContentProps>(({ children, style }) => {
         {showSheet ? (
           <SheetComponent>{children}</SheetComponent>
         ) : (
-          <>
+          <RemoveScroll
+            enabled={open}
+            style={composeStyles(
+              open && positionStyles.absoluteFill,
+              open && inlineStyle(() => ({ base: { display: 'flex' } })),
+              open && justifyContentStyle.center,
+              open && alignItemsStyle.center
+            )}
+          >
             <Floating.Overlay />
-            <RemoveScroll enabled={open}>
-              <FocusScope trapped={open} enabled={open}>
-                <Floating.Content
-                  role="dialog"
-                  aria-labelledby={`${idRef}-title`}
-                  aria-describedby={`${idRef}-description`}
-                  aria-hidden={!open}
-                  entering={FadeIn}
-                  exiting={FadeOut}
-                  style={composeStyles(
-                    modalStyles.content,
-                    styles.default,
-                    styles[size],
-                    style
-                  )}
-                >
-                  {children}
-                </Floating.Content>
-              </FocusScope>
-            </RemoveScroll>
-          </>
+            <FocusScope trapped={open} enabled={open}>
+              <Floating.Content
+                role="dialog"
+                aria-labelledby={`${idRef}-title`}
+                aria-describedby={`${idRef}-description`}
+                aria-hidden={!open}
+                entering={FadeIn}
+                exiting={FadeOut}
+                style={composeStyles(
+                  modalStyles.content,
+                  styles.default,
+                  styles[size],
+                  style
+                )}
+              >
+                {children}
+              </Floating.Content>
+            </FocusScope>
+          </RemoveScroll>
         )}
       </localContext.Provider>
     </Floating.Portal>

@@ -40,7 +40,7 @@ const esmBuild = (configPath: string) => {
     format: 'cjs',
     target: 'node14',
   });
-  // eslint-disable-next-line no-eval
+
   return codeBuild;
 };
 
