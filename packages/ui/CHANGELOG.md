@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 4.0.2
+
+### Patch Changes
+
+- 36aa57f: remove default isModal sheet
+
 ## 4.0.1
 
 ### Patch Changes
