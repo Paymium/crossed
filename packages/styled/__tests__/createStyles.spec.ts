@@ -85,8 +85,8 @@ describe('createStyles', () => {
       style: [
         {
           '$$css': true,
-          'color-[white]': 'color-[white]',
-          'border-color-[red]': 'border-color-[red]',
+          'color': 'color-[white]',
+          'borderColor': 'border-color-[red]',
         },
         {},
       ],
@@ -99,8 +99,8 @@ describe('createStyles', () => {
       style: [
         {
           '$$css': true,
-          'border-color-[red]': 'border-color-[red]',
-          'color-[white]': 'color-[white]',
+          'borderColor': 'border-color-[red]',
+          'color': 'color-[white]',
         },
         { color: 'black', backgroundColor: 'white' },
         {},
@@ -115,9 +115,8 @@ describe('createStyles', () => {
       style: [
         {
           '$$css': true,
-          'border-color-[red]': 'border-color-[red]',
-          'color-[white]': 'color-[white]',
-          'toto': 'toto',
+          'borderColor': 'border-color-[red]',
+          'color': 'color-[white]',
         },
         { color: 'black', backgroundColor: 'white' },
         {},

@@ -21,7 +21,7 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import { ChevronUp } from '@crossed/unicons';
+import { ChevronDown } from '@crossed/unicons';
 import {
   ScrollView,
   ScrollViewProps,
@@ -49,6 +49,7 @@ const accordionStyles = createStyles((t) => ({
     base: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center',
     },
   },
   panel: {
@@ -220,8 +221,8 @@ const AccordionIcon = () => {
     };
   }, [isOpen]);
   return (
-    <Animated.View style={animatedStyle}>
-      <ChevronUp />
+    <Animated.View style={[animatedStyle]}>
+      <ChevronDown />
     </Animated.View>
   );
 };
