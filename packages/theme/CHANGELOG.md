@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 2.2.0
+
+### Minor Changes
+
+- daed555: add boxShadow in theme
+
 ## 2.1.1
 
 ### Patch Changes

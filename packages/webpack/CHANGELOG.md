@@ -1,5 +1,16 @@
 # @crossed/webpack
 
+## 2.1.0
+
+### Minor Changes
+
+- daed555: add boxShadow in theme
+
+### Patch Changes
+
+- Updated dependencies [daed555]
+  - @crossed/loader@3.0.0
+
 ## 2.0.9
 
 ### Patch Changes

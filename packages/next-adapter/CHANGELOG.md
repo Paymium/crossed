@@ -1,5 +1,16 @@
 # @crossed/next-adapter
 
+## 0.7.0
+
+### Minor Changes
+
+- daed555: add boxShadow in theme
+
+### Patch Changes
+
+- Updated dependencies [daed555]
+  - @crossed/webpack@2.1.0
+
 ## 0.6.10
 
 ### Patch Changes

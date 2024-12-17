@@ -1,7 +1,7 @@
 {
   "name": "crossed-doc",
   "private": true,
-  "version": "0.7.11",
+  "version": "0.8.0",
   "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006",
@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "@crossed/styled": "workspace:0.14.3",
-    "@crossed/theme": "workspace:2.1.1",
-    "@crossed/ui": "workspace:3.7.6",
-    "@crossed/unicons": "2.0.1",
-    "@crossed/webpack": "workspace:2.0.9",
+    "@crossed/theme": "workspace:2.2.0",
+    "@crossed/ui": "workspace:4.0.0",
+    "@crossed/unicons": "3.0.0",
+    "@crossed/webpack": "workspace:2.1.0",
     "@gorhom/portal": "^1.0.14",
     "@storybook/addon-designs": "^8.0.3",
     "@storybook/manager-api": "^8.3.5",

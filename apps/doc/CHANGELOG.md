@@ -1,5 +1,20 @@
 # crossed-doc
 
+## 0.8.0
+
+### Minor Changes
+
+- daed555: add boxShadow in theme
+
+### Patch Changes
+
+- Updated dependencies [daed555]
+- Updated dependencies [daed555]
+  - @crossed/webpack@2.1.0
+  - @crossed/theme@2.2.0
+  - @crossed/ui@4.0.0
+  - @crossed/unicons@3.0.0
+
 ## 0.7.11
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @crossed/loader
 
+## 3.0.0
+
+### Minor Changes
+
+- daed555: add boxShadow in theme
+
+### Patch Changes
+
+- Updated dependencies [daed555]
+  - @crossed/theme@2.2.0
+
 ## 2.0.1
 
 ### Patch Changes
