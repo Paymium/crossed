@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 4.0.1
+
+### Patch Changes
+
+- 8e2fcf1: fix tooltip
+
 ## 4.0.0
 
 ### Minor Changes

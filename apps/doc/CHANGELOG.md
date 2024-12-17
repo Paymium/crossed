@@ -1,5 +1,13 @@
 # crossed-doc
 
+## 0.8.1
+
+### Patch Changes
+
+- 8e2fcf1: fix tooltip
+- Updated dependencies [8e2fcf1]
+  - @crossed/ui@4.0.1
+
 ## 0.8.0
 
 ### Minor Changes

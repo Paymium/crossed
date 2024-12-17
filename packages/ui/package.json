@@ -1,7 +1,7 @@
 {
   "name": "@crossed/ui",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "sideEffects": false,
   "keywords": [
     "React Native",
