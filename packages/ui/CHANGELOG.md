@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 4.0.3
+
+### Patch Changes
+
+- 5fc1d30: fix(Accordion): wrong icon
+
 ## 4.0.2
 
 ### Patch Changes
