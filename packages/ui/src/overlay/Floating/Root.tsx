@@ -59,8 +59,8 @@ export type FloatingProps = PropsWithChildren & {
   portal?: boolean;
 } & Partial<Pick<FloatingConfig, 'triggerStrategy' | 'enabled'>>;
 export type FloatingRef = {
-  onClose: () => void;
-  onOpen: () => void;
+  close: () => void;
+  open: () => void;
 };
 export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
   forwardRef<FloatingRef, FloatingProps>(
@@ -84,14 +84,18 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
         onChange,
         value,
       });
-      const onClose = useCallback(() => {
+      const handleClose = useCallback(() => {
         setOpen(false);
       }, [setOpen]);
-      const onOpen = useCallback(() => {
+      const handleOpen = useCallback(() => {
         setOpen(true);
       }, [setOpen]);
 
-      useImperativeHandle(ref, () => ({ onClose, onOpen }), [onClose, onOpen]);
+      useImperativeHandle(
+        ref,
+        () => ({ close: handleClose, open: handleOpen }),
+        [handleClose, handleOpen]
+      );
 
       return (
         <FloatingConfigProvider
@@ -101,8 +105,8 @@ export const FloatingRoot = memo<FloatingProps & RefAttributes<FloatingRef>>(
         >
           <FloatingProvider
             open={open}
-            onClose={onClose}
-            onOpen={onOpen}
+            onClose={handleClose}
+            onOpen={handleOpen}
             closeOverlayPress={closeOverlayPress ?? true}
             wait={wait}
             removeScroll={removeScroll}
