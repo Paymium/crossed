@@ -21,7 +21,7 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import { ChevronUp } from '@crossed/unicons';
+import { ChevronDown } from '@crossed/unicons';
 import {
   ScrollView,
   ScrollViewProps,
@@ -216,12 +216,12 @@ const AccordionIcon = () => {
   const isOpen = values.includes(value);
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ rotate: withTiming(isOpen ? '-180deg' : '0deg') }],
+      transform: [{ rotate: withTiming(isOpen ? '180deg' : '0deg') }],
     };
   }, [isOpen]);
   return (
     <Animated.View style={animatedStyle}>
-      <ChevronUp />
+      <ChevronDown />
     </Animated.View>
   );
 };
