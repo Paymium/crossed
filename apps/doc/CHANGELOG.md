@@ -1,5 +1,13 @@
 # crossed-doc
 
+## 0.8.15
+
+### Patch Changes
+
+- 2dff785: fix modal
+- Updated dependencies [2dff785]
+  - @crossed/ui@6.0.1
+
 ## 0.8.14
 
 ### Patch Changes
