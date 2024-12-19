@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.0.1
+
+### Patch Changes
+
+- 2dff785: fix modal
+
 ## 6.0.0
 
 ### Major Changes
