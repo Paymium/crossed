@@ -85,7 +85,10 @@ export const useKeyDown = (keyEvent: any, { enable }: any) => {
   }, [onKeyDown, enable]);
 };
 
-const SheetComponent = ({ children }: PropsWithChildren) => {
+const SheetComponent = ({
+  children,
+  style,
+}: PropsWithChildren<{ style?: CrossedMethods<any> }>) => {
   const { open, onClose } = useFloatingContext();
   const { showSheet } = useContext(localContext);
   const refSheet = useRef<ActionSheetRef>(null);
@@ -100,7 +103,7 @@ const SheetComponent = ({ children }: PropsWithChildren) => {
   }, [open, showSheet]);
   return (
     <Sheet ref={refSheet as any}>
-      <Sheet.Content onClose={onClose} padded={false}>
+      <Sheet.Content onClose={onClose} padded={false} containerStyle={style}>
         <Sheet.ScrollView>{children}</Sheet.ScrollView>
       </Sheet.Content>
     </Sheet>
@@ -125,7 +128,7 @@ export const ModalContent = memo<ModalContentProps>(
       <Floating.Portal>
         <localContext.Provider value={localContextInstance}>
           {showSheet ? (
-            <SheetComponent>{children}</SheetComponent>
+            <SheetComponent style={style}>{children}</SheetComponent>
           ) : (
             <RemoveScroll
               enabled={open}
