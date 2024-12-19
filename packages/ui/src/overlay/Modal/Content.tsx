@@ -6,6 +6,7 @@
  */
 
 import {
+  ComponentProps,
   KeyboardEventHandler,
   memo,
   PropsWithChildren,
@@ -14,7 +15,7 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import { FocusScope } from '../../other/FocusScope';
+import { FocusScope, FocusScopeProps } from '../../other/FocusScope';
 import { alignItemsStyle } from '../../styles/alignItems';
 import { justifyContentStyle } from '../../styles/justifyContent';
 import { positionStyles } from '../../styles/position';
@@ -106,53 +107,61 @@ const SheetComponent = ({ children }: PropsWithChildren) => {
   );
 };
 
-type ModalContentProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
-export const ModalContent = memo<ModalContentProps>(({ children, style }) => {
-  const localContextInstance = useContext(localContext);
-  const { open, onClose } = useFloatingContext();
+type ModalContentProps = PropsWithChildren<{
+  style?: CrossedMethods<any>;
+  focusScopeProps?: FocusScopeProps;
+  removeScrollProps?: ComponentProps<typeof RemoveScroll>;
+}>;
+export const ModalContent = memo<ModalContentProps>(
+  ({ children, style, removeScrollProps, focusScopeProps }) => {
+    const localContextInstance = useContext(localContext);
+    const { open, onClose } = useFloatingContext();
 
-  const { size, idRef, showSheet } = localContextInstance;
+    const { size, idRef, showSheet } = localContextInstance;
 
-  useKeyDown({ Escape: onClose }, { enable: open });
+    useKeyDown({ Escape: onClose }, { enable: open });
 
-  return (
-    <Floating.Portal>
-      <localContext.Provider value={localContextInstance}>
-        {showSheet ? (
-          <SheetComponent>{children}</SheetComponent>
-        ) : (
-          <RemoveScroll
-            enabled={open}
-            style={composeStyles(
-              open && positionStyles.absoluteFill,
-              open && inlineStyle(() => ({ base: { display: 'flex' } })),
-              open && justifyContentStyle.center,
-              open && alignItemsStyle.center
-            )}
-          >
-            <Floating.Overlay />
-            <FocusScope trapped={open} enabled={open}>
-              <Floating.Content
-                role="dialog"
-                aria-labelledby={`${idRef}-title`}
-                aria-describedby={`${idRef}-description`}
-                aria-hidden={!open}
-                entering={FadeIn}
-                exiting={FadeOut}
-                style={composeStyles(
-                  modalStyles.content,
-                  styles.default,
-                  styles[size],
-                  style
-                )}
-              >
-                {children}
-              </Floating.Content>
-            </FocusScope>
-          </RemoveScroll>
-        )}
-      </localContext.Provider>
-    </Floating.Portal>
-  );
-});
+    return (
+      <Floating.Portal>
+        <localContext.Provider value={localContextInstance}>
+          {showSheet ? (
+            <SheetComponent>{children}</SheetComponent>
+          ) : (
+            <RemoveScroll
+              enabled={open}
+              {...removeScrollProps}
+              style={composeStyles(
+                open && positionStyles.absoluteFill,
+                open && inlineStyle(() => ({ base: { display: 'flex' } })),
+                open && justifyContentStyle.center,
+                open && alignItemsStyle.center,
+                removeScrollProps?.style
+              )}
+            >
+              <Floating.Overlay />
+              <FocusScope trapped={open} enabled={open} {...focusScopeProps}>
+                <Floating.Content
+                  role="dialog"
+                  aria-labelledby={`${idRef}-title`}
+                  aria-describedby={`${idRef}-description`}
+                  aria-hidden={!open}
+                  entering={FadeIn}
+                  exiting={FadeOut}
+                  style={composeStyles(
+                    modalStyles.content,
+                    styles.default,
+                    styles[size],
+                    style
+                  )}
+                >
+                  {children}
+                </Floating.Content>
+              </FocusScope>
+            </RemoveScroll>
+          )}
+        </localContext.Provider>
+      </Floating.Portal>
+    );
+  }
+);
 ModalContent.displayName = 'Modal.Content';
