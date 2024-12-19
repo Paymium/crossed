@@ -13,6 +13,8 @@ import { ModalFooter } from './Footer';
 import { ModalBody } from './Body';
 import { ModalTrigger } from './Trigger';
 import { ModalHeader } from './Header';
+import { ModalScrollView } from './ScrollView';
+import { ModalPadded } from './Padded';
 
 export const Modal = withStaticProperties(ModalRoot, {
   Content: ModalContent,
@@ -21,6 +23,8 @@ export const Modal = withStaticProperties(ModalRoot, {
   Footer: ModalFooter,
   Header: ModalHeader,
   Body: ModalBody,
+  ScrollView: ModalScrollView,
+  Padded: ModalPadded,
 });
 
 export {
@@ -30,4 +34,6 @@ export {
   ModalFooter,
   ModalHeader,
   ModalBody,
+  ModalScrollView,
+  ModalPadded,
 };

@@ -11,10 +11,12 @@ import { Trigger } from './Trigger';
 import { Content } from './Content';
 import { ScrollView } from './ScrollView';
 import { FlatList } from './FlatList';
+import { SheetPadded } from './Padded';
 
 export const Sheet = withStaticProperties(Root, {
   Trigger,
   Content,
   ScrollView,
   FlatList,
+  Padded: SheetPadded,
 });

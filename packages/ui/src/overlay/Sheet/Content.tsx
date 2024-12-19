@@ -18,14 +18,10 @@ export type ContentProps = Omit<
 > & {
   containerStyle?: CrossedMethods<any>;
   indicatorStyle?: CrossedMethods<any>;
-  padded?: boolean;
 };
 export const Content = memo<ContentProps & RefAttributes<ActionSheetRef>>(
   forwardRef<ActionSheetRef, ContentProps>(
-    (
-      { containerStyle, indicatorStyle, padded = true, ...props },
-      parentRef
-    ) => {
+    ({ containerStyle, indicatorStyle, ...props }, parentRef) => {
       const { actionSheetRef, ref } = useSheetContext();
       return (
         <ActionSheet
@@ -33,12 +29,8 @@ export const Content = memo<ContentProps & RefAttributes<ActionSheetRef>>(
           {...props}
           ref={composeRefs(parentRef, actionSheetRef, ref)}
           containerStyle={
-            composeStyles(
-              styles.box,
-              padded && styles.containerPadded,
-              padded && styles.container,
-              containerStyle
-            ).style().style
+            composeStyles(styles.box, styles.container, containerStyle).style()
+              .style
           }
           indicatorStyle={
             composeStyles(styles.indicator, indicatorStyle).style().style

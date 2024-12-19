@@ -34,13 +34,13 @@ import { useSelect } from './styles';
 import { Focus } from './Focus';
 import { useFloatingContext } from '../../overlay/Floating/context';
 import { Checkbox } from '../Checkbox';
-import { XBox, YBox } from '../../layout';
-import { Adapt } from '../../other';
+import { XBox } from '../../layout';
 import { Sheet } from '../../overlay/Sheet';
 import { ActionSheetRef } from '@crossed/sheet';
 import { Item, ValueTypeMultiple } from './types';
 import { Spinner } from '../../display/Spinner';
 import { gapStyles } from '../../styles';
+import { useMedia } from '../../useMedia';
 
 const duration = 100;
 
@@ -151,101 +151,79 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
       ) : null;
 
       const totoRef = useRef<ActionSheetRef>();
+      const { md } = useMedia();
+
+      const showSheet = isWeb && md;
 
       return (
         <Floating.Portal>
-          {isWeb ? (
-            <Adapt
-              size={'md'}
-              fallback={
-                <Sheet.Content
-                  ref={totoRef as any}
-                  padded={false}
-                  onClose={onClose}
-                  snapPoints={searchable ? [100] : undefined}
-                  containerStyle={composeStyles(
-                    searchable &&
-                      inlineStyle(() => ({
-                        base: { height: '100%' },
-                      }))
-                  )}
-                >
-                  <YBox
-                    testID={'content-select'}
-                    style={inlineStyle(() => ({ base: { flex: 1 } }))}
-                  >
-                    <MenuList.Item>{renderSearch}</MenuList.Item>
-                    {loading ? (
-                      <Spinner />
-                    ) : (
-                      <Sheet.FlatList
-                        scrollEnabled
-                        data={children}
-                        renderItem={renderItem as any}
-                      />
-                    )}
-                  </YBox>
-                </Sheet.Content>
-              }
-            >
-              <Focus
-                onEscapeKey={onClose}
-                onClickOutside={onClose}
-                enabled={open}
-              >
-                <Floating.Content
-                  exiting={FadeOut.duration(duration)}
-                  entering={FadeIn.duration(duration)}
-                  style={composeStyles(
-                    inlineStyle(({ boxShadow }) => ({
-                      base: { zIndex: 100 },
-                      web: { base: { boxShadow } },
-                    }))
-                  )}
-                >
-                  <MenuList
-                    testID="content-select"
-                    ref={ref}
-                    style={composeStyles(
-                      form.input,
-                      useSelect.content,
-                      inlineStyle(() => ({
-                        web: { base: { overflowY: 'auto' } },
-                      })),
-                      styles.dynamic(floatingStyles) as any
-                    )}
-                  >
-                    {renderSearch}
-                    {loading ? (
-                      <Spinner />
-                    ) : (
-                      <FlatList
-                        contentContainerStyle={gapStyles.xxs.style().style}
-                        style={{ flex: 1 }}
-                        data={children}
-                        renderItem={renderItem}
-                      />
-                    )}
-                  </MenuList>
-                </Floating.Content>
-              </Focus>
-            </Adapt>
-          ) : (
+          {showSheet ? (
             <Sheet.Content
               ref={totoRef as any}
-              padded={false}
               onClose={onClose}
-              initialSnapIndex={0}
               snapPoints={searchable ? [100] : undefined}
-              containerStyle={inlineStyle(() => ({ base: { height: '100%' } }))}
+              containerStyle={composeStyles(
+                searchable &&
+                  inlineStyle(() => ({
+                    base: { height: '100%' },
+                  }))
+              )}
             >
-              <MenuList.Item>{renderSearch}</MenuList.Item>
-              <Sheet.FlatList
-                scrollEnabled
-                data={children}
-                renderItem={renderItem as any}
-              />
+              <Sheet.Padded testID={'content-select'}>
+                <MenuList.Item>{renderSearch}</MenuList.Item>
+                {loading ? (
+                  <Spinner />
+                ) : (
+                  <Sheet.FlatList
+                    scrollEnabled
+                    data={children}
+                    renderItem={renderItem as any}
+                  />
+                )}
+              </Sheet.Padded>
             </Sheet.Content>
+          ) : (
+            <Focus
+              onEscapeKey={onClose}
+              onClickOutside={onClose}
+              enabled={open}
+            >
+              <Floating.Content
+                exiting={FadeOut.duration(duration)}
+                entering={FadeIn.duration(duration)}
+                style={composeStyles(
+                  inlineStyle(({ boxShadow }) => ({
+                    base: { zIndex: 100 },
+                    web: { base: { boxShadow } },
+                  }))
+                )}
+              >
+                <MenuList
+                  testID="content-select"
+                  ref={ref}
+                  style={composeStyles(
+                    form.input,
+                    useSelect.content,
+                    inlineStyle(() => ({
+                      web: { base: { overflowY: 'auto' } },
+                    })),
+                    styles.dynamic(floatingStyles) as any
+                  )}
+                >
+                  {renderSearch}
+                  {loading ? (
+                    <Spinner />
+                  ) : (
+                    <FlatList
+                      contentContainerStyle={gapStyles.xxs.style().style}
+                      style={{ flex: 1 }}
+                      data={children}
+                      renderItem={renderItem}
+                    />
+                  )}
+                </MenuList>
+              </Floating.Content>
+            </Focus>
           )}
         </Floating.Portal>
       );

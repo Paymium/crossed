@@ -43,11 +43,11 @@ describe('Floating.Root', () => {
     expect(call).toHaveProperty('open', false);
     expect(call).toHaveProperty('removeScroll', true);
     expect(call).toHaveProperty('wait', 0);
-    expect(ref.current).toHaveProperty('onOpen');
-    expect(ref.current).toHaveProperty('onClose');
+    expect(ref.current).toHaveProperty('open');
+    expect(ref.current).toHaveProperty('close');
   });
 
-  test('check imperative handle onOpen', async () => {
+  test('check imperative handle open', async () => {
     mount();
     expect(FloatingProviderMocked).toHaveBeenCalledTimes(1);
     const call = FloatingProviderMocked.mock.calls[0][0];

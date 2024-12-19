@@ -39,9 +39,8 @@ export const modalStyles = createStyles(({ colors, space }) => ({
       zIndex: 100000,
       borderRadius: 16,
       backgroundColor: colors.background.secondary,
+      paddingVertical: space.xl,
       margin: 'auto',
-      padding: space.xl,
-      gap: space.xl,
     },
   },
 }));
@@ -103,8 +102,8 @@ const SheetComponent = ({
   }, [open, showSheet]);
   return (
     <Sheet ref={refSheet as any}>
-      <Sheet.Content onClose={onClose} padded={false} containerStyle={style}>
-        <Sheet.ScrollView>{children}</Sheet.ScrollView>
+      <Sheet.Content onClose={onClose} containerStyle={style}>
+        {children}
       </Sheet.Content>
     </Sheet>
   );
@@ -123,7 +122,6 @@ export const ModalContent = memo<ModalContentProps>(
     const { size, idRef, showSheet } = localContextInstance;
 
     useKeyDown({ Escape: onClose }, { enable: open });
-
     return (
       <Floating.Portal>
         <localContext.Provider value={localContextInstance}>

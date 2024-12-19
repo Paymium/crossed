@@ -22,22 +22,24 @@ const RenderBasic = (e: ModalProps) => {
           </Button>
         </Modal.Trigger>
         <Modal.Content>
-          <Modal.Header>
-            <Modal.Title>Title</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Text>Hello world</Text>
-          </Modal.Body>
+          <Modal.Padded>
+            <Modal.Header>
+              <Modal.Title>Title</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Text>Hello world</Text>
+            </Modal.Body>
 
-          <Modal.Footer>
-            <Button variant="tertiary">
-              <Button.Text>Button</Button.Text>
-            </Button>
+            <Modal.Footer>
+              <Button variant="tertiary">
+                <Button.Text>Button</Button.Text>
+              </Button>
 
-            <Button>
-              <Button.Text>Button</Button.Text>
-            </Button>
-          </Modal.Footer>
+              <Button>
+                <Button.Text>Button</Button.Text>
+              </Button>
+            </Modal.Footer>
+          </Modal.Padded>
         </Modal.Content>
       </Modal>
     </YBox>
@@ -71,4 +73,50 @@ export const SizeMd: Story = { args: { size: 'md' } };
 export const SizeLg: Story = { args: { size: 'lg' } };
 export const AdaptToSheet: Story = {
   args: { adapt: true },
+};
+
+export const WithScrollView: Story = {
+  args: { adapt: true },
+  render(e) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+        <Modal {...e}>
+          <Modal.Trigger asChild>
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Modal.Trigger>
+          <Modal.Content>
+            <Modal.Padded>
+              <Modal.Header>
+                <Modal.Title>Title</Modal.Title>
+              </Modal.Header>
+            </Modal.Padded>
+            <Modal.ScrollView>
+              <Modal.Padded>
+                <Modal.Body>
+                  {Array.from(Array(100).keys()).map((i) => {
+                    return (
+                      <Text key={`${i}-test-scrollview`}>Hello world</Text>
+                    );
+                  })}
+                </Modal.Body>
+              </Modal.Padded>
+            </Modal.ScrollView>
+            <Modal.Padded>
+              <Modal.Footer>
+                <Button variant="tertiary">
+                  <Button.Text>Button</Button.Text>
+                </Button>
+
+                <Button>
+                  <Button.Text>Button</Button.Text>
+                </Button>
+              </Modal.Footer>
+            </Modal.Padded>
+          </Modal.Content>
+        </Modal>
+      </YBox>
+    );
+  },
 };

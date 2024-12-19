@@ -13,20 +13,19 @@ import {
 } from 'react';
 import { ScrollView as SV } from '@crossed/sheet';
 import { ScrollView as RNSV } from 'react-native';
-import { paddedContainerStyle } from './styles';
+import { CrossedMethods } from '@crossed/styled';
 
-type ScrollViewProps = ComponentPropsWithoutRef<typeof RNSV> & {
-  padded?: boolean;
+type ScrollViewProps = Omit<
+  ComponentPropsWithoutRef<typeof RNSV>,
+  'contentContainerStyle'
+> & {
+  contentContainerStyle?: CrossedMethods<any>;
 };
 
 export const ScrollView = memo<ScrollViewProps & RefAttributes<typeof RNSV>>(
-  forwardRef(({ padded = true, ...props }, ref) => {
+  forwardRef((props, ref) => {
     return (
-      <SV
-        {...(props as any)}
-        ref={ref}
-        contentContainerStyle={paddedContainerStyle(padded).style().style}
-      />
+      <SV {...(props as any)} ref={ref} contentContainerStyle={props.style} />
     );
   })
 );

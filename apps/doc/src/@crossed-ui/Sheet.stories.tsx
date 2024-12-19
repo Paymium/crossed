@@ -7,7 +7,8 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button, Sheet, Text, YBox } from '@crossed/ui';
+import { Button, Text, YBox } from '@crossed/ui';
+import { Sheet } from '@crossed/ui/src/overlay/Sheet';
 import { inlineStyle } from '@crossed/styled';
 
 const meta: Meta<typeof Sheet> = {
@@ -19,6 +20,7 @@ const meta: Meta<typeof Sheet> = {
     'Sheet.Content': Sheet.Content,
     'Sheet.ScrollView': Sheet.ScrollView,
     'Sheet.FlatList': Sheet.FlatList,
+    'Sheet.Padded': Sheet.Padded,
   },
   render(e) {
     return (
@@ -59,10 +61,66 @@ export const ScrollView: Story = {
             </Button>
           </Sheet.Trigger>
           <Sheet.Content>
+            <Sheet.Padded>
+              <Sheet.ScrollView>
+                {Array.from(Array(100).keys()).map((i) => (
+                  <Text key={`renderscrollviewvody-${i}`}>Description {i}</Text>
+                ))}
+              </Sheet.ScrollView>
+            </Sheet.Padded>
+          </Sheet.Content>
+        </Sheet>
+      </YBox>
+    );
+  },
+};
+
+export const PaddedInsideContent: Story = {
+  args: {},
+
+  render(e) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+        <Sheet {...e}>
+          <Sheet.Trigger asChild>
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Sheet.Trigger>
+          <Sheet.Content>
+            <Sheet.Padded fullHeight>
+              <Sheet.ScrollView>
+                {Array.from(Array(100).keys()).map((i) => (
+                  <Text key={`renderscrollviewvody-${i}`}>Description {i}</Text>
+                ))}
+              </Sheet.ScrollView>
+            </Sheet.Padded>
+          </Sheet.Content>
+        </Sheet>
+      </YBox>
+    );
+  },
+};
+
+export const PaddedInsideScrollView: Story = {
+  args: {},
+
+  render(e) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+        <Sheet {...e}>
+          <Sheet.Trigger asChild>
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Sheet.Trigger>
+          <Sheet.Content>
             <Sheet.ScrollView>
-              {Array.from(Array(100).keys()).map((i) => (
-                <Text key={`renderscrollviewvody-${i}`}>Description {i}</Text>
-              ))}
+              <Sheet.Padded>
+                {Array.from(Array(100).keys()).map((i) => (
+                  <Text key={`renderscrollviewvody-${i}`}>Description {i}</Text>
+                ))}
+              </Sheet.Padded>
             </Sheet.ScrollView>
           </Sheet.Content>
         </Sheet>

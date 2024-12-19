@@ -13,7 +13,6 @@ import {
 } from 'react';
 import { FlatList as FL } from '@crossed/sheet';
 import { FlatList as RNFL } from 'react-native';
-import { paddedContainerStyle } from './styles';
 import '@crossed/sheet';
 import 'react-native';
 
@@ -21,12 +20,6 @@ type FlatListProps = ComponentPropsWithoutRef<typeof RNFL<any>> & {
   padded?: boolean;
 };
 export const FlatList = memo<FlatListProps & RefAttributes<typeof RNFL<any>>>(
-  forwardRef(({ padded = true, ...props }, ref) => (
-    <FL
-      {...(props as any)}
-      ref={ref as any}
-      contentContainerStyle={paddedContainerStyle(padded).style().style}
-    />
-  ))
+  forwardRef((props, ref) => <FL {...(props as any)} ref={ref as any} />)
 );
 FlatList.displayName = 'Sheet.FlatList';
