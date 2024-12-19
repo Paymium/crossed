@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 2.2.1
+
+### Patch Changes
+
+- e655e29: clean package dependencies
+
 ## 2.2.0
 
 ### Minor Changes

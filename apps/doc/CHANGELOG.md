@@ -1,5 +1,15 @@
 # crossed-doc
 
+## 0.8.11
+
+### Patch Changes
+
+- Updated dependencies [e655e29]
+  - @crossed/unicons@3.0.1
+  - @crossed/theme@2.2.1
+  - @crossed/ui@5.0.1
+  - @crossed/webpack@2.1.1
+
 ## 0.8.10
 
 ### Patch Changes

@@ -84,10 +84,10 @@ importers:
         specifier: workspace:^
         version: link:../../packages/styled
       '@crossed/theme':
-        specifier: workspace:2.2.0
+        specifier: workspace:2.2.1
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: 5.0.0
+        specifier: 5.0.1
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: workspace:*
@@ -181,16 +181,16 @@ importers:
         specifier: workspace:0.14.3
         version: link:../../packages/styled
       '@crossed/theme':
-        specifier: workspace:2.2.0
+        specifier: workspace:2.2.1
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: workspace:5.0.0
+        specifier: workspace:5.0.1
         version: link:../../packages/ui
       '@crossed/unicons':
-        specifier: 3.0.0
+        specifier: 3.0.1
         version: link:../../packages/unicons
       '@crossed/webpack':
-        specifier: workspace:2.1.0
+        specifier: workspace:2.1.1
         version: link:../../packages/webpack
       '@gorhom/portal':
         specifier: ^1.0.14
@@ -479,7 +479,7 @@ importers:
   packages/next-adapter:
     dependencies:
       '@crossed/webpack':
-        specifier: 2.1.0
+        specifier: 2.1.1
         version: link:../webpack
       find-yarn-workspace-root:
         specifier: ^2.0.0
@@ -832,7 +832,7 @@ importers:
         specifier: workspace:^
         version: link:../theme
       '@crossed/unicons':
-        specifier: 3.0.0
+        specifier: 3.0.1
         version: link:../unicons
       '@devvie/bottom-sheet':
         specifier: 0.3.0
@@ -917,7 +917,7 @@ importers:
   packages/webpack:
     dependencies:
       '@crossed/loader':
-        specifier: 3.0.0
+        specifier: 3.0.1
         version: link:../loader
       '@crossed/log':
         specifier: 0.1.1

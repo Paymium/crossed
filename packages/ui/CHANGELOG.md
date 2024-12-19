@@ -1,5 +1,14 @@
 # @crossed/ui
 
+## 5.0.1
+
+### Patch Changes
+
+- e655e29: clean package dependencies
+- Updated dependencies [e655e29]
+  - @crossed/unicons@3.0.1
+  - @crossed/theme@2.2.1
+
 ## 5.0.0
 
 ### Major Changes
