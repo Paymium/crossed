@@ -26,7 +26,7 @@ export const ModalHeader = ({ children, style, ...props }: BoxProps) => {
 
   return (
     <Box {...props} style={composeStyles(styles.header, style)}>
-      <Box style={inlineStyle(() => ({ base: { flexGrow: 1 } }))}>
+      <Box style={inlineStyle(() => ({ base: { flexGrow: 1, flexShrink:1 } }))}>
         {children}
       </Box>
       {showSheet ? null : (

@@ -2,18 +2,79 @@ import { Source } from '@storybook/blocks';
 
 # Usage
 
-Create your styles
+Create multiple styles
 <Source language='tsx' code={`
 import { createStyle } from '@crossed/styled';
 
 const styles = createStyle(()=> ({
-  disabled: { base: { opacity: 0.5, pointerEvent: "none", cursor: "not-allowed" } },
-  button: { base: { backgroundColor: "cyan" }, ':hover': { backgroundColor: "blue" } },
-  text: { base: { color: "white" } },
+  title: { base: { fontWeight: "800", fontSize:"32px", textDecoration: "underline"  } },
+  center: { base: {display: "flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}},
 }));
 `} />
 
-Use it
+Use it in your component
+<Source language='tsx' code={`
+import { Text, View, type TextProps } from "react-native";
+import { type CrossedMethods } from '@crossed/styled';
+
+type MyComponentProps = Omit<TextProps, "style"> & { style?: CrossedMethods<any>, title: string },
+
+export const MyComponent = ({title, style, ...props}: MyComponentProps) => {
+  return (
+    <View {...style.center.rnw()}>
+      <Text {...props} {...styles.text.rnw()}>
+        {title}
+      </Text>
+    </View>
+  );
+};
+`} />
+
+Or add inline style directly in your component
+<Source language='tsx' code={`
+import { Text, View, type TextProps } from "react-native";
+import { type CrossedMethods } from '@crossed/styled';
+
+type MyComponentProps = Omit<TextProps, "style"> & { style?: CrossedMethods<any>, title: string },
+
+export const MyComponent = ({title, style, ...props}: MyComponentProps) => {
+  return (
+    <View {...style.center.rnw()}>
+      <Text {...props} style={inlineStyle(() => ({base: { fontsize: 800, textAlign:"center" }}))}>
+        {title}
+      </Text>
+    </View>
+  );
+};
+`} />
+
+Be carefull with this 2 methodes, you can't apply conditional style directly from it. instead use composeStyle
+
+<Source language='tsx' code={`
+import { Text, View, type TextProps } from "react-native";
+import { createStyle, type CrossedMethods } from '@crossed/styled';
+import {useState} from "react"
+
+const styles = createStyle(()=> ({
+  red: { base: { backgroundColor:"red"} },
+  green: { base: {backgroundColor: "green"}},
+}));
+
+type MyComponentProps = Omit<TextProps, "style"> & { style?: CrossedMethods<any>, title: string },
+
+export const MyComponent = ({title, style, ...props}: MyComponentProps) => {
+    const [bgColor, setBgColor] = useState("red")
+  return (
+    <View {...composeStyle(bgColor === "red" && styles.red, bgColor === "green" && styles.green).rnw()}>
+      <Text {...props} style={inlineStyle(() => ({base: { fontsize: 800, textAlign:"center" }}))}>
+        {title}
+      </Text>
+    </View>
+  );
+};
+`} />
+
+More complexe exemple
 <Source language='tsx' code={`
 import { Text, type TextProps } from "react-native";
 import { type CrossedMethods, composeStyles } from '@crossed/styled';
