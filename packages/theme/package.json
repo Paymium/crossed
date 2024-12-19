@@ -36,16 +36,11 @@
   "devDependencies": {
     "@crossed/build": "*",
     "@crossed/styled": "workspace:^",
-    "@types/react": "^18.3.3",
     "jest": "^29.6.3",
-    "react": "^18.3.1",
-    "react-native-svg": "^15.1.0",
     "tsconfig": "*"
   },
   "peerDependencies": {
-    "@crossed/styled": "workspace:^",
-    "react": "^18.3.1",
-    "react-native-svg": "^15.1.0"
+    "@crossed/styled": "workspace:^"
   },
   "files": [
     "lib/",

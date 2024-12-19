@@ -104,10 +104,10 @@
     "tsconfig": "*"
   },
   "peerDependencies": {
-    "@crossed/styled": "workspace:^",
-    "@crossed/theme": "workspace:^",
-    "react": "^18.3.1",
-    "react-native-svg": "^15.1.0"
+    "@crossed/styled": "*",
+    "@crossed/theme": "*",
+    "react": "*",
+    "react-native-svg": "*"
   },
   "dependencies": {
     "@crossed/core": "workspace:^"
