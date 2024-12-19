@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.0.0
+
+### Major Changes
+
+- 52fcdfe: Add Padded component to Sheet and Modal, Break render padding, add Padded component
+
 ## 5.0.3
 
 ### Patch Changes
