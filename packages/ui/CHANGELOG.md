@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 5.0.2
+
+### Patch Changes
+
+- a5315f6: add props on modal
+
 ## 5.0.1
 
 ### Patch Changes
