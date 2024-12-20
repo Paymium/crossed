@@ -153,7 +153,7 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
       const totoRef = useRef<ActionSheetRef>();
       const { md } = useMedia();
 
-      const showSheet = isWeb && md;
+      const showSheet = isWeb && !md;
 
       return (
         <Floating.Portal>
