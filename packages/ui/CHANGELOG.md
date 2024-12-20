@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.0.2
+
+### Patch Changes
+
+- 03f15df: change condition to show sheet
+
 ## 6.0.1
 
 ### Patch Changes
