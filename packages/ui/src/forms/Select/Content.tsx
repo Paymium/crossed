@@ -18,12 +18,7 @@ import {
 } from 'react';
 import { Floating } from '../../overlay/Floating';
 import { useSelectConfig, useSelectValue } from './context';
-import {
-  composeStyles,
-  createStyles,
-  inlineStyle,
-  isWeb,
-} from '@crossed/styled';
+import { composeStyles, createStyles, inlineStyle } from '@crossed/styled';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
 import { FlatList, View } from 'react-native';
 import { MenuList } from '../../display';
@@ -153,11 +148,9 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
       const totoRef = useRef<ActionSheetRef>();
       const { md } = useMedia();
 
-      const showSheet = isWeb && !md;
-
       return (
         <Floating.Portal>
-          {showSheet ? (
+          {!md ? (
             <Sheet.Content
               ref={totoRef as any}
               onClose={onClose}
