@@ -153,11 +153,9 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
       const totoRef = useRef<ActionSheetRef>();
       const { md } = useMedia();
 
-      const showSheet = isWeb && !md;
-
       return (
         <Floating.Portal>
-          {showSheet ? (
+          {!md ? (
             <Sheet.Content
               ref={totoRef as any}
               onClose={onClose}
