@@ -184,7 +184,7 @@ importers:
         specifier: workspace:2.2.4
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: workspace:6.3.0
+        specifier: workspace:6.0.2
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: 3.0.2
