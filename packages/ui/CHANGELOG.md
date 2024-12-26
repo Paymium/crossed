@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.0.3
+
+### Patch Changes
+
+- 21cdba2: fix padding issue at build
+
 ## 6.0.2
 
 ### Patch Changes
