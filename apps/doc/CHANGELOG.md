@@ -1,5 +1,17 @@
 # crossed-doc
 
+## 0.9.0
+
+### Minor Changes
+
+- fc9b819: add custom trigger for select
+
+### Patch Changes
+
+- Updated dependencies [21cdba2]
+- Updated dependencies [fc9b819]
+  - @crossed/ui@6.1.0
+
 ## 0.8.16
 
 ### Patch Changes
