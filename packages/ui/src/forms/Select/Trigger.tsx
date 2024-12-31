@@ -104,7 +104,7 @@ const Value = () => {
 
 export const SelectTrigger = withStaticProperties(
   memo<ButtonProps & RefAttributes<View>>(
-    forwardRef((props, ref) => {
+    forwardRef(({ children, ...props }, ref) => {
       const { clearable } = useSelectConfig();
 
       return (
@@ -113,19 +113,22 @@ export const SelectTrigger = withStaticProperties(
             <Floating.Trigger
               {...props}
               style={composeStyles(
-                form.input,
-                inlineStyle(() => ({ base: { flex: 1 } })),
+                !children && form.input,
+                !children && useSelect.trigger,
                 // error && form.inputError,
-                useSelect.trigger,
                 props.style
               )}
               ref={ref}
             >
-              <Value />
-              <ChevronDown
-                {...useSelect.icon.style()}
-                color={form.placeholder.style().style.color}
-              />
+              {children ?? (
+                <>
+                  <Value />
+                  <ChevronDown
+                    {...useSelect.icon.style()}
+                    color={form.placeholder.style().style.color}
+                  />
+                </>
+              )}
             </Floating.Trigger>
           </FormControl>
           {clearable && <ClearButton />}

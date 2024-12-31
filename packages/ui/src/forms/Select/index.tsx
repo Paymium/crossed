@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { memo } from 'react';
+import { memo, ReactNode } from 'react';
 import { Sheet } from '../../overlay/Sheet';
 import { YBox } from '../../layout/YBox';
 import { Text } from '../../typography/Text';
@@ -40,6 +40,7 @@ export type SelectProps = Pick<
 
     onSearch?: (_search: string) => void;
     loading?: boolean;
+    children?: ReactNode;
   };
 
 export const Select = memo<SelectProps>((e) => {
@@ -60,6 +61,7 @@ export const Select = memo<SelectProps>((e) => {
     onSearch,
     loading,
     renderValue,
+    children,
   } = e;
 
   const [value, setValue] = useUncontrolled({
@@ -92,7 +94,9 @@ export const Select = memo<SelectProps>((e) => {
                   description={description}
                   extra={extra}
                 />
-                <SelectTrigger ref={refs.setReference as any} id={id} />
+                <SelectTrigger ref={refs.setReference as any} id={id}>
+                  {children}
+                </SelectTrigger>
                 {!!error && <Text color="error">{error.toString()}</Text>}
               </YBox>
               <SelectContent

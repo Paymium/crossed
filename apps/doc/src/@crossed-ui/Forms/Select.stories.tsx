@@ -14,6 +14,7 @@ import { YBox } from '@crossed/ui/src/layout';
 import { Text } from '@crossed/ui/src/typography';
 import { inlineStyle } from '@crossed/styled';
 import { useState } from 'react';
+import { Anchor } from '@crossed/ui';
 
 const items = [
   { value: 'Select 1', label: 'Select 1' },
@@ -129,4 +130,18 @@ export const SelectInDialog: Story = {
   ...Primary,
   args: { ...Primary.args },
   render: Render,
+};
+
+const CustomTriggerRender = (e) => {
+  const [value, setValue] = useState('');
+  return (
+    <Select {...e} value={value} onChange={setValue}>
+      <Anchor>toto</Anchor>
+    </Select>
+  );
+};
+export const CustomTrigger: Story = {
+  ...Primary,
+  args: { ...Primary.args },
+  render: CustomTriggerRender,
 };

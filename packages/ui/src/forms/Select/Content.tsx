@@ -47,179 +47,189 @@ type SelectContentProps = {
   loading?: boolean;
 };
 export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
-  forwardRef<View, SelectContentProps>(
-    ({ floatingStyles, onSearch, loading }, ref) => {
-      const { onClose, open } = useFloatingContext();
-      const { items, setValue, value: valueGlobal } = useSelectValue();
-      const { searchable, multiple } = useSelectConfig();
-      const [search, setSearch] = useState<string>('');
+  forwardRef(({ floatingStyles, onSearch, loading }, ref) => {
+    const { onClose, open } = useFloatingContext();
+    const { items, setValue, value: valueGlobal } = useSelectValue();
+    const { searchable, multiple } = useSelectConfig();
+    const [search, setSearch] = useState<string>('');
 
-      const fuse = useMemo(
-        () =>
-          new Fuse(items, {
-            keys: ['search', 'value'],
-          }),
-        [items]
-      );
-      const children = useMemo(() => {
-        return search && !onSearch
-          ? fuse.search(search).map(({ item }) => item)
-          : items;
-      }, [fuse, search, items, onSearch]);
+    const fuse = useMemo(
+      () =>
+        new Fuse(items, {
+          keys: ['search', 'value'],
+        }),
+      [items]
+    );
+    const children = useMemo(() => {
+      return search && !onSearch
+        ? fuse.search(search).map(({ item }) => item)
+        : items;
+    }, [fuse, search, items, onSearch]);
 
-      const onPress = useCallback(
-        (item: Item) => () => {
-          if (!multiple) onClose();
-          if (multiple) {
-            if (!valueGlobal || !Array.isArray(valueGlobal)) {
-              setValue([item.value]);
-            } else {
-              const toto = valueGlobal as ValueTypeMultiple;
-              setValue(
-                toto.includes(item.value)
-                  ? toto.filter((t) => t !== item.value)
-                  : [...toto, item.value]
-              );
-            }
-            return;
+    const onPress = useCallback(
+      (item: Item) => () => {
+        if (!multiple) onClose();
+        if (multiple) {
+          if (!valueGlobal || !Array.isArray(valueGlobal)) {
+            setValue([item.value]);
+          } else {
+            const toto = valueGlobal as ValueTypeMultiple;
+            setValue(
+              toto.includes(item.value)
+                ? toto.filter((t) => t !== item.value)
+                : [...toto, item.value]
+            );
           }
-          setValue(item.value);
-        },
-        [onClose, setValue, valueGlobal, multiple]
-      );
-
-      const handleChangeSearch = useCallback(
-        (value: string) => {
-          setSearch(value);
-          if (onSearch) onSearch(value);
-        },
-        [onSearch, setSearch]
-      );
-
-      useEffect(() => {
-        if (!open) {
-          totoRef.current?.hide();
-          setSearch('');
-        } else {
-          totoRef.current?.show();
+          return;
         }
-      }, [open]);
+        setValue(item.value);
+      },
+      [onClose, setValue, valueGlobal, multiple]
+    );
 
-      const renderItem = useCallback(
-        ({ item }: { item: Item }) => {
-          const checked =
-            item.value === valueGlobal ||
-            (Array.isArray(valueGlobal) &&
-              valueGlobal.includes(item.value as any));
-          return (
-            <MenuList.Item
+    const handleChangeSearch = useCallback(
+      (value: string) => {
+        setSearch(value);
+        if (onSearch) onSearch(value);
+      },
+      [onSearch, setSearch]
+    );
+
+    useEffect(() => {
+      if (!open) {
+        totoRef.current?.hide();
+        setSearch('');
+      } else {
+        totoRef.current?.show();
+      }
+    }, [open]);
+
+    const renderItem = useCallback(
+      ({ item }: { item: Item }) => {
+        const checked =
+          item.value === valueGlobal ||
+          (Array.isArray(valueGlobal) &&
+            valueGlobal.includes(item.value as any));
+        return (
+          <MenuList.Item
+            style={composeStyles(
+              useSelect.options,
+              item.value === valueGlobal &&
+                inlineStyle(({ colors }) => ({
+                  'base': { backgroundColor: colors.background.active },
+                  ':hover': { backgroundColor: colors.background.active },
+                }))
+            )}
+            onPress={onPress(item)}
+          >
+            <XBox space={'xxs'}>
+              {multiple && (
+                <Checkbox checked={checked} onChecked={onPress(item)} />
+              )}
+              <MenuList.Title>{item.label}</MenuList.Title>
+            </XBox>
+          </MenuList.Item>
+        );
+      },
+      [onPress, multiple]
+    );
+
+    const renderSearch = searchable ? (
+      <Input
+        formFieldStyle={inlineStyle(({ space }) => ({
+          base: {
+            flexGrow: 0,
+            marginTop: space.xxs,
+            marginHorizontal: space.xs,
+          },
+        }))}
+        value={search}
+        onChangeText={handleChangeSearch}
+        clearable
+        autoFocus
+      />
+    ) : null;
+
+    const totoRef = useRef<ActionSheetRef>();
+    const { md } = useMedia();
+
+    return (
+      <Floating.Portal>
+        {!md ? (
+          <Sheet.Content
+            ref={totoRef as any}
+            onClose={onClose}
+            snapPoints={searchable ? [100] : undefined}
+            containerStyle={composeStyles(
+              searchable &&
+                inlineStyle(() => ({
+                  base: { height: '100%' },
+                }))
+            )}
+          >
+            <Sheet.Padded testID={'content-select'}>
+              <MenuList.Item>{renderSearch}</MenuList.Item>
+              {loading ? (
+                <Spinner />
+              ) : (
+                <Sheet.FlatList
+                  scrollEnabled
+                  data={children}
+                  renderItem={renderItem as any}
+                />
+              )}
+            </Sheet.Padded>
+          </Sheet.Content>
+        ) : (
+          <Focus onEscapeKey={onClose} onClickOutside={onClose} enabled={open}>
+            <Floating.Content
+              exiting={FadeOut.duration(duration)}
+              entering={FadeIn.duration(duration)}
               style={composeStyles(
-                useSelect.options,
-                item.value === valueGlobal &&
-                  inlineStyle(({ colors }) => ({
-                    'base': { backgroundColor: colors.background.active },
-                    ':hover': { backgroundColor: colors.background.active },
-                  }))
+                inlineStyle(({ boxShadow }) => ({
+                  base: { zIndex: 100 },
+                  web: { base: { boxShadow } },
+                }))
               )}
-              onPress={onPress(item)}
             >
-              <XBox space={'xxs'}>
-                {multiple && (
-                  <Checkbox checked={checked} onChecked={onPress(item)} />
-                )}
-                <MenuList.Title>{item.label}</MenuList.Title>
-              </XBox>
-            </MenuList.Item>
-          );
-        },
-        [onPress, multiple]
-      );
-
-      const renderSearch = searchable ? (
-        <Input
-          formFieldStyle={inlineStyle(() => ({ base: { flexGrow: 0 } }))}
-          value={search}
-          onChangeText={handleChangeSearch}
-          clearable
-          autoFocus
-        />
-      ) : null;
-
-      const totoRef = useRef<ActionSheetRef>();
-      const { md } = useMedia();
-
-      return (
-        <Floating.Portal>
-          {!md ? (
-            <Sheet.Content
-              ref={totoRef as any}
-              onClose={onClose}
-              snapPoints={searchable ? [100] : undefined}
-              containerStyle={composeStyles(
-                searchable &&
+              <MenuList
+                testID="content-select"
+                ref={ref}
+                style={composeStyles(
+                  form.input,
+                  useSelect.content,
                   inlineStyle(() => ({
-                    base: { height: '100%' },
-                  }))
-              )}
-            >
-              <Sheet.Padded testID={'content-select'}>
-                <MenuList.Item>{renderSearch}</MenuList.Item>
+                    web: { base: { overflowY: 'auto' } },
+                  })),
+                  styles.dynamic(floatingStyles) as any
+                )}
+              >
+                {renderSearch}
                 {loading ? (
                   <Spinner />
                 ) : (
-                  <Sheet.FlatList
-                    scrollEnabled
+                  <FlatList
+                    contentContainerStyle={
+                      composeStyles(
+                        gapStyles.xxs,
+                        inlineStyle(({ space }) => ({
+                          base: {
+                            paddingVertical: space.xs,
+                            paddingHorizontal: space.xs,
+                          },
+                        }))
+                      ).style().style
+                    }
+                    style={{ flex: 1 }}
                     data={children}
-                    renderItem={renderItem as any}
+                    renderItem={renderItem}
                   />
                 )}
-              </Sheet.Padded>
-            </Sheet.Content>
-          ) : (
-            <Focus
-              onEscapeKey={onClose}
-              onClickOutside={onClose}
-              enabled={open}
-            >
-              <Floating.Content
-                exiting={FadeOut.duration(duration)}
-                entering={FadeIn.duration(duration)}
-                style={composeStyles(
-                  inlineStyle(({ boxShadow }) => ({
-                    base: { zIndex: 100 },
-                    web: { base: { boxShadow } },
-                  }))
-                )}
-              >
-                <MenuList
-                  testID="content-select"
-                  ref={ref}
-                  style={composeStyles(
-                    form.input,
-                    useSelect.content,
-                    inlineStyle(() => ({
-                      web: { base: { overflowY: 'auto' } },
-                    })),
-                    styles.dynamic(floatingStyles) as any
-                  )}
-                >
-                  {renderSearch}
-                  {loading ? (
-                    <Spinner />
-                  ) : (
-                    <FlatList
-                      contentContainerStyle={gapStyles.xxs.style().style}
-                      style={{ flex: 1 }}
-                      data={children}
-                      renderItem={renderItem}
-                    />
-                  )}
-                </MenuList>
-              </Floating.Content>
-            </Focus>
-          )}
-        </Floating.Portal>
-      );
-    }
-  )
+              </MenuList>
+            </Floating.Content>
+          </Focus>
+        )}
+      </Floating.Portal>
+    );
+  })
 );
