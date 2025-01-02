@@ -154,7 +154,7 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
     const { md } = useMedia();
 
     return (
-      <Floating.Portal>
+      <>
         {!md ? (
           <Sheet.Content
             ref={totoRef as any}
@@ -181,55 +181,62 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
             </Sheet.Padded>
           </Sheet.Content>
         ) : (
-          <Focus onEscapeKey={onClose} onClickOutside={onClose} enabled={open}>
-            <Floating.Content
-              exiting={FadeOut.duration(duration)}
-              entering={FadeIn.duration(duration)}
-              style={composeStyles(
-                inlineStyle(({ boxShadow }) => ({
-                  base: { zIndex: 100 },
-                  web: { base: { boxShadow } },
-                }))
-              )}
+          <Floating.Portal>
+            <Focus
+              onEscapeKey={onClose}
+              onClickOutside={onClose}
+              enabled={open}
             >
-              <MenuList
-                testID="content-select"
-                ref={ref}
+              <Floating.Content
+                exiting={FadeOut.duration(duration)}
+                entering={FadeIn.duration(duration)}
                 style={composeStyles(
-                  form.input,
-                  useSelect.content,
-                  inlineStyle(() => ({
-                    web: { base: { overflowY: 'auto' } },
-                  })),
-                  styles.dynamic(floatingStyles) as any
+                  inlineStyle(({ boxShadow }) => ({
+                    base: { zIndex: 100 },
+                    web: { base: { boxShadow } },
+                  }))
                 )}
               >
-                {renderSearch}
-                {loading ? (
-                  <Spinner />
-                ) : (
-                  <FlatList
-                    contentContainerStyle={
-                      composeStyles(
-                        gapStyles.xxs,
-                        inlineStyle(({ space }) => ({
-                          base: {
-                            paddingVertical: space.xs,
-                            paddingHorizontal: space.xs,
-                          },
-                        }))
-                      ).style().style
-                    }
-                    style={{ flex: 1 }}
-                    data={children}
-                    renderItem={renderItem}
-                  />
-                )}
-              </MenuList>
-            </Floating.Content>
-          </Focus>
+                <MenuList
+                  testID="content-select"
+                  ref={ref}
+                  style={composeStyles(
+                    form.input,
+                    useSelect.content,
+                    gapStyles.xs,
+                    inlineStyle(() => ({
+                      web: { base: { overflowY: 'auto' } },
+                    })),
+                    styles.dynamic(floatingStyles) as any
+                  )}
+                >
+                  {renderSearch}
+                  {loading ? (
+                    <Spinner />
+                  ) : (
+                    <FlatList
+                      contentContainerStyle={
+                        composeStyles(
+                          gapStyles.xxs,
+                          inlineStyle(({ space }) => ({
+                            base: {
+                              paddingVertical: space.xs,
+                              paddingHorizontal: space.xs,
+                            },
+                          }))
+                        ).style().style
+                      }
+                      style={{ flex: 1 }}
+                      data={children}
+                      renderItem={renderItem}
+                    />
+                  )}
+                </MenuList>
+              </Floating.Content>
+            </Focus>
+          </Floating.Portal>
         )}
-      </Floating.Portal>
+      </>
     );
   })
 );
