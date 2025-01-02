@@ -48,7 +48,6 @@ export const Divider = ({
   color = 'primary',
   ...props
 }: DividerProps) => {
-  console.log(direction)
   return (
     <View
       role="separator"
