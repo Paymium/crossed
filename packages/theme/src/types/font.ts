@@ -40,4 +40,5 @@ export type Font = {
   fontWeight: Record<TextName, CrossedstyleValues['fontWeight']>;
   color: string;
   family: string;
+  extraStyles?: CrossedstyleValues;
 };

@@ -8,29 +8,37 @@
 import { primary } from '../primary';
 import type { Colors } from '../types/color';
 
+const neutral = {
+  100: '#141430',
+  90: '#1D1D4C',
+  80: '#5D607C',
+  70: '#AEB6CE',
+} as const;
+
 export default {
+  primary,
+  neutral,
   black: 'black',
   white: 'white',
   text: {
     primary: 'black',
-    secondary: '#5D607C',
+    secondary: neutral[80],
     brand: primary.primary,
     invert: 'white',
   },
   background: {
     primary: primary[0],
-    secondary: primary[1],
+    secondary: 'white',
     brand: primary.primary,
-    hover: '#ececec',
-    active: '#cccccc',
+    hover: primary[1],
+    active: primary[10],
   },
   border: {
-    primary: primary[10],
-    secondary: primary[1],
-    tertiary: '#0A1648',
+    primary: primary[1],
+    secondary: neutral[70],
+    tertiary: primary[70],
     brand: primary.primary,
   },
-  primary,
   error: {
     primary: '#EF4444',
     muted: '#D73636',
@@ -52,11 +60,5 @@ export default {
     dark: '#AD5C23',
     light: '#FFF0E6',
     primary: '#F97316',
-  },
-  neutral: {
-    100: '#797979',
-    90: '#a8a8a8',
-    80: '#cccccc',
-    70: '#ececec',
   },
 } as const satisfies Colors;

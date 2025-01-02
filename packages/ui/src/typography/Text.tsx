@@ -25,8 +25,13 @@ import {
 import { textAlignStyles } from '../styles/textAlign';
 import { memo } from 'react';
 
-const useText = createStyles((t) => ({
-  root: { base: { color: t.font.color, fontFamily: t.font.family } },
+const useText = createStyles(({ font }) => ({
+  root: {
+    base: Object.assign(font.extraStyles, {
+      color: font.color,
+      fontFamily: font.family,
+    }),
+  },
 }));
 
 export interface TextProps extends Omit<TextNativeProps, 'style'> {

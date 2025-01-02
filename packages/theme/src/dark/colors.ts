@@ -9,31 +9,27 @@ import type { Colors } from '../types/color';
 import { primary } from '../primary';
 
 export default {
+  primary,
   black: 'black',
   white: 'white',
   text: {
     primary: 'white',
-    secondary: '#AEB6CE',
-    brand: '#0F82E6',
+    secondary: primary[20],
+    brand: primary[40],
     invert: 'black',
   },
   background: {
-    primary: primary[80],
+    primary: primary[100],
     secondary: primary[90],
-    brand: primary.primary,
-    hover: '#1D1D4C',
-    active: '#141430',
+    brand: primary[40],
+    hover: primary[70],
+    active: primary[80],
   },
   border: {
-    primary: '#000000',
-    secondary: '#060923',
-    tertiary: '#0A1648',
-    brand: '#0F82E6',
-  },
-  primary: {
-    ...primary,
-    0: primary[100],
-    1: primary[90],
+    primary: primary[80],
+    secondary: primary[70],
+    tertiary: primary[70],
+    brand: primary[40],
   },
   error: {
     primary: '#EF4444',

@@ -11,10 +11,10 @@ import colors from './colors';
 import { font } from '../font';
 
 export default {
-  boxShadow: '0px 4px 12px 0px rgba(0, 0, 0, 0.1)',
   colors: colors,
+  boxShadow: '0px 4px 12px 0px rgba(0, 0, 0, 0.1)',
   space,
-  font,
+  font: font,
   components: {
     Banner: {
       success: {
@@ -53,29 +53,29 @@ export default {
     Action: {
       primary: {
         default: {
+          text: colors.white,
+          icon: colors.white,
           background: colors.primary.primary,
           border: colors.primary.primary,
-          text: colors.white,
-          icon: colors.white,
         },
         hover: {
+          text: colors.white,
+          icon: colors.white,
           background: colors.primary[50],
           border: colors.primary[50],
-          text: colors.white,
-          icon: colors.white,
         },
         active: {
-          background: colors.primary[60],
-          border: colors.primary[60],
           text: colors.white,
           icon: colors.white,
+          background: colors.primary[60],
+          border: colors.primary[60],
         },
         focus: { background: '', text: '', icon: '', border: '' },
         disabled: {
-          background: colors.primary[1],
-          text: '',
-          icon: '',
-          border: '',
+          text: colors.primary[10],
+          icon: colors.primary[10],
+          background: colors.primary[40],
+          border: colors.primary[40],
         },
       },
       secondary: {
@@ -98,7 +98,12 @@ export default {
           border: colors.primary.primary,
         },
         focus: { background: '', text: '', icon: '', border: '' },
-        disabled: { background: '', text: '', icon: '', border: '' },
+        disabled: {
+          text: colors.primary[10],
+          icon: colors.primary[10],
+          background: colors.primary[40],
+          border: colors.primary[40],
+        },
       },
       tertiary: {
         default: {
@@ -129,23 +134,27 @@ export default {
       },
       icon: {
         default: {
-          color: colors.primary.primary,
+          color: colors.neutral[80],
           background: 'transparent',
           border: 'transparent',
         },
         hover: {
-          color: colors.primary[50],
-          background: 'transparent',
-          border: 'transparent',
+          color: colors.neutral[80],
+          background: colors.primary[1],
+          border: colors.primary[1],
         },
         active: {
-          color: colors.primary[60],
-          background: 'transparent',
-          border: 'transparent',
+          color: colors.neutral[80],
+          background: colors.primary[10],
+          border: colors.primary[10],
         },
-        focus: { background: '', color: '', border: '' },
+        focus: {
+          background: colors.primary[1],
+          color: colors.neutral[80],
+          border: colors.primary[40],
+        },
         disabled: {
-          color: colors.primary[10],
+          color: colors.neutral[80],
           background: 'transparent',
           border: 'transparent',
         },
@@ -182,15 +191,15 @@ export default {
         default: {
           background: colors.background.secondary,
           border: colors.border.secondary,
-          text: colors.white,
-          icon: colors.white,
+          text: colors.text.primary,
+          icon: colors.text.primary,
           placeholder: colors.text.secondary,
         },
         active: {
           background: colors.background.secondary,
           border: colors.border.secondary,
-          text: colors.white,
-          icon: colors.white,
+          text: colors.text.primary,
+          icon: colors.text.primary,
           placeholder: colors.text.secondary,
         },
         disabled: {
@@ -203,34 +212,34 @@ export default {
         focus: {
           background: colors.background.secondary,
           border: colors.border.brand,
-          text: colors.white,
-          icon: colors.white,
+          text: colors.text.primary,
+          icon: colors.text.primary,
           placeholder: colors.text.secondary,
         },
         hover: {
           background: colors.background.secondary,
           border: colors.border.brand,
-          text: colors.white,
-          icon: colors.white,
+          text: colors.text.primary,
+          icon: colors.text.primary,
           placeholder: colors.text.secondary,
         },
       },
     },
     Card: {
       default: {
-        background: colors.background.primary,
+        background: colors.primary[90],
         border: colors.border.primary,
         description: colors.text.secondary,
         title: colors.text.primary,
       },
       active: {
-        background: colors.background.active,
+        background: colors.primary[10],
         border: colors.border.primary,
         description: colors.text.secondary,
         title: colors.text.primary,
       },
       hover: {
-        background: colors.background.hover,
+        background: colors.primary[1],
         border: colors.border.primary,
         description: colors.text.secondary,
         title: colors.text.primary,
@@ -241,8 +250,14 @@ export default {
         background: colors.background.primary,
         text: colors.text.primary,
       },
-      green: { background: colors.success.light, text: colors.success.dark },
-      red: { background: colors.error.low, text: colors.error.muted },
+      green: {
+        background: colors.success.light,
+        text: colors.success.dark,
+      },
+      red: {
+        background: colors.error.low,
+        text: colors.error.muted,
+      },
     },
   },
 } as const satisfies Theme;
