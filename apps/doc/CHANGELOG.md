@@ -1,5 +1,17 @@
 # crossed-doc
 
+## 0.9.1
+
+### Patch Changes
+
+- ea67ed0: change default theme use paymium, and add extraStyles for text
+- Updated dependencies [3e5dc90]
+- Updated dependencies [2022e90]
+- Updated dependencies [ea67ed0]
+  - @crossed/theme@2.2.2
+  - @crossed/ui@6.1.1
+  - @crossed/webpack@2.1.2
+
 ## 0.9.0
 
 ### Minor Changes

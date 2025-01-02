@@ -1,5 +1,12 @@
 # @crossed/theme
 
+## 2.2.2
+
+### Patch Changes
+
+- 3e5dc90: change design secondary
+- ea67ed0: change default theme use paymium, and add extraStyles for text
+
 ## 2.2.1
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @crossed/ui
 
+## 6.1.1
+
+### Patch Changes
+
+- 2022e90: fix sheet size height
+- ea67ed0: change default theme use paymium, and add extraStyles for text
+- Updated dependencies [3e5dc90]
+- Updated dependencies [ea67ed0]
+  - @crossed/theme@2.2.2
+  - @crossed/unicons@3.0.1
+
 ## 6.1.0
 
 ### Minor Changes
