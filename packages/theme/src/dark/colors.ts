@@ -7,11 +7,13 @@
 
 import type { Colors } from '../types/color';
 import { primary } from '../primary';
+import { neutral } from '../neutral';
 
 export default {
   primary,
   black: 'black',
   white: 'white',
+  neutral,
   text: {
     primary: 'white',
     secondary: primary[20],
@@ -52,11 +54,5 @@ export default {
     dark: '#AD5C23',
     light: '#FFF0E6',
     primary: '#F97316',
-  },
-  neutral: {
-    100: '#141430',
-    90: '#1D1D4C',
-    80: '#5D607C',
-    70: '#AEB6CE',
   },
 } as const satisfies Colors;
