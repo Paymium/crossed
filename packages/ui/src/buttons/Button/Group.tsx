@@ -7,7 +7,7 @@
 
 import { forwardRef } from 'react';
 import { ProviderGroup, ButtonGroupCollection } from './context';
-import { Orientation, RovingFocusGroup } from '@crossed/primitive';
+import { Orientation } from '@crossed/primitive';
 import { type XBoxProps, XBox } from '../../layout/XBox';
 import { View } from 'react-native';
 import React from 'react';
@@ -16,16 +16,11 @@ export type ButtonGroupProps = XBoxProps & { orientation?: Orientation };
 export const ButtonGroup = forwardRef<View, ButtonGroupProps>(
   (props: ButtonGroupProps, ref) => (
     <ProviderGroup grouped orientation={props.orientation ?? 'horizontal'}>
-      <RovingFocusGroup
-        role={'group'}
-        orientation={props.orientation ?? 'horizontal'}
-      >
-        <ButtonGroupCollection.Provider>
-          <ButtonGroupCollection.Slot>
-            <XBox {...(props as any)} ref={ref} />
-          </ButtonGroupCollection.Slot>
-        </ButtonGroupCollection.Provider>
-      </RovingFocusGroup>
+      <ButtonGroupCollection.Provider>
+        <ButtonGroupCollection.Slot>
+          <XBox {...(props as any)} ref={ref} />
+        </ButtonGroupCollection.Slot>
+      </ButtonGroupCollection.Provider>
     </ProviderGroup>
   )
 );

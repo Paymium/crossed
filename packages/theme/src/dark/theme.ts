@@ -232,7 +232,7 @@ export default {
     },
     Card: {
       default: {
-        background: colors.primary[90],
+        background: colors.background.secondary,
         border: colors.border.primary,
         description: colors.text.secondary,
         title: colors.text.primary,

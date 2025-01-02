@@ -48,6 +48,7 @@ export const Divider = ({
   color = 'primary',
   ...props
 }: DividerProps) => {
+  console.log(direction)
   return (
     <View
       role="separator"
@@ -60,3 +61,4 @@ export const Divider = ({
     />
   );
 };
+Divider.displayName = 'Divider';
