@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 2.2.3
+
+### Patch Changes
+
+- 5507ed1: fix card color
+
 ## 2.2.2
 
 ### Patch Changes

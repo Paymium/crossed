@@ -1,5 +1,18 @@
 # @crossed/ui
 
+## 6.2.0
+
+### Minor Changes
+
+- 5507ed1: add group component
+
+### Patch Changes
+
+- 5507ed1: some other fix
+- Updated dependencies [5507ed1]
+  - @crossed/theme@2.2.3
+  - @crossed/unicons@3.0.1
+
 ## 6.1.1
 
 ### Patch Changes
