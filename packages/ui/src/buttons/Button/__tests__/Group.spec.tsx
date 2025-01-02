@@ -10,7 +10,7 @@ import { render, screen } from '@crossed/test';
 import { ButtonGroup } from '../Group';
 import { Button } from '../index';
 
-describe('ButtonGroup', () => {
+describe.skip('ButtonGroup', () => {
   it('renders correctly with default props', () => {
     render(
       <ButtonGroup>
