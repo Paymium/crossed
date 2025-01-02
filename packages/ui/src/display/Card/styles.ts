@@ -28,7 +28,7 @@ export const cardStyles = createStyles(({ space, font, components }) => ({
   root: {
     base: {
       borderRadius: space.md,
-      backgroundColor: components.Action.secondary.default.background,
+      backgroundColor: components.Card.default.background,
       borderWidth: 1,
       borderColor: components.Card.default.border,
       flexShrink: 1,
@@ -51,7 +51,10 @@ export const cardStyles = createStyles(({ space, font, components }) => ({
     },
   },
   description: {
-    base: { alignSelf: 'stretch', color: components.Card.default.description },
+    base: {
+      alignSelf: 'stretch',
+      color: components.Card.default.description,
+    },
   },
   extra: {
     base: {

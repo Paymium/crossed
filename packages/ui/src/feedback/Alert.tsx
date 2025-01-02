@@ -26,7 +26,7 @@ import { Box } from '../layout/Box';
 
 export const alertDescriptionStyles = createStyles(
   ({ components: { Alert } }) => ({
-    base: { base: { flexShrink: 1 } },
+    base: { base: { flexShrink: 1, flexGrow: 1 } },
     error: { base: { color: Alert.error.text } },
     success: { base: { color: Alert.success.text } },
     warning: { base: { color: Alert.warning.text } },
@@ -90,7 +90,7 @@ export const alertStyles = createStyles(
 
 const actionStyles = createStyles(({ components: { Alert } }) => ({
   base: {
-    base: { alignSelf: 'center' },
+    base: { alignSelf: 'center', borderWidth: 0 },
     media: { md: { alignSelf: 'baseline' } },
     web: {
       'base': { boxSizing: 'border-box' },
