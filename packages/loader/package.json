@@ -27,7 +27,7 @@
     "typescript": "^5.4.2"
   },
   "peerDependencies": {
-    "@crossed/styled": "0.14.3",
+    "@crossed/styled": "*",
     "@crossed/theme": "workspace:^"
   },
   "dependencies": {

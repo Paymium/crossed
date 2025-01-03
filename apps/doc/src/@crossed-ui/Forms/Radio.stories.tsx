@@ -28,3 +28,11 @@ export const Primary: Story = {
     children: 'My label',
   },
 };
+
+export const Disabled: Story = {
+  args: { ...Primary.args, disabled: true },
+};
+
+export const DisabledChecked: Story = {
+  args: { ...Primary.args, disabled: true, defaultChecked: true },
+};

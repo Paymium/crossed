@@ -20,20 +20,38 @@ const meta: Meta<typeof Checkbox> = {
     defaultChecked: { control: 'boolean' },
   },
   args: { onChecked: fn() },
+  render(e) {
+    return <Checkbox {...e}>My label</Checkbox>;
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
 export const Primary: Story = {
-  args: {
-    children: 'My label',
-  },
+  args: {},
 };
 
 export const DefaultChecked: Story = {
-  args: {
-    ...Primary.args,
-    defaultChecked: true,
+  args: { ...Primary.args, defaultChecked: true },
+};
+
+export const Disabled: Story = {
+  args: { ...Primary.args, disabled: true },
+};
+
+export const NoThumb: Story = {
+  args: { ...Primary.args, noThumb: true },
+};
+
+export const CustomPlacementThumb: Story = {
+  args: { ...Primary.args, noThumb: true },
+  render(e) {
+    return (
+      <Checkbox {...e}>
+        My label
+        <Checkbox.Thumb />
+      </Checkbox>
+    );
   },
 };

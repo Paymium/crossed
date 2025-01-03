@@ -32,7 +32,9 @@
   },
   "devDependencies": {
     "@crossed/build": "*",
+    "@crossed/core": "0.8.2",
     "@crossed/test": "0.13.0",
+    "@gorhom/portal": "^1.0.14",
     "@testing-library/jest-dom": "^6.5.0",
     "@types/jest": "^29.5.13",
     "@types/react": "^18.3.3",
@@ -46,14 +48,16 @@
     "tsconfig": "*"
   },
   "dependencies": {
-    "@crossed/core": "0.8.2",
-    "@gorhom/portal": "^1.0.14",
     "@react-native-aria/focus": "^0.2.8",
     "@react-native-aria/interactions": "^0.2.10",
     "react-aria": "^3.27.0",
     "react-focus-lock": "^2.11.2",
     "react-focus-on": "^3.9.2",
     "react-remove-scroll": "^2.5.6"
+  },
+  "peerDependencies": {
+    "@crossed/core": "*",
+    "@gorhom/portal": "*"
   },
   "files": [
     "lib/",
