@@ -1,5 +1,22 @@
 # crossed-doc
 
+## 0.10.0
+
+### Minor Changes
+
+- e4a854a: add doc checkbox and radio
+
+### Patch Changes
+
+- Updated dependencies [c671d61]
+- Updated dependencies [d809747]
+- Updated dependencies [8441f9a]
+  - @crossed/ui@6.3.0
+  - @crossed/styled@0.14.4
+  - @crossed/webpack@2.1.4
+  - @crossed/theme@2.2.4
+  - @crossed/unicons@3.0.2
+
 ## 0.9.2
 
 ### Patch Changes

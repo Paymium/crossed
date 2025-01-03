@@ -1,5 +1,12 @@
 # @crossed/next-adapter
 
+## 0.7.4
+
+### Patch Changes
+
+- 8441f9a: clean peerdependencies
+  - @crossed/webpack@2.1.4
+
 ## 0.7.3
 
 ### Patch Changes

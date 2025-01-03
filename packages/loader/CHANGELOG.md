@@ -1,5 +1,14 @@
 # @crossed/loader
 
+## 3.0.4
+
+### Patch Changes
+
+- 8441f9a: clean peerdependencies
+- Updated dependencies [8441f9a]
+  - @crossed/styled@0.14.4
+  - @crossed/theme@2.2.4
+
 ## 3.0.3
 
 ### Patch Changes

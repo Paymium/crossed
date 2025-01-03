@@ -1,5 +1,13 @@
 # @crossed/styled
 
+## 0.14.4
+
+### Patch Changes
+
+- 8441f9a: clean peerdependencies
+- Updated dependencies [8441f9a]
+  - @crossed/core@0.8.3
+
 ## 0.14.3
 
 ### Patch Changes

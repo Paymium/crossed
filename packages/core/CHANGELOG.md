@@ -1,5 +1,11 @@
 # @crossed/core
 
+## 0.8.3
+
+### Patch Changes
+
+- 8441f9a: clean peerdependencies
+
 ## 0.8.2
 
 ### Patch Changes

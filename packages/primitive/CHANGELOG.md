@@ -1,5 +1,13 @@
 # @crossed/primitive
 
+## 1.9.2
+
+### Patch Changes
+
+- 8441f9a: clean peerdependencies
+- Updated dependencies [8441f9a]
+  - @crossed/core@0.8.3
+
 ## 1.9.1
 
 ### Patch Changes

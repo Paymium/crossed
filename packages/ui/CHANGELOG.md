@@ -1,5 +1,22 @@
 # @crossed/ui
 
+## 6.3.0
+
+### Minor Changes
+
+- c671d61: Increase checkbox
+- d809747: Increase Radio
+
+### Patch Changes
+
+- 8441f9a: clean peerdependencies
+- Updated dependencies [8441f9a]
+  - @crossed/primitive@1.9.2
+  - @crossed/styled@0.14.4
+  - @crossed/core@0.8.3
+  - @crossed/theme@2.2.4
+  - @crossed/unicons@3.0.2
+
 ## 6.2.0
 
 ### Minor Changes

@@ -11,10 +11,10 @@
   "dependencies": {
     "@babel/runtime": "^7.23.8",
     "@crossed/babel-plugin": "0.4.0",
-    "@crossed/core": "0.8.2",
+    "@crossed/core": "0.8.3",
     "@crossed/styled": "workspace:^",
-    "@crossed/theme": "workspace:2.2.3",
-    "@crossed/ui": "6.2.0",
+    "@crossed/theme": "workspace:2.2.4",
+    "@crossed/ui": "6.3.0",
     "@crossed/unicons": "workspace:*",
     "@gorhom/portal": "^1.0.14",
     "@react-native/gradle-plugin": "^0.75.3",

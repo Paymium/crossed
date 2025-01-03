@@ -1,7 +1,7 @@
 {
   "name": "@crossed/styled",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "0.14.3",
+  "version": "0.14.4",
   "types": "lib/typescript/index.d.ts",
   "typings": "lib/typescript/index.d.ts",
   "main": "lib/commonjs/index.js",
@@ -96,7 +96,7 @@
     "react-native": "*"
   },
   "dependencies": {
-    "@crossed/core": "^0.8.2",
+    "@crossed/core": "^0.8.3",
     "ts-deepmerge": "^7.0.0"
   }
 }
