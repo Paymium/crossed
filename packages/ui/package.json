@@ -74,16 +74,14 @@
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@crossed/build": "*",
-    "@crossed/core": "0.8.2",
-    "@crossed/primitive": "1.9.1",
-    "@crossed/styled": "workspace:^",
+    "@crossed/core": "*",
+    "@crossed/primitive": "*",
+    "@crossed/styled": "*",
     "@crossed/theme": "workspace:^",
     "@crossed/unicons": "3.0.1",
-    "@devvie/bottom-sheet": "0.3.0",
-    "react-native": "^0.73.6",
-    "react-native-gesture-handler": "~2.21.2",
-    "react-native-reanimated": "^3.10.1"
+    "react-native": "*",
+    "react-native-gesture-handler": "*",
+    "react-native-reanimated": "*"
   },
   "devDependencies": {
     "@crossed/build": "*",
