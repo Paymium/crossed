@@ -540,10 +540,10 @@ importers:
   packages/primitive:
     dependencies:
       '@crossed/core':
-        specifier: 0.8.2
+        specifier: '*'
         version: link:../core
       '@gorhom/portal':
-        specifier: ^1.0.14
+        specifier: '*'
         version: 1.0.14(react-native@0.73.11)(react@18.3.1)
       '@react-native-aria/focus':
         specifier: ^0.2.8
@@ -655,9 +655,6 @@ importers:
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.11
-      '@types/react-dom':
-        specifier: ^18.3.0
-        version: 18.3.0
       csstype:
         specifier: 3.1.3
         version: 3.1.3
@@ -667,9 +664,6 @@ importers:
       react:
         specifier: ^18.3.1
         version: 18.3.1
-      react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
       react-native:
         specifier: ^0.73.6
         version: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
