@@ -32,7 +32,9 @@
   },
   "devDependencies": {
     "@crossed/build": "*",
+    "@crossed/core": "0.8.2",
     "@crossed/test": "0.13.0",
+    "@gorhom/portal": "^1.0.14",
     "@testing-library/jest-dom": "^6.5.0",
     "@types/jest": "^29.5.13",
     "@types/react": "^18.3.3",

@@ -539,12 +539,6 @@ importers:
 
   packages/primitive:
     dependencies:
-      '@crossed/core':
-        specifier: '*'
-        version: link:../core
-      '@gorhom/portal':
-        specifier: '*'
-        version: 1.0.14(react-native@0.73.11)(react@18.3.1)
       '@react-native-aria/focus':
         specifier: ^0.2.8
         version: 0.2.9(react-native@0.73.11)(react@18.3.1)
@@ -567,9 +561,15 @@ importers:
       '@crossed/build':
         specifier: '*'
         version: link:../build
+      '@crossed/core':
+        specifier: 0.8.2
+        version: link:../core
       '@crossed/test':
         specifier: 0.13.0
         version: link:../test
+      '@gorhom/portal':
+        specifier: ^1.0.14
+        version: 1.0.14(react-native@0.73.11)(react@18.3.1)
       '@testing-library/jest-dom':
         specifier: ^6.5.0
         version: 6.5.0
@@ -3969,7 +3969,6 @@ packages:
       nanoid: 3.3.7
       react: 18.3.1
       react-native: 0.73.11(@babel/core@7.25.7)(@babel/preset-env@7.25.7)(react@18.3.1)
-    dev: false
 
   /@gorhom/portal@1.0.14(react-native@0.73.6)(react@18.3.1):
     resolution: {integrity: sha512-MXyL4xvCjmgaORr/rtryDNFy3kU4qUbKlwtQqqsygd0xX3mhKjOLn6mQK8wfu0RkoE0pBE0nAasRoHua+/QZ7A==}
