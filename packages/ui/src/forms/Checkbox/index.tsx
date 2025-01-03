@@ -5,13 +5,23 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useUncontrolled } from '@crossed/core';
-import { composeStyles, createStyles } from '@crossed/styled';
-import { useInteraction } from '@crossed/styled';
+import {
+  createScope,
+  useUncontrolled,
+  withStaticProperties,
+} from '@crossed/core';
+import { composeStyles, createStyles, CrossedMethods } from '@crossed/styled';
 import { Check } from '@crossed/unicons';
-import { useCallback, useTransition } from 'react';
-import { Pressable, View } from 'react-native';
+import {
+  forwardRef,
+  memo,
+  RefAttributes,
+  useCallback,
+  useTransition,
+} from 'react';
+import { Pressable, View, ViewProps } from 'react-native';
 import { Implementation } from './Implementation';
+import { Text } from '../../typography/Text';
 import type { CheckboxComponent } from './type';
 
 const checkboxStyles = createStyles((t) => ({
@@ -23,35 +33,33 @@ const checkboxStyles = createStyles((t) => ({
       gap: t.space.md,
     },
   },
+  hover: { base: { borderColor: t.colors.border.tertiary } },
+  disabled: {
+    base: {
+      backgroundColor: t.colors.primary['10'],
+      borderColor: t.colors.primary['10'],
+    },
+  },
+  active: {
+    base: { borderColor: t.colors.border.tertiary },
+    'web': {
+      base: {
+        transition: 'all 0.1s ease',
+        boxShadow: `0px 0px 0px 2px ${t.colors.border.secondary}`,
+      },
+    },
+  },
   root: {
     'base': {
       width: 16,
       height: 16,
       borderRadius: 4,
       borderWidth: 1,
-      // borderColor: t.colors.neutral[500],
+      borderColor: t.colors.border.secondary,
       alignItems: 'center',
       display: 'flex',
       justifyContent: 'center',
-      backgroundColor: 'white',
-    },
-    ':hover': {
-      // borderColor: t.colors.neutral[600],
-    },
-    ':active': {
-      // borderColor: t.colors.neutral[500],
-      shadowColor: 'black',
-      shadowOpacity: 0.1,
-      elevation: 5,
-    },
-    ':disabled': {
-      // backgroundColor: t.colors.neutral[300],
-      // borderColor: t.colors.neutral[300],
-    },
-    'web': {
-      ':active': {
-        // boxShadow: `0px 0px 0px 2px ${t.colors.neutral[300]}`,
-      },
+      backgroundColor: 'transparent',
     },
   },
   checked: {
@@ -59,63 +67,144 @@ const checkboxStyles = createStyles((t) => ({
       borderColor: t.colors.primary.primary,
       backgroundColor: t.colors.primary.primary,
     },
-    ':active': {
+  },
+  checkedActive: {
+    base: {
       borderColor: t.colors.primary.primary,
       backgroundColor: t.colors.primary.primary,
     },
   },
 }));
 
-export const Checkbox: CheckboxComponent = ({
+type CheckboxContext = { checked: boolean };
+const [CheckboxProvider, useCheckboxContext] = createScope<CheckboxContext>({
+  checked: false,
+});
+type CheckboxStateInteraction = {
+  active: boolean;
+  hover: boolean;
+  focus: boolean;
+  disabled: boolean;
+};
+const [CheckboxInteractionProvider, useStateInteraction] =
+  createScope<CheckboxStateInteraction>({
+    active: false,
+    hover: false,
+    focus: false,
+    disabled: false,
+  });
+
+type CheckboxThumbProps = Omit<ViewProps, 'style'> & {
+  style?: CrossedMethods<any>;
+};
+const CheckboxThumb = memo<CheckboxThumbProps & RefAttributes<View>>(
+  forwardRef((props, ref) => {
+    const { checked } = useCheckboxContext();
+    const { disabled, hover, active } = useStateInteraction();
+
+    return (
+      <View
+        ref={ref}
+        {...props}
+        {...composeStyles(
+          checkboxStyles.root,
+          checked && checkboxStyles.checked,
+          checked && !disabled && active && checkboxStyles.checkedActive,
+          disabled && checkboxStyles.disabled,
+          !disabled && hover && checkboxStyles.hover,
+          !disabled && active && checkboxStyles.active,
+          props.style
+        ).rnw()}
+      >
+        {checked && <Check size={15} color="white" />}
+      </View>
+    );
+  })
+);
+CheckboxThumb.displayName = 'Checkbox.Thumb';
+
+const CheckboxRoot: CheckboxComponent = ({
   children,
   checked: checkedProps,
   defaultChecked = false,
   onChecked,
+  noThumb,
+  disabled,
+  style,
+  ...props
 }) => {
   const [checked, setChecked] = useUncontrolled({
     defaultValue: defaultChecked,
     value: checkedProps,
     onChange: onChecked,
   });
-  const { props } = useInteraction();
   const [, setTransition] = useTransition();
 
-  const handlePress = useCallback(() => {
-    setTransition(() => {
-      setChecked(!checked);
-    });
-  }, [setChecked, checked, setTransition]);
-  return (
-    <Pressable
-      onPress={handlePress}
-      {...props}
-      style={({
-        pressed,
-        hovered,
-        focused,
-      }: {
-        pressed: boolean;
-        hovered?: boolean;
-        focused?: boolean;
-      }) =>
-        checkboxStyles.pressable.rnw({
-          active: pressed,
-          hover: hovered,
-          focus: focused,
-        }).style
-      }
-    >
-      <Implementation checked={checked} setChecked={setChecked} />
-      <View
-        {...composeStyles(
-          checkboxStyles.root,
-          checked && checkboxStyles.checked
-        ).rnw()}
+  const handlePress = useCallback(
+    (e) => {
+      props.onPress?.(e);
+      setTransition(() => {
+        setChecked(!checked);
+      });
+    },
+    [setChecked, checked, setTransition, props.onPress]
+  );
+
+  const renderCallback = useCallback(
+    ({
+      pressed,
+      focused,
+      hovered,
+    }: {
+      pressed?: boolean;
+      focused?: boolean;
+      hovered?: boolean;
+    }) => (
+      <CheckboxInteractionProvider
+        focus={focused}
+        active={pressed}
+        hover={hovered}
+        disabled={disabled}
       >
-        {checked && <Check size={15} color="white" />}
-      </View>
-      {children}
-    </Pressable>
+        <Implementation checked={checked} setChecked={setChecked} />
+        {!noThumb && <CheckboxThumb />}
+        {typeof children === 'string' ? <Text>{children}</Text> : children}
+      </CheckboxInteractionProvider>
+    ),
+    [children, checked, setChecked]
+  );
+
+  return (
+    <CheckboxProvider checked={checked}>
+      <Pressable
+        {...props}
+        role={'checkbox'}
+        aria-checked={checked}
+        onPress={handlePress}
+        disabled={disabled}
+        style={({
+          pressed,
+          hovered,
+          focused,
+        }: {
+          pressed: boolean;
+          hovered?: boolean;
+          focused?: boolean;
+        }) =>
+          composeStyles(checkboxStyles.pressable, style).rnw({
+            active: pressed,
+            hover: hovered,
+            focus: focused,
+          }).style
+        }
+      >
+        {renderCallback}
+      </Pressable>
+    </CheckboxProvider>
   );
 };
-Checkbox.displayName = 'Checkbox';
+CheckboxRoot.displayName = 'Checkbox';
+
+export const Checkbox = withStaticProperties(CheckboxRoot, {
+  Thumb: CheckboxThumb,
+});
