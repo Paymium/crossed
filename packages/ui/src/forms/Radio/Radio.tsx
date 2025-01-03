@@ -5,10 +5,22 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useUncontrolled } from '@crossed/core';
-import { composeStyles, createStyles } from '@crossed/styled';
-import { useCallback, useTransition, type PropsWithChildren } from 'react';
-import { Pressable, View } from 'react-native';
+import {
+  createScope,
+  useUncontrolled,
+  withStaticProperties,
+} from '@crossed/core';
+import { composeStyles, createStyles, CrossedMethods } from '@crossed/styled';
+import {
+  forwardRef,
+  memo,
+  RefAttributes,
+  useCallback,
+  useTransition,
+  type PropsWithChildren,
+} from 'react';
+import { Pressable, PressableProps, View, ViewProps } from 'react-native';
+import { Text } from '../../typography/Text';
 
 const rootStyles = createStyles((t) => ({
   default: {
@@ -25,23 +37,32 @@ const rootStyles = createStyles((t) => ({
     },
   },
   hover: { base: { borderColor: t.colors.border.tertiary } },
-  active: { base: { shadowColor: 'black', shadowOpacity: 0.1, elevation: 5 } },
-  disabled: {
-    base: {
-      backgroundColor: t.colors.primary[1],
-      borderColor: t.colors.primary[1],
+  active: {
+    base: { borderColor: t.colors.border.tertiary },
+    'web': {
+      base: {
+        transition: 'all 0.1s ease',
+        boxShadow: `0px 0px 0px 2px ${t.colors.border.secondary}`,
+      },
     },
   },
-  checked: { base: { borderColor: t.colors.border.primary } },
-  checkedActive: { base: { borderColor: t.colors.border.primary } },
+  disabled: {
+    base: {
+      backgroundColor: t.colors.primary['10'],
+      borderColor: t.colors.primary['10'],
+    },
+  },
+  checked: { base: { borderColor: t.colors.primary.primary } },
+  checkedActive: { base: { borderColor: t.colors.primary.primary } },
 }));
 
-const pressableStyles = createStyles(() => ({
+const pressableStyles = createStyles(({ space }) => ({
   pressable: {
     base: {
       alignItems: 'center',
       display: 'flex',
       flexDirection: 'row',
+      gap: space.md,
     },
   },
 }));
@@ -52,73 +73,156 @@ const thumbStyles = createStyles((t) => ({
       width: 10,
       height: 10,
       borderRadius: 10,
-      overflow: 'hidden',
-      backgroundColor: 'white',
+      backgroundColor: 'transparent',
     },
   },
   checked: {
-    base: { backgroundColor: t.colors.background.primary },
+    base: { backgroundColor: t.colors.primary.primary },
   },
   checkedActive: {
-    base: { backgroundColor: t.colors.background.primary },
+    base: { backgroundColor: t.colors.primary['1'] },
+  },
+  checkedDisabled: {
+    base: { backgroundColor: t.colors.neutral['70'] },
   },
 }));
 
-export const Radio = ({
+type RadioContext = { checked: boolean };
+const [RadioProvider, useRadioContext] = createScope<RadioContext>({
+  checked: false,
+});
+
+type RadioStateInteraction = {
+  active: boolean;
+  hover: boolean;
+  disabled: boolean;
+};
+const [RadioInteractionProvider, useStateInteraction] =
+  createScope<RadioStateInteraction>({
+    active: false,
+    hover: false,
+    disabled: false,
+  });
+
+type RadioThumbProps = Omit<ViewProps, 'style'> & {
+  style?: CrossedMethods<any>;
+};
+const RadioThumb = memo<RadioThumbProps & RefAttributes<View>>(
+  forwardRef((props, ref) => {
+    const { active, hover, disabled } = useStateInteraction();
+    const { checked } = useRadioContext();
+    return (
+      <View
+        ref={ref}
+        {...props}
+        {...composeStyles(
+          rootStyles.default,
+          hover && rootStyles.hover,
+          active && rootStyles.active,
+          checked && rootStyles.checked,
+          checked && active && rootStyles.checkedActive,
+          disabled && rootStyles.disabled,
+          props.style
+        ).rnw()}
+      >
+        <View
+          {...composeStyles(
+            thumbStyles.default,
+            checked && thumbStyles.checked,
+            disabled && checked && thumbStyles.checkedDisabled
+          ).rnw()}
+        />
+      </View>
+    );
+  })
+);
+
+type RadioRootProps = Omit<PressableProps, 'style' | 'children'> &
+  PropsWithChildren<{
+    /**
+     * if true, radio is checked
+     */
+    checked?: boolean;
+
+    /**
+     * default checked value
+     */
+    defaultChecked?: boolean;
+
+    /**
+     * Call when checked value change
+     */
+    onChecked?: (_c: boolean) => void;
+
+    disabled?: boolean;
+    noThumb?: boolean;
+    style?: CrossedMethods<any>;
+  }>;
+export const RadioRoot = ({
   children,
   disabled,
-}: PropsWithChildren<{ disabled?: boolean }>) => {
-  const [checked, setChecked] = useUncontrolled({ defaultValue: false });
+  checked: checkedProps,
+  defaultChecked = false,
+  onChecked,
+  noThumb,
+  style,
+  ...props
+}: RadioRootProps) => {
+  const [checked, setChecked] = useUncontrolled({
+    defaultValue: defaultChecked,
+    value: checkedProps,
+    onChange: onChecked,
+  });
   const [, setTransition] = useTransition();
 
-  const handlePress = useCallback(() => {
-    setTransition(() => {
-      setChecked(!checked);
-    });
-  }, [setChecked, checked, setTransition]);
+  const handlePress = useCallback(
+    (e) => {
+      props.onPress?.(e);
+      setTransition(() => {
+        setChecked(!checked);
+      });
+    },
+    [setChecked, checked, setTransition, props.onPress]
+  );
 
   return (
-    <Pressable
-      onPress={handlePress}
-      style={({
-        pressed,
-        hovered,
-        focused,
-      }: {
-        pressed: boolean;
-        hovered?: boolean;
-        focused?: boolean;
-      }) =>
-        composeStyles(pressableStyles.pressable).rnw({
-          active: pressed,
-          hover: hovered,
-          focus: focused,
-        }).style
-      }
-    >
-      {({ hovered, pressed }: { hovered?: boolean; pressed: boolean }) => (
-        <>
-          <View
-            {...composeStyles(
-              rootStyles.default,
-              hovered && rootStyles.hover,
-              pressed && rootStyles.active,
-              checked && rootStyles.checked,
-              checked && pressed && rootStyles.checkedActive,
-              disabled && rootStyles.disabled
-            ).rnw()}
+    <RadioProvider checked={checked}>
+      <Pressable
+        role={'radio'}
+        aria-checked={checked}
+        {...props}
+        onPress={handlePress}
+        disabled={disabled}
+        style={({
+          pressed,
+          hovered,
+          focused,
+        }: {
+          pressed: boolean;
+          hovered?: boolean;
+          focused?: boolean;
+        }) =>
+          composeStyles(pressableStyles.pressable, style).rnw({
+            active: pressed,
+            hover: hovered,
+            focus: focused,
+          }).style
+        }
+      >
+        {({ hovered, pressed }: { hovered?: boolean; pressed: boolean }) => (
+          <RadioInteractionProvider
+            hover={hovered}
+            active={pressed}
+            disabled={disabled}
           >
-            <View
-              {...composeStyles(
-                thumbStyles.default,
-                checked && thumbStyles.checked
-              ).rnw()}
-            />
-          </View>
-          {children}
-        </>
-      )}
-    </Pressable>
+            {!noThumb && <RadioThumb />}
+            {typeof children === 'string' ? <Text>{children}</Text> : children}
+          </RadioInteractionProvider>
+        )}
+      </Pressable>
+    </RadioProvider>
   );
 };
-Radio.displayName = 'Radio';
+RadioRoot.displayName = 'Radio';
+
+export const Radio = withStaticProperties(RadioRoot, { Thumb: RadioThumb });
