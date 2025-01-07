@@ -82,20 +82,20 @@ export default {
         default: {
           text: colors.primary.primary,
           icon: colors.primary.primary,
-          background: colors.neutral['60'],
-          border: colors.neutral['60'],
+          background: colors.white,
+          border: colors.primary.primary,
         },
         hover: {
           text: colors.primary.primary,
           icon: colors.primary.primary,
-          background: colors.neutral['50'],
-          border: colors.neutral['50'],
+          background: colors.primary[1],
+          border: colors.primary.primary,
         },
         active: {
           text: colors.primary.primary,
           icon: colors.primary.primary,
-          background: colors.neutral['60'],
-          border: colors.neutral['50'],
+          background: colors.primary[10],
+          border: colors.primary.primary,
         },
         focus: { background: '', text: '', icon: '', border: '' },
         disabled: {
@@ -227,7 +227,7 @@ export default {
     },
     Card: {
       default: {
-        background: colors.background.secondary,
+        background: colors.primary[90],
         border: colors.border.primary,
         description: colors.text.secondary,
         title: colors.text.primary,
