@@ -8,8 +8,20 @@
 'use client';
 import { withStaticProperties } from '@crossed/core';
 import { Text, type TextProps } from '../typography/Text';
-import { composeStyles, createStyles, useTheme } from '@crossed/styled';
-import { createContext, useContext, useMemo, type ReactNode } from 'react';
+import {
+  composeStyles,
+  createStyles,
+  inlineStyle,
+  useTheme,
+} from '@crossed/styled';
+import {
+  createContext,
+  useContext,
+  useMemo,
+  type ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
 import { Box } from '../layout/Box';
 import { YBox, type YBoxProps } from '../layout/YBox';
@@ -17,6 +29,11 @@ import { match } from 'ts-pattern';
 import { useMedia } from '../useMedia';
 import { XBox } from '../layout/XBox';
 import { CloseButton } from '../buttons/CloseButton';
+import Animated, {
+  useAnimatedStyle,
+  // useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 const toastStyles = createStyles(
   (t) =>
@@ -47,14 +64,19 @@ const toastStyles = createStyles(
       },
       containerChildren: { base: { flex: 1, flexShrink: 1 } },
       closeButton: {
-        base: { paddingTop: 0, paddingRight: 0 },
+        base: {
+          paddingTop: 0,
+          paddingRight: 0,
+          alignSelf: 'flex-start',
+          borderWidth: 1,
+        },
       },
       container: {
         base: {
-          padding: t.space.md,
+          padding: t.space.xs,
+          minWidth: 400,
           borderRadius: 8,
-          borderWidth: 0,
-          borderStyle: 'solid',
+          gap: t.space.xs,
         },
         web: {
           base: {
@@ -88,6 +110,7 @@ const containerIconStyles = createStyles((t) => ({
     },
   },
 }));
+
 const containerStyles = createStyles((t) => ({
   error: {
     base: {
@@ -115,10 +138,34 @@ const containerStyles = createStyles((t) => ({
   },
 }));
 
+const progressBarStyles = createStyles(() => ({
+  container: {
+    base: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  },
+  progressBar: {
+    base: {
+      width: '100%',
+      height: 5,
+      overflow: 'hidden',
+    },
+  },
+}));
+
+const progressBarBackground = createStyles((t) => ({
+  success: { base: { backgroundColor: t.colors.success.primary } },
+  error: { base: { backgroundColor: t.colors.error.primary } },
+  info: { base: { backgroundColor: t.colors.info.primary } },
+}));
+
 type ContainerProps = YBoxProps & {
   closable?: boolean;
   icon?: ReactNode;
   status?: keyof typeof containerStyles;
+  duration?: number;
 };
 
 const toastContext = createContext<Pick<ContainerProps, 'status'>>({});
@@ -129,25 +176,26 @@ const Container = ({
   closable = false,
   icon,
   style,
+  duration,
   ...props
 }: ContainerProps) => {
   const { md } = useMedia();
   return (
     <toastContext.Provider value={{ status }}>
-      <XBox
-        space={!md ? 'xs' : 'xxs'}
-        {...props}
+      <Box
         style={composeStyles(
           toastStyles.container,
           containerStyles[status],
           style
         )}
       >
-        <Icon />
-        <YBox style={toastStyles.containerChildren}>{children}</YBox>
-        {closable && <CloseButton style={toastStyles.closeButton} />}
-        {icon}
-      </XBox>
+        <XBox space={!md ? 'xs' : 'xxs'} {...props}>
+          {icon ? icon : <Icon />}
+          <YBox style={toastStyles.containerChildren}>{children}</YBox>
+          {closable && <CloseButton style={toastStyles.closeButton} />}
+        </XBox>
+        {duration && <ProgressBar duration={duration} />}
+      </Box>
     </toastContext.Provider>
   );
 };
@@ -200,6 +248,54 @@ const Description = (props: TextProps) => {
       {...props}
       style={composeStyles(toastStyles.description, props.style)}
     />
+  );
+};
+
+const ProgressBar = ({ duration = 4000 }) => {
+  // const width= useSharedValue(100)
+  const { status } = useContext(toastContext);
+  const [test, setTest] = useState(true);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      width: withTiming(test ? '100%' : '0%', { duration }),
+      height: '100%',
+    };
+  }, [test]);
+
+  useEffect(() => {
+    setTest(false);
+  }, []);
+
+  // const animatedStyle = useAnimatedStyle(() => {
+  //   return {
+  //     width: `${width.value}%`,
+  //     height: '100%',
+  //   };
+  // }, [test]);
+  //
+  // useEffect(() => {
+  //   width.value = withTiming(0, { duration });
+  // }, []);
+
+  return (
+    <Box>
+      <Box
+        style={composeStyles(
+          progressBarStyles.progressBar,
+          containerStyles[status]
+        )}
+      >
+        <Animated.View style={animatedStyle}>
+          <Box
+            style={composeStyles(
+              progressBarBackground[status],
+              inlineStyle(() => ({ base: { height: '100%' } }))
+            )}
+          />
+        </Animated.View>
+      </Box>
+    </Box>
   );
 };
 
