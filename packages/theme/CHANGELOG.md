@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 2.2.5
+
+### Patch Changes
+
+- 928f5aa: fix theme colors
+
 ## 2.2.4
 
 ### Patch Changes
