@@ -7,54 +7,44 @@
 
 'use client';
 import { withStaticProperties } from '@crossed/core';
-import { Text, type TextProps } from '../typography/Text';
-import { composeStyles, createStyles, useTheme } from '@crossed/styled';
-import { createContext, useContext, useMemo, type ReactNode } from 'react';
-import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
-import { Box } from '../layout/Box';
-import { YBox, type YBoxProps } from '../layout/YBox';
-import { match } from 'ts-pattern';
-import { useMedia } from '../useMedia';
-import { XBox } from '../layout/XBox';
-import { CloseButton } from '../buttons/CloseButton';
+import { type TextProps } from '../typography';
+import {
+  composeStyles,
+  createStyles,
+  CrossedMethods,
+  inlineStyle,
+} from '@crossed/styled';
+import { useContext, type ReactNode } from 'react';
+import { Box, YBox, XBox, YBoxProps } from '../layout';
+import { CloseButton } from '../buttons';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import { Easing } from 'react-native';
+import { Banner, bannerContext } from './Banner';
 
 const toastStyles = createStyles(
   (t) =>
     ({
-      description: {
-        base: { flex: 1, color: t.colors.text.secondary },
-      },
-      title: {
-        base: { fontWeight: '600', color: t.colors.text.primary },
-      },
-      icon: {
-        base: { fontWeight: '600' },
-        variants: {
-          status: {
-            error: { base: { color: t.components.Banner.error.icon } },
-            success: { base: { color: t.components.Banner.success.icon } },
-            warning: { base: { color: t.components.Banner.warning.icon } },
-            info: { base: { color: t.components.Banner.info.icon } },
-          },
-        },
-      },
-      containerTitle: {
-        base: { flexDirection: 'row', alignItems: 'center' },
-      },
-      containerIcon: {
-        base: { borderRadius: 32, width: 32, height: 32 },
-        variants: {},
-      },
-      containerChildren: { base: { flex: 1, flexShrink: 1 } },
-      closeButton: {
-        base: { paddingTop: 0, paddingRight: 0 },
-      },
       container: {
         base: {
-          padding: t.space.md,
+          padding: t.space.xs,
           borderRadius: 8,
-          borderWidth: 0,
-          borderStyle: 'solid',
+          gap: t.space.xs,
+        },
+        media: {
+          xs: {
+            paddingVertical: t.space.xs,
+            paddingHorizontal: t.space.xs,
+          },
+          md: {
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            paddingVertical: t.space.xs,
+            paddingHorizontal: t.space.xs,
+          },
         },
         web: {
           base: {
@@ -66,140 +56,136 @@ const toastStyles = createStyles(
     }) as const
 );
 
-const containerIconStyles = createStyles((t) => ({
-  error: {
-    base: {
-      backgroundColor: t.components.Banner.error.backgroundIcon,
-    },
-  },
-  success: {
-    base: {
-      backgroundColor: t.components.Banner.success.backgroundIcon,
-    },
-  },
-  warning: {
-    base: {
-      backgroundColor: t.components.Banner.warning.backgroundIcon,
-    },
-  },
-  info: {
-    base: {
-      backgroundColor: t.components.Banner.info.backgroundIcon,
-    },
-  },
-}));
-const containerStyles = createStyles((t) => ({
-  error: {
-    base: {
-      borderColor: t.components.Banner.error.border,
-      backgroundColor: t.components.Banner.error.background,
-    },
-  },
-  success: {
-    base: {
-      borderColor: t.components.Banner.success.border,
-      backgroundColor: t.components.Banner.success.background,
-    },
-  },
-  warning: {
-    base: {
-      borderColor: t.components.Banner.warning.border,
-      backgroundColor: t.components.Banner.warning.background,
-    },
-  },
-  info: {
-    base: {
-      borderColor: t.components.Banner.info.border,
-      backgroundColor: t.components.Banner.info.background,
-    },
-  },
+const progressBarBackground = createStyles((t) => ({
+  success: { base: { backgroundColor: t.colors.success.primary } },
+  error: { base: { backgroundColor: t.colors.error.primary } },
+  info: { base: { backgroundColor: t.colors.info.primary } },
+  warning: { base: { backgroundColor: t.colors.warning.primary } },
 }));
 
 type ContainerProps = YBoxProps & {
   closable?: boolean;
   icon?: ReactNode;
-  status?: keyof typeof containerStyles;
+  status?: keyof typeof progressBarBackground;
+  duration?: number;
 };
 
-const toastContext = createContext<Pick<ContainerProps, 'status'>>({});
-
-const Container = ({
-  status = 'info',
-  children,
-  closable = false,
-  icon,
-  style,
-  ...props
-}: ContainerProps) => {
-  const { md } = useMedia();
+const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
   return (
-    <toastContext.Provider value={{ status }}>
-      <XBox
-        space={!md ? 'xs' : 'xxs'}
-        {...props}
-        style={composeStyles(
-          toastStyles.container,
-          containerStyles[status],
-          style
-        )}
-      >
-        <Icon />
-        <YBox style={toastStyles.containerChildren}>{children}</YBox>
-        {closable && <CloseButton style={toastStyles.closeButton} />}
-        {icon}
-      </XBox>
-    </toastContext.Provider>
+    <Banner status={status} style={toastStyles.container} {...props}>
+      {children}
+    </Banner>
   );
 };
 
-const Icon = () => {
-  const { status } = useContext(toastContext);
-  const {
-    components: { Banner },
-  } = useTheme();
+export type ToastPresetProps = {
+  status?: keyof typeof progressBarBackground;
+  title: string;
+  description: string;
+  onClose?: () => void;
+  onDurationEnd?: () => void;
+  duration?: number;
+};
 
-  const color = useMemo(() => {
-    return Banner[status].icon;
-  }, [status, Banner]);
-
-  const Comp = match(status)
-    .with('error', () => XCircle)
-    .with('info', () => Info)
-    .with('success', () => CheckCircle)
-    .with('warning', () => AlertTriangle)
-    .exhaustive();
-  return (
-    <Box
-      center
-      style={composeStyles(
-        toastStyles.containerIcon,
-        containerIconStyles[status]
-      )}
+const Preset = ({
+  status,
+  title,
+  description,
+  onClose,
+  duration,
+  onDurationEnd,
+}: ToastPresetProps) => (
+  <Toast status={status}>
+    <XBox
+      justifyContent={'between'}
+      style={inlineStyle(() => ({ base: { width: '100%' } }))}
     >
-      <Comp color={color} size={16} />
-    </Box>
-  );
+      <XBox space={'xs'}>
+        <Toast.Icon />
+        <YBox>
+          <Toast.Title>{title}</Toast.Title>
+          <Toast.Description>{description}</Toast.Description>
+        </YBox>
+      </XBox>
+      {!!onClose && <CloseButton onPress={onClose} />}
+    </XBox>
+    {!!duration && (
+      <Toast.Progress duration={duration} onDurationEnd={onDurationEnd} />
+    )}
+  </Toast>
+);
+
+const Icon = ({
+  style,
+}: {
+  /**
+   * Style of container Box
+   */
+  style?: CrossedMethods<any>;
+}) => {
+  return <Banner.Icon style={style} />;
 };
 
 const Title = (props: TextProps) => {
-  return (
-    <Box space="sm" style={toastStyles.containerTitle}>
-      <Text
-        weight="lg"
-        numberOfLines={1}
-        {...props}
-        style={composeStyles(toastStyles.title, props.style)}
-      />
-    </Box>
-  );
+  return <Banner.Title {...props} />;
 };
 const Description = (props: TextProps) => {
+  return <Banner.Description {...props} />;
+};
+
+type ProgressProps = {
+  duration: number;
+  onDurationEnd?: () => void;
+};
+
+const Progress = ({ duration = 4000, onDurationEnd }: ProgressProps) => {
+  const start = useSharedValue(0);
+  const { status } = useContext(bannerContext);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateX: withTiming(-1 * start.value, {
+            duration,
+            easing: Easing.linear,
+          }),
+        },
+      ],
+    };
+  }, [start]);
+
+  setTimeout(() => {
+    onDurationEnd();
+  }, duration);
+
   return (
-    <Text
-      role="alert"
-      {...props}
-      style={composeStyles(toastStyles.description, props.style)}
-    />
+    <Box
+      style={inlineStyle(() => ({
+        base: { overflow: 'hidden', height: 5, width: '100%' },
+      }))}
+      onLayout={({ nativeEvent: { layout } }) => {
+        start.value = layout.width;
+      }}
+    >
+      <Animated.View
+        style={[
+          animatedStyle,
+          composeStyles(
+            progressBarBackground[status],
+            inlineStyle(() => ({
+              base: {
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+              },
+            }))
+          ).style().style,
+        ]}
+      />
+    </Box>
   );
 };
 
@@ -207,12 +193,23 @@ const Toast = withStaticProperties(Container, {
   Icon,
   Title,
   Description,
+  Preset,
+  Progress,
 });
 
 const {
   Icon: ToastIcon,
   Title: ToastTitle,
   Description: ToastDescription,
+  Progress: ToastProgress,
+  Preset: ToastPreset,
 } = Toast;
 
-export { Toast, ToastIcon, ToastTitle, ToastDescription };
+export {
+  Toast,
+  ToastIcon,
+  ToastTitle,
+  ToastDescription,
+  ToastProgress,
+  ToastPreset,
+};
