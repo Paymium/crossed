@@ -139,7 +139,7 @@ const containerIconStyles = createStyles((t) => ({
 
 export type BannerProps = YBoxProps & { status?: keyof typeof containerStyles };
 
-const bannerContext = createContext<Pick<BannerProps, 'status'>>({});
+export const bannerContext = createContext<Pick<BannerProps, 'status'>>({});
 
 const Container = ({
   status = 'info',

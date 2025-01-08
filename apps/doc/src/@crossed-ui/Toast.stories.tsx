@@ -17,6 +17,8 @@ const meta: Meta<typeof Toast> = {
     'Toast.Description': Toast.Description,
     'Toast.Icon': Toast.Icon,
     'Toast.Title': Toast.Title,
+    'Toast.Progress': Toast.Progress,
+    'Toast.Preset': Toast.Preset,
   },
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
@@ -34,6 +36,7 @@ const meta: Meta<typeof Toast> = {
   },
   render: (e) => (
     <Toast {...e}>
+      <Toast.Icon />
       <Toast.Title>Title</Toast.Title>
       <Toast.Description>Description</Toast.Description>
     </Toast>
@@ -51,6 +54,24 @@ export const Primary: Story = {
   },
 };
 export const Animated: Story = {
-  ...Primary,
+  render: (e) => (
+    <Toast {...e}>
+      <Toast.Title>Title</Toast.Title>
+      <Toast.Description>Description</Toast.Description>
+      <Toast.Progress duration={4000} />
+    </Toast>
+  ),
   args: { status: 'info', center: false, duration: 4000 },
+};
+
+export const Preset: Story = {
+  render: (e) => (
+    <Toast.Preset
+      {...e}
+      title="Title"
+      description="Description"
+      status={'warning'}
+      duration={4000}
+    />
+  ),
 };

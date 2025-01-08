@@ -82,20 +82,20 @@ export default {
         default: {
           text: colors.primary.primary,
           icon: colors.primary.primary,
-          background: colors.white,
-          border: colors.primary.primary,
+          background: colors.neutral['60'],
+          border: colors.neutral['60'],
         },
         hover: {
           text: colors.primary.primary,
           icon: colors.primary.primary,
-          background: colors.primary[1],
-          border: colors.primary.primary,
+          background: colors.neutral['50'],
+          border: colors.neutral['50'],
         },
         active: {
           text: colors.primary.primary,
           icon: colors.primary.primary,
-          background: colors.primary[10],
-          border: colors.primary.primary,
+          background: colors.neutral['60'],
+          border: colors.neutral['50'],
         },
         focus: { background: '', text: '', icon: '', border: '' },
         disabled: {
