@@ -21,8 +21,8 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
+  Easing,
 } from 'react-native-reanimated';
-import { Easing } from 'react-native';
 import { Banner, bannerContext } from './Banner';
 
 const toastStyles = createStyles(
