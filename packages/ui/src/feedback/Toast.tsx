@@ -31,7 +31,6 @@ const toastStyles = createStyles(
       container: {
         base: {
           padding: t.space.xs,
-          minWidth: 400,
           borderRadius: 8,
           gap: t.space.xs,
         },
