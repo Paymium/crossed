@@ -14,6 +14,7 @@ import { Divider } from '@crossed/ui/src/layout/Divider';
 import { Box } from '@crossed/ui/src/layout/Box';
 import { inlineStyle } from '@crossed/styled';
 import { fn } from '@storybook/test';
+import { Group } from '@crossed/ui';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Card> = {
@@ -22,7 +23,6 @@ const meta: Meta<typeof Card> = {
     'Card.Title': Card.Title,
     'Card.Description': Card.Description,
     'Card.Extra': Card.Extra,
-    'Card.Group': Card.Group,
   },
   tags: ['autodocs'],
   argTypes: {
@@ -86,13 +86,11 @@ export const OtherCard: Story = {
 export const OneElement: Story = {
   ...Primary,
   render: (e) => (
-    <Card.Group>
+    <Group>
       {Primary.render(e, undefined)}
       <Divider />
       {OtherCard.render(e, undefined)}
-      <Divider />
-      {OtherCard.render(e, undefined)}
-    </Card.Group>
+    </Group>
   ),
 };
 
@@ -105,8 +103,8 @@ export const CardStat: Story = {
         media: { md: { width: '25%' } },
       }))}
     >
-      <Card.Group>
-        <Card {...e}>
+      <Group>
+        <Card>
           <Card.Title textAlign="center">00,00$</Card.Title>
           <Card.Description textAlign="center">Obtenu</Card.Description>
         </Card>
@@ -114,7 +112,7 @@ export const CardStat: Story = {
         {OtherCard.render(e, undefined)}
         <Divider />
         {OtherCard.render(e, undefined)}
-      </Card.Group>
+      </Group>
     </Box>
   ),
 };
