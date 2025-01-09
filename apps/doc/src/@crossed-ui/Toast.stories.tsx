@@ -56,7 +56,9 @@ export const Animated: Story = {
   render: (e) => (
     <Toast {...e}>
       <Toast.Title>Animated Toast</Toast.Title>
-      <Toast.Description>Indicating when the toast will disapear</Toast.Description>
+      <Toast.Description>
+        Indicating when the toast will disappear
+      </Toast.Description>
       <Toast.Progress duration={4000} />
     </Toast>
   ),
