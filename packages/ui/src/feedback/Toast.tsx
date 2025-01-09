@@ -33,6 +33,7 @@ const toastStyles = createStyles(
           padding: t.space.xs,
           borderRadius: 8,
           gap: t.space.xs,
+          alignSelf: 'flex-end',
         },
         media: {
           xs: {
@@ -56,6 +57,29 @@ const toastStyles = createStyles(
     }) as const
 );
 
+const toastPresetStyles = createStyles(
+  (t) =>
+    ({
+      container: {
+        base: {
+          borderWidth: 0,
+          boxShadow: '0px 1px 4px 0px #00000026',
+        },
+        media: {
+          xs: {
+            marginHorizontal: t.space.xs,
+          },
+          md: {
+            flexDirection: 'column',
+            marginHorizontal: 0,
+            maxWidth: 538,
+          },
+        },
+        variants: {},
+      },
+    }) as const
+);
+
 const progressBarBackground = createStyles((t) => ({
   success: { base: { backgroundColor: t.colors.success.primary } },
   error: { base: { backgroundColor: t.colors.error.primary } },
@@ -72,16 +96,20 @@ type ContainerProps = YBoxProps & {
 
 const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
   return (
-    <Banner status={status} style={toastStyles.container} {...props}>
+    <Banner
+      status={status}
+      style={composeStyles(toastStyles.container, props.style)}
+      {...props}
+    >
       {children}
     </Banner>
   );
 };
 
-export type ToastPresetProps = {
+export type ToastPresetProps = YBoxProps & {
   status?: keyof typeof progressBarBackground;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   onClose?: () => void;
   onDurationEnd?: () => void;
   duration?: number;
@@ -94,20 +122,45 @@ const Preset = ({
   onClose,
   duration,
   onDurationEnd,
+  ...props
 }: ToastPresetProps) => (
-  <Toast status={status}>
+  <Toast
+    status={status}
+    style={composeStyles(
+      toastStyles.container,
+      toastPresetStyles.container,
+      props.style
+    )}
+    {...props}
+  >
     <XBox
+      space={'xs'}
       justifyContent={'between'}
-      style={inlineStyle(() => ({ base: { width: '100%' } }))}
+      style={inlineStyle(() => ({
+        base: { flexShrink: 1 },
+      }))}
     >
-      <XBox space={'xs'}>
+      <XBox
+        space={'xs'}
+        style={inlineStyle(() => ({ base: { flexShrink: 1 } }))}
+      >
         <Toast.Icon />
-        <YBox>
-          <Toast.Title>{title}</Toast.Title>
-          <Toast.Description>{description}</Toast.Description>
+        <YBox
+          alignSelf={'center'}
+          style={inlineStyle(() => ({ base: { flexShrink: 1 } }))}
+        >
+          {title && <Toast.Title>{title}</Toast.Title>}
+          {description && <Toast.Description>{description}</Toast.Description>}
         </YBox>
       </XBox>
-      {!!onClose && <CloseButton onPress={onClose} />}
+      {!!onClose && (
+        <CloseButton
+          onPress={onClose}
+          style={inlineStyle(() => ({
+            base: { width: 20, height: 20, alignSelf: 'flex-start' },
+          }))}
+        />
+      )}
     </XBox>
     {!!duration && (
       <Toast.Progress duration={duration} onDurationEnd={onDurationEnd} />
@@ -156,7 +209,7 @@ const Progress = ({ duration = 4000, onDurationEnd }: ProgressProps) => {
   }, [start]);
 
   setTimeout(() => {
-    onDurationEnd();
+    onDurationEnd?.();
   }, duration);
 
   return (

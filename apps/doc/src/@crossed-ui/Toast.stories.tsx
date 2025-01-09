@@ -36,9 +36,8 @@ const meta: Meta<typeof Toast> = {
   },
   render: (e) => (
     <Toast {...e}>
-      <Toast.Icon />
-      <Toast.Title>Title</Toast.Title>
-      <Toast.Description>Description</Toast.Description>
+      <Toast.Title>This is a Toast </Toast.Title>
+      <Toast.Description>This is its description</Toast.Description>
     </Toast>
   ),
 };
@@ -56,8 +55,8 @@ export const Primary: Story = {
 export const Animated: Story = {
   render: (e) => (
     <Toast {...e}>
-      <Toast.Title>Title</Toast.Title>
-      <Toast.Description>Description</Toast.Description>
+      <Toast.Title>Animated Toast</Toast.Title>
+      <Toast.Description>Indicating when the toast will disapear</Toast.Description>
       <Toast.Progress duration={4000} />
     </Toast>
   ),
@@ -68,9 +67,9 @@ export const Preset: Story = {
   render: (e) => (
     <Toast.Preset
       {...e}
-      title="Title"
-      description="Description"
-      status={'warning'}
+      title="I'm a Toast"
+      description="This is a pre-configurated Toast you can use directly"
+      status={'success'}
       duration={4000}
     />
   ),
