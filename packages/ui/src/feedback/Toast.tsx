@@ -24,6 +24,7 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import { Banner, bannerContext } from './Banner';
+import { shrinkStyles } from '../styles/flex';
 
 const toastStyles = createStyles(
   (t) =>
@@ -32,8 +33,6 @@ const toastStyles = createStyles(
         base: {
           padding: t.space.xs,
           borderRadius: 8,
-          gap: t.space.xs,
-          alignSelf: 'flex-end',
         },
         media: {
           xs: {
@@ -63,7 +62,6 @@ const toastPresetStyles = createStyles(
       container: {
         base: {
           borderWidth: 0,
-          boxShadow: '0px 1px 4px 0px #00000026',
         },
         media: {
           xs: {
@@ -98,8 +96,10 @@ const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
   return (
     <Banner
       status={status}
-      style={composeStyles(toastStyles.container, props.style)}
+      alignSelf={'flex-end'}
+      space={'xs'}
       {...props}
+      style={composeStyles(toastStyles.container, props.style)}
     >
       {children}
     </Banner>
@@ -126,29 +126,13 @@ const Preset = ({
 }: ToastPresetProps) => (
   <Toast
     status={status}
-    style={composeStyles(
-      toastStyles.container,
-      toastPresetStyles.container,
-      props.style
-    )}
     {...props}
+    style={composeStyles(toastPresetStyles.container, props.style)}
   >
-    <XBox
-      space={'xs'}
-      justifyContent={'between'}
-      style={inlineStyle(() => ({
-        base: { flexShrink: 1 },
-      }))}
-    >
-      <XBox
-        space={'xs'}
-        style={inlineStyle(() => ({ base: { flexShrink: 1 } }))}
-      >
+    <XBox space={'xs'} justifyContent={'between'} style={shrinkStyles.on}>
+      <XBox space={'xs'} style={shrinkStyles.on}>
         <Toast.Icon />
-        <YBox
-          alignSelf={'center'}
-          style={inlineStyle(() => ({ base: { flexShrink: 1 } }))}
-        >
+        <YBox alignSelf={'center'} style={shrinkStyles.on}>
           {title && <Toast.Title>{title}</Toast.Title>}
           {description && <Toast.Description>{description}</Toast.Description>}
         </YBox>
