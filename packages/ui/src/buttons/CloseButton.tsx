@@ -8,9 +8,9 @@
 import { X } from '@crossed/unicons';
 import { IconButton, IconButtonProps } from './IconButton';
 
-export const CloseButton = ({ style, disabled, ...props }: IconButtonProps) => {
+export const CloseButton = (props: IconButtonProps) => {
   return (
-    <IconButton role="button" aria-label="Close" {...props} disabled={disabled}>
+    <IconButton role="button" aria-label="Close" {...props}>
       <X size={16} />
     </IconButton>
   );

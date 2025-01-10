@@ -17,6 +17,11 @@ import { composeStyles } from '@crossed/styled';
 import { CardRoot } from './Root';
 import { cardStyles } from './styles';
 
+/**
+ * group Card together.
+ *
+ * @deprecated use Group instead.
+ */
 export const CardGroup = ({ children }: PropsWithChildren) => {
   const childTmp = Children.toArray(children);
   const size = childTmp.length;
