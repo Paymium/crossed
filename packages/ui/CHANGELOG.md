@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.3.2
+
+### Patch Changes
+
+- 966de81: fix import
+
 ## 6.3.1
 
 ### Patch Changes
