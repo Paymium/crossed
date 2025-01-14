@@ -60,7 +60,7 @@ export const buttonPrimaryStyles = createStyles(
         },
         'web': {
           ':focus-visible': {
-            outlineColor: Action.primary.default.background,
+            outlineColor: Action.primary.focus.border,
           },
         },
       },
@@ -88,7 +88,7 @@ export const buttonSecondaryStyles = createStyles(
         },
         'web': {
           ':focus-visible': {
-            outlineColor: Action.secondary.default.border,
+            outlineColor: Action.secondary.focus.border,
           },
         },
       },
@@ -116,7 +116,8 @@ export const buttonTertiaryStyles = createStyles(
         },
         'web': {
           ':focus-visible': {
-            outlineColor: Action.tertiary.default.text,
+            outlineColor: Action.tertiary.focus.border,
+            backgroundColor: Action.tertiary.focus.background,
           },
         },
       },
