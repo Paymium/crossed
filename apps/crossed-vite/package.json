@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@crossed/loader": "workspace:2.0.1",
+    "@crossed/loader": "workspace:^",
     "@crossed/styled": "workspace:^",
     "@crossed/theme": "workspace:^",
     "@crossed/ui": "workspace:^",

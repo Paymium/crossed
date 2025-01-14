@@ -13,7 +13,7 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mdx}\"",
     "type-check": "turbo run type-check",
-    "lint": "eslint packages/**/src apps/** --ext .ts,.tsx --config .eslintrc && turbo run type-check",
+    "lint": "eslint packages/**/src apps/crossed-native apps/doc --ext .ts,.tsx --config .eslintrc && turbo run type-check",
     "release": "pnpm build && pnpm publish -r",
     "coverage-merge": "istanbul-merge --out coverage.raw.json **/coverage/coverage-final.json && istanbul report --include coverage.json --dir coverage html"
   },
