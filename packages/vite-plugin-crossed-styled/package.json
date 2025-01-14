@@ -7,7 +7,6 @@
   "source": "src/index",
   "typings": "lib/typescript/index.d.ts",
   "scripts": {
-    "test": "jest",
     "watch": "crossed-build --watch",
     "build": "crossed-build",
     "type-check": "tsc --noEmit"
