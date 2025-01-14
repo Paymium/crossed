@@ -3,7 +3,7 @@
     "src/index.ts", "src/views/FlashList.tsx"],
   "compilerOptions": {
     "baseUrl": "./",
-    "jsx": "react-native",
+    "jsx": "react-jsx",
     "module": "esnext",
     "moduleResolution": "node",
     "lib": ["es2017", "DOM"],
