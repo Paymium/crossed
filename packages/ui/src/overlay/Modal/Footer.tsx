@@ -7,6 +7,7 @@
 
 import { withDefaultProps } from '@crossed/core';
 import { XBox } from '../../layout/XBox';
+import 'react';
 
 export const ModalFooter = withDefaultProps(XBox, {
   justifyContent: 'end',

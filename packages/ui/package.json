@@ -79,6 +79,7 @@
     "@crossed/styled": "*",
     "@crossed/theme": "workspace:^",
     "@crossed/unicons": "3.0.2",
+    "react": "*",
     "react-native": "*",
     "react-native-gesture-handler": "*",
     "react-native-reanimated": "*"

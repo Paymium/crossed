@@ -9,6 +9,7 @@
 
 import { Text, type TextProps } from './Text';
 import { withDefaultProps } from '@crossed/core';
+import 'react';
 
 type HeadingProps = TextProps & { 'aria-level'?: number };
 
