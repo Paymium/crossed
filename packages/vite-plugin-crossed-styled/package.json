@@ -1,0 +1,27 @@
+{
+  "name": "vite-plugin-crossed-styled",
+  "version": "0.0.0",
+  "main": "lib/commonjs/index",
+  "types": "lib/typescript/index.d.ts",
+  "module": "lib/module/index",
+  "source": "src/index",
+  "typings": "lib/typescript/index.d.ts",
+  "scripts": {
+    "watch": "crossed-build --watch",
+    "build": "crossed-build",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@crossed/loader": "workspace:^",
+    "esprima": "^4.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite-plugin-react-native-web": "^1.1.2"
+  },
+  "devDependencies": {
+    "@crossed/build": "*",
+    "@crossed/styled": "workspace:^",
+    "@types/esprima": "^4.0.6",
+    "vite": "^6.0.3"
+  }
+}

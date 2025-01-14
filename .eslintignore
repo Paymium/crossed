@@ -9,4 +9,5 @@ packages/**/cli.js
 # packages/**/example
 # !.build/test.js
 
+vite.config.ts
 babel.config.js
