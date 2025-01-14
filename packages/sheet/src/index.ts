@@ -14,7 +14,7 @@ export {
 } from './sheetmanager';
 export {
   registerSheet,
-  SheetProps,
+  type SheetProps,
   SheetProvider,
   useProviderContext,
   useSheetIDContext,
@@ -22,19 +22,19 @@ export {
   useSheetPayload,
 } from './provider';
 export {
-  ActionSheetProps,
-  SheetDefinition,
-  Sheets,
-  ActionSheetRef,
+  type ActionSheetProps,
+  type SheetDefinition,
+  type Sheets,
+  type ActionSheetRef,
 } from './types';
 export { useScrollHandlers } from './hooks/use-scroll-handlers';
 export {
   useSheetRouter,
   useSheetRouteParams,
-  Route,
-  RouteScreenProps,
-  Router,
-  RouteDefinition,
+  type Route,
+  type RouteScreenProps,
+  type Router,
+  type RouteDefinition,
 } from './hooks/use-router';
 export { ScrollView } from './views/ScrollView';
 export { FlatList } from './views/FlatList';
