@@ -70,7 +70,12 @@ export default {
           background: colors.primary[60],
           border: colors.primary[60],
         },
-        focus: { background: '', text: '', icon: '', border: '' },
+        focus: {
+          background: colors.primary[60],
+          text: '',
+          icon: '',
+          border: colors.primary[40],
+        },
         disabled: {
           text: colors.primary[10],
           icon: colors.primary[10],
@@ -95,9 +100,14 @@ export default {
           text: colors.primary.primary,
           icon: colors.primary.primary,
           background: colors.neutral['60'],
-          border: colors.neutral['50'],
+          border: colors.neutral['40'],
         },
-        focus: { background: '', text: '', icon: '', border: '' },
+        focus: {
+          background: colors.neutral['60'],
+          text: '',
+          icon: '',
+          border: colors.primary.primary,
+        },
         disabled: {
           text: colors.primary[10],
           icon: colors.primary[10],
@@ -115,7 +125,7 @@ export default {
         hover: {
           text: colors.primary[50],
           icon: colors.primary[50],
-          background: 'transparent',
+          background: colors.neutral[60],
           border: 'transparent',
         },
         active: {
@@ -124,10 +134,15 @@ export default {
           background: 'transparent',
           border: 'transparent',
         },
-        focus: { background: '', text: '', icon: '', border: '' },
+        focus: {
+          text: '',
+          icon: '',
+          background: colors.primary[10],
+          border: colors.primary[40],
+        },
         disabled: {
-          text: colors.primary[10],
-          icon: colors.primary[10],
+          text: colors.neutral[80],
+          icon: colors.neutral[80],
           background: 'transparent',
           border: 'transparent',
         },

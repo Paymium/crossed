@@ -12,4 +12,5 @@ export const neutral = {
   70: '#AEB6CE',
   60: '#E8E6FF',
   50: '#D1CDFF',
+  40: '#BCB6FF',
 } as const;
