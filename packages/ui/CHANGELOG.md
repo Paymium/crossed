@@ -1,5 +1,14 @@
 # @crossed/ui
 
+## 6.3.5
+
+### Patch Changes
+
+- c2364f4: fix button style
+- Updated dependencies [c2364f4]
+  - @crossed/theme@2.2.6
+  - @crossed/unicons@3.0.2
+
 ## 6.3.4
 
 ### Patch Changes

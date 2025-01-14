@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 2.2.6
+
+### Patch Changes
+
+- c2364f4: fix button style
+
 ## 2.2.5
 
 ### Patch Changes
