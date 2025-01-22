@@ -13,6 +13,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
 } from 'react';
 import { FocusScope, FocusScopeProps } from '../../other/FocusScope';
@@ -121,9 +122,14 @@ export const ModalContent = memo<ModalContentProps>(
 
     const { size, idRef, showSheet } = localContextInstance;
 
+    const PortalComp = useMemo(
+      () => (showSheet ? Sheet : Floating.Portal),
+      [showSheet]
+    );
+
     useKeyDown({ Escape: onClose }, { enable: open });
     return (
-      <Floating.Portal>
+      <PortalComp>
         <localContext.Provider value={localContextInstance}>
           {showSheet ? (
             <SheetComponent style={style}>{children}</SheetComponent>
@@ -161,7 +167,7 @@ export const ModalContent = memo<ModalContentProps>(
             </RemoveScroll>
           )}
         </localContext.Provider>
-      </Floating.Portal>
+      </PortalComp>
     );
   }
 );
