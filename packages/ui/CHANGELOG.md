@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.3.6
+
+### Patch Changes
+
+- ea7375e: fix modal and import flexstyle
+
 ## 6.3.5
 
 ### Patch Changes
