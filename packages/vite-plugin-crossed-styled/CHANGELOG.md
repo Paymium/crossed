@@ -1,5 +1,11 @@
 # vite-plugin-crossed-styled
 
+## 0.0.4
+
+### Patch Changes
+
+- 9169ddd: fix src css
+
 ## 0.0.3
 
 ### Patch Changes
