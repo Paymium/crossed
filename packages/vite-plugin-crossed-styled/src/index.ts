@@ -6,7 +6,7 @@
  */
 
 import reactNativeWeb from 'vite-plugin-react-native-web';
-import { Plugin } from 'vite';
+import { Plugin, ViteDevServer } from 'vite';
 import { Loader } from '@crossed/loader';
 import path from 'path';
 import modifyModuleSourceLoader from './loader';
@@ -55,6 +55,7 @@ export default function crossedStyled(
     },
   });
 
+  let server: ViteDevServer;
   return [
     reactNativeWeb(),
     {
@@ -72,10 +73,34 @@ export default function crossedStyled(
     },
     {
       name: 'analyse-style',
+      transformIndexHtml(html) {
+        if (server) return html;
+        return [
+          {
+            tag: 'link',
+            injectTo: 'head',
+            attrs: {
+              href: `assets/crossed.css?${Date.now()}`,
+              rel: 'stylesheet',
+              crossorigin: true,
+            },
+          },
+        ];
+      },
+      configureServer(_server) {
+        server = _server;
+      },
       shouldTransformCachedModule() {
         return true;
       },
-      transform(src, id) {
+      buildEnd() {
+        this.emitFile({
+          type: 'asset',
+          source: parseAst.getCSS(),
+          fileName: `assets/crossed.css`,
+        });
+      },
+      async transform(src, id) {
         if (
           /\.jsx?/.test(path.extname(id)) ||
           /\.tsx?/.test(path.extname(id)) ||
