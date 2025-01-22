@@ -80,7 +80,7 @@ export default function crossedStyled(
             tag: 'link',
             injectTo: 'head',
             attrs: {
-              href: `assets/crossed.css?${Date.now()}`,
+              href: `/assets/crossed.css?${Date.now()}`,
               rel: 'stylesheet',
               crossorigin: true,
             },
