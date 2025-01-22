@@ -102,7 +102,7 @@ const SheetComponent = ({
   }, [open, showSheet]);
   return (
     <Sheet ref={refSheet as any}>
-      <Sheet.Content onClose={onClose} containerStyle={style}>
+      <Sheet.Content isModal={false} onClose={onClose} containerStyle={style}>
         {children}
       </Sheet.Content>
     </Sheet>

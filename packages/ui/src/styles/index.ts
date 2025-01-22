@@ -14,3 +14,4 @@ export * from './justifyContent';
 export * from './position';
 export * from './textAlign';
 export * from './visibilityHidden';
+export * from './flex';
