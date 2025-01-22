@@ -7,7 +7,6 @@
 
 import reactNativeWeb from 'vite-plugin-react-native-web';
 import { Plugin, ViteDevServer } from 'vite';
-import { createHash } from 'node:crypto';
 import { Loader } from '@crossed/loader';
 import path from 'path';
 import modifyModuleSourceLoader from './loader';
@@ -46,7 +45,6 @@ export default function crossedStyled(
     } catch (y) {}
   }
 
-  let hashName: string;
   const parseAst = new Loader({
     css,
     configPath: options.configPath,
