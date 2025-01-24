@@ -7,21 +7,22 @@
 
 import { composeStyles } from '@crossed/styled';
 import { Text } from '../../typography';
-import { Box } from '../../layout';
 import { styles } from './styles';
 import { PropsWithChildren, useContext } from 'react';
 import { localContext } from './context';
 
 export const Label = ({ children }: PropsWithChildren) => {
   const { sharedValue, disabled } = useContext(localContext);
-  return (
-    <Box
+  return typeof children === 'string' ? (
+    <Text
       style={composeStyles(
         disabled && styles.disabledOff,
         disabled && sharedValue.value && styles.disabledOn
       )}
     >
-      {typeof children === 'string' ? <Text>{children}</Text> : children}
-    </Box>
+      {children}
+    </Text>
+  ) : (
+    children
   );
 };
