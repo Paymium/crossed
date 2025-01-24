@@ -6,10 +6,10 @@
  */
 
 import { PropsWithChildren } from 'react';
-import { XBoxProps } from '../../layout';
+import { ButtonProps } from '../../buttons';
 
 export type SwitchProps = PropsWithChildren<
-  Pick<XBoxProps, 'style' | 'alignSelf' | 'alignItems' | 'center'> & {
+  ButtonProps & {
     value?: boolean;
     onChange?: () => void;
     disabled?: boolean;

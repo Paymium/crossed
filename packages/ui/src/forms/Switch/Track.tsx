@@ -16,7 +16,7 @@ import { useContext } from 'react';
 import { localContext } from './context';
 import { Thumb } from './Thumb';
 
-export const Track = () => {
+export const SwitchTrack = () => {
   const { sharedValue, duration, height, width, disabled } =
     useContext(localContext);
   const { components } = useTheme();

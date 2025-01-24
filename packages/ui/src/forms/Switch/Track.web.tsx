@@ -12,7 +12,7 @@ import { useContext } from 'react';
 import { localContext } from './context';
 import { Thumb } from './Thumb';
 
-export const Track = () => {
+export const SwitchTrack = () => {
   const { sharedValue, height, width, disabled } = useContext(localContext);
 
   return (

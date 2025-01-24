@@ -7,7 +7,8 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Switch } from '@crossed/ui/src/forms/Switch';
+import { Switch, SwitchPreset } from '@crossed/ui/src/forms/Switch/index';
+import { Tag } from '@crossed/ui';
 
 // Configuration de la story
 const meta: Meta<typeof Switch> = {
@@ -25,13 +26,40 @@ type Story = StoryObj<typeof Switch>;
 
 export const Primary: Story = {
   render: (args) => {
-    return <Switch {...args} />;
+    return (
+      <Switch {...args}>
+        <Switch.Thumb />
+        <Switch.Label>My Label</Switch.Label>
+      </Switch>
+    );
   },
 };
 
-export const WithLabel: Story = {
+export const WithoutLabel: Story = {
   render: (args) => {
-    return <Switch {...args}>My Label</Switch>;
+    return (
+      <Switch {...args}>
+        <Switch.Thumb />
+      </Switch>
+    );
+  },
+};
+export const CustomLabel: Story = {
+  render: (args) => {
+    return (
+      <Switch {...args}>
+        <Switch.Thumb />
+        <Switch.Label>
+          <Tag variant={'green'}>Custom Label</Tag>
+        </Switch.Label>
+      </Switch>
+    );
+  },
+};
+
+export const Preset: Story = {
+  render: (args) => {
+    return <SwitchPreset label={'MyLabel'} {...args} />;
   },
 };
 
@@ -52,16 +80,12 @@ export const DisabledOn: Story = {
   },
 };
 
-export const DisabledWithLabel: Story = {
-  render: (args) => {
-    return <Switch {...args}>My Label</Switch>;
-  },
+export const DisabledWithoutLabel: Story = {
+  ...WithoutLabel,
   args: { disabled: true },
 };
 
-export const DisabledOnWithLabel: Story = {
-  render: (args) => {
-    return <Switch {...args}>My Label</Switch>;
-  },
+export const DisabledOnWithoutLabel: Story = {
+  ...WithoutLabel,
   args: { disabled: true, defaultValue: true },
 };

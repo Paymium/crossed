@@ -6,18 +6,23 @@
  */
 
 import { composeStyles } from '@crossed/styled';
-import { Text } from '../../typography';
+import { Text, TextProps } from '../../typography';
 import { styles } from './styles';
 import { PropsWithChildren, useContext } from 'react';
 import { localContext } from './context';
 
-export const Label = ({ children }: PropsWithChildren) => {
+type LabelProps = PropsWithChildren<TextProps>;
+
+export const SwitchLabel = ({ children, id, ...props }: LabelProps) => {
   const { sharedValue, disabled } = useContext(localContext);
   return typeof children === 'string' ? (
     <Text
+      id={id}
+      {...props}
       style={composeStyles(
         disabled && styles.disabledOff,
-        disabled && sharedValue.value && styles.disabledOn
+        disabled && sharedValue.value && styles.disabledOn,
+        props.style
       )}
     >
       {children}
