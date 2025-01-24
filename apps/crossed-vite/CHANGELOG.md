@@ -1,5 +1,12 @@
 # crossed-vite
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies [5227d3c]
+  - @crossed/ui@6.4.0
+
 ## 0.0.5
 
 ### Patch Changes

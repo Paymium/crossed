@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.4.0
+
+### Minor Changes
+
+- 5227d3c: add Switch Component
+
 ## 6.3.6
 
 ### Patch Changes
