@@ -66,7 +66,12 @@ export const Switch = ({
       }}
     >
       <XBox space={'xs'} {...props}>
-        <Pressable onPress={onChange} disabled={disabled}>
+        <Pressable
+          onPress={onChange}
+          disabled={disabled}
+          aria-checked={value}
+          role={'switch'}
+        >
           <Track />
         </Pressable>
         {children && <Label>{children}</Label>}
