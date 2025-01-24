@@ -7,12 +7,10 @@
 
 import { createContext } from 'react';
 import { SharedValue } from 'react-native-reanimated';
-import { TrackColors } from './type';
 
 export type LocalContext = {
   disabled?: boolean;
   sharedValue?: SharedValue<boolean>;
-  trackColors?: TrackColors;
   duration: number;
   height: SharedValue<number>;
   width: SharedValue<number>;

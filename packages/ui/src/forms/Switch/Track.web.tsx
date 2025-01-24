@@ -5,32 +5,15 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import Animated, {
-  interpolateColor,
-  useAnimatedStyle,
-  withTiming,
-} from 'react-native-reanimated';
-import { composeStyles, useTheme } from '@crossed/styled';
+import Animated from 'react-native-reanimated';
+import { composeStyles } from '@crossed/styled';
 import { styles } from './styles';
 import { useContext } from 'react';
 import { localContext } from './context';
 import { Thumb } from './Thumb';
 
 export const Track = () => {
-  const { sharedValue, duration, height, width, disabled } =
-    useContext(localContext);
-  const { components } = useTheme();
-
-  const trackAnimatedStyle = useAnimatedStyle(() => {
-    const color = interpolateColor(
-      Number(sharedValue.value),
-      [0, 1],
-      [components.Switch.off.background, components.Switch.on.background]
-    );
-    return {
-      backgroundColor: withTiming(color, { duration }),
-    };
-  }, [sharedValue.value]);
+  const { sharedValue, height, width, disabled } = useContext(localContext);
 
   return (
     <Animated.View
@@ -41,10 +24,11 @@ export const Track = () => {
       style={[
         composeStyles(
           styles.track,
+          sharedValue.value && styles.toggleOn,
+          !sharedValue.value && styles.toggleOff,
           disabled && styles.disabledOff,
           disabled && sharedValue.value && styles.disabledOn
         ).style().style,
-        trackAnimatedStyle,
       ]}
     >
       <Thumb />

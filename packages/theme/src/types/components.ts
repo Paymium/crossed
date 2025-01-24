@@ -45,6 +45,10 @@ type Tag = {
   text: string;
 };
 
+type Switch = {
+  background: string;
+};
+
 type ActionType<T = Action> = {
   default: T;
   hover: T;
@@ -92,4 +96,5 @@ export type Components = {
     green: Tag;
     red: Tag;
   };
+  Switch: { on: Switch; off: Switch };
 };

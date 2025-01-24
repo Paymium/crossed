@@ -268,5 +268,9 @@ export default {
       green: { background: '#306C60', text: colors.text.primary },
       red: { background: '#A21A1A', text: colors.error.low },
     },
+    Switch: {
+      on: { background: colors.primary['40'] },
+      off: { background: colors.neutral['70'] },
+    },
   },
 } as const satisfies Theme;

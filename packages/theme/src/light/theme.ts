@@ -274,5 +274,9 @@ export default {
         text: colors.error.muted,
       },
     },
+    Switch: {
+      on: { background: colors.primary.primary },
+      off: { background: colors.primary['10'] },
+    },
   },
 } as const satisfies Theme;

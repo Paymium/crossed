@@ -7,7 +7,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Switch } from '@crossed/ui/src/forms/Switch/Root';
+import { Switch } from '@crossed/ui/src/forms/Switch';
 
 // Configuration de la story
 const meta: Meta<typeof Switch> = {
@@ -15,9 +15,6 @@ const meta: Meta<typeof Switch> = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    trackColorsProps: {
-      control: 'object',
-    },
     disabled: { control: 'boolean' },
     defaultValue: { control: 'boolean' },
   },
@@ -29,14 +26,6 @@ type Story = StoryObj<typeof Switch>;
 export const Primary: Story = {
   render: (args) => {
     return <Switch {...args} />;
-  },
-};
-
-export const CustomColor: Story = {
-  ...Primary,
-  args: {
-    ...Primary.args,
-    trackColorsProps: { on: '#4caf50', off: '#f44336' },
   },
 };
 
@@ -75,21 +64,4 @@ export const DisabledOnWithLabel: Story = {
     return <Switch {...args}>My Label</Switch>;
   },
   args: { disabled: true, defaultValue: true },
-};
-
-export const CustomColorDisabled: Story = {
-  ...CustomColor,
-  args: {
-    ...CustomColor.args,
-    disabled: true,
-  },
-};
-
-export const CustomColorDisabledOn: Story = {
-  ...CustomColor,
-  args: {
-    ...CustomColor.args,
-    disabled: true,
-    defaultValue: true,
-  },
 };

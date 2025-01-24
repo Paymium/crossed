@@ -8,13 +8,10 @@
 import { PropsWithChildren } from 'react';
 import { XBoxProps } from '../../layout';
 
-export type TrackColors = { on: string; off: string };
-
 export type SwitchProps = PropsWithChildren<
   Pick<XBoxProps, 'style' | 'alignSelf' | 'alignItems' | 'center'> & {
     value?: boolean;
-    onChangeProps?: () => void;
-    trackColorsProps?: TrackColors;
+    onChange?: () => void;
     disabled?: boolean;
     defaultValue?: boolean;
   }
