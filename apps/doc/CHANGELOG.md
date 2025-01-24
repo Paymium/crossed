@@ -1,5 +1,16 @@
 # crossed-doc
 
+## 0.11.0
+
+### Minor Changes
+
+- 5227d3c: add Switch Component
+
+### Patch Changes
+
+- Updated dependencies [5227d3c]
+  - @crossed/ui@6.4.0
+
 ## 0.10.6
 
 ### Patch Changes
