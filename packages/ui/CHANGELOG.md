@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 6.4.1
+
+### Patch Changes
+
+- Updated dependencies [06c8740]
+  - @crossed/theme@2.2.7
+  - @crossed/unicons@3.0.2
+
 ## 6.4.0
 
 ### Minor Changes

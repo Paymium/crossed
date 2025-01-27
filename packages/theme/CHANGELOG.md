@@ -1,5 +1,11 @@
 # @crossed/theme
 
+## 2.2.7
+
+### Patch Changes
+
+- 06c8740: updae tame with switch color
+
 ## 2.2.6
 
 ### Patch Changes
