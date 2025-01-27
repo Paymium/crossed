@@ -50,8 +50,7 @@ export const Root = ({
   const onChange = useCallback(() => {
     sharedValue.value = !sharedValue.value;
     setValue(!value);
-    onChangeProps?.();
-  }, [sharedValue, value, setValue, onChangeProps]);
+  }, [sharedValue, value, setValue]);
 
   return (
     <localContext.Provider

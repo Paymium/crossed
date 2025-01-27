@@ -57,19 +57,16 @@ const toastStyles = createStyles(
 );
 
 const toastPresetStyles = createStyles(
-  (t) =>
+  () =>
     ({
       container: {
         base: {
           borderWidth: 0,
         },
         media: {
-          xs: {
-            marginHorizontal: t.space.xs,
-          },
+          xs: {},
           md: {
             flexDirection: 'column',
-            marginHorizontal: 0,
             maxWidth: 538,
           },
         },
