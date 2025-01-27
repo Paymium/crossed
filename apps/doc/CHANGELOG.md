@@ -1,5 +1,15 @@
 # crossed-doc
 
+## 0.11.1
+
+### Patch Changes
+
+- 06c8740: updae tame with switch color
+- Updated dependencies [06c8740]
+  - @crossed/theme@2.2.7
+  - @crossed/ui@6.4.1
+  - @crossed/webpack@2.1.7
+
 ## 0.11.0
 
 ### Minor Changes

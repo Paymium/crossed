@@ -1,7 +1,7 @@
 {
   "name": "@crossed/theme",
   "description": "unicons",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
