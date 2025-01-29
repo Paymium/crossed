@@ -74,5 +74,5 @@ export const Primary: Story = {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Hover: Story = {
-  args: { triggerStrategy: 'onPointerEnter', placement: 'left-end' },
+  args: { triggerStrategy: 'onPointerEnter' },
 };

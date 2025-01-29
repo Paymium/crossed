@@ -12,9 +12,7 @@ import {
   PropsWithChildren,
   RefAttributes,
   useEffect,
-  useMemo,
   useRef,
-  useState,
 } from 'react';
 import { Adapt } from '../other/Adapt';
 import { Text, TextProps } from '../typography/Text';
@@ -30,30 +28,15 @@ import {
 import { ActionSheetRef } from '@crossed/sheet';
 import { View } from 'react-native';
 import { Floating, useFloatingContext } from './Floating';
-import {
-  autoUpdate,
-  offset,
-  Placement,
-  useFloating,
-  useHover,
-  useInteractions,
-} from '@floating-ui/react';
+import { autoUpdate, offset, Placement, useFloating } from '@floating-ui/react';
 import { flip } from '@floating-ui/dom';
-import {
-  FadeIn,
-  FadeOut,
-  StretchInX,
-  StretchOutX,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import { FadeIn, FadeOut } from 'react-native-reanimated';
 
 const useFloatinCompat = isWeb
   ? (placement?: Placement) =>
       useFloating({
         placement: placement,
-        middleware: [flip({ crossAxis: true })],
+        middleware: [flip({ crossAxis: true }), offset(10)],
         whileElementsMounted: autoUpdate,
       })
   : () => ({
@@ -72,7 +55,7 @@ const [FloatingUiProvider, useFloatingUi] = createScope<FloatingUiContext>(
 
 type RootProps = ComponentProps<typeof Floating> & { placement?: Placement };
 export const Root = memo(({ children, placement, ...props }: RootProps) => {
-  const { refs, floatingStyles, x, y } = useFloatinCompat(placement);
+  const { refs, floatingStyles } = useFloatinCompat(placement);
 
   return (
     <Floating
@@ -81,12 +64,7 @@ export const Root = memo(({ children, placement, ...props }: RootProps) => {
       wait={1000}
       {...props}
     >
-      <FloatingUiProvider
-        refs={refs as any}
-        floatingStyles={floatingStyles}
-        x={x}
-        y={y}
-      >
+      <FloatingUiProvider refs={refs as any} floatingStyles={floatingStyles}>
         {children}
       </FloatingUiProvider>
     </Floating>
@@ -126,12 +104,6 @@ export const Content = memo<ContentProps & RefAttributes<View>>(
 );
 Content.displayName = 'Tooltip.Content';
 
-const positionStyles = createStyles(() => ({
-  top: { base: { bottom: '100%' } },
-  left: { base: { right: '100%' } },
-  bottom: { base: { top: '100%' } },
-  right: { base: { right: '100%' } },
-}));
 const tooltipStyles = inlineStyle(({ colors, space }) => ({
   base: {
     backgroundColor: colors.text.primary,
@@ -144,26 +116,7 @@ const tooltipStyles = inlineStyle(({ colors, space }) => ({
 type ContentWebProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
 const ContentWeb = memo<ContentWebProps & RefAttributes<View>>(
   forwardRef<View, ContentWebProps>(({ children, style }, ref) => {
-    const { refs, floatingStyles, x, y } = useFloatingUi();
-    const { open } = useFloatingContext();
-
-    //TENTATIVE DE Gerer le style tout seul
-    // const translateX = useSharedValue(0);
-    // const translateY = useSharedValue(0);
-    //
-    // useEffect(() => {
-    //   translateY.value = y;
-    //   translateX.value = x;
-    //   console.log('x', x, 'y', y);
-    // }, [x, y]);
-    //
-    // const animatedStyle = useAnimatedStyle(() => {
-    //   console.log('translate', translateY.value, translateX.value);
-    //   return {
-    //     top: translateY.value,
-    //     left: translateX.value,
-    //   };
-    // }, [translateX, translateY]);
+    const { refs, floatingStyles } = useFloatingUi();
 
     return (
       <Floating.Portal>
@@ -172,8 +125,11 @@ const ContentWeb = memo<ContentWebProps & RefAttributes<View>>(
           entering={FadeIn}
           exiting={FadeOut}
           ref={composeRefs(ref, refs.setFloating as any)}
-          style={composeStyles(tooltipStyles)}
-          // animatedStyle={animatedStyle}
+          style={composeStyles(
+            tooltipStyles,
+            stylesDyn.dyn(floatingStyles),
+            style
+          )}
         >
           {children}
         </Floating.Content>
@@ -204,7 +160,18 @@ const ContentNative = ({
 ContentNative.displayName = 'Tooltip.ContentNative';
 
 const TooltipText = (props: TextProps) => {
-  return <Text color={'invert'} {...props} />;
+  return (
+    <Text
+      {...props}
+      style={composeStyles(
+        inlineStyle(({ colors }) => ({
+          base: { marginTop: 0 },
+          media: { md: { color: colors.text.invert, marginTop: 0 } },
+        })),
+        props.style
+      )}
+    />
+  );
 };
 TooltipText.displayName = 'Tooltip.Text';
 
