@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.4.2
+
+### Patch Changes
+
+- 19f21a2: fix modal focus
+
 ## 6.4.1
 
 ### Patch Changes
