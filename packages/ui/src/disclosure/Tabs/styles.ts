@@ -87,6 +87,9 @@ export const triggerStyles = createStyles(({ space }) => ({
       flexDirection: 'row',
       alignItems: 'center',
     },
+    ':hover': {
+      backgroundColor: 'transparent',
+    },
   },
   sm: { base: { paddingHorizontal: space.xs } },
   md: { base: { paddingHorizontal: space.md } },
