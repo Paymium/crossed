@@ -12,7 +12,9 @@ import {
   PropsWithChildren,
   RefAttributes,
   useEffect,
+  useMemo,
   useRef,
+  useState,
 } from 'react';
 import { Adapt } from '../other/Adapt';
 import { Text, TextProps } from '../typography/Text';
@@ -28,13 +30,30 @@ import {
 import { ActionSheetRef } from '@crossed/sheet';
 import { View } from 'react-native';
 import { Floating, useFloatingContext } from './Floating';
-import { autoUpdate, offset, shift, useFloating } from '@floating-ui/react';
+import {
+  autoUpdate,
+  offset,
+  Placement,
+  useFloating,
+  useHover,
+  useInteractions,
+} from '@floating-ui/react';
+import { flip } from '@floating-ui/dom';
+import {
+  FadeIn,
+  FadeOut,
+  StretchInX,
+  StretchOutX,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 const useFloatinCompat = isWeb
-  ? () =>
+  ? (placement?: Placement) =>
       useFloating({
-        placement: 'bottom-start',
-        middleware: [shift({ crossAxis: true }), offset(8)],
+        placement: placement,
+        middleware: [flip({ crossAxis: true })],
         whileElementsMounted: autoUpdate,
       })
   : () => ({
@@ -51,16 +70,23 @@ const [FloatingUiProvider, useFloatingUi] = createScope<FloatingUiContext>(
   {} as FloatingUiContext
 );
 
-type RootProps = ComponentProps<typeof Floating>;
-export const Root = memo(({ children, ...props }: RootProps) => {
-  const { refs, floatingStyles } = useFloatinCompat();
+type RootProps = ComponentProps<typeof Floating> & { placement?: Placement };
+export const Root = memo(({ children, placement, ...props }: RootProps) => {
+  const { refs, floatingStyles, x, y } = useFloatinCompat(placement);
+
   return (
     <Floating
       triggerStrategy={isWeb ? 'onPointerEnter' : 'onPress'}
       removeScroll={false}
+      wait={1000}
       {...props}
     >
-      <FloatingUiProvider refs={refs as any} floatingStyles={floatingStyles}>
+      <FloatingUiProvider
+        refs={refs as any}
+        floatingStyles={floatingStyles}
+        x={x}
+        y={y}
+      >
         {children}
       </FloatingUiProvider>
     </Floating>
@@ -118,23 +144,39 @@ const tooltipStyles = inlineStyle(({ colors, space }) => ({
 type ContentWebProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
 const ContentWeb = memo<ContentWebProps & RefAttributes<View>>(
   forwardRef<View, ContentWebProps>(({ children, style }, ref) => {
-    const { refs, floatingStyles } = useFloatingUi();
+    const { refs, floatingStyles, x, y } = useFloatingUi();
+    const { open } = useFloatingContext();
+
+    //TENTATIVE DE Gerer le style tout seul
+    // const translateX = useSharedValue(0);
+    // const translateY = useSharedValue(0);
+    //
+    // useEffect(() => {
+    //   translateY.value = y;
+    //   translateX.value = x;
+    //   console.log('x', x, 'y', y);
+    // }, [x, y]);
+    //
+    // const animatedStyle = useAnimatedStyle(() => {
+    //   console.log('translate', translateY.value, translateX.value);
+    //   return {
+    //     top: translateY.value,
+    //     left: translateX.value,
+    //   };
+    // }, [translateX, translateY]);
+
     return (
       <Floating.Portal>
-        <Floating.VisibilityHidden
+        <Floating.Content
+          key={'tooltipContent'}
+          entering={FadeIn}
+          exiting={FadeOut}
           ref={composeRefs(ref, refs.setFloating as any)}
-          style={composeStyles(
-            inlineStyle(() => ({
-              base: { bottom: 'auto', right: undefined },
-            })),
-            tooltipStyles,
-            positionStyles.bottom,
-            stylesDyn.dyn(floatingStyles),
-            style
-          )}
+          style={composeStyles(tooltipStyles)}
+          // animatedStyle={animatedStyle}
         >
           {children}
-        </Floating.VisibilityHidden>
+        </Floating.Content>
       </Floating.Portal>
     );
   })
@@ -171,44 +213,3 @@ export const Tooltip = withStaticProperties(Root, {
   Content,
   Text: TooltipText,
 });
-
-// const useFloatinCompat = isWeb
-//   ? () =>
-//     useFloating({
-//       placement: "bottom-start",
-//       middleware: [shift({ crossAxis: true }), offset(8)],
-//       whileElementsMounted: autoUpdate,
-//     })
-//   : () => ({
-//     refs: {},
-//     floatingStyles: {},
-//   });
-// export const Tooltip = withStaticProperties(
-//   ({
-//      children,
-//      content,
-//      contentStyle,
-//      triggerProps,
-//      ...props
-//    }: RootProps & {
-//     content: ReactNode;
-//     contentStyle?: ContentProps["style"];
-//     triggerProps?: TriggerProps;
-//   }) => {
-//     const { refs, floatingStyles } = useFloatinCompat() as any;
-//     return (
-//       <TooltipOri {...props}>
-//         <TooltipOri.Trigger ref={refs.setReference as any} {...triggerProps}>
-//           {children}
-//         </TooltipOri.Trigger>
-//         <TooltipOri.Content
-//           ref={refs.setFloating as any}
-//           style={composeStyles(contentStyle, styles.dynamic(floatingStyles))}
-//         >
-//           {content}
-//         </TooltipOri.Content>
-//       </TooltipOri>
-//     );
-//   },
-//   { Text: TooltipText }
-// );

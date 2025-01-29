@@ -14,14 +14,43 @@ import { inlineStyle } from '@crossed/styled';
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
   tags: ['autodocs'],
-  parameters: { layout: 'padded' },
+  parameters: { layout: 'centered' },
+  argTypes: {
+    triggerStrategy: {
+      control: 'select',
+      options: ['onPress', 'onPointerEnter'],
+    },
+    placement: {
+      control: 'select',
+      options: [
+        'top',
+        'top-start',
+        'top-end',
+        'right',
+        'right-start',
+        'right-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+        'left',
+        'left-start',
+        'left-end',
+      ],
+    },
+  },
   subcomponents: {
     'Tooltip.Trigger': Tooltip.Trigger,
     'Tooltip.Content': Tooltip.Content,
   },
   render({ closeOnPress, ...e }: any) {
     return (
-      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+      <YBox
+        alignItems={'center'}
+        justifyContent="center"
+        style={inlineStyle(() => ({
+          base: { width: 200, height: 200 },
+        }))}
+      >
         <Tooltip {...e}>
           <Tooltip.Trigger>
             <Text>Button</Text>
@@ -45,5 +74,5 @@ export const Primary: Story = {
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Hover: Story = {
-  args: { triggerStrategy: 'onPointerEnter' },
+  args: { triggerStrategy: 'onPointerEnter', placement: 'left-end' },
 };
