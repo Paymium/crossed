@@ -15,7 +15,12 @@ import {
   useMemo,
   useRef,
 } from 'react';
-import { composeStyles, CrossedMethods, inlineStyle, isWeb } from '@crossed/styled';
+import {
+  composeStyles,
+  CrossedMethods,
+  inlineStyle,
+  isWeb,
+} from '@crossed/styled';
 import { createStyles } from '@crossed/styled';
 import { localContext } from './context';
 import { Sheet } from '../Sheet/index';
@@ -23,7 +28,11 @@ import { FadeIn, FadeOut } from 'react-native-reanimated';
 import { ActionSheetRef } from '@crossed/sheet';
 import { Floating, useFloatingContext } from '../Floating';
 import { Focus } from './Focus';
-import { alignItemsStyle, justifyContentStyle, positionStyles } from '../../styles';
+import {
+  alignItemsStyle,
+  justifyContentStyle,
+  positionStyles,
+} from '../../styles';
 
 export const modalStyles = createStyles(({ colors, space }) => ({
   content: {
