@@ -31,6 +31,7 @@ import { Floating, useFloatingContext } from './Floating';
 import { autoUpdate, offset, Placement, useFloating } from '@floating-ui/react';
 import { flip } from '@floating-ui/dom';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
+import { useMedia } from '../useMedia';
 
 const useFloatinCompat = isWeb
   ? (placement?: Placement) =>
@@ -54,22 +55,28 @@ const [FloatingUiProvider, useFloatingUi] = createScope<FloatingUiContext>(
 );
 
 type RootProps = ComponentProps<typeof Floating> & { placement?: Placement };
-export const Root = memo(({ children, placement, ...props }: RootProps) => {
-  const { refs, floatingStyles } = useFloatinCompat(placement);
+export const Root = memo(
+  ({ children, placement, triggerStrategy, ...props }: RootProps) => {
+    const { refs, floatingStyles } = useFloatinCompat(placement);
+    const { md } = useMedia();
 
-  return (
-    <Floating
-      triggerStrategy={isWeb ? 'onPointerEnter' : 'onPress'}
-      removeScroll={false}
-      wait={1000}
-      {...props}
-    >
-      <FloatingUiProvider refs={refs as any} floatingStyles={floatingStyles}>
-        {children}
-      </FloatingUiProvider>
-    </Floating>
-  );
-});
+    return (
+      <Floating
+        triggerStrategy={
+          !md && triggerStrategy === 'onPointerEnter'
+            ? 'onPress'
+            : triggerStrategy
+        }
+        removeScroll={false}
+        {...props}
+      >
+        <FloatingUiProvider refs={refs as any} floatingStyles={floatingStyles}>
+          {children}
+        </FloatingUiProvider>
+      </Floating>
+    );
+  }
+);
 Root.displayName = 'Tooltip.Root';
 
 type TriggerProps = ComponentProps<typeof Floating.Trigger>;
@@ -121,7 +128,6 @@ const ContentWeb = memo<ContentWebProps & RefAttributes<View>>(
     return (
       <Floating.Portal>
         <Floating.Content
-          key={'tooltipContent'}
           entering={FadeIn}
           exiting={FadeOut}
           ref={composeRefs(ref, refs.setFloating as any)}
@@ -165,8 +171,7 @@ const TooltipText = (props: TextProps) => {
       {...props}
       style={composeStyles(
         inlineStyle(({ colors }) => ({
-          base: { marginTop: 0 },
-          media: { md: { color: colors.text.invert, marginTop: 0 } },
+          media: { md: { color: colors.text.invert } },
         })),
         props.style
       )}
