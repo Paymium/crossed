@@ -1,5 +1,15 @@
 # crossed-doc
 
+## 0.11.3
+
+### Patch Changes
+
+- 4395e18: fix Tooltip
+- Updated dependencies [cf73af2]
+- Updated dependencies [4395e18]
+- Updated dependencies [298d627]
+  - @crossed/ui@6.4.3
+
 ## 0.11.2
 
 ### Patch Changes
