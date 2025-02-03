@@ -18,7 +18,12 @@ import {
 } from 'react';
 import { Floating } from '../../overlay/Floating';
 import { useSelectConfig, useSelectValue } from './context';
-import { composeStyles, createStyles, inlineStyle } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  inlineStyle,
+  isWeb,
+} from '@crossed/styled';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
 import { FlatList, View } from 'react-native';
 import { MenuList } from '../../display';
@@ -155,7 +160,7 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
 
     return (
       <>
-        {!md ? (
+        {!isWeb || !md ? (
           <Sheet.Content
             ref={totoRef as any}
             onClose={onClose}
