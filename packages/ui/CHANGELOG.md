@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.4.4
+
+### Patch Changes
+
+- c00a239: fix Select not opening on Ipad
+
 ## 6.4.3
 
 ### Patch Changes
