@@ -11,8 +11,8 @@ import { useFocusScope as useOriginal } from 'react-focus-lock';
 import { useMemo } from 'react';
 import { useFloatingContext } from '../../overlay/Floating';
 
-export const Focus = (props: FocusProps) => {
-  return <FocusOn {...props} />;
+export const Focus = ({ style, ...props }: FocusProps) => {
+  return <FocusOn {...style.className()} {...props} />;
 };
 
 export const useFocusScope = () => {

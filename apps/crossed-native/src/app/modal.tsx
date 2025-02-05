@@ -17,7 +17,7 @@ const styles = createStyles(() => ({
       justifyContent: 'space-between',
     },
   },
-  end: { base: { alignSelt: 'flex-end', flexDirection: 'row' } },
+  end: { base: { alignSelf: 'flex-end', flexDirection: 'row' } },
 }));
 
 const Example = () => {

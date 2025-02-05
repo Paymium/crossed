@@ -7,5 +7,8 @@
 
 import type { ComponentProps } from 'react';
 import { FocusOn } from 'react-focus-on';
+import { CrossedMethods } from '@crossed/styled';
 
-export type FocusProps = ComponentProps<typeof FocusOn>;
+export type FocusProps = ComponentProps<typeof FocusOn> & {
+  style?: CrossedMethods<any>;
+};

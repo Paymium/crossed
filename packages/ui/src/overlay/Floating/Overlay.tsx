@@ -53,6 +53,10 @@ export const FloatingOverlay = memo(
         entering={FadeIn}
         exiting={FadeOut}
         {...animatedProps}
+        style={[
+          { top: 0, bottom: 0, left: 0, right: 0, position: 'absolute' },
+          animatedProps?.style,
+        ]}
       >
         <Box style={composeStyles(overlayStyles.root, style)} />
       </Animated.View>

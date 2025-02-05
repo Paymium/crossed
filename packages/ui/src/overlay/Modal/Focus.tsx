@@ -6,5 +6,12 @@
  */
 
 import { FocusProps } from './types';
+import { View, ViewProps } from 'react-native';
 
-export const Focus = ({ children }: FocusProps) => children;
+export const Focus = ({ children, style, ...props }: FocusProps) => {
+  return (
+    <View {...style.rnw()} {...(props as ViewProps)}>
+      {children}
+    </View>
+  );
+};
