@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.4.5
+
+### Patch Changes
+
+- f412e12: fix modale
+
 ## 6.4.4
 
 ### Patch Changes
