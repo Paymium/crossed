@@ -136,12 +136,12 @@ export const ModalContent = memo<ModalContentProps>(({ children, style }) => {
               onEscapeKey={onClose}
               onClickOutside={onClose}
               enabled={open}
-              {...composeStyles(
+              style={composeStyles(
                 open && positionStyles.absoluteFill,
                 open && inlineStyle(() => ({ base: { display: 'flex' } })),
                 open && justifyContentStyle.center,
                 open && alignItemsStyle.center
-              ).className()}
+              )}
             >
               <Floating.Overlay />
               <Floating.Content
