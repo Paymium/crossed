@@ -31,6 +31,7 @@ export const createPanel =
                 borderWidth: 0,
                 padding: 0,
               },
+              media: { md: { padding: 0 }, xl: { padding: 0 } },
             })),
           style
         )}

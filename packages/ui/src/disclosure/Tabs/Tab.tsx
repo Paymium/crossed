@@ -15,7 +15,12 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import { composeStyles, CrossedMethods, useInteraction } from '@crossed/styled';
+import {
+  composeStyles,
+  CrossedMethods,
+  isWeb,
+  useInteraction,
+} from '@crossed/styled';
 import { withTiming } from 'react-native-reanimated';
 import { View } from 'react-native-reanimated/lib/typescript/Animated';
 import { focusStyles, tabTitleStyles, triggerStyles } from './styles';
@@ -65,7 +70,8 @@ export const createTab = ({
           listTabRef.current as any,
           (left: number, _top: number, width: number) => {
             const offset = shouldShow ? 30 : 0;
-            const positionLeft = left + scroll.value;
+            const positionLeft = isWeb ? left + scroll.value : left;
+            console.log('positionLeft', positionLeft);
             indicator.left.value = withTiming(positionLeft);
             indicator.width.value = withTiming(width);
             if (
