@@ -71,7 +71,6 @@ export const createTab = ({
           (left: number, _top: number, width: number) => {
             const offset = shouldShow ? 30 : 0;
             const positionLeft = isWeb ? left + scroll.value : left;
-            console.log('positionLeft', positionLeft);
             indicator.left.value = withTiming(positionLeft);
             indicator.width.value = withTiming(width);
             if (

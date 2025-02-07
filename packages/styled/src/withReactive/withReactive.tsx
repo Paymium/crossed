@@ -5,13 +5,12 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { FunctionComponent } from 'react';
 import { useTheme } from '../useTheme';
 
-export const withReactive = <P extends object, R>(
-  Comp: React.ComponentType<P>
-) =>
-  forwardRef<R, P>((props, ref) => {
+export const withReactive =
+  <P extends object>(Comp: FunctionComponent<P>): FunctionComponent<P> =>
+  (props: P) => {
     useTheme();
-    return <Comp {...(props as P)} ref={ref as React.Ref<R>} />;
-  });
+    return <Comp {...(props as any)} />;
+  };

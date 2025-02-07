@@ -22,8 +22,6 @@ export const createIndicator = (useTabsContext: () => TabsContext) => {
       !variant || variant === 'rounded'
         ? indicatorRoundedStyles
         : indicatorUnderlineStyles;
-    console.log('indicatorLeft', indicator.left.value);
-    console.log('indicator.width', indicator.width.value);
     return (
       <Animated.View
         {...composeStyles(
