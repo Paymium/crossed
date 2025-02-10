@@ -173,23 +173,25 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
               onChangeText={setValue}
             />
           </FormControl>
-          <XBox
-            style={composeStyles(form.elementRight, gapStyles.xs)}
-            onLayout={({ nativeEvent: { layout } }) =>
-              setElementRightWidth(layout.width)
-            }
-          >
-            {isValidElement(elementRight) &&
-            typeof elementRight.type !== 'string' &&
-            (elementRight.type as any).displayName === 'CrossedText'
-              ? cloneElement(elementRight, {
-                  style: [(elementRight as any).style, { color }],
-                } as any)
-              : elementRight}
-            {!!showClear && (
-              <CloseButton onPress={onClear} style={styles.close} />
-            )}
-          </XBox>
+          {(!!elementRight || !!showClear) && (
+            <XBox
+              style={composeStyles(form.elementRight, gapStyles.xs)}
+              onLayout={({ nativeEvent: { layout } }) =>
+                setElementRightWidth(layout.width)
+              }
+            >
+              {isValidElement(elementRight) &&
+              typeof elementRight.type !== 'string' &&
+              (elementRight.type as any).displayName === 'CrossedText'
+                ? cloneElement(elementRight, {
+                    style: [(elementRight as any).style, { color }],
+                  } as any)
+                : elementRight}
+              {!!showClear && (
+                <CloseButton onPress={onClear} style={styles.close} />
+              )}
+            </XBox>
+          )}
         </XBox>
         {error && <Text color="error">{error.toString()}</Text>}
       </YBox>
