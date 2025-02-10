@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.4.6
+
+### Patch Changes
+
+- 4ecf2ef: fix input element right
+
 ## 6.4.5
 
 ### Patch Changes
