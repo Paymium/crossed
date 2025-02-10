@@ -1,5 +1,4 @@
 ---
-'@crossed/styled': patch
 '@crossed/ui': patch
 ---
 
