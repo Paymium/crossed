@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.4.7
+
+### Patch Changes
+
+- bf6ebd5: Fix Tabs on mobile
+
 ## 6.4.6
 
 ### Patch Changes
