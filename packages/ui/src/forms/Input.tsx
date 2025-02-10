@@ -173,7 +173,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
               onChangeText={setValue}
             />
           </FormControl>
-          {!!elementRight && (
+          {(!!elementRight || !!showClear) && (
             <XBox
               style={composeStyles(form.elementRight, gapStyles.xs)}
               onLayout={({ nativeEvent: { layout } }) =>
