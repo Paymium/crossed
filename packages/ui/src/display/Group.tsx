@@ -5,16 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import {
-  cloneElement,
-  isValidElement,
-  memo,
-  PropsWithChildren,
-  useMemo,
-  Children,
-} from 'react';
+import { cloneElement, isValidElement, memo, useMemo, Children } from 'react';
 import { withStaticProperties } from '@crossed/core';
-import { Divider, XBox, YBox } from '../layout';
+import { BoxProps, Divider, XBox, YBox } from '../layout';
 import { composeStyles, createStyles } from '@crossed/styled';
 
 const stylesVertical = createStyles(() => ({
@@ -57,11 +50,11 @@ const stylesHorizontal = createStyles(() => ({
   },
 }));
 
-type GroupRootProps = PropsWithChildren<{
+type GroupRootProps = BoxProps & {
   orientation?: 'horizontal' | 'vertical';
-}>;
+};
 export const GroupRoot = memo<GroupRootProps>(
-  ({ orientation = 'vertical', children }) => {
+  ({ orientation = 'vertical', children, ...props }) => {
     const childrenModified = useMemo(() => {
       return Children.toArray(children).map((child, i, a) => {
         if (!isValidElement(child)) return child;
@@ -101,7 +94,7 @@ export const GroupRoot = memo<GroupRootProps>(
       [orientation]
     );
 
-    return <Container>{childrenModified}</Container>;
+    return <Container {...props}>{childrenModified}</Container>;
   }
 );
 
