@@ -6,8 +6,8 @@
  */
 
 import { InputPart } from './InputPart';
-import { memo, useId } from 'react';
-import { DateInputProps } from './types';
+import { memo, useId, useRef } from 'react';
+import { DateInputProps, Value } from './types';
 import { XBox } from '../../layout/XBox';
 import { Text } from '../../typography/Text';
 import { form } from '../../styles/form';
@@ -15,6 +15,16 @@ import { composeStyles, inlineStyle } from '@crossed/styled';
 import { useDateInput } from './useDateInput';
 import { useFloating } from '../Select/useFloating';
 import { Calendar } from './Calendar';
+import { FloatingRef } from '../../overlay';
+
+const convertToDate = (e?: Partial<Value>) => {
+  const args = [e?.year, e?.month - 1, e?.day].filter(
+    (l) => typeof l === 'number'
+  );
+  const date = args.length > 0 ? new Date(...(args as [])) : undefined;
+  if (!date || isNaN(date.getTime())) return undefined;
+  return date;
+};
 
 export const DateInput = memo(
   ({
@@ -26,23 +36,27 @@ export const DateInput = memo(
     placeholder = {},
   }: DateInputProps) => {
     const { refs, floatingStyles } = useFloating();
+    const calendarRef = useRef<FloatingRef>(null);
     const id = useId();
-    const { inputs, separator, setWithDate } = useDateInput({
-      locale,
-      format,
-      value: valueProps,
-      placeholder,
-      onChange: (e) => {
-        const args = [e.year, e.month - 1, e.day].filter(
-          (l) => typeof l === 'number'
-        );
-        const date = new Date(...(args as []));
-        onChangeProps?.(date);
-      },
-    });
+    const { inputs, separator, setWithDate, value, containerProps } =
+      useDateInput({
+        locale,
+        format,
+        value: valueProps,
+        placeholder,
+        onChange: (e) => {
+          const args = [e.year, e.month - 1, e.day].filter(
+            (l) => typeof l === 'number'
+          );
+          const date = new Date(...(args as []));
+          onChangeProps?.(date);
+        },
+      });
 
     return (
       <XBox
+        pressable
+        {...containerProps}
         ref={refs.setReference as any}
         justifyContent={'start'}
         alignItems={'center'}
@@ -50,14 +64,18 @@ export const DateInput = memo(
         space={'xxs'}
       >
         {inputs.map(({ key, ...item }, i, a) => [
-          <InputPart key={`${id}-${key}`} {...item} />,
+          <InputPart
+            key={`${id}-${key}`}
+            {...item}
+            onFocus={calendarRef.current?.open}
+          />,
           i + 1 !== a.length ? (
             <Text
+              key={`${id}-${key}-separator`}
               style={composeStyles(
                 form.placeholder,
                 inlineStyle(() => ({ base: { marginTop: 1 } }))
               )}
-              key={`${id}-${key}-separator`}
             >
               {separator}
             </Text>
@@ -66,9 +84,9 @@ export const DateInput = memo(
 
         {picker && format === 'yyyy-mm-dd' && (
           <Calendar
-            selectedDate={valueProps}
+            ref={calendarRef}
+            selectedDate={convertToDate(value)}
             onDateSelected={(e) => {
-              console.log(e);
               setWithDate(e.date);
             }}
             floatingStyles={floatingStyles}

@@ -30,12 +30,12 @@ const button = createStyles(({ colors, components: { Action } }) => ({
   },
   selected: { base: { backgroundColor: Action.primary.default.background } },
   disabled: { base: { opacity: 0.1 } },
+  today: { base: { borderWidth: 2, borderColor: colors.text.brand } },
 }));
-const text = createStyles(({ components: { Action } }) => ({
-  default: {
-    base: {},
-  },
+const text = createStyles(({ colors, components: { Action } }) => ({
+  default: { base: { fontWeight: '500' } },
   selected: { base: { color: Action.primary.default.text } },
+  today: { base: { color: colors.text.brand } },
 }));
 
 export interface DayButtonProps
@@ -60,6 +60,7 @@ export const DayButton = memo(
           widthCell,
           button.default,
           disabled && button.disabled,
+          day.isToday && button.today,
           day.isSelected && button.selected,
           style
         ).style({
@@ -69,6 +70,7 @@ export const DayButton = memo(
         }).style,
       [style, disabled, day]
     );
+
     return (
       <Pressable
         {...props}
@@ -78,7 +80,12 @@ export const DayButton = memo(
       >
         <Text
           textAlign={'center'}
-          style={composeStyles(text.default, day.isSelected && text.selected)}
+          size={'lg'}
+          style={composeStyles(
+            text.default,
+            day.isToday && text.today,
+            day.isSelected && text.selected
+          )}
         >
           {day.date.getDate()}
         </Text>

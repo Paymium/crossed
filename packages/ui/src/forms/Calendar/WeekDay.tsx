@@ -11,7 +11,7 @@ import { widthCell } from './styles';
 import { IDay } from '@crossed/use-calendar/src';
 import { capFirstLetter } from './utils';
 import { XBox } from '../../layout';
-import { CrossedMethods } from '@crossed/styled';
+import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
 
 export const WeekDay = memo(
   ({
@@ -30,8 +30,12 @@ export const WeekDay = memo(
           <Text
             key={`${id}-${day.date.getDate()}`}
             color={'secondary'}
+            size={'lg'}
             textAlign={'center'}
-            style={widthCell}
+            style={composeStyles(
+              widthCell,
+              inlineStyle(() => ({ base: { fontWeight: '500' } }))
+            )}
           >
             {capFirstLetter(
               (day.date as Date).toLocaleString(locale, {

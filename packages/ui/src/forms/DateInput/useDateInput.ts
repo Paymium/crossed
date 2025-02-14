@@ -104,14 +104,14 @@ export const useDateInput = ({
       onChangeText: (v: string) => onChange(e, v as unknown as number),
       ...match(e)
         .with('dd', (r) => ({
-          value: value?.day,
+          value: value?.day?.toString(),
           placeholder: placeholder.day ?? r,
           label: value?.day?.toLocaleString(locale, {
             minimumIntegerDigits: 2,
           }),
         }))
         .with('mm', (r) => ({
-          value: value?.month,
+          value: value?.month?.toString(),
           placeholder: placeholder.month ?? r,
           label: value?.month?.toLocaleString(locale, {
             minimumIntegerDigits: 2,
@@ -125,7 +125,17 @@ export const useDateInput = ({
     }));
   }, [value, order, add, onChange, placeholder, locale]);
 
+  const containerProps = useMemo(() => {
+    return {
+      onPress: () => {
+        inputRef.current[0]?.ref.focus();
+      },
+    };
+  }, []);
+
   return {
+    containerProps,
+    value,
     onChange,
     inputs,
     separator,

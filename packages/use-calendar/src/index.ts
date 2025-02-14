@@ -175,15 +175,15 @@ export function useCalendar(options?: Partial<IUseCalendarOptions>): {
 
         if (latestDate.year < year) {
           newDate.setFullYear(latestDate.year);
+          if (latestDate.month < newDate.getMonth()) {
+            newDate.setMonth(latestDate.month);
+          } else if (firstDate.month >= newDate.getMonth()) {
+            newDate.setMonth(firstDate.month);
+          }
         } else {
           newDate.setFullYear(year);
         }
 
-        if (latestDate.month < newDate.getMonth()) {
-          newDate.setMonth(latestDate.month);
-        } else if (firstDate.month >= newDate.getMonth()) {
-          newDate.setMonth(firstDate.month);
-        }
         setVisibleMonth(newDate);
       }
     },

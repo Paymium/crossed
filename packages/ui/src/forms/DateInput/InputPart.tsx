@@ -21,15 +21,33 @@ export interface InputPartProps
 }
 
 export const InputPart = forwardRef<TextInput, InputPartProps>(
-  ({ value, onChangeText, placeholder, label }, ref) => {
+  (
+    {
+      value,
+      onChangeText,
+      placeholder,
+      label,
+      onBlur: onBlurProps,
+      onFocus: onFocusProps,
+    },
+    ref
+  ) => {
     const [isFocus, setIsFocus] = useState(false);
     const inputRef = useRef<TextInput>();
-    const onBlur = useCallback(() => {
-      setIsFocus(false);
-    }, [setIsFocus]);
-    const onFocus = useCallback(() => {
-      setIsFocus(true);
-    }, [setIsFocus]);
+    const onBlur = useCallback(
+      (e) => {
+        setIsFocus(false);
+        onBlurProps?.(e);
+      },
+      [setIsFocus, onBlurProps]
+    );
+    const onFocus = useCallback(
+      (e) => {
+        setIsFocus(true);
+        onFocusProps?.(e);
+      },
+      [setIsFocus, onFocusProps]
+    );
 
     const handlePress = useCallback(() => {
       inputRef?.current?.focus?.();
