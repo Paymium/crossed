@@ -32,6 +32,7 @@ import { autoUpdate, offset, Placement, useFloating } from '@floating-ui/react';
 import { flip } from '@floating-ui/dom';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useMedia } from '../useMedia';
+import { Box } from '../layout';
 
 const useFloatinCompat = isWeb
   ? (placement?: Placement) =>
@@ -130,14 +131,20 @@ const ContentWeb = memo<ContentWebProps & RefAttributes<View>>(
         <Floating.Content
           entering={FadeIn}
           exiting={FadeOut}
-          ref={composeRefs(ref, refs.setFloating as any)}
-          style={composeStyles(
-            tooltipStyles,
-            stylesDyn.dyn(floatingStyles),
-            style
-          )}
+          style={inlineStyle(() => ({
+            base: { position: 'absolute' },
+          }))}
         >
-          {children}
+          <Box
+            ref={composeRefs(ref, refs.setFloating as any)}
+            style={composeStyles(
+              tooltipStyles,
+              stylesDyn.dyn(floatingStyles),
+              style
+            )}
+          >
+            {children}
+          </Box>
         </Floating.Content>
       </Floating.Portal>
     );
