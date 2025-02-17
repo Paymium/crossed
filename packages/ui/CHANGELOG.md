@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.4.8
+
+### Patch Changes
+
+- c1ee475: fix tooltip
+
 ## 6.4.7
 
 ### Patch Changes
