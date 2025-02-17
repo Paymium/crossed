@@ -33,7 +33,7 @@ export const Calendar = memo<CalendarProps>(
         month: 'long',
       });
       const yearSelected = (props.selectedDate || new Date()).getFullYear();
-      const toto = Array.from(monthsByYear.get(yearSelected)).map((month) => {
+      return Array.from(monthsByYear.get(yearSelected)).map((month) => {
         const d = new Date(yearSelected, month);
         const nameMonth = formatter.format(d);
         return {
@@ -41,7 +41,6 @@ export const Calendar = memo<CalendarProps>(
           value: month.toString(),
         };
       });
-      return toto;
     }, [monthsByYear]);
 
     return (
@@ -66,11 +65,7 @@ export const Calendar = memo<CalendarProps>(
                 locale={locale}
               />
               {weeks.map((week, i) => (
-                <XBox
-                  key={`${id}-week-${i}`}
-                  space={'xxs'}
-                  justifyContent="between"
-                >
+                <XBox key={`${id}-week-${i}`} justifyContent="between">
                   {week.map((day, j) => {
                     const { onClick, ...props } = getDayProps({ day });
 

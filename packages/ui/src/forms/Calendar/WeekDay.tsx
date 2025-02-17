@@ -32,6 +32,7 @@ export const WeekDay = memo(
             color={'secondary'}
             size={'lg'}
             textAlign={'center'}
+            numberOfLines={1}
             style={composeStyles(
               widthCell,
               inlineStyle(() => ({ base: { fontWeight: '500' } }))

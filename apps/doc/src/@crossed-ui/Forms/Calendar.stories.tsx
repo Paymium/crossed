@@ -9,6 +9,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { Calendar } from '@crossed/ui/src/forms/Calendar';
+import { Card } from '@crossed/ui/src/display/Card';
 
 const date = new Date();
 const first = new Date(date);
@@ -32,6 +33,13 @@ const meta: Meta<typeof Calendar> = {
     onDateSelected: fn(),
     // selectedDate: date,
     locale: 'default',
+  },
+  render(e) {
+    return (
+      <Card>
+        <Calendar {...e} />
+      </Card>
+    );
   },
 };
 

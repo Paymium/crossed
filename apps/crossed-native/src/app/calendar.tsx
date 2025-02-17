@@ -8,6 +8,7 @@
 import { YBox, Calendar } from '@crossed/ui';
 import { createStyles } from '@crossed/styled';
 import { FlatList } from 'react-native';
+import { Card } from '@crossed/ui';
 
 const styles = createStyles(() => ({
   scrollview: { base: { paddingHorizontal: 10, paddingVertical: 10 } },
@@ -21,7 +22,11 @@ const styles = createStyles(() => ({
 }));
 
 const Example = () => {
-  return <Calendar />;
+  return (
+    <Card>
+      <Calendar />
+    </Card>
+  );
 };
 
 export default function CalendarScreen() {

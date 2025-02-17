@@ -7,7 +7,12 @@
 
 import { memo, useCallback } from 'react';
 import { Pressable, PressableProps } from 'react-native';
-import { composeStyles, createStyles, CrossedMethods } from '@crossed/styled';
+import {
+  composeStyles,
+  createStyles,
+  CrossedMethods,
+  isWeb,
+} from '@crossed/styled';
 import { Text } from '../../typography/Text';
 import { IDay } from '@crossed/use-calendar/src';
 import { widthCell } from './styles';
@@ -35,6 +40,7 @@ const button = createStyles(({ colors }) => ({
 }));
 const text = createStyles(({ colors, components: { Action } }) => ({
   default: { base: { fontWeight: '500' } },
+  noMarginTop: { base: { marginTop: 0 } },
   selected: { base: { color: Action.primary.default.text } },
   today: { base: { color: colors.text.brand } },
 }));
@@ -85,7 +91,8 @@ export const DayButton = memo(
           style={composeStyles(
             text.default,
             day.isToday && text.today,
-            day.isSelected && text.selected
+            day.isSelected && text.selected,
+            !isWeb && text.noMarginTop
           )}
         >
           {day.date.getDate()}

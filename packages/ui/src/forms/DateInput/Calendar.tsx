@@ -133,7 +133,19 @@ export const Calendar = forwardRef<FloatingRef, CalendarProps>(
             exiting={FadeOut.duration(duration)}
             entering={FadeIn.duration(duration)}
             ref={setFloating as any}
-            style={composeStyles(styles.dynamic(floatingStyles))}
+            style={composeStyles(
+              inlineStyle(({ colors, space, boxShadow }) => ({
+                base: {
+                  backgroundColor: colors.background.secondary,
+                  borderWidth: 1,
+                  borderColor: colors.border.secondary,
+                  padding: space.md,
+                  borderRadius: 16,
+                  boxShadow,
+                },
+              })),
+              styles.dynamic(floatingStyles)
+            )}
           >
             {renderCalendar}
           </Floating.Content>

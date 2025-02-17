@@ -19,6 +19,7 @@ import {
   buildGetPrevNextYearProps,
 } from './props';
 import { IUseCalendarOptions } from './types';
+import { isInRange } from './date-fns';
 export * from './types';
 
 export function useCalendar(options?: Partial<IUseCalendarOptions>) {
@@ -74,25 +75,43 @@ export function useCalendar(options?: Partial<IUseCalendarOptions>) {
   }, [start, end]);
 
   const months = useMemo(() => {
-    const visibleMonthTime = visibleMonth.getTime();
+    const visibleMonthTime = new Date(
+      visibleMonth.getFullYear(),
+      visibleMonth.getMonth()
+    ).getTime();
     const result = [];
-    for (const { month, year } of monthsInRange) {
-      const date = new Date(year, month);
-      if (date.getTime() >= visibleMonthTime) {
-        result.push(
-          getCalendarMonth({
-            month,
-            year,
-            availableDates,
-            events,
-            firstDayOfWeek,
-            maxDate,
-            minDate,
-            selected,
-          })
-        );
-        if (result.length >= monthsToDisplay) break;
+    if (isInRange({ date: visibleMonth, maxDate, minDate })) {
+      for (const { month, year } of monthsInRange) {
+        const date = new Date(year, month, 1);
+        if (date.getTime() >= visibleMonthTime) {
+          result.push(
+            getCalendarMonth({
+              month,
+              year,
+              availableDates,
+              events,
+              firstDayOfWeek,
+              maxDate,
+              minDate,
+              selected,
+            })
+          );
+          if (result.length >= monthsToDisplay) break;
+        }
       }
+    } else if (visibleMonth.getTime() > maxDate.getTime()) {
+      const max = monthsInRange[monthsInRange.length - 1];
+      result.push(
+        getCalendarMonth({
+          ...max,
+          availableDates,
+          events,
+          firstDayOfWeek,
+          maxDate,
+          minDate,
+          selected,
+        })
+      );
     }
     return result;
   }, [
