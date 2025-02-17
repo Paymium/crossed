@@ -12,12 +12,12 @@ import { Text } from '../../typography/Text';
 import { IDay } from '@crossed/use-calendar/src';
 import { widthCell } from './styles';
 
-const button = createStyles(({ colors, components: { Action } }) => ({
+const button = createStyles(({ colors }) => ({
   default: {
     base: {
       backgroundColor: colors.background.primary,
       borderRadius: 8,
-      height: 44,
+      height: 40,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -27,8 +27,9 @@ const button = createStyles(({ colors, components: { Action } }) => ({
     ':active': {
       backgroundColor: colors.background.active,
     },
+    media: { md: { height: 44 } },
   },
-  selected: { base: { backgroundColor: Action.primary.default.background } },
+  selected: { base: { backgroundColor: colors.text.brand } },
   disabled: { base: { opacity: 0.1 } },
   today: { base: { borderWidth: 2, borderColor: colors.text.brand } },
 }));

@@ -6,7 +6,7 @@
  */
 
 import { InputPart } from './InputPart';
-import { memo, useId, useRef } from 'react';
+import { memo, useCallback, useId, useRef } from 'react';
 import { DateInputProps, Value } from './types';
 import { XBox } from '../../layout/XBox';
 import { Text } from '../../typography/Text';
@@ -16,6 +16,7 @@ import { useDateInput } from './useDateInput';
 import { useFloating } from '../Select/useFloating';
 import { Calendar } from './Calendar';
 import { FloatingRef } from '../../overlay';
+import { growStyles } from '../../styles';
 
 const convertToDate = (e?: Partial<Value>) => {
   const args = [e?.year, e?.month - 1, e?.day].filter(
@@ -34,6 +35,12 @@ export const DateInput = memo(
     locale = 'en',
     picker,
     placeholder = {},
+    minDate,
+    maxDate,
+    availableDates,
+    firstDayOfWeek,
+    events,
+    monthsToDisplay,
   }: DateInputProps) => {
     const { refs, floatingStyles } = useFloating();
     const calendarRef = useRef<FloatingRef>(null);
@@ -53,35 +60,45 @@ export const DateInput = memo(
         },
       });
 
+    const handleFocusInput = useCallback(() => {
+      calendarRef.current?.open();
+    }, []);
+
     return (
       <XBox
         pressable
         {...containerProps}
         ref={refs.setReference as any}
-        justifyContent={'start'}
-        alignItems={'center'}
-        style={form.input}
-        space={'xxs'}
+        style={composeStyles(
+          form.input,
+          inlineStyle(() => ({
+            base: {
+              justifyContent: 'flex-start',
+              paddingVertical: 0,
+            },
+          }))
+        )}
       >
-        {inputs.map(({ key, ...item }, i, a) => [
-          <InputPart
-            key={`${id}-${key}`}
-            {...item}
-            onFocus={calendarRef.current?.open}
-          />,
-          i + 1 !== a.length ? (
-            <Text
-              key={`${id}-${key}-separator`}
-              style={composeStyles(
-                form.placeholder,
-                inlineStyle(() => ({ base: { marginTop: 1 } }))
-              )}
-            >
-              {separator}
-            </Text>
-          ) : null,
-        ])}
-
+        <XBox style={growStyles.on} alignItems="center">
+          {inputs.map(({ key, ...item }, i, a) => [
+            <InputPart
+              key={`${id}-${key}`}
+              {...item}
+              onFocus={handleFocusInput}
+            />,
+            i + 1 !== a.length ? (
+              <Text
+                key={`${id}-${key}-separator`}
+                style={composeStyles(
+                  form.placeholder,
+                  inlineStyle(() => ({ base: { marginTop: 1 } }))
+                )}
+              >
+                {separator}
+              </Text>
+            ) : null,
+          ])}
+        </XBox>
         {picker && format === 'yyyy-mm-dd' && (
           <Calendar
             ref={calendarRef}
@@ -92,6 +109,12 @@ export const DateInput = memo(
             floatingStyles={floatingStyles}
             setFloating={refs.setFloating}
             locale={locale}
+            minDate={minDate}
+            maxDate={maxDate}
+            availableDates={availableDates}
+            firstDayOfWeek={firstDayOfWeek}
+            events={events}
+            monthsToDisplay={monthsToDisplay}
           />
         )}
       </XBox>

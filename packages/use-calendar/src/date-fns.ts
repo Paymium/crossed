@@ -119,22 +119,27 @@ export function getLastDayOfMonth(date: Date = new Date(Date.now())) {
 
 export function getMonthsInRange(args: IGetMonthsInRangeArgs) {
   const { end = new Date(Date.now()), start = new Date(Date.now()) } = args;
-  const months = [];
+  const months = new Map<Date, { year: number; month: number }>();
+  const monthsByYear = new Map<number, Set<number>>();
 
   // include last date in range
   const dayAfterEnd = getDateFrom({ date: end, days: 1 });
   let date = new Date(start);
   while (!isSameDay(date, dayAfterEnd)) {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const index = months.findIndex((m) => m.year === year && m.month === month);
-    if (index === -1) {
-      months.push({ month, year });
+    if (!months.has(date)) {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      months.set(date, { month, year });
+      const t = monthsByYear.get(year) || new Set();
+      monthsByYear.set(year, t.add(month));
     }
     date = getDateFrom({ date, days: 1 });
   }
 
-  return months;
+  return {
+    monthsInRange: Array.from(months).map(([, value]) => value),
+    monthsByYear,
+  };
 }
 
 export function isFirstDayOfMonth(date: Date) {

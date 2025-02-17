@@ -91,7 +91,7 @@ export const useDateInput = ({
       if (date)
         setValue({
           day: date.getDate(),
-          month: date.getMonth(),
+          month: date.getMonth() + 1,
           year: date.getFullYear(),
         });
     },

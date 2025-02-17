@@ -8,6 +8,7 @@
 import { ReferenceType, useFloating } from '@floating-ui/react';
 import { ReactFocusOnProps } from 'react-focus-on/dist/es5/types';
 import { ComponentType } from 'react';
+import { CalendarProps } from './Calendar';
 
 export type FormatYear = 'yyyy';
 export type FormatMonth = 'mm';
@@ -33,11 +34,13 @@ export type Format =
 export type UseFloating<T extends ReferenceType = ReferenceType> =
   typeof useFloating<T>;
 
-export interface DateInputProps {
+export interface DateInputProps
+  extends Partial<
+    Omit<CalendarProps, 'floatingStyles' | 'setFloating' | 'onDateSelected'>
+  > {
   value?: Date;
   onChange?: (_param: Date) => void;
   format?: Format;
-  locale?: string;
   picker?: boolean;
   placeholder?: { day?: string; month?: string; year?: string };
 }

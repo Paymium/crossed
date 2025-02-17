@@ -22,6 +22,8 @@ import SheetScreen from './src/app/sheet';
 import TooltipScreen from './src/app/tooltip';
 import { CrossedUIProvider } from '@crossed/ui';
 import ModalScreen from './src/app/modal.tsx';
+import CalendarScreen from './src/app/calendar.tsx';
+import DateInputScreen from './src/app/dateInput.tsx';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -44,6 +46,8 @@ function App(): React.JSX.Element {
             <Stack.Screen name="/select" component={SelectScreen} />
             <Stack.Screen name="/tooltip" component={TooltipScreen} />
             <Stack.Screen name="/modal" component={ModalScreen} />
+            <Stack.Screen name="/calendar" component={CalendarScreen} />
+            <Stack.Screen name="/dateInput" component={DateInputScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

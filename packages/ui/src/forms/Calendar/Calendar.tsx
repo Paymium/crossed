@@ -5,9 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { inlineStyle } from '@crossed/styled';
 import { XBox, YBox } from '../../layout';
-import { memo, useId } from 'react';
+import { memo, useId, useMemo } from 'react';
 import { useCalendar } from '@crossed/use-calendar';
 import { IUseCalendarOptions } from '@crossed/use-calendar';
 import { DayButton } from './DayButton';
@@ -17,60 +16,55 @@ import { IDay } from '@crossed/use-calendar/src';
 import { SelectYear } from './SelectYear';
 import { SelectMonth } from './SelectMonth';
 
-const style = inlineStyle(({ colors, space }) => ({
-  base: {
-    backgroundColor: colors.background.secondary,
-    borderWidth: 1,
-    borderColor: colors.border.primary,
-    padding: space.lg,
-    borderRadius: 16,
-  },
-}));
-
-export interface CalendarProps extends Partial<IUseCalendarOptions> {
+export type CalendarProps = Partial<
+  Omit<IUseCalendarOptions, 'selectedDate'>
+> & {
   locale?: string;
-}
+  selectedDate?: Date;
+};
 export const Calendar = memo<CalendarProps>(
-  ({ locale = 'default', ...props }) => {
-    const { months, getDayProps, setMonth, setYear, monthsInRange } =
-      useCalendar({
-        ...props,
-      });
+  ({ locale = 'default', ...props }: CalendarProps) => {
+    const { months, getDayProps, setMonth, setYear, monthsByYear } =
+      useCalendar(props);
     const id = useId();
 
+    const itemsMonth = useMemo(() => {
+      const formatter = new Intl.DateTimeFormat(locale, {
+        month: 'long',
+      });
+      const yearSelected = (props.selectedDate || new Date()).getFullYear();
+      const toto = Array.from(monthsByYear.get(yearSelected)).map((month) => {
+        const d = new Date(yearSelected, month);
+        const nameMonth = formatter.format(d);
+        return {
+          label: capFirstLetter(nameMonth),
+          value: month.toString(),
+        };
+      });
+      return toto;
+    }, [monthsByYear]);
+
     return (
-      <YBox style={style}>
+      <YBox>
         {months.map(({ year, month, weeks }) => (
-          <YBox key={`${id}-month-${month}`} space={'md'}>
+          <YBox key={`${id}-month-${month}`} space={'xxs'}>
             <XBox alignItems={'stretch'} space={'md'}>
               <SelectMonth
                 month={month}
                 onChange={setMonth}
-                months={monthsInRange.reduce((acc, m) => {
-                  if (m.year === year) {
-                    const d = new Date(m.year, m.month);
-                    const nameMonth = d.toLocaleString(locale, {
-                      month: 'long',
-                    });
-                    acc.push({
-                      label: capFirstLetter(nameMonth),
-                      value: m.month,
-                    });
-                  }
-                  return acc;
-                }, [])}
+                months={itemsMonth}
               />
               <SelectYear
                 year={year}
                 onChange={setYear}
-                years={monthsInRange.reduce((acc, m) => {
-                  if (!acc.includes(m.year)) acc.push(m.year);
-                  return acc;
-                }, [])}
+                years={Array.from(monthsByYear).map(([year]) => year)}
               />
             </XBox>
             <YBox space={'xxs'}>
-              <WeekDay days={weeks[0] as IDay[]} locale={locale} />
+              <WeekDay
+                days={(weeks[0].length > 0 ? weeks[0] : weeks[1]) as IDay[]}
+                locale={locale}
+              />
               {weeks.map((week, i) => (
                 <XBox
                   key={`${id}-week-${i}`}
@@ -84,7 +78,7 @@ export const Calendar = memo<CalendarProps>(
                       <DayButton
                         key={`${id}-day-${j}`}
                         day={day}
-                        {...props}
+                        {...(props as any)}
                         onPress={onClick}
                       />
                     );

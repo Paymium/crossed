@@ -5,8 +5,14 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { composeStyles, createStyles, useTheme } from '@crossed/styled';
-import { Floating, FloatingRef } from '../../overlay';
+import {
+  composeStyles,
+  createStyles,
+  inlineStyle,
+  isWeb,
+  useTheme,
+} from '@crossed/styled';
+import { Floating, FloatingRef, Sheet } from '../../overlay';
 import { ChevronDown } from '@crossed/unicons';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
 import {
@@ -14,6 +20,7 @@ import {
   forwardRef,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useRef,
 } from 'react';
 import {
@@ -21,17 +28,19 @@ import {
   type CalendarProps as CalendarComponentProps,
 } from '../Calendar';
 import { IDay } from '@crossed/use-calendar';
-import { composeRefs } from '@crossed/core';
+import { Box } from '../../layout';
+import { useMedia } from '../../useMedia';
+import { ActionSheetRef } from '@crossed/sheet/src';
 
 const duration = 100;
 
 const styles = createStyles(() => ({ dynamic: (e) => e }));
 
-export interface CalendarProps extends CalendarComponentProps {
+export type CalendarProps = CalendarComponentProps & {
   floatingStyles: CSSProperties;
   setFloating: (_node: HTMLElement | null) => void;
   locale: string;
-}
+};
 export const Calendar = forwardRef<FloatingRef, CalendarProps>(
   (
     {
@@ -50,8 +59,24 @@ export const Calendar = forwardRef<FloatingRef, CalendarProps>(
     ref
   ) => {
     const { colors } = useTheme();
+    const { md } = useMedia();
     const open = useRef(false);
+    useImperativeHandle(
+      ref,
+      () => ({
+        open: () => {
+          floatingRef.current?.open();
+          sheetRef.current?.show();
+        },
+        close: () => {
+          floatingRef.current?.open();
+          sheetRef.current?.hide();
+        },
+      }),
+      []
+    );
     const floatingRef = useRef<FloatingRef | null>(null);
+    const sheetRef = useRef<ActionSheetRef | null>(null);
 
     const toggleOpen = useCallback((e) => {
       open.current = e;
@@ -75,7 +100,7 @@ export const Calendar = forwardRef<FloatingRef, CalendarProps>(
     }, []);
 
     useEffect(() => {
-      if (open.current) {
+      if (isWeb && open.current) {
         document.addEventListener('click', handleClose);
         document.addEventListener('keyup', handleClose);
         return () => {
@@ -86,47 +111,53 @@ export const Calendar = forwardRef<FloatingRef, CalendarProps>(
       return () => {};
     }, [open.current]);
 
-    return (
-      <Floating ref={composeRefs(floatingRef, ref)} onChange={toggleOpen}>
+    const renderCalendar = (
+      <CalendarComponent
+        locale={locale}
+        firstDayOfWeek={firstDayOfWeek}
+        availableDates={availableDates}
+        events={events}
+        maxDate={maxDate}
+        minDate={minDate}
+        monthsToDisplay={monthsToDisplay}
+        selectedDate={selectedDate}
+        onDateSelected={handleDateSelected}
+      />
+    );
+
+    return isWeb || md ? (
+      <Floating ref={floatingRef} onChange={toggleOpen}>
         <ChevronDown color={colors.text.secondary} />
         <Floating.Portal>
-          {/*<Focus*/}
-          {/*  {...composeStyles(*/}
-          {/*    open.current && positionStyles.absoluteFill,*/}
-          {/*    open.current &&*/}
-          {/*      inlineStyle(() => ({ base: { display: 'flex' } })),*/}
-          {/*    open.current && justifyContentStyle.center,*/}
-          {/*    open.current && alignItemsStyle.center*/}
-          {/*  ).className()}*/}
-          {/*  enabled={open.current}*/}
-          {/*  onEscapeKey={floatingRef.current?.close}*/}
-          {/*  onClickOutside={floatingRef.current?.close}*/}
-          {/*  scrollLock={false}*/}
-          {/*  focusLock={false}*/}
-          {/*  autoFocus={false}*/}
-          {/*  noIsolation*/}
-          {/*>*/}
           <Floating.Content
             exiting={FadeOut.duration(duration)}
             entering={FadeIn.duration(duration)}
             ref={setFloating as any}
             style={composeStyles(styles.dynamic(floatingStyles))}
           >
-            <CalendarComponent
-              locale={locale}
-              firstDayOfWeek={firstDayOfWeek}
-              availableDates={availableDates}
-              events={events}
-              maxDate={maxDate}
-              minDate={minDate}
-              monthsToDisplay={monthsToDisplay}
-              selectedDate={selectedDate}
-              onDateSelected={handleDateSelected}
-            />
+            {renderCalendar}
           </Floating.Content>
-          {/*</Focus>*/}
         </Floating.Portal>
       </Floating>
+    ) : (
+      <Sheet ref={sheetRef} onOpenChange={toggleOpen}>
+        <Sheet.Content
+          // enable autoHeight snap
+          containerStyle={inlineStyle(() => ({ base: { height: undefined } }))}
+        >
+          <Box
+            style={inlineStyle(({ space }) => ({
+              base: {
+                height: undefined,
+                paddingHorizontal: space.xs,
+                paddingVertical: space.md,
+              },
+            }))}
+          >
+            {renderCalendar}
+          </Box>
+        </Sheet.Content>
+      </Sheet>
     );
   }
 );

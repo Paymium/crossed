@@ -12,6 +12,7 @@ import { visibility } from '../../styles';
 import { Text } from '../../typography';
 import { Input } from '../Input';
 import { composeRefs } from '@crossed/core';
+import { YBox } from '../../layout';
 
 export interface InputPartProps
   extends Omit<TextInputProps, 'style' | 'value'> {
@@ -54,10 +55,17 @@ export const InputPart = forwardRef<TextInput, InputPartProps>(
     }, []);
 
     return (
-      <>
+      <YBox>
         <Text
           onPress={handlePress}
           style={composeStyles(
+            inlineStyle(({ space }) => ({
+              base: {
+                paddingVertical: space.xs,
+                paddingHorizontal: space.xs,
+                borderRadius: 8,
+              },
+            })),
             isFocus &&
               inlineStyle(({ colors }) => ({
                 base: { backgroundColor: colors.background.primary },
@@ -72,11 +80,13 @@ export const InputPart = forwardRef<TextInput, InputPartProps>(
           value={value}
           placeholder={placeholder}
           ref={composeRefs(ref, inputRef)}
+          showSoftInputOnFocus={false}
           onChangeText={onChangeText}
           onBlur={onBlur}
           onFocus={onFocus}
+          keyboardType="numeric"
         />
-      </>
+      </YBox>
     );
   }
 );
