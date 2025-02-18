@@ -30,10 +30,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v1
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           # 👇 Specify build output path
           path: ./apps/doc/storybook-static
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
