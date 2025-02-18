@@ -5,17 +5,12 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import { dtz } from './date-fns';
 
-import {
-  type IDay,
-  type IEvent,
-  type IGetDayPropsReturns,
-  useCalendar,
-} from './index';
+import { useCalendar } from './index';
 
 describe('use-calendar', () => {
   const dateNowSpy = vi
@@ -27,7 +22,6 @@ describe('use-calendar', () => {
   });
 
   describe('default', () => {
-
     it('pads last days of last month', () => {
       const { result } = renderHook(() =>
         useCalendar({
@@ -119,7 +113,6 @@ describe('use-calendar', () => {
   });
 
   describe('firstDayOfWeek', () => {
-
     it('pads last days of last month', () => {
       const { result } = renderHook(() =>
         useCalendar({
@@ -298,5 +291,4 @@ describe('use-calendar', () => {
       expect(actual.disabled).toBe(true);
     });
   });
-
 });
