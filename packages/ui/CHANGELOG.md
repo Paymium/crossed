@@ -1,5 +1,12 @@
 # @crossed/ui
 
+## 6.5.0
+
+### Minor Changes
+
+- 7425d31: add calendar
+- 7425d31: add date picker
+
 ## 6.4.8
 
 ### Patch Changes
