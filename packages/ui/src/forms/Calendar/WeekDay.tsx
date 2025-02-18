@@ -24,6 +24,7 @@ export const WeekDay = memo(
     style?: CrossedMethods<any>;
   }) => {
     const id = useId();
+    const formatter = new Intl.DateTimeFormat(locale, { weekday: 'short' });
     return (
       <XBox space={'xxs'} justifyContent="between" style={style}>
         {days.map((day) => (
@@ -38,11 +39,7 @@ export const WeekDay = memo(
               inlineStyle(() => ({ base: { fontWeight: '500' } }))
             )}
           >
-            {capFirstLetter(
-              (day.date as Date).toLocaleString(locale, {
-                weekday: 'short',
-              })
-            )}
+            {capFirstLetter(formatter.format(day.date as Date))}
           </Text>
         ))}
       </XBox>
