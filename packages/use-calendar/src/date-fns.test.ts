@@ -140,11 +140,14 @@ describe('date-fns', () => {
         start: df.dtz('2022-06-14'),
       });
 
-      const expected = [
-        { month: 5, year: 2022 },
-        { month: 6, year: 2022 },
-        { month: 7, year: 2022 },
-      ];
+      const expected = {
+        monthsInRange: [
+          { month: 5, year: 2022 },
+          { month: 6, year: 2022 },
+          { month: 7, year: 2022 },
+        ],
+        monthsByYear: new Map([[2022, new Set([5, 6, 7])]]),
+      };
       expect(actual).toStrictEqual(expected);
     });
 
@@ -154,11 +157,14 @@ describe('date-fns', () => {
         start: df.dtz('2022-06-14'),
       });
 
-      const expected = [
-        { month: 5, year: 2022 },
-        { month: 6, year: 2022 },
-        { month: 7, year: 2022 },
-      ];
+      const expected = {
+        monthsInRange: [
+          { month: 5, year: 2022 },
+          { month: 6, year: 2022 },
+          { month: 7, year: 2022 },
+        ],
+        monthsByYear: new Map([[2022, new Set([5, 6, 7])]]),
+      };
       expect(actual).toStrictEqual(expected);
     });
 
@@ -168,10 +174,13 @@ describe('date-fns', () => {
         start: df.dtz('2022-06-30'),
       });
 
-      const expected = [
-        { month: 5, year: 2022 },
-        { month: 6, year: 2022 },
-      ];
+      const expected = {
+        monthsInRange: [
+          { month: 5, year: 2022 },
+          { month: 6, year: 2022 },
+        ],
+        monthsByYear: new Map([[2022, new Set([5, 6])]]),
+      };
       expect(actual).toStrictEqual(expected);
     });
 
@@ -180,10 +189,13 @@ describe('date-fns', () => {
         end: df.dtz('2022-08-10'),
       });
 
-      const expected = [
-        { month: 6, year: 2022 },
-        { month: 7, year: 2022 },
-      ];
+      const expected = {
+        monthsInRange: [
+          { month: 6, year: 2022 },
+          { month: 7, year: 2022 },
+        ],
+        monthsByYear: new Map([[2022, new Set([6, 7])]]),
+      };
       expect(actual).toStrictEqual(expected);
     });
   });

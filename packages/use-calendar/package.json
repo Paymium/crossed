@@ -39,7 +39,7 @@
     "clean": "rm -rf lib",
     "watch": "crossed-build --watch",
     "build": "crossed-build",
-    "test": "vitest run",
+    "test": "vitest run ./src",
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {

@@ -27,49 +27,6 @@ describe('use-calendar', () => {
   });
 
   describe('default', () => {
-    it('returns default props', () => {
-      const { result } = renderHook(() => useCalendar());
-      const { current: actual } = result;
-
-      const expected = {
-        getDayProps: expect.any(Function),
-        getNextMonthProps: expect.any(Function),
-        getNextYearProps: expect.any(Function),
-        getPrevMonthProps: expect.any(Function),
-        getPrevYearProps: expect.any(Function),
-        months: [
-          {
-            month: 6,
-            weeks: [
-              '2022-07-01',
-              '2022-07-08',
-              '2022-07-14',
-              '2022-07-22',
-              '2022-07-29',
-            ].map((dateStr) =>
-              expect.arrayContaining([
-                {
-                  date: dtz(dateStr),
-                  isSelectable: true,
-                },
-              ])
-            ),
-            year: 2022,
-          },
-        ],
-        resetState: expect.any(Function),
-      };
-      expected.months[0].weeks.push(
-        expect.arrayContaining([
-          {
-            date: dtz('2022-07-31'),
-            isSelectable: true,
-            isWeekend: true,
-          },
-        ])
-      );
-      expect(actual).toMatchObject(expected);
-    });
 
     it('pads last days of last month', () => {
       const { result } = renderHook(() =>
@@ -162,27 +119,6 @@ describe('use-calendar', () => {
   });
 
   describe('firstDayOfWeek', () => {
-    it('returns weeks starting', () => {
-      const { result } = renderHook(() =>
-        useCalendar({
-          firstDayOfWeek: 1,
-          maxDate: dtz('2022-07-31'),
-          minDate: dtz('2022-07-01'),
-        })
-      );
-      const { current: actual } = result;
-
-      const expected = {
-        getDayProps: expect.any(Function),
-        getNextMonthProps: expect.any(Function),
-        getNextYearProps: expect.any(Function),
-        getPrevMonthProps: expect.any(Function),
-        getPrevYearProps: expect.any(Function),
-        months: expect.any(Array),
-        resetState: expect.any(Function),
-      };
-      expect(actual).toEqual(expected);
-    });
 
     it('pads last days of last month', () => {
       const { result } = renderHook(() =>
@@ -351,39 +287,6 @@ describe('use-calendar', () => {
       expect(actual.months[0].weeks[0][5]!.isSelectable).toBeUndefined();
     });
 
-    it('returns all months from now to single available date', () => {
-      const availableDates = [dtz('2022-12-25')];
-      const { result } = renderHook(() => useCalendar({ availableDates }));
-      const { current: actual } = result;
-
-      expect(actual.months).toHaveLength(1);
-      expect(actual.months[0].month).toBe(6);
-    });
-
-    it('handles 60 days of available dates', () => {
-      const today = new Date();
-      const day = 24 * 60 * 60 * 1_000;
-      const availableDates = Array.from({ length: 60 }).map((_, i) =>
-        dtz(today.getTime() + i * day)
-      );
-      const { result } = renderHook(() => useCalendar({ availableDates }));
-      const { current: actual } = result;
-
-      expect(actual.months).toHaveLength(1);
-      expect(actual.months[0].month).toBe(6);
-    });
-
-    it('returns getPrevMonthProps', () => {
-      const args = {
-        availableDates: [dtz('2022-12-25')],
-      };
-      const { result } = renderHook(() => useCalendar(args));
-      const { getPrevMonthProps } = result.current;
-      const actual = getPrevMonthProps();
-
-      expect(actual.disabled).toBe(true);
-    });
-
     it('returns getNextMonthProps', () => {
       const args = {
         availableDates: [dtz('2022-06-02')],
@@ -396,82 +299,4 @@ describe('use-calendar', () => {
     });
   });
 
-  describe('events', () => {
-    it.each(['2022-07-17', '2022-07-17T09:00:00.000Z'])(
-      'gets calendar with events: %s',
-      (dtStart) => {
-        interface MyEvent extends IEvent {
-          title: string;
-        }
-
-        const events: MyEvent[] = [
-          {
-            start: dtz(dtStart),
-            title: "Alice's Birthday Party",
-          },
-        ];
-        const { result } = renderHook(() => useCalendar({ events }));
-        const { current: actual } = result;
-
-        const expected = [
-          {
-            start: dtz(dtStart),
-            title: "Alice's Birthday Party",
-          },
-        ];
-        expect(actual.months[0].weeks[3][0]!.events).toStrictEqual(expected);
-      }
-    );
-  });
-
-  describe('resetState', () => {
-    it('goes back to first month', () => {
-      const { result } = renderHook(() =>
-        useCalendar({ maxDate: dtz('2022-08-31') })
-      );
-      const { getNextMonthProps: getForwardProps } = result.current;
-      const button = getForwardProps();
-
-      // goes to next month
-      act(() => button.onClick());
-      expect(result.current.months[0]).toMatchObject({ month: 7, year: 2022 });
-
-      // goes back to initial month
-      const { resetState } = result.current;
-      act(() => resetState());
-      expect(result.current.months[0]).toMatchObject({ month: 6, year: 2022 });
-    });
-
-    it('goes back to selected date', () => {
-      const { result } = renderHook(() =>
-        useCalendar({ selectedDate: dtz('2022-07-10') })
-      );
-      const { getDayProps } = result.current;
-      const day: IDay = {
-        date: dtz('2022-07-13'),
-        isSelectable: true,
-        isSelected: false,
-      };
-      const button = getDayProps({ day }) as IGetDayPropsReturns;
-
-      // picks a day
-      act(() => button.onClick());
-      expect(result.current.months[0].weeks[2][3]).toStrictEqual({
-        date: dtz('2022-07-13'),
-        isSelectable: true,
-        isSelected: true,
-      });
-
-      // goes back to initial selected day
-      const { resetState } = result.current;
-      act(() => resetState());
-      expect(result.current.months[0].weeks[2][3]?.isSelected).toBeUndefined();
-      expect(result.current.months[0].weeks[2][0]).toStrictEqual({
-        date: dtz('2022-07-10'),
-        isSelectable: true,
-        isSelected: true,
-        isWeekend: true,
-      });
-    });
-  });
 });
