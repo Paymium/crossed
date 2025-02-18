@@ -177,10 +177,10 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
       paddingBottom: props?.useBottomSafeAreaPadding ? 25 : 0,
     });
     const rootViewLayoutEventValues = useRef<{
-      timer?: number;
+      timer?: any;
       sub?: { unsubscribe: () => void };
       firstEventFired?: boolean;
-      layouTimer?: number;
+      layouTimer?: any;
       resizing?: boolean;
     }>({});
 

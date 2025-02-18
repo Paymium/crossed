@@ -40,6 +40,8 @@ const menus: Menu[] = [
   { to: '/sheet', title: 'Sheet' },
   { to: '/tooltip', title: 'Tooltip' },
   { to: '/modal', title: 'Modal' },
+  { to: '/calendar', title: 'Calendar' },
+  { to: '/dateInput', title: 'DateInput' },
 ] as const;
 
 export default function TabOneScreen({ navigation }: IndexScreenProps) {

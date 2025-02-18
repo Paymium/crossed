@@ -18,4 +18,5 @@ export const positionStyles = createStyles(() => ({
       zIndex: 1,
     },
   },
+  absolute: { base: { position: 'absolute' } },
 }));

@@ -9,7 +9,18 @@ import { createStyles } from '@crossed/styled';
 
 export const visibility = createStyles(() => ({
   hidden: {
-    base: {},
+    base: {
+      height: 0,
+      width: 0,
+      flex: 0,
+      maxWidth: 0,
+      padding: 0,
+      margin: 0,
+      border: 0,
+      overflow: 'hidden',
+      position: 'absolute',
+      top: -1000000000,
+    },
     web: {
       base: {
         position: 'absolute',

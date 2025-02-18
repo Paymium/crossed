@@ -111,9 +111,11 @@
   },
   "dependencies": {
     "@crossed/sheet": "workspace:^",
+    "@crossed/use-calendar": "workspace:0.0.0-development",
     "@floating-ui/dom": "^1.6.12",
     "@floating-ui/react": "^0.27.0",
     "@gorhom/portal": "^1.0.14",
+    "@tuplo/use-calendar": "^1.9.2",
     "fuse.js": "^7.0.0",
     "react-focus-lock": "^2.11.2",
     "react-focus-on": "^3.9.2",

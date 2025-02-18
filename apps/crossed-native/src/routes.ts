@@ -20,6 +20,8 @@ export type RootStackParamList = {
   '/sheet': undefined;
   '/tooltip': undefined;
   '/modal': undefined;
+  '/calendar': undefined;
+  '/dateInput': undefined;
 };
 
 export type AccordionScreenProps = NativeStackScreenProps<
