@@ -1,5 +1,11 @@
 # crossed-doc
 
+## 0.11.10
+
+### Patch Changes
+
+- @crossed/ui@6.5.1
+
 ## 0.11.9
 
 ### Patch Changes

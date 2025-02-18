@@ -1,7 +1,7 @@
 {
   "name": "@crossed/use-calendar",
   "description": "Headless calendar hook for React",
-  "version": "0.0.0-development",
+  "version": "0.0.0",
   "author": "crossed",
   "license": "MIT",
   "keywords": [

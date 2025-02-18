@@ -1,5 +1,12 @@
 # @crossed/ui
 
+## 6.5.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/use-calendar@0.0.0
+
 ## 6.5.0
 
 ### Minor Changes
