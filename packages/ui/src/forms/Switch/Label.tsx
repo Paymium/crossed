@@ -14,14 +14,14 @@ import { localContext } from './context';
 type LabelProps = PropsWithChildren<TextProps>;
 
 export const SwitchLabel = ({ children, id, ...props }: LabelProps) => {
-  const { sharedValue, disabled } = useContext(localContext);
+  const { value, disabled } = useContext(localContext);
   return typeof children === 'string' ? (
     <Text
       id={id}
       {...props}
       style={composeStyles(
         disabled && styles.disabledOff,
-        disabled && sharedValue.value && styles.disabledOn,
+        disabled && value && styles.disabledOn,
         props.style
       )}
     >

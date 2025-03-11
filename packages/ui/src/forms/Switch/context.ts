@@ -10,7 +10,7 @@ import { SharedValue } from 'react-native-reanimated';
 
 export type LocalContext = {
   disabled?: boolean;
-  sharedValue?: SharedValue<boolean>;
+  value?: boolean;
   duration: number;
   height: SharedValue<number>;
   width: SharedValue<number>;
