@@ -6,9 +6,9 @@
  */
 
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, SwitchPreset } from '@crossed/ui/src/forms/Switch/index';
-import { Tag } from '@crossed/ui';
+import { Tag, Button, XBox } from '@crossed/ui';
 
 // Configuration de la story
 const meta: Meta<typeof Switch> = {
@@ -23,6 +23,31 @@ const meta: Meta<typeof Switch> = {
 
 export default meta;
 type Story = StoryObj<typeof Switch>;
+
+const ControlledSwitch = (args) => {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <XBox space={'md'}>
+      <Button
+        onPress={() => {
+          setChecked(!checked);
+        }}
+      >
+        <Button.Text>Control switch</Button.Text>
+      </Button>
+      <Switch
+        value={checked}
+        onChange={() => {
+          setChecked(!checked);
+        }}
+        {...args}
+      >
+        <Switch.Thumb />
+      </Switch>
+    </XBox>
+  );
+};
 
 export const Primary: Story = {
   render: (args) => {
@@ -88,4 +113,10 @@ export const DisabledWithoutLabel: Story = {
 export const DisabledOnWithoutLabel: Story = {
   ...WithoutLabel,
   args: { disabled: true, defaultValue: true },
+};
+
+export const SwitchControlledByAnotherElement: story = {
+  render: (args) => {
+    return <ControlledSwitch {...args} />;
+  },
 };
