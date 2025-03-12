@@ -115,7 +115,7 @@ export const DisabledOnWithoutLabel: Story = {
   args: { disabled: true, defaultValue: true },
 };
 
-export const SwitchControlledByAnotherElement: story = {
+export const SwitchControlledByAnotherElement: Story = {
   render: (args) => {
     return <ControlledSwitch {...args} />;
   },
