@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.5.2
+
+### Patch Changes
+
+- 2d725e6: Fix switch component
+
 ## 6.5.1
 
 ### Patch Changes

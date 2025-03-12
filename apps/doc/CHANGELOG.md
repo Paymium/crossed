@@ -1,5 +1,13 @@
 # crossed-doc
 
+## 0.11.12
+
+### Patch Changes
+
+- 47102ca: fix doc
+- Updated dependencies [2d725e6]
+  - @crossed/ui@6.5.2
+
 ## 0.11.10
 
 ### Patch Changes
