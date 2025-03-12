@@ -13,7 +13,7 @@ import { localContext } from './context';
 import { Thumb } from './Thumb';
 
 export const SwitchTrack = () => {
-  const { sharedValue, height, width, disabled } = useContext(localContext);
+  const { value, height, width, disabled } = useContext(localContext);
 
   return (
     <Animated.View
@@ -24,10 +24,10 @@ export const SwitchTrack = () => {
       style={[
         composeStyles(
           styles.track,
-          sharedValue.value && styles.toggleOn,
-          !sharedValue.value && styles.toggleOff,
+          value && styles.toggleOn,
+          !value && styles.toggleOff,
           disabled && styles.disabledOff,
-          disabled && sharedValue.value && styles.disabledOn
+          disabled && value && styles.disabledOn
         ).style().style,
       ]}
     >

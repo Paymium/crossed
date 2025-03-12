@@ -15,17 +15,17 @@ import { useContext } from 'react';
 import { localContext } from './context';
 
 export const Thumb = () => {
-  const { sharedValue, duration, height, width } = useContext(localContext);
+  const { value, duration, height, width } = useContext(localContext);
   const thumbAnimatedStyle = useAnimatedStyle(() => {
     const moveValue = interpolate(
-      Number(sharedValue.value),
+      value ? 1 : 0,
       [0, 1],
       [0, width.value - height.value]
     );
     return {
       transform: [{ translateX: withTiming(moveValue, { duration }) }],
     };
-  }, [sharedValue.value]);
+  }, [value]);
 
   return (
     <Animated.View style={[styles.thumb.style().style, thumbAnimatedStyle]} />

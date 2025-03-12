@@ -17,20 +17,19 @@ import { localContext } from './context';
 import { Thumb } from './Thumb';
 
 export const SwitchTrack = () => {
-  const { sharedValue, duration, height, width, disabled } =
-    useContext(localContext);
+  const { value, duration, height, width, disabled } = useContext(localContext);
   const { components } = useTheme();
 
   const trackAnimatedStyle = useAnimatedStyle(() => {
     const color = interpolateColor(
-      Number(sharedValue.value),
+      value ? 1 : 0,
       [0, 1],
       [components.Switch.off.background, components.Switch.on.background]
     );
     return {
       backgroundColor: withTiming(color, { duration }),
     };
-  }, [sharedValue.value]);
+  }, [value]);
 
   return (
     <Animated.View
@@ -42,7 +41,7 @@ export const SwitchTrack = () => {
         composeStyles(
           styles.track,
           disabled && styles.disabledOff,
-          disabled && sharedValue.value && styles.disabledOn
+          disabled && value && styles.disabledOn
         ).style().style,
         trackAnimatedStyle,
       ]}

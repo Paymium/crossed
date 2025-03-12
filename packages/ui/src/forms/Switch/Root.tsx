@@ -45,12 +45,10 @@ export const Root = ({
 
   const height = useSharedValue(24);
   const width = useSharedValue(48);
-  const sharedValue = useSharedValue(value);
 
   const onChange = useCallback(() => {
-    sharedValue.value = !sharedValue.value;
     setValue(!value);
-  }, [sharedValue, value, setValue]);
+  }, [value, setValue]);
 
   return (
     <localContext.Provider
@@ -58,7 +56,7 @@ export const Root = ({
         height,
         width,
         duration: DURATION,
-        sharedValue,
+        value,
         disabled,
       }}
     >
