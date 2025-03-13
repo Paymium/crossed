@@ -141,6 +141,7 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
       return () => {};
     }, [open.current]);
 
+    const showFloating = isWeb || md;
     const renderCalendar = (
       <CalendarComponent
         locale={locale}
@@ -154,23 +155,24 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
         onDateSelected={handleDateSelected}
         ref={setFloating as any}
         style={composeStyles(
-          inlineStyle(({ colors, space, boxShadow }) => ({
-            base: {
-              backgroundColor: colors.background.secondary,
-              borderWidth: 1,
-              borderColor: colors.border.secondary,
-              padding: space.md,
-              borderRadius: 16,
-              boxShadow,
-              position: 'absolute',
-            },
-          })),
+          showFloating &&
+            inlineStyle(({ colors, space, boxShadow }) => ({
+              base: {
+                backgroundColor: colors.background.secondary,
+                borderWidth: 1,
+                borderColor: colors.border.secondary,
+                padding: space.md,
+                borderRadius: 16,
+                boxShadow,
+                position: 'absolute',
+              },
+            })),
           styles.dynamic(floatingStyles)
         )}
       />
     );
 
-    return isWeb || md ? (
+    return showFloating ? (
       <Floating
         {...floatingProps}
         ref={floatingRef}
