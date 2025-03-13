@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 6.5.3
+
+### Patch Changes
+
+- d6fbf5f: fix date input behavior
+- Updated dependencies [d6fbf5f]
+  - @crossed/use-calendar@0.0.1
+
 ## 6.5.2
 
 ### Patch Changes
