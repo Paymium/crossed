@@ -112,11 +112,6 @@ export function useCalendar(options?: Partial<IUseCalendarOptions>) {
           selected,
         })
       );
-    } else {
-      // console.log('nothing');
-      // console.log(visibleMonth);
-      // console.log(maxDate);
-      // console.log(minDate);
     }
     return result;
   }, [

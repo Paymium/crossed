@@ -38,7 +38,7 @@ import { ActionSheetRef } from '@crossed/sheet';
 
 const duration = 100;
 
-const styles = createStyles(() => ({
+const styles = createStyles(({ colors, space, boxShadow }) => ({
   dynamic: (e: any) => {
     const transform = [];
     if (e.transform) {
@@ -51,6 +51,17 @@ const styles = createStyles(() => ({
       transform.push({ translateX: Number(x) }, { translateY: Number(y) });
     }
     return Object.assign({}, e, { transform });
+  },
+  calendar: {
+    base: {
+      backgroundColor: colors.background.secondary,
+      borderWidth: 1,
+      borderColor: colors.border.secondary,
+      padding: space.md,
+      borderRadius: 16,
+      boxShadow,
+      position: 'absolute',
+    },
   },
 }));
 
@@ -155,18 +166,7 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
         onDateSelected={handleDateSelected}
         ref={setFloating as any}
         style={composeStyles(
-          showFloating &&
-            inlineStyle(({ colors, space, boxShadow }) => ({
-              base: {
-                backgroundColor: colors.background.secondary,
-                borderWidth: 1,
-                borderColor: colors.border.secondary,
-                padding: space.md,
-                borderRadius: 16,
-                boxShadow,
-                position: 'absolute',
-              },
-            })),
+          showFloating && styles.calendar,
           styles.dynamic(floatingStyles)
         )}
       />

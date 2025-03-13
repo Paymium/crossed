@@ -16,28 +16,30 @@ export interface InputPartProps
   label?: string;
 }
 
+const styles = inlineStyle(() => ({
+  base: {
+    borderWidth: 0,
+    backgroundColor: 'transparent',
+    maxWidth: 64,
+    textAlign: 'center',
+  },
+  web: {
+    ':focus': {
+      outlineWidth: 0,
+    },
+    ':focus-visible': {
+      outlineWidth: 0,
+    },
+  },
+}));
+
 export const InputPart = forwardRef<TextInput, InputPartProps>(
   ({ value, onChangeText, placeholder, onBlur, onFocus }, ref) => {
     const { colors } = useTheme();
     return (
       <TextInput
         selectTextOnFocus
-        {...inlineStyle(() => ({
-          base: {
-            borderWidth: 0,
-            backgroundColor: 'transparent',
-            maxWidth: 64,
-            textAlign: 'center',
-          },
-          web: {
-            ':focus': {
-              outlineWidth: 0,
-            },
-            ':focus-visible': {
-              outlineWidth: 0,
-            },
-          },
-        })).rnw()}
+        {...styles.rnw()}
         value={value}
         placeholder={placeholder}
         ref={ref}
