@@ -5,8 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { XBox, YBox } from '../../layout';
-import { memo, useId, useMemo } from 'react';
+import { XBox, YBox, YBoxProps } from '../../layout';
+import { forwardRef, memo, RefAttributes, useId, useMemo } from 'react';
 import { useCalendar } from '@crossed/use-calendar';
 import { IUseCalendarOptions } from '@crossed/use-calendar';
 import { DayButton } from './DayButton';
@@ -15,15 +15,15 @@ import { WeekDay } from './WeekDay';
 import { IDay } from '@crossed/use-calendar/src';
 import { SelectYear } from './SelectYear';
 import { SelectMonth } from './SelectMonth';
+import { View } from 'react-native';
 
-export type CalendarProps = Partial<
-  Omit<IUseCalendarOptions, 'selectedDate'>
-> & {
-  locale?: string;
-  selectedDate?: Date;
-};
-export const Calendar = memo<CalendarProps>(
-  ({ locale = 'default', ...props }: CalendarProps) => {
+export type CalendarProps = Partial<Omit<IUseCalendarOptions, 'selectedDate'>> &
+  Pick<YBoxProps, 'style'> & {
+    locale?: string;
+    selectedDate?: Date;
+  };
+export const Calendar = memo<CalendarProps & RefAttributes<View>>(
+  forwardRef(({ locale = 'default', style, ...props }, ref) => {
     const { months, getDayProps, setMonth, setYear, monthsByYear } =
       useCalendar(props);
     const id = useId();
@@ -33,7 +33,10 @@ export const Calendar = memo<CalendarProps>(
         month: 'long',
       });
       const yearSelected = (props.selectedDate || new Date()).getFullYear();
-      return Array.from(monthsByYear.get(yearSelected)).map((month) => {
+      let months = monthsByYear.get(yearSelected);
+      if (!months) months = new Set(Array.from(Array(12).keys()));
+
+      return Array.from(months).map((month) => {
         const d = new Date(yearSelected, month);
         const nameMonth = formatter.format(d);
         return {
@@ -42,9 +45,8 @@ export const Calendar = memo<CalendarProps>(
         };
       });
     }, [monthsByYear]);
-
     return (
-      <YBox>
+      <YBox style={style} ref={ref}>
         {months.map(({ year, month, weeks }) => (
           <YBox key={`${id}-month-${month}`} space={'xxs'}>
             <XBox alignItems={'stretch'} space={'md'}>
@@ -85,5 +87,5 @@ export const Calendar = memo<CalendarProps>(
         ))}
       </YBox>
     );
-  }
+  })
 );

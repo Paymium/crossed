@@ -12,36 +12,69 @@ import {
   isWeb,
   useTheme,
 } from '@crossed/styled';
-import { Floating, FloatingRef, Sheet } from '../../overlay';
+import { Floating, FloatingProps, FloatingRef, Sheet } from '../../overlay';
 import { ChevronDown } from '@crossed/unicons';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
 import {
+  ComponentProps,
   CSSProperties,
   forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
   useRef,
+  useTransition,
 } from 'react';
 import {
   Calendar as CalendarComponent,
   type CalendarProps as CalendarComponentProps,
 } from '../Calendar';
 import { IDay } from '@crossed/use-calendar';
-import { Box } from '../../layout';
+import { Box } from '../../layout/Box';
 import { useMedia } from '../../useMedia';
-import { ActionSheetRef } from '@crossed/sheet/src';
+import { composeEventHandlers } from '@crossed/core';
+import { Focus } from './Focus';
+import { ActionSheetRef } from '@crossed/sheet';
 
 const duration = 100;
 
-const styles = createStyles(() => ({ dynamic: (e) => e }));
+const styles = createStyles(({ colors, space, boxShadow }) => ({
+  dynamic: (e: any) => {
+    const transform = [];
+    if (e.transform) {
+      const [x, y] = e.transform
+        .replace('translate(', '')
+        .replace(')', '')
+        .replaceAll('px', '')
+        .replaceAll(' ', '')
+        .split(',');
+      transform.push({ translateX: Number(x) }, { translateY: Number(y) });
+    }
+    return Object.assign({}, e, { transform });
+  },
+  calendar: {
+    base: {
+      backgroundColor: colors.background.secondary,
+      borderWidth: 1,
+      borderColor: colors.border.secondary,
+      padding: space.md,
+      borderRadius: 16,
+      boxShadow,
+      position: 'absolute',
+    },
+  },
+}));
 
-export type CalendarProps = CalendarComponentProps & {
-  floatingStyles: CSSProperties;
-  setFloating: (_node: HTMLElement | null) => void;
-  locale: string;
-};
-export const Calendar = forwardRef<FloatingRef, CalendarProps>(
+export type FloatingRefExtended = FloatingRef & { isOpen: () => boolean };
+
+export type CalendarProps = CalendarComponentProps &
+  Pick<ComponentProps<typeof Focus>, 'shards'> & {
+    floatingStyles: CSSProperties;
+    setFloating: (_node: HTMLElement | null) => void;
+    locale: string;
+    floatingProps?: FloatingProps;
+  };
+export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
   (
     {
       onDateSelected,
@@ -55,9 +88,12 @@ export const Calendar = forwardRef<FloatingRef, CalendarProps>(
       monthsToDisplay,
       selectedDate,
       availableDates,
+      floatingProps,
+      shards,
     },
     ref
   ) => {
+    const [, setTransition] = useTransition();
     const { colors } = useTheme();
     const { md } = useMedia();
     const open = useRef(false);
@@ -69,8 +105,11 @@ export const Calendar = forwardRef<FloatingRef, CalendarProps>(
           sheetRef.current?.show();
         },
         close: () => {
-          floatingRef.current?.open();
+          floatingRef.current?.close();
           sheetRef.current?.hide();
+        },
+        isOpen() {
+          return open.current;
         },
       }),
       []
@@ -84,7 +123,9 @@ export const Calendar = forwardRef<FloatingRef, CalendarProps>(
 
     const handleDateSelected = useCallback(
       (e: IDay) => {
-        onDateSelected?.(e);
+        setTransition(() => {
+          onDateSelected?.(e);
+        });
         floatingRef.current?.close();
       },
       [onDateSelected]
@@ -111,6 +152,7 @@ export const Calendar = forwardRef<FloatingRef, CalendarProps>(
       return () => {};
     }, [open.current]);
 
+    const showFloating = isWeb || md;
     const renderCalendar = (
       <CalendarComponent
         locale={locale}
@@ -122,33 +164,48 @@ export const Calendar = forwardRef<FloatingRef, CalendarProps>(
         monthsToDisplay={monthsToDisplay}
         selectedDate={selectedDate}
         onDateSelected={handleDateSelected}
+        ref={setFloating as any}
+        style={composeStyles(
+          showFloating && styles.calendar,
+          styles.dynamic(floatingStyles)
+        )}
       />
     );
 
-    return isWeb || md ? (
-      <Floating ref={floatingRef} onChange={toggleOpen}>
-        <ChevronDown color={colors.text.secondary} />
+    return showFloating ? (
+      <Floating
+        {...floatingProps}
+        ref={floatingRef}
+        onChange={composeEventHandlers(toggleOpen, floatingProps?.onChange)}
+      >
+        <Box
+          style={inlineStyle(({ space }) => ({
+            base: { marginRight: space.xs },
+          }))}
+        >
+          <ChevronDown color={colors.text.secondary} />
+        </Box>
         <Floating.Portal>
-          <Floating.Content
-            exiting={FadeOut.duration(duration)}
-            entering={FadeIn.duration(duration)}
-            ref={setFloating as any}
-            style={composeStyles(
-              inlineStyle(({ colors, space, boxShadow }) => ({
-                base: {
-                  backgroundColor: colors.background.secondary,
-                  borderWidth: 1,
-                  borderColor: colors.border.secondary,
-                  padding: space.md,
-                  borderRadius: 16,
-                  boxShadow,
-                },
-              })),
-              styles.dynamic(floatingStyles)
-            )}
+          <Focus
+            onEscapeKey={handleClose}
+            onClickOutside={handleClose as any}
+            enabled={open.current}
+            shards={shards}
+            returnFocus={false}
           >
-            {renderCalendar}
-          </Floating.Content>
+            <Floating.Content
+              exiting={FadeOut.duration(duration)}
+              entering={FadeIn.duration(duration)}
+              style={composeStyles(
+                inlineStyle(({ boxShadow }) => ({
+                  base: { zIndex: 100, position: 'absolute' },
+                  web: { base: { boxShadow } },
+                }))
+              )}
+            >
+              {renderCalendar}
+            </Floating.Content>
+          </Focus>
         </Floating.Portal>
       </Floating>
     ) : (
