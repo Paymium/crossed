@@ -13,15 +13,15 @@ import { Text } from '../../typography/Text';
 import { form } from '../../styles/form';
 import { composeStyles, inlineStyle } from '@crossed/styled';
 import { useDateInput } from './useDateInput';
-import { useFloating } from '../Select/useFloating';
-import { Calendar } from './Calendar';
-import { FloatingRef } from '../../overlay';
-import { growStyles } from '../../styles';
+import { useFloating } from './useFloating';
+import { Calendar, FloatingRefExtended } from './Calendar';
+import { growStyles } from '../../styles/flex';
 
 const convertToDate = (e?: Partial<Value>) => {
-  const args = [e?.year, e?.month - 1, e?.day].filter(
-    (l) => typeof l === 'number'
-  );
+  if (e?.year === undefined || e?.month === undefined || e?.day === undefined)
+    return undefined;
+  const dateArray = [e?.year, e?.month - 1, e?.day];
+  const args = dateArray.filter((l) => typeof l === 'number');
   const date = args.length > 0 ? new Date(...(args as [])) : undefined;
   if (!date || isNaN(date.getTime())) return undefined;
   return date;
@@ -41,10 +41,13 @@ export const DateInput = memo(
     firstDayOfWeek,
     events,
     monthsToDisplay,
+    floatingProps,
+    id: idProps,
   }: DateInputProps) => {
     const { refs, floatingStyles } = useFloating();
-    const calendarRef = useRef<FloatingRef>(null);
+    const calendarRef = useRef<FloatingRefExtended>(null);
     const id = useId();
+    const isFocus = useRef(false);
     const { inputs, separator, setWithDate, value, containerProps } =
       useDateInput({
         locale,
@@ -61,13 +64,20 @@ export const DateInput = memo(
       });
 
     const handleFocusInput = useCallback(() => {
-      calendarRef.current?.open();
-    }, []);
+      isFocus.current = true;
+      if (picker && !calendarRef.current?.isOpen()) {
+        picker && calendarRef.current?.open();
+      }
+    }, [picker]);
+    const handleBlurInput = useCallback(() => {
+      isFocus.current = false;
+    }, [picker]);
 
     return (
       <XBox
         pressable
-        {...containerProps}
+        onPress={!isFocus.current ? containerProps.onPress : undefined}
+        id={idProps}
         ref={refs.setReference as any}
         style={composeStyles(
           form.input,
@@ -79,11 +89,12 @@ export const DateInput = memo(
           }))
         )}
       >
-        <XBox style={growStyles.on} alignItems="center">
+        <XBox style={growStyles.on} alignItems="stretch">
           {inputs.map(({ key, ...item }, i, a) => [
             <InputPart
               key={`${id}-${key}`}
               {...item}
+              onBlur={handleBlurInput}
               onFocus={handleFocusInput}
             />,
             i + 1 !== a.length ? (
@@ -91,7 +102,9 @@ export const DateInput = memo(
                 key={`${id}-${key}-separator`}
                 style={composeStyles(
                   form.placeholder,
-                  inlineStyle(() => ({ base: { marginTop: 1 } }))
+                  inlineStyle(() => ({
+                    base: { marginTop: 1, alignSelf: 'center' },
+                  }))
                 )}
               >
                 {separator}
@@ -115,6 +128,8 @@ export const DateInput = memo(
             firstDayOfWeek={firstDayOfWeek}
             events={events}
             monthsToDisplay={monthsToDisplay}
+            floatingProps={floatingProps}
+            shards={[refs.reference]}
           />
         )}
       </XBox>

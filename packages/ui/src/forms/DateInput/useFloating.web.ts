@@ -11,6 +11,7 @@ import {
   useFloating as useDefault,
   size,
   shift,
+  flip,
 } from '@floating-ui/react';
 import type { UseFloating } from './types';
 
@@ -20,6 +21,7 @@ export const useFloating: UseFloating = () => {
     middleware: [
       shift({ crossAxis: true }),
       offset(8),
+      flip({ fallbackAxisSideDirection: 'end' }),
       size({
         apply({ rects: { reference }, elements: { floating } }) {
           floating.style.minWidth = `${reference.width}px`;

@@ -68,12 +68,22 @@ export const useDateInput = ({
 
   const onChange = useCallback<Context['onChange']>(
     (name, v) => {
-      if (name === 'dd' && `${v}`.length <= 2) {
-        setValue({ ...value, day: Number(v) });
-      } else if (name === 'mm' && `${v}`.length <= 2) {
-        setValue({ ...value, month: Number(v) });
-      } else if (name === 'yyyy' && `${v}`.length <= 4) {
-        setValue({ ...value, year: Number(v) });
+      // Remove prefix '0'
+      // '06' => 6
+      const valueNumber = Number(v);
+      if (isNaN(valueNumber)) {
+        setValue({
+          ...value,
+          [name === 'dd' ? 'day' : name === 'mm' ? 'month' : 'year']: '',
+        });
+        return;
+      }
+      if (name === 'dd' && `${valueNumber}`.length <= 2) {
+        setValue({ ...value, day: valueNumber });
+      } else if (name === 'mm' && `${valueNumber}`.length <= 2) {
+        setValue({ ...value, month: valueNumber });
+      } else if (name === 'yyyy' && `${valueNumber}`.length <= 4) {
+        setValue({ ...value, year: valueNumber });
       }
       const index = inputRef.current.findIndex(({ name: n }) => n === name);
       if (index >= 0 && index < 2) {
@@ -104,14 +114,14 @@ export const useDateInput = ({
       onChangeText: (v: string) => onChange(e, v as unknown as number),
       ...match(e)
         .with('dd', (r) => ({
-          value: value?.day?.toString(),
+          value: value?.day?.toString().padStart(2, '0'),
           placeholder: placeholder.day ?? r,
           label: value?.day?.toLocaleString(locale, {
             minimumIntegerDigits: 2,
           }),
         }))
         .with('mm', (r) => ({
-          value: value?.month?.toString(),
+          value: value?.month?.toString().padStart(2, '0'),
           placeholder: placeholder.month ?? r,
           label: value?.month?.toLocaleString(locale, {
             minimumIntegerDigits: 2,
@@ -119,7 +129,7 @@ export const useDateInput = ({
         }))
         .with('yyyy', (r) => ({
           placeholder: placeholder.year ?? r,
-          value: value?.year?.toString(),
+          value: value?.year?.toString().padStart(4, '0'),
         }))
         .exhaustive(),
     }));
