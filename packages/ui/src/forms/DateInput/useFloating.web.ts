@@ -22,11 +22,7 @@ export const useFloating: UseFloating = () => {
       shift({ crossAxis: true }),
       offset(8),
       flip({ fallbackAxisSideDirection: 'end' }),
-      size({
-        apply({ rects: { reference }, elements: { floating } }) {
-          floating.style.minWidth = `${reference.width}px`;
-        },
-      }),
+      size(),
     ],
     whileElementsMounted: autoUpdate,
   });

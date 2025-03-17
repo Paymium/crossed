@@ -9,6 +9,7 @@ import { InputPart } from './InputPart';
 import { memo, useCallback, useId, useRef } from 'react';
 import { DateInputProps, Value } from './types';
 import { XBox } from '../../layout/XBox';
+import { YBox } from '../../layout/YBox';
 import { Text } from '../../typography/Text';
 import { form } from '../../styles/form';
 import { composeStyles, inlineStyle, isWeb } from '@crossed/styled';
@@ -92,7 +93,7 @@ export const DateInput = memo(
     }, [picker]);
 
     return (
-      <XBox
+      <YBox
         pressable
         onPress={
           !showFloating
@@ -162,7 +163,7 @@ export const DateInput = memo(
             shards={[refs.reference]}
           />
         )}
-      </XBox>
+      </YBox>
     );
   }
 );
