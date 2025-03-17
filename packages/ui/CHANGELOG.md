@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 6.5.4
+
+### Patch Changes
+
+- 7aacee3: fix controllable date input
+
 ## 6.5.3
 
 ### Patch Changes
