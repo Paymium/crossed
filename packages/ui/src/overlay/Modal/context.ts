@@ -6,6 +6,7 @@
  */
 
 import { createContext } from 'react';
+import { ModalProps } from './Root';
 
 export type VariantSize = {
   /**
@@ -19,6 +20,7 @@ export type LocalContext = VariantSize & {
   stickyHeader?: boolean;
   stickyFooter?: boolean;
   idRef: string;
+  closable: ModalProps['closable'];
 };
 
 export const localContext = createContext<LocalContext>({

@@ -117,7 +117,7 @@ export const NotClosable: Story = {
   render(e) {
     return (
       <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
-        <Modal floatingProps={{ closeOverlayPress: false }} {...e}>
+        <Modal closable={false} {...e}>
           <Modal.Trigger asChild>
             <Button>
               <Button.Text>Button</Button.Text>
