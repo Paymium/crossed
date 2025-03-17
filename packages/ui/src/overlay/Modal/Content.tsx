@@ -89,7 +89,7 @@ const SheetComponent = ({
   children,
   style,
 }: PropsWithChildren<{ style?: CrossedMethods<any> }>) => {
-  const { open, onClose } = useFloatingContext();
+  const { open, onClose, closeOverlayPress } = useFloatingContext();
   const { showSheet } = useContext(localContext);
   const refSheet = useRef<ActionSheetRef>(null);
   useEffect(() => {
@@ -103,7 +103,11 @@ const SheetComponent = ({
   }, [open, showSheet]);
   return (
     <Sheet ref={refSheet as any}>
-      <Sheet.Content onClose={onClose} containerStyle={style}>
+      <Sheet.Content
+        onClose={onClose}
+        containerStyle={style}
+        closable={closeOverlayPress}
+      >
         {children}
       </Sheet.Content>
     </Sheet>
