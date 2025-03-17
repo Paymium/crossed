@@ -61,6 +61,7 @@ const styles = createStyles(({ colors, space, boxShadow }) => ({
       borderRadius: 16,
       boxShadow,
       position: 'absolute',
+      width: 432,
     },
   },
 }));
