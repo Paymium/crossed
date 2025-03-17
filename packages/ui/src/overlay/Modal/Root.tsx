@@ -26,19 +26,40 @@ export type ModalProps = ChildWithViariant & {
    * Adapt to sheet responsive
    */
   adapt?: boolean;
+  /**
+   * Closable as boolean is a general props preventing the modal from closing when pressing on overlay
+   * and preventing sheet from closing when touching outside sheet or when swiping bottom
+   * as an object it provides greater granularity and allow different behavior on web or mobile
+   */
+  closable?:
+    | boolean
+    | { closeOverlayPress?: boolean; closeOnTouchBackdrop?: boolean };
 };
 export const ModalRoot = memo<ModalProps & RefAttributes<FloatingRef>>(
-  forwardRef(({ size = 'md', children, floatingProps, adapt = true }, ref) => {
-    const { md } = useMedia();
-    const showSheet = adapt && !md;
-    const id = useId();
-    return (
-      <Floating {...floatingProps} ref={ref}>
-        <localContext.Provider value={{ size, showSheet, idRef: id }}>
-          {children}
-        </localContext.Provider>
-      </Floating>
-    );
-  })
+  forwardRef(
+    (
+      { size = 'md', children, floatingProps, adapt = true, closable = true },
+      ref
+    ) => {
+      const { md } = useMedia();
+      const showSheet = adapt && !md;
+      const id = useId();
+      const closeOverlayProps =
+        typeof closable === 'boolean' ? closable : closable.closeOverlayPress;
+      return (
+        <Floating
+          closeOverlayPress={closeOverlayProps}
+          {...floatingProps}
+          ref={ref}
+        >
+          <localContext.Provider
+            value={{ size, showSheet, idRef: id, closable }}
+          >
+            {children}
+          </localContext.Provider>
+        </Floating>
+      );
+    }
+  )
 );
 ModalRoot.displayName = 'Modal';

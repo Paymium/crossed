@@ -91,6 +91,43 @@ export const WithScrollView: Story = {
               <Modal.Header>
                 <Modal.Title>Title</Modal.Title>
               </Modal.Header>
+              <Modal.Body>
+                <Text>Hello world</Text>
+              </Modal.Body>
+
+              <Modal.Footer>
+                <Button variant="tertiary">
+                  <Button.Text>Button</Button.Text>
+                </Button>
+
+                <Button>
+                  <Button.Text>Button</Button.Text>
+                </Button>
+              </Modal.Footer>
+            </Modal.Padded>
+          </Modal.Content>
+        </Modal>
+      </YBox>
+    );
+  },
+};
+
+export const NotClosable: Story = {
+  args: { adapt: true },
+  render(e) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+        <Modal closable={false} {...e}>
+          <Modal.Trigger asChild>
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Modal.Trigger>
+          <Modal.Content>
+            <Modal.Padded>
+              <Modal.Header>
+                <Modal.Title>Title</Modal.Title>
+              </Modal.Header>
             </Modal.Padded>
             <Modal.ScrollView>
               <Modal.Padded>
