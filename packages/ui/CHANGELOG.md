@@ -1,5 +1,12 @@
 # @crossed/ui
 
+## 6.5.5
+
+### Patch Changes
+
+- 6bdef8a: fix wrong width with big input
+- 783dadc: handle modal or sheet not closable
+
 ## 6.5.4
 
 ### Patch Changes

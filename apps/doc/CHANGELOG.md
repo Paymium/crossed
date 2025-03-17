@@ -1,5 +1,14 @@
 # crossed-doc
 
+## 0.11.15
+
+### Patch Changes
+
+- 783dadc: handle modal or sheet not closable
+- Updated dependencies [6bdef8a]
+- Updated dependencies [783dadc]
+  - @crossed/ui@6.5.5
+
 ## 0.11.14
 
 ### Patch Changes
