@@ -152,7 +152,8 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
       return () => {};
     }, [open.current]);
 
-    const showFloating = isWeb || md;
+    const showFloating = isWeb && md;
+
     const renderCalendar = (
       <CalendarComponent
         locale={locale}
@@ -167,7 +168,7 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
         ref={setFloating as any}
         style={composeStyles(
           showFloating && styles.calendar,
-          styles.dynamic(floatingStyles)
+          showFloating && styles.dynamic(floatingStyles)
         )}
       />
     );
@@ -189,7 +190,6 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
           <Focus
             onEscapeKey={handleClose}
             onClickOutside={handleClose as any}
-            enabled={open.current}
             shards={shards}
             returnFocus={false}
           >

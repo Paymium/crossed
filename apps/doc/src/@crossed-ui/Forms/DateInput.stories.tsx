@@ -9,7 +9,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { DateInput } from '@crossed/ui/src/forms/DateInput';
-// import { Text } from '@crossed/ui';
+import { Text } from '@crossed/ui/src/typography/Text';
+import { Modal } from '@crossed/ui/src/overlay/Modal';
+import { inlineStyle } from '@crossed/styled';
+import { Select } from '@crossed/ui/src/forms/Select';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof DateInput> = {
@@ -37,3 +40,33 @@ export const WithPlaceholder: Story = {
 export const WithPicker: Story = { args: { picker: true } };
 export const WithValue: Story = { args: { value: new Date() } };
 export const OnlyYearMonth: Story = { args: { format: 'yyyy-mm' } };
+export const InModal: Story = {
+  args: { format: 'yyyy-mm' },
+  render: () => {
+    return (
+      <Modal size={'md'}>
+        <Modal.Trigger>
+          <Text>Click here</Text>
+        </Modal.Trigger>
+        <Modal.Content
+          style={inlineStyle(() => ({
+            base: { minHeight: 200, minWidth: 500 },
+          }))}
+        >
+          <Modal.Header>
+            <Modal.Title>In Modal</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Select items={[]} />
+            <DateInput picker />
+          </Modal.Body>
+          <Modal.Footer>
+            <Modal.Trigger>
+              <Text>Close</Text>
+            </Modal.Trigger>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
+    );
+  },
+};
