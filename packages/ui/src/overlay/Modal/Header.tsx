@@ -11,7 +11,6 @@ import { CloseButton } from '../../buttons/CloseButton';
 import { useContext } from 'react';
 import { localContext } from './context';
 import { ModalTrigger } from './Trigger';
-import { useFloatingContext } from '../Floating';
 
 const styles = createStyles(() => ({
   header: {

@@ -108,9 +108,9 @@ const SheetComponent = ({
         containerStyle={style}
         closable={typeof closable === 'boolean' ? closable : undefined}
         closeOnTouchBackdrop={
-          typeof closable === 'object'
-            ? closable.closeOnTouchBackdrop
-            : undefined
+          typeof closable === 'boolean'
+            ? undefined
+            : closable.closeOnTouchBackdrop
         }
       >
         {children}
