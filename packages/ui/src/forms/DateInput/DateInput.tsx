@@ -11,11 +11,13 @@ import { DateInputProps, Value } from './types';
 import { XBox } from '../../layout/XBox';
 import { Text } from '../../typography/Text';
 import { form } from '../../styles/form';
-import { composeStyles, inlineStyle } from '@crossed/styled';
+import { composeStyles, inlineStyle, isWeb } from '@crossed/styled';
 import { useDateInput } from './useDateInput';
 import { useFloating } from './useFloating';
 import { Calendar, FloatingRefExtended } from './Calendar';
-import { growStyles } from '../../styles/flex';
+import { growStyles, shrinkStyles } from '../../styles/flex';
+import { useUncontrolled } from '@crossed/core';
+import { useMedia } from '../../useMedia';
 
 const convertToDate = (e?: Partial<Value>) => {
   if (e?.year === undefined || e?.month === undefined || e?.day === undefined)
@@ -43,29 +45,45 @@ export const DateInput = memo(
     monthsToDisplay,
     floatingProps,
     id: idProps,
+    style,
   }: DateInputProps) => {
     const { refs, floatingStyles } = useFloating();
     const calendarRef = useRef<FloatingRefExtended>(null);
     const id = useId();
     const isFocus = useRef(false);
+    const [valueBridge, setValueBridge] = useUncontrolled({
+      value: valueProps,
+      onChange: onChangeProps,
+    });
     const { inputs, separator, setWithDate, value, containerProps } =
       useDateInput({
         locale,
         format,
-        value: valueProps,
+        defaultValue:
+          valueBridge && valueBridge instanceof Date
+            ? {
+                day: valueBridge.getDate(),
+                month: valueBridge.getMonth() + 1,
+                year: valueBridge.getFullYear(),
+              }
+            : undefined,
         placeholder,
         onChange: (e) => {
-          const args = [e.year, e.month - 1, e.day].filter(
-            (l) => typeof l === 'number'
-          );
-          const date = new Date(...(args as []));
-          onChangeProps?.(date);
+          const args = [e.year, e.month - 1, e.day];
+          const date = new Date();
+          (date as any).setFullYear(...(args as number[]));
+          if (e.month > 0 && date.toString() !== 'Invalid Date') {
+            setValueBridge?.(date);
+          }
         },
       });
 
+    const { md } = useMedia();
+    const showFloating = isWeb && md;
+
     const handleFocusInput = useCallback(() => {
       isFocus.current = true;
-      if (picker && !calendarRef.current?.isOpen()) {
+      if (showFloating && picker && !calendarRef.current?.isOpen()) {
         picker && calendarRef.current?.open();
       }
     }, [picker]);
@@ -76,7 +94,15 @@ export const DateInput = memo(
     return (
       <XBox
         pressable
-        onPress={!isFocus.current ? containerProps.onPress : undefined}
+        onPress={
+          !showFloating
+            ? () => {
+                calendarRef.current?.open();
+              }
+            : !isFocus.current
+              ? containerProps.onPress
+              : undefined
+        }
         id={idProps}
         ref={refs.setReference as any}
         style={composeStyles(
@@ -86,10 +112,14 @@ export const DateInput = memo(
               justifyContent: 'flex-start',
               paddingVertical: 0,
             },
-          }))
+          })),
+          style
         )}
       >
-        <XBox style={growStyles.on} alignItems="stretch">
+        <XBox
+          style={composeStyles(growStyles.on, shrinkStyles.on)}
+          alignItems="stretch"
+        >
           {inputs.map(({ key, ...item }, i, a) => [
             <InputPart
               key={`${id}-${key}`}

@@ -14,10 +14,9 @@ import { match } from 'ts-pattern';
 import { isWeb } from '@crossed/styled';
 
 interface UseDateInputParams
-  extends Omit<UseUncontrolledInput<Value>, 'finalValue' | 'value'> {
+  extends Omit<UseUncontrolledInput<Value>, 'finalValue'> {
   locale?: string;
   format?: Format;
-  value?: Date;
   placeholder?: { day?: string; month?: string; year?: string };
 }
 
@@ -43,14 +42,7 @@ export const useDateInput = ({
     return () => {};
   }, [locale]);
   const [value, setValue] = useUncontrolled<Value>({
-    value:
-      valueProps && valueProps instanceof Date
-        ? {
-            day: valueProps.getDate(),
-            month: valueProps.getMonth() + 1,
-            year: valueProps.getFullYear(),
-          }
-        : undefined,
+    value: valueProps,
     defaultValue,
     onChange: onChangeProps,
   });

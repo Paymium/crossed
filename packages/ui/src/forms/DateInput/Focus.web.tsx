@@ -12,7 +12,8 @@ import { useMemo } from 'react';
 import { useFloatingContext } from '../../overlay/Floating';
 
 export const Focus: FocusComponent = (props) => {
-  return <FocusOn {...props} />;
+  const { open } = useFloatingContext();
+  return <FocusOn enabled={open} {...props} />;
 };
 
 export const useFocusScope = () => {
