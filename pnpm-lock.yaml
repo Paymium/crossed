@@ -87,7 +87,7 @@ importers:
         specifier: workspace:2.2.7
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: 7.0.0-beta.2
+        specifier: 7.0.0
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: workspace:*
@@ -257,7 +257,7 @@ importers:
         specifier: workspace:2.2.7
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: workspace:7.0.0-beta.2
+        specifier: workspace:7.0.0
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: 3.0.2
