@@ -22,6 +22,7 @@
     "@crossed/webpack": "2.1.7"
   },
   "changesets": [
+    "brown-fireants-admire",
     "cold-brooms-whisper",
     "eighty-insects-peel",
     "gold-snakes-begin"
