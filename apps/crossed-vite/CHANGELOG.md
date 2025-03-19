@@ -1,5 +1,14 @@
 # crossed-vite
 
+## 0.0.21-beta.0
+
+### Patch Changes
+
+- Updated dependencies [22350e8]
+- Updated dependencies [22350e8]
+- Updated dependencies [22350e8]
+  - @crossed/ui@7.0.0-beta.0
+
 ## 0.0.20
 
 ### Patch Changes

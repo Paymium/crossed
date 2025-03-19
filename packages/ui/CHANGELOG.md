@@ -1,5 +1,19 @@
 # @crossed/ui
 
+## 7.0.0-beta.0
+
+### Major Changes
+
+- 22350e8: Rewrite Text, increase design system
+
+### Minor Changes
+
+- 22350e8: create Badge component
+
+### Patch Changes
+
+- 22350e8: fix button tertiary text color
+
 ## 6.5.5
 
 ### Patch Changes
