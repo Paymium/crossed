@@ -13,9 +13,9 @@ import {
   CrossedMethods,
   isWeb,
 } from '@crossed/styled';
-import { Text } from '../../typography/Text';
 import { IDay } from '@crossed/use-calendar/src';
 import { widthCell } from './styles';
+import { Headline } from '../../typography';
 
 const button = createStyles(({ colors }) => ({
   default: {
@@ -85,9 +85,9 @@ export const DayButton = memo(
         role={'button'}
         style={handleStyle}
       >
-        <Text
+        <Headline
           textAlign={'center'}
-          size={'lg'}
+          size={'md'}
           style={composeStyles(
             text.default,
             day.isToday && text.today,
@@ -96,7 +96,7 @@ export const DayButton = memo(
           )}
         >
           {day.date.getDate()}
-        </Text>
+        </Headline>
       </Pressable>
     );
   }

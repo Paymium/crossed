@@ -22,7 +22,7 @@ import { Text as TextNative } from 'react-native';
 type ButtonTextProps = TextProps;
 
 const ButtonText = forwardRef<TextNative, ButtonTextProps>((props, ref) => {
-  const { variant, state, disabled, size, setTextId, textId } =
+  const { variant, state, disabled, setTextId, textId } =
     useContext(buttonContext);
 
   const { hover, active } = state || {};
@@ -35,8 +35,7 @@ const ButtonText = forwardRef<TextNative, ButtonTextProps>((props, ref) => {
 
   return (
     <Text
-      weight={size || undefined}
-      size={size || undefined}
+      weight={'lg'}
       {...props}
       id={textId}
       style={composeStyles(
@@ -47,7 +46,7 @@ const ButtonText = forwardRef<TextNative, ButtonTextProps>((props, ref) => {
         variant === 'secondary' && buttonSecondaryStyles.text,
         variant === 'secondary' && hover && buttonSecondaryStyles.textHover,
         variant === 'secondary' && active && buttonSecondaryStyles.text,
-        variant === 'tertiary' && buttonTertiaryStyles.textActive,
+        variant === 'tertiary' && buttonTertiaryStyles.text,
         variant === 'tertiary' && hover && buttonTertiaryStyles.textHover,
         variant === 'tertiary' && active && buttonTertiaryStyles.textActive,
         variant === 'error' && buttonErrorStyles.text,

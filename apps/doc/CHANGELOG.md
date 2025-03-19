@@ -1,5 +1,28 @@
 # crossed-doc
 
+## 0.11.16-beta.2
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/ui@7.0.0-beta.2
+
+## 0.11.16-beta.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @crossed/ui@7.0.0-beta.1
+
+## 0.11.16-beta.0
+
+### Patch Changes
+
+- Updated dependencies [22350e8]
+- Updated dependencies [22350e8]
+- Updated dependencies [22350e8]
+  - @crossed/ui@7.0.0-beta.0
+
 ## 0.11.15
 
 ### Patch Changes

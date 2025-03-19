@@ -5,15 +5,15 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Text, TextProps } from '../../typography';
+import { Headline } from '../../typography';
 import { composeStyles } from '@crossed/styled';
 import { cardStyles } from './styles';
+import { ComponentProps } from 'react';
 
-export const Title = (props: TextProps) => {
+export const Title = (props: ComponentProps<typeof Headline>) => {
   return (
-    <Text
-      size="xl"
-      weight="h1"
+    <Headline
+      size="lg"
       {...props}
       style={composeStyles(cardStyles.title, props.style)}
     />

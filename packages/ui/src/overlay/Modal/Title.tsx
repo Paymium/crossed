@@ -5,12 +5,12 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useContext } from 'react';
-import { Text, TextProps } from '../../typography/Text';
+import { ComponentProps, useContext } from 'react';
 import { localContext } from './context';
+import { Headline } from '../../typography';
 
-export const ModalTitle = (props: TextProps) => {
+export const ModalTitle = (props: ComponentProps<typeof Headline>) => {
   const { idRef } = useContext(localContext);
-  return <Text size="h6" weight="h6" id={`${idRef}-title`} {...props} />;
+  return <Headline size="lg" id={`${idRef}-title`} {...props} />;
 };
 ModalTitle.displayName = 'Modal.Title';
