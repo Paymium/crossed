@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-// export * from './Badge';
+export * from './Badge';
 export * from './Card';
 export * from './MenuList';
 export * from './Kbd';

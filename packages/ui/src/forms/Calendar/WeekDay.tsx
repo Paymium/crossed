@@ -6,7 +6,7 @@
  */
 
 import { memo, useId } from 'react';
-import { Text } from '../../typography';
+import { Headline } from '../../typography';
 import { widthCell } from './styles';
 import { IDay } from '@crossed/use-calendar/src';
 import { capFirstLetter } from './utils';
@@ -28,10 +28,10 @@ export const WeekDay = memo(
     return (
       <XBox space={'xxs'} justifyContent="between" style={style}>
         {days.map((day) => (
-          <Text
+          <Headline
             key={`${id}-${day.date.getDate()}`}
             color={'secondary'}
-            size={'lg'}
+            size={'md'}
             textAlign={'center'}
             numberOfLines={1}
             style={composeStyles(
@@ -40,7 +40,7 @@ export const WeekDay = memo(
             )}
           >
             {capFirstLetter(formatter.format(day.date as Date))}
-          </Text>
+          </Headline>
         ))}
       </XBox>
     );

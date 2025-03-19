@@ -8,42 +8,25 @@
 'use client';
 
 import { Text, type TextProps } from './Text';
-import { withDefaultProps } from '@crossed/core';
 import 'react';
+import { forwardRef, memo } from 'react';
+import { Text as RNText } from 'react-native';
+import { headingTemplateStyles } from '../styles';
+import { composeStyles } from '@crossed/styled';
 
-type HeadingProps = TextProps & { 'aria-level'?: number };
+type HeadingProps = Omit<TextProps, 'size'> & {
+  size?: keyof typeof headingTemplateStyles;
+};
 
-export const H1 = withDefaultProps<HeadingProps>(Text, {
-  'role': 'heading',
-  'aria-level': 1,
-  'size': 'h1',
-  'weight': 'h1',
-});
-
-export const H2 = withDefaultProps<HeadingProps>(Text, {
-  'role': 'heading',
-  'aria-level': 2,
-  'size': 'h2',
-  'weight': 'h2',
-});
-
-export const H3 = withDefaultProps<HeadingProps>(Text, {
-  'role': 'heading',
-  'aria-level': 3,
-  'size': 'h3',
-});
-export const H4 = withDefaultProps<HeadingProps>(Text, {
-  'role': 'heading',
-  'aria-level': 4,
-  'size': 'h4',
-});
-export const H5 = withDefaultProps<HeadingProps>(Text, {
-  'role': 'heading',
-  'aria-level': 5,
-  'size': 'h5',
-});
-export const H6 = withDefaultProps<HeadingProps>(Text, {
-  'role': 'heading',
-  'aria-level': 6,
-  'size': 'h6',
-});
+export const Headline = memo(
+  forwardRef<RNText, HeadingProps>(({ size = 'xl', style, ...props }, ref) => {
+    return (
+      <Text
+        {...props}
+        size={null}
+        style={composeStyles(headingTemplateStyles[size], style)}
+        ref={ref}
+      />
+    );
+  })
+);

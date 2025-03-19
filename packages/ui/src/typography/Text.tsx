@@ -21,6 +21,7 @@ import {
   fontWeightStyles,
   fontSizeStyles,
   fontColorStyles,
+  sizeTemplateStyles,
 } from '../styles/typography';
 import { textAlignStyles } from '../styles/textAlign';
 import { memo } from 'react';
@@ -53,7 +54,12 @@ export interface TextProps extends Omit<TextNativeProps, 'style'> {
   /**
    * select font-size
    */
-  size?: keyof typeof fontSizeStyles;
+  fontSize?: keyof typeof fontSizeStyles;
+
+  /**
+   * Select size template
+   */
+  size?: keyof typeof sizeTemplateStyles;
 
   /**
    * select text-align
@@ -69,11 +75,12 @@ export interface TextProps extends Omit<TextNativeProps, 'style'> {
 const Text = memo<TextProps>(
   withReactive(
     ({
-      weight = 'md',
+      weight,
       color = 'primary',
       textAlign,
-      size = 'md',
+      fontSize,
       style,
+      size = 'default',
       ...props
     }) => {
       return (
@@ -81,8 +88,9 @@ const Text = memo<TextProps>(
           ref={props.ref}
           {...props}
           {...composeStyles(
+            sizeTemplateStyles[size],
             textAlignStyles[textAlign],
-            fontSizeStyles[size],
+            fontSizeStyles[fontSize],
             fontWeightStyles[weight],
             useText.root,
             fontColorStyles[color],
