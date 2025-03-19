@@ -163,7 +163,7 @@ export const createTab = ({
             tabTitleStyles.hover,
           style
         )}
-        size={size === 'sm' ? 'sm' : 'md'}
+        size={size === 'sm' ? 'md' : 'default'}
         {...state}
         {...props}
       />

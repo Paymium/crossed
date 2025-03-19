@@ -13,7 +13,7 @@ import { ComponentProps } from 'react';
 export const Title = (props: ComponentProps<typeof Headline>) => {
   return (
     <Headline
-      size="md"
+      size="lg"
       {...props}
       style={composeStyles(cardStyles.title, props.style)}
     />

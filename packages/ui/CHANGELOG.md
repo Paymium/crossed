@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 7.0.0-beta.2
+
+### Patch Changes
+
+- fix modal, card and tabs
+
 ## 7.0.0-beta.1
 
 ### Patch Changes
