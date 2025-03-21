@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 7.0.1
+
+### Patch Changes
+
+- 01373ee: Fix sheet height
+
 ## 7.0.0
 
 ### Major Changes
