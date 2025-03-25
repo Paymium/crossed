@@ -118,7 +118,9 @@ const tooltipStyles = inlineStyle(({ colors, space }) => ({
     borderRadius: 16,
     paddingVertical: space.xs,
     paddingHorizontal: space.sm,
+    maxWidth: 276,
   },
+  web: { base: { width: 'max-content' as any } },
 }));
 
 type ContentWebProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
@@ -166,7 +168,9 @@ const ContentNative = ({
   }, [open]);
   return (
     <Sheet ref={refSheet as any}>
-      <Sheet.Content onClose={onClose} children={children} />
+      <Sheet.Content onClose={onClose}>
+        <Sheet.Padded>{children}</Sheet.Padded>
+      </Sheet.Content>
     </Sheet>
   );
 };
