@@ -1,5 +1,13 @@
 # crossed-doc
 
+## 0.11.18
+
+### Patch Changes
+
+- eb0dd70: Add padding to content mobile and fix width of tooltip on web
+- Updated dependencies [eb0dd70]
+  - @crossed/ui@7.0.2
+
 ## 0.11.17
 
 ### Patch Changes
