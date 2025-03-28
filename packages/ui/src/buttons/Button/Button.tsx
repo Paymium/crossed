@@ -49,7 +49,6 @@ export const Button = forwardRef<View, ButtonProps>(
         aria-disabled={Boolean(disabled ?? false)}
         aria-labelledby={textId}
         role="button"
-        // @ts-expect-error should update react and react-native
         tabIndex={disabled ? -1 : 0}
         disabled={disabled || loading}
         ref={ref}

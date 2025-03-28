@@ -210,7 +210,7 @@ const AccordionPanel = ({ children, style }: AccordionPanelProps) => {
 };
 AccordionPanel.displayName = 'Accordion.Panel';
 
-const AccordionIcon = () => {
+const AccordionIcon = ({ style }: { style?: CrossedMethods<any> }) => {
   const { value } = useContext(itemContext);
   const { values } = useContext(rootContext);
   const isOpen = values.includes(value);
@@ -220,7 +220,7 @@ const AccordionIcon = () => {
     };
   }, [isOpen]);
   return (
-    <Animated.View style={animatedStyle}>
+    <Animated.View style={[style?.style().style, animatedStyle]}>
       <ChevronDown />
     </Animated.View>
   );
