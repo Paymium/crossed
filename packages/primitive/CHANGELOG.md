@@ -1,5 +1,16 @@
 # @crossed/primitive
 
+## 2.0.0
+
+### Minor Changes
+
+- 8602f45: update react-native
+
+### Patch Changes
+
+- Updated dependencies [8602f45]
+  - @crossed/core@0.9.0
+
 ## 1.9.2
 
 ### Patch Changes

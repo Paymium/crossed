@@ -1,5 +1,11 @@
 # vite-plugin-crossed-styled
 
+## 0.0.6
+
+### Patch Changes
+
+- @crossed/loader@4.0.0
+
 ## 0.0.5
 
 ### Patch Changes

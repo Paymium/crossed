@@ -78,16 +78,16 @@ importers:
         specifier: 0.4.0
         version: 0.4.0(react-native@0.76.7)(ts-node@10.8.1)
       '@crossed/core':
-        specifier: 0.8.3
+        specifier: 0.9.0
         version: link:../../packages/core
       '@crossed/styled':
         specifier: workspace:^
         version: link:../../packages/styled
       '@crossed/theme':
-        specifier: workspace:2.2.7
+        specifier: workspace:3.0.0
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: 7.0.2
+        specifier: 8.0.0
         version: link:../../packages/ui
       '@crossed/unicons':
         specifier: workspace:*
@@ -260,19 +260,19 @@ importers:
   apps/doc:
     dependencies:
       '@crossed/styled':
-        specifier: workspace:0.14.4
+        specifier: workspace:0.15.0
         version: link:../../packages/styled
       '@crossed/theme':
-        specifier: workspace:2.2.7
+        specifier: workspace:3.0.0
         version: link:../../packages/theme
       '@crossed/ui':
-        specifier: workspace:7.0.2
+        specifier: workspace:8.0.0
         version: link:../../packages/ui
       '@crossed/unicons':
-        specifier: 3.0.2
+        specifier: 4.0.0
         version: link:../../packages/unicons
       '@crossed/webpack':
-        specifier: workspace:2.1.7
+        specifier: workspace:3.0.0
         version: link:../../packages/webpack
       '@gorhom/portal':
         specifier: ^1.0.14
@@ -385,16 +385,16 @@ importers:
     dependencies:
       '@crossed/next-adapter':
         specifier: ^0.6.4
-        version: 0.6.10(@babel/core@7.26.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(react-dom@18.3.1)(react@18.3.1)
+        version: 0.6.10(@babel/core@7.26.0)(@crossed/styled@0.14.4)(@crossed/theme@2.2.7)(react-dom@18.3.1)(react@18.3.1)
       '@crossed/styled':
         specifier: ^0.14.0
-        version: link:../../packages/styled
+        version: 0.14.4(react-native@0.73.11)(react@18.3.1)
       '@crossed/theme':
         specifier: ^2.0.2
-        version: link:../../packages/theme
+        version: 2.2.7(@crossed/styled@0.14.4)
       '@crossed/ui':
         specifier: ^1.0.3
-        version: 1.1.2(@crossed/build@packages+build)(@crossed/core@0.8.2)(@crossed/primitive@1.8.1)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@1.0.4)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.76.7)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.17.1)(react-native-safe-area-context@5.3.0)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1)
+        version: 1.1.2(@crossed/build@packages+build)(@crossed/core@0.8.2)(@crossed/primitive@1.8.1)(@crossed/styled@0.14.4)(@crossed/theme@2.2.7)(@crossed/unicons@1.0.4)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.76.7)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.17.1)(react-native-safe-area-context@5.3.0)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1)
       next:
         specifier: 14.2.14
         version: 14.2.14(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
@@ -460,7 +460,7 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/test':
-        specifier: 0.13.0
+        specifier: 0.14.0
         version: link:../test
       '@jest/types':
         specifier: 29.6.3
@@ -509,10 +509,10 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/styled':
-        specifier: 0.14.4
+        specifier: 0.15.0
         version: link:../styled
       '@crossed/test':
-        specifier: 0.13.0
+        specifier: 0.14.0
         version: link:../test
       '@crossed/theme':
         specifier: workspace:^
@@ -561,7 +561,7 @@ importers:
   packages/next-adapter:
     dependencies:
       '@crossed/webpack':
-        specifier: 2.1.7
+        specifier: 3.0.0
         version: link:../webpack
       find-yarn-workspace-root:
         specifier: ^2.0.0
@@ -644,10 +644,10 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/core':
-        specifier: 0.8.3
+        specifier: 0.9.0
         version: link:../core
       '@crossed/test':
-        specifier: 0.13.0
+        specifier: 0.14.0
         version: link:../test
       '@gorhom/portal':
         specifier: ^1.0.14
@@ -716,7 +716,7 @@ importers:
   packages/styled:
     dependencies:
       '@crossed/core':
-        specifier: ^0.8.3
+        specifier: ^0.9.0
         version: link:../core
       ts-deepmerge:
         specifier: ^7.0.0
@@ -726,7 +726,7 @@ importers:
         specifier: ^0.5.0
         version: link:../build
       '@crossed/test':
-        specifier: 0.13.0
+        specifier: 0.14.0
         version: link:../test
       '@types/jest':
         specifier: ^29.5.13
@@ -899,22 +899,22 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/core':
-        specifier: 0.8.3
+        specifier: 0.9.0
         version: link:../core
       '@crossed/primitive':
-        specifier: 1.9.2
+        specifier: 2.0.0
         version: link:../primitive
       '@crossed/styled':
         specifier: workspace:^
         version: link:../styled
       '@crossed/test':
-        specifier: 0.13.0
+        specifier: 0.14.0
         version: link:../test
       '@crossed/theme':
         specifier: workspace:^
         version: link:../theme
       '@crossed/unicons':
-        specifier: 3.0.2
+        specifier: 4.0.0
         version: link:../unicons
       '@devvie/bottom-sheet':
         specifier: 0.3.0
@@ -1002,7 +1002,7 @@ importers:
         specifier: '*'
         version: link:../build
       '@crossed/test':
-        specifier: workspace:0.13.0
+        specifier: workspace:0.14.0
         version: link:../test
       '@testing-library/dom':
         specifier: 10.4.0
@@ -1108,7 +1108,7 @@ importers:
   packages/webpack:
     dependencies:
       '@crossed/loader':
-        specifier: 3.0.7
+        specifier: 4.0.0
         version: link:../loader
       '@crossed/log':
         specifier: 0.1.1
@@ -1130,7 +1130,7 @@ importers:
         specifier: ^0.5.0
         version: link:../build
       '@crossed/styled':
-        specifier: 0.14.4
+        specifier: 0.15.0
         version: link:../styled
       '@types/esprima':
         specifier: ^4.0.6
@@ -3204,15 +3204,15 @@ packages:
       react-native: 0.73.11(@babel/core@7.26.0)(@babel/preset-env@7.25.7)(react@18.3.1)
     dev: false
 
-  /@crossed/loader@2.0.1(@crossed/styled@packages+styled)(@crossed/theme@packages+theme):
+  /@crossed/loader@2.0.1(@crossed/styled@0.14.4)(@crossed/theme@2.2.7):
     resolution: {integrity: sha512-7HN5VjwnlycPRRrc1VH07x22iygg+Rg2R/1fsrQKky5BlMtnWHR8nF+LidznjtSekgg0zijCWxw9UiV//2FAdg==}
     peerDependencies:
       '@crossed/styled': 0.14.3
       '@crossed/theme': ^2.1.1
     dependencies:
       '@crossed/log': 0.1.1
-      '@crossed/styled': link:packages/styled
-      '@crossed/theme': link:packages/theme
+      '@crossed/styled': 0.14.4(react-native@0.73.11)(react@18.3.1)
+      '@crossed/theme': 2.2.7(@crossed/styled@0.14.4)
       esbuild: 0.17.19
       escodegen: 2.1.0
       esprima: 4.0.1
@@ -3228,13 +3228,13 @@ packages:
       winston: 3.14.2
     dev: false
 
-  /@crossed/next-adapter@0.6.10(@babel/core@7.26.0)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(react-dom@18.3.1)(react@18.3.1):
+  /@crossed/next-adapter@0.6.10(@babel/core@7.26.0)(@crossed/styled@0.14.4)(@crossed/theme@2.2.7)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-o3AHmnosDt86ZX89O3SBQL0WpgeVmfVkN7073XX4tCFj2Ah2gfZgLgkjMk4k2e1965Y5s2L4Jy4f1TOWWTCeDw==}
     engines: {node: '>=10'}
     peerDependencies:
       react: 18.3.1
     dependencies:
-      '@crossed/webpack': 2.0.9(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)
+      '@crossed/webpack': 2.0.9(@crossed/styled@0.14.4)(@crossed/theme@2.2.7)
       find-yarn-workspace-root: 2.0.0
       fs-extra: 11.2.0
       next: 13.5.7(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
@@ -3270,7 +3270,27 @@ packages:
       - react-native
     dev: false
 
-  /@crossed/ui@1.1.2(@crossed/build@packages+build)(@crossed/core@0.8.2)(@crossed/primitive@1.8.1)(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(@crossed/unicons@1.0.4)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.76.7)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.17.1)(react-native-safe-area-context@5.3.0)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1):
+  /@crossed/styled@0.14.4(react-native@0.73.11)(react@18.3.1):
+    resolution: {integrity: sha512-jkkJFTmi9pLe4tTy+AEXB5qKxOZMT0/fbKMeeNyUMsv1Yf79VU0hQ4SpEsFIYQk0WRLxJ/OpeG4juMX29w3gig==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      '@crossed/core': 0.8.3(react-native@0.73.11)(react@18.3.1)
+      react: 18.3.1
+      react-native: 0.73.11(@babel/core@7.26.0)(@babel/preset-env@7.25.7)(react@18.3.1)
+      ts-deepmerge: 7.0.1
+    dev: false
+
+  /@crossed/theme@2.2.7(@crossed/styled@0.14.4):
+    resolution: {integrity: sha512-KOrEn9jTiYsfdga36MYCjPCJsEWx03zxsRBfVNbtD63tMnPwoJiF0fWLqRqg8qm20YYE1urmGnJFZpmU1Lne9w==}
+    peerDependencies:
+      '@crossed/styled': ^0.14.4
+    dependencies:
+      '@crossed/styled': 0.14.4(react-native@0.73.11)(react@18.3.1)
+    dev: false
+
+  /@crossed/ui@1.1.2(@crossed/build@packages+build)(@crossed/core@0.8.2)(@crossed/primitive@1.8.1)(@crossed/styled@0.14.4)(@crossed/theme@2.2.7)(@crossed/unicons@1.0.4)(@devvie/bottom-sheet@0.3.0)(@react-native/normalize-colors@0.76.7)(@types/react@18.3.11)(react-dom@18.3.1)(react-native-gesture-handler@2.14.1)(react-native-reanimated@3.17.1)(react-native-safe-area-context@5.3.0)(react-native@0.73.11)(react-test-renderer@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-GxI/iX5l2S/TlCNMrz2xz9Wrelz8WMkjwF4/ktSwT7zLKIu+/ZtLB/4Pr4rc+DoVc0kwEe8ZodmgVIVeWvvd3g==}
     peerDependencies:
       '@crossed/build': '*'
@@ -3287,9 +3307,9 @@ packages:
       '@crossed/build': link:packages/build
       '@crossed/core': 0.8.2(react-native@0.73.11)(react@18.3.1)
       '@crossed/primitive': 1.8.1(@types/react@18.3.11)(react-dom@18.3.1)(react-native@0.73.11)(react@18.3.1)
-      '@crossed/styled': link:packages/styled
-      '@crossed/theme': link:packages/theme
-      '@crossed/unicons': 1.0.4(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(react-native-svg@15.11.2)(react-native@0.73.11)(react@18.3.1)
+      '@crossed/styled': 0.14.4(react-native@0.73.11)(react@18.3.1)
+      '@crossed/theme': 2.2.7(@crossed/styled@0.14.4)
+      '@crossed/unicons': 1.0.4(@crossed/styled@0.14.4)(@crossed/theme@2.2.7)(react-native-svg@15.11.2)(react-native@0.73.11)(react@18.3.1)
       '@devvie/bottom-sheet': 0.3.0(react-native@0.73.11)(react@18.3.1)
       '@expo/html-elements': 0.5.1
       '@floating-ui/dom': 1.6.11
@@ -3328,7 +3348,7 @@ packages:
       - react-test-renderer
     dev: false
 
-  /@crossed/unicons@1.0.4(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)(react-native-svg@15.11.2)(react-native@0.73.11)(react@18.3.1):
+  /@crossed/unicons@1.0.4(@crossed/styled@0.14.4)(@crossed/theme@2.2.7)(react-native-svg@15.11.2)(react-native@0.73.11)(react@18.3.1):
     resolution: {integrity: sha512-gRQ7OguKgEnFB2ITIQpqdkPCiRUm7HxrxU4IeCgVFuWf+Gaa64kVOrlJBIwHDxpGjIloUG2C6m5BiSBEDrc2oA==}
     peerDependencies:
       '@crossed/styled': ^0.14.2
@@ -3337,22 +3357,22 @@ packages:
       react-native-svg: ^15.1.0
     dependencies:
       '@crossed/core': 0.8.3(react-native@0.73.11)(react@18.3.1)
-      '@crossed/styled': link:packages/styled
-      '@crossed/theme': link:packages/theme
+      '@crossed/styled': 0.14.4(react-native@0.73.11)(react@18.3.1)
+      '@crossed/theme': 2.2.7(@crossed/styled@0.14.4)
       react: 18.3.1
       react-native-svg: 15.11.2(react-native@0.73.11)(react@18.3.1)
     transitivePeerDependencies:
       - react-native
     dev: false
 
-  /@crossed/webpack@2.0.9(@crossed/styled@packages+styled)(@crossed/theme@packages+theme):
+  /@crossed/webpack@2.0.9(@crossed/styled@0.14.4)(@crossed/theme@2.2.7):
     resolution: {integrity: sha512-B+7CWEwOMi1k2LlZfuzMUVvmPZsLxicMkMVWfwowvBTnpzwHoi3ToCd5Kal4xpDaLaGe+BWkjQfoZf8EMN2R6A==}
     peerDependencies:
       '@crossed/styled': 0.14.3
     dependencies:
-      '@crossed/loader': 2.0.1(@crossed/styled@packages+styled)(@crossed/theme@packages+theme)
+      '@crossed/loader': 2.0.1(@crossed/styled@0.14.4)(@crossed/theme@2.2.7)
       '@crossed/log': 0.1.1
-      '@crossed/styled': link:packages/styled
+      '@crossed/styled': 0.14.4(react-native@0.73.11)(react@18.3.1)
       esprima: 4.0.1
       static-eval: 2.1.1
       ts-pattern: 5.4.0

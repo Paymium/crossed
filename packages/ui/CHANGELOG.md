@@ -1,5 +1,25 @@
 # @crossed/ui
 
+## 8.0.0
+
+### Minor Changes
+
+- 8602f45: update react-native
+
+### Patch Changes
+
+- 8602f45: remove color style of Card.Title for use Text props
+- 8602f45: add style props on AccordionIcon
+- Updated dependencies [a90c713]
+- Updated dependencies [8602f45]
+  - @crossed/sheet@0.11.0
+  - @crossed/primitive@2.0.0
+  - @crossed/unicons@4.0.0
+  - @crossed/styled@0.15.0
+  - @crossed/theme@3.0.0
+  - @crossed/core@0.9.0
+  - @crossed/use-calendar@0.0.1
+
 ## 7.0.2
 
 ### Patch Changes

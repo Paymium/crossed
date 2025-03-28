@@ -1,5 +1,16 @@
 # @crossed/theme
 
+## 3.0.0
+
+### Minor Changes
+
+- 8602f45: update react-native
+
+### Patch Changes
+
+- Updated dependencies [8602f45]
+  - @crossed/styled@0.15.0
+
 ## 2.2.7
 
 ### Patch Changes

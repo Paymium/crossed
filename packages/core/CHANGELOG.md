@@ -1,5 +1,11 @@
 # @crossed/core
 
+## 0.9.0
+
+### Minor Changes
+
+- 8602f45: update react-native
+
 ## 0.8.3
 
 ### Patch Changes

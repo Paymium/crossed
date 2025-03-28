@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@crossed/build": "*",
-    "@crossed/test": "workspace:0.13.0",
+    "@crossed/test": "workspace:0.14.0",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.1.0",

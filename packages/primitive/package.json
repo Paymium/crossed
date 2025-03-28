@@ -1,7 +1,7 @@
 {
   "name": "@crossed/primitive",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "1.9.2",
+  "version": "2.0.0",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
@@ -32,8 +32,8 @@
   },
   "devDependencies": {
     "@crossed/build": "*",
-    "@crossed/core": "0.8.3",
-    "@crossed/test": "0.13.0",
+    "@crossed/core": "0.9.0",
+    "@crossed/test": "0.14.0",
     "@gorhom/portal": "^1.0.14",
     "@testing-library/jest-dom": "^6.5.0",
     "@types/jest": "^29.5.13",

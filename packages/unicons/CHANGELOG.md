@@ -1,5 +1,18 @@
 # @crossed/unicons
 
+## 4.0.0
+
+### Minor Changes
+
+- 8602f45: update react-native
+
+### Patch Changes
+
+- Updated dependencies [8602f45]
+  - @crossed/styled@0.15.0
+  - @crossed/theme@3.0.0
+  - @crossed/core@0.9.0
+
 ## 3.0.2
 
 ### Patch Changes

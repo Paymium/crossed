@@ -1,5 +1,18 @@
 # crossed-vite
 
+## 0.0.24
+
+### Patch Changes
+
+- Updated dependencies [8602f45]
+- Updated dependencies [8602f45]
+- Updated dependencies [8602f45]
+  - @crossed/ui@8.0.0
+  - @crossed/styled@0.15.0
+  - @crossed/theme@3.0.0
+  - @crossed/loader@4.0.0
+  - vite-plugin-crossed-styled@0.0.6
+
 ## 0.0.23
 
 ### Patch Changes

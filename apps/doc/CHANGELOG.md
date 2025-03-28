@@ -1,5 +1,22 @@
 # crossed-doc
 
+## 0.12.0
+
+### Minor Changes
+
+- 8602f45: update react-native
+
+### Patch Changes
+
+- Updated dependencies [8602f45]
+- Updated dependencies [8602f45]
+- Updated dependencies [8602f45]
+  - @crossed/ui@8.0.0
+  - @crossed/unicons@4.0.0
+  - @crossed/styled@0.15.0
+  - @crossed/theme@3.0.0
+  - @crossed/webpack@3.0.0
+
 ## 0.11.18
 
 ### Patch Changes
