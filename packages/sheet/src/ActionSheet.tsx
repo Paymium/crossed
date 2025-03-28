@@ -1410,7 +1410,7 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
     };
 
     return (
-      <>
+      <View>
         {Platform.OS === 'ios' && !safeAreaInsets ? (
           <SafeAreaView
             pointerEvents="none"
@@ -1651,7 +1651,7 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
             </GestureHandlerRoot>
           </Root>
         ) : null}
-      </>
+      </View>
     );
   }
 );
