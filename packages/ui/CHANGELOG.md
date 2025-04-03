@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.0.1
+
+### Patch Changes
+
+- 3565d1e: fix open sheet datepicker
+
 ## 8.0.0
 
 ### Minor Changes
