@@ -84,7 +84,7 @@ export const DateInput = memo(
 
     const handleFocusInput = useCallback(() => {
       isFocus.current = true;
-      if (showFloating && picker && !calendarRef.current?.isOpen()) {
+      if (picker && !calendarRef.current?.isOpen()) {
         picker && calendarRef.current?.open();
       }
     }, [picker]);
