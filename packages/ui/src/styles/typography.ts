@@ -8,7 +8,7 @@
 import { createStyles } from '@crossed/styled';
 
 export const headingTemplateStyles = createStyles(() => ({
-  xl: { base: { fontSize: 32, lineHeight: 32, fontWeight: '900' } },
+  xl: { base: { fontSize: 32, lineHeight: 36, fontWeight: '900' } },
   lg: { base: { fontSize: 24, lineHeight: 32, fontWeight: '800' } },
   md: { base: { fontSize: 18, lineHeight: 24, fontWeight: '700' } },
 }));

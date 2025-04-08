@@ -13,4 +13,4 @@ type ThemesCustom = typeof themes;
 declare module '@crossed/styled' {
   export interface Themes extends ThemesCustom {}
 }
-Registry.setThemes(themes).setThemeName('light');
+Registry.setThemes(themes).setThemeName('dark');

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { MenuList, MenuItem } from '@crossed/ui';
-import { createStyles } from '@crossed/styled';
+import { createStyles, useTheme } from '@crossed/styled';
 import { ChevronRight } from '@crossed/unicons';
 import { FlatList } from 'react-native';
 import { IndexScreenProps, RootStackParamList } from '../routes';
@@ -45,6 +45,7 @@ const menus: Menu[] = [
 ] as const;
 
 export default function TabOneScreen({ navigation }: IndexScreenProps) {
+  useTheme();
   return (
     <MenuList>
       <FlatList
