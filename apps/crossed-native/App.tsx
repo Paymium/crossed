@@ -13,7 +13,11 @@ import {
   useColorScheme,
 } from 'react-native';
 
-import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme,
+  DefaultTheme,
+} from '@react-navigation/native';
 import TabOneScreen from './src/app';
 import ButtonScreen from './src/app/button';
 import { BannerScreen } from './src/app/banner';
