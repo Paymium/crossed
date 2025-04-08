@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.0.2
+
+### Patch Changes
+
+- df0f2c6: DateInput color text fix, icon not show on mobile
+
 ## 8.0.1
 
 ### Patch Changes
