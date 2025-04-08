@@ -16,12 +16,13 @@ export interface InputPartProps
   label?: string;
 }
 
-const styles = inlineStyle(() => ({
+const styles = inlineStyle(({ colors }) => ({
   base: {
     borderWidth: 0,
     backgroundColor: 'transparent',
     maxWidth: 64,
     textAlign: 'center',
+    color: colors.text.primary,
   },
   web: {
     ':focus': {

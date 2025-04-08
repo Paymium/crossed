@@ -35,6 +35,7 @@ import { useMedia } from '../../useMedia';
 import { composeEventHandlers } from '@crossed/core';
 import { Focus } from './Focus';
 import { ActionSheetRef } from '@crossed/sheet';
+import { XBox } from '../../layout';
 
 const duration = 100;
 
@@ -174,19 +175,23 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
       />
     );
 
+    const renderIcon = (
+      <XBox
+        style={inlineStyle(({ space }) => ({
+          base: { marginRight: space.xs },
+        }))}
+      >
+        <ChevronDown color={colors.text.secondary} />
+      </XBox>
+    );
+
     return showFloating ? (
       <Floating
         {...floatingProps}
         ref={floatingRef}
         onChange={composeEventHandlers(toggleOpen, floatingProps?.onChange)}
       >
-        <Box
-          style={inlineStyle(({ space }) => ({
-            base: { marginRight: space.xs },
-          }))}
-        >
-          <ChevronDown color={colors.text.secondary} />
-        </Box>
+        {renderIcon}
         <Floating.Portal>
           <Focus
             onEscapeKey={handleClose}
@@ -211,6 +216,7 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
       </Floating>
     ) : (
       <Sheet ref={sheetRef} onOpenChange={toggleOpen}>
+        {renderIcon}
         <Sheet.Content
           // enable autoHeight snap
           containerStyle={inlineStyle(() => ({ base: { height: undefined } }))}
