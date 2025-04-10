@@ -19,6 +19,7 @@ import { Calendar, FloatingRefExtended } from './Calendar';
 import { growStyles, shrinkStyles } from '../../styles/flex';
 import { useUncontrolled } from '@crossed/core';
 import { useMedia } from '../../useMedia';
+import { NativeSyntheticEvent, TextInputFocusEventData } from 'react-native';
 
 const convertToDate = (e?: Partial<Value>) => {
   if (e?.year === undefined || e?.month === undefined || e?.day === undefined)
@@ -82,12 +83,17 @@ export const DateInput = memo(
     const { md } = useMedia();
     const showFloating = isWeb && md;
 
-    const handleFocusInput = useCallback(() => {
-      isFocus.current = true;
-      if (picker && !calendarRef.current?.isOpen()) {
-        picker && calendarRef.current?.open();
-      }
-    }, [picker]);
+    const handleFocusInput = useCallback(
+      (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+        isFocus.current = true;
+        // blur input on mobile, if user hide sheet, re-focus on input loop appear sheet
+        !isWeb && e.target?.blur?.();
+        if (picker && !calendarRef.current?.isOpen()) {
+          picker && calendarRef.current?.open();
+        }
+      },
+      [picker]
+    );
     const handleBlurInput = useCallback(() => {
       isFocus.current = false;
     }, [picker]);
