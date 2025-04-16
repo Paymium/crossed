@@ -1,5 +1,11 @@
 # @crossed/sheet
 
+## 0.12.0
+
+### Minor Changes
+
+- 9e7b2b0: Add SectionList
+
 ## 0.11.0
 
 ### Minor Changes

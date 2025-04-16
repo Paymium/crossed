@@ -1,5 +1,17 @@
 # @crossed/ui
 
+## 8.1.0
+
+### Minor Changes
+
+- 9e7b2b0: Add sectionList in sheet and select
+- 9e7b2b0: Increase design MenuList.Label
+
+### Patch Changes
+
+- Updated dependencies [9e7b2b0]
+  - @crossed/sheet@0.12.0
+
 ## 8.0.3
 
 ### Patch Changes
