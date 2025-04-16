@@ -1,6 +1,6 @@
 {
   "name": "@crossed/sheet",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "A Cross Platform(Android & iOS) ActionSheet with a robust and flexible api, native performance and zero dependency code for react native. Create anything you want inside ActionSheet.",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",

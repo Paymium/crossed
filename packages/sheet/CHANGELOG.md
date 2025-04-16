@@ -1,5 +1,11 @@
 # @crossed/sheet
 
+## 0.12.1
+
+### Patch Changes
+
+- 5e55498: fix sheet
+
 ## 0.12.0
 
 ### Minor Changes
