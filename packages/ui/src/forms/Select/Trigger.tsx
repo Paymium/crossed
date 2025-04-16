@@ -14,7 +14,7 @@ import {
   useCallback,
   useId,
 } from 'react';
-import { composeStyles, inlineStyle } from '@crossed/styled';
+import { composeStyles, inlineStyle, useTheme } from '@crossed/styled';
 import { ChevronDown } from '@crossed/unicons';
 import { form } from '../../styles/form';
 import { VisibilityHidden } from '../../other/VisibilityHidden';
@@ -55,10 +55,15 @@ const Value = () => {
 
   const tmp = !value ? [] : Array.isArray(value) ? value : [value];
   const toRender = tmp && tmp.length > 3 ? tmp.slice(0, 3) : tmp;
-  const labelByValue = items.reduce(
-    (acc, i) => ({ ...acc, [`${i.value}`]: i }),
-    {}
-  );
+  const labelByValue = items.reduce((acc, i) => {
+    if ('title' in i) {
+      return {
+        ...acc,
+        ...i.data.reduce((acc2, d) => ({ ...acc2, [`${d.value}`]: d }), {}),
+      };
+    }
+    return { ...acc, [`${i.value}`]: i };
+  }, {});
   return (
     <>
       <VisibilityHidden hide>
@@ -106,7 +111,7 @@ export const SelectTrigger = withStaticProperties(
   memo<ButtonProps & RefAttributes<View>>(
     forwardRef(({ children, ...props }, ref) => {
       const { clearable } = useSelectConfig();
-
+      useTheme();
       return (
         <XBox>
           <FormControl>

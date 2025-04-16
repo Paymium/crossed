@@ -38,4 +38,6 @@ export {
 } from './hooks/use-router';
 export { ScrollView } from './views/ScrollView';
 export { FlatList } from './views/FlatList';
+export { SectionList } from './views/SectionList';
+export { FlashList } from './views/FlashList';
 export default ActionSheet;

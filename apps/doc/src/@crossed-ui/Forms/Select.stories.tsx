@@ -15,6 +15,7 @@ import { Text } from '@crossed/ui/src/typography';
 import { inlineStyle } from '@crossed/styled';
 import { useState } from 'react';
 import { Anchor } from '@crossed/ui';
+import { fn } from '@storybook/test';
 
 const items = [
   { value: 'Select 1', label: 'Select 1' },
@@ -57,6 +58,7 @@ export const Primary: Story = {
     clearable: false,
     error: '',
     items,
+    onChange: fn(),
   },
 };
 export const Clearabled: Story = {
@@ -90,7 +92,7 @@ export const Searchable: Story = {
 export const SearchablePerf: Story = {
   ...Primary,
   args: {
-    ...Primary.args,
+    ...(Primary.args as any),
     searchable: true,
     items: countries.map((country) => ({
       label: country.name_fr,
@@ -103,6 +105,20 @@ export const SearchablePerf: Story = {
 export const SearchableMultible: Story = {
   ...SearchablePerf,
   args: { ...SearchablePerf.args, searchable: true, multiple: true },
+};
+
+export const Section: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    section: true,
+    items: [
+      { title: 'Main dishes', data: items },
+      { title: 'Sides', data: items },
+      { title: 'Drinks', data: items },
+      { title: 'Desserts', data: items },
+    ],
+  },
 };
 
 const Render = (e) => {

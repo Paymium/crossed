@@ -10,8 +10,8 @@ import {
   composeStyles,
   createStyles,
   CrossedMethods,
+  inlineStyle,
   withReactive,
-  // type ExtractForProps,
 } from '@crossed/styled';
 import { Text, TextProps } from '../typography/Text';
 import { YBox, type YBoxProps } from '../layout/YBox';
@@ -19,6 +19,7 @@ import { Divider as D, DividerProps } from '../layout/Divider';
 import { withStaticProperties } from '@crossed/core';
 import {
   cloneElement,
+  ComponentProps,
   forwardRef,
   isValidElement,
   memo,
@@ -45,6 +46,14 @@ const rootStyle = createStyles(({ colors, space }) => ({
   padded: { base: { padding: space.xs } },
 }));
 const itemStyles = createStyles((t) => ({
+  padding: {
+    base: {
+      paddingTop: t.space.xs,
+      paddingBottom: t.space.xs,
+      paddingLeft: t.space.md,
+      paddingRight: t.space.md,
+    },
+  },
   item: {
     'base': {
       display: 'flex',
@@ -53,10 +62,6 @@ const itemStyles = createStyles((t) => ({
       paddingHorizontal: t.space.md,
       justifyContent: 'center',
       // height: 42,
-      paddingTop: t.space.xs,
-      paddingBottom: t.space.xs,
-      paddingLeft: t.space.md,
-      paddingRight: t.space.md,
       borderWidth: 0,
       borderRadius: 5,
     },
@@ -119,7 +124,9 @@ const MenuItem = withReactive<MenuListItemProps>(
     ({ asChild, style, children, ...props }: MenuListItemProps, ref) => {
       const styleCallback = useCallback(
         ({ pressed }) =>
-          composeStyles(itemStyles.item, style).rnw({ active: pressed }).style,
+          composeStyles(itemStyles.item, itemStyles.padding, style).rnw({
+            active: pressed,
+          }).style,
         [style]
       );
       return asChild && isValidElement(children) ? (
@@ -137,8 +144,19 @@ const MenuItem = withReactive<MenuListItemProps>(
 );
 MenuItem.displayName = 'MenuList.Item';
 
-const MenuLabel = Text;
+const MenuLabel = ({ style, ...props }: ComponentProps<typeof Text>) => (
+  <Text
+    {...props}
+    style={composeStyles(
+      itemStyles.padding,
+      inlineStyle(() => ({ base: { marginTop: 0 } })),
+      style
+    )}
+  />
+);
+MenuLabel.displayName = 'MenuList.Label';
 const MenuTitle = (props: TextProps) => <Text color="secondary" {...props} />;
+MenuTitle.displayName = 'MenuList.Title';
 
 const MenuList = withStaticProperties(MenuRoot, {
   Divider: MenuDivider,

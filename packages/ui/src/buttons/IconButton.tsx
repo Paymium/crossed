@@ -11,6 +11,7 @@ import {
   inlineStyle,
   CrossedMethods,
   useTheme,
+  Registry,
 } from '@crossed/styled';
 import { cloneElement, isValidElement, memo, useCallback } from 'react';
 
@@ -22,7 +23,7 @@ export interface IconButtonProps extends Omit<PressableProps, 'style'> {
 }
 
 export const iconButtonStyles = inlineStyle(({ components: { Action } }) => ({
-  base: {
+  'base': {
     borderRadius: 50,
     backgroundColor: Action.icon.default.background,
     borderColor: Action.icon.default.border,
@@ -42,7 +43,7 @@ export const iconButtonStyles = inlineStyle(({ components: { Action } }) => ({
     outlineColor: Action.icon.focus.border,
   },
   ':disabled': { opacity: 0.5 },
-  web: {
+  'web': {
     ':focus-visible': {
       backgroundColor: Action.icon.focus.background,
       outlineColor: Action.icon.focus.border,
@@ -52,6 +53,7 @@ export const iconButtonStyles = inlineStyle(({ components: { Action } }) => ({
 
 export const IconButton = memo<IconButtonProps>(
   ({ children, style, ...props }) => {
+    const { components } = useTheme();
     const getStyle = useCallback(
       ({
         hovered,
@@ -69,9 +71,8 @@ export const IconButton = memo<IconButtonProps>(
           disabled: !!props.disabled,
         }).style;
       },
-      [props.disabled, style]
+      [props.disabled, Registry.themeName, style]
     );
-    const { components } = useTheme();
     const child = useCallback(
       (e: any) => {
         const tmpChild =

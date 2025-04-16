@@ -5,43 +5,21 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 import { Sheet } from '../../overlay/Sheet';
 import { YBox } from '../../layout/YBox';
 import { Text } from '../../typography/Text';
 import { FormField } from '../../forms/Form';
-import { SelectLabel, SelectLabelProps } from './Label';
-import {
-  SelectConfigContext,
-  SelectConfigProvider,
-  SelectValueContext,
-  SelectValueProvider,
-} from './context';
-import { useUncontrolled, UseUncontrolledInput } from '@crossed/core';
-import { ValueType } from './types';
+import { SelectLabel } from './Label';
+import { SelectConfigProvider, SelectValueProvider } from './context';
+import { useUncontrolled } from '@crossed/core';
+import { SelectProps } from './types';
 import { SelectTrigger } from './Trigger';
 import { SelectContent } from './Content';
 import { useFloating } from './useFloating';
 import { Floating } from '../../overlay/Floating';
-
-export type SelectProps = Pick<
-  SelectLabelProps,
-  'label' | 'description' | 'extra'
-> &
-  Pick<SelectConfigContext, 'multiple' | 'clearable' | 'searchable'> &
-  Partial<Pick<UseUncontrolledInput<ValueType>, 'defaultValue' | 'onChange'>> &
-  Pick<SelectValueContext, 'items' | 'renderValue'> &
-  Partial<Pick<SelectValueContext, 'value'>> & {
-    error?: string;
-
-    disabled?: boolean;
-
-    id?: string;
-
-    onSearch?: (_search: string) => void;
-    loading?: boolean;
-    children?: ReactNode;
-  };
+import { isWeb } from '@crossed/styled';
+import { useMedia } from '../../useMedia';
 
 export const Select = memo<SelectProps>((e) => {
   const {
@@ -62,8 +40,10 @@ export const Select = memo<SelectProps>((e) => {
     loading,
     renderValue,
     children,
+    section,
   } = e;
 
+  const { md } = useMedia();
   const [value, setValue] = useUncontrolled({
     value: valueProps,
     onChange,
@@ -78,6 +58,8 @@ export const Select = memo<SelectProps>((e) => {
       clearable={clearable}
       searchable={searchable}
       disabled={disabled}
+      section={section}
+      showSheet={!isWeb || !md}
     >
       <SelectValueProvider
         value={value}

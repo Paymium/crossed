@@ -24,9 +24,6 @@ export const useSelect = createStyles(() => ({
       width: 'auto',
     },
   },
-  options: {
-    // ':active': { backgroundColor: t.colors.neutral[400] },
-  },
   value: {
     base: {
       alignItems: 'center',
