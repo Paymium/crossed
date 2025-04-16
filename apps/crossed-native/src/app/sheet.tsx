@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { XBox, Text, Sheet, Button } from '@crossed/ui';
+import { XBox, Text, Sheet, Button, Select } from '@crossed/ui';
 import { createStyles } from '@crossed/styled';
 import { FlatList } from 'react-native';
 
@@ -52,6 +52,23 @@ export default function SheetScreen() {
                       Description {i}
                     </Text>
                   ))}
+                </Sheet.ScrollView>
+              </Sheet.Content>
+            </Sheet>
+            <Sheet>
+              <Sheet.Trigger asChild>
+                <Button>
+                  <Button.Text>With Select</Button.Text>
+                </Button>
+              </Sheet.Trigger>
+              <Sheet.Content>
+                <Sheet.ScrollView>
+                  <Select
+                    items={Array.from(Array(100).keys()).map((i) => ({
+                      label: i,
+                      value: i,
+                    }))}
+                  />
                 </Sheet.ScrollView>
               </Sheet.Content>
             </Sheet>

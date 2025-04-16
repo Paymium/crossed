@@ -42,7 +42,7 @@ export function resolveScrollRef(ref: any) {
     return ref.current?.rlvRef?._scrollComponent?._scrollViewRef;
   }
   // SectionList
-  if (ref.current?._wrapperListRef._listRef?._scrollRef) {
+  if (ref.current?._wrapperListRef?._listRef?._scrollRef) {
     return ref.current?._wrapperListRef._listRef?._scrollRef;
   }
   // ScrollView
