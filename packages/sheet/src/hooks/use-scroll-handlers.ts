@@ -41,6 +41,10 @@ export function resolveScrollRef(ref: any) {
   if (ref.current?.rlvRef) {
     return ref.current?.rlvRef?._scrollComponent?._scrollViewRef;
   }
+  // SectionList
+  if (ref.current?._wrapperListRef._listRef?._scrollRef) {
+    return ref.current?._wrapperListRef._listRef?._scrollRef;
+  }
   // ScrollView
   return ref.current;
 }
@@ -91,20 +95,20 @@ export function useDraggable<T>(options?: DraggableNodeOptions) {
 }
 
 /**
- * Create a custom scrollable view inside the action sheet. 
+ * Create a custom scrollable view inside the action sheet.
  * The scrollable view must implement `onScroll`, and `onLayout` props.
  * @example
  * ```tsx
-  const handlers = useScrollHandlers<RNScrollView>();
-  return <NativeViewGestureHandler
-    simultaneousHandlers={handlers.simultaneousHandlers}
-  >
-  <ScrollableView
-    {...handlers}
-  >
-  </ScrollableView>
-  
-  </NativeViewGestureHandler>
+ const handlers = useScrollHandlers<RNScrollView>();
+ return <NativeViewGestureHandler
+ simultaneousHandlers={handlers.simultaneousHandlers}
+ >
+ <ScrollableView
+ {...handlers}
+ >
+ </ScrollableView>
+
+ </NativeViewGestureHandler>
  * ```
  */
 export function useScrollHandlers<T>(options?: DraggableNodeOptions) {

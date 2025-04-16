@@ -19,6 +19,8 @@ export type SelectConfigContext = {
   multiple?: boolean;
   clearable?: boolean;
   disabled?: boolean;
+  section?: boolean;
+  showSheet?: boolean;
 };
 
 export const [SelectConfigProvider, useSelectConfig] =

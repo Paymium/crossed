@@ -22,16 +22,13 @@ const styles = createStyles(() => ({
   end: { base: { alignSelt: 'flex-end', flexDirection: 'row' } },
 }));
 
+const countriesItems = countries.map(({ name_fr, iso_alpha2 }) => ({
+  value: iso_alpha2,
+  label: name_fr,
+}));
+
 const Example = (props: Omit<SelectProps, 'items'>) => {
-  return (
-    <Select
-      {...props}
-      items={countries.map(({ name_fr, iso_alpha2 }) => ({
-        value: iso_alpha2,
-        label: name_fr,
-      }))}
-    />
-  );
+  return <Select items={countriesItems} {...props} />;
 };
 
 export default function TabOneScreen() {
@@ -45,6 +42,14 @@ export default function TabOneScreen() {
           <Example label={'Multiple'} multiple />
           <Example label={'Search'} searchable />
           <Example label={'Seach Multiple'} multiple searchable />
+          <Example
+            label={'Section'}
+            section
+            items={[
+              { title: 'item 1', data: countriesItems },
+              { title: 'item 2', data: countriesItems },
+            ]}
+          />
         </YBox>
       }
       renderItem={() => null}

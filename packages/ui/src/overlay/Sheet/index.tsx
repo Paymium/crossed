@@ -11,6 +11,7 @@ import { Trigger } from './Trigger';
 import { Content } from './Content';
 import { ScrollView } from './ScrollView';
 import { FlatList } from './FlatList';
+import { SectionList } from './SectionList';
 import { SheetPadded } from './Padded';
 
 export const Sheet = withStaticProperties(Root, {
@@ -18,5 +19,6 @@ export const Sheet = withStaticProperties(Root, {
   Content,
   ScrollView,
   FlatList,
+  SectionList,
   Padded: SheetPadded,
 });
