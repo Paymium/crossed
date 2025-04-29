@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as df from './date-fns';
 import {
   getCalendarMonth,
@@ -36,6 +36,8 @@ export function useCalendar(options?: Partial<IUseCalendarOptions>) {
     [selectedDate]
   );
 
+  const oldMonths = useRef<any>(null);
+
   const [selected, setSelected] = useState<Date | undefined>(initialSelected);
   const [visibleMonth, setVisibleMonth] = useState(
     initialSelected || new Date()
@@ -43,8 +45,8 @@ export function useCalendar(options?: Partial<IUseCalendarOptions>) {
 
   useEffect(() => {
     if (initialSelected?.getTime() !== selected?.getTime()) {
-      setSelected(initialSelected);
       setVisibleMonth(initialSelected || new Date());
+      setSelected(initialSelected);
     }
   }, [initialSelected]);
 
@@ -113,6 +115,8 @@ export function useCalendar(options?: Partial<IUseCalendarOptions>) {
         })
       );
     }
+    if (oldMonths.current && result.length === 0) return oldMonths?.current;
+    oldMonths.current = result;
     return result;
   }, [
     monthsInRange,
@@ -175,17 +179,13 @@ export function useCalendar(options?: Partial<IUseCalendarOptions>) {
     [monthsInRange, visibleMonth]
   );
 
-  const setMonth = useCallback(
-    (month: number) =>
-      setVisibleMonth((prev) => new Date(prev.getFullYear(), month)),
-    []
-  );
+  const setMonth = useCallback((month: number) => {
+    setVisibleMonth((prev) => new Date(prev.getFullYear(), month));
+  }, []);
 
-  const setYear = useCallback(
-    (year: number) =>
-      setVisibleMonth((prev) => new Date(year, prev.getMonth())),
-    []
-  );
+  const setYear = useCallback((year: number) => {
+    setVisibleMonth((prev) => new Date(year, prev.getMonth()));
+  }, []);
 
   const resetState = useCallback(() => {
     setSelected(initialSelected);
