@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.1.2
+
+### Patch Changes
+
+- be6ad1c: fix render calendar empty
+
 ## 8.1.1
 
 ### Patch Changes
