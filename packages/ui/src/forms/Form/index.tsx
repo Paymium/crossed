@@ -63,11 +63,9 @@ const FormControl: FormControlComponent = ({ children }) => {
   const { inputId, states, handles } = useContext(fieldContext);
   const localId = useId();
   if (!isValidElement(children)) {
-    console.log('ici')
     return children;
   }
 
-  console.log('la')
   const id =
     children.props.id || children.props.nativeID || `form-control${localId}`;
   inputId.current = id;
