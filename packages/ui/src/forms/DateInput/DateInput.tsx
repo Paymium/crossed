@@ -21,7 +21,6 @@ import { useUncontrolled } from '@crossed/core';
 import { useMedia } from '../../useMedia';
 import { NativeSyntheticEvent, TextInputFocusEventData } from 'react-native';
 import { FormControl, FormField, FormLabel } from '../Form';
-import { SelectLabelProps } from '../Select/Label';
 
 const convertToDate = (e?: Partial<Value>) => {
   if (e?.year === undefined || e?.month === undefined || e?.day === undefined)
