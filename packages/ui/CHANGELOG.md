@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.2.0
+
+### Minor Changes
+
+- dfd52fa: add label on dateInput
+
 ## 8.1.2
 
 ### Patch Changes

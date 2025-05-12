@@ -1,5 +1,12 @@
 # crossed-doc
 
+## 0.12.7
+
+### Patch Changes
+
+- Updated dependencies [dfd52fa]
+  - @crossed/ui@8.2.0
+
 ## 0.12.6
 
 ### Patch Changes
