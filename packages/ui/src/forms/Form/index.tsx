@@ -65,6 +65,7 @@ const FormControl: FormControlComponent = ({ children }) => {
   if (!isValidElement(children)) {
     return children;
   }
+
   const id =
     children.props.id || children.props.nativeID || `form-control${localId}`;
   inputId.current = id;
