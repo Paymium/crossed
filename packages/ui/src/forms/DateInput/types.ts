@@ -49,4 +49,7 @@ export interface DateInputProps
    */
   floatingProps?: Partial<FloatingProps>;
   id?: string;
+  label?: string;
+  description?: string;
+  extra?: string;
 }

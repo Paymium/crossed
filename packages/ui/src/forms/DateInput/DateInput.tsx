@@ -6,7 +6,7 @@
  */
 
 import { InputPart } from './InputPart';
-import { memo, useCallback, useId, useRef } from 'react';
+import { Fragment, memo, useCallback, useId, useRef } from 'react';
 import { DateInputProps, Value } from './types';
 import { XBox } from '../../layout/XBox';
 import { YBox } from '../../layout/YBox';
@@ -20,6 +20,8 @@ import { growStyles, shrinkStyles } from '../../styles/flex';
 import { useUncontrolled } from '@crossed/core';
 import { useMedia } from '../../useMedia';
 import { NativeSyntheticEvent, TextInputFocusEventData } from 'react-native';
+import { FormControl, FormField, FormLabel } from '../Form';
+import { SelectLabelProps } from '../Select/Label';
 
 const convertToDate = (e?: Partial<Value>) => {
   if (e?.year === undefined || e?.month === undefined || e?.day === undefined)
@@ -48,6 +50,9 @@ export const DateInput = memo(
     floatingProps,
     id: idProps,
     style,
+    label,
+    description,
+    extra,
   }: DateInputProps) => {
     const { refs, floatingStyles } = useFloating();
     const calendarRef = useRef<FloatingRefExtended>(null);
@@ -99,77 +104,95 @@ export const DateInput = memo(
     }, [picker]);
 
     return (
-      <YBox
-        pressable
-        onPress={
-          !showFloating
-            ? () => {
-                calendarRef.current?.open();
-              }
-            : !isFocus.current
-              ? containerProps.onPress
-              : undefined
-        }
-        id={idProps}
-        ref={refs.setReference as any}
-        style={composeStyles(
-          form.input,
-          inlineStyle(() => ({
-            base: {
-              justifyContent: 'flex-start',
-              paddingVertical: 0,
-            },
-          })),
-          style
-        )}
-      >
-        <XBox
-          style={composeStyles(growStyles.on, shrinkStyles.on)}
-          alignItems="stretch"
-        >
-          {inputs.map(({ key, ...item }, i, a) => [
-            <InputPart
-              key={`${id}-${key}`}
-              {...item}
-              onBlur={handleBlurInput}
-              onFocus={handleFocusInput}
-            />,
-            i + 1 !== a.length ? (
-              <Text
-                key={`${id}-${key}-separator`}
-                style={composeStyles(
-                  form.placeholder,
-                  inlineStyle(() => ({
-                    base: { marginTop: 1, alignSelf: 'center' },
-                  }))
-                )}
-              >
-                {separator}
-              </Text>
-            ) : null,
-          ])}
+      <FormField>
+        <XBox alignItems="center" space="xxs">
+          {!!label && <FormLabel>{label}</FormLabel>}
+          {!!description && (
+            <Text style={form.labelDescription}>{description}</Text>
+          )}
+          {!!extra && (
+            <Text style={form.labelExtra} textAlign="right">
+              {extra}
+            </Text>
+          )}
         </XBox>
-        {picker && format === 'yyyy-mm-dd' && (
-          <Calendar
-            ref={calendarRef}
-            selectedDate={convertToDate(value)}
-            onDateSelected={(e) => {
-              setWithDate(e.date);
-            }}
-            floatingStyles={floatingStyles}
-            setFloating={refs.setFloating}
-            locale={locale}
-            minDate={minDate}
-            maxDate={maxDate}
-            availableDates={availableDates}
-            firstDayOfWeek={firstDayOfWeek}
-            events={events}
-            monthsToDisplay={monthsToDisplay}
-            floatingProps={floatingProps}
-            shards={[refs.reference]}
-          />
-        )}
-      </YBox>
+        <YBox
+          pressable
+          onPress={
+            !showFloating
+              ? () => {
+                  calendarRef.current?.open();
+                }
+              : !isFocus.current
+                ? containerProps.onPress
+                : undefined
+          }
+          id={idProps}
+          ref={refs.setReference as any}
+          style={composeStyles(
+            form.input,
+            inlineStyle(() => ({
+              base: {
+                justifyContent: 'flex-start',
+                paddingVertical: 0,
+              },
+            })),
+            style
+          )}
+        >
+          <XBox
+            style={composeStyles(growStyles.on, shrinkStyles.on)}
+            alignItems="stretch"
+          >
+            {inputs.map(({ key, ...item }, i, a) => {
+              const Comp = i === 0 ? FormControl : Fragment;
+              return [
+                <Comp key={`${id}-${key}-control`}>
+                  <InputPart
+                    key={`${id}-${key}`}
+                    {...item}
+                    onBlur={handleBlurInput}
+                    onFocus={handleFocusInput}
+                  />
+                </Comp>,
+                i + 1 !== a.length ? (
+                  <Text
+                    key={`${id}-${key}-separator`}
+                    style={composeStyles(
+                      form.placeholder,
+                      inlineStyle(() => ({
+                        base: { marginTop: 1, alignSelf: 'center' },
+                      }))
+                    )}
+                  >
+                    {separator}
+                  </Text>
+                ) : null,
+              ];
+            })}
+          </XBox>
+          {picker && format === 'yyyy-mm-dd' && (
+            <Calendar
+              ref={calendarRef}
+              selectedDate={convertToDate(value)}
+              onDateSelected={(e) => {
+                setWithDate(e.date);
+              }}
+              floatingStyles={floatingStyles}
+              setFloating={refs.setFloating}
+              locale={locale}
+              minDate={minDate}
+              maxDate={maxDate}
+              availableDates={availableDates}
+              firstDayOfWeek={firstDayOfWeek}
+              events={events}
+              monthsToDisplay={monthsToDisplay}
+              floatingProps={floatingProps}
+              shards={[refs.reference]}
+            />
+          )}
+        </YBox>
+      </FormField>
     );
   }
 );

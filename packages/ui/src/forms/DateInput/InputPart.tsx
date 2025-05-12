@@ -35,7 +35,7 @@ const styles = inlineStyle(({ colors }) => ({
 }));
 
 export const InputPart = forwardRef<TextInput, InputPartProps>(
-  ({ value, onChangeText, placeholder, onBlur, onFocus }, ref) => {
+  ({ value, onChangeText, placeholder, onBlur, onFocus, id }, ref) => {
     const { colors } = useTheme();
     return (
       <TextInput
@@ -43,6 +43,7 @@ export const InputPart = forwardRef<TextInput, InputPartProps>(
         {...styles.rnw()}
         value={value}
         placeholder={placeholder}
+        id={id}
         ref={ref}
         showSoftInputOnFocus={false}
         onChangeText={onChangeText}
