@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.2.1
+
+### Patch Changes
+
+- be0bf1b: fix size DateInput, and add style overwrite on formfield
+
 ## 8.2.0
 
 ### Minor Changes
