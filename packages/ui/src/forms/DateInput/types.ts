@@ -10,6 +10,7 @@ import { ReactFocusOnProps } from 'react-focus-on/dist/es5/types';
 import { ComponentType } from 'react';
 import { CalendarProps } from './Calendar';
 import { FloatingProps } from '../../overlay/Floating/Root';
+import { CrossedMethods } from '@crossed/styled';
 
 export type FormatYear = 'yyyy';
 export type FormatMonth = 'mm';
@@ -52,4 +53,6 @@ export interface DateInputProps
   label?: string;
   description?: string;
   extra?: string;
+
+  formFieldStyle?: CrossedMethods<any>;
 }

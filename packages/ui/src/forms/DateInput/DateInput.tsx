@@ -52,6 +52,7 @@ export const DateInput = memo(
     label,
     description,
     extra,
+    formFieldStyle,
   }: DateInputProps) => {
     const { refs, floatingStyles } = useFloating();
     const calendarRef = useRef<FloatingRefExtended>(null);
@@ -103,7 +104,7 @@ export const DateInput = memo(
     }, [picker]);
 
     return (
-      <FormField>
+      <FormField {...composeStyles(growStyles.on, formFieldStyle).rnw()}>
         <XBox alignItems="center" space="xxs">
           {!!label && <FormLabel>{label}</FormLabel>}
           {!!description && (
