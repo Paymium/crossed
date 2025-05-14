@@ -131,10 +131,11 @@ export const DateInput = memo(
           ref={refs.setReference as any}
           style={composeStyles(
             form.input,
-            inlineStyle(({ space }) => ({
+            inlineStyle(() => ({
               base: {
                 justifyContent: 'flex-start',
-                paddingVertical: space.xs,
+                paddingVertical: 0,
+                flex: undefined,
               },
             })),
             style
