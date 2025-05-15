@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.2.2
+
+### Patch Changes
+
+- 6967001: Fix vertical padding of date input
+
 ## 8.2.1
 
 ### Patch Changes
