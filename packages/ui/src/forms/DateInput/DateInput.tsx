@@ -135,6 +135,7 @@ export const DateInput = memo(
               base: {
                 justifyContent: 'flex-start',
                 paddingVertical: 0,
+                flex: undefined,
               },
             })),
             style

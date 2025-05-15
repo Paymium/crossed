@@ -176,11 +176,7 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
     );
 
     const renderIcon = (
-      <XBox
-        style={inlineStyle(({ space }) => ({
-          base: { marginRight: space.xs },
-        }))}
-      >
+      <XBox>
         <ChevronDown color={colors.text.secondary} />
       </XBox>
     );
