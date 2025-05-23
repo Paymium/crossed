@@ -112,12 +112,58 @@ export const WithScrollView: Story = {
   },
 };
 
-export const NotClosable: Story = {
+export const NotClosableAtAll: Story = {
   args: { adapt: true },
   render(e) {
     return (
       <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
         <Modal closable={false} {...e}>
+          <Modal.Trigger asChild>
+            <Button>
+              <Button.Text>Button</Button.Text>
+            </Button>
+          </Modal.Trigger>
+          <Modal.Content>
+            <Modal.Padded>
+              <Modal.Header>
+                <Modal.Title>Title</Modal.Title>
+              </Modal.Header>
+            </Modal.Padded>
+            <Modal.ScrollView>
+              <Modal.Padded>
+                <Modal.Body>
+                  {Array.from(Array(100).keys()).map((i) => {
+                    return (
+                      <Text key={`${i}-test-scrollview`}>Hello world</Text>
+                    );
+                  })}
+                </Modal.Body>
+              </Modal.Padded>
+            </Modal.ScrollView>
+            <Modal.Padded>
+              <Modal.Footer>
+                <Button variant="tertiary">
+                  <Button.Text>Button</Button.Text>
+                </Button>
+
+                <Button>
+                  <Button.Text>Button</Button.Text>
+                </Button>
+              </Modal.Footer>
+            </Modal.Padded>
+          </Modal.Content>
+        </Modal>
+      </YBox>
+    );
+  },
+};
+
+export const NotClosableOnOverlayPressOnly: Story = {
+  args: { adapt: true },
+  render(e) {
+    return (
+      <YBox style={inlineStyle(() => ({ base: { padding: 100 } }))}>
+        <Modal closable={{ closeOverlayPress: false }} {...e}>
           <Modal.Trigger asChild>
             <Button>
               <Button.Text>Button</Button.Text>
