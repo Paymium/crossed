@@ -24,8 +24,7 @@ const styles = createStyles(() => ({
 export const ModalHeader = ({ children, style, ...props }: BoxProps) => {
   const { showSheet, closable } = useContext(localContext);
 
-  const isClosable =
-    typeof closable === 'boolean' ? closable : closable.closeOverlayPress;
+  const isClosable = typeof closable === 'boolean' ? closable : true;
 
   return (
     <Box {...props} style={composeStyles(styles.header, style)}>
