@@ -1,5 +1,13 @@
 # crossed-doc
 
+## 0.12.11
+
+### Patch Changes
+
+- 73192f3: Allow modal to be closable with cross in header but not by clicking overlay
+- Updated dependencies [73192f3]
+  - @crossed/ui@8.2.4
+
 ## 0.12.10
 
 ### Patch Changes
