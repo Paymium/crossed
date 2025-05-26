@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.2.4
+
+### Patch Changes
+
+- 73192f3: Allow modal to be closable with cross in header but not by clicking overlay
+
 ## 8.2.3
 
 ### Patch Changes
