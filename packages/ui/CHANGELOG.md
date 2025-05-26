@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.2.3
+
+### Patch Changes
+
+- be3d9b8: fix publishing
+
 ## 8.2.2
 
 ### Patch Changes
