@@ -95,4 +95,4 @@ export const primary = {
     900: '#074D31',
     950: '#053321',
   },
-};
+} as const;
