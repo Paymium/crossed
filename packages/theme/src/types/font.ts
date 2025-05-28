@@ -42,3 +42,23 @@ export type Font = {
   family: string;
   extraStyles?: CrossedstyleValues;
 };
+
+export type DisplayNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type TextNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type FontWeightName = 'regular' | 'medium' | 'semibold' | 'bold';
+
+export type DysplayFont = {
+  lineHeight: Record<DisplayNames, number>;
+  fontSize: Record<DisplayNames, number>;
+  fontWeight: Record<FontWeightName, number>;
+  color: string;
+  family: string;
+};
+
+export type TextFont = {
+  lineHeight: Record<TextNames, number>;
+  fontSize: Record<TextNames, number>;
+  fontWeight: Record<FontWeightName, number>;
+  color: string;
+  family: string;
+};
