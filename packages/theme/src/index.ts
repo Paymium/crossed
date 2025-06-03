@@ -19,3 +19,5 @@ export * from './types/components';
 export * from './types/font';
 export * from './types/space';
 export * from './types/theme';
+export * from './typographie/text';
+export * from './typographie/display';

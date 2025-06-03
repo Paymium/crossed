@@ -5,60 +5,20 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { CrossedstyleValues } from '@crossed/styled';
-
-export type FontStyle = Required<
-  Pick<CrossedstyleValues, 'fontWeight' | 'fontSize' | 'lineHeight'>
->;
-
-////////////////////////
-// heading
-////////////////////////
-export type HeadingName = 'md' | 'lg' | 'xl';
-export type Headings = Record<HeadingName, FontStyle>;
-
-////////////////////////
-// text
-////////////////////////
-export type TextName =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | 'h6'
-  | 'h5'
-  | 'h4'
-  | 'h3'
-  | 'h2'
-  | 'h1';
-export type Texts = Record<TextName, FontStyle>;
-
-export type Font = {
-  lineHeight: Record<TextName, CrossedstyleValues['lineHeight']>;
-  fontSize: Record<TextName, CrossedstyleValues['fontSize']>;
-  fontWeight: Record<TextName, CrossedstyleValues['fontWeight']>;
-  color: string;
-  family: string;
-  extraStyles?: CrossedstyleValues;
-};
-
 export type DisplayNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export type TextNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type FontWeightName = 'regular' | 'medium' | 'semibold' | 'bold';
+export type FamilyName = 'regular' | 'medium' | 'semibold' | 'bold';
 
 export type DysplayFont = {
   lineHeight: Record<DisplayNames, number>;
   fontSize: Record<DisplayNames, number>;
-  fontWeight: Record<FontWeightName, number>;
   color: string;
-  family: string;
+  family: Record<FamilyName, string>;
 };
 
 export type TextFont = {
   lineHeight: Record<TextNames, number>;
   fontSize: Record<TextNames, number>;
-  fontWeight: Record<FontWeightName, number>;
   color: string;
-  family: string;
+  family: Record<FamilyName, string>;
 };

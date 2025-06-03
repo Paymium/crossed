@@ -22,12 +22,11 @@ export const textFont = {
     'lg': 18,
     'xl': 20,
   },
-  fontWeight: {
-    'regular': 400,
-    'medium': 500,
-    'semibold': 600,
-    'bold': 700,
-  },
   color: 'black',
-  family: 'Inter',
+  family: {
+    'regular': 'Inter-Regular',
+    'medium': 'Inter-Medium',
+    'semibold': 'Inter-Semibold',
+    'bold': 'Inter-Bold',
+  },
 } as const satisfies TextFont;

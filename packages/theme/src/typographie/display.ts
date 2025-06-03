@@ -24,12 +24,11 @@ export const displayFont = {
     'xl': 60,
     '2xl': 72,
   },
-  fontWeight: {
-    'regular': 400,
-    'medium': 500,
-    'semibold': 600,
-    'bold': 700,
-  },
   color: 'black',
-  family: 'Inter',
+  family: {
+    'regular': 'Inter-Regular',
+    'medium': 'Inter-Medium',
+    'semibold': 'Inter-Semibold',
+    'bold': 'Inter-Bold',
+  },
 } as const satisfies DysplayFont;
