@@ -5,20 +5,25 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export type DisplayNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type HeadlineNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type FontSizeAttributes = 'lineHeight' | 'fontSize';
 export type TextNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type FamilyName = 'regular' | 'medium' | 'semibold' | 'bold';
+export type WeightName = 'regular' | 'medium' | 'semibold' | 'bold';
 
-export type DysplayFont = {
-  lineHeight: Record<DisplayNames, number>;
-  fontSize: Record<DisplayNames, number>;
-  color: string;
-  family: Record<FamilyName, string>;
-};
+export type HeadLineFontSize = Record<
+  HeadlineNames,
+  Record<FontSizeAttributes, number>
+>;
 
-export type TextFont = {
-  lineHeight: Record<TextNames, number>;
-  fontSize: Record<TextNames, number>;
-  color: string;
-  family: Record<FamilyName, string>;
+export type TextFontSize = Record<
+  TextNames,
+  Record<FontSizeAttributes, number>
+>;
+
+export type FontWeight = Record<WeightName, Record<'fontFamily', string>>;
+
+export type Font = {
+  headline: HeadLineFontSize;
+  text: TextFontSize;
+  weight: FontWeight;
 };

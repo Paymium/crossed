@@ -5,28 +5,12 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { TextFont } from '../types/font';
+import { TextFontSize } from '../types/font';
 
-export const textFont = {
-  lineHeight: {
-    'xs': 18,
-    'sm': 20,
-    'md': 24,
-    'lg': 28,
-    'xl': 30,
-  },
-  fontSize: {
-    'xs': 12,
-    'sm': 14,
-    'md': 16,
-    'lg': 18,
-    'xl': 20,
-  },
-  color: 'black',
-  family: {
-    'regular': 'Inter-Regular',
-    'medium': 'Inter-Medium',
-    'semibold': 'Inter-Semibold',
-    'bold': 'Inter-Bold',
-  },
-} as const satisfies TextFont;
+export const textFontSize = {
+  'xs': { lineHeight: 18, fontSize: 12 },
+  'sm': { lineHeight: 20, fontSize: 14 },
+  'md': { lineHeight: 24, fontSize: 16 },
+  'lg': { lineHeight: 28, fontSize: 18 },
+  'xl': { lineHeight: 30, fontSize: 20 },
+} as const satisfies TextFontSize;
