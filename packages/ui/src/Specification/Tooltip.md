@@ -74,19 +74,25 @@
     - Blur
     - onclick
 
-- **Accessibilité** :
-    - `role="tooltip"` requis
-    - `aria-describedby` associé à l’élément trigger
-    - Doit être focusable si interactif
+---
+
+## 6. Accessibilité
+
+- Le tooltip doit être associé à un élément déclencheur (ex: bouton, icône) via :
+  - `aria-describedby="id-tooltip"` sur l’élément déclencheur
+- Le contenu du tooltip doit avoir un `id` unique correspondant à `aria-describedby`
+- Le tooltip doit être visible uniquement quand l’élément est focusé ou survolé (hover/focus)
+- Support clavier pour afficher/cacher le tooltip (ex: focus, `Esc` pour fermer)
+- Le tooltip ne doit pas apparaître de manière persistante pour éviter la surcharge d’informations
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 7. 🧩 Présets ou composants dérivés
 
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [x] Affichage au hover / focus
 - [x] Delay respecté
@@ -97,7 +103,7 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```jsx
 // Simple tooltip
@@ -117,6 +123,7 @@
   <InfoIcon />
 </Tooltip>
 ```
+---
 
-## 9. Liens utile
+## 10. Liens utile
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=1538-270360&m=dev)

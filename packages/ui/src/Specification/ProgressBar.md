@@ -71,20 +71,32 @@
 
 - **Comportement** :
     - Affiche une barre remplie proportionnellement à `value`
-    - Peut afficher un texte ou pourcentage si `label`est present 
-
-- **Accessibilité** :
-    - `role="progressbar"`
-    - Attributs `aria-valuenow`, `aria-valuemin`, `aria-valuemax`
-    - Texte visible pour lecteur d’écran (si non affiché)
+    - Peut afficher un texte ou pourcentage si `label`est present
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 6. Accessibilité
+
+progress bar
+- Utilisation de l’élément natif `<progress>` si possible
+- Sinon, utiliser `role="progressbar"` sur un élément div ou span
+- Fournir les attributs :
+  - `aria-valuemin` — valeur minimale
+  - `aria-valuemax` — valeur maximale
+  - `aria-valuenow` — valeur actuelle
+  - `aria-valuetext` si la valeur affichée a besoin d’un format lisible (ex: "50 %")
+- Ajouter un `aria-label` ou `aria-labelledby` pour décrire le but du chargement
+- Si nécessaire, afficher le pourcentage visuellement et textuellement
+- Doit être visible ou annoncé par un lecteur d’écran si important pour la tâche utilisateur
+- Si le progrès est **indéfini** (chargement en cours sans fin connue), ne pas définir `aria-valuenow`
 
 ---
 
-## 7. 🧪 Tests attendus
+## 7. 🧩 Présets ou composants dérivés
+
+---
+
+## 8. 🧪 Tests attendus
 
 - [x] Affichage correct selon `value`
 - [x] Support `max` personnalisé
@@ -93,7 +105,7 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```jsx
 // Progression simple
@@ -105,6 +117,7 @@
 // circulaire
 <ProgressBar value={value} label={`${value}%`} labelPosition={"floating-top"} type={"circle"} size={"md"} />
 ``` 
+---
 
-## 9. Liens utile
+## 10. Liens utile
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=1157-90228&m=dev)

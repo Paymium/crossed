@@ -78,7 +78,11 @@
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 6. Accessibilité
+
+---
+
+## 7. 🧩 Présets ou composants dérivés
 
 - `NotificationBadge` : badge avec un icon `dot` 
 - `StatusBadge` : avec `variant` dynamique (selon un statut : actif, en pause...)
@@ -87,12 +91,12 @@
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```jsx
 // Label simple
@@ -106,6 +110,7 @@
   <Badge.Text>Text</Badge.Text>
 </div>
 ```
+--- 
 
-9 Liens utile
+## 10 Liens utile
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=4826-406139&m=dev)

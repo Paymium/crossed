@@ -69,19 +69,28 @@
     - Utilisation de la touche `Espace` ou `Entrée` pour activer/désactiver
     - `tabIndex` pour navigation
 
-- **Accessibilité** :
-    - Doit utiliser `role="switch"` ou `input[type="checkbox"]`
-    - `aria-checked`, `aria-label`, ou `aria-labelledby` requis
-    - Supporte `id` pour couplage avec `label`
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 6. Accessibilité
+
+- Utiliser l’élément natif `<input type="checkbox">` si possible
+- Sinon, utiliser un élément avec `role="switch"` pour un composant custom
+- Fournir `aria-checked="true"` ou `false` selon l’état du toggle
+- Ajouter un `aria-label`, `aria-labelledby` ou associer un `<label>` visible
+- Support de la navigation clavier :
+  - `Tab` pour focus
+  - `Space` pour changer l’état
+- Texte explicite ou contextuel sur l’usage du toggle (ex: "Activer les notifications")
+- Si le switch est désactivé : ajouter l’attribut `disabled` ou `aria-disabled="true"`
+---
+
+## 7. 🧩 Présets ou composants dérivés
 
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [x] Affichage ON / OFF correct
 - [x] Interaction souris / clavier
@@ -90,7 +99,7 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```jsx
 // Basique
@@ -102,6 +111,7 @@
 // Avec label et extra
 <Toggle checked={enabled} onChange={setEnabled} label={"Remember me"} extra={"Save my login details for the next time"}/>
 ```
+---
 
-## 9. Liens utile
+## 10. Liens utile
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=1102-4181&m=dev)

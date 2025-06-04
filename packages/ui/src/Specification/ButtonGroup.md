@@ -60,18 +60,27 @@
 - **Clic** :
     - Peut déclencher l’action de chaque bouton
     - Peut aussi sélectionner (mode `toggle` ou `tabs`) avec `onSelect`
-
-- **Accessibilité** :
-    - Utiliser `role="group"` ou `role="tablist"` selon le contexte
-    - Si `selected`, appliquer `aria-pressed`, `aria-selected`, ou `aria-current` sur les boutons
-
 - **Keyboard navigation (optionnel)** :
     - Flèches gauche/droite pour naviguer entre les boutons
     - Entrée/Espace pour activer
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 6. Accessibilité
+
+- Utilisation d’un conteneur avec `role="group"` ou `role="radiogroup"` selon le comportement attendu
+- Attribution d’un `aria-label` ou `aria-labelledby` sur le groupe pour décrire sa fonction
+- Chaque bouton enfant doit être un `<button>` accessible individuellement
+- Si le groupe agit comme des onglets ou un switch exclusif → utiliser `aria-pressed` ou `aria-checked` sur les boutons, avec gestion de l’état actif
+- Si navigation au clavier horizontale attendue (comme des onglets), prévoir prise en charge des flèches gauche/droite
+- Maintenir un focus clair sur le bouton actif
+- Respect du contraste pour tous les états des boutons (normal, actif, désactivé)
+- Support de `disabled` sur les boutons individuels si applicable
+- Éviter de grouper des éléments non interactifs dans le `ButtonGroup`
+
+---
+
+## 7. 🧩 Présets ou composants dérivés
 
 - **Dérivés** :
     - `DateRangeToggleGroup`
@@ -82,7 +91,7 @@
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [x] Rendu horizontal / vertical correct
 - [x] Comportement de sélection (avec `selected` / `onSelect`)
@@ -91,7 +100,7 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```jsx
 <ButtonGroup selected="week" onSelect={setSelected}>
@@ -106,7 +115,8 @@
   <Button icon={<UnderlineIcon />} />
 </ButtonGroup>
 ```
+---
 
-## 9 Liens utile
+## 10 Liens utile
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=16427-545794&m=dev)
 

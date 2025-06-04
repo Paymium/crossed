@@ -73,19 +73,32 @@
     - `Tab` pour focus
     - `Space` pour changer d’état
 
-### Accessibilité
+---
 
-- Rôle `checkbox` natif (`<input type="checkbox">`)
-- Utilisation de `aria-checked="mixed"` pour indeterminate
-- Lien via `id` + `htmlFor` pour les labels
+## 6. Accessibilité
+
+
+- Utilisation de l’élément natif `<input type="checkbox">`
+- Association correcte d’un label visible via :
+  - L’élément `<label for="id">` lié à l’`id` de l’input
+  - Ou un `label` englobant directement l’input
+- Texte de label clair et descriptif, visible par les lecteurs d’écran
+- Prise en charge du clavier :
+  - `Tab` pour focus
+  - `Space` pour changer l’état
+- Gestion des trois états si applicable : `checked`, `unchecked`, et `indeterminate`
+- Utilisation d’`aria-checked` uniquement si composant custom sans `<input>`
+- Ajout d’`aria-describedby` si une aide contextuelle est associée
+- Indication visuelle du focus clavier sur la case ou son label
+- Utilisation de `disabled` si la case doit être inactive
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 7. 🧩 Présets ou composants dérivés
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [x] Clic → coche/décoche
 - [x] Navigation clavier (`Tab`, `Space`)
@@ -95,13 +108,14 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```tsx
   <Checkbox id="newsletter" name="newsletter" label={"mon label"} extra={"ma description"}/>
 ``` 
+---
 
-## 9. Liens utile
+## 10. Liens utile
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=1224-6867&m=dev)
 
 

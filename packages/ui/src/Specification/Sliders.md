@@ -60,22 +60,34 @@
     - Flèches pour déplacement précis
     - Glissement (drag and drop)
 
-- **Accessibilité** :
-    - `role="slider"`
-    - `aria-valuemin`, `aria-valuemax`, `aria-valuenow`
-    - `aria-valuetext` si `label` personnalisé
-    - `tabIndex=0` pour focus clavier
-
 - **Comportement mobile** :
     - Doit être facilement manipulable au doigt
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 6. Accessibilité
+
+- Utilisation de l’élément natif `<input type="range">` si possible
+- Sinon, utiliser `role="slider"` sur l’élément personnalisé
+- Fournir les attributs :
+  - `aria-valuemin` — valeur minimale
+  - `aria-valuemax` — valeur maximale
+  - `aria-valuenow` — valeur actuelle
+  - `aria-valuetext` si la valeur affichée a besoin d’un format lisible (ex: "50 %")
+- Ajout de `aria-label` ou `aria-labelledby` pour décrire l’usage du slider
+- Support du clavier obligatoire :
+  - `Left` / `Down` : diminue la valeur
+  - `Right` / `Up` : augmente la valeur
+  - `Home` / `End` : aller à la valeur min / max
+- Affichage visuel de la valeur recommandé, surtout pour des valeurs précises
+- Dans le cas d’un slider double (intervalle), chaque curseur doit être focusable et accessible indépendamment
+---
+
+## 7. 🧩 Présets ou composants dérivés
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [x] Valeurs mises à jour correctement
 - [x] Respect de `min`, `max`, `step`
@@ -86,13 +98,14 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```jsx
 // Slider simple
 <Slider value={values} onChange={setValue} min={0} max={100} labelPosition={"under"}/>
 
 ```
+---
 
-## 9. Liens utile
+## 10. Liens utile
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=1087-58516&m=dev)

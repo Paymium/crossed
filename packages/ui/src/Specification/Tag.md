@@ -77,21 +77,33 @@
 - **Clic sur la croix** (`onClose`) :
     - Supprime ou retire le tag
 
-- **Accessibilité** :
-    - Rôle `button` si `onClick`
-    - `aria-label` explicite pour `onClose`
-    - Utiliser `tabIndex={0}` pour la navigation clavier
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 6. Accessibilité
+
+- Utilisation d’un rôle sémantique adapté selon le type de tag :
+  - `role="button"` si le tag est cliquable
+  - `role="option"` si utilisé dans un groupe sélectionnable
+- Si le tag est supprimable, ajouter un bouton interne avec `aria-label="Supprimer [nom du tag]"`
+- Texte visible lisible par les lecteurs d’écran
+- Support de la navigation clavier :
+  - `Tab` pour focus
+  - `Enter` ou `Space` pour déclencher une action
+  - `Backspace` ou `Delete` pour supprimer, si pertinent
+- Utilisation de `aria-selected="true"` si le tag est sélectionné dans une liste
+- Focus clair et visible sur chaque tag interactif
+- Utilisation de `aria-describedby` si des instructions complémentaires sont nécessaires
+---
+
+## 7. 🧩 Présets ou composants dérivés
 
 - `InputTagField` : champ d'entrée multivaleurs avec `Tag` générés
 - `RemovableTag` : preset avec `closable: true`
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [x] Fonctionnement du `closable` + `onClose`
 - [x] Clic cliquable si `onClick`
@@ -99,7 +111,7 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```jsx
 <Tag label="React" variant="default" />
@@ -109,6 +121,7 @@
 <Tag label="Filtre actif" selected variant={'checkbox'} onClick={() => toggleFilter()} />
 
 ```
+---
 
-## 9. Liens utile
+## 10. Liens utile
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=3309-406742&m=dev)

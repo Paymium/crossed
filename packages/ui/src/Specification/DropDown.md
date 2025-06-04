@@ -78,19 +78,36 @@
   - `Enter` / `Space` pour sélectionner
   - `Esc` pour fermer
 
-### Accessibilité
+---
 
-- `role="menu"` sur `<DropdownContent>`
-- `role="menuitem"` sur chaque `<DropdownItem>`
-- Support ARIA : `aria-haspopup`, `aria-expanded`, focus management
+## 6. Accessibilité
+
+- Le bouton de déclenchement doit être un élément interactif (`<button>`) avec :
+  - `aria-haspopup="menu"` pour indiquer qu’un menu va s’ouvrir
+  - `aria-expanded="true/false"` pour refléter l’état ouvert/fermé
+  - `aria-controls="id-menu"` pour relier le bouton au menu
+- Le menu déroulant lui-même doit avoir :
+  - `role="menu"` si c’est une liste d’actions
+  - `id` correspondant à `aria-controls`
+- Chaque élément dans le menu doit avoir :
+  - `role="menuitem"` ou `menuitemradio` / `menuitemcheckbox` selon le comportement
+- Prise en charge complète de la navigation clavier :
+  - `Tab` pour entrer/sortir
+  - `ArrowDown` / `ArrowUp` pour naviguer entre les items
+  - `Enter` ou `Space` pour activer un item
+  - `Escape` pour fermer le menu et revenir au bouton
+- Focus géré manuellement à l’ouverture du menu (focus sur le 1er item)
+- Indication claire du focus visuel pour chaque item
+- Si le menu contient des sections ou groupes :
+  - Utilisation de `role="group"` avec `aria-label` ou `aria-labelledby`
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 7. 🧩 Présets ou composants dérivés
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [x] Ouverture / fermeture correcte
 - [x] Navigation clavier
@@ -100,7 +117,7 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```tsx
 <DropdownMenu>
@@ -121,6 +138,7 @@
   </DropdownContent>
 </DropdownMenu>
 ```
+---
 
-## 9. Liens utile
+## 10. Liens utile
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=1538-269977&m=dev)

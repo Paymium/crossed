@@ -50,24 +50,30 @@
 
 ## 5. 🧪 Comportements & Interactions
 
-- **Accessibilité** :
-    - `role="status"`
-    - `aria-live="polite"`
-    - `aria-label` ou `label` visible pour lecteur d’écran
-
 - **Comportement typique** :
     - L’animation tourne jusqu’à disparition du loader
     - Peut être déclenché par état `isLoading` d’un parent
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 6. Accessibilité
+
+- Utiliser `role="status"` sur l’élément contenant le spinner
+- Ajouter `aria-live="polite"` pour que l’apparition soit annoncée sans interrompre la lecture
+- Ajouter un `aria-label` ou un `aria-labelledby` pour décrire le chargement (ex : "Chargement en cours")
+- Ne pas utiliser uniquement une animation visuelle : fournir un texte accessible ou caché (`<span class="sr-only">Chargement...</span>`)
+- Retirer le spinner du DOM ou mettre à jour son contenu quand le chargement est terminé
+- Ne pas bloquer la navigation clavier ni la lecture d’écran autour du spinner
+- Si le spinner est **pure déco**, il ne doit **pas** avoir de rôle ARIA (ou `aria-hidden="true"`)
+---
+
+## 7. 🧩 Présets ou composants dérivés
 
 - `ButtonLoader` : loader intégré à un bouton
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [x] Le loader apparaît selon le bon état
 - [x] L’animation tourne correctement
@@ -76,7 +82,7 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```jsx
 // Loader simple
@@ -88,6 +94,7 @@
 // Loader variant 'dots'
 <Loading variant="dot" size="sm" />
 ```
+---
 
-## 9. Liens utile
+## 10. Liens utile
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=1172-32&p=f&m=dev)

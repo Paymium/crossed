@@ -82,21 +82,35 @@ Dans sa configuration mobiel les tabs sont remplacé par un select
     - `Enter` ou `Space` pour activer
 - Changement de tab via `Tab` navigation
 
-### Accessibilité
-
-- `role="tablist"` sur `<TabsList>`
-- `role="tab"` sur chaque onglet
-- `aria-selected`, `aria-controls`, `tabIndex` gérés automatiquement
-- `role="tabpanel"` sur `<TabsContent>`
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 6. Accessibilité
+
+- Conteneur avec `role="tablist"` pour définir le groupe d’onglets
+- Chaque onglet :
+  - `role="tab"`
+  - `aria-selected="true"` pour l’onglet actif
+  - `aria-controls="id-du-panel"` pour lier à son contenu
+  - Attribut `id` unique (référencé par le panel)
+  - Focusable avec `Tab` et activable avec `Enter` ou `Space`
+- Chaque panneau de contenu :
+  - `role="tabpanel"`
+  - `id` correspondant à `aria-controls` de son onglet
+  - `aria-labelledby="id-de-l’onglet"` pour relier le panel à son onglet
+  - Doit être visible seulement quand son onglet est actif (affichage/masquage)
+- Navigation clavier entre les onglets avec :
+  - `ArrowRight` et `ArrowLeft` (ou `ArrowDown`/`ArrowUp` selon orientation)
+- Indicateur visuel clair pour l’onglet actif et pour le focus clavier
+- Texte d’onglet descriptif (ex : pas "onglet 1", mais "Détails produit")
+---
+
+## 7. 🧩 Présets ou composants dérivés
 
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [x] Passage d’un onglet à l’autre
 - [x] Respect de la valeur `defaultValue` ou `value`
@@ -106,7 +120,7 @@ Dans sa configuration mobiel les tabs sont remplacé par un select
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```tsx
 <Tabs defaultValue="account">
@@ -123,3 +137,8 @@ Dans sa configuration mobiel les tabs sont remplacé par un select
     <PasswordForm />
   </TabsContent>
 </Tabs>
+```
+---
+
+## 10. Liens utile
+  [figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=1547-265252&m=dev)

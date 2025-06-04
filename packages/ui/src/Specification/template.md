@@ -65,7 +65,11 @@
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 6. Accessibilité
+
+---
+
+## 7. 🧩 Présets ou composants dérivés
 
 - **Composants dérivés** :
     - `PrimaryButton`
@@ -74,7 +78,7 @@
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [ ] Test unitaire des props critiques
 - [ ] Test de rendu (snapshot)
@@ -83,7 +87,7 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```jsx
 <Button variant="primary" onClick={handleSubmit}>
@@ -92,6 +96,7 @@
 
 <Button variant="ghost" icon={<TrashIcon />} onClick={handleDelete} />
 ```
+--- 
 
-## 9 Liens utile 
+## 10 Liens utile 
 - [Figma](https://www.figma.com)

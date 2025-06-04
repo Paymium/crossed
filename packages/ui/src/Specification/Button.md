@@ -68,17 +68,26 @@
 ## 5. 🧪 Comportements & Interactions
 
 - **Clic** : Déclenche `onClick` si `!disabled && !loading`
-- **Accessibilité** :
-    - `role="button"` 
-    - Support clavier (tab, espace, entrée)
-    - `aria-disabled` si `disabled === true`
 - **Transitions / Animations** :
     - Transition de couleur et d’ombre au `hover/focus`
     - Affichage conditionnel du spinner avec transition douce
 
 ---
 
-## 6. 🧩 Présets ou composants dérivés
+## 6. Accessibilité
+
+- Navigation clavier supportée (`Tab`, `Enter`, `Space`)
+- Focus visible (`:focus-visible` recommandé ou alternative accessible)
+- Utilisation de l’attribut `disabled` natif pour l'état désactivé
+- Utilisation de `aria-pressed` si bouton à état toggle
+- Utilisation de `aria-controls` et `aria-expanded` si bouton déclencheur (ex : menu, accordéon)
+- Contraste texte/fond respectant le minimum WCAG (≥ 4.5:1)
+- Utilisation de `aria-busy` ou `aria-disabled` en cas d’état de chargement personnalisé
+- Utilisation de `aria-describedby` si besoin d’un complément d’information
+
+---
+
+## 7. 🧩 Présets ou composants dérivés
 
 - **Composants dérivés** :
     - `PrimaryButton` (bouton accentué)
@@ -88,7 +97,7 @@
 
 ---
 
-## 7. 🧪 Tests attendus
+## 8. 🧪 Tests attendus
 
 - [x] Test `onClick` appelé si cliquable
 - [x] Test `disabled` empêche les interactions
@@ -97,7 +106,7 @@
 
 ---
 
-## 8. 📐 Exemple(s) d’utilisation
+## 9. 📐 Exemple(s) d’utilisation
 
 ```jsx
 <Button variant="primary" onPress={handleClick} text={"Valider"} />
@@ -120,6 +129,7 @@
 </Button>
 
 ```
+---
 
-## 9 Liens utile 
+## 10 Liens utile 
 - [Figma](https://www.figma.com/design/BE2sfEyiN6lmoEw5l9kXY4/Design-system-V.2?node-id=1-1183&p=f&m=dev)
