@@ -8,7 +8,7 @@
 export type HeadlineNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export type FontSizeAttributes = 'lineHeight' | 'fontSize';
 export type TextNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type WeightName = 'regular' | 'medium' | 'semibold' | 'bold';
+export type FamilyName = 'regular' | 'medium' | 'semibold' | 'bold';
 
 export type HeadLineFontSize = Record<
   HeadlineNames,
@@ -20,10 +20,10 @@ export type TextFontSize = Record<
   Record<FontSizeAttributes, number>
 >;
 
-export type FontWeight = Record<WeightName, Record<'fontFamily', string>>;
+export type FontFamily = Record<FamilyName, Record<'fontFamily', string>>;
 
 export type Font = {
   headline: HeadLineFontSize;
   text: TextFontSize;
-  weight: FontWeight;
+  family: FontFamily;
 };

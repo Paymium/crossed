@@ -5,11 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { FontWeight } from '../types/font';
+import { FontFamily } from '../types/font';
 
-export const fontWeight = {
+export const fontFamily = {
   'regular': { fontFamily: 'Inter-Regular' },
   'medium': { fontFamily: 'Inter-Medium' },
   'semibold': { fontFamily: 'Inter-Semibold' },
   'bold': { fontFamily: 'Inter-Bold' },
-} as const satisfies FontWeight;
+} as const satisfies FontFamily;

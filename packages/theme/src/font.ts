@@ -7,11 +7,11 @@
 
 import { headLineFontSize } from './typographie/headline';
 import { textFontSize } from './typographie/text';
-import { fontWeight } from './typographie/weight';
+import { fontFamily } from './typographie/family';
 import { Font } from './types/font';
 
 export const font = {
   headline: headLineFontSize,
   text: textFontSize,
-  weight: fontWeight,
+  family: fontFamily,
 } as const satisfies Font;
