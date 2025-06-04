@@ -5,40 +5,25 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { CrossedstyleValues } from '@crossed/styled';
+export type HeadlineNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type FontSizeAttributes = 'lineHeight' | 'fontSize';
+export type TextNames = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type FamilyName = 'regular' | 'medium' | 'semibold' | 'bold';
 
-export type FontStyle = Required<
-  Pick<CrossedstyleValues, 'fontWeight' | 'fontSize' | 'lineHeight'>
+export type HeadLineFontSize = Record<
+  HeadlineNames,
+  Record<FontSizeAttributes, number>
 >;
 
-////////////////////////
-// heading
-////////////////////////
-export type HeadingName = 'md' | 'lg' | 'xl';
-export type Headings = Record<HeadingName, FontStyle>;
+export type TextFontSize = Record<
+  TextNames,
+  Record<FontSizeAttributes, number>
+>;
 
-////////////////////////
-// text
-////////////////////////
-export type TextName =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | 'h6'
-  | 'h5'
-  | 'h4'
-  | 'h3'
-  | 'h2'
-  | 'h1';
-export type Texts = Record<TextName, FontStyle>;
+export type FontFamily = Record<FamilyName, Record<'fontFamily', string>>;
 
 export type Font = {
-  lineHeight: Record<TextName, CrossedstyleValues['lineHeight']>;
-  fontSize: Record<TextName, CrossedstyleValues['fontSize']>;
-  fontWeight: Record<TextName, CrossedstyleValues['fontWeight']>;
-  color: string;
-  family: string;
-  extraStyles?: CrossedstyleValues;
+  headline: HeadLineFontSize;
+  text: TextFontSize;
+  family: FontFamily;
 };
