@@ -40,6 +40,7 @@
 | `alignSelf` | `string`       | ❌     | ``   | alignement du button                        |
 | `style`     | `crossMethode` | ❌     | ``   | style aditionel                             |
 | `text`      | `string`       | ❌     | ``   | texte a l'intérieur du button               |
+| `type`      | `string`       | ❌     | ``   | default ou danger                           |
 
 ---
 
@@ -49,7 +50,11 @@
     - `primary`
     - `secondary`
     - `tertiary`
-    - `danger`
+    - `link`
+  
+- **type** : 
+  - `brand`
+  - `danger`
 
 - **Taille (`size`)** :
     - `sm`

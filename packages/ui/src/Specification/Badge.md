@@ -104,11 +104,11 @@
 
 // avec Icone
 <Badge variant={'default'} color={"warning"} size={'lg'} >
-  <Badge.Icon/>
+  <Badge.Icon>
     <BellIcon />
   </Badge.Icon>
   <Badge.Text>Text</Badge.Text>
-</div>
+</Badge>
 ```
 --- 
 

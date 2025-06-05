@@ -102,7 +102,9 @@
 <Alert variant="error" title="Erreur de connexion" description="Veuillez vérifier vos identifiants." closable onClose={handleClose} />
 
 <Alert variant="success">
-  <strong>Succès !</strong> Votre profil a bien été mis à jour.
+  <Alert.Icon/>
+  <Alert.Success>Succès !</Alert.Success> 
+  <Alert.Description>Votre profil a bien été mis à jour.</Alert.Description>
 </Alert>
 ```
 

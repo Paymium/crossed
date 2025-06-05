@@ -37,8 +37,6 @@
 |-------------------|------------|--------|-----------|-----------------------------------------------------------------------------------------------------------------|
 | `open`            | `boolean`  | ✅     | -         | Contrôle d’ouverture de la modal                                                                                |
 | `onClose`         | `function` | ✅     | -         | Callback pour fermer la modal                                                                                   |
-| `title`           | `string`   | ❌     | -         | Titre affiché dans l’en-tête                                                                                    |
-| `description`     | `string`   | ❌     | -         | Description facultative                                                                                         |
 | `size`            | `"sm"      | "md" | "lg"      | "xl"`                                                                                                           | ❌ | `"md"` | Taille de la modal                                 |
 | `adapt`           | `boolean`  | ❌     | `false`   | gère l'affichage responsive (pas de sheet sur browser)                                                          |
 | `closable`        | `boolean`  | ❌     | `true`    | Affiche ou non le bouton de fermeture, gère également le comportement au press du overlay ou gesture sur mobile |
@@ -89,7 +87,7 @@
     - `ConfirmationModal`
     - `warningModal`
     - `ErrorModal`
-    - `Preset`
+    - `Dialog` Preset pouvant être utilisé pour une modal "clasique"
 - **Créés à partir de** : `Modal` avec composition personnalisée via props ou slots
 
 ---

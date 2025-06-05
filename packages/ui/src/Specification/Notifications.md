@@ -105,12 +105,10 @@
   duration={3000}
 />
 
-<Notification
-  variant="error"
-  message="Échec de l’enregistrement."
-  closable
-  onClose={() => console.log('fermé')}
-/>
+<Notification>
+  <Notification.Title>Titre</Notification.Title>
+  <Notification.Description>Description</Notification.Description>
+</Notification>
 ```
 ---
 

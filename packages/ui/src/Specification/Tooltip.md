@@ -113,14 +113,9 @@
   </button>
 </Tooltip>
 
-// Placement à droite
-<Tooltip content="Profil" placement="right">
-  <Avatar />
-</Tooltip>
-
-// Tooltip contrôlé manuellement
 <Tooltip content="Info" open={show} onOpenChange={setShow}>
-  <InfoIcon />
+  <ToolTip.Trigger><InfoIcon /></ToolTip.Trigger>
+  <ToolTip.Content>Content</ToolTip.Content>
 </Tooltip>
 ```
 ---
