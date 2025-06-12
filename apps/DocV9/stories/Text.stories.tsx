@@ -49,6 +49,12 @@ const meta: Meta<typeof Text> = {
         'h1',
       ],
     },
+    textAlign: {
+      control: 'select',
+      options: [
+        'auto', 'justify', 'default', 'center', 'left', 'right'
+      ],
+    },
     color: {
       control: 'select',
       options: [
@@ -74,7 +80,7 @@ export const Primary: Story = {
       source: { language: 'tsx' },
     },
   },
-  args: { children: 'Text' },
+  args: { children: 'Text', textAlign:'center' },
 };
 
 export const Size: Story = {
@@ -82,7 +88,7 @@ export const Size: Story = {
     return (
       <YBox space={'md'}>
         <YBox space={'xxs'}>
-          <Text color={"warning"}>Text standard size</Text>
+          <Text>Text standard size</Text>
           <Text>{loremIpsum}</Text>
         </YBox>
         <YBox space={'xxs'}>
