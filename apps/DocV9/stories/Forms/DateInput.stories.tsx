@@ -23,7 +23,7 @@ const meta: Meta<typeof DateInput> = {
     locale: { control: 'select', options: ['default', 'en', 'fr'] },
     format: { control: 'text', value: 'yyyy-mm-dd' },
   },
-  args: { locale: 'default', onChange: ()=>{} },
+  args: { locale: 'default', onChange:()=>{} },
 };
 
 export default meta;

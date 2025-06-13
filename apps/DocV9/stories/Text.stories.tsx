@@ -7,7 +7,8 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { YBox, Text } from '@crossed/ui';
+import { Text } from '@crossed/ui/src/typography/Text';
+import { YBox } from '@crossed/ui/src/layout/YBox';
 
 const loremIpsum =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsu";
@@ -49,12 +50,6 @@ const meta: Meta<typeof Text> = {
         'h1',
       ],
     },
-    textAlign: {
-      control: 'select',
-      options: [
-        'auto', 'justify', 'default', 'center', 'left', 'right'
-      ],
-    },
     color: {
       control: 'select',
       options: [
@@ -80,7 +75,7 @@ export const Primary: Story = {
       source: { language: 'tsx' },
     },
   },
-  args: { children: 'Text', textAlign:'center' },
+  args: { children: 'Text' },
 };
 
 export const Size: Story = {

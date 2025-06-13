@@ -14,15 +14,14 @@ import { Divider } from '@crossed/ui/src/layout/Divider';
 import { Box } from '@crossed/ui/src/layout/Box';
 import { inlineStyle } from '@crossed/styled';
 import { Group } from '@crossed/ui';
-import { ComponentType } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Card> = {
   component: Card,
   subcomponents: {
-    'Card.Title': Card.Title as ComponentType<any>,
-    'Card.Description': Card.Description as ComponentType<any>,
-    'Card.Extra': Card.Extra as ComponentType<any>,
+    'Card.Title': Card.Title,
+    'Card.Description': Card.Description,
+    'Card.Extra': Card.Extra,
   },
   tags: ['autodocs'],
   argTypes: {
@@ -51,7 +50,7 @@ export const Primary: Story = {
 
 export const Pressable: Story = {
   ...Primary,
-  args: { pressable: true, onPress: () => {} },
+  args: { pressable: true, onPress: ()=>{} },
 };
 
 export const SizeXs: Story = {

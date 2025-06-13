@@ -7,26 +7,25 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { IconButton } from '@crossed/ui/src/buttons/IconButton';
-import { Github } from '@crossed/unicons';
+import { Anchor } from '@crossed/ui/src/typography/Anchor';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof IconButton> = {
-  component: IconButton,
-  parameters: { layout: 'centered' },
+const meta: Meta<typeof Anchor> = {
+  component: Anchor,
   tags: ['autodocs'],
+  parameters: { layout: 'centered' },
   argTypes: {},
-  render: (args) => (
-    <IconButton {...args}>
-      <Github />
-    </IconButton>
-  ),
 };
 
 export default meta;
-type Story = StoryObj<typeof IconButton>;
+type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
-  args: {},
+  args: { children: 'Text' },
+};
+
+export const NoPrimary: Story = {
+  ...Primary,
+  args: { ...Primary.args, primary: false },
 };

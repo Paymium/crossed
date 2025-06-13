@@ -6,21 +6,19 @@
  */
 
 import type { Meta, StoryObj } from '@storybook/react';
-// import { fn } from '@storybook/test';
 
 import { Tabs } from '@crossed/ui/src/disclosure/Tabs';
 import { Text } from '@crossed/ui';
-import { ComponentType } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Tabs> = {
   component: Tabs,
   subcomponents: {
-    'Tabs.List': Tabs.List as ComponentType<any>,
-    'Tabs.Tab': Tabs.Tab as ComponentType<any>,
-    'Tabs.Tab.Text': Tabs.Tab.Text as ComponentType<any>,
-    'Tabs.Panel': Tabs.Panel as ComponentType<any>,
-    'Tabs.Indicator': Tabs.Indicator as ComponentType<any>,
+    'Tabs.List': Tabs.List,
+    'Tabs.Tab': Tabs.Tab,
+    'Tabs.Tab.Text': Tabs.Tab.Text,
+    'Tabs.Panel': Tabs.Panel,
+    'Tabs.Indicator': Tabs.Indicator,
   },
   parameters: {
     design: {

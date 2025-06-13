@@ -1,4 +1,7 @@
 import { StorybookConfig } from "@storybook/react-native-web-vite";
+import { mergeConfig } from 'vite';
+import path from 'path';
+import * as crossedPlugin from "vite-plugin-crossed-styled";
 
 const main: StorybookConfig = {
   stories: [
@@ -16,8 +19,30 @@ const main: StorybookConfig = {
   docs: {},
 
   typescript: {
-    reactDocgen: "react-docgen",
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      //     compilerOptions: {
+      //       allowSyntheticDefaultImports: false,
+      //       esModuleInterop: false,
+      //     },
+    },
+  },
+  // typescript: {
+  //   reactDocgen: "react-docgen",
+  // },
+  viteFinal: async (config) => {
+    return mergeConfig(config, {
+      plugins: [
+        crossedPlugin.default({
+          configPath: path.resolve(
+            __dirname,
+            '../style.config.ts'
+          ),
+        }),
+      ],
+    });
   },
 };
+
 
 export default main;

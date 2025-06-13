@@ -29,7 +29,7 @@ const meta: Meta<typeof Calendar> = {
     minDate: first,
     maxDate: last,
     monthsToDisplay: 1,
-    onDateSelected: () => {},
+    onDateSelected: ()=>{},
     // selectedDate: date,
     locale: 'default',
   },

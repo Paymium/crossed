@@ -7,7 +7,8 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
-import { Badge, Switch, SwitchPreset , Button, XBox } from '@crossed/ui';
+import { Switch, SwitchPreset } from '@crossed/ui/src/forms/Switch/index';
+import { Button, XBox, Badge } from '@crossed/ui';
 
 // Configuration de la story
 const meta: Meta<typeof Switch> = {

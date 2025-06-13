@@ -7,18 +7,17 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Alert, AlertDescription } from '@crossed/ui';
-import { ComponentType } from 'react';
+import { Alert, AlertDescription } from '@crossed/ui/src/feedback/Alert';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Alert> = {
   component: Alert,
   subcomponents: {
-    'Alert.Description': AlertDescription as ComponentType<any>,
-    'Alert.Icon': Alert.Icon as ComponentType<any>,
-    'Alert.Group': Alert.Group as ComponentType<any>,
-    'Alert.Action': Alert.Action as ComponentType<any>,
-    'Alert.Action.Text': Alert.Action.Text as ComponentType<any>,
+    'Alert.Description': AlertDescription,
+    'Alert.Icon': Alert.Icon,
+    'Alert.Group': Alert.Group,
+    'Alert.Action': Alert.Action,
+    'Alert.Action.Text': Alert.Action.Text,
   },
   tags: ['autodocs'],
   argTypes: {

@@ -8,14 +8,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Badge } from '@crossed/ui/src/display/Badge';
-import { YBox } from '@crossed/ui';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Badge> = {
   component: Badge,
   render(e) {
     return (
-      <YBox space={"xs"}>
+      <>
         <Badge {...e}>
           <Badge.Text>Badge</Badge.Text>
         </Badge>
@@ -31,7 +30,7 @@ const meta: Meta<typeof Badge> = {
         <Badge {...e} variant={'info'}>
           <Badge.Text>Badge</Badge.Text>
         </Badge>
-      </YBox>
+      </>
     );
   },
   tags: ['autodocs'],

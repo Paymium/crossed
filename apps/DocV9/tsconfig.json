@@ -7,6 +7,7 @@
     "example"
   ],
   "compilerOptions": {
+    "baseUrl": "./",
     "noEmit": true,
     "ignoreDeprecations": "5.0",
     "declaration": true,
@@ -36,7 +37,7 @@
     "types": [
       "@crossed/theme",
       "node"
-    ]
+    ],
   },
   "extends": "expo/tsconfig.base"
 }

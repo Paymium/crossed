@@ -6,7 +6,6 @@
  */
 
 import type { Meta, StoryObj } from '@storybook/react';
-// import { fn } from '@storybook/test';
 
 import { CloseButton } from '@crossed/ui/src/buttons/CloseButton';
 

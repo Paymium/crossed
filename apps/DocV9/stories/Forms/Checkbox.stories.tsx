@@ -8,7 +8,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Checkbox } from '@crossed/ui/src/forms/Checkbox';
-import { Text } from '@crossed/ui';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Checkbox> = {
@@ -49,8 +48,8 @@ export const CustomPlacementThumb: Story = {
   render(e) {
     return (
       <Checkbox {...e}>
+        My label
         <Checkbox.Thumb />
-        <Text>My label</Text>
       </Checkbox>
     );
   },

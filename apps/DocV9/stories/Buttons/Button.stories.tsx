@@ -8,16 +8,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '@crossed/ui/src/buttons/Button';
-import { ComponentType } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Button> = {
   component: Button,
   subcomponents: {
-    'Button.Text': Button.Text as ComponentType<any>,
-    'Button.Element': Button.Element as ComponentType<any>,
-    'Button.Group': Button.Group as ComponentType<any>,
-    'Button.Icon': Button.Icon as ComponentType<any>,
+    'Button.Text': Button.Text,
+    'Button.Element': Button.Element,
+    'Button.Group': Button.Group,
+    'Button.Icon': Button.Icon,
   },
   tags: ['autodocs'],
   parameters: {

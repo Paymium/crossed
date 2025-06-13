@@ -6,20 +6,18 @@
  */
 
 import type { Meta, StoryObj } from '@storybook/react';
-// import { fn } from '@storybook/test';
 
 import { Banner, BannerActionText } from '@crossed/ui/src/feedback/Banner';
-import { ComponentType } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Banner> = {
   component: Banner,
   subcomponents: {
-    'Banner.Description': Banner.Description as ComponentType<any>,
-    'Banner.Icon': Banner.Icon as ComponentType<any>,
-    'Banner.Title': Banner.Title as ComponentType<any>,
-    'Banner.Action': Banner.Action as ComponentType<any>,
-    'Banner.Action.Text': BannerActionText as ComponentType<any>,
+    'Banner.Description': Banner.Description,
+    'Banner.Icon': Banner.Icon,
+    'Banner.Title': Banner.Title,
+    'Banner.Action': Banner.Action,
+    'Banner.Action.Text': BannerActionText,
   },
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
@@ -37,7 +35,7 @@ const meta: Meta<typeof Banner> = {
   render: (e) => (
     <Banner {...e}>
       <Banner.Icon />
-      <Banner.Title>Description</Banner.Title>
+      <Banner.Description>Description</Banner.Description>
     </Banner>
   ),
 };

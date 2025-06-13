@@ -9,16 +9,15 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Accordion } from '@crossed/ui/src/disclosure/Accordion';
 import { Box, Text, YBox } from '@crossed/ui';
-import { ComponentType } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Accordion> = {
   component: Accordion,
   subcomponents: {
-    'Accordion.Item': Accordion.Item as ComponentType<any>,
-    'Accordion.Icon': Accordion.Icon as ComponentType<any>,
-    'Accordion.Trigger': Accordion.Trigger as ComponentType<any>,
-    'Accordion.Panel': Accordion.Panel as ComponentType<any>,
+    'Accordion.Item': Accordion.Item,
+    'Accordion.Icon': Accordion.Icon,
+    'Accordion.Trigger': Accordion.Trigger,
+    'Accordion.Panel': Accordion.Panel,
   },
   tags: ['autodocs'],
   argTypes: {

@@ -1,5 +1,8 @@
 import "../style.config";
+import "virtual:crossed.css";
 import type { Preview } from "@storybook/react";
+import { PortalProvider } from '@gorhom/portal';
+import * as React from 'react';
 
 const preview: Preview = {
   parameters: {
@@ -12,7 +15,14 @@ const preview: Preview = {
     },
   },
 
-  tags: ["autodocs"]
+  tags: ["autodocs"],
+  decorators : [
+    (Story) => (
+      <PortalProvider>
+          <Story />
+      </PortalProvider>
+    ),
+  ]
 };
 
 export default preview;

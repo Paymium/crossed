@@ -31,6 +31,7 @@ config = makeMetroConfig({
   resolver: {
     ...config.resolver,
     resolveRequest: MetroSymlinksResolver(),
+    unstable_enablePackageExports: true,
   },
 });
 
