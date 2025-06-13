@@ -1,0 +1,40 @@
+import { Source, Primary } from '@storybook/blocks';
+import * as TextStories from './Text.stories';
+
+export const changeStyleConfigCode = `
+import { Registry } from '@crossed/styled';
+// ⬇️ add this line ⬇️
+import { themes } from "@crossed/theme";
+
+// ⬇️ Remove this part of code ⬇️
+const themes = {
+dark: { colorText: "white" },
+light: { colorText: "black" },
+};
+// ⬆️ Remove this part of code ⬆️
+
+type CustomThemes = typeof themes;
+
+Registry.setThemes(themes).setThemeName("dark");
+
+declare module '@crossed/styled' {
+export interface Themes extends CustomThemes {}
+}`;
+
+# Setup
+
+`@crossed/ui` depends of `@crossed/styled`, so you should install it, see [Setup](?path=/docs/crossed-styled-setup--docs)
+
+## Installation
+
+<Source language="bash" code={`pnpm i @crossed/theme @crossed/ui`} />
+
+## Init theme
+
+Edit your `style.config.ts`:
+
+<Source language="tsx" code={changeStyleConfigCode} />
+
+## Usage
+
+<Primary of={TextStories} />
