@@ -5,18 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-'use client';
-
 import {
   Text as TextNative,
   type TextProps as TextNativeProps,
 } from 'react-native';
-import {
-  composeStyles,
-  createStyles,
-  CrossedMethods,
-  withReactive,
-} from '@crossed/styled';
+import { composeStyles, createStyles, CrossedMethods } from '@crossed/styled';
 import {
   fontWeightStyles,
   fontSizeStyles,
@@ -73,33 +66,31 @@ export interface TextProps extends Omit<TextNativeProps, 'style'> {
 }
 
 const Text = memo<TextProps>(
-  withReactive(
-    ({
-      weight,
-      color = 'primary',
-      textAlign,
-      fontSize,
-      style,
-      size = 'default',
-      ...props
-    }) => {
-      return (
-        <TextNative
-          ref={props.ref}
-          {...props}
-          {...composeStyles(
-            sizeTemplateStyles[size],
-            textAlignStyles[textAlign],
-            fontSizeStyles[fontSize],
-            fontWeightStyles[weight],
-            useText.root,
-            fontColorStyles[color],
-            style
-          ).rnw()}
-        />
-      );
-    }
-  )
+  ({
+    weight,
+    color = 'primary',
+    textAlign,
+    fontSize,
+    style,
+    size = 'default',
+    ...props
+  }) => {
+    return (
+      <TextNative
+        ref={props.ref}
+        {...props}
+        {...composeStyles(
+          sizeTemplateStyles[size],
+          textAlignStyles[textAlign],
+          fontSizeStyles[fontSize],
+          fontWeightStyles[weight],
+          useText.root,
+          fontColorStyles[color],
+          style
+        ).rnw()}
+      />
+    );
+  }
 );
 Text.displayName = 'Text';
 
