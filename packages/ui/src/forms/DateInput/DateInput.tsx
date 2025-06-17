@@ -92,7 +92,7 @@ export const DateInput = memo(
       (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
         isFocus.current = true;
         // blur input on mobile, if user hide sheet, re-focus on input loop appear sheet
-        !isWeb && e.target?.blur?.();
+        !showFloating && e.target?.blur?.();
         if (picker && !calendarRef.current?.isOpen()) {
           picker && calendarRef.current?.open();
         }

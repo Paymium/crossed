@@ -129,6 +129,7 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
           onDateSelected?.(e);
         });
         floatingRef.current?.close();
+        sheetRef.current?.hide();
       },
       [onDateSelected]
     );
