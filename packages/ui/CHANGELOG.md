@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.2.5
+
+### Patch Changes
+
+- 6c13944: Picker for date input didn't close itself when selecting a day
+
 ## 8.2.4
 
 ### Patch Changes
