@@ -8,6 +8,7 @@
 - **Rôle** : Afficher des données sous forme de courbe pour visualiser des tendances
 - **Utilisation prévue** : Dashboard, reporting, analytics
 
+
 ---
 
 ## 2. 🧱 Structure & Composabilité
@@ -60,6 +61,9 @@
 
 - `role="img"` sur le conteneur SVG
 - Texte accessible via `aria-label` ou `title` si nécessaire
+- - les données du graphique doivent être consutable sous forme tabulaire
+- les légendes doivent être lisible par un lecteur d'écran 
+- si les données change, mettre à jour le text alternatif et réannoncé avec aria-live"polite"
 
 ---
 

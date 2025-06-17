@@ -73,11 +73,14 @@
 ## 6. Accessibilité
 
 - `role="dialog"` et `aria-modal="true"`
+- aria-labeledby pour la lié a un titre
 - Focus piégé à l’intérieur de la modal
-- Focus initial sur élément important (ou transmis par `initialFocusRef`)
+- Focus initial sur le premier élément foccusable
+- a la fermeture le focus est rendu sur le trigger de la modal
 - Échappement via `ESC` pris en charge
 - Lien sémantique entre `title`, `description` et le contenu (`aria-labelledby`, `aria-describedby`)
 - Navigation clavier complète
+- contenue derrière la modal innacessible au lecteur d'écran avec aria-hidden true par exemple
 
 ---
 

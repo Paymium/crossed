@@ -81,6 +81,7 @@
 
 ## 6. Accessibilité
 
+- toujours Utilisé <button> quand possible
 - Navigation clavier supportée (`Tab`, `Enter`, `Space`)
 - Focus visible (`:focus-visible` recommandé ou alternative accessible)
 - Utilisation de l’attribut `disabled` natif pour l'état désactivé
@@ -89,6 +90,8 @@
 - Contraste texte/fond respectant le minimum WCAG (≥ 4.5:1)
 - Utilisation de `aria-busy` ou `aria-disabled` en cas d’état de chargement personnalisé
 - Utilisation de `aria-describedby` si besoin d’un complément d’information
+- si button avec text seulement ajouté un aria-label
+- si button ouvre une popup utiliser aria-haspopup et aria-expanded
 
 ---
 

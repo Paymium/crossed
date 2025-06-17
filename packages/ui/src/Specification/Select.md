@@ -79,9 +79,20 @@
 
 ## 6. Accessibilité
 
-- `role="combobox"` avec attributs ARIA dynamiques
-- Prise en charge complète du clavier
-- Support de `aria-disabled`, `aria-selected`, `aria-activedescendant`
+- `role="combobox"` sur le trigger 
+- aria-expanded="true/false" selon l’état ouvert/fermé 
+- aria-haspopup="listbox"
+- aria-controls="listbox-id"
+- aria-activedescendant="option-id" (indique l'option survolé et/ou selectionné)
+- aria-selected true pour l'option choisie
+- Prise en charge complète du clavier:
+  - Enter ou Space	Ouvre ou sélectionne 
+  - ArrowDown / ArrowUp	Se déplace entre les options 
+  - Escape	Ferme la liste 
+  - Tab	Quitte le select (pas à l’intérieur)
+  - Home / End	Aller à la première / dernière option 
+  - Taper une lettre	Aller à l’option commençant par cette lettre
+- Support de `aria-disabled`, `aria-selected`, 
 - Annonce vocale des options survolées
 - Focus clair et visible
 

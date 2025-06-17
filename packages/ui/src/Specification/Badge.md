@@ -79,6 +79,8 @@
 ---
 
 ## 6. Accessibilité
+- Si badge purement décoratif, aria-hiden="true" pour l'exclure des lecteur d'écran 
+- pas besoin de aria spécifique sauf dans le cas ou le badge transmet une informations importante (type nombre de notification non lu)
 
 ---
 

@@ -59,6 +59,8 @@
 
 ## 6. Accessibilité
 
+- role dialog
+- aria-modal true
 - Utiliser `aria-labelledby` et `aria-describedby` pour contextualiser le contenu
 - Focus trap et retour du focus à la fermeture
 

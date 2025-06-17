@@ -73,6 +73,13 @@
 - `aria-selected` sur les lignes sélectionnées
 - `aria-sort` sur les en-têtes triables
 - Navigation clavier (tab, flèches, sélection)
+- role="columnheader" pour les en-têtes de colonnes 
+- role="rowheader" pour les en-têtes de ligne (si besoin)
+- role="gridcell" ou role="cell" pour les cellules classiques
+- Utiliser les attributs aria-labelledby ou aria-describedby pour lier chaque cellule à ses en-têtes (colonne et/ou ligne).
+- ajouter une légende avec aria-describedby
+- Si le tableau est triable, ajouter aria-sort sur les en-têtes (ascending, descending, none)
+
 
 ---
 

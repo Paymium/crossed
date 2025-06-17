@@ -62,6 +62,7 @@
 - `role="img"` pour le conteneur
 - `title`/`desc` pour description contextuelle des données
 - Utilisation d'attributs ARIA pour nommer les secteurs
+- Le graphique doit être accompagné d’un texte équivalent qui décrit l'information transmise visuellement.
 
 ---
 

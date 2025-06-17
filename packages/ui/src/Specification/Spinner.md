@@ -65,6 +65,7 @@
 - Retirer le spinner du DOM ou mettre à jour son contenu quand le chargement est terminé
 - Ne pas bloquer la navigation clavier ni la lecture d’écran autour du spinner
 - Si le spinner est **pure déco**, il ne doit **pas** avoir de rôle ARIA (ou `aria-hidden="true"`)
+- si le spinner est utilisé pour indiqué un chargement global, il faut ajouter un aria-busy true au container
 ---
 
 ## 7. 🧩 Présets ou composants dérivés

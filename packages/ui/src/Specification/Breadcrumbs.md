@@ -68,6 +68,10 @@
 
 - Respect des rôles et attributs ARIA (`nav`, `aria-current`)
 - Liens accessibles au clavier
+- Les séparateurs visuels doivent être visuellement présents, mais invisibles pour les lecteurs d’écran :
+- Utiliser un élément <nav> avec aria-label="Fil d’Ariane" (ou "Breadcrumb" pour l'anglais) 
+- L’élément actif (la page actuelle) doit être marqué avec aria-current="page" 
+
 
 ---
 

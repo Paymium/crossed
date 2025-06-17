@@ -91,6 +91,7 @@
   - `Tab` pour focus
   - `Enter` ou `Space` pour déclencher une action
   - `Backspace` ou `Delete` pour supprimer, si pertinent
+  - si liste de tag le contener doit avoir le role "liste" et les tag "listitem"
 - Utilisation de `aria-selected="true"` si le tag est sélectionné dans une liste
 - Focus clair et visible sur chaque tag interactif
 - Utilisation de `aria-describedby` si des instructions complémentaires sont nécessaires

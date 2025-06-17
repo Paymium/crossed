@@ -80,7 +80,12 @@
   - `Right` / `Up` : augmente la valeur
   - `Home` / `End` : aller à la valeur min / max
 - Affichage visuel de la valeur recommandé, surtout pour des valeurs précises
-- Dans le cas d’un slider double (intervalle), chaque curseur doit être focusable et accessible indépendamment
+- Dans le cas d’un slider double (intervalle), chaque curseur doit être focusable et accessible indépendamment : 
+  - Avoir role="slider"
+  - Un aria-valuenow propre 
+  - Partager le même aria-valuemin/max 
+  - Avoir des aria-label distincts (ex: "Prix minimum", "Prix maximum")
+- le slider doit être manipulable au click, au gliser et au toucher 
 ---
 
 ## 7. 🧩 Présets ou composants dérivés

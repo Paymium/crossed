@@ -28,7 +28,7 @@
 
 ## 3. ⚙️ Props attendues
 
-| Prop          | Type                      | Requis | Par défaut | Description                                         |
+'un| Prop          | Type                      | Requis | Par défaut | Description                                         |
 |---------------|---------------------------|--------|------------|-----------------------------------------------------|
 | `multiple`    | `boolean`                 | ❌     | `false`    | Permet l’upload de plusieurs fichiers               |
 | `accept`      | `string`                  | ❌     | `*`        | Types de fichiers acceptés (`.png,.pdf,image/*`)    |
@@ -75,11 +75,15 @@
 
 ## 6. Accessibilité
 
+- Input type="file"
 - Zone interagissable avec clavier (`tabIndex`, `role="button"`)
 - Texte d’aide descriptif (`aria-describedby`)
 - Statut d’upload lisible (`aria-live="polite"`)
 - Boutons de suppression marqués avec `aria-label`
 - Support des navigateurs avec ou sans drag & drop
+- pour une zone de drag & drop role="buton" ou "region" ainsi qu'un "aria-label"
+- une fois le document téléversé ajouté un aria-describedby="filename"
+- erreur claire pour les fichier non géré
 
 ---
 

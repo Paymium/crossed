@@ -61,10 +61,11 @@
 ## 6. Accessibilité
 
 - Lien accessible via le clavier
-- Rôle `link` implicite via `<a>`
+- Rôle `link` si non utilisation de la balise `<a>`
 - Focus visible
 - target="_blank"` + `rel="noopener noreferrer"` si `external` est vrai
 - Attributs ARIA pour indiquer `disabled` si nécessaire
+- aria-label si le text du liens n'est pas explicite 
 
 ---
 

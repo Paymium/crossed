@@ -77,7 +77,6 @@
 
 ## 6. Accessibilité
 
-progress bar
 - Utilisation de l’élément natif `<progress>` si possible
 - Sinon, utiliser `role="progressbar"` sur un élément div ou span
 - Fournir les attributs :
@@ -86,7 +85,9 @@ progress bar
   - `aria-valuenow` — valeur actuelle
   - `aria-valuetext` si la valeur affichée a besoin d’un format lisible (ex: "50 %")
 - Ajouter un `aria-label` ou `aria-labelledby` pour décrire le but du chargement
+- aria-busy si progressbar infini
 - Si nécessaire, afficher le pourcentage visuellement et textuellement
+- Si la valeur est modifier dynamiquement, il faut notifier les technologie d'assistance potentiellement avec aria-live
 - Doit être visible ou annoncé par un lecteur d’écran si important pour la tâche utilisateur
 - Si le progrès est **indéfini** (chargement en cours sans fin connue), ne pas définir `aria-valuenow`
 

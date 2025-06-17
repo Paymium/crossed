@@ -40,7 +40,7 @@
 | `action`      | `ReactNode` | ❌     | `null`     | Bouton ou élément interactif complémentaire                                      |
 | `fullWidth`   | `boolean`   | ❌     | `false`    | change l'affichage pour passer d'une floating a conteur prenant toute la largeur |
 
-
+une propos Status pour la couleur et variant utilisé pour default ou fullwidth ? 
 ---
 
 ## 4. 🎨 Variantes / États
@@ -73,8 +73,11 @@
 
 - `role="alert"` pour les messages importants (error, warning)
 - `role="status"` pour les messages non bloquants (info, success)
-- Focus visible sur les éléments interactifs
-- Bouton de fermeture accessible via clavier (`aria-label="Fermer"`)
+- Ne jamais forcer le focus sur l’alerte, sauf si elle est essentielle pour continuer l’action. 
+- Laisser l’utilisateur contrôler sa navigation.
+- Focus possible sur les éléments interactifs
+- Bouton de fermeture accessible via clavier 
+- Label explicite pour le bouton de fermetur (`aria-label="Fermer l'alerte"`)
 
 ---
 

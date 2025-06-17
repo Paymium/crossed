@@ -90,10 +90,11 @@ Dans sa configuration mobiel les tabs sont remplacé par un select
 - Conteneur avec `role="tablist"` pour définir le groupe d’onglets
 - Chaque onglet :
   - `role="tab"`
-  - `aria-selected="true"` pour l’onglet actif
+  - `aria-selected="true"` pour l’onglet actif aria-selected false pour les autre
   - `aria-controls="id-du-panel"` pour lier à son contenu
   - Attribut `id` unique (référencé par le panel)
   - Focusable avec `Tab` et activable avec `Enter` ou `Space`
+  - onglet disabled ne doivent pas être focusable 
 - Chaque panneau de contenu :
   - `role="tabpanel"`
   - `id` correspondant à `aria-controls` de son onglet
