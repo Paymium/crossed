@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.2.6
+
+### Patch Changes
+
+- 1db9f24: indicator tabs not good positionning on resize page
+
 ## 8.2.5
 
 ### Patch Changes
