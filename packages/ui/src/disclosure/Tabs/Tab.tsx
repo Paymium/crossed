@@ -25,6 +25,7 @@ import { withTiming } from 'react-native-reanimated';
 import { View } from 'react-native-reanimated/lib/typescript/Animated';
 import { focusStyles, tabTitleStyles, triggerStyles } from './styles';
 import { Button, ButtonTextProps } from '../../buttons/Button';
+import { useMedia } from '../../useMedia';
 
 export type TabsTabProps = Pick<TabsContext, 'value'> &
   Omit<PressableProps, 'style'> &
@@ -59,6 +60,7 @@ export const createTab = ({
       widthLayout,
       size,
     } = useTabsContext();
+    const media = useMedia();
 
     const selected = valueProps === value;
 
@@ -103,6 +105,11 @@ export const createTab = ({
         measure();
       }
     }, [shouldShow]);
+
+    // when screen change, recalculate position if tab is selected
+    useEffect(() => {
+      selected && measure();
+    }, [...Object.values(media), selected]);
 
     const onLayout = useCallback(
       composeEventHandlers(({ nativeEvent: { layout } }) => {
