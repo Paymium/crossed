@@ -1,5 +1,13 @@
 # crossed-doc
 
+## 0.12.14
+
+### Patch Changes
+
+- 8bbb5e7: improve behavior props of MenuList, and increase border radius
+- Updated dependencies [8bbb5e7]
+  - @crossed/ui@8.2.7
+
 ## 0.12.13
 
 ### Patch Changes
