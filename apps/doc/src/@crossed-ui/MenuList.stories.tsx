@@ -22,6 +22,7 @@ const meta: Meta<typeof MenuList> = {
   argTypes: {},
   render: (e) => (
     <MenuList {...e}>
+      <MenuList.Label>Label</MenuList.Label>
       <MenuList.Item>
         <MenuList.Title>Menu 1</MenuList.Title>
       </MenuList.Item>
