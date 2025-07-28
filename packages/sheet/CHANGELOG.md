@@ -1,5 +1,11 @@
 # @crossed/sheet
 
+## 0.12.2
+
+### Patch Changes
+
+- 96feed1: prevent crash on sectionList Sheet
+
 ## 0.12.1
 
 ### Patch Changes
