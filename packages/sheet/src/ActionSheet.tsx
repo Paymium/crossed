@@ -829,7 +829,6 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
 
                       if (y > 1) {
                         blockSwipeGesture = true;
-                        continue;
                       }
                     }
                   } else {
@@ -845,7 +844,6 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
                         y !== ScrollState.END
                       ) {
                         blockSwipeGesture = true;
-                        continue;
                       }
                     }
                   }
@@ -877,11 +875,13 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
                     if (!offsets[i] || node.offset.current?.y === 0) {
                       offsets[i] = node.offset.current?.y || 0;
                     }
-                    scrollRef.scrollTo({
-                      x: 0,
-                      y: offsets[i],
-                      animated: false,
-                    });
+                    if (scrollRef?.current) {
+                      scrollRef.current.scrollTo({
+                        x: 0,
+                        y: offsets[i],
+                        animated: false,
+                      });
+                    }
                   }
                 }
               }
@@ -1089,8 +1089,6 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
                         blockSwipeGesture = true;
                         const scrollRef = resolveScrollRef(node.node.ref);
                         offsets[i] = (scrollRef as HTMLDivElement).scrollTop;
-
-                        continue;
                       }
                     }
                   } else {
@@ -1100,7 +1098,6 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
                       const { y } = node.node.offset.current;
                       if (y > -1) {
                         blockSwipeGesture = true;
-                        continue;
                       }
                     }
                   }
