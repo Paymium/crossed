@@ -45,6 +45,12 @@ export const form = createStyles(
         ':disabled': { cursor: 'not-allowed' },
       },
     },
+    disabled: {
+      base: {
+        backgroundColor: Input.primary.disabled.background,
+        borderColor: Input.primary.disabled.border,
+      },
+    },
     placeholder: { base: { color: Input.primary.default.placeholder } },
     label: {
       'base': { color: font.color, fontWeight: font.fontWeight.lg },
