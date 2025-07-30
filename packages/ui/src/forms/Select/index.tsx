@@ -76,7 +76,11 @@ export const Select = memo<SelectProps>((e) => {
                   description={description}
                   extra={extra}
                 />
-                <SelectTrigger ref={refs.setReference as any} id={id}>
+                <SelectTrigger
+                  ref={refs.setReference as any}
+                  id={id}
+                  disabled={disabled}
+                >
                   {children}
                 </SelectTrigger>
                 {!!error && <Text color="error">{error.toString()}</Text>}
