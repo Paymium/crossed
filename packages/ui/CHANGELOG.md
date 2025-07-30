@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.2.9
+
+### Patch Changes
+
+- b3bcb1b: disabled select didn't appeared as disabled on mobile
+
 ## 8.2.8
 
 ### Patch Changes
