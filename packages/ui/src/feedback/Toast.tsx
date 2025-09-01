@@ -75,11 +75,27 @@ const toastPresetStyles = createStyles(
     }) as const
 );
 
-const progressBarBackground = createStyles((t) => ({
-  success: { base: { backgroundColor: t.colors.success.primary } },
-  error: { base: { backgroundColor: t.colors.error.primary } },
-  info: { base: { backgroundColor: t.colors.info.primary } },
-  warning: { base: { backgroundColor: t.colors.warning.primary } },
+const progressBarBackground = createStyles(() => ({
+  success: {
+    base: {
+      // backgroundColor: t.colors.success.primary,
+    },
+  },
+  error: {
+    base: {
+      // backgroundColor: t.colors.error.primary,
+    },
+  },
+  info: {
+    base: {
+      // backgroundColor: t.colors.info.primary,
+    },
+  },
+  warning: {
+    base: {
+      // backgroundColor: t.colors.warning.primary,
+    },
+  },
 }));
 
 type ContainerProps = YBoxProps & {

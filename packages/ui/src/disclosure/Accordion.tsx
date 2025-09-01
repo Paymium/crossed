@@ -37,11 +37,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useFloatingContext } from '../overlay/Floating/context';
 
-const accordionStyles = createStyles((t) => ({
+const accordionStyles = createStyles(() => ({
   root: {
     base: {
       borderBottomWidth: 1,
-      borderColor: t.colors.border.primary,
+      // borderColor: t.colors.border.primary,
       borderStyle: 'solid',
     },
   },
@@ -59,7 +59,7 @@ const accordionStyles = createStyles((t) => ({
   item: {
     base: {
       borderTopWidth: 1,
-      borderColor: t.colors.border.primary,
+      // borderColor: t.colors.border.primary,
       borderStyle: 'solid',
     },
     web: {

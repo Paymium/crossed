@@ -12,6 +12,12 @@ import { useTheme } from '@crossed/styled';
 export const Spinner = memo<ActivityIndicatorProps & RefAttributes<View>>(
   forwardRef<View, ActivityIndicatorProps>((props, ref) => {
     const { colors } = useTheme();
-    return <ActivityIndicator color={colors.text.brand} {...props} ref={ref} />;
+    return (
+      <ActivityIndicator
+        color={colors.text.brand.primary.default}
+        {...props}
+        ref={ref}
+      />
+    );
   })
 );

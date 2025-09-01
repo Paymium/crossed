@@ -127,6 +127,7 @@ export const Box: BoxComponent = forwardRef(
       <Comp
         ref={ref}
         {...(props as any)}
+        role={pressable ? 'button' : null}
         style={pressable ? handleStyles : styles.rnw().style}
       />
     );

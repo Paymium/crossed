@@ -6,14 +6,13 @@
  */
 
 import type { Colors } from './color';
-import type { Components } from './components';
 import type { Font } from './font';
 import type { Spaces } from './space';
+import { Radius } from './radius';
 
 export type Theme = {
-  boxShadow: string;
   colors: Colors;
   space: Spaces;
+  radius: Radius;
   font: Font;
-  components?: Components;
 };

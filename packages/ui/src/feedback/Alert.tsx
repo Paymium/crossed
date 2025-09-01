@@ -24,39 +24,75 @@ import {
 } from '../buttons/Button';
 import { Box } from '../layout/Box';
 
-export const alertDescriptionStyles = createStyles(
-  ({ components: { Alert } }) => ({
-    base: { base: { flexShrink: 1, flexGrow: 1 } },
-    error: { base: { color: Alert.error.text } },
-    success: { base: { color: Alert.success.text } },
-    warning: { base: { color: Alert.warning.text } },
-    info: { base: { color: Alert.info.text } },
-  })
-);
-export const alertActionTextStyles = createStyles(
-  ({ components: { Alert } }) => ({
-    error: {
-      'base': { color: Alert.error.text },
-      ':hover': { color: Alert.error.text },
-      ':active': { color: Alert.error.text },
+export const alertDescriptionStyles = createStyles(() => ({
+  base: { base: { flexShrink: 1, flexGrow: 1 } },
+  error: {
+    base: {
+      // color: Alert.error.text,
     },
-    success: {
-      'base': { color: Alert.success.text },
-      ':hover': { color: Alert.success.text },
-      ':active': { color: Alert.success.text },
+  },
+  success: {
+    base: {
+      // color: Alert.success.text,
     },
-    warning: {
-      'base': { color: Alert.warning.text },
-      ':hover': { color: Alert.warning.text },
-      ':active': { color: Alert.warning.text },
+  },
+  warning: {
+    base: {
+      // color: Alert.warning.text,
     },
-    info: {
-      'base': { color: Alert.info.text },
-      ':hover': { color: Alert.info.text },
-      ':active': { color: Alert.info.text },
+  },
+  info: {
+    base: {
+      // color: Alert.info.text,
     },
-  })
-);
+  },
+}));
+export const alertActionTextStyles = createStyles(() => ({
+  error: {
+    'base': {
+      // color: Alert.error.text,
+    },
+    ':hover': {
+      // color: Alert.error.text,
+    },
+    ':active': {
+      // color: Alert.error.text,
+    },
+  },
+  success: {
+    'base': {
+      // color: Alert.success.text,
+    },
+    ':hover': {
+      // color: Alert.success.text,
+    },
+    ':active': {
+      // color: Alert.success.text,
+    },
+  },
+  warning: {
+    'base': {
+      // color: Alert.warning.text,
+    },
+    ':hover': {
+      // color: Alert.warning.text,
+    },
+    ':active': {
+      // color: Alert.warning.text,
+    },
+  },
+  info: {
+    'base': {
+      // color: Alert.info.text,
+    },
+    ':hover': {
+      // color: Alert.info.text,
+    },
+    ':active': {
+      // color: Alert.info.text,
+    },
+  },
+}));
 
 export const alertStyles = createStyles(
   ({ space }) =>
@@ -88,7 +124,7 @@ export const alertStyles = createStyles(
     }) as const
 );
 
-const actionStyles = createStyles(({ components: { Alert } }) => ({
+const actionStyles = createStyles(() => ({
   base: {
     base: { alignSelf: 'center', borderWidth: 0 },
     media: { md: { alignSelf: 'baseline' } },
@@ -101,41 +137,59 @@ const actionStyles = createStyles(({ components: { Alert } }) => ({
       },
     },
   },
-  error: { web: { ':focus': { outlineColor: Alert.error.text } } },
+  error: {
+    web: {
+      ':focus': {
+        // outlineColor: Alert.error.text,
+      },
+    },
+  },
   success: {
-    web: { ':focus': { outlineColor: Alert.success.text } },
+    web: {
+      ':focus': {
+        // outlineColor: Alert.success.text,
+      },
+    },
   },
   warning: {
-    web: { ':focus': { outlineColor: Alert.warning.text } },
+    web: {
+      ':focus': {
+        // outlineColor: Alert.warning.text,
+      },
+    },
   },
   info: {
-    web: { ':focus': { outlineColor: Alert.info.text } },
+    web: {
+      ':focus': {
+        // outlineColor: Alert.info.text,
+      },
+    },
   },
 }));
 
-const containerStyles = createStyles(({ components: { Alert } }) => ({
+const containerStyles = createStyles(() => ({
   error: {
     base: {
-      borderColor: Alert.error.border,
-      backgroundColor: Alert.error.background,
+      // borderColor: Alert.error.border,
+      // backgroundColor: Alert.error.background,
     },
   },
   success: {
     base: {
-      borderColor: Alert.success.border,
-      backgroundColor: Alert.success.background,
+      // borderColor: Alert.success.border,
+      // backgroundColor: Alert.success.background,
     },
   },
   warning: {
     base: {
-      borderColor: Alert.warning.border,
-      backgroundColor: Alert.warning.background,
+      // borderColor: Alert.warning.border,
+      // backgroundColor: Alert.warning.background,
     },
   },
   info: {
     base: {
-      borderColor: Alert.info.border,
-      backgroundColor: Alert.info.background,
+      // borderColor: Alert.info.border,
+      // backgroundColor: Alert.info.background,
     },
   },
 }));

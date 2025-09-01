@@ -79,16 +79,7 @@ export const List = memo(({ data }: { data: any }) => {
     const checked = item.checked;
 
     return (
-      <MenuList.Item
-        onPress={onPress(item)}
-        style={
-          checked &&
-          inlineStyle(({ colors }) => ({
-            'base': { backgroundColor: colors.background.active },
-            ':hover': { backgroundColor: colors.background.active },
-          }))
-        }
-      >
+      <MenuList.Item onPress={onPress(item)}>
         <XBox space={'xxs'}>
           {multiple && <Checkbox checked={checked} onChecked={onPress(item)} />}
           <MenuList.Title>{item.label}</MenuList.Title>
@@ -99,15 +90,7 @@ export const List = memo(({ data }: { data: any }) => {
 
   const RenderLabel: SectionListProps<ItemList>['renderItem'] = useCallback(
     ({ section }) => {
-      return (
-        <MenuList.Label
-          style={inlineStyle(({ colors }) => ({
-            base: { backgroundColor: colors.background.primary },
-          }))}
-        >
-          {section.title}
-        </MenuList.Label>
-      );
+      return <MenuList.Label>{section.title}</MenuList.Label>;
     },
     []
   );

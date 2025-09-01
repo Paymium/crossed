@@ -7,7 +7,7 @@
 
 import { createStyles } from '@crossed/styled';
 
-export const styles = createStyles(({ colors, components: { Switch } }) => ({
+export const styles = createStyles(() => ({
   track: {
     base: {
       alignItems: 'flex-start',
@@ -18,13 +18,21 @@ export const styles = createStyles(({ colors, components: { Switch } }) => ({
     },
     web: { base: { transition: 'all 0.3s ease' } },
   },
-  toggleOff: { base: { backgroundColor: Switch.off.background } },
-  toggleOn: { base: { backgroundColor: Switch.on.background } },
+  toggleOff: {
+    base: {
+      // backgroundColor: Switch.off.background,
+    },
+  },
+  toggleOn: {
+    base: {
+      // backgroundColor: Switch.on.background,
+    },
+  },
   thumb: {
     base: {
       height: '100%',
       aspectRatio: 1,
-      backgroundColor: colors.background.secondary,
+      // backgroundColor: colors.background.secondary,
       borderRadius: 50,
     },
   },

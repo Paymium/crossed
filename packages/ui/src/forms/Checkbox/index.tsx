@@ -33,19 +33,25 @@ const checkboxStyles = createStyles((t) => ({
       gap: t.space.md,
     },
   },
-  hover: { base: { borderColor: t.colors.border.tertiary } },
+  hover: {
+    base: {
+      // borderColor: t.colors.border.tertiary,
+    },
+  },
   disabled: {
     base: {
-      backgroundColor: t.colors.primary['10'],
-      borderColor: t.colors.primary['10'],
+      // backgroundColor: t.colors.primary['10'],
+      // borderColor: t.colors.primary['10'],
     },
   },
   active: {
-    base: { borderColor: t.colors.border.tertiary },
+    base: {
+      // borderColor: t.colors.border.tertiary,
+    },
     'web': {
       base: {
         transition: 'all 0.1s ease',
-        boxShadow: `0px 0px 0px 2px ${t.colors.border.secondary}`,
+        // boxShadow: `0px 0px 0px 2px ${t.colors.border.secondary}`,
       },
     },
   },
@@ -55,7 +61,7 @@ const checkboxStyles = createStyles((t) => ({
       height: 16,
       borderRadius: 4,
       borderWidth: 1,
-      borderColor: t.colors.border.secondary,
+      // borderColor: t.colors.border.secondary,
       alignItems: 'center',
       display: 'flex',
       justifyContent: 'center',
@@ -64,14 +70,14 @@ const checkboxStyles = createStyles((t) => ({
   },
   checked: {
     'base': {
-      borderColor: t.colors.primary.primary,
-      backgroundColor: t.colors.primary.primary,
+      // borderColor: t.colors.primary.primary,
+      // backgroundColor: t.colors.primary.primary,
     },
   },
   checkedActive: {
     base: {
-      borderColor: t.colors.primary.primary,
-      backgroundColor: t.colors.primary.primary,
+      // borderColor: t.colors.primary.primary,
+      // backgroundColor: t.colors.primary.primary,
     },
   },
 }));

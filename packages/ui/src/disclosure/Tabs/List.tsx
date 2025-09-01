@@ -68,9 +68,9 @@ const ButtonScroll = ({
         {...rest}
       >
         <Button.Icon
-          style={inlineStyle(({ colors }) => ({
-            'base': { color: colors.text.secondary, flexShrink: 0 },
-            ':hover': { color: colors.text.primary },
+          style={inlineStyle(() => ({
+            // 'base': { color: colors.text.secondary, flexShrink: 0 },
+            // ':hover': { color: colors.text.primary },
           }))}
         >
           {children}

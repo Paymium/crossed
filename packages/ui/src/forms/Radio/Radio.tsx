@@ -22,38 +22,52 @@ import {
 import { Pressable, PressableProps, View, ViewProps } from 'react-native';
 import { Text } from '../../typography/Text';
 
-const rootStyles = createStyles((t) => ({
+const rootStyles = createStyles(() => ({
   default: {
     base: {
       width: 16,
       height: 16,
       borderRadius: 44,
       borderWidth: 1,
-      borderColor: t.colors.border.secondary,
+      // borderColor: t.colors.border.secondary,
       alignItems: 'center',
       display: 'flex',
       justifyContent: 'center',
-      backgroundColor: t.colors.background.secondary,
+      // backgroundColor: t.colors.background.secondary,
     },
   },
-  hover: { base: { borderColor: t.colors.border.tertiary } },
+  hover: {
+    base: {
+      // borderColor: t.colors.border.tertiary,
+    },
+  },
   active: {
-    base: { borderColor: t.colors.border.tertiary },
+    base: {
+      // borderColor: t.colors.border.tertiary,
+    },
     'web': {
       base: {
         transition: 'all 0.1s ease',
-        boxShadow: `0px 0px 0px 2px ${t.colors.border.secondary}`,
+        // boxShadow: `0px 0px 0px 2px ${t.colors.border.secondary}`,
       },
     },
   },
   disabled: {
     base: {
-      backgroundColor: t.colors.primary['10'],
-      borderColor: t.colors.primary['10'],
+      // backgroundColor: t.colors.primary['10'],
+      // borderColor: t.colors.primary['10'],
     },
   },
-  checked: { base: { borderColor: t.colors.primary.primary } },
-  checkedActive: { base: { borderColor: t.colors.primary.primary } },
+  checked: {
+    base: {
+      // borderColor: t.colors.primary.primary,
+    },
+  },
+  checkedActive: {
+    base: {
+      // borderColor: t.colors.primary.primary,
+    },
+  },
 }));
 
 const pressableStyles = createStyles(({ space }) => ({
@@ -67,7 +81,7 @@ const pressableStyles = createStyles(({ space }) => ({
   },
 }));
 
-const thumbStyles = createStyles((t) => ({
+const thumbStyles = createStyles(() => ({
   default: {
     base: {
       width: 10,
@@ -77,13 +91,19 @@ const thumbStyles = createStyles((t) => ({
     },
   },
   checked: {
-    base: { backgroundColor: t.colors.primary.primary },
+    base: {
+      // backgroundColor: t.colors.primary.primary,
+    },
   },
   checkedActive: {
-    base: { backgroundColor: t.colors.primary['1'] },
+    base: {
+      // backgroundColor: t.colors.primary['1'],
+    },
   },
   checkedDisabled: {
-    base: { backgroundColor: t.colors.neutral['70'] },
+    base: {
+      // backgroundColor: t.colors.neutral['70'],
+    },
   },
 }));
 

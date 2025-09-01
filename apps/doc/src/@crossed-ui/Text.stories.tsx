@@ -18,49 +18,17 @@ const meta: Meta<typeof Text> = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
-    weight: {
+    fontWeight: {
       control: 'select',
-      options: [
-        'xs',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-        'h6',
-        'h5',
-        'h4',
-        'h3',
-        'h2',
-        'h1',
-      ],
+      options: ['regular', 'medium', 'semibold', 'bold'],
     },
-    size: {
+    fontSize: {
       control: 'select',
-      options: [
-        'xs',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-        'h6',
-        'h5',
-        'h4',
-        'h3',
-        'h2',
-        'h1',
-      ],
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
     },
     color: {
       control: 'select',
-      options: [
-        'primary',
-        'secondary',
-        'default',
-        'info',
-        'warning',
-        'error',
-        'success',
-      ],
+      options: ['primary', 'secondary', 'warning', 'error', 'success', 'brand'],
     },
   },
 };
@@ -83,17 +51,67 @@ export const Size: Story = {
     return (
       <YBox space={'md'}>
         <YBox space={'xxs'}>
-          <Text>Text standard size</Text>
-          <Text>{loremIpsum}</Text>
+          <Text fontSize={'xl'}>Text xlarge size</Text>
+          <Text fontSize={'xl'}>{loremIpsum}</Text>
         </YBox>
         <YBox space={'xxs'}>
-          <Text size={'md'}>Text medium size</Text>
-          <Text size={'md'}>{loremIpsum}</Text>
+          <Text fontSize={'lg'}>Text large size</Text>
+          <Text fontSize={'lg'}>{loremIpsum}</Text>
         </YBox>
         <YBox space={'xxs'}>
-          <Text size={'sm'}>Text small size</Text>
-          <Text size={'sm'}>{loremIpsum}</Text>
+          <Text fontSize={'md'}>Text medium size</Text>
+          <Text fontSize={'md'}>{loremIpsum}</Text>
         </YBox>
+        <YBox space={'xxs'}>
+          <Text fontSize={'sm'}>Text small size</Text>
+          <Text fontSize={'sm'}>{loremIpsum}</Text>
+        </YBox>
+        <YBox space={'xxs'}>
+          <Text fontSize={'xs'}>Text xsmall size</Text>
+          <Text fontSize={'xs'}>{loremIpsum}</Text>
+        </YBox>
+      </YBox>
+    );
+  },
+};
+
+export const FontWeight: Story = {
+  render() {
+    return (
+      <YBox space={'md'}>
+        <YBox space={'xxs'}>
+          <Text fontWeight={'bold'}>Text bold</Text>
+          <Text fontWeight={'bold'}>{loremIpsum}</Text>
+        </YBox>
+        <YBox space={'xxs'}>
+          <Text fontWeight={'semibold'}>Text semibold</Text>
+          <Text fontWeight={'semibold'}>{loremIpsum}</Text>
+        </YBox>
+        <YBox space={'xxs'}>
+          <Text fontWeight={'medium'}>Text medium size</Text>
+          <Text fontWeight={'medium'}>{loremIpsum}</Text>
+        </YBox>
+        <YBox space={'xxs'}>
+          <Text fontWeight={'regular'}>Text regular size</Text>
+          <Text fontWeight={'regular'}>{loremIpsum}</Text>
+        </YBox>
+      </YBox>
+    );
+  },
+};
+
+export const Color: Story = {
+  render() {
+    return (
+      <YBox space={'md'}>
+        <Text color={'primary'}>primary</Text>
+        <Text color={'secondary'}>secondary</Text>
+        <Text color={'tertiary'}>tertiary</Text>
+        <Text color={'quaternary'}>quaternary</Text>
+        <Text color={'error'}>error</Text>
+        <Text color={'warning'}>warning</Text>
+        <Text color={'success'}>success</Text>
+        <Text color={'brand'}>brand</Text>
       </YBox>
     );
   },

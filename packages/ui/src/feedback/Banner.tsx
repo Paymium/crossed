@@ -26,19 +26,51 @@ import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
 import { useMedia } from '../useMedia';
 
-const titleStyle = createStyles((t) => ({
+const titleStyle = createStyles(() => ({
   default: { base: { fontWeight: '600' } },
-  error: { base: { color: t.components.Banner.error.title } },
-  success: { base: { color: t.components.Banner.success.title } },
-  warning: { base: { color: t.components.Banner.warning.title } },
-  info: { base: { color: t.components.Banner.info.title } },
+  error: {
+    base: {
+      // color: t.components.Banner.error.title,
+    },
+  },
+  success: {
+    base: {
+      // color: t.components.Banner.success.title,
+    },
+  },
+  warning: {
+    base: {
+      // color: t.components.Banner.warning.title,
+    },
+  },
+  info: {
+    base: {
+      // color: t.components.Banner.info.title,
+    },
+  },
 }));
-const descriptionStyle = createStyles((t) => ({
+const descriptionStyle = createStyles(() => ({
   default: { base: { flex: 1 } },
-  error: { base: { color: t.components.Banner.error.subtitle } },
-  success: { base: { color: t.components.Banner.success.subtitle } },
-  warning: { base: { color: t.components.Banner.warning.subtitle } },
-  info: { base: { color: t.components.Banner.info.subtitle } },
+  error: {
+    base: {
+      // color: t.components.Banner.error.subtitle,
+    },
+  },
+  success: {
+    base: {
+      // color: t.components.Banner.success.subtitle,
+    },
+  },
+  warning: {
+    base: {
+      // color: t.components.Banner.warning.subtitle,
+    },
+  },
+  info: {
+    base: {
+      // color: t.components.Banner.info.subtitle,
+    },
+  },
 }));
 const bannerStyles = createStyles(
   (t) =>
@@ -47,10 +79,26 @@ const bannerStyles = createStyles(
         base: { fontWeight: '600' },
         variants: {
           status: {
-            error: { base: { color: t.components.Banner.error.icon } },
-            success: { base: { color: t.components.Banner.success.icon } },
-            warning: { base: { color: t.components.Banner.warning.icon } },
-            info: { base: { color: t.components.Banner.info.icon } },
+            error: {
+              base: {
+                // color: t.components.Banner.error.icon,
+              },
+            },
+            success: {
+              base: {
+                // color: t.components.Banner.success.icon,
+              },
+            },
+            warning: {
+              base: {
+                // color: t.components.Banner.warning.icon,
+              },
+            },
+            info: {
+              base: {
+                // color: t.components.Banner.info.icon,
+              },
+            },
           },
         },
       },
@@ -88,51 +136,51 @@ const bannerStyles = createStyles(
     }) as const
 );
 
-const containerStyles = createStyles((t) => ({
+const containerStyles = createStyles(() => ({
   error: {
     base: {
-      borderColor: t.components.Banner.error.border,
-      backgroundColor: t.components.Banner.error.background,
+      // borderColor: t.components.Banner.error.border,
+      // backgroundColor: t.components.Banner.error.background,
     },
   },
   success: {
     base: {
-      borderColor: t.components.Banner.success.border,
-      backgroundColor: t.components.Banner.success.background,
+      // borderColor: t.components.Banner.success.border,
+      // backgroundColor: t.components.Banner.success.background,
     },
   },
   warning: {
     base: {
-      borderColor: t.components.Banner.warning.border,
-      backgroundColor: t.components.Banner.warning.background,
+      // borderColor: t.components.Banner.warning.border,
+      // backgroundColor: t.components.Banner.warning.background,
     },
   },
   info: {
     base: {
-      borderColor: t.components.Banner.info.border,
-      backgroundColor: t.components.Banner.info.background,
+      // borderColor: t.components.Banner.info.border,
+      // backgroundColor: t.components.Banner.info.background,
     },
   },
 }));
-const containerIconStyles = createStyles((t) => ({
+const containerIconStyles = createStyles(() => ({
   error: {
     base: {
-      backgroundColor: t.components.Banner.error.backgroundIcon,
+      // backgroundColor: t.components.Banner.error.backgroundIcon,
     },
   },
   success: {
     base: {
-      backgroundColor: t.components.Banner.success.backgroundIcon,
+      // backgroundColor: t.components.Banner.success.backgroundIcon,
     },
   },
   warning: {
     base: {
-      backgroundColor: t.components.Banner.warning.backgroundIcon,
+      // backgroundColor: t.components.Banner.warning.backgroundIcon,
     },
   },
   info: {
     base: {
-      backgroundColor: t.components.Banner.info.backgroundIcon,
+      // backgroundColor: t.components.Banner.info.backgroundIcon,
     },
   },
 }));
@@ -176,8 +224,8 @@ const BannerIcon = ({
   style?: CrossedMethods<any>;
 }) => {
   const { status } = useContext(bannerContext);
-  const theme = useTheme();
-  const color = theme.components.Banner[status].icon;
+  // const theme = useTheme();
+  // const color = theme.components.Banner[status].icon;
   const Comp = match(status)
     .with('error', () => XCircle)
     .with('info', () => Info)
@@ -193,7 +241,7 @@ const BannerIcon = ({
         style
       )}
     >
-      <Comp color={color} size={16} />
+      <Comp /*color={color}*/ size={16} />
     </Box>
   );
 };

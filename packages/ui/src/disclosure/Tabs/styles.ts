@@ -8,8 +8,12 @@
 import { createStyles } from '@crossed/styled';
 import { SharedValue } from 'react-native-reanimated';
 
-export const indicatorUnderlineStyles = createStyles(({ colors }) => ({
-  active: { base: { borderBottomColor: colors.border.brand } },
+export const indicatorUnderlineStyles = createStyles(() => ({
+  active: {
+    base: {
+      // borderBottomColor: colors.border.brand,
+    },
+  },
   default: {
     base: {
       borderBottomWidth: 4,
@@ -22,37 +26,41 @@ export const indicatorUnderlineStyles = createStyles(({ colors }) => ({
   },
 }));
 
-export const linearGradientRounded = createStyles(({ colors }) => ({
+export const linearGradientRounded = createStyles(() => ({
   prev: {
     base: {
       left: 0,
-      background: `linear-gradient(to right, ${colors.background.primary} 70%, transparent)`,
+      // background: `linear-gradient(to right, ${colors.background.primary} 70%, transparent)`,
     },
   },
   next: {
     base: {
       right: 0,
-      background: `linear-gradient(to left, ${colors.background.primary} 70%, transparent)`,
+      // background: `linear-gradient(to left, ${colors.background.primary} 70%, transparent)`,
     },
   },
 }));
-export const linearGradientUnderline = createStyles(({ colors }) => ({
+export const linearGradientUnderline = createStyles(() => ({
   prev: {
     base: {
       left: 0,
-      background: `linear-gradient(to right, ${colors.background.secondary} 70%, transparent)`,
+      // background: `linear-gradient(to right, ${colors.background.secondary} 70%, transparent)`,
     },
   },
   next: {
     base: {
       right: 0,
-      background: `linear-gradient(to left, ${colors.background.secondary} 70%, transparent)`,
+      // background: `linear-gradient(to left, ${colors.background.secondary} 70%, transparent)`,
     },
   },
 }));
 
 export const indicatorRoundedStyles = createStyles(({ colors }) => ({
-  active: { base: { backgroundColor: colors.background.secondary } },
+  active: {
+    base: {
+      backgroundColor: colors.background.secondary.default,
+    },
+  },
   default: {
     base: {
       backgroundColor: 'transparent',
@@ -70,10 +78,22 @@ export const indicatorDynamicStyles = createStyles(() => ({
     ({ width, transform: [{ translateX: left }] }) as any,
 }));
 
-export const tabTitleStyles = createStyles(({ colors }) => ({
-  default: { base: { color: colors.text.secondary } },
-  hover: { base: { color: colors.text.primary } },
-  active: { base: { color: colors.text.brand } },
+export const tabTitleStyles = createStyles(() => ({
+  default: {
+    base: {
+      // color: colors.text.secondary,
+    },
+  },
+  hover: {
+    base: {
+      // color: colors.text.primary,
+    },
+  },
+  active: {
+    base: {
+      // color: colors.text.brand,
+    },
+  },
 }));
 
 export const triggerStyles = createStyles(({ space }) => ({
@@ -102,11 +122,11 @@ export const heightStyles = createStyles(() => ({
   lg: { base: { height: 44 } },
 }));
 
-export const focusStyles = createStyles(({ colors }) => ({
+export const focusStyles = createStyles(() => ({
   rounded: {
     web: {
       ':focus-visible': {
-        outlineColor: colors.border.brand,
+        // outlineColor: colors.border.brand,
         outlineOffset: '4px',
       },
     },
@@ -114,7 +134,7 @@ export const focusStyles = createStyles(({ colors }) => ({
   underline: {
     web: {
       ':focus-visible': {
-        outlineColor: colors.border.brand,
+        // outlineColor: colors.border.brand,
         outlineOffset: '4px',
       },
     },

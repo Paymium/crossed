@@ -11,14 +11,14 @@ import {
   isValidElement,
   PropsWithChildren,
   useContext,
-  useMemo,
 } from 'react';
 import { buttonContext } from './context';
 import {
-  buttonErrorStyles,
+  buttonPrimaryErrorStyle,
   buttonPrimaryStyles,
+  buttonSecondaryErrorStyle,
   buttonSecondaryStyles,
-  buttonSuccessStyles,
+  buttonTertiaryErrorStyle,
   buttonTertiaryStyles,
   textStyles,
 } from './styles';
@@ -27,27 +27,56 @@ export const ButtonIcon = ({
   children,
   style,
 }: PropsWithChildren<{ style?: CrossedMethods<any> }>) => {
-  const { variant, state, disabled } = useContext(buttonContext);
+  const { variant, state, disabled, error } = useContext(buttonContext);
   const { hover, active } = state;
 
-  const color = useMemo(() => {
-    return composeStyles(
-      textStyles.default,
-      variant === 'primary' && buttonPrimaryStyles.text,
-      variant === 'primary' && hover && buttonPrimaryStyles.textHover,
-      variant === 'primary' && active && buttonPrimaryStyles.textActive,
-      variant === 'secondary' && buttonSecondaryStyles.text,
-      variant === 'secondary' && hover && buttonSecondaryStyles.textHover,
-      variant === 'secondary' && active && buttonSecondaryStyles.text,
-      variant === 'tertiary' && buttonTertiaryStyles.textActive,
-      variant === 'tertiary' && hover && buttonTertiaryStyles.textHover,
-      variant === 'tertiary' && active && buttonTertiaryStyles.textActive,
-      variant === 'error' && buttonErrorStyles.text,
-      variant === 'success' && buttonSuccessStyles.text,
-      disabled && textStyles.disabled,
-      style
-    ).style(state).style.color;
-  }, [variant, state]);
+  const color = composeStyles(
+    textStyles.default,
+    variant === 'primary' &&
+      composeStyles(
+        ...(!error
+          ? [
+              buttonPrimaryStyles.text,
+              hover && buttonPrimaryStyles.textHover,
+              active && buttonPrimaryStyles.textActive,
+            ]
+          : [
+              buttonPrimaryErrorStyle.text,
+              hover && buttonPrimaryErrorStyle.textHover,
+              active && buttonPrimaryErrorStyle.textActive,
+            ])
+      ),
+    variant === 'secondary' &&
+      composeStyles(
+        ...(!error
+          ? [
+              buttonSecondaryStyles.text,
+              hover && buttonSecondaryStyles.textHover,
+              active && buttonSecondaryStyles.text,
+            ]
+          : [
+              buttonSecondaryErrorStyle.text,
+              hover && buttonSecondaryErrorStyle.textHover,
+              active && buttonSecondaryErrorStyle.textActive,
+            ])
+      ),
+    variant === 'tertiary' &&
+      composeStyles(
+        ...(!error
+          ? [
+              buttonTertiaryStyles.text,
+              hover && buttonTertiaryStyles.textHover,
+              active && buttonTertiaryStyles.textActive,
+            ]
+          : [
+              buttonTertiaryErrorStyle.text,
+              hover && buttonTertiaryErrorStyle.textHover,
+              active && buttonTertiaryErrorStyle.textActive,
+            ])
+      ),
+    disabled && textStyles.disabled,
+    style
+  ).style(state).style.color;
 
   return isValidElement(children)
     ? cloneElement(children, { color } as any)

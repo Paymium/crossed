@@ -28,18 +28,18 @@ import {
 } from 'react';
 import { Pressable, View, type PressableProps } from 'react-native';
 
-const rootStyle = createStyles(({ colors, space }) => ({
+const rootStyle = createStyles(({ space }) => ({
   default: {
     base: {
       alignItems: 'stretch',
-      backgroundColor: colors.background.secondary,
+      // backgroundColor: colors.background.secondary,
       gap: space.xs,
     },
   },
   border: {
     base: {
       borderWidth: 1,
-      borderColor: colors.border.primary,
+      // borderColor: colors.border.primary,
       borderRadius: 8,
     },
   },
@@ -66,15 +66,15 @@ const itemStyles = createStyles((t) => ({
       borderRadius: 5,
     },
     ':hover': {
-      backgroundColor: t.colors.background.hover,
+      // backgroundColor: t.colors.background.hover,
     },
     ':active': {
-      backgroundColor: t.colors.background.active,
+      // backgroundColor: t.colors.background.active,
     },
     'web': {
       base: { transition: 'all 170ms ease' },
       ':focus-visible': {
-        outlineColor: t.colors.border.brand,
+        // outlineColor: t.colors.border.brand,
       },
     },
   },

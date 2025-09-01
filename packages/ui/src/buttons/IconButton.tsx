@@ -10,7 +10,7 @@ import {
   composeStyles,
   inlineStyle,
   CrossedMethods,
-  useTheme,
+  // useTheme,
   Registry,
 } from '@crossed/styled';
 import { cloneElement, isValidElement, memo, useCallback } from 'react';
@@ -22,11 +22,11 @@ export interface IconButtonProps extends Omit<PressableProps, 'style'> {
   style?: CrossedMethods<any>;
 }
 
-export const iconButtonStyles = inlineStyle(({ components: { Action } }) => ({
+export const iconButtonStyles = inlineStyle(() => ({
   'base': {
     borderRadius: 50,
-    backgroundColor: Action.icon.default.background,
-    borderColor: Action.icon.default.border,
+    // backgroundColor: Action.icon.default.background,
+    // borderColor: Action.icon.default.border,
     height: 40,
     width: 40,
     alignItems: 'center',
@@ -34,26 +34,26 @@ export const iconButtonStyles = inlineStyle(({ components: { Action } }) => ({
     borderWidth: 1,
   },
   ':hover': {
-    backgroundColor: Action.icon.hover.background,
-    borderColor: Action.icon.hover.border,
+    // backgroundColor: Action.icon.hover.background,
+    // borderColor: Action.icon.hover.border,
   },
   ':active': {
-    backgroundColor: Action.icon.active.background,
-    borderColor: Action.icon.active.border,
-    outlineColor: Action.icon.focus.border,
+    // backgroundColor: Action.icon.active.background,
+    // borderColor: Action.icon.active.border,
+    // outlineColor: Action.icon.focus.border,
   },
   ':disabled': { opacity: 0.5 },
   'web': {
     ':focus-visible': {
-      backgroundColor: Action.icon.focus.background,
-      outlineColor: Action.icon.focus.border,
+      // backgroundColor: Action.icon.focus.background,
+      // outlineColor: Action.icon.focus.border,
     },
   },
 }));
 
 export const IconButton = memo<IconButtonProps>(
   ({ children, style, ...props }) => {
-    const { components } = useTheme();
+    // const { components } = useTheme();
     const getStyle = useCallback(
       ({
         hovered,
@@ -81,7 +81,7 @@ export const IconButton = memo<IconButtonProps>(
         if (isValidElement(tmpChild)) {
           return cloneElement(tmpChild, {
             size: 16,
-            color: components.Action.icon.default.color,
+            // color: components.Action.icon.default.color,
           } as any);
         }
         return tmpChild;

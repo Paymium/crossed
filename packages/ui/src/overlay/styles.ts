@@ -7,11 +7,11 @@
 
 import { createStyles } from '@crossed/styled';
 
-export const overlayStyles = createStyles(({ colors }) => ({
+export const overlayStyles = createStyles(() => ({
   root: {
     base: {
       position: 'absolute',
-      backgroundColor: colors.black,
+      // backgroundColor: colors.black,
       opacity: 0.7,
       top: 0,
       left: 0,
@@ -23,12 +23,12 @@ export const overlayStyles = createStyles(({ colors }) => ({
   },
 }));
 
-export const modalStyles = createStyles(({ colors, space }) => ({
+export const modalStyles = createStyles(({ space }) => ({
   content: {
     base: {
       zIndex: 100000,
       borderRadius: 16,
-      backgroundColor: colors.background.secondary,
+      // backgroundColor: colors.background.secondary,
       margin: 'auto',
       padding: space.xl,
       gap: space.xl,

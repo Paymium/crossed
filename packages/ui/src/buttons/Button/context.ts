@@ -19,7 +19,7 @@ export const [Provider, useContext] = createScope<ContextButton>(
 );
 
 export const buttonContext = createContext<
-  Pick<ButtonProps, 'variant' | 'size' | 'disabled'> & {
+  Pick<ButtonProps, 'variant' | 'size' | 'disabled' | 'error'> & {
     state?: {
       active?: boolean;
       hover?: boolean;

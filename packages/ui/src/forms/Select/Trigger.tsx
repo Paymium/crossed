@@ -84,14 +84,14 @@ const Value = () => {
                 style={composeStyles(
                   useSelect.value,
                   multiple &&
-                    inlineStyle(({ colors, space }) => ({
+                    inlineStyle(({ space }) => ({
                       base: {
-                        backgroundColor: colors.info.light,
+                        // backgroundColor: colors.info.light,
                         padding: space.xxs,
                         borderRadius: 4,
                         borderWidth: 1,
-                        borderColor: colors.info.primary,
-                        color: colors.info.dark,
+                        // borderColor: colors.info.primary,
+                        // color: colors.info.dark,
                       },
                     }))
                   // style

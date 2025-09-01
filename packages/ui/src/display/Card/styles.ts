@@ -24,23 +24,23 @@ export const spacingStyle = createStyles(({ space }) => {
   };
 });
 
-export const cardStyles = createStyles(({ space, font, components }) => ({
+export const cardStyles = createStyles(({ space, font }) => ({
   root: {
     base: {
       borderRadius: space.md,
-      backgroundColor: components.Card.default.background,
+      // backgroundColor: colors.primary.,
       borderWidth: 1,
-      borderColor: components.Card.default.border,
+      // borderColor: components.Card.default.border,
       flexShrink: 1,
     },
   },
   rootLink: {
     'web': { base: { transition: 'all 0.27s ease' } },
     ':hover': {
-      backgroundColor: components.Card.hover.background,
+      // backgroundColor: components.Card.hover.background,
     },
     ':active': {
-      backgroundColor: components.Card.active.background,
+      // backgroundColor: components.Card.active.background,
     },
   },
   title: {
@@ -52,12 +52,12 @@ export const cardStyles = createStyles(({ space, font, components }) => ({
   description: {
     base: {
       alignSelf: 'stretch',
-      color: components.Card.default.description,
+      // color: components.Card.default.description,
     },
   },
   extra: {
     base: {
-      color: components.Card.default.description,
+      // color: components.Card.default.description,
       fontWeight: font.fontWeight.xl,
     },
   },
