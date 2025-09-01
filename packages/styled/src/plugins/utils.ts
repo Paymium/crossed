@@ -39,6 +39,10 @@ export const convertToPx = [
   'height',
   'maxHeight',
   'minHeight',
+  'top',
+  'bottom',
+  'left',
+  'right',
 ];
 
 export const normalizeUnitPixel = (key: string, value: any, isWeb?: boolean) =>

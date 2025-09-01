@@ -11,31 +11,32 @@ export const light: ThemeVarsPartial = {
   brandImage: isDev ? '/logo.png' : '/crossed/logo.png',
   brandTarget: '_self',
 
-  textColor: themes.light.colors.text.primary,
+  textColor: themes.light.colors.text.primary.default,
 
-  fontBase: '"Overpass", "Open Sans"',
-  fontCode: '"Overpass"',
+  fontBase: '"Inter", "Open Sans"',
+  fontCode: '"Inter"',
 
-  colorPrimary: themes.light.colors.primary.primary,
-  colorSecondary: themes.light.colors.background.brand,
+  colorPrimary: themes.light.colors.text.primary.default,
+  colorSecondary: themes.light.colors.text.secondary.default,
 
   // UI
-  appBg: themes.light.colors.background.secondary,
-  appContentBg: themes.light.colors.background.secondary,
-  appPreviewBg: themes.light.colors.background.primary,
-  appBorderColor: themes.light.colors.border.primary,
+  appBg: themes.light.colors.background.secondary.default,
+  appContentBg: themes.light.colors.background.secondary.default,
+  appPreviewBg: themes.light.colors.background.primary.default,
+  appBorderColor: themes.light.colors.border.primary.default,
   appBorderRadius: 4,
 
   // Toolbar default and active colors
-  barTextColor: themes.light.colors.text.brand,
-  barSelectedColor: themes.light.colors.background.brand,
-  barHoverColor: themes.light.colors.background.hover,
-  barBg: themes.light.colors.background.secondary,
+  barTextColor: themes.light.colors.text.brand.primary.default,
+  barSelectedColor: themes.light.colors.background.brand.primary.default,
+  barHoverColor: themes.light.colors.background.brand.primary.alt,
+  barBg: themes.light.colors.background.secondary.default,
 
-  inputBorder: themes.light.colors.border.secondary,
-  inputTextColor: themes.light.colors.text.primary,
-
-  buttonBg: themes.light.colors.background.primary,
+  inputBorder: themes.light.colors.border.primary.default,
+  inputBg: themes.light.colors.background.primary.default,
+  inputTextColor: themes.light.colors.text.primary.default,
+  //
+  buttonBg: themes.light.colors.background.primary.default,
 } as const;
 export const dark: ThemeVarsPartial = {
   base: 'dark',
@@ -44,33 +45,33 @@ export const dark: ThemeVarsPartial = {
   brandImage: isDev ? '/logo.png' : '/crossed/logo.png',
   brandTarget: '_self',
 
-  textColor: themes.dark.colors.text.primary,
+  textColor: themes.dark.colors.text.primary.default,
 
-  fontBase: '"Overpass", "Open Sans"',
-  fontCode: '"Overpass"',
+  fontBase: '"Inter", "Open Sans"',
+  fontCode: '"Inter"',
 
-  colorPrimary: themes.dark.colors.primary.primary,
-  colorSecondary: themes.dark.colors.background.brand,
+  colorPrimary: themes.dark.colors.text.primary.default,
+  colorSecondary: themes.dark.colors.text.secondary.default,
 
   // UI
-  appBg: themes.dark.colors.background.secondary,
-  appContentBg: themes.dark.colors.background.secondary,
-  appPreviewBg: themes.dark.colors.background.primary,
-  appBorderColor: themes.dark.colors.border.primary,
+  appBg: themes.dark.colors.background.secondary.default,
+  appContentBg: themes.dark.colors.background.secondary.default,
+  appPreviewBg: themes.dark.colors.background.primary.default,
+  appBorderColor: themes.dark.colors.border.primary.default,
   appBorderRadius: 4,
 
   // Toolbar default and active colors
-  barTextColor: themes.dark.colors.text.brand,
-  barSelectedColor: themes.dark.colors.background.brand,
-  barHoverColor: themes.dark.colors.background.hover,
-  barBg: themes.dark.colors.background.secondary,
+  barTextColor: themes.dark.colors.text.brand.primary.default,
+  barSelectedColor: themes.dark.colors.background.brand.primary.default,
+  barHoverColor: themes.dark.colors.background.brand.primary.alt,
+  barBg: themes.dark.colors.background.secondary.default,
 
-  inputBorder: themes.dark.colors.background.primary,
-  inputBg: themes.dark.colors.background.primary,
-  inputTextColor: themes.dark.colors.text.primary,
+  inputBorder: themes.dark.colors.border.primary.default,
+  inputBg: themes.dark.colors.background.primary.default,
+  inputTextColor: themes.dark.colors.text.primary.default,
 
-  buttonBg: themes.dark.colors.background.primary,
-  buttonBorder: themes.dark.colors.background.primary,
+  buttonBg: themes.dark.colors.background.primary.default,
+  buttonBorder: themes.dark.colors.background.primary.default,
 } as const;
 export const lightStoryBook = create(light);
 export const darkStoryBook = create(dark);

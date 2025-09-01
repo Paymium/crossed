@@ -14,14 +14,19 @@ import { Text, type TextProps } from './Text';
 import { forwardRef } from 'react';
 
 export const anchorStyles = createStyles(({ colors }) => ({
-  text: { web: { base: { cursor: 'pointer' } } },
-  underline: {
-    ':hover': { textDecorationLine: 'underline' },
-    ':active': { textDecorationLine: 'underline' },
-    ':focus': { textDecorationLine: 'underline' },
+  default: {
+    base: {
+      color: colors.text.brand.tertiary.default,
+      textDecorationColor: colors.text.brand.tertiary.default,
+    },
+    ':hover': {
+      textDecorationLine: 'underline',
+      color: colors.text.brand.secondary.default,
+      textDecorationColor: colors.text.brand.secondary.default,
+    },
+    ':active': {},
+    web: { base: { cursor: 'pointer' } },
   },
-  primary: { base: { textDecorationColor: colors.text.brand } },
-  default: { base: { textDecorationColor: colors.text.primary } },
 }));
 
 /**
@@ -36,14 +41,6 @@ export type AnchorProps = Omit<TextProps, 'style'> & {
   style?: CrossedMethods<any, any>;
 
   /**
-   * Indicates whether the anchor should use the "primary" style. Default is true.
-   *
-   * @type {boolean}
-   * @default true
-   */
-  primary?: boolean;
-
-  /**
    * The target URL the anchor points to.
    *
    * @type {string}
@@ -52,19 +49,13 @@ export type AnchorProps = Omit<TextProps, 'style'> & {
 };
 
 export const Anchor = forwardRef<Text, AnchorProps>(
-  ({ primary = true, style, ...props }, ref) => {
+  ({ style, ...props }, ref) => {
     return (
       <Text
         role="link"
         weight="lg"
-        color={primary ? 'brand' : 'default'}
         {...props}
-        style={composeStyles(
-          anchorStyles.text,
-          anchorStyles.underline,
-          primary ? anchorStyles.primary : anchorStyles.default,
-          style
-        )}
+        style={composeStyles(anchorStyles.default, style)}
         ref={ref as any}
       />
     );

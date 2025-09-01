@@ -104,7 +104,7 @@ export const secondary = {
     900: '#1C1917',
     950: '#171412',
   },
-  Moss: {
+  moss: {
     25: '#FAFDF7',
     50: '#F5FBEE',
     100: '#E6F4D7',

@@ -18,13 +18,14 @@ import { Thumb } from './Thumb';
 
 export const SwitchTrack = () => {
   const { value, duration, height, width, disabled } = useContext(localContext);
-  const { components } = useTheme();
+  // const { components } = useTheme();
 
   const trackAnimatedStyle = useAnimatedStyle(() => {
     const color = interpolateColor(
       value ? 1 : 0,
       [0, 1],
-      [components.Switch.off.background, components.Switch.on.background]
+      []
+      // [components.Switch.off.background, components.Switch.on.background]
     );
     return {
       backgroundColor: withTiming(color, { duration }),

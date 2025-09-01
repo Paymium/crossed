@@ -8,6 +8,7 @@
 import { CrossedMethods } from '@crossed/styled';
 import { PressableProps } from 'react-native';
 import { alignSelfStyle } from '../../styles/alignItems';
+import { buttonSizeStyles } from './styles';
 
 type Variants =
   | 'primary'
@@ -16,7 +17,6 @@ type Variants =
   | 'success'
   | 'error'
   | false;
-type Sizes = 'sm' | 'md' | 'lg' | false;
 export interface ButtonProps extends Omit<PressableProps, 'style'> {
   /**
    * Select button variant
@@ -34,16 +34,21 @@ export interface ButtonProps extends Omit<PressableProps, 'style'> {
    * Extend style of button
    * @type {CrossedMethods<any>}
    */
-  style?: CrossedMethods<any>;
+  // style?: CrossedMethods<any>;
 
   /**
    * Disable size
    * @default md
    */
-  size?: Sizes;
+  size?: Exclude<keyof typeof buttonSizeStyles, 'default'>;
 
   /**
    * Set align-self style
    */
   alignSelf?: keyof typeof alignSelfStyle;
+
+  /**
+   * Error style with variant
+   */
+  error?: boolean;
 }

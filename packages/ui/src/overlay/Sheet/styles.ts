@@ -10,7 +10,7 @@ import { composeStyles, createStyles } from '@crossed/styled';
 export const styles = createStyles(({ colors, space }) => ({
   box: {
     base: {
-      backgroundColor: colors.background.secondary,
+      // backgroundColor: colors.background.secondary,
       borderTopLeftRadius: 24,
       borderTopRightRadius: 24,
     },

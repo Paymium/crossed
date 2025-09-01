@@ -141,9 +141,9 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
                 exiting={FadeOut.duration(duration)}
                 entering={FadeIn.duration(duration)}
                 style={composeStyles(
-                  inlineStyle(({ boxShadow }) => ({
+                  inlineStyle(() => ({
                     base: { zIndex: 100 },
-                    web: { base: { boxShadow } },
+                    // web: { base: { boxShadow } },
                   }))
                 )}
               >

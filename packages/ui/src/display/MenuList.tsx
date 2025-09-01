@@ -28,17 +28,19 @@ import {
 } from 'react';
 import { Pressable, View, type PressableProps } from 'react-native';
 
-const rootStyle = createStyles(({ colors, space }) => ({
+const rootStyle = createStyles(({ space }) => ({
   default: {
     base: {
-      backgroundColor: colors.background.secondary,
-      borderRadius: 12,
+      alignItems: 'stretch',
+      // backgroundColor: colors.background.secondary,
+      gap: space.xs,
     },
   },
   border: {
     base: {
       borderWidth: 1,
-      borderColor: colors.border.primary,
+      // borderColor: colors.border.primary,
+      borderRadius: 8,
     },
   },
   padded: { base: { padding: space.xs } },
@@ -64,15 +66,15 @@ const itemStyles = createStyles((t) => ({
       borderRadius: 12,
     },
     ':hover': {
-      backgroundColor: t.colors.background.hover,
+      // backgroundColor: t.colors.background.hover,
     },
     ':active': {
-      backgroundColor: t.colors.background.active,
+      // backgroundColor: t.colors.background.active,
     },
     'web': {
       base: { transition: 'all 170ms ease' },
       ':focus-visible': {
-        outlineColor: t.colors.border.brand,
+        // outlineColor: t.colors.border.brand,
       },
     },
   },
@@ -84,8 +86,6 @@ const MenuRoot = memo<MenuListProps & RefAttributes<View>>(
       return (
         <YBox
           role="list"
-          alignItems={'stretch'}
-          space={padded ? 'xxs' : undefined}
           {...props}
           style={composeStyles(
             rootStyle.default,

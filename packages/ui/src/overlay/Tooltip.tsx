@@ -112,9 +112,9 @@ export const Content = memo<ContentProps & RefAttributes<View>>(
 );
 Content.displayName = 'Tooltip.Content';
 
-const tooltipStyles = inlineStyle(({ colors, space }) => ({
+const tooltipStyles = inlineStyle(({ space }) => ({
   base: {
-    backgroundColor: colors.text.primary,
+    // backgroundColor: colors.text.primary,
     borderRadius: 16,
     paddingVertical: space.xs,
     paddingHorizontal: space.sm,
@@ -177,17 +177,7 @@ const ContentNative = ({
 ContentNative.displayName = 'Tooltip.ContentNative';
 
 const TooltipText = (props: TextProps) => {
-  return (
-    <Text
-      {...props}
-      style={composeStyles(
-        inlineStyle(({ colors }) => ({
-          media: { md: { color: colors.text.invert } },
-        })),
-        props.style
-      )}
-    />
-  );
+  return <Text {...props} style={composeStyles(props.style)} />;
 };
 TooltipText.displayName = 'Tooltip.Text';
 

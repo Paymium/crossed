@@ -17,32 +17,49 @@ import { IDay } from '@crossed/use-calendar/src';
 import { widthCell } from './styles';
 import { Headline } from '../../typography';
 
-const button = createStyles(({ colors }) => ({
+const button = createStyles(() => ({
   default: {
     base: {
-      backgroundColor: colors.background.primary,
+      // backgroundColor: colors.background.primary,
       borderRadius: 8,
       height: 40,
       alignItems: 'center',
       justifyContent: 'center',
     },
     ':hover': {
-      backgroundColor: colors.background.hover,
+      // backgroundColor: colors.background.hover,
     },
     ':active': {
-      backgroundColor: colors.background.active,
+      // backgroundColor: colors.background.active,
     },
     media: { md: { height: 44 } },
   },
-  selected: { base: { backgroundColor: colors.text.brand } },
+  selected: {
+    base: {
+      // backgroundColor: colors.text.brand,
+    },
+  },
   disabled: { base: { opacity: 0.1 } },
-  today: { base: { borderWidth: 2, borderColor: colors.text.brand } },
+  today: {
+    base: {
+      borderWidth: 2,
+      // borderColor: colors.text.brand,
+    },
+  },
 }));
-const text = createStyles(({ colors, components: { Action } }) => ({
+const text = createStyles(() => ({
   default: { base: { fontWeight: '500' } },
   noMarginTop: { base: { marginTop: 0 } },
-  selected: { base: { color: Action.primary.default.text } },
-  today: { base: { color: colors.text.brand } },
+  selected: {
+    base: {
+      // color: Action.primary.default.text,
+    },
+  },
+  today: {
+    base: {
+      // color: colors.text.brand,
+    },
+  },
 }));
 
 export interface DayButtonProps

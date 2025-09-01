@@ -20,9 +20,11 @@ const styles = createStyles((t) => ({
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      backgroundColor: t.colors.background.secondary,
+      // backgroundColor: t.colors.background.secondary,
     },
-    ':active': { backgroundColor: t.colors.background.active },
+    ':active': {
+      // backgroundColor: t.colors.background.active
+    },
   },
 }));
 

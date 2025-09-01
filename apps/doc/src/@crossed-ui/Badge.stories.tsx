@@ -8,31 +8,28 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Badge } from '@crossed/ui/src/display/Badge';
+import { ColorsBadge } from '@crossed/ui/src/display/Badge/type';
+import { XBox, YBox } from '@crossed/ui';
+import { ChevronRight, X } from '@crossed/unicons';
+
+const colors: ColorsBadge[] = [
+  'gray',
+  'brand',
+  'error',
+  'warning',
+  'success',
+  'grayBlue',
+  'blueLight',
+  'blue',
+  'indigo',
+  'purple',
+  'pink',
+  'orange',
+];
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Badge> = {
   component: Badge,
-  render(e) {
-    return (
-      <>
-        <Badge {...e}>
-          <Badge.Text>Badge</Badge.Text>
-        </Badge>
-        <Badge {...e} variant={'success'}>
-          <Badge.Text>Badge</Badge.Text>
-        </Badge>
-        <Badge {...e} variant={'error'}>
-          <Badge.Text>Badge</Badge.Text>
-        </Badge>
-        <Badge {...e} variant={'warning'}>
-          <Badge.Text>Badge</Badge.Text>
-        </Badge>
-        <Badge {...e} variant={'info'}>
-          <Badge.Text>Badge</Badge.Text>
-        </Badge>
-      </>
-    );
-  },
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {},
@@ -49,4 +46,148 @@ export const Primary: Story = {
     },
   },
   args: {},
+  render(e) {
+    return (
+      <XBox space={'sm'}>
+        <YBox space={'sm'}>
+          {colors.map((v) => (
+            <Badge {...e} key={`${v}-default`} variant={v}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+          ))}
+        </YBox>
+        <YBox space={'sm'}>
+          {colors.map((v) => (
+            <Badge {...e} key={`${v}-rounded`} variant={v} rounded>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+          ))}
+        </YBox>
+        <YBox space={'sm'}>
+          {colors.map((v) => (
+            <Badge {...e} key={`${v}-icon`} variant={v}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <ChevronRight />
+              </Badge.Icon>
+            </Badge>
+          ))}
+        </YBox>
+        <YBox space={'sm'}>
+          {colors.map((v) => (
+            <Badge {...e} key={`${v}-close`} variant={v}>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+          ))}
+        </YBox>
+        <YBox space={'sm'}>
+          {colors.map((v) => (
+            <Badge {...e} key={`${v}-icon-only`} variant={v}>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+          ))}
+        </YBox>
+        <YBox space={'sm'}>
+          {colors.map((v) => (
+            <Badge {...e} key={`${v}-icon-only-rounded`} variant={v} rounded>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+          ))}
+        </YBox>
+      </XBox>
+    );
+  },
+};
+
+export const Group: Story = {
+  parameters: {
+    docs: {
+      source: { language: 'tsx' },
+    },
+  },
+  args: {},
+  render(e) {
+    return (
+      <XBox space={'sm'}>
+        <YBox space={'sm'}>
+          {colors.map((v) => (
+            <Badge.Group key={`${v}-default-group`} {...e} variant={v}>
+              <Badge>
+                <Badge.Text>Version 4.0</Badge.Text>
+              </Badge>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge.Group>
+          ))}
+        </YBox>
+        <YBox space={'sm'}>
+          {colors.map((v) => (
+            <Badge.Group key={`${v}-rounded-group`} {...e} variant={v} rounded>
+              <Badge>
+                <Badge.Text>Version 4.0</Badge.Text>
+              </Badge>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge.Group>
+          ))}
+        </YBox>
+        <YBox space={'sm'}>
+          {colors.map((v) => (
+            <Badge.Group key={`${v}-icon-group`} {...e} variant={v} rounded>
+              <Badge>
+                <Badge.Text>Version 4.0</Badge.Text>
+              </Badge>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <ChevronRight />
+              </Badge.Icon>
+            </Badge.Group>
+          ))}
+        </YBox>
+        <YBox space={'sm'}>
+          {colors.map((v) => (
+            <Badge.Group
+              key={`${v}-icon-group-pressable`}
+              pressable
+              {...e}
+              variant={v}
+              rounded
+            >
+              <Badge>
+                <Badge.Text>Version 4.0</Badge.Text>
+              </Badge>
+              <Badge.Text>Pressable</Badge.Text>
+              <Badge.Icon>
+                <ChevronRight />
+              </Badge.Icon>
+            </Badge.Group>
+          ))}
+        </YBox>
+        {/*<YBox space={'sm'}>*/}
+        {/*  {colors.map((v) => (*/}
+        {/*    <Badge {...e} key={`${v}-close`} variant={v}>*/}
+        {/*      <Badge.Icon>*/}
+        {/*        <X />*/}
+        {/*      </Badge.Icon>*/}
+        {/*      <Badge.Text>Badge</Badge.Text>*/}
+        {/*    </Badge>*/}
+        {/*  ))}*/}
+        {/*</YBox>*/}
+        {/*<YBox space={'sm'}>*/}
+        {/*  {colors.map((v) => (*/}
+        {/*    <Badge {...e} key={`${v}-icon-only`} variant={v}>*/}
+        {/*      <Badge.Icon>*/}
+        {/*        <X />*/}
+        {/*      </Badge.Icon>*/}
+        {/*    </Badge>*/}
+        {/*  ))}*/}
+        {/*</YBox>*/}
+      </XBox>
+    );
+  },
 };

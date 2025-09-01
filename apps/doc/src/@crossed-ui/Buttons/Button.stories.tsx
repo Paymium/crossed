@@ -8,6 +8,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '@crossed/ui/src/buttons/Button';
+import { XBox, YBox } from '@crossed/ui';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Button> = {
@@ -51,7 +52,101 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Size: Story = {
+  render() {
+    return (
+      <XBox space={'xs'} alignItems={'center'}>
+        <Button variant={'primary'} size={'sm'}>
+          <Button.Text>Primary</Button.Text>
+        </Button>
+        <Button variant={'primary'} size={'md'}>
+          <Button.Text>Primary</Button.Text>
+        </Button>
+        <Button variant={'primary'} size={'lg'}>
+          <Button.Text>Primary</Button.Text>
+        </Button>
+        <Button variant={'primary'} size={'xl'}>
+          <Button.Text>Primary</Button.Text>
+        </Button>
+      </XBox>
+    );
+  },
+};
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const Variant: Story = {
+  render() {
+    return (
+      <YBox space={'xs'}>
+        <XBox space={'xs'}>
+          <Button variant={'primary'}>
+            <Button.Text>Primary</Button.Text>
+          </Button>
+          <Button variant={'primary'} disabled>
+            <Button.Text>Primary</Button.Text>
+          </Button>
+          <Button variant={'primary'} loading>
+            <Button.Text>Primary</Button.Text>
+          </Button>
+        </XBox>
+        <XBox space={'xs'}>
+          <Button variant={'secondary'}>
+            <Button.Text>Secondary</Button.Text>
+          </Button>
+          <Button variant={'secondary'} disabled>
+            <Button.Text>Secondary</Button.Text>
+          </Button>
+          <Button variant={'secondary'} loading>
+            <Button.Text>Secondary</Button.Text>
+          </Button>
+        </XBox>
+        <XBox space={'xs'}>
+          <Button variant={'tertiary'}>
+            <Button.Text>Tertiary</Button.Text>
+          </Button>
+          <Button variant={'tertiary'} disabled>
+            <Button.Text>Tertiary</Button.Text>
+          </Button>
+          <Button variant={'tertiary'} loading>
+            <Button.Text>Tertiary</Button.Text>
+          </Button>
+        </XBox>
+        <XBox space={'xs'}>
+          <Button variant={'primary'} error>
+            <Button.Text>Primary error</Button.Text>
+          </Button>
+          <Button variant={'primary'} disabled error>
+            <Button.Text>Primary error</Button.Text>
+          </Button>
+          <Button variant={'primary'} loading error>
+            <Button.Text>Primary error</Button.Text>
+          </Button>
+        </XBox>
+        <XBox space={'xs'}>
+          <Button variant={'secondary'} error>
+            <Button.Text>Secondary error</Button.Text>
+          </Button>
+          <Button variant={'secondary'} disabled error>
+            <Button.Text>Secondary error</Button.Text>
+          </Button>
+          <Button variant={'secondary'} loading error>
+            <Button.Text>Secondary error</Button.Text>
+          </Button>
+        </XBox>
+        <XBox space={'xs'}>
+          <Button variant={'tertiary'} error>
+            <Button.Text>Tertiary error</Button.Text>
+          </Button>
+          <Button variant={'tertiary'} disabled error>
+            <Button.Text>Tertiary error</Button.Text>
+          </Button>
+          <Button variant={'tertiary'} loading error>
+            <Button.Text>Tertiary error</Button.Text>
+          </Button>
+        </XBox>
+      </YBox>
+    );
+  },
+};
 export const Primary: Story = {
   args: { variant: 'primary', loading: false, disabled: false },
 };

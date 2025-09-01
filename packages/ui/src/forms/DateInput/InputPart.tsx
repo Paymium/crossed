@@ -16,13 +16,13 @@ export interface InputPartProps
   label?: string;
 }
 
-const styles = inlineStyle(({ colors }) => ({
+const styles = inlineStyle(() => ({
   base: {
     borderWidth: 0,
     backgroundColor: 'transparent',
     maxWidth: 64,
     textAlign: 'center',
-    color: colors.text.primary,
+    // color: colors.text.primary,
   },
   web: {
     ':focus': {
@@ -47,7 +47,7 @@ export const InputPart = forwardRef<TextInput, InputPartProps>(
         ref={ref}
         showSoftInputOnFocus={false}
         onChangeText={onChangeText}
-        placeholderTextColor={colors.text.secondary}
+        // placeholderTextColor={colors.text.secondary}
         onBlur={onBlur}
         onFocus={onFocus}
         keyboardType="numeric"

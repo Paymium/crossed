@@ -39,7 +39,7 @@ import { XBox } from '../../layout';
 
 const duration = 100;
 
-const styles = createStyles(({ colors, space, boxShadow }) => ({
+const styles = createStyles(({ space }) => ({
   dynamic: (e: any) => {
     const transform = [];
     if (e.transform) {
@@ -55,13 +55,13 @@ const styles = createStyles(({ colors, space, boxShadow }) => ({
   },
   calendar: {
     base: {
-      backgroundColor: colors.background.secondary,
+      // backgroundColor: colors.background.secondary,
       borderWidth: 1,
-      borderColor: colors.border.secondary,
+      // borderColor: colors.border.secondary,
       padding: space.md,
       borderRadius: 16,
-      boxShadow,
-      position: 'absolute',
+      // boxShadow,
+      // position: 'absolute',
       width: 432,
     },
   },
@@ -96,7 +96,6 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
     ref
   ) => {
     const [, setTransition] = useTransition();
-    const { colors } = useTheme();
     const { md } = useMedia();
     const open = useRef(false);
     useImperativeHandle(
@@ -178,7 +177,7 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
 
     const renderIcon = (
       <XBox>
-        <ChevronDown color={colors.text.secondary} />
+        <ChevronDown /*color={colors.text.secondary} */ />
       </XBox>
     );
 
@@ -200,9 +199,9 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
               exiting={FadeOut.duration(duration)}
               entering={FadeIn.duration(duration)}
               style={composeStyles(
-                inlineStyle(({ boxShadow }) => ({
+                inlineStyle(() => ({
                   base: { zIndex: 100, position: 'absolute' },
-                  web: { base: { boxShadow } },
+                  // web: { base: { boxShadow } },
                 }))
               )}
             >
