@@ -8,6 +8,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { MenuList } from '@crossed/ui/src/display/MenuList';
+import { XBox } from '@crossed/ui';
+import { ChevronUp } from '@crossed/unicons';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof MenuList> = {
@@ -15,30 +17,64 @@ const meta: Meta<typeof MenuList> = {
   subcomponents: {
     'MenuList.Item': MenuList.Item,
     'MenuList.Title': MenuList.Title,
+    'MenuList.Label': MenuList.Label,
     'MenuList.Divider': MenuList.Divider,
   },
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {},
   render: (e) => (
-    <MenuList {...e}>
-      <MenuList.Label>Label</MenuList.Label>
-      <MenuList.Item>
-        <MenuList.Title>Menu 1</MenuList.Title>
-      </MenuList.Item>
-      <MenuList.Item>
-        <MenuList.Title>Menu 2</MenuList.Title>
-      </MenuList.Item>
-      <MenuList.Item>
-        <MenuList.Title>Menu 3</MenuList.Title>
-      </MenuList.Item>
-      <MenuList.Divider />
-      <MenuList.Item>
-        <MenuList.Title color="error" weight="lg">
-          Danger
-        </MenuList.Title>
-      </MenuList.Item>
-    </MenuList>
+    <XBox space={'md'}>
+      <MenuList {...e}>
+        <MenuList.Label>Label</MenuList.Label>
+        <MenuList.Item>
+          <MenuList.Title>Menu 1</MenuList.Title>
+        </MenuList.Item>
+        <MenuList.Item>
+          <MenuList.Title>Menu 2</MenuList.Title>
+        </MenuList.Item>
+        <MenuList.Item>
+          <MenuList.Title>Menu 3</MenuList.Title>
+        </MenuList.Item>
+        <MenuList.Divider />
+        <MenuList.Item>
+          <MenuList.Title color="error">Danger</MenuList.Title>
+        </MenuList.Item>
+      </MenuList>
+      <MenuList {...e} bordered={false}>
+        <MenuList.Item>
+          <MenuList.Title>Menu 1</MenuList.Title>
+        </MenuList.Item>
+        <MenuList.Item>
+          <MenuList.Title>Menu 2</MenuList.Title>
+        </MenuList.Item>
+        <MenuList.Item>
+          <MenuList.Title>Menu 3</MenuList.Title>
+        </MenuList.Item>
+        <MenuList.Divider />
+        <MenuList.Item>
+          <MenuList.Title color="error">Danger</MenuList.Title>
+        </MenuList.Item>
+      </MenuList>
+      <MenuList {...e} rounded={false}>
+        <MenuList.Item>
+          <MenuList.Icon>
+            <ChevronUp />
+          </MenuList.Icon>
+          <MenuList.Title>Menu 1</MenuList.Title>
+        </MenuList.Item>
+        <MenuList.Item>
+          <MenuList.Title>Menu 2</MenuList.Title>
+        </MenuList.Item>
+        <MenuList.Item>
+          <MenuList.Title>Menu 3</MenuList.Title>
+        </MenuList.Item>
+        <MenuList.Divider />
+        <MenuList.Item>
+          <MenuList.Title color="error">Danger</MenuList.Title>
+        </MenuList.Item>
+      </MenuList>
+    </XBox>
   ),
 };
 

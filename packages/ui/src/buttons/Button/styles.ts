@@ -7,10 +7,13 @@
 
 import { createStyles, inlineStyle } from '@crossed/styled';
 
-export const buttonStyle = inlineStyle(() => ({
+export const buttonStyle = inlineStyle(({ radius }) => ({
   base: {
     display: 'flex',
-    borderRadius: 8,
+    borderTopLeftRadius: radius.md,
+    borderTopRightRadius: radius.md,
+    borderBottomLeftRadius: radius.md,
+    borderBottomRightRadius: radius.md,
     borderWidth: 0,
     borderStyle: 'solid',
     borderColor: 'transparent',
@@ -27,7 +30,10 @@ export const buttonOutlineStyle = createStyles(({ colors }) => ({
     base: {
       position: 'absolute',
       borderWidth: 2,
-      borderRadius: 12,
+      borderTopLeftRadius: 12,
+      borderTopRightRadius: 12,
+      borderBottomLeftRadius: 12,
+      borderBottomRightRadius: 12,
       top: -4,
       right: -4,
       left: -4,

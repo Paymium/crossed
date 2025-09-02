@@ -71,7 +71,7 @@ export default {
     primary: { default: gray['900'] },
     secondary: { default: gray['700'], hover: gray['800'] },
     tertiary: { default: gray['600'], hover: gray['700'] },
-    quaternary: { default: primary.brand['400'], hover: primary.brand['500'] },
+    quaternary: { default: gray['400'], hover: gray['500'] },
     disabled: { default: primary.brand['100'], subtle: primary.brand['200'] },
     brand: {
       primary: { default: primary.brand['600'], alt: primary.brand['600'] },

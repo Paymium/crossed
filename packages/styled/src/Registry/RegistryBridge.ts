@@ -26,9 +26,6 @@ export const parse = <T extends Record<string, any>>(
       }>(
         (acc, [key, value]) => {
           if (Array.isArray(value)) {
-            const name = convertKeyToCss(
-              `${parentName ? `${parentName}-` : ''}${key}`
-            );
             (acc.theme as any)[key] = [];
             value.forEach((v, i) => {
               if (['string'].includes(typeof v)) {

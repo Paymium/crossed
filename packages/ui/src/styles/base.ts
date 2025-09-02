@@ -11,7 +11,10 @@ export const baseStyle = createStyles(() => ({
   view: {
     base: {
       borderStyle: 'solid',
-      borderWidth: 0,
+      borderTopWidth: 0,
+      borderBottomWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
       alignItems: 'stretch',
       backgroundColor: 'rgba(0, 0, 0, 0)',
       boxSizing: 'border-box',

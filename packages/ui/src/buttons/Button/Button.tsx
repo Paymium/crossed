@@ -75,14 +75,27 @@ export const Button = forwardRef<View, ButtonProps>(
                 // colors={colors.gradient.brand.1}
                 colors={colors.gradient.brand['2']}
                 {...inlineStyle(() => ({
-                  base: { padding: 1, borderRadius: 9, position: 'relative' },
+                  base: {
+                    padding: 1,
+                    borderTopLeftRadius: 9,
+                    borderTopRightRadius: 9,
+                    borderBottomLeftRadius: 9,
+                    borderBottomRightRadius: 9,
+                    position: 'relative',
+                  },
                 })).rnw()}
               >
                 {/*deuxieme border*/}
                 <LinearGradient
                   colors={['#4754da', '#2e3dcb']}
                   {...inlineStyle(() => ({
-                    base: { padding: 1, borderRadius: 9 },
+                    base: {
+                      padding: 1,
+                      borderTopLeftRadius: 9,
+                      borderTopRightRadius: 9,
+                      borderBottomLeftRadius: 9,
+                      borderBottomRightRadius: 9,
+                    },
                   })).rnw()}
                 >
                   <View

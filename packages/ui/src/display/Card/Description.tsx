@@ -5,16 +5,12 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Text, TextProps } from '../../typography';
-import { composeStyles } from '@crossed/styled';
-import { cardStyles } from './styles';
+import { Text } from '../../typography';
+import { withDefaultProps } from '@crossed/core';
 
-export const Description = (props: TextProps) => {
-  return (
-    <Text
-      {...props}
-      style={composeStyles(cardStyles.description, props.style)}
-    />
-  );
-};
+export const Description = withDefaultProps(Text, {
+  fontSize: 'sm',
+  fontWeight: 'regular',
+  color: 'tertiary',
+});
 Description.displayName = 'Card.Description';

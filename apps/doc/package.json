@@ -12,6 +12,7 @@
     "chromatic": "npx chromatic --project-token=chpt_4047e48604d2a77"
   },
   "dependencies": {
+    "@crossed/icons": "workspace:1.0.0",
     "@crossed/styled": "workspace:0.15.0",
     "@crossed/theme": "workspace:3.0.0",
     "@crossed/ui": "workspace:8.4.3",

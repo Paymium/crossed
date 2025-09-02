@@ -11,6 +11,12 @@ import type { LabelComponent } from './types';
 import { form } from '../../styles/form';
 
 export const Label: LabelComponent = withReactive((props) => {
-  const { htmlFor: _u, disabled, style, ...other } = props as any;
-  return <Text {...other} style={composeStyles(form.label, style)} />;
+  const { disabled, style, ...other } = props as any;
+  return (
+    <Text
+      accessibilityRole={'label'}
+      {...other}
+      style={composeStyles(form.label, style)}
+    />
+  );
 });

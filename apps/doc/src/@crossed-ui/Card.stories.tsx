@@ -22,14 +22,9 @@ const meta: Meta<typeof Card> = {
   subcomponents: {
     'Card.Title': Card.Title,
     'Card.Description': Card.Description,
-    'Card.Extra': Card.Extra,
   },
   tags: ['autodocs'],
   argTypes: {
-    space: {
-      control: 'select',
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', null],
-    },
     center: { control: 'boolean' },
   },
 };
@@ -44,7 +39,6 @@ export const Primary: Story = {
     <Card {...e}>
       <Card.Title>This is a Title</Card.Title>
       <Card.Description>This is a Description for your card</Card.Description>
-      <Card.Extra>This is a litle Extra</Card.Extra>
     </Card>
   ),
 };
@@ -52,23 +46,6 @@ export const Primary: Story = {
 export const Pressable: Story = {
   ...Primary,
   args: { pressable: true, onPress: fn() },
-};
-
-export const SizeXs: Story = {
-  ...Primary,
-  args: { size: 'xs' },
-};
-export const SizeSm: Story = {
-  ...Primary,
-  args: { size: 'sm' },
-};
-export const SizeMd: Story = {
-  ...Primary,
-  args: { size: 'md' },
-};
-export const SizeLg: Story = {
-  ...Primary,
-  args: { size: 'lg' },
 };
 
 export const OtherCard: Story = {
@@ -113,6 +90,24 @@ export const CardStat: Story = {
         <Divider />
         {OtherCard.render(e, undefined)}
       </Group>
+    </Box>
+  ),
+};
+
+export const CardInCard: Story = {
+  ...Primary,
+  render: (e) => (
+    <Box
+      style={inlineStyle(() => ({
+        base: { width: '100%' },
+        media: { md: { width: '25%' } },
+      }))}
+    >
+      <Card>
+        <Card.Title textAlign="center">00,00$</Card.Title>
+        <Card.Description textAlign="center">Obtenu</Card.Description>
+        {OtherCard.render(e, undefined)}
+      </Card>
     </Box>
   ),
 };
