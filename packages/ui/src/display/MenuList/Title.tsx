@@ -5,11 +5,12 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Text } from '../../typography';
+import { Text, TextProps } from '../../typography';
 import { withDefaultProps } from '@crossed/core';
 
-export const Title = withDefaultProps(Text, {
-  fontSize: 'md',
+export const MenuTitle = withDefaultProps(Text, {
+  color: 'secondary',
+  fontSize: 'sm',
   fontWeight: 'semibold',
 });
-Title.displayName = 'Card.Title';
+MenuTitle.displayName = 'MenuList.Title';

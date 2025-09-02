@@ -6,7 +6,6 @@
  */
 
 import { cloneElement, isValidElement, memo, useMemo, Children } from 'react';
-import { withStaticProperties } from '@crossed/core';
 import { BoxProps, Divider, XBox, YBox } from '../layout';
 import { composeStyles, createStyles } from '@crossed/styled';
 
@@ -19,7 +18,14 @@ const stylesVertical = createStyles(() => ({
     },
   },
   middle: {
-    base: { borderBottomWidth: 0, borderRadius: 0, borderTopWidth: 0 },
+    base: {
+      borderBottomWidth: 0,
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0,
+      borderTopWidth: 0,
+    },
   },
   last: {
     base: {
@@ -53,7 +59,7 @@ const stylesHorizontal = createStyles(() => ({
 type GroupRootProps = BoxProps & {
   orientation?: 'horizontal' | 'vertical';
 };
-export const GroupRoot = memo<GroupRootProps>(
+export const Group = memo<GroupRootProps>(
   ({ orientation = 'vertical', children, ...props }) => {
     const childrenModified = useMemo(() => {
       return Children.toArray(children).map((child, i, a) => {
@@ -65,6 +71,7 @@ export const GroupRoot = memo<GroupRootProps>(
         const isMiddle = !isFirst && !isLast;
 
         const props: any = {
+          ...child.props,
           style: composeStyles(
             child.props.style,
             orientation === 'vertical' && [
@@ -84,7 +91,7 @@ export const GroupRoot = memo<GroupRootProps>(
             orientation === 'horizontal' ? 'vertical' : 'horizontal';
           delete props.style;
         }
-
+        console.log(props);
         return cloneElement(child, props as any);
       });
     }, [children, orientation]);
@@ -97,5 +104,3 @@ export const GroupRoot = memo<GroupRootProps>(
     return <Container {...props}>{childrenModified}</Container>;
   }
 );
-
-export const Group = withStaticProperties(GroupRoot, {});

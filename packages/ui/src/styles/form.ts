@@ -7,7 +7,7 @@
 
 import { createStyles } from '@crossed/styled';
 
-export const form = createStyles(({ space, font }) => ({
+export const form = createStyles(({ space, font, colors, radius }) => ({
   inputError: {
     base: {
       // borderColor: colors.error.primary,
@@ -16,12 +16,12 @@ export const form = createStyles(({ space, font }) => ({
   },
   input: {
     'base': {
-      // color: Input.primary.default.text,
+      color: colors.text.primary.default,
       borderWidth: 1,
       borderStyle: 'solid',
-      // borderColor: Input.primary.default.border,
-      // backgroundColor: Input.primary.default.background,
-      borderRadius: 8,
+      borderColor: colors.border.primary.default,
+      backgroundColor: colors.background.primary.alt,
+      borderRadius: radius.md,
       paddingVertical: space.xs,
       paddingHorizontal: space.md,
       justifyContent: 'center',
@@ -34,7 +34,7 @@ export const form = createStyles(({ space, font }) => ({
       // borderColor: Input.primary.hover.border,
     },
     ':focus': {
-      // borderColor: Input.primary.focus.border,
+      borderColor: colors.border.brand.default,
     },
     ':active': {
       // borderColor: Input.primary.focus.border,
@@ -54,13 +54,13 @@ export const form = createStyles(({ space, font }) => ({
   },
   placeholder: {
     base: {
-      // color: Input.primary.default.placeholder,
+      color: colors.text.placeholder.default,
     },
   },
   label: {
-    'base': { color: font.color, fontWeight: font.fontWeight.lg },
+    'base': { color: colors.text.secondary.default },
     ':focus': {
-      // color: colors.text.brand,
+      color: colors.text.secondary.default,
     },
     ':disabled': {
       // color: colors.text.secondary,

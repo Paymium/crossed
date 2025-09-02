@@ -101,7 +101,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
   const [elementRightWidth, setElementRightWidth] = useState(0);
   const { state, props: propsInteraction } = useInteraction(allProps);
   const { colors } = useTheme();
-  const color = colors.text.secondary;
+  const color = colors.text.placeholder.default;
 
   const onClear = useCallback(() => {
     setValue('');

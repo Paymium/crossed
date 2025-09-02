@@ -154,6 +154,14 @@ export class Loader {
         )}:${value};${convertKeyToCss(
           'paddingLeft'
         )}:${value};${convertKeyToCss('paddingRight')}:${value};`;
+      } else if (key === 'borderRadius') {
+        return `${acc}${convertKeyToCss(
+          'borderTopLeftRadius'
+        )}:${value};${convertKeyToCss(
+          'borderTopRightRadius'
+        )}:${value};${convertKeyToCss(
+          'borderBottomLeftRadius'
+        )}:${value};${convertKeyToCss('borderBottomLeftRadius')}:${value};`;
       }
       return `${acc}${convertKeyToCss(key)}:${value};`;
     }, '');

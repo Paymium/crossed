@@ -5,7 +5,6 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export * from './CloseButton';
-export * from './Button';
-export * from './IconButton';
-export * from './Pagination';
+import { PaginationRoot } from './Root';
+
+export const Pagination = PaginationRoot;

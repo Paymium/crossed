@@ -5,11 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Text } from '../../typography';
+import { Divider as D } from '../../layout';
 import { withDefaultProps } from '@crossed/core';
 
-export const Title = withDefaultProps(Text, {
-  fontSize: 'md',
-  fontWeight: 'semibold',
-});
-Title.displayName = 'Card.Title';
+export const MenuDivider = withDefaultProps(D, { color: 'secondary' });
+MenuDivider.displayName = 'MenuList.Divider';
