@@ -7,8 +7,9 @@
 
 import { forwardRef } from 'react';
 import { YBox, type YBoxProps } from '../../layout';
-import { composeStyles } from '@crossed/styled';
+import { composeStyles, inlineStyle } from '@crossed/styled';
 import { cardStyles } from './styles';
+import { useGroupProvider } from './context';
 
 /**
  * Represents the properties for a card component.
@@ -20,7 +21,7 @@ import { cardStyles } from './styles';
  * Optional size indication for the card, allowing predefined sizes: 'auto', 'xs', 'sm', 'md', or 'lg'.
  * Defaults to 'auto' if not specified.
  */
-type CardProps = YBoxProps;
+type CardProps = YBoxProps & { padding?: boolean };
 
 /**
  * CardRoot is a forwardRef component that renders a YBox element with
@@ -33,14 +34,22 @@ type CardProps = YBoxProps;
  * @returns {JSX.Element} A styled YBox component based on the provided properties.
  */
 export const CardRoot = forwardRef(
-  ({ role, style, ...props }: CardProps, ref: any) => {
+  ({ role, style, padding = true, ...props }: CardProps, ref: any) => {
+    const inGroup = useGroupProvider();
     return (
       <YBox
         ref={ref}
         role={role}
         space={'md'}
         {...props}
-        style={composeStyles(cardStyles.root, style)}
+        style={composeStyles(
+          cardStyles.root,
+          padding && cardStyles.padding,
+          inGroup && inlineStyle(() => ({ base: { marginHorizontal: -1 } })),
+          !inGroup?.hasFooter &&
+            inlineStyle(() => ({ base: { marginBottom: -1 } })),
+          style
+        )}
       />
     );
   }

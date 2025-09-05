@@ -8,17 +8,14 @@
 import { createStyles } from '@crossed/styled';
 
 export const cardStyles = createStyles(({ space, radius, colors }) => ({
+  padding: { base: { padding: space['2xl'] } },
   root: {
     base: {
-      padding: space['2xl'],
-      borderTopLeftRadius: radius.xl,
-      borderTopRightRadius: radius.xl,
-      borderBottomRightRadius: radius.xl,
-      borderBottomLeftRadius: radius.xl,
+      borderRadius: radius.xl,
       backgroundColor: colors.background.primary.alt,
       borderWidth: 1,
       borderColor: colors.border.secondary.default,
-      flexShrink: 1,
+      flexGrow: 0,
     },
   },
 }));

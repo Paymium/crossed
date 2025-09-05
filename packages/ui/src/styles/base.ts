@@ -15,7 +15,6 @@ export const baseStyle = createStyles(() => ({
       borderBottomWidth: 0,
       borderLeftWidth: 0,
       borderRightWidth: 0,
-      alignItems: 'stretch',
       backgroundColor: 'rgba(0, 0, 0, 0)',
       boxSizing: 'border-box',
       display: 'flex',

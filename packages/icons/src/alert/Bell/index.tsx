@@ -6,7 +6,7 @@
  */
 
 import { withDefaultProps } from '@crossed/core';
-import { Infinity as Base } from './Infinity';
+import { Bell as Base } from './Bell';
 import { Path, Svg } from 'react-native-svg';
 
-export const Infinity = withDefaultProps(Base, { Svg, Path });
+export const Bell = withDefaultProps(Base, { Svg, Path });

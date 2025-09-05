@@ -46,8 +46,8 @@ const meta: Meta<RequireOnly<'color' | 'size'>> = {
       style={inlineStyle(() => ({ base: { flexWrap: 'wrap' } }))}
     >
       {Object.entries(icons).map(([key, Icon]: any) => (
-        <Center>
-          <Icon {...e} key={key} />
+        <Center key={key} style={inlineStyle(() => ({ base: { flex: 1 } }))}>
+          <Icon {...e} />
           <Text fontSize={'xs'}>{key}</Text>
         </Center>
       ))}

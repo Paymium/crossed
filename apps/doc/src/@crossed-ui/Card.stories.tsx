@@ -12,7 +12,6 @@ import { XBox } from '@crossed/ui/src/layout/XBox';
 import { Text } from '@crossed/ui/src/typography/Text';
 import { Divider } from '@crossed/ui/src/layout/Divider';
 import { Box } from '@crossed/ui/src/layout/Box';
-import { inlineStyle } from '@crossed/styled';
 import { fn } from '@storybook/test';
 import { Group } from '@crossed/ui';
 
@@ -65,7 +64,6 @@ export const OneElement: Story = {
   render: (e) => (
     <Group>
       {Primary.render(e, undefined)}
-      <Divider />
       {OtherCard.render(e, undefined)}
     </Group>
   ),
@@ -74,20 +72,13 @@ export const OneElement: Story = {
 export const CardStat: Story = {
   ...Primary,
   render: (e) => (
-    <Box
-      style={inlineStyle(() => ({
-        base: { width: '100%' },
-        media: { md: { width: '25%' } },
-      }))}
-    >
+    <Box>
       <Group>
         <Card>
           <Card.Title textAlign="center">00,00$</Card.Title>
           <Card.Description textAlign="center">Obtenu</Card.Description>
         </Card>
-        <Divider />
         {OtherCard.render(e, undefined)}
-        <Divider />
         {OtherCard.render(e, undefined)}
       </Group>
     </Box>
@@ -97,17 +88,38 @@ export const CardStat: Story = {
 export const CardInCard: Story = {
   ...Primary,
   render: (e) => (
-    <Box
-      style={inlineStyle(() => ({
-        base: { width: '100%' },
-        media: { md: { width: '25%' } },
-      }))}
-    >
+    <XBox space={'xl'}>
       <Card>
         <Card.Title textAlign="center">00,00$</Card.Title>
         <Card.Description textAlign="center">Obtenu</Card.Description>
         {OtherCard.render(e, undefined)}
       </Card>
-    </Box>
+      <Group>
+        <Card>
+          <Card.Title textAlign="center">00,00$</Card.Title>
+          <Card.Description textAlign="center">Obtenu</Card.Description>
+        </Card>
+        {OtherCard.render(e, undefined)}
+      </Group>
+      <Card.Group>
+        <Card.Header>
+          <Card.Title>toto</Card.Title>
+        </Card.Header>
+        <Card>
+          <Card.Title>toto</Card.Title>
+        </Card>
+        <Card.Footer>
+          <Card.Title>toto</Card.Title>
+        </Card.Footer>
+      </Card.Group>
+      <Card.Group>
+        <Card.Header>
+          <Card.Title>toto</Card.Title>
+        </Card.Header>
+        <Card>
+          <Card.Title>toto</Card.Title>
+        </Card>
+      </Card.Group>
+    </XBox>
   ),
 };

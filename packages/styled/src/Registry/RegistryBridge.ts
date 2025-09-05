@@ -7,7 +7,12 @@
 
 import type { Plugin, PluginContext, Themes } from '../types';
 import { setTheme } from '../setTheme';
-import { convertKeyToCss, normalizeUnitPixel } from '../plugins/utils';
+import {
+  convertGeneralKeyToSpecificKey,
+  convertKeyToCss,
+  normalizeUnitPixel,
+  styleToString,
+} from '../plugins/utils';
 import { isWeb as isWebFile } from '../isWeb';
 
 export const parse = <T extends Record<string, any>>(
@@ -168,7 +173,11 @@ export class RegistryBridge {
           const keyFind = test.includes(key);
           if (keyFind) {
             this.log(`[${name}] Find "${key}" for "${name}" plugin`);
-            apply?.({ ...options, key, styles });
+            apply?.({
+              ...options,
+              key,
+              styles: convertGeneralKeyToSpecificKey(styles),
+            });
           }
         }
       });

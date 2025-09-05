@@ -8,7 +8,7 @@
 import type { RequireOnly } from '../../types';
 import { useColor } from '../../utils';
 
-export const Infinity = ({
+export const Infinite = ({
   Svg,
   Path,
   size = 24,

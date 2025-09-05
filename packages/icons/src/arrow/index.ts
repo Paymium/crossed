@@ -80,7 +80,7 @@ export * from './Expand5';
 export * from './Expand6';
 export * from './FlipBackward';
 export * from './FlipForward';
-export * from './Infinity';
+export * from './Infinite';
 export * from './RefreshCcw1';
 export * from './RefreshCcw2';
 export * from './RefreshCcw3';
