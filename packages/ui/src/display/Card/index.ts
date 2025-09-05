@@ -10,10 +10,16 @@ import { ComponentProps } from 'react';
 import { CardRoot } from './Root';
 import { Title } from './Title';
 import { Description } from './Description';
+import { CardGroup } from './Group';
+import { CardFooter } from './Footer';
+import { CardHeader } from './Header';
 
 const Card = withStaticProperties(CardRoot, {
   Title,
   Description,
+  Group: CardGroup,
+  Footer: CardFooter,
+  Header: CardHeader,
 });
 const { Title: CardTitle, Description: CardDescription } = Card;
 

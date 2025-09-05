@@ -86,12 +86,11 @@ export const Group = memo<GroupRootProps>(
             ]
           ),
         };
-        if (child.type === Divider) {
+        if ((child.type as any).displayName === 'Divider') {
           props.direction =
             orientation === 'horizontal' ? 'vertical' : 'horizontal';
           delete props.style;
         }
-        console.log(props);
         return cloneElement(child, props as any);
       });
     }, [children, orientation]);
