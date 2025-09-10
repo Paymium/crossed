@@ -10,7 +10,7 @@ import * as React from 'react';
 
 import type { FocusScopeProps } from './FocusScopeProps';
 import { useComposedRefs } from '@crossed/core';
-import { useEvent } from '@crossed/primitive';
+import { useEvent } from './useEvent';
 
 const AUTOFOCUS_ON_MOUNT = 'focusScope.autoFocusOnMount';
 const AUTOFOCUS_ON_UNMOUNT = 'focusScope.autoFocusOnUnmount';

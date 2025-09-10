@@ -619,73 +619,6 @@ importers:
         specifier: ^5.4.2
         version: 5.6.2
 
-  packages/primitive:
-    dependencies:
-      '@react-native-aria/focus':
-        specifier: ^0.2.8
-        version: 0.2.9(react-native@0.76.7)(react@18.3.1)
-      '@react-native-aria/interactions':
-        specifier: ^0.2.10
-        version: 0.2.13(react-native@0.76.7)(react@18.3.1)
-      react-aria:
-        specifier: ^3.27.0
-        version: 3.35.0(react-dom@18.3.1)(react@18.3.1)
-      react-focus-lock:
-        specifier: ^2.11.2
-        version: 2.13.2(@types/react@18.3.11)(react@18.3.1)
-      react-focus-on:
-        specifier: ^3.9.2
-        version: 3.9.4(@types/react@18.3.11)(react@18.3.1)
-      react-remove-scroll:
-        specifier: ^2.5.6
-        version: 2.6.0(@types/react@18.3.11)(react@18.3.1)
-    devDependencies:
-      '@crossed/build':
-        specifier: '*'
-        version: link:../build
-      '@crossed/core':
-        specifier: 0.9.0
-        version: link:../core
-      '@crossed/test':
-        specifier: 0.14.0
-        version: link:../test
-      '@gorhom/portal':
-        specifier: ^1.0.14
-        version: 1.0.14(react-native@0.76.7)(react@18.3.1)
-      '@testing-library/jest-dom':
-        specifier: ^6.5.0
-        version: 6.5.0
-      '@types/jest':
-        specifier: ^29.5.13
-        version: 29.5.13
-      '@types/react':
-        specifier: ^18.3.3
-        version: 18.3.11
-      '@types/react-dom':
-        specifier: ^18.3.0
-        version: 18.3.0
-      babel-plugin-transform-remove-console:
-        specifier: ^6.9.4
-        version: 6.9.4
-      jest:
-        specifier: ^29.6.3
-        version: 29.7.0(@types/node@20.5.1)(ts-node@10.8.1)
-      react:
-        specifier: ^18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
-      react-native:
-        specifier: '=0.76.7'
-        version: 0.76.7(@babel/core@7.26.0)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)
-      react-native-web:
-        specifier: ^0.19.10
-        version: 0.19.12(react-dom@18.3.1)(react@18.3.1)
-      tsconfig:
-        specifier: '*'
-        version: 7.0.0
-
   packages/sheet:
     devDependencies:
       '@crossed/build':
@@ -901,9 +834,6 @@ importers:
       '@crossed/core':
         specifier: 0.9.0
         version: link:../core
-      '@crossed/primitive':
-        specifier: 2.0.0
-        version: link:../primitive
       '@crossed/styled':
         specifier: workspace:^
         version: link:../styled
@@ -4733,6 +4663,7 @@ packages:
       nanoid: 3.3.7
       react: 18.3.1
       react-native: 0.76.7(@babel/core@7.26.0)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)
+    dev: false
 
   /@hapi/hoek@9.3.0:
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -6460,17 +6391,6 @@ packages:
       react-native: 0.73.11(@babel/core@7.26.0)(@babel/preset-env@7.25.7)(react@18.3.1)
     dev: false
 
-  /@react-native-aria/focus@0.2.9(react-native@0.76.7)(react@18.3.1):
-    resolution: {integrity: sha512-zVgOIzKwnsyyurUxlZnzUKB2ekK/cmK64sQJIKKUlkJKVxd2EAFf7Sjz/NVEoMhTODN3qGRASTv9bMk/pBzzVA==}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
-    dependencies:
-      '@react-aria/focus': 3.18.3(react@18.3.1)
-      react: 18.3.1
-      react-native: 0.76.7(@babel/core@7.26.0)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)
-    dev: false
-
   /@react-native-aria/interactions@0.2.13(react-native@0.73.11)(react@18.3.1):
     resolution: {integrity: sha512-Uzru5Pqq5pG46lg/pzXoku9Y9k1UvuwJB/HRLSwahdC6eyNJOOm4kmadR/iziL/BeTAi5rOZsPEd0IKcMdH3nA==}
     peerDependencies:
@@ -6484,19 +6404,6 @@ packages:
       react-native: 0.73.11(@babel/core@7.26.0)(@babel/preset-env@7.25.7)(react@18.3.1)
     dev: false
 
-  /@react-native-aria/interactions@0.2.13(react-native@0.76.7)(react@18.3.1):
-    resolution: {integrity: sha512-Uzru5Pqq5pG46lg/pzXoku9Y9k1UvuwJB/HRLSwahdC6eyNJOOm4kmadR/iziL/BeTAi5rOZsPEd0IKcMdH3nA==}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
-    dependencies:
-      '@react-aria/interactions': 3.22.3(react@18.3.1)
-      '@react-aria/utils': 3.25.3(react@18.3.1)
-      '@react-native-aria/utils': 0.2.11(react-native@0.76.7)(react@18.3.1)
-      react: 18.3.1
-      react-native: 0.76.7(@babel/core@7.26.0)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)
-    dev: false
-
   /@react-native-aria/utils@0.2.11(react-native@0.73.11)(react@18.3.1):
     resolution: {integrity: sha512-8MzE25pYDo1ZQtu7N9grx2Q+2uK58Tvvg4iJ7Nvx3PXTEz2XKU8G//yX9un97f7zCM6ptL8viRdKbSYDBmQvsA==}
     peerDependencies:
@@ -6507,18 +6414,6 @@ packages:
       '@react-aria/utils': 3.25.3(react@18.3.1)
       react: 18.3.1
       react-native: 0.73.11(@babel/core@7.26.0)(@babel/preset-env@7.25.7)(react@18.3.1)
-    dev: false
-
-  /@react-native-aria/utils@0.2.11(react-native@0.76.7)(react@18.3.1):
-    resolution: {integrity: sha512-8MzE25pYDo1ZQtu7N9grx2Q+2uK58Tvvg4iJ7Nvx3PXTEz2XKU8G//yX9un97f7zCM6ptL8viRdKbSYDBmQvsA==}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
-    dependencies:
-      '@react-aria/ssr': 3.9.6(react@18.3.1)
-      '@react-aria/utils': 3.25.3(react@18.3.1)
-      react: 18.3.1
-      react-native: 0.76.7(@babel/core@7.26.0)(@babel/preset-env@7.25.7)(@types/react@18.3.11)(react@18.3.1)
     dev: false
 
   /@react-native-community/cli-clean@12.3.7:

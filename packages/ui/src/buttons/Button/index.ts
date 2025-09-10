@@ -7,7 +7,6 @@
 
 import { withStaticProperties } from '@crossed/core';
 import { ButtonText, ButtonTextProps } from './Text';
-import { ButtonGroup, ButtonGroupProps } from './Group';
 import { Box as ButtonElement } from '../../layout/Box';
 import { ButtonIcon } from './Icon';
 import { Button as Root } from './Button';
@@ -16,10 +15,9 @@ export * from './styles';
 export * from './types';
 
 export const Button = withStaticProperties(Root, {
-  Group: ButtonGroup,
   Text: ButtonText,
   Element: ButtonElement,
   Icon: ButtonIcon,
 });
-export { ButtonText, ButtonElement, ButtonGroup, ButtonIcon };
-export type { ButtonTextProps, ButtonGroupProps };
+export { ButtonText, ButtonElement, ButtonIcon };
+export type { ButtonTextProps };
