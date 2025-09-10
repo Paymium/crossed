@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.3.0
+
+### Minor Changes
+
+- 6e75c3c: remove primitive package
+
 ## 8.2.9
 
 ### Patch Changes
