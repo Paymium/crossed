@@ -5,8 +5,8 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { VisibilityHidden } from '@crossed/primitive';
 import type { ImplementationComponent } from './type';
+import { VisibilityHidden } from '../../other';
 
 export const Implementation: ImplementationComponent = ({
   checked,

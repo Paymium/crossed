@@ -75,7 +75,6 @@
   },
   "peerDependencies": {
     "@crossed/core": "*",
-    "@crossed/primitive": "*",
     "@crossed/styled": "*",
     "@crossed/theme": "workspace:^",
     "@crossed/unicons": "4.0.0",
@@ -87,7 +86,6 @@
   "devDependencies": {
     "@crossed/build": "*",
     "@crossed/core": "0.9.0",
-    "@crossed/primitive": "2.0.0",
     "@crossed/styled": "workspace:^",
     "@crossed/test": "0.14.0",
     "@crossed/theme": "workspace:^",
