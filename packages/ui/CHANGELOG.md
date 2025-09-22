@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.4.0
+
+### Minor Changes
+
+- ce3da7d: fix: form select multiple broken : unable to select multiple values
+
 ## 8.3.0
 
 ### Minor Changes

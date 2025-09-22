@@ -1,7 +1,7 @@
 {
   "name": "crossed-doc",
   "private": true,
-  "version": "0.12.17",
+  "version": "0.12.18",
   "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006",
@@ -14,7 +14,7 @@
   "dependencies": {
     "@crossed/styled": "workspace:0.15.0",
     "@crossed/theme": "workspace:3.0.0",
-    "@crossed/ui": "workspace:8.3.0",
+    "@crossed/ui": "workspace:8.4.0",
     "@crossed/unicons": "4.0.0",
     "@crossed/webpack": "workspace:3.0.0",
     "@gorhom/portal": "^1.0.14",
