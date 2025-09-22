@@ -75,27 +75,32 @@ export const List = memo(({ data }: { data: any }) => {
 
   const RenderItem: FlatListProps<
     ItemList & { checked: boolean }
-  >['renderItem'] = useCallback(({ item }) => {
-    const checked = item.checked;
+  >['renderItem'] = useCallback(
+    ({ item }) => {
+      const checked = item.checked;
 
-    return (
-      <MenuList.Item
-        onPress={onPress(item)}
-        style={
-          checked &&
-          inlineStyle(({ colors }) => ({
-            'base': { backgroundColor: colors.background.active },
-            ':hover': { backgroundColor: colors.background.active },
-          }))
-        }
-      >
-        <XBox space={'xxs'}>
-          {multiple && <Checkbox checked={checked} onChecked={onPress(item)} />}
-          <MenuList.Title>{item.label}</MenuList.Title>
-        </XBox>
-      </MenuList.Item>
-    );
-  }, []);
+      return (
+        <MenuList.Item
+          onPress={onPress(item)}
+          style={
+            checked &&
+            inlineStyle(({ colors }) => ({
+              'base': { backgroundColor: colors.background.active },
+              ':hover': { backgroundColor: colors.background.active },
+            }))
+          }
+        >
+          <XBox space={'xxs'}>
+            {multiple && (
+              <Checkbox checked={checked} onChecked={onPress(item)} />
+            )}
+            <MenuList.Title>{item.label}</MenuList.Title>
+          </XBox>
+        </MenuList.Item>
+      );
+    },
+    [onPress, multiple]
+  );
 
   const RenderLabel: SectionListProps<ItemList>['renderItem'] = useCallback(
     ({ section }) => {
