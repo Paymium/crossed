@@ -1,5 +1,11 @@
 # @crossed/sheet
 
+## 0.12.3
+
+### Patch Changes
+
+- 901c650: hide handle if sheet isn't closable
+
 ## 0.12.2
 
 ### Patch Changes

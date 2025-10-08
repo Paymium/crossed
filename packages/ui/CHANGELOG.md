@@ -1,5 +1,12 @@
 # @crossed/ui
 
+## 8.4.1
+
+### Patch Changes
+
+- Updated dependencies [901c650]
+  - @crossed/sheet@0.12.3
+
 ## 8.4.0
 
 ### Minor Changes
