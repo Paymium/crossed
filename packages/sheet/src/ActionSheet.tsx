@@ -1593,14 +1593,14 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
                             {gestureEnabled || props.headerAlwaysVisible ? (
                               props.CustomHeaderComponent ? (
                                 props.CustomHeaderComponent
-                              ) : (
+                              ) : closable ? (
                                 <Animated.View
                                   style={[
                                     styles.indicator,
                                     props.indicatorStyle,
                                   ]}
                                 />
-                              )
+                              ) : null
                             ) : null}
 
                             <View
