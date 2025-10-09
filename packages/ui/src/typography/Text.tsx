@@ -59,7 +59,7 @@ export interface TextProps extends Omit<TextNativeProps, 'style'> {
   /**
    * Select size template
    */
-  size?: keyof typeof sizeTemplateStyles;
+  size?: keyof typeof sizeTemplateStyles | null;
 
   /**
    * select text-align
@@ -88,7 +88,7 @@ const Text = memo<TextProps>(
           ref={props.ref}
           {...props}
           {...composeStyles(
-            sizeTemplateStyles[size],
+            size && sizeTemplateStyles[size],
             textAlignStyles[textAlign],
             fontSizeStyles[fontSize],
             fontWeightStyles[weight],
