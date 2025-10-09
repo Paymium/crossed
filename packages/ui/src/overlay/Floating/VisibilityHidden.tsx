@@ -8,7 +8,12 @@
 import Animated, { AnimatedProps } from 'react-native-reanimated';
 import { View, ViewProps } from 'react-native';
 import { forwardRef, memo, RefAttributes } from 'react';
-import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
+import {
+  composeStyles,
+  CrossedMethods,
+  inlineStyle,
+  isWeb,
+} from '@crossed/styled';
 import { visibility } from '../../styles/visibilityHidden';
 import { useFloatingContext } from './context';
 
@@ -37,7 +42,7 @@ export const FloatingVisibilityHidden = memo<
           style={[
             composeStyles(
               inlineStyle(() => ({ base: { zIndex: 1 } })),
-              !open && visibility.hidden,
+              !open && isWeb && visibility.hidden,
               style
             ).style().style,
             animatedStyle,

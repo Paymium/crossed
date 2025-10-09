@@ -35,7 +35,7 @@ const ButtonText = forwardRef<TextNative, ButtonTextProps>((props, ref) => {
 
   return (
     <Text
-      weight={'lg'}
+      fontWeight={'lg'}
       {...props}
       id={textId}
       style={composeStyles(

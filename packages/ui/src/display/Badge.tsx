@@ -43,7 +43,7 @@ const BadgeText = memo<ComponentProps<typeof Text>>(({ style, ...props }) => {
   return (
     <Text
       style={composeStyles(variant && badgeTextStyles[variant], style)}
-      weight={'lg'}
+      fontWeight={'lg'}
       {...props}
     />
   );

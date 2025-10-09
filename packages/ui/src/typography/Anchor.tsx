@@ -20,15 +20,8 @@ export const anchorStyles = createStyles(({ colors }) => ({
     ':active': { textDecorationLine: 'underline' },
     ':focus': { textDecorationLine: 'underline' },
   },
-  primary: {
-    base: { color: colors.text.brand, textDecorationColor: colors.text.brand },
-  },
-  default: {
-    base: {
-      color: colors.text.primary,
-      textDecorationColor: colors.text.primary,
-    },
-  },
+  primary: { base: { textDecorationColor: colors.text.brand } },
+  default: { base: { textDecorationColor: colors.text.primary } },
 }));
 
 /**
@@ -63,7 +56,8 @@ export const Anchor = forwardRef<Text, AnchorProps>(
     return (
       <Text
         role="link"
-        weight="lg"
+        fontWeight="lg"
+        color={primary ? 'brand' : 'default'}
         {...props}
         style={composeStyles(
           anchorStyles.text,

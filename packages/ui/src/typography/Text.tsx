@@ -49,7 +49,7 @@ export interface TextProps extends Omit<TextNativeProps, 'style'> {
   /**
    * Select font-weight
    */
-  weight?: keyof typeof fontWeightStyles;
+  fontWeight?: keyof typeof fontWeightStyles;
 
   /**
    * select font-size
@@ -59,7 +59,7 @@ export interface TextProps extends Omit<TextNativeProps, 'style'> {
   /**
    * Select size template
    */
-  size?: keyof typeof sizeTemplateStyles;
+  size?: keyof typeof sizeTemplateStyles | null;
 
   /**
    * select text-align
@@ -75,7 +75,7 @@ export interface TextProps extends Omit<TextNativeProps, 'style'> {
 const Text = memo<TextProps>(
   withReactive(
     ({
-      weight,
+      fontWeight,
       color = 'primary',
       textAlign,
       fontSize,
@@ -88,10 +88,10 @@ const Text = memo<TextProps>(
           ref={props.ref}
           {...props}
           {...composeStyles(
-            sizeTemplateStyles[size],
+            size && sizeTemplateStyles[size],
             textAlignStyles[textAlign],
             fontSizeStyles[fontSize],
-            fontWeightStyles[weight],
+            fontWeightStyles[fontWeight],
             useText.root,
             fontColorStyles[color],
             style

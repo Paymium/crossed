@@ -9,4 +9,4 @@ import { Text } from './Text';
 import { withDefaultProps } from '@crossed/core';
 import 'react';
 
-export const B = withDefaultProps(Text, { weight: 'h1' });
+export const B = withDefaultProps(Text, { fontWeight: 'h1' });

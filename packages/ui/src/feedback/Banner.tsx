@@ -203,7 +203,7 @@ const BannerTitle = ({ style, ...props }: TextProps) => {
   const { status } = useContext(bannerContext);
   return (
     <Text
-      weight="lg"
+      fontWeight="lg"
       {...props}
       style={composeStyles(titleStyle.default, titleStyle[status], style)}
     />
