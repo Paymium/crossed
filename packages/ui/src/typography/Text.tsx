@@ -75,7 +75,7 @@ export interface TextProps extends Omit<TextNativeProps, 'style'> {
 const Text = memo<TextProps>(
   withReactive(
     ({
-       weight,
+      weight,
       color = 'primary',
       textAlign,
       fontSize,
