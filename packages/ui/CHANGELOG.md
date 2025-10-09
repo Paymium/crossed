@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.4.2
+
+### Patch Changes
+
+- 4d02392: visibilityHidden break floating for mobile
+
 ## 8.4.1
 
 ### Patch Changes
