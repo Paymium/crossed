@@ -56,7 +56,7 @@ export const Anchor = forwardRef<Text, AnchorProps>(
     return (
       <Text
         role="link"
-        fontWeight="lg"
+        weight="lg"
         color={primary ? 'brand' : 'default'}
         {...props}
         style={composeStyles(
