@@ -167,10 +167,9 @@ AccordionTrigger.displayName = 'Accordion.Trigger';
  * methods for advanced styling techniques or conditional styles based on theme
  * or state.
  */
-export type AccordionPanelProps = ScrollViewProps &
-  PropsWithChildren<{
-    style?: CrossedMethods<any>;
-  }>;
+export type AccordionPanelProps = Omit<ScrollViewProps, 'style'> & {
+  style?: CrossedMethods<any>;
+};
 const AccordionPanel = ({ children, style, ...props }: AccordionPanelProps) => {
   const openSharedValue = useSharedValue(false);
   const { open } = useFloatingContext();
