@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.4.3
+
+### Patch Changes
+
+- f8f52b1: Allow scrollView props to be passed to accordion panel
+
 ## 8.4.2
 
 ### Patch Changes
