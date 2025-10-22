@@ -11,15 +11,17 @@ import { Pressable, View } from 'react-native';
 import { itemStyles } from './style';
 import { MenuListItemProps } from './types';
 import { useProviderContext } from './context';
+import { gapStyles } from '../../styles';
 
 export const MenuItem = withReactive<MenuListItemProps>(
   forwardRef<View, MenuListItemProps>(
-    ({ asChild, style, children, ...props }: MenuListItemProps, ref) => {
+    ({ asChild, style, children, space, ...props }: MenuListItemProps, ref) => {
       const { rounded } = useProviderContext();
       const styleCallback = ({ pressed, hovered }) =>
         composeStyles(
           itemStyles.item,
           rounded && itemStyles.rounded,
+          space && gapStyles[space],
           style
         ).rnw({
           active: pressed,

@@ -24,7 +24,7 @@ export const PaginationRoot = (
     pageCount > 1 && (
       <XBox>
         {pages.map(
-          ({ href, linkContent, isCurrent, disabled, pageNumber }, i) => {
+          ({ href, linkContent, disabled /*, isCurrent, pageNumber*/ }, i) => {
             return (
               <Button
                 key={`${href}-${i}-button`}
@@ -44,3 +44,4 @@ export const PaginationRoot = (
     )
   );
 };
+PaginationRoot.displayName = 'Pagination';

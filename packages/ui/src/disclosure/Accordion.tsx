@@ -112,8 +112,8 @@ Root.displayName = 'Accordion';
 
 const AccordionItem = ({ children, value }: AccordionItemProps) => {
   const { setValues, values, allowMultiple } = useContext(rootContext);
-  const buttonId = useRef<string>();
-  const panelId = useRef<string>();
+  const buttonId = useRef<string>(null);
+  const panelId = useRef<string>(null);
   const handleChange = useCallback(() => {
     setValues(
       allowMultiple

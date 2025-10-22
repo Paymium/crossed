@@ -20,7 +20,7 @@ export const useColor = (
   let value: any = colors;
   for (const key of keys) {
     if (value[key] === undefined) {
-      throw new Error(`Color path "${color}" not found`);
+      return color;
     }
     value = value[key];
   }

@@ -1,0 +1,40 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as CalendarStories from './Calendar.stories';
+
+<Meta of={CalendarStories} />
+
+# Calendar
+The `Calendar` component is a React container that displays and manages date selection within an interactive calendar interface.
+It allows users to navigate through months and years, select single or multiple dates, and handle date-related interactions such as disabling specific days or highlighting ranges — making it ideal for use in forms, booking flows, and scheduling features.
+```jsx
+import { Calendar } from '@crossed/ui';
+```
+
+<Canvas of={CalendarStories.Primary} />
+
+## Composition
+
+<TabsPreset
+  defaultValue={'Calendar'}
+  items={[
+    {
+      title: 'Calendar',
+      value: 'Calendar',
+      panel: <ArgTypes of={CalendarStories.default.component} />,
+    },
+  ]}
+/>
+
+## Example
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={CalendarStories.Primary} />,
+    },
+  ]}
+/>

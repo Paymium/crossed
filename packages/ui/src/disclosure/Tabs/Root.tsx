@@ -5,48 +5,49 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { PropsWithChildren, useMemo } from 'react';
+import { ComponentType, PropsWithChildren } from 'react';
 import { type TabsContext } from './context';
 import { UseUncontrolledInput } from '@crossed/core';
 import { YBox, YBoxProps } from '../../layout/YBox';
 import { useTabs } from './useTabs';
-import { useMedia } from '../../useMedia';
 
-export const createRoot =
-  (TabsProvider) =>
-  ({
+export type RootProps = PropsWithChildren<
+  Partial<Pick<TabsContext, 'variant' | 'size' | 'fullWidth'>> &
+    UseUncontrolledInput<TabsContext['value']> &
+    YBoxProps
+>;
+export const createRoot = (TabsProvider): ComponentType<RootProps> => {
+  const Root = ({
     children,
     value: valueProps,
     defaultValue,
     finalValue,
     onChange,
-    variant = 'rounded',
-    size,
+    variant = 'minimal',
+    fullWidth,
+    size = 'sm',
     ...props
-  }: PropsWithChildren<
-    Partial<Pick<TabsContext, 'variant' | 'size'>> &
-      UseUncontrolledInput<TabsContext['value']> &
-      YBoxProps
-  >) => {
+  }: RootProps) => {
     const tabsInstance = useTabs({
       value: valueProps,
       defaultValue,
       finalValue,
       onChange,
     });
-    const { md, lg } = useMedia();
-    const tmpSize = useMemo(() => {
-      if (typeof size !== 'undefined') return size;
-      if (lg) return 'lg';
-      if (md) return 'md';
-      return 'sm';
-    }, [lg, size, md]);
 
     return (
-      <TabsProvider {...tabsInstance} variant={variant} size={tmpSize}>
+      <TabsProvider
+        {...tabsInstance}
+        variant={variant}
+        size={size}
+        fullWidth={fullWidth}
+      >
         <YBox space="sm" {...props}>
           {children}
         </YBox>
       </TabsProvider>
     );
   };
+  Root.displayName = 'TabsRoot';
+  return Root;
+};

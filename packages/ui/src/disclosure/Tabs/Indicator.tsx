@@ -7,30 +7,39 @@
 
 import { composeStyles, CrossedMethods } from '@crossed/styled';
 import {
-  heightStyles,
+  indicatorBorderStyles,
+  indicatorBrandGrayStyles,
+  indicatorBrandStyles,
   indicatorDynamicStyles,
-  indicatorRoundedStyles,
+  indicatorMinimalStyles,
   indicatorUnderlineStyles,
 } from './styles';
 import Animated from 'react-native-reanimated';
 import { TabsContext } from './context';
+import { match } from 'ts-pattern';
 
+type IndicatorProps = { style?: CrossedMethods<any> };
 export const createIndicator = (useTabsContext: () => TabsContext) => {
-  const Indicator = ({ style }: { style?: CrossedMethods<any> }) => {
-    const { variant, indicator, size } = useTabsContext();
-    const indicatorStyle =
-      !variant || variant === 'rounded'
-        ? indicatorRoundedStyles
-        : indicatorUnderlineStyles;
+  const Indicator = ({ style }: IndicatorProps) => {
+    const { variant, indicator } = useTabsContext();
+    const indicatorStyle = match(variant)
+      .with('minimal', () => indicatorMinimalStyles)
+      .with('border', () => indicatorBorderStyles)
+      .with('underline', () => indicatorUnderlineStyles)
+      .with('brand', () => indicatorBrandStyles)
+      .with('brandGray', () => indicatorBrandGrayStyles)
+      .exhaustive();
     return (
       <Animated.View
-        {...composeStyles(
-          indicatorStyle.default,
-          indicatorStyle.active,
-          variant === 'rounded' && heightStyles[size],
-          indicatorDynamicStyles.dyn(indicator.left, indicator.width),
-          style
-        ).style()}
+        style={[
+          composeStyles(
+            indicatorStyle.default,
+            indicatorStyle.active,
+            indicatorDynamicStyles.dyn(indicator.left, indicator.width),
+            style
+          ).style().style,
+          { top: 0, bottom: 0 },
+        ]}
       />
     );
   };

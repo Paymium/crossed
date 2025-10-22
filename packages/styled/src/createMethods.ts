@@ -8,7 +8,6 @@
 import { Registry } from './Registry';
 import { isWeb } from './isWeb';
 import { CrossedPropsExtended, PluginContext } from './types';
-import { convertGeneralKeyToSpecificKey } from './plugins/utils';
 
 const cache = new Map();
 

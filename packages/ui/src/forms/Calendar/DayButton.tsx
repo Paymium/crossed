@@ -15,14 +15,15 @@ import {
 } from '@crossed/styled';
 import { IDay } from '@crossed/use-calendar/src';
 import { widthCell } from './styles';
-import { Headline } from '../../typography';
+import { Text } from '../../typography';
 
-const button = createStyles(() => ({
+const button = createStyles(({ radius, colors }) => ({
   default: {
-    base: {
-      // backgroundColor: colors.background.primary,
-      borderRadius: 8,
+    'base': {
+      // backgroundColor: colors.background.primary.solid,
+      borderRadius: radius.full,
       height: 40,
+      width: 40,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -32,32 +33,32 @@ const button = createStyles(() => ({
     ':active': {
       // backgroundColor: colors.background.active,
     },
-    media: { md: { height: 44 } },
+    // 'media': { md: { height: 44 } },
   },
   selected: {
     base: {
-      // backgroundColor: colors.text.brand,
+      backgroundColor: colors.background.brand.solid.default,
     },
   },
-  disabled: { base: { opacity: 0.1 } },
   today: {
     base: {
-      borderWidth: 2,
-      // borderColor: colors.text.brand,
+      backgroundColor: colors.background.brand.solid.default,
     },
   },
 }));
-const text = createStyles(() => ({
-  default: { base: { fontWeight: '500' } },
+const text = createStyles(({ colors }) => ({
+  default: { base: { color: colors.text.secondary.default } },
+  hover: { base: { color: colors.text.secondary.hover, fontWeight: '500' } },
   noMarginTop: { base: { marginTop: 0 } },
   selected: {
     base: {
-      // color: Action.primary.default.text,
+      color: colors.primary.base.white,
     },
   },
+  disabled: { base: { color: colors.text.disabled.default } },
   today: {
     base: {
-      // color: colors.text.brand,
+      color: colors.primary.base.white,
     },
   },
 }));
@@ -83,11 +84,10 @@ export const DayButton = memo(
         composeStyles(
           widthCell,
           button.default,
-          disabled && button.disabled,
           day.isToday && button.today,
           day.isSelected && button.selected,
           style
-        ).style({
+        ).rnw({
           hover: !day.isSelected && hovered,
           focus: focused,
           active: pressed,
@@ -102,18 +102,23 @@ export const DayButton = memo(
         role={'button'}
         style={handleStyle}
       >
-        <Headline
-          textAlign={'center'}
-          size={'md'}
-          style={composeStyles(
-            text.default,
-            day.isToday && text.today,
-            day.isSelected && text.selected,
-            !isWeb && text.noMarginTop
-          )}
-        >
-          {day.date.getDate()}
-        </Headline>
+        {({ hovered }: any) => (
+          <Text
+            textAlign={'center'}
+            fontSize={'sm'}
+            color={'secondary'}
+            style={composeStyles(
+              text.default,
+              hovered && text.hover,
+              disabled && text.disabled,
+              day.isToday && text.today,
+              day.isSelected && text.selected,
+              !isWeb && text.noMarginTop
+            )}
+          >
+            {day.date.getDate()}
+          </Text>
+        )}
       </Pressable>
     );
   }

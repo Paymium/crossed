@@ -2,3 +2,15 @@ packages:
   - "apps/*"
   - "packages/*"
   - examples/**
+
+linkWorkspacePackages: deep
+
+catalog:
+  #  react
+  react: =19.2.0
+  react-dom: =19.2.0
+  "@types/react": =19.2.2
+  "@types/react-dom": =19.2.2
+  #  react native
+  react-native: =0.82.1
+  react-native-web: =0.21.1

@@ -11,7 +11,6 @@ import {
   convertGeneralKeyToSpecificKey,
   convertKeyToCss,
   normalizeUnitPixel,
-  styleToString,
 } from '../plugins/utils';
 import { isWeb as isWebFile } from '../isWeb';
 

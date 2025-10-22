@@ -13,26 +13,40 @@ import {
 import { Text, type TextProps } from './Text';
 import { forwardRef } from 'react';
 
-export const anchorStyles = createStyles(({ colors }) => ({
+export const anchorStyles = createStyles(({ colors, radius }) => ({
   default: {
-    base: {
-      color: colors.text.brand.tertiary.default,
-      textDecorationColor: colors.text.brand.tertiary.default,
+    'base': {
+      color: colors.text.tertiary.default,
+      textDecorationColor: colors.text.tertiary.default,
+      borderRadius: radius.xs,
     },
     ':hover': {
       textDecorationLine: 'underline',
-      color: colors.text.brand.secondary.default,
-      textDecorationColor: colors.text.brand.secondary.default,
     },
-    ':active': {},
-    web: { base: { cursor: 'pointer' } },
+    ':active': {
+      outlineWidth: 2,
+      outlineOffset: 2,
+      outlineStyle: 'solid',
+      outlineColor: colors.background.primary.default,
+    },
+    'web': { base: { cursor: 'pointer' } },
+  },
+  primary: {
+    'base': {
+      color: colors.text.brand.secondary.default,
+      textDecorationColor: colors.text.brand.secondary.hover,
+    },
+    ':hover': {
+      color: colors.text.brand.secondary.hover,
+      textDecorationLine: 'underline',
+    },
   },
 }));
 
 /**
  * Properties for an Anchor component, derived from TextProps with some modifications.
  */
-export type AnchorProps = Omit<TextProps, 'style'> & {
+export type AnchorProps = Omit<TextProps, 'style' | 'color'> & {
   /**
    * Optional style for the anchor, which can combine crossed methods.
    *
@@ -46,16 +60,22 @@ export type AnchorProps = Omit<TextProps, 'style'> & {
    * @type {string}
    */
   href?: string;
+
+  primary?: boolean;
 };
 
 export const Anchor = forwardRef<Text, AnchorProps>(
-  ({ style, ...props }, ref) => {
+  ({ style, primary = true, ...props }, ref) => {
     return (
       <Text
         role="link"
-        weight="lg"
+        fontWeight="medium"
         {...props}
-        style={composeStyles(anchorStyles.default, style)}
+        style={composeStyles(
+          anchorStyles.default,
+          primary && anchorStyles.primary,
+          style
+        )}
         ref={ref as any}
       />
     );

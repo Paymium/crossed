@@ -7,7 +7,7 @@
 
 import { ComponentProps, memo } from 'react';
 import { Text } from '../../typography';
-import { composeStyles, useTheme } from '@crossed/styled';
+import { composeStyles } from '@crossed/styled';
 import { useContext } from './context';
 import { badgeTextColor } from './styles';
 

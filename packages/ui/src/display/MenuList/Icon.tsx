@@ -11,6 +11,8 @@ import { useTheme } from '@crossed/styled';
 export const MenuListIcon = ({ children }: PropsWithChildren) => {
   const { colors } = useTheme();
   return isValidElement(children)
-    ? cloneElement(children, { color: colors.foreground.quaternary.default })
+    ? cloneElement(children, {
+        color: colors.foreground.quaternary.default,
+      } as any)
     : children;
 };

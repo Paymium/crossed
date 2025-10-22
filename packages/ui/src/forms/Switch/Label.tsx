@@ -7,27 +7,20 @@
 
 import { composeStyles } from '@crossed/styled';
 import { Text, TextProps } from '../../typography';
-import { styles } from './styles';
-import { PropsWithChildren, useContext } from 'react';
-import { localContext } from './context';
+import { PropsWithChildren } from 'react';
+import { form } from '../../styles';
 
 type LabelProps = PropsWithChildren<TextProps>;
 
 export const SwitchLabel = ({ children, id, ...props }: LabelProps) => {
-  const { value, disabled } = useContext(localContext);
-  return typeof children === 'string' ? (
+  return (
     <Text
       id={id}
+      accessibilityRole={'label' as any}
       {...props}
-      style={composeStyles(
-        disabled && styles.disabledOff,
-        disabled && value && styles.disabledOn,
-        props.style
-      )}
+      style={composeStyles(form.label, props.style)}
     >
       {children}
     </Text>
-  ) : (
-    children
   );
 };

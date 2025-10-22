@@ -1,0 +1,56 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as DateInputStories from './DateInput.stories';
+
+<Meta of={DateInputStories} />
+
+# DateInput
+The `DateInput` component is a React input field that enables users to enter or select a date value.
+It combines manuals text entry with optional calendar integration, supports locale-based formatting, and ensures consistent date handling for forms, filters, and scheduling interfaces.
+
+```jsx
+import { DateInput } from '@crossed/ui';
+```
+
+<Canvas of={DateInputStories.WithLabel} />
+
+## Composition
+
+<TabsPreset
+  defaultValue={'DateInput'}
+  items={[
+    {
+      title: 'DateInput',
+      value: 'DateInput',
+      panel: <ArgTypes of={DateInputStories.default.component} />,
+    },
+  ]}
+/>
+
+## Example
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={DateInputStories.Primary} />,
+    },
+    {
+      title: 'Picker',
+      value: 'Picker',
+      panel: <Canvas of={DateInputStories.WithPicker} />,
+    },
+    {
+      title: 'In modal',
+      value: 'InModal',
+      panel: <Canvas of={DateInputStories.InModal} />,
+    },
+    {
+      title: 'Large',
+      value: 'BigWidth',
+      panel: <Canvas of={DateInputStories.BigWidth} />,
+    },
+  ]}
+/>

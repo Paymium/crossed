@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { ElementType } from 'react';
+import type { ElementType, JSX } from 'react';
 import type { Circle, Path, Svg } from 'react-native-svg';
 
 export type IconProps = {

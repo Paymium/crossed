@@ -8,11 +8,11 @@
 import { createStyles } from '@crossed/styled';
 
 export const headingTemplateStyles = createStyles(() => ({
-  xs: { base: { fontSize: 24, lineHeight: 32 } },
-  sm: { base: { fontSize: 30, lineHeight: 38 } },
-  md: { base: { fontSize: 36, lineHeight: 44 } },
-  lg: { base: { fontSize: 48, lineHeight: 60, letterSpacing: -0.96 } },
-  xl: { base: { fontSize: 60, lineHeight: 72, letterSpacing: -1.2 } },
+  'xs': { base: { fontSize: 24, lineHeight: 32 } },
+  'sm': { base: { fontSize: 30, lineHeight: 38 } },
+  'md': { base: { fontSize: 36, lineHeight: 44 } },
+  'lg': { base: { fontSize: 48, lineHeight: 60, letterSpacing: -0.96 } },
+  'xl': { base: { fontSize: 60, lineHeight: 72, letterSpacing: -1.2 } },
   '2xl': { base: { fontSize: 72, lineHeight: 90, letterSpacing: -1.44 } },
 }));
 
@@ -40,4 +40,6 @@ export const fontColorStyles = createStyles(({ colors }) => ({
   error: { base: { color: colors.text.error.default } },
   success: { base: { color: colors.text.success.default } },
   brand: { base: { color: colors.text.brand.primary.default } },
+  primaryBrand: { base: { color: colors.text.primary.brand } },
+  tertiaryBrand: { base: { color: colors.text.tertiary.brand } },
 }));

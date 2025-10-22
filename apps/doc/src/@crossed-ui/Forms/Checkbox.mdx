@@ -1,0 +1,96 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as CheckboxStories from './Checkbox.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={CheckboxStories} />
+
+# Calendar
+
+The `Checkbox` component is a React input control that allows users to toggle between checked and unchecked states.
+It is commonly used in forms and settings to enable or disable options, select multiple items from a list, or confirm user consent through a simple and accessible interface.
+
+```jsx
+import { Checkbox } from '@crossed/ui';
+```
+
+<Canvas of={CheckboxStories.Primary} />
+
+## Composition
+
+<TabsPreset
+  defaultValue={'Checkbox'}
+  items={[
+    {
+      title: 'Checkbox',
+      value: 'Checkbox',
+      panel: <ArgTypes of={CheckboxStories.default.component} />,
+    },
+    {
+      title: 'Checkbox.Preset',
+      value: 'Checkbox.Preset',
+      panel: (
+        <ArgTypes
+          of={CheckboxStories.default.subcomponents['Checkbox.Preset']}
+        />
+      ),
+    },
+    {
+      title: 'Checkbox.Label',
+      value: 'Checkbox.Label',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes
+            of={CheckboxStories.default.subcomponents['Checkbox.Label']}
+          />
+        </>
+      ),
+    },
+    {
+      title: 'Checkbox.Thumb',
+      value: 'Checkbox.Thumb',
+      panel: (
+        <ArgTypes
+          of={CheckboxStories.default.subcomponents['Checkbox.Thumb']}
+        />
+      ),
+    },
+    {
+      title: 'Checkbox.HelperText',
+      value: 'Checkbox.HelperText',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes
+            of={CheckboxStories.default.subcomponents['Checkbox.HelperText']}
+          />
+        </>
+      ),
+    },
+  ]}
+/>
+
+## Example
+
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={CheckboxStories.Primary} />,
+    },
+    {
+      title: 'Disabled',
+      value: 'Disabled',
+      panel: <Canvas of={CheckboxStories.Disabled} />,
+    },
+    {
+      title: 'Placement',
+      value: 'Placement',
+      panel: <Canvas of={CheckboxStories.CustomPlacementThumb} />,
+    },
+  ]}
+/>

@@ -1,0 +1,55 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as AnchorStories from './Anchor.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={AnchorStories} />
+
+# Anchor
+
+The `Text` component is used to display readable content in the interface.
+It allows developers to apply typography styles, such as font size, weight, and color, consistently across the application.
+
+`Text` should be used for all textual content to maintain visual consistency. Avoid using plain HTML or system text elements directly, as it can lead to inconsistent styling and accessibility issues.
+
+```jsx
+import { Text } from '@crossed/ui';
+```
+
+<Canvas of={AnchorStories.Primary} />
+
+## Composition
+
+<Tabs defaultValue={'button'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'button'}>
+      <Tabs.Tab.Text>Anchor</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="button">
+    <ExtendText />
+    <ArgTypes of={AnchorStories.default.component} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+
+<Tabs defaultValue={'NoPrimary'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'NoPrimary'}>
+      <Tabs.Tab.Text>No primary</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Primary'}>
+      <Tabs.Tab.Text>Primary</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value={'NoPrimary'}>
+    <Canvas of={AnchorStories.NoPrimary} />
+  </Tabs.Panel>
+  <Tabs.Panel value={'Primary'}>
+    <Canvas of={AnchorStories.Primary} />
+  </Tabs.Panel>
+</Tabs>

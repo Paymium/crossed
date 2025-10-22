@@ -16,11 +16,7 @@ import { Provider } from './context';
 export const MenuRoot = memo<MenuListProps & RefAttributes<View>>(
   forwardRef<View, MenuListProps>(
     (
-      {
-        bordered = true,
-        rounded = true,
-        ...props
-      }: MenuListProps,
+      { bordered = true, rounded = true, ...props }: MenuListProps,
       ref: any
     ) => {
       return (

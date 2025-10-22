@@ -20,7 +20,7 @@ describe('Radio', () => {
   test('Disabled', () => {
     const onPress = jest.fn();
     render(
-      <Radio onPress={onPress} disabled>
+      <Radio onValueChange={onPress} disabled>
         Simple
       </Radio>
     );

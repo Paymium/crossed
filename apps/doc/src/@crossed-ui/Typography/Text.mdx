@@ -1,0 +1,58 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as TextStories from "./Text.stories";
+
+<Meta of={TextStories} />
+
+# Text
+The `Text` component is used to display readable content in the interface.
+It allows developers to apply typography styles, such as font size, weight, and color, consistently across the application.
+
+`Text` should be used for all textual content to maintain visual consistency. Avoid using plain HTML or system text elements directly, as it can lead to inconsistent styling and accessibility issues.
+
+```jsx
+import { Text } from '@crossed/ui';
+```
+
+<Canvas of={TextStories.Primary} />
+
+
+## Composition
+
+<Tabs defaultValue={"button"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"button"}>
+      <Tabs.Tab.Text>Text</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="button">
+    <ArgTypes of={TextStories.default.component} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+<Tabs defaultValue={"Color"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"Color"}>
+      <Tabs.Tab.Text>Color</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"FontSize"}>
+      <Tabs.Tab.Text>FontSize</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"FontWeight"}>
+      <Tabs.Tab.Text>FontWeight</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value={"Color"}>
+    <Canvas of={TextStories.Color} />
+  </Tabs.Panel>
+  <Tabs.Panel value={"FontSize"}>
+    <Canvas of={TextStories.Size} />
+  </Tabs.Panel>
+  <Tabs.Panel value={"FontWeight"}>
+    <Canvas of={TextStories.FontWeight} />
+  </Tabs.Panel>
+</Tabs>

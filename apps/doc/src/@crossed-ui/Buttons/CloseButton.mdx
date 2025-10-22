@@ -1,0 +1,47 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as CloseButtonStories from './CloseButton.stories';
+
+<Meta of={CloseButtonStories} />
+
+# CloseButton
+
+The `CloseButton` component is used to dismiss dialogs, modals, or other temporary UI elements.
+It represents a neutral action that allows users to exit or cancel a current interaction without triggering side effects.
+
+Close buttons should be used consistently to provide a clear exit path. Avoid placing multiple close buttons in the same context to prevent confusion.
+
+```jsx
+import { CloseButton } from '@crossed/ui';
+```
+
+<Canvas of={CloseButtonStories.Primary} />
+
+## Composition
+
+<Tabs defaultValue={"button"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"button"}>
+      <Tabs.Tab.Text>CloseButton</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="button">
+    <ArgTypes of={CloseButtonStories.default.component} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+
+<Tabs defaultValue={"Size"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"Size"}>
+      <Tabs.Tab.Text>Size</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value={"Size"}>
+    <Canvas of={CloseButtonStories.Primary} />
+  </Tabs.Panel>
+</Tabs>

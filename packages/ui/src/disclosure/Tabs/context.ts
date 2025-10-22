@@ -13,8 +13,15 @@ export type TabsContext = {
   value: string | number;
   setValue: (_value: string | number) => void;
   id: string;
-  variant?: 'underline' | 'rounded';
-  size?: 'sm' | 'md' | 'lg';
+  /**
+   * Variant of tab
+   */
+  variant?: 'brand' | 'brandGray' | 'underline' | 'border' | 'minimal';
+  /**
+   * Tab list take full width available
+   */
+  fullWidth?: boolean;
+  size?: 'sm' | 'md';
   listTabRef: React.MutableRefObject<ScrollView>;
   indicator: { left: SharedValue<number>; width: SharedValue<number> };
   scroll: SharedValue<number>;
@@ -27,12 +34,14 @@ export type TriggerContext = {
   disabled?: boolean;
   hover?: boolean;
   selected?: boolean;
+  pressed?: boolean;
+  focus?: boolean;
 };
 
 export const createContext = () => {
   return {
     tabsContext: createScope<TabsContext>({
-      variant: 'rounded',
+      variant: 'minimal',
     } as TabsContext),
     triggerContext: createScope<TriggerContext>({}),
   };

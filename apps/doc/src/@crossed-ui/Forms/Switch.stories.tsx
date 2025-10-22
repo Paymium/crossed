@@ -8,12 +8,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import { Switch, SwitchPreset } from '@crossed/ui/src/forms/Switch/index';
-import { Tag, Button, XBox } from '@crossed/ui';
+import { Button, XBox } from '@crossed/ui';
 
 // Configuration de la story
 const meta: Meta<typeof Switch> = {
   component: Switch,
-  tags: ['autodocs'],
+  subcomponents: {
+    'Switch.Thumb': Switch.Thumb,
+    'Switch.Label': Switch.Label,
+    'Switch.Preset': Switch.Preset,
+    'Switch.Helper': Switch.Helper,
+  },
   parameters: { layout: 'centered' },
   argTypes: {
     disabled: { control: 'boolean' },
@@ -75,7 +80,7 @@ export const CustomLabel: Story = {
       <Switch {...args}>
         <Switch.Thumb />
         <Switch.Label>
-          <Tag variant={'green'}>Custom Label</Tag>
+          {/*<Tag variant={'green'}>Custom Label</Tag>*/}
         </Switch.Label>
       </Switch>
     );

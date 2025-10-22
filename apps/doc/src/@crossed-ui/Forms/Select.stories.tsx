@@ -31,14 +31,11 @@ const items = [
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Select> = {
   component: Select,
-  tags: ['autodocs'],
-  parameters: { layout: 'centered' },
+  // parameters: { layout: 'centered' },
   argTypes: {
     label: { control: 'text' },
     clearable: { control: 'boolean' },
     error: { control: 'text' },
-    description: { control: 'text' },
-    extra: { control: 'text' },
   },
 };
 
@@ -53,8 +50,7 @@ export const Primary: Story = {
   },
   args: {
     label: 'My label',
-    description: 'Your description',
-    extra: '',
+    helperText: 'Your description',
     clearable: false,
     error: '',
     items,

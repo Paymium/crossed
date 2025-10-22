@@ -54,7 +54,7 @@ export const dark: ThemeVarsPartial = {
   colorSecondary: themes.dark.colors.text.secondary.default,
 
   // UI
-  appBg: themes.dark.colors.background.secondary.default,
+  appBg: themes.dark.colors.background.primary.default,
   appContentBg: themes.dark.colors.background.secondary.default,
   appPreviewBg: themes.dark.colors.background.primary.default,
   appBorderColor: themes.dark.colors.border.primary.default,

@@ -1,3 +1,4 @@
+import './style.css';
 import '../src/style.config';
 import * as React from 'react';
 import type { Preview } from '@storybook/react';
@@ -9,9 +10,15 @@ import {
 } from 'storybook-dark-mode';
 import { addons } from '@storybook/preview-api';
 import { Registry } from '@crossed/styled';
-import { Title, Subtitle, Description, Primary, Controls, Stories, } from '@storybook/blocks';
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Controls,
+  Stories,
+} from '@storybook/blocks';
 import ImportPath from '../src/components/ImportPath';
-
 
 const channel = addons.getChannel();
 
@@ -22,6 +29,20 @@ if (process.env.NODE_ENV === 'development') {
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: [
+          '@crossed-styled',
+          ['Introduction', 'Setup', "Usage", 'API'],
+          '@crossed-ui',
+          ["Introduction", "Setup", "*"],
+          "*"
+        ],
+      },
+    },
+    backgrounds: {
+      disable: true
+    },
     docs: {
       page: () => (
         <>
@@ -50,13 +71,13 @@ const preview: Preview = {
       stylePreview: true,
     },
 
-    backgrounds: {
-      default: 'Primary',
-      values: [
-        { name: 'Primary', value: 'var(--colors-background-primary)' },
-        { name: 'Secondary', value: 'var(--colors-background-secondary)' },
-      ],
-    },
+    // backgrounds: {
+    //   default: 'Primary',
+    //   values: [
+    //     { name: 'Primary', value: 'var(--colors-background-primary)' },
+    //     { name: 'Secondary', value: 'var(--colors-background-secondary)' },
+    //   ],
+    // },
   },
 };
 
@@ -75,7 +96,7 @@ export const decorators = [
 const ThemeProvider = ({ children }) => {
   React.useEffect(() => {
     const setDark = (e: boolean) => {
-      Registry.setThemeName(e ? 'dark' : 'light' as any);
+      Registry.setThemeName(e ? 'dark' : ('light' as any));
     };
     channel.on(DARK_MODE_EVENT_NAME, setDark);
     return () => channel.off(DARK_MODE_EVENT_NAME, setDark);

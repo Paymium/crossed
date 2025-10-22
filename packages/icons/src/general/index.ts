@@ -5,6 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
+export * from './Check';
 export * from './CheckCircle';
 export * from './Help';
 export * from './HomeLine';

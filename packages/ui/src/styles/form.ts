@@ -7,11 +7,13 @@
 
 import { createStyles } from '@crossed/styled';
 
-export const form = createStyles(({ space, font, colors, radius }) => ({
+export const form = createStyles(({ space, colors, radius }) => ({
   inputError: {
-    base: {
-      // borderColor: colors.error.primary,
-      // color: colors.error.primary,
+    'base': {
+      borderColor: colors.border.error.subtle,
+    },
+    ':focus': {
+      borderColor: colors.border.error.default,
     },
   },
   input: {
@@ -19,7 +21,7 @@ export const form = createStyles(({ space, font, colors, radius }) => ({
       color: colors.text.primary.default,
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: colors.border.primary.default,
+      borderColor: colors.border.primary.w,
       backgroundColor: colors.background.primary.alt,
       borderRadius: radius.md,
       paddingVertical: space.xs,
@@ -36,19 +38,13 @@ export const form = createStyles(({ space, font, colors, radius }) => ({
     ':focus': {
       borderColor: colors.border.brand.default,
     },
-    ':active': {
-      // borderColor: Input.primary.focus.border,
-    },
     ':disabled': {
-      // backgroundColor: Input.primary.disabled.background,
-      // borderColor: Input.primary.disabled.border,
+      backgroundColor: colors.background.disabled.subtle,
+      borderColor: colors.border.disabled.subtlew,
     },
     'web': {
       'base': { boxSizing: 'border-box' },
       ':focus-visible': { outlineWidth: 0 },
-      ':focus': {
-        // outlineColor: Input.primary.focus.border,
-      },
       ':disabled': { cursor: 'not-allowed' },
     },
   },
@@ -58,23 +54,9 @@ export const form = createStyles(({ space, font, colors, radius }) => ({
     },
   },
   label: {
-    'base': { color: colors.text.secondary.default },
+    'base': { color: colors.text.secondary.default, fontWeight: 500 },
     ':focus': {
       color: colors.text.secondary.default,
-    },
-    ':disabled': {
-      // color: colors.text.secondary,
-    },
-  },
-  labelDescription: {
-    base: {
-      // color: colors.text.secondary,
-    },
-  },
-  labelExtra: {
-    base: {
-      // color: colors.text.secondary,
-      flex: 1,
     },
   },
   containerLabel: {},

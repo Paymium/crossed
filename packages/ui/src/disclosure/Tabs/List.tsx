@@ -6,13 +6,7 @@
  */
 
 import { ScrollViewProps } from 'react-native';
-import Animated, {
-  FadeIn,
-  FadeOut,
-  SharedValue,
-  useAnimatedReaction,
-  useSharedValue,
-} from 'react-native-reanimated';
+import { useAnimatedReaction, useSharedValue } from 'react-native-reanimated';
 import {
   composeStyles,
   createStyles,
@@ -21,156 +15,64 @@ import {
 } from '@crossed/styled';
 import { XBox } from '../../layout/XBox';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Box } from '../../layout/Box';
-import { Button, ButtonProps, ButtonTextProps } from '../../buttons/Button';
-import { useState } from 'react';
 import {
-  heightStyles,
-  linearGradientRounded,
-  linearGradientUnderline,
-} from './styles';
-import { ChevronLeft, ChevronRight } from '@crossed/unicons';
+  Children,
+  ComponentProps,
+  isValidElement,
+  PropsWithChildren,
+} from 'react';
+import { heightStyles } from './styles';
 import { TabsContext } from './context';
+import { Select } from '../../forms';
 
 const styles = createStyles(() => ({
   default: { base: { zIndex: 1 } },
 }));
-const ButtonScroll = ({
-  children,
-  style,
-  ...rest
-}: Omit<ButtonProps, 'children'> & Pick<ButtonTextProps, 'children'>) => {
-  return (
-    <Animated.View
-      entering={FadeIn}
-      exiting={FadeOut}
-      style={style}
-      {...composeStyles(
-        inlineStyle(() => ({
-          base: {
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            zIndex: 100,
-          },
-        })),
-        style
-      ).style()}
-    >
-      <Button
-        variant="tertiary"
-        style={composeStyles(
-          inlineStyle(() => ({
-            base: { paddingHorizontal: 0, height: '100%', width: 30 },
-          })),
-          rest.disabled && inlineStyle(() => ({ base: { opacity: 0.5 } }))
-        )}
-        {...rest}
-      >
-        <Button.Icon
-          style={inlineStyle(() => ({
-            // 'base': { color: colors.text.secondary, flexShrink: 0 },
-            // ':hover': { color: colors.text.primary },
-          }))}
-        >
-          {children}
-        </Button.Icon>
-      </Button>
-    </Animated.View>
-  );
-};
+
+const containerVariantStyle = createStyles(({ space, colors, radius }) => ({
+  brand: { base: {} },
+  brandGray: { base: {} },
+  underline: { base: {} },
+  border: {
+    base: {
+      padding: space.xs,
+      backgroundColor: colors.background.brand.secondary.default,
+      borderRadius: radius.full,
+    },
+  },
+  minimal: {
+    base: {
+      backgroundColor: colors.background.brand.secondary.default,
+      borderRadius: radius.full,
+    },
+  },
+}));
+type Items = ComponentProps<typeof Select>['items'];
 
 export const createList = (useTabsContext: () => TabsContext) => {
-  const PrevButton = ({
-    widthLayout,
-  }: {
-    widthLayout: SharedValue<number>;
-  }) => {
-    const { listTabRef, scroll, variant } = useTabsContext();
-    const [disabled, setDisabled] = useState(false);
-
-    useAnimatedReaction(
-      () => {
-        return scroll.value;
-      },
-      (currentValue, previousValue) => {
-        if (currentValue !== previousValue) {
-          setDisabled(currentValue === 0);
-        }
-      },
-      [widthLayout, scroll]
-    );
-
-    const style =
-      variant === 'rounded' ? linearGradientRounded : linearGradientUnderline;
-
-    return (
-      <ButtonScroll
-        variant="tertiary"
-        disabled={disabled}
-        testID="toLeft"
-        aria-label="Slide to left"
-        style={style.prev}
-        onPress={() => {
-          listTabRef.current?.scrollTo({
-            x:
-              scroll.value >= widthLayout.value
-                ? scroll.value - widthLayout.value
-                : 0,
-          });
-        }}
-      >
-        <ChevronLeft />
-      </ButtonScroll>
-    );
+  const SelectTab = ({ children }: PropsWithChildren) => {
+    const { setValue, value } = useTabsContext();
+    const items = Children.toArray(children).reduce<Items>((acc, cur) => {
+      if (isValidElement(cur) && 'value' in (cur as any).props) {
+        const { value, children } = cur.props as any;
+        acc.push({ value, label: children } as any);
+      }
+      return acc;
+    }, []);
+    return <Select value={value} items={items as any} onChange={setValue} />;
   };
-  const NextButton = ({
-    widthLayout,
-    widthContent,
-  }: {
-    widthLayout: SharedValue<number>;
-    widthContent: SharedValue<number>;
-  }) => {
-    const { listTabRef, scroll, variant } = useTabsContext();
-    const [disabled, setDisabled] = useState(false);
 
-    useAnimatedReaction(
-      () => {
-        return scroll.value;
-      },
-      (currentValue, previousValue) => {
-        if (currentValue !== previousValue) {
-          setDisabled(currentValue + widthLayout.value >= widthContent.value);
-        }
-      },
-      [widthLayout, scroll, widthContent]
-    );
-
-    const style =
-      variant === 'rounded' ? linearGradientRounded : linearGradientUnderline;
-
-    return (
-      <ButtonScroll
-        variant="tertiary"
-        disabled={disabled}
-        style={style.next}
-        testID="toRight"
-        aria-label="Slide to right"
-        onPress={() => {
-          scroll.value <= widthLayout.value
-            ? listTabRef.current?.scrollTo({
-                x: scroll.value + widthLayout.value,
-              })
-            : listTabRef.current?.scrollToEnd();
-        }}
-      >
-        <ChevronRight />
-      </ButtonScroll>
-    );
-  };
   return ({ children, ...props }: Omit<ScrollViewProps, 'style'>) => {
-    const { listTabRef, scroll, shouldShow, setShow, widthLayout, size } =
-      useTabsContext();
+    const {
+      listTabRef,
+      variant,
+      scroll,
+      shouldShow,
+      setShow,
+      widthLayout,
+      size,
+      fullWidth,
+    } = useTabsContext();
 
     const widthContent = useSharedValue(0);
     useAnimatedReaction(
@@ -187,13 +89,15 @@ export const createList = (useTabsContext: () => TabsContext) => {
 
     return (
       <XBox
+        alignItems={'stretch'}
         justifyContent="between"
-        style={composeStyles(styles.default, heightStyles[size])}
-      >
-        {shouldShow && <PrevButton widthLayout={widthLayout} />}
-        {shouldShow && (
-          <NextButton widthLayout={widthLayout} widthContent={widthContent} />
+        style={composeStyles(
+          styles.default,
+          heightStyles[size],
+          !shouldShow && containerVariantStyle[variant]
         )}
+      >
+        {shouldShow && <SelectTab>{children}</SelectTab>}
         <ScrollView
           space="xs"
           role="tablist"
@@ -214,6 +118,8 @@ export const createList = (useTabsContext: () => TabsContext) => {
           {...props}
           contentContainerStyle={
             composeStyles(
+              fullWidth && inlineStyle(() => ({ base: { flex: 1 } })),
+              shouldShow && inlineStyle(() => ({ base: { opacity: 0 } })),
               inlineStyle(() => ({ base: { alignItems: 'center' } }))
             ).rnw().style
           }
@@ -221,6 +127,7 @@ export const createList = (useTabsContext: () => TabsContext) => {
             shouldShow &&
               inlineStyle(() => ({
                 base: {
+                  flex: 1,
                   position: 'absolute',
                   top: 0,
                   bottom: 0,
@@ -231,13 +138,7 @@ export const createList = (useTabsContext: () => TabsContext) => {
               }))
           ).rnw()}
         >
-          {shouldShow && (
-            <Box style={inlineStyle(() => ({ base: { width: 30 } }))} />
-          )}
           {children}
-          {shouldShow && (
-            <Box style={inlineStyle(() => ({ base: { width: 30 } }))} />
-          )}
         </ScrollView>
       </XBox>
     );

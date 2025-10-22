@@ -6,7 +6,11 @@
  */
 
 import { SwitchProps } from './type';
-import { Switch } from './index';
+import { Root } from './Root';
+import { SwitchLabel } from './Label';
+import { SwitchHelper } from './Helper';
+import { SwitchTrack } from './Track';
+import { YBox } from '../../layout';
 
 export const SwitchPreset = ({
   value,
@@ -14,19 +18,27 @@ export const SwitchPreset = ({
   label,
   defaultValue = false,
   disabled,
+  helperText,
+  size = 'md',
   ...props
-}: Omit<SwitchProps, 'children'> & { label: string }) => {
+}: Omit<SwitchProps, 'children'> & { label?: string; helperText?: string }) => {
   return (
-    <Switch
+    <Root
       value={value}
       onChange={onChange}
       defaultValue={defaultValue}
       disabled={disabled}
       aria-labelledby={'switchLabel'}
+      size={size}
       {...props}
     >
-      <Switch.Thumb />
-      <Switch.Label id={'switchLabel'}>{label}</Switch.Label>
-    </Switch>
+      <SwitchTrack />
+      {!!label && (
+        <YBox>
+          <SwitchLabel id={'switchLabel'}>{label}</SwitchLabel>
+          {helperText && <SwitchHelper>{helperText}</SwitchHelper>}
+        </YBox>
+      )}
+    </Root>
   );
 };

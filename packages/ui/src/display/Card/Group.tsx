@@ -11,7 +11,7 @@ import { GroupProvider } from './context';
 
 export const CardGroup = (props: ComponentProps<typeof CardRoot>) => {
   let hasFooter = false;
-  Children.forEach(props.children, (child, index) => {
+  Children.forEach(props.children, (child) => {
     if (
       isValidElement(child) &&
       (child.type as any).displayName === 'CardFooter'

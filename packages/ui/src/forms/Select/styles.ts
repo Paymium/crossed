@@ -7,7 +7,7 @@
 
 import { createStyles } from '@crossed/styled';
 
-export const useSelect = createStyles(() => ({
+export const useSelect = createStyles(({ colors }) => ({
   trigger: {
     base: {
       flexDirection: 'row',
@@ -36,7 +36,7 @@ export const useSelect = createStyles(() => ({
     base: {
       position: 'absolute',
       maxWidth: 'auto',
-      // backgroundColor: t.colors.background.secondary,
+      backgroundColor: colors.background.primary.subtle,
       zIndex: 100,
       display: 'flex',
       flexDirection: 'column',

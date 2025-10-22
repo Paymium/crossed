@@ -1,0 +1,46 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as PaginationStories from './Pagination.stories';
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+The `Pagination` component is used to navigate through large sets of content divided into discrete pages.
+It helps users move forward or backward efficiently, providing context about their current position within the content.
+
+Pagination should be used when presenting content in chunks to avoid overwhelming users. Avoid displaying too many page links at once to maintain clarity.
+
+```jsx title="Import Button"
+import { Pagination } from '@crossed/ui';
+```
+
+<Canvas of={PaginationStories.Primary} />
+
+## Composition
+
+<Tabs defaultValue={"button"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"button"}>
+      <Tabs.Tab.Text>Pagination</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="button">
+    <ArgTypes of={PaginationStories.default.component} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+<Tabs defaultValue={"Size"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"Size"}>
+      <Tabs.Tab.Text>Simple</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value={"Size"}>
+    <Canvas of={PaginationStories.Primary} />
+  </Tabs.Panel>
+</Tabs>

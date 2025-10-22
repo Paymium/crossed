@@ -5,6 +5,4 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { PaginationRoot } from './Root';
-
-export const Pagination = PaginationRoot;
+export { PaginationRoot as Pagination } from './Root';

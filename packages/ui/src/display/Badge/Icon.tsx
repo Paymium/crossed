@@ -8,8 +8,8 @@
 import { cloneElement, isValidElement, PropsWithChildren } from 'react';
 import { useContext } from './context';
 import { useTheme } from '@crossed/styled';
-
-export const BadgeIcon = ({ children }: PropsWithChildren) => {
+type BadgeIconProps = PropsWithChildren<{}>;
+export const BadgeIcon = ({ children }: BadgeIconProps) => {
   const { variant } = useContext();
   const { colors } = useTheme();
   const colorVariant = colors.utility[variant]['700'];

@@ -7,10 +7,17 @@
 
 import { ComponentProps, useContext } from 'react';
 import { localContext } from './context';
-import { Headline } from '../../typography';
+import { Text } from '../../typography';
 
-export const ModalTitle = (props: ComponentProps<typeof Headline>) => {
+export const ModalTitle = (props: ComponentProps<typeof Text>) => {
   const { idRef } = useContext(localContext);
-  return <Headline size="lg" id={`${idRef}-title`} {...props} />;
+  return (
+    <Text
+      fontSize="lg"
+      fontWeight={'semibold'}
+      id={`${idRef}-title`}
+      {...props}
+    />
+  );
 };
 ModalTitle.displayName = 'Modal.Title';

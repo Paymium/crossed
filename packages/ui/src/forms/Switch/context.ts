@@ -7,6 +7,7 @@
 
 import { createContext } from 'react';
 import { SharedValue } from 'react-native-reanimated';
+import { trackSizeStyles } from './styles';
 
 export type LocalContext = {
   disabled?: boolean;
@@ -14,6 +15,9 @@ export type LocalContext = {
   duration: number;
   height: SharedValue<number>;
   width: SharedValue<number>;
+  hovered?: boolean;
+  pressed?: boolean;
+  size?: keyof typeof trackSizeStyles;
 };
 
 export const localContext = createContext<LocalContext>({} as LocalContext);

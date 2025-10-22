@@ -7,7 +7,7 @@
 
 import { forwardRef } from 'react';
 import { TextInput, type TextInputProps } from 'react-native';
-import { CrossedMethods, inlineStyle, useTheme } from '@crossed/styled';
+import { CrossedMethods, inlineStyle } from '@crossed/styled';
 
 export interface InputPartProps
   extends Omit<TextInputProps, 'style' | 'value'> {
@@ -36,7 +36,6 @@ const styles = inlineStyle(() => ({
 
 export const InputPart = forwardRef<TextInput, InputPartProps>(
   ({ value, onChangeText, placeholder, onBlur, onFocus, id }, ref) => {
-    const { colors } = useTheme();
     return (
       <TextInput
         selectTextOnFocus

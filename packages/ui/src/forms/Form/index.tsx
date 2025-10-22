@@ -6,97 +6,96 @@
  */
 
 import { Pressable, View } from 'react-native';
-import type {
-  FormComponent,
-  FormFieldComponent,
+import {
   FormControlComponent,
   FormLabelComponent,
-  FormMessageComponent,
   FieldContext,
+  FormFieldProps,
 } from './types';
 import {
   cloneElement,
+  ComponentProps,
   createContext,
   isValidElement,
   useContext,
+  useEffect,
   useId,
   useRef,
+  useState,
 } from 'react';
-import { composeEventHandlers } from '@crossed/core';
+import { withStaticProperties } from '@crossed/core';
 import { Label } from '../Label';
-import { useInteraction } from '@crossed/styled';
-import { YBox } from '../../layout/YBox';
+import { Text } from '../../typography/Text';
+import { isWeb } from '@crossed/styled';
 
 const fieldContext = createContext<FieldContext>({} as FieldContext);
 
-const Form: FormComponent = ({ onSubmit, asChild, children, ...props }) => {
-  const propsTmp = { role: 'form', ...props } as const;
-  return asChild && isValidElement(children) ? (
-    cloneElement(children, propsTmp)
-  ) : (
-    <YBox space="md" {...propsTmp}>
-      {children}
-    </YBox>
-  );
-};
-const FormField: FormFieldComponent = ({ name, ...props }) => {
-  const inputId = useRef<string>();
-  const {
-    state: { focus, hover },
-    props: { onFocus, onBlur, onHoverIn, onHoverOut },
-  } = useInteraction(props);
+const Root = ({ children }: FormFieldProps) => {
+  const [inputId, setInputId] = useState<string>();
+  const controlRef = useRef<View>(null);
 
   return (
-    <fieldContext.Provider
-      value={{
-        name,
-        inputId,
-        states: { focus, hover, disabled: props.disabled },
-        handles: { onFocus, onBlur, onHoverIn, onHoverOut },
-      }}
-    >
-      <View {...props} />
+    <fieldContext.Provider value={{ setInputId, inputId, controlRef }}>
+      {children}
     </fieldContext.Provider>
   );
 };
-const FormControl: FormControlComponent = ({ children }) => {
-  const { inputId, states, handles } = useContext(fieldContext);
+Root.displayName = 'FormFieldRoot';
+const FormFieldControl: FormControlComponent = ({ children }) => {
+  const { setInputId } = useContext(fieldContext);
   const localId = useId();
-  if (!isValidElement(children)) {
-    return children;
-  }
 
-  const id =
-    children.props.id || children.props.nativeID || `form-control${localId}`;
-  inputId.current = id;
-  return cloneElement(children, {
-    id,
-    ...states,
-    ...([undefined, true].includes(children.props.focusable)
-      ? {
-          onFocus: composeEventHandlers(
-            handles.onFocus,
-            children.props.onFocus
-          ),
-          onBlur: composeEventHandlers(handles.onBlur, children.props.onBlur),
-        }
-      : {}),
-  } as any);
+  const id = (children as any).props?.id || `form-control${localId}`;
+  useEffect(() => {
+    setInputId(id);
+  }, [id, setInputId]);
+
+  return isValidElement(children)
+    ? cloneElement(children, {
+        id,
+        'nativeID': id,
+        'data-describedby': `${id}:helper`,
+      } as any)
+    : children;
 };
-const FormLabel: FormLabelComponent = (props) => {
-  const { inputId, states, handles } = useContext(fieldContext);
-  return (
-    <Pressable
-      {...({ tabIndex: '-1' } as any)}
-      onHoverIn={handles.onHoverIn}
-      onHoverOut={handles.onHoverOut}
-    >
-      <Label {...states} {...props} htmlFor={inputId.current} />
+FormFieldControl.displayName = 'FormFieldControl';
+const FormFieldLabel: FormLabelComponent = (props) => {
+  const { inputId, controlRef } = useContext(fieldContext);
+  const render = <Label {...props} for={inputId} />;
+  return isWeb ? (
+    render
+  ) : (
+    <Pressable tabIndex={-1} onPress={() => controlRef.current?.focus()}>
+      {render}
     </Pressable>
   );
 };
-const FormMessage: FormMessageComponent = () => {
-  return null;
+FormFieldLabel.displayName = 'FormFieldLabel';
+
+const FormFieldHelper = (props: ComponentProps<typeof Text>) => {
+  const { inputId } = useContext(fieldContext);
+  return (
+    <Text
+      color={'tertiary'}
+      fontSize={'sm'}
+      id={`${inputId}:helper`}
+      {...props}
+    />
+  );
 };
 
-export { Form, FormField, FormControl, FormLabel, FormMessage };
+FormFieldHelper.displayName = 'FormFieldHelper';
+
+const FormFieldError = (props: ComponentProps<typeof Text>) => {
+  return <Text color="error" fontSize={'sm'} {...props} />;
+};
+FormFieldError.displayName = 'FormFieldError';
+
+export const FormField = withStaticProperties(Root, {
+  Control: FormFieldControl,
+  Label: FormFieldLabel,
+  Helper: FormFieldHelper,
+  Error: FormFieldError,
+});
+
+export { FormFieldControl, FormFieldLabel };

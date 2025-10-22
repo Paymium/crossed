@@ -1,0 +1,78 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import * as BannerStories from './Banner.stories';
+import { Tabs } from '@crossed/ui';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={BannerStories} />
+
+# Banner
+
+The `Banner` component is used to display important messages or alerts to users.
+It can communicate information such as warnings, updates, or confirmations in a prominent yet non-intrusive way.
+
+Banners should be used for high-priority messages that require user attention. Avoid overusing them, as too many banners can overwhelm the interface and reduce their effectiveness.
+
+```jsx
+import { Banner } from '@crossed/ui';
+```
+
+## Compositions
+
+<Tabs defaultValue={'Banner'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Banner'}>
+      <Tabs.Tab.Text>Banner</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Banner.Icon'}>
+      <Tabs.Tab.Text>Banner.Icon</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Banner.Title'}>
+      <Tabs.Tab.Text>Banner.Title</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Banner.Description'}>
+      <Tabs.Tab.Text>Banner.Description</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Banner.Preset'}>
+      <Tabs.Tab.Text>Banner.Preset</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Banner">
+    <ArgTypes of={BannerStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Banner.Icon">
+    <ArgTypes of={BannerStories.default.subcomponents['Banner.Icon']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Banner.Title">
+    <ExtendText />
+    <ArgTypes of={BannerStories.default.subcomponents['Banner.Title']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Banner.Description">
+    <ExtendText />
+    <ArgTypes of={BannerStories.default.subcomponents['Banner.Description']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Banner.Preset">
+    <ArgTypes of={BannerStories.default.subcomponents['Banner.Preset']} />
+  </Tabs.Panel>
+</Tabs>
+
+## Examples
+
+<Tabs defaultValue={'Preset'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Preset'}>
+      <Tabs.Tab.Text>Preset</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Primary'}>
+      <Tabs.Tab.Text>Primary</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Preset">
+    <Canvas of={BannerStories.Preset} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Primary">
+    <Canvas of={BannerStories.Primary} />
+  </Tabs.Panel>
+</Tabs>

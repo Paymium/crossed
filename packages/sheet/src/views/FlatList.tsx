@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import React, { RefObject, useImperativeHandle } from 'react';
+import React, { RefAttributes, useImperativeHandle } from 'react';
 import { FlatListProps, Platform, FlatList as RNFlatList } from 'react-native';
 import {
   NativeViewGestureHandlerProps,
@@ -23,21 +23,20 @@ type Props<T = any> = FlatListProps<T> &
     refreshControlGestureArea?: number;
   };
 
-function $FlatList<T>(
-  props: Props<T>,
-  ref: React.ForwardedRef<RefObject<RNFlatList>>
-) {
+function $FlatList<T>(props: Props<T> & RefAttributes<RNFlatList>) {
   const handlers = useScrollHandlers<RNFlatList>({
     hasRefreshControl: !!props.refreshControl,
     refreshControlBoundary: props.refreshControlGestureArea || 0.15,
   });
-  useImperativeHandle(ref, () => handlers.ref);
-  const ScrollComponent = Platform.OS === 'web' ? RNFlatList : RNGHFlatList;
+  useImperativeHandle(props.ref, () => (handlers as any).ref);
+  const ScrollComponent = (
+    Platform.OS === 'web' ? RNFlatList : RNGHFlatList
+  ) as any;
 
   return (
     <ScrollComponent
       {...(props as any)}
-      {...handlers}
+      {...(handlers as any)}
       onScroll={(event) => {
         handlers.onScroll(event);
         props.onScroll?.(event);

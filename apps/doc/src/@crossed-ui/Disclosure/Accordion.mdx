@@ -1,0 +1,66 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as AccordionStories from './Accordion.stories';
+
+<Meta of={AccordionStories} />
+
+# Accordion
+The `Accordion` component is used to show and hide sections of content within a limited space.
+It allows users to expand or collapse information, helping them focus on relevant details without overwhelming the interface.
+
+Accordions should be used to organize content hierarchically or group related information. Avoid nesting too many levels to maintain clarity and usability.
+
+```tsx
+import { Accordion } from "@crossed/ui"
+```
+
+## Composition
+<Tabs defaultValue={"Accordion"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"Accordion"}>
+      <Tabs.Tab.Text>Accordion</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Accordion.Trigger"}>
+      <Tabs.Tab.Text>Accordion.Trigger</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Accordion.Item"}>
+      <Tabs.Tab.Text>Accordion.Item</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Accordion.Icon"}>
+      <Tabs.Tab.Text>Accordion.Icon</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Accordion.Panel"}>
+      <Tabs.Tab.Text>Accordion.Panel</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Accordion">
+    <ArgTypes of={AccordionStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Accordion.Trigger">
+    <ArgTypes of={AccordionStories.default.subcomponents['Accordion.Trigger']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Accordion.Item">
+    <ArgTypes of={AccordionStories.default.subcomponents['Accordion.Item']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Accordion.Icon">
+    <ArgTypes of={AccordionStories.default.subcomponents['Accordion.Icon']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Accordion.Panel">
+    <ArgTypes of={AccordionStories.default.subcomponents['Accordion.Panel']} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+<Tabs defaultValue={"Accordion"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"Accordion"}>
+      <Tabs.Tab.Text>Simple</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Accordion">
+    <Canvas of={AccordionStories.Info} />
+  </Tabs.Panel>
+</Tabs>

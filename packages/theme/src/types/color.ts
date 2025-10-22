@@ -105,6 +105,8 @@ export type Colors = {
     brand: {
       primary: ColorStructure;
       secondary: ColorStructure;
+      quaternary: ColorStructure;
+      active: ColorStructure;
       solid: ColorStructure;
       section: ColorStructure;
     };
@@ -130,10 +132,12 @@ export type Colors = {
     secondary: ColorStructure;
     tertiary: ColorStructure;
     quaternary: ColorStructure;
-    disabled: ColorStructure;
+    disabled: ColorStructure & { subtleBrand: string };
     brand: {
       primary: ColorStructure;
       secondary: ColorStructure;
+      tertiary: ColorStructure;
+      quaternary: ColorStructure;
     };
     error: {
       primary: ColorStructure;
@@ -149,12 +153,12 @@ export type Colors = {
     };
   };
   border: {
-    primary: ColorStructure;
-    secondary: ColorStructure;
-    tertiary: ColorStructure;
+    primary: ColorStructure & { w: string };
+    secondary: ColorStructure & { w: string };
+    tertiary: ColorStructure & { w: string };
     brand: ColorStructure;
     error: ColorStructure;
-    disabled: ColorStructure;
+    disabled: ColorStructure & { subtlew: string; w: string };
   };
   utility: {
     gray: Omit<ColorPalette, 950 | 25>;

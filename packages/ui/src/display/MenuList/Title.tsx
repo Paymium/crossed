@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Text, TextProps } from '../../typography';
+import { Text } from '../../typography';
 import { withDefaultProps } from '@crossed/core';
 
 export const MenuTitle = withDefaultProps(Text, {

@@ -12,6 +12,11 @@ import { useCallback } from 'react';
 import { localContext } from './context';
 import { Pressable } from 'react-native';
 import { composeStyles, inlineStyle } from '@crossed/styled';
+import {
+  alignItemsStyle,
+  flexDirectionStyles,
+  justifyContentStyle,
+} from '../../styles';
 
 /**
  * Switch Component
@@ -33,6 +38,7 @@ export const Root = ({
   children,
   defaultValue = false,
   disabled,
+  size = 'md',
   ...props
 }: SwitchProps) => {
   const DURATION = 300;
@@ -43,45 +49,48 @@ export const Root = ({
     onChange: onChangeProps,
   });
 
-  const height = useSharedValue(24);
-  const width = useSharedValue(48);
+  const height = useSharedValue(size === 'md' ? 24 : 20);
+  const width = useSharedValue(size === 'md' ? 44 : 36);
 
   const onChange = useCallback(() => {
     setValue(!value);
   }, [value, setValue]);
 
   return (
-    <localContext.Provider
-      value={{
-        height,
-        width,
-        duration: DURATION,
-        value,
-        disabled,
-      }}
+    <Pressable
+      onPress={onChange}
+      disabled={disabled}
+      aria-checked={value}
+      role={'switch'}
+      {...props}
+      style={
+        composeStyles(
+          inlineStyle(({ space }) => ({
+            base: { display: 'flex', gap: space.md },
+          })),
+          alignItemsStyle.center,
+          flexDirectionStyles.row,
+          justifyContentStyle.start,
+          props.style
+        ).style().style
+      }
     >
-      <Pressable
-        onPress={onChange}
-        disabled={disabled}
-        aria-checked={value}
-        role={'switch'}
-        style={
-          composeStyles(
-            inlineStyle(({ space }) => ({
-              base: {
-                display: 'flex',
-                flexDirection: 'row',
-                gap: space.xs,
-                alignItems: 'center',
-              },
-            })),
-            props.style
-          ).style().style
-        }
-        {...props}
-      >
-        {children}
-      </Pressable>
-    </localContext.Provider>
+      {({ hovered, pressed }: { hovered?: boolean; pressed?: boolean }) => (
+        <localContext.Provider
+          value={{
+            height,
+            width,
+            duration: DURATION,
+            value,
+            disabled,
+            hovered,
+            pressed,
+            size,
+          }}
+        >
+          {children}
+        </localContext.Provider>
+      )}
+    </Pressable>
   );
 };

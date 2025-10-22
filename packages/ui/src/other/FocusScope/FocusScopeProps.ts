@@ -7,7 +7,7 @@
 
 import type { ForwardedRef, KeyboardEvent, ReactNode } from 'react';
 
-export interface FocusScopeProps {
+export type FocusScopeProps = {
   /**
    * @default true
    */
@@ -48,7 +48,7 @@ export interface FocusScopeProps {
     | ReactNode
     | ((_props: {
         onKeyDown: (_event: KeyboardEvent) => void;
-        tabIndex: number;
+        tabIndex: 0 | -1;
         ref: ForwardedRef<any>;
       }) => ReactNode);
-}
+};

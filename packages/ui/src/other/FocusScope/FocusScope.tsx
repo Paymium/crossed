@@ -5,11 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef } from 'react';
-
 import type { FocusScopeProps } from './FocusScopeProps';
 
-export const FocusScope = forwardRef((props: FocusScopeProps, _ref) => {
+export const FocusScope = (props: FocusScopeProps) => {
   return props.children as any;
-});
+};
 FocusScope.displayName = 'FocusScope';

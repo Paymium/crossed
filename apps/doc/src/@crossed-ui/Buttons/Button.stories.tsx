@@ -8,7 +8,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '@crossed/ui/src/buttons/Button';
-import { XBox, YBox } from '@crossed/ui';
+import { XBox, YBox, Group as GroupCrossed } from '@crossed/ui';
+import { Check } from '@crossed/icons';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Button> = {
@@ -18,8 +19,9 @@ const meta: Meta<typeof Button> = {
     'Button.Element': Button.Element,
     'Button.Group': Button.Group,
     'Button.Icon': Button.Icon,
+    'Button.Preset': Button.Preset,
   },
-  tags: ['autodocs'],
+  // tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     design: {
@@ -35,6 +37,7 @@ const meta: Meta<typeof Button> = {
       </Button>
     );
   },
+  args: { variant: 'primary', loading: false, disabled: false },
   argTypes: {
     loading: { control: 'boolean' },
     disabled: { control: 'boolean' },
@@ -51,7 +54,25 @@ const meta: Meta<typeof Button> = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
+export const Loading: Story = {
+  args: { variant: 'primary', loading: true, disabled: false },
+  render: (args) => (
+    <Button {...args}>
+      <Button.Text>Loading</Button.Text>
+    </Button>
+  ),
+};
+export const WithIcon: Story = {
+  args: { variant: 'primary', loading: false, disabled: false },
+  render: (args) => (
+    <Button {...args}>
+      <Button.Icon>
+        <Check />
+      </Button.Icon>
+      <Button.Text>With icon</Button.Text>
+    </Button>
+  ),
+};
 export const Size: Story = {
   render() {
     return (
@@ -143,12 +164,30 @@ export const Variant: Story = {
             <Button.Text>Tertiary error</Button.Text>
           </Button>
         </XBox>
+        <XBox space={'xs'}>
+          <Button variant={'primary'} success>
+            <Button.Text>Primary success</Button.Text>
+          </Button>
+          <Button variant={'primary'} disabled success>
+            <Button.Text>Primary success</Button.Text>
+          </Button>
+          <Button variant={'primary'} loading success>
+            <Button.Text>Primary success</Button.Text>
+          </Button>
+        </XBox>
       </YBox>
     );
   },
 };
 export const Primary: Story = {
   args: { variant: 'primary', loading: false, disabled: false },
+  render(e) {
+    return (
+      <Button {...e}>
+        <Button.Text>Button</Button.Text>
+      </Button>
+    );
+  },
 };
 export const Secondary: Story = {
   args: { ...Primary.args, variant: 'secondary' },
@@ -170,7 +209,7 @@ export const Tertiary: Story = {
 };
 
 export const Success: Story = {
-  args: { ...Primary.args, variant: 'success' },
+  args: { ...Primary.args, variant: 'primary', success: true },
   parameters: {
     design: {
       type: 'figma',
@@ -180,11 +219,45 @@ export const Success: Story = {
 };
 
 export const Error: Story = {
-  args: { ...Primary.args, variant: 'error' },
+  args: { ...Primary.args, variant: 'primary', error: true },
   parameters: {
     design: {
       type: 'figma',
       url: 'https://www.figma.com/design/Ke8D4tdGD8lCjNYY5NO33R/Design-system?node-id=3-301&t=2ZiT8Ks6ZLwLW9X6-4',
     },
+  },
+};
+export const Group: Story = {
+  args: { variant: 'primary', loading: false, disabled: false },
+  render(e) {
+    return (
+      <GroupCrossed orientation={'horizontal'}>
+        <Button {...e}>
+          <Button.Text>Button</Button.Text>
+        </Button>
+        <Button {...e}>
+          <Button.Text>Button</Button.Text>
+        </Button>
+        <Button {...e}>
+          <Button.Text>Button</Button.Text>
+        </Button>
+        <Button {...e}>
+          <Button.Text>Button</Button.Text>
+        </Button>
+      </GroupCrossed>
+    );
+  },
+};
+export const Preset: Story = {
+  args: { variant: 'primary', loading: false, disabled: false },
+  render(e) {
+    return (
+      <Button.Preset
+        {...e}
+        text={'my button'}
+        iconLeft={<Check />}
+        iconRight={<Check />}
+      />
+    );
   },
 };

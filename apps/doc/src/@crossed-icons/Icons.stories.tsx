@@ -8,7 +8,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import * as icons from '@crossed/icons';
-import { XBox, YBox, Center, Text } from '@crossed/ui';
+import { XBox, Center, Text } from '@crossed/ui';
 import { RequireOnly } from '@crossed/icons/lib/typescript/types';
 import { themes } from '@crossed/theme';
 import { inlineStyle } from '@crossed/styled';

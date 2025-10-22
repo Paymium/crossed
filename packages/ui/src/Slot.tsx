@@ -38,10 +38,10 @@ export const Slot = forwardRef(
           const { children, ...rest } = props;
           // console.log(c.props, rest);
           return cloneElement(c, {
-            ...c.props,
+            ...(c.props as any),
             ...rest,
-            ...(c.props.style && rest.style
-              ? { style: [c.props.style, rest.style] }
+            ...((c.props as any).style && rest.style
+              ? { style: [(c.props as any).style, rest.style] }
               : {}),
             ref,
           });

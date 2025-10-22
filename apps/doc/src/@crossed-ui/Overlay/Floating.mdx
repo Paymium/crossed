@@ -1,0 +1,96 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as FloatingStories from './Floating.stories';
+
+<Meta of={FloatingStories} />
+
+# Floating
+The `Floating` component is a primitive used to anchor content to a trigger element.
+It allows developers to display overlays, popovers, or tooltips relative to a reference element, ensuring proper positioning and visibility.
+
+`Floating` should be used to create contextual UI elements that appear on interaction. Avoid overusing it for static content, as it is designed specifically for temporary, triggered displays.
+
+```jsx
+import { Floating } from '@crossed/ui';
+```
+
+<Canvas of={FloatingStories.Primary} />
+
+## Compositions
+
+<TabsPreset
+  defaultValue={'Floating'}
+  items={[
+    {
+      value: 'Floating',
+      title: 'Floating',
+      panel: <ArgTypes of={FloatingStories.default.component} />,
+    },
+    {
+      value: 'Floating.Overlay',
+      title: 'Floating.Overlay',
+      panel: (
+        <ArgTypes
+          of={FloatingStories.default.subcomponents['Floating.Overlay']}
+        />
+      ),
+    },
+    {
+      value: 'Floating.Content',
+      title: 'Floating.Content',
+      panel: (
+        <ArgTypes
+          of={FloatingStories.default.subcomponents['Floating.Content']}
+        />
+      ),
+    },
+    {
+      value: 'Floating.VisibilityHidden',
+      title: 'Floating.VisibilityHidden',
+      panel: (
+        <ArgTypes
+          of={
+            FloatingStories.default.subcomponents['Floating.VisibilityHidden']
+          }
+        />
+      ),
+    },
+    {
+      value: 'Floating.Trigger',
+      title: 'Floating.Trigger',
+      panel: (
+        <ArgTypes
+          of={FloatingStories.default.subcomponents['Floating.Trigger']}
+        />
+      ),
+    },
+    {
+      value: 'Floating.Portal',
+      title: 'Floating.Portal',
+      panel: (
+        <ArgTypes
+          of={FloatingStories.default.subcomponents['Floating.Portal']}
+        />
+      ),
+    },
+  ]}
+/>
+
+## Examples
+
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={FloatingStories.Primary} />,
+    },
+    {
+      title: 'VisibilityHidden',
+      value: 'VisibilityHidden',
+      panel: <Canvas of={FloatingStories.VisibilityHidden} />,
+    },
+  ]}
+/>

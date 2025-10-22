@@ -24,9 +24,8 @@ import { useMedia } from '../../useMedia';
 export const Select = memo<SelectProps>((e) => {
   const {
     label,
-    description,
-    extra,
     error,
+    helperText,
     multiple,
     clearable,
     searchable,
@@ -71,11 +70,7 @@ export const Select = memo<SelectProps>((e) => {
           <Sheet>
             <FormField disabled={disabled}>
               <YBox space="xxs">
-                <SelectLabel
-                  label={label}
-                  description={description}
-                  extra={extra}
-                />
+                <SelectLabel label={label} />
                 <SelectTrigger
                   ref={refs.setReference as any}
                   id={id}
@@ -83,6 +78,11 @@ export const Select = memo<SelectProps>((e) => {
                 >
                   {children}
                 </SelectTrigger>
+                {!!helperText && (
+                  <Text fontSize={'sm'} color={'tertiary'}>
+                    {helperText}
+                  </Text>
+                )}
                 {!!error && <Text color="error">{error.toString()}</Text>}
               </YBox>
               <SelectContent

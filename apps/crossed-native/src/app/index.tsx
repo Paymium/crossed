@@ -6,13 +6,13 @@
  */
 
 import React from 'react';
-import { MenuList, MenuItem } from '@crossed/ui';
+import { MenuList } from '@crossed/ui';
 import { createStyles, useTheme } from '@crossed/styled';
 import { ChevronRight } from '@crossed/unicons';
 import { FlatList } from 'react-native';
 import { IndexScreenProps, RootStackParamList } from '../routes';
 
-const styles = createStyles((t) => ({
+const styles = createStyles(() => ({
   container: { base: { paddingHorizontal: 15 } },
   item: {
     'base': {
@@ -54,13 +54,13 @@ export default function TabOneScreen({ navigation }: IndexScreenProps) {
         data={menus}
         renderItem={({ item }) => {
           return (
-            <MenuItem
+            <MenuList.Item
               style={styles.item}
               onPress={() => navigation.navigate(item.to)}
             >
               <MenuList.Title>{item.title}</MenuList.Title>
               <ChevronRight />
-            </MenuItem>
+            </MenuList.Item>
           );
         }}
       />

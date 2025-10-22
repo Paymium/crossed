@@ -13,7 +13,13 @@ import { fn } from '@storybook/test';
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Checkbox> = {
   component: Checkbox,
-  tags: ['autodocs'],
+  subcomponents: {
+    'Checkbox': Checkbox.Preset,
+    'Checkbox.Label': Checkbox.Label,
+    'Checkbox.Thumb': Checkbox.Thumb,
+    'Checkbox.HelperText': Checkbox.HelperText,
+    'Checkbox.Preset': Checkbox.Preset,
+  },
   parameters: { layout: 'padded' },
   argTypes: {
     checked: { control: 'boolean' },
@@ -21,15 +27,15 @@ const meta: Meta<typeof Checkbox> = {
   },
   args: { onChecked: fn() },
   render(e) {
-    return <Checkbox {...e}>My label</Checkbox>;
+    return <Checkbox.Preset {...e} />;
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof Checkbox>;
+type Story = StoryObj<typeof Checkbox.Preset>;
 
 export const Primary: Story = {
-  args: {},
+  args: { label: 'My label', helperText: 'Helper text' },
 };
 
 export const DefaultChecked: Story = {
@@ -41,15 +47,17 @@ export const Disabled: Story = {
 };
 
 export const NoThumb: Story = {
-  args: { ...Primary.args, noThumb: true },
+  args: { ...Primary.args },
 };
 
-export const CustomPlacementThumb: Story = {
-  args: { ...Primary.args, noThumb: true },
+type StoryCustom = StoryObj<typeof Checkbox>;
+
+export const CustomPlacementThumb: StoryCustom = {
+  args: { ...Primary.args },
   render(e) {
     return (
       <Checkbox {...e}>
-        My label
+        <Checkbox.Label>My label</Checkbox.Label>
         <Checkbox.Thumb />
       </Checkbox>
     );

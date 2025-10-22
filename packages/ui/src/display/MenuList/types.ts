@@ -8,6 +8,7 @@
 import type { YBoxProps } from '../../layout';
 import type { PressableProps } from 'react-native';
 import { CrossedMethods } from '@crossed/styled';
+import { gapStyles } from '../../styles';
 
 export type Context = {
   /**
@@ -25,10 +26,11 @@ export type MenuListProps = YBoxProps &
     /**
      * Apply border
      */
-    bordered: boolean;
+    bordered?: boolean;
   };
 
 export type MenuListItemProps = Omit<PressableProps, 'style'> & {
   asChild?: boolean;
   style?: CrossedMethods<any>;
+  space?: keyof typeof gapStyles;
 };

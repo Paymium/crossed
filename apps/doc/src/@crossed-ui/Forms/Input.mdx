@@ -1,0 +1,56 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as InputStories from './Input.stories';
+
+<Meta of={InputStories} />
+
+# Input
+The `Input` component is a React text field that allows users to enter and edit single-line text values.
+It supports various input types, validation states, and visual styles, making it suitable for use in forms, search bars, and data entry interfaces.
+
+```jsx
+import { Input } from '@crossed/ui';
+```
+
+<Canvas of={InputStories.Primary} />
+
+## Composition
+
+<TabsPreset
+  defaultValue={'Input'}
+  items={[
+    {
+      title: 'Input',
+      value: 'Input',
+      panel: <ArgTypes of={InputStories.default.component} />,
+    },
+  ]}
+/>
+
+## Example
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={InputStories.Primary} />,
+    },
+    {
+      title: 'Disabled',
+      value: 'Disabled',
+      panel: <Canvas of={InputStories.Disabled} />,
+    },
+    {
+      title: 'Error',
+      value: 'Error',
+      panel: <Canvas of={InputStories.Error} />,
+    },
+    {
+      title: 'With right element',
+      value: 'right',
+      panel: <Canvas of={InputStories.WithRightElement} />,
+    },
+  ]}
+/>

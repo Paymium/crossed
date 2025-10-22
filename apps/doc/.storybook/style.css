@@ -13,3 +13,45 @@
   cursor: pointer;
   /* @apply bg-gray rounded-full cursor-pointer; */
 }
+
+.dark .sbdocs-wrapper {
+    background: var(--colors-background-secondary-default) !important;
+}
+.dark .sbdocs-preview {
+    border-color: var(--colors-border-tertiary-default) !important;
+    background-color: var(--colors-background-primary-default) !important;
+}
+.dark .docblock-source{
+    border-color: var(--colors-border-tertiary-default) !important;
+    background: var(--colors-background-primary-default) !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+th,
+td {
+    color: var(--colors-text-primary-default) !important;
+}
+
+.dark td, .dark th {
+    background: var(--colors-background-primary-default) !important;
+}
+
+.dark code, .dark .css-o1d7ko {
+    color: var(--colors-text-primary-default) !important;
+    background: var(--colors-background-primary-default) !important;
+    border-color: var(--colors-border-tertiary-default) !important;
+}
+.dark .css-11xgcgt{
+    background: var(--colors-background-primary-default) !important;
+}
+.dark button {
+    color: var(--colors-text-primary-default) !important;
+    background: var(--colors-background-primary-default) !important;
+    border-color: var(--colors-border-tertiary-default) !important;
+}

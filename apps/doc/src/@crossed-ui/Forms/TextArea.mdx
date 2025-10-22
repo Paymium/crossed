@@ -1,0 +1,41 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as TextAreaStories from './TextArea.stories';
+
+<Meta of={TextAreaStories} />
+
+# TextArea
+The `TextArea` component is a React input field that allows users to enter and edit multi-line text.
+It supports adjustable sizing, validation states, and helper texts, making it ideal for forms, comments, notes, and any interface requiring longer text input.
+
+```jsx
+import { TextArea } from '@crossed/ui';
+```
+
+<Canvas of={TextAreaStories.Primary} />
+
+## Composition
+
+<TabsPreset
+  defaultValue={'TextArea'}
+  items={[
+    {
+      title: 'TextArea',
+      value: 'TextArea',
+      panel: <ArgTypes of={TextAreaStories.default.component} />,
+    },
+  ]}
+/>
+
+## Example
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={TextAreaStories.Primary} />,
+    },
+  ]}
+/>

@@ -1,0 +1,83 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as SwitchStories from './Switch.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={SwitchStories} />
+
+# Switch
+
+The `Switch` component is a React input control that allows users to toggle between on and off states.
+It is commonly used to enable or disable settings, preferences, or features, providing a clear and interactive way to represent binary choices.
+
+```jsx
+import { Switch } from '@crossed/ui';
+```
+
+<Canvas of={SwitchStories.Primary} />
+
+## Composition
+
+<TabsPreset
+  defaultValue={'Switch'}
+  items={[
+    {
+      title: 'Switch',
+      value: 'Switch',
+      panel: <ArgTypes of={SwitchStories.default.component} />,
+    },
+    {
+      title: 'Switch.Thumb',
+      value: 'Switch.Thumb',
+      panel: (
+        <ArgTypes of={SwitchStories.default.subcomponents['Switch.Thumb']} />
+      ),
+    },
+    {
+      title: 'Switch.Label',
+      value: 'Switch.Label',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes of={SwitchStories.default.subcomponents['Switch.Label']} />
+        </>
+      ),
+    },
+    {
+      title: 'Switch.Preset',
+      value: 'Switch.Preset',
+      panel: (
+        <ArgTypes of={SwitchStories.default.subcomponents['Switch.Preset']} />
+      ),
+    },
+    {
+      title: 'Switch.Helper',
+      value: 'Switch.Helper',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes of={SwitchStories.default.subcomponents['Switch.Helper']} />
+        </>
+      ),
+    },
+  ]}
+/>
+
+## Example
+
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={SwitchStories.Primary} />,
+    },
+    {
+      title: 'Disabled',
+      value: 'Disabled',
+      panel: <Canvas of={SwitchStories.Disabled} />,
+    },
+  ]}
+/>

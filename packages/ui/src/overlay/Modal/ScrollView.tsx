@@ -5,17 +5,29 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { memo, useContext } from 'react';
+import { ComponentProps, memo, useContext } from 'react';
 import { ScrollView as RNScrollView } from 'react-native';
 import { localContext } from './context';
 import { Sheet } from '../Sheet';
+import { CrossedMethods } from '@crossed/styled';
 
-export const ModalScrollView = memo((props) => {
+type ModalScrollViewProps = Omit<
+  ComponentProps<typeof RNScrollView>,
+  'style' | 'contentContainerStyle'
+> & {
+  contentContainerStyle?: CrossedMethods<any>;
+  style?: CrossedMethods<any>;
+};
+export const ModalScrollView = memo((props: ModalScrollViewProps) => {
   const { showSheet } = useContext(localContext);
 
   return showSheet ? (
     <Sheet.ScrollView {...props} />
   ) : (
-    <RNScrollView {...props} />
+    <RNScrollView
+      {...props}
+      style={props.style?.style().style}
+      contentContainerStyle={props.contentContainerStyle?.style().style}
+    />
   );
 });

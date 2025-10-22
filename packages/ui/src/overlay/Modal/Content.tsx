@@ -34,12 +34,12 @@ import {
   positionStyles,
 } from '../../styles';
 
-export const modalStyles = createStyles(({ space }) => ({
+export const modalStyles = createStyles(({ space, colors }) => ({
   content: {
     base: {
       zIndex: 100000,
       borderRadius: 16,
-      // backgroundColor: colors.background.secondary,
+      backgroundColor: colors.background.primary.subtle,
       paddingVertical: space.xl,
       margin: 'auto',
     },

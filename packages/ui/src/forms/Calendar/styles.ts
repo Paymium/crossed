@@ -9,5 +9,4 @@ import { inlineStyle } from '@crossed/styled';
 
 export const widthCell = inlineStyle(() => ({
   base: { width: 40 },
-  media: { md: { width: 50 } },
 }));

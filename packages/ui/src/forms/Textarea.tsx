@@ -9,11 +9,10 @@ import { TextInput, type TextInputProps } from 'react-native';
 import { forwardRef, useCallback, useState, type ReactNode } from 'react';
 import { form } from '../styles/form';
 import { composeStyles, CrossedMethods, useInteraction } from '@crossed/styled';
-import { FormControl, FormField, FormLabel } from './Form';
+import { FormField } from './Form';
 import { CloseButton } from '../buttons/CloseButton';
 import { useUncontrolled } from '@crossed/core';
 import { XBox } from '../layout/XBox';
-import { Text } from '../typography/Text';
 import { YBox } from '../layout/YBox';
 
 export type TextareaProps = Omit<TextInputProps, 'editable' | 'onChange'> & {
@@ -22,10 +21,9 @@ export type TextareaProps = Omit<TextInputProps, 'editable' | 'onChange'> & {
   elementLeft?: ReactNode;
   elementRight?: ReactNode;
   error?: string;
-  description?: string;
-  extra?: string;
   style?: CrossedMethods<any>;
   disabled?: boolean;
+  helperText?: string;
 };
 
 export const Textarea = forwardRef<TextInput, TextareaProps>(
@@ -40,8 +38,7 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
       disabled,
       elementRight,
       elementLeft,
-      description,
-      extra,
+      helperText,
       ...props
     },
     ref
@@ -65,17 +62,9 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
     return (
       <FormField>
         <YBox space="xxs">
-          {(label || description || extra) && (
+          {label && (
             <XBox alignItems="center" space="xxs">
-              {label && <FormLabel>{label}</FormLabel>}
-              {description && (
-                <Text style={form.labelDescription}>{description}</Text>
-              )}
-              {extra && (
-                <Text style={form.labelExtra} textAlign="right">
-                  {extra}
-                </Text>
-              )}
+              {label && <FormField.Label>{label}</FormField.Label>}
             </XBox>
           )}
           <XBox>
@@ -89,23 +78,27 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
                 {elementLeft}
               </XBox>
             )}
-            <FormControl>
+            <FormField.Control>
               <TextInput
                 ref={ref}
                 placeholderTextColor={color}
                 cursorColor={color}
                 editable={!disabled}
+                focusable={!disabled}
                 multiline={true}
                 numberOfLines={10}
                 {...props}
                 {...propsInteraction}
-                {...composeStyles(form.input, error && form.inputError).rnw({
+                {...composeStyles(
+                  form.input,
+                  error && form.inputError,
+                  props.style
+                ).rnw({
                   ...props,
                   ...state,
                   disabled,
                   style: [
                     { minHeight: 88, textAlignVertical: 'top' },
-                    props.style as any,
                     elementLeftWidth && { paddingLeft: elementLeftWidth },
                     elementRightWidth && { paddingRight: elementRightWidth },
                   ],
@@ -113,7 +106,7 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
                 value={value}
                 onChangeText={setValue}
               />
-            </FormControl>
+            </FormField.Control>
             <XBox
               style={form.elementRight}
               onLayout={({ nativeEvent: { layout } }) =>
@@ -124,7 +117,8 @@ export const Textarea = forwardRef<TextInput, TextareaProps>(
               {elementRight}
             </XBox>
           </XBox>
-          {error && <Text color="error">{error.toString()}</Text>}
+          {!!helperText && <FormField.Helper>{helperText}</FormField.Helper>}
+          {!!error && <FormField.Error>{error.toString()}</FormField.Error>}
         </YBox>
       </FormField>
     );

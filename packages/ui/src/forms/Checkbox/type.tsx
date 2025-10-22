@@ -9,8 +9,8 @@ import type { ComponentType, PropsWithChildren } from 'react';
 import type { PressableProps } from 'react-native';
 import { CrossedMethods } from '@crossed/styled';
 
-export type CheckboxProps = Omit<PressableProps, 'style' | 'children'> &
-  PropsWithChildren<{
+export type CheckboxProps = PropsWithChildren<
+  Omit<PressableProps, 'style' | 'children'> & {
     /**
      * if true, checkbox is checked
      */
@@ -27,17 +27,26 @@ export type CheckboxProps = Omit<PressableProps, 'style' | 'children'> &
     onChecked?: (_c: boolean) => void;
 
     /**
-     * Not show thumb
-     */
-    noThumb?: boolean;
-
-    /**
-     * If true, checkbox is disable
+     * If true, checkbox is disabled
      */
     disabled?: boolean;
 
     style?: CrossedMethods<any>;
-  }>;
+  }
+>;
+
+export type CheckboxPresetProps = Omit<CheckboxProps, 'children'> & {
+  /**
+   * Label of checkbox
+   */
+  label?: string;
+
+  /**
+   * Helper text to show
+   */
+  helperText?: string;
+};
+
 export type ImplementationProps = {
   checked: boolean;
   setChecked: (_c: boolean) => void;

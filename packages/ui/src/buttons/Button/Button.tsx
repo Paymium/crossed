@@ -7,25 +7,25 @@
 
 'use client';
 
-import { composeStyles, inlineStyle, useTheme } from '@crossed/styled';
+import { composeStyles } from '@crossed/styled';
 import { ActivityIndicator, Pressable, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { forwardRef, useId, useState } from 'react';
 import {
   buttonOutlineStyle,
   buttonPrimaryErrorStyle,
   buttonPrimaryStyles,
+  buttonPrimarySuccessStyle,
   buttonSecondaryErrorStyle,
   buttonSecondaryStyles,
   buttonSizeStyles,
   buttonStyle,
+  buttonTertiaryErrorStyle,
   buttonTertiaryStyles,
 } from './styles';
 import { ButtonProps } from './types';
 import { ButtonIcon } from './Icon';
 import { buttonContext } from './context';
 import { alignSelfStyle } from '../../styles/alignItems';
-import { Box } from '../../layout';
 
 export const Button = forwardRef<View, ButtonProps>(
   (
@@ -33,15 +33,15 @@ export const Button = forwardRef<View, ButtonProps>(
       variant = 'primary',
       size = 'md',
       error,
+      success,
       disabled,
       loading,
       children,
       alignSelf,
       ...props
-    }: ButtonProps,
+    },
     ref
   ) => {
-    const { colors } = useTheme();
     const renderLoading = loading ? (
       <ButtonIcon>
         <ActivityIndicator />
@@ -59,104 +59,85 @@ export const Button = forwardRef<View, ButtonProps>(
         disabled={disabled || loading}
         ref={ref}
         {...props}
+        style={(e: any) =>
+          composeStyles(
+            buttonStyle,
+            buttonOutlineStyle.default,
+            size && buttonSizeStyles[size],
+            alignSelf && alignSelfStyle[alignSelf],
+            variant === 'primary' &&
+              composeStyles(
+                ...(error
+                  ? [
+                      buttonPrimaryErrorStyle.root,
+                      buttonOutlineStyle.error,
+                      disabled && buttonPrimaryErrorStyle.disabled,
+                    ]
+                  : success
+                    ? [
+                        buttonPrimarySuccessStyle.root,
+                        buttonOutlineStyle.success,
+                        disabled && buttonPrimarySuccessStyle.disabled,
+                      ]
+                    : [
+                        buttonPrimaryStyles.root,
+                        buttonOutlineStyle.primary,
+                        disabled && buttonPrimaryStyles.disabled,
+                      ])
+              ),
+            variant === 'secondary' &&
+              composeStyles(
+                ...(error
+                  ? [
+                      buttonSecondaryErrorStyle.root,
+                      buttonOutlineStyle.error,
+                      disabled && buttonSecondaryErrorStyle.disabled,
+                    ]
+                  : [
+                      buttonSecondaryStyles.root,
+                      buttonOutlineStyle.primary,
+                      disabled && buttonSecondaryStyles.disabled,
+                    ])
+              ),
+            variant === 'tertiary' &&
+              composeStyles(
+                ...(error
+                  ? [buttonTertiaryErrorStyle.root, buttonOutlineStyle.error]
+                  : [
+                      buttonTertiaryStyles.root,
+                      buttonOutlineStyle.primary,
+                      disabled && buttonTertiaryStyles.disabled,
+                    ])
+              ),
+            props.style
+          ).rnw({
+            hover: (!disabled && e.hovered) || loading,
+            active: !disabled && !loading && e.pressed,
+            disabled: disabled,
+          }).style
+        }
       >
         {(e: any) => {
           return (
             <>
-              {/*outline*/}
-              <Box
-                style={composeStyles(
-                  e.pressed && buttonOutlineStyle.default,
-                  error ? buttonOutlineStyle.error : buttonOutlineStyle.primary
-                )}
-              />
-              {/*premier border*/}
-              <LinearGradient
-                // colors={colors.gradient.brand.1}
-                colors={colors.gradient.brand['2']}
-                {...inlineStyle(() => ({
-                  base: {
-                    padding: 1,
-                    borderTopLeftRadius: 9,
-                    borderTopRightRadius: 9,
-                    borderBottomLeftRadius: 9,
-                    borderBottomRightRadius: 9,
-                    position: 'relative',
+              <buttonContext.Provider
+                value={{
+                  variant,
+                  size,
+                  state: {
+                    active: e.pressed,
+                    hover: e.hovered || loading,
                   },
-                })).rnw()}
+                  disabled: disabled,
+                  textId,
+                  setTextId,
+                  error,
+                  success,
+                }}
               >
-                {/*deuxieme border*/}
-                <LinearGradient
-                  colors={['#4754da', '#2e3dcb']}
-                  {...inlineStyle(() => ({
-                    base: {
-                      padding: 1,
-                      borderTopLeftRadius: 9,
-                      borderTopRightRadius: 9,
-                      borderBottomLeftRadius: 9,
-                      borderBottomRightRadius: 9,
-                    },
-                  })).rnw()}
-                >
-                  <View
-                    {...composeStyles(
-                      buttonStyle,
-                      size && buttonSizeStyles[size],
-                      alignSelf && alignSelfStyle[alignSelf],
-                      variant === 'primary' &&
-                        composeStyles(
-                          ...(error
-                            ? [
-                                buttonPrimaryErrorStyle.root,
-                                disabled && buttonPrimaryErrorStyle.disabled,
-                              ]
-                            : [
-                                buttonPrimaryStyles.root,
-                                disabled && buttonPrimaryStyles.disabled,
-                              ])
-                        ),
-                      variant === 'secondary' &&
-                        composeStyles(
-                          ...(!error
-                            ? [
-                                buttonSecondaryStyles.root,
-                                disabled && buttonSecondaryStyles.disabled,
-                              ]
-                            : [
-                                buttonSecondaryErrorStyle.root,
-                                disabled && buttonSecondaryErrorStyle.disabled,
-                              ])
-                        ),
-                      variant === 'tertiary' &&
-                        composeStyles(
-                          ...(!error ? [buttonTertiaryStyles.root] : [])
-                        )
-                    ).rnw({
-                      hover: (!disabled && e.hovered) || loading,
-                      active: !disabled && !loading && e.pressed,
-                      disabled: disabled,
-                    })}
-                  >
-                    <buttonContext.Provider
-                      value={{
-                        variant,
-                        size,
-                        state: {
-                          active: e.pressed,
-                          hover: e.hovered || loading,
-                        },
-                        disabled: disabled,
-                        textId,
-                        setTextId,
-                        error,
-                      }}
-                    >
-                      {renderLoading}
-                      {typeof children === 'function' ? children(e) : children}
-                    </buttonContext.Provider>
-                  </View>
-                </LinearGradient>
-              </LinearGradient>
+                {renderLoading}
+                {typeof children === 'function' ? children(e) : children}
+              </buttonContext.Provider>
             </>
           );
         }}

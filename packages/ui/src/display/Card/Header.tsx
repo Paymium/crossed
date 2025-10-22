@@ -8,8 +8,9 @@
 import { YBox } from '../../layout';
 import { composeStyles } from '@crossed/styled';
 import { cardStyles } from './styles';
-
-export const CardHeader = (props) => {
+import { ComponentProps } from 'react';
+type CardHeaderProps = ComponentProps<typeof YBox>;
+export const CardHeader = (props: CardHeaderProps) => {
   return (
     <YBox {...props} style={composeStyles(cardStyles.padding, props.style)} />
   );

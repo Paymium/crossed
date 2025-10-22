@@ -10,7 +10,6 @@ import {
   createStyles,
   inlineStyle,
   isWeb,
-  useTheme,
 } from '@crossed/styled';
 import { Floating, FloatingProps, FloatingRef, Sheet } from '../../overlay';
 import { ChevronDown } from '@crossed/unicons';
@@ -39,7 +38,7 @@ import { XBox } from '../../layout';
 
 const duration = 100;
 
-const styles = createStyles(({ space }) => ({
+const styles = createStyles(({ space, colors, radius }) => ({
   dynamic: (e: any) => {
     const transform = [];
     if (e.transform) {
@@ -55,11 +54,10 @@ const styles = createStyles(({ space }) => ({
   },
   calendar: {
     base: {
-      // backgroundColor: colors.background.secondary,
       borderWidth: 1,
-      // borderColor: colors.border.secondary,
+      borderColor: colors.border.primary.w,
       padding: space.md,
-      borderRadius: 16,
+      borderRadius: radius['2xl'],
       // boxShadow,
       // position: 'absolute',
       width: 432,

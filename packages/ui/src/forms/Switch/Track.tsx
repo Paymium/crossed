@@ -10,23 +10,18 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
-import { composeStyles, useTheme } from '@crossed/styled';
-import { styles } from './styles';
+import { composeStyles } from '@crossed/styled';
+import { styles, trackSizeStyles } from './styles';
 import { useContext } from 'react';
 import { localContext } from './context';
 import { Thumb } from './Thumb';
 
 export const SwitchTrack = () => {
-  const { value, duration, height, width, disabled } = useContext(localContext);
-  // const { components } = useTheme();
+  const { value, duration, height, width, disabled, hovered, pressed, size } =
+    useContext(localContext);
 
   const trackAnimatedStyle = useAnimatedStyle(() => {
-    const color = interpolateColor(
-      value ? 1 : 0,
-      [0, 1],
-      []
-      // [components.Switch.off.background, components.Switch.on.background]
-    );
+    const color = interpolateColor(value ? 1 : 0, [0, 1], []);
     return {
       backgroundColor: withTiming(color, { duration }),
     };
@@ -41,9 +36,12 @@ export const SwitchTrack = () => {
       style={[
         composeStyles(
           styles.track,
+          trackSizeStyles[size],
+          value && styles.toggleOn,
+          !value && styles.toggleOff,
           disabled && styles.disabledOff,
           disabled && value && styles.disabledOn
-        ).style().style,
+        ).style({ hover: hovered, active: pressed }).style,
         trackAnimatedStyle,
       ]}
     >

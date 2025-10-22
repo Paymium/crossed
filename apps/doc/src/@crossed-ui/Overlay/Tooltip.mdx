@@ -1,0 +1,58 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as TooltipStories from './Tooltip.stories';
+
+<Meta of={TooltipStories} />
+
+# Tooltip
+
+The `Tooltip` component is used to provide additional information or context when users hover over or focus on an element.
+It helps clarify functionality or content without cluttering the interface.
+
+Tooltips should be used sparingly to support understanding of interface elements. Avoid placing essential information solely in tooltips, as it may be inaccessible on some devices or to assistive technologies.
+
+```jsx
+import { Tooltip } from '@crossed/ui';
+```
+
+<Canvas of={TooltipStories.Hover} />
+
+## Compositions
+
+<TabsPreset
+  defaultValue={'Tooltip'}
+  items={[
+    {
+      value: 'Tooltip',
+      title: 'Tooltip',
+      panel: <ArgTypes of={TooltipStories.default.component} />,
+    },
+    {
+      value: 'Tooltip.Trigger',
+      title: 'Tooltip.Trigger',
+      panel: <ArgTypes of={TooltipStories.default.subcomponents['Tooltip.Trigger']} />,
+    },{
+      value: 'Tooltip.Content',
+      title: 'Tooltip.Content',
+      panel: <ArgTypes of={TooltipStories.default.subcomponents['Tooltip.Content']} />,
+    },
+  ]}
+/>
+
+## Examples
+
+<TabsPreset
+  defaultValue={'Hover'}
+  items={[
+    {
+      title: 'Hover',
+      value: 'Hover',
+      panel: <Canvas of={TooltipStories.Hover} />,
+    },{
+      title: 'On click',
+      value: 'onClick',
+      panel: <Canvas of={TooltipStories.Primary} />,
+    },
+  ]}
+/>

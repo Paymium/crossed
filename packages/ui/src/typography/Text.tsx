@@ -34,7 +34,7 @@ const useText = createStyles(({ font }) => ({
   },
 }));
 
-export interface TextProps extends Omit<TextNativeProps, 'style'> {
+export type TextProps = Omit<TextNativeProps, 'style'> & {
   /**
    * Color of text
    */
@@ -64,7 +64,7 @@ export interface TextProps extends Omit<TextNativeProps, 'style'> {
    * Element ref
    */
   ref?: React.Ref<TextNative> | undefined;
-}
+};
 
 const Text = memo<TextProps>(
   withReactive(

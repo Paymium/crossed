@@ -1,0 +1,89 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import * as AlertStories from './Alert.stories';
+import { Tabs } from '@crossed/ui';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={AlertStories} />
+
+# Alert
+
+Alerts are an important method of communicating with important users and providing feedback.
+Alerts can serve as informational messages, where they provide additional information to users that may not be tied
+to their current action or task. They can also be used to provide direct feedback to users and actions.
+
+```jsx title="Import Alert"
+import { Alert } from '@crossed/ui';
+```
+
+## Compositions
+
+<Tabs defaultValue={'Alert'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Alert'}>
+      <Tabs.Tab.Text>Alert</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Alert.Icon'}>
+      <Tabs.Tab.Text>Alert.Icon</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Alert.Title'}>
+      <Tabs.Tab.Text>Alert.Title</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Alert.Description'}>
+      <Tabs.Tab.Text>Alert.Description</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Alert.Group'}>
+      <Tabs.Tab.Text>Alert.Group</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Alert.Preset'}>
+      <Tabs.Tab.Text>Alert.Preset</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Alert">
+    <ArgTypes of={AlertStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Alert.Icon">
+    <ArgTypes of={AlertStories.default.subcomponents['Alert.Icon']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Alert.Title">
+    <ExtendText />
+    <ArgTypes of={AlertStories.default.subcomponents['Alert.Title']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Alert.Description">
+    <ExtendText />
+    <ArgTypes of={AlertStories.default.subcomponents['Alert.Description']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Alert.Group">
+    <ArgTypes of={AlertStories.default.subcomponents['Alert.Group']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Alert.Preset">
+    <ArgTypes of={AlertStories.default.subcomponents['Alert.Preset']} />
+  </Tabs.Panel>
+</Tabs>
+
+## Examples
+
+<Tabs defaultValue={'Info'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Info'}>
+      <Tabs.Tab.Text>Info</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Rounded'}>
+      <Tabs.Tab.Text>Rounded</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Preset'}>
+      <Tabs.Tab.Text>Preset</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Info">
+    <Canvas of={AlertStories.Info} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Rounded">
+    <Canvas of={AlertStories.Rounded} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Preset">
+    <Canvas of={AlertStories.Preset} />
+  </Tabs.Panel>
+</Tabs>

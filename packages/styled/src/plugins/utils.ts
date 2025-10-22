@@ -25,6 +25,8 @@ export const convertToPx = [
   'borderTopLeftRadius',
   'borderBottomRightRadius',
   'borderBottomLeftRadius',
+  'outlineWidth',
+  'outlineOffset',
   'padding',
   'paddingTop',
   'paddingBottom',

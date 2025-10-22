@@ -7,14 +7,11 @@
 
 import { createStyles, inlineStyle } from '@crossed/styled';
 
-export const buttonStyle = inlineStyle(({ radius }) => ({
+export const buttonStyle = inlineStyle(() => ({
   base: {
     display: 'flex',
-    borderTopLeftRadius: radius.md,
-    borderTopRightRadius: radius.md,
-    borderBottomLeftRadius: radius.md,
-    borderBottomRightRadius: radius.md,
-    borderWidth: 0,
+    borderRadius: 8,
+    borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'transparent',
     flexDirection: 'row',
@@ -27,21 +24,15 @@ export const buttonStyle = inlineStyle(({ radius }) => ({
 
 export const buttonOutlineStyle = createStyles(({ colors }) => ({
   default: {
-    base: {
-      position: 'absolute',
-      borderWidth: 2,
-      borderTopLeftRadius: 12,
-      borderTopRightRadius: 12,
-      borderBottomLeftRadius: 12,
-      borderBottomRightRadius: 12,
-      top: -4,
-      right: -4,
-      left: -4,
-      bottom: -4,
+    ':active': {
+      outlineWidth: 2,
+      outlineOffset: 2,
+      outlineStyle: 'solid',
     },
   },
-  primary: { base: { borderColor: colors.background.brand.solid.default } },
-  error: { base: { borderColor: colors.background.error.solid.default } },
+  primary: { base: { outlineColor: colors.background.brand.solid.default } },
+  error: { base: { outlineColor: colors.background.error.solid.default } },
+  success: { base: { outlineColor: colors.background.brand.solid.default } },
 }));
 
 export const buttonSizeStyles = createStyles(() => ({
@@ -68,14 +59,14 @@ export const buttonPrimaryStyles = createStyles(({ colors }) => ({
   },
   disabled: {
     base: {
-      backgroundColor: colors.background.disabled.default,
+      backgroundColor: colors.background.brand.primary.default,
       borderColor: colors.border.disabled.subtle,
     },
   },
-  text: { 'base': { color: colors.primary.base.white } },
-  textHover: { 'base': { color: colors.primary.base.white } },
-  textActive: { 'base': { color: colors.primary.base.white } },
-  textDisabled: { 'base': { color: colors.text.secondary.brand } },
+  text: { base: { color: colors.primary.base.white } },
+  textHover: { base: { color: colors.primary.base.white } },
+  textActive: { base: { color: colors.primary.base.white } },
+  textDisabled: { base: { color: colors.text.secondary.brand } },
 }));
 
 export const buttonSecondaryStyles = createStyles(({ colors }) => ({
@@ -99,10 +90,10 @@ export const buttonSecondaryStyles = createStyles(({ colors }) => ({
       borderColor: colors.background.primary.alt,
     },
   },
-  text: { 'base': { color: colors.text.brand.tertiary.default } },
-  textHover: { 'base': { color: colors.text.brand.secondary.hover } },
-  textActive: { 'base': { color: colors.text.brand.secondary.default } },
-  textDisabled: { 'base': { color: colors.text.quaternary.brand } },
+  text: { base: { color: colors.text.brand.tertiary.default } },
+  textHover: { base: { color: colors.text.brand.secondary.hover } },
+  textActive: { base: { color: colors.text.brand.secondary.default } },
+  textDisabled: { base: { color: colors.text.quaternary.default } },
 }));
 
 export const buttonTertiaryStyles = createStyles(({ colors }) => ({
@@ -112,23 +103,29 @@ export const buttonTertiaryStyles = createStyles(({ colors }) => ({
       backgroundColor: colors.primary.base.transparent,
     },
     ':hover': {
-      borderColor: colors.background.brand.secondary.hover,
-      backgroundColor: colors.background.brand.secondary.hover,
+      borderColor: colors.background.primary.hover,
+      backgroundColor: colors.background.primary.hover,
     },
     ':active': {
       borderColor: colors.background.primary.default,
       backgroundColor: colors.background.primary.default,
     },
   },
-  text: { 'base': { color: colors.text.brand.tertiary.default } },
-  textHover: { 'base': { color: colors.text.brand.secondary.hover } },
-  textActive: { 'base': { color: colors.text.brand.secondary.default } },
-  textDisabled: { 'base': { color: colors.text.quaternary.brand } },
+  disabled: {
+    base: {
+      borderColor: colors.primary.base.transparent,
+      backgroundColor: colors.primary.base.transparent,
+    },
+  },
+  text: { base: { color: colors.text.brand.tertiary.default } },
+  textHover: { base: { color: colors.text.brand.secondary.hover } },
+  textActive: { base: { color: colors.text.brand.secondary.default } },
+  textDisabled: { base: { color: colors.text.quaternary.default } },
 }));
 
 export const buttonPrimaryErrorStyle = createStyles(({ colors }) => ({
   root: {
-    base: {
+    'base': {
       borderColor: colors.background.error.solid.default,
       backgroundColor: colors.background.error.solid.default,
     },
@@ -137,25 +134,26 @@ export const buttonPrimaryErrorStyle = createStyles(({ colors }) => ({
       backgroundColor: colors.background.error.solid.default,
     },
     ':active': {
+      outlineColor: colors.background.error.solid.default,
       borderColor: colors.background.error.solid.default,
       backgroundColor: colors.background.error.solid.default,
     },
   },
   disabled: {
     base: {
-      backgroundColor: colors.background.error.secondary.default,
-      borderColor: colors.background.error.secondary.default,
+      backgroundColor: colors.background.disabled.default,
+      borderColor: colors.border.disabled.subtlew,
     },
   },
-  text: { 'base': { color: colors.primary.base.white } },
-  textHover: { 'base': { color: colors.primary.base.white } },
-  textActive: { 'base': { color: colors.primary.base.white } },
-  textDisabled: { 'base': { color: colors.primary.base.white } },
+  text: { base: { color: colors.primary.base.white } },
+  textHover: { base: { color: colors.primary.base.white } },
+  textActive: { base: { color: colors.primary.base.white } },
+  textDisabled: { base: { color: colors.foreground.disabled.default } },
 }));
 
 export const buttonSecondaryErrorStyle = createStyles(({ colors }) => ({
   root: {
-    base: {
+    'base': {
       borderColor: colors.border.error.subtle,
       backgroundColor: colors.background.error.primary.default,
     },
@@ -170,35 +168,60 @@ export const buttonSecondaryErrorStyle = createStyles(({ colors }) => ({
   },
   disabled: {
     base: {
-      borderColor: colors.border.error.subtle,
-      backgroundColor: colors.background.error.primary.default,
+      borderColor: colors.border.disabled.subtlew,
+      backgroundColor: colors.background.primary.alt,
     },
   },
-  text: { 'base': { color: colors.text.error.default } },
-  textHover: { 'base': { color: colors.text.error.hover } },
-  textActive: { 'base': { color: colors.text.error.hover } },
-  textDisabled: { 'base': { color: colors.text.error.default } },
+  text: { base: { color: colors.text.error.default } },
+  textHover: { base: { color: colors.text.error.hover } },
+  textActive: { base: { color: colors.text.error.hover } },
+  textDisabled: { base: { color: colors.foreground.disabled.default } },
 }));
 
 export const buttonTertiaryErrorStyle = createStyles(({ colors }) => ({
   root: {
-    base: {
-      borderColor: colors.border.error.subtle,
-      backgroundColor: colors.background.error.primary.default,
+    'base': {
+      borderColor: colors.primary.base.transparent,
+      backgroundColor: colors.primary.base.transparent,
     },
     ':hover': {
-      borderColor: colors.border.error.subtle,
-      backgroundColor: colors.background.error.secondary.default,
+      backgroundColor: colors.background.error.primary.default,
     },
     ':active': {
-      borderColor: colors.border.error.subtle,
       backgroundColor: colors.background.error.primary.default,
     },
   },
-  text: { 'base': { color: colors.text.error.default } },
-  textHover: { 'base': { color: colors.text.error.hover } },
-  textActive: { 'base': { color: colors.text.error.hover } },
-  textDisabled: { 'base': { color: colors.text.error.default } },
+  text: { base: { color: colors.text.error.default } },
+  textHover: { base: { color: colors.text.error.hover } },
+  textActive: { base: { color: colors.text.error.hover } },
+  textDisabled: { base: { color: colors.foreground.disabled.default } },
+}));
+
+export const buttonPrimarySuccessStyle = createStyles(({ colors }) => ({
+  root: {
+    'base': {
+      borderColor: colors.background.success.solid.default,
+      backgroundColor: colors.background.success.solid.default,
+    },
+    ':hover': {
+      borderColor: colors.background.success.solid.default,
+      backgroundColor: colors.utility.success['700'],
+    },
+    ':active': {
+      borderColor: colors.background.success.solid.default,
+      backgroundColor: colors.background.success.solid.default,
+    },
+  },
+  disabled: {
+    base: {
+      backgroundColor: colors.background.disabled.default,
+      borderColor: colors.border.disabled.subtlew,
+    },
+  },
+  text: { base: { color: colors.primary.base.white } },
+  textHover: { base: { color: colors.primary.base.white } },
+  textActive: { base: { color: colors.primary.base.white } },
+  textDisabled: { base: { color: colors.foreground.disabled.default } },
 }));
 
 export const textStyles = createStyles(() => ({

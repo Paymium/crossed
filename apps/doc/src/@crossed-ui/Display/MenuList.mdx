@@ -1,0 +1,75 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as MenuListStories from './MenuList.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={MenuListStories} />
+
+# MenuList
+
+A composite component that acts as a provider for its menu-related subcomponents. It manages shared state, behavior, and styling, allowing you to build flexible and consistent menus.
+
+```tsx
+import { MenuList } from '@crossed/ui';
+```
+
+## Composition
+
+<Tabs defaultValue={'MenuList'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'MenuList'}>
+      <Tabs.Tab.Text>MenuList</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'MenuList.Divider'}>
+      <Tabs.Tab.Text>MenuList.Divider</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'MenuList.Item'}>
+      <Tabs.Tab.Text>MenuList.Item</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'MenuList.Label'}>
+      <Tabs.Tab.Text>MenuList.Label</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'MenuList.Title'}>
+      <Tabs.Tab.Text>MenuList.Title</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'MenuList.Icon'}>
+      <Tabs.Tab.Text>MenuList.Icon</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="MenuList">
+    <ArgTypes of={MenuListStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="MenuList.Divider">
+    <ArgTypes of={MenuListStories.default.subcomponents['MenuList.Divider']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="MenuList.Item">
+    <ArgTypes of={MenuListStories.default.subcomponents['MenuList.Item']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="MenuList.Label">
+    <ExtendText />
+    <ArgTypes of={MenuListStories.default.subcomponents['MenuList.Label']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="MenuList.Title">
+    <ExtendText />
+    <ArgTypes of={MenuListStories.default.subcomponents['MenuList.Title']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="MenuList.Icon">
+    <ArgTypes of={MenuListStories.default.subcomponents['MenuList.Icon']} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+
+<Tabs defaultValue={'Simple'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Simple'}>
+      <Tabs.Tab.Text>Simple</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Simple">
+    <Canvas of={MenuListStories.Primary} />
+  </Tabs.Panel>
+</Tabs>

@@ -18,12 +18,20 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions',
     "@chromatic-com/storybook",
     'storybook-dark-mode',
+    '@storybook/addon-docs',
     '@storybook/addon-a11y',
     "@storybook/addon-designs"
   ],
   typescript: {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
+      propFilter: (prop) => {
+        // ignore tout ce qui vient de node_modules (ex: Pressable)
+        if (prop.parent) {
+          return !/node_modules/.test(prop.parent.fileName);
+        }
+        return true;
+      },
   //     compilerOptions: {
   //       allowSyntheticDefaultImports: false,
   //       esModuleInterop: false,

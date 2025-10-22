@@ -1,0 +1,70 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as BadgeStories from './Badge.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={BadgeStories} />
+
+# Badge
+The `Badge` component is used to display small pieces of information or status indicators.
+It can highlight counts, statuses, or categories to draw attention to important details without disrupting the layout.
+
+Badges should be used sparingly to emphasize relevant information. Avoid overusing them, as too many badges can reduce their visual impact and clarity.
+
+```tsx
+import { Badge } from "@crossed/ui"
+```
+
+## Composition
+
+<Tabs defaultValue={'Badge'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Badge'}>
+      <Tabs.Tab.Text>Badge</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Badge.Text'}>
+      <Tabs.Tab.Text>Badge.Text</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Badge.Group'}>
+      <Tabs.Tab.Text>Badge.Group</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Badge.Icon'}>
+      <Tabs.Tab.Text>Badge.Icon</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Badge">
+    <ArgTypes of={BadgeStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Badge.Text">
+    <ExtendText />
+    <ArgTypes of={BadgeStories.default.subcomponents['Badge.Text']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Badge.Group">
+    <ArgTypes of={BadgeStories.default.subcomponents['Badge.Group']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Badge.Icon">
+    <ArgTypes of={BadgeStories.default.subcomponents['Badge.Icon']} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+
+<Tabs defaultValue={'Variants'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Variants'}>
+      <Tabs.Tab.Text>Variants</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Group'}>
+      <Tabs.Tab.Text>Group</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Variants">
+    <Canvas of={BadgeStories.Primary} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Group">
+    <Canvas of={BadgeStories.Group} />
+  </Tabs.Panel>
+</Tabs>

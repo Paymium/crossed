@@ -33,10 +33,10 @@
     "@jest/types": "29.6.3",
     "@testing-library/jest-dom": "^6.5.0",
     "@types/jest": "^29.5.13",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "18.3.0",
-    "react": "^18.3.1",
-    "react-native": "=0.76.7",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-native": "catalog:",
     "typescript": "5.4.2"
   },
   "peerDependencies": {

@@ -51,4 +51,11 @@ export interface ButtonProps extends Omit<PressableProps, 'style'> {
    * Error style with variant
    */
   error?: boolean;
+
+  /**
+   * Success style with variant
+   */
+  success?: boolean;
+
+  style?: CrossedMethods<any>;
 }

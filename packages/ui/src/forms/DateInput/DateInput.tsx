@@ -20,7 +20,7 @@ import { growStyles, shrinkStyles } from '../../styles/flex';
 import { useUncontrolled } from '@crossed/core';
 import { useMedia } from '../../useMedia';
 import { NativeSyntheticEvent, TextInputFocusEventData } from 'react-native';
-import { FormControl, FormField, FormLabel } from '../Form';
+import { FormField } from '../Form';
 
 const convertToDate = (e?: Partial<Value>) => {
   if (e?.year === undefined || e?.month === undefined || e?.day === undefined)
@@ -50,9 +50,7 @@ export const DateInput = memo(
     id: idProps,
     style,
     label,
-    description,
-    extra,
-    formFieldStyle,
+    helperText,
   }: DateInputProps) => {
     const { refs, floatingStyles } = useFloating();
     const calendarRef = useRef<FloatingRefExtended>(null);
@@ -104,18 +102,8 @@ export const DateInput = memo(
     }, [picker]);
 
     return (
-      <FormField {...composeStyles(growStyles.on, formFieldStyle).rnw()}>
-        <XBox alignItems="center" space="xxs">
-          {!!label && <FormLabel>{label}</FormLabel>}
-          {!!description && (
-            <Text style={form.labelDescription}>{description}</Text>
-          )}
-          {!!extra && (
-            <Text style={form.labelExtra} textAlign="right">
-              {extra}
-            </Text>
-          )}
-        </XBox>
+      <FormField>
+        {!!label && <FormField.Label>{label}</FormField.Label>}
         <YBox
           pressable
           onPress={
@@ -146,7 +134,7 @@ export const DateInput = memo(
             alignItems="stretch"
           >
             {inputs.map(({ key, ...item }, i, a) => {
-              const Comp = i === 0 ? FormControl : Fragment;
+              const Comp = i === 0 ? FormField.Control : Fragment;
               return [
                 <Comp key={`${id}-${key}-control`}>
                   <InputPart
@@ -193,6 +181,7 @@ export const DateInput = memo(
             />
           )}
         </YBox>
+        {!!helperText && <FormField.Helper>{helperText}</FormField.Helper>}
       </FormField>
     );
   }

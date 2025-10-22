@@ -23,3 +23,12 @@ export const flexDirectionStyles = createStyles(() => ({
   column: { base: { flexDirection: 'column' } },
   columnReverse: { base: { flexDirection: 'column-reverse' } },
 }));
+
+export const flexDirectionResponsiveStyles = createStyles(() => ({
+  mdCol: {
+    media: { md: { flexDirection: 'column' } },
+  },
+  mdRow: {
+    media: { md: { flexDirection: 'row' } },
+  },
+}));

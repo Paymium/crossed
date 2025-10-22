@@ -6,7 +6,7 @@
  */
 
 import { cloneElement, isValidElement, memo, useMemo, Children } from 'react';
-import { BoxProps, Divider, XBox, YBox } from '../layout';
+import { BoxProps, XBox, YBox } from '../layout';
 import { composeStyles, createStyles } from '@crossed/styled';
 
 const stylesVertical = createStyles(() => ({
@@ -71,9 +71,9 @@ export const Group = memo<GroupRootProps>(
         const isMiddle = !isFirst && !isLast;
 
         const props: any = {
-          ...child.props,
+          ...(child.props as any),
           style: composeStyles(
-            child.props.style,
+            (child.props as any).style,
             orientation === 'vertical' && [
               isFirst && !isLast && stylesVertical.first,
               isLast && !isFirst && stylesVertical.last,
@@ -103,3 +103,4 @@ export const Group = memo<GroupRootProps>(
     return <Container {...props}>{childrenModified}</Container>;
   }
 );
+Group.displayName = 'Group';

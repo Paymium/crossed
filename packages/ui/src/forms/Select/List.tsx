@@ -9,17 +9,17 @@ import { memo, useCallback, useMemo } from 'react';
 import { ItemList, ValueTypeMultiple } from './types';
 import { MenuList } from '../../display';
 import { composeStyles, inlineStyle } from '@crossed/styled';
-import { XBox } from '../../layout';
-import { Checkbox } from '../Checkbox';
+import { Box } from '../../layout';
 import { useSelectConfig, useSelectValue } from './context';
 import { Sheet, useFloatingContext } from '../../overlay';
-import { gapStyles } from '../../styles';
+import { gapStyles, growStyles, justifyContentStyle } from '../../styles';
 import {
   FlatListProps,
   SectionListProps,
   FlatList,
   SectionList,
 } from 'react-native';
+import { Check } from '@crossed/icons';
 
 const isChecked = (
   value: string,
@@ -79,19 +79,38 @@ export const List = memo(({ data }: { data: any }) => {
     ({ item }) => {
       const checked = item.checked;
 
-    return (
-      <MenuList.Item onPress={onPress(item)}>
-        <XBox space={'xxs'}>
-          {multiple && <Checkbox checked={checked} onChecked={onPress(item)} />}
-          <MenuList.Title>{item.label}</MenuList.Title>
-        </XBox>
-      </MenuList.Item>
-    );
-  }, [onPress, multiple]);
+      return (
+        <MenuList.Item
+          onPress={onPress(item)}
+          style={justifyContentStyle.between}
+          space={'xxs'}
+        >
+          <MenuList.Title style={growStyles.on}>{item.label}</MenuList.Title>
+          {checked && (
+            <Box alignSelf={'center'}>
+              <Check size={16} color={'foreground.brand.primary.default'} />
+            </Box>
+          )}
+        </MenuList.Item>
+      );
+    },
+    [multiple, onPress]
+  );
 
   const RenderLabel: SectionListProps<ItemList>['renderItem'] = useCallback(
     ({ section }) => {
-      return <MenuList.Label>{section.title}</MenuList.Label>;
+      return (
+        <MenuList.Label
+          style={inlineStyle(({ colors, space }) => ({
+            base: {
+              backgroundColor: colors.background.primary.subtle,
+              padding: space.sm,
+            },
+          }))}
+        >
+          {section.title}
+        </MenuList.Label>
+      );
     },
     []
   );

@@ -1,0 +1,90 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as CardStories from './Card.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={CardStories} />
+
+# Card
+
+The `Card` component is used to group related information within a distinct container.
+It helps organize content such as text, images, and actions into a visually separated block that’s easy to scan and understand.
+
+Cards should be used to highlight key information or interactive elements. Avoid nesting multiple cards or overusing them, as it can clutter the interface and reduce visual hierarchy.
+
+```tsx
+import { Card } from "@crossed/ui"
+```
+
+## Composition
+
+<Tabs defaultValue={'Card'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Card'}>
+      <Tabs.Tab.Text>Card</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Card.Title'}>
+      <Tabs.Tab.Text>Card.Title</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Card.Description'}>
+      <Tabs.Tab.Text>Card.Description</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Card.Group'}>
+      <Tabs.Tab.Text>Card.Group</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Card.Footer'}>
+      <Tabs.Tab.Text>Card.Footer</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Card.Header'}>
+      <Tabs.Tab.Text>Card.Header</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Card">
+    <ArgTypes of={CardStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Card.Title">
+    <ExtendText />
+    <ArgTypes of={CardStories.default.subcomponents['Card.Title']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Card.Description">
+    <ExtendText />
+    <ArgTypes of={CardStories.default.subcomponents['Card.Description']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Card.Group">
+    <ArgTypes of={CardStories.default.subcomponents['Card.Group']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Card.Footer">
+    <ArgTypes of={CardStories.default.subcomponents['Card.Footer']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Card.Header">
+    <ArgTypes of={CardStories.default.subcomponents['Card.Header']} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+
+<Tabs defaultValue={'Simple'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Simple'}>
+      <Tabs.Tab.Text>Simple</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Nested'}>
+      <Tabs.Tab.Text>Nested</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Stat'}>
+      <Tabs.Tab.Text>Stat</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Simple">
+    <Canvas of={CardStories.Primary} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Nested">
+    <Canvas of={CardStories.CardInCard} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Stat">
+    <Canvas of={CardStories.CardStat} />
+  </Tabs.Panel>
+</Tabs>

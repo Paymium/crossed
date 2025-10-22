@@ -21,15 +21,14 @@ import {
   createStyles,
   composeStyles,
   CrossedMethods,
-  inlineStyle,
   useTheme,
 } from '@crossed/styled';
-import { FormControl, FormField, FormLabel } from './Form';
+import { FormField } from './Form';
 import { CloseButton } from '../buttons/CloseButton';
 import { useUncontrolled } from '@crossed/core';
 import { XBox } from '../layout/XBox';
-import { Text } from '../typography/Text';
 import { YBox } from '../layout/YBox';
+import { AlertCircle } from '@crossed/icons';
 
 const styles = createStyles(() => ({
   close: { base: { padding: 0 } },
@@ -45,6 +44,11 @@ export type InputProps = Omit<
   label?: string;
 
   /**
+   * Helper text
+   */
+  helperText?: string;
+
+  /**
    * Render clearable button if value is filled
    */
   clearable?: boolean;
@@ -55,14 +59,6 @@ export type InputProps = Omit<
    */
   error?: string;
   /**
-   * Description of input
-   */
-  description?: string;
-  /**
-   * Extra of label
-   */
-  extra?: string;
-  /**
    * Disabled state
    */
   disabled?: boolean;
@@ -70,10 +66,6 @@ export type InputProps = Omit<
    * style to extends
    */
   style?: CrossedMethods<any>;
-  /**
-   * formField style to extends
-   */
-  formFieldStyle?: CrossedMethods<any>;
 };
 
 export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
@@ -87,9 +79,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
     disabled,
     elementRight,
     elementLeft,
-    description,
-    extra,
-    formFieldStyle,
+    helperText,
     ...props
   } = allProps;
   const [value, setValue] = useUncontrolled({
@@ -109,25 +99,11 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
 
   const showClear = !!(clearable && value);
   return (
-    <FormField
-      disabled={disabled || (!props.focusable && props.focusable !== undefined)}
-      {...composeStyles(
-        inlineStyle(() => ({ base: { flexGrow: 1 } })),
-        formFieldStyle
-      ).rnw()}
-    >
-      <YBox space="xxs">
-        {!!(label || description || extra) && (
+    <FormField>
+      <YBox space="sm">
+        {!!label && (
           <XBox alignItems="center" space="xxs">
-            {!!label && <FormLabel>{label}</FormLabel>}
-            {!!description && (
-              <Text style={form.labelDescription}>{description}</Text>
-            )}
-            {!!extra && (
-              <Text style={form.labelExtra} textAlign="right">
-                {extra}
-              </Text>
-            )}
+            {!!label && <FormField.Label>{label}</FormField.Label>}
           </XBox>
         )}
         <XBox>
@@ -140,14 +116,14 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
             >
               {isValidElement(elementLeft) &&
               typeof elementLeft.type !== 'string' &&
-              (elementLeft.type as any).displayName === 'CrossedText'
+              (elementLeft.type as any).displayName === 'Text'
                 ? cloneElement(elementLeft, {
                     style: [(elementLeft as any).style, { color }],
                   } as any)
                 : elementLeft}
             </XBox>
           )}
-          <FormControl>
+          <FormField.Control>
             <TextInput
               ref={ref}
               placeholderTextColor={color}
@@ -172,8 +148,8 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
               value={value}
               onChangeText={setValue}
             />
-          </FormControl>
-          {(!!elementRight || !!showClear) && (
+          </FormField.Control>
+          {(!!elementRight || !!showClear || !!error) && (
             <XBox
               style={composeStyles(form.elementRight, gapStyles.xs)}
               onLayout={({ nativeEvent: { layout } }) =>
@@ -182,7 +158,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
             >
               {isValidElement(elementRight) &&
               typeof elementRight.type !== 'string' &&
-              (elementRight.type as any).displayName === 'CrossedText'
+              (elementRight.type as any).displayName === 'Text'
                 ? cloneElement(elementRight, {
                     style: [(elementRight as any).style, { color }],
                   } as any)
@@ -190,10 +166,14 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
               {!!showClear && (
                 <CloseButton onPress={onClear} style={styles.close} />
               )}
+              {!!error && (
+                <AlertCircle color={'foreground.error.secondary.default'} />
+              )}
             </XBox>
           )}
         </XBox>
-        {error && <Text color="error">{error.toString()}</Text>}
+        {!!helperText && <FormField.Helper>{helperText}</FormField.Helper>}
+        {!!error && <FormField.Error>{error.toString()}</FormField.Error>}
       </YBox>
     </FormField>
   );

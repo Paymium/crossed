@@ -9,19 +9,11 @@ import { render, screen } from '@crossed/test';
 import '@testing-library/jest-dom';
 import { Text } from '../../../typography';
 import { Divider } from '../../../layout';
-import {
-  Card,
-  CardTitle,
-  CardDescription,
-  CardGroup,
-  CardExtra,
-} from '../index';
+import { Card, CardTitle, CardDescription } from '../index';
 
 expect(Card).toBeDefined();
 expect(CardTitle).toBeDefined();
 expect(CardDescription).toBeDefined();
-expect(CardGroup).toBeDefined();
-expect(CardExtra).toBeDefined();
 
 describe('Card Group', () => {
   test('if child not valid it is not rendered', () => {

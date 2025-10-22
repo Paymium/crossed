@@ -11,7 +11,8 @@ import { composeStyles, inlineStyle } from '@crossed/styled';
 import { BadgeProps } from './type';
 import { Provider, useContextGroup } from './context';
 import {
-  badgeContentColor, badgePressableContentColor,
+  badgeContentColor,
+  badgePressableContentColor,
   badgeSizeRoundedStyle,
   badgeSizeStyle,
   badgeStyle,

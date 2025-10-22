@@ -16,6 +16,7 @@ import { IDay } from '@crossed/use-calendar/src';
 import { SelectYear } from './SelectYear';
 import { SelectMonth } from './SelectMonth';
 import { View } from 'react-native';
+import { composeStyles, inlineStyle } from '@crossed/styled';
 
 export type CalendarProps = Partial<Omit<IUseCalendarOptions, 'selectedDate'>> &
   Pick<YBoxProps, 'style'> & {
@@ -46,7 +47,15 @@ export const Calendar = memo<CalendarProps & RefAttributes<View>>(
       });
     }, [monthsByYear]);
     return (
-      <YBox style={style} ref={ref}>
+      <YBox
+        style={composeStyles(
+          inlineStyle(({ colors }) => ({
+            base: { backgroundColor: colors.background.primary.alt },
+          })),
+          style
+        )}
+        ref={ref}
+      >
         {months.map(({ year, month, weeks }) => (
           <YBox key={`${id}-month-${month}`} space={'xxs'}>
             <XBox alignItems={'stretch'} space={'md'}>
