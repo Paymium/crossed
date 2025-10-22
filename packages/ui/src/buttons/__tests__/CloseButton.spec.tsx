@@ -55,7 +55,7 @@ describe('CloseButton', () => {
   it('renders the icon with the correct size', () => {
     render(<CloseButton />);
     const icon = screen.getByLabelText('Close').children[0]; // Supposant que l'icône a le rôle d'image
-    expect(icon).toHaveAttribute('width', '16'); // Vérifie que la taille est correcte
-    expect(icon).toHaveAttribute('height', '16');
+    expect(icon).toHaveAttribute('width', '20'); // Vérifie que la taille est correcte
+    expect(icon).toHaveAttribute('height', '20');
   });
 });

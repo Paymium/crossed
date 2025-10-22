@@ -122,7 +122,7 @@ export const SelectTrigger = withStaticProperties(
               style={composeStyles(
                 !children && form.input,
                 !children && useSelect.trigger,
-                props.disabled && form.disabled,
+                // props.disabled && form.disabled,
                 // error && form.inputError,
                 props.style
               )}

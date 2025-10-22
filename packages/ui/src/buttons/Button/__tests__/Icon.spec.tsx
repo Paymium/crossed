@@ -40,8 +40,8 @@ describe('ButtonIcon', () => {
     });
 
     expect(X).toBeCalledWith(
-      { 'color': 'var(--components--action-primary-default-text)' },
-      {}
+      { 'color': 'var(--colors-primary-base-white)' },
+      undefined
     );
   });
 
@@ -53,8 +53,8 @@ describe('ButtonIcon', () => {
     });
 
     expect(X).toBeCalledWith(
-      { 'color': 'var(--components--action-primary-hover-text)' },
-      {}
+      { 'color': 'var(--colors-primary-base-white)' },
+      undefined
     );
   });
 
@@ -66,8 +66,8 @@ describe('ButtonIcon', () => {
     });
 
     expect(X).toBeCalledWith(
-      { 'color': 'var(--components--action-primary-active-text)' },
-      {}
+      { 'color': 'var(--colors-primary-base-white)' },
+      undefined
     );
   });
 
@@ -79,8 +79,8 @@ describe('ButtonIcon', () => {
     });
 
     expect(X).toBeCalledWith(
-      { 'color': 'var(--components--action-primary-default-text)' },
-      {}
+      { 'color': 'var(--colors-primary-base-white)' },
+      undefined
     );
   });
 
@@ -92,8 +92,8 @@ describe('ButtonIcon', () => {
     });
 
     expect(X).toBeCalledWith(
-      { 'color': 'var(--components--action-secondary-default-text)' },
-      {}
+      { 'color': 'var(--colors-text-brand-tertiary-default)' },
+      undefined
     );
   });
 

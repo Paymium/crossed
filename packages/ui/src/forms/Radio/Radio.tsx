@@ -136,7 +136,7 @@ export const RadioItem = ({
         // @ts-expect-error error react-native react-native-web
         accessibilityRole={'label'}
         {...props}
-        onPress={handlePress}
+        onPress={disabled ? undefined : handlePress}
         disabled={disabled}
         style={({
           pressed,

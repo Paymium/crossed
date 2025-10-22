@@ -50,9 +50,7 @@ describe('ButtonText', () => {
     );
 
     const text = screen.getByText('Primary Text');
-    expect(text).toHaveClass(
-      `color-[var(--components--action-primary-default-text)]`
-    ); // Exemple de vérification
+    expect(text).toHaveClass(`color-[var(--colors-primary-base-white)]`); // Exemple de vérification
   });
 
   it('updates the textId when id changes', () => {
@@ -99,9 +97,7 @@ describe('ButtonText', () => {
     );
 
     const text = screen.getByText('Hover Text');
-    expect(text).toHaveClass(
-      `color-[var(--components--action-primary-hover-text)]`
-    ); // Exemple de vérification
+    expect(text).toHaveClass(`color-[var(--colors-primary-base-white)]`); // Exemple de vérification
   });
 
   it('applies disabled styles when disabled is true', () => {
@@ -117,9 +113,7 @@ describe('ButtonText', () => {
     );
 
     const text = screen.getByText('Disabled Text');
-    expect(text).toHaveClass(
-      `color-[var(--components--action-primary-default-text)]`
-    );
+    expect(text).toHaveClass(`color-[var(--colors-text-secondary-brand)]`);
   });
 
   it('passes additional props to the underlying Text component', () => {
@@ -136,8 +130,6 @@ describe('ButtonText', () => {
 
     const text = screen.getByText('Custom Props');
     expect(text).toHaveStyle('color: rgb(255, 0, 0)');
-    expect(text).toHaveClass(
-      `color-[var(--components--action-primary-default-text)]`
-    );
+    expect(text).toHaveClass(`color-[var(--colors-primary-base-white)]`);
   });
 });

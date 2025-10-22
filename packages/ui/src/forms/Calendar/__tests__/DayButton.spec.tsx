@@ -51,7 +51,7 @@ describe('DayButton', () => {
       <DayButton day={{ ...mockDay, isSelected: true }} onPress={mockOnPress} />
     );
     expect(screen.getByText('15')).toHaveClass(
-      'color-[var(--components--action-primary-default-text)]'
+      'color-[var(--colors-primary-base-white)]'
     );
   });
 });
