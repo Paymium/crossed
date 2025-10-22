@@ -10,34 +10,28 @@ import { ComponentProps } from 'react';
 import { CardRoot } from './Root';
 import { Title } from './Title';
 import { Description } from './Description';
-import { Extra } from './Extra';
 import { CardGroup } from './Group';
+import { CardFooter } from './Footer';
+import { CardHeader } from './Header';
 
 const Card = withStaticProperties(CardRoot, {
   Title,
   Description,
-  Extra,
   Group: CardGroup,
+  Footer: CardFooter,
+  Header: CardHeader,
 });
-const {
-  Title: CardTitle,
-  Description: CardDescription,
-  Extra: CardExtra,
-} = Card;
+const { Title: CardTitle, Description: CardDescription } = Card;
 
 type CardTitleProps = ComponentProps<typeof CardTitle>;
 type CardDescriptionProps = ComponentProps<typeof CardDescription>;
-type CardExtraProps = ComponentProps<typeof CardExtra>;
 type CardProps = ComponentProps<typeof CardRoot>;
 
 export {
   Card,
   CardTitle,
   CardDescription,
-  CardExtra,
-  CardGroup,
   type CardProps,
   type CardTitleProps,
   type CardDescriptionProps,
-  type CardExtraProps,
 };

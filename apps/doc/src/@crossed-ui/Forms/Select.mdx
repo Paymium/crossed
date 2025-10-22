@@ -1,0 +1,51 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as SelectStories from './Select.stories';
+
+<Meta of={SelectStories} />
+
+# Select
+The `Select` component is a React input control that allows users to choose one or multiple options from a dropdown list.
+It supports searchable lists, custom rendering, and validation states, making it ideal for forms, filters, and dynamic selection interfaces.
+
+```jsx
+import { Select } from '@crossed/ui';
+```
+
+<Canvas of={SelectStories.Primary} />
+
+## Composition
+
+<TabsPreset
+  defaultValue={'Select'}
+  items={[
+    {
+      title: 'Select',
+      value: 'Select',
+      panel: <ArgTypes of={SelectStories.default.component} />,
+    },
+  ]}
+/>
+
+## Example
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={SelectStories.Primary} />,
+    },
+    {
+      title: 'Searchable',
+      value: 'Searchable',
+      panel: <Canvas of={SelectStories.Searchable} />,
+    },
+    {
+      title: 'Multiple',
+      value: 'Multiple',
+      panel: <Canvas of={SelectStories.Multiple} />,
+    },
+  ]}
+/>

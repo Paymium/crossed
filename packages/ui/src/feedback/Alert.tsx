@@ -12,73 +12,119 @@ import {
   composeStyles,
   createStyles,
   type CrossedMethods,
+  inlineStyle,
 } from '@crossed/styled';
-import { createContext, memo, useContext } from 'react';
+import {
+  ComponentProps,
+  createContext,
+  PropsWithChildren,
+  ReactNode,
+  useContext,
+} from 'react';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { match } from 'ts-pattern';
-import { AlertTriangle, CheckCircle, Info, XCircle } from '@crossed/unicons';
-import {
-  Button,
-  type ButtonProps,
-  type ButtonTextProps,
-} from '../buttons/Button';
+import { AlertCircle, CheckCircle, Help } from '@crossed/icons';
 import { Box } from '../layout/Box';
+import { ColorPaths } from '@crossed/icons/lib/typescript/types';
+import { XBox } from '../layout';
+import { CloseButton } from '../buttons';
+import { Adapt } from '../other';
+import {
+  flexDirectionResponsiveStyles,
+  growStyles,
+  justifyContentStyle,
+} from '../styles';
 
-export const alertDescriptionStyles = createStyles(
-  ({ components: { Alert } }) => ({
-    base: { base: { flexShrink: 1, flexGrow: 1 } },
-    error: { base: { color: Alert.error.text } },
-    success: { base: { color: Alert.success.text } },
-    warning: { base: { color: Alert.warning.text } },
-    info: { base: { color: Alert.info.text } },
-  })
-);
-export const alertActionTextStyles = createStyles(
-  ({ components: { Alert } }) => ({
-    error: {
-      'base': { color: Alert.error.text },
-      ':hover': { color: Alert.error.text },
-      ':active': { color: Alert.error.text },
+const containerIconRound = createStyles(({ radius, colors }) => ({
+  parent: { base: { position: 'relative', width: 38, height: 38 } },
+  flat: {
+    base: {
+      borderRadius: radius.md,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: colors.border.brand.default,
+      backgroundColor: colors.background.primary.default,
     },
-    success: {
-      'base': { color: Alert.success.text },
-      ':hover': { color: Alert.success.text },
-      ':active': { color: Alert.success.text },
+  },
+  firstLine: {
+    base: {
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      borderWidth: 2,
+      borderStyle: 'solid',
+      borderRadius: radius['3xl'],
+      opacity: 0.1,
     },
-    warning: {
-      'base': { color: Alert.warning.text },
-      ':hover': { color: Alert.warning.text },
-      ':active': { color: Alert.warning.text },
+  },
+  secondLine: {
+    base: {
+      position: 'absolute',
+      top: 6,
+      bottom: 6,
+      left: 6,
+      right: 6,
+      borderWidth: 2,
+      borderStyle: 'solid',
+      borderRadius: radius['3xl'],
+      opacity: 0.3,
     },
-    info: {
-      'base': { color: Alert.info.text },
-      ':hover': { color: Alert.info.text },
-      ':active': { color: Alert.info.text },
+  },
+}));
+
+const containerIconStyles = createStyles(({ colors }) => ({
+  brand: {
+    base: {
+      borderColor: colors.foreground.brand.primary.default,
     },
-  })
-);
+  },
+  info: {
+    base: {
+      borderColor: colors.foreground.tertiary.default,
+    },
+  },
+  success: {
+    base: {
+      borderColor: colors.foreground.success.primary.default,
+    },
+  },
+  error: {
+    base: {
+      borderColor: colors.foreground.error.primary.default,
+    },
+  },
+  warning: {
+    base: {
+      borderColor: colors.foreground.warning.primary.default,
+    },
+  },
+}));
 
 export const alertStyles = createStyles(
-  ({ space }) =>
+  ({ space, radius, colors }) =>
     ({
-      containerIcon: {
-        base: { alignSelf: 'center' },
-        media: { md: { alignSelf: 'baseline', paddingTop: 3 } },
+      floating: {
+        base: {
+          borderRadius: radius.xl,
+          borderWidth: 1,
+          borderColor: colors.border.secondary.w,
+        },
       },
       container: {
         base: {
-          paddingVertical: space.xs,
-          paddingHorizontal: space.md,
-          padding: space.xs,
-          borderRadius: 8,
-          borderWidth: 1,
+          padding: space.xl,
+          borderTopWidth: 1,
+          borderColor: colors.border.primary.default,
+          backgroundColor: colors.background.primary.alt,
           borderStyle: 'solid',
-          alignItems: 'center',
           gap: space.xs,
         },
-        variants: {},
         media: {
           md: {
+            borderTopWidth: 0,
+            borderBottomWidth: 1,
             flexDirection: 'row',
             gap: space.md,
           },
@@ -88,56 +134,32 @@ export const alertStyles = createStyles(
     }) as const
 );
 
-const actionStyles = createStyles(({ components: { Alert } }) => ({
-  base: {
-    base: { alignSelf: 'center', borderWidth: 0 },
-    media: { md: { alignSelf: 'baseline' } },
-    web: {
-      'base': { boxSizing: 'border-box' },
-      ':focus': {
-        outlineWidth: '2px',
-        outlineOffset: '2px',
-        outlineStyle: 'solid',
-      },
-    },
-  },
-  error: { web: { ':focus': { outlineColor: Alert.error.text } } },
-  success: {
-    web: { ':focus': { outlineColor: Alert.success.text } },
-  },
-  warning: {
-    web: { ':focus': { outlineColor: Alert.warning.text } },
-  },
-  info: {
-    web: { ':focus': { outlineColor: Alert.info.text } },
-  },
-}));
-
-const containerStyles = createStyles(({ components: { Alert } }) => ({
+const containerStyles = createStyles(() => ({
   error: {
     base: {
-      borderColor: Alert.error.border,
-      backgroundColor: Alert.error.background,
+      // borderColor: Alert.error.border,
+      // backgroundColor: Alert.error.background,
     },
   },
   success: {
     base: {
-      borderColor: Alert.success.border,
-      backgroundColor: Alert.success.background,
+      // borderColor: Alert.success.border,
+      // backgroundColor: Alert.success.background,
     },
   },
   warning: {
     base: {
-      borderColor: Alert.warning.border,
-      backgroundColor: Alert.warning.background,
+      // borderColor: Alert.warning.border,
+      // backgroundColor: Alert.warning.background,
     },
   },
   info: {
     base: {
-      borderColor: Alert.info.border,
-      backgroundColor: Alert.info.background,
+      // borderColor: Alert.info.border,
+      // backgroundColor: Alert.info.background,
     },
   },
+  brand: { base: {} },
 }));
 
 type Status = keyof typeof containerStyles;
@@ -148,75 +170,128 @@ export type AlertProps = YBoxProps & {
    * @default 'infos'
    */
   status?: Status;
+
+  /**
+   * Show rounded Icon
+   */
+  rounded?: boolean;
+  /**
+   * Floating style
+   */
+  floating?: boolean;
+  /**
+   * Style pass to container
+   */
+  containerStyle?: CrossedMethods<any>;
 };
 
-const alertContext = createContext<Pick<AlertProps, 'status'>>({});
+export const alertContext = createContext<
+  Pick<AlertProps, 'status' | 'rounded'>
+>({});
 
 const Container = ({
   status = 'info',
   children,
   style,
+  rounded,
+  floating,
+  containerStyle,
   ...props
 }: AlertProps) => {
   return (
-    <alertContext.Provider value={{ status }}>
+    <alertContext.Provider value={{ status, rounded }}>
       <YBox
-        space="xs"
         role="alert"
         {...props}
         style={composeStyles(
           alertStyles.container,
+          floating && alertStyles.floating,
+          !floating && justifyContentStyle.center,
           containerStyles[status],
           style
         )}
       >
-        {children}
+        <YBox
+          space="xl"
+          style={composeStyles(
+            growStyles.on,
+            flexDirectionResponsiveStyles.mdRow,
+            !floating && inlineStyle(() => ({ base: { maxWidth: 1280 } })),
+            containerStyle
+          )}
+        >
+          {children}
+        </YBox>
       </YBox>
     </alertContext.Provider>
   );
 };
 Container.displayName = 'Alert';
 
-export type AlertIconProps = { style?: CrossedMethods<any> };
-const AlertIcon = ({ style }: AlertIconProps) => {
+const IconRound = ({ children }: PropsWithChildren) => {
+  const { status, rounded } = useContext(alertContext);
+  return (
+    <Box
+      center
+      style={composeStyles(
+        containerIconRound.parent,
+        !rounded && containerIconRound.flat
+      )}
+    >
+      {rounded && (
+        <>
+          <Box
+            style={composeStyles(
+              containerIconRound.firstLine,
+              containerIconStyles[status]
+            )}
+          />
+          <Box
+            style={composeStyles(
+              containerIconRound.secondLine,
+              containerIconStyles[status]
+            )}
+          />
+        </>
+      )}
+      {children}
+    </Box>
+  );
+};
+
+const AlertIcon = () => {
   const { status } = useContext(alertContext);
-  const { color } = composeStyles(
-    alertDescriptionStyles.base,
-    alertDescriptionStyles[status]
-  ).style().style;
   const Comp = match(status)
-    .with('error', () => XCircle)
-    .with('info', () => Info)
+    .with('brand', () => Help)
+    .with('error', () => Help)
+    .with('info', () => Help)
     .with('success', () => CheckCircle)
-    .with('warning', () => AlertTriangle)
+    .with('warning', () => AlertCircle)
     .exhaustive();
   return (
-    <Box style={composeStyles(alertStyles.containerIcon, style)}>
-      <Comp color={color} size={16} />
-    </Box>
+    <IconRound>
+      <Comp
+        color={match(status)
+          .returnType<ColorPaths>()
+          .with('brand', () => 'foreground.brand.primary.default')
+          .with('error', () => 'foreground.error.primary.default')
+          .with('info', () => 'foreground.tertiary.default')
+          .with('success', () => 'foreground.success.primary.default')
+          .with('warning', () => 'foreground.warning.primary.default')
+          .exhaustive()}
+        size={16}
+      />
+    </IconRound>
   );
 };
 AlertIcon.displayName = 'Alert.Icon';
 
-const AlertDescription = memo<TextProps>((props) => {
-  const { status } = useContext(alertContext);
-  return (
-    <Text
-      {...props}
-      style={composeStyles(
-        alertDescriptionStyles.base,
-        alertDescriptionStyles[status],
-        props.style
-      )}
-    />
-  );
-});
+const AlertDescription = (props: TextProps) => {
+  return <Text color={'tertiary'} fontSize={'sm'} {...props} />;
+};
 AlertDescription.displayName = 'Alert.Description';
 
-export type GroupProps = { style?: CrossedMethods<any, any> } & Omit<
-  TextProps,
-  'style'
->;
+export type GroupProps = ComponentProps<typeof YBox>;
 
 const AlertGroup = ({ style, ...props }: GroupProps) => {
   return (
@@ -229,35 +304,68 @@ const AlertGroup = ({ style, ...props }: GroupProps) => {
 };
 AlertGroup.displayName = 'Alert.Group';
 
-const AlertAction = (props: ButtonProps) => {
-  const { status } = useContext(alertContext);
-  return (
-    <Button
-      variant="tertiary"
-      size={false}
-      {...props}
-      style={composeStyles(actionStyles.base, actionStyles[status])}
-    />
-  );
-};
-AlertAction.displayName = 'Alert.Action';
+type AlertTitle = ComponentProps<typeof Text>;
+const AlertTitle = ({ ...props }: AlertTitle) => (
+  <Text
+    fontSize={'sm'}
+    fontWeight={'semibold'}
+    color={'secondary'}
+    {...props}
+  />
+);
+AlertTitle.displayName = 'AlertTitle';
 
-const ActionText = (props: ButtonTextProps) => {
-  const { status } = useContext(alertContext);
+type AlertPresetProps = AlertProps & {
+  /**
+   * Title of alert
+   */
+  title?: string;
+  /**
+   * Description of alert
+   */
+  description?: string;
+  /**
+   * actions for alert, is ReactNode
+   */
+  actions?: ReactNode;
+  /**
+   * onClose if exist show closable button and call this function when click on it
+   */
+  onClose?: () => void | Promise<void>;
+};
+const AlertPreset = ({
+  title,
+  description,
+  actions,
+  onClose,
+  ...props
+}: AlertPresetProps) => {
   return (
-    <Button.Text
-      {...props}
-      style={composeStyles(alertActionTextStyles[status], props.style)}
-    />
+    <Alert {...props}>
+      <XBox justifyContent={'between'}>
+        <Alert.Icon />
+        <Adapt size={'md'} fallback={<CloseButton />} />
+      </XBox>
+      <Alert.Group space={'xl'}>
+        <Alert.Group>
+          {title && <Alert.Title>{title}</Alert.Title>}
+          {description && <Alert.Description>{description}</Alert.Description>}
+        </Alert.Group>
+        <XBox space={'xl'}>{!!actions && actions}</XBox>
+      </Alert.Group>
+      <Adapt size={'md'} fallback={null}>
+        <CloseButton />
+      </Adapt>
+    </Alert>
   );
 };
-ActionText.displayName = 'Alert.Action.Text';
 
 const Alert = withStaticProperties(Container, {
   Icon: AlertIcon,
+  Title: AlertTitle,
   Description: AlertDescription,
-  Action: withStaticProperties(AlertAction, { Text: ActionText }),
   Group: AlertGroup,
+  Preset: AlertPreset,
 });
 
-export { Alert, AlertIcon, ActionText, AlertDescription, AlertGroup };
+export { Alert, AlertIcon, AlertDescription, AlertGroup, AlertPreset };

@@ -50,9 +50,9 @@
   "devDependencies": {
     "@crossed/build": "workspace:^",
     "@shopify/flash-list": "^1.6.3",
-    "@types/react": "^18.3.3",
-    "react": "18.3.1",
-    "react-native": "=0.76.7",
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "react-native": "catalog:",
     "react-native-gesture-handler": "^2.23.1",
     "react-native-safe-area-context": "5.3.0",
     "typescript": "5.0.4"

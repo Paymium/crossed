@@ -7,6 +7,7 @@
 
 import { PropsWithChildren } from 'react';
 import { ButtonProps } from '../../buttons';
+import { trackSizeStyles } from './styles';
 
 export type SwitchProps = PropsWithChildren<
   ButtonProps & {
@@ -14,5 +15,6 @@ export type SwitchProps = PropsWithChildren<
     onChange?: () => void;
     disabled?: boolean;
     defaultValue?: boolean;
+    size?: keyof typeof trackSizeStyles;
   }
 >;

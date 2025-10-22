@@ -1,0 +1,125 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as ModalStories from './Modal.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={ModalStories} />
+
+# Modal
+
+A modal is a secondary window that communicates or provides an action inside the same process.
+They’re incredibly useful for communicating additional information, collecting information,
+or directing users without forcing them to leave the page. When modals are used unnecessarily, they can become
+intrusive and annoying for the user.Nobody likes pop-ups.
+
+```jsx
+import { Modal } from '@crossed/ui';
+```
+
+<Canvas of={ModalStories.Primary} />
+
+## Compositions
+
+<TabsPreset
+  defaultValue={'Modal'}
+  items={[
+    {
+      value: 'Modal',
+      title: 'Modal',
+      panel: <ArgTypes of={ModalStories.default.component} />,
+    },
+    {
+      value: 'Modal.Header',
+      title: 'Modal.Header',
+      panel: (
+        <ArgTypes of={ModalStories.default.subcomponents['Modal.Header']} />
+      ),
+    },
+    {
+      value: 'Modal.Content',
+      title: 'Modal.Content',
+      panel: (
+        <ArgTypes of={ModalStories.default.subcomponents['Modal.Content']} />
+      ),
+    },
+    {
+      value: 'Modal.Title',
+      title: 'Modal.Title',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes of={ModalStories.default.subcomponents['Modal.Title']} />
+        </>
+      ),
+    },
+    {
+      value: 'Modal.Description',
+      title: 'Modal.Description',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes
+            of={ModalStories.default.subcomponents['Modal.Description']}
+          />
+        </>
+      ),
+    },
+    {
+      value: 'Modal.Trigger',
+      title: 'Modal.Trigger',
+      panel: (
+        <ArgTypes of={ModalStories.default.subcomponents['Modal.Trigger']} />
+      ),
+    },
+    {
+      value: 'Modal.Footer',
+      title: 'Modal.Footer',
+      panel: (
+        <ArgTypes of={ModalStories.default.subcomponents['Modal.Footer']} />
+      ),
+    },
+    {
+      value: 'Modal.Body',
+      title: 'Modal.Body',
+      panel: <ArgTypes of={ModalStories.default.subcomponents['Modal.Body']} />,
+    },
+    {
+      value: 'Modal.ScrollView',
+      title: 'Modal.ScrollView',
+      panel: (
+        <ArgTypes of={ModalStories.default.subcomponents['Modal.ScrollView']} />
+      ),
+    },
+    {
+      value: 'Modal.Padded',
+      title: 'Modal.Padded',
+      panel: (
+        <ArgTypes of={ModalStories.default.subcomponents['Modal.Padded']} />
+      ),
+    },
+  ]}
+/>
+
+## Examples
+
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={ModalStories.Primary} />,
+    },
+    {
+      title: 'Size sm',
+      value: 'sm',
+      panel: <Canvas of={ModalStories.SizeSm} />,
+    },
+    {
+      title: 'No closable',
+      value: 'noClosable',
+      panel: <Canvas of={ModalStories.NotClosableAtAll} />,
+    },
+  ]}
+/>

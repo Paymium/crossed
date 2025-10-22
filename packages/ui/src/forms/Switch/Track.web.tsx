@@ -7,13 +7,14 @@
 
 import Animated from 'react-native-reanimated';
 import { composeStyles } from '@crossed/styled';
-import { styles } from './styles';
+import { styles, trackSizeStyles } from './styles';
 import { useContext } from 'react';
 import { localContext } from './context';
 import { Thumb } from './Thumb';
 
 export const SwitchTrack = () => {
-  const { value, height, width, disabled } = useContext(localContext);
+  const { value, height, width, disabled, hovered, pressed, size } =
+    useContext(localContext);
 
   return (
     <Animated.View
@@ -24,11 +25,12 @@ export const SwitchTrack = () => {
       style={[
         composeStyles(
           styles.track,
+          trackSizeStyles[size],
           value && styles.toggleOn,
           !value && styles.toggleOff,
           disabled && styles.disabledOff,
           disabled && value && styles.disabledOn
-        ).style().style,
+        ).style({ hover: hovered, active: pressed }).style,
       ]}
     >
       <Thumb />

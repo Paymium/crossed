@@ -17,7 +17,7 @@ export const useTabs = (
   state?: UseUncontrolledInput<TabsContext['value']>
 ): Instance => {
   const [value, setValue] = useUncontrolled<TabsContext['value']>(state);
-  const listTabRef = useRef<ScrollView>();
+  const listTabRef = useRef<ScrollView>(null);
   const left = useSharedValue(0);
   const width = useSharedValue(0);
   const scroll = useSharedValue(0);

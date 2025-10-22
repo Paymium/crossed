@@ -1,0 +1,64 @@
+{
+  "name": "@crossed/icons",
+  "description": "crossed icons",
+  "version": "1.0.0",
+  "main": "lib/commonjs/index",
+  "types": "lib/typescript/index.d.ts",
+  "module": "lib/module/index",
+  "react-native": "src/index",
+  "source": "src/index",
+  "typings": "lib/typescript/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./lib/commonjs/index.js",
+      "import": "./lib/module/index.js",
+      "default": "./lib/module/index.js",
+      "types": "./lib/typescript/index.d.ts"
+    }
+  },
+  "keywords": [
+    "React Native",
+    "React",
+    "Next.js",
+    "Expo",
+    "packager",
+    "typescript",
+    "javascript",
+    "android",
+    "ios",
+    "styling",
+    "css-in-js",
+    "design-system",
+    "uikit",
+    "icone",
+    "ui"
+  ],
+  "scripts": {
+    "clean": "rm -rf lib",
+    "watch": "crossed-build --watch --project-path ./tsconfig.build.json",
+    "build": "crossed-build --project-path ./tsconfig.build.json",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@crossed/build": "*",
+    "@crossed/styled": "workspace:^",
+    "@crossed/theme": "workspace:^",
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "react-native-svg": "^15.10.1",
+    "tsconfig": "*"
+  },
+  "peerDependencies": {
+    "@crossed/styled": "*",
+    "@crossed/theme": "*",
+    "react": "*",
+    "react-native-svg": "*"
+  },
+  "dependencies": {
+    "@crossed/core": "workspace:^"
+  },
+  "files": [
+    "lib/",
+    "src/"
+  ]
+}

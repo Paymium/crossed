@@ -8,7 +8,6 @@
 import React, {
   PropsWithChildren,
   RefAttributes,
-  RefObject,
   useImperativeHandle,
 } from 'react';
 import { SectionListProps, SectionList as RNSectionList } from 'react-native';
@@ -30,14 +29,13 @@ type Props<T = any> = SectionListProps<T> &
      */
     refreshControlGestureArea?: number;
   };
-
+type RNGHSectionListProps<T> = PropsWithChildren<
+  Omit<SectionListProps<T>, 'renderScrollComponent'> &
+    RefAttributes<RNSectionList<T>> &
+    NativeViewGestureHandlerProps
+>;
 export const RNGHSectionList = <T = any,>(
-  props: PropsWithChildren<
-    Omit<SectionListProps<T>, 'renderScrollComponent'> &
-      RefAttributes<RNSectionList<T>> &
-      NativeViewGestureHandlerProps
-  >,
-  ref: React.ForwardedRef<RefObject<RNSectionList>>
+  props: RNGHSectionListProps<T> & RefAttributes<RNSectionList>
 ) => {
   const refreshControlGestureRef = React.useRef<RefreshControl>(null);
   const { waitFor, refreshControl, ...rest } = props;
@@ -55,7 +53,7 @@ export const RNGHSectionList = <T = any,>(
 
   return (
     <RNSectionList
-      ref={ref}
+      ref={props.ref}
       {...(flatListProps as any)}
       scrollEventThrottle={1}
       renderScrollComponent={(scrollProps) => (
@@ -78,19 +76,16 @@ export const RNGHSectionList = <T = any,>(
   );
 };
 
-function $SectionList<T>(
-  props: Props<T>,
-  ref: React.ForwardedRef<RefObject<RNSectionList>>
-) {
+function $SectionList<T>(props: Props<T> & RefAttributes<RNSectionList>) {
   const handlers = useScrollHandlers<RNSectionList>({
     hasRefreshControl: !!props.refreshControl,
     refreshControlBoundary: props.refreshControlGestureArea || 0.15,
   });
-  useImperativeHandle(ref, () => handlers.ref);
+  useImperativeHandle(props.ref, () => (handlers as any).ref);
 
   return (
     <RNGHSectionList
-      {...(props as any)}
+      {...props}
       {...handlers}
       onScroll={(event) => {
         handlers.onScroll(event);

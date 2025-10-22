@@ -9,11 +9,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Input } from '@crossed/ui/src/forms/Input';
 import { Text } from '@crossed/ui';
+import { Help } from '@crossed/icons';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Input> = {
   component: Input,
-  tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
     label: { control: 'text' },
@@ -21,8 +21,7 @@ const meta: Meta<typeof Input> = {
     // elementLeft?: ReactNode;
     // elementRight?: ReactNode;
     error: { control: 'text' },
-    description: { control: 'text' },
-    extra: { control: 'text' },
+    helperText: { control: 'text' },
     disabled: { control: 'boolean' },
     // style?: CrossedMethods<any>;
   },
@@ -40,8 +39,8 @@ export const Primary: Story = {
   },
   args: {
     label: 'My label',
-    description: 'Your description',
-    extra: '',
+    placeholder: 'dupon@dupon.com',
+    helperText: 'Your description',
     clearable: false,
     error: '',
     disabled: false,
@@ -76,6 +75,13 @@ export const WithRightElement: Story = {
   args: {
     ...Primary.args,
     elementRight: <Text>Right</Text>,
+  },
+};
+export const WithRightIcon: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    elementRight: <Help />,
   },
 };
 export const WithRightElementClearable: Story = {

@@ -9,7 +9,7 @@ import { createContext } from 'react';
 import { ButtonProps } from './types';
 
 export const buttonContext = createContext<
-  Pick<ButtonProps, 'variant' | 'size' | 'disabled'> & {
+  Pick<ButtonProps, 'variant' | 'size' | 'disabled' | 'error' | 'success'> & {
     state?: {
       active?: boolean;
       hover?: boolean;

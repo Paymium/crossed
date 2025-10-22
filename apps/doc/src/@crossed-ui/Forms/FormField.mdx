@@ -1,0 +1,95 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset, Anchor } from '@crossed/ui';
+import * as FormFieldStories from './FormField.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={FormFieldStories} />
+
+# FormField
+
+The `FormField` component is a React wrapper that manages the layout, labeling, and validation state of form inputs.
+It provides a consistent structure for displaying labels, helper texts, and error messages, ensuring a cohesive and accessible user experience across all form elements.
+
+```jsx
+import { FormField } from '@crossed/ui';
+```
+
+<Canvas of={FormFieldStories.Primary} />
+
+## Composition
+
+<TabsPreset
+  defaultValue={'FormField'}
+  items={[
+    {
+      title: 'FormField',
+      value: 'FormField',
+      panel: <>
+        Provider which connect accessibility behavior
+        <ArgTypes of={FormFieldStories.default.component} />
+      </>,
+    },
+    {
+      title: 'FormField.Error',
+      value: 'FormField.Error',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes
+            of={FormFieldStories.default.subcomponents['FormField.Error']}
+          />
+        </>
+      ),
+    },
+    {
+      title: 'FormField.Control',
+      value: 'FormField.Control',
+      panel: (
+        <>
+          Input/Select to control
+          <ArgTypes
+            of={FormFieldStories.default.subcomponents['FormField.Control']}
+          />
+        </>
+      ),
+    },
+    {
+      title: 'FormField.Label',
+      value: 'FormField.Label',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes
+            of={FormFieldStories.default.subcomponents['FormField.Label']}
+          />
+        </>
+      ),
+    },
+    {
+      title: 'FormField.Helper',
+      value: 'FormField.Helper',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes
+            of={FormFieldStories.default.subcomponents['FormField.Helper']}
+          />
+        </>
+      ),
+    },
+  ]}
+/>
+
+## Example
+
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={FormFieldStories.Primary} />,
+    },
+  ]}
+/>

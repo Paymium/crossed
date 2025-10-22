@@ -17,15 +17,21 @@ import { CrossedMethods } from '@crossed/styled';
 
 type ScrollViewProps = Omit<
   ComponentPropsWithoutRef<typeof RNSV>,
-  'contentContainerStyle'
+  'contentContainerStyle' | 'style'
 > & {
   contentContainerStyle?: CrossedMethods<any>;
+  style?: CrossedMethods<any>;
 };
 
 export const ScrollView = memo<ScrollViewProps & RefAttributes<typeof RNSV>>(
   forwardRef((props, ref) => {
     return (
-      <SV {...(props as any)} ref={ref} contentContainerStyle={props.style} />
+      <SV
+        {...(props as any)}
+        ref={ref}
+        style={props.style?.style().style}
+        contentContainerStyle={props.contentContainerStyle?.style().style}
+      />
     );
   })
 );

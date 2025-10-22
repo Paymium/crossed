@@ -22,12 +22,9 @@ import {
 // import { parseScript as parse } from 'esprima';
 import escodegen from 'escodegen';
 import { createLogger, apiLog } from '@crossed/log';
-import { Registry, parse } from '@crossed/styled';
-import { convertKeyToCss } from '@crossed/styled';
+import { Registry, parse, styleToString } from '@crossed/styled';
 import type { CrossedstyleValues } from '@crossed/styled';
 import * as esbuild from 'esbuild';
-
-type Style = Record<string, any>;
 
 const esmBuild = (configPath: string) => {
   const contentFileConfig = fs.readFileSync(
@@ -127,38 +124,6 @@ export class Loader {
     }
   }
 
-  styleToString = (style: Style) => {
-    return Object.keys(style).reduce((acc, key) => {
-      const value = style[key];
-      if (key === 'marginHorizontal') {
-        return `${acc}${convertKeyToCss(
-          'marginLeft'
-        )}:${value};${convertKeyToCss('marginRight')}:${value};`;
-      } else if (key === 'marginVertical') {
-        return `${acc}${convertKeyToCss(
-          'marginTop'
-        )}:${value};${convertKeyToCss('marginBottom')}:${value};`;
-      } else if (key === 'paddingHorizontal') {
-        return `${acc}${convertKeyToCss(
-          'paddingLeft'
-        )}:${value};${convertKeyToCss('paddingRight')}:${value};`;
-      } else if (key === 'paddingVertical') {
-        return `${acc}${convertKeyToCss(
-          'paddingTop'
-        )}:${value};${convertKeyToCss('paddingBottom')}:${value};`;
-      } else if (key === 'padding') {
-        return `${acc}${convertKeyToCss(
-          'paddingTop'
-        )}:${value};${convertKeyToCss(
-          'paddingBottom'
-        )}:${value};${convertKeyToCss(
-          'paddingLeft'
-        )}:${value};${convertKeyToCss('paddingRight')}:${value};`;
-      }
-      return `${acc}${convertKeyToCss(key)}:${value};`;
-    }, '');
-  };
-
   getCSS() {
     // console.log(this.fileCache)
     const values = Array.from([
@@ -229,7 +194,7 @@ export class Loader {
       // transform { backgroundColor: "blue" } => background-color: blue;
 
       const styleParsed =
-        typeof value === 'string' ? value : this.styleToString(value);
+        typeof value === 'string' ? value : styleToString(value);
 
       const className = `${obj.prefix ?? '.'}${key
         .replace(/[#:\[\]\(\)%,\.]/g, '\\$&')

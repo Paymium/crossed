@@ -15,6 +15,7 @@ export const Implementation: ImplementationComponent = ({
   return (
     <VisibilityHidden hide>
       <input
+        tabIndex={-1}
         type="checkbox"
         checked={checked}
         onChange={() => setChecked(!checked)}

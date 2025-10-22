@@ -7,31 +7,21 @@
 
 import { composeStyles, createStyles } from '@crossed/styled';
 import { Box, type BoxProps } from './Box';
-import { forwardRef } from 'react';
-import { View } from 'react-native';
+import { flexDirectionStyles } from '../styles';
 
-export const useXBox = createStyles(
-  () =>
-    ({
-      root: {
-        base: {
-          display: 'flex',
-          flexDirection: 'row',
-          flexBasis: 'auto',
-        },
-      },
-    }) as const
-);
+export const useXBox = createStyles(() => ({
+  root: { base: { flexBasis: 'auto' } },
+}));
 
 export type XBoxProps = BoxProps;
 
-export const XBox = forwardRef<View, XBoxProps>(({ style, ...props }, ref) => {
+export const XBox = ({ style, ...props }: XBoxProps) => {
   return (
     <Box
-      ref={ref}
       justifyContent={'start'}
+      alignItems={'flex-start'}
       {...props}
-      style={composeStyles(useXBox.root, style)}
+      style={composeStyles(useXBox.root, flexDirectionStyles.row, style)}
     />
   );
-});
+};

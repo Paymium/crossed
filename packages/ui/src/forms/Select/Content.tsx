@@ -96,13 +96,6 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
 
     const renderSearch = searchable ? (
       <Input
-        formFieldStyle={inlineStyle(({ space }) => ({
-          base: {
-            flexGrow: 0,
-            marginTop: space.xxs,
-            marginHorizontal: space.xs,
-          },
-        }))}
         value={search}
         onChangeText={handleChangeSearch}
         clearable
@@ -110,7 +103,7 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
       />
     ) : null;
 
-    const totoRef = useRef<ActionSheetRef>();
+    const totoRef = useRef<ActionSheetRef>(null);
 
     return (
       <>
@@ -141,15 +134,17 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
                 exiting={FadeOut.duration(duration)}
                 entering={FadeIn.duration(duration)}
                 style={composeStyles(
-                  inlineStyle(({ boxShadow }) => ({
+                  inlineStyle(() => ({
                     base: { zIndex: 100 },
-                    web: { base: { boxShadow } },
+                    // web: { base: { boxShadow } },
                   }))
                 )}
               >
                 <SelectConfigProvider {...configContext}>
                   <SelectValueProvider {...selectValue}>
                     <MenuList
+                      bordered
+                      pressable={false}
                       testID="content-select"
                       ref={ref}
                       style={composeStyles(

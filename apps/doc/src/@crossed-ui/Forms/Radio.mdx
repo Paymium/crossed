@@ -1,0 +1,95 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as RadioStories from './Radio.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={RadioStories} />
+
+# Radio
+
+The `Radio` component is a React input control that allows users to select a single option from a group of choices.
+It ensures mutually exclusive selection, supports labels and validation states, and is commonly used in forms, surveys, and preference settings.
+
+```jsx
+import { Radio } from '@crossed/ui';
+```
+
+<Canvas of={RadioStories.Primary} />
+
+## Composition
+
+<TabsPreset
+  defaultValue={'Radio'}
+  items={[
+    {
+      title: 'Radio',
+      value: 'Radio',
+      panel: <ArgTypes of={RadioStories.default.component} />,
+    },
+    {
+      title: 'Radio.Item',
+      value: 'Radio.Item',
+      panel: <ArgTypes of={RadioStories.default.subcomponents['Radio.Item']} />,
+    },
+    {
+      title: 'Radio.Label',
+      value: 'Radio.Label',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes of={RadioStories.default.subcomponents['Radio.Label']} />
+        </>
+      ),
+    },
+    {
+      title: 'Radio.HelperText',
+      value: 'Radio.HelperText',
+      panel: (
+        <>
+          <ExtendText />
+          <ArgTypes
+            of={RadioStories.default.subcomponents['Radio.HelperText']}
+          />
+        </>
+      ),
+    },
+    {
+      title: 'Radio.Thumb',
+      value: 'Radio.Thumb',
+      panel: (
+        <ArgTypes of={RadioStories.default.subcomponents['Radio.Thumb']} />
+      ),
+    },
+    {
+      title: 'Radio.ItemPreset',
+      value: 'Radio.ItemPreset',
+      panel: (
+        <ArgTypes of={RadioStories.default.subcomponents['Radio.ItemPreset']} />
+      ),
+    },
+  ]}
+/>
+
+## Example
+
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={RadioStories.Primary} />,
+    },
+    {
+      title: 'Disabled',
+      value: 'Disabled',
+      panel: <Canvas of={RadioStories.Disabled} />,
+    },
+    {
+      title: 'Custom render',
+      value: 'CustomRender',
+      panel: <Canvas of={RadioStories.CustomRender} />,
+    },
+  ]}
+/>

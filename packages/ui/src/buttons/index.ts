@@ -7,4 +7,4 @@
 
 export * from './CloseButton';
 export * from './Button';
-export * from './IconButton';
+export * from './Pagination';

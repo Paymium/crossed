@@ -1,0 +1,44 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as FocusScopeStories from "./FocusScope.stories";
+
+<Meta of={FocusScopeStories} />
+
+# FocusScope
+The `FocusScope` component is a React container that manages the keyboard focus cycle within a specific section of the interface.
+It allows you to trap focus inside a defined area (focus trapping) when an interactive element is open — such as a modal, popover, or menu — and restore it automatically once the element is closed.
+
+```jsx
+import { FocusScop } from '@crossed/ui';
+```
+
+<Canvas of={FocusScopeStories.Primary} />
+
+
+## Composition
+
+<Tabs defaultValue={"button"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"button"}>
+      <Tabs.Tab.Text>FocusScope</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="button">
+    <ArgTypes of={FocusScopeStories.default.component} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+<Tabs defaultValue={"Size"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"Size"}>
+      <Tabs.Tab.Text>Simple</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value={"Size"}>
+    <Canvas of={FocusScopeStories.Primary} />
+  </Tabs.Panel>
+</Tabs>

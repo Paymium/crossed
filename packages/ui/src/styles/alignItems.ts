@@ -9,6 +9,7 @@ import { createStyles } from '@crossed/styled';
 
 export const alignItemsStyle = createStyles(() => ({
   'center': { base: { alignItems: 'center' } },
+  'mdCenter': { media: { md: { alignItems: 'center' } } },
   'baseline': { base: { alignItems: 'baseline' } },
   'flex-end': { base: { alignItems: 'flex-end' } },
   'flex-start': { base: { alignItems: 'flex-start' } },

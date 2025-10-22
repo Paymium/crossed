@@ -1,0 +1,51 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as GroupStories from './Group.stories';
+
+<Meta of={GroupStories} />
+
+# Group
+
+The `Group` component is used to arrange multiple elements together in a horizontal or vertical layout.
+It helps maintain consistent spacing and alignment between related components, such as buttons or inputs.
+
+Groups should be used to create clear visual relationships between elements. Avoid grouping unrelated components to keep the interface organized and intuitive.
+
+```tsx
+import { Group } from "@crossed/ui"
+```
+
+## Composition
+
+<Tabs defaultValue={'Group'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Group'}>
+      <Tabs.Tab.Text>Group</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Group">
+    <ArgTypes of={GroupStories.default.component} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+
+<Tabs defaultValue={'button'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'button'}>
+      <Tabs.Tab.Text>Button</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'card'}>
+      <Tabs.Tab.Text>Card</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="button">
+    <Canvas of={GroupStories.WithButton} />
+  </Tabs.Panel>
+  <Tabs.Panel value="card">
+    <Canvas of={GroupStories.WithCard} />
+  </Tabs.Panel>
+</Tabs>

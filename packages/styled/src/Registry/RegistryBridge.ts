@@ -7,7 +7,11 @@
 
 import type { Plugin, PluginContext, Themes } from '../types';
 import { setTheme } from '../setTheme';
-import { convertKeyToCss, normalizeUnitPixel } from '../plugins/utils';
+import {
+  convertGeneralKeyToSpecificKey,
+  convertKeyToCss,
+  normalizeUnitPixel,
+} from '../plugins/utils';
 import { isWeb as isWebFile } from '../isWeb';
 
 export const parse = <T extends Record<string, any>>(
@@ -26,6 +30,20 @@ export const parse = <T extends Record<string, any>>(
       }>(
         (acc, [key, value]) => {
           if (Array.isArray(value)) {
+            (acc.theme as any)[key] = [];
+            value.forEach((v, i) => {
+              if (['string'].includes(typeof v)) {
+                const name = convertKeyToCss(
+                  `${parentName ? `${parentName}-` : ''}${key}-${i}`
+                );
+                acc.values[`--${name}`] = normalizeUnitPixel(
+                  'marginTop',
+                  v,
+                  isWeb
+                );
+                (acc.theme as any)[key].push(`var(--${name})`);
+              }
+            }, []);
           } else if (['number', 'string'].includes(typeof value)) {
             const name = convertKeyToCss(
               `${parentName ? `${parentName}-` : ''}${key}`
@@ -154,7 +172,11 @@ export class RegistryBridge {
           const keyFind = test.includes(key);
           if (keyFind) {
             this.log(`[${name}] Find "${key}" for "${name}" plugin`);
-            apply?.({ ...options, key, styles });
+            apply?.({
+              ...options,
+              key,
+              styles: convertGeneralKeyToSpecificKey(styles),
+            });
           }
         }
       });

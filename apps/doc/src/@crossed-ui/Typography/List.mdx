@@ -1,0 +1,53 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs, Anchor } from '@crossed/ui';
+import * as ListStories from './List.stories';
+import { linkTo } from '@storybook/addon-links';
+
+<Meta of={ListStories} />
+
+# List
+The `Headline` component is used to display prominent titles or headings within the interface.
+It helps structure content hierarchically, guiding users’ attention and improving readability.
+
+`Headline` should be used for key sections or important messages. Avoid using multiple headlines with equal visual weight in the same context, as it can reduce clarity and hierarchy.
+
+```jsx
+import { List } from '@crossed/ui';
+```
+
+<Canvas of={ListStories.Primary} />
+
+## Composition
+
+<Tabs defaultValue={'button'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'button'}>
+      <Tabs.Tab.Text>List</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'List.Li'}>
+      <Tabs.Tab.Text>List.Li</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="button">
+    <ArgTypes of={ListStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="List.Li">
+    <ArgTypes of={ListStories.default.subcomponents['List.Li']} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+
+<Tabs defaultValue={'Primary'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Primary'}>
+      <Tabs.Tab.Text>Primary</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value={'Primary'}>
+    <Canvas of={ListStories.Primary} />
+  </Tabs.Panel>
+</Tabs>

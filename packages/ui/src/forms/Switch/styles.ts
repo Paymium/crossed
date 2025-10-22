@@ -7,25 +7,47 @@
 
 import { createStyles } from '@crossed/styled';
 
-export const styles = createStyles(({ colors, components: { Switch } }) => ({
+export const trackSizeStyles = createStyles(() => ({
+  sm: { base: { width: 36, height: 20 } },
+  md: { base: { width: 44, height: 24 } },
+}));
+
+export const styles = createStyles(({ colors }) => ({
   track: {
-    base: {
+    'base': {
       alignItems: 'flex-start',
-      width: 48,
-      height: 24,
+      alignSelf: 'flex-start',
       padding: 3,
       borderRadius: 50,
     },
-    web: { base: { transition: 'all 0.3s ease' } },
+    ':active': {
+      outlineWidth: 2,
+      outlineOffset: 2,
+      outlineStyle: 'solid',
+      outlineColor: colors.background.brand.solid.default,
+    },
+    'web': { base: { transition: 'background 0.3s ease' } },
   },
-  toggleOff: { base: { backgroundColor: Switch.off.background } },
-  toggleOn: { base: { backgroundColor: Switch.on.background } },
+  toggleOff: {
+    'base': { backgroundColor: colors.background.brand.secondary.default },
+    ':hover': { backgroundColor: colors.background.brand.secondary.hover },
+    ':active': { backgroundColor: colors.background.brand.secondary.hover },
+  },
+  toggleOn: {
+    'base': { backgroundColor: colors.background.brand.solid.default },
+    ':hover': { backgroundColor: colors.background.brand.solid.hover },
+    ':active': { backgroundColor: colors.background.brand.solid.hover },
+  },
   thumb: {
     base: {
       height: '100%',
       aspectRatio: 1,
-      backgroundColor: colors.background.secondary,
+      backgroundColor: colors.primary.base.white,
       borderRadius: 50,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
     },
   },
   disabledOff: { base: { opacity: 0.5 } },

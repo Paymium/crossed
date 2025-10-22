@@ -38,12 +38,20 @@ describe('WebPlugin', () => {
         {
           '$$css': true,
           'align-items-[center]': 'align-items-[center]',
-          'border-radius-[8px]': 'border-radius-[8px]',
+          'border-bottom-left-radius-[8px]': 'border-bottom-left-radius-[8px]',
+          'border-bottom-right-radius-[8px]':
+            'border-bottom-right-radius-[8px]',
+          'border-bottom-width-[1px]': 'border-bottom-width-[1px]',
+          'border-left-width-[1px]': 'border-left-width-[1px]',
+          'border-right-width-[1px]': 'border-right-width-[1px]',
           'border-style-[solid]': 'border-style-[solid]',
-          'border-width-[1px]': 'border-width-[1px]',
+          'border-top-left-radius-[8px]': 'border-top-left-radius-[8px]',
+          'border-top-right-radius-[8px]': 'border-top-right-radius-[8px]',
+          'border-top-width-[1px]': 'border-top-width-[1px]',
           'box-sizing-[border-box]': 'box-sizing-[border-box]',
           'flex-[1]': 'flex-[1]',
-          'focus-visible:outline-width-[0]': 'focus-visible:outline-width-[0]',
+          'focus-visible:outline-width-[0px]':
+            'focus-visible:outline-width-[0px]',
           'height-[44px]': 'height-[44px]',
           'justify-content-[center]': 'justify-content-[center]',
           'flex-direction-[row]': 'flex-direction-[row]',

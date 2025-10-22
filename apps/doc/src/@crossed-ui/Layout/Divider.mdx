@@ -1,0 +1,50 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as DividerStories from "./Divider.stories";
+
+<Meta of={DividerStories} />
+
+# Divider
+The `FocusScope` component is a React container that manages the keyboard focus cycle within a specific section of the interface.
+It allows you to trap focus inside a defined area (focus trapping) when an interactive element is open — such as a modal, popover, or menu — and restore it automatically once the element is closed.
+
+```jsx
+import { Divider } from '@crossed/ui';
+```
+
+<Canvas of={DividerStories.Primary} />
+
+
+## Composition
+
+<Tabs defaultValue={"button"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"button"}>
+      <Tabs.Tab.Text>Divider</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="button">
+    <ArgTypes of={DividerStories.default.component} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+<Tabs defaultValue={"Horizontal"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"Horizontal"}>
+      <Tabs.Tab.Text>Horizontal</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Vertical"}>
+      <Tabs.Tab.Text>Vertical</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value={"Horizontal"}>
+    <Canvas of={DividerStories.Horizontal} />
+  </Tabs.Panel>
+  <Tabs.Panel value={"Vertical"}>
+    <Canvas of={DividerStories.Vertical} />
+  </Tabs.Panel>
+</Tabs>

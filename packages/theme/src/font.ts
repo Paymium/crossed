@@ -48,6 +48,6 @@ export const font = {
     h1: '700',
   },
   color: 'black',
-  family: 'Overpass',
+  family: 'Inter',
   extraStyles: { marginTop: 3 },
 } as const satisfies Font;

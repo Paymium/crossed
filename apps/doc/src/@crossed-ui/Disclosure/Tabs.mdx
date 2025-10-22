@@ -1,0 +1,80 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as TabsStories from './Tabs.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={TabsStories} />
+
+# Tabs
+The `Tabs` component is used to organize and navigate between related sections of content within the same context.
+It allows users to switch views without leaving the current page, keeping the experience fast and focused.
+
+Tabs should be used to group content at the same hierarchy level. Avoid using too many tabs or nested tab structures to maintain clarity and ease of navigation.
+
+```tsx
+import { Tabs } from "@crossed/ui"
+```
+
+## Composition
+<Tabs defaultValue={"Tabs"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"Tabs"}>
+      <Tabs.Tab.Text>Tabs</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Tabs.List"}>
+      <Tabs.Tab.Text>Tabs.List</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Tabs.Tab"}>
+      <Tabs.Tab.Text>Tabs.Tab</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Tabs.Tab.Text"}>
+      <Tabs.Tab.Text>Tabs.Tab.Text</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Tabs.Panel"}>
+      <Tabs.Tab.Text>Tabs.Panel</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Tabs.Indicator"}>
+      <Tabs.Tab.Text>Tabs.Indicator</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Tabs">
+    <ArgTypes of={TabsStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Tabs.List">
+    <ArgTypes of={TabsStories.default.subcomponents['Tabs.List']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Tabs.Tab">
+    <ArgTypes of={TabsStories.default.subcomponents['Tabs.Tab']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Tabs.Tab.Text">
+    <ExtendText />
+    <ArgTypes of={TabsStories.default.subcomponents['Tabs.Tab.Text']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Tabs.Panel">
+    <ArgTypes of={TabsStories.default.subcomponents['Tabs.Panel']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Tabs.Indicator">
+    <ArgTypes of={TabsStories.default.subcomponents['Tabs.Indicator']} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+<Tabs defaultValue={"variants"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"variants"}>
+      <Tabs.Tab.Text>Variants</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"size"}>
+      <Tabs.Tab.Text>Sizes</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="variants">
+    <Canvas of={TabsStories.Variants} />
+  </Tabs.Panel>
+  <Tabs.Panel value="size">
+    <Canvas of={TabsStories.Sizes} />
+  </Tabs.Panel>
+</Tabs>

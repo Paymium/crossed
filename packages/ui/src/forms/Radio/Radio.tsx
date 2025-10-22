@@ -10,7 +10,7 @@ import {
   useUncontrolled,
   withStaticProperties,
 } from '@crossed/core';
-import { composeStyles, createStyles, CrossedMethods } from '@crossed/styled';
+import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
 import {
   forwardRef,
   memo,
@@ -18,79 +18,27 @@ import {
   useCallback,
   useTransition,
   type PropsWithChildren,
+  useId,
+  ComponentProps,
 } from 'react';
 import { Pressable, PressableProps, View, ViewProps } from 'react-native';
 import { Text } from '../../typography/Text';
+import { alignSelfStyle, form } from '../../styles';
+import { XBox, YBox } from '../../layout';
+import { pressableStyles, rootStyles, thumbStyles } from './styles';
 
-const rootStyles = createStyles((t) => ({
-  default: {
-    base: {
-      width: 16,
-      height: 16,
-      borderRadius: 44,
-      borderWidth: 1,
-      borderColor: t.colors.border.secondary,
-      alignItems: 'center',
-      display: 'flex',
-      justifyContent: 'center',
-      backgroundColor: t.colors.background.secondary,
-    },
-  },
-  hover: { base: { borderColor: t.colors.border.tertiary } },
-  active: {
-    base: { borderColor: t.colors.border.tertiary },
-    'web': {
-      base: {
-        transition: 'all 0.1s ease',
-        boxShadow: `0px 0px 0px 2px ${t.colors.border.secondary}`,
-      },
-    },
-  },
-  disabled: {
-    base: {
-      backgroundColor: t.colors.primary['10'],
-      borderColor: t.colors.primary['10'],
-    },
-  },
-  checked: { base: { borderColor: t.colors.primary.primary } },
-  checkedActive: { base: { borderColor: t.colors.primary.primary } },
-}));
-
-const pressableStyles = createStyles(({ space }) => ({
-  pressable: {
-    base: {
-      alignItems: 'center',
-      display: 'flex',
-      flexDirection: 'row',
-      gap: space.md,
-    },
-  },
-}));
-
-const thumbStyles = createStyles((t) => ({
-  default: {
-    base: {
-      width: 10,
-      height: 10,
-      borderRadius: 10,
-      backgroundColor: 'transparent',
-    },
-  },
-  checked: {
-    base: { backgroundColor: t.colors.primary.primary },
-  },
-  checkedActive: {
-    base: { backgroundColor: t.colors.primary['1'] },
-  },
-  checkedDisabled: {
-    base: { backgroundColor: t.colors.neutral['70'] },
-  },
-}));
-
-type RadioContext = { checked: boolean };
+type RadioContext = { checked: boolean; id: string };
 const [RadioProvider, useRadioContext] = createScope<RadioContext>({
   checked: false,
-});
+} as RadioContext);
+
+type RadioGroupContext = {
+  value?: string;
+  setValue: (_v: string) => void;
+  disabled?: boolean;
+};
+const [RadioGroupProvider, useRadioGroupContext] =
+  createScope<RadioGroupContext>({} as RadioGroupContext);
 
 type RadioStateInteraction = {
   active: boolean;
@@ -110,13 +58,17 @@ type RadioThumbProps = Omit<ViewProps, 'style'> & {
 const RadioThumb = memo<RadioThumbProps & RefAttributes<View>>(
   forwardRef((props, ref) => {
     const { active, hover, disabled } = useStateInteraction();
-    const { checked } = useRadioContext();
+    const { checked, id } = useRadioContext();
     return (
       <View
         ref={ref}
+        role={'radio'}
+        aria-checked={checked}
+        aria-labelledby={id}
         {...props}
         {...composeStyles(
           rootStyles.default,
+          alignSelfStyle.center,
           hover && rootStyles.hover,
           active && rootStyles.active,
           checked && rootStyles.checked,
@@ -137,61 +89,54 @@ const RadioThumb = memo<RadioThumbProps & RefAttributes<View>>(
   })
 );
 
-type RadioRootProps = Omit<PressableProps, 'style' | 'children'> &
-  PropsWithChildren<{
+type RadioItemProps = PropsWithChildren<
+  Omit<PressableProps, 'style' | 'children'> & {
     /**
-     * if true, radio is checked
+     * value of radio
      */
-    checked?: boolean;
-
-    /**
-     * default checked value
-     */
-    defaultChecked?: boolean;
-
-    /**
-     * Call when checked value change
-     */
-    onChecked?: (_c: boolean) => void;
+    value: string;
 
     disabled?: boolean;
-    noThumb?: boolean;
     style?: CrossedMethods<any>;
-  }>;
-export const RadioRoot = ({
+  }
+>;
+
+type RadioItemPresetProps = Omit<RadioItemProps, 'children'> & {
+  noThumb?: boolean;
+  label?: string;
+  helperText?: string;
+};
+
+export const RadioItem = ({
   children,
   disabled,
-  checked: checkedProps,
-  defaultChecked = false,
-  onChecked,
-  noThumb,
   style,
+  value,
+  id: idProps,
   ...props
-}: RadioRootProps) => {
-  const [checked, setChecked] = useUncontrolled({
-    defaultValue: defaultChecked,
-    value: checkedProps,
-    onChange: onChecked,
-  });
+}: RadioItemProps) => {
+  const localId = useId();
+  const id = idProps ?? localId;
   const [, setTransition] = useTransition();
+  const { setValue, value: valueContext } = useRadioGroupContext();
 
   const handlePress = useCallback(
     (e) => {
       props.onPress?.(e);
       setTransition(() => {
-        setChecked(!checked);
+        setValue(value);
       });
     },
-    [setChecked, checked, setTransition, props.onPress]
+    [setValue, value, setTransition, props.onPress]
   );
 
   return (
-    <RadioProvider checked={checked}>
+    <RadioProvider checked={valueContext === value} id={id}>
       <Pressable
-        role={'radio'}
-        aria-checked={checked}
+        // @ts-expect-error error react-native react-native-web
+        accessibilityRole={'label'}
         {...props}
-        onPress={handlePress}
+        onPress={disabled ? undefined : handlePress}
         disabled={disabled}
         style={({
           pressed,
@@ -215,14 +160,86 @@ export const RadioRoot = ({
             active={pressed}
             disabled={disabled}
           >
-            {!noThumb && <RadioThumb />}
-            {typeof children === 'string' ? <Text>{children}</Text> : children}
+            {children}
           </RadioInteractionProvider>
         )}
       </Pressable>
     </RadioProvider>
   );
 };
-RadioRoot.displayName = 'Radio';
+RadioItem.displayName = 'RadioItem';
 
-export const Radio = withStaticProperties(RadioRoot, { Thumb: RadioThumb });
+const RadioLabel = (props: ComponentProps<typeof Text>) => {
+  return (
+    <Text
+      fontSize={'sm'}
+      {...props}
+      style={composeStyles(form.label, props.style)}
+    />
+  );
+};
+RadioLabel.displayName = 'RadioLabel';
+const RadioHelper = (props: ComponentProps<typeof Text>) => {
+  return <Text fontSize={'sm'} color={'tertiary'} {...props} />;
+};
+RadioHelper.displayName = 'RadioHelper';
+
+const RadioItemPreset = ({
+  noThumb,
+  label,
+  helperText,
+  id: idProps,
+  ...props
+}: RadioItemPresetProps) => {
+  const localId = useId();
+  const id = idProps ?? localId;
+  return (
+    <RadioItem {...props} id={id}>
+      <YBox>
+        <XBox space={'md'}>
+          {!noThumb && <RadioThumb />}
+          {!!label && <RadioLabel id={id}>{label}</RadioLabel>}
+        </XBox>
+        {!!helperText && (
+          <XBox style={inlineStyle(() => ({ base: { paddingLeft: 24 } }))}>
+            <RadioHelper>{helperText}</RadioHelper>
+          </XBox>
+        )}
+      </YBox>
+    </RadioItem>
+  );
+};
+
+type RadioRoot = PropsWithChildren<{
+  defaultValue?: string;
+  value?: string;
+  onValueChange?: (_v: string) => void;
+  disabled?: boolean;
+}>;
+
+const RadioRoot = ({
+  children,
+  defaultValue,
+  value: valueProps,
+  onValueChange,
+  disabled,
+}: RadioRoot) => {
+  const [value, setValue] = useUncontrolled({
+    defaultValue: defaultValue,
+    value: valueProps,
+    onChange: onValueChange,
+  });
+  return (
+    <RadioGroupProvider value={value} setValue={setValue} disabled={disabled}>
+      {children}
+    </RadioGroupProvider>
+  );
+};
+
+export const Radio = withStaticProperties(RadioRoot, {
+  Item: RadioItem,
+  ItemPreset: RadioItemPreset,
+  Thumb: RadioThumb,
+  Label: RadioLabel,
+  HelperText: RadioHelper,
+});

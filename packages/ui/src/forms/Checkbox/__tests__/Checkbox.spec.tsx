@@ -11,7 +11,7 @@ import { screen, render, fireEvent } from '@crossed/test';
 describe('Checkbox', () => {
   test('Simple render', () => {
     const onPress = jest.fn();
-    render(<Checkbox onPress={onPress}>Simple</Checkbox>);
+    render(<Checkbox.Preset onPress={onPress} label={'Simple'} />);
     const checkbox = screen.getByRole('checkbox');
     expect(checkbox).toHaveAttribute('aria-checked', 'false');
     fireEvent.click(checkbox);
@@ -21,11 +21,7 @@ describe('Checkbox', () => {
 
   test('Disabled', () => {
     const onPress = jest.fn();
-    render(
-      <Checkbox onPress={onPress} disabled>
-        Simple
-      </Checkbox>
-    );
+    render(<Checkbox.Preset disabled onPress={onPress} label={'Simple'} />);
     const checkbox = screen.getByRole('checkbox');
     expect(checkbox).toHaveAttribute('aria-checked', 'false');
     fireEvent.click(checkbox);

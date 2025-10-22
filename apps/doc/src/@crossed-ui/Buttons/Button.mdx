@@ -1,0 +1,134 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+import { Tabs, Anchor, Text, XBox } from '@crossed/ui';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+The `Button` component is used to trigger actions or events.
+It can represent primary, secondary, tertiary, success, or error actions depending on the context.
+
+Buttons should be used sparingly for key actions to help users achieve their goals efficiently.
+Avoid using too many buttons with equal visual weight to prevent confusion.
+
+```jsx title="Import Button"
+import { Button } from '@crossed/ui';
+```
+
+<Canvas of={ButtonStories.WithIcon} />
+
+## Composition
+
+<Tabs defaultValue={'button'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'button'}>
+      <Tabs.Tab.Text>Button</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Button.Preset'}>
+      <Tabs.Tab.Text>Button.Preset</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Button.Text'}>
+      <Tabs.Tab.Text>Button.Text</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Button.Icon'}>
+      <Tabs.Tab.Text>Button.Icon</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Button.Group'}>
+      <Tabs.Tab.Text>Button.Group</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Button.Element'}>
+      <Tabs.Tab.Text>Button.Element</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="button">
+    <Text>
+      Button – A composite component that acts as a provider for its
+      subcomponents. It manages shared state, behavior, and styling for all its
+      children, enabling a flexible and consistent button structure.
+    </Text>
+    ```tsx
+    <Button onPress={handlePress} variant="primary">
+      {/* Subcomponents like Button.Text, Button.Icon, etc. go here */}
+    </Button>
+    ```
+    <ArgTypes of={ButtonStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Button.Preset">
+    <ArgTypes of={ButtonStories.default.subcomponents['Button.Preset']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Button.Text">
+    <Text children={`A subcomponent of Button used to render the button’s label. It inherits styling and context from its parent Button, ensuring consistent typography and alignment across all button variants.`} />
+
+    <XBox>
+      <Text>Extend{' '}</Text>
+      <LinkTo kind={'crossed-ui-typography-text'} story={'docs'}>
+        <Anchor children={'Text'} />
+      </LinkTo>
+    </XBox>
+
+    ```tsx
+
+<Button onPress={handlePress}>
+  <Button.Text>Submit</Button.Text>
+</Button>
+    ```
+    <ArgTypes of={ButtonStories.default.subcomponents['Button.Text']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Button.Icon">
+    <ArgTypes of={ButtonStories.default.subcomponents['Button.Icon']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Button.Group">
+    <ArgTypes of={ButtonStories.default.subcomponents['Button.Group']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Button.Element">
+    <ArgTypes of={ButtonStories.default.subcomponents['Button.Element']} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+
+<Tabs defaultValue={'Preset'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Preset'}>
+      <Tabs.Tab.Text>Preset</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Icon'}>
+      <Tabs.Tab.Text>Icon</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Loading'}>
+      <Tabs.Tab.Text>Loading</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Variant'}>
+      <Tabs.Tab.Text>Variant</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Size'}>
+      <Tabs.Tab.Text>Size</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Group'}>
+      <Tabs.Tab.Text>Group</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value={'Preset'}>
+    <Canvas of={ButtonStories.Preset} />
+  </Tabs.Panel>
+  <Tabs.Panel value={'Icon'}>
+    <Canvas of={ButtonStories.WithIcon} />
+  </Tabs.Panel>
+  <Tabs.Panel value={'Loading'}>
+    <Canvas of={ButtonStories.Loading} />
+  </Tabs.Panel>
+  <Tabs.Panel value={'Variant'}>
+    <Canvas of={ButtonStories.Variant} />
+  </Tabs.Panel>
+  <Tabs.Panel value={'Size'}>
+    <Canvas of={ButtonStories.Size} />
+  </Tabs.Panel>
+  <Tabs.Panel value={'Group'}>
+    <Canvas of={ButtonStories.Group} />
+  </Tabs.Panel>
+</Tabs>

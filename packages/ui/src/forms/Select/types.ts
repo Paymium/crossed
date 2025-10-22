@@ -34,7 +34,7 @@ export type FocusComponent = ComponentType<FocusProps>;
 // Select Props
 ////////////////////////
 
-type Base = Pick<SelectLabelProps, 'label' | 'description' | 'extra'> &
+type Base = SelectLabelProps &
   Pick<SelectConfigContext, 'multiple' | 'clearable' | 'searchable'> &
   Partial<Pick<UseUncontrolledInput<ValueType>, 'defaultValue' | 'onChange'>> &
   Pick<SelectValueContext, 'renderValue'> &
@@ -44,6 +44,8 @@ type Base = Pick<SelectLabelProps, 'label' | 'description' | 'extra'> &
     disabled?: boolean;
 
     id?: string;
+
+    helperText?: string;
 
     onSearch?: (_search: string) => void;
     loading?: boolean;

@@ -5,11 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 import { YBox, type YBoxProps } from '../../layout';
-import { composeStyles } from '@crossed/styled';
-import { cardStyles, spacingStyle } from './styles';
-import { useMedia } from '../../useMedia';
+import { composeStyles, inlineStyle } from '@crossed/styled';
+import { cardStyles } from './styles';
+import { useGroupProvider } from './context';
 
 /**
  * Represents the properties for a card component.
@@ -21,7 +21,7 @@ import { useMedia } from '../../useMedia';
  * Optional size indication for the card, allowing predefined sizes: 'auto', 'xs', 'sm', 'md', or 'lg'.
  * Defaults to 'auto' if not specified.
  */
-type CardProps = YBoxProps & { size?: 'auto' | 'xs' | 'sm' | 'md' | 'lg' };
+type CardProps = YBoxProps & { padding?: boolean };
 
 /**
  * CardRoot is a forwardRef component that renders a YBox element with
@@ -34,27 +34,20 @@ type CardProps = YBoxProps & { size?: 'auto' | 'xs' | 'sm' | 'md' | 'lg' };
  * @returns {JSX.Element} A styled YBox component based on the provided properties.
  */
 export const CardRoot = forwardRef(
-  ({ role, style, size = 'auto', ...props }: CardProps, ref: any) => {
-    const { md, xl } = useMedia();
-    const space = useMemo<YBoxProps['space']>(() => {
-      if (size === 'sm') return 'xs';
-      if (size === 'xs') return 'xxs';
-      if (size === 'auto') {
-        if (xl) return 'lg';
-        if (md) return 'md';
-      }
-      return 'xs';
-    }, [size, md, xl]);
+  ({ role, style, padding = true, ...props }: CardProps, ref: any) => {
+    const inGroup = useGroupProvider();
     return (
       <YBox
         ref={ref}
         role={role}
-        space={space}
+        space={'md'}
         {...props}
         style={composeStyles(
           cardStyles.root,
-          spacingStyle[size],
-          props.pressable && cardStyles.rootLink,
+          padding && cardStyles.padding,
+          inGroup && inlineStyle(() => ({ base: { marginHorizontal: -1 } })),
+          !inGroup?.hasFooter &&
+            inlineStyle(() => ({ base: { marginBottom: -1 } })),
           style
         )}
       />

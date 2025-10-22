@@ -190,7 +190,7 @@ export function useFocusScope(
   );
 
   return {
-    tabIndex: -1,
+    tabIndex: -1 as 0 | -1,
     ...scopeProps,
     ref: composedRefs,
     onKeyDown: handleKeyDown,

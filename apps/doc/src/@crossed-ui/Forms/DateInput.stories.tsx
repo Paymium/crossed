@@ -18,7 +18,6 @@ import { YBox } from '@crossed/ui/src/layout/YBox';
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof DateInput> = {
   component: DateInput,
-  tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {
     locale: { control: 'select', options: ['default', 'en', 'fr'] },
@@ -35,8 +34,7 @@ export const Primary: Story = { args: {} };
 export const WithLabel: Story = {
   args: {
     label: 'Label input',
-    description: 'one description',
-    extra: 'one extra',
+    helperText: 'one description',
   },
 };
 

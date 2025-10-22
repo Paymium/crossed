@@ -6,12 +6,12 @@
  */
 
 import { memo, useId } from 'react';
-import { Headline } from '../../typography';
+import { Text } from '../../typography';
 import { widthCell } from './styles';
 import { IDay } from '@crossed/use-calendar/src';
 import { capFirstLetter } from './utils';
 import { XBox } from '../../layout';
-import { composeStyles, CrossedMethods, inlineStyle } from '@crossed/styled';
+import { CrossedMethods } from '@crossed/styled';
 
 export const WeekDay = memo(
   ({
@@ -28,19 +28,17 @@ export const WeekDay = memo(
     return (
       <XBox space={'xxs'} justifyContent="between" style={style}>
         {days.map((day) => (
-          <Headline
+          <Text
             key={`${id}-${day.date.getDate()}`}
             color={'secondary'}
-            size={'md'}
+            fontSize={'sm'}
+            fontWeight={'medium'}
             textAlign={'center'}
             numberOfLines={1}
-            style={composeStyles(
-              widthCell,
-              inlineStyle(() => ({ base: { fontWeight: '500' } }))
-            )}
+            style={widthCell}
           >
             {capFirstLetter(formatter.format(day.date as Date))}
-          </Headline>
+          </Text>
         ))}
       </XBox>
     );

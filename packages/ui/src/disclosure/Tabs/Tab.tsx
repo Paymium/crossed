@@ -7,8 +7,9 @@
 
 import { composeEventHandlers, withStaticProperties } from '@crossed/core';
 import { TabsContext, TriggerContext } from './context';
-import { PressableProps } from 'react-native';
+import { Pressable, PressableProps } from 'react-native';
 import {
+  ComponentProps,
   PropsWithChildren,
   ReactNode,
   useCallback,
@@ -23,8 +24,18 @@ import {
 } from '@crossed/styled';
 import { withTiming } from 'react-native-reanimated';
 import { View } from 'react-native-reanimated/lib/typescript/Animated';
-import { focusStyles, tabTitleStyles, triggerStyles } from './styles';
-import { Button, ButtonTextProps } from '../../buttons/Button';
+import {
+  tabTitleBorderStyles,
+  tabTitleBrandGrayStyles,
+  tabTitleBrandStyles,
+  tabTitleMinimalStyles,
+  tabTitleUnderlineStyles,
+  triggerStyles,
+  triggerVariantStyles,
+} from './styles';
+import { Text as TextCrossed } from '../../typography/Text';
+import { match } from 'ts-pattern';
+import { alignSelfStyle, growStyles, justifyContentStyle } from '../../styles';
 import { useMedia } from '../../useMedia';
 
 export type TabsTabProps = Pick<TabsContext, 'value'> &
@@ -59,6 +70,7 @@ export const createTab = ({
       shouldShow,
       widthLayout,
       size,
+      fullWidth,
     } = useTabsContext();
     const media = useMedia();
 
@@ -121,7 +133,7 @@ export const createTab = ({
       [props.onLayout, setValue, selected, shouldShow]
     );
 
-    const ref = useRef<View>();
+    const ref = useRef<View>(null);
 
     return (
       <TriggerProvider
@@ -130,48 +142,55 @@ export const createTab = ({
         selected={selected}
         hover={selected || state.hover}
       >
-        <Button
+        <Pressable
           role="tab"
           ref={ref}
           disabled={disabled}
-          variant={'tertiary'}
           aria-selected={selected}
           aria-control={`${id}-panel-${valueProps}`}
           id={`${id}-tab-${valueProps}`}
           {...props}
-          style={composeStyles(
+          {...composeStyles(
+            fullWidth && growStyles.on,
+            fullWidth && justifyContentStyle.center,
+            alignSelfStyle.stretch,
             triggerStyles.trigger,
             triggerStyles[size],
-            focusStyles[variant],
+            triggerVariantStyles[variant],
             disabled && triggerStyles.disabled,
             style
-          )}
+          ).rnw({ ...state, disabled })}
           {...interaction}
           onPress={onPress}
           onLayout={onLayout}
         >
           {(e) => (typeof children === 'function' ? children(e) : children)}
-        </Button>
+        </Pressable>
       </TriggerProvider>
     );
   };
 
-  const Text = ({ style, ...props }: ButtonTextProps) => {
-    const { size } = useTabsContext();
-    const state = useTriggerContext();
+  const Text = ({ style, ...props }: ComponentProps<typeof TextCrossed>) => {
+    const { size, variant } = useTabsContext();
+    const { disabled, hover, selected, pressed } = useTriggerContext();
+    const styles = match(variant)
+      .with('minimal', () => tabTitleMinimalStyles)
+      .with('border', () => tabTitleBorderStyles)
+      .with('underline', () => tabTitleUnderlineStyles)
+      .with('brand', () => tabTitleBrandStyles)
+      .with('brandGray', () => tabTitleBrandGrayStyles)
+      .exhaustive();
     return (
-      <Button.Text
+      <TextCrossed
+        fontWeight={'semibold'}
         style={composeStyles(
-          tabTitleStyles.default,
-          state.selected && tabTitleStyles.active,
-          !state.selected &&
-            !state.disabled &&
-            state.hover &&
-            tabTitleStyles.hover,
+          styles.default,
+          selected && styles.selected,
+          pressed && styles.active,
+          !selected && !disabled && hover && styles.hover,
           style
         )}
-        size={size === 'sm' ? 'md' : 'default'}
-        {...state}
+        fontSize={size}
         {...props}
       />
     );

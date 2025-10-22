@@ -20,7 +20,7 @@ export const overlayStyles = createStyles(({ colors }) => ({
   root: {
     base: {
       position: 'absolute',
-      backgroundColor: colors.black,
+      backgroundColor: colors.background.overlay.default,
       opacity: 0.7,
       top: 0,
       left: 0,

@@ -5,17 +5,24 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-'use client';
-
-import { View, type ViewProps } from 'react-native';
 import { createStyles, composeStyles } from '@crossed/styled';
+import { Box } from './Box';
+import { ComponentProps } from 'react';
 
 export const useDivider = createStyles(
   ({ colors }) =>
     ({
       divider: { base: { borderStyle: 'solid' } },
-      primary: { base: { borderColor: colors.border.primary } },
-      secondary: { base: { borderColor: colors.border.secondary } },
+      primary: {
+        base: {
+          borderColor: colors.border.secondary.default,
+        },
+      },
+      secondary: {
+        base: {
+          borderColor: colors.border.secondary.alt,
+        },
+      },
       vertical: {
         base: {
           borderLeftWidth: 1,
@@ -31,7 +38,7 @@ export const useDivider = createStyles(
     }) as const
 );
 
-export type DividerProps = ViewProps & {
+export type DividerProps = ComponentProps<typeof Box> & {
   /**
    * Direction of divider
    */
@@ -49,14 +56,15 @@ export const Divider = ({
   ...props
 }: DividerProps) => {
   return (
-    <View
+    <Box
       role="separator"
       {...props}
-      {...composeStyles(
+      style={composeStyles(
         useDivider.divider,
         useDivider[direction],
-        useDivider[color]
-      ).rnw()}
+        useDivider[color],
+        props.style
+      )}
     />
   );
 };

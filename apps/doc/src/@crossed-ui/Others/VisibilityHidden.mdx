@@ -1,0 +1,42 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as VisibilityHiddenStories from "./VisibilityHidden.stories";
+
+<Meta of={VisibilityHiddenStories} />
+
+# VisibilityHidden
+The `VisibilityHidden` component is used to hide content visually while keeping it accessible to screen readers.
+It allows developers to improve accessibility without affecting layout or visual presentation.
+
+`VisibilityHidden` should be used for content that needs to be read by assistive technologies but not displayed on screen. Avoid hiding interactive elements that users need to see or interact with, as it can create confusion.
+
+<Canvas of={VisibilityHiddenStories.NoHide} />
+
+
+## Composition
+
+<Tabs defaultValue={"button"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"button"}>
+      <Tabs.Tab.Text>FocusScope</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="button">
+    <ArgTypes of={VisibilityHiddenStories.default.component} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+<Tabs defaultValue={"Size"}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={"Size"}>
+      <Tabs.Tab.Text>Simple</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value={"Size"}>
+    <Canvas of={VisibilityHiddenStories.Hide} />
+  </Tabs.Panel>
+</Tabs>

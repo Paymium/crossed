@@ -1,0 +1,70 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as SheetStories from './Sheet.stories';
+
+<Meta of={SheetStories} />
+
+# Sheet
+
+The `Sheet` component is used to display content in an overlay panel that slides in from the edge of the screen.
+It allows users to focus on secondary or contextual information without leaving the current view.
+
+Sheets should be used for supplementary actions or content that doesn’t require a full page. Avoid using multiple sheets simultaneously, as it can overwhelm users and complicate navigation.
+
+```jsx
+import { Sheet } from '@crossed/ui';
+```
+
+<Canvas of={SheetStories.Primary} />
+
+## Compositions
+
+<TabsPreset
+  defaultValue={'Sheet'}
+  items={[
+    {
+      value: 'Sheet',
+      title: 'Sheet',
+      panel: <ArgTypes of={SheetStories.default.component} />,
+    },
+    {
+      value: 'Sheet.Trigger',
+      title: 'Sheet.Trigger',
+      panel: <ArgTypes of={SheetStories.default.subcomponents['Sheet.Trigger']} />,
+    },
+    {
+      value: 'Sheet.Content',
+      title: 'Sheet.Content',
+      panel: <ArgTypes of={SheetStories.default.subcomponents['Sheet.Content']} />,
+    },
+    {
+      value: 'Sheet.ScrollView',
+      title: 'Sheet.ScrollView',
+      panel: <ArgTypes of={SheetStories.default.subcomponents['Sheet.ScrollView']} />,
+    },
+    {
+      value: 'Sheet.FlatList',
+      title: 'Sheet.FlatList',
+      panel: <ArgTypes of={SheetStories.default.subcomponents['Sheet.FlatList']} />,
+    },
+  ]}
+/>
+
+## Examples
+
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={SheetStories.Primary} />,
+    },
+    {
+      title: 'ScrollView',
+      value: 'ScrollView',
+      panel: <Canvas of={SheetStories.ScrollView} />,
+    },
+  ]}
+/>

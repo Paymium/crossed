@@ -7,82 +7,81 @@
 
 import { createStyles } from '@crossed/styled';
 
-export const form = createStyles(
-  ({ space, font, colors, components: { Input } }) => ({
-    inputError: {
-      base: {
-        borderColor: colors.error.primary,
-        color: colors.error.primary,
-      },
+export const form = createStyles(({ space, colors, radius }) => ({
+  inputError: {
+    'base': {
+      borderColor: colors.border.error.subtle,
     },
-    input: {
-      'base': {
-        color: Input.primary.default.text,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: Input.primary.default.border,
-        backgroundColor: Input.primary.default.background,
-        borderRadius: 8,
-        paddingVertical: space.xs,
-        paddingHorizontal: space.md,
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 44,
-        flexDirection: 'row',
-        flex: 1,
-      },
-      ':hover': { borderColor: Input.primary.hover.border },
-      ':focus': { borderColor: Input.primary.focus.border },
-      ':active': { borderColor: Input.primary.focus.border },
-      ':disabled': {
-        backgroundColor: Input.primary.disabled.background,
-        borderColor: Input.primary.disabled.border,
-      },
-      'web': {
-        'base': { boxSizing: 'border-box' },
-        ':focus-visible': { outlineWidth: 0 },
-        ':focus': { outlineColor: Input.primary.focus.border },
-        ':disabled': { cursor: 'not-allowed' },
-      },
+    ':focus': {
+      borderColor: colors.border.error.default,
     },
-    disabled: {
-      base: {
-        backgroundColor: Input.primary.disabled.background,
-        borderColor: Input.primary.disabled.border,
-      },
+  },
+  input: {
+    'base': {
+      color: colors.text.primary.default,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: colors.border.primary.w,
+      backgroundColor: colors.background.primary.alt,
+      borderRadius: radius.md,
+      paddingVertical: space.xs,
+      paddingHorizontal: space.md,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 44,
+      flexDirection: 'row',
+      flex: 1,
     },
-    placeholder: { base: { color: Input.primary.default.placeholder } },
-    label: {
-      'base': { color: font.color, fontWeight: font.fontWeight.lg },
-      ':focus': { color: colors.text.brand },
-      ':disabled': { color: colors.text.secondary },
+    ':hover': {
+      // borderColor: Input.primary.hover.border,
     },
-    labelDescription: { base: { color: colors.text.secondary } },
-    labelExtra: { base: { color: colors.text.secondary, flex: 1 } },
-    containerLabel: {},
-    elementRight: {
-      base: {
-        position: 'absolute',
-        right: 0,
-        top: 0,
-        bottom: 0,
-        justifyContent: 'center',
-        padding: space.md,
-        paddingVertical: 0,
-        alignItems: 'center',
-      },
+    ':focus': {
+      borderColor: colors.border.brand.default,
     },
-    elementLeft: {
-      base: {
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        bottom: 0,
-        paddingVertical: 0,
-        justifyContent: 'center',
-        padding: space.md,
-        alignItems: 'center',
-      },
+    ':disabled': {
+      backgroundColor: colors.background.disabled.subtle,
+      borderColor: colors.border.disabled.subtlew,
     },
-  })
-);
+    'web': {
+      'base': { boxSizing: 'border-box' },
+      ':focus-visible': { outlineWidth: 0 },
+      ':disabled': { cursor: 'not-allowed' },
+    },
+  },
+  placeholder: {
+    base: {
+      color: colors.text.placeholder.default,
+    },
+  },
+  label: {
+    'base': { color: colors.text.secondary.default, fontWeight: 500 },
+    ':focus': {
+      color: colors.text.secondary.default,
+    },
+  },
+  containerLabel: {},
+  elementRight: {
+    base: {
+      position: 'absolute',
+      right: 0,
+      top: 0,
+      bottom: 0,
+      justifyContent: 'center',
+      padding: space.md,
+      paddingVertical: 0,
+      alignItems: 'center',
+    },
+  },
+  elementLeft: {
+    base: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      bottom: 0,
+      paddingVertical: 0,
+      justifyContent: 'center',
+      padding: space.md,
+      alignItems: 'center',
+    },
+  },
+}));

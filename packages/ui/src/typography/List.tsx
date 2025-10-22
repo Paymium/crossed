@@ -6,9 +6,12 @@
  */
 
 import { Text } from './Text';
-import { XBox, type XBoxProps } from '../layout/XBox';
+import { XBox } from '../layout/XBox';
 import { YBox, type YBoxProps } from '../layout/YBox';
 import { composeStyles, createStyles } from '@crossed/styled';
+import { withStaticProperties } from '@crossed/core';
+import { alignItemsStyle } from '../styles';
+import { ComponentProps, ReactNode } from 'react';
 
 const useList = createStyles((t) => ({
   ul: { base: { gap: t.space.xs } },
@@ -17,18 +20,36 @@ const useList = createStyles((t) => ({
 }));
 
 export type UlProps = YBoxProps;
-export const Ul = ({ style, ...props }: UlProps) => {
+const Ul = ({ style, ...props }: UlProps) => {
   return (
     <YBox role="list" {...props} style={composeStyles(useList.ul, style)} />
   );
 };
+Ul.displayName = 'ListRoot';
 
-export type LiProps = XBoxProps;
-export const Li = ({ children, style, ...props }: LiProps) => {
+export type LiProps = ComponentProps<typeof XBox> & {
+  /**
+   * Change misc
+   */
+  misc?: ReactNode;
+};
+const Li = ({
+  children,
+  style,
+  misc = <Text style={useList.disc}>{'\u2B24'} </Text>,
+  ...props
+}: LiProps) => {
   return (
-    <XBox {...props} style={composeStyles(useList.li, style)} role="listitem">
-      <Text style={useList.disc}>{'\u2B24'} </Text>
+    <XBox
+      {...props}
+      style={composeStyles(alignItemsStyle['center'], useList.li, style)}
+      role="listitem"
+    >
+      {misc}
       {children as any}
     </XBox>
   );
 };
+Li.displayName = 'List.List';
+
+export const List = withStaticProperties(Ul, { Li });

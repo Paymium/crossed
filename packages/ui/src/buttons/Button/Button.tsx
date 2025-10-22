@@ -11,11 +11,15 @@ import { composeStyles } from '@crossed/styled';
 import { ActivityIndicator, Pressable, View } from 'react-native';
 import { forwardRef, useId, useState } from 'react';
 import {
-  buttonErrorStyles,
+  buttonOutlineStyle,
+  buttonPrimaryErrorStyle,
   buttonPrimaryStyles,
+  buttonPrimarySuccessStyle,
+  buttonSecondaryErrorStyle,
   buttonSecondaryStyles,
   buttonSizeStyles,
-  buttonSuccessStyles,
+  buttonStyle,
+  buttonTertiaryErrorStyle,
   buttonTertiaryStyles,
 } from './styles';
 import { ButtonProps } from './types';
@@ -27,13 +31,15 @@ export const Button = forwardRef<View, ButtonProps>(
   (
     {
       variant = 'primary',
+      size = 'md',
+      error,
+      success,
       disabled,
       loading,
-      size = 'md',
       children,
       alignSelf,
       ...props
-    }: ButtonProps,
+    },
     ref
   ) => {
     const renderLoading = loading ? (
@@ -55,37 +61,84 @@ export const Button = forwardRef<View, ButtonProps>(
         {...props}
         style={(e: any) =>
           composeStyles(
-            buttonSizeStyles.default,
+            buttonStyle,
+            buttonOutlineStyle.default,
             size && buttonSizeStyles[size],
             alignSelf && alignSelfStyle[alignSelf],
-            variant === 'primary' && buttonPrimaryStyles.root,
-            variant === 'secondary' && buttonSecondaryStyles.root,
-            variant === 'tertiary' && buttonTertiaryStyles.root,
-            variant === 'error' && buttonErrorStyles.root,
-            variant === 'success' && buttonSuccessStyles.root,
+            variant === 'primary' &&
+              composeStyles(
+                ...(error
+                  ? [
+                      buttonPrimaryErrorStyle.root,
+                      buttonOutlineStyle.error,
+                      disabled && buttonPrimaryErrorStyle.disabled,
+                    ]
+                  : success
+                    ? [
+                        buttonPrimarySuccessStyle.root,
+                        buttonOutlineStyle.success,
+                        disabled && buttonPrimarySuccessStyle.disabled,
+                      ]
+                    : [
+                        buttonPrimaryStyles.root,
+                        buttonOutlineStyle.primary,
+                        disabled && buttonPrimaryStyles.disabled,
+                      ])
+              ),
+            variant === 'secondary' &&
+              composeStyles(
+                ...(error
+                  ? [
+                      buttonSecondaryErrorStyle.root,
+                      buttonOutlineStyle.error,
+                      disabled && buttonSecondaryErrorStyle.disabled,
+                    ]
+                  : [
+                      buttonSecondaryStyles.root,
+                      buttonOutlineStyle.primary,
+                      disabled && buttonSecondaryStyles.disabled,
+                    ])
+              ),
+            variant === 'tertiary' &&
+              composeStyles(
+                ...(error
+                  ? [buttonTertiaryErrorStyle.root, buttonOutlineStyle.error]
+                  : [
+                      buttonTertiaryStyles.root,
+                      buttonOutlineStyle.primary,
+                      disabled && buttonTertiaryStyles.disabled,
+                    ])
+              ),
             props.style
           ).rnw({
-            hover: e.hovered,
-            active: e.pressed,
-            disabled: disabled || loading,
+            hover: (!disabled && e.hovered) || loading,
+            active: !disabled && !loading && e.pressed,
+            disabled: disabled,
           }).style
         }
       >
         {(e: any) => {
           return (
-            <buttonContext.Provider
-              value={{
-                variant,
-                size,
-                state: { active: e.pressed, hover: e.hovered },
-                disabled: disabled || loading,
-                textId,
-                setTextId,
-              }}
-            >
-              {renderLoading}
-              {typeof children === 'function' ? children(e) : children}
-            </buttonContext.Provider>
+            <>
+              <buttonContext.Provider
+                value={{
+                  variant,
+                  size,
+                  state: {
+                    active: e.pressed,
+                    hover: e.hovered || loading,
+                  },
+                  disabled: disabled,
+                  textId,
+                  setTextId,
+                  error,
+                  success,
+                }}
+              >
+                {renderLoading}
+                {typeof children === 'function' ? children(e) : children}
+              </buttonContext.Provider>
+            </>
           );
         }}
       </Pressable>

@@ -8,12 +8,7 @@
 'use client';
 import { withStaticProperties } from '@crossed/core';
 import { type TextProps } from '../typography';
-import {
-  composeStyles,
-  createStyles,
-  CrossedMethods,
-  inlineStyle,
-} from '@crossed/styled';
+import { composeStyles, createStyles, inlineStyle } from '@crossed/styled';
 import { useContext, type ReactNode } from 'react';
 import { Box, YBox, XBox, YBoxProps } from '../layout';
 import { CloseButton } from '../buttons';
@@ -23,8 +18,8 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
-import { Banner, bannerContext } from './Banner';
 import { shrinkStyles } from '../styles/flex';
+import { Alert, alertContext } from './Alert';
 
 const toastStyles = createStyles(
   (t) =>
@@ -75,11 +70,27 @@ const toastPresetStyles = createStyles(
     }) as const
 );
 
-const progressBarBackground = createStyles((t) => ({
-  success: { base: { backgroundColor: t.colors.success.primary } },
-  error: { base: { backgroundColor: t.colors.error.primary } },
-  info: { base: { backgroundColor: t.colors.info.primary } },
-  warning: { base: { backgroundColor: t.colors.warning.primary } },
+const progressBarBackground = createStyles(() => ({
+  success: {
+    base: {
+      // backgroundColor: t.colors.success.primary,
+    },
+  },
+  error: {
+    base: {
+      // backgroundColor: t.colors.error.primary,
+    },
+  },
+  info: {
+    base: {
+      // backgroundColor: t.colors.info.primary,
+    },
+  },
+  warning: {
+    base: {
+      // backgroundColor: t.colors.warning.primary,
+    },
+  },
 }));
 
 type ContainerProps = YBoxProps & {
@@ -91,7 +102,7 @@ type ContainerProps = YBoxProps & {
 
 const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
   return (
-    <Banner
+    <Alert
       status={status}
       alignSelf={'flex-end'}
       space={'xs'}
@@ -99,7 +110,7 @@ const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
       style={composeStyles(toastStyles.container, props.style)}
     >
       {children}
-    </Banner>
+    </Alert>
   );
 };
 
@@ -149,23 +160,19 @@ const Preset = ({
   </Toast>
 );
 
-const Icon = ({
-  style,
-}: {
-  /**
-   * Style of container Box
-   */
-  style?: CrossedMethods<any>;
-}) => {
-  return <Banner.Icon style={style} />;
+const Icon = () => {
+  return <Alert.Icon />;
 };
+Icon.displayName = 'Toast.Icon';
 
 const Title = (props: TextProps) => {
-  return <Banner.Title {...props} />;
+  return <Alert.Title {...props} />;
 };
+Title.displayName = 'Toast.Title';
 const Description = (props: TextProps) => {
-  return <Banner.Description {...props} />;
+  return <Alert.Description {...props} />;
 };
+Description.displayName = 'Toast.Description';
 
 type ProgressProps = {
   duration: number;
@@ -174,7 +181,7 @@ type ProgressProps = {
 
 const Progress = ({ duration = 4000, onDurationEnd }: ProgressProps) => {
   const start = useSharedValue(0);
-  const { status } = useContext(bannerContext);
+  const { status } = useContext(alertContext);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {

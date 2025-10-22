@@ -18,6 +18,17 @@ configPath: './src/style.config.ts',
 
 module.exports = nextConfig;
 `;
+export const configureVite =`
+import crossedStyled from 'vite-plugin-crossed-styled';
+import reactNativeWeb from 'vite-plugin-react-native-web';
+
+export default defineConfig({
+  plugins: [
+    reactNativeWeb(),
+    crossedStyled.default({ configPath: './src/style.config.ts' }),
+  ]
+});
+`;
 export const styleConfig =`
 import { Registry } from '@crossed/styled';
 
@@ -56,6 +67,9 @@ export const BuilderTab = createTabs();
         <BuilderTab.Tab value="webpack">
           <BuilderTab.Tab.Text>webpack</BuilderTab.Tab.Text>
         </BuilderTab.Tab>
+        <BuilderTab.Tab value="vite">
+          <BuilderTab.Tab.Text>vite</BuilderTab.Tab.Text>
+        </BuilderTab.Tab>
         <BuilderTab.Tab value="next">
           <BuilderTab.Tab.Text>next</BuilderTab.Tab.Text>
         </BuilderTab.Tab>
@@ -66,6 +80,9 @@ export const BuilderTab = createTabs();
         <BuilderTab.Panel value="next">
           <Source language='bash' code={"pnpm i @crossed/styled @crossed/next-adapter"} />
         </BuilderTab.Panel>
+        <BuilderTab.Panel value="vite">
+          <Source language='bash' code={"pnpm i @crossed/styled vite-plugin-crossed-styled vite-plugin-react-native-web"} />
+        </BuilderTab.Panel>
     </PlatformTab.Panel>
     <PlatformTab.Panel value="native">
       <Source language='bash' code={"pnpm i @crossed/styled"} />
@@ -74,6 +91,9 @@ export const BuilderTab = createTabs();
       ## Configure builder
       <BuilderTab.Panel value="webpack">
         <Source code={confiregureWebpack} />
+      </BuilderTab.Panel>
+      <BuilderTab.Panel value="vite">
+        <Source code={configureVite} />
       </BuilderTab.Panel>
       <BuilderTab.Panel value="next">
         <Source code={confiregureNext} />

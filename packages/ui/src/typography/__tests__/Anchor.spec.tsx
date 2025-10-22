@@ -22,13 +22,17 @@ describe('Anchor component', () => {
   it('applies primary styles by default', () => {
     render(<Anchor>Primary Link</Anchor>);
     const anchorElement = screen.getByRole('link', { name: /primary link/i });
-    expect(anchorElement).toHaveClass('color-[var(--colors-text-brand)]');
+    expect(anchorElement).toHaveClass(
+      'color-[var(--colors-text-brand-secondary-default)]'
+    );
   });
 
   it('applies default styles when primary is false', () => {
     render(<Anchor primary={false}>Default Link</Anchor>);
     const anchorElement = screen.getByRole('link', { name: /default link/i });
-    expect(anchorElement).toHaveClass('color-[var(--colors-text-primary)]');
+    expect(anchorElement).toHaveClass(
+      'color-[var(--colors-text-tertiary-default)]'
+    );
   });
 
   it('applies custom styles', () => {

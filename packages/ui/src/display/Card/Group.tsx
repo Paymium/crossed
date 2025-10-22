@@ -5,49 +5,23 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  PropsWithChildren,
-  ReactNode,
-} from 'react';
-import { Divider } from '../../layout';
-import { composeStyles } from '@crossed/styled';
+import { Children, ComponentProps, isValidElement } from 'react';
 import { CardRoot } from './Root';
-import { cardStyles } from './styles';
+import { GroupProvider } from './context';
 
-/**
- * group Card together.
- *
- * @deprecated use Group instead.
- */
-export const CardGroup = ({ children }: PropsWithChildren) => {
-  const childTmp = Children.toArray(children);
-  const size = childTmp.length;
-
-  const mappedChildren = childTmp.reduce<ReactNode[]>((acc, child, index) => {
-    if (!isValidElement(child)) return acc;
-    if (child.type === Divider) return [...acc, child];
-    if (child.type === CardRoot) {
-      const isFirst = index === 0;
-      const isLast = index === size - 1;
-      const isMiddle = !isFirst && !isLast;
-      return [
-        ...acc,
-        cloneElement(child, {
-          style: composeStyles(
-            isFirst && !isLast && cardStyles.first,
-            isLast && !isFirst && cardStyles.last,
-            isMiddle && cardStyles.middle,
-            child.props.style
-          ),
-        } as any),
-      ];
+export const CardGroup = (props: ComponentProps<typeof CardRoot>) => {
+  let hasFooter = false;
+  Children.forEach(props.children, (child) => {
+    if (
+      isValidElement(child) &&
+      (child.type as any).displayName === 'CardFooter'
+    ) {
+      hasFooter = true;
     }
-    throw new Error('Direct children of CardGroup should be Divider or Card');
-  }, []);
-
-  return mappedChildren;
+  });
+  return (
+    <GroupProvider hasFooter={hasFooter}>
+      <CardRoot padding={false} space={null} {...props} />
+    </GroupProvider>
+  );
 };
-CardGroup.displayName = 'Card.Group';

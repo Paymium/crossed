@@ -10,11 +10,13 @@ import { SwitchTrack } from './Track';
 import { SwitchLabel } from './Label';
 import { SwitchPreset } from './Preset';
 import { Root } from './Root';
+import { SwitchHelper } from './Helper';
 
 export const Switch = withStaticProperties(Root, {
   Thumb: SwitchTrack,
   Label: SwitchLabel,
   Preset: SwitchPreset,
+  Helper: SwitchHelper,
 });
 
-export { SwitchLabel, SwitchTrack, SwitchPreset };
+export { SwitchLabel, SwitchTrack, SwitchPreset, SwitchHelper };

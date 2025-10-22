@@ -15,10 +15,12 @@ import { ModalTrigger } from './Trigger';
 import { ModalHeader } from './Header';
 import { ModalScrollView } from './ScrollView';
 import { ModalPadded } from './Padded';
+import { ModalDescription } from './Description';
 
 export const Modal = withStaticProperties(ModalRoot, {
   Content: ModalContent,
   Title: ModalTitle,
+  Description: ModalDescription,
   Trigger: ModalTrigger,
   Footer: ModalFooter,
   Header: ModalHeader,

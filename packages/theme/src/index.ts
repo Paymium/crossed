@@ -15,7 +15,6 @@ const themes = {
 
 export { themes };
 export * from './types/color';
-export * from './types/components';
 export * from './types/font';
 export * from './types/space';
 export * from './types/theme';

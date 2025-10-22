@@ -22,7 +22,7 @@ import { CloseButton } from '../../buttons/CloseButton';
 import { Button } from '../../buttons/Button';
 import { XBox } from '../../layout/XBox';
 import { Text } from '../../typography/Text';
-import { FormControl } from '../../forms/Form';
+import { FormField } from '../../forms/Form';
 import { useSelectConfig, useSelectValue } from './context';
 import { useSelect } from './styles';
 import { TextInput, View } from 'react-native';
@@ -81,17 +81,19 @@ const Value = () => {
                 ellipsizeMode={'tail'}
                 numberOfLines={1}
                 key={`${id}-${e}`}
+                fontSize={'sm'}
+                color={'secondary'}
                 style={composeStyles(
                   useSelect.value,
                   multiple &&
-                    inlineStyle(({ colors, space }) => ({
+                    inlineStyle(({ space, colors }) => ({
                       base: {
-                        backgroundColor: colors.info.light,
+                        backgroundColor: colors.background.primary.alt,
                         padding: space.xxs,
                         borderRadius: 4,
                         borderWidth: 1,
-                        borderColor: colors.info.primary,
-                        color: colors.info.dark,
+                        borderColor: colors.border.primary.w,
+                        // color: colors.info.dark,
                       },
                     }))
                   // style
@@ -114,13 +116,13 @@ export const SelectTrigger = withStaticProperties(
       useTheme();
       return (
         <XBox>
-          <FormControl>
+          <FormField.Control>
             <Floating.Trigger
               {...props}
               style={composeStyles(
                 !children && form.input,
                 !children && useSelect.trigger,
-                props.disabled && form.disabled,
+                // props.disabled && form.disabled,
                 // error && form.inputError,
                 props.style
               )}
@@ -136,7 +138,7 @@ export const SelectTrigger = withStaticProperties(
                 </>
               )}
             </Floating.Trigger>
-          </FormControl>
+          </FormField.Control>
           {clearable && <ClearButton />}
         </XBox>
       );

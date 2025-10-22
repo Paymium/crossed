@@ -10,7 +10,11 @@ import { screen, render, fireEvent } from '@crossed/test';
 
 describe('Radio', () => {
   test('Simple render', () => {
-    render(<Radio>Simple</Radio>);
+    render(
+      <Radio>
+        <Radio.ItemPreset label={'Simple'} value={'simple'} />
+      </Radio>
+    );
     const radio = screen.getByRole('radio');
     expect(radio).toHaveAttribute('aria-checked', 'false');
     fireEvent.click(radio);
@@ -20,8 +24,8 @@ describe('Radio', () => {
   test('Disabled', () => {
     const onPress = jest.fn();
     render(
-      <Radio onPress={onPress} disabled>
-        Simple
+      <Radio onValueChange={onPress}>
+        <Radio.ItemPreset label={'Simple'} disabled value={'simple'} />
       </Radio>
     );
     const radio = screen.getByRole('radio');
