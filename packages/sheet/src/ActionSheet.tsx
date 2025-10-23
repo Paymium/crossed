@@ -185,7 +185,10 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
     }>({});
 
     if (safeAreaInsets) {
-      safeAreaPaddings.current = safeAreaInsets;
+      safeAreaPaddings.current = {
+        ...safeAreaInsets,
+        top: safeAreaInsets.top + 20,
+      };
     }
 
     const { visible, setVisible } = useSheetManager({

@@ -33,6 +33,7 @@ import {
   justifyContentStyle,
   positionStyles,
 } from '../../styles';
+import { SafeAreaInsets } from './types';
 
 export const modalStyles = createStyles(({ colors, space }) => ({
   content: {
@@ -88,7 +89,11 @@ export const useKeyDown = (keyEvent: any, { enable }: any) => {
 const SheetComponent = ({
   children,
   style,
-}: PropsWithChildren<{ style?: CrossedMethods<any> }>) => {
+  safeAreaInsets,
+}: PropsWithChildren<{
+  style?: CrossedMethods<any>;
+  safeAreaInsets?: SafeAreaInsets;
+}>) => {
   const { open, onClose } = useFloatingContext();
   const { showSheet, closable } = useContext(localContext);
   const refSheet = useRef<ActionSheetRef>(null);
@@ -112,6 +117,7 @@ const SheetComponent = ({
             ? undefined
             : closable.closeOnTouchBackdrop
         }
+        safeAreaInsets={safeAreaInsets}
       >
         {children}
       </Sheet.Content>
@@ -121,59 +127,64 @@ const SheetComponent = ({
 
 type ModalContentProps = PropsWithChildren<{
   style?: CrossedMethods<any>;
+  safeAreaInsets?: SafeAreaInsets;
 }>;
-export const ModalContent = memo<ModalContentProps>(({ children, style }) => {
-  const localContextInstance = useContext(localContext);
-  const { open, onClose } = useFloatingContext();
+export const ModalContent = memo<ModalContentProps>(
+  ({ children, style, safeAreaInsets }) => {
+    const localContextInstance = useContext(localContext);
+    const { open, onClose } = useFloatingContext();
 
-  const { size, idRef, showSheet } = localContextInstance;
+    const { size, idRef, showSheet } = localContextInstance;
 
-  const PortalComp = useMemo(
-    () => (showSheet ? Sheet : Floating.Portal),
-    [showSheet]
-  );
+    const PortalComp = useMemo(
+      () => (showSheet ? Sheet : Floating.Portal),
+      [showSheet]
+    );
 
-  useKeyDown({ Escape: onClose }, { enable: open });
-  return (
-    <PortalComp>
-      <localContext.Provider value={localContextInstance}>
-        {showSheet ? (
-          <SheetComponent style={style}>{children}</SheetComponent>
-        ) : (
-          <>
-            <Focus
-              onEscapeKey={onClose}
-              onClickOutside={onClose}
-              enabled={open}
-              style={composeStyles(
-                open && positionStyles.absoluteFill,
-                open && inlineStyle(() => ({ base: { display: 'flex' } })),
-                open && justifyContentStyle.center,
-                open && alignItemsStyle.center
-              )}
-            >
-              <Floating.Overlay />
-              <Floating.Content
-                role="dialog"
-                aria-labelledby={`${idRef}-title`}
-                aria-describedby={`${idRef}-description`}
-                aria-hidden={!open}
-                entering={FadeIn}
-                exiting={FadeOut}
+    useKeyDown({ Escape: onClose }, { enable: open });
+    return (
+      <PortalComp>
+        <localContext.Provider value={localContextInstance}>
+          {showSheet ? (
+            <SheetComponent style={style} safeAreaInsets={safeAreaInsets}>
+              {children}
+            </SheetComponent>
+          ) : (
+            <>
+              <Focus
+                onEscapeKey={onClose}
+                onClickOutside={onClose}
+                enabled={open}
                 style={composeStyles(
-                  modalStyles.content,
-                  styles.default,
-                  styles[size],
-                  style
+                  open && positionStyles.absoluteFill,
+                  open && inlineStyle(() => ({ base: { display: 'flex' } })),
+                  open && justifyContentStyle.center,
+                  open && alignItemsStyle.center
                 )}
               >
-                {children}
-              </Floating.Content>
-            </Focus>
-          </>
-        )}
-      </localContext.Provider>
-    </PortalComp>
-  );
-});
+                <Floating.Overlay />
+                <Floating.Content
+                  role="dialog"
+                  aria-labelledby={`${idRef}-title`}
+                  aria-describedby={`${idRef}-description`}
+                  aria-hidden={!open}
+                  entering={FadeIn}
+                  exiting={FadeOut}
+                  style={composeStyles(
+                    modalStyles.content,
+                    styles.default,
+                    styles[size],
+                    style
+                  )}
+                >
+                  {children}
+                </Floating.Content>
+              </Focus>
+            </>
+          )}
+        </localContext.Provider>
+      </PortalComp>
+    );
+  }
+);
 ModalContent.displayName = 'Modal.Content';

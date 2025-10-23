@@ -12,3 +12,9 @@ import { CrossedMethods } from '@crossed/styled';
 export type FocusProps = ComponentProps<typeof FocusOn> & {
   style?: CrossedMethods<any>;
 };
+export type SafeAreaInsets = {
+  top: number;
+  left: number;
+  right: number;
+  bottom: number;
+};
