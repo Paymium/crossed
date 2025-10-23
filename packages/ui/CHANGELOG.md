@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 8.4.4
+
+### Patch Changes
+
+- c440902: passe SafeAreaInset props to sheet via Modal
+- Updated dependencies [c440902]
+  - @crossed/sheet@0.12.4
+
 ## 8.4.3
 
 ### Patch Changes
