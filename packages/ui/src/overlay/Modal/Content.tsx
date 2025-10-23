@@ -25,7 +25,7 @@ import { createStyles } from '@crossed/styled';
 import { localContext } from './context';
 import { Sheet } from '../Sheet/index';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
-import { ActionSheetRef } from '@crossed/sheet';
+import { ActionSheetProps, ActionSheetRef } from '@crossed/sheet';
 import { Floating, useFloatingContext } from '../Floating';
 import { Focus } from './Focus';
 import {
@@ -33,7 +33,7 @@ import {
   justifyContentStyle,
   positionStyles,
 } from '../../styles';
-import { SafeAreaInsets } from './types';
+import { ContentProps as ContentSheetProps } from '../Sheet/Content';
 
 export const modalStyles = createStyles(({ colors, space }) => ({
   content: {
@@ -89,10 +89,10 @@ export const useKeyDown = (keyEvent: any, { enable }: any) => {
 const SheetComponent = ({
   children,
   style,
-  safeAreaInsets,
+  sheetProps,
 }: PropsWithChildren<{
   style?: CrossedMethods<any>;
-  safeAreaInsets?: SafeAreaInsets;
+  sheetProps?: ContentSheetProps;
 }>) => {
   const { open, onClose } = useFloatingContext();
   const { showSheet, closable } = useContext(localContext);
@@ -109,6 +109,7 @@ const SheetComponent = ({
   return (
     <Sheet ref={refSheet as any}>
       <Sheet.Content
+        {...sheetProps}
         onClose={onClose}
         containerStyle={style}
         closable={typeof closable === 'boolean' ? closable : undefined}
@@ -117,7 +118,6 @@ const SheetComponent = ({
             ? undefined
             : closable.closeOnTouchBackdrop
         }
-        safeAreaInsets={safeAreaInsets}
       >
         {children}
       </Sheet.Content>
@@ -127,10 +127,10 @@ const SheetComponent = ({
 
 type ModalContentProps = PropsWithChildren<{
   style?: CrossedMethods<any>;
-  safeAreaInsets?: SafeAreaInsets;
+  sheetProps?: ActionSheetProps;
 }>;
 export const ModalContent = memo<ModalContentProps>(
-  ({ children, style, safeAreaInsets }) => {
+  ({ children, style, sheetProps }) => {
     const localContextInstance = useContext(localContext);
     const { open, onClose } = useFloatingContext();
 
@@ -146,7 +146,7 @@ export const ModalContent = memo<ModalContentProps>(
       <PortalComp>
         <localContext.Provider value={localContextInstance}>
           {showSheet ? (
-            <SheetComponent style={style} safeAreaInsets={safeAreaInsets}>
+            <SheetComponent style={style} {...sheetProps}>
               {children}
             </SheetComponent>
           ) : (
