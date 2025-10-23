@@ -1,5 +1,11 @@
 # @crossed/sheet
 
+## 0.12.4
+
+### Patch Changes
+
+- c440902: passe SafeAreaInset props to sheet via Modal
+
 ## 0.12.3
 
 ### Patch Changes
