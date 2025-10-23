@@ -25,7 +25,7 @@ import { createStyles } from '@crossed/styled';
 import { localContext } from './context';
 import { Sheet } from '../Sheet/index';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
-import { ActionSheetProps, ActionSheetRef } from '@crossed/sheet';
+import { ActionSheetRef } from '@crossed/sheet';
 import { Floating, useFloatingContext } from '../Floating';
 import { Focus } from './Focus';
 import {
@@ -33,7 +33,8 @@ import {
   justifyContentStyle,
   positionStyles,
 } from '../../styles';
-import { ContentProps as ContentSheetProps } from '../Sheet/Content';
+import { ContentProps } from '../Sheet/Content';
+import { composeEventHandlers } from '@crossed/core';
 
 export const modalStyles = createStyles(({ colors, space }) => ({
   content: {
@@ -88,11 +89,11 @@ export const useKeyDown = (keyEvent: any, { enable }: any) => {
 
 const SheetComponent = ({
   children,
-  style,
+  containerStyle,
   sheetProps,
 }: PropsWithChildren<{
-  style?: CrossedMethods<any>;
-  sheetProps?: ContentSheetProps;
+  containerStyle?: CrossedMethods<any>;
+  sheetProps?: Omit<ContentProps, 'containerStyle'>;
 }>) => {
   const { open, onClose } = useFloatingContext();
   const { showSheet, closable } = useContext(localContext);
@@ -109,15 +110,15 @@ const SheetComponent = ({
   return (
     <Sheet ref={refSheet as any}>
       <Sheet.Content
-        {...sheetProps}
-        onClose={onClose}
-        containerStyle={style}
         closable={typeof closable === 'boolean' ? closable : undefined}
         closeOnTouchBackdrop={
           typeof closable === 'boolean'
             ? undefined
             : closable.closeOnTouchBackdrop
         }
+        {...sheetProps}
+        onClose={composeEventHandlers(onClose, sheetProps.onClose)}
+        containerStyle={containerStyle}
       >
         {children}
       </Sheet.Content>
@@ -127,7 +128,7 @@ const SheetComponent = ({
 
 type ModalContentProps = PropsWithChildren<{
   style?: CrossedMethods<any>;
-  sheetProps?: ActionSheetProps;
+  sheetProps?: ContentProps;
 }>;
 export const ModalContent = memo<ModalContentProps>(
   ({ children, style, sheetProps }) => {
@@ -146,7 +147,10 @@ export const ModalContent = memo<ModalContentProps>(
       <PortalComp>
         <localContext.Provider value={localContextInstance}>
           {showSheet ? (
-            <SheetComponent style={style} {...sheetProps}>
+            <SheetComponent
+              {...sheetProps}
+              containerStyle={composeStyles(style, sheetProps.containerStyle)}
+            >
               {children}
             </SheetComponent>
           ) : (
