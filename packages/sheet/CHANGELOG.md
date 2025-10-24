@@ -1,5 +1,11 @@
 # @crossed/sheet
 
+## 0.12.5
+
+### Patch Changes
+
+- a92a6fa: fix sheet height calculation
+
 ## 0.12.4
 
 ### Patch Changes
