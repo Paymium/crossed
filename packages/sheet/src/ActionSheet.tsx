@@ -491,7 +491,8 @@ export default forwardRef<ActionSheetRef, ActionSheetProps>(
               Platform.OS === 'ios'
                 ? safeAreaPaddings.current.top < 20
                   ? 20
-                  : safeAreaPaddings.current.top
+                  : safeAreaPaddings.current.top +
+                    safeAreaPaddings.current.bottom
                 : StatusBar.currentHeight || 0;
 
             const height = rootViewHeight - safeMarginFromTop;

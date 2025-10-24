@@ -90,11 +90,12 @@ export const useKeyDown = (keyEvent: any, { enable }: any) => {
 const SheetComponent = ({
   children,
   containerStyle,
-  sheetProps,
-}: PropsWithChildren<{
-  containerStyle?: CrossedMethods<any>;
-  sheetProps?: Omit<ContentProps, 'containerStyle'>;
-}>) => {
+  ...sheetProps
+}: PropsWithChildren<
+  Omit<ContentProps, 'containerStyle'> & {
+    containerStyle?: CrossedMethods<any>;
+  }
+>) => {
   const { open, onClose } = useFloatingContext();
   const { showSheet, closable } = useContext(localContext);
   const refSheet = useRef<ActionSheetRef>(null);
@@ -117,7 +118,9 @@ const SheetComponent = ({
             : closable.closeOnTouchBackdrop
         }
         {...sheetProps}
-        onClose={composeEventHandlers(onClose, sheetProps.onClose)}
+        onClose={composeEventHandlers(onClose, sheetProps?.onClose, {
+          checkForDefaultPrevented: false,
+        })}
         containerStyle={containerStyle}
       >
         {children}
@@ -149,7 +152,7 @@ export const ModalContent = memo<ModalContentProps>(
           {showSheet ? (
             <SheetComponent
               {...sheetProps}
-              containerStyle={composeStyles(style, sheetProps.containerStyle)}
+              containerStyle={composeStyles(style, sheetProps?.containerStyle)}
             >
               {children}
             </SheetComponent>
