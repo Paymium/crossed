@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 8.4.5
+
+### Patch Changes
+
+- a92a6fa: fix sheet height calculation
+- Updated dependencies [a92a6fa]
+  - @crossed/sheet@0.12.5
+
 ## 8.4.4
 
 ### Patch Changes
