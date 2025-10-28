@@ -184,7 +184,9 @@ export function useCalendar(options?: Partial<IUseCalendarOptions>) {
   }, []);
 
   const setYear = useCallback((year: number) => {
-    setVisibleMonth((prev) => new Date(year, prev.getMonth()));
+    setVisibleMonth((prev) => {
+      return new Date(year, prev.getMonth(), prev.getDate());
+    });
   }, []);
 
   const resetState = useCallback(() => {
