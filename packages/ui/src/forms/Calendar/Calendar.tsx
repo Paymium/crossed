@@ -6,7 +6,14 @@
  */
 
 import { XBox, YBox, YBoxProps } from '../../layout';
-import { forwardRef, memo, RefAttributes, useId, useMemo } from 'react';
+import {
+  forwardRef,
+  memo,
+  RefAttributes,
+  useId,
+  useMemo,
+  useState,
+} from 'react';
 import { useCalendar } from '@crossed/use-calendar';
 import { IUseCalendarOptions } from '@crossed/use-calendar';
 import { DayButton } from './DayButton';
@@ -27,12 +34,14 @@ export const Calendar = memo<CalendarProps & RefAttributes<View>>(
     const { months, getDayProps, setMonth, setYear, monthsByYear } =
       useCalendar(props);
     const id = useId();
+    const [yearSelected, setYearSelected] = useState(
+      (props.selectedDate || new Date()).getFullYear()
+    );
 
     const itemsMonth = useMemo(() => {
       const formatter = new Intl.DateTimeFormat(locale, {
         month: 'long',
       });
-      const yearSelected = (props.selectedDate || new Date()).getFullYear();
       let months = monthsByYear.get(yearSelected);
       if (!months) months = new Set(Array.from(Array(12).keys()));
 
@@ -44,7 +53,7 @@ export const Calendar = memo<CalendarProps & RefAttributes<View>>(
           value: month.toString(),
         };
       });
-    }, [monthsByYear]);
+    }, [monthsByYear, yearSelected]);
     return (
       <YBox style={style} ref={ref}>
         {months.map(({ year, month, weeks }) => (
@@ -57,7 +66,10 @@ export const Calendar = memo<CalendarProps & RefAttributes<View>>(
               />
               <SelectYear
                 year={year}
-                onChange={setYear}
+                onChange={(e) => {
+                  setYearSelected(e);
+                  setYear(e);
+                }}
                 years={Array.from(monthsByYear).map(([year]) => year)}
               />
             </XBox>
