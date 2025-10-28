@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 8.4.6
+
+### Patch Changes
+
+- 5cb5cee: fix month not updating when another years is selected
+- Updated dependencies [5cb5cee]
+  - @crossed/use-calendar@0.0.2
+
 ## 8.4.5
 
 ### Patch Changes
