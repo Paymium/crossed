@@ -1,5 +1,12 @@
 # @crossed/ui
 
+## 8.4.7
+
+### Patch Changes
+
+- Updated dependencies [cb6ce29]
+  - @crossed/use-calendar@0.0.3
+
 ## 8.4.6
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @crossed/use-calendar
 
+## 0.0.3
+
+### Patch Changes
+
+- cb6ce29: Fix visible month when selected date don't respect min or max
+
 ## 0.0.2
 
 ### Patch Changes
