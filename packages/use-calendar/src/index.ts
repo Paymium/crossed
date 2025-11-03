@@ -39,9 +39,23 @@ export function useCalendar(options?: Partial<IUseCalendarOptions>) {
   const oldMonths = useRef<any>(null);
 
   const [selected, setSelected] = useState<Date | undefined>(initialSelected);
-  const [visibleMonth, setVisibleMonth] = useState(
-    initialSelected || new Date()
-  );
+  const [visibleMonth, setVisibleMonth] = useState(() => {
+    const today = new Date();
+    const minDate = options?.minDate;
+    const maxDate = options?.maxDate;
+
+    const baseDate = initialSelected || today;
+
+    if (isInRange({ date: baseDate, minDate, maxDate })) {
+      return baseDate;
+    }
+    console.log(minDate && baseDate < minDate, maxDate && baseDate > maxDate);
+
+    if (minDate && baseDate < minDate) return minDate;
+    if (maxDate && baseDate > maxDate) return maxDate;
+
+    return today;
+  });
 
   useEffect(() => {
     if (initialSelected?.getTime() !== selected?.getTime()) {
