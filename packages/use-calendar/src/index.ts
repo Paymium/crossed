@@ -49,7 +49,6 @@ export function useCalendar(options?: Partial<IUseCalendarOptions>) {
     if (isInRange({ date: baseDate, minDate, maxDate })) {
       return baseDate;
     }
-    console.log(minDate && baseDate < minDate, maxDate && baseDate > maxDate);
 
     if (minDate && baseDate < minDate) return minDate;
     if (maxDate && baseDate > maxDate) return maxDate;
