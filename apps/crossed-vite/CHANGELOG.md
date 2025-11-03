@@ -1,5 +1,11 @@
 # crossed-vite
 
+## 0.0.49
+
+### Patch Changes
+
+- @crossed/ui@8.4.7
+
 ## 0.0.48
 
 ### Patch Changes

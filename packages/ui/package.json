@@ -1,7 +1,7 @@
 {
   "name": "@crossed/ui",
   "description": "A universal & performant styling library for React Native, Next.js & React",
-  "version": "8.4.6",
+  "version": "8.4.7",
   "sideEffects": false,
   "keywords": [
     "React Native",
@@ -109,7 +109,7 @@
   },
   "dependencies": {
     "@crossed/sheet": "workspace:^",
-    "@crossed/use-calendar": "workspace:0.0.2",
+    "@crossed/use-calendar": "workspace:0.0.3",
     "@floating-ui/dom": "^1.6.12",
     "@floating-ui/react": "^0.27.0",
     "@gorhom/portal": "^1.0.14",
