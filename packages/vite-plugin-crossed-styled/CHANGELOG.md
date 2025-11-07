@@ -1,5 +1,11 @@
 # vite-plugin-crossed-styled
 
+## 0.0.7
+
+### Patch Changes
+
+- f851684: change package dependencies
+
 ## 0.0.6
 
 ### Patch Changes

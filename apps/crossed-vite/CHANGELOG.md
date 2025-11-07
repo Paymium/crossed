@@ -1,5 +1,12 @@
 # crossed-vite
 
+## 0.0.50
+
+### Patch Changes
+
+- Updated dependencies [f851684]
+  - vite-plugin-crossed-styled@0.0.7
+
 ## 0.0.49
 
 ### Patch Changes
