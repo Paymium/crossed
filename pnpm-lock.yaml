@@ -1012,12 +1012,6 @@ importers:
       esprima:
         specifier: ^4.0.1
         version: 4.0.1
-      react:
-        specifier: ^18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
       vite-plugin-react-native-web:
         specifier: ^1.1.2
         version: 1.1.2
@@ -1031,6 +1025,12 @@ importers:
       '@types/esprima':
         specifier: ^4.0.6
         version: 4.0.6
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
       vite:
         specifier: ^6.0.3
         version: 6.0.7(@types/node@20.5.1)
