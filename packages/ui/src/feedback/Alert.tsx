@@ -32,7 +32,7 @@ import { Adapt } from '../other';
 import {
   flexDirectionResponsiveStyles,
   growStyles,
-  justifyContentStyle,
+  justifyContentStyle, shadowStyles,
 } from '../styles';
 
 const containerIconRound = createStyles(({ radius, colors }) => ({
@@ -206,6 +206,7 @@ const Container = ({
         style={composeStyles(
           alertStyles.container,
           floating && alertStyles.floating,
+          floating && shadowStyles.lg,
           !floating && justifyContentStyle.center,
           containerStyles[status],
           style

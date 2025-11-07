@@ -5,4 +5,17 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-export { PaginationRoot as Pagination } from './Root';
+import { withStaticProperties } from '@crossed/core';
+import { PaginationNext } from './NextButton';
+import { PaginationPrev } from './PrevButton';
+import { PaginationRoot } from './Root';
+import { PagesLink } from './PagesLink';
+import { PagesCompact } from './PagesCompact';
+
+export * from "./singleton"
+export const Pagination = withStaticProperties(PaginationRoot, {
+  Next: PaginationNext,
+  Prev: PaginationPrev,
+  Links: PagesLink,
+  Compact: PagesCompact,
+});

@@ -1,0 +1,54 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import * as ProgressStories from './Progress.stories';
+import { Tabs } from '@crossed/ui';
+
+<Meta of={ProgressStories} />
+
+# Progress
+
+```jsx title="Import Progress"
+import { Progress } from '@crossed/ui';
+```
+
+## Compositions
+
+<Tabs defaultValue={'Progress'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Progress'}>
+      <Tabs.Tab.Text>Progress</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Progress">
+    <ArgTypes of={ProgressStories.default.component} />
+  </Tabs.Panel>
+</Tabs>
+
+## Examples
+
+<Tabs defaultValue={'Simple'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Simple'}>
+      <Tabs.Tab.Text>Simple</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Value'}>
+      <Tabs.Tab.Text>With static value</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'ShowPercent'}>
+      <Tabs.Tab.Text>Show percent</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Simple">
+    <Canvas of={ProgressStories.Primary} />
+  </Tabs.Panel>
+
+  <Tabs.Panel value="Value">
+    <Canvas of={ProgressStories.Value} />
+  </Tabs.Panel>
+
+  <Tabs.Panel value="ShowPercent">
+    <Canvas of={ProgressStories.ShowPercent} />
+  </Tabs.Panel>
+</Tabs>

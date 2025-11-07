@@ -19,4 +19,5 @@ export const positionStyles = createStyles(() => ({
     },
   },
   absolute: { base: { position: 'absolute' } },
+  relative: { base: { position: 'relative' } },
 }));

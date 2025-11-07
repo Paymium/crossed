@@ -50,7 +50,7 @@ td {
 .dark .css-11xgcgt{
     background: var(--colors-background-primary-default) !important;
 }
-.dark button {
+.dark button.css-1fdphfk {
     color: var(--colors-text-primary-default) !important;
     background: var(--colors-background-primary-default) !important;
     border-color: var(--colors-border-tertiary-default) !important;

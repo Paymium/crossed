@@ -9,6 +9,7 @@ export * from './alert';
 export * from './arrow';
 export * from './charts';
 export * from './editor';
+export * from './fileType';
 export * from './finance';
 export * from './general';
 export * from './time';

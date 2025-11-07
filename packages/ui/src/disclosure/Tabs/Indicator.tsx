@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { composeStyles, CrossedMethods } from '@crossed/styled';
+import { composeStyles, CrossedMethods, useTheme } from '@crossed/styled';
 import {
   indicatorBorderStyles,
   indicatorBrandGrayStyles,
@@ -17,28 +17,32 @@ import {
 import Animated from 'react-native-reanimated';
 import { TabsContext } from './context';
 import { match } from 'ts-pattern';
+import { shadowStyles } from '../../styles';
 
 type IndicatorProps = { style?: CrossedMethods<any> };
 export const createIndicator = (useTabsContext: () => TabsContext) => {
   const Indicator = ({ style }: IndicatorProps) => {
     const { variant, indicator } = useTabsContext();
     const indicatorStyle = match(variant)
-      .with('minimal', () => indicatorMinimalStyles)
-      .with('border', () => indicatorBorderStyles)
-      .with('underline', () => indicatorUnderlineStyles)
-      .with('brand', () => indicatorBrandStyles)
-      .with('brandGray', () => indicatorBrandGrayStyles)
+      .with('minimal', () =>
+        composeStyles(indicatorMinimalStyles.default, shadowStyles.xs)
+      )
+      .with('border', () =>
+        composeStyles(indicatorBorderStyles.default, shadowStyles.sm)
+      )
+      .with('underline', () => indicatorUnderlineStyles.default)
+      .with('brand', () => indicatorBrandStyles.default)
+      .with('brandGray', () => indicatorBrandGrayStyles.default)
       .exhaustive();
     return (
       <Animated.View
         style={[
+          { top: 0, bottom: 0 },
           composeStyles(
-            indicatorStyle.default,
-            indicatorStyle.active,
+            indicatorStyle,
             indicatorDynamicStyles.dyn(indicator.left, indicator.width),
             style
           ).style().style,
-          { top: 0, bottom: 0 },
         ]}
       />
     );

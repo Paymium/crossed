@@ -17,9 +17,7 @@ import {
   buttonSecondaryStyles,
   buttonTertiaryErrorStyle,
   buttonTertiaryStyles,
-  textStyles,
 } from './styles';
-import { fontSizeStyles } from '../../styles';
 
 export type ButtonTextProps = ComponentProps<typeof Text>;
 
@@ -37,10 +35,11 @@ export const ButtonText = (props: ButtonTextProps) => {
 
   return (
     <Text
+      fontSize={['sm', 'md'].includes(size) ? 'sm' : 'md'}
+      fontWeight={'bold'}
       {...props}
       id={textId}
       style={composeStyles(
-        textStyles.default,
         variant === 'primary' &&
           composeStyles(
             ...(error
@@ -96,7 +95,6 @@ export const ButtonText = (props: ButtonTextProps) => {
                   disabled && buttonTertiaryStyles.textDisabled,
                 ])
           ),
-        fontSizeStyles[['sm', 'md'].includes(size) ? 'sm' : 'md'],
         props.style
       )}
     />

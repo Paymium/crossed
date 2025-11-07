@@ -16,6 +16,15 @@ export default {
     gray,
   },
   secondary,
+  shadow: {
+    xs: `${gray['950']}05`,
+    sm: `${gray['950']}10`,
+    md: `${gray['950']}10`,
+    lg: `${gray['950']}08`,
+    xl: `${gray['950']}08`,
+    '2xl': `${gray['950']}18`,
+    '3xl': `${gray['950']}14`,
+  },
   gradient: {
     brand: {
       1: [primary.brand['600'], primary.brand['500']],

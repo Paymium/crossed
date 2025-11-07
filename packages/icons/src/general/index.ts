@@ -11,5 +11,7 @@ export * from './Help';
 export * from './HomeLine';
 export * from './Menu';
 export * from './SearchLg';
+export * from './Trash01';
+export * from './UploadCloud02';
 export * from './X';
 export * from './Zap';

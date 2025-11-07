@@ -26,9 +26,33 @@ import { Pagination } from '@crossed/ui';
     <Tabs.Tab value={"button"}>
       <Tabs.Tab.Text>Pagination</Tabs.Tab.Text>
     </Tabs.Tab>
+    <Tabs.Tab value={"Pagination.Next"}>
+      <Tabs.Tab.Text>Pagination.Next</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Pagination.Prev"}>
+      <Tabs.Tab.Text>Pagination.Prev</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Pagination.Links"}>
+      <Tabs.Tab.Text>Pagination.Links</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={"Pagination.Compact"}>
+      <Tabs.Tab.Text>Pagination.Compact</Tabs.Tab.Text>
+    </Tabs.Tab>
   </Tabs.List>
   <Tabs.Panel value="button">
     <ArgTypes of={PaginationStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Pagination.Next">
+    <ArgTypes of={PaginationStories.default.subcomponents['Pagination.Next']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Pagination.Prev">
+    <ArgTypes of={PaginationStories.default.subcomponents['Pagination.Prev']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Pagination.Links">
+    <ArgTypes of={PaginationStories.default.subcomponents['Pagination.Links']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Pagination.Compact">
+    <ArgTypes of={PaginationStories.default.subcomponents['Pagination.Compact']} />
   </Tabs.Panel>
 </Tabs>
 
@@ -39,8 +63,14 @@ import { Pagination } from '@crossed/ui';
     <Tabs.Tab value={"Size"}>
       <Tabs.Tab.Text>Simple</Tabs.Tab.Text>
     </Tabs.Tab>
+    <Tabs.Tab value={"Circle"}>
+      <Tabs.Tab.Text>Circle</Tabs.Tab.Text>
+    </Tabs.Tab>
   </Tabs.List>
   <Tabs.Panel value={"Size"}>
     <Canvas of={PaginationStories.Primary} />
+  </Tabs.Panel>
+  <Tabs.Panel value={"Circle"}>
+    <Canvas of={PaginationStories.Circle} />
   </Tabs.Panel>
 </Tabs>

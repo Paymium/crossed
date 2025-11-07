@@ -5,7 +5,7 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { ItemList, ValueTypeMultiple } from './types';
 import { MenuList } from '../../display';
 import { composeStyles, inlineStyle } from '@crossed/styled';
@@ -18,6 +18,7 @@ import {
   SectionListProps,
   FlatList,
   SectionList,
+  View,
 } from 'react-native';
 import { Check } from '@crossed/icons';
 
@@ -32,10 +33,15 @@ const isChecked = (
 };
 
 export const List = memo(({ data }: { data: any }) => {
-  const { onClose } = useFloatingContext();
+  const { onClose, open } = useFloatingContext();
   const { setValue, value: valueGlobal } = useSelectValue();
   const { multiple, section, showSheet } = useSelectConfig();
+  const flatListRef = useRef<FlatList<string>>(null);
+  const hasScrollMultiple = useRef(false);
 
+  useEffect(() => {
+    if (!open) hasScrollMultiple.current = false;
+  }, [open]);
   const dataTransformed = useMemo(() => {
     if (section) {
       return data.map((d) => ({
@@ -51,7 +57,7 @@ export const List = memo(({ data }: { data: any }) => {
       checked: isChecked(item.value, valueGlobal as any),
     }));
   }, [data, valueGlobal, section]);
-  // console.log(dataTransformed[0].data)
+
   const onPress = useCallback(
     (item: ItemList) => () => {
       if (!multiple) onClose();
@@ -76,11 +82,20 @@ export const List = memo(({ data }: { data: any }) => {
   const RenderItem: FlatListProps<
     ItemList & { checked: boolean }
   >['renderItem'] = useCallback(
-    ({ item }) => {
+    ({ item, index }) => {
       const checked = item.checked;
-
       return (
         <MenuList.Item
+          onLayout={(e) => {
+            if (open && isChecked(item.value as any, valueGlobal as any)) {
+              if ((multiple && !hasScrollMultiple.current) || !multiple) {
+                flatListRef.current?.scrollToOffset({
+                  offset: index * e.nativeEvent.layout.height,
+                });
+                hasScrollMultiple.current = true;
+              }
+            }
+          }}
           onPress={onPress(item)}
           style={justifyContentStyle.between}
           space={'xxs'}
@@ -126,6 +141,7 @@ export const List = memo(({ data }: { data: any }) => {
       />
     ) : (
       <Sheet.FlatList
+        ref={flatListRef as any}
         scrollEnabled
         data={dataTransformed}
         renderItem={RenderItem}
@@ -133,6 +149,7 @@ export const List = memo(({ data }: { data: any }) => {
     )
   ) : section ? (
     <SectionList
+      ref={flatListRef as any}
       sections={dataTransformed}
       renderItem={RenderItem as any}
       renderSectionHeader={RenderLabel}
@@ -140,6 +157,7 @@ export const List = memo(({ data }: { data: any }) => {
     />
   ) : (
     <FlatList
+      ref={flatListRef as any}
       contentContainerStyle={
         composeStyles(
           gapStyles.xxs,

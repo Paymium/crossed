@@ -16,6 +16,8 @@ import {
 import { IDay } from '@crossed/use-calendar/src';
 import { widthCell } from './styles';
 import { Text } from '../../typography';
+import { Box } from '../../layout';
+import { positionStyles } from '../../styles';
 
 const button = createStyles(({ radius, colors }) => ({
   default: {
@@ -42,12 +44,15 @@ const button = createStyles(({ radius, colors }) => ({
   },
   today: {
     base: {
+      width: 5,
+      height: 5,
+      borderRadius: radius.full,
+      bottom: 0,
       backgroundColor: colors.background.brand.solid.default,
     },
   },
 }));
 const text = createStyles(({ colors }) => ({
-  default: { base: { color: colors.text.secondary.default } },
   hover: { base: { color: colors.text.secondary.hover, fontWeight: '500' } },
   noMarginTop: { base: { marginTop: 0 } },
   selected: {
@@ -84,7 +89,6 @@ export const DayButton = memo(
         composeStyles(
           widthCell,
           button.default,
-          day.isToday && button.today,
           day.isSelected && button.selected,
           style
         ).rnw({
@@ -103,21 +107,25 @@ export const DayButton = memo(
         style={handleStyle}
       >
         {({ hovered }: any) => (
-          <Text
-            textAlign={'center'}
-            fontSize={'sm'}
-            color={'secondary'}
-            style={composeStyles(
-              text.default,
-              hovered && text.hover,
-              disabled && text.disabled,
-              day.isToday && text.today,
-              day.isSelected && text.selected,
-              !isWeb && text.noMarginTop
+          <>
+            {day.isToday && (
+              <Box
+                style={composeStyles(button.today, positionStyles.absolute)}
+              />
             )}
-          >
-            {day.date.getDate()}
-          </Text>
+            <Text
+              textAlign={'center'}
+              fontSize={'sm'}
+              color={'secondary'}
+              style={composeStyles(
+                hovered && text.hover,
+                disabled && text.disabled,
+                day.isSelected && text.selected,
+              )}
+            >
+              {day.date.getDate()}
+            </Text>
+          </>
         )}
       </Pressable>
     );

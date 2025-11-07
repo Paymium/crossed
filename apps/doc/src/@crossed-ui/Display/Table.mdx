@@ -1,0 +1,78 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { Tabs } from '@crossed/ui';
+import * as TableStories from './Table.stories';
+import { ExtendText } from '../../components/ExtendText';
+
+<Meta of={TableStories} />
+
+# Table
+
+The `Card` component is used to group related information within a distinct container.
+It helps organize content such as text, images, and actions into a visually separated block that’s easy to scan and understand.
+
+Cards should be used to highlight key information or interactive elements. Avoid nesting multiple cards or overusing them, as it can clutter the interface and reduce visual hierarchy.
+
+```tsx
+import { Table } from "@crossed/ui"
+```
+
+## Composition
+
+<Tabs defaultValue={'Table'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Table'}>
+      <Tabs.Tab.Text>Table</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Table.TBody'}>
+      <Tabs.Tab.Text>Table.TBody</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Table.THead'}>
+      <Tabs.Tab.Text>Table.THead</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Table.Tr'}>
+      <Tabs.Tab.Text>Table.Tr</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Table.Td'}>
+      <Tabs.Tab.Text>Table.Td</Tabs.Tab.Text>
+    </Tabs.Tab>
+    <Tabs.Tab value={'Table.Th'}>
+      <Tabs.Tab.Text>Table.Th</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Table">
+    <ArgTypes of={TableStories.default.component} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Table.TBody">
+    <ExtendText />
+    <ArgTypes of={TableStories.default.subcomponents['Table.TBody']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Table.THead">
+    <ExtendText />
+    <ArgTypes of={TableStories.default.subcomponents['Table.THead']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Table.Tr">
+    <ArgTypes of={TableStories.default.subcomponents['Table.Tr']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Table.Td">
+    <ArgTypes of={TableStories.default.subcomponents['Table.Td']} />
+  </Tabs.Panel>
+  <Tabs.Panel value="Table.Th">
+    <ArgTypes of={TableStories.default.subcomponents['Table.Th']} />
+  </Tabs.Panel>
+</Tabs>
+
+## Example
+
+<Tabs defaultValue={'Simple'}>
+  <Tabs.List>
+    <Tabs.Indicator />
+    <Tabs.Tab value={'Simple'}>
+      <Tabs.Tab.Text>Simple</Tabs.Tab.Text>
+    </Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="Simple">
+    <Canvas of={TableStories.Primary} />
+  </Tabs.Panel>
+</Tabs>

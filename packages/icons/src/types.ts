@@ -6,13 +6,14 @@
  */
 
 import type { ElementType, JSX } from 'react';
-import type { Circle, Path, Svg } from 'react-native-svg';
+import type { Circle, Path, Svg, Rect } from 'react-native-svg';
 import { Colors } from '@crossed/theme';
 
 export type IconProps = {
   Svg?: ElementType<JSX.IntrinsicElements['svg']> | typeof Svg;
   Path?: ElementType<JSX.IntrinsicElements['path']> | typeof Path;
   Circle?: ElementType<JSX.IntrinsicElements['circle']> | typeof Circle;
+  Rect?: ElementType<JSX.IntrinsicElements['rect']> | typeof Rect;
 
   /**
    * color of icon

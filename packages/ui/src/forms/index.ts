@@ -15,3 +15,4 @@ export * from './Form';
 export * from './Switch';
 export * from './DateInput';
 export * from './Calendar';
+export * from './FileUpload';

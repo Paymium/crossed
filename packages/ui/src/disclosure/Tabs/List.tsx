@@ -24,18 +24,18 @@ import {
 import { heightStyles } from './styles';
 import { TabsContext } from './context';
 import { Select } from '../../forms';
+import { alignItemsStyle, paddingStyles } from '../../styles';
 
 const styles = createStyles(() => ({
   default: { base: { zIndex: 1 } },
 }));
 
-const containerVariantStyle = createStyles(({ space, colors, radius }) => ({
+const containerVariantStyle = createStyles(({ colors, radius }) => ({
   brand: { base: {} },
   brandGray: { base: {} },
   underline: { base: {} },
   border: {
     base: {
-      padding: space.xs,
       backgroundColor: colors.background.brand.secondary.default,
       borderRadius: radius.full,
     },
@@ -120,7 +120,8 @@ export const createList = (useTabsContext: () => TabsContext) => {
             composeStyles(
               fullWidth && inlineStyle(() => ({ base: { flex: 1 } })),
               shouldShow && inlineStyle(() => ({ base: { opacity: 0 } })),
-              inlineStyle(() => ({ base: { alignItems: 'center' } }))
+              alignItemsStyle.center,
+              variant === 'border' && paddingStyles.xs
             ).rnw().style
           }
           {...composeStyles(

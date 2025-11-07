@@ -69,6 +69,15 @@ type ColorStructure = {
 export type Colors = {
   primary: PrimaryColor;
   secondary: SecondaryColor;
+  shadow: {
+    xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    '2xl': string;
+    '3xl': string;
+  },
   gradient: {
     brand: {
       1: [string, string];

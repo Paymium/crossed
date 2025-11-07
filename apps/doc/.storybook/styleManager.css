@@ -1,0 +1,16 @@
+.sidebar-item[data-selected='true'] {
+    background-color: var(--colors-background-primary-default) !important;
+    color: var(--colors-text-brand-primary-default) !important;
+}
+
+.sidebar-item:hover {
+    background-color: var(--colors-background-secondary-hover) !important;
+}
+
+[data-selected='true'] svg {
+    color: var(--colors-text-brand-primary-default) !important;
+}
+
+.dark .css-rvzxrw {
+    background-color: var(--colors-background-primary-default) !important;
+}

@@ -6,41 +6,88 @@
  */
 
 import { XBox } from '../../layout';
-import usePagination from './usePagination';
-import { UsePaginationParams } from './types';
+import usePagination, { PageLink } from './usePagination';
+import { PaginationRootProps, UsePaginationParams } from './types';
 import { Button } from '../Button';
+import { ReactNode } from 'react';
+import { ArrowLeft, ArrowRight } from '@crossed/icons';
+import { PaginationButton } from './Button';
+import { Adapt } from '../../other';
+import { PagesProvider, VariantProvider } from './context';
+import { composeStyles, inlineStyle } from '@crossed/styled';
+import { paddingTopStyles } from '../../styles';
 
-export const PaginationRoot = (
-  props: Pick<UsePaginationParams, 'pageCount' | 'currentPageNumber'>
-) => {
-  const { pageCount, currentPageNumber } = props;
-  const pages = usePagination({
+export const PaginationRoot = ({
+  pageCount,
+  currentPageNumber,
+  onChangePage,
+  nextLabel,
+  prevLabel,
+  variant = 'square',
+  children,
+                                 hasIcon,
+  ...props
+}: PaginationRootProps) => {
+  const pagesHook = usePagination({
     pageCount,
     currentPageNumber: Number(currentPageNumber),
     pageLinkBuilder: (index) => `page=${index}`,
     pageShownCount: 2,
+    nextLabel,
+    prevLabel,
   });
+
+  const { pages, nextPage, prevPage } = pagesHook.reduce<{
+    prevPage?: PageLink;
+    nextPage?: PageLink;
+    pages: PageLink[];
+  }>(
+    (acc, page) => {
+      if (page.type === 'prev') {
+        acc.prevPage = page;
+      } else if (page.type === 'next') {
+        acc.nextPage = page;
+      } else {
+        acc.pages.push(page);
+      }
+      return acc;
+    },
+    {
+      prevPage: undefined,
+      nextPage: undefined,
+      pages: [],
+    }
+  );
   return (
     pageCount > 1 && (
-      <XBox>
-        {pages.map(
-          ({ href, linkContent, disabled /*, isCurrent, pageNumber*/ }, i) => {
-            return (
-              <Button
-                key={`${href}-${i}-button`}
-                disabled={disabled || !href}
-                variant={'tertiary'}
-                // variant={
-                //   isCurrent ? 'primary' : !href ? 'tertiary' : 'tertiary'
-                // }
-                // onPress={() => onChangePage(Number(pageNumber))}
-              >
-                <Button.Text>{linkContent}</Button.Text>
-              </Button>
-            );
-          }
-        )}
-      </XBox>
+      <VariantProvider variant={variant}>
+        <PagesProvider
+          pages={pages}
+          nextPage={nextPage}
+          prevPage={prevPage}
+          onChangePage={onChangePage}
+          hasIcon={hasIcon}
+        >
+          <XBox
+            alignItems={'center'}
+            justifyContent={'between'}
+            {...props}
+            style={composeStyles(
+              inlineStyle(({ colors }) => ({
+                base: {
+                  borderTopWidth: 1,
+                  borderColor: colors.border.secondary.default,
+                  borderStyle: 'solid',
+                },
+              })),
+              paddingTopStyles['2xl'],
+              props.style
+            )}
+          >
+            {children}
+          </XBox>
+        </PagesProvider>
+      </VariantProvider>
     )
   );
 };

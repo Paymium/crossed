@@ -16,6 +16,15 @@ export default {
     gray,
   },
   secondary,
+  shadow: {
+    xs: primary.base.transparent,
+    sm: primary.base.transparent,
+    md: primary.base.transparent,
+    lg: primary.base.transparent,
+    xl: primary.base.transparent,
+    '2xl': primary.base.transparent,
+    '3xl': primary.base.transparent,
+  },
   gradient: {
     brand: {
       1: [primary.brand['600'], primary.brand['500']],

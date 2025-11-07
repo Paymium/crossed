@@ -17,7 +17,6 @@ const meta: Meta<typeof Button> = {
   subcomponents: {
     'Button.Text': Button.Text,
     'Button.Element': Button.Element,
-    'Button.Group': Button.Group,
     'Button.Icon': Button.Icon,
     'Button.Preset': Button.Preset,
   },

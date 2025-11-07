@@ -31,7 +31,7 @@ import {
   alignItemsStyle,
   flexDirectionResponsiveStyles,
   growStyles,
-  justifyContentStyle,
+  justifyContentStyle, shadowStyles,
 } from '../styles';
 
 const bannerStyles = createStyles(
@@ -137,6 +137,7 @@ const Container = ({
           bannerStyles.container,
           flexDirectionResponsiveStyles.mdRow,
           floating && containerFloatingStyles.base,
+          floating && shadowStyles.lg,
           !floating && justifyContentStyle.center,
           floating
             ? containerFloatingStyles[variant]

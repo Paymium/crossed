@@ -84,7 +84,11 @@ export const createTab = ({
           listTabRef.current as any,
           (left: number, _top: number, width: number) => {
             const offset = shouldShow ? 30 : 0;
-            const positionLeft = isWeb ? left + scroll.value : left;
+            const positionLeft = isWeb
+              ? variant === 'border'
+                ? left - 4 + scroll.value
+                : left + scroll.value
+              : left;
             indicator.left.value = withTiming(positionLeft);
             indicator.width.value = withTiming(width);
             if (
@@ -126,11 +130,12 @@ export const createTab = ({
     const onLayout = useCallback(
       composeEventHandlers(({ nativeEvent: { layout } }) => {
         if (selected) {
-          indicator.left.value = layout.x + scroll.value;
+          indicator.left.value =
+            layout.x + scroll.value - (variant === 'border' ? 4 : 0);
           indicator.width.value = layout.width;
         }
       }, props.onLayout),
-      [props.onLayout, setValue, selected, shouldShow]
+      [props.onLayout, setValue, selected, shouldShow, variant]
     );
 
     const ref = useRef<View>(null);

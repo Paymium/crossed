@@ -8,113 +8,49 @@
 import { createStyles } from '@crossed/styled';
 import { SharedValue } from 'react-native-reanimated';
 
-export const linearGradientRounded = createStyles(() => ({
-  prev: {
-    base: {
-      left: 0,
-      // background: `linear-gradient(to right, ${colors.background.primary} 70%, transparent)`,
-    },
-  },
-  next: {
-    base: {
-      right: 0,
-      // background: `linear-gradient(to left, ${colors.background.primary} 70%, transparent)`,
-    },
-  },
-}));
-export const linearGradientUnderline = createStyles(() => ({
-  prev: {
-    base: {
-      left: 0,
-      // background: `linear-gradient(to right, ${colors.background.secondary} 70%, transparent)`,
-    },
-  },
-  next: {
-    base: {
-      right: 0,
-      // background: `linear-gradient(to left, ${colors.background.secondary} 70%, transparent)`,
-    },
-  },
-}));
-
-export const indicatorRoundedStyles = createStyles(({ colors }) => ({
-  active: {
-    base: {
-      backgroundColor: colors.background.secondary.default,
-    },
-  },
-  default: {
-    base: {
-      backgroundColor: 'transparent',
-      borderRadius: 24,
-      position: 'absolute',
-    },
-    web: {
-      base: { boxShadow: '0px 1px 4px 0px #1018280A' },
-    },
-  },
-}));
 export const indicatorMinimalStyles = createStyles(({ colors }) => ({
-  active: {
+  default: {
     base: {
       backgroundColor: colors.background.primary.alt,
       borderColor: colors.border.primary.default,
       borderWidth: 1,
       borderStyle: 'solid',
       boxSizing: 'border-box',
-    },
-  },
-  default: {
-    base: {
-      backgroundColor: 'transparent',
       borderRadius: 24,
       position: 'absolute',
     },
-    web: {
-      base: { boxShadow: '0px 1px 4px 0px #1018280A' },
-    },
   },
 }));
-export const indicatorBorderStyles = createStyles(({ colors, radius }) => ({
-  active: {
+export const indicatorBorderStyles = createStyles(({ space,colors, radius }) => ({
+  default: {
     base: {
+      borderRadius: radius.full,
+      position: 'absolute',
       backgroundColor: colors.background.primary.alt,
       borderColor: colors.background.primary.alt,
       borderWidth: 1,
       borderStyle: 'solid',
       boxSizing: 'border-box',
-    },
-  },
-  default: {
-    base: {
-      backgroundColor: 'transparent',
-      borderRadius: radius.full,
-      position: 'absolute',
-    },
-    web: {
-      base: { boxShadow: '0px 1px 4px 0px #1018280A' },
+      top: space.xs,
+      bottom: space.xs,
+      // left: space.xs,
     },
   },
 }));
 export const indicatorUnderlineStyles = createStyles(({ colors }) => ({
-  active: {
+  default: {
     base: {
       backgroundColor: colors.primary.base.transparent,
       borderColor: colors.foreground.brand.primary.default,
       borderBottomWidth: 2,
       borderStyle: 'solid',
       boxSizing: 'border-box',
-    },
-  },
-  default: {
-    base: {
-      backgroundColor: 'transparent',
       position: 'absolute',
     },
   },
 }));
 export const indicatorBrandStyles = createStyles(({ colors, radius }) => ({
-  active: {
+  default: {
     base: {
       backgroundColor: colors.background.brand.secondary.default,
       borderColor: colors.background.brand.secondary.default,
@@ -122,17 +58,11 @@ export const indicatorBrandStyles = createStyles(({ colors, radius }) => ({
       borderRadius: radius.full,
       borderStyle: 'solid',
       boxSizing: 'border-box',
-    },
-  },
-  default: {
-    base: {
-      backgroundColor: 'transparent',
       position: 'absolute',
     },
   },
 }));
 export const indicatorBrandGrayStyles = createStyles(() => ({
-  active: { base: {} },
   default: { base: { backgroundColor: 'transparent', position: 'absolute' } },
 }));
 
@@ -170,23 +100,6 @@ export const tabTitleBrandGrayStyles = createStyles(({ colors }) => ({
   hover: { base: { color: colors.text.secondary.default } },
   active: { base: { color: colors.text.quaternary.default } },
   selected: { base: { color: colors.text.brand.secondary.default } },
-}));
-export const tabTitleStyles = createStyles(() => ({
-  default: {
-    base: {
-      // color: colors.text.secondary,
-    },
-  },
-  hover: {
-    base: {
-      // color: colors.text.primary,
-    },
-  },
-  active: {
-    base: {
-      // color: colors.text.brand,
-    },
-  },
 }));
 
 export const triggerStyles = createStyles(({ space }) => ({
@@ -277,23 +190,4 @@ export const triggerVariantStyles = createStyles(({ radius, colors }) => ({
 export const heightStyles = createStyles(() => ({
   sm: { base: { height: 36 } },
   md: { base: { height: 44 } },
-}));
-
-export const focusStyles = createStyles(() => ({
-  rounded: {
-    web: {
-      ':focus-visible': {
-        // outlineColor: colors.border.brand,
-        outlineOffset: '4px',
-      },
-    },
-  },
-  underline: {
-    web: {
-      ':focus-visible': {
-        // outlineColor: colors.border.brand,
-        outlineOffset: '4px',
-      },
-    },
-  },
 }));

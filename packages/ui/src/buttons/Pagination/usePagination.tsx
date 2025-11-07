@@ -7,6 +7,7 @@
 
 import { useMemo } from 'react';
 import { UsePaginationParams } from './types';
+import { nextLabel as nextLabelSingleton, prevLabel as prevLabelSingleton} from "./singleton"
 
 export const PAGE_LINK_TYPES = {
   page: 'page',
@@ -40,8 +41,10 @@ const usePagination = ({
   currentPageNumber,
   pageLinkBuilder,
   pageShownCount,
-  prevLabel = '<',
-  nextLabel = '>',
+  prevLabel = prevLabelSingleton,
+  nextLabel = nextLabelSingleton,
+  // prevLabel,
+  // nextLabel,
 }: UsePaginationParams): Array<PageLink> => {
   const buildLink = (
     type: PageType,

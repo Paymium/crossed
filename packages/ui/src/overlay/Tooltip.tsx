@@ -33,6 +33,7 @@ import { flip } from '@floating-ui/dom';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useMedia } from '../useMedia';
 import { Box } from '../layout';
+import { shadowStyles } from '../styles';
 
 const useFloatinCompat = isWeb
   ? (placement?: Placement) =>
@@ -141,6 +142,7 @@ const ContentWeb = memo<ContentWebProps & RefAttributes<View>>(
             ref={composeRefs(ref, refs.setFloating as any)}
             style={composeStyles(
               tooltipStyles,
+              shadowStyles.lg,
               stylesDyn.dyn(floatingStyles),
               style
             )}

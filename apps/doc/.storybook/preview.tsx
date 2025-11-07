@@ -35,7 +35,7 @@ const preview: Preview = {
           '@crossed-styled',
           ['Introduction', 'Setup', "Usage", 'API'],
           '@crossed-ui',
-          ["Introduction", "Setup", "*"],
+          ["Introduction", "Setup", "Style composition", "*"],
           "*"
         ],
       },

@@ -10,6 +10,7 @@ import { YBox, type YBoxProps } from '../../layout';
 import { composeStyles, inlineStyle } from '@crossed/styled';
 import { cardStyles } from './styles';
 import { useGroupProvider } from './context';
+import { shadowStyles } from '../../styles';
 
 /**
  * Represents the properties for a card component.
@@ -44,6 +45,7 @@ export const CardRoot = forwardRef(
         {...props}
         style={composeStyles(
           cardStyles.root,
+          shadowStyles.xs,
           padding && cardStyles.padding,
           inGroup && inlineStyle(() => ({ base: { marginHorizontal: -1 } })),
           !inGroup?.hasFooter &&

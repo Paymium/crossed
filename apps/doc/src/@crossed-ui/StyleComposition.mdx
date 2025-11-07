@@ -1,0 +1,217 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { Shadow, Gap, AlignItems, TextAlign } from './StyleComposition.stories';
+import { TableCss } from '../components/TableCss';
+
+<Meta title="@crossed-ui/Style composition " />
+
+# Atomic CSS
+
+Use atomic classes to style your components efficiently.
+
+## Table of Contents
+
+- [flex](#flex)
+  - [alignItems](#alignitems)
+  - [shrink](#shrink)
+  - [grow](#grow)
+  - [flexDirection](#flexdirection)
+  - [flexDirectionResponsive](#flexdirectionresponsive)
+  - [justifyContent](#justifycontent)
+- [form](#form)
+- [shadow](#shadow)
+- [gap](#gap)
+- [position](#position)
+- [textAlign](#textalign)
+- [typography](#typography)
+  - [fontSize](#fontsize)
+  - [fontWeight](#fontweight)
+  - [fontColor](#fontcolor)
+- [visibilityHidden](#visibilityhidden)
+- [base](#base)
+
+## flex
+
+### alignItems
+
+<TableCss
+  items={[
+    { key: `center`, css: `alignItems: 'center'` },
+    { key: `mdCenter`, css: `md: { alignItems: 'center' }` },
+    { key: `baseline`, css: `alignItems: 'baseline'` },
+    { key: `flex-end`, css: `alignItems: 'flex-end'` },
+    { key: `flex-start`, css: `alignItems: 'flex-start'` },
+    { key: `stretch`, css: `alignItems: 'stretch'` },
+  ]}
+/>
+<Canvas of={AlignItems} />
+
+### shrink
+
+<TableCss
+  items={[
+    { key: `on`, css: `flexShrink: 1` },
+    { key: `off`, css: `flexShrink: 0` },
+  ]}
+/>
+
+### grow
+
+<TableCss
+  items={[
+    { key: `on`, css: `flexGrow: 1` },
+    { key: `off`, css: `flexGrow: 0` },
+  ]}
+/>
+
+### flexDirection
+
+<TableCss
+  items={[
+    { key: `row`, css: `flexDirection: 'row'` },
+    { key: `rowReverse`, css: `flexDirection: 'row-reverse'` },
+    { key: `column`, css: `flexDirection: 'column'` },
+    { key: `columnReverse`, css: `flexDirection: 'column-reverse'` },
+  ]}
+/>
+
+### flexDirectionResponsive
+
+<TableCss
+  items={[
+    { key: `mdCol`, css: `md: { flexDirection: 'column' }` },
+    { key: `mdRow`, css: `md: { flexDirection: 'row' }` },
+  ]}
+/>
+
+### justifyContent
+
+<TableCss
+  items={[
+    { key: `xxs`, css: `gap: space.xxs` },
+    { key: `xs`, css: `gap: space.xs` },
+    { key: `sm`, css: `gap: space.sm` },
+    { key: `md`, css: `gap: space.md` },
+    { key: `lg`, css: `gap: space.lg` },
+    { key: `xl`, css: `gap: space.xl` },
+    { key: `xxl`, css: `gap: space['2xl']` },
+  ]}
+/>
+
+## form
+
+<TableCss
+  items={[
+    { key: `inputError`, css: `Style input in error` },
+    { key: `input`, css: `Default style of input` },
+    { key: `placeholder`, css: `Color of placeholder` },
+    { key: `label`, css: `Style for label` },
+    { key: `elementRight`, css: `Style of element right in Input` },
+    { key: `elementLeft`, css: `Style of element left in Input` },
+  ]}
+/>
+
+## shadow
+
+<TableCss
+  items={[
+    { key: `xs`, css: `` },
+    { key: `sm`, css: `` },
+    { key: `md`, css: `` },
+    { key: `lg`, css: `` },
+    { key: `xl`, css: `` },
+    { key: `2xl`, css: `` },
+    { key: `3xl`, css: `` },
+  ]}
+/>
+<Canvas of={Shadow} />
+
+## gap
+
+<TableCss
+  items={[
+    { key: `xxs`, css: `gap: space.xxs` },
+    { key: `xs`, css: `gap: space.xs` },
+    { key: `sm`, css: `gap: space.sm` },
+    { key: `md`, css: `gap: space.md` },
+    { key: `lg`, css: `gap: space.lg` },
+    { key: `xl`, css: `gap: space.xl` },
+    { key: `xxl`, css: `gap: space['2xl']` },
+  ]}
+/>
+<Canvas of={Gap} />
+
+## position
+
+<TableCss
+  items={[
+    { key: `absoluteFill`, css: `Style position absolute full parent` },
+    { key: `absolute`, css: `position: 'absolute'` },
+    { key: `relative`, css: `position: 'relative'` },
+  ]}
+/>
+
+## textAlign
+
+<TableCss
+  items={[
+    { key: `auto`, css: `textAlign: 'auto'` },
+    { key: `justify`, css: `textAlign: 'justify'` },
+    { key: `default`, css: `textAlign: 'default'` },
+    { key: `center`, css: `textAlign: 'center'` },
+    { key: `left`, css: `textAlign: 'left'` },
+    { key: `right`, css: `textAlign: 'right'` },
+  ]}
+/>
+<Canvas of={TextAlign} />
+
+## typography
+
+### fontSize
+
+<TableCss
+  items={[
+    { key: `xs`, css: `fontSize: 12, lineHeight: 18` },
+    { key: `sm`, css: `fontSize: 14, lineHeight: 20` },
+    { key: `md`, css: `fontSize: 16, lineHeight: 24` },
+    { key: `lg`, css: `fontSize: 18, lineHeight: 28` },
+    { key: `xl`, css: `fontSize: 20, lineHeight: 30` },
+  ]}
+/>
+
+### fontWeight
+
+<TableCss
+  items={[
+    { key: `regular`, css: `fontWeight: 400, fontFamily: 'Inter-Regular'` },
+    { key: `medium`, css: `fontWeight: 500, fontFamily: 'Inter-Medium'` },
+    { key: `semibold`, css: `fontWeight: 600, fontFamily: 'Inter-SemiBold'` },
+    { key: `bold`, css: `fontWeight: 700, fontFamily: 'Inter-Bold'` },
+  ]}
+/>
+
+### fontColor
+
+<TableCss
+  items={[
+    { key: `primary`, css: `color: colors.text.primary.default` },
+    { key: `secondary`, css: `color: colors.text.secondary.default` },
+    { key: `tertiary`, css: `color: colors.text.tertiary.default` },
+    { key: `quaternary`, css: `color: colors.text.quaternary.default` },
+    { key: `warning`, css: `color: colors.text.warning.default` },
+    { key: `error`, css: `color: colors.text.error.default` },
+    { key: `success`, css: `color: colors.text.success.default` },
+    { key: `brand`, css: `color: colors.text.brand.primary.default` },
+    { key: `primaryBrand`, css: `color: colors.text.primary.brand` },
+    { key: `tertiaryBrand`, css: `color: colors.text.tertiary.brand` },
+  ]}
+/>
+
+## visibilityHidden
+
+<TableCss
+  items={[{ key: `hidden`, css: `Hidden content for accessibility` }]}
+/>
+
+## base
+
+<TableCss items={[{ key: `view`, css: `Base of view` }]} />

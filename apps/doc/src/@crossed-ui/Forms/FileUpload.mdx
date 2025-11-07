@@ -1,0 +1,65 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes } from '@storybook/addon-docs';
+import { TabsPreset } from '@crossed/ui';
+import * as FileUploadStories from './FileUpload.stories';
+
+<Meta of={FileUploadStories} />
+
+# FileUpload
+
+```jsx
+import { FileUpload } from '@crossed/ui';
+```
+
+<Canvas of={FileUploadStories.Primary} />
+
+## Composition
+
+<TabsPreset
+  defaultValue={'FileUpload'}
+  items={[
+    {
+      title: 'FileUpload',
+      value: 'FileUpload',
+      panel: <ArgTypes of={FileUploadStories.default.component} />,
+    },
+    {
+      title: 'FileUpload.Label',
+      value: 'FileUpload.Label',
+      panel: <ArgTypes of={FileUploadStories.default.subcomponents['FileUpload.Label']} />,
+    },
+    {
+      title: 'FileUpload.HelperText',
+      value: 'FileUpload.HelperText',
+      panel: <ArgTypes of={FileUploadStories.default.subcomponents['FileUpload.HelperText']} />,
+    },
+    {
+      title: 'FileUpload.Icon',
+      value: 'FileUpload.Icon',
+      panel: <ArgTypes of={FileUploadStories.default.subcomponents['FileUpload.Icon']} />,
+    },
+  ]}
+/>
+
+## Example
+
+<TabsPreset
+  defaultValue={'Simple'}
+  items={[
+    {
+      title: 'Simple',
+      value: 'Simple',
+      panel: <Canvas of={FileUploadStories.Primary} />,
+    },
+    {
+      title: 'Disabled',
+      value: 'Disabled',
+      panel: <Canvas of={FileUploadStories.Disabled} />,
+    },
+    {
+      title: 'InProgress',
+      value: 'InProgress',
+      panel: <Canvas of={FileUploadStories.InProgress} />,
+    },
+  ]}
+/>
