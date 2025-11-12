@@ -24,7 +24,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { composeEventHandlers } from '@crossed/core';
 import { Label } from '../Label';
 import { YBox } from '../../layout/YBox';
 import { isWeb } from '@crossed/styled';

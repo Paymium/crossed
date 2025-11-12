@@ -5,11 +5,18 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import type { ComponentType, MutableRefObject, PropsWithChildren } from 'react';
+import type {
+  ComponentType,
+  Dispatch,
+  MutableRefObject,
+  PropsWithChildren,
+  SetStateAction,
+} from 'react';
 import type {
   MouseEvent,
   NativeSyntheticEvent,
   TargetedEvent,
+  View,
   ViewProps,
 } from 'react-native';
 import type { LabelProps } from '../Label/types';
