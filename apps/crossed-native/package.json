@@ -14,7 +14,7 @@
     "@crossed/core": "0.9.0",
     "@crossed/styled": "workspace:^",
     "@crossed/theme": "workspace:3.0.0",
-    "@crossed/ui": "8.4.7",
+    "@crossed/ui": "8.4.8",
     "@crossed/unicons": "workspace:*",
     "@gorhom/portal": "^1.0.14",
     "@react-native-community/cli": "^15.1.3",

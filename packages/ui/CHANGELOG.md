@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.4.8
+
+### Patch Changes
+
+- 052b366: fix form control wrong accessibility
+
 ## 8.4.7
 
 ### Patch Changes
