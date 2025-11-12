@@ -12,13 +12,7 @@ import type {
   PropsWithChildren,
   SetStateAction,
 } from 'react';
-import type {
-  MouseEvent,
-  NativeSyntheticEvent,
-  TargetedEvent,
-  View,
-  ViewProps,
-} from 'react-native';
+import type { View, ViewProps } from 'react-native';
 import type { LabelProps } from '../Label/types';
 import type { YBoxProps } from '../../layout/YBox';
 
