@@ -69,7 +69,7 @@ const FormControl: FormControlComponent = ({ children }) => {
 };
 const FormLabel: FormLabelComponent = (props) => {
   const { inputId, controlRef } = useContext(fieldContext);
-  const render = <Label {...props} for={inputId} />;
+  const render = <Label {...props} htmlFor={inputId} />;
 
   return isWeb ? (
     render

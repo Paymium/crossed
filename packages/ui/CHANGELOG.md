@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 8.4.9
+
+### Patch Changes
+
+- not for but htmlFor
+
 ## 8.4.8
 
 ### Patch Changes
