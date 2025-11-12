@@ -12,5 +12,6 @@ import type { TextProps } from 'react-native';
 export type LabelProps = Omit<TextProps, 'style'> & {
   style?: CrossedMethods<any>;
   htmlFor?: string;
+  for?: string;
 };
 export type LabelComponent = ComponentType<LabelProps>;
