@@ -19,13 +19,15 @@ import {
   createContext,
   isValidElement,
   useContext,
+  useEffect,
   useId,
   useRef,
+  useState,
 } from 'react';
 import { composeEventHandlers } from '@crossed/core';
 import { Label } from '../Label';
-import { useInteraction } from '@crossed/styled';
 import { YBox } from '../../layout/YBox';
+import { isWeb } from '@crossed/styled';
 
 const fieldContext = createContext<FieldContext>({} as FieldContext);
 
@@ -40,58 +42,41 @@ const Form: FormComponent = ({ onSubmit, asChild, children, ...props }) => {
   );
 };
 const FormField: FormFieldComponent = ({ name, ...props }) => {
-  const inputId = useRef<string>();
-  const {
-    state: { focus, hover },
-    props: { onFocus, onBlur, onHoverIn, onHoverOut },
-  } = useInteraction(props);
+  const [inputId, setInputId] = useState<string>();
+  const controlRef = useRef<View>(null);
 
   return (
-    <fieldContext.Provider
-      value={{
-        name,
-        inputId,
-        states: { focus, hover, disabled: props.disabled },
-        handles: { onFocus, onBlur, onHoverIn, onHoverOut },
-      }}
-    >
+    <fieldContext.Provider value={{ setInputId, inputId, controlRef }}>
       <View {...props} />
     </fieldContext.Provider>
   );
 };
 const FormControl: FormControlComponent = ({ children }) => {
-  const { inputId, states, handles } = useContext(fieldContext);
+  const { setInputId } = useContext(fieldContext);
   const localId = useId();
-  if (!isValidElement(children)) {
-    return children;
-  }
 
-  const id =
-    children.props.id || children.props.nativeID || `form-control${localId}`;
-  inputId.current = id;
-  return cloneElement(children, {
-    id,
-    ...states,
-    ...([undefined, true].includes(children.props.focusable)
-      ? {
-          onFocus: composeEventHandlers(
-            handles.onFocus,
-            children.props.onFocus
-          ),
-          onBlur: composeEventHandlers(handles.onBlur, children.props.onBlur),
-        }
-      : {}),
-  } as any);
+  const id = (children as any).props?.id || `form-control${localId}`;
+  useEffect(() => {
+    setInputId(id);
+  }, [id, setInputId]);
+
+  return isValidElement(children)
+    ? cloneElement(children, {
+        id,
+        'nativeID': id,
+        'data-describedby': `${id}:helper`,
+      } as any)
+    : children;
 };
 const FormLabel: FormLabelComponent = (props) => {
-  const { inputId, states, handles } = useContext(fieldContext);
-  return (
-    <Pressable
-      {...({ tabIndex: '-1' } as any)}
-      onHoverIn={handles.onHoverIn}
-      onHoverOut={handles.onHoverOut}
-    >
-      <Label {...states} {...props} htmlFor={inputId.current} />
+  const { inputId, controlRef } = useContext(fieldContext);
+  const render = <Label {...props} for={inputId} />;
+
+  return isWeb ? (
+    render
+  ) : (
+    <Pressable tabIndex={-1} onPress={() => controlRef.current?.focus()}>
+      {render}
     </Pressable>
   );
 };

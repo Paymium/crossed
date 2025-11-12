@@ -28,13 +28,7 @@ export type FormLabelComponent = ComponentType<FormLabelProps>;
 export type FormMessageComponent = ComponentType<FormMessageProps>;
 
 export type FieldContext = {
-  name?: string;
-  inputId: MutableRefObject<string>;
-  states: { focus: boolean; hover: boolean; disabled: boolean };
-  handles: {
-    onFocus: (_e: NativeSyntheticEvent<TargetedEvent>) => void;
-    onBlur: (_e: NativeSyntheticEvent<TargetedEvent>) => void;
-    onHoverIn: (_e: MouseEvent) => void;
-    onHoverOut: (_e: MouseEvent) => void;
-  };
+  inputId: string;
+  setInputId: Dispatch<SetStateAction<string>>;
+  controlRef: MutableRefObject<View>;
 };
