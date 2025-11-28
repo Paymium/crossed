@@ -39,7 +39,7 @@ const rootStyles = createStyles((t) => ({
   hover: { base: { borderColor: t.colors.border.tertiary } },
   active: {
     base: { borderColor: t.colors.border.tertiary },
-    'web': {
+    web: {
       base: {
         transition: 'all 0.1s ease',
         boxShadow: `0px 0px 0px 2px ${t.colors.border.secondary}`,
@@ -73,17 +73,29 @@ const thumbStyles = createStyles((t) => ({
       width: 10,
       height: 10,
       borderRadius: 10,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: 'transparent',
       backgroundColor: 'transparent',
     },
   },
   checked: {
-    base: { backgroundColor: t.colors.primary.primary },
+    base: {
+      backgroundColor: t.colors.primary.primary,
+      borderColor: t.colors.primary.primary,
+    },
   },
   checkedActive: {
-    base: { backgroundColor: t.colors.primary['1'] },
+    base: {
+      backgroundColor: t.colors.primary['1'],
+      borderColor: t.colors.primary['1'],
+    },
   },
   checkedDisabled: {
-    base: { backgroundColor: t.colors.neutral['70'] },
+    base: {
+      backgroundColor: t.colors.neutral['70'],
+      borderColor: t.colors.neutral['70'],
+    },
   },
 }));
 
