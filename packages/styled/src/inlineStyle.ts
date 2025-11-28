@@ -12,6 +12,25 @@ import { isWeb } from './isWeb';
 
 export const inlineStyle = <O extends StyleSheet>(
   stylesParam: (_theme: Themes[keyof Themes]) => O
-): CrossedMethods<any> => {
-  return createMethods(stylesParam(Registry.getTheme(isWeb)));
+): CrossedMethods<O> => {
+  // styles calculés avec le thème actuel
+  let current = stylesParam(Registry.getTheme(isWeb));
+
+  // proxy renvoyé
+  const proxy = new Proxy(createMethods(current), {
+    get(_target, prop) {
+      return createMethods(current)[
+        prop as keyof ReturnType<typeof createMethods>
+      ];
+    },
+  }) as CrossedMethods<O>;
+
+  // sur mobile, on écoute les changements de thème
+  if (!isWeb) {
+    Registry.subscribe(() => {
+      current = stylesParam(Registry.getTheme(isWeb));
+    });
+  }
+
+  return proxy;
 };

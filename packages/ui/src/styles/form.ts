@@ -62,6 +62,7 @@ export const form = createStyles(
     containerLabel: {},
     elementRight: {
       base: {
+        zIndex: 5,
         position: 'absolute',
         right: 0,
         top: 0,
@@ -74,6 +75,7 @@ export const form = createStyles(
     },
     elementLeft: {
       base: {
+        zIndex: 5,
         position: 'absolute',
         left: 0,
         top: 0,
