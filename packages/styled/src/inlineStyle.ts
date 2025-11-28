@@ -12,7 +12,7 @@ import { isWeb } from './isWeb';
 
 export const inlineStyle = <O extends StyleSheet>(
   stylesParam: (_theme: Themes[keyof Themes]) => O
-): CrossedMethods<O> => {
+): CrossedMethods<any> => {
   // styles calculés avec le thème actuel
   let current = stylesParam(Registry.getTheme(isWeb));
 
