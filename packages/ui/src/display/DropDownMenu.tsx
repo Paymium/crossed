@@ -11,6 +11,7 @@ import { Popover, useFloatingContext } from '../overlay';
 import { ComponentProps, memo, PropsWithChildren } from 'react';
 import { MenuList } from './MenuList';
 import { Divider as D, DividerProps } from '../layout/Divider';
+import { useMedia } from '../useMedia';
 
 type RootProps = ComponentProps<typeof Popover>;
 const DropDownRoot = memo(
@@ -39,9 +40,12 @@ const DropDowmMenuTrigger = ({ ...props }: TooltipTriggerProps) => {
 type ContentProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
 
 const DropDownMenuContent = ({ children, style }: ContentProps) => {
+  const { md } = useMedia();
   return (
     <Popover.Content>
-      <MenuList style={style}>{children}</MenuList>
+      <MenuList style={style} bordered={md}>
+        {children}
+      </MenuList>
     </Popover.Content>
   );
 };
