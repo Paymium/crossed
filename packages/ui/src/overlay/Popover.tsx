@@ -30,6 +30,7 @@ import { autoUpdate, offset, Placement, useFloating } from '@floating-ui/react';
 import { flip } from '@floating-ui/dom';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useMedia } from '../useMedia';
+import { FocusOn } from 'react-focus-on';
 
 export type PopoverConfigContext = {
   showSheet?: boolean;
@@ -126,23 +127,26 @@ type ContentWebProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
 const ContentWeb = memo<ContentWebProps & RefAttributes<View>>(
   forwardRef<View, ContentWebProps>(({ children, style }, ref) => {
     const { refs, floatingStyles } = useFloatingUi();
+    const { onClose, open } = useFloatingContext();
 
     return (
       <Floating.Portal>
-        <Floating.Content
-          entering={FadeIn}
-          exiting={FadeOut}
-          ref={composeRefs(ref, refs.setFloating as any)}
-          style={composeStyles(
-            inlineStyle(() => ({
-              base: { position: 'absolute' },
-            })),
-            stylesDyn.dyn(floatingStyles),
-            style
-          )}
-        >
-          {children}
-        </Floating.Content>
+        <FocusOn onClickOutside={onClose} onEscapeKey={onClose} enabled={open}>
+          <Floating.Content
+            entering={FadeIn}
+            exiting={FadeOut}
+            ref={composeRefs(ref, refs.setFloating as any)}
+            style={composeStyles(
+              inlineStyle(() => ({
+                base: { position: 'absolute' },
+              })),
+              stylesDyn.dyn(floatingStyles),
+              style
+            )}
+          >
+            {children}
+          </Floating.Content>
+        </FocusOn>
       </Floating.Portal>
     );
   })

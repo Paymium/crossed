@@ -5,9 +5,9 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { withStaticProperties } from '@crossed/core';
-import { composeStyles, CrossedMethods } from '@crossed/styled';
-import { Popover } from '../overlay';
+import { composeEventHandlers, withStaticProperties } from '@crossed/core';
+import { CrossedMethods } from '@crossed/styled';
+import { Popover, useFloatingContext } from '../overlay';
 import { ComponentProps, memo, PropsWithChildren } from 'react';
 import { MenuList } from './MenuList';
 import { Divider as D, DividerProps } from '../layout/Divider';
@@ -40,14 +40,19 @@ type ContentProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
 
 const DropDownMenuContent = ({ children, style }: ContentProps) => {
   return (
-    <Popover.Content style={composeStyles(style)}>
-      <MenuList>{children}</MenuList>
+    <Popover.Content>
+      <MenuList style={style}>{children}</MenuList>
     </Popover.Content>
   );
 };
 type ItemProps = ComponentProps<typeof MenuList.Item>;
-const DropDownMenuItem = ({ children, ...props }: ItemProps) => {
-  return <MenuList.Item {...props}>{children}</MenuList.Item>;
+const DropDownMenuItem = ({ children, onPress, ...props }: ItemProps) => {
+  const { onClose } = useFloatingContext();
+  return (
+    <MenuList.Item {...props} onPress={composeEventHandlers(onPress, onClose)}>
+      {children}
+    </MenuList.Item>
+  );
 };
 type LabelProps = ComponentProps<typeof MenuList.Label>;
 const DropDownMenuItemLabel = ({ children, ...props }: LabelProps) => {

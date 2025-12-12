@@ -117,27 +117,20 @@ export const WithComponent: Story = {
         }))}
       >
         <DropDownMenu {...e}>
-          {/*TRIGGER*/}
           <DropDownMenu.Trigger asChild>
             <Button>
               <Button.Text>Menu</Button.Text>
               <Button.Icon />
             </Button>
           </DropDownMenu.Trigger>
-          {/*CONTENT*/}
           <DropDownMenu.Content>
-            {/*COmposent Autre*/}
             <Card size={'xs'}>
               <Card.Title>Your Profile</Card.Title>
               <Card.Description>Find here all your info</Card.Description>
             </Card>
-            {/*DIVIDER*/}
             <DropDownMenu.Divider />
-            {/*LABEL*/}
             <DropDownMenu.Label>Action</DropDownMenu.Label>
-            {/*ITEM*/}
             <DropDownMenu.Item>
-              {/*TITRE du CHOIX*/}
               <DropDownMenu.Title>Action1</DropDownMenu.Title>
             </DropDownMenu.Item>
             <DropDownMenu.Item>
