@@ -16,3 +16,19 @@ export const growStyles = createStyles(() => ({
   on: { base: { flexGrow: 1 } },
   off: { base: { flexGrow: 0 } },
 }));
+
+export const flexDirectionStyles = createStyles(() => ({
+  row: { base: { flexDirection: 'row' } },
+  rowReverse: { base: { flexDirection: 'row-reverse' } },
+  column: { base: { flexDirection: 'column' } },
+  columnReverse: { base: { flexDirection: 'column-reverse' } },
+}));
+
+export const flexDirectionResponsiveStyles = createStyles(() => ({
+  mdCol: {
+    media: { md: { flexDirection: 'column' } },
+  },
+  mdRow: {
+    media: { md: { flexDirection: 'row' } },
+  },
+}));
