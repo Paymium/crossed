@@ -30,7 +30,7 @@ const checkboxStyles = createStyles((t) => ({
       alignItems: 'center',
       display: 'flex',
       flexDirection: 'row',
-      gap: t.space.md,
+      gap: t.space.xl,
     },
   },
   hover: { base: { borderColor: t.colors.border.tertiary } },

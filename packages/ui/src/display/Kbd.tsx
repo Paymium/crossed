@@ -13,7 +13,7 @@ const useKbd = createStyles((t) => ({
     base: {
       // backgroundColor: t.colors.neutral[500],
       // paddingVertical: 1,
-      paddingHorizontal: t.space.xs,
+      paddingHorizontal: t.space.md,
       borderWidth: 1,
       borderStyle: 'solid',
       borderRadius: 4,

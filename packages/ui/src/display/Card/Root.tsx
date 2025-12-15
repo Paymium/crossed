@@ -37,13 +37,13 @@ export const CardRoot = forwardRef(
   ({ role, style, size = 'auto', ...props }: CardProps, ref: any) => {
     const { md, xl } = useMedia();
     const space = useMemo<YBoxProps['space']>(() => {
-      if (size === 'sm') return 'xs';
-      if (size === 'xs') return 'xxs';
+      if (size === 'sm') return 'md';
+      if (size === 'xs') return 'xs';
       if (size === 'auto') {
-        if (xl) return 'lg';
-        if (md) return 'md';
+        if (xl) return '3xl';
+        if (md) return 'xl';
       }
-      return 'xs';
+      return 'md';
     }, [size, md, xl]);
     return (
       <YBox

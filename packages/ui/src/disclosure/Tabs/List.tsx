@@ -195,7 +195,7 @@ export const createList = (useTabsContext: () => TabsContext) => {
           <NextButton widthLayout={widthLayout} widthContent={widthContent} />
         )}
         <ScrollView
-          space="xs"
+          space="md"
           role="tablist"
           ref={listTabRef}
           horizontal

@@ -41,15 +41,15 @@ const rootStyle = createStyles(({ colors, space }) => ({
       borderColor: colors.border.primary,
     },
   },
-  padded: { base: { padding: space.xs } },
+  padded: { base: { padding: space.md } },
 }));
 const itemStyles = createStyles((t) => ({
   padding: {
     base: {
-      paddingTop: t.space.xs,
-      paddingBottom: t.space.xs,
-      paddingLeft: t.space.md,
-      paddingRight: t.space.md,
+      paddingTop: t.space.md,
+      paddingBottom: t.space.md,
+      paddingLeft: t.space.xl,
+      paddingRight: t.space.xl,
     },
   },
   item: {
@@ -57,7 +57,7 @@ const itemStyles = createStyles((t) => ({
       display: 'flex',
       flexDirection: 'column',
       // alignItems: 'center',
-      paddingHorizontal: t.space.md,
+      paddingHorizontal: t.space.xl,
       justifyContent: 'center',
       // height: 42,
       borderWidth: 0,
@@ -85,7 +85,7 @@ const MenuRoot = memo<MenuListProps & RefAttributes<View>>(
         <YBox
           role="list"
           alignItems={'stretch'}
-          space={padded ? 'xxs' : undefined}
+          space={padded ? 'xs' : undefined}
           {...props}
           style={composeStyles(
             rootStyle.default,

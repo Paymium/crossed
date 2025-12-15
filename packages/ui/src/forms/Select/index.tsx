@@ -70,7 +70,7 @@ export const Select = memo<SelectProps>((e) => {
         <Floating removeScroll={false}>
           <Sheet>
             <FormField disabled={disabled}>
-              <YBox space="xxs">
+              <YBox space="xs">
                 <SelectLabel
                   label={label}
                   description={description}

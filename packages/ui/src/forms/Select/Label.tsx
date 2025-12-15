@@ -19,7 +19,7 @@ export type SelectLabelProps = {
 export const SelectLabel = memo<SelectLabelProps>(
   ({ label, description, extra }) => {
     return label || description || extra ? (
-      <XBox alignItems="center" space="xxs">
+      <XBox alignItems="center" space="xs">
         {!!label && <FormLabel>{label}</FormLabel>}
         {!!description && (
           <Text style={form.labelDescription}>{description}</Text>

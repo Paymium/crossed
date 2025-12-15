@@ -71,7 +71,7 @@ export const Root = ({
               base: {
                 display: 'flex',
                 flexDirection: 'row',
-                gap: space.xs,
+                gap: space.md,
                 alignItems: 'center',
               },
             })),

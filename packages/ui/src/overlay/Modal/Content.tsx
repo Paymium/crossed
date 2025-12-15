@@ -42,7 +42,7 @@ export const modalStyles = createStyles(({ colors, space }) => ({
       zIndex: 100000,
       borderRadius: 16,
       backgroundColor: colors.background.secondary,
-      paddingVertical: space.xl,
+      paddingVertical: space['4xl'],
       margin: 'auto',
     },
   },

@@ -31,19 +31,19 @@ const toastStyles = createStyles(
     ({
       container: {
         base: {
-          padding: t.space.xs,
+          padding: t.space.md,
           borderRadius: 8,
         },
         media: {
           xs: {
-            paddingVertical: t.space.xs,
-            paddingHorizontal: t.space.xs,
+            paddingVertical: t.space.md,
+            paddingHorizontal: t.space.md,
           },
           md: {
             flexDirection: 'column',
             alignItems: 'flex-start',
-            paddingVertical: t.space.xs,
-            paddingHorizontal: t.space.xs,
+            paddingVertical: t.space.md,
+            paddingHorizontal: t.space.md,
           },
         },
         web: {
@@ -94,7 +94,7 @@ const Container = ({ status = 'info', children, ...props }: ContainerProps) => {
     <Banner
       status={status}
       alignSelf={'flex-end'}
-      space={'xs'}
+      space={'md'}
       {...props}
       style={composeStyles(toastStyles.container, props.style)}
     >
@@ -126,8 +126,8 @@ const Preset = ({
     {...props}
     style={composeStyles(toastPresetStyles.container, props.style)}
   >
-    <XBox space={'xs'} justifyContent={'between'} style={shrinkStyles.on}>
-      <XBox space={'xs'} style={shrinkStyles.on}>
+    <XBox space={'md'} justifyContent={'between'} style={shrinkStyles.on}>
+      <XBox space={'md'} style={shrinkStyles.on}>
         <Toast.Icon />
         <YBox alignSelf={'center'} style={shrinkStyles.on}>
           {title && <Toast.Title>{title}</Toast.Title>}
