@@ -1,5 +1,16 @@
 # @crossed/theme
 
+## 3.1.0
+
+### Minor Changes
+
+- 870beea: upgrade space theme
+
+### Patch Changes
+
+- Updated dependencies [3ce8889]
+  - @crossed/styled@0.15.1
+
 ## 3.0.0
 
 ### Minor Changes

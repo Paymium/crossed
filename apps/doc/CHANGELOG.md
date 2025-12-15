@@ -1,5 +1,24 @@
 # crossed-doc
 
+## 0.13.0
+
+### Minor Changes
+
+- ef93115: Add component Popover, Tooltip, DropDownMenu
+
+### Patch Changes
+
+- Updated dependencies [3ce8889]
+- Updated dependencies [ef93115]
+- Updated dependencies [870beea]
+- Updated dependencies [3ce8889]
+- Updated dependencies [eba3acb]
+  - @crossed/styled@0.15.1
+  - @crossed/ui@9.0.0
+  - @crossed/theme@3.1.0
+  - @crossed/unicons@5.0.0
+  - @crossed/webpack@3.0.1
+
 ## 0.12.27
 
 ### Patch Changes
