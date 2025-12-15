@@ -29,7 +29,7 @@ describe('Box component', () => {
   it('applies custom gap styles', () => {
     render(<Box space="3xl" testID="box" />);
     const boxElement = screen.getByTestId('box');
-    expect(boxElement).toHaveClass('gap-[var(--space-lg)]');
+    expect(boxElement).toHaveClass('gap-[var(--space-3xl)]');
   });
 
   it('applies justify-content and align-items styles', () => {
