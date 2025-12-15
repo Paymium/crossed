@@ -48,16 +48,16 @@ export const fontSizeStyles = createStyles(() => ({
 
 export const fontWeightStyles = createStyles((t) => ({
   xs: {
-    base: { fontWeight: t.font.fontWeight.xs },
-    media: { md: { fontWeight: t.font.fontWeight.xs } },
+    base: { fontWeight: t.font.fontWeight.xss },
+    media: { md: { fontWeight: t.font.fontWeight.xss } },
   },
   sm: {
     base: { fontWeight: t.font.fontWeight.sm },
     media: { md: { fontWeight: t.font.fontWeight.sm } },
   },
   md: {
-    base: { fontWeight: t.font.fontWeight.md },
-    media: { md: { fontWeight: t.font.fontWeight.md } },
+    base: { fontWeight: t.font.fontWeight.xs },
+    media: { md: { fontWeight: t.font.fontWeight.xs } },
   },
   lg: {
     base: { fontWeight: t.font.fontWeight.lg },

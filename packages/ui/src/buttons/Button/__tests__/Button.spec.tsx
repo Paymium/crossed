@@ -82,7 +82,7 @@ describe('Button', () => {
   });
 
   it('applies the correct styles for sm size', () => {
-    render(<Button size="sm">Small Button</Button>);
+    render(<Button size="lg">Small Button</Button>);
     expect(screen.getByRole('button')).toMatchSnapshot();
   });
 

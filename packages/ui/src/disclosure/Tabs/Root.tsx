@@ -37,14 +37,14 @@ export const createRoot =
     const { md, lg } = useMedia();
     const tmpSize = useMemo(() => {
       if (typeof size !== 'undefined') return size;
-      if (lg) return 'lg';
-      if (md) return 'md';
-      return 'sm';
+      if (lg) return '3xl';
+      if (md) return 'xl';
+      return 'lg';
     }, [lg, size, md]);
 
     return (
       <TabsProvider {...tabsInstance} variant={variant} size={tmpSize}>
-        <YBox space="sm" {...props}>
+        <YBox space="lg" {...props}>
           {children}
         </YBox>
       </TabsProvider>

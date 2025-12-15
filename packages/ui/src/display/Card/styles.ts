@@ -8,10 +8,10 @@
 import { createStyles } from '@crossed/styled';
 
 export const spacingStyle = createStyles(({ space }) => {
-  const xs = { padding: space.sm };
-  const sm = { padding: space.md };
-  const md = { padding: space.lg };
-  const lg = { padding: space.xl };
+  const xs = { padding: space.lg };
+  const sm = { padding: space.xl };
+  const md = { padding: space['3xl'] };
+  const lg = { padding: space['4xl'] };
   return {
     auto: {
       base: sm,
@@ -27,7 +27,7 @@ export const spacingStyle = createStyles(({ space }) => {
 export const cardStyles = createStyles(({ space, font, components }) => ({
   root: {
     base: {
-      borderRadius: space.md,
+      borderRadius: space.xl,
       backgroundColor: components.Card.default.background,
       borderWidth: 1,
       borderColor: components.Card.default.border,

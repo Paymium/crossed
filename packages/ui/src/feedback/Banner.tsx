@@ -66,7 +66,7 @@ const bannerStyles = createStyles(
       },
       container: {
         base: {
-          padding: t.space.md,
+          padding: t.space.xl,
           borderRadius: 8,
           borderWidth: 1,
           borderStyle: 'solid',
@@ -74,14 +74,14 @@ const bannerStyles = createStyles(
         variants: {},
         media: {
           xs: {
-            paddingVertical: t.space.xs,
-            paddingHorizontal: t.space.md,
+            paddingVertical: t.space.md,
+            paddingHorizontal: t.space.xl,
           },
           md: {
             flexDirection: 'row',
             alignItems: 'center',
-            paddingVertical: t.space.md,
-            paddingHorizontal: t.space.lg,
+            paddingVertical: t.space.xl,
+            paddingHorizontal: t.space['3xl'],
           },
         },
       },
@@ -151,7 +151,7 @@ const Container = ({
   return (
     <bannerContext.Provider value={{ status }}>
       <YBox
-        space={!md ? 'xs' : 'xxs'}
+        space={!md ? 'md' : 'xs'}
         role="banner"
         {...props}
         style={composeStyles(

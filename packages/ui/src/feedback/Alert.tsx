@@ -67,14 +67,14 @@ export const alertStyles = createStyles(
       },
       container: {
         base: {
-          paddingVertical: space.xs,
-          paddingHorizontal: space.md,
-          padding: space.xs,
+          paddingVertical: space.md,
+          paddingHorizontal: space.xl,
+          padding: space.md,
           borderRadius: 8,
           borderWidth: 1,
           borderStyle: 'solid',
           alignItems: 'center',
-          gap: space.xs,
+          gap: space.md,
         },
         variants: {},
         media: {
@@ -161,7 +161,7 @@ const Container = ({
   return (
     <alertContext.Provider value={{ status }}>
       <YBox
-        space="xs"
+        space="md"
         role="alert"
         {...props}
         style={composeStyles(
@@ -221,7 +221,7 @@ export type GroupProps = { style?: CrossedMethods<any, any> } & Omit<
 const AlertGroup = ({ style, ...props }: GroupProps) => {
   return (
     <YBox
-      space="xs"
+      space="md"
       {...props}
       style={composeStyles(alertStyles.group, style)}
     />

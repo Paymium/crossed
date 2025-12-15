@@ -57,8 +57,8 @@ export const Calendar = memo<CalendarProps & RefAttributes<View>>(
     return (
       <YBox style={style} ref={ref}>
         {months.map(({ year, month, weeks }) => (
-          <YBox key={`${id}-month-${month}`} space={'xxs'}>
-            <XBox alignItems={'stretch'} space={'md'}>
+          <YBox key={`${id}-month-${month}`} space={'xs'}>
+            <XBox alignItems={'stretch'} space={'xl'}>
               <SelectMonth
                 month={month}
                 onChange={setMonth}
@@ -73,7 +73,7 @@ export const Calendar = memo<CalendarProps & RefAttributes<View>>(
                 years={Array.from(monthsByYear).map(([year]) => year)}
               />
             </XBox>
-            <YBox space={'xxs'}>
+            <YBox space={'xs'}>
               <WeekDay
                 days={(weeks[0].length > 0 ? weeks[0] : weeks[1]) as IDay[]}
                 locale={locale}

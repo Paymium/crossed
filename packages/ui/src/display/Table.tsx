@@ -41,9 +41,9 @@ const useTable = createStyles((t) => ({
     },
   },
   td: {
-    base: { padding: t.space.md },
+    base: { padding: t.space.xl },
   },
-  th: { base: { textAlign: 'left', padding: t.space.md } },
+  th: { base: { textAlign: 'left', padding: t.space.xl } },
 }));
 
 export const Table = (props: HTMLProps<HTMLTableElement>) => {

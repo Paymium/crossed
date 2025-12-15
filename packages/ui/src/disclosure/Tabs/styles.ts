@@ -91,9 +91,9 @@ export const triggerStyles = createStyles(({ space }) => ({
       backgroundColor: 'transparent',
     },
   },
-  sm: { base: { paddingHorizontal: space.xs } },
-  md: { base: { paddingHorizontal: space.md } },
-  lg: { base: { paddingHorizontal: space.lg } },
+  sm: { base: { paddingHorizontal: space.md } },
+  md: { base: { paddingHorizontal: space.xl } },
+  lg: { base: { paddingHorizontal: space['3xl'] } },
 }));
 
 export const heightStyles = createStyles(() => ({

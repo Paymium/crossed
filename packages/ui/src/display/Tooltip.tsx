@@ -15,8 +15,8 @@ const tooltipStyles = inlineStyle(({ colors, space }) => ({
   base: {
     backgroundColor: colors.text.primary,
     borderRadius: 16,
-    paddingVertical: space.xs,
-    paddingHorizontal: space.sm,
+    paddingVertical: space.md,
+    paddingHorizontal: space.lg,
     maxWidth: 276,
   },
   web: { base: { width: 'max-content' as any } },

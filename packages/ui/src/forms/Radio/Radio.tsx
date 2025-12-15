@@ -62,7 +62,7 @@ const pressableStyles = createStyles(({ space }) => ({
       alignItems: 'center',
       display: 'flex',
       flexDirection: 'row',
-      gap: space.md,
+      gap: space.xl,
     },
   },
 }));

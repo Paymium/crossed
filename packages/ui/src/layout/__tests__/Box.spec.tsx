@@ -27,7 +27,7 @@ describe('Box component', () => {
   });
 
   it('applies custom gap styles', () => {
-    render(<Box space="lg" testID="box" />);
+    render(<Box space="3xl" testID="box" />);
     const boxElement = screen.getByTestId('box');
     expect(boxElement).toHaveClass('gap-[var(--space-lg)]');
   });

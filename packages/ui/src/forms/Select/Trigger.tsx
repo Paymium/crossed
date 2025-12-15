@@ -39,7 +39,7 @@ const ClearButton = memo(() => {
       style={composeStyles(
         form.elementRight,
         inlineStyle(({ space }) => ({
-          base: { marginRight: space.md },
+          base: { marginRight: space.xl },
         }))
       )}
     >
@@ -87,7 +87,7 @@ const Value = () => {
                     inlineStyle(({ colors, space }) => ({
                       base: {
                         backgroundColor: colors.info.light,
-                        padding: space.xxs,
+                        padding: space.xs,
                         borderRadius: 4,
                         borderWidth: 1,
                         borderColor: colors.info.primary,

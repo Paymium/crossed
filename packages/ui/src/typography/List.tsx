@@ -11,8 +11,8 @@ import { YBox, type YBoxProps } from '../layout/YBox';
 import { composeStyles, createStyles } from '@crossed/styled';
 
 const useList = createStyles((t) => ({
-  ul: { base: { gap: t.space.xs } },
-  li: { base: { gap: t.space.xs } },
+  ul: { base: { gap: t.space.xl } },
+  li: { base: { gap: t.space.md } },
   disc: { base: { fontSize: 9 } },
 }));
 

@@ -116,9 +116,9 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
         formFieldStyle
       ).rnw()}
     >
-      <YBox space="xxs">
+      <YBox space="xs">
         {!!(label || description || extra) && (
-          <XBox alignItems="center" space="xxs">
+          <XBox alignItems="center" space="xs">
             {!!label && <FormLabel>{label}</FormLabel>}
             {!!description && (
               <Text style={form.labelDescription}>{description}</Text>
@@ -175,7 +175,7 @@ export const Input = forwardRef<TextInput, InputProps>((allProps, ref) => {
           </FormControl>
           {(!!elementRight || !!showClear) && (
             <XBox
-              style={composeStyles(form.elementRight, gapStyles.xs)}
+              style={composeStyles(form.elementRight, gapStyles.md)}
               onLayout={({ nativeEvent: { layout } }) =>
                 setElementRightWidth(layout.width)
               }
