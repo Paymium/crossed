@@ -1,5 +1,12 @@
 # crossed-vite
 
+## 0.0.54
+
+### Patch Changes
+
+- Updated dependencies [fc170a0]
+  - @crossed/ui@9.0.1
+
 ## 0.0.53
 
 ### Patch Changes

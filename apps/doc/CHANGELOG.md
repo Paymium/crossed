@@ -1,5 +1,12 @@
 # crossed-doc
 
+## 0.13.1
+
+### Patch Changes
+
+- Updated dependencies [fc170a0]
+  - @crossed/ui@9.0.1
+
 ## 0.13.0
 
 ### Minor Changes
