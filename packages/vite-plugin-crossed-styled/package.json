@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-crossed-styled",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
