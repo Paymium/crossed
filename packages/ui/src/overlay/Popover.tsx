@@ -14,8 +14,6 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import { Adapt } from '../other/Adapt';
-import { Text, TextProps } from '../typography/Text';
 import { Sheet } from './Sheet/index';
 import { composeRefs, createScope, withStaticProperties } from '@crossed/core';
 import {
@@ -32,13 +30,20 @@ import { autoUpdate, offset, Placement, useFloating } from '@floating-ui/react';
 import { flip } from '@floating-ui/dom';
 import { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useMedia } from '../useMedia';
-import { Box } from '../layout';
+import { FocusOn } from 'react-focus-on';
+
+export type PopoverConfigContext = {
+  showSheet?: boolean;
+};
+
+export const [PopoverConfigProvider, usePopoverConfig] =
+  createScope<PopoverConfigContext>({} as PopoverConfigContext);
 
 const useFloatinCompat = isWeb
-  ? (placement?: Placement) =>
+  ? (placement: Placement, offSetValue: number) =>
       useFloating({
         placement: placement,
-        middleware: [flip({ crossAxis: true }), offset(10)],
+        middleware: [flip({ crossAxis: true }), offset(offSetValue)],
         whileElementsMounted: autoUpdate,
       })
   : () => ({
@@ -55,30 +60,43 @@ const [FloatingUiProvider, useFloatingUi] = createScope<FloatingUiContext>(
   {} as FloatingUiContext
 );
 
-type RootProps = ComponentProps<typeof Floating> & { placement?: Placement };
+type RootProps = ComponentProps<typeof Floating> & {
+  placement?: Placement;
+  offsetValue?: number;
+};
 export const Root = memo(
-  ({ children, placement, triggerStrategy, ...props }: RootProps) => {
-    const { refs, floatingStyles } = useFloatinCompat(placement);
+  ({
+    children,
+    placement = 'bottom-end',
+    triggerStrategy = 'onPress',
+    offsetValue = 10,
+    ...props
+  }: RootProps) => {
+    const { refs, floatingStyles } = useFloatinCompat(placement, offsetValue);
     const { md } = useMedia();
 
     return (
-      <Floating
-        triggerStrategy={
-          !md && triggerStrategy === 'onPointerEnter'
-            ? 'onPress'
-            : triggerStrategy
-        }
-        removeScroll={false}
-        {...props}
-      >
-        <FloatingUiProvider refs={refs as any} floatingStyles={floatingStyles}>
-          {children}
-        </FloatingUiProvider>
-      </Floating>
+      <PopoverConfigProvider showSheet={!isWeb || !md}>
+        <Floating
+          triggerStrategy={
+            !md && triggerStrategy === 'onPointerEnter'
+              ? 'onPress'
+              : triggerStrategy
+          }
+          removeScroll={false}
+          {...props}
+        >
+          <FloatingUiProvider
+            refs={refs as any}
+            floatingStyles={floatingStyles}
+          >
+            {children}
+          </FloatingUiProvider>
+        </Floating>
+      </PopoverConfigProvider>
     );
   }
 );
-Root.displayName = 'Tooltip.Root';
 
 type TriggerProps = ComponentProps<typeof Floating.Trigger>;
 export const Trigger = memo<TriggerProps & RefAttributes<View>>(
@@ -92,67 +110,47 @@ export const Trigger = memo<TriggerProps & RefAttributes<View>>(
     );
   })
 );
-Trigger.displayName = 'Tooltip.Trigger';
 
 type ContentProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
 export const Content = memo<ContentProps & RefAttributes<View>>(
   forwardRef<View, ContentProps>(({ children, style }, ref) => {
-    return (
-      <>
-        {isWeb ? (
-          <Adapt fallback={<ContentNative children={children} style={style} />}>
-            <ContentWeb ref={ref} children={children} style={style} />
-          </Adapt>
-        ) : (
-          <ContentNative children={children} style={style} />
-        )}
-      </>
+    const { showSheet } = usePopoverConfig();
+    return showSheet ? (
+      <ContentNative children={children} style={style} />
+    ) : (
+      <ContentWeb ref={ref} children={children} style={style} />
     );
   })
 );
-Content.displayName = 'Tooltip.Content';
-
-const tooltipStyles = inlineStyle(({ colors, space }) => ({
-  base: {
-    backgroundColor: colors.text.primary,
-    borderRadius: 16,
-    paddingVertical: space.xs,
-    paddingHorizontal: space.sm,
-    maxWidth: 276,
-  },
-  web: { base: { width: 'max-content' as any } },
-}));
 
 type ContentWebProps = PropsWithChildren<{ style?: CrossedMethods<any> }>;
 const ContentWeb = memo<ContentWebProps & RefAttributes<View>>(
   forwardRef<View, ContentWebProps>(({ children, style }, ref) => {
     const { refs, floatingStyles } = useFloatingUi();
+    const { onClose, open } = useFloatingContext();
 
     return (
       <Floating.Portal>
-        <Floating.Content
-          entering={FadeIn}
-          exiting={FadeOut}
-          style={inlineStyle(() => ({
-            base: { position: 'absolute' },
-          }))}
-        >
-          <Box
+        <FocusOn onClickOutside={onClose} onEscapeKey={onClose} enabled={open}>
+          <Floating.Content
+            entering={FadeIn}
+            exiting={FadeOut}
             ref={composeRefs(ref, refs.setFloating as any)}
             style={composeStyles(
-              tooltipStyles,
+              inlineStyle(() => ({
+                base: { position: 'absolute' },
+              })),
               stylesDyn.dyn(floatingStyles),
               style
             )}
           >
             {children}
-          </Box>
-        </Floating.Content>
+          </Floating.Content>
+        </FocusOn>
       </Floating.Portal>
     );
   })
 );
-ContentWeb.displayName = 'Tooltip.ContentWeb';
 
 const ContentNative = ({
   children,
@@ -174,25 +172,8 @@ const ContentNative = ({
     </Sheet>
   );
 };
-ContentNative.displayName = 'Tooltip.ContentNative';
 
-const TooltipText = (props: TextProps) => {
-  return (
-    <Text
-      {...props}
-      style={composeStyles(
-        inlineStyle(({ colors }) => ({
-          media: { md: { color: colors.text.invert } },
-        })),
-        props.style
-      )}
-    />
-  );
-};
-TooltipText.displayName = 'Tooltip.Text';
-
-export const Tooltip = withStaticProperties(Root, {
+export const Popover = withStaticProperties(Root, {
   Trigger,
   Content,
-  Text: TooltipText,
 });

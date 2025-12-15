@@ -15,3 +15,5 @@ export * from './position';
 export * from './textAlign';
 export * from './visibilityHidden';
 export * from './flex';
+export * from './padding';
+export * from './margin';

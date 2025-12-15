@@ -6,13 +6,14 @@
  */
 
 import { createStyles } from '@crossed/styled';
+import { SpaceName } from '@crossed/theme';
 
-export const gapStyles = createStyles(({ space }) => ({
-  xxs: { base: { gap: space.xs } },
-  xs: { base: { gap: space.md } },
-  sm: { base: { gap: space.lg } },
-  md: { base: { gap: space.xl } },
-  lg: { base: { gap: space.lg } },
-  xl: { base: { gap: space.xl } },
-  xxl: { base: { gap: space.xxl } },
-}));
+export const gapStyles = createStyles(({ space }) =>
+  (Object.keys(space) as SpaceName[]).reduce(
+    (acc, spaceName) => {
+      acc[spaceName] = { base: { 'gap': space[spaceName] } };
+      return acc;
+    },
+    {} as Record<SpaceName, any>
+  )
+);

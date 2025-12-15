@@ -8,7 +8,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { YBox, Text } from '@crossed/ui';
-import { Tooltip } from '@crossed/ui/src/overlay/Tooltip';
+import { Tooltip } from '@crossed/ui/src/display/Tooltip';
 import { inlineStyle } from '@crossed/styled';
 
 const meta: Meta<typeof Tooltip> = {
@@ -69,10 +69,10 @@ type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
-  args: { triggerStrategy: 'onPress' },
+  args: {},
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Hover: Story = {
-  args: { triggerStrategy: 'onPointerEnter' },
+export const Click: Story = {
+  args: { triggerStrategy: 'onPress' },
 };

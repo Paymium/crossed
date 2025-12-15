@@ -22,3 +22,11 @@ export const alignSelfStyle = createStyles(() => ({
   'flex-start': { base: { alignSelf: 'flex-start' } },
   'stretch': { base: { alignSelf: 'stretch' } },
 }));
+
+export const alignSelfResponsiveStyle = createStyles(() => ({
+  'mdCenter': { media: { md: { alignSelf: 'center' } } },
+  'mdBaseline': { media: { md: { alignSelf: 'baseline' } } },
+  'mdEnd': { media: { md: { alignSelf: 'flex-end' } } },
+  'mdStart': { media: { md: { alignSelf: 'flex-start' } } },
+  'mdStretch': { media: { md: { alignSelf: 'stretch' } } },
+}));
