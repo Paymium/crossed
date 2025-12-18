@@ -37,9 +37,9 @@ export const createRoot =
     const { md, lg } = useMedia();
     const tmpSize = useMemo(() => {
       if (typeof size !== 'undefined') return size;
-      if (lg) return '3xl';
-      if (md) return 'xl';
-      return 'lg';
+      if (lg) return 'lg';
+      if (md) return 'md';
+      return 'sm';
     }, [lg, size, md]);
 
     return (
