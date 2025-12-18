@@ -1,5 +1,12 @@
 # @crossed/ui
 
+## 9.0.2
+
+### Patch Changes
+
+- 9650ad0: revert change on tabs size
+- 6c7fc61: Update button text weight according to size
+
 ## 9.0.1
 
 ### Patch Changes
