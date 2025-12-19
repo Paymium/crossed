@@ -16,6 +16,8 @@ import {
 import EventManager from './eventmanager';
 import { Route } from './hooks/use-router';
 
+export { BottomSheetModal } from '@gorhom/bottom-sheet';
+
 export interface Sheets {}
 
 type DefaultSheetDefinition = {
@@ -26,18 +28,18 @@ type DefaultSheetDefinition = {
 
 export type SheetDefinition<T extends DefaultSheetDefinition = any> = T;
 
-export type ActionSheetRef<SheetId extends keyof Sheets = never> = {
+export type BottomSheetRef<SheetId extends keyof Sheets = never> = {
   /**
-   * Show the ActionSheet.
+   * Show the BottomSheet.
    */
   show: (_snapIndex?: number) => void;
 
   /**
-   * Hide the ActionSheet.
+   * Hide the BottomSheet.
    */
   hide: (_data?: Sheets[SheetId]['returnValue']) => void;
   /**
-   * @removed Use `show` or `hide` functions or SheetManager to open/close ActionSheet.
+   * @removed Use `show` or `hide` functions or SheetManager to open/close BottomSheet.
    */
   setModalVisible: (_visible?: boolean) => void;
 
@@ -46,15 +48,15 @@ export type ActionSheetRef<SheetId extends keyof Sheets = never> = {
    */
   snapToOffset: (_offset: number) => void;
   /**
-   * @removed Use `useScrollHandlers` hook to enable scrolling in ActionSheet.
+   * @removed Use `useScrollHandlers` hook to enable scrolling in BottomSheet.
    */
   /**
-   * When multiple snap points aret on the action sheet, use this to snap it to different
+   * When multiple snap points aret on the bottom sheet, use this to snap it to different
    * position.
    */
   snapToIndex: (_index: number) => void;
   /**
-   * @removed Use `useScrollHandlers` hook to enable scrolling in ActionSheet.
+   * @removed Use `useScrollHandlers` hook to enable scrolling in BottomSheet.
    */
   handleChildScrollEnd: () => void;
   snapToRelativeOffset: (_offset: number) => void;
@@ -81,23 +83,23 @@ export type ActionSheetRef<SheetId extends keyof Sheets = never> = {
   keyboardHandler: (_enabled?: boolean) => void;
 };
 
-export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
+export type BottomSheetProps<SheetId extends keyof Sheets = never> = {
   children?: React.ReactNode;
   /**
-   * A unique id for the ActionSheet. Defining this is optional. Usually when you register
+   * A unique id for the BottomSheet. Defining this is optional. Usually when you register
    * a sheet with `registerSheet()` it's id get automatically assigned.
    *
    */
   id?: SheetId | (string & {});
   /**
-   * Animate the opening and closing of ActionSheet.
+   * Animate the opening and closing of BottomSheet.
    *
    * Default: `true`
    */
   animated?: boolean;
 
   /**
-   * Choose how far off the user needs to drag the action sheet to make it snap to next point. The default is `50` which means
+   * Choose how far off the user needs to drag the bottom sheet to make it snap to next point. The default is `50` which means
    * that user needs to drag the sheet up or down at least 50 display pixels for it to close or move to next snap point.
    * Otherwise it will just return to the initial position.
    *
@@ -106,7 +108,7 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
   springOffset?: number;
 
   /**
-   * When the action sheet is pulled beyond top position, it overdraws and bounces back. Set this to false if you need to disable this behaviour.
+   * When the bottom sheet is pulled beyond top position, it overdraws and bounces back. Set this to false if you need to disable this behaviour.
    */
   overdrawEnabled?: boolean;
   /**
@@ -139,14 +141,14 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
     'useNativeDriver'
   >;
   /**
-   * Provide snap points ranging from 0 to 100. ActionSheet will snap between these points. If no snap points
+   * Provide snap points ranging from 0 to 100. BottomSheet will snap between these points. If no snap points
    * are provided, the default is a single snap point set to `100` which means that the sheet will be opened
    * 100% on becoming visible.
    */
   snapPoints?: number[];
   /**
    * When you have set the `snapPoints` prop. You can use this prop to set the inital snap point for the sheet. For example
-   * if i have snap points set to `[30,60,100]` then setting this prop to `1` would mean the action sheet will snap to 60% on
+   * if i have snap points set to `[30,60,100]` then setting this prop to `1` would mean the bottom sheet will snap to 60% on
    * becoming visible.
    */
   initialSnapIndex?: number;
@@ -163,7 +165,7 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
   keyboardHandlerEnabled?: boolean;
 
   /**
-   * Add elevation to the ActionSheet container.
+   * Add elevation to the BottomSheet container.
    *
    * Default: `5`
    */
@@ -180,7 +182,7 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
   payload?: Sheets[SheetId]['returnValue'];
 
   /**
-   * Style the top indicator bar in ActionSheet.
+   * Style the top indicator bar in BottomSheet.
    */
   indicatorStyle?: ViewStyle;
 
@@ -209,7 +211,7 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
   containerStyle?: ViewStyle;
 
   /**
-   * Control closing ActionSheet by touching on backdrop.
+   * Control closing BottomSheet by touching on backdrop.
    *
    * Default: `true`
    */
@@ -223,7 +225,7 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
   onTouchBackdrop?: (_event: GestureResponderEvent) => void;
 
   /**
-   * Render a component over the ActionSheet. Useful for rendering
+   * Render a component over the BottomSheet. Useful for rendering
    * Toast components with which user can interact. Should be `absolutely` positioned.
    *
    * */
@@ -239,7 +241,7 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
   withNestedSheetProvider?: React.ReactNode;
 
   /**
-   * Will the ActionSheet close on `hardwareBackPress` event.
+   * Will the BottomSheet close on `hardwareBackPress` event.
    *
    * Default: `true`
    */
@@ -252,7 +254,7 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
   defaultOverlayOpacity?: number;
 
   /**
-   * Enables gesture control of ActionSheet.
+   * Enables gesture control of BottomSheet.
    *
    * Default: `false`
    */
@@ -266,7 +268,7 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
   statusBarTranslucent?: boolean;
 
   /**
-   * Prevent ActionSheet from closing on
+   * Prevent BottomSheet from closing on
    * gesture or tapping on backdrop.
    * Instead snap it to `bottomOffset` location
    *
@@ -274,7 +276,7 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
   closable?: boolean;
 
   /**
-   * Allow ActionSheet to draw under the StatusBar.
+   * Allow BottomSheet to draw under the StatusBar.
    * This is enabled by default.
    *
    * Default: `true`
@@ -328,27 +330,27 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
   useBottomSafeAreaPadding?: boolean;
 
   /**
-   * Event called when the ActionSheet closes.
+   * Event called when the BottomSheet closes.
    *
    * */
 
   onClose?: (_data?: Sheets[SheetId]['returnValue']) => void;
 
   /**
-   * Event called before ActionSheet opens. This is called only when using `SheetManager`.
+   * Event called before BottomSheet opens. This is called only when using `SheetManager`.
    */
   onBeforeShow?: (_data?: Sheets[SheetId]['payload']) => void;
 
   onBeforeClose?: (_data?: Sheets[SheetId]['returnValue']) => void;
 
   /**
-   * An event called when the ActionSheet Opens.
+   * An event called when the BottomSheet Opens.
    *
    * */
   onOpen?: () => void;
 
   /**
-   * Event called when the position of the ActionSheet changes. When the `position` value is 0, it means that the ActionSheet has reached top.
+   * Event called when the position of the BottomSheet changes. When the `position` value is 0, it means that the BottomSheet has reached top.
    */
   onChange?: (_position: number, _height: number) => void;
 
@@ -398,3 +400,12 @@ export type ActionSheetProps<SheetId extends keyof Sheets = never> = {
    */
   disableDragBeyondMinimumSnapPoint?: boolean;
 };
+
+// Backwards compatibility type aliases
+/** @deprecated Use BottomSheetRef instead */
+export type ActionSheetRef<SheetId extends keyof Sheets = never> =
+  BottomSheetRef<SheetId>;
+
+/** @deprecated Use BottomSheetProps instead */
+export type ActionSheetProps<SheetId extends keyof Sheets = never> =
+  BottomSheetProps<SheetId>;

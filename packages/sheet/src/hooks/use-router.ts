@@ -7,7 +7,7 @@
 
 import { createContext, useCallback, useContext, useState } from 'react';
 import { Animated } from 'react-native';
-import { Sheets, ActionSheetRef } from '../types';
+import { Sheets, BottomSheetRef } from '../types';
 
 export type RouteDefinition<T extends {} = {}> = T;
 
@@ -55,7 +55,7 @@ export type Router<Key extends keyof Sheets = never> = {
     _snap?: number
   ) => void;
   /**
-   * Close the action sheet.
+   * Close the bottom sheet.
    */
   close: () => void;
   /**
@@ -87,7 +87,7 @@ export const useRouter = ({
 }: {
   initialRoute?: string;
   routes?: Route[];
-  getRef?: () => ActionSheetRef;
+  getRef?: () => BottomSheetRef;
   onNavigate?: (_route: string) => void;
   onNavigateBack?: (_route: string) => void;
   routeOpacity: Animated.Value;
