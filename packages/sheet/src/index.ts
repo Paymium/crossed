@@ -5,12 +5,18 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import ActionSheet from './ActionSheet';
+import ActionSheet from './BottomSheet';
+
+// Re-export BottomSheetModalProvider for users who need to wrap their app
+export { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+
 export {
   SheetManager,
-  setBaseZIndexForActionSheets,
+  setBaseZIndexForBottomSheets,
   getSheetStack,
   isRenderedOnTop,
+  // Backwards compatibility - deprecated
+  setBaseZIndexForActionSheets,
 } from './sheetmanager';
 export {
   registerSheet,
@@ -22,9 +28,12 @@ export {
   useSheetPayload,
 } from './provider';
 export {
-  type ActionSheetProps,
+  type BottomSheetProps,
+  type BottomSheetRef,
   type SheetDefinition,
   type Sheets,
+  // Backwards compatibility - deprecated
+  type ActionSheetProps,
   type ActionSheetRef,
 } from './types';
 export { useScrollHandlers } from './hooks/use-scroll-handlers';

@@ -6,22 +6,14 @@
  */
 
 import React, {
-  PropsWithChildren,
-  RefAttributes,
   RefObject,
   useImperativeHandle,
 } from 'react';
-import { SectionListProps, SectionList as RNSectionList } from 'react-native';
-import {
-  NativeViewGestureHandlerProps,
-  RefreshControl,
-  ScrollView,
-} from 'react-native-gesture-handler';
+import { Platform, SectionListProps, SectionList as RNSectionList } from 'react-native';
+import { BottomSheetSectionList } from '@gorhom/bottom-sheet';
 import { useScrollHandlers } from '../hooks/use-scroll-handlers';
-import { nativeViewProps } from 'react-native-gesture-handler/src/handlers/NativeViewGestureHandler';
 
 type Props<T = any> = SectionListProps<T> &
-  Partial<NativeViewGestureHandlerProps> &
   React.RefAttributes<RNSectionList> & {
     /**
      * By default refresh control gesture will work in top 15% area of the ScrollView. You can set a different value here.
@@ -30,53 +22,6 @@ type Props<T = any> = SectionListProps<T> &
      */
     refreshControlGestureArea?: number;
   };
-
-export const RNGHSectionList = <T = any,>(
-  props: PropsWithChildren<
-    Omit<SectionListProps<T>, 'renderScrollComponent'> &
-      RefAttributes<RNSectionList<T>> &
-      NativeViewGestureHandlerProps
-  >,
-  ref: React.ForwardedRef<RefObject<RNSectionList>>
-) => {
-  const refreshControlGestureRef = React.useRef<RefreshControl>(null);
-  const { waitFor, refreshControl, ...rest } = props;
-
-  const flatListProps: any = {};
-  const scrollViewProps: any = {};
-  for (const [propName, value] of Object.entries(rest)) {
-    // https://github.com/microsoft/TypeScript/issues/26255
-    if ((nativeViewProps as readonly string[]).includes(propName)) {
-      scrollViewProps[propName] = value;
-    } else {
-      flatListProps[propName] = value;
-    }
-  }
-
-  return (
-    <RNSectionList
-      ref={ref}
-      {...(flatListProps as any)}
-      scrollEventThrottle={1}
-      renderScrollComponent={(scrollProps) => (
-        <ScrollView
-          {...{
-            ...scrollProps,
-            ...scrollViewProps,
-            waitFor: [...toArray(waitFor ?? []), refreshControlGestureRef],
-          }}
-        />
-      )}
-      refreshControl={
-        refreshControl
-          ? React.cloneElement(refreshControl, {
-              ref: refreshControlGestureRef,
-            } as any)
-          : undefined
-      }
-    />
-  );
-};
 
 function $SectionList<T>(
   props: Props<T>,
@@ -88,20 +33,21 @@ function $SectionList<T>(
   });
   useImperativeHandle(ref, () => handlers.ref);
 
+  // Use native SectionList for web, BottomSheetSectionList for native
+  const ScrollComponent = Platform.OS === 'web' ? RNSectionList : BottomSheetSectionList;
+
   return (
-    <RNGHSectionList
+    <ScrollComponent
       {...(props as any)}
-      {...handlers}
+      ref={handlers.ref as any}
       onScroll={(event) => {
         handlers.onScroll(event);
         props.onScroll?.(event);
       }}
-      bounces={false}
       onLayout={(event) => {
         handlers.onLayout();
         props.onLayout?.(event);
       }}
-      scrollEventThrottle={1}
     />
   );
 }
@@ -112,11 +58,3 @@ export const SectionList = React.forwardRef(
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export type FlatList<ItemT = any> = typeof RNSectionList & RNSectionList<ItemT>;
-
-function toArray<T>(object: T | T[]): T[] {
-  if (!Array.isArray(object)) {
-    return [object];
-  }
-
-  return object;
-}

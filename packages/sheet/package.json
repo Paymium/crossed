@@ -1,7 +1,7 @@
 {
   "name": "@crossed/sheet",
   "version": "0.12.5",
-  "description": "A Cross Platform(Android & iOS) ActionSheet with a robust and flexible api, native performance and zero dependency code for react native. Create anything you want inside ActionSheet.",
+  "description": "A Cross Platform(Android & iOS) BottomSheet with a robust and flexible api, native performance using @gorhom/bottom-sheet for react native. Create anything you want inside BottomSheet.",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
@@ -42,9 +42,13 @@
     "url": "https://github.com/paymium/crossed/issues/"
   },
   "homepage": "https://github.com/paymium/crossed",
+  "dependencies": {
+    "@gorhom/bottom-sheet": "^5.0.0"
+  },
   "peerDependencies": {
     "react-native": "*",
     "react-native-gesture-handler": "*",
+    "react-native-reanimated": "^3.0.0",
     "react-native-safe-area-context": "*"
   },
   "devDependencies": {

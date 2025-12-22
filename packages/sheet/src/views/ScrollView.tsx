@@ -11,13 +11,10 @@ import {
   ScrollView as RNScrollView,
   ScrollViewProps,
 } from 'react-native';
-import {
-  NativeViewGestureHandlerProps,
-  ScrollView as RNGHScrollView,
-} from 'react-native-gesture-handler';
+import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useScrollHandlers } from '../hooks/use-scroll-handlers';
+
 type Props = ScrollViewProps &
-  Partial<NativeViewGestureHandlerProps> &
   React.RefAttributes<RNScrollView> & {
     /**
      * By default refresh control gesture will work in top 15% area of the ScrollView. You can set a different value here.
@@ -37,11 +34,13 @@ function $ScrollView(
   });
   useImperativeHandle(ref, () => handlers.ref);
 
-  const ScrollComponent = Platform.OS === 'web' ? RNScrollView : RNGHScrollView;
+  // Use native ScrollView for web, BottomSheetScrollView for native
+  const ScrollComponent = Platform.OS === 'web' ? RNScrollView : BottomSheetScrollView;
+
   return (
     <ScrollComponent
       {...props}
-      {...handlers}
+      ref={handlers.ref as any}
       onScroll={(event) => {
         handlers.onScroll(event);
         props.onScroll?.(event);
@@ -50,8 +49,6 @@ function $ScrollView(
         handlers.onLayout();
         props.onLayout?.(event);
       }}
-      bounces={false}
-      scrollEventThrottle={1}
     />
   );
 }

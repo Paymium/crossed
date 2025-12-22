@@ -16,8 +16,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { actionSheetEventManager } from './eventmanager';
-import { ActionSheetRef, Sheets } from './types';
+import { BottomSheetRef, Sheets } from './types';
 
 export const providerRegistryStack: string[] = [];
 
@@ -105,17 +106,25 @@ export function SheetProvider({
     <RenderSheet key={sheetId} id={sheetId} context={context} />
   );
 
-  return (
+  const content = (
     <>
       {children}
       {sheetIds.map(renderSheet)}
     </>
   );
+
+  // Wrap with BottomSheetModalProvider for global context (top-level)
+  // Nested contexts don't need their own provider
+  if (context === 'global') {
+    return <BottomSheetModalProvider>{content}</BottomSheetModalProvider>;
+  }
+
+  return content;
 }
 const ProviderContext = createContext('global');
 const SheetIDContext = createContext<string | undefined>(undefined);
 
-export const SheetRefContext = createContext<RefObject<ActionSheetRef | null>>(
+export const SheetRefContext = createContext<RefObject<BottomSheetRef | null>>(
   {} as any
 );
 
@@ -134,16 +143,16 @@ export const useSheetIDContext = () => useContext(SheetIDContext);
  * @returns
  */
 // export const useSheetRef = <SheetId extends keyof Sheets = never>(): RefObject<
-//   ActionSheetRef<SheetId>
+//   BottomSheetRef<SheetId>
 // > => useContext(SheetRefContext) as RefObject<
-// ActionSheetRef<SheetId>
+// BottomSheetRef<SheetId>
 // >;
 
 export function useSheetRef<SheetId extends keyof Sheets = never>(
   _id?: SheetId | (string & {})
 ) {
   return useContext(SheetRefContext) as MutableRefObject<
-    ActionSheetRef<SheetId>
+    BottomSheetRef<SheetId>
   >;
 }
 
@@ -160,7 +169,7 @@ export function useSheetPayload<SheetId extends keyof Sheets = never>(
 const RenderSheet = ({ id, context }: { id: string; context: string }) => {
   const [payload, setPayload] = useState();
   const [visible, setVisible] = useState(false);
-  const ref = useRef<ActionSheetRef | null>(null);
+  const ref = useRef<BottomSheetRef | null>(null);
   const Sheet = context.startsWith('$$-auto-')
     ? sheetsRegistry?.global?.[id]
     : sheetsRegistry[context]
