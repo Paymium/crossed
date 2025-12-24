@@ -8,29 +8,114 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Badge } from '@crossed/ui/src/display/Badge';
+import { XBox, YBox } from '@crossed/ui';
+import { X } from '@crossed/unicons';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Badge> = {
   component: Badge,
   render(e) {
     return (
-      <>
-        <Badge {...e}>
-          <Badge.Text>Badge</Badge.Text>
-        </Badge>
-        <Badge {...e} variant={'success'}>
-          <Badge.Text>Badge</Badge.Text>
-        </Badge>
-        <Badge {...e} variant={'error'}>
-          <Badge.Text>Badge</Badge.Text>
-        </Badge>
-        <Badge {...e} variant={'warning'}>
-          <Badge.Text>Badge</Badge.Text>
-        </Badge>
-        <Badge {...e} variant={'info'}>
-          <Badge.Text>Badge</Badge.Text>
-        </Badge>
-      </>
+      <YBox space={'md'}>
+        <XBox space={'sm'} alignItems={'center'}>
+          <Badge {...e}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+          <Badge {...e} variant={'success'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+          <Badge {...e} variant={'error'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+          <Badge {...e} variant={'warning'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+          <Badge {...e} variant={'info'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+        </XBox>
+        <XBox space={'sm'} alignItems={'center'}>
+          <Badge {...e} type={'pill'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+          <Badge {...e} variant={'success'} type={'pill'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+          <Badge {...e} variant={'error'} type={'pill'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+          <Badge {...e} variant={'warning'} type={'pill'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+          <Badge {...e} variant={'info'} type={'pill'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+        </XBox>
+        <XBox space={'sm'} alignItems={'center'}>
+          <Badge {...e}>
+            <Badge.Text>Badge</Badge.Text>
+            <Badge.Icon>
+              <X />
+            </Badge.Icon>
+          </Badge>
+          <Badge {...e} variant={'success'}>
+            <Badge.Text>Badge</Badge.Text>
+            <Badge.Icon>
+              <X />
+            </Badge.Icon>
+          </Badge>
+          <Badge {...e} variant={'error'}>
+            <Badge.Text>Badge</Badge.Text>
+            <Badge.Icon>
+              <X />
+            </Badge.Icon>
+          </Badge>
+          <Badge {...e} variant={'warning'}>
+            <Badge.Text>Badge</Badge.Text>
+            <Badge.Icon>
+              <X />
+            </Badge.Icon>
+          </Badge>
+          <Badge {...e} variant={'info'}>
+            <Badge.Text>Badge</Badge.Text>
+            <Badge.Icon>
+              <X />
+            </Badge.Icon>
+          </Badge>
+        </XBox>
+        <XBox space={'sm'} alignItems={'center'}>
+          <Badge {...e} type={'pill'}>
+            <Badge.Text>Badge</Badge.Text>
+            <Badge.Icon>
+              <X />
+            </Badge.Icon>
+          </Badge>
+          <Badge {...e} variant={'success'} type={'pill'}>
+            <Badge.Text>Badge</Badge.Text>
+            <Badge.Icon>
+              <X />
+            </Badge.Icon>
+          </Badge>
+          <Badge {...e} variant={'error'} type={'pill'}>
+            <Badge.Text>Badge</Badge.Text>
+            <Badge.Icon>
+              <X />
+            </Badge.Icon>
+          </Badge>
+          <Badge {...e} variant={'warning'} type={'pill'}>
+            <Badge.Text>Badge</Badge.Text>
+            <Badge.Icon>
+              <X />
+            </Badge.Icon>
+          </Badge>
+          <Badge {...e} variant={'info'} type={'pill'}>
+            <Badge.Text>Badge</Badge.Text>
+            <Badge.Icon>
+              <X />
+            </Badge.Icon>
+          </Badge>
+        </XBox>
+      </YBox>
     );
   },
   tags: ['autodocs'],
