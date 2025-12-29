@@ -7,9 +7,6 @@
 
 import ActionSheet from './BottomSheet';
 
-// Re-export BottomSheetModalProvider for users who need to wrap their app
-export { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-
 export {
   SheetManager,
   setBaseZIndexForBottomSheets,
@@ -37,16 +34,7 @@ export {
   type ActionSheetRef,
 } from './types';
 export { useScrollHandlers } from './hooks/use-scroll-handlers';
-export {
-  useSheetRouter,
-  useSheetRouteParams,
-  type Route,
-  type RouteScreenProps,
-  type Router,
-  type RouteDefinition,
-} from './hooks/use-router';
 export { ScrollView } from './views/ScrollView';
 export { FlatList } from './views/FlatList';
 export { SectionList } from './views/SectionList';
-export { FlashList } from './views/FlashList';
 export default ActionSheet;

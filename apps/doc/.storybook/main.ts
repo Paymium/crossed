@@ -59,18 +59,35 @@ const config: StorybookConfig = {
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
       }),
+      new webpack.ProvidePlugin({
+        React: 'react',
+      }),
       new StylePlugin({
         configPath: './src/style.config.ts',
         level: 'debug',
         out: path.resolve(__dirname, '../storybook-static')
       }),
     ];
+    // Configure babel-loader for React Native and Reanimated support
     config.module.rules.push({
-      test: /\.(mjs|tsx?|jsx?)$/,
-      loader: 'ts-loader',
-      options: {
-        transpileOnly: true,
-      },
+      test: /\.(tsx?|jsx?)$/,
+      exclude: /node_modules\/(?!(react-native|@react-native|react-native-reanimated|react-native-gesture-handler|@gorhom|@crossed))/,
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            presets: [
+              ['@babel/preset-env', { targets: { esmodules: true } }],
+              ['@babel/preset-react', { runtime: 'automatic' }],
+              '@babel/preset-typescript',
+            ],
+            plugins: [
+              'react-native-reanimated/plugin',
+            ],
+          },
+        },
+      ],
     });
     Object.assign(config.resolve.fallback, { os: false, tty: false });
     return config;

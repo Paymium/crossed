@@ -6,8 +6,7 @@
  */
 
 import { RefObject } from 'react';
-import { actionSheetEventManager } from './eventmanager';
-import { providerRegistryStack, sheetsRegistry } from './provider';
+import { actionSheetEventManager, providerRegistryStack, sheetsRegistry } from './provider';
 import { BottomSheetRef, Sheets } from './types';
 let baseZindex = 999;
 // Array of all the ids of BottomSheets currently rendered in the app.

@@ -5,50 +5,48 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import React, { RefObject, useImperativeHandle } from 'react';
+import React from 'react';
 import {
-  Platform,
   ScrollView as RNScrollView,
   ScrollViewProps,
 } from 'react-native';
-import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { useScrollHandlers } from '../hooks/use-scroll-handlers';
 
+/**
+ * Simplified ScrollView for BottomSheet.
+ *
+ * Note: This is now a simple wrapper around React Native's ScrollView.
+ * For sheets with scrollable content, set `gestureEnabled={false}` on the BottomSheet
+ * to prevent gesture conflicts.
+ *
+ * Future: Advanced gesture coordination can be added if needed.
+ */
 type Props = ScrollViewProps &
   React.RefAttributes<RNScrollView> & {
     /**
      * By default refresh control gesture will work in top 15% area of the ScrollView. You can set a different value here.
      *
      * Accepts a value between 0-1.
+     *
+     * @deprecated This is no longer used in the simplified implementation
      */
     refreshControlGestureArea?: number;
   };
 
 function $ScrollView(
   props: Props,
-  ref: React.ForwardedRef<RefObject<RNScrollView>>
+  ref: React.ForwardedRef<RNScrollView>
 ) {
-  const handlers = useScrollHandlers<RNScrollView>({
-    hasRefreshControl: !!props.refreshControl,
-    refreshControlBoundary: props.refreshControlGestureArea || 0.15,
-  });
-  useImperativeHandle(ref, () => handlers.ref);
+  const { refreshControlGestureArea, ...restProps } = props;
 
-  // Use native ScrollView for web, BottomSheetScrollView for native
-  const ScrollComponent = Platform.OS === 'web' ? RNScrollView : BottomSheetScrollView;
+  // Log deprecation warning if refreshControlGestureArea is used
+  if (refreshControlGestureArea !== undefined) {
+    console.warn('refreshControlGestureArea is deprecated in the simplified ScrollView implementation');
+  }
 
   return (
-    <ScrollComponent
-      {...props}
-      ref={handlers.ref as any}
-      onScroll={(event) => {
-        handlers.onScroll(event);
-        props.onScroll?.(event);
-      }}
-      onLayout={(event) => {
-        handlers.onLayout();
-        props.onLayout?.(event);
-      }}
+    <RNScrollView
+      ref={ref}
+      {...restProps}
     />
   );
 }

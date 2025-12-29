@@ -5,46 +5,45 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import React, { RefObject, useImperativeHandle } from 'react';
-import { FlatListProps, Platform, FlatList as RNFlatList } from 'react-native';
-import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
-import { useScrollHandlers } from '../hooks/use-scroll-handlers';
+import React from 'react';
+import { FlatListProps, FlatList as RNFlatList } from 'react-native';
 
+/**
+ * Simplified FlatList for BottomSheet.
+ *
+ * Note: This is now a simple wrapper around React Native's FlatList.
+ * For sheets with scrollable content, set `gestureEnabled={false}` on the BottomSheet
+ * to prevent gesture conflicts.
+ *
+ * Future: Advanced gesture coordination can be added if needed.
+ */
 type Props<T = any> = FlatListProps<T> &
   React.RefAttributes<RNFlatList> & {
     /**
      * By default refresh control gesture will work in top 15% area of the ScrollView. You can set a different value here.
      *
      * Accepts a value between 0-1.
+     *
+     * @deprecated This is no longer used in the simplified implementation
      */
     refreshControlGestureArea?: number;
   };
 
 function $FlatList<T>(
   props: Props<T>,
-  ref: React.ForwardedRef<RefObject<RNFlatList>>
+  ref: React.ForwardedRef<RNFlatList>
 ) {
-  const handlers = useScrollHandlers<RNFlatList>({
-    hasRefreshControl: !!props.refreshControl,
-    refreshControlBoundary: props.refreshControlGestureArea || 0.15,
-  });
-  useImperativeHandle(ref, () => handlers.ref);
+  const { refreshControlGestureArea, ...restProps } = props;
 
-  // Use native FlatList for web, BottomSheetFlatList for native
-  const ScrollComponent = Platform.OS === 'web' ? RNFlatList : BottomSheetFlatList;
+  // Log deprecation warning if refreshControlGestureArea is used
+  if (refreshControlGestureArea !== undefined) {
+    console.warn('refreshControlGestureArea is deprecated in the simplified FlatList implementation');
+  }
 
   return (
-    <ScrollComponent
-      {...(props as any)}
-      ref={handlers.ref as any}
-      onScroll={(event) => {
-        handlers.onScroll(event);
-        props.onScroll?.(event);
-      }}
-      onLayout={(event) => {
-        handlers.onLayout();
-        props.onLayout?.(event);
-      }}
+    <RNFlatList
+      ref={ref}
+      {...(restProps as any)}
     />
   );
 }

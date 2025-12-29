@@ -7,16 +7,10 @@
 
 import React from 'react';
 import {
-  Animated,
   GestureResponderEvent,
-  LayoutRectangle,
   TouchableOpacityProps,
   ViewStyle,
 } from 'react-native';
-import EventManager from './eventmanager';
-import { Route } from './hooks/use-router';
-
-export { BottomSheetModal } from '@gorhom/bottom-sheet';
 
 export interface Sheets {}
 
@@ -38,8 +32,9 @@ export type BottomSheetRef<SheetId extends keyof Sheets = never> = {
    * Hide the BottomSheet.
    */
   hide: (_data?: Sheets[SheetId]['returnValue']) => void;
+
   /**
-   * @removed Use `show` or `hide` functions or SheetManager to open/close BottomSheet.
+   * @deprecated Use `show` or `hide` functions or SheetManager to open/close BottomSheet.
    */
   setModalVisible: (_visible?: boolean) => void;
 
@@ -47,38 +42,51 @@ export type BottomSheetRef<SheetId extends keyof Sheets = never> = {
    * Provide a value between 0 to 100 for the action sheet to snap to.
    */
   snapToOffset: (_offset: number) => void;
+
   /**
-   * @removed Use `useScrollHandlers` hook to enable scrolling in BottomSheet.
-   */
-  /**
-   * When multiple snap points aret on the bottom sheet, use this to snap it to different
+   * When multiple snap points are on the bottom sheet, use this to snap it to different
    * position.
    */
   snapToIndex: (_index: number) => void;
+
   /**
-   * @removed Use `useScrollHandlers` hook to enable scrolling in BottomSheet.
+   * @deprecated Use `useScrollHandlers` hook to enable scrolling in BottomSheet.
    */
   handleChildScrollEnd: () => void;
+
+  /**
+   * @deprecated Use snapToIndex instead.
+   */
   snapToRelativeOffset: (_offset: number) => void;
+
   /**
    * Get the current snap index of the sheet.
    */
   currentSnapIndex: () => number;
 
   /**
-   * Used internally for scrollable views.
+   * @deprecated No longer needed with new gesture system.
    */
   modifyGesturesForLayout: (
-    _id: string,
-    _layout: LayoutRectangle | undefined,
-    _scrollOffset: number
+    _id?: string,
+    _layout?: any,
+    _scrollOffset?: number
   ) => void;
 
   isGestureEnabled: () => boolean;
   isOpen: () => boolean;
-  ev: EventManager;
+
   /**
-   * Disable or enable sheet keyboard handler.
+   * @deprecated EventManager has been removed. Use callbacks (onOpen, onClose, etc.) instead.
+   */
+  ev: {
+    publish: (...args: any[]) => void;
+    subscribe: (...args: any[]) => () => void;
+    unsubscribe: (...args: any[]) => void;
+  };
+
+  /**
+   * @deprecated Keyboard is handled automatically now.
    */
   keyboardHandler: (_enabled?: boolean) => void;
 };
@@ -127,19 +135,13 @@ export type BottomSheetProps<SheetId extends keyof Sheets = never> = {
   overdrawSize?: number;
 
   /**
-   * The open animation is a spring animation. You can modify it using the config below.
+   * @deprecated Animation config is no longer customizable. Use the built-in spring configuration.
    */
-  openAnimationConfig?: Omit<
-    Omit<Animated.SpringAnimationConfig, 'toValue'>,
-    'useNativeDriver'
-  >;
+  openAnimationConfig?: any;
   /**
-   * The open animation is a spring animation. You can modify it by providing a custom config.
+   * @deprecated Animation config is no longer customizable. Use the built-in spring configuration.
    */
-  closeAnimationConfig?: Omit<
-    Omit<Animated.SpringAnimationConfig, 'toValue'>,
-    'useNativeDriver'
-  >;
+  closeAnimationConfig?: any;
   /**
    * Provide snap points ranging from 0 to 100. BottomSheet will snap between these points. If no snap points
    * are provided, the default is a single snap point set to `100` which means that the sheet will be opened
@@ -366,29 +368,27 @@ export type BottomSheetProps<SheetId extends keyof Sheets = never> = {
    */
   safeAreaInsets?: { top: number; left: number; right: number; bottom: number };
   /**
-   * A list of routes for the router.
+   * @deprecated Router system has been removed. Manage multiple screens with state instead.
    */
-  routes?: Route[];
+  routes?: any[];
   /**
-   * An event called when navigating to a route in stack
+   * @deprecated Router system has been removed.
    */
   onNavigate?: (_route: string) => void;
   /**
-   * An event called when navigating back in stack.
+   * @deprecated Router system has been removed.
    */
   onNavigateBack?: (_route: string) => void;
   /**
-   * Initial route to navigate to when the sheet opens.
+   * @deprecated Router system has been removed.
    */
-  initialRoute?: keyof Sheets[SheetId]['routes'] | (string & {});
+  initialRoute?: any;
   /**
-   * Enable back navigation for router when pressing hardware back button or
-   * touching the back drop. Remember that swiping down the sheet will still close
-   * the sheet regardless of the route in stack.
+   * @deprecated Router system has been removed.
    */
   enableRouterBackNavigation?: boolean;
   /**
-   * Enable swipe gestures inside ScrollView/FlatList. Enabled by default.
+   * @deprecated This prop is no longer needed. Use gestureEnabled={false} for scrollable content.
    */
   enableGesturesInScrollView?: boolean;
 

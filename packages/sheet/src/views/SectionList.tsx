@@ -5,49 +5,45 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import React, {
-  RefObject,
-  useImperativeHandle,
-} from 'react';
-import { Platform, SectionListProps, SectionList as RNSectionList } from 'react-native';
-import { BottomSheetSectionList } from '@gorhom/bottom-sheet';
-import { useScrollHandlers } from '../hooks/use-scroll-handlers';
+import React from 'react';
+import { SectionListProps, SectionList as RNSectionList } from 'react-native';
 
+/**
+ * Simplified SectionList for BottomSheet.
+ *
+ * Note: This is now a simple wrapper around React Native's SectionList.
+ * For sheets with scrollable content, set `gestureEnabled={false}` on the BottomSheet
+ * to prevent gesture conflicts.
+ *
+ * Future: Advanced gesture coordination can be added if needed.
+ */
 type Props<T = any> = SectionListProps<T> &
   React.RefAttributes<RNSectionList> & {
     /**
      * By default refresh control gesture will work in top 15% area of the ScrollView. You can set a different value here.
      *
      * Accepts a value between 0-1.
+     *
+     * @deprecated This is no longer used in the simplified implementation
      */
     refreshControlGestureArea?: number;
   };
 
 function $SectionList<T>(
   props: Props<T>,
-  ref: React.ForwardedRef<RefObject<RNSectionList>>
+  ref: React.ForwardedRef<RNSectionList>
 ) {
-  const handlers = useScrollHandlers<RNSectionList>({
-    hasRefreshControl: !!props.refreshControl,
-    refreshControlBoundary: props.refreshControlGestureArea || 0.15,
-  });
-  useImperativeHandle(ref, () => handlers.ref);
+  const { refreshControlGestureArea, ...restProps } = props;
 
-  // Use native SectionList for web, BottomSheetSectionList for native
-  const ScrollComponent = Platform.OS === 'web' ? RNSectionList : BottomSheetSectionList;
+  // Log deprecation warning if refreshControlGestureArea is used
+  if (refreshControlGestureArea !== undefined) {
+    console.warn('refreshControlGestureArea is deprecated in the simplified SectionList implementation');
+  }
 
   return (
-    <ScrollComponent
-      {...(props as any)}
-      ref={handlers.ref as any}
-      onScroll={(event) => {
-        handlers.onScroll(event);
-        props.onScroll?.(event);
-      }}
-      onLayout={(event) => {
-        handlers.onLayout();
-        props.onLayout?.(event);
-      }}
+    <RNSectionList
+      ref={ref}
+      {...(restProps as any)}
     />
   );
 }
@@ -57,4 +53,4 @@ export const SectionList = React.forwardRef(
 ) as unknown as typeof RNSectionList;
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export type FlatList<ItemT = any> = typeof RNSectionList & RNSectionList<ItemT>;
+export type SectionList<ItemT = any> = typeof RNSectionList & RNSectionList<ItemT>;

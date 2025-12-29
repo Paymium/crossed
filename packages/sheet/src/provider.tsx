@@ -16,9 +16,33 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { actionSheetEventManager } from './eventmanager';
 import { BottomSheetRef, Sheets } from './types';
+
+// Simplified event manager for internal provider communication
+class SimpleEventManager {
+  private subscribers: Map<string, Set<Function>> = new Map();
+
+  subscribe(eventName: string, callback: Function) {
+    if (!this.subscribers.has(eventName)) {
+      this.subscribers.set(eventName, new Set());
+    }
+    this.subscribers.get(eventName)!.add(callback);
+    return {
+      unsubscribe: () => {
+        this.subscribers.get(eventName)?.delete(callback);
+      },
+    };
+  }
+
+  publish(eventName: string, ...args: any[]) {
+    this.subscribers.get(eventName)?.forEach((callback) => callback(...args));
+  }
+}
+
+const actionSheetEventManager = new SimpleEventManager();
+
+// Export for internal use by sheetmanager and hooks
+export { actionSheetEventManager };
 
 export const providerRegistryStack: string[] = [];
 
@@ -106,20 +130,12 @@ export function SheetProvider({
     <RenderSheet key={sheetId} id={sheetId} context={context} />
   );
 
-  const content = (
+  return (
     <>
       {children}
       {sheetIds.map(renderSheet)}
     </>
   );
-
-  // Wrap with BottomSheetModalProvider for global context (top-level)
-  // Nested contexts don't need their own provider
-  if (context === 'global') {
-    return <BottomSheetModalProvider>{content}</BottomSheetModalProvider>;
-  }
-
-  return content;
 }
 const ProviderContext = createContext('global');
 const SheetIDContext = createContext<string | undefined>(undefined);
