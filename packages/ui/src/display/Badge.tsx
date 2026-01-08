@@ -12,8 +12,8 @@ import {
   memo,
   PropsWithChildren,
 } from 'react';
+import { XBox, Box } from '../layout';
 import { Text } from '../typography';
-import { Box, XBox } from '../layout';
 import { composeStyles, createStyles, CrossedMethods } from '@crossed/styled';
 import { createScope, withStaticProperties } from '@crossed/core';
 
@@ -46,6 +46,12 @@ const badgeColorStyles = createStyles(({ colors }) => ({
     base: {
       backgroundColor: colors.info.light,
       borderColor: colors.info.primary,
+    },
+  },
+  gray: {
+    base: {
+      backgroundColor: '#FAFAFA',
+      borderColor: '#E9EAEB',
     },
   },
 }));
@@ -107,6 +113,7 @@ const badgeTextStyles = createStyles(({ colors }) => ({
   warning: { base: { color: colors.warning.dark } },
   error: { base: { color: colors.error.satured } },
   info: { base: { color: colors.info.dark } },
+  gray: { base: { color: '#414651' } },
 }));
 
 const iconColors = createStyles(({ colors }) => ({
@@ -135,20 +142,22 @@ const iconColors = createStyles(({ colors }) => ({
       color: colors.info.primary,
     },
   },
+  gray: { base: { color: '#717680' } },
 }));
 
-type Variants = keyof typeof badgeColorStyles;
+export type BadgeVariants = keyof typeof badgeColorStyles;
 type Type = keyof typeof badgeTypeStyles;
 type BadgeProps = ComponentProps<typeof Box> & {
-  variant?: Variants;
+  variant?: BadgeVariants;
   type?: Type;
   size?: 'sm' | 'md' | 'lg';
+  onPress?: () => void;
 };
 
 const [Provider, useContext] = createScope<{
-  variant?: Variants;
+  variant: BadgeVariants;
   size?: 'sm' | 'md' | 'lg';
-}>({});
+}>({ variant: 'default' });
 
 const BadgeText = memo<ComponentProps<typeof Text>>(({ style, ...props }) => {
   const { variant, size } = useContext();
@@ -172,6 +181,7 @@ const BadgeRoot = memo<BadgeProps>(
     variant = 'default',
     size = 'sm',
     type = 'default',
+    onPress,
     ...props
   }) => {
     return (
@@ -186,6 +196,8 @@ const BadgeRoot = memo<BadgeProps>(
             sizeBadgeStyles[size],
             style
           )}
+          pressable={!!onPress}
+          onPress={onPress}
         >
           {children}
         </XBox>
@@ -203,7 +215,7 @@ export const BadgeIcon = ({
   const color = composeStyles(iconColors[variant], style).style().style.color;
 
   return isValidElement(children)
-    ? cloneElement(children, { color, size: 12 } as any)
+    ? cloneElement(children, { color } as any)
     : children;
 };
 BadgeIcon.displayName = 'Badge.Icon';

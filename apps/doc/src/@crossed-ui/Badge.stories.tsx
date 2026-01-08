@@ -21,6 +21,17 @@ const meta: Meta<typeof Badge> = {
           <Badge {...e}>
             <Badge.Text>Badge</Badge.Text>
           </Badge>
+          <Badge {...e} size={'md'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+          <Badge {...e} size={'lg'}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
+        </XBox>
+        <XBox space={'sm'} alignItems={'center'}>
+          <Badge {...e}>
+            <Badge.Text>Badge</Badge.Text>
+          </Badge>
           <Badge {...e} variant={'success'}>
             <Badge.Text>Badge</Badge.Text>
           </Badge>
@@ -33,6 +44,40 @@ const meta: Meta<typeof Badge> = {
           <Badge {...e} variant={'info'}>
             <Badge.Text>Badge</Badge.Text>
           </Badge>
+          <XBox space={'sm'} alignItems={'center'}>
+            <Badge {...e} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'success'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'error'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'warning'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'info'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+          </XBox>
+          <XBox space={'sm'} alignItems={'center'}>
+            <Badge {...e} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'success'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'error'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'warning'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'info'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+          </XBox>
         </XBox>
         <XBox space={'sm'} alignItems={'center'}>
           <Badge {...e} type={'pill'}>
@@ -50,7 +95,42 @@ const meta: Meta<typeof Badge> = {
           <Badge {...e} variant={'info'} type={'pill'}>
             <Badge.Text>Badge</Badge.Text>
           </Badge>
+          <XBox space={'sm'} alignItems={'center'}>
+            <Badge {...e} type={'pill'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'success'} type={'pill'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'error'} type={'pill'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'warning'} type={'pill'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'info'} type={'pill'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+          </XBox>
+          <XBox space={'sm'} alignItems={'center'}>
+            <Badge {...e} type={'pill'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'success'} type={'pill'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'error'} type={'pill'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'warning'} type={'pill'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+            <Badge {...e} variant={'info'} type={'pill'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+            </Badge>
+          </XBox>
         </XBox>
+
         <XBox space={'sm'} alignItems={'center'}>
           <Badge {...e}>
             <Badge.Text>Badge</Badge.Text>
@@ -82,7 +162,72 @@ const meta: Meta<typeof Badge> = {
               <X />
             </Badge.Icon>
           </Badge>
+          <XBox space={'sm'} alignItems={'center'}>
+            <Badge {...e} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'success'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'error'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'warning'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'info'} size={'md'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+          </XBox>
+          <XBox space={'sm'} alignItems={'center'}>
+            <Badge {...e} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'success'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'error'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'warning'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'info'} size={'lg'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+          </XBox>
         </XBox>
+
         <XBox space={'sm'} alignItems={'center'}>
           <Badge {...e} type={'pill'}>
             <Badge.Text>Badge</Badge.Text>
@@ -114,6 +259,70 @@ const meta: Meta<typeof Badge> = {
               <X />
             </Badge.Icon>
           </Badge>
+          <XBox space={'sm'} alignItems={'center'}>
+            <Badge {...e} size={'md'} type={'pill'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'success'} size={'md'} type={'pill'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'error'} size={'md'} type={'pill'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'warning'} size={'md'} type={'pill'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'info'} size={'md'} type={'pill'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+          </XBox>
+          <XBox space={'sm'} alignItems={'center'}>
+            <Badge {...e} size={'lg'} type={'pill'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'success'} size={'lg'} type={'pill'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'error'} size={'lg'} type={'pill'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'warning'} size={'lg'} type={'pill'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+            <Badge {...e} variant={'info'} size={'lg'} type={'pill'}>
+              <Badge.Text>Badge</Badge.Text>
+              <Badge.Icon>
+                <X />
+              </Badge.Icon>
+            </Badge>
+          </XBox>
         </XBox>
       </YBox>
     );
