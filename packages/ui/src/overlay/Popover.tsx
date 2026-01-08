@@ -75,7 +75,6 @@ export const Root = memo(
   }: RootProps) => {
     const { refs, floatingStyles } = useFloatinCompat(placement, offsetValue);
     const { md } = useMedia();
-    console.log('ici');
 
     return (
       <PopoverConfigProvider
