@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 9.0.3
+
+### Patch Changes
+
+- 974ae30: fix popover
+
 ## 9.0.2
 
 ### Patch Changes
