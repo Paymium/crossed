@@ -7,45 +7,40 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { List } from '@crossed/ui/src/display/List';
-import { inlineStyle } from '@crossed/styled';
+import { ItemList } from '@crossed/ui/src/display/ItemList';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof List> = {
-  component: List,
+const meta: Meta<typeof ItemList> = {
+  component: ItemList,
   subcomponents: {
-    'List.Item': List.Item,
-    'List.Title': List.Title,
-    'List.Divider': List.Divider,
+    'List.Item': ItemList.Item,
+    'List.Title': ItemList.Title,
+    'List.Divider': ItemList.Divider,
   },
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   argTypes: {},
   render: (e) => (
-    <List {...e} padded={false}>
-      <List.Label>Main Task</List.Label>
-      <List.Item
-        style={inlineStyle(() => ({
-          base: { paddingVertical: 100, paddingHorizontal: 100 },
-        }))}
-      >
-        <List.Title>MainTask1</List.Title>
-      </List.Item>
-      <List.Item>
-        <List.Title>MainTask2</List.Title>
-      </List.Item>
-      <List.Item>
-        <List.Title>MainTask3</List.Title>
-      </List.Item>
-      <List.Divider />
-      <List.Label>Minor Task</List.Label>
-      <List.Item>
-        <List.Title>MinorTask1</List.Title>
-      </List.Item>
-      <List.Item>
-        <List.Title>MinorTask2</List.Title>
-      </List.Item>
-    </List>
+    <ItemList {...e} padded={false}>
+      <ItemList.Label>Main Task</ItemList.Label>
+      <ItemList.Item>
+        <ItemList.Title>MainTask1</ItemList.Title>
+      </ItemList.Item>
+      <ItemList.Item>
+        <ItemList.Title>MainTask2</ItemList.Title>
+      </ItemList.Item>
+      <ItemList.Item>
+        <ItemList.Title>MainTask3</ItemList.Title>
+      </ItemList.Item>
+      <ItemList.Divider />
+      <ItemList.Label>Minor Task</ItemList.Label>
+      <ItemList.Item>
+        <ItemList.Title>MinorTask1</ItemList.Title>
+      </ItemList.Item>
+      <ItemList.Item>
+        <ItemList.Title>MinorTask2</ItemList.Title>
+      </ItemList.Item>
+    </ItemList>
   ),
 };
 

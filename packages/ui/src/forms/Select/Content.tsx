@@ -111,7 +111,6 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
     ) : null;
 
     const totoRef = useRef<ActionSheetRef>();
-
     return (
       <>
         {showSheet ? (
@@ -152,6 +151,7 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
                     <MenuList
                       testID="content-select"
                       ref={ref}
+                      padded={false}
                       style={composeStyles(
                         form.input,
                         useSelect.content,
