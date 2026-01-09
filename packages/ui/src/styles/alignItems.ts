@@ -15,6 +15,14 @@ export const alignItemsStyle = createStyles(() => ({
   'stretch': { base: { alignItems: 'stretch' } },
 }));
 
+export const alignItemsResponsiveStyle = createStyles(() => ({
+  'mdCenter': { media: { md: { alignItems: 'center' } } },
+  'mdBaseline': { media: { md: { alignItems: 'baseline' } } },
+  'mdEnd': { media: { md: { alignItems: 'flex-end' } } },
+  'mdStart': { media: { md: { alignItems: 'flex-start' } } },
+  'mdStretch': { media: { md: { alignItems: 'stretch' } } },
+}));
+
 export const alignSelfStyle = createStyles(() => ({
   'center': { base: { alignSelf: 'center' } },
   'baseline': { base: { alignSelf: 'baseline' } },

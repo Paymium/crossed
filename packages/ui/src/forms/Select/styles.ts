@@ -44,7 +44,7 @@ export const useSelect = createStyles(() => ({
       alignItems: 'stretch',
       justifyContent: 'flex-start',
       padding: undefined,
-      paddingVertical: undefined,
+      paddingLeft: undefined,
       paddingHorizontal: undefined,
       maxHeight: 250,
     },

@@ -11,7 +11,12 @@ import { SpaceName } from '@crossed/theme';
 export const paddingVerticalStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'marginVertical': space[spaceName] } };
+      acc[spaceName] = {
+        base: {
+          'paddingTop': space[spaceName],
+          'paddingBottom': space[spaceName],
+        },
+      };
       return acc;
     },
     {} as Record<SpaceName, any>
@@ -21,7 +26,12 @@ export const paddingVerticalStyles = createStyles(({ space }) =>
 export const paddingHorizontalStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'marginHorizontal': space[spaceName] } };
+      acc[spaceName] = {
+        base: {
+          'paddingLeft': space[spaceName],
+          'paddingRight': space[spaceName],
+        },
+      };
       return acc;
     },
     {} as Record<SpaceName, any>
