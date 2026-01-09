@@ -20,8 +20,15 @@ import { withStaticProperties } from '@crossed/core';
 import { ComponentProps, forwardRef, memo, RefAttributes } from 'react';
 import { View } from 'react-native';
 import { Box, BoxViewProps } from '../layout';
+import {
+  flexDirectionStyles,
+  justifyContentStyle,
+  paddingHorizontalStyles,
+  paddingStyles,
+  paddingVerticalStyles,
+} from '../styles';
 
-const rootStyle = createStyles(({ colors, space }) => ({
+const rootStyle = createStyles(({ colors }) => ({
   default: {
     base: {
       backgroundColor: colors.background.secondary,
@@ -34,26 +41,12 @@ const rootStyle = createStyles(({ colors, space }) => ({
       borderColor: colors.border.primary,
     },
   },
-  padded: { base: { padding: space.md } },
 }));
-const itemStyles = createStyles((t) => ({
-  padding: {
-    base: {
-      paddingTop: t.space.md,
-      paddingBottom: t.space.md,
-      paddingLeft: t.space.xl,
-      paddingRight: t.space.xl,
-    },
-  },
-  item: {
-    base: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      borderWidth: 0,
-    },
-  },
-}));
+
+const itemPaddingStyle = composeStyles(
+  paddingHorizontalStyles.xl,
+  paddingVerticalStyles.md
+);
 
 const Root = memo<ListProps & RefAttributes<View>>(
   forwardRef<View, ListProps>(
@@ -67,7 +60,7 @@ const Root = memo<ListProps & RefAttributes<View>>(
           style={composeStyles(
             rootStyle.default,
             bordered && rootStyle.border,
-            padded && rootStyle.padded,
+            padded && paddingStyles.md,
             props.style
           )}
           ref={ref}
@@ -76,7 +69,7 @@ const Root = memo<ListProps & RefAttributes<View>>(
     }
   )
 );
-Root.displayName = 'List';
+Root.displayName = 'ItemList.Root';
 
 export type ListProps = YBoxProps & {
   /**
@@ -89,50 +82,60 @@ export type ListProps = YBoxProps & {
   bordered?: boolean;
 };
 
-const ListDivider = (props: DividerProps) => <D {...props} />;
-ListDivider.displayName = 'List.Divider';
+const ItemListDivider = (props: DividerProps) => <D {...props} />;
+ItemListDivider.displayName = 'ItemList.Divider';
 
 export type ListItemProps = Omit<BoxViewProps, 'style'> & {
   style?: CrossedMethods<any>;
 };
 
-const ListItem = withReactive<ListItemProps>(
-  forwardRef<View, ListItemProps>(
-    ({ style, children, ...props }: ListItemProps, ref) => {
-      return (
-        <Box
-          {...props}
-          ref={ref}
-          style={composeStyles(itemStyles.padding, itemStyles.item, style)}
-        >
-          {children}
-        </Box>
-      );
-    }
-  )
+const ItemListItem = withReactive<ListItemProps>(
+  ({ style, children, ...props }: ListItemProps) => {
+    return (
+      <Box
+        {...props}
+        style={composeStyles(
+          flexDirectionStyles.column,
+          justifyContentStyle.center,
+          itemPaddingStyle,
+          style
+        )}
+      >
+        {children}
+      </Box>
+    );
+  }
 );
-ListItem.displayName = 'List.Item';
+ItemListItem.displayName = 'ItemList.Item';
 
-const ListLabel = ({ style, ...props }: ComponentProps<typeof Text>) => (
+const ItemListLabel = ({ style, ...props }: ComponentProps<typeof Text>) => (
   <Text
     {...props}
     style={composeStyles(
-      itemStyles.padding,
+      itemPaddingStyle,
       inlineStyle(() => ({ base: { marginTop: 0 } })),
       style
     )}
   />
 );
-ListLabel.displayName = 'List.Label';
-const ListTitle = (props: TextProps) => <Text color="secondary" {...props} />;
-ListTitle.displayName = 'List.Title';
+ItemListLabel.displayName = 'ItemList.Label';
+const ItemListTitle = (props: TextProps) => (
+  <Text color="secondary" {...props} />
+);
+ItemListTitle.displayName = 'ItemList.Title';
 
-const List = withStaticProperties(Root, {
-  Divider: ListDivider,
-  Item: ListItem,
-  Label: ListLabel,
-  Title: ListTitle,
+const ItemList = withStaticProperties(Root, {
+  Divider: ItemListDivider,
+  Item: ItemListItem,
+  Label: ItemListLabel,
+  Title: ItemListTitle,
 });
-List.displayName = 'List';
+ItemList.displayName = 'ItemList';
 
-export { List, ListDivider, ListItem, ListLabel, ListTitle };
+export {
+  ItemList,
+  ItemListDivider,
+  ItemListItem,
+  ItemListLabel,
+  ItemListTitle,
+};
