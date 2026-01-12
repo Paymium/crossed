@@ -222,7 +222,7 @@ describe('DropDownMenu', () => {
     const itemCall = MenuListItemMocked.mock.calls[0][0];
     expect(itemCall).toHaveProperty('onPress');
 
-    if (itemCall.pressable) {
+    if ('onPress' in itemCall && typeof itemCall.onPress === 'function') {
       itemCall.onPress({} as any);
     }
 
@@ -249,8 +249,7 @@ describe('DropDownMenu', () => {
     );
 
     const itemCall = MenuListItemMocked.mock.calls[0][0];
-
-    if (itemCall.pressable) {
+    if ('onPress' in itemCall && typeof itemCall.onPress === 'function') {
       itemCall.onPress({} as any);
     }
 
