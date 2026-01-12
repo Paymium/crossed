@@ -34,6 +34,7 @@ import { FocusOn } from 'react-focus-on';
 
 export type PopoverConfigContext = {
   showSheet?: boolean;
+  triggerStrategy: 'onPointerEnter' | 'onPress';
 };
 
 export const [PopoverConfigProvider, usePopoverConfig] =
@@ -76,7 +77,10 @@ export const Root = memo(
     const { md } = useMedia();
 
     return (
-      <PopoverConfigProvider showSheet={!isWeb || !md}>
+      <PopoverConfigProvider
+        showSheet={!isWeb || !md}
+        triggerStrategy={triggerStrategy}
+      >
         <Floating
           triggerStrategy={
             !md && triggerStrategy === 'onPointerEnter'
@@ -128,10 +132,15 @@ const ContentWeb = memo<ContentWebProps & RefAttributes<View>>(
   forwardRef<View, ContentWebProps>(({ children, style }, ref) => {
     const { refs, floatingStyles } = useFloatingUi();
     const { onClose, open } = useFloatingContext();
+    const { triggerStrategy } = usePopoverConfig();
 
     return (
       <Floating.Portal>
-        <FocusOn onClickOutside={onClose} onEscapeKey={onClose} enabled={open}>
+        <FocusOn
+          onClickOutside={onClose}
+          onEscapeKey={onClose}
+          enabled={open && triggerStrategy === 'onPress'}
+        >
           <Floating.Content
             entering={FadeIn}
             exiting={FadeOut}

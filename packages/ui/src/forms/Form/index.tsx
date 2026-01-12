@@ -35,7 +35,7 @@ const Form: FormComponent = ({ onSubmit, asChild, children, ...props }) => {
   return asChild && isValidElement(children) ? (
     cloneElement(children, propsTmp)
   ) : (
-    <YBox space="md" {...propsTmp}>
+    <YBox space="xl" {...propsTmp}>
       {children}
     </YBox>
   );

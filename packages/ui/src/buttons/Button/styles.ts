@@ -38,9 +38,9 @@ export const buttonSizeStyles = createStyles(({ space }) => ({
       gap: 8,
     },
   },
-  sm: { base: { height: 32, paddingHorizontal: space.xs } },
-  md: { base: { height: 44, paddingHorizontal: space.md } },
-  lg: { base: { height: 52, paddingHorizontal: space.lg } },
+  sm: { base: { height: 32, paddingHorizontal: space.md } },
+  md: { base: { height: 44, paddingHorizontal: space.xl } },
+  lg: { base: { height: 52, paddingHorizontal: space['3xl'] } },
 }));
 export const buttonPrimaryStyles = createStyles(
   ({ components: { Action } }) =>

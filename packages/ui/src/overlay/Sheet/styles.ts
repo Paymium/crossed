@@ -16,9 +16,13 @@ export const styles = createStyles(({ colors, space }) => ({
     },
   },
   container: {
-    base: { paddingBottom: space.xl, paddingTop: space.xs, maxHeight: '97%' },
+    base: {
+      paddingBottom: space['4xl'],
+      paddingTop: space.md,
+      maxHeight: '97%',
+    },
   },
-  containerPadded: { base: { paddingHorizontal: space.xl } },
+  containerPadded: { base: { paddingHorizontal: space['4xl'] } },
   maxHeight: { base: { maxHeight: '100%' } },
   indicator: {
     base: {

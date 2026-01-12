@@ -10,65 +10,30 @@ import {
   composeStyles,
   createStyles,
   CrossedMethods,
-  inlineStyle,
   withReactive,
 } from '@crossed/styled';
 import { Text, TextProps } from '../typography/Text';
-import { YBox, type YBoxProps } from '../layout/YBox';
-import { Divider as D, DividerProps } from '../layout/Divider';
 import { withStaticProperties } from '@crossed/core';
-import {
-  cloneElement,
-  ComponentProps,
-  forwardRef,
-  isValidElement,
-  memo,
-  RefAttributes,
-  useCallback,
-} from 'react';
+import { ComponentProps, forwardRef, memo, RefAttributes } from 'react';
 import { Pressable, View, type PressableProps } from 'react-native';
+import { ItemList, ListProps } from './ItemList';
+import { DividerProps } from '../layout';
 
-const rootStyle = createStyles(({ colors, space }) => ({
-  default: {
-    base: {
-      backgroundColor: colors.background.secondary,
-      borderRadius: 12,
-    },
-  },
-  border: {
-    base: {
-      borderWidth: 1,
-      borderColor: colors.border.primary,
-    },
-  },
-  padded: { base: { padding: space.xs } },
-}));
-const itemStyles = createStyles((t) => ({
-  padding: {
-    base: {
-      paddingTop: t.space.xs,
-      paddingBottom: t.space.xs,
-      paddingLeft: t.space.md,
-      paddingRight: t.space.md,
-    },
-  },
+const menuItemStyles = createStyles((t) => ({
   item: {
-    'base': {
-      display: 'flex',
-      flexDirection: 'column',
-      // alignItems: 'center',
-      paddingHorizontal: t.space.md,
-      justifyContent: 'center',
-      // height: 42,
-      borderWidth: 0,
+    base: {
       borderRadius: 12,
     },
-    ':hover': {
+  },
+  hover: {
+    base: {
       backgroundColor: t.colors.background.hover,
     },
-    ':active': {
-      backgroundColor: t.colors.background.active,
-    },
+  },
+  active: {
+    base: { backgroundColor: t.colors.background.active },
+  },
+  focus: {
     'web': {
       base: { transition: 'all 170ms ease' },
       ':focus-visible': {
@@ -78,84 +43,59 @@ const itemStyles = createStyles((t) => ({
   },
 }));
 
-const MenuRoot = memo<MenuListProps & RefAttributes<View>>(
-  forwardRef<View, MenuListProps>(
-    ({ padded = true, bordered = true, ...props }: MenuListProps, ref: any) => {
-      return (
-        <YBox
-          role="list"
-          alignItems={'stretch'}
-          space={padded ? 'xxs' : undefined}
-          {...props}
-          style={composeStyles(
-            rootStyle.default,
-            bordered && rootStyle.border,
-            padded && rootStyle.padded,
-            props.style
-          )}
-          ref={ref}
-        />
-      );
-    }
-  )
+const MenuRoot = memo<ListProps & RefAttributes<View>>(
+  forwardRef<View, ListProps>(({ ...props }: ListProps, ref: any) => {
+    return <ItemList {...props} ref={ref} />;
+  })
 );
 MenuRoot.displayName = 'MenuList';
 
-export type MenuListProps = YBoxProps & {
-  /**
-   * Apply padding
-   */
-  padded?: boolean;
-  /**
-   * Apply border
-   */
-  bordered?: boolean;
-};
-
-const MenuDivider = (props: DividerProps) => <D {...props} />;
+const MenuDivider = (props: DividerProps) => <ItemList.Divider {...props} />;
 MenuDivider.displayName = 'MenuList.Divider';
 
 export type MenuListItemProps = Omit<PressableProps, 'style'> & {
-  asChild?: boolean;
   style?: CrossedMethods<any>;
 };
 const MenuItem = withReactive<MenuListItemProps>(
-  forwardRef<View, MenuListItemProps>(
-    ({ asChild, style, children, ...props }: MenuListItemProps, ref) => {
-      const styleCallback = useCallback(
-        ({ pressed }) =>
-          composeStyles(itemStyles.item, itemStyles.padding, style).rnw({
-            active: pressed,
-          }).style,
-        [style]
-      );
-      return asChild && isValidElement(children) ? (
-        cloneElement(children, {
-          style: styleCallback,
-          role: 'listitem',
-        } as any)
-      ) : (
-        <Pressable role="listitem" {...props} style={styleCallback} ref={ref}>
-          {children}
-        </Pressable>
-      );
-    }
-  )
+  ({ style, children, ...props }: MenuListItemProps) => {
+    return (
+      <Pressable role="listitem" {...props}>
+        {({
+          hovered,
+          pressed,
+          focused,
+        }: {
+          pressed: boolean;
+          hovered: boolean;
+          focused: boolean;
+        }) => (
+          <ItemList.Item
+            style={composeStyles(
+              menuItemStyles.item,
+              hovered && menuItemStyles.hover,
+              pressed && menuItemStyles.active,
+              focused && menuItemStyles.focus,
+              style
+            )}
+          >
+            {typeof children === 'function'
+              ? children({ hovered, pressed, focused } as any)
+              : children}
+          </ItemList.Item>
+        )}
+      </Pressable>
+    );
+  }
 );
 MenuItem.displayName = 'MenuList.Item';
 
 const MenuLabel = ({ style, ...props }: ComponentProps<typeof Text>) => (
-  <Text
-    {...props}
-    style={composeStyles(
-      itemStyles.padding,
-      inlineStyle(() => ({ base: { marginTop: 0 } })),
-      style
-    )}
-  />
+  <ItemList.Label {...props} />
 );
 MenuLabel.displayName = 'MenuList.Label';
-const MenuTitle = (props: TextProps) => <Text color="secondary" {...props} />;
+const MenuTitle = (props: TextProps) => (
+  <ItemList.Title color="secondary" {...props} />
+);
 MenuTitle.displayName = 'MenuList.Title';
 
 const MenuList = withStaticProperties(MenuRoot, {

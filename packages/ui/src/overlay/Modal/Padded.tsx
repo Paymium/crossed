@@ -32,7 +32,7 @@ export const ModalPadded = memo<
         {...props}
         style={composeStyles(
           inlineStyle(({ space }) => ({
-            base: { padding: undefined, paddingHorizontal: space.xl },
+            base: { padding: undefined, paddingHorizontal: space['4xl'] },
           })),
           props.style
         )}

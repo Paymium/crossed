@@ -44,7 +44,7 @@ export const createRoot =
 
     return (
       <TabsProvider {...tabsInstance} variant={variant} size={tmpSize}>
-        <YBox space="sm" {...props}>
+        <YBox space="lg" {...props}>
           {children}
         </YBox>
       </TabsProvider>

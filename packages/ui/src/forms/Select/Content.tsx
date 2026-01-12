@@ -99,8 +99,8 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
         formFieldStyle={inlineStyle(({ space }) => ({
           base: {
             flexGrow: 0,
-            marginTop: space.xxs,
-            marginHorizontal: space.xs,
+            marginTop: space.xs,
+            marginHorizontal: space.md,
           },
         }))}
         value={search}
@@ -111,7 +111,6 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
     ) : null;
 
     const totoRef = useRef<ActionSheetRef>();
-
     return (
       <>
         {showSheet ? (
@@ -152,10 +151,11 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
                     <MenuList
                       testID="content-select"
                       ref={ref}
+                      padded={false}
                       style={composeStyles(
                         form.input,
                         useSelect.content,
-                        gapStyles.xs,
+                        gapStyles.md,
                         inlineStyle(() => ({
                           web: { base: { overflowY: 'auto' } },
                         })),

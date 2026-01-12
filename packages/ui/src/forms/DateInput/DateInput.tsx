@@ -105,7 +105,7 @@ export const DateInput = memo(
 
     return (
       <FormField {...composeStyles(growStyles.on, formFieldStyle).rnw()}>
-        <XBox alignItems="center" space="xxs">
+        <XBox alignItems="center" space="xs">
           {!!label && <FormLabel>{label}</FormLabel>}
           {!!description && (
             <Text style={form.labelDescription}>{description}</Text>

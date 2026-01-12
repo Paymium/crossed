@@ -58,7 +58,7 @@ const styles = createStyles(({ colors, space, boxShadow }) => ({
       backgroundColor: colors.background.secondary,
       borderWidth: 1,
       borderColor: colors.border.secondary,
-      padding: space.md,
+      padding: space.xl,
       borderRadius: 16,
       boxShadow,
       position: 'absolute',
@@ -222,8 +222,8 @@ export const Calendar = forwardRef<FloatingRefExtended, CalendarProps>(
             style={inlineStyle(({ space }) => ({
               base: {
                 height: undefined,
-                paddingHorizontal: space.xs,
-                paddingVertical: space.md,
+                paddingHorizontal: space.md,
+                paddingVertical: space.xl,
               },
             }))}
           >

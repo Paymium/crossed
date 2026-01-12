@@ -3,4 +3,4 @@
 'crossed-doc': minor
 ---
 
-Add component Popover, Tooltip, DropDownMenu
+Add list component and use it into MenuList

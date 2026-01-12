@@ -26,7 +26,7 @@ export const WeekDay = memo(
     const id = useId();
     const formatter = new Intl.DateTimeFormat(locale, { weekday: 'short' });
     return (
-      <XBox space={'xxs'} justifyContent="between" style={style}>
+      <XBox space={'xs'} justifyContent="between" style={style}>
         {days.map((day) => (
           <Headline
             key={`${id}-${day.date.getDate()}`}

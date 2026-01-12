@@ -90,7 +90,7 @@ export const List = memo(({ data }: { data: any }) => {
             }))
           }
         >
-          <XBox space={'xxs'}>
+          <XBox space={'xs'}>
             {multiple && (
               <Checkbox checked={checked} onChecked={onPress(item)} />
             )}
@@ -144,11 +144,11 @@ export const List = memo(({ data }: { data: any }) => {
     <FlatList
       contentContainerStyle={
         composeStyles(
-          gapStyles.xxs,
+          gapStyles.xs,
           inlineStyle(({ space }) => ({
             base: {
-              paddingVertical: space.xs,
-              paddingHorizontal: space.xs,
+              paddingVertical: space.md,
+              paddingHorizontal: space.md,
             },
           }))
         ).style().style
