@@ -1,5 +1,15 @@
 # crossed-vite
 
+## 0.0.57
+
+### Patch Changes
+
+- Updated dependencies [b0f082e]
+- Updated dependencies [cc0014c]
+- Updated dependencies [6574376]
+- Updated dependencies [925fdac]
+  - @crossed/ui@9.1.0
+
 ## 0.0.56
 
 ### Patch Changes
