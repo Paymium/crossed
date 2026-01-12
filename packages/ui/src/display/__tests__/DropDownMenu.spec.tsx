@@ -212,7 +212,7 @@ describe('DropDownMenu', () => {
           <Text>Open Menu</Text>
         </DropDownMenu.Trigger>
         <DropDownMenu.Content>
-          <DropDownMenu.Item>
+          <DropDownMenu.Item onPress={() => {}}>
             <DropDownMenu.Label>Item 1</DropDownMenu.Label>
           </DropDownMenu.Item>
         </DropDownMenu.Content>
@@ -222,7 +222,7 @@ describe('DropDownMenu', () => {
     const itemCall = MenuListItemMocked.mock.calls[0][0];
     expect(itemCall).toHaveProperty('onPress');
 
-    if (itemCall.onPress) {
+    if ('onPress' in itemCall && typeof itemCall.onPress === 'function') {
       itemCall.onPress({} as any);
     }
 
@@ -249,8 +249,7 @@ describe('DropDownMenu', () => {
     );
 
     const itemCall = MenuListItemMocked.mock.calls[0][0];
-
-    if (itemCall.onPress) {
+    if ('onPress' in itemCall && typeof itemCall.onPress === 'function') {
       itemCall.onPress({} as any);
     }
 

@@ -49,11 +49,16 @@ const DropDownMenuContent = ({ children, style }: ContentProps) => {
     </Popover.Content>
   );
 };
-type ItemProps = ComponentProps<typeof MenuList.Item>;
+type ItemProps = ComponentProps<typeof MenuList.Item> & {
+  onPress?: () => void;
+};
 const DropDownMenuItem = ({ children, onPress, ...props }: ItemProps) => {
   const { onClose } = useFloatingContext();
   return (
-    <MenuList.Item {...props} onPress={composeEventHandlers(onPress, onClose)}>
+    <MenuList.Item
+      {...(props as any)}
+      onPress={composeEventHandlers(onPress, onClose)}
+    >
       {children}
     </MenuList.Item>
   );

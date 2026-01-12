@@ -9,7 +9,6 @@
 import {
   composeStyles,
   createStyles,
-  CrossedMethods,
   inlineStyle,
   withReactive,
 } from '@crossed/styled';
@@ -19,7 +18,7 @@ import { Divider as D, DividerProps } from '../layout/Divider';
 import { withStaticProperties } from '@crossed/core';
 import { ComponentProps, forwardRef, memo, RefAttributes } from 'react';
 import { View } from 'react-native';
-import { Box, BoxViewProps } from '../layout';
+import { Box, BoxProps } from '../layout';
 import {
   flexDirectionStyles,
   justifyContentStyle,
@@ -85,12 +84,8 @@ export type ListProps = YBoxProps & {
 const ItemListDivider = (props: DividerProps) => <D {...props} />;
 ItemListDivider.displayName = 'ItemList.Divider';
 
-export type ListItemProps = Omit<BoxViewProps, 'style'> & {
-  style?: CrossedMethods<any>;
-};
-
-const ItemListItem = withReactive<ListItemProps>(
-  ({ style, children, ...props }: ListItemProps) => {
+const ItemListItem = withReactive<BoxProps>(
+  ({ style, children, ...props }: BoxProps) => {
     return (
       <Box
         {...props}

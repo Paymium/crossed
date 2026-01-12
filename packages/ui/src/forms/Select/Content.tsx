@@ -125,7 +125,9 @@ export const SelectContent = memo<SelectContentProps & RefAttributes<View>>(
             )}
           >
             <Sheet.Padded testID={'content-select'}>
-              <MenuList.Item>{renderSearch}</MenuList.Item>
+              {renderSearch && (
+                <MenuList.Item pressable={false}>{renderSearch}</MenuList.Item>
+              )}
               {loading ? <Spinner /> : <List data={data} />}
             </Sheet.Padded>
           </Sheet.Content>
