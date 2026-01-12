@@ -1,5 +1,19 @@
 # crossed-doc
 
+## 0.14.0
+
+### Minor Changes
+
+- cc0014c: Add list component and use it into MenuList
+
+### Patch Changes
+
+- Updated dependencies [b0f082e]
+- Updated dependencies [cc0014c]
+- Updated dependencies [6574376]
+- Updated dependencies [925fdac]
+  - @crossed/ui@9.1.0
+
 ## 0.13.3
 
 ### Patch Changes

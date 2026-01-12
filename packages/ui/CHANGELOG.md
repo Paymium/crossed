@@ -1,5 +1,17 @@
 # @crossed/ui
 
+## 9.1.0
+
+### Minor Changes
+
+- cc0014c: Add list component and use it into MenuList
+
+### Patch Changes
+
+- b0f082e: add alignItemsResponsiveStyle
+- 6574376: Fix padding style to use the good property
+- 925fdac: add justifyContentResponsivStyle
+
 ## 9.0.3
 
 ### Patch Changes
