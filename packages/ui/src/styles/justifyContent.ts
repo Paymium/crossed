@@ -15,3 +15,12 @@ export const justifyContentStyle = createStyles(() => ({
   evenly: { base: { justifyContent: 'space-evenly' } },
   center: { base: { justifyContent: 'center' } },
 }));
+
+export const justifyContentResponsiveStyle = createStyles(() => ({
+  'mdStart': { media: { md: { justifyContent: 'flex-start' } } },
+  'mdEnd': { media: { md: { justifyContent: 'flex-end' } } },
+  'mdBetween': { media: { md: { justifyContent: 'space-between' } } },
+  'mdAround': { media: { md: { justifyContent: 'space-around' } } },
+  'mdEvenly': { base: { justifyContent: 'space-evenly' } },
+  'mdCenter': { media: { md: { justifyContent: 'center' } } },
+}));
