@@ -89,6 +89,7 @@ const ItemListItem = withReactive<BoxProps>(
     return (
       <Box
         {...props}
+        role={'listitem'}
         style={composeStyles(
           flexDirectionStyles.column,
           justifyContentStyle.center,
