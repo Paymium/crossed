@@ -1,5 +1,11 @@
 # @crossed/ui
 
+## 9.1.2
+
+### Patch Changes
+
+- b21e60c: Add role listitem
+
 ## 9.1.1
 
 ### Patch Changes
