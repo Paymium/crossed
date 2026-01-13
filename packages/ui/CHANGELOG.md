@@ -1,5 +1,13 @@
 # @crossed/ui
 
+## 9.1.1
+
+### Patch Changes
+
+- 20666c5: Fix searchable select
+- c715d97: revert base style on padding and margin
+- b302603: fix ItemList and menuList
+
 ## 9.1.0
 
 ### Minor Changes
