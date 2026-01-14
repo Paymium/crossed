@@ -32,7 +32,9 @@ import { Text } from '../typography/Text';
 import { YBox } from '../layout/YBox';
 
 const styles = createStyles(() => ({
-  close: { base: { padding: 0 } },
+  close: {
+    base: { paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0 },
+  },
 }));
 
 export type InputProps = Omit<

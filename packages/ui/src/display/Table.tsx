@@ -41,9 +41,22 @@ const useTable = createStyles((t) => ({
     },
   },
   td: {
-    base: { padding: t.space.xl },
+    base: {
+      paddingLeft: t.space.xl,
+      paddingRight: t.space.xl,
+      paddingTop: t.space.xl,
+      paddingBottom: t.space.xl,
+    },
   },
-  th: { base: { textAlign: 'left', padding: t.space.xl } },
+  th: {
+    base: {
+      textAlign: 'left',
+      paddingLeft: t.space.xl,
+      paddingRight: t.space.xl,
+      paddingTop: t.space.xl,
+      paddingBottom: t.space.xl,
+    },
+  },
 }));
 
 export const Table = (props: HTMLProps<HTMLTableElement>) => {

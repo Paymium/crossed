@@ -31,7 +31,10 @@ const toastStyles = createStyles(
     ({
       container: {
         base: {
-          padding: t.space.md,
+          paddingLeft: t.space.md,
+          paddingRight: t.space.md,
+          paddingTop: t.space.md,
+          paddingBottom: t.space.md,
           borderRadius: 8,
         },
         media: {
