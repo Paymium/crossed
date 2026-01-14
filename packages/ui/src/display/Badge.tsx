@@ -14,7 +14,10 @@ import { createScope, withStaticProperties } from '@crossed/core';
 const badgeStyles = createStyles(({ space, colors }) => ({
   default: {
     base: {
-      padding: space.md,
+      paddingLeft: space.md,
+      paddingRight: space.md,
+      paddingTop: space.md,
+      paddingBottom: space.md,
       marginTop: 0,
       borderRadius: 4,
       backgroundColor: colors.background.primary,

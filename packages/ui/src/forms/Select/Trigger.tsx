@@ -87,7 +87,10 @@ const Value = () => {
                     inlineStyle(({ colors, space }) => ({
                       base: {
                         backgroundColor: colors.info.light,
-                        padding: space.xs,
+                        paddingLeft: space.xs,
+                        paddingRight: space.xs,
+                        paddingTop: space.xs,
+                        paddingBottom: space.xs,
                         borderRadius: 4,
                         borderWidth: 1,
                         borderColor: colors.info.primary,

@@ -67,9 +67,10 @@ export const alertStyles = createStyles(
       },
       container: {
         base: {
-          paddingVertical: space.md,
-          paddingHorizontal: space.xl,
-          padding: space.md,
+          paddingLeft: space.xl,
+          paddingRight: space.xl,
+          paddingTop: space.md,
+          paddingBottom: space.md,
           borderRadius: 8,
           borderWidth: 1,
           borderStyle: 'solid',

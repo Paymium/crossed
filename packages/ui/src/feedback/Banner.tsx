@@ -66,7 +66,10 @@ const bannerStyles = createStyles(
       },
       container: {
         base: {
-          padding: t.space.xl,
+          paddingLeft: t.space.xl,
+          paddingRight: t.space.xl,
+          paddingTop: t.space.xl,
+          paddingBottom: t.space.xl,
           borderRadius: 8,
           borderWidth: 1,
           borderStyle: 'solid',
