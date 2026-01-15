@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import crossedStyled from 'vite-plugin-crossed-styled';
+import crossedStyled from '@crossed/vite-plugin';
 import react from '@vitejs/plugin-react';
 import reactNativeWeb from 'vite-plugin-react-native-web';
 
