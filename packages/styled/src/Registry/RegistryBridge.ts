@@ -148,7 +148,38 @@ export class RegistryBridge {
     const par = params();
 
     Object.keys(par).forEach((key: keyof T) => {
-      const styles = par[key];
+      const styles = Object.entries(par[key]).reduce<T[keyof T]>(
+        (acc, [key, value]) => {
+          if (key === 'paddingHorizontal') {
+            acc.paddingLeft = value;
+            acc.paddingRight = value;
+          } else if (key === 'paddingVertical') {
+            acc.paddingTop = value;
+            acc.paddingBottom = value;
+          } else if (key === 'padding') {
+            acc.paddingTop = value;
+            acc.paddingBottom = value;
+            acc.paddingLeft = value;
+            acc.paddingRight = value;
+          } else if (key === 'marginHorizontal') {
+            acc.marginLeft = value;
+            acc.marginRight = value;
+          } else if (key === 'marginVertical') {
+            acc.marginTop = value;
+            acc.marginBottom = value;
+          } else if (key === 'margin') {
+            acc.marginTop = value;
+            acc.marginBottom = value;
+            acc.marginLeft = value;
+            acc.marginRight = value;
+          } else {
+            acc[key] = value;
+          }
+          return acc;
+        },
+        {} as any
+      );
+
       this.plugins.forEach(({ test, apply, name }) => {
         if (typeof key === 'string') {
           const keyFind = test.includes(key);
