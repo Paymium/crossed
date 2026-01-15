@@ -1,5 +1,14 @@
 # @crossed/ui
 
+## 9.1.5
+
+### Patch Changes
+
+- Updated dependencies [0f31cbb]
+  - @crossed/styled@0.15.3
+  - @crossed/theme@3.1.2
+  - @crossed/unicons@5.0.0
+
 ## 9.1.4
 
 ### Patch Changes

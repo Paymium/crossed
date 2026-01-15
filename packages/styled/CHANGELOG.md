@@ -1,5 +1,11 @@
 # @crossed/styled
 
+## 0.15.3
+
+### Patch Changes
+
+- 0f31cbb: add style converter to methode
+
 ## 0.15.2
 
 ### Patch Changes
