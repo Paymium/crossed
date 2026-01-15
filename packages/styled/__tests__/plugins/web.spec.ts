@@ -8,6 +8,7 @@
 /// <reference types="jest" />
 
 import { createStyles } from '../../src/createStyles';
+import { inlineStyle } from '../../src';
 
 jest.mock('../../src/isWeb/isWeb', () => {
   return { isWeb: true };
@@ -47,6 +48,94 @@ describe('WebPlugin', () => {
           'height-[44px]': 'height-[44px]',
           'justify-content-[center]': 'justify-content-[center]',
           'flex-direction-[row]': 'flex-direction-[row]',
+        },
+        {},
+      ],
+    });
+  });
+
+  test('should convert padding', () => {
+    const style = inlineStyle(() => ({ base: { padding: 0 } }));
+    expect(style.rnw()).toStrictEqual({
+      style: [
+        {
+          '$$css': true,
+          'padding-bottom-[0px]': 'padding-bottom-[0px]',
+          'padding-top-[0px]': 'padding-top-[0px]',
+          'padding-left-[0px]': 'padding-left-[0px]',
+          'padding-right-[0px]': 'padding-right-[0px]',
+        },
+        {},
+      ],
+    });
+  });
+
+  test('should convert paddingHorizontal', () => {
+    const style = inlineStyle(() => ({ base: { paddingHorizontal: 0 } }));
+    expect(style.rnw()).toStrictEqual({
+      style: [
+        {
+          '$$css': true,
+          'padding-left-[0px]': 'padding-left-[0px]',
+          'padding-right-[0px]': 'padding-right-[0px]',
+        },
+        {},
+      ],
+    });
+  });
+
+  test('should convert paddingVertical', () => {
+    const style = inlineStyle(() => ({ base: { paddingVertical: 0 } }));
+    expect(style.rnw()).toStrictEqual({
+      style: [
+        {
+          '$$css': true,
+          'padding-bottom-[0px]': 'padding-bottom-[0px]',
+          'padding-top-[0px]': 'padding-top-[0px]',
+        },
+        {},
+      ],
+    });
+  });
+
+  test('should convert margin', () => {
+    const style = inlineStyle(() => ({ base: { margin: 0 } }));
+    expect(style.rnw()).toStrictEqual({
+      style: [
+        {
+          '$$css': true,
+          'margin-bottom-[0px]': 'margin-bottom-[0px]',
+          'margin-top-[0px]': 'margin-top-[0px]',
+          'margin-left-[0px]': 'margin-left-[0px]',
+          'margin-right-[0px]': 'margin-right-[0px]',
+        },
+        {},
+      ],
+    });
+  });
+
+  test('should convert marginHorizontal', () => {
+    const style = inlineStyle(() => ({ base: { marginHorizontal: 0 } }));
+    expect(style.rnw()).toStrictEqual({
+      style: [
+        {
+          '$$css': true,
+          'margin-left-[0px]': 'margin-left-[0px]',
+          'margin-right-[0px]': 'margin-right-[0px]',
+        },
+        {},
+      ],
+    });
+  });
+
+  test('should convert marginVertical', () => {
+    const style = inlineStyle(() => ({ base: { marginVertical: 0 } }));
+    expect(style.rnw()).toStrictEqual({
+      style: [
+        {
+          '$$css': true,
+          'margin-bottom-[0px]': 'margin-bottom-[0px]',
+          'margin-top-[0px]': 'margin-top-[0px]',
         },
         {},
       ],

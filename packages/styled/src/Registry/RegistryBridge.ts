@@ -172,6 +172,8 @@ export class RegistryBridge {
             acc.marginBottom = value;
             acc.marginLeft = value;
             acc.marginRight = value;
+          } else {
+            acc[key] = value;
           }
           return acc;
         },
