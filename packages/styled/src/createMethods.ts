@@ -43,11 +43,63 @@ const cleanClassName = (classNames: string[]) => {
   }, new Set<string>());
 };
 
+const styleConverter = (styleOfKey: any) => {
+  if (!styleOfKey) {
+    return {};
+  }
+  return Object.entries(styleOfKey).reduce((acc, [key, value]) => {
+    if (key === 'paddingHorizontal') {
+      acc.paddingLeft = value;
+      acc.paddingRight = value;
+    } else if (key === 'paddingVertical') {
+      acc.paddingTop = value;
+      acc.paddingBottom = value;
+    } else if (key === 'padding') {
+      acc.paddingTop = value;
+      acc.paddingBottom = value;
+      acc.paddingLeft = value;
+      acc.paddingRight = value;
+    } else if (key === 'marginHorizontal') {
+      acc.marginLeft = value;
+      acc.marginRight = value;
+    } else if (key === 'marginVertical') {
+      acc.marginTop = value;
+      acc.marginBottom = value;
+    } else if (key === 'margin') {
+      acc.marginTop = value;
+      acc.marginBottom = value;
+      acc.marginLeft = value;
+      acc.marginRight = value;
+    } else {
+      acc[key] = value;
+    }
+    return acc;
+  }, {} as any);
+};
+
 export const createMethods = (
-  styleOfKey: Record<string, any> | (() => unknown),
+  baseStyle: Record<string, any> | (() => unknown),
   stylesParent: Record<string, any> = {}
 ) => {
-  // console.log(stylesParent)
+  const styleOfKey =
+    typeof baseStyle === 'function' || !baseStyle
+      ? baseStyle
+      : {
+          ...baseStyle,
+          base: styleConverter(baseStyle.base),
+          [':focus']: styleConverter(baseStyle[':focus']),
+          [':focus-visible']: styleConverter(baseStyle[':focus-visible']),
+          [':active']: styleConverter(baseStyle[':active']),
+          [':hovered']: styleConverter(baseStyle[':hovered']),
+          web: styleConverter(baseStyle.web),
+          media: {
+            md: styleConverter(baseStyle.media?.md),
+            sm: styleConverter(baseStyle.media?.sm),
+            lg: styleConverter(baseStyle.media?.lg),
+            xl: styleConverter(baseStyle.media?.xl),
+          },
+        };
+
   return {
     original: styleOfKey,
     stylesParent,
