@@ -1,5 +1,13 @@
 # crossed-vite
 
+## 0.0.62
+
+### Patch Changes
+
+- e2a9c84: CHange package name
+- Updated dependencies [e2a9c84]
+  - @crossed/vite-plugin@0.0.10
+
 ## 0.0.61
 
 ### Patch Changes
