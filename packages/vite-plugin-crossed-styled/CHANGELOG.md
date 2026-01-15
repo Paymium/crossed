@@ -1,5 +1,11 @@
 # vite-plugin-crossed-styled
 
+## 0.0.10
+
+### Patch Changes
+
+- e2a9c84: CHange package name
+
 ## 0.0.9
 
 ### Patch Changes
