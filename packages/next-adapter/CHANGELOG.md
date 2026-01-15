@@ -1,5 +1,11 @@
 # @crossed/next-adapter
 
+## 0.7.11
+
+### Patch Changes
+
+- @crossed/webpack@3.0.3
+
 ## 0.7.10
 
 ### Patch Changes
