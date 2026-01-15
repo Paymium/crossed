@@ -1,5 +1,13 @@
 # @crossed/loader
 
+## 5.0.1
+
+### Patch Changes
+
+- Updated dependencies [5c3770c]
+  - @crossed/styled@0.15.2
+  - @crossed/theme@3.1.1
+
 ## 5.0.0
 
 ### Patch Changes
