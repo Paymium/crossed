@@ -204,6 +204,9 @@ importers:
       '@crossed/ui':
         specifier: workspace:^
         version: link:../../packages/ui
+      '@crossed/vite-plugin':
+        specifier: workspace:^
+        version: link:../../packages/vite-plugin-crossed-styled
       esprima:
         specifier: ^4.0.1
         version: 4.0.1
@@ -216,9 +219,6 @@ importers:
       react-native-web:
         specifier: ^0.19.10
         version: 0.19.12(react-dom@18.3.1)(react@18.3.1)
-      vite-plugin-crossed-styled:
-        specifier: workspace:^
-        version: link:../../packages/vite-plugin-crossed-styled
       vite-plugin-react-native-web:
         specifier: ^1.1.2
         version: 1.1.2
@@ -14148,7 +14148,7 @@ packages:
       '@babel/eslint-parser': ^7.12.0
       eslint: ^8.1.0
     dependencies:
-      '@babel/eslint-parser': 7.25.7(@babel/core@7.25.7)(eslint@8.57.1)
+      '@babel/eslint-parser': 7.25.7(@babel/core@7.26.0)(eslint@8.57.1)
       eslint: 8.57.1
       lodash: 4.17.21
       string-natural-compare: 3.0.1
