@@ -8,15 +8,6 @@
 import React from 'react';
 import { ScrollView as RNScrollView, ScrollViewProps } from 'react-native';
 
-/**
- * Simplified ScrollView for BottomSheet.
- *
- * Note: This is now a simple wrapper around React Native's ScrollView.
- * For sheets with scrollable content, set `gestureEnabled={false}` on the BottomSheet
- * to prevent gesture conflicts.
- *
- * Future: Advanced gesture coordination can be added if needed.
- */
 type Props = ScrollViewProps &
   React.RefAttributes<RNScrollView> & {
     /**

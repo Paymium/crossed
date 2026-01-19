@@ -13,19 +13,20 @@ import {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  SharedValue,
 } from 'react-native-reanimated';
 import { snapPointsToPixels, interpolate } from './calculations';
 import { SPRING_CONFIG } from './animations';
 
 export interface BottomSheetAnimations {
-  translateY: any; // Animated.SharedValue<number>
-  isOpen: any; // Animated.SharedValue<boolean>
-  currentSnapIndex: any; // Animated.SharedValue<number>
-  sheetHeight: any; // Animated.SharedValue<number>
-  screenHeight: any; // Animated.SharedValue<number>
-  snapPointsPixels: any; // Animated.SharedValue<number[]>
-  gestureTranslateY: any; // Animated.SharedValue<number>
-  gestureActive: any; // Animated.SharedValue<boolean>
+  translateY: SharedValue<number>;
+  isOpen: SharedValue<boolean>;
+  currentSnapIndex: SharedValue<number>;
+  sheetHeight: SharedValue<number>;
+  screenHeight: SharedValue<number>;
+  snapPointsPixels: SharedValue<number[]>;
+  gestureTranslateY: SharedValue<number>;
+  gestureActive: SharedValue<boolean>;
 }
 
 /**

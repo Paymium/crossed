@@ -8,15 +8,6 @@
 import React from 'react';
 import { FlatListProps, FlatList as RNFlatList } from 'react-native';
 
-/**
- * Simplified FlatList for BottomSheet.
- *
- * Note: This is now a simple wrapper around React Native's FlatList.
- * For sheets with scrollable content, set `gestureEnabled={false}` on the BottomSheet
- * to prevent gesture conflicts.
- *
- * Future: Advanced gesture coordination can be added if needed.
- */
 type Props<T = any> = FlatListProps<T> &
   React.RefAttributes<RNFlatList> & {
     /**

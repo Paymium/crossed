@@ -29,26 +29,22 @@ export function createPanGesture(
     .enabled(enabled)
     .onStart(() => {
       'worklet';
-      // Store the starting position for this gesture
       animations.gestureActive.value = true;
       animations.gestureTranslateY.value = animations.translateY.value;
     })
     .onUpdate((event) => {
       'worklet';
-      // Update position based on gesture
       const newTranslateY =
         animations.gestureTranslateY.value + event.translationY;
 
-      // Get bounds - can't go above topmost snap point or below screen height
       const minY = animations.snapPointsPixels.value[0] || 0;
       const maxY = animations.screenHeight.value;
 
-      // Clamp the position within bounds
       animations.translateY.value = clamp(newTranslateY, minY, maxY);
     })
     .onEnd((event) => {
       'worklet';
-      // Calculate target snap point based on position and velocity
+
       const targetSnapIndex = calculateTargetSnap(
         animations.translateY.value,
         event.velocityY,
@@ -58,7 +54,6 @@ export function createPanGesture(
 
       const targetY = animations.snapPointsPixels.value[targetSnapIndex];
 
-      // Animate to the target snap point
       animations.translateY.value = withSpring(
         targetY,
         SPRING_CONFIG,

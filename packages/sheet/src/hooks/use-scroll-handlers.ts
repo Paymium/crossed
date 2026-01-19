@@ -37,9 +37,6 @@ export function resolveScrollRef(ref: any) {
 /**
  * Create a custom scrollable view inside the action sheet.
  *
- * NOTE: With @gorhom/bottom-sheet, scroll coordination is handled automatically.
- * This hook is simplified to maintain API compatibility.
- *
  * @example
  * ```tsx
  const handlers = useScrollHandlers<RNScrollView>();
@@ -67,9 +64,7 @@ export function useScrollHandlers<T>(_options?: DraggableNodeOptions) {
           y: y === maxOffsetY || y > maxOffsetY - 5 ? ScrollState.END : y,
         };
       },
-      onLayout: () => {
-        // @gorhom/bottom-sheet handles layout automatically
-      },
+      onLayout: () => {},
     };
   }, [nodeRef, offset]);
 

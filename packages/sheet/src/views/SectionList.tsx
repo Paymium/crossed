@@ -8,15 +8,6 @@
 import React from 'react';
 import { SectionListProps, SectionList as RNSectionList } from 'react-native';
 
-/**
- * Simplified SectionList for BottomSheet.
- *
- * Note: This is now a simple wrapper around React Native's SectionList.
- * For sheets with scrollable content, set `gestureEnabled={false}` on the BottomSheet
- * to prevent gesture conflicts.
- *
- * Future: Advanced gesture coordination can be added if needed.
- */
 type Props<T = any> = SectionListProps<T> &
   React.RefAttributes<RNSectionList> & {
     /**

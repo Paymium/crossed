@@ -18,7 +18,6 @@ import React, {
 } from 'react';
 import { BottomSheetRef, Sheets } from './types';
 
-// Simplified event manager for internal provider communication
 class SimpleEventManager {
   private subscribers: Map<string, Set<Function>> = new Map();
 
@@ -41,7 +40,6 @@ class SimpleEventManager {
 
 const actionSheetEventManager = new SimpleEventManager();
 
-// Export for internal use by sheetmanager and hooks
 export { actionSheetEventManager };
 
 export const providerRegistryStack: string[] = [];

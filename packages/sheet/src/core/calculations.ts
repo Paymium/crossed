@@ -7,6 +7,8 @@
 
 'worklet';
 
+// We use "worklet" to enable UI Thread animations for better perf.
+
 /**
  * Clamp a value between min and max
  */
@@ -63,13 +65,12 @@ export function findNextSnapAbove(
   snapPoints: number[]
 ): number {
   'worklet';
-  // Find the first snap point that is above (less than) current position
   for (let i = 0; i < snapPoints.length; i++) {
     if (snapPoints[i] < position) {
       return i;
     }
   }
-  // If none found, return the topmost snap point
+
   return 0;
 }
 
@@ -81,13 +82,13 @@ export function findNextSnapBelow(
   snapPoints: number[]
 ): number {
   'worklet';
-  // Find the first snap point that is below (greater than) current position
+
   for (let i = snapPoints.length - 1; i >= 0; i--) {
     if (snapPoints[i] > position) {
       return i;
     }
   }
-  // If none found, return the bottommost snap point
+
   return snapPoints.length - 1;
 }
 
@@ -107,14 +108,12 @@ export function calculateTargetSnap(
 ): number {
   'worklet';
 
-  // If velocity is strong enough, snap in the direction of velocity
   if (Math.abs(velocity) > velocityThreshold) {
     return velocity > 0
       ? findNextSnapBelow(currentPosition, snapPoints)
       : findNextSnapAbove(currentPosition, snapPoints);
   }
 
-  // Otherwise, snap to nearest point
   return findNearestSnap(currentPosition, snapPoints);
 }
 
@@ -131,10 +130,7 @@ export function interpolate(
   const [inputMin, inputMax] = inputRange;
   const [outputMin, outputMax] = outputRange;
 
-  // Calculate the ratio
   const ratio = (value - inputMin) / (inputMax - inputMin);
-
-  // Calculate output value
   let result = outputMin + ratio * (outputMax - outputMin);
 
   // Apply extrapolation
