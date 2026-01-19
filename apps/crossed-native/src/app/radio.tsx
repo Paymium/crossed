@@ -6,7 +6,7 @@
  */
 
 import { YBox, Label, Radio, XBox } from '@crossed/ui';
-import { createStyles } from '@crossed/styled';
+import { createStyles, inlineStyle } from '@crossed/styled';
 import { FlatList } from 'react-native';
 
 const styles = createStyles(() => ({
@@ -19,6 +19,10 @@ const styles = createStyles(() => ({
   },
   end: { base: { alignSelt: 'flex-end', flexDirection: 'row' } },
 }));
+
+const ItemSeparator = () => (
+  <YBox style={inlineStyle(() => ({ base: { height: 5 } }))} />
+);
 
 export default function TabOneScreen() {
   return (
@@ -34,7 +38,7 @@ export default function TabOneScreen() {
           </XBox>
         </>
       }
-      ItemSeparatorComponent={() => <YBox style={{ height: 5 }} />}
+      ItemSeparatorComponent={ItemSeparator}
       renderItem={() => null}
     />
   );

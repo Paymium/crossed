@@ -52,7 +52,7 @@ export default forwardRef<BottomSheetRef, BottomSheetProps>(
       snapPoints = [100],
       initialSnapIndex = 0,
       zIndex = 999,
-      keyboardHandlerEnabled = true,
+      keyboardHandlerEnabled: _keyboardHandlerEnabled = true,
       payload,
       onBeforeShow,
       onBeforeClose,

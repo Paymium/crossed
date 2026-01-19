@@ -48,8 +48,8 @@ export function useSnapPoints(
 export function useBottomSheetAnimations(
   snapPoints: number[],
   _initialSnapIndex: number,
-  onSnapIndexChange?: (index: number) => void,
-  onChange?: (position: number, height: number) => void
+  onSnapIndexChange?: (_index: number) => void,
+  onChange?: (_position: number, _height: number) => void
 ): BottomSheetAnimations {
   const screenHeight = Dimensions.get('window').height;
 

@@ -80,9 +80,9 @@ export type BottomSheetRef<SheetId extends keyof Sheets = never> = {
    * @deprecated EventManager has been removed. Use callbacks (onOpen, onClose, etc.) instead.
    */
   ev: {
-    publish: (...args: any[]) => void;
-    subscribe: (...args: any[]) => () => void;
-    unsubscribe: (...args: any[]) => void;
+    publish: (..._args: any[]) => void;
+    subscribe: (..._args: any[]) => () => void;
+    unsubscribe: (..._args: any[]) => void;
   };
 
   /**

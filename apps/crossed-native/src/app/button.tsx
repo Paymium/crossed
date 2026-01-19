@@ -50,6 +50,10 @@ const variantList = [
   { title: 'Tertiary', props: { variant: 'tertiary' }, data: states },
 ] as const;
 
+const ItemSeparator = () => (
+  <YBox style={inlineStyle(() => ({ base: { height: 5 } }))} />
+);
+
 export default function ButtonScreen() {
   return (
     <SectionList
@@ -60,9 +64,7 @@ export default function ButtonScreen() {
           <ButtonText>Button</ButtonText>
         </Button>
       }
-      ItemSeparatorComponent={() => (
-        <YBox style={inlineStyle(() => ({ base: { height: 5 } }))} />
-      )}
+      ItemSeparatorComponent={ItemSeparator}
       SectionSeparatorComponent={Divider}
       renderItem={({
         item: { title, props },

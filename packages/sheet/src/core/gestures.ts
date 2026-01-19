@@ -13,7 +13,7 @@ import type { BottomSheetAnimations } from './hooks';
 
 export interface GestureConfig {
   enabled: boolean;
-  onSnapIndexChange?: (index: number) => void;
+  onSnapIndexChange?: (_index: number) => void;
 }
 
 /**

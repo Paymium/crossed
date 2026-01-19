@@ -64,7 +64,7 @@ export const GroupRoot = memo<GroupRootProps>(
         const isLast = i === size - 1;
         const isMiddle = !isFirst && !isLast;
 
-        const props: any = {
+        const childProps: any = {
           style: composeStyles(
             child.props.style,
             orientation === 'vertical' && [
@@ -80,12 +80,12 @@ export const GroupRoot = memo<GroupRootProps>(
           ),
         };
         if (child.type === Divider) {
-          props.direction =
+          childProps.direction =
             orientation === 'horizontal' ? 'vertical' : 'horizontal';
-          delete props.style;
+          delete childProps.style;
         }
 
-        return cloneElement(child, props as any);
+        return cloneElement(child, childProps as any);
       });
     }, [children, orientation]);
 

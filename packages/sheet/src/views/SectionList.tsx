@@ -40,6 +40,5 @@ export const SectionList = React.forwardRef(
   $SectionList
 ) as unknown as typeof RNSectionList;
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type SectionList<ItemT = any> = typeof RNSectionList &
   RNSectionList<ItemT>;

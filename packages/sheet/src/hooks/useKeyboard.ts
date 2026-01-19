@@ -68,7 +68,7 @@ export function useKeyboard(enabled: boolean) {
         Keyboard.addListener('keyboardDidChangeFrame', handleKeyboardDidShow),
         Keyboard.addListener('keyboardDidHide', handleKeyboardDidHide),
       ];
-      if (Platform.OS == 'android') {
+      if (Platform.OS === 'android') {
         subscriptions.push(
           Keyboard.addListener('keyboardDidShow', handleKeyboardDidShow)
         );

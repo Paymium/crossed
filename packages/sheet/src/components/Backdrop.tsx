@@ -20,7 +20,7 @@ const AnimatedTouchableOpacity = Animated.createAnimatedComponent(
 export interface BackdropProps extends Partial<TouchableOpacityProps> {
   animatedStyle: any;
   overlayColor: string;
-  onPress?: (event?: any) => void;
+  onPress?: (_event?: any) => void;
   pressBehavior?: 'none' | 'close';
 }
 
