@@ -44,11 +44,11 @@ export const BottomSheetContent: React.FC<BottomSheetContentProps> = ({
   );
 
   const renderHandle = () => {
-    if (CustomHeaderComponent) {
-      return <>{CustomHeaderComponent}</>;
-    }
     if (!gestureEnabled || !closable) {
       return null;
+    }
+     if (CustomHeaderComponent) {
+      return <>{CustomHeaderComponent}</>;
     }
     return <Handle style={indicatorStyle} />;
   };
