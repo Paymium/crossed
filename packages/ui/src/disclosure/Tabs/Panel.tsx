@@ -29,9 +29,25 @@ export const createPanel =
               base: {
                 backgroundColor: 'transparent',
                 borderWidth: 0,
-                padding: 0,
+                paddingLeft: 0,
+                paddingRight: 0,
+                paddingTop: 0,
+                paddingBottom: 0,
               },
-              media: { md: { padding: 0 }, xl: { padding: 0 } },
+              media: {
+                md: {
+                  paddingLeft: 0,
+                  paddingRight: 0,
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                },
+                xl: {
+                  paddingLeft: 0,
+                  paddingRight: 0,
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                },
+              },
             })),
           style
         )}

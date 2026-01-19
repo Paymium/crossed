@@ -1,5 +1,19 @@
 # vite-plugin-crossed-styled
 
+## 0.0.10
+
+### Patch Changes
+
+- e2a9c84: CHange package name
+
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies [5c3770c]
+  - @crossed/styled@0.15.2
+  - @crossed/loader@5.0.1
+
 ## 0.0.8
 
 ### Patch Changes

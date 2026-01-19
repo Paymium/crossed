@@ -1,7 +1,7 @@
 {
   "name": "crossed-vite",
   "private": true,
-  "version": "0.0.56",
+  "version": "0.0.62",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -18,7 +18,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-native-web": "^0.19.10",
-    "vite-plugin-crossed-styled": "workspace:^",
+    "@crossed/vite-plugin": "workspace:^",
     "vite-plugin-react-native-web": "^1.1.2"
   },
   "devDependencies": {

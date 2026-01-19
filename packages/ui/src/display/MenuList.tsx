@@ -6,16 +6,11 @@
  */
 
 'use client';
-import {
-  composeStyles,
-  createStyles,
-  CrossedMethods,
-  withReactive,
-} from '@crossed/styled';
+import { composeStyles, createStyles, withReactive } from '@crossed/styled';
 import { Text, TextProps } from '../typography/Text';
 import { withStaticProperties } from '@crossed/core';
 import { ComponentProps, forwardRef, memo, RefAttributes } from 'react';
-import { Pressable, View, type PressableProps } from 'react-native';
+import { View } from 'react-native';
 import { ItemList, ListProps } from './ItemList';
 import { DividerProps } from '../layout';
 
@@ -25,17 +20,13 @@ const menuItemStyles = createStyles((t) => ({
       borderRadius: 12,
     },
   },
-  hover: {
-    base: {
-      backgroundColor: t.colors.background.hover,
+  pressable: {
+    ':hover': { backgroundColor: t.colors.background.hover },
+    ':active': {
+      backgroundColor: t.colors.background.active,
     },
-  },
-  active: {
-    base: { backgroundColor: t.colors.background.active },
-  },
-  focus: {
-    web: {
-      'base': { transition: 'all 170ms ease' },
+    'web': {
+      base: { transition: 'all 170ms ease' },
       ':focus-visible': {
         outlineColor: t.colors.border.brand,
       },
@@ -53,43 +44,28 @@ MenuRoot.displayName = 'MenuList';
 const MenuDivider = (props: DividerProps) => <ItemList.Divider {...props} />;
 MenuDivider.displayName = 'MenuList.Divider';
 
-export type MenuListItemProps = Omit<PressableProps, 'style'> & {
-  style?: CrossedMethods<any>;
-};
+export type MenuListItemProps = ComponentProps<typeof ItemList.Item>;
+
 const MenuItem = withReactive<MenuListItemProps>(
-  ({ style, children, ...props }: MenuListItemProps) => {
+  ({ style, children, pressable = true, ...props }: MenuListItemProps) => {
     return (
-      <Pressable role="listitem" {...props}>
-        {({
-          hovered,
-          pressed,
-          focused,
-        }: {
-          pressed: boolean;
-          hovered: boolean;
-          focused: boolean;
-        }) => (
-          <ItemList.Item
-            style={composeStyles(
-              menuItemStyles.item,
-              hovered && menuItemStyles.hover,
-              pressed && menuItemStyles.active,
-              focused && menuItemStyles.focus,
-              style
-            )}
-          >
-            {typeof children === 'function'
-              ? children({ hovered, pressed, focused } as any)
-              : children}
-          </ItemList.Item>
+      <ItemList.Item
+        {...(props as any)}
+        pressable={pressable}
+        style={composeStyles(
+          pressable && menuItemStyles.pressable,
+          menuItemStyles.item,
+          style
         )}
-      </Pressable>
+      >
+        {children}
+      </ItemList.Item>
     );
   }
 );
 MenuItem.displayName = 'MenuList.Item';
 
-const MenuLabel = ({ style, ...props }: ComponentProps<typeof Text>) => (
+const MenuLabel = ({ ...props }: ComponentProps<typeof Text>) => (
   <ItemList.Label {...props} />
 );
 MenuLabel.displayName = 'MenuList.Label';

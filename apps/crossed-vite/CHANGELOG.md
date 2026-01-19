@@ -1,5 +1,57 @@
 # crossed-vite
 
+## 0.0.62
+
+### Patch Changes
+
+- e2a9c84: CHange package name
+- Updated dependencies [e2a9c84]
+  - @crossed/vite-plugin@0.0.10
+
+## 0.0.61
+
+### Patch Changes
+
+- Updated dependencies [5c3770c]
+  - @crossed/styled@0.15.2
+  - @crossed/loader@5.0.1
+  - @crossed/theme@3.1.1
+  - @crossed/ui@9.1.4
+  - vite-plugin-crossed-styled@0.0.9
+
+## 0.0.60
+
+### Patch Changes
+
+- Updated dependencies [a147acb]
+  - @crossed/ui@9.1.3
+
+## 0.0.59
+
+### Patch Changes
+
+- Updated dependencies [b21e60c]
+  - @crossed/ui@9.1.2
+
+## 0.0.58
+
+### Patch Changes
+
+- Updated dependencies [20666c5]
+- Updated dependencies [c715d97]
+- Updated dependencies [b302603]
+  - @crossed/ui@9.1.1
+
+## 0.0.57
+
+### Patch Changes
+
+- Updated dependencies [b0f082e]
+- Updated dependencies [cc0014c]
+- Updated dependencies [6574376]
+- Updated dependencies [925fdac]
+  - @crossed/ui@9.1.0
+
 ## 0.0.56
 
 ### Patch Changes

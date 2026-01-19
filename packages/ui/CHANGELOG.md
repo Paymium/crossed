@@ -1,5 +1,46 @@
 # @crossed/ui
 
+## 9.1.4
+
+### Patch Changes
+
+- Updated dependencies [5c3770c]
+  - @crossed/styled@0.15.2
+  - @crossed/theme@3.1.1
+  - @crossed/unicons@5.0.0
+
+## 9.1.3
+
+### Patch Changes
+
+- a147acb: remove field padding in style
+
+## 9.1.2
+
+### Patch Changes
+
+- b21e60c: Add role listitem
+
+## 9.1.1
+
+### Patch Changes
+
+- 20666c5: Fix searchable select
+- c715d97: revert base style on padding and margin
+- b302603: fix ItemList and menuList
+
+## 9.1.0
+
+### Minor Changes
+
+- cc0014c: Add list component and use it into MenuList
+
+### Patch Changes
+
+- b0f082e: add alignItemsResponsiveStyle
+- 6574376: Fix padding style to use the good property
+- 925fdac: add justifyContentResponsivStyle
+
 ## 9.0.3
 
 ### Patch Changes

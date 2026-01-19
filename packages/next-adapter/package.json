@@ -1,5 +1,5 @@
 {
-  "version": "0.7.9",
+  "version": "0.7.10",
   "license": "MIT",
   "main": "lib/commonjs/index.js",
   "module": "lib/modules/index.js",
@@ -56,7 +56,7 @@
     "typescript": "^5.4.2"
   },
   "dependencies": {
-    "@crossed/webpack": "3.0.1",
+    "@crossed/webpack": "3.0.2",
     "find-yarn-workspace-root": "^2.0.0",
     "fs-extra": "^11.1.0",
     "next": "^13.4.19",
