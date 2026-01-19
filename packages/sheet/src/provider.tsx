@@ -16,8 +16,31 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { actionSheetEventManager } from './eventmanager';
-import { ActionSheetRef, Sheets } from './types';
+import { BottomSheetRef, Sheets } from './types';
+
+class SimpleEventManager {
+  private subscribers: Map<string, Set<Function>> = new Map();
+
+  subscribe(eventName: string, callback: Function) {
+    if (!this.subscribers.has(eventName)) {
+      this.subscribers.set(eventName, new Set());
+    }
+    this.subscribers.get(eventName)!.add(callback);
+    return {
+      unsubscribe: () => {
+        this.subscribers.get(eventName)?.delete(callback);
+      },
+    };
+  }
+
+  publish(eventName: string, ...args: any[]) {
+    this.subscribers.get(eventName)?.forEach((callback) => callback(...args));
+  }
+}
+
+const actionSheetEventManager = new SimpleEventManager();
+
+export { actionSheetEventManager };
 
 export const providerRegistryStack: string[] = [];
 
@@ -115,7 +138,7 @@ export function SheetProvider({
 const ProviderContext = createContext('global');
 const SheetIDContext = createContext<string | undefined>(undefined);
 
-export const SheetRefContext = createContext<RefObject<ActionSheetRef | null>>(
+export const SheetRefContext = createContext<RefObject<BottomSheetRef | null>>(
   {} as any
 );
 
@@ -134,16 +157,16 @@ export const useSheetIDContext = () => useContext(SheetIDContext);
  * @returns
  */
 // export const useSheetRef = <SheetId extends keyof Sheets = never>(): RefObject<
-//   ActionSheetRef<SheetId>
+//   BottomSheetRef<SheetId>
 // > => useContext(SheetRefContext) as RefObject<
-// ActionSheetRef<SheetId>
+// BottomSheetRef<SheetId>
 // >;
 
 export function useSheetRef<SheetId extends keyof Sheets = never>(
   _id?: SheetId | (string & {})
 ) {
   return useContext(SheetRefContext) as MutableRefObject<
-    ActionSheetRef<SheetId>
+    BottomSheetRef<SheetId>
   >;
 }
 
@@ -160,7 +183,7 @@ export function useSheetPayload<SheetId extends keyof Sheets = never>(
 const RenderSheet = ({ id, context }: { id: string; context: string }) => {
   const [payload, setPayload] = useState();
   const [visible, setVisible] = useState(false);
-  const ref = useRef<ActionSheetRef | null>(null);
+  const ref = useRef<BottomSheetRef | null>(null);
   const Sheet = context.startsWith('$$-auto-')
     ? sheetsRegistry?.global?.[id]
     : sheetsRegistry[context]

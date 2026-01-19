@@ -6,13 +6,16 @@
  */
 
 import { RefObject } from 'react';
-import { actionSheetEventManager } from './eventmanager';
-import { providerRegistryStack, sheetsRegistry } from './provider';
-import { ActionSheetRef, Sheets } from './types';
+import {
+  actionSheetEventManager,
+  providerRegistryStack,
+  sheetsRegistry,
+} from './provider';
+import { BottomSheetRef, Sheets } from './types';
 let baseZindex = 999;
-// Array of all the ids of ActionSheets currently rendered in the app.
+// Array of all the ids of BottomSheets currently rendered in the app.
 const ids: string[] = [];
-const refs: { [name: string]: RefObject<ActionSheetRef> } = {};
+const refs: { [name: string]: RefObject<BottomSheetRef> } = {};
 
 /**
  * Get rendered action sheets stack
@@ -28,7 +31,7 @@ export function getSheetStack() {
 }
 
 /**
- * A function that checks whether the action sheet with the given id is rendered on top or not.
+ * A function that checks whether the bottom sheet with the given id is rendered on top or not.
  * @param id
  * @param context
  * @returns
@@ -40,18 +43,21 @@ export function isRenderedOnTop(id: string, context?: string) {
 }
 
 /**
- * Set the base zIndex upon which action sheets will be stacked. Should be called once in the global space.
+ * Set the base zIndex upon which bottom sheets will be stacked. Should be called once in the global space.
  *
  * Default `baseZIndex` is `999`.
  *
  * @param zIndex
  */
-export function setBaseZIndexForActionSheets(zIndex: number) {
+export function setBaseZIndexForBottomSheets(zIndex: number) {
   baseZindex = zIndex;
 }
 
+/** @deprecated Use setBaseZIndexForBottomSheets instead */
+export const setBaseZIndexForActionSheets = setBaseZIndexForBottomSheets;
+
 /**
- * Since non modal based sheets are stacked one above the other, they need to have
+ * Since non modal based bottom sheets are stacked one above the other, they need to have
  * different zIndex for gestures to work correctly.
  * @param id
  * @param context
@@ -86,16 +92,16 @@ class _SheetManager {
   }
 
   /**
-   * Show the ActionSheet with an id.
+   * Show the BottomSheet with an id.
    *
-   * @param id id of the ActionSheet to show
+   * @param id id of the BottomSheet to show
    * @param options
    */
   async show<SheetId extends keyof Sheets>(
     id: SheetId | (string & {}),
     options?: {
       /**
-       * Any data to pass to the ActionSheet. Will be available from the component `props` or in `onBeforeShow` prop on the action sheet.
+       * Any data to pass to the BottomSheet. Will be available from the component `props` or in `onBeforeShow` prop on the bottom sheet.
        */
       payload?: Sheets[SheetId]['payload'];
 
@@ -105,7 +111,7 @@ class _SheetManager {
       onClose?: (_data: Sheets[SheetId]['returnValue'] | undefined) => void;
 
       /**
-       * Provide `context` of the `SheetProvider` where you want to show the action sheet.
+       * Provide `context` of the `SheetProvider` where you want to show the bottom sheet.
        */
       context?: string;
     }
@@ -147,9 +153,9 @@ class _SheetManager {
   }
 
   /**
-   * An async hide function. This is useful when you want to show one ActionSheet after closing another.
+   * An async hide function. This is useful when you want to show one BottomSheet after closing another.
    *
-   * @param id id of the ActionSheet to show
+   * @param id id of the BottomSheet to show
    * @param data
    */
   async hide<SheetId extends keyof Sheets>(
@@ -160,7 +166,7 @@ class _SheetManager {
        */
       payload?: Sheets[SheetId]['returnValue'];
       /**
-       * Provide `context` of the `SheetProvider` to hide the action sheet.
+       * Provide `context` of the `SheetProvider` to hide the bottom sheet.
        */
       context?: string;
     }
@@ -204,7 +210,7 @@ class _SheetManager {
   }
 
   /**
-   * Hide all the opened ActionSheets.
+   * Hide all the opened BottomSheets.
    *
    * @param id Hide all sheets for the specific id.
    */
@@ -218,7 +224,7 @@ class _SheetManager {
   registerRef = (
     id: string,
     context: string,
-    instance: RefObject<ActionSheetRef>
+    instance: RefObject<BottomSheetRef>
   ) => {
     refs[`${id}:${context}`] = instance;
   };
@@ -233,7 +239,7 @@ class _SheetManager {
   get = <SheetId extends keyof Sheets>(
     id: SheetId | (string & {}),
     context?: string
-  ): RefObject<ActionSheetRef<SheetId>> => {
+  ): RefObject<BottomSheetRef<SheetId>> => {
     if (!context) {
       for (const ctx of providerRegistryStack.slice().reverse()) {
         for (const _id in sheetsRegistry[ctx]) {
@@ -244,7 +250,7 @@ class _SheetManager {
         }
       }
     }
-    return refs[`${id}:${context}`] as RefObject<ActionSheetRef<SheetId>>;
+    return refs[`${id}:${context}`] as RefObject<BottomSheetRef<SheetId>>;
   };
 
   add = (id: string, context: string) => {
@@ -261,7 +267,7 @@ class _SheetManager {
 }
 
 /**
- * SheetManager is used to imperitively show/hide any ActionSheet with a
+ * SheetManager is used to imperitively show/hide any BottomSheet with a
  * unique id prop.
  */
 export const SheetManager = new _SheetManager();

@@ -82,7 +82,7 @@ export const triggerStyles = createStyles(({ space }) => ({
     web: { base: { cursor: 'not-allowed' } },
   },
   trigger: {
-    base: {
+    'base': {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',

@@ -39,6 +39,7 @@ export const PlatformTab = createTabs();
 export const BuilderTab = createTabs();
 
 # Setup
+
 <PlatformTab defaultValue="web" variant="underline">
   <BuilderTab defaultValue="webpack" variant="underline">
     <PlatformTab.List>
@@ -84,27 +85,31 @@ export const BuilderTab = createTabs();
 
 Create `style.config.ts` file <Source code={styleConfig} language='jsx' format />
 And import this file only once in your entry file<Source code={"import './style.config';"} language='jsx' format />
+
 <PlatformTab.Panel value="web">
-  add css in your js<Source code={'import "crossed.css";'} language='jsx' format />
-  or in your css<Source code={'@import "crossed.css";'} language='css' format />
+  add css in your js
+  <Source code={'import "crossed.css";'} language="jsx" format />
+  or in your css
+  <Source code={'@import "crossed.css";'} language="css" format />
 </PlatformTab.Panel>
 
 ## Usage
+
 <Source code={`
 import { createStyles } from '@crossed/styled';
 import { Text } from "react-native";
 
 const styles = createStyles((t) => ({
-  root: {
-    base: { color: t.colorText }
-  }
+root: {
+base: { color: t.colorText }
+}
 }));
 
 function App () {
-  return (
-    <>
-      {/* react-native + web */}
-      <Text {...styles.root.style()}>Hello World!</Text>
+return (
+<>
+{/* react-native + web */}
+<Text {...styles.root.style()}>Hello World!</Text>
 
       {/* react-native + web */}
       <Text {...styles.root.rnw()}>Hello World!</Text>
@@ -112,8 +117,10 @@ function App () {
       {/* web */}
       <p {...styles.root.className()}>Hello World!</p>
     </>
-  );
+
+);
 }
 `} language='jsx' format />
+
   </BuilderTab>
 </PlatformTab>

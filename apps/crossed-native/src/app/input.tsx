@@ -6,7 +6,7 @@
  */
 
 import { YBox, Label, Input } from '@crossed/ui';
-import { createStyles } from '@crossed/styled';
+import { createStyles, inlineStyle } from '@crossed/styled';
 import { FlatList } from 'react-native';
 import { useInteraction } from '@crossed/styled/plugins';
 
@@ -29,6 +29,10 @@ const states = [
   { title: 'Error', props: { error: true } },
 ];
 
+const ItemSeparator = () => (
+  <YBox style={inlineStyle(() => ({ base: { height: 5 } }))} />
+);
+
 export default function TabOneScreen() {
   const { state, props } = useInteraction();
   return (
@@ -43,14 +47,14 @@ export default function TabOneScreen() {
           <Input {...state} {...props} placeholder="Placeholder" />
         </>
       }
-      ItemSeparatorComponent={() => <YBox style={{ height: 5 }} />}
-      renderItem={({ item: { title, props } }) => (
+      ItemSeparatorComponent={ItemSeparator}
+      renderItem={({ item: { title, props: itemProps } }) => (
         <YBox {...styles.between.rnw()} key={`${title}`} space="xs">
-          <Label weight="semibold" {...props}>
+          <Label weight="semibold" {...itemProps}>
             {title}
           </Label>
-          <Input {...props} placeholder="Placeholder" />
-          <Input {...props} value={'Type something'} />
+          <Input {...itemProps} placeholder="Placeholder" />
+          <Input {...itemProps} value={'Type something'} />
         </YBox>
       )}
     />

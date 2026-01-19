@@ -39,9 +39,9 @@ describe('props functions', () => {
       const expected = {
         'aria-label': 'July 2, 2022',
         'aria-selected': false,
-        disabled: true,
-        onClick: expect.any(Function),
-        role: 'button',
+        'disabled': true,
+        'onClick': expect.any(Function),
+        'role': 'button',
       };
       expect(actual).toStrictEqual(expected);
     });
@@ -177,7 +177,7 @@ describe('props functions', () => {
       const expected = {
         ...commonProps,
         'aria-label': 'Go back 1 month',
-        disabled: false,
+        'disabled': false,
       };
       expect(actual).toStrictEqual(expected);
     });
@@ -227,7 +227,7 @@ describe('props functions', () => {
       const expected = {
         ...commonProps,
         'aria-label': 'Go forward 1 month',
-        disabled: false,
+        'disabled': false,
       };
       expect(actual).toStrictEqual(expected);
     });

@@ -42,7 +42,7 @@ const checkboxStyles = createStyles((t) => ({
   },
   active: {
     base: { borderColor: t.colors.border.tertiary },
-    'web': {
+    web: {
       base: {
         transition: 'all 0.1s ease',
         boxShadow: `0px 0px 0px 2px ${t.colors.border.secondary}`,
@@ -50,7 +50,7 @@ const checkboxStyles = createStyles((t) => ({
     },
   },
   root: {
-    'base': {
+    base: {
       width: 16,
       height: 16,
       borderRadius: 4,
@@ -63,7 +63,7 @@ const checkboxStyles = createStyles((t) => ({
     },
   },
   checked: {
-    'base': {
+    base: {
       borderColor: t.colors.primary.primary,
       backgroundColor: t.colors.primary.primary,
     },

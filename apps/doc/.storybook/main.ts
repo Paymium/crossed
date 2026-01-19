@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/react-webpack5';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import StylePlugin from '@crossed/webpack';
 import webpack from 'webpack';
-import path from "path"
+import path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -16,18 +16,18 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
-    "@chromatic-com/storybook",
+    '@chromatic-com/storybook',
     'storybook-dark-mode',
     '@storybook/addon-a11y',
-    "@storybook/addon-designs"
+    '@storybook/addon-designs',
   ],
   typescript: {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
-  //     compilerOptions: {
-  //       allowSyntheticDefaultImports: false,
-  //       esModuleInterop: false,
-  //     },
+      //     compilerOptions: {
+      //       allowSyntheticDefaultImports: false,
+      //       esModuleInterop: false,
+      //     },
     },
   },
   framework: {
@@ -59,18 +59,34 @@ const config: StorybookConfig = {
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
       }),
+      new webpack.ProvidePlugin({
+        React: 'react',
+      }),
       new StylePlugin({
         configPath: './src/style.config.ts',
         level: 'debug',
-        out: path.resolve(__dirname, '../storybook-static')
+        out: path.resolve(__dirname, '../storybook-static'),
       }),
     ];
+    // Configure babel-loader for React Native and Reanimated support
     config.module.rules.push({
-      test: /\.(mjs|tsx?|jsx?)$/,
-      loader: 'ts-loader',
-      options: {
-        transpileOnly: true,
-      },
+      test: /\.(tsx?|jsx?)$/,
+      exclude:
+        /node_modules\/(?!(react-native|@react-native|react-native-reanimated|react-native-gesture-handler|@gorhom|@crossed))/,
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            presets: [
+              ['@babel/preset-env', { targets: { esmodules: true } }],
+              ['@babel/preset-react', { runtime: 'automatic' }],
+              '@babel/preset-typescript',
+            ],
+            plugins: ['react-native-reanimated/plugin'],
+          },
+        },
+      ],
     });
     Object.assign(config.resolve.fallback, { os: false, tty: false });
     return config;

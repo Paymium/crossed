@@ -1,7 +1,7 @@
 {
   "name": "@crossed/sheet",
   "version": "0.12.5",
-  "description": "A Cross Platform(Android & iOS) ActionSheet with a robust and flexible api, native performance and zero dependency code for react native. Create anything you want inside ActionSheet.",
+  "description": "A Cross Platform(Android & iOS) BottomSheet with a robust and flexible api, native performance using react-native-reanimated v4. Create anything you want inside BottomSheet.",
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "module": "lib/module/index",
@@ -34,7 +34,8 @@
     "action",
     "sheet",
     "bottom",
-    "sheet"
+    "sheet",
+    "reanimated"
   ],
   "author": "paymium",
   "license": "MIT",
@@ -45,7 +46,7 @@
   "peerDependencies": {
     "react-native": "*",
     "react-native-gesture-handler": "*",
-    "react-native-safe-area-context": "*"
+    "react-native-reanimated": "^4.0.0"
   },
   "devDependencies": {
     "@crossed/build": "workspace:^",
@@ -54,7 +55,7 @@
     "react": "18.3.1",
     "react-native": "=0.76.7",
     "react-native-gesture-handler": "^2.23.1",
-    "react-native-safe-area-context": "5.3.0",
+    "react-native-reanimated": "^4.2.1",
     "typescript": "5.0.4"
   },
   "scripts": {
@@ -62,5 +63,8 @@
     "watch": "crossed-build --watch --project-path ./tsconfig.json",
     "build": "crossed-build --project-path ./tsconfig.json",
     "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react-native-worklets": "^0.7.1"
   }
 }

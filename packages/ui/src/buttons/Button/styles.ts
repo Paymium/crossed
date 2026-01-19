@@ -17,7 +17,7 @@ type RequiredKeys = {
 export const buttonSizeStyles = createStyles(({ space }) => ({
   default: {
     ':disabled': { opacity: 0.5 },
-    web: {
+    'web': {
       'base': { boxSizing: 'border-box' },
       ':focus-visible': {
         outlineWidth: '2px',
@@ -25,7 +25,7 @@ export const buttonSizeStyles = createStyles(({ space }) => ({
         outlineStyle: 'solid',
       },
     },
-    base: {
+    'base': {
       display: 'flex',
       borderRadius: 7,
       borderWidth: 2,
@@ -64,9 +64,9 @@ export const buttonPrimaryStyles = createStyles(
           },
         },
       },
-      text: { 'base': { color: Action.primary.default.text } },
-      textHover: { 'base': { color: Action.primary.hover.text } },
-      textActive: { 'base': { color: Action.primary.active.text } },
+      text: { base: { color: Action.primary.default.text } },
+      textHover: { base: { color: Action.primary.hover.text } },
+      textActive: { base: { color: Action.primary.active.text } },
     }) satisfies RequiredKeys
 );
 
@@ -92,9 +92,9 @@ export const buttonSecondaryStyles = createStyles(
           },
         },
       },
-      text: { 'base': { color: Action.secondary.default.text } },
-      textHover: { 'base': { color: Action.secondary.hover.text } },
-      textActive: { 'base': { color: Action.secondary.active.text } },
+      text: { base: { color: Action.secondary.default.text } },
+      textHover: { base: { color: Action.secondary.hover.text } },
+      textActive: { base: { color: Action.secondary.active.text } },
     }) satisfies RequiredKeys
 );
 
@@ -121,9 +121,9 @@ export const buttonTertiaryStyles = createStyles(
           },
         },
       },
-      text: { 'base': { color: Action.tertiary.default.text } },
-      textHover: { 'base': { color: Action.tertiary.hover.text } },
-      textActive: { 'base': { color: Action.tertiary.active.text } },
+      text: { base: { color: Action.tertiary.default.text } },
+      textHover: { base: { color: Action.tertiary.hover.text } },
+      textActive: { base: { color: Action.tertiary.active.text } },
     }) satisfies RequiredKeys
 );
 
@@ -149,7 +149,7 @@ export const buttonSuccessStyles = createStyles(
           },
         },
       },
-      text: { 'base': { color: colors.white } },
+      text: { base: { color: colors.white } },
       textHover: {},
       textActive: {},
     }) satisfies RequiredKeys
@@ -177,7 +177,7 @@ export const buttonErrorStyles = createStyles(
           },
         },
       },
-      text: { 'base': { color: colors.white } },
+      text: { base: { color: colors.white } },
       textHover: {},
       textActive: {},
     }) satisfies RequiredKeys

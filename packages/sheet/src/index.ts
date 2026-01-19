@@ -5,12 +5,15 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import ActionSheet from './ActionSheet';
+import ActionSheet from './BottomSheet';
+
 export {
   SheetManager,
-  setBaseZIndexForActionSheets,
+  setBaseZIndexForBottomSheets,
   getSheetStack,
   isRenderedOnTop,
+  // Backwards compatibility - deprecated
+  setBaseZIndexForActionSheets,
 } from './sheetmanager';
 export {
   registerSheet,
@@ -22,22 +25,16 @@ export {
   useSheetPayload,
 } from './provider';
 export {
-  type ActionSheetProps,
+  type BottomSheetProps,
+  type BottomSheetRef,
   type SheetDefinition,
   type Sheets,
+  // Backwards compatibility - deprecated
+  type ActionSheetProps,
   type ActionSheetRef,
 } from './types';
 export { useScrollHandlers } from './hooks/use-scroll-handlers';
-export {
-  useSheetRouter,
-  useSheetRouteParams,
-  type Route,
-  type RouteScreenProps,
-  type Router,
-  type RouteDefinition,
-} from './hooks/use-router';
 export { ScrollView } from './views/ScrollView';
 export { FlatList } from './views/FlatList';
 export { SectionList } from './views/SectionList';
-export { FlashList } from './views/FlashList';
 export default ActionSheet;

@@ -149,7 +149,7 @@ export class RegistryBridge {
 
     Object.keys(par).forEach((key: keyof T) => {
       const styles = Object.entries(par[key]).reduce<T[keyof T]>(
-        (acc, [key, value]) => {
+        (acc, [_styleKey, value]) => {
           if (key === 'paddingHorizontal') {
             acc.paddingLeft = value;
             acc.paddingRight = value;

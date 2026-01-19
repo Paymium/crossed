@@ -1,1 +1,2353 @@
-{"inputs":{"src/Provider.tsx":{"bytes":473,"imports":[],"format":"esm"},"src/index.ts":{"bytes":866,"imports":[],"format":"esm"},"src/useMedia.ts":{"bytes":555,"imports":[],"format":"esm"},"src/disclosure/Accordion.tsx":{"bytes":3425,"imports":[],"format":"esm"},"src/disclosure/Tabs.tsx":{"bytes":6350,"imports":[],"format":"esm"},"src/disclosure/index.ts":{"bytes":216,"imports":[],"format":"esm"},"src/feedback/Alert.tsx":{"bytes":4429,"imports":[],"format":"esm"},"src/feedback/Banner.tsx":{"bytes":6241,"imports":[],"format":"esm"},"src/feedback/index.ts":{"bytes":214,"imports":[],"format":"esm"},"src/forms/Button.tsx":{"bytes":8666,"imports":[],"format":"esm"},"src/forms/Input.tsx":{"bytes":4626,"imports":[],"format":"esm"},"src/forms/Switch.tsx":{"bytes":4132,"imports":[],"format":"esm"},"src/forms/Textarea.tsx":{"bytes":4079,"imports":[],"format":"esm"},"src/forms/index.ts":{"bytes":399,"imports":[],"format":"esm"},"src/display/Badge.tsx":{"bytes":2802,"imports":[],"format":"esm"},"src/display/Card.tsx":{"bytes":1914,"imports":[],"format":"esm"},"src/display/Code.tsx":{"bytes":702,"imports":[],"format":"esm"},"src/display/Kbd.tsx":{"bytes":720,"imports":[],"format":"esm"},"src/display/MenuList.tsx":{"bytes":3741,"imports":[],"format":"esm"},"src/display/Table.tsx":{"bytes":2298,"imports":[],"format":"esm"},"src/display/index.ts":{"bytes":315,"imports":[],"format":"esm"},"src/layout/Box.tsx":{"bytes":1631,"imports":[],"format":"esm"},"src/layout/Center.tsx":{"bytes":515,"imports":[],"format":"esm"},"src/layout/Divider.tsx":{"bytes":1266,"imports":[],"format":"esm"},"src/layout/XBox.tsx":{"bytes":1810,"imports":[],"format":"esm"},"src/layout/YBox.tsx":{"bytes":717,"imports":[],"format":"esm"},"src/layout/index.ts":{"bytes":287,"imports":[],"format":"esm"},"src/other/CloseButton.tsx":{"bytes":1066,"imports":[],"format":"esm"},"src/other/index.ts":{"bytes":194,"imports":[],"format":"esm"},"src/overlay/index.ts":{"bytes":188,"imports":[],"format":"esm"},"src/styles/base.ts":{"bytes":796,"imports":[],"format":"esm"},"src/styles/form.ts":{"bytes":2327,"imports":[],"format":"esm"},"src/styles/index.ts":{"bytes":193,"imports":[],"format":"esm"},"src/styles/typography.ts":{"bytes":2268,"imports":[],"format":"esm"},"src/typography/Anchor.tsx":{"bytes":850,"imports":[],"format":"esm"},"src/typography/B.tsx":{"bytes":304,"imports":[],"format":"esm"},"src/typography/Heading.tsx":{"bytes":1076,"imports":[],"format":"esm"},"src/typography/I.tsx":{"bytes":495,"imports":[],"format":"esm"},"src/typography/List.tsx":{"bytes":1029,"imports":[],"format":"esm"},"src/typography/P.tsx":{"bytes":527,"imports":[],"format":"esm"},"src/typography/Text.tsx":{"bytes":2242,"imports":[],"format":"esm"},"src/typography/index.ts":{"bytes":327,"imports":[],"format":"esm"},"src/variants/colors.ts":{"bytes":5320,"imports":[],"format":"esm"},"src/variants/index.ts":{"bytes":244,"imports":[],"format":"esm"},"src/variants/size.ts":{"bytes":529,"imports":[],"format":"esm"},"src/variants/space.ts":{"bytes":302,"imports":[],"format":"esm"},"src/forms/Checkbox/Implementation.tsx":{"bytes":286,"imports":[],"format":"esm"},"src/forms/Checkbox/Implementation.web.tsx":{"bytes":469,"imports":[],"format":"esm"},"src/forms/Checkbox/index.tsx":{"bytes":3056,"imports":[],"format":"esm"},"src/forms/Checkbox/type.tsx":{"bytes":559,"imports":[],"format":"esm"},"src/forms/Form/index.tsx":{"bytes":2540,"imports":[],"format":"esm"},"src/forms/Form/types.tsx":{"bytes":1422,"imports":[],"format":"esm"},"src/forms/Label/Label.tsx":{"bytes":728,"imports":[],"format":"esm"},"src/forms/Label/Label.web.tsx":{"bytes":586,"imports":[],"format":"esm"},"src/forms/Label/index.ts":{"bytes":188,"imports":[],"format":"esm"},"src/forms/Label/styles.ts":{"bytes":391,"imports":[],"format":"esm"},"src/forms/Label/types.ts":{"bytes":530,"imports":[],"format":"esm"},"src/forms/Radio/Radio.tsx":{"bytes":2446,"imports":[],"format":"esm"},"src/forms/Radio/index.ts":{"bytes":196,"imports":[],"format":"esm"},"src/forms/Select/ContentImpl.tsx":{"bytes":1402,"imports":[],"format":"esm"},"src/forms/Select/ContentNative.tsx":{"bytes":827,"imports":[],"format":"esm"},"src/forms/Select/ContentWeb.tsx":{"bytes":1008,"imports":[],"format":"esm"},"src/forms/Select/Focus.tsx":{"bytes":330,"imports":[],"format":"esm"},"src/forms/Select/Focus.web.tsx":{"bytes":935,"imports":[],"format":"esm"},"src/forms/Select/Provider.tsx":{"bytes":586,"imports":[],"format":"esm"},"src/forms/Select/Provider.web.tsx":{"bytes":424,"imports":[],"format":"esm"},"src/forms/Select/context.ts":{"bytes":1348,"imports":[],"format":"esm"},"src/forms/Select/index.tsx":{"bytes":8789,"imports":[],"format":"esm"},"src/forms/Select/styles.ts":{"bytes":1156,"imports":[],"format":"esm"},"src/forms/Select/types.ts":{"bytes":757,"imports":[],"format":"esm"},"src/forms/Select/useFloating.ts":{"bytes":320,"imports":[],"format":"esm"},"src/forms/Select/useFloating.web.ts":{"bytes":489,"imports":[],"format":"esm"},"src/layout/__tests__/Box.spec.tsx":{"bytes":570,"imports":[],"format":"esm"},"src/overlay/Modal/index.tsx":{"bytes":4479,"imports":[],"format":"esm"}},"outputs":{"lib/module/Provider.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":190},"lib/module/Provider.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@gorhom/portal","kind":"import-statement","external":true}],"exports":["CrossedUIProvider"],"entryPoint":"src/Provider.tsx","inputs":{"src/Provider.tsx":{"bytesInOutput":199}},"bytes":282},"lib/module/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":100},"lib/module/index.js":{"imports":[{"path":"./forms","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/index.ts","inputs":{"src/index.ts":{"bytesInOutput":25}},"bytes":73},"lib/module/useMedia.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":347},"lib/module/useMedia.js":{"imports":[{"path":"react-native","kind":"import-statement","external":true},{"path":"@crossed/styled/plugins","kind":"import-statement","external":true}],"exports":["useMedia"],"entryPoint":"src/useMedia.ts","inputs":{"src/useMedia.ts":{"bytesInOutput":383}},"bytes":443},"lib/module/disclosure/Accordion.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":2236},"lib/module/disclosure/Accordion.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/primitive","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"@crossed/unicons","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true}],"exports":["Accordion","AccordionIcon","AccordionItem","AccordionPanel","AccordionTrigger"],"entryPoint":"src/disclosure/Accordion.tsx","inputs":{"src/disclosure/Accordion.tsx":{"bytesInOutput":3030}},"bytes":3164},"lib/module/disclosure/Tabs.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":3576},"lib/module/disclosure/Tabs.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"../forms/Button","kind":"import-statement","external":true},{"path":"../layout/XBox","kind":"import-statement","external":true},{"path":"../layout/YBox","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true},{"path":"../layout/Box","kind":"import-statement","external":true},{"path":"@crossed/styled/plugins","kind":"import-statement","external":true}],"exports":["Tab","TabList","TabPanel","TabPanels","TabText","Tabs","createTabs"],"entryPoint":"src/disclosure/Tabs.tsx","inputs":{"src/disclosure/Tabs.tsx":{"bytesInOutput":5683}},"bytes":5817},"lib/module/disclosure/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":123},"lib/module/disclosure/index.js":{"imports":[{"path":"./Tabs","kind":"import-statement","external":true},{"path":"./Accordion","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/disclosure/index.ts","inputs":{"src/disclosure/index.ts":{"bytesInOutput":53}},"bytes":87},"lib/module/feedback/Alert.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":2426},"lib/module/feedback/Alert.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"../typography/Text","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"../layout/YBox","kind":"import-statement","external":true},{"path":"ts-pattern","kind":"import-statement","external":true},{"path":"@crossed/unicons","kind":"import-statement","external":true}],"exports":["Alert","AlertDescription","AlertIcon"],"entryPoint":"src/feedback/Alert.tsx","inputs":{"src/feedback/Alert.tsx":{"bytesInOutput":3788}},"bytes":3889},"lib/module/feedback/Banner.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":4228},"lib/module/feedback/Banner.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"../typography/Text","kind":"import-statement","external":true},{"path":"../forms/Button","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"@crossed/unicons","kind":"import-statement","external":true},{"path":"../layout/Box","kind":"import-statement","external":true},{"path":"../layout/YBox","kind":"import-statement","external":true},{"path":"ts-pattern","kind":"import-statement","external":true}],"exports":["Banner","BannerAction","BannerDescription","BannerIcon","BannerTitle"],"entryPoint":"src/feedback/Banner.tsx","inputs":{"src/feedback/Banner.tsx":{"bytesInOutput":5501}},"bytes":5637},"lib/module/feedback/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":121},"lib/module/feedback/index.js":{"imports":[{"path":"./Alert","kind":"import-statement","external":true},{"path":"./Banner","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/feedback/index.ts","inputs":{"src/feedback/index.ts":{"bytesInOutput":51}},"bytes":85},"lib/module/forms/Button.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":4396},"lib/module/forms/Button.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"@crossed/primitive","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true},{"path":"../typography/Text","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"../layout/XBox","kind":"import-statement","external":true},{"path":"../layout/Box","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"@crossed/styled/plugins","kind":"import-statement","external":true}],"exports":["Button","ButtonElement","ButtonIcon","ButtonText","useButton"],"entryPoint":"src/forms/Button.tsx","inputs":{"src/forms/Button.tsx":{"bytesInOutput":7534}},"bytes":7662},"lib/module/forms/Input.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":2316},"lib/module/forms/Input.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"../styles/form","kind":"import-statement","external":true},{"path":"@crossed/styled/plugins","kind":"import-statement","external":true},{"path":"./Form","kind":"import-statement","external":true},{"path":"../other/CloseButton","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"../layout/XBox","kind":"import-statement","external":true},{"path":"../typography/Text","kind":"import-statement","external":true},{"path":"../layout/YBox","kind":"import-statement","external":true}],"exports":["Input"],"entryPoint":"src/forms/Input.tsx","inputs":{"src/forms/Input.tsx":{"bytesInOutput":3804}},"bytes":3858},"lib/module/forms/Switch.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":69},"lib/module/forms/Switch.js":{"imports":[],"exports":[],"entryPoint":"src/forms/Switch.tsx","inputs":{"src/forms/Switch.tsx":{"bytesInOutput":0}},"bytes":35},"lib/module/forms/Textarea.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":2071},"lib/module/forms/Textarea.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"../styles/form","kind":"import-statement","external":true},{"path":"@crossed/styled/plugins","kind":"import-statement","external":true},{"path":"./Form","kind":"import-statement","external":true},{"path":"../other/CloseButton","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"../layout/XBox","kind":"import-statement","external":true},{"path":"../typography/Text","kind":"import-statement","external":true},{"path":"../layout/YBox","kind":"import-statement","external":true}],"exports":["Textarea"],"entryPoint":"src/forms/Textarea.tsx","inputs":{"src/forms/Textarea.tsx":{"bytesInOutput":3445}},"bytes":3505},"lib/module/forms/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":178},"lib/module/forms/index.js":{"imports":[{"path":"./Label","kind":"import-statement","external":true},{"path":"./Input","kind":"import-statement","external":true},{"path":"./Textarea","kind":"import-statement","external":true},{"path":"./Button","kind":"import-statement","external":true},{"path":"./Select","kind":"import-statement","external":true},{"path":"./Radio","kind":"import-statement","external":true},{"path":"./Checkbox","kind":"import-statement","external":true},{"path":"./Form","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/forms/index.ts","inputs":{"src/forms/index.ts":{"bytesInOutput":207}},"bytes":241},"lib/module/display/Badge.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":69},"lib/module/display/Badge.js":{"imports":[],"exports":[],"entryPoint":"src/display/Badge.tsx","inputs":{"src/display/Badge.tsx":{"bytesInOutput":0}},"bytes":34},"lib/module/display/Card.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":1099},"lib/module/display/Card.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"../layout/YBox","kind":"import-statement","external":true},{"path":"../typography/Text","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true}],"exports":["Card","CardDescription","CardTitle"],"entryPoint":"src/display/Card.tsx","inputs":{"src/display/Card.tsx":{"bytesInOutput":1381}},"bytes":1465},"lib/module/display/Code.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":429},"lib/module/display/Code.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"../typography/Text","kind":"import-statement","external":true}],"exports":["Code"],"entryPoint":"src/display/Code.tsx","inputs":{"src/display/Code.tsx":{"bytesInOutput":504}},"bytes":556},"lib/module/display/Kbd.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":419},"lib/module/display/Kbd.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"../typography/Text","kind":"import-statement","external":true}],"exports":["Kbd"],"entryPoint":"src/display/Kbd.tsx","inputs":{"src/display/Kbd.tsx":{"bytesInOutput":526}},"bytes":576},"lib/module/display/MenuList.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":2040},"lib/module/display/MenuList.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/primitive","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"../typography/Text","kind":"import-statement","external":true},{"path":"../layout/YBox","kind":"import-statement","external":true},{"path":"../layout/Divider","kind":"import-statement","external":true},{"path":"../forms/Button","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true}],"exports":["MenuDivider","MenuItem","MenuLabel","MenuList","MenuSubTitle","MenuTitle"],"entryPoint":"src/display/MenuList.tsx","inputs":{"src/display/MenuList.tsx":{"bytesInOutput":2722}},"bytes":2865},"lib/module/display/Table.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":1585},"lib/module/display/Table.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"../typography/Text","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true}],"exports":["TBody","THead","Table","Td","Th","Tr"],"entryPoint":"src/display/Table.tsx","inputs":{"src/display/Table.tsx":{"bytesInOutput":2097}},"bytes":2187},"lib/module/display/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":150},"lib/module/display/index.js":{"imports":[{"path":"./Card","kind":"import-statement","external":true},{"path":"./MenuList","kind":"import-statement","external":true},{"path":"./Kbd","kind":"import-statement","external":true},{"path":"./Code","kind":"import-statement","external":true},{"path":"./Table","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/display/index.ts","inputs":{"src/display/index.ts":{"bytesInOutput":124}},"bytes":158},"lib/module/layout/Box.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":1169},"lib/module/layout/Box.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"../styles/base","kind":"import-statement","external":true}],"exports":["Box"],"entryPoint":"src/layout/Box.tsx","inputs":{"src/layout/Box.tsx":{"bytesInOutput":1220}},"bytes":1270},"lib/module/layout/Center.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":355},"lib/module/layout/Center.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"./YBox","kind":"import-statement","external":true}],"exports":["Center","useCenter"],"entryPoint":"src/layout/Center.tsx","inputs":{"src/layout/Center.tsx":{"bytesInOutput":367}},"bytes":436},"lib/module/layout/Divider.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":696},"lib/module/layout/Divider.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true}],"exports":["Divider","useDivider"],"entryPoint":"src/layout/Divider.tsx","inputs":{"src/layout/Divider.tsx":{"bytesInOutput":892}},"bytes":978},"lib/module/layout/XBox.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":1111},"lib/module/layout/XBox.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"./Box","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true}],"exports":["XBox","useXBox"],"entryPoint":"src/layout/XBox.tsx","inputs":{"src/layout/XBox.tsx":{"bytesInOutput":1362}},"bytes":1425},"lib/module/layout/YBox.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":434},"lib/module/layout/YBox.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"./Box","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true}],"exports":["YBox"],"entryPoint":"src/layout/YBox.tsx","inputs":{"src/layout/YBox.tsx":{"bytesInOutput":478}},"bytes":544},"lib/module/layout/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":149},"lib/module/layout/index.js":{"imports":[{"path":"./Box","kind":"import-statement","external":true},{"path":"./YBox","kind":"import-statement","external":true},{"path":"./XBox","kind":"import-statement","external":true},{"path":"./Divider","kind":"import-statement","external":true},{"path":"./Center","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/layout/index.ts","inputs":{"src/layout/index.ts":{"bytesInOutput":124}},"bytes":158},"lib/module/other/CloseButton.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":740},"lib/module/other/CloseButton.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"@crossed/unicons","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true}],"exports":["CloseButton"],"entryPoint":"src/other/CloseButton.tsx","inputs":{"src/other/CloseButton.tsx":{"bytesInOutput":902}},"bytes":968},"lib/module/other/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":108},"lib/module/other/index.js":{"imports":[{"path":"./CloseButton","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/other/index.ts","inputs":{"src/other/index.ts":{"bytesInOutput":31}},"bytes":65},"lib/module/overlay/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":110},"lib/module/overlay/index.js":{"imports":[{"path":"./Modal","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/overlay/index.ts","inputs":{"src/overlay/index.ts":{"bytesInOutput":25}},"bytes":59},"lib/module/styles/base.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":513},"lib/module/styles/base.js":{"imports":[{"path":"@crossed/styled","kind":"import-statement","external":true}],"exports":["baseStyle"],"entryPoint":"src/styles/base.ts","inputs":{"src/styles/base.ts":{"bytesInOutput":620}},"bytes":677},"lib/module/styles/form.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":1651},"lib/module/styles/form.js":{"imports":[{"path":"@crossed/styled","kind":"import-statement","external":true}],"exports":["form"],"entryPoint":"src/styles/form.ts","inputs":{"src/styles/form.ts":{"bytesInOutput":1999}},"bytes":2051},"lib/module/styles/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":109},"lib/module/styles/index.js":{"imports":[{"path":"./typography","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/styles/index.ts","inputs":{"src/styles/index.ts":{"bytesInOutput":30}},"bytes":64},"lib/module/styles/typography.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":1855},"lib/module/styles/typography.js":{"imports":[{"path":"@crossed/styled","kind":"import-statement","external":true}],"exports":["typoStyles"],"entryPoint":"src/styles/typography.ts","inputs":{"src/styles/typography.ts":{"bytesInOutput":1892}},"bytes":1956},"lib/module/typography/Anchor.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":582},"lib/module/typography/Anchor.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"./Text","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true}],"exports":["Anchor","useAnchor"],"entryPoint":"src/typography/Anchor.tsx","inputs":{"src/typography/Anchor.tsx":{"bytesInOutput":659}},"bytes":728},"lib/module/typography/B.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":181},"lib/module/typography/B.js":{"imports":[{"path":"./Text","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true}],"exports":["B"],"entryPoint":"src/typography/B.tsx","inputs":{"src/typography/B.tsx":{"bytesInOutput":133}},"bytes":179},"lib/module/typography/Heading.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":670},"lib/module/typography/Heading.js":{"imports":[{"path":"./Text","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true}],"exports":["H1","H2","H3","H4","H5","H6"],"entryPoint":"src/typography/Heading.tsx","inputs":{"src/typography/Heading.tsx":{"bytesInOutput":687}},"bytes":784},"lib/module/typography/I.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":331},"lib/module/typography/I.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"./Text","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true}],"exports":["I"],"entryPoint":"src/typography/I.tsx","inputs":{"src/typography/I.tsx":{"bytesInOutput":324}},"bytes":370},"lib/module/typography/List.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":826},"lib/module/typography/List.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"./Text","kind":"import-statement","external":true},{"path":"../layout/XBox","kind":"import-statement","external":true},{"path":"../layout/YBox","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true}],"exports":["Li","Ul"],"entryPoint":"src/typography/List.tsx","inputs":{"src/typography/List.tsx":{"bytesInOutput":898}},"bytes":954},"lib/module/typography/P.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":346},"lib/module/typography/P.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"./Text","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true}],"exports":["P"],"entryPoint":"src/typography/P.tsx","inputs":{"src/typography/P.tsx":{"bytesInOutput":339}},"bytes":385},"lib/module/typography/Text.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":1404},"lib/module/typography/Text.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"../styles/typography","kind":"import-statement","external":true}],"exports":["Text"],"entryPoint":"src/typography/Text.tsx","inputs":{"src/typography/Text.tsx":{"bytesInOutput":1690}},"bytes":1756},"lib/module/typography/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":173},"lib/module/typography/index.js":{"imports":[{"path":"./Heading","kind":"import-statement","external":true},{"path":"./Text","kind":"import-statement","external":true},{"path":"./P","kind":"import-statement","external":true},{"path":"./B","kind":"import-statement","external":true},{"path":"./Anchor","kind":"import-statement","external":true},{"path":"./List","kind":"import-statement","external":true},{"path":"./I","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/typography/index.ts","inputs":{"src/typography/index.ts":{"bytesInOutput":164}},"bytes":198},"lib/module/variants/colors.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":69},"lib/module/variants/colors.js":{"imports":[],"exports":[],"entryPoint":"src/variants/colors.ts","inputs":{"src/variants/colors.ts":{"bytesInOutput":0}},"bytes":35},"lib/module/variants/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":111},"lib/module/variants/index.js":{"imports":[{"path":"./space","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/variants/index.ts","inputs":{"src/variants/index.ts":{"bytesInOutput":25}},"bytes":59},"lib/module/variants/size.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":69},"lib/module/variants/size.js":{"imports":[],"exports":[],"entryPoint":"src/variants/size.ts","inputs":{"src/variants/size.ts":{"bytesInOutput":0}},"bytes":33},"lib/module/variants/space.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":279},"lib/module/variants/space.js":{"imports":[],"exports":["spaceVariants"],"entryPoint":"src/variants/space.ts","inputs":{"src/variants/space.ts":{"bytesInOutput":131}},"bytes":193},"lib/module/forms/Checkbox/Implementation.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":142},"lib/module/forms/Checkbox/Implementation.js":{"imports":[],"exports":["Implementation"],"entryPoint":"src/forms/Checkbox/Implementation.tsx","inputs":{"src/forms/Checkbox/Implementation.tsx":{"bytesInOutput":35}},"bytes":107},"lib/module/forms/Checkbox/Implementation.web.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":257},"lib/module/forms/Checkbox/Implementation.web.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/primitive","kind":"import-statement","external":true}],"exports":["Implementation"],"entryPoint":"src/forms/Checkbox/Implementation.web.tsx","inputs":{"src/forms/Checkbox/Implementation.web.tsx":{"bytesInOutput":276}},"bytes":352},"lib/module/forms/Checkbox/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":2012},"lib/module/forms/Checkbox/index.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"@crossed/styled/plugins","kind":"import-statement","external":true},{"path":"@crossed/unicons","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true},{"path":"./Implementation","kind":"import-statement","external":true}],"exports":["Checkbox"],"entryPoint":"src/forms/Checkbox/index.tsx","inputs":{"src/forms/Checkbox/index.tsx":{"bytesInOutput":2926}},"bytes":2983},"lib/module/forms/Checkbox/type.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":69},"lib/module/forms/Checkbox/type.js":{"imports":[],"exports":[],"entryPoint":"src/forms/Checkbox/type.tsx","inputs":{"src/forms/Checkbox/type.tsx":{"bytesInOutput":0}},"bytes":33},"lib/module/forms/Form/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":1547},"lib/module/forms/Form/index.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"../Label","kind":"import-statement","external":true},{"path":"@crossed/styled/plugins","kind":"import-statement","external":true},{"path":"../../layout/YBox","kind":"import-statement","external":true}],"exports":["Form","FormControl","FormField","FormLabel","FormMessage"],"entryPoint":"src/forms/Form/index.tsx","inputs":{"src/forms/Form/index.tsx":{"bytesInOutput":2078}},"bytes":2187},"lib/module/forms/Form/types.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":69},"lib/module/forms/Form/types.js":{"imports":[],"exports":[],"entryPoint":"src/forms/Form/types.tsx","inputs":{"src/forms/Form/types.tsx":{"bytesInOutput":0}},"bytes":34},"lib/module/forms/Label/Label.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":483},"lib/module/forms/Label/Label.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"../../typography/Text","kind":"import-statement","external":true},{"path":"./styles","kind":"import-statement","external":true}],"exports":["Label"],"entryPoint":"src/forms/Label/Label.tsx","inputs":{"src/forms/Label/Label.tsx":{"bytesInOutput":543}},"bytes":597},"lib/module/forms/Label/Label.web.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":423},"lib/module/forms/Label/Label.web.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"./styles","kind":"import-statement","external":true}],"exports":["Label"],"entryPoint":"src/forms/Label/Label.web.tsx","inputs":{"src/forms/Label/Label.web.tsx":{"bytesInOutput":399}},"bytes":457},"lib/module/forms/Label/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":117},"lib/module/forms/Label/index.js":{"imports":[{"path":"./Label","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/forms/Label/index.ts","inputs":{"src/forms/Label/index.ts":{"bytesInOutput":25}},"bytes":59},"lib/module/forms/Label/styles.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":216},"lib/module/forms/Label/styles.js":{"imports":[{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"../../styles/form","kind":"import-statement","external":true},{"path":"../../styles","kind":"import-statement","external":true}],"exports":["styles"],"entryPoint":"src/forms/Label/styles.ts","inputs":{"src/forms/Label/styles.ts":{"bytesInOutput":218}},"bytes":274},"lib/module/forms/Label/types.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":69},"lib/module/forms/Label/types.js":{"imports":[],"exports":[],"entryPoint":"src/forms/Label/types.ts","inputs":{"src/forms/Label/types.ts":{"bytesInOutput":0}},"bytes":34},"lib/module/forms/Radio/Radio.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":1846},"lib/module/forms/Radio/Radio.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"@crossed/styled/plugins","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true}],"exports":["Radio"],"entryPoint":"src/forms/Radio/Radio.tsx","inputs":{"src/forms/Radio/Radio.tsx":{"bytesInOutput":2328}},"bytes":2382},"lib/module/forms/Radio/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":122},"lib/module/forms/Radio/index.js":{"imports":[{"path":"./Radio","kind":"import-statement","external":true}],"exports":["Radio"],"entryPoint":"src/forms/Radio/index.ts","inputs":{"src/forms/Radio/index.ts":{"bytesInOutput":33}},"bytes":87},"lib/module/forms/Select/ContentImpl.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":825},"lib/module/forms/Select/ContentImpl.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"./ContentNative","kind":"import-statement","external":true},{"path":"./ContentWeb","kind":"import-statement","external":true},{"path":"./context","kind":"import-statement","external":true},{"path":"../../useMedia","kind":"import-statement","external":true},{"path":"@gorhom/portal","kind":"import-statement","external":true},{"path":"./Focus","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true}],"exports":["ContentImpl"],"entryPoint":"src/forms/Select/ContentImpl.tsx","inputs":{"src/forms/Select/ContentImpl.tsx":{"bytesInOutput":1247}},"bytes":1313},"lib/module/forms/Select/ContentNative.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":479},"lib/module/forms/Select/ContentNative.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"../../display/MenuList","kind":"import-statement","external":true},{"path":"./context","kind":"import-statement","external":true},{"path":"@devvie/bottom-sheet","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true}],"exports":["ContentNative"],"entryPoint":"src/forms/Select/ContentNative.tsx","inputs":{"src/forms/Select/ContentNative.tsx":{"bytesInOutput":646}},"bytes":716},"lib/module/forms/Select/ContentWeb.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":629},"lib/module/forms/Select/ContentWeb.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"../../display/MenuList","kind":"import-statement","external":true},{"path":"./context","kind":"import-statement","external":true},{"path":"../../styles/form","kind":"import-statement","external":true},{"path":"./styles","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true}],"exports":["ContentWeb"],"entryPoint":"src/forms/Select/ContentWeb.tsx","inputs":{"src/forms/Select/ContentWeb.tsx":{"bytesInOutput":828}},"bytes":892},"lib/module/forms/Select/Focus.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":189},"lib/module/forms/Select/Focus.js":{"imports":[],"exports":["Focus","useFocusScope"],"entryPoint":"src/forms/Select/Focus.tsx","inputs":{"src/forms/Select/Focus.tsx":{"bytesInOutput":88}},"bytes":159},"lib/module/forms/Select/Focus.web.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":602},"lib/module/forms/Select/Focus.web.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"react-focus-on","kind":"import-statement","external":true},{"path":"react-focus-lock","kind":"import-statement","external":true},{"path":"./context","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true}],"exports":["Focus","useFocusScope"],"entryPoint":"src/forms/Select/Focus.web.tsx","inputs":{"src/forms/Select/Focus.web.tsx":{"bytesInOutput":753}},"bytes":828},"lib/module/forms/Select/Provider.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":300},"lib/module/forms/Select/Provider.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"./context","kind":"import-statement","external":true},{"path":"react-native-gesture-handler","kind":"import-statement","external":true}],"exports":["Provider"],"entryPoint":"src/forms/Select/Provider.tsx","inputs":{"src/forms/Select/Provider.tsx":{"bytesInOutput":359}},"bytes":419},"lib/module/forms/Select/Provider.web.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":241},"lib/module/forms/Select/Provider.web.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"./context","kind":"import-statement","external":true}],"exports":["Provider"],"entryPoint":"src/forms/Select/Provider.web.tsx","inputs":{"src/forms/Select/Provider.web.tsx":{"bytesInOutput":209}},"bytes":273},"lib/module/forms/Select/context.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":184},"lib/module/forms/Select/context.js":{"imports":[{"path":"@crossed/core","kind":"import-statement","external":true}],"exports":["SelectProvider","useSelectProvider"],"entryPoint":"src/forms/Select/context.ts","inputs":{"src/forms/Select/context.ts":{"bytesInOutput":110}},"bytes":196},"lib/module/forms/Select/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":4876},"lib/module/forms/Select/index.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"../Button","kind":"import-statement","external":true},{"path":"../../display/MenuList","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true},{"path":"../../styles/form","kind":"import-statement","external":true},{"path":"./context","kind":"import-statement","external":true},{"path":"./Provider","kind":"import-statement","external":true},{"path":"./styles","kind":"import-statement","external":true},{"path":"./ContentImpl","kind":"import-statement","external":true},{"path":"../../typography/Text","kind":"import-statement","external":true},{"path":"@crossed/primitive","kind":"import-statement","external":true},{"path":"./Focus","kind":"import-statement","external":true},{"path":"@crossed/unicons/ChevronDown","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"./useFloating","kind":"import-statement","external":true},{"path":"../Form","kind":"import-statement","external":true},{"path":"../../layout/XBox","kind":"import-statement","external":true},{"path":"../../layout/YBox","kind":"import-statement","external":true},{"path":"../../other/CloseButton","kind":"import-statement","external":true}],"exports":["Select","SelectContent","SelectOption","SelectValue"],"entryPoint":"src/forms/Select/index.tsx","inputs":{"src/forms/Select/index.tsx":{"bytesInOutput":7841}},"bytes":7944},"lib/module/forms/Select/styles.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":818},"lib/module/forms/Select/styles.js":{"imports":[{"path":"@crossed/styled","kind":"import-statement","external":true}],"exports":["useSelect"],"entryPoint":"src/forms/Select/styles.ts","inputs":{"src/forms/Select/styles.ts":{"bytesInOutput":975}},"bytes":1034},"lib/module/forms/Select/types.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":69},"lib/module/forms/Select/types.js":{"imports":[],"exports":[],"entryPoint":"src/forms/Select/types.ts","inputs":{"src/forms/Select/types.ts":{"bytesInOutput":0}},"bytes":34},"lib/module/forms/Select/useFloating.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":204},"lib/module/forms/Select/useFloating.js":{"imports":[],"exports":["useFloating"],"entryPoint":"src/forms/Select/useFloating.ts","inputs":{"src/forms/Select/useFloating.ts":{"bytesInOutput":84}},"bytes":150},"lib/module/forms/Select/useFloating.web.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":300},"lib/module/forms/Select/useFloating.web.js":{"imports":[{"path":"@floating-ui/react","kind":"import-statement","external":true},{"path":"@floating-ui/dom","kind":"import-statement","external":true}],"exports":["useFloating"],"entryPoint":"src/forms/Select/useFloating.web.ts","inputs":{"src/forms/Select/useFloating.web.ts":{"bytesInOutput":260}},"bytes":330},"lib/module/layout/__tests__/Box.spec.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":372},"lib/module/layout/__tests__/Box.spec.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"../Box","kind":"import-statement","external":true},{"path":"@testing-library/jest-dom","kind":"import-statement","external":true},{"path":"@jest/globals","kind":"import-statement","external":true},{"path":"@crossed/test","kind":"import-statement","external":true},{"path":"react-native","kind":"import-statement","external":true}],"exports":[],"entryPoint":"src/layout/__tests__/Box.spec.tsx","inputs":{"src/layout/__tests__/Box.spec.tsx":{"bytesInOutput":483}},"bytes":520},"lib/module/overlay/Modal/index.js.map":{"imports":[],"exports":[],"inputs":{},"bytes":3002},"lib/module/overlay/Modal/index.js":{"imports":[{"path":"react/jsx-runtime","kind":"import-statement","external":true},{"path":"@crossed/primitive","kind":"import-statement","external":true},{"path":"@crossed/styled","kind":"import-statement","external":true},{"path":"react","kind":"import-statement","external":true},{"path":"../../layout/XBox","kind":"import-statement","external":true},{"path":"../../layout/Box","kind":"import-statement","external":true},{"path":"@crossed/core","kind":"import-statement","external":true},{"path":"../../other/CloseButton","kind":"import-statement","external":true}],"exports":["Modal","ModalBody","ModalContent","ModalFooter","ModalHeader","ModalOverlay","ModalPortal","ModalTitle","ModalTrigger"],"entryPoint":"src/overlay/Modal/index.tsx","inputs":{"src/overlay/Modal/index.tsx":{"bytesInOutput":3906}},"bytes":4080}}}
+{
+  "inputs": {
+    "src/Provider.tsx": { "bytes": 473, "imports": [], "format": "esm" },
+    "src/index.ts": { "bytes": 866, "imports": [], "format": "esm" },
+    "src/useMedia.ts": { "bytes": 555, "imports": [], "format": "esm" },
+    "src/disclosure/Accordion.tsx": {
+      "bytes": 3425,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/disclosure/Tabs.tsx": {
+      "bytes": 6350,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/disclosure/index.ts": { "bytes": 216, "imports": [], "format": "esm" },
+    "src/feedback/Alert.tsx": { "bytes": 4429, "imports": [], "format": "esm" },
+    "src/feedback/Banner.tsx": {
+      "bytes": 6241,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/feedback/index.ts": { "bytes": 214, "imports": [], "format": "esm" },
+    "src/forms/Button.tsx": { "bytes": 8666, "imports": [], "format": "esm" },
+    "src/forms/Input.tsx": { "bytes": 4626, "imports": [], "format": "esm" },
+    "src/forms/Switch.tsx": { "bytes": 4132, "imports": [], "format": "esm" },
+    "src/forms/Textarea.tsx": { "bytes": 4079, "imports": [], "format": "esm" },
+    "src/forms/index.ts": { "bytes": 399, "imports": [], "format": "esm" },
+    "src/display/Badge.tsx": { "bytes": 2802, "imports": [], "format": "esm" },
+    "src/display/Card.tsx": { "bytes": 1914, "imports": [], "format": "esm" },
+    "src/display/Code.tsx": { "bytes": 702, "imports": [], "format": "esm" },
+    "src/display/Kbd.tsx": { "bytes": 720, "imports": [], "format": "esm" },
+    "src/display/MenuList.tsx": {
+      "bytes": 3741,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/display/Table.tsx": { "bytes": 2298, "imports": [], "format": "esm" },
+    "src/display/index.ts": { "bytes": 315, "imports": [], "format": "esm" },
+    "src/layout/Box.tsx": { "bytes": 1631, "imports": [], "format": "esm" },
+    "src/layout/Center.tsx": { "bytes": 515, "imports": [], "format": "esm" },
+    "src/layout/Divider.tsx": { "bytes": 1266, "imports": [], "format": "esm" },
+    "src/layout/XBox.tsx": { "bytes": 1810, "imports": [], "format": "esm" },
+    "src/layout/YBox.tsx": { "bytes": 717, "imports": [], "format": "esm" },
+    "src/layout/index.ts": { "bytes": 287, "imports": [], "format": "esm" },
+    "src/other/CloseButton.tsx": {
+      "bytes": 1066,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/other/index.ts": { "bytes": 194, "imports": [], "format": "esm" },
+    "src/overlay/index.ts": { "bytes": 188, "imports": [], "format": "esm" },
+    "src/styles/base.ts": { "bytes": 796, "imports": [], "format": "esm" },
+    "src/styles/form.ts": { "bytes": 2327, "imports": [], "format": "esm" },
+    "src/styles/index.ts": { "bytes": 193, "imports": [], "format": "esm" },
+    "src/styles/typography.ts": {
+      "bytes": 2268,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/typography/Anchor.tsx": {
+      "bytes": 850,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/typography/B.tsx": { "bytes": 304, "imports": [], "format": "esm" },
+    "src/typography/Heading.tsx": {
+      "bytes": 1076,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/typography/I.tsx": { "bytes": 495, "imports": [], "format": "esm" },
+    "src/typography/List.tsx": {
+      "bytes": 1029,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/typography/P.tsx": { "bytes": 527, "imports": [], "format": "esm" },
+    "src/typography/Text.tsx": {
+      "bytes": 2242,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/typography/index.ts": { "bytes": 327, "imports": [], "format": "esm" },
+    "src/variants/colors.ts": { "bytes": 5320, "imports": [], "format": "esm" },
+    "src/variants/index.ts": { "bytes": 244, "imports": [], "format": "esm" },
+    "src/variants/size.ts": { "bytes": 529, "imports": [], "format": "esm" },
+    "src/variants/space.ts": { "bytes": 302, "imports": [], "format": "esm" },
+    "src/forms/Checkbox/Implementation.tsx": {
+      "bytes": 286,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Checkbox/Implementation.web.tsx": {
+      "bytes": 469,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Checkbox/index.tsx": {
+      "bytes": 3056,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Checkbox/type.tsx": {
+      "bytes": 559,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Form/index.tsx": {
+      "bytes": 2540,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Form/types.tsx": {
+      "bytes": 1422,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Label/Label.tsx": {
+      "bytes": 728,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Label/Label.web.tsx": {
+      "bytes": 586,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Label/index.ts": {
+      "bytes": 188,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Label/styles.ts": {
+      "bytes": 391,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Label/types.ts": {
+      "bytes": 530,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Radio/Radio.tsx": {
+      "bytes": 2446,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Radio/index.ts": {
+      "bytes": 196,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/ContentImpl.tsx": {
+      "bytes": 1402,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/ContentNative.tsx": {
+      "bytes": 827,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/ContentWeb.tsx": {
+      "bytes": 1008,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/Focus.tsx": {
+      "bytes": 330,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/Focus.web.tsx": {
+      "bytes": 935,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/Provider.tsx": {
+      "bytes": 586,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/Provider.web.tsx": {
+      "bytes": 424,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/context.ts": {
+      "bytes": 1348,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/index.tsx": {
+      "bytes": 8789,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/styles.ts": {
+      "bytes": 1156,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/types.ts": {
+      "bytes": 757,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/useFloating.ts": {
+      "bytes": 320,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/forms/Select/useFloating.web.ts": {
+      "bytes": 489,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/layout/__tests__/Box.spec.tsx": {
+      "bytes": 570,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/overlay/Modal/index.tsx": {
+      "bytes": 4479,
+      "imports": [],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "lib/module/Provider.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 190
+    },
+    "lib/module/Provider.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@gorhom/portal",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["CrossedUIProvider"],
+      "entryPoint": "src/Provider.tsx",
+      "inputs": { "src/Provider.tsx": { "bytesInOutput": 199 } },
+      "bytes": 282
+    },
+    "lib/module/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 100
+    },
+    "lib/module/index.js": {
+      "imports": [
+        { "path": "./forms", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/index.ts",
+      "inputs": { "src/index.ts": { "bytesInOutput": 25 } },
+      "bytes": 73
+    },
+    "lib/module/useMedia.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 347
+    },
+    "lib/module/useMedia.js": {
+      "imports": [
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled/plugins",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["useMedia"],
+      "entryPoint": "src/useMedia.ts",
+      "inputs": { "src/useMedia.ts": { "bytesInOutput": 383 } },
+      "bytes": 443
+    },
+    "lib/module/disclosure/Accordion.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 2236
+    },
+    "lib/module/disclosure/Accordion.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/primitive",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/unicons",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react-native", "kind": "import-statement", "external": true }
+      ],
+      "exports": [
+        "Accordion",
+        "AccordionIcon",
+        "AccordionItem",
+        "AccordionPanel",
+        "AccordionTrigger"
+      ],
+      "entryPoint": "src/disclosure/Accordion.tsx",
+      "inputs": { "src/disclosure/Accordion.tsx": { "bytesInOutput": 3030 } },
+      "bytes": 3164
+    },
+    "lib/module/disclosure/Tabs.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 3576
+    },
+    "lib/module/disclosure/Tabs.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "../forms/Button",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/XBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/YBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/Box",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled/plugins",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": [
+        "Tab",
+        "TabList",
+        "TabPanel",
+        "TabPanels",
+        "TabText",
+        "Tabs",
+        "createTabs"
+      ],
+      "entryPoint": "src/disclosure/Tabs.tsx",
+      "inputs": { "src/disclosure/Tabs.tsx": { "bytesInOutput": 5683 } },
+      "bytes": 5817
+    },
+    "lib/module/disclosure/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 123
+    },
+    "lib/module/disclosure/index.js": {
+      "imports": [
+        { "path": "./Tabs", "kind": "import-statement", "external": true },
+        { "path": "./Accordion", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/disclosure/index.ts",
+      "inputs": { "src/disclosure/index.ts": { "bytesInOutput": 53 } },
+      "bytes": 87
+    },
+    "lib/module/feedback/Alert.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 2426
+    },
+    "lib/module/feedback/Alert.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "../layout/YBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "ts-pattern", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/unicons",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Alert", "AlertDescription", "AlertIcon"],
+      "entryPoint": "src/feedback/Alert.tsx",
+      "inputs": { "src/feedback/Alert.tsx": { "bytesInOutput": 3788 } },
+      "bytes": 3889
+    },
+    "lib/module/feedback/Banner.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 4228
+    },
+    "lib/module/feedback/Banner.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../forms/Button",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/unicons",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/Box",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/YBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "ts-pattern", "kind": "import-statement", "external": true }
+      ],
+      "exports": [
+        "Banner",
+        "BannerAction",
+        "BannerDescription",
+        "BannerIcon",
+        "BannerTitle"
+      ],
+      "entryPoint": "src/feedback/Banner.tsx",
+      "inputs": { "src/feedback/Banner.tsx": { "bytesInOutput": 5501 } },
+      "bytes": 5637
+    },
+    "lib/module/feedback/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 121
+    },
+    "lib/module/feedback/index.js": {
+      "imports": [
+        { "path": "./Alert", "kind": "import-statement", "external": true },
+        { "path": "./Banner", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/feedback/index.ts",
+      "inputs": { "src/feedback/index.ts": { "bytesInOutput": 51 } },
+      "bytes": 85
+    },
+    "lib/module/forms/Button.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 4396
+    },
+    "lib/module/forms/Button.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/primitive",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/XBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/Box",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/styled/plugins",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": [
+        "Button",
+        "ButtonElement",
+        "ButtonIcon",
+        "ButtonText",
+        "useButton"
+      ],
+      "entryPoint": "src/forms/Button.tsx",
+      "inputs": { "src/forms/Button.tsx": { "bytesInOutput": 7534 } },
+      "bytes": 7662
+    },
+    "lib/module/forms/Input.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 2316
+    },
+    "lib/module/forms/Input.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "../styles/form",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled/plugins",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./Form", "kind": "import-statement", "external": true },
+        {
+          "path": "../other/CloseButton",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/XBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/YBox",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Input"],
+      "entryPoint": "src/forms/Input.tsx",
+      "inputs": { "src/forms/Input.tsx": { "bytesInOutput": 3804 } },
+      "bytes": 3858
+    },
+    "lib/module/forms/Switch.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 69
+    },
+    "lib/module/forms/Switch.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/forms/Switch.tsx",
+      "inputs": { "src/forms/Switch.tsx": { "bytesInOutput": 0 } },
+      "bytes": 35
+    },
+    "lib/module/forms/Textarea.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 2071
+    },
+    "lib/module/forms/Textarea.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "../styles/form",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled/plugins",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./Form", "kind": "import-statement", "external": true },
+        {
+          "path": "../other/CloseButton",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/XBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/YBox",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Textarea"],
+      "entryPoint": "src/forms/Textarea.tsx",
+      "inputs": { "src/forms/Textarea.tsx": { "bytesInOutput": 3445 } },
+      "bytes": 3505
+    },
+    "lib/module/forms/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 178
+    },
+    "lib/module/forms/index.js": {
+      "imports": [
+        { "path": "./Label", "kind": "import-statement", "external": true },
+        { "path": "./Input", "kind": "import-statement", "external": true },
+        { "path": "./Textarea", "kind": "import-statement", "external": true },
+        { "path": "./Button", "kind": "import-statement", "external": true },
+        { "path": "./Select", "kind": "import-statement", "external": true },
+        { "path": "./Radio", "kind": "import-statement", "external": true },
+        { "path": "./Checkbox", "kind": "import-statement", "external": true },
+        { "path": "./Form", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/forms/index.ts",
+      "inputs": { "src/forms/index.ts": { "bytesInOutput": 207 } },
+      "bytes": 241
+    },
+    "lib/module/display/Badge.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 69
+    },
+    "lib/module/display/Badge.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/display/Badge.tsx",
+      "inputs": { "src/display/Badge.tsx": { "bytesInOutput": 0 } },
+      "bytes": 34
+    },
+    "lib/module/display/Card.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 1099
+    },
+    "lib/module/display/Card.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/YBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["Card", "CardDescription", "CardTitle"],
+      "entryPoint": "src/display/Card.tsx",
+      "inputs": { "src/display/Card.tsx": { "bytesInOutput": 1381 } },
+      "bytes": 1465
+    },
+    "lib/module/display/Code.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 429
+    },
+    "lib/module/display/Code.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Code"],
+      "entryPoint": "src/display/Code.tsx",
+      "inputs": { "src/display/Code.tsx": { "bytesInOutput": 504 } },
+      "bytes": 556
+    },
+    "lib/module/display/Kbd.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 419
+    },
+    "lib/module/display/Kbd.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Kbd"],
+      "entryPoint": "src/display/Kbd.tsx",
+      "inputs": { "src/display/Kbd.tsx": { "bytesInOutput": 526 } },
+      "bytes": 576
+    },
+    "lib/module/display/MenuList.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 2040
+    },
+    "lib/module/display/MenuList.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/primitive",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/YBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/Divider",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../forms/Button",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        { "path": "react-native", "kind": "import-statement", "external": true }
+      ],
+      "exports": [
+        "MenuDivider",
+        "MenuItem",
+        "MenuLabel",
+        "MenuList",
+        "MenuSubTitle",
+        "MenuTitle"
+      ],
+      "entryPoint": "src/display/MenuList.tsx",
+      "inputs": { "src/display/MenuList.tsx": { "bytesInOutput": 2722 } },
+      "bytes": 2865
+    },
+    "lib/module/display/Table.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 1585
+    },
+    "lib/module/display/Table.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["TBody", "THead", "Table", "Td", "Th", "Tr"],
+      "entryPoint": "src/display/Table.tsx",
+      "inputs": { "src/display/Table.tsx": { "bytesInOutput": 2097 } },
+      "bytes": 2187
+    },
+    "lib/module/display/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 150
+    },
+    "lib/module/display/index.js": {
+      "imports": [
+        { "path": "./Card", "kind": "import-statement", "external": true },
+        { "path": "./MenuList", "kind": "import-statement", "external": true },
+        { "path": "./Kbd", "kind": "import-statement", "external": true },
+        { "path": "./Code", "kind": "import-statement", "external": true },
+        { "path": "./Table", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/display/index.ts",
+      "inputs": { "src/display/index.ts": { "bytesInOutput": 124 } },
+      "bytes": 158
+    },
+    "lib/module/layout/Box.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 1169
+    },
+    "lib/module/layout/Box.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "../styles/base",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Box"],
+      "entryPoint": "src/layout/Box.tsx",
+      "inputs": { "src/layout/Box.tsx": { "bytesInOutput": 1220 } },
+      "bytes": 1270
+    },
+    "lib/module/layout/Center.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 355
+    },
+    "lib/module/layout/Center.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./YBox", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["Center", "useCenter"],
+      "entryPoint": "src/layout/Center.tsx",
+      "inputs": { "src/layout/Center.tsx": { "bytesInOutput": 367 } },
+      "bytes": 436
+    },
+    "lib/module/layout/Divider.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 696
+    },
+    "lib/module/layout/Divider.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Divider", "useDivider"],
+      "entryPoint": "src/layout/Divider.tsx",
+      "inputs": { "src/layout/Divider.tsx": { "bytesInOutput": 892 } },
+      "bytes": 978
+    },
+    "lib/module/layout/XBox.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 1111
+    },
+    "lib/module/layout/XBox.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./Box", "kind": "import-statement", "external": true },
+        { "path": "react", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["XBox", "useXBox"],
+      "entryPoint": "src/layout/XBox.tsx",
+      "inputs": { "src/layout/XBox.tsx": { "bytesInOutput": 1362 } },
+      "bytes": 1425
+    },
+    "lib/module/layout/YBox.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 434
+    },
+    "lib/module/layout/YBox.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./Box", "kind": "import-statement", "external": true },
+        { "path": "react", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["YBox"],
+      "entryPoint": "src/layout/YBox.tsx",
+      "inputs": { "src/layout/YBox.tsx": { "bytesInOutput": 478 } },
+      "bytes": 544
+    },
+    "lib/module/layout/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 149
+    },
+    "lib/module/layout/index.js": {
+      "imports": [
+        { "path": "./Box", "kind": "import-statement", "external": true },
+        { "path": "./YBox", "kind": "import-statement", "external": true },
+        { "path": "./XBox", "kind": "import-statement", "external": true },
+        { "path": "./Divider", "kind": "import-statement", "external": true },
+        { "path": "./Center", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/layout/index.ts",
+      "inputs": { "src/layout/index.ts": { "bytesInOutput": 124 } },
+      "bytes": 158
+    },
+    "lib/module/other/CloseButton.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 740
+    },
+    "lib/module/other/CloseButton.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/unicons",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react-native", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["CloseButton"],
+      "entryPoint": "src/other/CloseButton.tsx",
+      "inputs": { "src/other/CloseButton.tsx": { "bytesInOutput": 902 } },
+      "bytes": 968
+    },
+    "lib/module/other/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 108
+    },
+    "lib/module/other/index.js": {
+      "imports": [
+        {
+          "path": "./CloseButton",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": [],
+      "entryPoint": "src/other/index.ts",
+      "inputs": { "src/other/index.ts": { "bytesInOutput": 31 } },
+      "bytes": 65
+    },
+    "lib/module/overlay/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 110
+    },
+    "lib/module/overlay/index.js": {
+      "imports": [
+        { "path": "./Modal", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/overlay/index.ts",
+      "inputs": { "src/overlay/index.ts": { "bytesInOutput": 25 } },
+      "bytes": 59
+    },
+    "lib/module/styles/base.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 513
+    },
+    "lib/module/styles/base.js": {
+      "imports": [
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["baseStyle"],
+      "entryPoint": "src/styles/base.ts",
+      "inputs": { "src/styles/base.ts": { "bytesInOutput": 620 } },
+      "bytes": 677
+    },
+    "lib/module/styles/form.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 1651
+    },
+    "lib/module/styles/form.js": {
+      "imports": [
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["form"],
+      "entryPoint": "src/styles/form.ts",
+      "inputs": { "src/styles/form.ts": { "bytesInOutput": 1999 } },
+      "bytes": 2051
+    },
+    "lib/module/styles/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 109
+    },
+    "lib/module/styles/index.js": {
+      "imports": [
+        { "path": "./typography", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/styles/index.ts",
+      "inputs": { "src/styles/index.ts": { "bytesInOutput": 30 } },
+      "bytes": 64
+    },
+    "lib/module/styles/typography.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 1855
+    },
+    "lib/module/styles/typography.js": {
+      "imports": [
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["typoStyles"],
+      "entryPoint": "src/styles/typography.ts",
+      "inputs": { "src/styles/typography.ts": { "bytesInOutput": 1892 } },
+      "bytes": 1956
+    },
+    "lib/module/typography/Anchor.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 582
+    },
+    "lib/module/typography/Anchor.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./Text", "kind": "import-statement", "external": true },
+        { "path": "react", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["Anchor", "useAnchor"],
+      "entryPoint": "src/typography/Anchor.tsx",
+      "inputs": { "src/typography/Anchor.tsx": { "bytesInOutput": 659 } },
+      "bytes": 728
+    },
+    "lib/module/typography/B.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 181
+    },
+    "lib/module/typography/B.js": {
+      "imports": [
+        { "path": "./Text", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["B"],
+      "entryPoint": "src/typography/B.tsx",
+      "inputs": { "src/typography/B.tsx": { "bytesInOutput": 133 } },
+      "bytes": 179
+    },
+    "lib/module/typography/Heading.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 670
+    },
+    "lib/module/typography/Heading.js": {
+      "imports": [
+        { "path": "./Text", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["H1", "H2", "H3", "H4", "H5", "H6"],
+      "entryPoint": "src/typography/Heading.tsx",
+      "inputs": { "src/typography/Heading.tsx": { "bytesInOutput": 687 } },
+      "bytes": 784
+    },
+    "lib/module/typography/I.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 331
+    },
+    "lib/module/typography/I.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./Text", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["I"],
+      "entryPoint": "src/typography/I.tsx",
+      "inputs": { "src/typography/I.tsx": { "bytesInOutput": 324 } },
+      "bytes": 370
+    },
+    "lib/module/typography/List.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 826
+    },
+    "lib/module/typography/List.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./Text", "kind": "import-statement", "external": true },
+        {
+          "path": "../layout/XBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../layout/YBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Li", "Ul"],
+      "entryPoint": "src/typography/List.tsx",
+      "inputs": { "src/typography/List.tsx": { "bytesInOutput": 898 } },
+      "bytes": 954
+    },
+    "lib/module/typography/P.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 346
+    },
+    "lib/module/typography/P.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./Text", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["P"],
+      "entryPoint": "src/typography/P.tsx",
+      "inputs": { "src/typography/P.tsx": { "bytesInOutput": 339 } },
+      "bytes": 385
+    },
+    "lib/module/typography/Text.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 1404
+    },
+    "lib/module/typography/Text.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "../styles/typography",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Text"],
+      "entryPoint": "src/typography/Text.tsx",
+      "inputs": { "src/typography/Text.tsx": { "bytesInOutput": 1690 } },
+      "bytes": 1756
+    },
+    "lib/module/typography/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 173
+    },
+    "lib/module/typography/index.js": {
+      "imports": [
+        { "path": "./Heading", "kind": "import-statement", "external": true },
+        { "path": "./Text", "kind": "import-statement", "external": true },
+        { "path": "./P", "kind": "import-statement", "external": true },
+        { "path": "./B", "kind": "import-statement", "external": true },
+        { "path": "./Anchor", "kind": "import-statement", "external": true },
+        { "path": "./List", "kind": "import-statement", "external": true },
+        { "path": "./I", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/typography/index.ts",
+      "inputs": { "src/typography/index.ts": { "bytesInOutput": 164 } },
+      "bytes": 198
+    },
+    "lib/module/variants/colors.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 69
+    },
+    "lib/module/variants/colors.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/variants/colors.ts",
+      "inputs": { "src/variants/colors.ts": { "bytesInOutput": 0 } },
+      "bytes": 35
+    },
+    "lib/module/variants/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 111
+    },
+    "lib/module/variants/index.js": {
+      "imports": [
+        { "path": "./space", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/variants/index.ts",
+      "inputs": { "src/variants/index.ts": { "bytesInOutput": 25 } },
+      "bytes": 59
+    },
+    "lib/module/variants/size.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 69
+    },
+    "lib/module/variants/size.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/variants/size.ts",
+      "inputs": { "src/variants/size.ts": { "bytesInOutput": 0 } },
+      "bytes": 33
+    },
+    "lib/module/variants/space.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 279
+    },
+    "lib/module/variants/space.js": {
+      "imports": [],
+      "exports": ["spaceVariants"],
+      "entryPoint": "src/variants/space.ts",
+      "inputs": { "src/variants/space.ts": { "bytesInOutput": 131 } },
+      "bytes": 193
+    },
+    "lib/module/forms/Checkbox/Implementation.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 142
+    },
+    "lib/module/forms/Checkbox/Implementation.js": {
+      "imports": [],
+      "exports": ["Implementation"],
+      "entryPoint": "src/forms/Checkbox/Implementation.tsx",
+      "inputs": {
+        "src/forms/Checkbox/Implementation.tsx": { "bytesInOutput": 35 }
+      },
+      "bytes": 107
+    },
+    "lib/module/forms/Checkbox/Implementation.web.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 257
+    },
+    "lib/module/forms/Checkbox/Implementation.web.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/primitive",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Implementation"],
+      "entryPoint": "src/forms/Checkbox/Implementation.web.tsx",
+      "inputs": {
+        "src/forms/Checkbox/Implementation.web.tsx": { "bytesInOutput": 276 }
+      },
+      "bytes": 352
+    },
+    "lib/module/forms/Checkbox/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 2012
+    },
+    "lib/module/forms/Checkbox/index.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled/plugins",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/unicons",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "./Implementation",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Checkbox"],
+      "entryPoint": "src/forms/Checkbox/index.tsx",
+      "inputs": { "src/forms/Checkbox/index.tsx": { "bytesInOutput": 2926 } },
+      "bytes": 2983
+    },
+    "lib/module/forms/Checkbox/type.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 69
+    },
+    "lib/module/forms/Checkbox/type.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/forms/Checkbox/type.tsx",
+      "inputs": { "src/forms/Checkbox/type.tsx": { "bytesInOutput": 0 } },
+      "bytes": 33
+    },
+    "lib/module/forms/Form/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 1547
+    },
+    "lib/module/forms/Form/index.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "../Label", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/styled/plugins",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../layout/YBox",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": [
+        "Form",
+        "FormControl",
+        "FormField",
+        "FormLabel",
+        "FormMessage"
+      ],
+      "entryPoint": "src/forms/Form/index.tsx",
+      "inputs": { "src/forms/Form/index.tsx": { "bytesInOutput": 2078 } },
+      "bytes": 2187
+    },
+    "lib/module/forms/Form/types.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 69
+    },
+    "lib/module/forms/Form/types.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/forms/Form/types.tsx",
+      "inputs": { "src/forms/Form/types.tsx": { "bytesInOutput": 0 } },
+      "bytes": 34
+    },
+    "lib/module/forms/Label/Label.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 483
+    },
+    "lib/module/forms/Label/Label.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./styles", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["Label"],
+      "entryPoint": "src/forms/Label/Label.tsx",
+      "inputs": { "src/forms/Label/Label.tsx": { "bytesInOutput": 543 } },
+      "bytes": 597
+    },
+    "lib/module/forms/Label/Label.web.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 423
+    },
+    "lib/module/forms/Label/Label.web.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./styles", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["Label"],
+      "entryPoint": "src/forms/Label/Label.web.tsx",
+      "inputs": { "src/forms/Label/Label.web.tsx": { "bytesInOutput": 399 } },
+      "bytes": 457
+    },
+    "lib/module/forms/Label/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 117
+    },
+    "lib/module/forms/Label/index.js": {
+      "imports": [
+        { "path": "./Label", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/forms/Label/index.ts",
+      "inputs": { "src/forms/Label/index.ts": { "bytesInOutput": 25 } },
+      "bytes": 59
+    },
+    "lib/module/forms/Label/styles.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 216
+    },
+    "lib/module/forms/Label/styles.js": {
+      "imports": [
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../styles/form",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "../../styles", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["styles"],
+      "entryPoint": "src/forms/Label/styles.ts",
+      "inputs": { "src/forms/Label/styles.ts": { "bytesInOutput": 218 } },
+      "bytes": 274
+    },
+    "lib/module/forms/Label/types.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 69
+    },
+    "lib/module/forms/Label/types.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/forms/Label/types.ts",
+      "inputs": { "src/forms/Label/types.ts": { "bytesInOutput": 0 } },
+      "bytes": 34
+    },
+    "lib/module/forms/Radio/Radio.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 1846
+    },
+    "lib/module/forms/Radio/Radio.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled/plugins",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        { "path": "react-native", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["Radio"],
+      "entryPoint": "src/forms/Radio/Radio.tsx",
+      "inputs": { "src/forms/Radio/Radio.tsx": { "bytesInOutput": 2328 } },
+      "bytes": 2382
+    },
+    "lib/module/forms/Radio/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 122
+    },
+    "lib/module/forms/Radio/index.js": {
+      "imports": [
+        { "path": "./Radio", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["Radio"],
+      "entryPoint": "src/forms/Radio/index.ts",
+      "inputs": { "src/forms/Radio/index.ts": { "bytesInOutput": 33 } },
+      "bytes": 87
+    },
+    "lib/module/forms/Select/ContentImpl.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 825
+    },
+    "lib/module/forms/Select/ContentImpl.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "./ContentNative",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "./ContentWeb",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./context", "kind": "import-statement", "external": true },
+        {
+          "path": "../../useMedia",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@gorhom/portal",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./Focus", "kind": "import-statement", "external": true },
+        { "path": "react", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["ContentImpl"],
+      "entryPoint": "src/forms/Select/ContentImpl.tsx",
+      "inputs": {
+        "src/forms/Select/ContentImpl.tsx": { "bytesInOutput": 1247 }
+      },
+      "bytes": 1313
+    },
+    "lib/module/forms/Select/ContentNative.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 479
+    },
+    "lib/module/forms/Select/ContentNative.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../display/MenuList",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./context", "kind": "import-statement", "external": true },
+        {
+          "path": "@devvie/bottom-sheet",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["ContentNative"],
+      "entryPoint": "src/forms/Select/ContentNative.tsx",
+      "inputs": {
+        "src/forms/Select/ContentNative.tsx": { "bytesInOutput": 646 }
+      },
+      "bytes": 716
+    },
+    "lib/module/forms/Select/ContentWeb.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 629
+    },
+    "lib/module/forms/Select/ContentWeb.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../display/MenuList",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./context", "kind": "import-statement", "external": true },
+        {
+          "path": "../../styles/form",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./styles", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["ContentWeb"],
+      "entryPoint": "src/forms/Select/ContentWeb.tsx",
+      "inputs": { "src/forms/Select/ContentWeb.tsx": { "bytesInOutput": 828 } },
+      "bytes": 892
+    },
+    "lib/module/forms/Select/Focus.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 189
+    },
+    "lib/module/forms/Select/Focus.js": {
+      "imports": [],
+      "exports": ["Focus", "useFocusScope"],
+      "entryPoint": "src/forms/Select/Focus.tsx",
+      "inputs": { "src/forms/Select/Focus.tsx": { "bytesInOutput": 88 } },
+      "bytes": 159
+    },
+    "lib/module/forms/Select/Focus.web.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 602
+    },
+    "lib/module/forms/Select/Focus.web.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-focus-on",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-focus-lock",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./context", "kind": "import-statement", "external": true },
+        { "path": "react", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["Focus", "useFocusScope"],
+      "entryPoint": "src/forms/Select/Focus.web.tsx",
+      "inputs": { "src/forms/Select/Focus.web.tsx": { "bytesInOutput": 753 } },
+      "bytes": 828
+    },
+    "lib/module/forms/Select/Provider.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 300
+    },
+    "lib/module/forms/Select/Provider.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./context", "kind": "import-statement", "external": true },
+        {
+          "path": "react-native-gesture-handler",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Provider"],
+      "entryPoint": "src/forms/Select/Provider.tsx",
+      "inputs": { "src/forms/Select/Provider.tsx": { "bytesInOutput": 359 } },
+      "bytes": 419
+    },
+    "lib/module/forms/Select/Provider.web.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 241
+    },
+    "lib/module/forms/Select/Provider.web.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./context", "kind": "import-statement", "external": true }
+      ],
+      "exports": ["Provider"],
+      "entryPoint": "src/forms/Select/Provider.web.tsx",
+      "inputs": {
+        "src/forms/Select/Provider.web.tsx": { "bytesInOutput": 209 }
+      },
+      "bytes": 273
+    },
+    "lib/module/forms/Select/context.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 184
+    },
+    "lib/module/forms/Select/context.js": {
+      "imports": [
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["SelectProvider", "useSelectProvider"],
+      "entryPoint": "src/forms/Select/context.ts",
+      "inputs": { "src/forms/Select/context.ts": { "bytesInOutput": 110 } },
+      "bytes": 196
+    },
+    "lib/module/forms/Select/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 4876
+    },
+    "lib/module/forms/Select/index.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        { "path": "../Button", "kind": "import-statement", "external": true },
+        {
+          "path": "../../display/MenuList",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "react-native",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../styles/form",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./context", "kind": "import-statement", "external": true },
+        { "path": "./Provider", "kind": "import-statement", "external": true },
+        { "path": "./styles", "kind": "import-statement", "external": true },
+        {
+          "path": "./ContentImpl",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../typography/Text",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/primitive",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "./Focus", "kind": "import-statement", "external": true },
+        {
+          "path": "@crossed/unicons/ChevronDown",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "./useFloating",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "../Form", "kind": "import-statement", "external": true },
+        {
+          "path": "../../layout/XBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../layout/YBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../other/CloseButton",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["Select", "SelectContent", "SelectOption", "SelectValue"],
+      "entryPoint": "src/forms/Select/index.tsx",
+      "inputs": { "src/forms/Select/index.tsx": { "bytesInOutput": 7841 } },
+      "bytes": 7944
+    },
+    "lib/module/forms/Select/styles.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 818
+    },
+    "lib/module/forms/Select/styles.js": {
+      "imports": [
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["useSelect"],
+      "entryPoint": "src/forms/Select/styles.ts",
+      "inputs": { "src/forms/Select/styles.ts": { "bytesInOutput": 975 } },
+      "bytes": 1034
+    },
+    "lib/module/forms/Select/types.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 69
+    },
+    "lib/module/forms/Select/types.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/forms/Select/types.ts",
+      "inputs": { "src/forms/Select/types.ts": { "bytesInOutput": 0 } },
+      "bytes": 34
+    },
+    "lib/module/forms/Select/useFloating.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 204
+    },
+    "lib/module/forms/Select/useFloating.js": {
+      "imports": [],
+      "exports": ["useFloating"],
+      "entryPoint": "src/forms/Select/useFloating.ts",
+      "inputs": { "src/forms/Select/useFloating.ts": { "bytesInOutput": 84 } },
+      "bytes": 150
+    },
+    "lib/module/forms/Select/useFloating.web.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 300
+    },
+    "lib/module/forms/Select/useFloating.web.js": {
+      "imports": [
+        {
+          "path": "@floating-ui/react",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@floating-ui/dom",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": ["useFloating"],
+      "entryPoint": "src/forms/Select/useFloating.web.ts",
+      "inputs": {
+        "src/forms/Select/useFloating.web.ts": { "bytesInOutput": 260 }
+      },
+      "bytes": 330
+    },
+    "lib/module/layout/__tests__/Box.spec.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 372
+    },
+    "lib/module/layout/__tests__/Box.spec.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "../Box", "kind": "import-statement", "external": true },
+        {
+          "path": "@testing-library/jest-dom",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@jest/globals",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/test",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react-native", "kind": "import-statement", "external": true }
+      ],
+      "exports": [],
+      "entryPoint": "src/layout/__tests__/Box.spec.tsx",
+      "inputs": {
+        "src/layout/__tests__/Box.spec.tsx": { "bytesInOutput": 483 }
+      },
+      "bytes": 520
+    },
+    "lib/module/overlay/Modal/index.js.map": {
+      "imports": [],
+      "exports": [],
+      "inputs": {},
+      "bytes": 3002
+    },
+    "lib/module/overlay/Modal/index.js": {
+      "imports": [
+        {
+          "path": "react/jsx-runtime",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/primitive",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/styled",
+          "kind": "import-statement",
+          "external": true
+        },
+        { "path": "react", "kind": "import-statement", "external": true },
+        {
+          "path": "../../layout/XBox",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../layout/Box",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "@crossed/core",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "../../other/CloseButton",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "exports": [
+        "Modal",
+        "ModalBody",
+        "ModalContent",
+        "ModalFooter",
+        "ModalHeader",
+        "ModalOverlay",
+        "ModalPortal",
+        "ModalTitle",
+        "ModalTrigger"
+      ],
+      "entryPoint": "src/overlay/Modal/index.tsx",
+      "inputs": { "src/overlay/Modal/index.tsx": { "bytesInOutput": 3906 } },
+      "bytes": 4080
+    }
+  }
+}

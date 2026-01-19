@@ -103,14 +103,14 @@ export const List = memo(({ data }: { data: any }) => {
   );
 
   const RenderLabel: SectionListProps<ItemList>['renderItem'] = useCallback(
-    ({ section }) => {
+    ({ section: sectionData }) => {
       return (
         <MenuList.Label
           style={inlineStyle(({ colors }) => ({
             base: { backgroundColor: colors.background.primary },
           }))}
         >
-          {section.title}
+          {sectionData.title}
         </MenuList.Label>
       );
     },

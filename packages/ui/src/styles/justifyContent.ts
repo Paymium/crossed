@@ -17,10 +17,10 @@ export const justifyContentStyle = createStyles(() => ({
 }));
 
 export const justifyContentResponsiveStyle = createStyles(() => ({
-  'mdStart': { media: { md: { justifyContent: 'flex-start' } } },
-  'mdEnd': { media: { md: { justifyContent: 'flex-end' } } },
-  'mdBetween': { media: { md: { justifyContent: 'space-between' } } },
-  'mdAround': { media: { md: { justifyContent: 'space-around' } } },
-  'mdEvenly': { base: { justifyContent: 'space-evenly' } },
-  'mdCenter': { media: { md: { justifyContent: 'center' } } },
+  mdStart: { media: { md: { justifyContent: 'flex-start' } } },
+  mdEnd: { media: { md: { justifyContent: 'flex-end' } } },
+  mdBetween: { media: { md: { justifyContent: 'space-between' } } },
+  mdAround: { media: { md: { justifyContent: 'space-around' } } },
+  mdEvenly: { base: { justifyContent: 'space-evenly' } },
+  mdCenter: { media: { md: { justifyContent: 'center' } } },
 }));

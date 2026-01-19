@@ -250,7 +250,7 @@ describe('use-calendar', () => {
       expect(months).toHaveLength(1);
     });
 
-    it('returns number of months for available dates', () => {
+    it('returns number of months for available dates with min/max date range', () => {
       const args = {
         maxDate: dtz('2023-03-25'),
         minDate: dtz('2022-12-25'),
@@ -263,7 +263,7 @@ describe('use-calendar', () => {
       expect(months).toHaveLength(4);
     });
 
-    it('returns number of months for available dates', () => {
+    it('returns number of months for available dates with infinite months', () => {
       const args = { monthsToDisplay: Number.POSITIVE_INFINITY };
       const { result } = renderHook(() => useCalendar(args));
       const { months } = result.current;

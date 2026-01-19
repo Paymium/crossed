@@ -13,8 +13,8 @@ export const paddingVerticalStyles = createStyles(({ space }) =>
     (acc, spaceName) => {
       acc[spaceName] = {
         base: {
-          'paddingTop': space[spaceName],
-          'paddingBottom': space[spaceName],
+          paddingTop: space[spaceName],
+          paddingBottom: space[spaceName],
         },
       };
       return acc;
@@ -28,8 +28,8 @@ export const paddingHorizontalStyles = createStyles(({ space }) =>
     (acc, spaceName) => {
       acc[spaceName] = {
         base: {
-          'paddingLeft': space[spaceName],
-          'paddingRight': space[spaceName],
+          paddingLeft: space[spaceName],
+          paddingRight: space[spaceName],
         },
       };
       return acc;
@@ -41,7 +41,7 @@ export const paddingHorizontalStyles = createStyles(({ space }) =>
 export const paddingLeftStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'paddingLeft': space[spaceName] } };
+      acc[spaceName] = { base: { paddingLeft: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>
@@ -51,7 +51,7 @@ export const paddingLeftStyles = createStyles(({ space }) =>
 export const paddingRightStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'paddingRight': space[spaceName] } };
+      acc[spaceName] = { base: { paddingRight: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>
@@ -61,7 +61,7 @@ export const paddingRightStyles = createStyles(({ space }) =>
 export const paddingBottomStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'paddingBottom': space[spaceName] } };
+      acc[spaceName] = { base: { paddingBottom: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>
@@ -71,7 +71,7 @@ export const paddingBottomStyles = createStyles(({ space }) =>
 export const paddingTopStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'paddingTop': space[spaceName] } };
+      acc[spaceName] = { base: { paddingTop: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>

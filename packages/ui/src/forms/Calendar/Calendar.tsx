@@ -42,10 +42,11 @@ export const Calendar = memo<CalendarProps & RefAttributes<View>>(
       const formatter = new Intl.DateTimeFormat(locale, {
         month: 'long',
       });
-      let months = monthsByYear.get(yearSelected);
-      if (!months) months = new Set(Array.from(Array(12).keys()));
+      let availableMonths = monthsByYear.get(yearSelected);
+      if (!availableMonths)
+        availableMonths = new Set(Array.from(Array(12).keys()));
 
-      return Array.from(months).map((month) => {
+      return Array.from(availableMonths).map((month) => {
         const d = new Date(yearSelected, month);
         const nameMonth = formatter.format(d);
         return {
@@ -70,7 +71,7 @@ export const Calendar = memo<CalendarProps & RefAttributes<View>>(
                   setYearSelected(e);
                   setYear(e);
                 }}
-                years={Array.from(monthsByYear).map(([year]) => year)}
+                years={Array.from(monthsByYear).map(([y]) => y)}
               />
             </XBox>
             <YBox space={'xs'}>
@@ -81,13 +82,13 @@ export const Calendar = memo<CalendarProps & RefAttributes<View>>(
               {weeks.map((week, i) => (
                 <XBox key={`${id}-week-${i}`} justifyContent="between">
                   {week.map((day, j) => {
-                    const { onClick, ...props } = getDayProps({ day });
+                    const { onClick, ...dayProps } = getDayProps({ day });
 
                     return (
                       <DayButton
                         key={`${id}-day-${j}`}
                         day={day}
-                        {...(props as any)}
+                        {...(dayProps as any)}
                         onPress={onClick}
                       />
                     );

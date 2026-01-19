@@ -30,6 +30,10 @@
     "tty-browserify": "^0.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
     "@chromatic-com/storybook": "^1.9.0",
     "@storybook/addon-a11y": "^8.3.5",
     "@storybook/addon-essentials": "^8.3.4",
@@ -47,6 +51,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "babel-loader": "^10.0.0",
     "chromatic": "^11.11.0",
     "globals": "^15.9.0",
     "mini-css-extract-plugin": "^2.9.1",

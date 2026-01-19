@@ -6,7 +6,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { actionSheetEventManager } from '../eventmanager';
+import { actionSheetEventManager } from '../provider';
 import { useProviderContext } from '../provider';
 
 const useSheetManager = ({

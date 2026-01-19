@@ -16,11 +16,11 @@ export const alignItemsStyle = createStyles(() => ({
 }));
 
 export const alignItemsResponsiveStyle = createStyles(() => ({
-  'mdCenter': { media: { md: { alignItems: 'center' } } },
-  'mdBaseline': { media: { md: { alignItems: 'baseline' } } },
-  'mdEnd': { media: { md: { alignItems: 'flex-end' } } },
-  'mdStart': { media: { md: { alignItems: 'flex-start' } } },
-  'mdStretch': { media: { md: { alignItems: 'stretch' } } },
+  mdCenter: { media: { md: { alignItems: 'center' } } },
+  mdBaseline: { media: { md: { alignItems: 'baseline' } } },
+  mdEnd: { media: { md: { alignItems: 'flex-end' } } },
+  mdStart: { media: { md: { alignItems: 'flex-start' } } },
+  mdStretch: { media: { md: { alignItems: 'stretch' } } },
 }));
 
 export const alignSelfStyle = createStyles(() => ({
@@ -32,9 +32,9 @@ export const alignSelfStyle = createStyles(() => ({
 }));
 
 export const alignSelfResponsiveStyle = createStyles(() => ({
-  'mdCenter': { media: { md: { alignSelf: 'center' } } },
-  'mdBaseline': { media: { md: { alignSelf: 'baseline' } } },
-  'mdEnd': { media: { md: { alignSelf: 'flex-end' } } },
-  'mdStart': { media: { md: { alignSelf: 'flex-start' } } },
-  'mdStretch': { media: { md: { alignSelf: 'stretch' } } },
+  mdCenter: { media: { md: { alignSelf: 'center' } } },
+  mdBaseline: { media: { md: { alignSelf: 'baseline' } } },
+  mdEnd: { media: { md: { alignSelf: 'flex-end' } } },
+  mdStart: { media: { md: { alignSelf: 'flex-start' } } },
+  mdStretch: { media: { md: { alignSelf: 'stretch' } } },
 }));

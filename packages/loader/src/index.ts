@@ -232,7 +232,7 @@ export class Loader {
         typeof value === 'string' ? value : this.styleToString(value);
 
       const className = `${obj.prefix ?? '.'}${key
-        .replace(/[#:\[\]\(\)%,\.]/g, '\\$&')
+        .replace(/[#:[\]()%,.]/g, '\\$&')
         .replace(/ /g, '-')}${obj.suffix || ''}`;
       // escape some character in css
       const css = `${className} { ${styleParsed} }`;
@@ -248,16 +248,18 @@ export class Loader {
     // const ctx = plugins.reduce((acc, { utils }) => {
     //   return { ...acc, ...(utils?.() || undefined) };
     // }, {});
-    const theme = Registry.getThemes();
-    if (theme) {
-      Object.entries(Registry.getThemes()).forEach(([themeName, theme]) => {
-        this.addClassname({
-          prefix: '.',
-          body: {
-            [`${themeName}`]: parse(theme, undefined, true).values,
-          },
-        });
-      });
+    const themes = Registry.getThemes();
+    if (themes) {
+      Object.entries(Registry.getThemes()).forEach(
+        ([themeName, themeValue]) => {
+          this.addClassname({
+            prefix: '.',
+            body: {
+              [`${themeName}`]: parse(themeValue, undefined, true).values,
+            },
+          });
+        }
+      );
     }
 
     // plugins.forEach(({ init }) =>
@@ -265,7 +267,7 @@ export class Loader {
     // );
     const _parseObjectExpression = (arg: ObjectExpression) => {
       if (arg.type === 'ObjectExpression') {
-        const ast = {
+        const programAst = {
           type: 'Program',
           body: [
             {
@@ -274,7 +276,7 @@ export class Loader {
             },
           ],
         };
-        const toto = escodegen.generate(ast);
+        const toto = escodegen.generate(programAst);
         let returnEl;
         try {
           // eslint-disable-next-line no-eval
@@ -297,7 +299,7 @@ export class Loader {
         arg.type === 'ArrowFunctionExpression' ||
         arg.type === 'FunctionExpression'
       ) {
-        const ast = {
+        const funcAst = {
           type: 'Program',
           body: [
             {
@@ -306,7 +308,7 @@ export class Loader {
             },
           ],
         };
-        const toto = escodegen.generate(ast);
+        const toto = escodegen.generate(funcAst);
         let returnEl;
         try {
           // eslint-disable-next-line no-eval

@@ -3,16 +3,18 @@ import { Source } from '@storybook/blocks';
 # Usage
 
 Create multiple styles
+
 <Source language='tsx' code={`
 import { createStyle } from '@crossed/styled';
 
 const styles = createStyle(()=> ({
-  title: { base: { fontWeight: "800", fontSize:"32px", textDecoration: "underline"  } },
-  center: { base: {display: "flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}},
+title: { base: { fontWeight: "800", fontSize:"32px", textDecoration: "underline" } },
+center: { base: {display: "flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}},
 }));
 `} />
 
 Use it in your component
+
 <Source language='tsx' code={`
 import { Text, View, type TextProps } from "react-native";
 import { type CrossedMethods } from '@crossed/styled';
@@ -31,6 +33,7 @@ export const MyComponent = ({title, style, ...props}: MyComponentProps) => {
 `} />
 
 Or add inline style directly in your component
+
 <Source language='tsx' code={`
 import { Text, View, type TextProps } from "react-native";
 import { type CrossedMethods } from '@crossed/styled';
@@ -56,8 +59,8 @@ import { createStyle, type CrossedMethods } from '@crossed/styled';
 import {useState} from "react"
 
 const styles = createStyle(()=> ({
-  red: { base: { backgroundColor:"red"} },
-  green: { base: {backgroundColor: "green"}},
+red: { base: { backgroundColor:"red"} },
+green: { base: {backgroundColor: "green"}},
 }));
 
 type MyComponentProps = Omit<TextProps, "style"> & { style?: CrossedMethods<any>, title: string },
@@ -75,6 +78,7 @@ export const MyComponent = ({title, style, ...props}: MyComponentProps) => {
 `} />
 
 More complexe exemple
+
 <Source language='tsx' code={`
 import { Text, type TextProps } from "react-native";
 import { type CrossedMethods, composeStyles } from '@crossed/styled';
@@ -94,4 +98,6 @@ export const MyComponent = ({title, style, ...props}: MyComponentProps) => {
     </Pressable>
   );
 };
-`} />
+`} /
+
+>
