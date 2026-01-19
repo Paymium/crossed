@@ -5,7 +5,11 @@
  * LICENSE file in the root of this projects source tree.
  */
 
-import { Easing, WithSpringConfig, WithTimingConfig } from 'react-native-reanimated';
+import {
+  Easing,
+  WithSpringConfig,
+  WithTimingConfig,
+} from 'react-native-reanimated';
 
 /**
  * Default spring animation configuration for sheet movements

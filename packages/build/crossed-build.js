@@ -25,7 +25,8 @@ const ignoreBaseUrl = process.argv.includes('--ignore-base-url');
 const baseUrlIndex = process.argv.indexOf('--base-url');
 const projectPathIndex = process.argv.indexOf('--project-path');
 const baseUrl = baseUrlIndex > -1 ? process.argv[baseUrlIndex] : '.';
-const projectPath = projectPathIndex > -1 ? process.argv[projectPathIndex + 1] : '';
+const projectPath =
+  projectPathIndex > -1 ? process.argv[projectPathIndex + 1] : '';
 
 const pkg = fs.readJSONSync('./package.json');
 let shouldSkipInitialTypes = !!process.env.SKIP_TYPES_INITIAL;
@@ -138,7 +139,7 @@ async function buildTsc() {
       ? ' --declarationDir ./'
       : '';
     const baseUrlFlag = ignoreBaseUrl ? '' : ` --baseUrl ${baseUrl}`;
-    const projectPathFlag = projectPath ? `-p ${projectPath} ` : ''
+    const projectPathFlag = projectPath ? `-p ${projectPath} ` : '';
     const cmd = `tsc${baseUrlFlag} ${projectPathFlag}--outDir ${targetDir} --rootDir src ${declarationToRootFlag}--emitDeclarationOnly --declarationMap`;
 
     // console.log('\x1b[2m$', `npx ${cmd}`)

@@ -13,10 +13,9 @@ import {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  withTiming,
 } from 'react-native-reanimated';
 import { snapPointsToPixels, interpolate } from './calculations';
-import { BACKDROP_TIMING_CONFIG, SPRING_CONFIG } from './animations';
+import { SPRING_CONFIG } from './animations';
 
 export interface BottomSheetAnimations {
   translateY: any; // Animated.SharedValue<number>
@@ -90,7 +89,8 @@ export function useBottomSheetAnimations(
     (current, previous) => {
       if (current !== previous && onChange) {
         // Calculate position as percentage (0-100)
-        const position = ((screenHeightValue.value - current) / screenHeightValue.value) * 100;
+        const position =
+          ((screenHeightValue.value - current) / screenHeightValue.value) * 100;
         runOnJS(onChange)(position, sheetHeight.value);
       }
     },
@@ -121,16 +121,13 @@ export function useBackdropAnimation(
   return useAnimatedStyle(() => {
     const opacity = interpolate(
       translateY.value,
-      [
-        snapPointsPixels.value[0] || 0,
-        screenHeight.value,
-      ],
+      [snapPointsPixels.value[0] || 0, screenHeight.value],
       [defaultOverlayOpacity, 0],
       'clamp'
     );
 
     return {
-      opacity: withTiming(opacity, BACKDROP_TIMING_CONFIG),
+      opacity,
     };
   });
 }

@@ -7,12 +7,12 @@
 
 ## Why
 
-* No dependencies, tiny footprint
-* Configurable available dates, minimum and maximum dates
-* Weekends, adjacent month's days
-* Previous and next month/year navigation
-* Events
-* WAI-ARIA compliant
+- No dependencies, tiny footprint
+- Configurable available dates, minimum and maximum dates
+- Weekends, adjacent month's days
+- Previous and next month/year navigation
+- Events
+- WAI-ARIA compliant
 
 <div align="center">
   <img src="docs/screenshot.png" alt="Logo" width="240">
@@ -32,37 +32,34 @@ $ yarn add @crossed/use-calendar
 Minimal example
 
 ```jsx
-import { useCalendar } from '@crossed/use-calendar'
+import { useCalendar } from '@crossed/use-calendar';
 
 function Calendar() {
-  const {
-    months,
-    getDayProps,
-    getPrevMonthProps,
-    getNextMonthProps
-  } = useCalendar()
+  const { months, getDayProps, getPrevMonthProps, getNextMonthProps } =
+    useCalendar();
 
   return (
     <>
       {months.map(({ year, month, weeks }) => (
         <div>
           <header>
-            <h1>{month} {year}</h1>
+            <h1>
+              {month} {year}
+            </h1>
           </header>
           <nav>
             <button {...getPrevMonthProps()}>Prev</button>
             <button {...getNextMonthProps()}>Next</button>
           </nav>
-          {
-            weeks.map((week) =>
-              week.map((day) =>
-                <button {...getDayProps({ day })}>{day.date.getDate()}</button>
-              ))
-          }
+          {weeks.map((week) =>
+            week.map((day) => (
+              <button {...getDayProps({ day })}>{day.date.getDate()}</button>
+            ))
+          )}
         </div>
       ))}
     </>
-  )
+  );
 }
 ```
 
@@ -118,7 +115,6 @@ Used to calculate the maximum month to render.
 
 Number of months returned, based off the `selectedDate`. `Infinity` will display all months with available dates.
 
-
 ### onDateSelected
 
 > `function(day: Day)` | optional
@@ -130,7 +126,6 @@ Called when the user selects a date.
 > `Date | string | number` | optional
 
 Used to calculate what month to display on initial render.
-
 
 ## Outputs
 

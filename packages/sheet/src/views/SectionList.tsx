@@ -37,15 +37,12 @@ function $SectionList<T>(
 
   // Log deprecation warning if refreshControlGestureArea is used
   if (refreshControlGestureArea !== undefined) {
-    console.warn('refreshControlGestureArea is deprecated in the simplified SectionList implementation');
+    console.warn(
+      'refreshControlGestureArea is deprecated in the simplified SectionList implementation'
+    );
   }
 
-  return (
-    <RNSectionList
-      ref={ref}
-      {...(restProps as any)}
-    />
-  );
+  return <RNSectionList ref={ref} {...(restProps as any)} />;
 }
 
 export const SectionList = React.forwardRef(
@@ -53,4 +50,5 @@ export const SectionList = React.forwardRef(
 ) as unknown as typeof RNSectionList;
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export type SectionList<ItemT = any> = typeof RNSectionList & RNSectionList<ItemT>;
+export type SectionList<ItemT = any> = typeof RNSectionList &
+  RNSectionList<ItemT>;

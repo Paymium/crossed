@@ -19,7 +19,7 @@ import { Headline } from '../../typography';
 
 const button = createStyles(({ colors }) => ({
   default: {
-    base: {
+    'base': {
       backgroundColor: colors.background.primary,
       borderRadius: 8,
       height: 40,
@@ -32,7 +32,7 @@ const button = createStyles(({ colors }) => ({
     ':active': {
       backgroundColor: colors.background.active,
     },
-    media: { md: { height: 44 } },
+    'media': { md: { height: 44 } },
   },
   selected: { base: { backgroundColor: colors.text.brand } },
   disabled: { base: { opacity: 0.1 } },

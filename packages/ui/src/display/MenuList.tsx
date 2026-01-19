@@ -34,8 +34,8 @@ const menuItemStyles = createStyles((t) => ({
     base: { backgroundColor: t.colors.background.active },
   },
   focus: {
-    'web': {
-      base: { transition: 'all 170ms ease' },
+    web: {
+      'base': { transition: 'all 170ms ease' },
       ':focus-visible': {
         outlineColor: t.colors.border.brand,
       },

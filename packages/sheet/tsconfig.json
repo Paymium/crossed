@@ -1,6 +1,5 @@
 {
-  "include": [
-    "src/index.ts", "src/views/FlashList.tsx"],
+  "include": ["src/index.ts", "src/views/FlashList.tsx"],
   "compilerOptions": {
     "baseUrl": "./",
     "jsx": "react-jsx",

@@ -11,7 +11,7 @@ import { SpaceName } from '@crossed/theme';
 export const gapStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'gap': space[spaceName] } };
+      acc[spaceName] = { base: { gap: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>

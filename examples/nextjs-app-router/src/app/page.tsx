@@ -1,5 +1,5 @@
-"use client";
-import "../style.config";
+'use client';
+import '../style.config';
 import { Text } from '@crossed/ui';
 export default function Home() {
   return (

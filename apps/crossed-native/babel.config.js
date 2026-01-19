@@ -7,7 +7,8 @@ module.exports = {
       {
         root: ['./src'],
         alias: {
-          'react-native-gesture-handler': './node_modules/react-native-gesture-handler',
+          'react-native-gesture-handler':
+            './node_modules/react-native-gesture-handler',
         },
       },
     ],

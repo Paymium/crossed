@@ -29,23 +29,17 @@ type Props<T = any> = FlatListProps<T> &
     refreshControlGestureArea?: number;
   };
 
-function $FlatList<T>(
-  props: Props<T>,
-  ref: React.ForwardedRef<RNFlatList>
-) {
+function $FlatList<T>(props: Props<T>, ref: React.ForwardedRef<RNFlatList>) {
   const { refreshControlGestureArea, ...restProps } = props;
 
   // Log deprecation warning if refreshControlGestureArea is used
   if (refreshControlGestureArea !== undefined) {
-    console.warn('refreshControlGestureArea is deprecated in the simplified FlatList implementation');
+    console.warn(
+      'refreshControlGestureArea is deprecated in the simplified FlatList implementation'
+    );
   }
 
-  return (
-    <RNFlatList
-      ref={ref}
-      {...(restProps as any)}
-    />
-  );
+  return <RNFlatList ref={ref} {...(restProps as any)} />;
 }
 
 export const FlatList = React.forwardRef(

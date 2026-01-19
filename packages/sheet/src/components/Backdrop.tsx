@@ -6,10 +6,16 @@
  */
 
 import React from 'react';
-import { StyleSheet, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native';
 import Animated from 'react-native-reanimated';
 
-const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity) as React.ComponentType<any>;
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent(
+  TouchableOpacity
+) as React.ComponentType<any>;
 
 export interface BackdropProps extends Partial<TouchableOpacityProps> {
   animatedStyle: any;

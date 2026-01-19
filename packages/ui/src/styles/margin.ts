@@ -11,7 +11,7 @@ import { SpaceName } from '@crossed/theme';
 export const marginVerticalStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'marginVertical': space[spaceName] } };
+      acc[spaceName] = { base: { marginVertical: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>
@@ -21,7 +21,7 @@ export const marginVerticalStyles = createStyles(({ space }) =>
 export const marginHorizontalStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'marginHorizontal': space[spaceName] } };
+      acc[spaceName] = { base: { marginHorizontal: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>
@@ -31,7 +31,7 @@ export const marginHorizontalStyles = createStyles(({ space }) =>
 export const marginLeftStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'marginLeft': space[spaceName] } };
+      acc[spaceName] = { base: { marginLeft: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>
@@ -41,7 +41,7 @@ export const marginLeftStyles = createStyles(({ space }) =>
 export const marginRightStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'marginRight': space[spaceName] } };
+      acc[spaceName] = { base: { marginRight: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>
@@ -51,7 +51,7 @@ export const marginRightStyles = createStyles(({ space }) =>
 export const marginBottomStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'marginBottom': space[spaceName] } };
+      acc[spaceName] = { base: { marginBottom: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>
@@ -61,7 +61,7 @@ export const marginBottomStyles = createStyles(({ space }) =>
 export const marginTopStyles = createStyles(({ space }) =>
   (Object.keys(space) as SpaceName[]).reduce(
     (acc, spaceName) => {
-      acc[spaceName] = { base: { 'marginTop': space[spaceName] } };
+      acc[spaceName] = { base: { marginTop: space[spaceName] } };
       return acc;
     },
     {} as Record<SpaceName, any>

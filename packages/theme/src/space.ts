@@ -8,14 +8,14 @@
 import type { Spaces } from './types/space';
 
 export const space = {
-  none: 0,
-  xxs: 2,
-  xs: 4,
-  sm: 6,
-  md: 8,
-  lg: 12,
-  xl: 16,
-  xxl: 20,
+  'none': 0,
+  'xxs': 2,
+  'xs': 4,
+  'sm': 6,
+  'md': 8,
+  'lg': 12,
+  'xl': 16,
+  'xxl': 20,
   '3xl': 24,
   '4xl': 32,
   '5xl': 40,

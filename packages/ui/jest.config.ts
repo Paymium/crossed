@@ -41,7 +41,10 @@ const config: Config.InitialOptions = {
   ],
   modulePathIgnorePatterns: ['lib', 'coverage'],
   moduleDirectories: ['./node_modules', 'src'],
-  setupFilesAfterEnv: ['./node_modules/@crossed/test/src/jest-setup.ts','./jest-setup.ts'],
+  setupFilesAfterEnv: [
+    './node_modules/@crossed/test/src/jest-setup.ts',
+    './jest-setup.ts',
+  ],
   testEnvironment: 'jsdom',
   globals: {
     __DEV__: true,

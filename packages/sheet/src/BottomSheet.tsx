@@ -33,11 +33,7 @@ import {
 } from './core/hooks';
 import { createBottomSheetGesture } from './core/gestures';
 import useSheetManager from './hooks/use-sheet-manager';
-import {
-  useProviderContext,
-  useSheetIDContext,
-  useSheetRef,
-} from './provider';
+import { useProviderContext, useSheetIDContext, useSheetRef } from './provider';
 import { getZIndexFromStack, SheetManager } from './sheetmanager';
 import type { BottomSheetProps, BottomSheetRef } from './types';
 
@@ -140,14 +136,7 @@ export default forwardRef<BottomSheetRef, BottomSheetProps>(
           }
         });
       },
-      [
-        closable,
-        onBeforeClose,
-        onClose,
-        sheetId,
-        currentContext,
-        animations,
-      ]
+      [closable, onBeforeClose, onClose, sheetId, currentContext, animations]
     );
 
     const { visible, setVisible } = useSheetManager({

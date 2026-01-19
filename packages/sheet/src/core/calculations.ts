@@ -139,7 +139,11 @@ export function interpolate(
 
   // Apply extrapolation
   if (extrapolate === 'clamp') {
-    result = clamp(result, Math.min(outputMin, outputMax), Math.max(outputMin, outputMax));
+    result = clamp(
+      result,
+      Math.min(outputMin, outputMax),
+      Math.max(outputMin, outputMax)
+    );
   }
 
   return result;

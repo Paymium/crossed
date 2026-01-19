@@ -6,10 +6,7 @@
  */
 
 import React from 'react';
-import {
-  ScrollView as RNScrollView,
-  ScrollViewProps,
-} from 'react-native';
+import { ScrollView as RNScrollView, ScrollViewProps } from 'react-native';
 
 /**
  * Simplified ScrollView for BottomSheet.
@@ -32,23 +29,17 @@ type Props = ScrollViewProps &
     refreshControlGestureArea?: number;
   };
 
-function $ScrollView(
-  props: Props,
-  ref: React.ForwardedRef<RNScrollView>
-) {
+function $ScrollView(props: Props, ref: React.ForwardedRef<RNScrollView>) {
   const { refreshControlGestureArea, ...restProps } = props;
 
   // Log deprecation warning if refreshControlGestureArea is used
   if (refreshControlGestureArea !== undefined) {
-    console.warn('refreshControlGestureArea is deprecated in the simplified ScrollView implementation');
+    console.warn(
+      'refreshControlGestureArea is deprecated in the simplified ScrollView implementation'
+    );
   }
 
-  return (
-    <RNScrollView
-      ref={ref}
-      {...restProps}
-    />
-  );
+  return <RNScrollView ref={ref} {...restProps} />;
 }
 
 export const ScrollView = React.forwardRef(

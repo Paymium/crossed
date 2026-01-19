@@ -6,10 +6,7 @@
  */
 
 import React, { useRef } from 'react';
-import {
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-} from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 
 export type DraggableNodeOptions = {
   hasRefreshControl?: boolean;
@@ -59,7 +56,8 @@ export function useScrollHandlers<T>(_options?: DraggableNodeOptions) {
       onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => {
         const { x, y } = event.nativeEvent.contentOffset;
         const { width, height } = event.nativeEvent.contentSize;
-        const { width: layoutWidth, height: layoutHeight } = event.nativeEvent.layoutMeasurement;
+        const { width: layoutWidth, height: layoutHeight } =
+          event.nativeEvent.layoutMeasurement;
 
         const maxOffsetX = width - layoutWidth;
         const maxOffsetY = height - layoutHeight;

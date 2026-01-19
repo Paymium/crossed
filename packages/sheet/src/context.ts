@@ -32,4 +32,3 @@ export type NodesRef = {
 export type DraggableNodes = {
   nodes: RefObject<NodesRef>;
 };
-
